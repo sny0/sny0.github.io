@@ -4,23 +4,22 @@
 const lightCodeTheme = require('prism-react-renderer/themes/github');
 const darkCodeTheme = require('prism-react-renderer/themes/dracula');
 
-/** @type {import('@docusaurus/types').Config} */
-const config = {
+module.exports= {
   title: 'My Site',
   tagline: 'Dinosaurs are cool',
   favicon: 'img/favicon.ico',
 
   // Set the production url of your site here
-  url: 'https://sny0.github.io/my-docusaurus/',
+  url: 'https://sny0.github.io',
   // Set the /<baseUrl>/ pathname under which your site is served
   // For GitHub pages deployment, it is often '/<projectName>/'
-  baseUrl: 'my-docusaurus',
+  baseUrl: '/my-docusaurus/',
 
   // GitHub pages deployment config.
   // If you aren't using GitHub pages, you don't need these.
   organizationName: 'sny0', // Usually your GitHub org/user name.
   projectName: 'my-docusaurus', // Usually your repo name.
-
+  trailingSlash: false,
   onBrokenLinks: 'throw',
   onBrokenMarkdownLinks: 'warn',
 
@@ -135,5 +134,3 @@ const config = {
       },
     }),
 };
-
-module.exports = config;
