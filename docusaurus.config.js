@@ -5,7 +5,7 @@ const lightCodeTheme = require('prism-react-renderer/themes/github');
 const darkCodeTheme = require('prism-react-renderer/themes/dracula');
 
 module.exports= {
-title: 'sny0',
+title: 'My Site',
   tagline: 'Dinosaurs are cool',
   favicon: 'img/favicon.ico',
 
