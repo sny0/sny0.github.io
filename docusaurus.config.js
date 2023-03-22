@@ -5,7 +5,7 @@ const lightCodeTheme = require('prism-react-renderer/themes/github');
 const darkCodeTheme = require('prism-react-renderer/themes/dracula');
 
 module.exports= {
-title: 'My Site',
+title: 'sny0',
   tagline: 'Dinosaurs are cool',
   favicon: 'img/favicon.ico',
 
@@ -34,24 +34,10 @@ title: 'My Site',
       ({
         docs: 
           {
-            //path: 'projects',
             sidebarPath: require.resolve('./sidebars.js'),
-            // Please change this to your repo.
-            // Remove this to remove the "edit this page" links.
-            editUrl:
-              'https://github.com/facebook/docusaurus/tree/main/packages/create-docusaurus/templates/shared/',
           },
-          // {
-          //   path: 'projects',
-          //   sidebarPath: require.resolve('./sidebars.js'),
-          // },
-        
         blog: {
           showReadingTime: true,
-          // Please change this to your repo.
-          // Remove this to remove the "edit this page" links.
-          editUrl:
-            'https://github.com/facebook/docusaurus/tree/main/packages/create-docusaurus/templates/shared/',
         },
         theme: {
           customCss: require.resolve('./src/css/custom.css'),
