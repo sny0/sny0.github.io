@@ -5,7 +5,7 @@ const lightCodeTheme = require('prism-react-renderer/themes/github');
 const darkCodeTheme = require('prism-react-renderer/themes/dracula');
 
 module.exports= {
-  title: 'My Site',
+title: 'sny0',
   tagline: 'Dinosaurs are cool',
   favicon: 'img/favicon.ico',
 
@@ -36,13 +36,20 @@ module.exports= {
       'classic',
       /** @type {import('@docusaurus/preset-classic').Options} */
       ({
-        docs: {
-          sidebarPath: require.resolve('./sidebars.js'),
-          // Please change this to your repo.
-          // Remove this to remove the "edit this page" links.
-          editUrl:
-            'https://github.com/facebook/docusaurus/tree/main/packages/create-docusaurus/templates/shared/',
-        },
+        docs: 
+          {
+            //path: 'projects',
+            sidebarPath: require.resolve('./sidebars.js'),
+            // Please change this to your repo.
+            // Remove this to remove the "edit this page" links.
+            editUrl:
+              'https://github.com/facebook/docusaurus/tree/main/packages/create-docusaurus/templates/shared/',
+          },
+          // {
+          //   path: 'projects',
+          //   sidebarPath: require.resolve('./sidebars.js'),
+          // },
+        
         blog: {
           showReadingTime: true,
           // Please change this to your repo.
@@ -63,21 +70,25 @@ module.exports= {
       // Replace with your project's social card
       image: 'img/docusaurus-social-card.jpg',
       navbar: {
-        title: 'My Site',
+        title: 'sny0',
         logo: {
           alt: 'My Site Logo',
           src: 'img/logo.svg',
         },
         items: [
           {
+            label: 'Profile',
+            to: '/profile'
+          },
+          {
             type: 'doc',
             docId: 'intro',
             position: 'left',
-            label: 'Tutorial',
+            label: 'Docs',
           },
           {to: '/blog', label: 'Blog', position: 'left'},
           {
-            href: 'https://github.com/facebook/docusaurus',
+            href: 'https://github.com/sny0',
             label: 'GitHub',
             position: 'right',
           },
@@ -93,23 +104,10 @@ module.exports= {
                 label: 'Tutorial',
                 to: '/docs/intro',
               },
-            ],
-          },
-          {
-            title: 'Community',
-            items: [
               {
-                label: 'Stack Overflow',
-                href: 'https://stackoverflow.com/questions/tagged/docusaurus',
-              },
-              {
-                label: 'Discord',
-                href: 'https://discordapp.com/invite/docusaurus',
-              },
-              {
-                label: 'Twitter',
-                href: 'https://twitter.com/docusaurus',
-              },
+                label: 'Hello',
+                to: '/docs/intro',
+              }
             ],
           },
           {
@@ -121,7 +119,7 @@ module.exports= {
               },
               {
                 label: 'GitHub',
-                href: 'https://github.com/facebook/docusaurus',
+                href: 'https://github.com/sny0',
               },
             ],
           },
