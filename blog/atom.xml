@@ -2,11 +2,30 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://sny0.github.io/my-docusaurus/blog</id>
     <title>sny0 Blog</title>
-    <updated>2023-03-22T00:00:00.000Z</updated>
+    <updated>2023-03-27T00:00:00.000Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://sny0.github.io/my-docusaurus/blog"/>
     <subtitle>sny0 Blog</subtitle>
     <icon>https://sny0.github.io/my-docusaurus/img/favicon.ico</icon>
+    <entry>
+        <title type="html"><![CDATA[Unity1週間ゲームジャムに作品を投稿した]]></title>
+        <id>https://sny0.github.io/my-docusaurus/blog/2023/03/27/Hikyakuchan</id>
+        <link href="https://sny0.github.io/my-docusaurus/blog/2023/03/27/Hikyakuchan"/>
+        <updated>2023-03-27T00:00:00.000Z</updated>
+        <summary type="html"><![CDATA[Unity1週間ゲームジャムとは？]]></summary>
+        <content type="html"><![CDATA[<h2 class="anchor anchorWithStickyNavbar_LWe7" id="unity1週間ゲームジャムとは">Unity1週間ゲームジャムとは？<a href="#unity1週間ゲームジャムとは" class="hash-link" aria-label="Direct link to Unity1週間ゲームジャムとは？" title="Direct link to Unity1週間ゲームジャムとは？">​</a></h2><p>「<a href="https://unityroom.com/unity1weeks" target="_blank" rel="noopener noreferrer">Unity1週間ゲームジャム</a>」とは、Unityを使って1週間でゲームをつくるイベントです。</p><p>毎回異なるお題が与えられます。お題は多少こじつけでも大丈夫なようです。</p><p>先週、とある研究室のOBの方から存在を教えてもらいました！</p><p>今回は、「つたえる」がお題でした。</p><h2 class="anchor anchorWithStickyNavbar_LWe7" id="hikyaku-chan">Hikyaku Chan<a href="#hikyaku-chan" class="hash-link" aria-label="Direct link to Hikyaku Chan" title="Direct link to Hikyaku Chan">​</a></h2><p>今回私が製作したゲームは「<a href="https://unityroom.com/games/hikyakuchan" target="_blank" rel="noopener noreferrer">Hikyaku Chan</a>」です。作品名をクリックすると遊べるWebページに飛びます。</p><p><img loading="lazy" alt="Hikyaku_Chan" src="/my-docusaurus/assets/images/HikyakuChan-ca16e1b8a1241d2aaf98a9e90b4c8d05.png" width="960" height="598" class="img_ev3q"></p><p>古典的な横スクロールのアクションゲームです。</p><h3 class="anchor anchorWithStickyNavbar_LWe7" id="ゲーム紹介">ゲーム紹介<a href="#ゲーム紹介" class="hash-link" aria-label="Direct link to ゲーム紹介" title="Direct link to ゲーム紹介">​</a></h3><p>世は江戸時代の日本。
+郵便物は「飛脚」と呼ばれる人が足で運んでいた。
+ユニティちゃんを操作してできるだけ速く郵便物をゴールまで運ぼう!
+道中にある「おにぎり」を食べると足が速くなるぞ!</p><p>※作成したゲームを紹介する文書か記事は別で書こうと思います。</p><h2 class="anchor anchorWithStickyNavbar_LWe7" id="製作するまでの過程">製作するまでの過程<a href="#製作するまでの過程" class="hash-link" aria-label="Direct link to 製作するまでの過程" title="Direct link to 製作するまでの過程">​</a></h2><p>私はUnity初心者（いくつかの本のサンプルゲーム作成や簡単なVRゲームを作成した程度）であり、凝ったゲームや特殊なジャンルは作れないと考えました。</p><p>始めたのも遅く、時間があるわけではなかったため、横スクロールのアクションゲームなら現実的に作れそうだなと考えました。</p><p><strong><em>つたえる ⇒ 情報を伝える ⇒ 手紙などを運ぶ</em></strong></p><p>と連想ゲームをし、<strong>伝書バト</strong>や<strong>飛脚</strong>という案が浮かびました。</p><p>気づいたのが遅かった、他の用事があった、企画がなかなか思いつかない、Unity初心者ということで大変苦労しました。期日までには完成することが出来ず、一日遅れで何とか遊べるまで持って行って投稿しました。いくつか把握しているバグはあるものの原因や解決方法が分からなかったという理由とお蔵入りにしたくなかったという理由で公開することにしました。</p><h2 class="anchor anchorWithStickyNavbar_LWe7" id="感想">感想<a href="#感想" class="hash-link" aria-label="Direct link to 感想" title="Direct link to 感想">​</a></h2><p>出来ていくにつれて、どんどん入れたい要素が出てきました。</p><p>投稿する日は朝からPCに張り付いて作業をしました。</p><p>拙い本作ですが、遊べるまで完成したとき、達成感がとても得られ、参加してよかったと思いました！</p><p>次回も参加します！（宣言）</p>]]></content>
+        <author>
+            <name>sny0</name>
+            <uri>https://github.com/sny0</uri>
+        </author>
+        <category label="Unity" term="Unity"/>
+        <category label="Unity1週間ゲームジャム" term="Unity1週間ゲームジャム"/>
+        <category label="Hikyakuchan" term="Hikyakuchan"/>
+        <category label="つたえる" term="つたえる"/>
+    </entry>
     <entry>
         <title type="html"><![CDATA[オンラインのFPSゲームを作るUdemyの講座を受けた]]></title>
         <id>https://sny0.github.io/my-docusaurus/blog/2023/03/22/Online_FPS</id>
