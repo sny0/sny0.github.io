@@ -6,8 +6,8 @@ const darkCodeTheme = require('prism-react-renderer/themes/dracula');
 
 module.exports= {
 title: 'sny0',
-  tagline: 'Dinosaurs are cool',
-  favicon: 'img/favicon.ico',
+  tagline: 'Rabbits are cute!',
+  favicon: 'img/sny0_icon.png',
 
   // Set the production url of your site here
   url: 'https://sny0.github.io',
@@ -55,7 +55,7 @@ title: 'sny0',
         title: 'sny0',
         logo: {
           alt: 'My Site Logo',
-          src: 'img/logo.svg',
+          src: 'img/sny0_icon.png',
         },
         items: [
           {
@@ -64,9 +64,9 @@ title: 'sny0',
           },
           {
             type: 'doc',
-            docId: 'intro',
+            docId: 'tank',
             position: 'left',
-            label: 'Docs',
+            label: 'Portfolio',
           },
           {to: '/blog', label: 'Blog', position: 'left'},
           {
@@ -80,15 +80,15 @@ title: 'sny0',
         style: 'dark',
         links: [
           {
-            title: 'Docs',
+            title: 'Portfolio',
             items: [
               {
-                label: 'Tutorial',
-                to: '/docs/intro',
+                label: '学部時代',
+                to: '/docs/tank',
               },
               {
-                label: 'Hello',
-                to: '/docs/intro',
+                label: 'Unity1WeekGameJam',
+                to: '/docs/hikyakuchan',
               }
             ],
           },
@@ -106,7 +106,7 @@ title: 'sny0',
             ],
           },
         ],
-        copyright: `Copyright © ${new Date().getFullYear()} My Project, Inc. Built with Docusaurus.`,
+        copyright: `Copyright © ${new Date().getFullYear()} sny0. Built with Docusaurus.`,
       },
       prism: {
         theme: lightCodeTheme,
