@@ -4,10 +4,19 @@
         <title>sny0 Blog</title>
         <link>https://sny0.github.io/my-docusaurus/blog</link>
         <description>sny0 Blog</description>
-        <lastBuildDate>Mon, 27 Mar 2023 00:00:00 GMT</lastBuildDate>
+        <lastBuildDate>Tue, 04 Apr 2023 00:00:00 GMT</lastBuildDate>
         <docs>https://validator.w3.org/feed/docs/rss2.html</docs>
         <generator>https://github.com/jpmonette/feed</generator>
         <language>en</language>
+        <item>
+            <title><![CDATA[木島研究室のHPを作成した]]></title>
+            <link>https://sny0.github.io/my-docusaurus/blog/2023/04/04/kzmhp</link>
+            <guid>https://sny0.github.io/my-docusaurus/blog/2023/04/04/kzmhp</guid>
+            <pubDate>Tue, 04 Apr 2023 00:00:00 GMT</pubDate>
+            <description><![CDATA[経緯]]></description>
+            <content:encoded><![CDATA[<h2 class="anchor anchorWithStickyNavbar_LWe7" id="経緯">経緯<a href="#経緯" class="hash-link" aria-label="Direct link to 経緯" title="Direct link to 経緯">​</a></h2><p>私が所属している岐阜大学 木島研究室のHPは長いことありませんでした（少なくとも、私が仮配属される時にはありませんでした）。</p><p>私が研究室を選ぶときに、木島研の情報がインターネット上に皆無であり、木島先生の講義を受けたことがなかったため、<strong>木島研 = 謎の研究室</strong>という印象しかありませんでした。そのため、本当に木島研を志望していいのか当時はとても心配でした。入ってみたら、木島研でよかったと思いましたが。</p><p>こうした経緯があり、私の中に研究室のHPを作って木島研の情報を発信したいという考えは強くありました。しかし、機会がなく今まで時が過ぎていました。</p><p>とある研究室のOBの方とお会いしたときに、背中を押してもらい、研究室のHPを作成する決心をしました。</p><p>私のHPを作ったのは、研究室のHPを作る機会があったからです。</p><h2 class="anchor anchorWithStickyNavbar_LWe7" id="使用したもの">使用したもの<a href="#使用したもの" class="hash-link" aria-label="Direct link to 使用したもの" title="Direct link to 使用したもの">​</a></h2><ul><li><a href="https://freehtml5.co/" target="_blank" rel="noopener noreferrer">FREEHTML5.CO</a>の<a href="https://freehtml5.co/cache-free-html5-bootstrap-template/" target="_blank" rel="noopener noreferrer">Cache</a></li></ul><p>Webサイトのテンプレートを使用しました。型は出来ているので、特定の部分を書き換えれば、簡単に自分のHPを作ることが出来ます。</p><p>昔、ProgateでHTML、CSSの勉強をした経験が活きました。</p><h2 class="anchor anchorWithStickyNavbar_LWe7" id="最後に">最後に<a href="#最後に" class="hash-link" aria-label="Direct link to 最後に" title="Direct link to 最後に">​</a></h2><p><a href="http://www.kzm.info.gifu-u.ac.jp/" target="_blank" rel="noopener noreferrer">木島研究室のHPはこちらから</a></p><p>HPはすぐに作り終えましたが、サーバーの問題で公開が4月になってしまいました。</p><p>HPを作ったからには、更新できるように研究室での活動も頑張ります！</p>]]></content:encoded>
+            <category>木島研</category>
+        </item>
         <item>
             <title><![CDATA[Unity1週間ゲームジャムに作品を投稿した]]></title>
             <link>https://sny0.github.io/my-docusaurus/blog/2023/03/27/Hikyakuchan</link>
