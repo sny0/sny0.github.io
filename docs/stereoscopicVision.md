@@ -8,6 +8,9 @@ id: stereoscopic
 
 見る人が動いても見える物体の場所は変化しない、つまり正しい運動視差があることを研究室では「運動視」と呼んでいる。
 
+[ドキュメント](http://www.kzm.info.gifu-u.ac.jp/contents/B3Project2021.pdf)
+
+[学祭展示でのポスター](http://www.kzm.info.gifu-u.ac.jp/contents/popOutObjectPoster.pdf)
 
 ![Tank](../static/img/立体視実験.jpg)
 
