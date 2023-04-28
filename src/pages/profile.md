@@ -14,7 +14,7 @@ Daiki Nokura
 sny0 / sny
 
 ## 所属
-岐阜大学大学院 [自然科学技術研究科](https://gnst.gifu-u.ac.jp/) 知能理工学専攻 [木島研究室](http://www.kzm.info.gifu-u.ac.jp/)
+岐阜大学大学院 [自然科学技術研究科](https://gnst.gifu-u.ac.jp/) 知能理工学専攻 [木島研究室](https://www.kzm.info.gifu-u.ac.jp/)
 
 ## 経歴
 - 2016年4月　　岐阜県立加納高等学校 普通科 入学
