@@ -4,10 +4,21 @@
         <title>sny0 Blog</title>
         <link>https://sny0.github.io/my-docusaurus/blog</link>
         <description>sny0 Blog</description>
-        <lastBuildDate>Fri, 28 Apr 2023 00:00:00 GMT</lastBuildDate>
+        <lastBuildDate>Sun, 07 May 2023 00:00:00 GMT</lastBuildDate>
         <docs>https://validator.w3.org/feed/docs/rss2.html</docs>
         <generator>https://github.com/jpmonette/feed</generator>
         <language>en</language>
+        <item>
+            <title><![CDATA[JavaScriptを使用して簡単なブラウザゲームを作った]]></title>
+            <link>https://sny0.github.io/my-docusaurus/blog/2023/05/7/oneStrokeGame</link>
+            <guid>https://sny0.github.io/my-docusaurus/blog/2023/05/7/oneStrokeGame</guid>
+            <pubDate>Sun, 07 May 2023 00:00:00 GMT</pubDate>
+            <description><![CDATA[JavaScriptを勉強したので簡単なブラウザゲームを作ってみました。]]></description>
+            <content:encoded><![CDATA[<p>JavaScriptを勉強したので簡単なブラウザゲームを作ってみました。</p><p><img loading="lazy" alt="OneStrokeGame" src="/my-docusaurus/assets/images/oneStrokeGame-69a98f65c5fba47227f632724eaacc5e.png" width="640" height="660" class="img_ev3q"></p><p><a href="https://sny0.github.io/OneStrokeGame_js/" target="_blank" rel="noopener noreferrer"><strong>ここからプレイできます</strong></a></p><p>すぐ終わる簡単なゲームなので是非遊んでみてください！</p>]]></content:encoded>
+            <category>JavaScript</category>
+            <category>ブラウザゲーム</category>
+            <category>OneStrokeGame</category>
+        </item>
         <item>
             <title><![CDATA[今年の春のMVEで発表します]]></title>
             <link>https://sny0.github.io/my-docusaurus/blog/2023/04/28/MVE2023genko</link>

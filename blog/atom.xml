@@ -2,11 +2,26 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://sny0.github.io/my-docusaurus/blog</id>
     <title>sny0 Blog</title>
-    <updated>2023-04-28T00:00:00.000Z</updated>
+    <updated>2023-05-07T00:00:00.000Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://sny0.github.io/my-docusaurus/blog"/>
     <subtitle>sny0 Blog</subtitle>
     <icon>https://sny0.github.io/my-docusaurus/img/sny0_icon.png</icon>
+    <entry>
+        <title type="html"><![CDATA[JavaScriptを使用して簡単なブラウザゲームを作った]]></title>
+        <id>https://sny0.github.io/my-docusaurus/blog/2023/05/7/oneStrokeGame</id>
+        <link href="https://sny0.github.io/my-docusaurus/blog/2023/05/7/oneStrokeGame"/>
+        <updated>2023-05-07T00:00:00.000Z</updated>
+        <summary type="html"><![CDATA[JavaScriptを勉強したので簡単なブラウザゲームを作ってみました。]]></summary>
+        <content type="html"><![CDATA[<p>JavaScriptを勉強したので簡単なブラウザゲームを作ってみました。</p><p><img loading="lazy" alt="OneStrokeGame" src="/my-docusaurus/assets/images/oneStrokeGame-69a98f65c5fba47227f632724eaacc5e.png" width="640" height="660" class="img_ev3q"></p><p><a href="https://sny0.github.io/OneStrokeGame_js/" target="_blank" rel="noopener noreferrer"><strong>ここからプレイできます</strong></a></p><p>すぐ終わる簡単なゲームなので是非遊んでみてください！</p>]]></content>
+        <author>
+            <name>sny0</name>
+            <uri>https://github.com/sny0</uri>
+        </author>
+        <category label="JavaScript" term="JavaScript"/>
+        <category label="ブラウザゲーム" term="ブラウザゲーム"/>
+        <category label="OneStrokeGame" term="OneStrokeGame"/>
+    </entry>
     <entry>
         <title type="html"><![CDATA[今年の春のMVEで発表します]]></title>
         <id>https://sny0.github.io/my-docusaurus/blog/2023/04/28/MVE2023genko</id>

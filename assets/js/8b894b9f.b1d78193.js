@@ -1,0 +1,1 @@
+"use strict";(self.webpackChunkmy_docusaurus=self.webpackChunkmy_docusaurus||[]).push([[3404],{2138:s=>{s.exports=JSON.parse('{"label":"OneStrokeGame","permalink":"/my-docusaurus/blog/tags/one-stroke-game","allTagsPath":"/my-docusaurus/blog/tags","count":1}')}}]);
