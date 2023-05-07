@@ -87,6 +87,10 @@ title: 'sny0',
                 to: '/docs/tank',
               },
               {
+                label: '修士時代',
+                to: '/docs/oneStrokeGame',
+              },
+              {
                 label: 'Unity1WeekGameJam',
                 to: '/docs/hikyakuchan',
               }
