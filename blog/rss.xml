@@ -4,10 +4,30 @@
         <title>sny0 Blog</title>
         <link>https://sny0.github.io/my-docusaurus/blog</link>
         <description>sny0 Blog</description>
-        <lastBuildDate>Sun, 07 May 2023 00:00:00 GMT</lastBuildDate>
+        <lastBuildDate>Tue, 23 May 2023 00:00:00 GMT</lastBuildDate>
         <docs>https://validator.w3.org/feed/docs/rss2.html</docs>
         <generator>https://github.com/jpmonette/feed</generator>
         <language>en</language>
+        <item>
+            <title><![CDATA[第1回木島研ハッカソンに参加]]></title>
+            <link>https://sny0.github.io/my-docusaurus/blog/2023/05/23/kzmHackson1</link>
+            <guid>https://sny0.github.io/my-docusaurus/blog/2023/05/23/kzmHackson1</guid>
+            <pubDate>Tue, 23 May 2023 00:00:00 GMT</pubDate>
+            <description><![CDATA[先輩の提案で突如として開催された木島研ハッカソン。今回のテーマはChatGPTに触れてみながらオウム返しアプリケーションを作成するというものでした。最終的には、一人ひとり作成したアプリでおうむ返しを繰り返し、ちゃんと初めに話した言葉を伝えることを目指します。]]></description>
+            <content:encoded><![CDATA[<p>先輩の提案で突如として開催された木島研ハッカソン。今回のテーマはChatGPTに触れてみながらオウム返しアプリケーションを作成するというものでした。最終的には、一人ひとり作成したアプリでおうむ返しを繰り返し、ちゃんと初めに話した言葉を伝えることを目指します。</p><p>ChatGPTに手段やコードを尋ねると音声認識にGoogleSpeechRecognition、音声合成にPyttsx3を使用したオウム返しアプリが簡単にすぐにできてしまいました。そこで2日目に音声合成にVOICEVOXのずんだもんの声を使用できるようにしました。</p><p><a href="https://github.com/sny0/repeatVoiceApp" target="_blank" rel="noopener noreferrer">ソースコード</a></p>]]></content:encoded>
+            <category>木島研</category>
+            <category>ハッカソン</category>
+            <category>木島研ハッカソン</category>
+        </item>
+        <item>
+            <title><![CDATA[BIPROGY DX HACK -User's voice "Solve the problem"-に参加した]]></title>
+            <link>https://sny0.github.io/my-docusaurus/blog/2023/05/21/BiprogyHackson</link>
+            <guid>https://sny0.github.io/my-docusaurus/blog/2023/05/21/BiprogyHackson</guid>
+            <pubDate>Sun, 21 May 2023 00:00:00 GMT</pubDate>
+            <description><![CDATA[5/20と5/21に行われたBIPROGYさん主催のBIPROGY DX HACK -User's voice "Solve the problem"-に参加しました。]]></description>
+            <content:encoded><![CDATA[<p>5/20と5/21に行われたBIPROGYさん主催の<a href="https://pr.biprogy.com/recruit/hackathon/index_hackason.html" target="_blank" rel="noopener noreferrer">BIPROGY DX HACK -User's voice "Solve the problem"-</a>に参加しました。</p><p>はじめて会った人たちとユーザの問題を解決するために、話し合い、プロトタイプを作成するハッカソンでした。どんなテーマだったのか、どんなものを作ったのかを具体的にお話しすることはできませんが、私たちのグループではWebアプリを製作しました。私は、フロントエンドを担当しました。</p><p>私は、ハッカソンに参加するのが初めてであり、Webアプリの製作経験も皆無であったため、とても不安ではありましたが、メンバーに助けてもらいながら自分のできることを見つけてやりました。その結果、大変短い期間でありながら動くプロトタイプを作成することができ、とても嬉しかったです。また、参加者みんながやる気があり、技術もあるためとてもよい刺激を得ることが出来ました。本当に参加してよかったと思えるハッカソンでした。</p>]]></content:encoded>
+            <category>ハッカソン</category>
+        </item>
         <item>
             <title><![CDATA[JavaScriptを使用して簡単なブラウザゲームを作った]]></title>
             <link>https://sny0.github.io/my-docusaurus/blog/2023/05/7/oneStrokeGame</link>
