@@ -4,10 +4,19 @@
         <title>sny0 Blog</title>
         <link>https://sny0.github.io/my-docusaurus/blog</link>
         <description>sny0 Blog</description>
-        <lastBuildDate>Tue, 23 May 2023 00:00:00 GMT</lastBuildDate>
+        <lastBuildDate>Thu, 01 Jun 2023 00:00:00 GMT</lastBuildDate>
         <docs>https://validator.w3.org/feed/docs/rss2.html</docs>
         <generator>https://github.com/jpmonette/feed</generator>
         <language>en</language>
+        <item>
+            <title><![CDATA[MVE研究会で口頭発表を行いました]]></title>
+            <link>https://sny0.github.io/my-docusaurus/blog/2023/06/01/MVE2023</link>
+            <guid>https://sny0.github.io/my-docusaurus/blog/2023/06/01/MVE2023</guid>
+            <pubDate>Thu, 01 Jun 2023 00:00:00 GMT</pubDate>
+            <description><![CDATA[5/31、6/1に行われた電気情報通信学会MVE研究会で口頭発表を行いました。]]></description>
+            <content:encoded><![CDATA[<p>5/31、6/1に行われた電気情報通信学会MVE研究会で口頭発表を行いました。</p><ul><li><a href="https://ken.ieice.org/ken/program/index.php?tgs_regid=53d8eff9187610a31e3ff47b25b104a3d58a039b8acd30378b80e756dd840f11&amp;tgid=IEICE-MVE" target="_blank" rel="noopener noreferrer">プログラム</a></li><li><a href="https://ken.ieice.org/ken/paper/20230601hCUZ/" target="_blank" rel="noopener noreferrer">原稿：視差式ディスプレイにおける両眼立体視時の融像困難性と観察瞳径制限の関係</a></li></ul><p>発表後は様々な先生から質問やコメントを頂きました。私の発表を理解してくださる先生方に感謝です。</p><p>今回のMVE研究会は、他の研究会（ITE-HI、IPSJ-HCI、IPSJ-EC、HI-SIG-DeMO）と共催であり、様々な興味深い研究を聴くことができ、良い体験ができました。</p><p>会場は、東京大学本郷キャンパスにあったのですが、本郷キャンパスが大変広く驚きました。東大の建物は古くて趣があって格好良いですね。歴史を感じました。三四郎池を散策しましたが、迷子になるくらい広かったです...</p>]]></content:encoded>
+            <category>MVE研究会</category>
+        </item>
         <item>
             <title><![CDATA[第1回木島研ハッカソンに参加]]></title>
             <link>https://sny0.github.io/my-docusaurus/blog/2023/05/23/kzmHackson1</link>
@@ -40,14 +49,14 @@
             <category>OneStrokeGame</category>
         </item>
         <item>
-            <title><![CDATA[今年の春のMVEで発表します]]></title>
+            <title><![CDATA[今年の春のMVE研究会で発表します]]></title>
             <link>https://sny0.github.io/my-docusaurus/blog/2023/04/28/MVE2023genko</link>
             <guid>https://sny0.github.io/my-docusaurus/blog/2023/04/28/MVE2023genko</guid>
             <pubDate>Fri, 28 Apr 2023 00:00:00 GMT</pubDate>
             <description><![CDATA[2023/5/31～6/1に開催されるメディアエクスペリエンス・バーチャル環境基礎研究会（MVE）で登壇して研究発表をします。]]></description>
             <content:encoded><![CDATA[<p>2023/5/31～6/1に開催される<a href="https://www.ite.or.jp/ken/program/index.php?tgs_regid=a5fc286a46b37732a802fff64f3ec9fb2f50fd9cc1546e3a968df4b1c7864c01&amp;tgid=IEICE-MVE" target="_blank" rel="noopener noreferrer">メディアエクスペリエンス・バーチャル環境基礎研究会（MVE）</a>で登壇して研究発表をします。</p><p>私の出番は、6/1（木）午後セッション8の
 「視差式ディスプレイにおける両眼立体視時の融像困難性と観察瞳径制限の関係」です。</p><p>昨日、なんとか原稿を提出しました。当日は、頑張ってきます！</p>]]></content:encoded>
-            <category>MVE</category>
+            <category>MVE研究会</category>
         </item>
         <item>
             <title><![CDATA[ピカチュウ仲間と冒険チュウ！の参加得点を頂いた]]></title>

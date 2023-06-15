@@ -1,0 +1,1 @@
+"use strict";(self.webpackChunkmy_docusaurus=self.webpackChunkmy_docusaurus||[]).push([[7624],{4969:s=>{s.exports=JSON.parse('{"label":"MVE\u7814\u7a76\u4f1a","permalink":"/my-docusaurus/blog/tags/mve\u7814\u7a76\u4f1a","allTagsPath":"/my-docusaurus/blog/tags","count":2}')}}]);
