@@ -2,13 +2,27 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://sny0.github.io/my-docusaurus/blog</id>
     <title>sny0 Blog</title>
-    <updated>2023-07-22T00:00:00.000Z</updated>
+    <updated>2023-09-05T00:00:00.000Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://sny0.github.io/my-docusaurus/blog"/>
     <subtitle>sny0 Blog</subtitle>
     <icon>https://sny0.github.io/my-docusaurus/img/sny0_icon.png</icon>
     <entry>
-        <title type="html"><![CDATA[近況報告]]></title>
+        <title type="html"><![CDATA[OBJファイルのパーサーを制作しています]]></title>
+        <id>https://sny0.github.io/my-docusaurus/blog/2023/09/05/recentReport</id>
+        <link href="https://sny0.github.io/my-docusaurus/blog/2023/09/05/recentReport"/>
+        <updated>2023-09-05T00:00:00.000Z</updated>
+        <summary type="html"><![CDATA[ゲームエンジンのようなマシンに近い部分を勉強したいと考え、８月はDirectXとHLSLの勉強をしていました。]]></summary>
+        <content type="html"><![CDATA[<p>ゲームエンジンのようなマシンに近い部分を勉強したいと考え、８月はDirectXとHLSLの勉強をしていました。</p><p>使用した書籍は、</p><ul><li><a href="https://www.shoeisha.co.jp/book/detail/9784798164281" target="_blank" rel="noopener noreferrer">HLSL シェーダーの魔導書 シェーディングの基礎からレイトレーシングまで</a></li><li><a href="https://www.shoeisha.co.jp/book/detail/9784798161938" target="_blank" rel="noopener noreferrer">DirectX 12の魔導書 3Dレンダリングの基礎からMMDモデルを踊らせるまで</a></li></ul><p>です。</p><p>私は、光学を扱う研究をしているためCGのレンダリングの仕組みは勉強していて大変面白いと思いました。</p><p>２週間ほど前から、アプリケーションを作り始めました。私はゲームエンジン的なものが作りたいと考え、OBJファイルのビュアーを制作しています。
+現在は、OBJファイルから頂点情報をパースし、ポリゴンを描画してテクスチャを張り付けるところまでできています。</p><p>DirectXとOBJファイルのuv座標のv軸の方向が逆であることを知らず、デバッグに大変苦労しました...</p><iframe width="560" height="315" src="https://www.youtube.com/embed/TUSzngICLHE?si=4CEpNZ-zAuZurPwU" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"></iframe><p>動画のモデルは、<a href="https://open3dmodel.com/ja/3d-models/3d-model-low-poly-horse_43095.html" target="_blank" rel="noopener noreferrer">ここのWebサイト</a>から入手したフリーのものを使用しています。</p><p>これからは、Phongの反射モデルの実装やmtlファイルのパースしマテリアルの適応を行う予定です。</p>]]></content>
+        <author>
+            <name>sny0</name>
+            <uri>https://github.com/sny0</uri>
+        </author>
+        <category label="DX12" term="DX12"/>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[近況報告(2023年7月)]]></title>
         <id>https://sny0.github.io/my-docusaurus/blog/2023/07/22/recentReport</id>
         <link href="https://sny0.github.io/my-docusaurus/blog/2023/07/22/recentReport"/>
         <updated>2023-07-22T00:00:00.000Z</updated>
@@ -18,9 +32,8 @@
             <name>sny0</name>
             <uri>https://github.com/sny0</uri>
         </author>
-        <category label="木島研" term="木島研"/>
-        <category label="ハッカソン" term="ハッカソン"/>
-        <category label="木島研ハッカソン" term="木島研ハッカソン"/>
+        <category label="IVRC" term="IVRC"/>
+        <category label="VRSJ" term="VRSJ"/>
     </entry>
     <entry>
         <title type="html"><![CDATA[MVE研究会で口頭発表を行いました]]></title>
