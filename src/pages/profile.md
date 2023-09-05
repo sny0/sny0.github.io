@@ -38,3 +38,5 @@ sny0 / sny
 - [ペルソナ5 ザ・ロイヤル](https://p5r.jp/)
 - [OMORI](https://www.omori-game.com/en)
 - [deltarune](https://deltarune.com/)
+- [ゼルダの伝説 ブレス オブ ザ ワイルド](https://www.nintendo.co.jp/zelda/botw/index.html)
+- [ストリートファイター６](https://www.streetfighter.com/6/ja-jp)
