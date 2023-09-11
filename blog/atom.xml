@@ -2,11 +2,24 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://sny0.github.io/my-docusaurus/blog</id>
     <title>sny0 Blog</title>
-    <updated>2023-09-05T00:00:00.000Z</updated>
+    <updated>2023-09-11T01:04:21.113Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://sny0.github.io/my-docusaurus/blog"/>
     <subtitle>sny0 Blog</subtitle>
     <icon>https://sny0.github.io/my-docusaurus/img/sny0_icon.png</icon>
+    <entry>
+        <title type="html"><![CDATA[第28回日本バーチャルリアリティ学会大会に行ってきます]]></title>
+        <id>https://sny0.github.io/my-docusaurus/blog/2023-09011-gotoVRSJ2023</id>
+        <link href="https://sny0.github.io/my-docusaurus/blog/2023-09011-gotoVRSJ2023"/>
+        <updated>2023-09-11T01:04:21.113Z</updated>
+        <summary type="html"><![CDATA[9/12～9/14に開催される第２８回日本バーチャルリアリティ学会大会へ行ってきます。]]></summary>
+        <content type="html"><![CDATA[<p>9/12～9/14に開催される第２８回日本バーチャルリアリティ学会大会へ行ってきます。</p><p>私は、２件の研究発表と１件の技術展示を抱えています。先日プログラムが発表されたので、日時を記します。</p><ul><li><p>アイトラッキングによるアイボックス追従を備えたマクスウェル視ディスプレイ</p><p>  ポスター発表：9/13（水）, 9:10～11:25, HMD・プロジェクタセッション, D会場（※口頭発表は後輩が行いますが、ポスター発表には一緒に参加します）</p><p>  技術・芸術展示：9/13（水）, 12:20～14:00, 技術・芸術展示２, 暗室</p></li></ul><ul><li><p>視焦点の移動によるボケの変化勾配の矛盾が融像困難性に与える影響</p><p>  ポスター発表：9/14（木）, 9:10～11:25, 視覚セッション, B会場</p></li></ul><p>実は、展示を行うために、装置の改良や調整を研究室に泊まりながら、9/9まで行っていました。本番でしっかり動いてくれることを願っています。</p><h2 class="anchor anchorWithStickyNavbar_LWe7" id="objファイルビュアー進捗">OBJファイルビュアー進捗<a href="#objファイルビュアー進捗" class="hash-link" aria-label="Direct link to OBJファイルビュアー進捗" title="Direct link to OBJファイルビュアー進捗">​</a></h2><p>ここ数日、徹夜で開発をし、MTLファイルをパースし、マテリアルを使用しPhongの反射モデルを実装することまで出来ました。しかし、読み込めるファイルは１つであり、１つのマテリアルのみであり、コードでファイルパスを指定しなくてはならなくアプリとしては、まだまだの状態ではあります。</p><p>学会が終わり次第、更に開発を勧めます！！！</p><iframe width="560" height="315" src="https://www.youtube.com/embed/mjz2uXiGsEg?si=_OTFL-lOWh1fb0nu" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"></iframe><p>↓鏡面反射率を上げたversion</p><iframe width="560" height="315" src="https://www.youtube.com/embed/Ctz0JRySegQ?si=Z_znhBy7Kz4_D_4I" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"></iframe>]]></content>
+        <author>
+            <name>sny0</name>
+            <uri>https://github.com/sny0</uri>
+        </author>
+        <category label="VRSJ" term="VRSJ"/>
+    </entry>
     <entry>
         <title type="html"><![CDATA[OBJファイルのパーサーを制作しています]]></title>
         <id>https://sny0.github.io/my-docusaurus/blog/2023/09/05/recentReport</id>
