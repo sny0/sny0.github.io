@@ -1,7 +1,7 @@
 ---
 title: OBJファイルのパーサーを制作しています
 authors: sny0
-tags: [DX12]
+tags: [OBJFileViwer]
 ---
 
 ゲームエンジンのようなマシンに近い部分を勉強したいと考え、８月はDirectXとHLSLの勉強をしていました。
