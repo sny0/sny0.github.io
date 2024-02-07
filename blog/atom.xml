@@ -2,11 +2,39 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://sny0.github.io/my-docusaurus/blog</id>
     <title>sny0 Blog</title>
-    <updated>2023-09-18T00:00:00.000Z</updated>
+    <updated>2024-02-07T00:00:00.000Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://sny0.github.io/my-docusaurus/blog"/>
     <subtitle>sny0 Blog</subtitle>
     <icon>https://sny0.github.io/my-docusaurus/img/sny0_icon.png</icon>
+    <entry>
+        <title type="html"><![CDATA[近況報告]]></title>
+        <id>https://sny0.github.io/my-docusaurus/blog/2024/02/07/kinkyo</id>
+        <link href="https://sny0.github.io/my-docusaurus/blog/2024/02/07/kinkyo"/>
+        <updated>2024-02-07T00:00:00.000Z</updated>
+        <summary type="html"><![CDATA[Blogの更新をせず、かなり時間が経った。全く何もしていなかったわけでなく、どちらかというと忙しくて更新できなかった。そのため、前回の更新から今まで何をしていたのか今回まとめて報告を行いたい。]]></summary>
+        <content type="html"><![CDATA[<p>Blogの更新をせず、かなり時間が経った。全く何もしていなかったわけでなく、どちらかというと忙しくて更新できなかった。そのため、前回の更新から今まで何をしていたのか今回まとめて報告を行いたい。</p><h2 class="anchor anchorWithStickyNavbar_LWe7" id="obj-file-viewerの完成">OBJ File Viewerの完成<a href="#obj-file-viewerの完成" class="hash-link" aria-label="Direct link to OBJ File Viewerの完成" title="Direct link to OBJ File Viewerの完成">​</a></h2><p>8月から制作していたDirectX12を使用したobjファイルのビューワーだが、11月上旬に一応完成した。本当に制作に苦労した…<br>
+<!-- -->機能は、SRT(Position, Rotation, Scale)の変更やPhongの反射モデルのパラメータ(アンビエント光, ディフューズ光, スペキュラー光, 透過度, スペキュラーの強さ)の変更、テクスチャの変更が行える。objファイルだけでなく、同名のmtlファイルがあるときはそのパラメータがPhongの反射モデルに適応される。<br>
+<!-- -->Unityの画面を意識して制作した。</p><h2 class="anchor anchorWithStickyNavbar_LWe7" id="tank2を制作中">Tank2を制作中<a href="#tank2を制作中" class="hash-link" aria-label="Direct link to Tank2を制作中" title="Direct link to Tank2を制作中">​</a></h2><p>学部2年生の頃に制作したTankのリメイク。Unityで製作中。<br>
+<!-- -->旧タンクでは技術や知識がなくうまく実装できなかった<strong>ゲームAI</strong>に拘って制作した。
+どういう実装をおこなったかはPortfolioのTank2の方で述べたい。<br>
+<a href="https://unityroom.com/games/tank_sny" target="_blank" rel="noopener noreferrer">ここから</a>遊べるので是非遊んでほしい。</p><h2 class="anchor anchorWithStickyNavbar_LWe7" id="データサイエンティスト育成事業に参加">データサイエンティスト育成事業に参加<a href="#データサイエンティスト育成事業に参加" class="hash-link" aria-label="Direct link to データサイエンティスト育成事業に参加" title="Direct link to データサイエンティスト育成事業に参加">​</a></h2><p>岐阜大学には<a href="https://sites.google.com/db.info.gifu-u.ac.jp/ds2021/" target="_blank" rel="noopener noreferrer">データサイエンティスト育成事業</a>という超スマート社会のデータサイエンティストに必要な3要素（実世界データ知識，ツールの活⽤スキル，異分野との協業マインド）の育成を⽬的としたプログラムがある。名古屋大学などと連携している取り組みで、詳しくは、上のリンク先を見て欲しい。企業や市町村から提供されたデータをチームで分析し、お悩みを解決する実践的な演習である。それに至るまでに、幾つもの講義の受講が必要となるが、一番大変なのはこの演習だろう。<br>
+<!-- -->私は、2023年度このプログラムに参加した。前期にオンデマンドの講義を受け知識を付けたあと、後期（10月～1月）に先ほど述べたメイン演習を行った。私のチームは、名古屋大学院の学生や複数の社会人から構成された複合チームだった。週１～2回の会議（名駅の名大キャンパスやオンラインで）と裏で自分の分担した作業を進める必要があり、ゲーム制作と並行する必要があった私にとっては大変な期間だった。しかし、私の研究で使用していない（今後使用するかもしれない）機械学習技術を扱えたり、チームでの活発な活動を通じて多くの学びを得た。<br>
+<!-- -->最終的には発表会があり、それが1月の中旬であったため、私の正月休みはこの準備で無くなってしまった…しかし、達成感は非常に大きく、楽しかったの事実だ。チームメイトには本当に感謝している。</p><h2 class="anchor anchorWithStickyNavbar_LWe7" id="イベント参加">イベント参加<a href="#イベント参加" class="hash-link" aria-label="Direct link to イベント参加" title="Direct link to イベント参加">​</a></h2><ul><li>Tokyo Game Show 2023</li></ul><p>TGSに参戦。一般dayの一日目に参加したのだが、人が多すぎて移動がとても大変だった。開園前から1時間以上並んだのだが、新作ゲームのプレイチケットを獲得することができず、悔しい思いをした。しかし、私が楽しみにしている<strong>龍が如く8</strong>のディスプレイがきれいで興奮した。物販で欲しいグッズも買え大変満足した。来年はビジネスdayで行けるといいな…<br>
+<!-- -->私は、こういうゲームのオフラインイベントに参加するのが大好きだ。住んでいる場所が岐阜であり、高額な出費が必要となるがその価値はあると思う。2023年の夏は、インディーゲームの祭典のBitSummitに行き、クリエーターの人とおしゃべりをしてきた。  </p><p><img loading="lazy" alt="TGS2023" src="/my-docusaurus/assets/images/TGS2023-5bba0af90fb1fdaf84126ed5ed106c0a.jpg" width="4032" height="3024" class="img_ev3q">
+<img loading="lazy" alt="TGS2023" src="/my-docusaurus/assets/images/TGS2023_ryu8-042d225f0de4bff7e0d9d1ff17244f5a.jpg" width="3024" height="4032" class="img_ev3q"></p><ul><li>OMORIコンサート</li></ul><p>私が大好きなインディーゲームの一つ<strong>OMORI</strong>のコンサートに参戦した。私はOMORIのBGMが大好きでサントラも持っている。論文を執筆するときはいつもお世話になっている。だから、コンサートに参加しないという選択肢はない。春のコンサートは残念ながらチケットが当選せず行けなかったが、今回は運よく当選したのだ。<br>
+<!-- -->コンサートは天国だった。特にWorld's End Valentineが最高だった。
+<img loading="lazy" alt="OMORIコンサート" src="/my-docusaurus/assets/images/omoriconcert_display-3b417b956762790ba6408ccc1162d18b.jpg" width="3024" height="4032" class="img_ev3q">
+<img loading="lazy" alt="OMORIコンサート献花" src="/my-docusaurus/assets/images/omoriconcert_flower-58f5a0a2075e92508ba5012e1b88009a.jpg" width="3024" height="4032" class="img_ev3q">
+↑OMORIのファンたちがお金を募って購入し送ったらしい。たくさんの人から愛されていることを実感した。</p>]]></content>
+        <author>
+            <name>sny0</name>
+            <uri>https://github.com/sny0</uri>
+        </author>
+        <category label="OBJFileViewer" term="OBJFileViewer"/>
+        <category label="Tank2" term="Tank2"/>
+        <category label="TGS" term="TGS"/>
+    </entry>
     <entry>
         <title type="html"><![CDATA[VR学会大会2023で研究発表を行いました]]></title>
         <id>https://sny0.github.io/my-docusaurus/blog/2023/09/18/VRSJ2023</id>
@@ -26,9 +54,9 @@
     </entry>
     <entry>
         <title type="html"><![CDATA[VR学会大会2023に行ってきます]]></title>
-        <id>https://sny0.github.io/my-docusaurus/blog/2023-09011-gotoVRSJ2023</id>
-        <link href="https://sny0.github.io/my-docusaurus/blog/2023-09011-gotoVRSJ2023"/>
-        <updated>2023-09-11T04:14:25.000Z</updated>
+        <id>https://sny0.github.io/my-docusaurus/blog/2023/09/11/gotoVRSJ2023</id>
+        <link href="https://sny0.github.io/my-docusaurus/blog/2023/09/11/gotoVRSJ2023"/>
+        <updated>2023-09-11T00:00:00.000Z</updated>
         <summary type="html"><![CDATA[9/12～9/14に開催される第２８回日本バーチャルリアリティ学会大会へ行ってきます。]]></summary>
         <content type="html"><![CDATA[<p>9/12～9/14に開催される第２８回日本バーチャルリアリティ学会大会へ行ってきます。</p><p>私は、２件の研究発表と１件の技術展示を抱えています。先日プログラムが発表されたので、日時を記します。</p><ul><li><p>アイトラッキングによるアイボックス追従を備えたマクスウェル視ディスプレイ</p><p>  ポスター発表：9/13（水）, 9:10～11:25, HMD・プロジェクタセッション, D会場（※口頭発表は後輩が行いますが、ポスター発表には一緒に参加します）</p><p>  技術・芸術展示：9/13（水）, 12:20～14:00, 技術・芸術展示２, 暗室</p></li></ul><ul><li><p>視焦点の移動によるボケの変化勾配の矛盾が融像困難性に与える影響</p><p>  ポスター発表：9/14（木）, 9:10～11:25, 視覚セッション, B会場</p></li></ul><p>実は、展示を行うために、装置の改良や調整を研究室に泊まりながら、9/9まで行っていました。本番でしっかり動いてくれることを願っています。</p><h2 class="anchor anchorWithStickyNavbar_LWe7" id="objファイルビュアー進捗">OBJファイルビュアー進捗<a href="#objファイルビュアー進捗" class="hash-link" aria-label="Direct link to OBJファイルビュアー進捗" title="Direct link to OBJファイルビュアー進捗">​</a></h2><p>ここ数日、徹夜で開発をし、MTLファイルをパースし、マテリアルを使用しPhongの反射モデルを実装することまで出来ました。しかし、読み込めるファイルは１つであり、１つのマテリアルのみであり、コードでファイルパスを指定しなくてはならなくアプリとしては、まだまだの状態ではあります。</p><p>学会が終わり次第、更に開発を勧めます！！！</p><iframe width="560" height="315" src="https://www.youtube.com/embed/mjz2uXiGsEg?si=_OTFL-lOWh1fb0nu" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"></iframe><p>↓鏡面反射率を上げたversion</p><iframe width="560" height="315" src="https://www.youtube.com/embed/Ctz0JRySegQ?si=Z_znhBy7Kz4_D_4I" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"></iframe>]]></content>
         <author>
@@ -36,7 +64,7 @@
             <uri>https://github.com/sny0</uri>
         </author>
         <category label="VRSJ" term="VRSJ"/>
-        <category label="OBJFileViwer" term="OBJFileViwer"/>
+        <category label="OBJFileViewer" term="OBJFileViewer"/>
     </entry>
     <entry>
         <title type="html"><![CDATA[OBJファイルのパーサーを制作しています]]></title>
