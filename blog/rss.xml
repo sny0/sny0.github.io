@@ -4,10 +4,25 @@
         <title>sny0 Blog</title>
         <link>https://sny0.github.io/my-docusaurus/blog</link>
         <description>sny0 Blog</description>
-        <lastBuildDate>Wed, 07 Feb 2024 00:00:00 GMT</lastBuildDate>
+        <lastBuildDate>Mon, 19 Feb 2024 00:00:00 GMT</lastBuildDate>
         <docs>https://validator.w3.org/feed/docs/rss2.html</docs>
         <generator>https://github.com/jpmonette/feed</generator>
         <language>en</language>
+        <item>
+            <title><![CDATA[Tank2完成！]]></title>
+            <link>https://sny0.github.io/my-docusaurus/blog/2024/02/19/CompleteTank2</link>
+            <guid>https://sny0.github.io/my-docusaurus/blog/2024/02/19/CompleteTank2</guid>
+            <pubDate>Mon, 19 Feb 2024 00:00:00 GMT</pubDate>
+            <description><![CDATA[Tank2 ver3.1をリリースした。これで完成としたいと思う。]]></description>
+            <content:encoded><![CDATA[<p>Tank2 ver3.1をリリースした。これで完成としたいと思う。<br>
+<!-- -->ver.2からの更新点を以下に示す。</p><ul><li>ローカルなランキング機能の追加</li><li>敵の種類の追加</li><li>敵のパラメータ調整</li><li>ステージの追加</li><li>エクストラモードの追加</li><li>ブラウン管テレビ感、弾や敵のエフェクトを追加</li><li>弾の種類や残機数、最大弾数を設定できるように</li></ul><p>特に、「ブラウン管テレビ感、弾や敵のエフェクトを追加」にこだわった。<br>
+<!-- -->この実装には、shaderを書く必要があり、OBJ File Viewerを製作するときに学んだ、3DCGやHLSLの知識が大変役に立った。<br>
+<!-- -->思いのほかshaderを書くことが楽しく、かなり拘って色々な要素を実装した。<br>
+<!-- -->見た目を大きく変えることができる点、数学をがっつり使う点が面白いと感じた。<br>
+<!-- -->このゲームが完成してもshaderで様々な絵を描いてみたいと思う。  </p><p>Tank2は、<br>
+<a href="https://unityroom.com/games/tank_sny" target="_blank" rel="noopener noreferrer">ここから遊べます！</a></p>]]></content:encoded>
+            <category>Tank2</category>
+        </item>
         <item>
             <title><![CDATA[近況報告]]></title>
             <link>https://sny0.github.io/my-docusaurus/blog/2024/02/07/kinkyo</link>
