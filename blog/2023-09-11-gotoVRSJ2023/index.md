@@ -1,7 +1,7 @@
 ---
 title: VR学会大会2023に行ってきます
 authors: sny0
-tags: [VRSJ, OBJFileViwer]
+tags: [VRSJ, OBJFileViewer]
 ---
 
 9/12～9/14に開催される第２８回日本バーチャルリアリティ学会大会へ行ってきます。

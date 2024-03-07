@@ -6,7 +6,7 @@ const darkCodeTheme = require('prism-react-renderer/themes/dracula');
 
 module.exports= {
 title: 'sny0',
-  tagline: 'Rabbits are cute!',
+  tagline: 'Lately, I have become obsessed with shader!',
   favicon: 'img/sny0_icon.png',
 
   // Set the production url of your site here

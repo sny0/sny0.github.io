@@ -6,7 +6,7 @@ sidebar_position: 2
 # Tank
 学部2年時に作成した2D戦車ゲーム
 
-[ソースコード](https://github.com/sny0/Tank)
+[GitHubリポジトリ](https://github.com/sny0/Tank)
 
 ![Tank](../static/img/tank.png)
 
