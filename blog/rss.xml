@@ -4,10 +4,45 @@
         <title>sny0 Blog</title>
         <link>https://sny0.github.io/my-docusaurus/blog</link>
         <description>sny0 Blog</description>
-        <lastBuildDate>Mon, 19 Feb 2024 00:00:00 GMT</lastBuildDate>
+        <lastBuildDate>Thu, 09 May 2024 00:00:00 GMT</lastBuildDate>
         <docs>https://validator.w3.org/feed/docs/rss2.html</docs>
         <generator>https://github.com/jpmonette/feed</generator>
         <language>en</language>
+        <item>
+            <title><![CDATA[MVE2024で研究発表します]]></title>
+            <link>https://sny0.github.io/my-docusaurus/blog/2024/05/09/goToMVE</link>
+            <guid>https://sny0.github.io/my-docusaurus/blog/2024/05/09/goToMVE</guid>
+            <pubDate>Thu, 09 May 2024 00:00:00 GMT</pubDate>
+            <description><![CDATA[今年の6/6、6/7に東京大学山上会館で行われるメディアエクスペリエンス・バーチャル環境基礎研究会（MVE）で研究発表を行う。]]></description>
+            <content:encoded><![CDATA[<p>今年の6/6、6/7に東京大学山上会館で行われるメディアエクスペリエンス・バーチャル環境基礎研究会（MVE）で研究発表を行う。</p><p>先日、<a href="https://ken.ieice.org/ken/program/index.php?tgs_regid=1416a817764d923363086e57089a067c959812e720bfc2c41992f981fbaa7adf&amp;tgid=IEICE-MVE" target="_blank" rel="noopener noreferrer">開催プログラム</a>が発表された。また、今週原稿の提出を行った。</p><p>私の発表題目は、<br>
+<strong>平行パンケーキウィンドウ光学系を用いたビデオシースルーHMDにおけるカメラと目の位置の一致</strong><br>
+<!-- -->だ。</p><p>概要を以下に示す。<br>
+<!-- -->現在、様々なHMDにも採用されているパンケーキウィンドウ光学系を用いてビデオシースルーHMDのカメラと体験者の目の位置の差を解決する方法を提案する。実際にプロトタイプを制作し、効果の確認と周波数特性の測定を行った。</p><p>今年は、私だけでなく他の研究室メンバーも何人か研究発表を行う。楽しみだ。</p>]]></content:encoded>
+            <category>MVE</category>
+            <category>研究</category>
+        </item>
+        <item>
+            <title><![CDATA[近況報告]]></title>
+            <link>https://sny0.github.io/my-docusaurus/blog/2024/05/08/kinkyo</link>
+            <guid>https://sny0.github.io/my-docusaurus/blog/2024/05/08/kinkyo</guid>
+            <pubDate>Wed, 08 May 2024 00:00:00 GMT</pubDate>
+            <description><![CDATA[前回の更新からかなり時間が経ってしまった。この２，3カ月何をしていたかを記したい。]]></description>
+            <content:encoded><![CDATA[<p>前回の更新からかなり時間が経ってしまった。この２，3カ月何をしていたかを記したい。</p><h2 class="anchor anchorWithStickyNavbar_LWe7" id="shader-arts製作">Shader Arts製作<a href="#shader-arts製作" class="hash-link" aria-label="Direct link to Shader Arts製作" title="Direct link to Shader Arts製作">​</a></h2><p>Unityのフラグメントシェーダーを書くことで様々な作品を制作した。<br>
+<!-- -->数式を弄ることが面白く、短期間で40作品以上制作した。<br>
+<a href="https://sny0.github.io/my-docusaurus/docs/shaderArts" target="_blank" rel="noopener noreferrer">ここに詳しく載せている</a></p><h2 class="anchor anchorWithStickyNavbar_LWe7" id="大人がnintendo-laboで遊ぶ">大人がNintendo Laboで遊ぶ<a href="#大人がnintendo-laboで遊ぶ" class="hash-link" aria-label="Direct link to 大人がNintendo Laboで遊ぶ" title="Direct link to 大人がNintendo Laboで遊ぶ">​</a></h2><ul><li><a href="https://www.nintendo.com/jp/labo/kit/variety.html" target="_blank" rel="noopener noreferrer">Nintendo Labo バラエティキット</a></li><li><a href="https://www.nintendo.com/jp/labo/kit/vr.html" target="_blank" rel="noopener noreferrer">Nintendo Labo VRキット</a></li></ul><p>を購入し、Toy-Conを組み立てて遊んでみた。<br>
+<!-- -->スゴイ…凄すぎる…！！想像以上のクオリティの高さ、面白さに脱帽した。IRライト&amp;カメラの可能性を感じた。<br>
+<!-- -->Nintendo Laboの凄いところは、仕組みをしっかり解説しているところだ。例えば、VRキットでは、立体視の原理から始まり、フレームシーケンシャル方式（ファミコン3Dシステムはこの方式）や視差バリア式（ニンテンドー3DSはこの方式）の仕組み、レンズの収差のインバースをディスプレイに掛ける収差補償の話に至るまで…<br>
+<!-- -->かなり深いところまで、子供でも分かるように丁寧に解説されており、素晴らしいと思った。</p><p>以下に私が組み立てたToy-Conの写真を載せる。
+<img loading="lazy" alt="HMD" src="/my-docusaurus/assets/images/HMD-2459fb9fa80c28f0239f014c7da9c15f.jpg" width="4032" height="3024" class="img_ev3q">
+<img loading="lazy" alt="Piano" src="/my-docusaurus/assets/images/Piano-847d103ba369b77ef232f6c59178a07d.jpg" width="3024" height="4032" class="img_ev3q"></p><h2 class="anchor anchorWithStickyNavbar_LWe7" id="サークルを立ち上げた">サークルを立ち上げた<a href="#サークルを立ち上げた" class="hash-link" aria-label="Direct link to サークルを立ち上げた" title="Direct link to サークルを立ち上げた">​</a></h2><p>今年の春から、研究室の同級生の<a href="https://naoki911.github.io/Porto/index.html" target="_blank" rel="noopener noreferrer">小木曽君</a>とデジタル創作サークルというサークルを立ち上げた。<br>
+<!-- -->名前の通り、デジタル作品を創るサークルで、IVRCをはじめとした様々な学生コンテストに作品を応募する予定だ。<br>
+<!-- -->4月に新歓があり、ありがたいことになんと40人以上の人が集まった。学年は学部1年生が多いもののB1からM2のすべての学生がいる。
+後輩たちに私の経験を伝えられるように、さらに私が成長できるように頑張りたい。</p><p>早速、今月末にはIVRCの書類選考の締め切りがある。私はここ2年間応募しているが、書類が通らず大変悔しい想いをしてきた。<br>
+<!-- -->今年で学生生活が終わるため、なんとしてでも通したい。<br>
+<!-- -->勿論、研究も頑張りたい。</p>]]></content:encoded>
+            <category>ShaderArts</category>
+            <category>NintendoLabo</category>
+        </item>
         <item>
             <title><![CDATA[Tank2完成！]]></title>
             <link>https://sny0.github.io/my-docusaurus/blog/2024/02/19/CompleteTank2</link>

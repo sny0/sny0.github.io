@@ -1,0 +1,1 @@
+"use strict";(self.webpackChunkmy_docusaurus=self.webpackChunkmy_docusaurus||[]).push([[1144],{5954:s=>{s.exports=JSON.parse('{"label":"NintendoLabo","permalink":"/my-docusaurus/blog/tags/nintendo-labo","allTagsPath":"/my-docusaurus/blog/tags","count":1}')}}]);
