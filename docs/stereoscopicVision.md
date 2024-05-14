@@ -25,6 +25,9 @@ HTC VIVEのコントローラーが括りつけられたヘッドセットを被
 - アクティブシャッターメガネ
 - 3Dテレビ
 
+## 動画
+春祭2024で展示したときに撮影した。
+<iframe width="560" height="315" src="https://www.youtube.com/embed/q7bqP6noDqQ?si=eOOf-yxqASqDrgg5" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
 
 ## 秘話
 私の研究室では、仮配属された学部3年生時に先生から課題が与えられる。私の代では、「**3Dテレビを使って、見る人が動いても見える物体の場所は変化しないようなものをつくる**」ことがお題だった。
