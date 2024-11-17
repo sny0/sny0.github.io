@@ -70,6 +70,16 @@ title: 'sny0',
           },
           {to: '/blog', label: 'Blog', position: 'left'},
           {
+            href: 'https://www.kzm.info.gifu-u.ac.jp/',
+            label: 'KZM Lab',
+            position: 'right',
+          },
+          {
+            href: 'https://atcoder.jp/users/sny',
+            label: 'AtCoder',
+            position: 'right',
+          },
+          {
             href: 'https://github.com/sny0',
             label: 'GitHub',
             position: 'right',
@@ -79,6 +89,15 @@ title: 'sny0',
       footer: {
         style: 'dark',
         links: [
+          {
+            title: 'About Me',
+            items: [
+              {
+                label: 'Profile',
+                to: '/profile'
+              }
+            ]
+          },
           {
             title: 'Portfolio',
             items: [
@@ -102,6 +121,14 @@ title: 'sny0',
               {
                 label: 'Blog',
                 to: '/blog',
+              },
+              {
+                label: 'KZM Lab',
+                href: 'https://www.kzm.info.gifu-u.ac.jp/'
+              },
+              {
+                label: 'AtCoder',
+                href: 'https://atcoder.jp/users/sny'
               },
               {
                 label: 'GitHub',

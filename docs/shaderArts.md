@@ -20,5 +20,5 @@ Tank2の制作時にshaderを書くことに夢中になり、shaderの作品を
 - C#, ShaderLab
 
 ## 参考にしたもの
-- [楽しい！Unityシェーダー お絵描き入門！](https://docs.google.com/presentation/d/1NMhx4HWuNZsjNRRlaFOu2ysjo04NgcpFlEhzodE8Rlg/edit#slide=id.g370aabb90c_0_794)
+- [楽しい！Unityシェーダー お絵描き入門！](https://docs.google.com/presentation/d/1NMhx4HWuNZsjNRRlaFOu2ysjo04NgcpFlEhzodE8Rlg/edit#slide=id.g423da70889_217_0)
 - [The Book of Shaders](https://thebookofshaders.com/)
