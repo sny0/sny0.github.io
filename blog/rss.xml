@@ -2,7 +2,7 @@
 <rss version="2.0" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/">
     <channel>
         <title>sny0 Blog</title>
-        <link>https://sny0.github.io/my-docusaurus/blog</link>
+        <link>https://sny0.github.io/blog</link>
         <description>sny0 Blog</description>
         <lastBuildDate>Thu, 09 May 2024 00:00:00 GMT</lastBuildDate>
         <docs>https://validator.w3.org/feed/docs/rss2.html</docs>
@@ -10,8 +10,8 @@
         <language>en</language>
         <item>
             <title><![CDATA[MVE2024で研究発表します]]></title>
-            <link>https://sny0.github.io/my-docusaurus/blog/2024/05/09/goToMVE</link>
-            <guid>https://sny0.github.io/my-docusaurus/blog/2024/05/09/goToMVE</guid>
+            <link>https://sny0.github.io/blog/2024/05/09/goToMVE</link>
+            <guid>https://sny0.github.io/blog/2024/05/09/goToMVE</guid>
             <pubDate>Thu, 09 May 2024 00:00:00 GMT</pubDate>
             <description><![CDATA[今年の6/6、6/7に東京大学山上会館で行われるメディアエクスペリエンス・バーチャル環境基礎研究会（MVE）で研究発表を行う。]]></description>
             <content:encoded><![CDATA[<p>今年の6/6、6/7に東京大学山上会館で行われるメディアエクスペリエンス・バーチャル環境基礎研究会（MVE）で研究発表を行う。</p><p>先日、<a href="https://ken.ieice.org/ken/program/index.php?tgs_regid=1416a817764d923363086e57089a067c959812e720bfc2c41992f981fbaa7adf&amp;tgid=IEICE-MVE" target="_blank" rel="noopener noreferrer">開催プログラム</a>が発表された。また、今週原稿の提出を行った。</p><p>私の発表題目は、<br>
@@ -23,8 +23,8 @@
         </item>
         <item>
             <title><![CDATA[近況報告]]></title>
-            <link>https://sny0.github.io/my-docusaurus/blog/2024/05/08/kinkyo</link>
-            <guid>https://sny0.github.io/my-docusaurus/blog/2024/05/08/kinkyo</guid>
+            <link>https://sny0.github.io/blog/2024/05/08/kinkyo</link>
+            <guid>https://sny0.github.io/blog/2024/05/08/kinkyo</guid>
             <pubDate>Wed, 08 May 2024 00:00:00 GMT</pubDate>
             <description><![CDATA[前回の更新からかなり時間が経ってしまった。この２，3カ月何をしていたかを記したい。]]></description>
             <content:encoded><![CDATA[<p>前回の更新からかなり時間が経ってしまった。この２，3カ月何をしていたかを記したい。</p><h2 class="anchor anchorWithStickyNavbar_LWe7" id="shader-arts製作">Shader Arts製作<a href="#shader-arts製作" class="hash-link" aria-label="Direct link to Shader Arts製作" title="Direct link to Shader Arts製作">​</a></h2><p>Unityのフラグメントシェーダーを書くことで様々な作品を制作した。<br>
@@ -33,8 +33,8 @@
 <!-- -->スゴイ…凄すぎる…！！想像以上のクオリティの高さ、面白さに脱帽した。IRライト&amp;カメラの可能性を感じた。<br>
 <!-- -->Nintendo Laboの凄いところは、仕組みをしっかり解説しているところだ。例えば、VRキットでは、立体視の原理から始まり、フレームシーケンシャル方式（ファミコン3Dシステムはこの方式）や視差バリア式（ニンテンドー3DSはこの方式）の仕組み、レンズの収差のインバースをディスプレイに掛ける収差補償の話に至るまで…<br>
 <!-- -->かなり深いところまで、子供でも分かるように丁寧に解説されており、素晴らしいと思った。</p><p>以下に私が組み立てたToy-Conの写真を載せる。
-<img loading="lazy" alt="HMD" src="/my-docusaurus/assets/images/HMD-2459fb9fa80c28f0239f014c7da9c15f.jpg" width="4032" height="3024" class="img_ev3q">
-<img loading="lazy" alt="Piano" src="/my-docusaurus/assets/images/Piano-847d103ba369b77ef232f6c59178a07d.jpg" width="3024" height="4032" class="img_ev3q"></p><h2 class="anchor anchorWithStickyNavbar_LWe7" id="サークルを立ち上げた">サークルを立ち上げた<a href="#サークルを立ち上げた" class="hash-link" aria-label="Direct link to サークルを立ち上げた" title="Direct link to サークルを立ち上げた">​</a></h2><p>今年の春から、研究室の同級生の<a href="https://naoki911.github.io/Porto/index.html" target="_blank" rel="noopener noreferrer">小木曽君</a>とデジタル創作サークルというサークルを立ち上げた。<br>
+<img loading="lazy" alt="HMD" src="/assets/images/HMD-2459fb9fa80c28f0239f014c7da9c15f.jpg" width="4032" height="3024" class="img_ev3q">
+<img loading="lazy" alt="Piano" src="/assets/images/Piano-847d103ba369b77ef232f6c59178a07d.jpg" width="3024" height="4032" class="img_ev3q"></p><h2 class="anchor anchorWithStickyNavbar_LWe7" id="サークルを立ち上げた">サークルを立ち上げた<a href="#サークルを立ち上げた" class="hash-link" aria-label="Direct link to サークルを立ち上げた" title="Direct link to サークルを立ち上げた">​</a></h2><p>今年の春から、研究室の同級生の<a href="https://naoki911.github.io/Porto/index.html" target="_blank" rel="noopener noreferrer">小木曽君</a>とデジタル創作サークルというサークルを立ち上げた。<br>
 <!-- -->名前の通り、デジタル作品を創るサークルで、IVRCをはじめとした様々な学生コンテストに作品を応募する予定だ。<br>
 <!-- -->4月に新歓があり、ありがたいことになんと40人以上の人が集まった。学年は学部1年生が多いもののB1からM2のすべての学生がいる。
 後輩たちに私の経験を伝えられるように、さらに私が成長できるように頑張りたい。</p><p>早速、今月末にはIVRCの書類選考の締め切りがある。私はここ2年間応募しているが、書類が通らず大変悔しい想いをしてきた。<br>
@@ -45,8 +45,8 @@
         </item>
         <item>
             <title><![CDATA[Tank2完成！]]></title>
-            <link>https://sny0.github.io/my-docusaurus/blog/2024/02/19/CompleteTank2</link>
-            <guid>https://sny0.github.io/my-docusaurus/blog/2024/02/19/CompleteTank2</guid>
+            <link>https://sny0.github.io/blog/2024/02/19/CompleteTank2</link>
+            <guid>https://sny0.github.io/blog/2024/02/19/CompleteTank2</guid>
             <pubDate>Mon, 19 Feb 2024 00:00:00 GMT</pubDate>
             <description><![CDATA[Tank2 ver3.1をリリースした。これで完成としたいと思う。]]></description>
             <content:encoded><![CDATA[<p>Tank2 ver3.1をリリースした。これで完成としたいと思う。<br>
@@ -60,8 +60,8 @@
         </item>
         <item>
             <title><![CDATA[近況報告]]></title>
-            <link>https://sny0.github.io/my-docusaurus/blog/2024/02/07/kinkyo</link>
-            <guid>https://sny0.github.io/my-docusaurus/blog/2024/02/07/kinkyo</guid>
+            <link>https://sny0.github.io/blog/2024/02/07/kinkyo</link>
+            <guid>https://sny0.github.io/blog/2024/02/07/kinkyo</guid>
             <pubDate>Wed, 07 Feb 2024 00:00:00 GMT</pubDate>
             <description><![CDATA[Blogの更新をせず、かなり時間が経った。全く何もしていなかったわけでなく、どちらかというと忙しくて更新できなかった。そのため、前回の更新から今まで何をしていたのか今回まとめて報告を行いたい。]]></description>
             <content:encoded><![CDATA[<p>Blogの更新をせず、かなり時間が経った。全く何もしていなかったわけでなく、どちらかというと忙しくて更新できなかった。そのため、前回の更新から今まで何をしていたのか今回まとめて報告を行いたい。</p><h2 class="anchor anchorWithStickyNavbar_LWe7" id="obj-file-viewerの完成">OBJ File Viewerの完成<a href="#obj-file-viewerの完成" class="hash-link" aria-label="Direct link to OBJ File Viewerの完成" title="Direct link to OBJ File Viewerの完成">​</a></h2><p>8月から制作していたDirectX12を使用したobjファイルのビューワーだが、11月上旬に一応完成した。本当に制作に苦労した…<br>
@@ -72,11 +72,11 @@
 <a href="https://unityroom.com/games/tank_sny" target="_blank" rel="noopener noreferrer">ここから</a>遊べるので是非遊んでほしい。</p><h2 class="anchor anchorWithStickyNavbar_LWe7" id="データサイエンティスト育成事業に参加">データサイエンティスト育成事業に参加<a href="#データサイエンティスト育成事業に参加" class="hash-link" aria-label="Direct link to データサイエンティスト育成事業に参加" title="Direct link to データサイエンティスト育成事業に参加">​</a></h2><p>岐阜大学には<a href="https://sites.google.com/db.info.gifu-u.ac.jp/ds2021/" target="_blank" rel="noopener noreferrer">データサイエンティスト育成事業</a>という超スマート社会のデータサイエンティストに必要な3要素（実世界データ知識，ツールの活⽤スキル，異分野との協業マインド）の育成を⽬的としたプログラムがある。名古屋大学などと連携している取り組みで、詳しくは、上のリンク先を見て欲しい。企業や市町村から提供されたデータをチームで分析し、お悩みを解決する実践的な演習である。それに至るまでに、幾つもの講義の受講が必要となるが、一番大変なのはこの演習だろう。<br>
 <!-- -->私は、2023年度このプログラムに参加した。前期にオンデマンドの講義を受け知識を付けたあと、後期（10月～1月）に先ほど述べたメイン演習を行った。私のチームは、名古屋大学院の学生や複数の社会人から構成された複合チームだった。週１～2回の会議（名駅の名大キャンパスやオンラインで）と裏で自分の分担した作業を進める必要があり、ゲーム制作と並行する必要があった私にとっては大変な期間だった。しかし、私の研究で使用していない（今後使用するかもしれない）機械学習技術を扱えたり、チームでの活発な活動を通じて多くの学びを得た。<br>
 <!-- -->最終的には発表会があり、それが1月の中旬であったため、私の正月休みはこの準備で無くなってしまった…しかし、達成感は非常に大きく、楽しかったの事実だ。チームメイトには本当に感謝している。</p><h2 class="anchor anchorWithStickyNavbar_LWe7" id="イベント参加">イベント参加<a href="#イベント参加" class="hash-link" aria-label="Direct link to イベント参加" title="Direct link to イベント参加">​</a></h2><ul><li>Tokyo Game Show 2023</li></ul><p>TGSに参戦。一般dayの一日目に参加したのだが、人が多すぎて移動がとても大変だった。開園前から1時間以上並んだのだが、新作ゲームのプレイチケットを獲得することができず、悔しい思いをした。しかし、私が楽しみにしている<strong>龍が如く8</strong>のディスプレイがきれいで興奮した。物販で欲しいグッズも買え大変満足した。来年はビジネスdayで行けるといいな…<br>
-<!-- -->私は、こういうゲームのオフラインイベントに参加するのが大好きだ。住んでいる場所が岐阜であり、高額な出費が必要となるがその価値はあると思う。2023年の夏は、インディーゲームの祭典のBitSummitに行き、クリエーターの人とおしゃべりをしてきた。  </p><p><img loading="lazy" alt="TGS2023" src="/my-docusaurus/assets/images/TGS2023-5bba0af90fb1fdaf84126ed5ed106c0a.jpg" width="4032" height="3024" class="img_ev3q">
-<img loading="lazy" alt="TGS2023" src="/my-docusaurus/assets/images/TGS2023_ryu8-042d225f0de4bff7e0d9d1ff17244f5a.jpg" width="3024" height="4032" class="img_ev3q"></p><ul><li>OMORIコンサート</li></ul><p>私が大好きなインディーゲームの一つ<strong>OMORI</strong>のコンサートに参戦した。私はOMORIのBGMが大好きでサントラも持っている。論文を執筆するときはいつもお世話になっている。だから、コンサートに参加しないという選択肢はない。春のコンサートは残念ながらチケットが当選せず行けなかったが、今回は運よく当選したのだ。<br>
+<!-- -->私は、こういうゲームのオフラインイベントに参加するのが大好きだ。住んでいる場所が岐阜であり、高額な出費が必要となるがその価値はあると思う。2023年の夏は、インディーゲームの祭典のBitSummitに行き、クリエーターの人とおしゃべりをしてきた。  </p><p><img loading="lazy" alt="TGS2023" src="/assets/images/TGS2023-5bba0af90fb1fdaf84126ed5ed106c0a.jpg" width="4032" height="3024" class="img_ev3q">
+<img loading="lazy" alt="TGS2023" src="/assets/images/TGS2023_ryu8-042d225f0de4bff7e0d9d1ff17244f5a.jpg" width="3024" height="4032" class="img_ev3q"></p><ul><li>OMORIコンサート</li></ul><p>私が大好きなインディーゲームの一つ<strong>OMORI</strong>のコンサートに参戦した。私はOMORIのBGMが大好きでサントラも持っている。論文を執筆するときはいつもお世話になっている。だから、コンサートに参加しないという選択肢はない。春のコンサートは残念ながらチケットが当選せず行けなかったが、今回は運よく当選したのだ。<br>
 <!-- -->コンサートは天国だった。特にWorld's End Valentineが最高だった。
-<img loading="lazy" alt="OMORIコンサート" src="/my-docusaurus/assets/images/omoriconcert_display-3b417b956762790ba6408ccc1162d18b.jpg" width="3024" height="4032" class="img_ev3q">
-<img loading="lazy" alt="OMORIコンサート献花" src="/my-docusaurus/assets/images/omoriconcert_flower-58f5a0a2075e92508ba5012e1b88009a.jpg" width="3024" height="4032" class="img_ev3q">
+<img loading="lazy" alt="OMORIコンサート" src="/assets/images/omoriconcert_display-3b417b956762790ba6408ccc1162d18b.jpg" width="3024" height="4032" class="img_ev3q">
+<img loading="lazy" alt="OMORIコンサート献花" src="/assets/images/omoriconcert_flower-58f5a0a2075e92508ba5012e1b88009a.jpg" width="3024" height="4032" class="img_ev3q">
 ↑OMORIのファンたちがお金を募って購入し送ったらしい。たくさんの人から愛されていることを実感した。</p>]]></content:encoded>
             <category>OBJFileViewer</category>
             <category>Tank2</category>
@@ -84,11 +84,11 @@
         </item>
         <item>
             <title><![CDATA[VR学会大会2023で研究発表を行いました]]></title>
-            <link>https://sny0.github.io/my-docusaurus/blog/2023/09/18/VRSJ2023</link>
-            <guid>https://sny0.github.io/my-docusaurus/blog/2023/09/18/VRSJ2023</guid>
+            <link>https://sny0.github.io/blog/2023/09/18/VRSJ2023</link>
+            <guid>https://sny0.github.io/blog/2023/09/18/VRSJ2023</guid>
             <pubDate>Mon, 18 Sep 2023 00:00:00 GMT</pubDate>
             <description><![CDATA[VRSJ2023]]></description>
-            <content:encoded><![CDATA[<p><img loading="lazy" alt="VRSJ2023" src="/my-docusaurus/assets/images/VRSJ2023-0e517315f85fc9c36cf338842f8acf95.jpg" width="4032" height="3024" class="img_ev3q"></p><p>先日行われた<a href="https://conference.vrsj.org/ac2023/index.html" target="_blank" rel="noopener noreferrer">第28回日本バーチャルリアリティ学会大会</a>で研究発表を行いました。<br>
+            <content:encoded><![CDATA[<p><img loading="lazy" alt="VRSJ2023" src="/assets/images/VRSJ2023-0e517315f85fc9c36cf338842f8acf95.jpg" width="4032" height="3024" class="img_ev3q"></p><p>先日行われた<a href="https://conference.vrsj.org/ac2023/index.html" target="_blank" rel="noopener noreferrer">第28回日本バーチャルリアリティ学会大会</a>で研究発表を行いました。<br>
 <!-- -->ポスター発表２件、技術・芸術展示が１件と中々ハードでした。<br>
 <!-- -->技術・芸術展示では装置が途中で破損し、修復に３０分ほどかかってしまったことと、私のポスター発表で、極度に緊張して質問者の話が全く入ってこなかった時があったため、猛省しています...</p><p>今年は、口頭発表（３分）＋ポスター発表（1時間以上）という発表形式であり、口頭発表で気になった研究についてポスター発表でじっくり説明を聞きに行く人が多かったのではないかと思います。説明する立場ではお客さんの反応を見ながら説明でき、聴きに行く立場ではその場で質問できるためとても良いなと思いました。  </p><p>しかし、少し残念だと感じたこともあります。私の技術・芸術展示は暗室という特別な部屋で行いました。しかし、この暗室は、通常の技術・芸術展示の部屋からかなり離れており、会場に道案内がなかったため、あまりお客さんが来ませんでした。</p><p>一方で、光学の研究を行っている学生と仲良くなることができ、嬉しかったです。私の研究は情報系からかなり離れており、研究の話が出来る人が全然いませんでした。そのため、同じ分野での苦労やあるある話で大変盛り上がり、研究へのモチベーションが高まりました。仲間を見つけることができるという点で学会へは積極的に行くべきだと実感しました。そのためには、研究を頑張る必要がありますが...</p><p>来年のVR学会大会は愛知の名城大で行われるそうです。岐阜大木島研も駆り出されるのかな？その時は、喜んで協力します！<br>
 <!-- -->来年も研究発表が出来るように研究を頑張ります！！！！</p><p>Webで原稿が公開されたため、URLや動画を載せておきます。<br>
@@ -97,8 +97,8 @@
         </item>
         <item>
             <title><![CDATA[VR学会大会2023に行ってきます]]></title>
-            <link>https://sny0.github.io/my-docusaurus/blog/2023/09/11/gotoVRSJ2023</link>
-            <guid>https://sny0.github.io/my-docusaurus/blog/2023/09/11/gotoVRSJ2023</guid>
+            <link>https://sny0.github.io/blog/2023/09/11/gotoVRSJ2023</link>
+            <guid>https://sny0.github.io/blog/2023/09/11/gotoVRSJ2023</guid>
             <pubDate>Mon, 11 Sep 2023 00:00:00 GMT</pubDate>
             <description><![CDATA[9/12～9/14に開催される第２８回日本バーチャルリアリティ学会大会へ行ってきます。]]></description>
             <content:encoded><![CDATA[<p>9/12～9/14に開催される第２８回日本バーチャルリアリティ学会大会へ行ってきます。</p><p>私は、２件の研究発表と１件の技術展示を抱えています。先日プログラムが発表されたので、日時を記します。</p><ul><li><p>アイトラッキングによるアイボックス追従を備えたマクスウェル視ディスプレイ</p><p>  ポスター発表：9/13（水）, 9:10～11:25, HMD・プロジェクタセッション, D会場（※口頭発表は後輩が行いますが、ポスター発表には一緒に参加します）</p><p>  技術・芸術展示：9/13（水）, 12:20～14:00, 技術・芸術展示２, 暗室</p></li></ul><ul><li><p>視焦点の移動によるボケの変化勾配の矛盾が融像困難性に与える影響</p><p>  ポスター発表：9/14（木）, 9:10～11:25, 視覚セッション, B会場</p></li></ul><p>実は、展示を行うために、装置の改良や調整を研究室に泊まりながら、9/9まで行っていました。本番でしっかり動いてくれることを願っています。</p><h2 class="anchor anchorWithStickyNavbar_LWe7" id="objファイルビュアー進捗">OBJファイルビュアー進捗<a href="#objファイルビュアー進捗" class="hash-link" aria-label="Direct link to OBJファイルビュアー進捗" title="Direct link to OBJファイルビュアー進捗">​</a></h2><p>ここ数日、徹夜で開発をし、MTLファイルをパースし、マテリアルを使用しPhongの反射モデルを実装することまで出来ました。しかし、読み込めるファイルは１つであり、１つのマテリアルのみであり、コードでファイルパスを指定しなくてはならなくアプリとしては、まだまだの状態ではあります。</p><p>学会が終わり次第、更に開発を勧めます！！！</p><iframe width="560" height="315" src="https://www.youtube.com/embed/mjz2uXiGsEg?si=_OTFL-lOWh1fb0nu" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"></iframe><p>↓鏡面反射率を上げたversion</p><iframe width="560" height="315" src="https://www.youtube.com/embed/Ctz0JRySegQ?si=Z_znhBy7Kz4_D_4I" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"></iframe>]]></content:encoded>
@@ -107,8 +107,8 @@
         </item>
         <item>
             <title><![CDATA[OBJファイルのパーサーを制作しています]]></title>
-            <link>https://sny0.github.io/my-docusaurus/blog/2023/09/05/recentReport</link>
-            <guid>https://sny0.github.io/my-docusaurus/blog/2023/09/05/recentReport</guid>
+            <link>https://sny0.github.io/blog/2023/09/05/recentReport</link>
+            <guid>https://sny0.github.io/blog/2023/09/05/recentReport</guid>
             <pubDate>Tue, 05 Sep 2023 00:00:00 GMT</pubDate>
             <description><![CDATA[ゲームエンジンのようなマシンに近い部分を勉強したいと考え、８月はDirectXとHLSLの勉強をしていました。]]></description>
             <content:encoded><![CDATA[<p>ゲームエンジンのようなマシンに近い部分を勉強したいと考え、８月はDirectXとHLSLの勉強をしていました。</p><p>使用した書籍は、</p><ul><li><a href="https://www.shoeisha.co.jp/book/detail/9784798164281" target="_blank" rel="noopener noreferrer">HLSL シェーダーの魔導書 シェーディングの基礎からレイトレーシングまで</a></li><li><a href="https://www.shoeisha.co.jp/book/detail/9784798161938" target="_blank" rel="noopener noreferrer">DirectX 12の魔導書 3Dレンダリングの基礎からMMDモデルを踊らせるまで</a></li></ul><p>です。</p><p>私は、光学を扱う研究をしているためCGのレンダリングの仕組みは勉強していて大変面白いと思いました。</p><p>２週間ほど前から、アプリケーションを作り始めました。私はゲームエンジン的なものが作りたいと考え、OBJファイルのビュアーを制作しています。
@@ -117,8 +117,8 @@
         </item>
         <item>
             <title><![CDATA[近況報告(2023年7月)]]></title>
-            <link>https://sny0.github.io/my-docusaurus/blog/2023/07/22/recentReport</link>
-            <guid>https://sny0.github.io/my-docusaurus/blog/2023/07/22/recentReport</guid>
+            <link>https://sny0.github.io/blog/2023/07/22/recentReport</link>
+            <guid>https://sny0.github.io/blog/2023/07/22/recentReport</guid>
             <pubDate>Sat, 22 Jul 2023 00:00:00 GMT</pubDate>
             <description><![CDATA[前回の投稿からかなり日が空いてしまいました。そのため、6,7月に行っていたことの報告をしたいと思います。]]></description>
             <content:encoded><![CDATA[<p>前回の投稿からかなり日が空いてしまいました。そのため、6,7月に行っていたことの報告をしたいと思います。</p><h1>IVRC2023に企画書を提出</h1><p><a href="https://ivrc.net/2023/" target="_blank" rel="noopener noreferrer">IVRC</a>とは、VRSJ（日本バーチャルリアリティ学会）が開催する学生を中心としたチームでインタラクティブ作品を企画・制作するチャレンジです。<br>
@@ -128,8 +128,8 @@
         </item>
         <item>
             <title><![CDATA[MVE研究会で口頭発表を行いました]]></title>
-            <link>https://sny0.github.io/my-docusaurus/blog/2023/06/01/MVE2023</link>
-            <guid>https://sny0.github.io/my-docusaurus/blog/2023/06/01/MVE2023</guid>
+            <link>https://sny0.github.io/blog/2023/06/01/MVE2023</link>
+            <guid>https://sny0.github.io/blog/2023/06/01/MVE2023</guid>
             <pubDate>Thu, 01 Jun 2023 00:00:00 GMT</pubDate>
             <description><![CDATA[5/31、6/1に行われた電気情報通信学会MVE研究会で口頭発表を行いました。]]></description>
             <content:encoded><![CDATA[<p>5/31、6/1に行われた電気情報通信学会MVE研究会で口頭発表を行いました。</p><ul><li><a href="https://ken.ieice.org/ken/program/index.php?tgs_regid=53d8eff9187610a31e3ff47b25b104a3d58a039b8acd30378b80e756dd840f11&amp;tgid=IEICE-MVE" target="_blank" rel="noopener noreferrer">プログラム</a></li><li><a href="https://ken.ieice.org/ken/paper/20230601hCUZ/" target="_blank" rel="noopener noreferrer">原稿：視差式ディスプレイにおける両眼立体視時の融像困難性と観察瞳径制限の関係</a></li></ul><p>発表後は様々な先生から質問やコメントを頂きました。私の発表を理解してくださる先生方に感謝です。</p><p>今回のMVE研究会は、他の研究会（ITE-HI、IPSJ-HCI、IPSJ-EC、HI-SIG-DeMO）と共催であり、様々な興味深い研究を聴くことができ、良い体験ができました。</p><p>会場は、東京大学本郷キャンパスにあったのですが、本郷キャンパスが大変広く驚きました。東大の建物は古くて趣があって格好良いですね。歴史を感じました。三四郎池を散策しましたが、迷子になるくらい広かったです...</p>]]></content:encoded>
@@ -137,8 +137,8 @@
         </item>
         <item>
             <title><![CDATA[第1回木島研ハッカソンに参加]]></title>
-            <link>https://sny0.github.io/my-docusaurus/blog/2023/05/23/kzmHackson1</link>
-            <guid>https://sny0.github.io/my-docusaurus/blog/2023/05/23/kzmHackson1</guid>
+            <link>https://sny0.github.io/blog/2023/05/23/kzmHackson1</link>
+            <guid>https://sny0.github.io/blog/2023/05/23/kzmHackson1</guid>
             <pubDate>Tue, 23 May 2023 00:00:00 GMT</pubDate>
             <description><![CDATA[先輩の提案で突如として開催された木島研ハッカソン。今回のテーマはChatGPTに触れてみながらオウム返しアプリケーションを作成するというものでした。最終的には、一人ひとり作成したアプリでおうむ返しを繰り返し、ちゃんと初めに話した言葉を伝えることを目指します。]]></description>
             <content:encoded><![CDATA[<p>先輩の提案で突如として開催された木島研ハッカソン。今回のテーマはChatGPTに触れてみながらオウム返しアプリケーションを作成するというものでした。最終的には、一人ひとり作成したアプリでおうむ返しを繰り返し、ちゃんと初めに話した言葉を伝えることを目指します。</p><p>ChatGPTに手段やコードを尋ねると音声認識にGoogleSpeechRecognition、音声合成にPyttsx3を使用したオウム返しアプリが簡単にすぐにできてしまいました。そこで2日目に音声合成にVOICEVOXのずんだもんの声を使用できるようにしました。</p><p><a href="https://github.com/sny0/repeatVoiceApp" target="_blank" rel="noopener noreferrer">ソースコード</a></p>]]></content:encoded>
@@ -148,8 +148,8 @@
         </item>
         <item>
             <title><![CDATA[BIPROGY DX HACK -User's voice "Solve the problem"-に参加した]]></title>
-            <link>https://sny0.github.io/my-docusaurus/blog/2023/05/21/BiprogyHackson</link>
-            <guid>https://sny0.github.io/my-docusaurus/blog/2023/05/21/BiprogyHackson</guid>
+            <link>https://sny0.github.io/blog/2023/05/21/BiprogyHackson</link>
+            <guid>https://sny0.github.io/blog/2023/05/21/BiprogyHackson</guid>
             <pubDate>Sun, 21 May 2023 00:00:00 GMT</pubDate>
             <description><![CDATA[5/20と5/21に行われたBIPROGYさん主催のBIPROGY DX HACK -User's voice "Solve the problem"-に参加しました。]]></description>
             <content:encoded><![CDATA[<p>5/20と5/21に行われたBIPROGYさん主催の<a href="https://pr.biprogy.com/recruit/hackathon/index_hackason.html" target="_blank" rel="noopener noreferrer">BIPROGY DX HACK -User's voice "Solve the problem"-</a>に参加しました。</p><p>はじめて会った人たちとユーザの問題を解決するために、話し合い、プロトタイプを作成するハッカソンでした。どんなテーマだったのか、どんなものを作ったのかを具体的にお話しすることはできませんが、私たちのグループではWebアプリを製作しました。私は、フロントエンドを担当しました。</p><p>私は、ハッカソンに参加するのが初めてであり、Webアプリの製作経験も皆無であったため、とても不安ではありましたが、メンバーに助けてもらいながら自分のできることを見つけてやりました。その結果、大変短い期間でありながら動くプロトタイプを作成することができ、とても嬉しかったです。また、参加者みんながやる気があり、技術もあるためとてもよい刺激を得ることが出来ました。本当に参加してよかったと思えるハッカソンでした。</p>]]></content:encoded>
@@ -157,19 +157,19 @@
         </item>
         <item>
             <title><![CDATA[JavaScriptを使用して簡単なブラウザゲームを作った]]></title>
-            <link>https://sny0.github.io/my-docusaurus/blog/2023/05/7/oneStrokeGame</link>
-            <guid>https://sny0.github.io/my-docusaurus/blog/2023/05/7/oneStrokeGame</guid>
+            <link>https://sny0.github.io/blog/2023/05/7/oneStrokeGame</link>
+            <guid>https://sny0.github.io/blog/2023/05/7/oneStrokeGame</guid>
             <pubDate>Sun, 07 May 2023 00:00:00 GMT</pubDate>
             <description><![CDATA[JavaScriptを勉強したので簡単なブラウザゲームを作ってみました。]]></description>
-            <content:encoded><![CDATA[<p>JavaScriptを勉強したので簡単なブラウザゲームを作ってみました。</p><p><img loading="lazy" alt="OneStrokeGame" src="/my-docusaurus/assets/images/oneStrokeGame-69a98f65c5fba47227f632724eaacc5e.png" width="640" height="660" class="img_ev3q"></p><p><a href="https://sny0.github.io/OneStrokeGame_js/" target="_blank" rel="noopener noreferrer"><strong>ここからプレイできます</strong></a></p><p>すぐ終わる簡単なゲームなので是非遊んでみてください！</p>]]></content:encoded>
+            <content:encoded><![CDATA[<p>JavaScriptを勉強したので簡単なブラウザゲームを作ってみました。</p><p><img loading="lazy" alt="OneStrokeGame" src="/assets/images/oneStrokeGame-69a98f65c5fba47227f632724eaacc5e.png" width="640" height="660" class="img_ev3q"></p><p><a href="https://sny0.github.io/OneStrokeGame_js/" target="_blank" rel="noopener noreferrer"><strong>ここからプレイできます</strong></a></p><p>すぐ終わる簡単なゲームなので是非遊んでみてください！</p>]]></content:encoded>
             <category>JavaScript</category>
             <category>ブラウザゲーム</category>
             <category>OneStrokeGame</category>
         </item>
         <item>
             <title><![CDATA[今年の春のMVE研究会で発表します]]></title>
-            <link>https://sny0.github.io/my-docusaurus/blog/2023/04/28/MVE2023genko</link>
-            <guid>https://sny0.github.io/my-docusaurus/blog/2023/04/28/MVE2023genko</guid>
+            <link>https://sny0.github.io/blog/2023/04/28/MVE2023genko</link>
+            <guid>https://sny0.github.io/blog/2023/04/28/MVE2023genko</guid>
             <pubDate>Fri, 28 Apr 2023 00:00:00 GMT</pubDate>
             <description><![CDATA[2023/5/31～6/1に開催されるメディアエクスペリエンス・バーチャル環境基礎研究会（MVE）で登壇して研究発表をします。]]></description>
             <content:encoded><![CDATA[<p>2023/5/31～6/1に開催される<a href="https://www.ite.or.jp/ken/program/index.php?tgs_regid=a5fc286a46b37732a802fff64f3ec9fb2f50fd9cc1546e3a968df4b1c7864c01&amp;tgid=IEICE-MVE" target="_blank" rel="noopener noreferrer">メディアエクスペリエンス・バーチャル環境基礎研究会（MVE）</a>で登壇して研究発表をします。</p><p>私の出番は、6/1（木）午後セッション8の
@@ -178,17 +178,17 @@
         </item>
         <item>
             <title><![CDATA[ピカチュウ仲間と冒険チュウ！の参加得点を頂いた]]></title>
-            <link>https://sny0.github.io/my-docusaurus/blog/2023/04/28/bokentyu</link>
-            <guid>https://sny0.github.io/my-docusaurus/blog/2023/04/28/bokentyu</guid>
+            <link>https://sny0.github.io/blog/2023/04/28/bokentyu</link>
+            <guid>https://sny0.github.io/blog/2023/04/28/bokentyu</guid>
             <pubDate>Fri, 28 Apr 2023 00:00:00 GMT</pubDate>
             <description><![CDATA[先月、ゲームフリークさんの「ゲームフリーク・プログラミングチャレンジ-ピカチュウ仲間と冒険チュウ！-」にチャレンジしました。]]></description>
-            <content:encoded><![CDATA[<p>先月、ゲームフリークさんの「ゲームフリーク・プログラミングチャレンジ-ピカチュウ仲間と冒険チュウ！-」にチャレンジしました。</p><blockquote class="twitter-tweet"><p lang="ja" dir="ltr">【ゲームフリーク プログラマ新卒採用】<br>全学年対象の採用企画<br>「プログラミングチャレンジ -ピカチュウ仲間と冒険チュウ！-」開催決定！<br>一緒に冒険する仲間のポケモンを育てて、進化させよう！<br><br>▼企画詳細はこちら(参加者限定特典あり)<a href="https://t.co/1XAMJNdLgv" target="_blank" rel="noopener noreferrer">https://t.co/1XAMJNdLgv</a><a href="https://twitter.com/hashtag/%E3%83%94%E3%82%AB%E3%83%81%E3%83%A5%E3%82%A6%E5%86%92%E9%99%BA%E3%83%81%E3%83%A5%E3%82%A6?src=hash&amp;ref_src=twsrc%5Etfw" target="_blank" rel="noopener noreferrer">#ピカチュウ冒険チュウ</a>　<a href="https://twitter.com/hashtag/%E3%83%97%E3%83%AD%E3%82%B0%E3%83%A9%E3%83%9E?src=hash&amp;ref_src=twsrc%5Etfw" target="_blank" rel="noopener noreferrer">#プログラマ</a></p>— ゲームフリーク公式 (@GAMEFREAK_info) <a href="https://twitter.com/GAMEFREAK_info/status/1620641909726416896?ref_src=twsrc%5Etfw" target="_blank" rel="noopener noreferrer">February 1, 2023</a></blockquote> <script async="" src="https://platform.twitter.com/widgets.js" charset="utf-8"></script><p>ある一定のスコアを取得できたので参加得点を頂きました！</p><p><img loading="lazy" alt="ピカピカ冒険チュウ参加得点" src="/my-docusaurus/assets/images/bokentyu-279a2bc602855803e88c0dafc082c9e8.jpg" width="4032" height="3024" class="img_ev3q"></p>]]></content:encoded>
+            <content:encoded><![CDATA[<p>先月、ゲームフリークさんの「ゲームフリーク・プログラミングチャレンジ-ピカチュウ仲間と冒険チュウ！-」にチャレンジしました。</p><blockquote class="twitter-tweet"><p lang="ja" dir="ltr">【ゲームフリーク プログラマ新卒採用】<br>全学年対象の採用企画<br>「プログラミングチャレンジ -ピカチュウ仲間と冒険チュウ！-」開催決定！<br>一緒に冒険する仲間のポケモンを育てて、進化させよう！<br><br>▼企画詳細はこちら(参加者限定特典あり)<a href="https://t.co/1XAMJNdLgv" target="_blank" rel="noopener noreferrer">https://t.co/1XAMJNdLgv</a><a href="https://twitter.com/hashtag/%E3%83%94%E3%82%AB%E3%83%81%E3%83%A5%E3%82%A6%E5%86%92%E9%99%BA%E3%83%81%E3%83%A5%E3%82%A6?src=hash&amp;ref_src=twsrc%5Etfw" target="_blank" rel="noopener noreferrer">#ピカチュウ冒険チュウ</a>　<a href="https://twitter.com/hashtag/%E3%83%97%E3%83%AD%E3%82%B0%E3%83%A9%E3%83%9E?src=hash&amp;ref_src=twsrc%5Etfw" target="_blank" rel="noopener noreferrer">#プログラマ</a></p>— ゲームフリーク公式 (@GAMEFREAK_info) <a href="https://twitter.com/GAMEFREAK_info/status/1620641909726416896?ref_src=twsrc%5Etfw" target="_blank" rel="noopener noreferrer">February 1, 2023</a></blockquote> <script async="" src="https://platform.twitter.com/widgets.js" charset="utf-8"></script><p>ある一定のスコアを取得できたので参加得点を頂きました！</p><p><img loading="lazy" alt="ピカピカ冒険チュウ参加得点" src="/assets/images/bokentyu-279a2bc602855803e88c0dafc082c9e8.jpg" width="4032" height="3024" class="img_ev3q"></p>]]></content:encoded>
             <category>プログラミングチャレンジ</category>
         </item>
         <item>
             <title><![CDATA[木島研究室のHPを作成した]]></title>
-            <link>https://sny0.github.io/my-docusaurus/blog/2023/04/04/kzmhp</link>
-            <guid>https://sny0.github.io/my-docusaurus/blog/2023/04/04/kzmhp</guid>
+            <link>https://sny0.github.io/blog/2023/04/04/kzmhp</link>
+            <guid>https://sny0.github.io/blog/2023/04/04/kzmhp</guid>
             <pubDate>Tue, 04 Apr 2023 00:00:00 GMT</pubDate>
             <description><![CDATA[経緯]]></description>
             <content:encoded><![CDATA[<h2 class="anchor anchorWithStickyNavbar_LWe7" id="経緯">経緯<a href="#経緯" class="hash-link" aria-label="Direct link to 経緯" title="Direct link to 経緯">​</a></h2><p>私が所属している岐阜大学 木島研究室のHPは長いことありませんでした（少なくとも、私が仮配属される時にはありませんでした）。</p><p>私が研究室を選ぶときに、木島研の情報がインターネット上に皆無であり、木島先生の講義を受けたことがなかったため、<strong>木島研 = 謎の研究室</strong>という印象しかありませんでした。そのため、本当に木島研を志望していいのか当時はとても心配でした。入ってみたら、木島研でよかったと思いましたが。</p><p>こうした経緯があり、私の中に研究室のHPを作って木島研の情報を発信したいという考えは強くありました。しかし、機会がなく今まで時が過ぎていました。</p><p>とある研究室のOBの方とお会いしたときに、背中を押してもらい、研究室のHPを作成する決心をしました。</p><p>私のHPを作ったのは、研究室のHPを作る機会があったからです。</p><h2 class="anchor anchorWithStickyNavbar_LWe7" id="使用したもの">使用したもの<a href="#使用したもの" class="hash-link" aria-label="Direct link to 使用したもの" title="Direct link to 使用したもの">​</a></h2><ul><li><a href="https://freehtml5.co/" target="_blank" rel="noopener noreferrer">FREEHTML5.CO</a>の<a href="https://freehtml5.co/cache-free-html5-bootstrap-template/" target="_blank" rel="noopener noreferrer">Cache</a></li></ul><p>Webサイトのテンプレートを使用しました。型は出来ているので、特定の部分を書き換えれば、簡単に自分のHPを作ることが出来ます。</p><p>昔、ProgateでHTML、CSSの勉強をした経験が活きました。</p><h2 class="anchor anchorWithStickyNavbar_LWe7" id="最後に">最後に<a href="#最後に" class="hash-link" aria-label="Direct link to 最後に" title="Direct link to 最後に">​</a></h2><p><a href="https://www.kzm.info.gifu-u.ac.jp/" target="_blank" rel="noopener noreferrer">木島研究室のHPはこちらから</a></p><p>HPはすぐに作り終えましたが、サーバーの問題で公開が4月になってしまいました。</p><p>HPを作ったからには、更新できるように研究室での活動も頑張ります！</p>]]></content:encoded>
@@ -196,11 +196,11 @@
         </item>
         <item>
             <title><![CDATA[Unity1週間ゲームジャムに作品を投稿した]]></title>
-            <link>https://sny0.github.io/my-docusaurus/blog/2023/03/27/Hikyakuchan</link>
-            <guid>https://sny0.github.io/my-docusaurus/blog/2023/03/27/Hikyakuchan</guid>
+            <link>https://sny0.github.io/blog/2023/03/27/Hikyakuchan</link>
+            <guid>https://sny0.github.io/blog/2023/03/27/Hikyakuchan</guid>
             <pubDate>Mon, 27 Mar 2023 00:00:00 GMT</pubDate>
             <description><![CDATA[Unity1週間ゲームジャムとは？]]></description>
-            <content:encoded><![CDATA[<h2 class="anchor anchorWithStickyNavbar_LWe7" id="unity1週間ゲームジャムとは">Unity1週間ゲームジャムとは？<a href="#unity1週間ゲームジャムとは" class="hash-link" aria-label="Direct link to Unity1週間ゲームジャムとは？" title="Direct link to Unity1週間ゲームジャムとは？">​</a></h2><p>「<a href="https://unityroom.com/unity1weeks" target="_blank" rel="noopener noreferrer">Unity1週間ゲームジャム</a>」とは、Unityを使って1週間でゲームをつくるイベントです。</p><p>毎回異なるお題が与えられます。お題は多少こじつけでも大丈夫なようです。</p><p>先週、とある研究室のOBの方から存在を教えてもらいました！</p><p>今回は、「つたえる」がお題でした。</p><h2 class="anchor anchorWithStickyNavbar_LWe7" id="hikyaku-chan">Hikyaku Chan<a href="#hikyaku-chan" class="hash-link" aria-label="Direct link to Hikyaku Chan" title="Direct link to Hikyaku Chan">​</a></h2><p>今回私が製作したゲームは「<a href="https://unityroom.com/games/hikyakuchan" target="_blank" rel="noopener noreferrer">Hikyaku Chan</a>」です。作品名をクリックすると遊べるWebページに飛びます。</p><p><img loading="lazy" alt="Hikyaku_Chan" src="/my-docusaurus/assets/images/HikyakuChan-ca16e1b8a1241d2aaf98a9e90b4c8d05.png" width="960" height="598" class="img_ev3q"></p><p>古典的な横スクロールのアクションゲームです。</p><h3 class="anchor anchorWithStickyNavbar_LWe7" id="ゲーム紹介">ゲーム紹介<a href="#ゲーム紹介" class="hash-link" aria-label="Direct link to ゲーム紹介" title="Direct link to ゲーム紹介">​</a></h3><p>世は江戸時代の日本。
+            <content:encoded><![CDATA[<h2 class="anchor anchorWithStickyNavbar_LWe7" id="unity1週間ゲームジャムとは">Unity1週間ゲームジャムとは？<a href="#unity1週間ゲームジャムとは" class="hash-link" aria-label="Direct link to Unity1週間ゲームジャムとは？" title="Direct link to Unity1週間ゲームジャムとは？">​</a></h2><p>「<a href="https://unityroom.com/unity1weeks" target="_blank" rel="noopener noreferrer">Unity1週間ゲームジャム</a>」とは、Unityを使って1週間でゲームをつくるイベントです。</p><p>毎回異なるお題が与えられます。お題は多少こじつけでも大丈夫なようです。</p><p>先週、とある研究室のOBの方から存在を教えてもらいました！</p><p>今回は、「つたえる」がお題でした。</p><h2 class="anchor anchorWithStickyNavbar_LWe7" id="hikyaku-chan">Hikyaku Chan<a href="#hikyaku-chan" class="hash-link" aria-label="Direct link to Hikyaku Chan" title="Direct link to Hikyaku Chan">​</a></h2><p>今回私が製作したゲームは「<a href="https://unityroom.com/games/hikyakuchan" target="_blank" rel="noopener noreferrer">Hikyaku Chan</a>」です。作品名をクリックすると遊べるWebページに飛びます。</p><p><img loading="lazy" alt="Hikyaku_Chan" src="/assets/images/HikyakuChan-ca16e1b8a1241d2aaf98a9e90b4c8d05.png" width="960" height="598" class="img_ev3q"></p><p>古典的な横スクロールのアクションゲームです。</p><h3 class="anchor anchorWithStickyNavbar_LWe7" id="ゲーム紹介">ゲーム紹介<a href="#ゲーム紹介" class="hash-link" aria-label="Direct link to ゲーム紹介" title="Direct link to ゲーム紹介">​</a></h3><p>世は江戸時代の日本。
 郵便物は「飛脚」と呼ばれる人が足で運んでいた。
 ユニティちゃんを操作してできるだけ速く郵便物をゴールまで運ぼう!
 道中にある「おにぎり」を食べると足が速くなるぞ!</p><p>※作成したゲームを紹介する文書か記事は別で書こうと思います。</p><h2 class="anchor anchorWithStickyNavbar_LWe7" id="製作するまでの過程">製作するまでの過程<a href="#製作するまでの過程" class="hash-link" aria-label="Direct link to 製作するまでの過程" title="Direct link to 製作するまでの過程">​</a></h2><p>私はUnity初心者（いくつかの本のサンプルゲーム作成や簡単なVRゲームを作成した程度）であり、凝ったゲームや特殊なジャンルは作れないと考えました。</p><p>始めたのも遅く、時間があるわけではなかったため、横スクロールのアクションゲームなら現実的に作れそうだなと考えました。</p><p><strong><em>つたえる ⇒ 情報を伝える ⇒ 手紙などを運ぶ</em></strong></p><p>と連想ゲームをし、<strong>伝書バト</strong>や<strong>飛脚</strong>という案が浮かびました。</p><p>気づいたのが遅かった、他の用事があった、企画がなかなか思いつかない、Unity初心者ということで大変苦労しました。期日までには完成することが出来ず、一日遅れで何とか遊べるまで持って行って投稿しました。いくつか把握しているバグはあるものの原因や解決方法が分からなかったという理由とお蔵入りにしたくなかったという理由で公開することにしました。</p><h2 class="anchor anchorWithStickyNavbar_LWe7" id="感想">感想<a href="#感想" class="hash-link" aria-label="Direct link to 感想" title="Direct link to 感想">​</a></h2><p>出来ていくにつれて、どんどん入れたい要素が出てきました。</p><p>投稿する日は朝からPCに張り付いて作業をしました。</p><p>拙い本作ですが、遊べるまで完成したとき、達成感がとても得られ、参加してよかったと思いました！</p><p>次回も参加します！（宣言）</p>]]></content:encoded>
@@ -211,8 +211,8 @@
         </item>
         <item>
             <title><![CDATA[オンラインのFPSゲームを作るUdemyの講座を受けた]]></title>
-            <link>https://sny0.github.io/my-docusaurus/blog/2023/03/22/Online_FPS</link>
-            <guid>https://sny0.github.io/my-docusaurus/blog/2023/03/22/Online_FPS</guid>
+            <link>https://sny0.github.io/blog/2023/03/22/Online_FPS</link>
+            <guid>https://sny0.github.io/blog/2023/03/22/Online_FPS</guid>
             <pubDate>Wed, 22 Mar 2023 00:00:00 GMT</pubDate>
             <description><![CDATA[数週間前からコツコツやっていた、Udemyの講座を最後までやりました。]]></description>
             <content:encoded><![CDATA[<p>数週間前からコツコツやっていた、<a href="https://www.udemy.com/course/unity-photon-fps/" target="_blank" rel="noopener noreferrer">Udemyの講座</a>を最後までやりました。</p><p>この講座は、UnityでPhotonを使いオンラインのFPSゲームを作るというものです。</p><p>私は、Photonの存在は知っていて、PUN(Photon Unity Network)は軽く触ったことはありましたが、本格的なオンラインゲームは作り方も分からなければ、作ったことがありませんでした。</p><p>この講座でPUNでできることやライブラリの関数の使い方をなんとなく知れました。また、他の人のアーキテクチャを見れ、面白かったです。</p>]]></content:encoded>
@@ -221,8 +221,8 @@
         </item>
         <item>
             <title><![CDATA[ホームページ開設]]></title>
-            <link>https://sny0.github.io/my-docusaurus/blog/2023/03/21/Hello</link>
-            <guid>https://sny0.github.io/my-docusaurus/blog/2023/03/21/Hello</guid>
+            <link>https://sny0.github.io/blog/2023/03/21/Hello</link>
+            <guid>https://sny0.github.io/blog/2023/03/21/Hello</guid>
             <pubDate>Tue, 21 Mar 2023 00:00:00 GMT</pubDate>
             <description><![CDATA[こんにちは。sny0と申します。]]></description>
             <content:encoded><![CDATA[<p>こんにちは。sny0と申します。</p><p>DocusaurusとGitHub Pagesを利用して、私のホームページを作成しました。</p><p>これから、たまに更新していきます。</p>]]></content:encoded>

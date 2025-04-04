@@ -1,1 +1,0 @@
-"use strict";(self.webpackChunkmy_docusaurus=self.webpackChunkmy_docusaurus||[]).push([[4458],{2546:s=>{s.exports=JSON.parse('{"permalink":"/my-docusaurus/blog/tags/nintendo-labo","page":1,"postsPerPage":10,"totalPages":1,"totalCount":1,"blogDescription":"Blog","blogTitle":"Blog"}')}}]);

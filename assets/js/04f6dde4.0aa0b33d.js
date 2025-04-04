@@ -1,0 +1,1 @@
+"use strict";(self.webpackChunkmy_docusaurus=self.webpackChunkmy_docusaurus||[]).push([[7121],{9481:e=>{e.exports=JSON.parse('{"label":"OBJFileViewer","permalink":"/blog/tags/obj-file-viewer","allTagsPath":"/blog/tags","count":2}')}}]);

@@ -1,1 +1,0 @@
-"use strict";(self.webpackChunkmy_docusaurus=self.webpackChunkmy_docusaurus||[]).push([[9574],{5356:s=>{s.exports=JSON.parse('{"permalink":"/my-docusaurus/blog/tags/ivrc","page":1,"postsPerPage":10,"totalPages":1,"totalCount":1,"blogDescription":"Blog","blogTitle":"Blog"}')}}]);

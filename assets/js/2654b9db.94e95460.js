@@ -1,1 +1,0 @@
-"use strict";(self.webpackChunkmy_docusaurus=self.webpackChunkmy_docusaurus||[]).push([[1455],{8683:s=>{s.exports=JSON.parse('{"permalink":"/my-docusaurus/blog/tags/obj-file-viewer","page":1,"postsPerPage":10,"totalPages":1,"totalCount":2,"blogDescription":"Blog","blogTitle":"Blog"}')}}]);

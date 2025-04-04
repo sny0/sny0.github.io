@@ -1,0 +1,1 @@
+"use strict";(self.webpackChunkmy_docusaurus=self.webpackChunkmy_docusaurus||[]).push([[7722],{1723:s=>{s.exports=JSON.parse('{"label":"OBJFileViwer","permalink":"/blog/tags/obj-file-viwer","allTagsPath":"/blog/tags","count":1}')}}]);

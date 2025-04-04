@@ -1,1 +1,0 @@
-"use strict";(self.webpackChunkmy_docusaurus=self.webpackChunkmy_docusaurus||[]).push([[2696],{6729:s=>{s.exports=JSON.parse('{"permalink":"/my-docusaurus/blog/tags/shader-arts","page":1,"postsPerPage":10,"totalPages":1,"totalCount":1,"blogDescription":"Blog","blogTitle":"Blog"}')}}]);
