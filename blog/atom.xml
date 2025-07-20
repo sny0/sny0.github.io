@@ -2,11 +2,52 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://sny0.github.io/blog</id>
     <title>sny0 Blog</title>
-    <updated>2024-05-09T00:00:00.000Z</updated>
+    <updated>2025-07-21T00:00:00.000Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://sny0.github.io/blog"/>
     <subtitle>sny0 Blog</subtitle>
     <icon>https://sny0.github.io/img/rabbit_icon.png</icon>
+    <entry>
+        <title type="html"><![CDATA[社会人になってからの色々]]></title>
+        <id>https://sny0.github.io/blog/2025/07/21/goTobitSummit</id>
+        <link href="https://sny0.github.io/blog/2025/07/21/goTobitSummit"/>
+        <updated>2025-07-21T00:00:00.000Z</updated>
+        <summary type="html"><![CDATA[社会人になって、4カ月！？]]></summary>
+        <content type="html"><![CDATA[<p>社会人になって、4カ月！？<br>
+<!-- -->時の流れは速いね！！！激動だった。<br>
+<!-- -->書けること書けないこと色々あるけど、適当に書く。<br>
+<!-- -->そもそも、このWebサイト更新するの久しぶりだな。</p><h2 class="anchor anchorWithStickyNavbar_LWe7" id="なんとなく振り返ったり先のこと考えたり">なんとなく振り返ったり、先のこと考えたり<a href="#なんとなく振り返ったり先のこと考えたり" class="hash-link" aria-label="Direct link to なんとなく振り返ったり、先のこと考えたり" title="Direct link to なんとなく振り返ったり、先のこと考えたり">​</a></h2><p>元々、就活用のポートフォリオサイト及び、活動や作品を発信することで自分の尻を叩くように作成した。<br>
+<!-- -->Xで活動している技術・実績がある人が全員何かしらのブログやサイトで活動や作品についての記事を載せていたいたことに気づき、学部4年生の時、卒論発表後、1週間で作成し公開した。  </p><p>何者でもなかった自分が何者かになりたくて、夢の業界へ行きたくて、がむしゃらにもがいていたあの頃が懐かしい。<br>
+<!-- -->できることは何でもやった。イベントがあればどんなに遠くても積極的に参加したし、創作活動もしたし、研究も誰よりも超頑張ったし…<br>
+<!-- -->あの頃のハングリー精神があったから今、自分はここにいるし、社会人になった今でもその精神は変わっていないと思う。  </p><p>社会人になって改めて実感するのは、この業界は「勉強し続けること」が当たり前だということだ。<br>
+<!-- -->特に私は、特別プログラミングができるわけでもないし、突出した技術や知識があるわけでもない。入社してから同期のプログラマから本当に学ぶことばかりである。<br>
+<!-- -->休日の勉強、アウトプットは必須だろう。大きな成果を残している凄い大学の先輩や、会社の同期の優秀で尊敬しているプログラマを見て思うのは、「常に精進している人って、やっぱり強い。」ということ。それができるから必然的に現在の能力や地位があるんだと思う。<br>
+<!-- -->彼らは、興味を持って、自分で調べて、アウトプットして、発信したりして...とにかく積極的に行動している。そんな人間に私もなりたい。</p><p>また、創作する精神も忘れちゃいけないと思う。会社の業務の他に、個人や仲間内で製作して、展示会に出したい、というか出さなきゃ。<br>
+<!-- -->自分のキャリアを作るために。そのためには、頑張らなきゃ。</p><h2 class="anchor anchorWithStickyNavbar_LWe7" id="社会人になってからの色々">社会人になってからの色々<a href="#社会人になってからの色々" class="hash-link" aria-label="Direct link to 社会人になってからの色々" title="Direct link to 社会人になってからの色々">​</a></h2><h3 class="anchor anchorWithStickyNavbar_LWe7" id="ドメインを割り当てた">ドメインを割り当てた<a href="#ドメインを割り当てた" class="hash-link" aria-label="Direct link to ドメインを割り当てた" title="Direct link to ドメインを割り当てた">​</a></h3><p>このWebサイトは、Docusaurusで作成し、GitHub Pageでdeployしている。
+そのため、元々はURLはGitHubのものだったが、以前購入したドメイン <strong>sny0.com</strong> を割り当てることにした。<br>
+<!-- -->deployはこれまで通り、GitHub Pagesでしており、簡単に独自ドメインを割り当てることができた。<br>
+<!-- -->自身のWebサイトを作りたい人、持っている人におすすめしたい。</p><h3 class="anchor anchorWithStickyNavbar_LWe7" id="デジ創の記事がでた">デジ創の記事がでた！？<a href="#デジ創の記事がでた" class="hash-link" aria-label="Direct link to デジ創の記事がでた！？" title="Direct link to デジ創の記事がでた！？">​</a></h3><p>私が大学の同期の<a href="https://naoki911.github.io/Porto/index.html" target="_blank" rel="noopener noreferrer">小木曽君</a>、<a href="https://sakahiro0201.github.io/" target="_blank" rel="noopener noreferrer">阪井君</a>と立ち上げた<a href="https://www.gu-digital.com/" target="_blank" rel="noopener noreferrer">岐阜大学デジタル創作サークル</a>（通称：デジ創）について、<a href="https://www.cgarts.or.jp/" target="_blank" rel="noopener noreferrer">CG ARTS</a>さんが記事として取り上げてくれた。</p><p><a href="https://one.cgarts.or.jp/article/41241" target="_blank" rel="noopener noreferrer">記事：岐阜大学　デジタル創作サークルに突撃！</a></p><p>↑の記事の前半でも触れられているが、マジで色々な奇跡が重なって記事ができた。<br>
+<!-- -->世の中何が起こるか分からないものだ。<br>
+<!-- -->記事のきっかけを作ったのは、紛れもなく私だし、担当の方とやり取りしながら文章の校正も行った。そのため、半分くらいは自分の記事みたいになっている。<br>
+<!-- -->最後の方に、私がサークルの後輩に残した言葉が紹介されていて、嬉しいが恥ずかしい。書いたときは、全世界に発信されるとは思ってなかった...</p><h3 class="anchor anchorWithStickyNavbar_LWe7" id="色々なイベントに行ってきた">色々なイベントに行ってきた<a href="#色々なイベントに行ってきた" class="hash-link" aria-label="Direct link to 色々なイベントに行ってきた" title="Direct link to 色々なイベントに行ってきた">​</a></h3><p>東京という土地は、岐阜と異なり、様々なイベントが開催されている。やっぱり、東京って恵まれてるなって思う。<br>
+<!-- -->最近は、会社の同期を誘って色々なイベントに行っている。</p><ul><li><p><a href="https://tokyogamedungeon.com/" target="_blank" rel="noopener noreferrer">東京ゲームダンジョン</a><br>
+<!-- -->インディーゲームの展示会。安価で出展できるからいいね。<br>
+<!-- -->自分で作って出展してーーっと思った。やっと、研修が終わったから、勉強・創作するぞー！</p></li><li><p><a href="https://gamemarket.jp/" target="_blank" rel="noopener noreferrer">ゲームマーケット</a><br>
+<!-- -->日本最大級のボードゲームの祭典。年二度開催。<br>
+<!-- -->ボードゲームというモノにあまり関心がなく、何か刺激を受けられたらいいなくらいの温度感で行ったイベントだが、ボードゲームの面白さや人口の多さにびっくりさせられた。絶対今年の秋も行く。</p></li><li><p><a href="https://bitsummit.org/" target="_blank" rel="noopener noreferrer">BitSummit</a><br>
+<!-- -->国内最大級のインディーゲームの祭典。開催場所は京都。来年は、5月開催なんだってね。<br>
+<!-- -->プログラマの同期と二人で業務後、深夜バスに乗って参戦。参加ハードル高かったはずだけど、二つ返事で一緒に行ってくれてありがと。<br>
+<!-- -->やっぱり刺激を受けるね。</p></li></ul><p>ゲーム業界志望の私の研究室の後輩に<a href="https://www.creators-guild.com/bitsummit-game-jam-2025" target="_blank" rel="noopener noreferrer">BitSummit Game Jam</a>を紹介して、参加してくれた。当日、色々トラブルもありながら頑張っていた。<br>
+<!-- -->明らかにこの半年で成長していたし、当時の私のようにもがいてもがいてできることは何でもやる精神でいいね！と思った。私の精神が受け継がれている気がして嬉しかった。<br>
+<!-- -->今年のゲームマーケット秋に出展するらしいし、ペラコンも出すみたいだし、マジでめっちゃ頑張ってると思う。自分も頑張らなきゃな、と思わされた。</p><h3 class="anchor anchorWithStickyNavbar_LWe7" id="山手線を徒歩で一周">山手線を徒歩で一周<a href="#山手線を徒歩で一周" class="hash-link" aria-label="Direct link to 山手線を徒歩で一周" title="Direct link to 山手線を徒歩で一周">​</a></h3><p>6月に、会社の同期4人で山手線を徒歩で一周した。突然の誘いに二つ返事で参加してくれたみんなに感謝。<br>
+<!-- -->掛かった時間は、約11時間半。</p>]]></content>
+        <author>
+            <name>sny0</name>
+            <uri>https://github.com/sny0</uri>
+        </author>
+        <category label="BitSummit" term="BitSummit"/>
+        <category label="東京ゲームダンジョン" term="東京ゲームダンジョン"/>
+    </entry>
     <entry>
         <title type="html"><![CDATA[MVE2024で研究発表します]]></title>
         <id>https://sny0.github.io/blog/2024/05/09/goToMVE</id>
