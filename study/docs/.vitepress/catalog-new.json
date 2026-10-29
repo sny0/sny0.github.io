@@ -1,0 +1,39 @@
+{
+  "domains": [],
+  "entries": [
+    {
+      "title": "ECS — Entity Component System",
+      "url": "/game/ecs.html",
+      "domain": "game",
+      "kind": "本文草稿",
+      "summary": "EntityのIDと寿命、Componentの配置、Query、構成変更、並列実行と性能判断を説明します。",
+      "source": "新規執筆",
+      "status": "草稿",
+      "aliases": [
+        "ECS",
+        "Entity Component System",
+        "エンティティ・コンポーネント・システム",
+        "Archetype",
+        "Sparse Set"
+      ]
+    },
+    {
+      "title": "ビデオゲーム史 — 遊び・ハード・作り方の変化をつなぐ",
+      "url": "/history/video-games.html",
+      "domain": "history",
+      "kind": "本文草稿",
+      "summary": "遊び・ハード・制作・流通・保存をつなぐ概説と、1971〜2026年の代表作・ハード年表。",
+      "source": "新規執筆",
+      "status": "草稿",
+      "aliases": [
+        "ビデオゲーム史",
+        "ゲーム史",
+        "ゲームの歴史",
+        "年表",
+        "名作ソフト",
+        "ゲーム機",
+        "歴代ハード"
+      ]
+    }
+  ]
+}
