@@ -1,0 +1,25 @@
+{
+  "name": "sny0-study",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "node scripts/generate-navigation.mjs && vitepress dev docs",
+    "check": "node scripts/generate-navigation.mjs && node scripts/check-source.mjs",
+    "build": "node scripts/generate-navigation.mjs && vitepress build docs && node scripts/check-dist.mjs",
+    "preview": "vitepress preview docs",
+    "deploy:pages": "node scripts/deploy-pages.mjs",
+    "deploy:manual": "node scripts/deploy-manual.mjs"
+  },
+  "engines": {
+    "node": ">=20.19.0"
+  },
+  "devDependencies": {
+    "markdown-it-mathjax3": "4.3.2",
+    "mermaid": "11.16.0",
+    "vitepress": "1.6.4",
+    "vitepress-plugin-mermaid": "2.0.17",
+    "vue": "3.5.40",
+    "yaml": "2.8.1"
+  }
+}

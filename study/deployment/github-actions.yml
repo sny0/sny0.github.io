@@ -1,0 +1,85 @@
+name: Study
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'study/**'
+      - '.github/workflows/study.yml'
+  pull_request:
+    branches: [main]
+    paths:
+      - 'study/**'
+      - '.github/workflows/study.yml'
+  workflow_dispatch:
+
+permissions: {}
+
+concurrency:
+  group: study-pages
+  cancel-in-progress: false
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    permissions:
+      contents: read
+    defaults:
+      run:
+        shell: bash
+        working-directory: study
+    outputs:
+      artifact-id: ${{ steps.artifact.outputs.artifact-id }}
+    steps:
+      # Official action versions checked against their maintainers' READMEs.
+      - uses: actions/checkout@v7
+        with:
+          persist-credentials: false
+      - uses: actions/setup-node@v7
+        with:
+          node-version: '22'
+          cache: npm
+          cache-dependency-path: study/package-lock.json
+      - run: npm ci
+      - run: npm run check
+      - run: npm run build
+      - name: Save generated site
+        if: github.event_name != 'pull_request'
+        id: artifact
+        uses: actions/upload-artifact@v7
+        with:
+          name: study-dist
+          path: study/docs/.vitepress/dist/
+          if-no-files-found: error
+          include-hidden-files: true
+          retention-days: 3
+
+  deploy:
+    if: github.ref == 'refs/heads/main' && github.event_name != 'pull_request'
+    needs: build
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    permissions:
+      contents: write
+      pages: write
+    steps:
+      - uses: actions/checkout@v7
+        with:
+          # Git uses checkout's temporary credentials, never a token in a URL.
+          persist-credentials: true
+      - uses: actions/setup-node@v7
+        with:
+          node-version: '22'
+          package-manager-cache: false
+      - uses: actions/download-artifact@v8
+        with:
+          artifact-ids: ${{ needs.build.outputs.artifact-id }}
+          path: study/docs/.vitepress/dist/
+      - name: Update study and verify Pages publication
+        env:
+          GITHUB_TOKEN: ${{ github.token }}
+        run: >-
+          node study/scripts/deploy-pages.mjs
+          --repo-root "$GITHUB_WORKSPACE"
+          --source-dist "$GITHUB_WORKSPACE/study/docs/.vitepress/dist"

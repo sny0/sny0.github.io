@@ -1,0 +1,8 @@
+node_modules/
+docs/.vitepress/cache/
+docs/.vitepress/dist/
+docs/.vitepress/.temp/
+docs/.vitepress/config.*.timestamp-*
+*.log
+__pycache__/
+.pages-worktree-*/

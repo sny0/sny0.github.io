@@ -1,0 +1,1825 @@
+{
+  "title": "各年の名作・代表的ソフトとハード",
+  "first_year": 1971,
+  "last_year": 2026,
+  "checked_at": "2026-10-30",
+  "year_basis": "日本発売年を基本。海外初出、業務用稼働、初公開等を採った記録は地域と注記を表示。",
+  "selection_policy": "本章の編集上の選定。遊びの特徴、歴史的・文化的影響、技術・制作上の意義を考える入口として選び、客観的な順位や全作品・全機種の網羅とはしない。",
+  "hardware_policy": "新発売・稼働の主なハードを選定。該当機種を選ばない年には、その年の選定ソフトの対応機種を併記する。",
+  "current_year_policy": "2026年は2026-10-30までに発売・公開済みとして確認した記録の暫定選定。",
+  "prehistory": "1958年等の研究・展示の前史は既存の出来事年表と本文で扱う。年別の製品表は1971年から。",
+  "years": [
+    {
+      "year": 1971,
+      "games": [
+        {
+          "title": "Computer Space",
+          "platform": "アーケード（専用筐体）",
+          "region": "米国",
+          "release_note": "商業用の業務用ゲームとして登場した年。",
+          "reason": "研究施設の遊びが、筐体・入力・支払いを備えた商業製品へつながる例。",
+          "source_url": "https://www.computerhistory.org/timeline/graphics-games/",
+          "source_title": "Computer History Museum：Computer Space is released"
+        }
+      ],
+      "hardware": []
+    },
+    {
+      "year": 1972,
+      "games": [
+        {
+          "title": "PONG",
+          "platform": "アーケード",
+          "region": "米国",
+          "release_note": "米国でのアーケード原作の登場年。家庭用PONGの発売年とは区別する。",
+          "reason": "短いルールと即時の応答だけで対戦が成立する、初期設計の入口として選定。",
+          "source_url": "https://americanhistory.si.edu/blog/2012/04/pong-atari-and-the-origins-of-the-home-video-game.html",
+          "source_title": "Smithsonian：Pong, Atari, and the origins of the home video game"
+        }
+      ],
+      "hardware": [
+        {
+          "name": "Magnavox Odyssey",
+          "region": "米国",
+          "release_note": "1972年の米国向け家庭用機。日本発売年としては扱わない。",
+          "significance": "テレビを家庭のゲーム画面に使う初期の試みを追う入口。",
+          "source_url": "https://americanhistory.si.edu/collections/object/nmah_1302004",
+          "source_title": "Smithsonian：Magnavox Odyssey Video Game Unit, 1972"
+        }
+      ]
+    },
+    {
+      "year": 1973,
+      "games": [
+        {
+          "title": "Space Race",
+          "platform": "アーケード",
+          "region": "米国",
+          "release_note": "Atari製アーケード原作の年。日本発売年ではない。",
+          "reason": "障害物回避と二人の競争を組み合わせた、初期の対戦設計の例。",
+          "source_url": "https://www.arcade-museum.com/Videogame/space-race",
+          "source_title": "Museum of the Game：Space Race"
+        }
+      ],
+      "hardware": []
+    },
+    {
+      "year": 1974,
+      "games": [
+        {
+          "title": "Tank",
+          "platform": "アーケード",
+          "region": "米国",
+          "release_note": "Kee Games製アーケード原作の年。日本発売年ではない。",
+          "reason": "戦車の移動、迷路、射撃を使った対戦の駆け引きを見る題材。",
+          "source_url": "https://www.arcade-museum.com/Videogame/tank",
+          "source_title": "Museum of the Game：Tank"
+        }
+      ],
+      "hardware": []
+    },
+    {
+      "year": 1975,
+      "games": [
+        {
+          "title": "ウエスタンガン",
+          "platform": "アーケード",
+          "region": "日本",
+          "release_note": "タイトーの国内アーケード作品。米国のMidway版Gun Fightとは版を区別する。",
+          "reason": "西部劇の決闘を題材に、対人戦の操作と射撃を考える一作として選定。",
+          "source_url": "https://www.taito.co.jp/70th/history",
+          "source_title": "タイトー公式：タイトーの歩み（1975年作品の展示記録）"
+        }
+      ],
+      "hardware": [
+        {
+          "name": "テレビテニス",
+          "region": "日本",
+          "release_note": "エポック社の公式製品史が1975年発売として記録。",
+          "significance": "日本の家庭用テレビゲーム機の初期展開をたどる題材。",
+          "source_url": "https://epoch.jp/company/toy-history.php",
+          "source_title": "エポック社公式：Toy History ～おもちゃの歴史～"
+        }
+      ]
+    },
+    {
+      "year": 1976,
+      "games": [
+        {
+          "title": "Breakout",
+          "platform": "アーケード",
+          "region": "米国",
+          "release_note": "1976年のアーケード原作。1978年のAtari VCS版とは区別する。",
+          "reason": "ボールの反射とブロック破壊が生む、一人用の反復と上達を見る題材。",
+          "source_url": "https://www.arcade-museum.com/Videogame/breakout",
+          "source_title": "Museum of the Game：Breakout"
+        }
+      ],
+      "hardware": [
+        {
+          "name": "Fairchild Channel F",
+          "region": "米国",
+          "release_note": "1976年のオリジナル機。1979年のChannel F System IIとは区別する。",
+          "significance": "交換式カートリッジによるソフト供給を学ぶ初期の事例。",
+          "source_url": "https://www.museumofplay.org/blog/collection-documents-the-career-of-video-game-pioneer-jerry-lawson/",
+          "source_title": "The Strong：Collection Documents the Career of Video Game Pioneer Jerry Lawson"
+        }
+      ]
+    },
+    {
+      "year": 1977,
+      "games": [
+        {
+          "title": "Combat",
+          "platform": "Atari VCS",
+          "region": "米国",
+          "release_note": "Atari公式資料に記された1977年のVCS版。日本発売年ではない。",
+          "reason": "戦車や航空機の対戦を比べ、ルール変更が遊びを変える仕組みを見る題材。",
+          "source_url": "https://atari.com/pages/combat",
+          "source_title": "Atari公式：Combat"
+        }
+      ],
+      "hardware": [
+        {
+          "name": "Atari VCS（後のAtari 2600）",
+          "region": "米国",
+          "release_note": "1977年の米国導入。日本向けATARI 2800の発売年とは区別する。",
+          "significance": "同じ本体で複数のカートリッジを遊ぶ市場の広がりを追う軸。",
+          "source_url": "https://www.computerhistory.org/timeline/1977/",
+          "source_title": "Computer History Museum：Timeline of Computer History — 1977"
+        },
+        {
+          "name": "カラーテレビゲーム15／カラーテレビゲーム6",
+          "region": "日本",
+          "release_note": "任天堂の公式沿革が両機を1977年発売として記録。",
+          "significance": "任天堂が家庭用テレビゲームに展開する過程を見る入口。",
+          "source_url": "https://www.nintendo.co.jp/corporate/history/index.html",
+          "source_title": "任天堂公式：会社の沿革"
+        }
+      ]
+    },
+    {
+      "year": 1978,
+      "games": [
+        {
+          "title": "スペースインベーダー",
+          "platform": "アーケード",
+          "region": "日本",
+          "release_note": "1978年のアーケード原作。6月16日は新製品発表展示会での初登場日。",
+          "reason": "敵集団の動き、射撃、得点を結ぶ固定画面シューティングの基準点として選定。",
+          "source_url": "https://www.taito.co.jp/70th/history",
+          "source_title": "タイトー公式：タイトーの歩み（1978年）"
+        }
+      ],
+      "hardware": []
+    },
+    {
+      "year": 1979,
+      "games": [
+        {
+          "title": "ギャラクシアン",
+          "platform": "アーケード",
+          "region": "日本",
+          "release_note": "1979年のナムコ製アーケード原作。1984年のファミコン移植とは区別する。",
+          "reason": "編隊から離れて襲う敵と得点設計を通して、射撃ゲームの展開を見る題材。",
+          "source_url": "https://galaga.com/ja/history/galaxian.php",
+          "source_title": "バンダイナムコ公式：ギャラガウェブ — ギャラクシアン"
+        }
+      ],
+      "hardware": []
+    },
+    {
+      "year": 1980,
+      "games": [
+        {
+          "title": "パックマン",
+          "platform": "アーケード",
+          "region": "日本",
+          "release_note": "5月22日に先行テスト、7月に日本で一般向け発売。年表では1980年のAC原作を掲載。",
+          "reason": "迷路、追跡、攻守の逆転を組み合わせるアクション設計を読む題材。",
+          "source_url": "https://pacman.com/en/history/",
+          "source_title": "バンダイナムコ公式：PAC-MAN HISTORY"
+        }
+      ],
+      "hardware": [
+        {
+          "name": "ゲーム＆ウオッチ",
+          "region": "日本",
+          "release_note": "任天堂の公式沿革に基づく1980年のシリーズ登場。",
+          "significance": "テレビ接続型とは異なる、液晶式携帯ゲームの系統を見る入口。",
+          "source_url": "https://www.nintendo.co.jp/corporate/history/index.html",
+          "source_title": "任天堂公式：会社の沿革"
+        }
+      ]
+    },
+    {
+      "year": 1981,
+      "games": [
+        {
+          "title": "ドンキーコング",
+          "platform": "アーケード",
+          "region": "日本",
+          "release_note": "任天堂の1981年アーケード作品。1983年のファミコン版とは区別する。",
+          "reason": "足場とジャンプを使うアクションを、キャラクター表現と合わせて見る題材。",
+          "source_url": "https://www.nintendo.co.jp/corporate/history/index.html",
+          "source_title": "任天堂公式：会社の沿革"
+        }
+      ],
+      "hardware": [
+        {
+          "name": "カセットビジョン",
+          "region": "日本",
+          "release_note": "エポック社の公式製品史に基づく1981年発売。",
+          "significance": "ファミコン以前の国内カートリッジ交換式ゲーム機を知る題材。",
+          "source_url": "https://epoch.jp/company/toy-history.php",
+          "source_title": "エポック社公式：Toy History ～おもちゃの歴史～"
+        },
+        {
+          "name": "PC-8801（初代）",
+          "region": "日本",
+          "release_note": "1981年発売の初代機。後のPC-8801mkIIやmkIISRなど、シリーズ各機の発売年とは区別する。",
+          "significance": "国内パソコンでゲームを遊び、プログラムを作る文化を家庭用ゲーム機と並べて考える題材。",
+          "source_url": "https://www.museum.uec.ac.jp/database/sf/sf100/s131.html",
+          "source_title": "電気通信大学 UECコミュニケーションミュージアム：パーソナルコンピューター PC-8801"
+        }
+      ]
+    },
+    {
+      "year": 1982,
+      "games": [
+        {
+          "title": "ディグダグ",
+          "platform": "アーケード",
+          "region": "日本",
+          "release_note": "1982年のナムコ製アーケード原作。後年の移植配信年とは区別する。",
+          "reason": "地形を掘る操作と敵・岩の位置関係が生む、戦術的なアクションとして選定。",
+          "source_url": "https://www.arcadearchives.com/title/aca-218/",
+          "source_title": "HAMSTER公式：アーケードアーカイブス ディグダグ（当時の稼働年）"
+        }
+      ],
+      "hardware": [
+        {
+          "name": "PC-9801（初代）",
+          "region": "日本",
+          "release_note": "NECの公式社史に基づく1982年10月発売。PC-9800シリーズ全機種の仕様・発売年を示すものではない。",
+          "significance": "日本のパソコン市場とソフト供給、16ビットCPUや描画機能の発展を追う軸。",
+          "source_url": "https://jpn.nec.com/profile/corp/history/pdf/history-120.pdf",
+          "source_title": "NEC公式：120年、その先のNECへ。（PC-9801の発売記録）"
+        }
+      ]
+    },
+    {
+      "year": 1983,
+      "games": [
+        {
+          "title": "マリオブラザーズ（FC版）",
+          "platform": "ファミリーコンピュータ",
+          "region": "日本",
+          "release_note": "1983年9月9日発売のFC版として掲載。アーケード版の稼働日を示すものではない。",
+          "reason": "協力と妨害の両方が成立する、二人同時プレイの設計を読む題材。",
+          "source_url": "https://www.nintendo.com/jp/famicom/history/index.html",
+          "source_title": "任天堂公式：ファミコン年表 — マリオブラザーズ"
+        }
+      ],
+      "hardware": [
+        {
+          "name": "ファミリーコンピュータ",
+          "region": "日本",
+          "release_note": "任天堂の公式沿革に基づく1983年発売。海外のNES発売年とは区別する。",
+          "significance": "国内のソフト供給、操作機器、開発環境の変化を追う中心軸。",
+          "source_url": "https://www.nintendo.co.jp/corporate/history/index.html",
+          "source_title": "任天堂公式：会社の沿革"
+        },
+        {
+          "name": "SG-1000",
+          "region": "日本",
+          "release_note": "1983年7月15日発売。SC-3000とは別製品として掲載。",
+          "significance": "同時期に登場したセガの家庭用機を比較する題材。",
+          "source_url": "https://www.sega.jp/history/hard/sg1000/",
+          "source_title": "セガ公式：セガハード大百科 — SG-1000"
+        },
+        {
+          "name": "MSX規格／対応パソコン（例：HIT BIT HB-55）",
+          "region": "日本",
+          "release_note": "1983年にアスキーとマイクロソフトが共通規格MSXを提案し、各社が対応機を発売。例としてソニーのHB-55は同年11月発売。MSXは単一メーカーの実機名ではない。",
+          "significance": "共通規格とメーカーごとの実機を分け、互換性とソフト供給を考える題材。",
+          "source_url": "https://museum.ipsj.or.jp/computer/personal/history.html",
+          "source_title": "情報処理学会 コンピュータ博物館：パーソナルコンピュータ 誕生と発展の歴史 — MSX規格のパソコン"
+        }
+      ]
+    },
+    {
+      "year": 1984,
+      "games": [
+        {
+          "title": "エキサイトバイク",
+          "platform": "ファミリーコンピュータ",
+          "region": "日本",
+          "release_note": "1984年11月30日発売のFC原作。後のアーケード版とは区別する。",
+          "reason": "走行と着地の操作に加え、コースを作る機能から制作と遊びの関係を見られる。",
+          "source_url": "https://www.nintendo.com/jp/famicom/history/index.html",
+          "source_title": "任天堂公式：ファミコン年表 — エキサイトバイク"
+        }
+      ],
+      "hardware": [
+        {
+          "name": "スーパーカセットビジョン",
+          "region": "日本",
+          "release_note": "エポック社の公式製品史に基づく1984年発売。",
+          "significance": "家庭用機の競争をファミコン以外からも確認するための一例。",
+          "source_url": "https://epoch.jp/company/toy-history.php",
+          "source_title": "エポック社公式：Toy History ～おもちゃの歴史～"
+        }
+      ]
+    },
+    {
+      "year": 1985,
+      "games": [
+        {
+          "title": "スーパーマリオブラザーズ",
+          "platform": "ファミリーコンピュータ",
+          "region": "日本",
+          "release_note": "1985年9月13日の国内FC版発売を基準に掲載。",
+          "reason": "加速、ジャンプ、スクロール、段階的な地形配置を合わせて学ぶ題材。",
+          "source_url": "https://www.nintendo.com/jp/famicom/software/smb1/index.html",
+          "source_title": "任天堂公式：スーパーマリオブラザーズ — ファミリーコンピュータ"
+        }
+      ],
+      "hardware": [
+        {
+          "name": "セガ・マークIII",
+          "region": "日本",
+          "release_note": "1985年10月20日発売。海外Master Systemや1987年の国内マスターシステムとは区別する。",
+          "significance": "互換性を保ちながら機能を拡張する家庭用機の設計を見る題材。",
+          "source_url": "https://www.sega.jp/history/hard/segamark3/",
+          "source_title": "セガ公式：セガハード大百科 — セガ・マークIII"
+        }
+      ]
+    },
+    {
+      "year": 1986,
+      "games": [
+        {
+          "title": "ゼルダの伝説",
+          "platform": "ファミリーコンピュータ ディスクシステム",
+          "region": "日本",
+          "release_note": "1986年2月21日発売の国内ディスク版。後年の国内ROMカセット版とは区別する。",
+          "reason": "探索、アイテム、謎解きと継続プレイが結び付く構造を読む題材。",
+          "source_url": "https://www.nintendo.co.jp/wii/vc/vc_zel_fc/vc_zel_fc_01.html",
+          "source_title": "任天堂公式：VC ゼルダの伝説（原作の発売日）"
+        },
+        {
+          "title": "ドラゴンクエスト",
+          "platform": "ファミリーコンピュータ",
+          "region": "日本",
+          "release_note": "1986年5月27日発売のFC版。移植・リメイクの発売年とは区別する。",
+          "reason": "コマンド選択と成長を使う家庭用RPGの導線を考える題材。",
+          "source_url": "https://www.dragonquest.jp/about/",
+          "source_title": "スクウェア・エニックス公式：ドラゴンクエストとは"
+        }
+      ],
+      "hardware": [
+        {
+          "name": "ファミリーコンピュータ ディスクシステム（周辺機器）",
+          "region": "日本",
+          "release_note": "1986年2月21日発売。単体で動く新本体ではなく、ファミコン用の周辺機器。",
+          "significance": "記録媒体、セーブ、店頭書き換えがゲーム設計と流通を変える例。",
+          "source_url": "https://www.nintendo.com/jp/famicom/history/index.html",
+          "source_title": "任天堂公式：ファミコン年表 — ディスクシステム"
+        }
+      ]
+    },
+    {
+      "year": 1987,
+      "games": [
+        {
+          "title": "ファイナルファンタジー",
+          "platform": "ファミリーコンピュータ",
+          "region": "日本",
+          "release_note": "1987年12月18日発売のFC原作。後年の改訂版・リメイクとは区別する。",
+          "reason": "職業の組み合わせと役割分担から、パーティー制RPGの設計を見る題材。",
+          "source_url": "https://www.nintendo.co.jp/wii/vc/vc_ff/vc_ff_01.html",
+          "source_title": "任天堂公式：VC ファイナルファンタジー（原作の発売日）"
+        },
+        {
+          "title": "ロックマン",
+          "platform": "ファミリーコンピュータ",
+          "region": "日本",
+          "release_note": "1987年12月17日発売のシリーズ第1作。海外名はMega Man。",
+          "reason": "ステージ選択と武器獲得を通じ、攻略順をプレイヤーに渡す設計を見る題材。",
+          "source_url": "https://captown.capcom.com/en/site_topics/3",
+          "source_title": "カプコン公式：Capcom Town — Happy Birthday, Mega Man!!"
+        }
+      ],
+      "hardware": [
+        {
+          "name": "PCエンジン",
+          "region": "日本",
+          "release_note": "1987年の国内発売。後の北米TurboGrafx-16やPCエンジン miniとは区別する。",
+          "significance": "任天堂・セガ以外の家庭用機とソフト市場をたどる軸。",
+          "source_url": "https://www.nintendo.com/jp/famicom/history/index.html",
+          "source_title": "任天堂公式：ファミコン年表 — 1987年のその他のゲーム機"
+        },
+        {
+          "name": "X68000（初代）",
+          "region": "日本",
+          "release_note": "1986年に発表、1987年3月発売。年表には発売年を採用し、後継機や復刻機とは区別する。",
+          "significance": "68000系CPU、スプライト、FM音源を備えるパソコンを、アーケード移植や表現の学習と結ぶ題材。",
+          "source_url": "https://museum.ipsj.or.jp/computer/personal/0038.html",
+          "source_title": "情報処理学会 コンピュータ博物館：【シャープ】X68000"
+        }
+      ]
+    },
+    {
+      "year": 1988,
+      "games": [
+        {
+          "title": "スーパーマリオブラザーズ3",
+          "platform": "ファミリーコンピュータ",
+          "region": "日本",
+          "release_note": "1988年10月23日の国内FC版発売を基準に掲載。海外NES版とは発売年が異なる。",
+          "reason": "マップと多様な変身を使い、短いステージ群を大きな冒険へまとめる例。",
+          "source_url": "https://www.nintendo.co.jp/kids/161019/family_computer/index.html",
+          "source_title": "任天堂公式：ニンテンドーキッズスペース — ファミコン内蔵ソフト（1987～1989）"
+        },
+        {
+          "title": "ドラゴンクエストIII そして伝説へ…",
+          "platform": "ファミリーコンピュータ",
+          "region": "日本",
+          "release_note": "1988年2月10日発売のFC原作。SFC版やHD-2D版ではない。",
+          "reason": "職業と仲間編成が冒険の進め方を変えるRPGとして選定。",
+          "source_url": "https://www.nintendo.com/jp/famicom/history/index.html",
+          "source_title": "任天堂公式：ファミコン年表 — ドラゴンクエストIII"
+        }
+      ],
+      "hardware": [
+        {
+          "name": "メガドライブ",
+          "region": "日本",
+          "release_note": "1988年10月29日の国内発売。北米Genesisの発売年とは区別する。",
+          "significance": "CPUと描画・音源の構成を、次の世代のゲーム表現と結び付ける題材。",
+          "source_url": "https://www.sega.jp/history/hard/megadrive/",
+          "source_title": "セガ公式：セガハード大百科 — メガドライブ"
+        }
+      ]
+    },
+    {
+      "year": 1989,
+      "games": [
+        {
+          "title": "MOTHER",
+          "platform": "ファミリーコンピュータ",
+          "region": "日本",
+          "release_note": "1989年7月27日発売のFC原作。海外のEarthBoundやMOTHER2とは別作品。",
+          "reason": "現代的な日常をRPGの冒険に組み替える、世界観と言葉の設計を見る題材。",
+          "source_url": "https://www.nintendo.com/jp/famicom/software/mother/index.html",
+          "source_title": "任天堂公式：MOTHER — ファミリーコンピュータ"
+        },
+        {
+          "title": "テトリス（GB版）",
+          "platform": "ゲームボーイ",
+          "region": "日本",
+          "release_note": "1989年6月14日発売のGB版。テトリス原作の誕生年を示すものではない。",
+          "reason": "落下パズルと携帯機の組み合わせを、短い時間でも続く遊びとして見る題材。",
+          "source_url": "https://www.nintendo.co.jp/n02/dmg/index.html",
+          "source_title": "任天堂公式：ゲームボーイ ソフト発売日一覧"
+        }
+      ],
+      "hardware": [
+        {
+          "name": "ゲームボーイ",
+          "region": "日本",
+          "release_note": "1989年4月21日の国内発売。後のPocket・Color等の派生機とは区別する。",
+          "significance": "携帯性とカートリッジ式ソフト供給を組み合わせる系統を追う軸。",
+          "source_url": "https://www.nintendo.co.jp/kids/161019/family_computer/index.html",
+          "source_title": "任天堂公式：ニンテンドーキッズスペース — 1989年のゲームボーイ発売"
+        }
+      ]
+    },
+    {
+      "year": 1990,
+      "games": [
+        {
+          "title": "スーパーマリオワールド",
+          "platform": "スーパーファミコン",
+          "region": "日本",
+          "release_note": "1990年11月21日発売・SFC原作。",
+          "reason": "分岐するマップと豊富な仕掛けから、2Dアクションの探索と再挑戦の設計を学べる。",
+          "source_url": "https://www.nintendo.com/jp/character/mario/history/world/index.html",
+          "source_title": "スーパーマリオワールド | ヒストリー | マリオポータル | Nintendo"
+        }
+      ],
+      "hardware": [
+        {
+          "name": "スーパーファミコン",
+          "region": "日本",
+          "release_note": "1990年発売。海外のSuper NES発売年とは区別。",
+          "significance": "2Dゲームの映像・音楽・操作の作り込みを知るうえで中心となる据置機。",
+          "source_url": "https://www.nintendo.co.jp/corporate/en/history/index.html",
+          "source_title": "Corporate Information : Company History | Nintendo"
+        },
+        {
+          "name": "ゲームギア",
+          "region": "日本",
+          "release_note": "1990年10月6日発売。",
+          "significance": "カラー液晶とバックライトを備えた携帯機。画面の表現力と携帯性の両立を考える題材。",
+          "source_url": "https://www.sega.jp/history/hard/gamegear/index.html",
+          "source_title": "ゲームギア ｜セガ SEGA"
+        }
+      ]
+    },
+    {
+      "year": 1991,
+      "games": [
+        {
+          "title": "ソニック・ザ・ヘッジホッグ",
+          "platform": "メガドライブ",
+          "region": "日本",
+          "release_note": "1991年7月26日発売・メガドライブ原作。北米先行発売とは区別。",
+          "reason": "加速と地形の組み合わせによって、速さそのものを遊びにするアクションを示す。",
+          "source_url": "https://sonic.sega.jp/SonicOrigins/about/",
+          "source_title": "ゲーム概要｜『ソニックオリジンズ』公式サイト|SEGA"
+        },
+        {
+          "title": "ストリートファイターII",
+          "platform": "アーケード",
+          "region": "日本",
+          "release_note": "1991年稼働・アーケード原作。1992年のSFC版とは区別。",
+          "reason": "間合い、技の相性、相手の行動を読む駆け引きから対戦格闘の設計を考えられる。",
+          "source_url": "https://www.capcom.co.jp/ir/english/company/history.html",
+          "source_title": "History | Corporate Information | CAPCOM"
+        },
+        {
+          "title": "ゼルダの伝説 神々のトライフォース",
+          "platform": "スーパーファミコン",
+          "region": "日本",
+          "release_note": "1991年11月21日発売・SFC原作。",
+          "reason": "道具の獲得で行動範囲を広げる構成と、二つの世界を使った謎解きの代表例。",
+          "source_url": "https://www.nintendo.com/jp/character/zelda/history/index.html?lang=ja",
+          "source_title": "History（ヒストリー） | ゼルダの伝説40周年 | 任天堂"
+        }
+      ],
+      "hardware": [
+        {
+          "name": "メガCD（メガドライブ用拡張機器）",
+          "region": "日本",
+          "release_note": "1991年12月12日発売。単独で遊ぶ本体ではなく、メガドライブに接続する機器。",
+          "significance": "CD-ROMの容量を使う映像・音声表現と、拡張ハードによる機能追加の例。",
+          "source_url": "https://www.sega.jp/history/hard/mega-cd/",
+          "source_title": "メガCD ｜セガ SEGA"
+        }
+      ]
+    },
+    {
+      "year": 1992,
+      "games": [
+        {
+          "title": "スーパーマリオカート",
+          "platform": "スーパーファミコン",
+          "region": "日本",
+          "release_note": "1992年8月27日発売・SFC原作。引用元は後年の復刻版紹介だが原作の発売日を明記。",
+          "reason": "レースにアイテムと対戦の駆け引きを重ね、操作技術以外でも展開が変わる設計。",
+          "source_url": "https://www.nintendo.co.jp/clvs/soft/mario_kart.html",
+          "source_title": "スーパーマリオカート | ニンテンドークラシックミニ スーパーファミコン | 任天堂"
+        },
+        {
+          "title": "ソニック・ザ・ヘッジホッグ2",
+          "platform": "メガドライブ",
+          "region": "日本",
+          "release_note": "1992年発売・メガドライブ版。同名のゲームギア版とは内容が異なる。",
+          "reason": "スピードを維持する地形と複数の通路に、相棒との遊びを加えた続編。",
+          "source_url": "https://sonic.sega.jp/20th/history/index.html",
+          "source_title": "SEGA | ソニック20周年公式サイト | 20年の歴史"
+        }
+      ],
+      "hardware": []
+    },
+    {
+      "year": 1993,
+      "games": [
+        {
+          "title": "DOOM",
+          "platform": "PC（MS-DOS）",
+          "region": "海外初出",
+          "release_note": "1993年12月10日公開・初代DOOM。日本向け移植や2016年版の発売年ではない。",
+          "reason": "一人称視点の高速な戦闘と立体的なレベルを組み合わせ、PCのFPS史を理解する入口になる。",
+          "source_url": "https://bethesda.net/en-US/news/doom-turns-22",
+          "source_title": "DOOM Turns 22! | Bethesda"
+        },
+        {
+          "title": "バーチャファイター",
+          "platform": "アーケード（MODEL1）",
+          "region": "日本",
+          "release_note": "1993年12月稼働・アーケード原作。後年のセガサターン版とは区別。",
+          "reason": "3Dの人物表現と格闘の駆け引きを結び付けた、ポリゴンゲームへの転換を示す作品。",
+          "source_url": "https://www.sega.jp/history/arcade/product/9122/",
+          "source_title": "バーチャファイター – 株式会社セガ"
+        }
+      ],
+      "hardware": []
+    },
+    {
+      "year": 1994,
+      "games": [
+        {
+          "title": "ファイナルファンタジーVI",
+          "platform": "スーパーファミコン",
+          "region": "日本",
+          "release_note": "1994年4月2日発売・SFC原作。",
+          "reason": "多くの登場人物を描き分ける物語と、ドット絵・音楽を使った演出の例。",
+          "source_url": "https://jp.finalfantasy.com/titles/finalfantasy6/",
+          "source_title": "ファイナルファンタジーVI | FINAL FANTASY PORTAL SITE"
+        },
+        {
+          "title": "鉄拳",
+          "platform": "アーケード",
+          "region": "日本",
+          "release_note": "1994年12月稼働・アーケード原作。PlayStation版は翌1995年。",
+          "reason": "四肢に対応したボタン操作を軸に、3D格闘の表現と操作方法の多様化を示す。",
+          "source_url": "https://www.tekken-official.jp/titles/",
+          "source_title": "TITLES | TEKKEN OFFICIAL | バンダイナムコエンターテインメント公式サイト"
+        }
+      ],
+      "hardware": [
+        {
+          "name": "セガサターン",
+          "region": "日本",
+          "release_note": "1994年11月22日発売。",
+          "significance": "2Dと3Dが並行して発展した時代を、家庭用へのアーケード移植とともに見られる。",
+          "source_url": "https://www.sega.jp/history/hard/segasaturn/index.html",
+          "source_title": "セガサターン ｜セガ SEGA"
+        },
+        {
+          "name": "PlayStation",
+          "region": "日本",
+          "release_note": "1994年12月3日発売。北米・欧州は1995年。",
+          "significance": "CD-ROMと3D描画を軸に、家庭用ゲームの表現と制作の幅を広げた。",
+          "source_url": "https://www.playstation.com/ja-jp/playstation-history/1994-ps-one/",
+          "source_title": "PlayStation 1994 | PlayStationの歴史年表 (日本)"
+        }
+      ]
+    },
+    {
+      "year": 1995,
+      "games": [
+        {
+          "title": "クロノ・トリガー",
+          "platform": "スーパーファミコン",
+          "region": "日本",
+          "release_note": "1995年3月11日発売・SFC原作。引用元はVC紹介だが原作の発売日を明記。",
+          "reason": "時代を行き来する物語と仲間の連携技から、物語と戦闘を結び付ける設計を学べる。",
+          "source_url": "https://www.nintendo.co.jp/wii/vc/vc_chr/vc_chr_01.html",
+          "source_title": "VC クロノ・トリガー | 任天堂"
+        }
+      ],
+      "hardware": []
+    },
+    {
+      "year": 1996,
+      "games": [
+        {
+          "title": "スーパーマリオ64",
+          "platform": "NINTENDO 64",
+          "region": "日本",
+          "release_note": "1996年6月23日発売・NINTENDO 64原作。",
+          "reason": "アナログ操作、カメラ、立体空間の探索をまとめて設計する3Dアクションの重要例。",
+          "source_url": "https://www.nintendo.com/jp/character/mario/history/64/index.html",
+          "source_title": "スーパーマリオ64 | ヒストリー | マリオポータル | Nintendo"
+        },
+        {
+          "title": "ポケットモンスター 赤・緑",
+          "platform": "ゲームボーイ",
+          "region": "日本",
+          "release_note": "1996年2月27日発売・ゲームボーイ原作。",
+          "reason": "収集・育成・交換・対戦をつなぎ、一人用の冒険を他人との遊びに広げる設計。",
+          "source_url": "https://www.pokemon.co.jp/game/other/gb-rg/",
+          "source_title": "ポケットモンスター 赤・緑｜ポケットモンスターオフィシャルサイト"
+        }
+      ],
+      "hardware": [
+        {
+          "name": "NINTENDO 64",
+          "region": "日本",
+          "release_note": "1996年発売。",
+          "significance": "3D空間での移動やカメラ操作、同じ画面を使った多人数プレイを考える基盤。",
+          "source_url": "https://www.nintendo.co.jp/corporate/en/history/index.html",
+          "source_title": "Corporate Information : Company History | Nintendo"
+        }
+      ]
+    },
+    {
+      "year": 1997,
+      "games": [
+        {
+          "title": "ファイナルファンタジーVII",
+          "platform": "PlayStation",
+          "region": "日本",
+          "release_note": "1997年1月31日発売・PS原作。同年のインターナショナル版や後年のリメイクとは区別。",
+          "reason": "3Dキャラクター、背景画像、映像演出を組み合わせたCD世代のRPG表現を見られる。",
+          "source_url": "https://jp.finalfantasy.com/titles/finalfantasy7/",
+          "source_title": "ファイナルファンタジーVII | FINAL FANTASY PORTAL SITE"
+        },
+        {
+          "title": "グランツーリスモ",
+          "platform": "PlayStation",
+          "region": "日本",
+          "release_note": "1997年12月23日発売・初代PS原作。",
+          "reason": "運転、車の調整、収集を一つの循環にした、実車を扱うレースゲームの代表例。",
+          "source_url": "https://www.gran-turismo.com/jp/products/gt/",
+          "source_title": "Gran Turismo - グランツーリスモ・ドットコム"
+        }
+      ],
+      "hardware": []
+    },
+    {
+      "year": 1998,
+      "games": [
+        {
+          "title": "ゼルダの伝説 時のオカリナ",
+          "platform": "NINTENDO 64",
+          "region": "日本",
+          "release_note": "1998年11月21日発売・NINTENDO 64原作。",
+          "reason": "注目する相手を定める操作と立体的な謎解きから、3Dで情報を伝える方法を学べる。",
+          "source_url": "https://www.nintendo.com/jp/character/zelda/history/index.html?lang=ja",
+          "source_title": "History（ヒストリー） | ゼルダの伝説40周年 | 任天堂"
+        },
+        {
+          "title": "METAL GEAR SOLID",
+          "platform": "PlayStation",
+          "region": "日本",
+          "release_note": "1998年発売・PS原作。後年の公式シリーズ紹介で発売年を確認。",
+          "reason": "敵に見つからない行動と映画的な演出を結び付けた、ステルスゲームの重要例。",
+          "source_url": "https://www.konami.com/mg/archive/mga/japanese/introduction.html",
+          "source_title": "METAL GEAR ACID | 作品紹介・メタルギアソリッドについて | KONAMI"
+        }
+      ],
+      "hardware": [
+        {
+          "name": "ドリームキャスト",
+          "region": "日本",
+          "release_note": "1998年11月27日発売。",
+          "significance": "モデムの標準搭載により、ゲーム機を通信やオンライン協力プレイの端末へ広げた。",
+          "source_url": "https://www.sega.jp/history/hard/dreamcast/",
+          "source_title": "ドリームキャスト ｜セガ SEGA"
+        }
+      ]
+    },
+    {
+      "year": 1999,
+      "games": [
+        {
+          "title": "ニンテンドウオールスター！ 大乱闘スマッシュブラザーズ",
+          "platform": "NINTENDO 64",
+          "region": "日本",
+          "release_note": "1999年1月21日発売・NINTENDO 64原作。引用元はVC版紹介。",
+          "reason": "体力を削り切る方式に代えて場外へ飛ばす勝敗を採用し、多人数の対戦を読みやすくした。",
+          "source_url": "https://www.nintendo.co.jp/wii/vc/vc_dsb/vc_dsb_01.html",
+          "source_title": "VC ニンテンドウオールスター！ 大乱闘スマッシュブラザーズ | 任天堂"
+        },
+        {
+          "title": "シェンムー 一章 横須賀",
+          "platform": "ドリームキャスト",
+          "region": "日本",
+          "release_note": "1999年12月発売・ドリームキャスト原作。",
+          "reason": "生活する街の細部と時間の進行から、3D世界に日常を作り込む方向性を見られる。",
+          "source_url": "https://www.sega.jp/history/companyTimeline/",
+          "source_title": "セガの歴史 1960-2020 | セガ"
+        }
+      ],
+      "hardware": []
+    },
+    {
+      "year": 2000,
+      "games": [
+        {
+          "title": "ファイナルファンタジーIX",
+          "platform": "PlayStation",
+          "region": "日本",
+          "release_note": "2000年7月7日発売・PS原作。",
+          "reason": "キャラクターの造形、背景、音楽をそろえ、一つの世界観を作る演出の例。",
+          "source_url": "https://jp.finalfantasy.com/titles/finalfantasy9/",
+          "source_title": "ファイナルファンタジーIX | FINAL FANTASY PORTAL SITE"
+        },
+        {
+          "title": "ファンタシースターオンライン",
+          "platform": "ドリームキャスト",
+          "region": "日本",
+          "release_note": "2000年12月21日発売・ドリームキャスト原作。",
+          "reason": "家庭用ゲーム機でのオンライン協力とアイテム収集を結び付けた重要例。",
+          "source_url": "https://phantasystar.sega.jp/20th/history/",
+          "source_title": "PHANTASY STAR 20th ANNIVERSARY | HISTORY"
+        }
+      ],
+      "hardware": [
+        {
+          "name": "PlayStation 2",
+          "region": "日本",
+          "release_note": "2000年3月4日発売。",
+          "significance": "DVDの容量と再生機能、3D表現の強化を背景に、長編ゲームと映像の接点を広げた。",
+          "source_url": "https://www.playstation.com/ja-jp/playstation-history/2000-ps2-psp/",
+          "source_title": "2000年 PlayStation 2 - PSP | PlayStation 歴史年表 (日本)"
+        }
+      ]
+    },
+    {
+      "year": 2001,
+      "games": [
+        {
+          "title": "ファイナルファンタジーX",
+          "platform": "PlayStation 2",
+          "region": "日本",
+          "release_note": "2001年7月19日発売・PS2原作。",
+          "reason": "音声による会話、人物の演技、場面演出を組み合わせたPS2世代の物語表現を見られる。",
+          "source_url": "https://jp.finalfantasy.com/titles/finalfantasy10/",
+          "source_title": "ファイナルファンタジーX | FINAL FANTASY PORTAL SITE"
+        },
+        {
+          "title": "Halo: Combat Evolved",
+          "platform": "Xbox",
+          "region": "北米",
+          "release_note": "2001年11月15日の北米Xbox発売時に登場。日本のXbox発売年（2002年）とは区別。",
+          "reason": "家庭用コントローラーによるFPSと、協力・対戦を含む遊びのまとまりを考える題材。",
+          "source_url": "https://www.halowaypoint.com/news/celebrating-20-years-of-halo",
+          "source_title": "Celebrating 20 Years of Halo | Halo - Official Site"
+        }
+      ],
+      "hardware": [
+        {
+          "name": "ゲームボーイアドバンス",
+          "region": "日本",
+          "release_note": "2001年発売。",
+          "significance": "携帯機での2D表現を押し広げ、アクションからRPGまで幅広く展開した。",
+          "source_url": "https://www.nintendo.co.jp/corporate/en/history/index.html",
+          "source_title": "Corporate Information : Company History | Nintendo"
+        },
+        {
+          "name": "ニンテンドーゲームキューブ",
+          "region": "日本",
+          "release_note": "2001年発売。",
+          "significance": "3Dアクションの表現と操作を発展させた任天堂の据置機。",
+          "source_url": "https://www.nintendo.co.jp/corporate/en/history/index.html",
+          "source_title": "Corporate Information : Company History | Nintendo"
+        }
+      ]
+    },
+    {
+      "year": 2002,
+      "games": [
+        {
+          "title": "ゼルダの伝説 風のタクト",
+          "platform": "ニンテンドーゲームキューブ",
+          "region": "日本",
+          "release_note": "2002年12月13日発売・ゲームキューブ原作。Wii UのHD版とは区別。",
+          "reason": "輪郭と色彩を整理した3D表現で、写実以外の映像と冒険の魅力を示す。",
+          "source_url": "https://www.nintendo.com/jp/character/zelda/history/index.html?lang=ja",
+          "source_title": "History（ヒストリー） | ゼルダの伝説40周年 | 任天堂"
+        },
+        {
+          "title": "スーパーマリオサンシャイン",
+          "platform": "ニンテンドーゲームキューブ",
+          "region": "日本",
+          "release_note": "2002年7月19日発売・ゲームキューブ原作。引用元は後年の復刻版紹介。",
+          "reason": "放水の道具を移動と戦闘の両方に使い、一つの仕組みから遊びを広げる設計。",
+          "source_url": "https://www.nintendo.com/jp/switch/avp3a/detail02/index.html",
+          "source_title": "スーパーマリオ ３Ｄコレクション：スーパーマリオサンシャイン | Nintendo Switch | 任天堂"
+        }
+      ],
+      "hardware": [
+        {
+          "name": "Xbox",
+          "region": "日本",
+          "release_note": "2002年2月に日本で発売。北米初発売の2001年とは別に記録。",
+          "significance": "マイクロソフトの家庭用ゲーム機事業が日本でも始まり、据置機市場の選択肢が広がった。",
+          "source_url": "https://news.xbox.com/ja-jp/2022/03/01/xbox-wire-japan-launch/",
+          "source_title": "Xbox 発売 20 周年を記念して、Xbox Wire Japan を公開 - Xbox Wire Japan"
+        }
+      ]
+    },
+    {
+      "year": 2003,
+      "games": [
+        {
+          "title": "メイド イン ワリオ",
+          "platform": "ゲームボーイアドバンス",
+          "region": "日本",
+          "release_note": "2003年3月21日発売・GBA原作。同年のゲームキューブ作品『あつまれ!!』とは区別。",
+          "reason": "短い指示と数秒の操作でルールを理解させる、説明と入力の設計を学べる。",
+          "source_url": "https://www.nintendo.co.jp/wii/rodj/history/index.html",
+          "source_title": "おどる メイド イン ワリオ | シリーズの歴史 | 任天堂"
+        },
+        {
+          "title": "Call of Duty",
+          "platform": "PC（Windows）",
+          "region": "海外初出",
+          "release_note": "2003年10月29日発売・PC原作。Steamの原作発売日表記を採用。日本語版や後年の家庭用版とは区別。",
+          "reason": "仲間の兵士や周囲の出来事によって、戦場の中にいる感覚を作るFPS演出の例。",
+          "source_url": "https://store.steampowered.com/app/2620/Call_of_Duty/",
+          "source_title": "Call of Duty® (2003) on Steam"
+        }
+      ],
+      "hardware": []
+    },
+    {
+      "year": 2004,
+      "games": [
+        {
+          "title": "Half-Life 2",
+          "platform": "PC（Windows）",
+          "region": "海外初出",
+          "release_note": "2004年11月16日発売・PC原作。ValveのSteam製品ページの発売日表記を採用。",
+          "reason": "物理演算を見た目だけでなく戦闘や謎解きに使い、世界への干渉を遊びにしている。",
+          "source_url": "https://store.steampowered.com/app/220/HalfLife_2/",
+          "source_title": "Half-Life 2 on Steam"
+        },
+        {
+          "title": "モンスターハンター",
+          "platform": "PlayStation 2",
+          "region": "日本",
+          "release_note": "2004年3月11日発売・PS2原作。携帯機の『ポータブル』シリーズとは区別。",
+          "reason": "協力して狩り、素材を集め、装備を作って次の狩りに進む循環の代表例。",
+          "source_url": "https://www.capcom.co.jp/ir/news/pdf/041101a.pdf",
+          "source_title": "『モンスターハンター』がGAME AWARDS 2003-2004で最優秀賞を受賞 | カプコン"
+        }
+      ],
+      "hardware": [
+        {
+          "name": "ニンテンドーDS",
+          "region": "日本",
+          "release_note": "2004年12月2日発売。北米の11月21日とは区別。",
+          "significance": "二画面・タッチ・音声入力によって、遊び方を入力方法から変える方向を示した。",
+          "source_url": "https://www.nintendo.co.jp/ds/series/ds/index.html",
+          "source_title": "ニンテンドーDS | 任天堂"
+        },
+        {
+          "name": "PSP（プレイステーション・ポータブル）",
+          "region": "日本",
+          "release_note": "2004年12月12日発売・初代PSP-1000。当時のSCE公式発表を参照。",
+          "significance": "3Dゲーム、無線通信、映像・音楽再生を携帯できる一台にまとめた。",
+          "source_url": "https://sonyinteractive.com/uploads/sites/5/2023/02/041027a.pdf",
+          "source_title": "新携帯型ゲーム機 PSP「プレイステーション・ポータブル」（PSP-1000）発売 | SCE（2004年10月27日）"
+        }
+      ]
+    },
+    {
+      "year": 2005,
+      "games": [
+        {
+          "title": "バイオハザード4",
+          "platform": "ニンテンドーゲームキューブ／PlayStation 2",
+          "region": "日本",
+          "release_note": "ゲームキューブ原作は2005年1月27日、PS2移植版は同年12月1日発売。2023年のRE:4とは区別。",
+          "reason": "肩越しの視点で照準と敵の距離を把握させ、恐怖と戦闘を組み直した作品。",
+          "source_url": "https://www.capcom.co.jp/ir/news/pdf/060208a.pdf",
+          "source_title": "『バイオハザード4』全世界で出荷本数300万本を突破 | カプコン（2006年2月8日）"
+        },
+        {
+          "title": "ワンダと巨像",
+          "platform": "PlayStation 2",
+          "region": "日本",
+          "release_note": "2005年10月27日発売・PS2原作。後年のHD版・PS4版とは区別。",
+          "reason": "敵そのものを登る地形にし、探索と謎解きと戦闘を一つの対象に凝縮した。",
+          "source_url": "https://blog.ja.playstation.com/?p=256309",
+          "source_title": "PlayStationの懐かしのゲームサウンドトラックをApple Musicなどサブスクリプションサービスで順次配信開始！ | PlayStation.Blog"
+        }
+      ],
+      "hardware": [
+        {
+          "name": "Xbox 360",
+          "region": "日本",
+          "release_note": "2005年12月10日発売。北米11月22日・欧州12月2日とは区別。",
+          "significance": "HD世代の据置機として、オンラインサービスと家庭用ゲームの結び付きを強めた。",
+          "source_url": "https://news.microsoft.com/source/2005/09/14/the-countdown-begins-xbox-360-to-hit-store-shelves-nov-22-in-north-america-dec-2-in-europe-and-dec-10-in-japan/",
+          "source_title": "The Countdown Begins: Xbox 360 to Hit Store Shelves Nov. 22 in North America, Dec. 2 in Europe and Dec. 10 in Japan | Microsoft"
+        }
+      ]
+    },
+    {
+      "year": 2006,
+      "games": [
+        {
+          "title": "大神",
+          "platform": "PlayStation 2",
+          "region": "日本",
+          "release_note": "2006年4月20日発売・PS2原作。後年のWii版・絶景版とは区別。",
+          "reason": "筆で描く操作と絵画的な画面を結び付け、美術とゲームの仕組みをそろえた例。",
+          "source_url": "https://www.capcom.co.jp/ir/news/html/090903.html",
+          "source_title": "『大神』および『モンスターハンターポータブル』の開発チームがCEDEC AWARDSで最優秀賞を受賞 | カプコン"
+        },
+        {
+          "title": "デッドライジング",
+          "platform": "Xbox 360",
+          "region": "日本",
+          "release_note": "2006年9月28日発売・Xbox 360原作。北米は同年8月に先行発売。",
+          "reason": "群衆の多さ、残り時間、救助と寄り道の選択を組み合わせた箱庭の設計を見られる。",
+          "source_url": "https://www.capcom.co.jp/ir/news/pdf/070424.pdf",
+          "source_title": "『モンスターハンター2』『デッドライジング』『大神』がFAMITSU AWARDS 2006で優秀賞を受賞 | カプコン"
+        },
+        {
+          "title": "Wii Sports",
+          "platform": "Wii",
+          "region": "日本",
+          "release_note": "2006年12月2日発売。Wii Sports Resortとは別作品。",
+          "reason": "体を動かす身振りと画面内の動きを結び付け、入力機器から遊びを変えた作品。",
+          "source_url": "https://www.nintendo.co.jp/wii/rspj/index_04.html",
+          "source_title": "Wii Sports - Wii | 任天堂"
+        }
+      ],
+      "hardware": [
+        {
+          "name": "PlayStation 3",
+          "region": "日本",
+          "release_note": "2006年11月11日発売。欧州の2007年発売とは区別。",
+          "significance": "Blu-ray、HD映像、ネットワークによる配信とサービスを組み合わせた据置機。",
+          "source_url": "https://www.playstation.com/ja-jp/playstation-history/2007-ps3-ps-vita/",
+          "source_title": "2007年 PlayStation 3 - PlayStation Vita | PlayStation歴史年表 (日本)"
+        },
+        {
+          "name": "Wii",
+          "region": "日本",
+          "release_note": "2006年12月2日発売・初代本体。北米の11月19日とは区別。",
+          "significance": "リモコンを振る・指し示す入力を広め、ゲームに触れる層と身体的な遊びを広げた。",
+          "source_url": "https://www.nintendo.co.jp/wii/console/index.html",
+          "source_title": "Wii | 本体 | 任天堂"
+        }
+      ]
+    },
+    {
+      "year": 2007,
+      "games": [
+        {
+          "title": "Portal",
+          "platform": "PC（Windows）",
+          "region": "海外初出",
+          "release_note": "2007年10月10日発売・PC原作。ValveのSteam製品ページの発売日表記を採用。家庭用版の日程とは区別。",
+          "reason": "空間をつなぐ一つの道具から謎を増やし、学習の順序と物語の伝え方を組み立てた。",
+          "source_url": "https://store.steampowered.com/app/400/Portal/",
+          "source_title": "Portal on Steam"
+        },
+        {
+          "title": "スーパーマリオギャラクシー",
+          "platform": "Wii",
+          "region": "日本",
+          "release_note": "2007年11月1日発売・Wii原作。引用元は後年の復刻版紹介。",
+          "reason": "小さな惑星と変わる重力によって、3D空間の見せ方と移動の発想を広げた。",
+          "source_url": "https://www.nintendo.com/jp/switch/avp3a/detail03/index.html",
+          "source_title": "スーパーマリオ ３Ｄコレクション：スーパーマリオギャラクシー | Nintendo Switch | 任天堂"
+        }
+      ],
+      "hardware": []
+    },
+    {
+      "year": 2008,
+      "games": [
+        {
+          "title": "モンスターハンターポータブル 2nd G",
+          "platform": "PSP",
+          "region": "日本",
+          "release_note": "2008-03-27発売・配信。",
+          "reason": "携帯機を持ち寄る協力プレイと、狩猟・装備更新の循環を学べる。",
+          "source_url": "https://www.capcom.co.jp/ir/news/html/100331a.html",
+          "source_title": "カプコン『モンスターハンターポータブル 2nd G』国内400万本出荷のプレスリリース"
+        },
+        {
+          "title": "World of Goo",
+          "platform": "PC（Steam版）",
+          "region": "国際配信（Steam表示日基準）",
+          "release_note": "2008-10-13配信。",
+          "reason": "物理演算と構造物づくりを結び付けた、小規模開発のパズル設計を学べる。",
+          "source_url": "https://store.steampowered.com/app/22000/World_of_Goo/",
+          "source_title": "World of Goo on Steam"
+        }
+      ],
+      "hardware": [
+        {
+          "name": "ニンテンドーDSi",
+          "region": "日本",
+          "release_note": "2008年発売。任天堂の沿革の記載年を採用。",
+          "significance": "カメラとダウンロードソフトに対応したDS系の発展。",
+          "source_url": "https://www.nintendo.co.jp/corporate/history/index.html",
+          "source_title": "会社情報：会社の沿革 | 任天堂"
+        }
+      ]
+    },
+    {
+      "year": 2009,
+      "games": [
+        {
+          "title": "Demon's Souls（デモンズソウル）",
+          "platform": "PS3",
+          "region": "日本",
+          "release_note": "2009-02-05発売・配信。",
+          "reason": "失敗から学ぶ攻略と、探索中にリスクを引き受けるアクションRPGの設計を学べる。",
+          "source_url": "https://www.fromsoftware.jp/jp/detail.html?csm=070",
+          "source_title": "Demon’s Souls | 製品情報 | FromSoftware"
+        },
+        {
+          "title": "Machinarium",
+          "platform": "PC（Steam版）",
+          "region": "国際配信（Steam表示日基準）",
+          "release_note": "2009-10-16配信。",
+          "reason": "手描きの背景と動作による、言葉に頼らない謎解きと物語表現を学べる。",
+          "source_url": "https://store.steampowered.com/app/40700/Machinarium/",
+          "source_title": "Machinarium on Steam"
+        }
+      ],
+      "hardware": []
+    },
+    {
+      "year": 2010,
+      "games": [
+        {
+          "title": "ゼノブレイド",
+          "platform": "Wii",
+          "region": "日本",
+          "release_note": "2010-06-10発売・配信。この対応機種の原作を掲載。後年の移植・リマスターとは区別。",
+          "reason": "広大なフィールドの探索と、位置取り・仲間の連携を使う戦闘を学べる。",
+          "source_url": "https://www.nintendo.co.jp/wii/sx4j/index.html",
+          "source_title": "Xenoblade ゼノブレイド"
+        },
+        {
+          "title": "Super Meat Boy",
+          "platform": "PC（Steam版）",
+          "region": "国際配信（Steam表示日基準）",
+          "release_note": "2010-11-30配信。",
+          "reason": "精密な操作と短いリトライを組み合わせた、難易度とテンポの設計を学べる。",
+          "source_url": "https://store.steampowered.com/app/40800/Super_Meat_Boy/",
+          "source_title": "Super Meat Boy on Steam"
+        }
+      ],
+      "hardware": []
+    },
+    {
+      "year": 2011,
+      "games": [
+        {
+          "title": "ゼルダの伝説 スカイウォードソード",
+          "platform": "Wii",
+          "region": "日本",
+          "release_note": "2011-11-23発売・配信。この対応機種の原作を掲載。後年の移植・リマスターとは区別。",
+          "reason": "剣の振り方を直接操作へ結び付ける、モーション入力の使い方を学べる。",
+          "source_url": "https://www.nintendo.com/jp/character/zelda/history/index.html",
+          "source_title": "History（ヒストリー） | ゼルダの伝説40周年"
+        },
+        {
+          "title": "Portal 2",
+          "platform": "PC（Steam版）",
+          "region": "国際配信（Steam表示日基準）",
+          "release_note": "2011-04-18配信。",
+          "reason": "空間パズルの段階的な導入と、二人協力による役割分担を学べる。",
+          "source_url": "https://store.steampowered.com/app/620/Portal_2/",
+          "source_title": "Portal 2 on Steam"
+        }
+      ],
+      "hardware": [
+        {
+          "name": "ニンテンドー3DS",
+          "region": "日本",
+          "release_note": "2011年発売。任天堂の沿革の記載年を採用。",
+          "significance": "裸眼立体視を取り入れた携帯ゲーム機。",
+          "source_url": "https://www.nintendo.co.jp/corporate/history/index.html",
+          "source_title": "会社情報：会社の沿革 | 任天堂"
+        },
+        {
+          "name": "PlayStation Vita",
+          "region": "日本",
+          "release_note": "2011-12-17発売。海外の主な発売年である2012年と区別。",
+          "significance": "二本のアナログスティックやタッチ入力を持つ携帯機。",
+          "source_url": "https://www.playstation.com/en-us/playstation-history/2007-ps3-ps-vita/",
+          "source_title": "2007 PlayStation 3 - PlayStation Vita | PlayStation History"
+        }
+      ]
+    },
+    {
+      "year": 2012,
+      "games": [
+        {
+          "title": "風ノ旅ビト（Journey）",
+          "platform": "PS3",
+          "region": "日本",
+          "release_note": "2012-03-15発売・配信。この対応機種の原作を掲載。後年の移植・リマスターとは区別。",
+          "reason": "言葉を使わない誘導と、ゆるやかな他者との出会いを通じた体験設計を学べる。",
+          "source_url": "https://sonyinteractive.com/jp/press-releases/2012/121203b/",
+          "source_title": "「PlayStation Awards 2012」受賞タイトルのご案内"
+        },
+        {
+          "title": "FTL: Faster Than Light",
+          "platform": "PC（Steam版）",
+          "region": "国際配信（Steam表示日基準）",
+          "release_note": "2012-09-14配信。",
+          "reason": "航路・乗員・船内設備をめぐる判断が、周回ごとの物語を生む構造を学べる。",
+          "source_url": "https://store.steampowered.com/app/212680/FTL_Faster_Than_Light/",
+          "source_title": "FTL: Faster Than Light on Steam"
+        }
+      ],
+      "hardware": [
+        {
+          "name": "Wii U",
+          "region": "日本",
+          "release_note": "2012年発売。任天堂の沿革の記載年を採用。",
+          "significance": "画面を備えたGamePadを使い、テレビとの二画面体験を作る。",
+          "source_url": "https://www.nintendo.co.jp/corporate/history/index.html",
+          "source_title": "会社情報：会社の沿革 | 任天堂"
+        }
+      ]
+    },
+    {
+      "year": 2013,
+      "games": [
+        {
+          "title": "スーパーマリオ 3Dワールド",
+          "platform": "Wii U",
+          "region": "日本",
+          "release_note": "2013-11-21発売・配信。この対応機種の原作を掲載。後年の移植・リマスターとは区別。",
+          "reason": "立体空間の課題を短いコースへまとめ、協力と競争を共存させる設計を学べる。",
+          "source_url": "https://www.nintendo.com/jp/character/mario/history/3d_world/index.html",
+          "source_title": "スーパーマリオ 3Dワールド | ヒストリー | マリオポータル"
+        },
+        {
+          "title": "Papers, Please",
+          "platform": "PC（Steam版）",
+          "region": "国際配信（Steam表示日基準）",
+          "release_note": "2013-08-08配信。",
+          "reason": "書類審査という操作を、時間制限・生活費・倫理的判断につなげる設計を学べる。",
+          "source_url": "https://store.steampowered.com/app/239030/Papers_Please/",
+          "source_title": "Papers, Please on Steam"
+        }
+      ],
+      "hardware": [
+        {
+          "name": "PlayStation 4（海外発売）",
+          "region": "北米・欧州",
+          "release_note": "北米2013-11-15、欧州2013-11-29発売。日本発売は2014年。",
+          "significance": "据置機の世代交代を示す、海外での初発売年。",
+          "source_url": "https://www.playstation.com/en-us/playstation-history/2013-ps4-ps-vr/",
+          "source_title": "2013 PlayStation 4 - PS VR | PlayStation History"
+        },
+        {
+          "name": "Xbox One（海外発売）",
+          "region": "米国など初期13市場",
+          "release_note": "2013-11-22発売。日本は初期13市場に含まれない。",
+          "significance": "Microsoftの据置ゲーム機が次世代へ移行。",
+          "source_url": "https://news.xbox.com/en-us/2013/11/23/xbox-one-biggest-launch-in-xbox-history/",
+          "source_title": "Xbox One is Biggest Launch in Xbox History | Xbox Wire"
+        }
+      ]
+    },
+    {
+      "year": 2014,
+      "games": [
+        {
+          "title": "マリオカート8",
+          "platform": "Wii U",
+          "region": "日本",
+          "release_note": "2014-05-29発売・配信。この対応機種の原作を掲載。後年の移植・リマスターとは区別。",
+          "reason": "反重力による立体的なコースと、対戦の読み合いを作るアイテム設計を学べる。",
+          "source_url": "https://www.nintendo.com/jp/hardware/amiibo/game/amkj/index.html",
+          "source_title": "amiibo対応ソフト マリオカート8"
+        },
+        {
+          "title": "This War of Mine",
+          "platform": "PC（Steam版）",
+          "region": "国際配信（Steam表示日基準）",
+          "release_note": "2014-11-14配信。",
+          "reason": "戦闘員以外の視点から、資源管理と生存の選択を描く方法を学べる。",
+          "source_url": "https://store.steampowered.com/app/282070/This_War_of_Mine/",
+          "source_title": "This War of Mine on Steam"
+        }
+      ],
+      "hardware": [
+        {
+          "name": "Newニンテンドー3DS / Newニンテンドー3DS LL",
+          "region": "日本",
+          "release_note": "2014年発売。任天堂の沿革の記載年を採用。",
+          "significance": "入力と処理性能などを拡張した3DSの改良機。",
+          "source_url": "https://www.nintendo.co.jp/corporate/history/index.html",
+          "source_title": "会社情報：会社の沿革 | 任天堂"
+        },
+        {
+          "name": "PlayStation 4（日本発売）",
+          "region": "日本",
+          "release_note": "2014-02-22発売。海外初発売の2013年と区別。",
+          "significance": "PS4が日本でも発売され、同世代の開発環境が広がる。",
+          "source_url": "https://www.playstation.com/en-us/playstation-history/2013-ps4-ps-vr/",
+          "source_title": "2013 PlayStation 4 - PS VR | PlayStation History"
+        }
+      ]
+    },
+    {
+      "year": 2015,
+      "games": [
+        {
+          "title": "Splatoon（スプラトゥーン）",
+          "platform": "Wii U",
+          "region": "日本",
+          "release_note": "2015-05-28発売・配信。",
+          "reason": "塗った面積を目的にし、移動・攻撃・陣地確保を同じ仕組みで結ぶ設計を学べる。",
+          "source_url": "https://www.nintendo.com/jp/topics/article/e2378f94-2149-11e6-8360-063b7ac45a6d",
+          "source_title": "『Splatoon』発売1周年！ 新展開が明らかに！"
+        },
+        {
+          "title": "UNDERTALE",
+          "platform": "PC（Steam版）",
+          "region": "国際配信（Steam表示日基準）",
+          "release_note": "2015-09-15配信。",
+          "reason": "戦う・見逃すという選択を、戦闘システムと物語の両方へ結び付ける設計を学べる。",
+          "source_url": "https://store.steampowered.com/app/391540/Undertale/",
+          "source_title": "Undertale on Steam"
+        }
+      ],
+      "hardware": []
+    },
+    {
+      "year": 2016,
+      "games": [
+        {
+          "title": "Pokémon GO",
+          "platform": "iOS・Android",
+          "region": "日本",
+          "release_note": "2016-07-22発売・配信。",
+          "reason": "位置情報を現実の移動と収集の遊びへつなげる、モバイルゲームの構造を学べる。",
+          "source_url": "https://pokemongo.com/ja/news/launch-jp",
+          "source_title": "Pokémon GO、いよいよ日本で配信開始！"
+        },
+        {
+          "title": "Stardew Valley",
+          "platform": "PC（Steam版）",
+          "region": "国際配信（Steam表示日基準）",
+          "release_note": "2016-02-26配信。",
+          "reason": "農作業・交流・探索を日々の循環へまとめ、自分のペースを作る設計を学べる。",
+          "source_url": "https://store.steampowered.com/app/413150/Stardew_Valley/",
+          "source_title": "Stardew Valley on Steam"
+        }
+      ],
+      "hardware": [
+        {
+          "name": "PlayStation VR",
+          "region": "国際発売",
+          "release_note": "2016-10-13発売。",
+          "significance": "PS4に接続するヘッドセットで、家庭用のVR体験を展開。",
+          "source_url": "https://www.playstation.com/en-us/playstation-history/2013-ps4-ps-vr/",
+          "source_title": "2013 PlayStation 4 - PS VR | PlayStation History"
+        },
+        {
+          "name": "PlayStation 4 Pro",
+          "region": "国際発売",
+          "release_note": "2016年11月発売。",
+          "significance": "同じPS4世代で描画性能を高める上位モデル。",
+          "source_url": "https://www.playstation.com/en-us/playstation-history/2013-ps4-ps-vr/",
+          "source_title": "2013 PlayStation 4 - PS VR | PlayStation History"
+        }
+      ]
+    },
+    {
+      "year": 2017,
+      "games": [
+        {
+          "title": "ゼルダの伝説 ブレス オブ ザ ワイルド",
+          "platform": "Nintendo Switch・Wii U",
+          "region": "日本",
+          "release_note": "2017-03-03発売・配信。",
+          "reason": "物理・天候・地形を組み合わせ、プレイヤーの工夫で課題を解く構造を学べる。",
+          "source_url": "https://www.nintendo.com/jp/character/zelda/history/index.html",
+          "source_title": "History（ヒストリー） | ゼルダの伝説40周年"
+        },
+        {
+          "title": "Hollow Knight",
+          "platform": "PC（Steam版）",
+          "region": "国際配信（Steam表示日基準）",
+          "release_note": "2017-02-24配信。",
+          "reason": "つながった地形と能力獲得によって、探索範囲が広がる構成を学べる。",
+          "source_url": "https://store.steampowered.com/app/367520/Hollow_Knight/",
+          "source_title": "Hollow Knight on Steam"
+        }
+      ],
+      "hardware": [
+        {
+          "name": "Nintendo Switch",
+          "region": "日本",
+          "release_note": "2017年発売。任天堂の沿革の記載年を採用。",
+          "significance": "テレビでのプレイと携帯を、一つの本体で切り替える構成。",
+          "source_url": "https://www.nintendo.co.jp/corporate/history/index.html",
+          "source_title": "会社情報：会社の沿革 | 任天堂"
+        }
+      ]
+    },
+    {
+      "year": 2018,
+      "games": [
+        {
+          "title": "大乱闘スマッシュブラザーズ SPECIAL",
+          "platform": "Nintendo Switch",
+          "region": "日本",
+          "release_note": "2018-12-07発売・配信。",
+          "reason": "多数のキャラクターを共通操作で動かし、対戦ルールの幅を作る設計を学べる。",
+          "source_url": "https://www.nintendo.com/jp/hardware/amiibo/game/aaaba/index.html",
+          "source_title": "amiibo対応ソフト 大乱闘スマッシュブラザーズ SPECIAL"
+        },
+        {
+          "title": "Celeste",
+          "platform": "PC（Steam版）",
+          "region": "国際配信（Steam表示日基準）",
+          "release_note": "2018-01-25配信。",
+          "reason": "少ない基本操作から多様な課題を作り、再挑戦を促すステージ設計を学べる。",
+          "source_url": "https://store.steampowered.com/app/504230/Celeste/",
+          "source_title": "Celeste on Steam"
+        }
+      ],
+      "hardware": []
+    },
+    {
+      "year": 2019,
+      "games": [
+        {
+          "title": "ファイアーエムブレム 風花雪月",
+          "platform": "Nintendo Switch",
+          "region": "日本",
+          "release_note": "2019-07-26発売・配信。",
+          "reason": "育成・交流と戦術マップを結び付け、仲間への関心を戦闘へ反映する設計を学べる。",
+          "source_url": "https://www.nintendo.com/jp/switch/anvya/products/soft.html",
+          "source_title": "ファイアーエムブレム 風花雪月 : 商品情報"
+        },
+        {
+          "title": "Baba Is You",
+          "platform": "PC（Steam版）",
+          "region": "国際配信（Steam表示日基準）",
+          "release_note": "2019-03-13配信。",
+          "reason": "ルールを表す単語自体を動かす、仕組みの書き換えを遊びにする発想を学べる。",
+          "source_url": "https://store.steampowered.com/app/736260/Baba_Is_You/",
+          "source_title": "Baba Is You on Steam"
+        }
+      ],
+      "hardware": [
+        {
+          "name": "Nintendo Switch Lite",
+          "region": "日本",
+          "release_note": "2019-09-20発売。初期カラーの発売日を採用。",
+          "significance": "携帯専用に構成を絞ったSwitchの別モデル。",
+          "source_url": "https://www.nintendo.com/jp/hardware/detail/switch-lite/index.html",
+          "source_title": "Nintendo Switch Lite | 任天堂"
+        }
+      ]
+    },
+    {
+      "year": 2020,
+      "games": [
+        {
+          "title": "あつまれ どうぶつの森",
+          "platform": "Nintendo Switch",
+          "region": "日本",
+          "release_note": "2020-03-20発売・配信。",
+          "reason": "現実の時間と島の暮らしを結び、制作・収集・共有へつなげる設計を学べる。",
+          "source_url": "https://www.nintendo.com/jp/switch/acbaa/index.html",
+          "source_title": "あつまれ どうぶつの森 | Nintendo Switch"
+        },
+        {
+          "title": "Hades",
+          "platform": "PC（正式版）",
+          "region": "国際配信（Steam表示日基準）",
+          "release_note": "2020-09-17配信。正式版の発売年を採用し、早期アクセス開始とは区別。",
+          "reason": "繰り返す攻略と人物の会話・物語を結び付け、周回を進展にする構成を学べる。",
+          "source_url": "https://store.steampowered.com/app/1145360/Hades/",
+          "source_title": "Hades on Steam"
+        }
+      ],
+      "hardware": [
+        {
+          "name": "PlayStation 5",
+          "region": "日本など先行発売地域",
+          "release_note": "2020-11-12発売。地域によって発売日が異なる。",
+          "significance": "SSDと新しい触覚入力などを組み合わせた据置機の世代交代。",
+          "source_url": "https://www.playstation.com/en-us/playstation-history/2020-ps5-ps-vr2/",
+          "source_title": "2020 PlayStation 5 - PS VR2 | PlayStation History"
+        },
+        {
+          "name": "Xbox Series X / Xbox Series S",
+          "region": "国際発売",
+          "release_note": "2020-11-10発売。",
+          "significance": "同じ世代に性能・構成の異なる二機種を用意し、互換性も重視。",
+          "source_url": "https://news.xbox.com/en-us/2020/11/10/power-your-dreams-xbox-series-x-and-xbox-series-s-available-now/",
+          "source_title": "Power Your Dreams: Xbox Series X and Xbox Series S Now Available Worldwide | Xbox Wire"
+        }
+      ]
+    },
+    {
+      "year": 2021,
+      "games": [
+        {
+          "title": "メトロイド ドレッド",
+          "platform": "Nintendo Switch",
+          "region": "日本",
+          "release_note": "2021-10-08発売・配信。",
+          "reason": "能力による探索範囲の拡張と、追跡される緊張感の組合せを学べる。",
+          "source_url": "https://www.nintendo.com/jp/switch/ayl8a/index.html",
+          "source_title": "メトロイド ドレッド | Nintendo Switch"
+        },
+        {
+          "title": "It Takes Two",
+          "platform": "PC（Steam版）",
+          "region": "国際配信（Steam表示日基準）",
+          "release_note": "2021-03-25配信。",
+          "reason": "二人に異なる機能を与え、協力する理由を場面ごとに変える設計を学べる。",
+          "source_url": "https://store.steampowered.com/app/1426210/It_Takes_Two/",
+          "source_title": "It Takes Two on Steam"
+        }
+      ],
+      "hardware": [
+        {
+          "name": "Nintendo Switch（有機ELモデル）",
+          "region": "日本",
+          "release_note": "2021-10-08発売。",
+          "significance": "有機EL画面とスタンドなど、携帯・テーブル利用の表示環境を改良。",
+          "source_url": "https://www.nintendo.com/jp/hardware/detail/switch-oled/index.html",
+          "source_title": "Nintendo Switch（有機ELモデル） | 任天堂"
+        }
+      ]
+    },
+    {
+      "year": 2022,
+      "games": [
+        {
+          "title": "ゼノブレイド3",
+          "platform": "Nintendo Switch",
+          "region": "日本",
+          "release_note": "2022-07-29発売・配信。",
+          "reason": "複数の仲間・クラス・連携を扱う、パーティ制RPGの戦闘と育成を学べる。",
+          "source_url": "https://www.nintendo.com/jp/switch/az3ha/index.html",
+          "source_title": "Xenoblade3（ゼノブレイド3） | Nintendo Switch"
+        },
+        {
+          "title": "ELDEN RING",
+          "platform": "PC（Steam版）",
+          "region": "国際配信（Steam表示日基準）",
+          "release_note": "2022-02-24配信。",
+          "reason": "広い世界の探索と手応えのある戦闘を、複数の攻略経路で結ぶ構成を学べる。",
+          "source_url": "https://store.steampowered.com/app/1245620/ELDEN_RING/",
+          "source_title": "ELDEN RING on Steam"
+        }
+      ],
+      "hardware": [
+        {
+          "name": "Steam Deck（日本出荷開始）",
+          "region": "日本・香港・韓国・台湾",
+          "release_note": "2022-12-17から出荷開始。地域ごとの販売展開を記載。",
+          "significance": "PCゲームを携帯型の本体で遊ぶ構成と、互換レイヤーを考える入口。",
+          "source_url": "https://komodo.jp/news/steamdeck-launch.html",
+          "source_title": "Steam Deck Shipping in Japan, Hong Kong, South Korea and Taiwan begins Dec 17 | KOMODO"
+        }
+      ]
+    },
+    {
+      "year": 2023,
+      "games": [
+        {
+          "title": "ゼルダの伝説 ティアーズ オブ ザ キングダム",
+          "platform": "Nintendo Switch",
+          "region": "日本",
+          "release_note": "2023-05-12発売・配信。",
+          "reason": "物を組み合わせる制作と物理的な相互作用を、探索や課題解決へ広げる設計を学べる。",
+          "source_url": "https://www.nintendo.com/jp/character/zelda/history/index.html",
+          "source_title": "History（ヒストリー） | ゼルダの伝説40周年"
+        },
+        {
+          "title": "Baldur's Gate 3",
+          "platform": "PC（正式版）",
+          "region": "国際配信（Steam表示日基準）",
+          "release_note": "2023-08-03配信。正式版の発売年を採用し、早期アクセス開始とは区別。",
+          "reason": "会話・戦術・環境との相互作用が、多様な解決法へつながるRPG設計を学べる。",
+          "source_url": "https://store.steampowered.com/app/1086940/Baldurs_Gate_3/",
+          "source_title": "Baldur's Gate 3 on Steam"
+        }
+      ],
+      "hardware": [
+        {
+          "name": "PlayStation VR2",
+          "region": "国際発売",
+          "release_note": "2023-02-22発売。",
+          "significance": "PS5に接続するVR機器として、視線追跡などの入力を扱う。",
+          "source_url": "https://www.playstation.com/en-us/playstation-history/2020-ps5-ps-vr2/",
+          "source_title": "2020 PlayStation 5 - PS VR2 | PlayStation History"
+        }
+      ]
+    },
+    {
+      "year": 2024,
+      "games": [
+        {
+          "title": "アストロボット",
+          "platform": "PS5",
+          "region": "日本",
+          "release_note": "2024-09-06発売・配信。",
+          "reason": "立体ステージの発見とコントローラーの触覚表現を結び付ける設計を学べる。",
+          "source_url": "https://blog.ja.playstation.com/2024/09/06/20240906-astro/comment-page-1/",
+          "source_title": "『アストロボット』本日9月6日発売！"
+        },
+        {
+          "title": "Balatro",
+          "platform": "PC（Steam版）",
+          "region": "国際配信（Steam表示日基準）",
+          "release_note": "2024-02-20配信。",
+          "reason": "既知のカード役へ効果の組合せを加え、相乗効果を発見させる設計を学べる。",
+          "source_url": "https://store.steampowered.com/app/2379780/Balatro/",
+          "source_title": "Balatro on Steam"
+        }
+      ],
+      "hardware": [
+        {
+          "name": "PlayStation 5 Pro",
+          "region": "国際発売",
+          "release_note": "2024-11-07発売。公式の発売当日記事で確認。",
+          "significance": "PS5世代の描画性能と画質を高める上位モデル。",
+          "source_url": "https://blog.ja.playstation.com/?p=259344",
+          "source_title": "PlayStation 5 Proのセットアップガイドを公開！ | PlayStation.Blog"
+        }
+      ]
+    },
+    {
+      "year": 2025,
+      "games": [
+        {
+          "title": "ドンキーコング バナンザ",
+          "platform": "Nintendo Switch 2",
+          "region": "日本",
+          "release_note": "2025-07-17発売・配信。",
+          "reason": "地形を壊す操作を探索と発見へ結び付ける、3Dアクションの設計を扱う。",
+          "source_url": "https://www.nintendo.com/jp/games/switch2/aaaca/products/soft.html",
+          "source_title": "ドンキーコング バナンザ : 商品情報"
+        },
+        {
+          "title": "Clair Obscur: Expedition 33",
+          "platform": "PC（Steam版）",
+          "region": "国際配信（Steam表示日基準）",
+          "release_note": "2025-04-24配信。",
+          "reason": "ターン制の選択へ回避・パリィなどの入力を組み合わせた戦闘表現を扱う。",
+          "source_url": "https://store.steampowered.com/app/1903340/Clair_Obscur_Expedition_33/",
+          "source_title": "Clair Obscur: Expedition 33 on Steam"
+        }
+      ],
+      "hardware": [
+        {
+          "name": "Nintendo Switch 2",
+          "region": "日本",
+          "release_note": "2025-06-05発売。現行の公式本体カタログで確認。",
+          "significance": "据置・携帯の切替を引き継ぎ、処理性能やコントローラーを更新。",
+          "source_url": "https://www.nintendo.com/jp/hardware/switch2/index.html",
+          "source_title": "Nintendo Switch 2 本体 | 任天堂"
+        }
+      ]
+    },
+    {
+      "year": 2026,
+      "games": [
+        {
+          "title": "ぽこ あ ポケモン",
+          "platform": "Nintendo Switch 2",
+          "region": "日本",
+          "release_note": "2026-03-05発売・配信。2026-10-30時点で発売済みの作品からの暫定選定。",
+          "reason": "生き物との交流と環境づくりを組み合わせる遊びを扱う、暫定選定。",
+          "source_url": "https://www.nintendo.com/jp/topics/article/03c14694-3e04-46b9-9d7a-c357281bd70c",
+          "source_title": "Nintendo Switch 2 ソフト『ぽこ あ ポケモン』は本日発売。"
+        },
+        {
+          "title": "バイオハザード レクイエム / Resident Evil Requiem",
+          "platform": "PC（Steam版）",
+          "region": "国際配信（Steam表示日基準）",
+          "release_note": "2026-02-26配信。2026-10-30時点で発売済みの作品からの暫定選定。",
+          "reason": "恐怖の演出と探索・戦闘の構成を考えるための暫定選定。",
+          "source_url": "https://store.steampowered.com/app/3764200/Resident_Evil_Requiem/",
+          "source_title": "Resident Evil Requiem on Steam"
+        }
+      ],
+      "hardware": []
+    }
+  ],
+  "sources": {
+    "https://www.computerhistory.org/timeline/graphics-games/": "Computer History Museum：Computer Space is released",
+    "https://americanhistory.si.edu/blog/2012/04/pong-atari-and-the-origins-of-the-home-video-game.html": "Smithsonian：Pong, Atari, and the origins of the home video game",
+    "https://americanhistory.si.edu/collections/object/nmah_1302004": "Smithsonian：Magnavox Odyssey Video Game Unit, 1972",
+    "https://www.arcade-museum.com/Videogame/space-race": "Museum of the Game：Space Race",
+    "https://www.arcade-museum.com/Videogame/tank": "Museum of the Game：Tank",
+    "https://www.taito.co.jp/70th/history": "タイトー公式：タイトーの歩み（1978年）",
+    "https://epoch.jp/company/toy-history.php": "エポック社公式：Toy History ～おもちゃの歴史～",
+    "https://www.arcade-museum.com/Videogame/breakout": "Museum of the Game：Breakout",
+    "https://www.museumofplay.org/blog/collection-documents-the-career-of-video-game-pioneer-jerry-lawson/": "The Strong：Collection Documents the Career of Video Game Pioneer Jerry Lawson",
+    "https://atari.com/pages/combat": "Atari公式：Combat",
+    "https://www.computerhistory.org/timeline/1977/": "Computer History Museum：Timeline of Computer History — 1977",
+    "https://www.nintendo.co.jp/corporate/history/index.html": "会社情報：会社の沿革 | 任天堂",
+    "https://galaga.com/ja/history/galaxian.php": "バンダイナムコ公式：ギャラガウェブ — ギャラクシアン",
+    "https://pacman.com/en/history/": "バンダイナムコ公式：PAC-MAN HISTORY",
+    "https://www.museum.uec.ac.jp/database/sf/sf100/s131.html": "電気通信大学 UECコミュニケーションミュージアム：パーソナルコンピューター PC-8801",
+    "https://www.arcadearchives.com/title/aca-218/": "HAMSTER公式：アーケードアーカイブス ディグダグ（当時の稼働年）",
+    "https://jpn.nec.com/profile/corp/history/pdf/history-120.pdf": "NEC公式：120年、その先のNECへ。（PC-9801の発売記録）",
+    "https://www.nintendo.com/jp/famicom/history/index.html": "任天堂公式：ファミコン年表 — ドラゴンクエストIII",
+    "https://www.sega.jp/history/hard/sg1000/": "セガ公式：セガハード大百科 — SG-1000",
+    "https://museum.ipsj.or.jp/computer/personal/history.html": "情報処理学会 コンピュータ博物館：パーソナルコンピュータ 誕生と発展の歴史 — MSX規格のパソコン",
+    "https://www.nintendo.com/jp/famicom/software/smb1/index.html": "任天堂公式：スーパーマリオブラザーズ — ファミリーコンピュータ",
+    "https://www.sega.jp/history/hard/segamark3/": "セガ公式：セガハード大百科 — セガ・マークIII",
+    "https://www.nintendo.co.jp/wii/vc/vc_zel_fc/vc_zel_fc_01.html": "任天堂公式：VC ゼルダの伝説（原作の発売日）",
+    "https://www.dragonquest.jp/about/": "スクウェア・エニックス公式：ドラゴンクエストとは",
+    "https://www.nintendo.co.jp/wii/vc/vc_ff/vc_ff_01.html": "任天堂公式：VC ファイナルファンタジー（原作の発売日）",
+    "https://captown.capcom.com/en/site_topics/3": "カプコン公式：Capcom Town — Happy Birthday, Mega Man!!",
+    "https://museum.ipsj.or.jp/computer/personal/0038.html": "情報処理学会 コンピュータ博物館：【シャープ】X68000",
+    "https://www.nintendo.co.jp/kids/161019/family_computer/index.html": "任天堂公式：ニンテンドーキッズスペース — 1989年のゲームボーイ発売",
+    "https://www.sega.jp/history/hard/megadrive/": "セガ公式：セガハード大百科 — メガドライブ",
+    "https://www.nintendo.com/jp/famicom/software/mother/index.html": "任天堂公式：MOTHER — ファミリーコンピュータ",
+    "https://www.nintendo.co.jp/n02/dmg/index.html": "任天堂公式：ゲームボーイ ソフト発売日一覧",
+    "https://www.nintendo.com/jp/character/mario/history/world/index.html": "スーパーマリオワールド | ヒストリー | マリオポータル | Nintendo",
+    "https://www.nintendo.co.jp/corporate/en/history/index.html": "Corporate Information : Company History | Nintendo",
+    "https://www.sega.jp/history/hard/gamegear/index.html": "ゲームギア ｜セガ SEGA",
+    "https://sonic.sega.jp/SonicOrigins/about/": "ゲーム概要｜『ソニックオリジンズ』公式サイト|SEGA",
+    "https://www.capcom.co.jp/ir/english/company/history.html": "History | Corporate Information | CAPCOM",
+    "https://www.nintendo.com/jp/character/zelda/history/index.html?lang=ja": "History（ヒストリー） | ゼルダの伝説40周年 | 任天堂",
+    "https://www.sega.jp/history/hard/mega-cd/": "メガCD ｜セガ SEGA",
+    "https://www.nintendo.co.jp/clvs/soft/mario_kart.html": "スーパーマリオカート | ニンテンドークラシックミニ スーパーファミコン | 任天堂",
+    "https://sonic.sega.jp/20th/history/index.html": "SEGA | ソニック20周年公式サイト | 20年の歴史",
+    "https://bethesda.net/en-US/news/doom-turns-22": "DOOM Turns 22! | Bethesda",
+    "https://www.sega.jp/history/arcade/product/9122/": "バーチャファイター – 株式会社セガ",
+    "https://jp.finalfantasy.com/titles/finalfantasy6/": "ファイナルファンタジーVI | FINAL FANTASY PORTAL SITE",
+    "https://www.tekken-official.jp/titles/": "TITLES | TEKKEN OFFICIAL | バンダイナムコエンターテインメント公式サイト",
+    "https://www.sega.jp/history/hard/segasaturn/index.html": "セガサターン ｜セガ SEGA",
+    "https://www.playstation.com/ja-jp/playstation-history/1994-ps-one/": "PlayStation 1994 | PlayStationの歴史年表 (日本)",
+    "https://www.nintendo.co.jp/wii/vc/vc_chr/vc_chr_01.html": "VC クロノ・トリガー | 任天堂",
+    "https://www.nintendo.com/jp/character/mario/history/64/index.html": "スーパーマリオ64 | ヒストリー | マリオポータル | Nintendo",
+    "https://www.pokemon.co.jp/game/other/gb-rg/": "ポケットモンスター 赤・緑｜ポケットモンスターオフィシャルサイト",
+    "https://jp.finalfantasy.com/titles/finalfantasy7/": "ファイナルファンタジーVII | FINAL FANTASY PORTAL SITE",
+    "https://www.gran-turismo.com/jp/products/gt/": "Gran Turismo - グランツーリスモ・ドットコム",
+    "https://www.konami.com/mg/archive/mga/japanese/introduction.html": "METAL GEAR ACID | 作品紹介・メタルギアソリッドについて | KONAMI",
+    "https://www.sega.jp/history/hard/dreamcast/": "ドリームキャスト ｜セガ SEGA",
+    "https://www.nintendo.co.jp/wii/vc/vc_dsb/vc_dsb_01.html": "VC ニンテンドウオールスター！ 大乱闘スマッシュブラザーズ | 任天堂",
+    "https://www.sega.jp/history/companyTimeline/": "セガの歴史 1960-2020 | セガ",
+    "https://jp.finalfantasy.com/titles/finalfantasy9/": "ファイナルファンタジーIX | FINAL FANTASY PORTAL SITE",
+    "https://phantasystar.sega.jp/20th/history/": "PHANTASY STAR 20th ANNIVERSARY | HISTORY",
+    "https://www.playstation.com/ja-jp/playstation-history/2000-ps2-psp/": "2000年 PlayStation 2 - PSP | PlayStation 歴史年表 (日本)",
+    "https://jp.finalfantasy.com/titles/finalfantasy10/": "ファイナルファンタジーX | FINAL FANTASY PORTAL SITE",
+    "https://www.halowaypoint.com/news/celebrating-20-years-of-halo": "Celebrating 20 Years of Halo | Halo - Official Site",
+    "https://www.nintendo.com/jp/switch/avp3a/detail02/index.html": "スーパーマリオ ３Ｄコレクション：スーパーマリオサンシャイン | Nintendo Switch | 任天堂",
+    "https://news.xbox.com/ja-jp/2022/03/01/xbox-wire-japan-launch/": "Xbox 発売 20 周年を記念して、Xbox Wire Japan を公開 - Xbox Wire Japan",
+    "https://www.nintendo.co.jp/wii/rodj/history/index.html": "おどる メイド イン ワリオ | シリーズの歴史 | 任天堂",
+    "https://store.steampowered.com/app/2620/Call_of_Duty/": "Call of Duty® (2003) on Steam",
+    "https://store.steampowered.com/app/220/HalfLife_2/": "Half-Life 2 on Steam",
+    "https://www.capcom.co.jp/ir/news/pdf/041101a.pdf": "『モンスターハンター』がGAME AWARDS 2003-2004で最優秀賞を受賞 | カプコン",
+    "https://www.nintendo.co.jp/ds/series/ds/index.html": "ニンテンドーDS | 任天堂",
+    "https://sonyinteractive.com/uploads/sites/5/2023/02/041027a.pdf": "新携帯型ゲーム機 PSP「プレイステーション・ポータブル」（PSP-1000）発売 | SCE（2004年10月27日）",
+    "https://www.capcom.co.jp/ir/news/pdf/060208a.pdf": "『バイオハザード4』全世界で出荷本数300万本を突破 | カプコン（2006年2月8日）",
+    "https://blog.ja.playstation.com/?p=256309": "PlayStationの懐かしのゲームサウンドトラックをApple Musicなどサブスクリプションサービスで順次配信開始！ | PlayStation.Blog",
+    "https://news.microsoft.com/source/2005/09/14/the-countdown-begins-xbox-360-to-hit-store-shelves-nov-22-in-north-america-dec-2-in-europe-and-dec-10-in-japan/": "The Countdown Begins: Xbox 360 to Hit Store Shelves Nov. 22 in North America, Dec. 2 in Europe and Dec. 10 in Japan | Microsoft",
+    "https://www.capcom.co.jp/ir/news/html/090903.html": "『大神』および『モンスターハンターポータブル』の開発チームがCEDEC AWARDSで最優秀賞を受賞 | カプコン",
+    "https://www.capcom.co.jp/ir/news/pdf/070424.pdf": "『モンスターハンター2』『デッドライジング』『大神』がFAMITSU AWARDS 2006で優秀賞を受賞 | カプコン",
+    "https://www.nintendo.co.jp/wii/rspj/index_04.html": "Wii Sports - Wii | 任天堂",
+    "https://www.playstation.com/ja-jp/playstation-history/2007-ps3-ps-vita/": "2007年 PlayStation 3 - PlayStation Vita | PlayStation歴史年表 (日本)",
+    "https://www.nintendo.co.jp/wii/console/index.html": "Wii | 本体 | 任天堂",
+    "https://store.steampowered.com/app/400/Portal/": "Portal on Steam",
+    "https://www.nintendo.com/jp/switch/avp3a/detail03/index.html": "スーパーマリオ ３Ｄコレクション：スーパーマリオギャラクシー | Nintendo Switch | 任天堂",
+    "https://www.capcom.co.jp/ir/news/html/100331a.html": "カプコン『モンスターハンターポータブル 2nd G』国内400万本出荷のプレスリリース",
+    "https://store.steampowered.com/app/22000/World_of_Goo/": "World of Goo on Steam",
+    "https://www.fromsoftware.jp/jp/detail.html?csm=070": "Demon’s Souls | 製品情報 | FromSoftware",
+    "https://store.steampowered.com/app/40700/Machinarium/": "Machinarium on Steam",
+    "https://www.nintendo.co.jp/wii/sx4j/index.html": "Xenoblade ゼノブレイド",
+    "https://store.steampowered.com/app/40800/Super_Meat_Boy/": "Super Meat Boy on Steam",
+    "https://www.nintendo.com/jp/character/zelda/history/index.html": "History（ヒストリー） | ゼルダの伝説40周年",
+    "https://store.steampowered.com/app/620/Portal_2/": "Portal 2 on Steam",
+    "https://www.playstation.com/en-us/playstation-history/2007-ps3-ps-vita/": "2007 PlayStation 3 - PlayStation Vita | PlayStation History",
+    "https://sonyinteractive.com/jp/press-releases/2012/121203b/": "「PlayStation Awards 2012」受賞タイトルのご案内",
+    "https://store.steampowered.com/app/212680/FTL_Faster_Than_Light/": "FTL: Faster Than Light on Steam",
+    "https://www.nintendo.com/jp/character/mario/history/3d_world/index.html": "スーパーマリオ 3Dワールド | ヒストリー | マリオポータル",
+    "https://store.steampowered.com/app/239030/Papers_Please/": "Papers, Please on Steam",
+    "https://www.playstation.com/en-us/playstation-history/2013-ps4-ps-vr/": "2013 PlayStation 4 - PS VR | PlayStation History",
+    "https://news.xbox.com/en-us/2013/11/23/xbox-one-biggest-launch-in-xbox-history/": "Xbox One is Biggest Launch in Xbox History | Xbox Wire",
+    "https://www.nintendo.com/jp/hardware/amiibo/game/amkj/index.html": "amiibo対応ソフト マリオカート8",
+    "https://store.steampowered.com/app/282070/This_War_of_Mine/": "This War of Mine on Steam",
+    "https://www.nintendo.com/jp/topics/article/e2378f94-2149-11e6-8360-063b7ac45a6d": "『Splatoon』発売1周年！ 新展開が明らかに！",
+    "https://store.steampowered.com/app/391540/Undertale/": "Undertale on Steam",
+    "https://pokemongo.com/ja/news/launch-jp": "Pokémon GO、いよいよ日本で配信開始！",
+    "https://store.steampowered.com/app/413150/Stardew_Valley/": "Stardew Valley on Steam",
+    "https://store.steampowered.com/app/367520/Hollow_Knight/": "Hollow Knight on Steam",
+    "https://www.nintendo.com/jp/hardware/amiibo/game/aaaba/index.html": "amiibo対応ソフト 大乱闘スマッシュブラザーズ SPECIAL",
+    "https://store.steampowered.com/app/504230/Celeste/": "Celeste on Steam",
+    "https://www.nintendo.com/jp/switch/anvya/products/soft.html": "ファイアーエムブレム 風花雪月 : 商品情報",
+    "https://store.steampowered.com/app/736260/Baba_Is_You/": "Baba Is You on Steam",
+    "https://www.nintendo.com/jp/hardware/detail/switch-lite/index.html": "Nintendo Switch Lite | 任天堂",
+    "https://www.nintendo.com/jp/switch/acbaa/index.html": "あつまれ どうぶつの森 | Nintendo Switch",
+    "https://store.steampowered.com/app/1145360/Hades/": "Hades on Steam",
+    "https://www.playstation.com/en-us/playstation-history/2020-ps5-ps-vr2/": "2020 PlayStation 5 - PS VR2 | PlayStation History",
+    "https://news.xbox.com/en-us/2020/11/10/power-your-dreams-xbox-series-x-and-xbox-series-s-available-now/": "Power Your Dreams: Xbox Series X and Xbox Series S Now Available Worldwide | Xbox Wire",
+    "https://www.nintendo.com/jp/switch/ayl8a/index.html": "メトロイド ドレッド | Nintendo Switch",
+    "https://store.steampowered.com/app/1426210/It_Takes_Two/": "It Takes Two on Steam",
+    "https://www.nintendo.com/jp/hardware/detail/switch-oled/index.html": "Nintendo Switch（有機ELモデル） | 任天堂",
+    "https://www.nintendo.com/jp/switch/az3ha/index.html": "Xenoblade3（ゼノブレイド3） | Nintendo Switch",
+    "https://store.steampowered.com/app/1245620/ELDEN_RING/": "ELDEN RING on Steam",
+    "https://komodo.jp/news/steamdeck-launch.html": "Steam Deck Shipping in Japan, Hong Kong, South Korea and Taiwan begins Dec 17 | KOMODO",
+    "https://store.steampowered.com/app/1086940/Baldurs_Gate_3/": "Baldur's Gate 3 on Steam",
+    "https://blog.ja.playstation.com/2024/09/06/20240906-astro/comment-page-1/": "『アストロボット』本日9月6日発売！",
+    "https://store.steampowered.com/app/2379780/Balatro/": "Balatro on Steam",
+    "https://blog.ja.playstation.com/?p=259344": "PlayStation 5 Proのセットアップガイドを公開！ | PlayStation.Blog",
+    "https://www.nintendo.com/jp/games/switch2/aaaca/products/soft.html": "ドンキーコング バナンザ : 商品情報",
+    "https://store.steampowered.com/app/1903340/Clair_Obscur_Expedition_33/": "Clair Obscur: Expedition 33 on Steam",
+    "https://www.nintendo.com/jp/hardware/switch2/index.html": "Nintendo Switch 2 本体 | 任天堂",
+    "https://www.nintendo.com/jp/topics/article/03c14694-3e04-46b9-9d7a-c357281bd70c": "Nintendo Switch 2 ソフト『ぽこ あ ポケモン』は本日発売。",
+    "https://store.steampowered.com/app/3764200/Resident_Evil_Requiem/": "Resident Evil Requiem on Steam"
+  },
+  "counts": {
+    "years": 56,
+    "games": 97,
+    "hardware": 54,
+    "sources": 124
+  }
+}
