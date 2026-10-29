@@ -1134,6 +1134,14 @@
         "link": "/guide/low-level/"
       },
       {
+        "text": "シューティング実装例 — C#とUnity 6",
+        "link": "/game/shooter-unity.html"
+      },
+      {
+        "text": "シューティング実装例 — C++17とraylib",
+        "link": "/game/shooter-cpp.html"
+      },
+      {
         "text": "リフレクション — UCLASS・UFUNCTION・UPROPERTY・Unreal Header Tool",
         "link": "/game/unreal/reflection-and-uht.html"
       },
@@ -1144,6 +1152,10 @@
       {
         "text": "最適化系パターン: Dirty Flag・Spatial Partition・Data Locality・Double Buffer",
         "link": "/game/patterns/optimization-patterns.html"
+      },
+      {
+        "text": "小さなシューティングの設計 — C++とUnityで作る",
+        "link": "/game/shooter-design.html"
       },
       {
         "text": "第0章 学習全体マップ",
