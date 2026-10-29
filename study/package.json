@@ -8,7 +8,8 @@
     "check": "node scripts/generate-navigation.mjs && node scripts/check-source.mjs",
     "build": "node scripts/generate-navigation.mjs && vitepress build docs && node scripts/check-dist.mjs",
     "preview": "vitepress preview docs",
-    "deploy:pages": "node scripts/deploy-pages.mjs"
+    "deploy:pages": "node scripts/deploy-pages.mjs",
+    "deploy:manual": "node scripts/deploy-manual.mjs"
   },
   "engines": {
     "node": ">=20.19.0"

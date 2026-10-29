@@ -5,3 +5,4 @@ docs/.vitepress/.temp/
 docs/.vitepress/config.*.timestamp-*
 *.log
 __pycache__/
+.pages-worktree-*/

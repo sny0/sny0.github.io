@@ -47,8 +47,24 @@ study:
 
 ## 公開する
 
-`main` の `study/` または公開ワークフローを更新すると、GitHub Actionsの **Study** が検査・ビルド・公開を実行します。Pull Requestでは検査とビルドだけを実行します。
+初版はローカルで検査・ビルドし、通常のGit認証で公開します。リポジトリのルートからではなく、この `study/` ディレクトリで実行します。
 
-既存サイトの公開設定は `gh-pages` ブランチのルートです。公開スクリプトは、そのブランチの **`study/` だけ** を置き換えます。ルートサイト、CNAME、その他のファイルを保持できたことを検証してからpushし、GitHub Pagesのビルド成功も確認します。Pagesの公開元設定や独自ドメインを変更する必要はありません。
+```sh
+npm ci
+npm run check
+npm run build
+npm run deploy:manual
+npm run deploy:manual -- --publish
+```
 
-GitHub Actionsの再実行は、対象コミットの **Study** ワークフローから行えます。公開先が変わる場合は、VitePressのbase・sitemapと公開スクリプトの前提を合わせて変更してください。
+最初の `deploy:manual` は生成物と配置先を検査するdry runです。`--publish` を付けた場合だけ、公開ブランチへ通常のpushを行います。GitHub Pagesのビルドと公開状態はリポジトリのPages画面でも確認してください。
+
+既存サイトの公開設定は `gh-pages` ブランチのルートです。公開スクリプトは、そのブランチの **`study/` だけ** を置き換えます。ルートサイト、CNAME、その他のファイルを保持できたことを検証してからpushします。Pagesの公開元設定や独自ドメインを変更する必要はありません。
+
+### 自動公開を有効にする
+
+ワークフロー案は `deployment/github-actions.yml` にあります。初版を反映したGit認証には `workflow` 権限がなかったため、このファイルはまだGitHub Actionsへ登録していません。
+
+権限のあるGitHub画面またはGit認証で、この内容をリポジトリの `.github/workflows/study.yml` に登録すると、`main` の `study/` またはワークフローの更新時に **Study** が検査・ビルド・公開を実行します。Pull Requestでは検査とビルドだけを実行します。Actions用の公開スクリプトは、Pagesのビルド成功まで確認します。
+
+公開先が変わる場合は、VitePressのbase・sitemapと公開スクリプトの前提を合わせて変更してください。
