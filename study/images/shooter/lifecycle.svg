@@ -1,0 +1,93 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="640" height="1670" viewBox="0 0 640 1670" role="img" aria-labelledby="lifecycle-title lifecycle-desc">
+  <title id="lifecycle-title">1発の弾が敵AとBに重なるときの判定とcleanup</title>
+  <desc id="lifecycle-desc">縦に並ぶ3コマ。最初は弾1個が敵AとBに重なり、敵の格納順はA、B。次にAへの命中で弾とAのC++ aliveまたはC# Aliveをfalseにし、100点を加えて内側の走査をbreakする。Bはtrueのまま、走査中は格納件数と並びを保つ。最後にcleanupで無効な弾とAを対象範囲から除き、有効な要素の順序を保って詰める。敵Bは位置を変えず、添字だけ1から0へ変わる。札はModelが件数として管理する範囲までを図示し、C#の物理配列Lengthは固定のまま。cleanupで有効件数と並びを更新する。</desc>
+  <defs>
+    <marker id="lifecycle-gold-arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0 0 L10 5 L0 10 Z" fill="#d89a22"/></marker>
+    <marker id="lifecycle-green-arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto"><path d="M0 0 L10 5 L0 10 Z" fill="#245d48"/></marker>
+    <style>
+      text{font-family:"Noto Sans JP","Yu Gothic","Hiragino Kaku Gothic ProN",sans-serif;fill:#26352e}
+      .title{font-size:34px;font-weight:700}.head{font-size:30px;font-weight:700}.body{font-size:26px}.small{font-size:24px}.center{text-anchor:middle}
+      .step{fill:#ffffff;font-size:28px;font-weight:700;text-anchor:middle}
+      .frame{fill:#f1f7f2;stroke:#245d48;stroke-width:2.5}
+      .enemy-card{fill:#ffffff;stroke:#d85b4b;stroke-width:2.5}
+      .dead-card{fill:#ffffff;stroke:#26352e;stroke-width:2;stroke-dasharray:7 5}
+    </style>
+  </defs>
+  <rect width="640" height="1670" rx="20" fill="#ffffff"/>
+  <text class="title center" x="320" y="53">1発で加点は1回</text>
+  <text class="body center" x="320" y="96">C++ alive / C# Alive</text>
+
+  <rect class="frame" x="28" y="120" width="584" height="420" rx="20"/>
+  <circle cx="69" cy="161" r="24" fill="#245d48"/>
+  <text class="step" x="69" y="171">1</text>
+  <text class="head" x="110" y="172">衝突前</text>
+  <text class="body" x="56" y="213">弾が A と B の両方に重なる</text>
+  <circle cx="274" cy="282" r="36" fill="#d85b4b" fill-opacity="0.9" stroke="#d85b4b" stroke-width="3"/>
+  <circle cx="338" cy="282" r="36" fill="#d85b4b" fill-opacity="0.9" stroke="#d85b4b" stroke-width="3"/>
+  <text class="head center" x="266" y="287" style="fill:#ffffff">A</text>
+  <text class="head center" x="346" y="287" style="fill:#ffffff">B</text>
+  <circle cx="306" cy="307" r="14" fill="#d89a22" stroke="#ffffff" stroke-width="3"/>
+  <text class="body" x="76" y="291">弾1個</text>
+  <path d="M165 284 H194 L285 306" fill="none" stroke="#d89a22" stroke-width="3" marker-end="url(#lifecycle-gold-arrow)"/>
+  <text class="body" x="62" y="390">弾</text>
+  <rect x="145" y="354" width="180" height="59" rx="10" fill="#ffffff" stroke="#d89a22" stroke-width="3"/>
+  <text class="body center" x="235" y="392">有効</text>
+  <rect x="398" y="354" width="170" height="59" rx="10" fill="#ffffff" stroke="#245d48" stroke-width="2"/>
+  <text class="small center" x="483" y="392">score 0</text>
+  <text class="body" x="62" y="478">敵</text>
+  <rect class="enemy-card" x="145" y="434" width="180" height="72" rx="10"/>
+  <rect class="enemy-card" x="355" y="434" width="180" height="72" rx="10"/>
+  <text class="small center" x="235" y="463">[0] A</text>
+  <text class="small center" x="235" y="493">有効</text>
+  <text class="small center" x="445" y="463">[1] B</text>
+  <text class="small center" x="445" y="493">有効</text>
+  <path d="M320 548 V578" fill="none" stroke="#245d48" stroke-width="4" marker-end="url(#lifecycle-green-arrow)"/>
+
+  <rect class="frame" x="28" y="590" width="584" height="460" rx="20"/>
+  <circle cx="69" cy="631" r="24" fill="#245d48"/>
+  <text class="step" x="69" y="641">2</text>
+  <text class="head" x="110" y="642">弾と A を無効化</text>
+  <text class="body" x="56" y="683">A で break。B へは進まない</text>
+  <circle cx="274" cy="752" r="36" fill="#d85b4b" fill-opacity="0.16" stroke="#26352e" stroke-width="2" stroke-dasharray="6 5"/>
+  <text class="head center" x="266" y="757" opacity="0.5">A</text>
+  <path d="M246 724 L301 779 M301 724 L246 779" fill="none" stroke="#26352e" stroke-width="4"/>
+  <circle cx="338" cy="752" r="36" fill="#d85b4b" stroke="#d85b4b" stroke-width="3"/>
+  <text class="head center" x="346" y="757" style="fill:#ffffff">B</text>
+  <circle cx="306" cy="777" r="14" fill="#d89a22" fill-opacity="0.2" stroke="#26352e" stroke-width="2"/>
+  <path d="M294 765 L318 789 M318 765 L294 789" fill="none" stroke="#26352e" stroke-width="3"/>
+  <text class="body" x="76" y="761">命中</text>
+  <text class="body" x="62" y="860">弾</text>
+  <rect class="dead-card" x="145" y="824" width="180" height="59" rx="10"/>
+  <text class="body center" x="235" y="862">無効</text>
+  <rect x="398" y="824" width="170" height="59" rx="10" fill="#ffffff" stroke="#245d48" stroke-width="3"/>
+  <text class="title center" x="483" y="864" style="fill:#245d48">+100</text>
+  <text class="body" x="62" y="948">敵</text>
+  <rect class="dead-card" x="145" y="904" width="180" height="72" rx="10"/>
+  <rect class="enemy-card" x="355" y="904" width="180" height="72" rx="10"/>
+  <text class="small center" x="235" y="933">[0] A</text>
+  <text class="small center" x="235" y="963">無効</text>
+  <text class="small center" x="445" y="933">[1] B</text>
+  <text class="small center" x="445" y="963">有効</text>
+  <text class="body center" x="320" y="1018">走査中は、件数と並びを保つ</text>
+  <path d="M320 1058 V1088" fill="none" stroke="#245d48" stroke-width="4" marker-end="url(#lifecycle-green-arrow)"/>
+
+  <rect class="frame" x="28" y="1100" width="584" height="440" rx="20"/>
+  <circle cx="69" cy="1141" r="24" fill="#245d48"/>
+  <text class="step" x="69" y="1151">3</text>
+  <text class="head" x="110" y="1152">走査後に cleanup</text>
+  <text class="body" x="56" y="1193">無効な弾と A を取り除く</text>
+  <circle cx="338" cy="1262" r="36" fill="#d85b4b" stroke="#d85b4b" stroke-width="3"/>
+  <text class="head center" x="346" y="1267" style="fill:#ffffff">B</text>
+  <text class="body" x="76" y="1262">残る敵：B</text>
+  <text class="body" x="62" y="1340">弾</text>
+  <rect x="145" y="1304" width="180" height="59" rx="10" fill="#ffffff" stroke="#245d48" stroke-width="2" stroke-dasharray="6 5"/>
+  <text class="body center" x="235" y="1342">空</text>
+  <text class="body" x="62" y="1436">敵</text>
+  <rect class="enemy-card" x="145" y="1392" width="180" height="72" rx="10"/>
+  <text class="small center" x="235" y="1421">[0] B</text>
+  <text class="small center" x="235" y="1451">有効</text>
+  <text class="body center" x="320" y="1506">B は [1] → [0] へ</text>
+
+  <text class="body center" x="320" y="1592" style="fill:#245d48">有効な要素の順序を保って詰める</text>
+  <text class="small center" x="320" y="1637" style="fill:#6b66a3">C#は有効範囲を図示。配列長は固定</text>
+</svg>
