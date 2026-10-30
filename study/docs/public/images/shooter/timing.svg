@@ -1,0 +1,83 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="680" height="984" viewBox="0 0 680 984" role="img" aria-labelledby="title desc">
+  <title id="title">描画フレームと60 Hzの更新tick</title>
+  <desc id="desc">説明用の理想例。同じ約66.7ミリ秒の間に、120 fpsでは8フレームを描き、更新tick数は0、1、0、1、0、1、0、1。30 fpsでは2フレームを描き、各フレームで2 tickを更新する。どちらも合計4 tick。Rの押し始めは0 tickのフレームでも保持し、次のtickで1回だけ消費する。過負荷時の最大5 tickと時間破棄は、上の理想例とは別の制限。浮動小数点の丸めや実入力の再現性を保証する図ではない。</desc>
+  <defs>
+    <marker id="arrow" markerWidth="9" markerHeight="9" refX="7" refY="4.5" orient="auto" markerUnits="userSpaceOnUse">
+      <path d="M0 0L8 4.5L0 9" fill="none" stroke="#245d48" stroke-width="2"/>
+    </marker>
+  </defs>
+  <style>
+    text { font-family: system-ui, "Noto Sans JP", "Yu Gothic", Meiryo, sans-serif; fill: #26352e; }
+    .heading { font-size: 28px; font-weight: 700; }
+    .body { font-size: 24px; }
+    .count { font-size: 32px; font-weight: 700; text-anchor: middle; }
+    .total { font-size: 26px; font-weight: 700; fill: #245d48; text-anchor: end; }
+    .small-box { fill: #edf5ef; stroke: #bad1c2; stroke-width: 1.5; }
+    .update-box { fill: #245d48; }
+    .axis { stroke: #245d48; stroke-width: 2; fill: none; }
+  </style>
+  <rect width="680" height="984" rx="18" fill="#f4f8f4"/>
+  <text x="28" y="47" font-size="34" font-weight="700">描画フレームと60 Hz tick</text>
+  <text x="28" y="89" font-size="26">同じ約66.7 msで、どちらも4 tick</text>
+  <text x="28" y="130" class="body">箱の数字＝そのフレームの更新tick数</text>
+
+  <g>
+    <rect x="24" y="154" width="632" height="174" rx="14" fill="#fff"/>
+    <text x="44" y="194" class="heading">120 fps：8フレーム</text>
+    <text x="636" y="194" class="total">計 4 tick</text>
+    <rect x="44" y="216" width="68" height="56" rx="7" class="small-box"/>
+    <rect x="118" y="216" width="68" height="56" rx="7" class="update-box"/>
+    <rect x="192" y="216" width="68" height="56" rx="7" class="small-box"/>
+    <rect x="266" y="216" width="68" height="56" rx="7" class="update-box"/>
+    <rect x="340" y="216" width="68" height="56" rx="7" class="small-box"/>
+    <rect x="414" y="216" width="68" height="56" rx="7" class="update-box"/>
+    <rect x="488" y="216" width="68" height="56" rx="7" class="small-box"/>
+    <rect x="562" y="216" width="68" height="56" rx="7" class="update-box"/>
+    <text x="78" y="255" class="count">0</text>
+    <text x="152" y="255" class="count" style="fill:#fff">1</text>
+    <text x="226" y="255" class="count">0</text>
+    <text x="300" y="255" class="count" style="fill:#fff">1</text>
+    <text x="374" y="255" class="count">0</text>
+    <text x="448" y="255" class="count" style="fill:#fff">1</text>
+    <text x="522" y="255" class="count">0</text>
+    <text x="596" y="255" class="count" style="fill:#fff">1</text>
+    <path d="M44 295H636" class="axis" marker-end="url(#arrow)"/>
+    <text x="44" y="318" class="body">0 ms</text>
+    <text x="636" y="318" class="body" text-anchor="end">約66.7 ms</text>
+  </g>
+
+  <g>
+    <rect x="24" y="344" width="632" height="174" rx="14" fill="#fff"/>
+    <text x="44" y="384" class="heading">30 fps：2フレーム</text>
+    <text x="636" y="384" class="total">計 4 tick</text>
+    <rect x="44" y="406" width="290" height="56" rx="7" class="update-box"/>
+    <rect x="346" y="406" width="290" height="56" rx="7" class="update-box"/>
+    <text x="189" y="445" class="count" style="fill:#fff">2</text>
+    <text x="491" y="445" class="count" style="fill:#fff">2</text>
+    <path d="M44 485H636" class="axis" marker-end="url(#arrow)"/>
+    <text x="44" y="508" class="body">0 ms</text>
+    <text x="636" y="508" class="body" text-anchor="end">約66.7 ms</text>
+  </g>
+
+  <g>
+    <rect x="24" y="542" width="632" height="146" rx="14" fill="#fff"/>
+    <text x="44" y="582" class="heading">Rの押し始めは、次のtickへ</text>
+    <rect x="44" y="600" width="254" height="64" rx="8" class="small-box"/>
+    <text x="171" y="626" class="body" text-anchor="middle">0 tickのフレーム</text>
+    <text x="171" y="655" class="body" text-anchor="middle">要求を保持</text>
+    <path d="M310 632H354" class="axis" marker-end="url(#arrow)"/>
+    <rect x="366" y="600" width="270" height="64" rx="8" class="small-box"/>
+    <text x="501" y="626" class="body" text-anchor="middle">次のtickで</text>
+    <text x="501" y="655" class="body" text-anchor="middle">1回だけ消費</text>
+  </g>
+
+  <g>
+    <rect x="24" y="710" width="632" height="172" rx="14" fill="#e6f1e8" stroke="#bad1c2" stroke-width="1.5"/>
+    <text x="44" y="750" class="heading">上の理想例とは別：過負荷の制限</text>
+    <text x="44" y="789" class="body">取込は最大0.1秒、更新は最大5 tick</text>
+    <text x="44" y="824" class="body">残る整数tickは捨て、端数だけ保持</text>
+    <text x="44" y="859" class="body">ゲームの進行は実時間から遅れる</text>
+  </g>
+  <text x="28" y="920" class="body" font-weight="700">説明用の理想例です。</text>
+  <text x="28" y="956" class="body">実装の丸めや、実入力の再現性は保証しません。</text>
+</svg>

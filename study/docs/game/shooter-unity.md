@@ -51,6 +51,11 @@ Unityの`Update`を入口にして、入力と実時間をModelへ渡します�
 
 ## 座標と表示の読み方
 
+<figure class="study-figure">
+  <img src="/images/shooter/coordinates.svg" alt="左上原点のModel論理座標を、中央原点のUnityワールド座標へ変換する図。yの向きが反転し、100pxが1unitになる。自機の320,650は0,-2.9へ写る。" width="640" height="1094" />
+  <figcaption>図の青い点は同じ自機です。画面上の見た目をそろえるため、原点・yの向き・単位をまとめて変えます。</figcaption>
+</figure>
+
 Modelの`(0, 0)`は画面左上です。Unity側では画面中心を原点に置き、100pxを1unitとして次の変換を使います。
 
 $$

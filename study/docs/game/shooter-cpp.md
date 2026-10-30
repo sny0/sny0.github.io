@@ -15,6 +15,11 @@ study:
 
 ## ファイルの役割
 
+<figure class="study-figure">
+  <img src="/images/shooter/architecture.svg" alt="入力と表示を担当する外側のループと、ルール・状態を持つModelの関係。C++ではmain.cppが入力・固定更新・描画を接続し、Worldが自機・弾・敵・HP・スコアを持つ。" width="640" height="1440" />
+  <figcaption>まず図の役割を、下のファイルへ対応させてください。C++では外側のループと描画関数を、読みやすい長さの<code>main.cpp</code>にまとめています。</figcaption>
+</figure>
+
 | ファイル | 役割 |
 | --- | --- |
 | `shooter_model.hpp` | 自機・弾・敵・HP・スコア、1tickのルール |

@@ -1,0 +1,60 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="640" height="1094" viewBox="0 0 640 1094" role="img" aria-labelledby="title desc">
+  <title id="title">Model座標からUnityのworld座標への変換</title>
+  <desc id="desc">上段は幅640、高さ720ピクセルのModel。原点は左上でxは右、yは下へ増える。下段は同じ領域をUnityのworld座標で表し、100ピクセルを1単位とする。原点は領域の中央でXは右、Yは上へ増える。Xはxから320を引いて100で割り、Yは360からyを引いて100で割る。中心320,360は0,0へ、自機の初期位置320,650は0,-2.9へ変換される。UnityのScreen座標ではない。</desc>
+  <defs>
+    <marker id="axis-arrow" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path d="M 1 1 L 9 5 L 1 9 Z" fill="#245d48"/></marker>
+  </defs>
+  <style>
+    text { font-family: "Noto Sans JP", "Yu Gothic", Meiryo, sans-serif; fill: #26352e; }
+    .heading { font-size: 25px; font-weight: 700; }
+    .point { font-size: 25px; font-weight: 700; }
+    .small { font-size: 21px; }
+    .axis { fill: none; stroke: #245d48; stroke-width: 2.5; marker-end: url(#axis-arrow); }
+    .guide { fill: none; stroke: #9caf9f; stroke-width: 1.5; stroke-dasharray: 5 5; }
+  </style>
+  <rect width="640" height="1094" rx="16" fill="#f5f8f3"/>
+  <text x="320" y="39" text-anchor="middle" font-size="27" font-weight="700">Model → Unity：座標の変換</text>
+  <text x="320" y="72" text-anchor="middle" class="small">同じ位置を、別の原点・単位で表す</text>
+
+  <rect x="24" y="92" width="592" height="380" rx="12" fill="#ffffff" stroke="#dce7de" stroke-width="2"/>
+  <text x="44" y="126" class="heading">Model / px</text>
+  <!-- Scale 0.4. Model center (320,360) = (198,294). -->
+  <rect x="70" y="150" width="256" height="288" fill="#edf5ef" stroke="#a7bbae" stroke-width="1.5"/>
+  <path class="axis" d="M 70 150 H 341"/>
+  <path class="axis" d="M 70 150 V 451"/>
+  <text x="292" y="141" class="small">+x</text>
+  <text x="37" y="463" class="small">+y</text>
+  <text x="82" y="179" class="small">(0, 0)</text>
+  <path class="guide" d="M 198 150 V 438 M 70 294 H 340"/>
+  <circle cx="198" cy="294" r="5" fill="#245d48"/>
+  <text x="358" y="275" class="small">中心</text>
+  <text x="358" y="307" class="point">(320, 360)</text>
+  <path class="guide" d="M 207 410 H 340"/>
+  <circle cx="198" cy="410" r="7.2" fill="#2479b8"/>
+  <text x="358" y="389" class="small">自機の初期位置</text>
+  <text x="358" y="421" class="point">(320, 650)</text>
+
+  <rect x="24" y="491" width="592" height="105" rx="12" fill="#e3eee5"/>
+  <text x="320" y="531" text-anchor="middle" font-size="26" font-weight="700">X = (x − 320) / 100</text>
+  <text x="320" y="572" text-anchor="middle" font-size="26" font-weight="700">Y = (360 − y) / 100</text>
+
+  <rect x="24" y="616" width="592" height="412" rx="12" fill="#ffffff" stroke="#dce7de" stroke-width="2"/>
+  <text x="44" y="651" class="heading">Unity / world 座標</text>
+  <!-- Same area, same scale. World center (0,0) = (198,824). -->
+  <rect x="70" y="680" width="256" height="288" fill="#edf5ef" stroke="#a7bbae" stroke-width="1.5"/>
+  <path class="axis" d="M 70 824 H 341"/>
+  <path class="axis" d="M 198 968 V 672"/>
+  <text x="296" y="813" class="small">+X</text>
+  <text x="214" y="698" class="small">+Y</text>
+  <text x="358" y="704" class="small">100 px = 1 unit</text>
+  <circle cx="198" cy="824" r="5" fill="#245d48"/>
+  <text x="358" y="805" class="small">中心</text>
+  <text x="358" y="837" class="point">(0, 0)</text>
+  <path class="guide" d="M 207 940 H 340"/>
+  <circle cx="198" cy="940" r="7.2" fill="#2479b8"/>
+  <text x="358" y="919" class="small">自機の初期位置</text>
+  <text x="358" y="951" class="point">(0, −2.9)</text>
+  <text x="320" y="1006" text-anchor="middle" class="small">中央を原点にし、y の向きを反転する</text>
+
+  <text x="320" y="1070" text-anchor="middle" class="small">Unity 側は Camera が描く world 座標です。</text>
+</svg>
