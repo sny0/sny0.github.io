@@ -1,13 +1,19 @@
 ---
-title: "第9部 演習 — Unity/C#との対応"
+title: Unity/C#との対応の演習
 study:
-  source: "C++ Wiki"
-  kind: "演習"
-  status: "既存原稿"
+  source: C++ Wiki
+  status: published
   summary: "C#の各機能に対応するC++の道具を答え、「似ているが同じではない」差分を一言添えてください。 using var f = ... 2. event Action 3. List 4. where T : IComparable 5. override(キーワード)"
+  section: practice
+  format: exercise
+  domain: languages
+  collection: cpp-exercises
+  order: 9
 ---
 
-# 第9部 演習 — Unity/C#との対応
+<div id="第9部-演習-—-unity-c-との対応" class="study-legacy-anchor" aria-hidden="true"></div>
+
+# Unity/C#との対応の演習
 
 ## 問1. 概念確認(対応表の穴埋め)
 
@@ -67,7 +73,7 @@ void OnEnemyDied() {
 
 <details><summary>解答の要点</summary>
 
-(a) C#: 解除忘れ→delegateがUI(破棄済みのはず)を延命し、非表示のUIが通知を受け続ける(リーク+Unityでは MissingReferenceException)。事故は「死なない」方向。(b) C++: 解除忘れ→リストに死んだオブジェクトへの参照が残り、通知時にUAF(未定義動作)。事故は「死んだ後に触る」方向。RAIIトークンは購読の寿命を部品の寿命に物理的に連動させることで両方向の事故を封じる([delegateとevent](/languages/csharp/delegates-events-function-pointers.html)、[第7部](/runtime/memory/ownership-and-borrowing.html))。
+(a) C#: 解除忘れ→delegateがUI(破棄済みのはず)を延命し、非表示のUIが通知を受け続ける(リーク+Unityでは MissingReferenceException)。事故は「死なない」方向。(b) C++: 解除忘れ→リストに死んだオブジェクトへの参照が残り、通知時にUAF(未定義動作)。事故は「死んだ後に触る」方向。RAIIトークンは購読の寿命を部品の寿命に物理的に連動させることで両方向の事故を封じる([delegateとevent](/languages/csharp/delegates-events-function-pointers.html)、[所有権と借用](/runtime/memory/ownership-and-borrowing.html))。
 </details>
 
 ## 問5. デバッグ問題
@@ -85,7 +91,7 @@ void OnEnemyDied() {
 
 <details><summary>解答例</summary>
 
-C#では「無効な参照」はnullしかなく、チェックすれば安全が保証される(GCが生きている参照を無効にしないから)。C++のポインタには「null」と「**死んだものを指すdangling**」の2種類の無効があり、danglingはnullチェックをすり抜ける(deleteされてもポインタは非nullのまま)。だからC++では「nullかどうか」より「所有者は誰で、いつまで生きるか」を設計することが本質的な対策になる([第7部: 所有権](/runtime/memory/ownership-and-borrowing.html)、[メモリバグ](/runtime/memory/memory-bugs.html))。
+C#では「無効な参照」はnullしかなく、チェックすれば安全が保証される(GCが生きている参照を無効にしないから)。C++のポインタには「null」と「**死んだものを指すdangling**」の2種類の無効があり、danglingはnullチェックをすり抜ける(deleteされてもポインタは非nullのまま)。だからC++では「nullかどうか」より「所有者は誰で、いつまで生きるか」を設計することが本質的な対策になる([所有権と借用](/runtime/memory/ownership-and-borrowing.html)、[メモリバグ](/runtime/memory/memory-bugs.html))。
 </details>
 
 ## 問7. 小規模実装問題
@@ -96,4 +102,4 @@ C#で書いた経験があるはずの「クールダウン付きスキル使用
 
 ---
 
-前: [C++例外とC#例外](/languages/csharp/exceptions-comparison.html) | [カテゴリ目次](/languages/csharp/) | [第10部: Unreal Engineとの対応へ](/game/unreal/)
+関連項目：[C++例外とC#例外](/languages/csharp/exceptions-comparison.html) / [学習ガイド](/languages/csharp/) / [Unreal Engineと標準C++をつなぐ学習ガイド](/game/unreal/)

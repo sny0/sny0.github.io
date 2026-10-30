@@ -1,17 +1,17 @@
 ---
-title: "つなぎ方を整える — Adapter・Decorator・Facade"
+title: つなぎ方を整える — Adapter・Decorator・Facade
 study:
-  source: "設計の手帖"
-  kind: "本文"
-  status: "既存原稿"
-  summary: "外部の API を合わせる、処理を包む、入口を簡単にする。どれも「ラッパー」ですが、目的が違います。"
+  source: 設計の手帖
+  status: published
+  summary: 外部の API を合わせる、処理を包む、入口を簡単にする。どれも「ラッパー」ですが、目的が違います。
+  section: reference
+  format: article
+  domain: design
 ---
 
 # つなぎ方を整える — Adapter・Decorator・Facade
 
 外部の API を合わせる、処理を包む、入口を簡単にする。どれも「ラッパー」ですが、目的が違います。
-
-02 · パターンを道具にする / Adapter・Decorator・Facade / Shape the boundaries / 基礎 / 9分
 
 タグ: Adapter / Decorator / Facade / Proxy / Bridge / Composite
 

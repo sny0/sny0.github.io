@@ -1,10 +1,12 @@
 ---
 title: "判断ガイド: インターフェースを作るべきか"
 study:
-  source: "C++ Wiki"
-  kind: "本文"
-  status: "既存原稿"
+  source: C++ Wiki
+  status: published
   summary: "根拠: ポリモーフィズム、DIP、ISP、YAGNI 作るシグナル: 実装が既に2つ(または2つ目が今期の計画にある)/モック無しでテストが書けない/#include連鎖がビルドを苦しめている境界(前方宣言では足りない場合)"
+  section: reference
+  format: article
+  domain: design
 ---
 
 # 判断ガイド: インターフェースを作るべきか
@@ -53,4 +55,4 @@ Q3. 呼び出し側と実装側を、別々に変更・ビルド・配布した�
 
 ---
 
-前: [クラスを分けるべきか](/design/decisions/split-class.html) | [カテゴリ目次](/design/decisions/) | 次: [継承かコンポジションか](/design/decisions/inheritance-or-composition.html)
+関連項目：[クラスを分けるべきか](/design/decisions/split-class.html) / [学習ガイド](/design/decisions/) / [継承かコンポジションか](/design/decisions/inheritance-or-composition.html)

@@ -1,13 +1,17 @@
 ---
-title: "ケーススタディ 02: 武器切り替え"
+title: 武器切り替えの設計
 study:
-  source: "C++ Wiki"
-  kind: "本文"
-  status: "既存原稿"
-  summary: "武器2種で固定ならこれが正解です。 武器が5種に → Attackのifが伸びる。さらに GetRange(), GetAttackSpeed(), PlayEquipAnim() にも同じ分岐が複製される(switch散らばり → ポリモーフィズムの出番のサイン)"
+  source: C++ Wiki
+  status: published
+  summary: 武器2種で固定ならこれが正解です。 武器が5種に → Attackのifが伸びる。さらに GetRange(), GetAttackSpeed(), PlayEquipAnim() にも同じ分岐が複製される(switch散らばり → ポリモーフィズムの出番のサイン)
+  section: reference
+  format: article
+  domain: design
 ---
 
-# ケーススタディ 02: 武器切り替え
+<div id="ケーススタディ-02-武器切り替え" class="study-legacy-anchor" aria-hidden="true"></div>
+
+# 武器切り替えの設計
 
 ## 素朴な実装
 
@@ -107,4 +111,4 @@ struct WeaponData {          // 武器の「種類」はデータ(JSON/Scriptabl
 
 ---
 
-前: [プレイヤー入力](/design/case-studies/player-input.html) | [カテゴリ目次](/design/case-studies/) | 次: [敵AI](/design/case-studies/enemy-ai.html)
+関連項目：[プレイヤー入力](/design/case-studies/player-input.html) / [学習ガイド](/design/case-studies/) / [敵AI](/design/case-studies/enemy-ai.html)

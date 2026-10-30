@@ -1,10 +1,12 @@
 ---
-title: "Iterator"
+title: Iterator
 study:
-  source: "C++ Wiki"
-  kind: "本文"
-  status: "既存原稿"
-  summary: "コレクションの内部構造(配列か、リストか、ツリーか)を知らずに、要素を順に処理したい。走査のやり方をコレクション自身から分離する。 このパターンはC++/C#では言語とライブラリに完全に吸収済みです(C++のイテレータ・range-for、C#の IEnumerable/foreach)。学ぶ意義は"
+  source: C++ Wiki
+  status: published
+  summary: コレクションの内部構造(配列か、リストか、ツリーか)を知らずに、要素を順に処理したい。走査のやり方をコレクション自身から分離する。 このパターンはC++/C#では言語とライブラリに完全に吸収済みです(C++のイテレータ・range-for、C#の IEnumerable/foreach)。学ぶ意義は
+  section: reference
+  format: article
+  domain: design
 ---
 
 # Iterator
@@ -146,4 +148,4 @@ public class EnemyManager : IEnumerable<Enemy> {
 
 ---
 
-前: [Interpreter](/design/patterns/interpreter.html) | [カテゴリ目次](/design/patterns/) | 次: [Mediator](/design/patterns/mediator.html)
+関連項目：[Interpreter](/design/patterns/interpreter.html) / [学習ガイド](/design/patterns/) / [Mediator](/design/patterns/mediator.html)

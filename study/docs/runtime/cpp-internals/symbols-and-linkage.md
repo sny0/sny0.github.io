@@ -1,10 +1,12 @@
 ---
-title: "シンボル・名前修飾・リンケージ・ABI"
+title: シンボル・名前修飾・リンケージ・ABI
 study:
-  source: "C++ Wiki"
-  kind: "本文"
-  status: "既存原稿"
+  source: C++ Wiki
+  status: published
   summary: "シンボル: リンカが使う「名前→機械語/データの場所」の項目。関数・グローバル変数が持つ 名前修飾 (name mangling): C++の関数名を、型情報込みの一意な文字列に変換する仕組み(オーバーロードを区別するため)"
+  section: reference
+  format: article
+  domain: compilers
 ---
 
 # シンボル・名前修飾・リンケージ・ABI
@@ -84,7 +86,7 @@ ABIは「コンパイル済みバイナリ同士が正しく会話するため�
 ## C#との対応
 
 - 一般的なC#のマネージドアセンブリはIL+メタデータを持ち、C++の名前修飾やヘッダー配布とは異なる仕組みで型を参照する。ただし**互換性の確認が不要になるわけではない**。対象フレームワーク/API、アセンブリと依存の版、実行環境、ネイティブ依存のCPU/ABIなどを確認する([.NETの対象フレームワーク](https://learn.microsoft.com/en-us/dotnet/standard/library-guidance/cross-platform-targeting))。Unityではさらに、利用版のAPI Compatibility Level・スクリプティングバックエンド・対象プラットフォームの制約を確認する([Unity 6.0の説明](https://docs.unity.com/en-us/engine/6000.0/manual/programming-environment/overview-of-dot-net-in-unity/dotnet-profile-support))
-- C++/C#相互運用(P/Invoke)は、まさに `extern "C"` のC ABIを経由して行う(→ [第9部](/languages/csharp/il2cpp.html))
+- C++/C#相互運用(P/Invoke)は、まさに `extern "C"` のC ABIを経由して行う(→ [ネイティブビルドと IL2CPP](/languages/csharp/il2cpp.html))
 - UnityのネイティブプラグインでC++関数を呼ぶときの `[DllImport]` + `extern "C"` がこのページの内容の実践
 
 ## Unity開発者が誤解しやすい点
@@ -111,4 +113,4 @@ ABIは「コンパイル済みバイナリ同士が正しく会話するため�
 
 ---
 
-前: [翻訳単位とヘッダー](/runtime/cpp-internals/translation-units-and-headers.html) | [カテゴリ目次](/runtime/cpp-internals/) | 次: [オブジェクトファイルとライブラリ](/runtime/cpp-internals/object-files-and-libraries.html)
+関連項目：[翻訳単位とヘッダー](/runtime/cpp-internals/translation-units-and-headers.html) / [学習ガイド](/runtime/cpp-internals/) / [オブジェクトファイルとライブラリ](/runtime/cpp-internals/object-files-and-libraries.html)

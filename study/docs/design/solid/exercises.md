@@ -1,13 +1,19 @@
 ---
-title: "第2部 演習 — SOLID原則"
+title: SOLID原則の演習
 study:
-  source: "C++ Wiki"
-  kind: "演習"
-  status: "既存原稿"
-  summary: "まず自力で解いてから解答を開いてください。 各記述がどの原則の話か答え、正誤を判定してください。 「このクラスは企画とサーバ担当の両方から変更依頼が来る」 「派生クラスで基底のメソッドを空実装した」"
+  source: C++ Wiki
+  status: published
+  summary: まず自力で解いてから解答を開いてください。 各記述がどの原則の話か答え、正誤を判定してください。 「このクラスは企画とサーバ担当の両方から変更依頼が来る」 「派生クラスで基底のメソッドを空実装した」
+  section: practice
+  format: exercise
+  domain: design
+  collection: cpp-exercises
+  order: 2
 ---
 
-# 第2部 演習 — SOLID原則
+<div id="第2部-演習-—-solid原則" class="study-legacy-anchor" aria-hidden="true"></div>
+
+# SOLID原則の演習
 
 まず自力で解いてから解答を開いてください。
 
@@ -124,4 +130,4 @@ SOLIDは「変更が繰り返される場所」で効く投資の指針で、守
 
 ---
 
-前: [DIP](/design/solid/dip.html) | [カテゴリ目次](/design/solid/) | [第3部: GoFデザインパターンへ](/design/patterns/)
+関連項目：[DIP](/design/solid/dip.html) / [学習ガイド](/design/solid/) / [GoFデザインパターンを学ぶ](/design/patterns/)

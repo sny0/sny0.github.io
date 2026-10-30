@@ -1,13 +1,17 @@
 ---
-title: "ケーススタディ 15: 照準制御"
+title: 照準制御の設計
 study:
-  source: "C++ Wiki"
-  kind: "本文"
-  status: "既存原稿"
-  summary: "TPS/アクションの「狙う」機能——エイムアシスト、ロックオン、カメラ追従の設計です。数学とゲームフィールの絡む題材で、Update順序(Game Loop)が品質を左右します。"
+  source: C++ Wiki
+  status: published
+  summary: TPS/アクションの「狙う」機能——エイムアシスト、ロックオン、カメラ追従の設計です。数学とゲームフィールの絡む題材で、Update順序(Game Loop)が品質を左右します。
+  section: reference
+  format: article
+  domain: design
 ---
 
-# ケーススタディ 15: 照準制御
+<div id="ケーススタディ-15-照準制御" class="study-legacy-anchor" aria-hidden="true"></div>
+
+# 照準制御の設計
 
 TPS/アクションの「狙う」機能——エイムアシスト、ロックオン、カメラ追従の設計です。数学とゲームフィールの絡む題材で、**Update順序**([Game Loop](/game/patterns/game-loop-and-update.html))が品質を左右します。
 
@@ -102,4 +106,4 @@ else UpdateFreeAim(in, dt);
 
 ---
 
-前: [イベント通知](/design/case-studies/event-notification.html) | [カテゴリ目次](/design/case-studies/) | 次: [演習](/design/case-studies/exercises.html)
+関連項目：[イベント通知](/design/case-studies/event-notification.html) / [学習ガイド](/design/case-studies/) / [演習](/design/case-studies/exercises.html)

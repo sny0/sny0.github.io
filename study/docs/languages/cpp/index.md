@@ -1,13 +1,19 @@
 ---
-title: "第5部: C++の言語機能"
+title: C++の言語機能を学ぶ
 study:
-  source: "C++ Wiki"
-  kind: "索引"
-  status: "既存原稿"
-  summary: "C++の言語機能を「構文」ではなく「仕組みと目的」から説明する章です。各ページに必ず、C#との違い/Unity開発者が誤解しやすい点/ゲーム開発での使用例/メモリ上で起きることを含めています。"
+  source: C++ Wiki
+  status: published
+  summary: C++の言語機能を「構文」ではなく「仕組みと目的」から説明する章です。各ページに必ず、C#との違い/Unity開発者が誤解しやすい点/ゲーム開発での使用例/メモリ上で起きることを含めています。
+  section: learning
+  format: path
+  domain: languages
+  collection: cpp-design
+  order: 5
 ---
 
-# 第5部: C++の言語機能
+<div id="第5部-c-の言語機能" class="study-legacy-anchor" aria-hidden="true"></div>
+
+# C++の言語機能を学ぶ
 
 C++の言語機能を「構文」ではなく「**仕組みと目的**」から説明する章です。各ページに必ず、**C#との違い/Unity開発者が誤解しやすい点/ゲーム開発での使用例/メモリ上で起きること**を含めています。
 

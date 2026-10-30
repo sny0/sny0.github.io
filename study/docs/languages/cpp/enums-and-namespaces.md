@@ -1,10 +1,12 @@
 ---
-title: "enum・enum class・namespace"
+title: enum・enum class・namespace
 study:
-  source: "C++ Wiki"
-  kind: "本文"
-  status: "既存原稿"
-  summary: "列挙型は「名前付きの整数定数の集合」。C++には旧式の enum(スコープなし)と、C++11以降の enum class(スコープ付き) があり、新規コードは enum class 一択です。"
+  source: C++ Wiki
+  status: published
+  summary: 列挙型は「名前付きの整数定数の集合」。C++には旧式の enum(スコープなし)と、C++11以降の enum class(スコープ付き) があり、新規コードは enum class 一択です。
+  section: reference
+  format: article
+  domain: languages
 ---
 
 # enum・enum class・namespace
@@ -56,7 +58,7 @@ switch (e) {
 
 ### メモリ上
 
-enumは実行時にはただの整数(既定はint、指定すればその型)。文字列変換テーブルは存在しない(C#の`ToString()`のようなリフレクションはない → 自分でテーブルを書くか、コード生成。UEはリフレクションで持っている → [第10部](/game/unreal/reflection-and-uht.html))。
+enumは実行時にはただの整数(既定はint、指定すればその型)。文字列変換テーブルは存在しない(C#の`ToString()`のようなリフレクションはない → 自分でテーブルを書くか、コード生成。UEはリフレクションで持っている → [リフレクション — UCLASS・UFUNCTION・UPROPERTY・Unreal Header Tool](/game/unreal/reflection-and-uht.html))。
 
 ## namespace
 
@@ -121,4 +123,4 @@ samples/enums_namespaces.cpp(検証済み)で、(a) enum classのswitch網羅警
 
 ---
 
-前: [ラムダ式・関数ポインタ・std::function](/languages/cpp/lambdas-and-functions.html) | [カテゴリ目次](/languages/cpp/) | 次: [例外](/languages/cpp/exceptions.html)
+関連項目：[ラムダ式・関数ポインタ・std::function](/languages/cpp/lambdas-and-functions.html) / [学習ガイド](/languages/cpp/) / [例外](/languages/cpp/exceptions.html)

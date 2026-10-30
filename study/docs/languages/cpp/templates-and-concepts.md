@@ -1,10 +1,12 @@
 ---
-title: "テンプレートと concepts"
+title: テンプレートと concepts
 study:
-  source: "C++ Wiki"
-  kind: "本文"
-  status: "既存原稿"
-  summary: "テンプレートは「型を引数にしたコードの雛形」。コンパイラが使用時に型ごとの実物のコードを生成(実体化)します。C#のジェネリックと似た見た目で仕組みは根本的に違い、実行時コストゼロ・制約は緩い(C++20のconceptsで改善)という特徴があります。"
+  source: C++ Wiki
+  status: published
+  summary: テンプレートは「型を引数にしたコードの雛形」。コンパイラが使用時に型ごとの実物のコードを生成(実体化)します。C#のジェネリックと似た見た目で仕組みは根本的に違い、実行時コストゼロ・制約は緩い(C++20のconceptsで改善)という特徴があります。
+  section: reference
+  format: article
+  domain: languages
 ---
 
 # テンプレートと concepts
@@ -96,7 +98,7 @@ C#で `T.TakeDamage()` を呼ぶには interface制約が必須ですが、C++�
 
 1. `List<T>` の感覚で「テンプレートは1つのコードを共有」と思う——C++は型ごとに完全なコピーを生成。100型で使えば100個の関数ができる(ビルド時間とサイズに跳ね返る)
 2. C#のジェネリックは実行時にも型情報が残る(`typeof(T)`)が、C++のテンプレートは**コンパイル後は消える**(実行時に「これはMax&lt;int>だ」という情報はない。RTTIとは別物)
-3. IL2CPPはC#ジェネリックを結局C++テンプレート的な特殊化に落とす(→ [第9部](/languages/csharp/il2cpp.html))——AOTでの「ジェネリック実体化漏れ」問題の背景
+3. IL2CPPはC#ジェネリックを結局C++テンプレート的な特殊化に落とす(→ [ネイティブビルドと IL2CPP](/languages/csharp/il2cpp.html))——AOTでの「ジェネリック実体化漏れ」問題の背景
 
 ## ゲーム開発での使用例
 
@@ -133,4 +135,4 @@ samples/templates_basic.cpp(検証済み: 関数テンプレート+非型引数�
 
 ---
 
-前: [オーバーロード](/languages/cpp/overloading.html) | [カテゴリ目次](/languages/cpp/) | 次: [ラムダ式・関数ポインタ・std::function](/languages/cpp/lambdas-and-functions.html)
+関連項目：[オーバーロード](/languages/cpp/overloading.html) / [学習ガイド](/languages/cpp/) / [ラムダ式・関数ポインタ・std::function](/languages/cpp/lambdas-and-functions.html)

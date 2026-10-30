@@ -1,17 +1,17 @@
 ---
-title: "SOLID を、変更の例で理解する"
+title: SOLID を、変更の例で理解する
 study:
-  source: "設計の手帖"
-  kind: "本文"
-  status: "既存原稿"
-  summary: "五つの原則は、コードの問題を見つけるための観点です。すべてのクラスへ機械的に適用する規則ではありません。"
+  source: 設計の手帖
+  status: published
+  summary: 五つの原則は、コードの問題を見つけるための観点です。すべてのクラスへ機械的に適用する規則ではありません。
+  section: reference
+  format: article
+  domain: design
 ---
 
 # SOLID を、変更の例で理解する
 
 五つの原則は、コードの問題を見つけるための観点です。すべてのクラスへ機械的に適用する規則ではありません。
-
-01 · 設計の土台 / SOLID の5原則 / Five lenses, not five laws / 基礎 / 10分
 
 タグ: SOLID / SRP / OCP / LSP / ISP / DIP
 

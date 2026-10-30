@@ -1,10 +1,12 @@
 ---
-title: "Vertex Shader"
+title: Vertex Shader
 study:
-  source: "RenderingWiki"
-  kind: "本文"
-  status: "既存原稿"
-  summary: "Vertex Shader (VS) は頂点1つごとに1回実行されるプログラムで、主な仕事は頂点座標をモデル空間からクリップ空間へ変換することです。加えて法線・UV・色などの属性を後段へ受け渡し、スキニングやモーフィング、頂点アニメーションもここで行います。最初に登場したプログラマブルステージであり"
+  source: RenderingWiki
+  status: published
+  summary: Vertex Shader (VS) は頂点1つごとに1回実行されるプログラムで、主な仕事は頂点座標をモデル空間からクリップ空間へ変換することです。加えて法線・UV・色などの属性を後段へ受け渡し、スキニングやモーフィング、頂点アニメーションもここで行います。最初に登場したプログラマブルステージであり
+  section: reference
+  format: article
+  domain: graphics
 ---
 
 # Vertex Shader

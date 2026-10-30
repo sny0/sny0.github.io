@@ -1,17 +1,17 @@
 ---
-title: "振る舞いを変える — Strategy・State・Command"
+title: 振る舞いを変える — Strategy・State・Command
 study:
-  source: "設計の手帖"
-  kind: "本文"
-  status: "既存原稿"
-  summary: "条件分岐には意味があります。「何を選んでいる分岐なのか」によって、適した分け方が変わります。"
+  source: 設計の手帖
+  status: published
+  summary: 条件分岐には意味があります。「何を選んでいる分岐なのか」によって、適した分け方が変わります。
+  section: reference
+  format: article
+  domain: design
 ---
 
 # 振る舞いを変える — Strategy・State・Command
 
 条件分岐には意味があります。「何を選んでいる分岐なのか」によって、適した分け方が変わります。
-
-02 · パターンを道具にする / Strategy・State・Command / Make behavior replaceable / 基礎 / 12分
 
 タグ: Strategy / State / Command / Template Method / Policy
 

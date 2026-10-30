@@ -1,10 +1,12 @@
 ---
 title: "判断ガイド: C++の選択 — テンプレートか仮想関数か/値渡しか参照渡しか/unique_ptrかshared_ptrか/配列かvectorか/構造体かクラスか"
 study:
-  source: "C++ Wiki"
-  kind: "本文"
-  status: "既存原稿"
-  summary: "テンプレートの明示的実体化をライブラリから提供することもできます。ただし、それもC++ ABI・型定義・ビルド条件の互換性が必要です。処理系や言語をまたぐ公開APIでは、C ABIの関数と明示したデータ/所有権の契約を検討します。"
+  source: C++ Wiki
+  status: published
+  summary: テンプレートの明示的実体化をライブラリから提供することもできます。ただし、それもC++ ABI・型定義・ビルド条件の互換性が必要です。処理系や言語をまたぐ公開APIでは、C ABIの関数と明示したデータ/所有権の契約を検討します。
+  section: reference
+  format: article
+  domain: design
 ---
 
 # 判断ガイド: C++の選択 — テンプレートか仮想関数か/値渡しか参照渡しか/unique_ptrかshared_ptrか/配列かvectorか/構造体かクラスか
@@ -97,4 +99,4 @@ Q2. 迷ったら: getter/setterを全メンバに生やしたくなった時点�
 
 ---
 
-前: [イベント・DI・Singletonの判断](/design/decisions/events-di-singleton.html) | [カテゴリ目次](/design/decisions/) | 次: [最適化・リファクタリングの判断](/design/decisions/optimize-or-refactor.html)
+関連項目：[イベント・DI・Singletonの判断](/design/decisions/events-di-singleton.html) / [学習ガイド](/design/decisions/) / [最適化・リファクタリングの判断](/design/decisions/optimize-or-refactor.html)

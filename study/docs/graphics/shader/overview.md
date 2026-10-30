@@ -1,10 +1,12 @@
 ---
-title: "シェーダ言語総論と比較"
+title: シェーダ言語総論と比較
 study:
-  source: "RenderingWiki"
-  kind: "本文"
-  status: "既存原稿"
-  summary: "シェーダ言語はGPU上で実行されるプログラムを書くための言語です。現在の主要言語は HLSL (DirectX/Unity/UE)、GLSL (OpenGL/Vulkan)、WGSL (WebGPU)、MSL (Metal) の4つで、いずれもC系構文のデータ並列言語です。このページでは4言語+中間"
+  source: RenderingWiki
+  status: published
+  summary: シェーダ言語はGPU上で実行されるプログラムを書くための言語です。現在の主要言語は HLSL (DirectX/Unity/UE)、GLSL (OpenGL/Vulkan)、WGSL (WebGPU)、MSL (Metal) の4つで、いずれもC系構文のデータ並列言語です。このページでは4言語+中間
+  section: reference
+  format: article
+  domain: graphics
 ---
 
 # シェーダ言語総論と比較

@@ -1,17 +1,23 @@
 ---
-title: "第4部: ゲームプログラミングで頻出するパターン"
+title: ゲームプログラミングパターンの学習ガイド
 study:
-  source: "C++ Wiki"
-  kind: "索引"
-  status: "既存原稿"
-  summary: "GoF(第3部)が汎用の設計語彙だとすれば、この章はゲーム開発の現場で生まれた実戦パターンです。多くはRobert Nystrom『Game Programming Patterns』で整理されたもので、パフォーマンス(毎フレーム動く・大量に出る)とワークフロー(企画が調整する)というゲーム特有の圧"
+  source: C++ Wiki
+  status: published
+  summary: ゲームループ・通知・Component・AI・UIの本文を、前提と比較から読み進める。
+  section: learning
+  format: path
+  domain: game
+  collection: cpp-design
+  order: 4
 ---
 
-# 第4部: ゲームプログラミングで頻出するパターン
+<div id="第4部-ゲームプログラミングで頻出するパターン" class="study-legacy-anchor" aria-hidden="true"></div>
 
-GoF(第3部)が汎用の設計語彙だとすれば、この章は**ゲーム開発の現場で生まれた実戦パターン**です。多くはRobert Nystrom『Game Programming Patterns』で整理されたもので、パフォーマンス(毎フレーム動く・大量に出る)とワークフロー(企画が調整する)というゲーム特有の圧力から生まれています。
+# ゲームプログラミングパターンの学習ガイド
 
-## ページ一覧
+[GoFパターン](/design/patterns/)を踏まえ、**ゲーム開発の現場で生まれた実戦パターン**を読むためのガイドです。多くはRobert Nystrom『Game Programming Patterns』で整理されたもので、パフォーマンス(毎フレーム動く・大量に出る)とワークフロー(企画が調整する)というゲーム特有の圧力から生まれています。
+
+## 本文を読む順序
 
 | ページ | 扱うパターン |
 |---|---|
@@ -28,9 +34,9 @@ GoF(第3部)が汎用の設計語彙だとすれば、この章は**ゲーム開
 | [MVC・MVP・MVVM](/game/patterns/mvc-mvp-mvvm.html) | UIアーキテクチャ3方式の比較 |
 | [Reactive Programming](/game/patterns/reactive-and-message-bus.html) | R3/UniRx、データフローの考え方 |
 
-仕上げに [演習](/game/patterns/exercises.html) を解いてください。
+仕組みを確認したら、「実践・サンプル」の[ゲームプログラミングパターン演習](/game/patterns/exercises.html)で確かめられます。
 
-## この章の読み方
+## このガイドの使い方
 
 - 各パターンは**UnityとUnreal Engineのどこに現れるか**を必ず書いています。「自作する」より「エンジンが実装済みのものを正しく使う」場面の方が多いためです。
 - 最適化系パターン(Object Pool、Data Locality等)は**計測とセット**で使うもの。計測なしの適用は[早すぎる最適化](/design/foundations/yagni-kiss-dry.html)です。
@@ -46,4 +52,4 @@ GoF(第3部)が汎用の設計語彙だとすれば、この章は**ゲーム開
 
 ---
 
-[全体目次](/guide/cpp-index.html) | 次: [Game Loop と Update Method](/game/patterns/game-loop-and-update.html)
+[C++・設計の学習ガイド](/guide/cpp-index.html) | [ゲームループの本文](/game/patterns/game-loop-and-update.html)

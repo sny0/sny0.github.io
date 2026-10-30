@@ -1,10 +1,14 @@
 ---
-title: "3. リソースとパイプライン構築"
+title: 3. リソースとパイプライン構築
 study:
-  source: "RenderingWiki"
-  kind: "本文"
-  status: "既存原稿"
-  summary: "GPUにデータを送り込み、描画の設計図 (パイプライン) を組み立てます。バッファ・テクスチャ・ディスクリプタ・PSOという明示的APIの4大リソース概念 (DX12/Vulkan) を、実際に手を動かして体得するステップです。"
+  source: RenderingWiki
+  status: published
+  summary: GPUにデータを送り込み、描画の設計図 (パイプライン) を組み立てます。バッファ・テクスチャ・ディスクリプタ・PSOという明示的APIの4大リソース概念 (DX12/Vulkan) を、実際に手を動かして体得するステップです。
+  section: practice
+  format: tutorial
+  domain: graphics
+  collection: renderer-project
+  order: 3
 ---
 
 # 3. リソースとパイプライン構築

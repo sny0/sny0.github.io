@@ -1,13 +1,17 @@
 ---
-title: "ケーススタディ 07: ダメージ計算"
+title: ダメージ計算の設計
 study:
-  source: "C++ Wiki"
-  kind: "本文"
-  status: "既存原稿"
-  summary: "純粋関数(入力→出力、副作用なし)で始めるのが正解。この形はテストが1行で書けます。 クリティカル、属性相性、バフ/デバフ、装備効果、スキル倍率… → 引数が増え続け、関数内が仕様の堆積地層に"
+  source: C++ Wiki
+  status: published
+  summary: 純粋関数(入力→出力、副作用なし)で始めるのが正解。この形はテストが1行で書けます。 クリティカル、属性相性、バフ/デバフ、装備効果、スキル倍率… → 引数が増え続け、関数内が仕様の堆積地層に
+  section: reference
+  format: article
+  domain: design
 ---
 
-# ケーススタディ 07: ダメージ計算
+<div id="ケーススタディ-07-ダメージ計算" class="study-legacy-anchor" aria-hidden="true"></div>
+
+# ダメージ計算の設計
 
 ## 素朴な実装
 
@@ -90,4 +94,4 @@ int CalcDamage(DamageContext& ctx) {
 
 ---
 
-前: [セーブデータ](/design/case-studies/save-data.html) | [カテゴリ目次](/design/case-studies/) | 次: [UI通知](/design/case-studies/ui-notification.html)
+関連項目：[セーブデータ](/design/case-studies/save-data.html) / [学習ガイド](/design/case-studies/) / [UI通知](/design/case-studies/ui-notification.html)

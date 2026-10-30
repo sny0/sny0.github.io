@@ -1,17 +1,19 @@
 ---
-title: "ネイティブビルドと IL2CPP"
+title: ネイティブビルドと IL2CPP
 study:
-  source: "C++ Wiki"
-  kind: "本文"
-  status: "既存原稿"
-  summary: "IL2CPPは「C#(IL)をC++ソースに変換し、各プラットフォームのC++コンパイラでビルドする」Unityの仕組み。つまりあなたのC#コードは、最終的に本Wiki第6部の旅を通ってCPU命令になっています。C++を学ぶと、IL2CPPの制約・性能特性が「仕様の暗記」から「当然の帰結」に変わりま"
+  source: C++ Wiki
+  status: published
+  summary: UnityのIL2CPPによるILからC++への変換、AOT、コード生成、ネイティブ連携を調べる。
+  section: reference
+  format: article
+  domain: languages
 ---
 
 # ネイティブビルドと IL2CPP
 
 ## 一言で言うと
 
-IL2CPPは「**C#(IL)をC++ソースに変換し、各プラットフォームのC++コンパイラでビルドする**」Unityの仕組み。つまりあなたのC#コードは、最終的に[本Wiki第6部の旅](/runtime/cpp-internals/build-pipeline-journey.html)を通ってCPU命令になっています。C++を学ぶと、IL2CPPの制約・性能特性が「仕様の暗記」から「当然の帰結」に変わります。
+IL2CPPは「**C#(IL)をC++ソースに変換し、各プラットフォームのC++コンパイラでビルドする**」Unityの仕組み。つまりあなたのC#コードは、最終的に[main.cpp から CPU命令までの旅](/runtime/cpp-internals/build-pipeline-journey.html)を通ってCPU命令になっています。C++を学ぶと、IL2CPPの制約・性能特性が「仕様の暗記」から「当然の帰結」に変わります。
 
 ## 実行方式の全体地図
 
@@ -36,7 +38,7 @@ C#ソース ──Roslyn──> IL(中間言語)+メタデータ
 | 値型ジェネリックの組み合わせがAOTで漏れる | ジェネリックがC++テンプレート的に**使用実績ベースで実体化**されるため、リフレクション経由でしか現れない組み合わせは生成されない |
 | コードストリッピングでメソッドが消える(link.xml) | リンカのデッドコード除去([リンク](/runtime/cpp-internals/object-files-and-libraries.html))。リフレクション呼び出しは「使用」と見なされない |
 | iOSビルドが遅い | 生成された膨大なC++のコンパイル([ビルドが遅い理由](/tools/build/build-speed.html)がフル適用) |
-| IL2CPPの方が速いことが多い | C++コンパイラの最適化([第6部](/runtime/cpp-internals/optimization-and-ub.html))がフルに掛かる。ただしGCはBoehmのまま(→ [GC比較](/runtime/memory/gc-and-csharp-comparison.html)) |
+| IL2CPPの方が速いことが多い | C++コンパイラの最適化([コンパイラ最適化・未定義動作の影響・Debug/Release・ゼロコスト抽象化](/runtime/cpp-internals/optimization-and-ub.html))がフルに掛かる。ただしGCはBoehmのまま(→ [GC比較](/runtime/memory/gc-and-csharp-comparison.html)) |
 
 ## ネイティブプラグインとの境界(P/Invoke)
 
@@ -77,4 +79,4 @@ Burst(HPC# → LLVMで機械語)は「C#の**サブセット**を、C++並みの
 
 ---
 
-前: [ヘッダー分割とAssembly Definition](/languages/csharp/headers-vs-asmdef.html) | [カテゴリ目次](/languages/csharp/) | 次: [手動メモリ管理とGC](/languages/csharp/memory-management-vs-gc.html)
+関連項目：[ヘッダー分割とAssembly Definition](/languages/csharp/headers-vs-asmdef.html) / [学習ガイド](/languages/csharp/) / [手動メモリ管理とGC](/languages/csharp/memory-management-vs-gc.html)

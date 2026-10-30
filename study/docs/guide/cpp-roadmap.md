@@ -1,19 +1,25 @@
 ---
-title: "学習ロードマップ"
+title: C++とゲーム設計の学習ロードマップ
 study:
-  source: "C++ Wiki"
-  kind: "学習ガイド"
-  status: "既存原稿"
-  summary: "自分の目的に合ったルートを選んでください。どのルートも「全部読む」必要はありません。各ページは独立して読めるように書かれており、未説明の用語には用語集やリンク先ページへの参照があります。"
+  source: C++ Wiki
+  status: published
+  summary: 設計の基礎、Unity経験者向けC++、実行の仕組みなど、目的に合わせて辞典本文を読む経路。
+  section: learning
+  format: path
+  domain: design
+  collection: cpp-design
+  order: 0
 ---
 
-# 学習ロードマップ
+<div id="学習ロードマップ" class="study-legacy-anchor" aria-hidden="true"></div>
+
+# C++とゲーム設計の学習ロードマップ
 
 自分の目的に合ったルートを選んでください。どのルートも「全部読む」必要はありません。各ページは独立して読めるように書かれており、未説明の用語には[用語集](/guide/cpp-glossary.html)やリンク先ページへの参照があります。
 
 ## ルート0: まず全員に勧める最短コース(約10ページ)
 
-「設計もC++もまだ自信がない」状態から、このWiki全体の見取り図を作るためのコースです。
+「設計もC++もまだ自信がない」状態から、設計とC++の本文の見取り図を作るためのコースです。
 
 1. [設計とは何を決める行為なのか](/design/foundations/what-is-design.html)
 2. [凝集度と結合度](/design/foundations/cohesion-and-coupling.html)
@@ -30,12 +36,12 @@ study:
 
 順番に読むと、前のページの知識だけで次が読めるように並べています。
 
-1. 第1部を順番に: [設計とは](/design/foundations/what-is-design.html) → [責務](/design/foundations/responsibility-and-separation.html) → [凝集度と結合度](/design/foundations/cohesion-and-coupling.html) → [依存](/design/foundations/dependency.html) → [抽象化](/design/foundations/abstraction-encapsulation.html) → [継承とコンポジション](/design/foundations/inheritance-delegation-composition.html) → [ポリモーフィズム](/design/foundations/polymorphism-interface.html) → [品質特性](/design/foundations/quality-attributes.html) → [YAGNI/KISS/DRY](/design/foundations/yagni-kiss-dry.html) → [技術的負債](/design/foundations/tech-debt-and-refactoring.html)
-2. [第1部演習](/design/foundations/exercises.html) を解く
-3. 第2部 SOLID を [SRP](/design/solid/srp.html) から順に
-4. 第3部は全部ではなく、まず [Observer](/design/patterns/observer.html) / [State](/design/patterns/state.html) / [Strategy](/design/patterns/strategy.html) / [Command](/design/patterns/command.html) / [Factory Method](/design/patterns/factory-method.html) / [Singleton](/design/patterns/singleton.html) の6つ
-5. 第5部を 01 から順に(1日1〜2ページ)
-6. 第11部のケーススタディを2〜3題読み、[判断ガイド](/design/decisions/)で締める
+1. 設計の基礎を順番に: [設計とは](/design/foundations/what-is-design.html) → [責務](/design/foundations/responsibility-and-separation.html) → [凝集度と結合度](/design/foundations/cohesion-and-coupling.html) → [依存](/design/foundations/dependency.html) → [抽象化](/design/foundations/abstraction-encapsulation.html) → [継承とコンポジション](/design/foundations/inheritance-delegation-composition.html) → [ポリモーフィズム](/design/foundations/polymorphism-interface.html) → [品質特性](/design/foundations/quality-attributes.html) → [YAGNI/KISS/DRY](/design/foundations/yagni-kiss-dry.html) → [技術的負債](/design/foundations/tech-debt-and-refactoring.html)
+2. [設計の基礎の演習](/design/foundations/exercises.html) を解く
+3. SOLID原則を [SRP](/design/solid/srp.html) から順に
+4. GoFパターンは、まず [Observer](/design/patterns/observer.html) / [State](/design/patterns/state.html) / [Strategy](/design/patterns/strategy.html) / [Command](/design/patterns/command.html) / [Factory Method](/design/patterns/factory-method.html) / [Singleton](/design/patterns/singleton.html) の6つ
+5. [C++の言語機能の学習ガイド](/languages/cpp/)に沿って、値・寿命・所有から読む
+6. [設計ケーススタディの読み進め方](/design/case-studies/)から2〜3題読み、[判断ガイド](/design/decisions/)で締める
 
 ## ルート2: Unity経験者向けC++ルート
 

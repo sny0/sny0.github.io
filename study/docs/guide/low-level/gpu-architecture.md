@@ -1,13 +1,33 @@
 ---
-title: "第11章 GPUアーキテクチャ ── 多数の処理を並列に進める仕組み"
+title: 第11章 GPUアーキテクチャ
 study:
-  source: "IT教本"
-  kind: "学習ガイド"
-  status: "学習計画・概要"
-  summary: "シェーダを書き、RenderDocでフレームを追い、描画負荷を最適化するには、 「GPUというハードウェアがCPUと何が違うのか」を知らなければならない。 「ドローコールが多いと重い」「分岐がシェーダで嫌われる」「帯域が足りない」"
+  source: IT教本
+  status: outline
+  summary: |-
+    GPUの実行単位、メモリ階層、並列処理の制約を学び、プロファイラで観察するための学習計画・概要です。CPUとの比較から入り、対象GPUの資料と測定結果を対応させます。
+
+    ## 関連する辞典本文・実践
+
+    - [GPUとは何か](/hardware/gpu/what-is-gpu.html)と[
+  section: learning
+  format: path
+  domain: hardware
+  collection: low-level
+  order: 12
 ---
 
-# 第11章 GPUアーキテクチャ ── 多数の処理を並列に進める仕組み
+<div id="第11章-gpuアーキテクチャ-──-多数の処理を並列に進める仕組み" class="study-legacy-anchor" aria-hidden="true"></div>
+
+# 第11章 GPUアーキテクチャ
+
+## このページで案内すること
+
+GPUの実行単位、メモリ階層、並列処理の制約を学び、プロファイラで観察するための**学習計画・概要**です。CPUとの比較から入り、対象GPUの資料と測定結果を対応させます。
+
+## 関連する辞典本文・実践
+
+- [GPUとは何か](/hardware/gpu/what-is-gpu.html)と[GPUアーキテクチャ](/hardware/gpu/architecture.html)で、構成と役割を調べられます。
+- [Warp / Waveの実行モデル](/graphics/compute/execution-model.html)では、並列実行と分岐の扱いを掘り下げます。
 
 ## 学ぶ理由
 

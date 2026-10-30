@@ -1,10 +1,12 @@
 ---
-title: "継承・委譲・コンポジション(比較ページ)"
+title: 継承・委譲・コンポジション(比較ページ)
 study:
-  source: "C++ Wiki"
-  kind: "本文"
-  status: "既存原稿"
+  source: C++ Wiki
+  status: published
   summary: "コードを再利用し組み合わせる手段は主に3つあります。 継承(inheritance): 「BはAの一種である(is-a)」。Aの実装とインターフェースを丸ごと受け継ぐ。 コンポジション(composition): 「BはAを部品として持つ(has-a)」。必要な機能だけ持ち物として抱える。"
+  section: reference
+  format: article
+  domain: design
 ---
 
 # 継承・委譲・コンポジション(比較ページ)
@@ -128,7 +130,7 @@ Enemy MakeFlyingShooter() {
 
 ## Unreal Engine との対応
 
-- UEはActor継承(ACharacter ← APawn ← AActor)とActorComponentの両方を提供。Gameplay Frameworkは継承が深めの設計で、ゲーム固有機能はComponentに切り出すのが近年の推奨です(→ [第10部](/game/unreal/uobject-actor-component.html))。
+- UEはActor継承(ACharacter ← APawn ← AActor)とActorComponentの両方を提供。Gameplay Frameworkは継承が深めの設計で、ゲーム固有機能はComponentに切り出すのが近年の推奨です(→ [UObject・Actor・ActorComponent](/game/unreal/uobject-actor-component.html))。
 
 ## よくある誤解
 
@@ -160,4 +162,4 @@ Enemy MakeFlyingShooter() {
 
 ---
 
-前: [抽象化・カプセル化・情報隠蔽](/design/foundations/abstraction-encapsulation.html) | [カテゴリ目次](/design/foundations/) | 次: [ポリモーフィズムとインターフェース](/design/foundations/polymorphism-interface.html)
+関連項目：[抽象化・カプセル化・情報隠蔽](/design/foundations/abstraction-encapsulation.html) / [学習ガイド](/design/foundations/) / [ポリモーフィズムとインターフェース](/design/foundations/polymorphism-interface.html)

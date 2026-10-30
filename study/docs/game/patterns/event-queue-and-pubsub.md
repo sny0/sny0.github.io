@@ -1,10 +1,12 @@
 ---
-title: "Event Queue・Message Bus・Publish/Subscribe(Observerとの比較)"
+title: Event Queue・Message Bus・Publish/Subscribe(Observerとの比較)
 study:
-  source: "C++ Wiki"
-  kind: "本文"
-  status: "既存原稿"
-  summary: "「起きたことを他へ伝える」仕組みの一族です。違いはいつ届くかと誰を知っているかの2軸で整理できます。 Observerは発行者と購読者を疎結合にしますが、2つの結合が残ります。"
+  source: C++ Wiki
+  status: published
+  summary: 「起きたことを他へ伝える」仕組みの一族です。違いはいつ届くかと誰を知っているかの2軸で整理できます。 Observerは発行者と購読者を疎結合にしますが、2つの結合が残ります。
+  section: reference
+  format: article
+  domain: game
 ---
 
 # Event Queue・Message Bus・Publish/Subscribe(Observerとの比較)
@@ -124,7 +126,7 @@ Pub/Subを**プロジェクト全域の1本のバス**として運用する形�
 
 ## Unreal Engine との対応
 
-- Observer = Delegate / Multicast Delegate(→ [第10部](/game/unreal/delegates-and-interfaces.html))
+- Observer = Delegate / Multicast Delegate(→ [DelegateとInterface](/game/unreal/delegates-and-interfaces.html))
 - Pub/Sub = Gameplay Message Subsystem(UE5、チャネル文字列ベース)
 - 入力・アニメ通知(AnimNotify)はイベントキュー的に配送される
 
@@ -157,4 +159,4 @@ samples/event_queue.cpp を拡張し、同一フレームに積まれた `PlaySe
 
 ---
 
-前: [Component と ECS](/game/patterns/component-and-ecs.html) | [カテゴリ目次](/game/patterns/) | 次: [Service Locator と DI](/game/patterns/service-locator-and-di.html)
+関連項目：[Component と ECS](/game/patterns/component-and-ecs.html) | [この分野の学習ガイド](/game/patterns/) | [Service Locator と DI](/game/patterns/service-locator-and-di.html)

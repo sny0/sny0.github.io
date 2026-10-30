@@ -1,17 +1,19 @@
 ---
-title: "4大API横断比較 — OpenGL / Vulkan / DirectX 12 / WebGPU"
+title: 4大API横断比較 — OpenGL / Vulkan / DirectX 12 / WebGPU
 study:
-  source: "RenderingWiki"
-  kind: "本文"
-  status: "既存原稿"
-  summary: "このページは第5章の総まとめとして、同じ仕事が各APIでどう表現されるかを横断比較します。「初期化 → リソース → パイプライン → コマンド → 同期」の5段階で対応表を示し、最後に「三角形を出すまで」のコード量と構造を比べます。1つのAPIを知っていれば、この対応表で他の3つへ翻訳できます。"
+  source: RenderingWiki
+  status: published
+  summary: 同じ描画の仕事がOpenGL・Vulkan・Direct3D 12・WebGPUでどう表現されるかを、リソース・パイプライン・コマンド・同期から比較する。
+  section: reference
+  format: article
+  domain: graphics
 ---
 
 # 4大API横断比較 — OpenGL / Vulkan / DirectX 12 / WebGPU
 
 ## 概要
 
-このページは第5章の総まとめとして、**同じ仕事が各APIでどう表現されるか**を横断比較します。「初期化 → リソース → パイプライン → コマンド → 同期」の5段階で対応表を示し、最後に「三角形を出すまで」のコード量と構造を比べます。1つのAPIを知っていれば、この対応表で他の3つへ翻訳できます。
+このページはグラフィックスAPIの総まとめとして、**同じ仕事が各APIでどう表現されるか**を横断比較します。「初期化 → リソース → パイプライン → コマンド → 同期」の5段階で対応表を示し、最後に「三角形を出すまで」のコード量と構造を比べます。1つのAPIを知っていれば、この対応表で他の3つへ翻訳できます。
 
 ## 概念対応表 (全体)
 
@@ -143,11 +145,11 @@ fn shade(N: vec3f, L: vec3f, albedo: vec3f) -> vec3f {
 
 ## 前提知識
 
-- 第5章の各APIページ ([OpenGL](/graphics/api/opengl.html), [DX11](/graphics/api/directx11.html), [DX12](/graphics/api/directx12.html), [Vulkan](/graphics/api/vulkan.html), [Metal](/graphics/api/metal.html), [WebGPU](/graphics/api/webgpu.html))
+- 各APIの本文 ([OpenGL](/graphics/api/opengl.html), [DX11](/graphics/api/directx11.html), [DX12](/graphics/api/directx12.html), [Vulkan](/graphics/api/vulkan.html), [Metal](/graphics/api/metal.html), [WebGPU](/graphics/api/webgpu.html))
 
 ## 次に読むべきページ
 
-- [Compute Shader](/graphics/compute/compute-shader.html) — 第6章へ
+- [Compute Shader](/graphics/compute/compute-shader.html) — GPUコンピューティングを調べる
 - [最終章: ゼロからレンダラーを作る](/graphics/capstone/01-design.html) — この知識の実践
 
 ## 理解度チェック

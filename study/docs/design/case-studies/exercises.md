@@ -1,13 +1,19 @@
 ---
-title: "第11部 演習 — ケーススタディ"
+title: ケーススタディの演習
 study:
-  source: "C++ Wiki"
-  kind: "演習"
-  status: "既存原稿"
-  summary: "次の症状は、どのケーススタディで学んだ何のサインですか。 「同じ型分岐のswitchが5つの関数に複製されている」 「bool変数が8個あり、if条件が4つ以上のフラグを見ている」"
+  source: C++ Wiki
+  status: published
+  summary: 次の症状は、どのケーススタディで学んだ何のサインですか。 「同じ型分岐のswitchが5つの関数に複製されている」 「bool変数が8個あり、if条件が4つ以上のフラグを見ている」
+  section: practice
+  format: exercise
+  domain: design
+  collection: cpp-exercises
+  order: 11
 ---
 
-# 第11部 演習 — ケーススタディ
+<div id="第11部-演習-—-ケーススタディ" class="study-legacy-anchor" aria-hidden="true"></div>
+
+# ケーススタディの演習
 
 ## 問1. 概念確認(破綻シグナルの診断)
 
@@ -65,7 +71,7 @@ A. 敵AIのBehavior Tree基盤 B. セーブのバージョン管理 C. サウン
 
 ## 問5. デバッグ問題
 
-「ロックオン中にターゲットの敵が死ぬと、たまにカメラが原点(0,0,0)を向く」。[照準制御](/design/case-studies/aim-control.html)と[第7部](/runtime/memory/memory-bugs.html)の知識で、原因の候補2つと対策を書いてください。
+「ロックオン中にターゲットの敵が死ぬと、たまにカメラが原点(0,0,0)を向く」。[照準制御](/design/case-studies/aim-control.html)と[メモリバグ図鑑 — dangling pointer・use-after-free・double free・memory leak・buffer overflow・stack overflow](/runtime/memory/memory-bugs.html)の知識で、原因の候補2つと対策を書いてください。
 
 <details><summary>解答の要点</summary>
 
@@ -94,4 +100,4 @@ A. 敵AIのBehavior Tree基盤 B. セーブのバージョン管理 C. サウン
 
 ---
 
-前: [照準制御](/design/case-studies/aim-control.html) | [カテゴリ目次](/design/case-studies/) | [第12部: 判断ガイドへ](/design/decisions/)
+関連項目：[照準制御](/design/case-studies/aim-control.html) / [学習ガイド](/design/case-studies/) / [設計判断の読み進め方](/design/decisions/)

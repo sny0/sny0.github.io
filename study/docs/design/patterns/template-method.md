@@ -1,10 +1,12 @@
 ---
-title: "Template Method"
+title: Template Method
 study:
-  source: "C++ Wiki"
-  kind: "本文"
-  status: "既存原稿"
-  summary: "複数のクラスで処理の骨格(手順)は同じだが、一部の工程だけが違う。骨格を基底クラスに1回だけ書き、可変部分だけをサブクラスに上書きさせたい。 ※ C++のテンプレート(template)とは無関係の用語です。「手順のひな型(template)」の意。"
+  source: C++ Wiki
+  status: published
+  summary: 複数のクラスで処理の骨格(手順)は同じだが、一部の工程だけが違う。骨格を基底クラスに1回だけ書き、可変部分だけをサブクラスに上書きさせたい。 ※ C++のテンプレート(template)とは無関係の用語です。「手順のひな型(template)」の意。
+  section: reference
+  format: article
+  domain: design
 ---
 
 # Template Method
@@ -185,4 +187,4 @@ public abstract class ScreenBase : MonoBehaviour {   // 画面遷移の骨格
 
 ---
 
-前: [Strategy](/design/patterns/strategy.html) | [カテゴリ目次](/design/patterns/) | 次: [Visitor](/design/patterns/visitor.html)
+関連項目：[Strategy](/design/patterns/strategy.html) / [学習ガイド](/design/patterns/) / [Visitor](/design/patterns/visitor.html)

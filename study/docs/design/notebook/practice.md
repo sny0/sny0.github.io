@@ -1,17 +1,19 @@
 ---
-title: "小さな注文アプリで、設計を一巡する"
+title: 小さな注文アプリで、設計を一巡する
 study:
-  source: "設計の手帖"
-  kind: "本文"
-  status: "既存原稿"
-  summary: "一度で理想の構造を作るより、変更のたびに一つの問題を見つけ、改善の効果を確かめます。"
+  source: 設計の手帖
+  status: published
+  summary: 一度で理想の構造を作るより、変更のたびに一つの問題を見つけ、改善の効果を確かめます。
+  section: practice
+  format: tutorial
+  domain: design
+  collection: design-refactoring
+  order: 1
 ---
 
 # 小さな注文アプリで、設計を一巡する
 
 一度で理想の構造を作るより、変更のたびに一つの問題を見つけ、改善の効果を確かめます。
-
-05 · 視野を広げ、使ってみる / 実践課題とレビューの視点 / Practice with one small change / 実践 / 15分
 
 タグ: リファクタリング / テスト / 設計レビュー / 実践 / Fake / Stub / Mock
 
@@ -27,7 +29,7 @@ study:
 
 <div v-pre>
 
-<div class="case-flow"><span>OrderController</span><i>↓ 呼び出す</i><span>PlaceOrderUseCase</span><i>↓ 業務を操作する</i><span>Order + ShippingPolicy</span><i>↓ 契約を通じて保存する</i><span>IOrderRepository</span><small>実装：SqlOrderRepository / InMemoryOrderRepository</small></div><p>この図は処理の流れです。ソースの依存は第9章の図と合わせて確認します。全クラスを初日に作る必要はありません。変更の痛みが見えたところで分け、分けた理由を記録すると学びになります。</p>
+<div class="case-flow"><span>OrderController</span><i>↓ 呼び出す</i><span>PlaceOrderUseCase</span><i>↓ 業務を操作する</i><span>Order + ShippingPolicy</span><i>↓ 契約を通じて保存する</i><span>IOrderRepository</span><small>実装：SqlOrderRepository / InMemoryOrderRepository</small></div><p>この図は処理の流れです。ソースの依存は<a href="/study/design/notebook/architecture.html">アーキテクチャの解説</a>と合わせて確認します。全クラスを初日に作る必要はありません。変更の痛みが見えたところで分け、分けた理由を記録すると学びになります。</p>
 
 </div>
 

@@ -1,12 +1,23 @@
 ---
-title: "シューティング実装例 — C++17とraylib"
+title: シューティング実装例 — C++17とraylib
 study:
-  source: "新規執筆"
-  kind: "実装例"
-  status: "モデル検証済み"
+  source: 新規執筆
+  status: published
   domain: game
-  summary: "raylib 5.5で動かす小さな縦シューティング。純C++ Model、入力・描画、CMake、モデル検査を完全なファイルで読む。"
-  aliases: [シューティング, STG, C++, raylib, 固定更新, ゲームループ, サンプル]
+  summary: raylib 5.5で動かす小さな縦シューティング。純C++ Model、入力・描画、CMake、モデル検査を完全なファイルで読む。
+  aliases:
+    - シューティング
+    - STG
+    - C++
+    - raylib
+    - 固定更新
+    - ゲームループ
+    - サンプル
+  section: practice
+  format: tutorial
+  collection: shooter
+  order: 2
+  verification: モデル検証済み
 ---
 
 # シューティング実装例 — C++17とraylib

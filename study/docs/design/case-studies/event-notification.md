@@ -1,13 +1,17 @@
 ---
-title: "ケーススタディ 14: イベント通知(通知設計の総合判断)"
+title: イベント通知(通知設計の総合判断)の設計
 study:
-  source: "C++ Wiki"
-  kind: "本文"
-  status: "既存原稿"
+  source: C++ Wiki
+  status: published
   summary: "Observer・Event Queue・Pub/Subで個別に学んだ道具を、「1つのゲームの中でどう組み合わせるか」という総合問題として扱います。題材: 「敵死亡」に UI(キル表示)・スコア・実績・クエスト・ドロップ生成・サウンドの6システムが反応する。"
+  section: reference
+  format: article
+  domain: design
 ---
 
-# ケーススタディ 14: イベント通知(通知設計の総合判断)
+<div id="ケーススタディ-14-イベント通知-通知設計の総合判断" class="study-legacy-anchor" aria-hidden="true"></div>
+
+# イベント通知(通知設計の総合判断)の設計
 
 [Observer](/design/patterns/observer.html)・[Event Queue・Pub/Sub](/game/patterns/event-queue-and-pubsub.html)で個別に学んだ道具を、「**1つのゲームの中でどう組み合わせるか**」という総合問題として扱います。題材: 「敵死亡」に UI(キル表示)・スコア・実績・クエスト・ドロップ生成・サウンドの6システムが反応する。
 
@@ -87,4 +91,4 @@ void World::KillEnemy(Enemy& e) {                 // 死亡処理の手続きは
 
 ---
 
-前: [クエスト](/design/case-studies/quest-system.html) | [カテゴリ目次](/design/case-studies/) | 次: [照準制御](/design/case-studies/aim-control.html)
+関連項目：[クエスト](/design/case-studies/quest-system.html) / [学習ガイド](/design/case-studies/) / [照準制御](/design/case-studies/aim-control.html)

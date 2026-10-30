@@ -1,17 +1,37 @@
 ---
-title: "第3章 メモリとキャッシュ ── 現代ゲーム最適化の主戦場"
+title: 第3章 メモリ階層とキャッシュ
 study:
-  source: "IT教本"
-  kind: "学習ガイド"
-  status: "学習計画・概要"
-  summary: "現代のゲームの速度はCPUの計算速度ではなく、メモリアクセスで決まる。 メインメモリへのアクセス待ちは、レジスタを使う演算より長くなりやすい。ECS(第15章)も UnityのDOTS(第16章)も、データ指向設計(DOD)も、すべて"
+  source: IT教本
+  status: outline
+  summary: |-
+    メモリ階層、局所性、データ配置を学び、計測で確かめるための学習計画・概要です。配置を変えた小さな実験を通じて、計算とメモリアクセスのどちらが制約になっているかを調べます。
+
+    ## 関連する辞典本文・実践
+
+    - [キャッシュ局所性とAoS / SoA](/runtime/memory/cach
+  section: learning
+  format: path
+  domain: hardware
+  collection: low-level
+  order: 4
 ---
 
-# 第3章 メモリとキャッシュ ── 現代ゲーム最適化の主戦場
+<div id="第3章-メモリとキャッシュ-──-現代ゲーム最適化の主戦場" class="study-legacy-anchor" aria-hidden="true"></div>
+
+# 第3章 メモリ階層とキャッシュ
+
+## このページで案内すること
+
+メモリ階層、局所性、データ配置を学び、計測で確かめるための**学習計画・概要**です。配置を変えた小さな実験を通じて、計算とメモリアクセスのどちらが制約になっているかを調べます。
+
+## 関連する辞典本文・実践
+
+- [キャッシュ局所性とAoS / SoA](/runtime/memory/cache-locality-aos-soa.html)から、配列の配置とアクセス順を調べられます。
+- [キャッシュ・分岐予測・SIMD](/runtime/cpp-internals/cache-branch-simd.html)と[並行処理のバグ・false sharing](/runtime/memory/concurrency-bugs.html)で、CPU側の挙動と計測上の注意を確認できます。
 
 ## 学ぶ理由
 
-**現代のゲームの速度はCPUの計算速度ではなく、メモリアクセスで決まる。**
+**メモリアクセスが、ゲーム処理の性能を制約する場合がある。**
 メインメモリへのアクセス待ちは、レジスタを使う演算より長くなりやすい。ECS(第15章)も
 UnityのDOTS(第16章)も、データ指向設計(DOD)も、すべて
 「キャッシュに優しいメモリレイアウト」を実現するための技術である。

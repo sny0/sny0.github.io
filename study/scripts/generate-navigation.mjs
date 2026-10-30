@@ -1,4 +1,5 @@
 import fs from 'node:fs'
+import { sections, formatLabels, statusLabels, collections } from '../docs/.vitepress/content-model.mjs'
 import path from 'node:path'
 import { fileURLToPath } from 'node:url'
 import { createRequire } from 'node:module'
@@ -62,145 +63,242 @@ function urlFor(file) {
   return relative==='index.md' ? '/' : relative.endsWith('/index.md')
     ? '/'+relative.slice(0,-8) : '/'+relative.slice(0,-3)+'.html'
 }
-function writePage(relative, title, domain, body, kind='統合ガイド', include=true) {
-  const file=path.join(docs,relative)
-  fs.mkdirSync(path.dirname(file),{recursive:true})
-  const meta={title,study:{source:'統合ガイド',kind,status:'初版',domain,generated:true,catalog:include,
-    summary:body.replace(/[#*\[\]`]/g,'').split('\n').find(line=>line.trim())?.slice(0,150) || title}}
-  // JSON is a YAML subset; frontmatter remains editable without a custom syntax.
-  fs.writeFileSync(file,'---\n'+JSON.stringify(meta,null,2)+'\n---\n\n# '+title+'\n\n'+body+'\n','utf8')
+const generatedLegacyAnchors = {"guide/index.md": "ガイドと読み進め方", "guide/learning-paths.md": "読み進め方"}
+function writePage(relative, title, study, body, layout) {
+  const oldAnchor = generatedLegacyAnchors[relative]
+  if (oldAnchor) body = `<div id="${oldAnchor}" class="study-legacy-anchor" aria-hidden="true"></div>\n\n` + body
+  const file = path.join(docs, relative)
+  fs.mkdirSync(path.dirname(file), { recursive: true })
+  const data = {
+    title, ...(layout ? { layout } : {}),
+    study: { source: '統合ガイド', status: 'published', generated: true, catalog: false, ...study }
+  }
+  fs.writeFileSync(file, '---\n' + JSON.stringify(data, null, 2) + '\n---\n\n' + body + '\n', 'utf8')
 }
 
-const findUrl = (needle, fallback) => imported.find(e=>(e.title+' '+e.url).toLowerCase().includes(needle.toLowerCase()))?.url || fallback
-const allocator = findUrl('allocators','/runtime/')
-const memory = findUrl('storage-duration','/runtime/')
-const compiler = findUrl('build-pipeline-journey','/compilers/')
-const loop = findUrl('game-loop-and-update','/game/')
-const conventions = findUrl('coordinate','/math/')
-const profiling = findUrl('profil','/tools/')
+function linkedUrls(content, file) {
+  const clean = content.replace(/^(`{3,}|~{3,})[^\n]*\n[\s\S]*?^\1[^\n]*$/gm, '')
+  const matches = [...clean.matchAll(/\[[^\]\n]*\]\(([^)\s]+)(?:\s+[^)]*)?\)/g)].map(match => match[1])
+  matches.push(...[...clean.matchAll(/\bhref=["']([^"']+)["']/g)].map(match => match[1]))
+  return [...new Set(matches.filter(value => !/^(?:https?:|mailto:|data:|#|\/\/)/.test(value)).map(value => {
+    const url = new URL(value, 'https://study.invalid' + urlFor(file))
+    return decodeURIComponent(url.pathname).replace(/^\/study\//, '/').replace(/\.md$/, '.html').replace(/\/index\.html$/, '/')
+  }))]
+}
 
-writePage('guide/about.md','この技術辞典について','guide',`コンピュータの内部から、言語、開発ツール、3DCG、ゲーム開発までをつなぐ個人の技術ノートです。用語の意味、仕組み、使う場面、落とし穴、手元で確かめる方法を整理しています。
+let entries = []
+for (const file of walk(docs)) {
+  const parsed = matter(fs.readFileSync(file, 'utf8'))
+  const meta = parsed.data.study
+  if (!meta || meta.generated) continue
+  const url = urlFor(file)
+  const base = importedByUrl.get(url) || {}
+  const title = parsed.data.title || parsed.content.match(/^# (.+)$/m)?.[1] || path.basename(file, '.md')
+  const domain = meta.domain || base.domain
+  if (!sections.some(section => section.id === meta.section) || !formatLabels[meta.format] || !statusLabels[meta.status]) {
+    throw new Error(`Set study.section, study.format and study.status explicitly: ${path.relative(docs, file)}`)
+  }
+  if (![...domains.map(item => item.id), 'guide', 'terms'].includes(domain)) throw new Error('Unknown domain: ' + url)
+  if (meta.collection && !collections.some(item => item.id === meta.collection && item.section === meta.section)) {
+    throw new Error('Unknown or mismatched collection: ' + url)
+  }
+  const aliases = [...(base.aliases || []), ...(meta.aliases || []), ...(parsed.data.aliases || [])]
+  for (const [pattern, values] of extraAliases) if (pattern.test(title + ' ' + url)) aliases.push(...values)
+  entries.push({
+    title, url, file: path.relative(docs, file).split(path.sep).join('/'), domain,
+    section: meta.section, format: meta.format, status: meta.status,
+    summary: meta.summary || base.summary || '', source: meta.source || base.source || '個人ノート',
+    aliases: [...new Set(aliases)], ...(meta.collection ? { collection: meta.collection } : {}),
+    ...(Number.isFinite(meta.order) ? { order: meta.order } : {}),
+    ...(meta.verification ? { verification: meta.verification } : {}), links: linkedUrls(parsed.content, file)
+  })
+}
 
-## 本文・学習ガイド・草稿
+const byTitle = (a, b) => a.title.localeCompare(b.title, 'ja')
+const byOrder = (a, b) => (a.order ?? 999) - (b.order ?? 999) || byTitle(a, b)
+const pageLink = entry => `- [${entry.title.replace(/\[/g, '［').replace(/\]/g, '］')}](${entry.url})${entry.status === 'published' ? '' : ' — ' + statusLabels[entry.status]}`
+const list = selected => selected.map(pageLink).join('\n')
+const at = url => entries.find(entry => entry.url === url)
 
-初版では、C++・設計・描画の既存原稿を中心にまとめています。IT教本に由来する項目は、主に学習計画・概要・演習のガイドです。歴史とECSには本文草稿を追加しました。[小さなシューティングの設計例](/game/shooter-design.html)では、同じルールのC++版とUnityのC#版を読めます。各ページ上部の表示で、原稿の種類と状態を確認できます。
+writePage('index.md', '技術辞典', { section: 'reference', format: 'index', domain: 'guide' }, '<StudyCatalog section="reference" />', 'page')
+writePage('learn/index.md', '学習ガイド', { section: 'learning', format: 'index', domain: 'guide' }, '<StudyCatalog section="learning" />', 'page')
+writePage('practice/index.md', '実践・サンプル', { section: 'practice', format: 'index', domain: 'guide' }, '<StudyCatalog section="practice" />', 'page')
 
-ブラウザ、ネットワーク、Rust、Zig、一般C#の基礎、3DCG制作・アニメーションなどは順次充実させる分野です。分野索引の執筆予定と、既に読める本文を分けています。
+writePage('guide/about.md', 'この技術辞典について', { section: 'reference', format: 'index', domain: 'guide' }, `# この技術辞典について
 
-## 検証の読み方
+コンピュータの内部から、言語、開発ツール、3DCG、ゲーム開発までをつなぐ個人の技術ノートです。自分が調べ直すための辞典を、一般公開しています。
 
-標準で保証されること、典型的な実装、実測結果、設計上の助言を区別して読みます。コードの対象言語・規格・エンジン・OSの前提は、個々の本文に従ってください。一般.NETの例とUnityの例にも対応環境の差があります。
+## 目的に応じた3つの入口
 
-初版の公開準備では文書のビルドとリンクを確認し、見つかった誤記を修正しました。本文内の過去の検証記録は元原稿時点のものです。全コードを、全環境で実行確認したという意味ではありません。疑似コード・省略したコードは完成実装と分けます。
+| 入口 | 調べられること |
+| --- | --- |
+| [技術辞典](/) | 用語の意味、仕組み、内部動作、比較、注意点。分野と名前から調べます。 |
+| [学習ガイド](/learn/) | 前提知識、到達目標、読む順番。詳しい説明は辞典の本文へつなぎます。 |
+| [実践・サンプル](/practice/) | 制作手順、コード例、演習。動かしたり考えたりして確かめます。 |
 
-## 調べ方
+分野は扱うテーマ、入口はページの役割です。同じテーマの学習ガイドと本文があっても、用途を分けて案内します。各本文にある「関連する学習ガイド・実践」から行き来できます。
 
-ナビの「全文検索」は本文を含めて検索します。トップの絞り込みはタイトル・別名と分野・種類を対象にします。何から調べるか迷ったら[読み進め方](/guide/learning-paths.html)、表記が分からなければ[用語・別名](/terms/)を使えます。
+## 記事の状態と確認範囲
 
-誤りや改善点は、[このサイトのソース](https://github.com/sny0/sny0.github.io/tree/main/study)から確認できます。`, '案内')
+「草稿」は増補・推敲中の解説、「学習計画・概要」は学ぶ範囲と演習の案内です。学習計画があるだけの分野を、辞典本文が整っている分野と同じ扱いにはしていません。ブラウザやネットワークなど、専用の本文がまだない分野も明示します。
 
-writePage('guide/learning-paths.md','読み進め方','guide',`辞典を最初から順番に読む必要はありません。いま持っている疑問を、関係する項目へつなげる読み順です。
+公開中という状態は、コードの実行や技術内容の全面的な検証を保証しません。対象の言語・規格・エンジン・OSと、実行確認の範囲は個々の本文に従ってください。「モデル検証済み」等の記録は、そのページに書かれた確認範囲に限ります。
+
+標準で保証されること、典型的な実装、実測結果、設計上の助言を区別して読みます。元原稿の出典と検証記録も保っています。
+
+## 探し方
+
+入口ごとの索引は、その入口に属するページのタイトル・別名を絞り込みます。画面上部の全文検索はサイト全体が対象です。[用語・別名](/terms/)からも説明へ進めます。
+
+元の教本の章順は学習ガイドに残し、辞典では主題の名前を使います。再編前のURLからも、同じページを開けます。
+
+誤りや改善点は、[このサイトのソース](https://github.com/sny0/sny0.github.io/tree/main/study)から確認できます。`)
+
+writePage('guide/index.md', '学習ガイドの入口', { section: 'learning', format: 'index', domain: 'guide' }, `# 学習ガイドの入口
+
+読む順番と前提知識は[学習ガイド一覧](/learn/)にまとめています。用語や仕組みを調べるときは[技術辞典](/)、手を動かす題材は[実践・サンプル](/practice/)へ進んでください。
+
+${collections.filter(item => item.section === 'learning').map(item => `- [${item.title}](${item.start}) — ${item.description}`).join('\n')}`)
+
+writePage('guide/learning-paths.md', '疑問から選ぶ読み順', {
+  section: 'learning', format: 'path', domain: 'guide', catalog: true, collection: 'questions', order: 0,
+  summary: 'メモリ確保、実行、入力と描画、Webの流れなど、疑問から関連する本文をたどる。'
+}, `# 疑問から選ぶ読み順
+
+辞典を最初から順番に読む必要はありません。いまの疑問に関係する本文から選びます。
 
 ## 「確保する」と内部で何が起きるか
 
-1. [所有・記憶域・寿命](${memory})を区別する。
-2. [アロケータ](${allocator})で、小さい領域の再利用とOSへの追加要求を調べる。
-3. [OS](/os/)の仮想メモリ、ページフォルト、物理ページとの関係へ進む。
-4. [調査ツール](/tools/)で、確保量・常駐量・解放と再利用を観察する。
+1. [記憶域期間・スコープ・寿命](/runtime/memory/storage-duration-and-lifetime.html)を区別する。
+2. [アロケータ](/runtime/memory/allocators-and-pools.html)で、小さい領域の再利用とOSへの追加要求を調べる。
+3. [OSを学ぶ計画](/guide/low-level/operating-system.html)で、仮想メモリ・ページフォルトとのつながりを整理する。OS専用の辞典本文は未整備です。
+4. [メモリバグ](/runtime/memory/memory-bugs.html)と[キャッシュ局所性](/runtime/memory/cache-locality-aos-soa.html)から、正しさと配置を確かめる。
 
 ## ソースコードがCPUで動くまで
 
-1. [ビルドの旅](${compiler})から、コンパイルとリンクをたどる。
-2. [コンパイラ](/compilers/)と[言語](/languages/)から、型・ABI・実行方式を調べる。
-3. [ハードウェア](/hardware/)の命令、レジスタ、キャッシュへつなぐ。
+1. [ビルドの旅](/runtime/cpp-internals/build-pipeline-journey.html)でコンパイルとリンクをたどる。
+2. [翻訳単位・ヘッダー](/runtime/cpp-internals/translation-units-and-headers.html)、[シンボル・ABI](/runtime/cpp-internals/symbols-and-linkage.html)、[実行ファイル・ライブラリ](/runtime/cpp-internals/object-files-and-libraries.html)を調べる。
+3. [関数呼び出し・レジスタ](/runtime/cpp-internals/function-calls-and-cpu.html)へ進む。
 
 ## 入力からゲーム画面まで
 
-1. [ゲームループ](${loop})で入力・更新・描画の時間を分ける。
+1. [ゲームループ](/game/patterns/game-loop-and-update.html)で入力・更新・描画の時間を分ける。
 2. [ECS](/game/ecs.html)でID、データ配置、Query、構成変更を調べる。
-3. [数学](${conventions})と[グラフィックス](/graphics/)から座標・GPU・表示へ進む。
-4. [計測](${profiling})で、CPU・GPU・待機・確保のどこが重いか確かめる。
-
-まとまった実装を追うなら、[小さなシューティングの設計](/game/shooter-design.html)から[C++版](/game/shooter-cpp.html)と[Unity版](/game/shooter-unity.html)へ進めます。仕様・データ・更新順を対応させて読みます。
+3. [座標変換](/math/rendering/transform.html)と[描画パイプライン](/graphics/pipeline/overview.html)から画面へつなぐ。
+4. 作って試すなら[シューティングの設計](/game/shooter-design.html)を読み、[C++版](/game/shooter-cpp.html)または[Unity版](/game/shooter-unity.html)へ進む。
 
 ## URLを開いてからページが見えるまで
 
-[ネットワーク](/network/)のDNS・接続・HTTPから、[ブラウザ](/browser/)の解析・実行・描画へ進む系列です。この系列は現在、基礎本文を充実させる段階で、分野索引に項目を整理しています。
+[ネットワーク](/network/)と[ブラウザ](/browser/)の専用本文は準備中です。両ページには扱う範囲を記しています。学習計画と、既に読める詳しい説明を区別して増補します。
 
 ## 作り方の変化を歴史から見る
 
-[ビデオゲーム史](/history/video-games.html)で作品・ハード・媒体・流通を並べ、気になった時代からメモリ、描画、入力、通信の各論へ進めます。年別の表は地域・初公開・発売を区別して読みます。`)
+[ビデオゲーム史](/history/video-games.html)の作品・ハード・媒体・流通と、[リアルタイム3D技術史](/guide/rendering/timeline.html)の技術の変化から、気になった仕組みへ進みます。`)
 
-writePage('guide/index.md','ガイドと読み進め方','guide',`調べる順番と、元の教本の学習経路を集めています。
-
-- [疑問から選ぶ読み進め方](/guide/learning-paths.html)
-- [C++ Wikiの入口](${findUrl('cpp-index','/languages/')})
-- [低レイヤの学習ガイド](/guide/low-level/)
-- [この辞典の範囲と検証の読み方](/guide/about.html)`)
-
-const terms=[
-  ['alloc / allocate / malloc / アロック / メモリ確保',allocator,'要求・確保・初期化・解放を分け、アロケータとOSへつなぐ'],
-  ['ECS / Entity Component System','/game/ecs.html','Entity、Component、System、Query、格納方式'],
-  ['RAII / 寿命 / 所有',memory,'似た言葉の役割と、後片付けを担うオブジェクト'],
-  ['HLSL',findUrl('/shader/hlsl','/graphics/'),'Direct3Dやエンジンで使うシェーダ言語'],
-  ['GLSL',findUrl('/shader/glsl','/graphics/'),'OpenGL系のシェーダ言語と、コンパイル経路'],
-  ['OpenGL / GL',findUrl('/api/opengl','/graphics/'),'状態、リソース、パイプライン、同期'],
-  ['DirectX / Direct3D / D3D / DX',findUrl('/api/comparison','/graphics/'),'DirectX全体と、描画API・DXGIを区別する'],
-  ['Vulkan / VK',findUrl('/api/vulkan','/graphics/'),'明示的な資源管理、コマンド、同期、表示'],
-  ['DIP / DI',findUrl('/solid/dip','/design/'),'依存性逆転の原則と、依存性注入の手段'],
-  ['命名辞典 / Factory / Service / Repository','/design/naming.html','名前と責務、具体例と注意点'],
+const termRows = [
+  ['alloc / allocate / malloc / アロック / メモリ確保', '/runtime/memory/allocators-and-pools.html', '確保・初期化・解放、アロケータとOSの関係'],
+  ['ECS / Entity Component System', '/game/ecs.html', 'ID、Component、System、Query、格納方式'],
+  ['RAII / 所有 / 寿命', '/runtime/memory/storage-duration-and-lifetime.html', '記憶域、寿命、後片付けの区別'],
+  ['HLSL', '/graphics/shader/hlsl.html', 'Direct3Dやエンジンで使うシェーダ言語'],
+  ['GLSL', '/graphics/shader/glsl.html', 'OpenGL系のシェーダ言語とコンパイル経路'],
+  ['OpenGL / GL', '/graphics/api/opengl.html', '状態、リソース、パイプライン、同期'],
+  ['DirectX / Direct3D / D3D / DX', '/graphics/api/comparison.html', 'DirectX全体、描画API、DXGIの区別'],
+  ['Vulkan / VK', '/graphics/api/vulkan.html', '明示的な資源管理、コマンド、同期、表示'],
+  ['DIP / DI', '/design/solid/dip.html', '依存性逆転と依存性注入'],
+  ['命名辞典 / Factory / Service / Repository', '/design/naming.html', '名前と責務、具体例と注意点']
 ]
-writePage('terms/index.md','用語・別名から調べる','terms',`表記の違いから、主な説明へ進む索引です。詳しい用語集・命名辞典も併用できます。
+writePage('terms/index.md', '用語・別名から調べる', {
+  section: 'reference', format: 'glossary', domain: 'terms', catalog: true,
+  summary: '表記の違いから、用語や仕組みの主な説明へ進む。'
+}, `# 用語・別名から調べる
 
 | 用語・別名 | 説明への入口 |
 | --- | --- |
-${terms.map(([name,url,description])=>`| [${name}](${url}) | ${description} |`).join('\n')}
+${termRows.map(([name, url, description]) => `| [${name}](${url}) | ${description} |`).join('\n')}
 
-- [C++・設計の用語集](${findUrl('cpp-glossary','/design/')})
+- [C++・設計の用語集](/guide/cpp-glossary.html)
 - [クラス名辞典](/design/naming.html)
 - [問題から選ぶパターン索引](/design/pattern-index.html)
-- [辞典全体のタイトル・別名索引](/)`,'用語索引')
+- [技術辞典のタイトル・別名索引](/)`)
 
-let entries=[]
-for(const file of walk(docs)) {
-  const parsed=matter(fs.readFileSync(file,'utf8'))
-  const meta=parsed.data.study
-  if(!meta || meta.generated) continue
-  const url=urlFor(file)
-  const base=importedByUrl.get(url) || {}
-  const domain=meta.domain || base.domain || path.relative(docs,file).split(path.sep)[0]
-  const title=parsed.data.title || base.title || parsed.content.match(/^# (.+)$/m)?.[1] || path.basename(file,'.md')
-  const aliases=[...(base.aliases || []),...(meta.aliases || []),...(parsed.data.aliases || [])]
-  for(const [pattern,values] of extraAliases) if(pattern.test(title+' '+url)) aliases.push(...values)
-  entries.push({title,url,domain,kind:meta.kind || base.kind || '本文', summary:meta.summary || base.summary || '',
-    source:meta.source || base.source || '技術ノート',status:meta.status || base.status || '草稿',aliases:[...new Set(aliases)]})
+for (const domain of domains) {
+  const reference = entries.filter(entry => entry.domain === domain.id && entry.section === 'reference').sort(byTitle)
+  const learning = entries.filter(entry => entry.domain === domain.id && entry.section === 'learning').sort(byOrder)
+  const practice = entries.filter(entry => entry.domain === domain.id && entry.section === 'practice').sort(byOrder)
+  domain.count = reference.length
+  domain.status = reference.length ? '辞典本文あり' : '辞典本文を準備中'
+  writePage(domain.id + '/index.md', domain.title, { section: 'reference', format: 'index', domain: domain.id }, `# ${domain.title}
+
+${domain.description}
+
+## 辞典の本文
+
+${reference.length ? list(reference) : 'この分野の専用の辞典本文は準備中です。学習計画や分野の目次を、詳しい解説本文として数えてはいません。'}
+
+## この分野の学習ガイド
+
+${learning.length ? list(learning) : 'この分野専用の学習経路は準備中です。[学習ガイド一覧](/learn/)から、公開中のコースを選べます。'}
+
+## 作って試す
+
+${practice.length ? list(practice) : 'この分野専用の実践教材は準備中です。[実践・サンプル一覧](/practice/)に公開中の題材をまとめています。'}
+
+## 扱う範囲・増補する項目
+
+${domain.planned.split('、').map(text => '- ' + text).join('\n')}`)
 }
 
-const pageLink = entry => `- [${entry.title.replace(/\[/g,'［').replace(/\]/g,'］')}](${entry.url}) — ${entry.kind}`
-for(const domain of domains) {
-  const existing=entries.filter(entry=>entry.domain===domain.id)
-  const body=`${domain.description}\n\n## いま読める項目\n\n${existing.length ? existing.map(pageLink).join('\n') : 'この分野の基礎本文は執筆予定です。下の項目から、扱う範囲を確認できます。'}\n\n## これから充実させる項目\n\n${domain.planned.split('、').map(text=>'- '+text).join('\n')}\n\n本文・概要・学習計画を区別しながら増補します。[疑問から選ぶ読み進め方](/guide/learning-paths.html)にも、この分野とのつながりをまとめています。`
-  writePage(domain.id+'/index.md',domain.title,domain.id,body,'分野索引')
-  domain.status=existing.some(e=>['本文','本文草稿','草稿','参考資料'].includes(e.kind)) ? '本文・ガイドあり' : existing.length ? '概要・学習ガイドから' : '本文を執筆予定'
+for (const file of walk(docs)) {
+  const parsed = matter(fs.readFileSync(file, 'utf8'))
+  const meta = parsed.data.study
+  if (!meta?.generated || !meta.catalog) continue
+  entries.push({ title: parsed.data.title, url: urlFor(file), file: path.relative(docs, file).split(path.sep).join('/'),
+    domain: meta.domain, section: meta.section, format: meta.format, status: meta.status,
+    summary: meta.summary, source: meta.source, aliases: [], ...(meta.collection ? { collection: meta.collection } : {}),
+    ...(Number.isFinite(meta.order) ? { order: meta.order } : {}), links: linkedUrls(parsed.content, file) })
 }
-
-for(const file of walk(docs)) {
-  const parsed=matter(fs.readFileSync(file,'utf8'))
-  const meta=parsed.data.study
-  if(!meta?.generated || meta.catalog===false)continue
-  entries.push({title:parsed.data.title,url:urlFor(file),domain:meta.domain,kind:meta.kind,summary:meta.summary,
-    source:meta.source,status:meta.status,aliases:[]})
-}
-entries.sort((a,b)=>a.title.localeCompare(b.title,'ja'))
-const seen=new Set()
-for(const entry of entries) {
-  if(seen.has(entry.url)) throw new Error('Duplicate catalog URL: '+entry.url)
+entries.sort(byTitle)
+const seen = new Set()
+for (const entry of entries) {
+  if (seen.has(entry.url)) throw new Error('Duplicate catalog URL: ' + entry.url)
   seen.add(entry.url)
+  entry.links = entry.links.filter(url => entries.some(item => item.url === url))
 }
-const catalog={domains:domains.map(({planned,...data})=>data),entries}
-const sidebar=[{text:'ガイド',collapsed:true,items:[{text:'読み進め方',link:'/guide/learning-paths.html'},{text:'用語・別名',link:'/terms/'},{text:'この辞典',link:'/guide/about.html'}]},
-  ...domains.map(domain=>({text:domain.title,collapsed:true,items:[{text:'分野の入口',link:'/'+domain.id+'/'},
-    ...entries.filter(e=>e.domain===domain.id && e.kind!=='分野索引').map(e=>({text:e.title,link:e.url}))]}))]
-fs.writeFileSync(path.join(dataDir,'catalog.json'),JSON.stringify(catalog,null,2)+'\n')
-fs.writeFileSync(path.join(dataDir,'sidebar.json'),JSON.stringify(sidebar,null,2)+'\n')
-console.log(`Navigation: ${domains.length} domains, ${entries.length} catalog entries`)
+for (const collection of collections) {
+  if (!at(collection.start)) throw new Error('Missing collection entry: ' + collection.id)
+  const pages = entries.filter(entry => entry.collection === collection.id).sort(byOrder)
+  if (!pages.length) throw new Error('Empty collection: ' + collection.id)
+  if (collection.linear) {
+    if (new Set(pages.map(entry => entry.order)).size !== pages.length) throw new Error('Duplicate course order: ' + collection.id)
+    pages.forEach((entry, index) => {
+      if (index > 0) entry.previous = pages[index - 1].url
+      if (index < pages.length - 1) entry.next = pages[index + 1].url
+    })
+  }
+}
+
+const item = entry => ({ text: entry.title, link: entry.url })
+const referenceSidebar = [
+  { text: '技術辞典', link: '/' }, { text: '用語・別名', link: '/terms/' },
+  ...domains.map(domain => ({ text: domain.title, collapsed: true, items: [
+    { text: domain.count ? '分野の目次' : '本文を準備中', link: '/' + domain.id + '/' },
+    ...entries.filter(entry => entry.section === 'reference' && entry.domain === domain.id).map(item)
+  ] }))
+]
+function sectionSidebar(section, collectionId) {
+  const sectionInfo = sections.find(item => item.id === section)
+  const collection = collections.find(item => item.id === collectionId)
+  const current = collection ? [{ text: collection.title, items: entries.filter(entry => entry.collection === collection.id).sort(byOrder).map(item) }] : []
+  return [{ text: sectionInfo.title + '一覧', link: sectionInfo.url }, ...current,
+    { text: collection ? 'ほかの' + sectionInfo.title : sectionInfo.title, collapsed: Boolean(collection),
+      items: collections.filter(item => item.section === section && item.id !== collectionId).map(item => ({ text: item.title, link: item.start })) }]
+}
+const sidebar = { '/': referenceSidebar, '/learn/': sectionSidebar('learning'), '/practice/': sectionSidebar('practice') }
+for (const entry of entries) {
+  if (entry.section !== 'reference') sidebar['/' + entry.file] = sectionSidebar(entry.section, entry.collection)
+}
+sidebar['/guide/index.md'] = sectionSidebar('learning')
+const catalog = { sections, domains: domains.map(({ planned, ...data }) => data), collections, entries }
+fs.writeFileSync(path.join(dataDir, 'catalog.json'), JSON.stringify(catalog, null, 2) + '\n')
+fs.writeFileSync(path.join(dataDir, 'sidebar.json'), JSON.stringify(sidebar, null, 2) + '\n')
+console.log(`Navigation: ${domains.length} domains; ${sections.map(section => section.title + ' ' + entries.filter(entry => entry.section === section.id).length).join(', ')}`)

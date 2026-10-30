@@ -1,10 +1,12 @@
 ---
-title: "デストラクタと Dispose / RAII と using"
+title: デストラクタと Dispose / RAII と using
 study:
-  source: "C++ Wiki"
-  kind: "本文"
-  status: "既存原稿"
+  source: C++ Wiki
+  status: published
   summary: "C#の~の感覚(いつか呼ばれるかも)をC++に持ち込むと、逆方向に驚くことになります: C++のデストラクタは決定的・同期的で、設計の主役です(RAII)。 C#: 型がIDisposableでも、usingを書くかは利用者次第(呼び忘れがコンパイルは通る)"
+  section: reference
+  format: article
+  domain: languages
 ---
 
 # デストラクタと Dispose / RAII と using
@@ -74,4 +76,4 @@ C#で書いたことのある `using` 使用コードを1つ思い出し、C++�
 
 ---
 
-前: [カテゴリ目次](/languages/csharp/) | 次: [ポインタと参照型 / 値セマンティクス](/languages/csharp/pointers-references-value-semantics.html)
+関連項目：[学習ガイド](/languages/csharp/) / [ポインタと参照型 / 値セマンティクス](/languages/csharp/pointers-references-value-semantics.html)

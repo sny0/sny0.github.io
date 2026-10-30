@@ -1,17 +1,17 @@
 ---
-title: "オブジェクト指向と、不正な状態を作らない設計"
+title: オブジェクト指向と、不正な状態を作らない設計
 study:
-  source: "設計の手帖"
-  kind: "本文"
-  status: "既存原稿"
-  summary: "オブジェクトはデータの入れ物に振る舞いを足しただけではありません。守るべきルールの境界です。"
+  source: 設計の手帖
+  status: published
+  summary: オブジェクトはデータの入れ物に振る舞いを足しただけではありません。守るべきルールの境界です。
+  section: reference
+  format: article
+  domain: design
 ---
 
 # オブジェクト指向と、不正な状態を作らない設計
 
 オブジェクトはデータの入れ物に振る舞いを足しただけではありません。守るべきルールの境界です。
-
-01 · 設計の土台 / カプセル化と値オブジェクト / Protect your invariants / 入門 / 9分
 
 タグ: OOP / カプセル化 / 不変条件 / Value Object
 

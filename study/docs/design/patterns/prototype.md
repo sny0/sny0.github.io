@@ -1,10 +1,12 @@
 ---
-title: "Prototype"
+title: Prototype
 study:
-  source: "C++ Wiki"
-  kind: "本文"
-  status: "既存原稿"
-  summary: "「クラスから new する」のではなく、設定済みの見本(プロトタイプ)をコピーして新しいインスタンスを作りたい。生成したい種類が実行時に決まる(データやエディタ上の配置で決まる)場合、クラス階層での表現は追いつきません。"
+  source: C++ Wiki
+  status: published
+  summary: 「クラスから new する」のではなく、設定済みの見本(プロトタイプ)をコピーして新しいインスタンスを作りたい。生成したい種類が実行時に決まる(データやエディタ上の配置で決まる)場合、クラス階層での表現は追いつきません。
+  section: reference
+  format: article
+  domain: design
 ---
 
 # Prototype
@@ -184,4 +186,4 @@ public class Spawner : MonoBehaviour {
 
 ---
 
-前: [Builder](/design/patterns/builder.html) | [カテゴリ目次](/design/patterns/) | 次: [Singleton](/design/patterns/singleton.html)
+関連項目：[Builder](/design/patterns/builder.html) / [学習ガイド](/design/patterns/) / [Singleton](/design/patterns/singleton.html)

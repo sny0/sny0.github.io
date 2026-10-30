@@ -1,10 +1,12 @@
 ---
-title: "DirectX 12"
+title: DirectX 12
 study:
-  source: "RenderingWiki"
-  kind: "本文"
-  status: "既存原稿"
-  summary: "DirectX 12 (2015) はMicrosoftの明示的 (explicit) グラフィックスAPIです。DX11でドライバが自動で行っていた仕事 — 状態検証・ハザード管理・メモリ管理・同期 — をアプリケーションの責務に移し、引き換えにマルチコアCPUの完全活用と予測可能な性能を得ました"
+  source: RenderingWiki
+  status: published
+  summary: DirectX 12 (2015) はMicrosoftの明示的 (explicit) グラフィックスAPIです。DX11でドライバが自動で行っていた仕事 — 状態検証・ハザード管理・メモリ管理・同期 — をアプリケーションの責務に移し、引き換えにマルチコアCPUの完全活用と予測可能な性能を得ました
+  section: reference
+  format: article
+  domain: graphics
 ---
 
 # DirectX 12

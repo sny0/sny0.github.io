@@ -1,31 +1,37 @@
 ---
-title: "1. 全体設計 — 1フレームの旅"
+title: 1. 全体設計 — 1フレームの旅
 study:
-  source: "RenderingWiki"
-  kind: "本文"
-  status: "既存原稿"
-  summary: "最終章では、Wiki全体の知識を使って、ゼロからレンダラーを設計・実装します。題材はVulkan (C++) を主とし、DX12との対応を併記します。目標は「三角形」で終わらず、影・PBRライティング・ポストプロセスを備えた1フレームが、CPUのコードからGPUの実行までどう流れるかを、自分の手で説"
+  source: RenderingWiki
+  status: published
+  summary: Vulkanを題材に、レンダラーの設計と主要処理のコード断片を追う実践教材。完成プロジェクト一式の配布ではなく、必要な処理を補いながら仕組みを確かめる。
+  section: practice
+  format: tutorial
+  domain: graphics
+  collection: renderer-project
+  order: 1
 ---
 
 # 1. 全体設計 — 1フレームの旅
 
-## この章について
+## この実践で扱う範囲
 
-最終章では、**Wiki全体の知識を使って、ゼロからレンダラーを設計・実装**します。題材はVulkan (C++) を主とし、DX12との対応を併記します。目標は「三角形」で終わらず、**影・PBRライティング・ポストプロセスを備えた1フレームが、CPUのコードからGPUの実行までどう流れるか**を、自分の手で説明できるようになることです。
+Vulkan (C++) を題材に、レンダラーの設計と主要処理のコード断片を追います。DX12との対応も併記し、CPUのコードとGPUの処理が1フレームの中でどうつながるかを確かめます。
 
-各ステップで「これは第N章のあの知識」と往復しながら進みます。**この章は読むだけでなく、必ず手を動かしてください。**
+この5ページは、そのままビルドできる完成プロジェクト一式を配布する教材ではありません。ヘルパー関数・資源生成・アセット読み込みなど、省略された処理を手元の環境へ補って組み合わせる必要があります。下の影・PBR・ポストプロセスは、設計するレンダラーの目標仕様です。
 
-## 完成形の仕様
+前提は[描画の学習ロードマップ](/guide/rendering/roadmap.html)で確認できます。各ステップで[パイプライン](/graphics/pipeline/overview.html)、[Vulkan](/graphics/api/vulkan.html)、[PBR](/graphics/lighting/pbr.html)などの本文へ戻り、コードと仕組みを対応付けながら進めてください。
+
+## 設計するレンダラーの目標仕様
 
 | 項目 | 内容 | 使う知識 |
 |---|---|---|
-| API | Vulkan 1.3 (Dynamic Rendering) / DX12併記 | [第5章](/graphics/api/vulkan.html) |
-| シェーダ | HLSL→SPIR-V (DXC) or GLSL | [第4章](/graphics/shader/hlsl.html) |
-| メッシュ | glTF読み込み (cgltf等) | [第2章](/math/rendering/transform.html) |
-| ライティング | PBR (GGX) + IBL + 平行光源 | [第8章](/graphics/lighting/pbr.html) |
+| API | Vulkan 1.3 (Dynamic Rendering) / DX12併記 | [Vulkan](/graphics/api/vulkan.html) |
+| シェーダ | HLSL→SPIR-V (DXC) or GLSL | [シェーダ言語](/graphics/shader/hlsl.html) |
+| メッシュ | glTF読み込み (cgltf等) | [座標変換](/math/rendering/transform.html) |
+| ライティング | PBR (GGX) + IBL + 平行光源 | [PBR](/graphics/lighting/pbr.html) |
 | 影 | シャドウマップ (PCF) | [シャドウ](/graphics/lighting/shadow.html) |
-| ポスト | ブルーム + ACESトーンマップ | [第9章](/graphics/postprocess/overview.html) |
-| 方式 | シングルパスForward (拡張課題でForward+) | [第7章](/graphics/path/forward.html) |
+| ポスト | ブルーム + ACESトーンマップ | [ポストプロセス](/graphics/postprocess/overview.html) |
+| 方式 | シングルパスForward (拡張課題でForward+) | [Forward Rendering](/graphics/path/forward.html) |
 
 ## アーキテクチャ全体図
 
@@ -34,7 +40,7 @@ flowchart TB
     subgraph App["アプリケーション層"]
         MAIN["main loop<br/>入力・カメラ・シーン更新"]
     end
-    subgraph Renderer["レンダラー層 (この章で作る)"]
+    subgraph Renderer["レンダラー層 (設計する構成)"]
         DEV["Device<br/>初期化・スワップチェイン・フレーム同期"]
         RES["Resources<br/>バッファ/テクスチャ/パイプライン管理"]
         FRAME["FrameRenderer<br/>パスの構成と記録"]
@@ -48,9 +54,9 @@ flowchart TB
     FRAME -->|コマンドバッファ| GPU
 ```
 
-## 1フレームの旅 — 完成後の姿を先に見る
+## 1フレームの旅 — 目標の構成を先に見る
 
-実装を始める前に、完成したレンダラーの1フレームを**CPU側とGPU側の時系列**で追います。この図が本章の地図です:
+実装を考える前に、目標とするレンダラーの1フレームを**CPU側とGPU側の時系列**で追います。この図が本章の地図です:
 
 ```mermaid
 sequenceDiagram

@@ -1,10 +1,12 @@
 ---
-title: "コンパイラ最適化・未定義動作の影響・Debug/Release・ゼロコスト抽象化"
+title: コンパイラ最適化・未定義動作の影響・Debug/Release・ゼロコスト抽象化
 study:
-  source: "C++ Wiki"
-  kind: "本文"
-  status: "既存原稿"
+  source: C++ Wiki
+  status: published
   summary: "コンパイラは「観測可能な動作(出力・volatileアクセス等)が同じなら、コードを何をしてもよい」(as-ifルール)という原則で変形します。主な最適化: コンパイラは「UBは起きない」という前提で変形します。UBのページの続きを、最適化の視点から:"
+  section: reference
+  format: article
+  domain: compilers
 ---
 
 # コンパイラ最適化・未定義動作の影響・Debug/Release・ゼロコスト抽象化
@@ -95,4 +97,4 @@ godbolt.orgで、(a) 結果を使わないループが-O2で消えること、(b
 
 ---
 
-前: [キャッシュ・分岐予測・SIMD](/runtime/cpp-internals/cache-branch-simd.html) | [カテゴリ目次](/runtime/cpp-internals/) | 次: [演習](/runtime/cpp-internals/exercises.html)
+関連項目：[キャッシュ・分岐予測・SIMD](/runtime/cpp-internals/cache-branch-simd.html) / [学習ガイド](/runtime/cpp-internals/) / [演習](/runtime/cpp-internals/exercises.html)

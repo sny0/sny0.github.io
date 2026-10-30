@@ -1,10 +1,12 @@
 ---
-title: "HDRP (High Definition Render Pipeline)"
+title: HDRP (High Definition Render Pipeline)
 study:
-  source: "RenderingWiki"
-  kind: "本文"
-  status: "既存原稿"
-  summary: "HDRPはハイエンドPC・コンソール・映像制作向けのUnity公式レンダーパイプラインです。物理単位のライティング (lux/lumen/EV)、Tiled/Clusteredハイブリッドのライトループ、SSGI/RTGI・パストレーサ、水面・雲・ボリューメトリックフォグなど、AAA級の機能セットを"
+  source: RenderingWiki
+  status: published
+  summary: HDRPはハイエンドPC・コンソール・映像制作向けのUnity公式レンダーパイプラインです。物理単位のライティング (lux/lumen/EV)、Tiled/Clusteredハイブリッドのライトループ、SSGI/RTGI・パストレーサ、水面・雲・ボリューメトリックフォグなど、AAA級の機能セットを
+  section: reference
+  format: article
+  domain: graphics
 ---
 
 # HDRP (High Definition Render Pipeline)

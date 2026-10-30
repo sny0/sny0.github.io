@@ -1,10 +1,12 @@
 ---
-title: "構造体・クラス・アクセス指定子"
+title: 構造体・クラス・アクセス指定子
 study:
-  source: "C++ Wiki"
-  kind: "本文"
-  status: "既存原稿"
+  source: C++ Wiki
+  status: published
   summary: "C++の struct と class はほぼ同一の機能で、違いは既定のアクセスだけ(struct=public、class=private)。C#のような「struct=値型、class=参照型」という意味の違いはありません(どちらも値です)。使い分けは慣習で表現します: 「structはただのデ"
+  section: reference
+  format: article
+  domain: languages
 ---
 
 # 構造体・クラス・アクセス指定子
@@ -69,7 +71,7 @@ struct Enemy {
 | struct/class | 値型/参照型という**意味の違い** | 既定アクセスの違いのみ(両方値) |
 | 割り当て | classは必ずヒープ | どちらもスタック/ヒープ/静的領域を選べる |
 | 継承 | structは継承不可 | structも継承可(機能差なし) |
-| internal | アセンブリ内公開がある | 対応物なし(無名namespace等で代用 → [第9部](/languages/csharp/headers-vs-asmdef.html)) |
+| internal | アセンブリ内公開がある | 対応物なし(無名namespace等で代用 → [ヘッダー分割と Assembly Definition](/languages/csharp/headers-vs-asmdef.html)) |
 
 C#の「structは16バイト以下にすべき」的なガイドラインは、**値渡しコピーのコスト**の話であり、C++でも値渡しするなら同じ配慮をします(大きければconst参照 → [値渡しか参照渡しか](/design/decisions/cpp-choices.html))。
 
@@ -77,7 +79,7 @@ C#の「structは16バイト以下にすべき」的なガイドラインは、*
 
 1. 「structだから値、classだから参照」の感覚を**C++に持ち込むと混乱**する。C++ではどちらも値で、参照にしたければ`&`や`*`を自分で書く
 2. C#のプロパティ(`public int Hp { get; private set; }`)に相当する言語機能はC++にない。関数(`int Hp() const`)で書く
-3. Unityの `[SerializeField] private` のような「エディタには見せるがコードには隠す」という区別はC++単体には存在しない(UEでは`UPROPERTY`が同じ役割 → [第10部](/game/unreal/reflection-and-uht.html))
+3. Unityの `[SerializeField] private` のような「エディタには見せるがコードには隠す」という区別はC++単体には存在しない(UEでは`UPROPERTY`が同じ役割 → [リフレクション — UCLASS・UFUNCTION・UPROPERTY・Unreal Header Tool](/game/unreal/reflection-and-uht.html))
 
 ## ゲーム開発での使用例
 
@@ -112,4 +114,4 @@ samples/struct_layout.cpp(検証済み)で、メンバの並び順を変える�
 
 ---
 
-前: [配列と文字列](/languages/cpp/arrays-and-strings.html) | [カテゴリ目次](/languages/cpp/) | 次: [コンストラクタ・デストラクタ・コピー・ムーブ](/languages/cpp/ctor-dtor-copy-move.html)
+関連項目：[配列と文字列](/languages/cpp/arrays-and-strings.html) / [学習ガイド](/languages/cpp/) / [コンストラクタ・デストラクタ・コピー・ムーブ](/languages/cpp/ctor-dtor-copy-move.html)

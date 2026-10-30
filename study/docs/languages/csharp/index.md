@@ -1,13 +1,19 @@
 ---
-title: "第9部: Unity/C#との対応"
+title: C++とUnity/C#の違いを学ぶ
 study:
-  source: "C++ Wiki"
-  kind: "索引"
-  status: "既存原稿"
-  summary: "C++の各概念を、Unity/C#経験者の既存知識に対応づけて理解する章です。合言葉は「似ているが同じではない」——対応表の「≒」の裏にある差分こそが、C++で事故る場所です。"
+  source: C++ Wiki
+  status: published
+  summary: C++の各概念を、Unity/C#経験者の既存知識に対応づけて理解する章です。合言葉は「似ているが同じではない」——対応表の「≒」の裏にある差分こそが、C++で事故る場所です。
+  section: learning
+  format: path
+  domain: languages
+  collection: cpp-design
+  order: 9
 ---
 
-# 第9部: Unity/C#との対応
+<div id="第9部-unity-c-との対応" class="study-legacy-anchor" aria-hidden="true"></div>
+
+# C++とUnity/C#の違いを学ぶ
 
 C++の各概念を、Unity/C#経験者の既存知識に**対応づけて**理解する章です。合言葉は「**似ているが同じではない**」——対応表の「≒」の裏にある差分こそが、C++で事故る場所です。
 

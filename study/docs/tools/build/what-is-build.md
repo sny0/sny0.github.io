@@ -1,10 +1,12 @@
 ---
-title: "ビルドとは何か — コンパイラとビルドシステムの違い"
+title: ビルドとは何か — コンパイラとビルドシステムの違い
 study:
-  source: "C++ Wiki"
-  kind: "本文"
-  status: "既存原稿"
+  source: C++ Wiki
+  status: published
   summary: "コンパイラ(g++, cl.exe): 1つの翻訳単位を機械語にする「職人」 ビルドシステム(CMake+Make/Ninja, MSBuild): 「何を・どの順で・どの設定で職人に依頼し、リンクまで完走させるか」を管理する「現場監督」"
+  section: reference
+  format: article
+  domain: tools
 ---
 
 # ビルドとは何か — コンパイラとビルドシステムの違い
@@ -50,7 +52,7 @@ g++ main.o enemy.o -o game.exe               # ②リンク
 ```
 
 - CMakeは**ビルドしない**(NinjaやVSプロジェクトを生成する)。この区別が分かるとエラーの切り分け(CMakeの設定ミスか、コンパイルエラーか)ができる
-- UEのUBT(Unreal Build Tool)はこの階層を自前で持つ独自の監督(→ [第10部](/game/unreal/build-system-ubt.html))
+- UEのUBT(Unreal Build Tool)はこの階層を自前で持つ独自の監督(→ [Unreal Build Tool・Module・Build.cs・Target.cs](/game/unreal/build-system-ubt.html))
 
 ## C#/Unityとの対応
 
@@ -82,4 +84,4 @@ C#で「ビルドはIDEが勝手にやるもの」だった感覚に対し、C++
 
 ---
 
-前: [カテゴリ目次](/tools/build/) | 次: [三大コンパイラ](/tools/build/compilers.html)
+関連項目：[学習ガイド](/tools/build/) / [三大コンパイラ](/tools/build/compilers.html)

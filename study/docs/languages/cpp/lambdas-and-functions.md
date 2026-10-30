@@ -1,10 +1,12 @@
 ---
-title: "ラムダ式・関数ポインタ・std::function"
+title: ラムダ式・関数ポインタ・std::function
 study:
-  source: "C++ Wiki"
-  kind: "本文"
-  status: "既存原稿"
+  source: C++ Wiki
+  status: published
   summary: "「関数を値として持ち運ぶ」3つの手段です。 関数ポインタ void(*)(int): 関数のアドレス。状態を持てない。C言語から続く最軽量の形 ラムダ式 x{ return x+y; }: その場で作る無名の関数オブジェクト。変数をキャプチャ(捕獲)できる"
+  section: reference
+  format: article
+  domain: languages
 ---
 
 # ラムダ式・関数ポインタ・std::function
@@ -17,7 +19,7 @@ study:
 - **ラムダ式** `[x](int y){ return x+y; }`: その場で作る無名の関数オブジェクト。**変数をキャプチャ(捕獲)できる**
 - **std::function** `std::function<void(int)>`: 上記すべて(+メンバ関数など)を**統一的に入れられる箱**。柔軟だがコストあり
 
-C#のdelegateは、この3つの役割を1つでこなす言語機能です(→ 対比の詳細: [第9部](/languages/csharp/delegates-events-function-pointers.html))。
+C#のdelegateは、この3つの役割を1つでこなす言語機能です(→ 対比の詳細: [関数ポインタと delegate / Observer と event](/languages/csharp/delegates-events-function-pointers.html))。
 
 ## 関数ポインタ
 
@@ -148,4 +150,4 @@ samples/lambdas_functions.cpp(検証済み)で、(a) 参照キャプチャのラ
 
 ---
 
-前: [テンプレートと concepts](/languages/cpp/templates-and-concepts.html) | [カテゴリ目次](/languages/cpp/) | 次: [enum・enum class・namespace](/languages/cpp/enums-and-namespaces.html)
+関連項目：[テンプレートと concepts](/languages/cpp/templates-and-concepts.html) / [学習ガイド](/languages/cpp/) / [enum・enum class・namespace](/languages/cpp/enums-and-namespaces.html)

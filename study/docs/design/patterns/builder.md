@@ -1,10 +1,12 @@
 ---
-title: "Builder"
+title: Builder
 study:
-  source: "C++ Wiki"
-  kind: "本文"
-  status: "既存原稿"
+  source: C++ Wiki
+  status: published
   summary: "構築手順が複雑なオブジェクト(必須/任意の設定が多い、段階的に組み立てる、組み合わせに制約がある)を、巨大なコンストラクタ引数リストなしで安全に作りたい。 Product: 作られる複雑なオブジェクト(例: Character)"
+  section: reference
+  format: article
+  domain: design
 ---
 
 # Builder
@@ -184,4 +186,4 @@ public class DungeonBuilder {
 
 ---
 
-前: [Abstract Factory](/design/patterns/abstract-factory.html) | [カテゴリ目次](/design/patterns/) | 次: [Prototype](/design/patterns/prototype.html)
+関連項目：[Abstract Factory](/design/patterns/abstract-factory.html) / [学習ガイド](/design/patterns/) / [Prototype](/design/patterns/prototype.html)

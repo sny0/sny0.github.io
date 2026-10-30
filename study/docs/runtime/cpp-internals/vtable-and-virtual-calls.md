@@ -1,10 +1,12 @@
 ---
-title: "vtable・vptr・仮想関数呼び出し"
+title: vtable・vptr・仮想関数呼び出し
 study:
-  source: "C++ Wiki"
-  kind: "本文"
-  status: "既存原稿"
-  summary: "仮想関数の「実行時に実際の型のメソッドが呼ばれる」魔法の正体は、関数ポインタの表(vtable)を型ごとに1つ作り、各オブジェクトが自分の型の表へのポインタ(vptr)を持つという単純な仕組みです。"
+  source: C++ Wiki
+  status: published
+  summary: 仮想関数の「実行時に実際の型のメソッドが呼ばれる」魔法の正体は、関数ポインタの表(vtable)を型ごとに1つ作り、各オブジェクトが自分の型の表へのポインタ(vptr)を持つという単純な仕組みです。
+  section: reference
+  format: article
+  domain: runtime
 ---
 
 # vtable・vptr・仮想関数呼び出し
@@ -104,4 +106,4 @@ samples/vtable_size.cpp で (a) 仮想関数の有無によるsizeofの変化、
 
 ---
 
-前: [テンプレートの実体化とinline](/runtime/cpp-internals/template-instantiation-and-inline.html) | [カテゴリ目次](/runtime/cpp-internals/) | 次: [RTTI・dynamic_cast・例外処理の仕組み](/runtime/cpp-internals/exceptions-and-rtti-impl.html)
+関連項目：[テンプレートの実体化とinline](/runtime/cpp-internals/template-instantiation-and-inline.html) / [学習ガイド](/runtime/cpp-internals/) / [RTTI・dynamic_cast・例外処理の仕組み](/runtime/cpp-internals/exceptions-and-rtti-impl.html)

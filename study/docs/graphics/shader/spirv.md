@@ -1,10 +1,12 @@
 ---
-title: "SPIR-V と中間表現"
+title: SPIR-V と中間表現
 study:
-  source: "RenderingWiki"
-  kind: "本文"
-  status: "既存原稿"
-  summary: "SPIR-V はVulkan / OpenCL / (OpenGL 4.6) の標準シェーダ中間表現 (IR) です。人間が書く言語 (GLSL/HLSL/WGSL) とGPUドライバの間に立つバイナリ形式で、SSA形式の型付き命令列として構成されます。DirectXにおける DXIL と対をなす存"
+  source: RenderingWiki
+  status: published
+  summary: SPIR-V はVulkan / OpenCL / (OpenGL 4.6) の標準シェーダ中間表現 (IR) です。人間が書く言語 (GLSL/HLSL/WGSL) とGPUドライバの間に立つバイナリ形式で、SSA形式の型付き命令列として構成されます。DirectXにおける DXIL と対をなす存
+  section: reference
+  format: article
+  domain: graphics
 ---
 
 # SPIR-V と中間表現

@@ -1,13 +1,19 @@
 ---
-title: "第6部: C++の内部的な仕組み"
+title: C++の内部的な仕組みを学ぶ
 study:
-  source: "C++ Wiki"
-  kind: "索引"
-  status: "既存原稿"
-  summary: "「書いたコードが、どうやって動く機械語になり、実行時に何が起きているのか」を扱う章です。UnityのC#では意識しなくてよかった層——だからこそUnity経験者のC++理解の穴になりやすい部分です。"
+  source: C++ Wiki
+  status: published
+  summary: 「書いたコードが、どうやって動く機械語になり、実行時に何が起きているのか」を扱う章です。UnityのC#では意識しなくてよかった層——だからこそUnity経験者のC++理解の穴になりやすい部分です。
+  section: learning
+  format: path
+  domain: runtime
+  collection: cpp-design
+  order: 6
 ---
 
-# 第6部: C++の内部的な仕組み
+<div id="第6部-c-の内部的な仕組み" class="study-legacy-anchor" aria-hidden="true"></div>
+
+# C++の内部的な仕組みを学ぶ
 
 「書いたコードが、どうやって動く機械語になり、実行時に何が起きているのか」を扱う章です。UnityのC#では意識しなくてよかった層——だからこそUnity経験者のC++理解の穴になりやすい部分です。
 

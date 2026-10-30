@@ -1,10 +1,12 @@
 ---
-title: "Reactive Programming"
+title: Reactive Programming
 study:
-  source: "C++ Wiki"
-  kind: "本文"
-  status: "既存原稿"
-  summary: "「値の変化」や「イベントの発生」を時間軸上のストリーム(流れ)として扱い、それを変換・合成・購読する宣言的なスタイル。「HPが変わったらUIを更新」を、手続き(変わった箇所で全部呼ぶ)ではなく関係の宣言(UIはHPに追従する)として書く。"
+  source: C++ Wiki
+  status: published
+  summary: 「値の変化」や「イベントの発生」を時間軸上のストリーム(流れ)として扱い、それを変換・合成・購読する宣言的なスタイル。「HPが変わったらUIを更新」を、手続き(変わった箇所で全部呼ぶ)ではなく関係の宣言(UIはHPに追従する)として書く。
+  section: reference
+  format: article
+  domain: game
 ---
 
 # Reactive Programming
@@ -125,4 +127,4 @@ C++にはUniRx級の定番はなく(RxCppはあるがゲームでの採用は少
 
 ---
 
-前: [MVC・MVP・MVVM](/game/patterns/mvc-mvp-mvvm.html) | [カテゴリ目次](/game/patterns/) | 次: [演習](/game/patterns/exercises.html)
+関連項目：[MVC・MVP・MVVM](/game/patterns/mvc-mvp-mvvm.html) | [この分野の学習ガイド](/game/patterns/) | [演習](/game/patterns/exercises.html)

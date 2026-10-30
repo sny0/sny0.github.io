@@ -1,10 +1,12 @@
 ---
-title: "責務と関心の分離"
+title: 責務と関心の分離
 study:
-  source: "C++ Wiki"
-  kind: "本文"
-  status: "既存原稿"
-  summary: "責務(responsibility)とは「そのコードが引き受けている仕事と、その仕事が変更される理由」のこと。関心の分離(separation of concerns)とは、異なる理由で変更されるコードを別の場所に置くことです。"
+  source: C++ Wiki
+  status: published
+  summary: 責務(responsibility)とは「そのコードが引き受けている仕事と、その仕事が変更される理由」のこと。関心の分離(separation of concerns)とは、異なる理由で変更されるコードを別の場所に置くことです。
+  section: reference
+  format: article
+  domain: design
 ---
 
 # 責務と関心の分離
@@ -129,7 +131,7 @@ Unity の Component システム自体が関心の分離の仕組みです。1�
 
 ## Unreal Engine との対応
 
-UE では ActorComponent への分割、また「データ(DataAsset)とロジックの分離」が対応します(→ [第10部](/game/unreal/gameplay-framework.html))。
+UE では ActorComponent への分割、また「データ(DataAsset)とロジックの分離」が対応します(→ [Gameplay Framework・Subsystem・Slate/UMG・DataAsset/DataTable](/game/unreal/gameplay-framework.html))。
 
 ## よくある誤解
 
@@ -155,8 +157,8 @@ UE では ActorComponent への分割、また「データ(DataAsset)とロジ�
 
 ## 演習
 
-`敵を倒したらスコア加算・ドロップ生成・SE再生・実績チェックを行う OnEnemyKilled 関数` がある想定で、変更理由ごとにグループ分けし、どんな分割(またはどんな通知の仕組み)にするか案を書いてください。模範解答は[第1部演習](/design/foundations/exercises.html)の類題にあります。
+`敵を倒したらスコア加算・ドロップ生成・SE再生・実績チェックを行う OnEnemyKilled 関数` がある想定で、変更理由ごとにグループ分けし、どんな分割(またはどんな通知の仕組み)にするか案を書いてください。模範解答は[設計の基礎の演習](/design/foundations/exercises.html)の類題にあります。
 
 ---
 
-前: [設計とは何を決める行為なのか](/design/foundations/what-is-design.html) | [カテゴリ目次](/design/foundations/) | 次: [凝集度と結合度](/design/foundations/cohesion-and-coupling.html)
+関連項目：[設計とは何を決める行為なのか](/design/foundations/what-is-design.html) / [学習ガイド](/design/foundations/) / [凝集度と結合度](/design/foundations/cohesion-and-coupling.html)

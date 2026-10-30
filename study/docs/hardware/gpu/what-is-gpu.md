@@ -1,10 +1,12 @@
 ---
-title: "GPUとは何か"
+title: GPUとは何か
 study:
-  source: "RenderingWiki"
-  kind: "本文"
-  status: "既存原稿"
-  summary: "GPU (Graphics Processing Unit) は、大量のデータに対して同じ計算を並列に実行することに特化したプロセッサです。CPUが「少数の複雑な処理を高速に」こなすレイテンシ指向であるのに対し、GPUは「単純な処理を数千〜数万並列で」こなすスループット指向の設計です。"
+  source: RenderingWiki
+  status: published
+  summary: GPU (Graphics Processing Unit) は、大量のデータに対して同じ計算を並列に実行することに特化したプロセッサです。CPUが「少数の複雑な処理を高速に」こなすレイテンシ指向であるのに対し、GPUは「単純な処理を数千〜数万並列で」こなすスループット指向の設計です。
+  section: reference
+  format: article
+  domain: hardware
 ---
 
 # GPUとは何か
@@ -147,7 +149,7 @@ Debug.Log($"RayTracing対応: {SystemInfo.supportsRayTracing}");
 
 ## 前提知識
 
-- なし。このWikiの出発点です。
+- 特定の本文を先に読む必要はありません。GPUの説明の入口として使えます。
 
 ## 次に読むべきページ
 

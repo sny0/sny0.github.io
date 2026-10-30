@@ -1,10 +1,12 @@
 ---
-title: "Memento"
+title: Memento
 study:
-  source: "C++ Wiki"
-  kind: "本文"
-  status: "既存原稿"
-  summary: "オブジェクトの内部状態を、カプセル化を壊さずに外部へ保存し、後で復元したい(Undo、セーブ、チェックポイント、リトライ)。状態の中身は本人だけが知り、保管者は中身を見ない。"
+  source: C++ Wiki
+  status: published
+  summary: オブジェクトの内部状態を、カプセル化を壊さずに外部へ保存し、後で復元したい(Undo、セーブ、チェックポイント、リトライ)。状態の中身は本人だけが知り、保管者は中身を見ない。
+  section: reference
+  format: article
+  domain: design
 ---
 
 # Memento
@@ -183,4 +185,4 @@ Snapshotに参照(ポインタ、List参照)をそのまま入れると、**ス�
 
 ---
 
-前: [Mediator](/design/patterns/mediator.html) | [カテゴリ目次](/design/patterns/) | 次: [Observer](/design/patterns/observer.html)
+関連項目：[Mediator](/design/patterns/mediator.html) / [学習ガイド](/design/patterns/) / [Observer](/design/patterns/observer.html)

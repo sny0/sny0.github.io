@@ -1,10 +1,12 @@
 ---
-title: "HLSL"
+title: HLSL
 study:
-  source: "RenderingWiki"
-  kind: "本文"
-  status: "既存原稿"
-  summary: "HLSL (High-Level Shading Language) はMicrosoftのシェーダ言語で、DirectX・Unity・Unreal Engine・(DXC経由で)Vulkanまでカバーする、実務上最も重要なシェーダ言語です。Shader Model (SM) というバージョン体系で"
+  source: RenderingWiki
+  status: published
+  summary: HLSL (High-Level Shading Language) はMicrosoftのシェーダ言語で、DirectX・Unity・Unreal Engine・(DXC経由で)Vulkanまでカバーする、実務上最も重要なシェーダ言語です。Shader Model (SM) というバージョン体系で
+  section: reference
+  format: article
+  domain: graphics
 ---
 
 # HLSL

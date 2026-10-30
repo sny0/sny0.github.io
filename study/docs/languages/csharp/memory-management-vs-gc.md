@@ -1,15 +1,17 @@
 ---
-title: "手動メモリ管理と GC"
+title: 手動メモリ管理と GC
 study:
-  source: "C++ Wiki"
-  kind: "本文"
-  status: "既存原稿"
-  summary: "本論は第7部: GCとの違いで詳述済み。このページはUnity開発者の視点からの要点整理と実践対応表です。 C++のメモリ管理は「毎回deleteを手で書く」ではありません。現代C++は:"
+  source: C++ Wiki
+  status: published
+  summary: C++のRAIIと所有権、C#・UnityのGCと明示的な資源解放を対応させる。
+  section: reference
+  format: article
+  domain: languages
 ---
 
 # 手動メモリ管理と GC
 
-本論は[第7部: GCとの違い](/runtime/memory/gc-and-csharp-comparison.html)で詳述済み。このページはUnity開発者の視点からの**要点整理と実践対応表**です。
+本論は[ガベージコレクションとの違い — C#の管理ヒープ・UnityのGC Allocとの比較](/runtime/memory/gc-and-csharp-comparison.html)で詳述済み。このページはUnity開発者の視点からの**要点整理と実践対応表**です。
 
 ## 「手動」という誤解を先に解く
 
@@ -42,7 +44,7 @@ C++のメモリ管理は「毎回deleteを手で書く」ではありません�
 ## 実務でのハイブリッド感覚
 
 - UnityでもDOTS/NativeArrayを使えば「手動管理の世界」に半分入っていた(Allocator.Temp/Persistent、Dispose必須)——あれがC++の日常
-- UEに行くと「C++なのにUObjectはGC管理」という逆ハイブリッド(→ [第10部](/game/unreal/gc-and-object-pointers.html))
+- UEに行くと「C++なのにUObjectはGC管理」という逆ハイブリッド(→ [UEのガベージコレクションと UPROPERTY・TObjectPtr・TWeakObjectPtr](/game/unreal/gc-and-object-pointers.html))
 - **どの言語・エンジンでも「寿命のパターンを見つけて構造化する」のが本質**で、道具(GC/RAII/プール)はその実装手段
 
 ## 理解度チェック
@@ -53,8 +55,8 @@ C++のメモリ管理は「毎回deleteを手で書く」ではありません�
 
 ## 演習
 
-[第7部演習](/runtime/memory/exercises.html)の問4(当たり判定結果の一時データ)を、Unity C#で同じ問題を解く場合(List再利用/NativeArray+Temp)と対比しながら解いてください。「同じ問題に同じ答え(再利用)を出している」ことの確認が目的です。
+[メモリと実行時の演習](/runtime/memory/exercises.html)の問4(当たり判定結果の一時データ)を、Unity C#で同じ問題を解く場合(List再利用/NativeArray+Temp)と対比しながら解いてください。「同じ問題に同じ答え(再利用)を出している」ことの確認が目的です。
 
 ---
 
-前: [ネイティブビルドとIL2CPP](/languages/csharp/il2cpp.html) | [カテゴリ目次](/languages/csharp/) | 次: [C++例外とC#例外](/languages/csharp/exceptions-comparison.html)
+関連項目：[ネイティブビルドとIL2CPP](/languages/csharp/il2cpp.html) / [学習ガイド](/languages/csharp/) / [C++例外とC#例外](/languages/csharp/exceptions-comparison.html)

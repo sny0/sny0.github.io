@@ -1,10 +1,12 @@
 ---
-title: "Command"
+title: Command
 study:
-  source: "C++ Wiki"
-  kind: "本文"
-  status: "既存原稿"
-  summary: "「操作」そのものをオブジェクト(データ)として持ち運びたい。関数呼び出しは実行した瞬間に消えるが、オブジェクトにすれば、保存(リプレイ)、取り消し(Undo)、キューイング(遅延実行)、割り当て変更(キーリバインド)ができる。"
+  source: C++ Wiki
+  status: published
+  summary: 「操作」そのものをオブジェクト(データ)として持ち運びたい。関数呼び出しは実行した瞬間に消えるが、オブジェクトにすれば、保存(リプレイ)、取り消し(Undo)、キューイング(遅延実行)、割り当て変更(キーリバインド)ができる。
+  section: reference
+  format: article
+  domain: design
 ---
 
 # Command
@@ -184,4 +186,4 @@ Unityの `InputAction`(操作の抽象)と `UnityEvent`/delegateの組み合わ�
 
 ---
 
-前: [Chain of Responsibility](/design/patterns/chain-of-responsibility.html) | [カテゴリ目次](/design/patterns/) | 次: [Interpreter](/design/patterns/interpreter.html)
+関連項目：[Chain of Responsibility](/design/patterns/chain-of-responsibility.html) / [学習ガイド](/design/patterns/) / [Interpreter](/design/patterns/interpreter.html)

@@ -1,10 +1,12 @@
 ---
-title: "RTTI・dynamic_cast・例外処理の仕組み"
+title: RTTI・dynamic_cast・例外処理の仕組み
 study:
-  source: "C++ Wiki"
-  kind: "本文"
-  status: "既存原稿"
-  summary: "言語機能としての使い方はキャストと例外で説明済み。このページは「内部で何が起きているか」と「ゲーム開発でオフにされがちな理由」を扱います。以下は主流実装(Itanium C++ ABI / MSVC)の説明で、標準が実装方式を定めているわけではありません。"
+  source: C++ Wiki
+  status: published
+  summary: 言語機能としての使い方はキャストと例外で説明済み。このページは「内部で何が起きているか」と「ゲーム開発でオフにされがちな理由」を扱います。以下は主流実装(Itanium C++ ABI / MSVC)の説明で、標準が実装方式を定めているわけではありません。
+  section: reference
+  format: article
+  domain: runtime
 ---
 
 # RTTI・dynamic_cast・例外処理の仕組み
@@ -63,7 +65,7 @@ t.name();                                       // 修飾された型名(処理�
 ## C#との対応
 
 - C#の例外も内部はテーブル+巻き戻しで概念は近い。ただしC#はランタイムが常に型情報・スタック情報を持つため、スタックトレース取得が標準機能。C++では別途(プラットフォームAPI/ライブラリ)で取る
-- C#のリフレクション(`GetType()`)はRTTIの遥かに豊かな版(メンバ列挙・動的呼び出しまで)。C++のRTTIは「型の同定」しかできない最小限——UEがリフレクションを**自作**した理由(→ [第10部](/game/unreal/reflection-and-uht.html))
+- C#のリフレクション(`GetType()`)はRTTIの遥かに豊かな版(メンバ列挙・動的呼び出しまで)。C++のRTTIは「型の同定」しかできない最小限——UEがリフレクションを**自作**した理由(→ [リフレクション — UCLASS・UFUNCTION・UPROPERTY・Unreal Header Tool](/game/unreal/reflection-and-uht.html))
 
 ## Unity開発者が誤解しやすい点
 
@@ -88,4 +90,4 @@ godbolt.orgで、同じ関数を `-fexceptions` と `-fno-exceptions` でコン�
 
 ---
 
-前: [vtableと仮想関数呼び出し](/runtime/cpp-internals/vtable-and-virtual-calls.html) | [カテゴリ目次](/runtime/cpp-internals/) | 次: [メモリレイアウト](/runtime/cpp-internals/memory-layout.html)
+関連項目：[vtableと仮想関数呼び出し](/runtime/cpp-internals/vtable-and-virtual-calls.html) / [学習ガイド](/runtime/cpp-internals/) / [メモリレイアウト](/runtime/cpp-internals/memory-layout.html)

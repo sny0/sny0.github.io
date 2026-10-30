@@ -1,10 +1,12 @@
 ---
-title: "関数オーバーロードと演算子オーバーロード"
+title: 関数オーバーロードと演算子オーバーロード
 study:
-  source: "C++ Wiki"
-  kind: "本文"
-  status: "既存原稿"
+  source: C++ Wiki
+  status: published
   summary: "関数オーバーロード: 同名の関数を引数の型・数違いで複数定義し、コンパイル時に引数から選ばせる仕組み 演算子オーバーロード: + == [] などの演算子を自作型に定義する仕組み。数学的な型(ベクトル、行列)を自然に書くための道具"
+  section: reference
+  format: article
+  domain: languages
 ---
 
 # 関数オーバーロードと演算子オーバーロード
@@ -124,4 +126,4 @@ samples/operator_overload.cpp のVec2に `operator-`、`Dot(内積)`を追加し
 
 ---
 
-前: [継承・仮想関数](/languages/cpp/inheritance-and-virtual.html) | [カテゴリ目次](/languages/cpp/) | 次: [テンプレートと concepts](/languages/cpp/templates-and-concepts.html)
+関連項目：[継承・仮想関数](/languages/cpp/inheritance-and-virtual.html) / [学習ガイド](/languages/cpp/) / [テンプレートと concepts](/languages/cpp/templates-and-concepts.html)

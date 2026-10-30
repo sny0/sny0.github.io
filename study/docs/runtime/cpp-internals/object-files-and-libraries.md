@@ -1,10 +1,12 @@
 ---
-title: "オブジェクトファイル・実行ファイル・静的ライブラリ・動的ライブラリ・DLL"
+title: オブジェクトファイル・実行ファイル・静的ライブラリ・動的ライブラリ・DLL
 study:
-  source: "C++ Wiki"
-  kind: "本文"
-  status: "既存原稿"
+  source: C++ Wiki
+  status: published
   summary: "オブジェクトファイル(.o / .obj): 1翻訳単位ぶんの機械語+シンボル表。未完成品 静的ライブラリ(.a / .lib): .oを束ねた「アーカイブ」。リンク時に実行ファイルへ焼き込まれる"
+  section: reference
+  format: article
+  domain: compilers
 ---
 
 # オブジェクトファイル・実行ファイル・静的ライブラリ・動的ライブラリ・DLL
@@ -67,7 +69,7 @@ extern "C" __declspec(dllexport) int PluginVersion() { return 3; }
 ## ゲーム開発での使われ方
 
 - **エンジン・ミドルウェアの配布形態**: FMOD/Steamworks等はDLL+Cヘッダ(まさにABI安全策)
-- **ホットリロード**: ゲームロジックをDLL化し、実行中に差し替えて反映(開発イテレーション高速化)。UEのLive Codingもモジュール(DLL)差し替えが基盤(→ [第10部](/game/unreal/build-system-ubt.html))
+- **ホットリロード**: ゲームロジックをDLL化し、実行中に差し替えて反映(開発イテレーション高速化)。UEのLive Codingもモジュール(DLL)差し替えが基盤(→ [Unreal Build Tool・Module・Build.cs・Target.cs](/game/unreal/build-system-ubt.html))
 - **プラグイン/MOD**: 明示ロード(LoadLibrary)+extern "C"エントリポイント
 - コンソール機では静的リンクが基本(単一実行ファイル文化)——プラットフォームで流儀が変わる
 
@@ -75,7 +77,7 @@ extern "C" __declspec(dllexport) int PluginVersion() { return 3; }
 
 - C#の通常のマネージド.dllはIL+メタデータを持つ[アセンブリ](https://learn.microsoft.com/en-us/dotnet/standard/assembly/)で、ネイティブDLLとはロード・型参照の仕組みが異なる。**対象フレームワーク/API・アセンブリの版・依存関係などの互換性は必要**で、ネイティブ相互運用にはCPU/ABIの条件もある。「UnityのManaged DLL」と「ネイティブDLL」は拡張子だけでは区別できない
 - Unityの `Plugins/` フォルダのネイティブプラグイン(.dll/.so/.dylib)がこのページの動的ライブラリで、P/Invoke(`[DllImport]`)がGetProcAddressに相当
-- Assembly Definition(.asmdef)は「C#コードの静的ライブラリ分割」に似た開発時の構造化(→ [第9部](/languages/csharp/headers-vs-asmdef.html))
+- Assembly Definition(.asmdef)は「C#コードの静的ライブラリ分割」に似た開発時の構造化(→ [ヘッダー分割と Assembly Definition](/languages/csharp/headers-vs-asmdef.html))
 
 ## Unity開発者が誤解しやすい点
 
@@ -101,4 +103,4 @@ extern "C" __declspec(dllexport) int PluginVersion() { return 3; }
 
 ---
 
-前: [シンボルとリンケージ](/runtime/cpp-internals/symbols-and-linkage.html) | [カテゴリ目次](/runtime/cpp-internals/) | 次: [テンプレートの実体化とinlineの実際](/runtime/cpp-internals/template-instantiation-and-inline.html)
+関連項目：[シンボルとリンケージ](/runtime/cpp-internals/symbols-and-linkage.html) / [学習ガイド](/runtime/cpp-internals/) / [テンプレートの実体化とinlineの実際](/runtime/cpp-internals/template-instantiation-and-inline.html)

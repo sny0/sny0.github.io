@@ -1,13 +1,19 @@
 ---
-title: "第10部 演習 — Unreal Engineとの対応"
+title: Unreal Engineと標準C++の演習
 study:
-  source: "C++ Wiki"
-  kind: "演習"
-  status: "既存原稿"
-  summary: "正誤を判定し、誤りは訂正してください。 UPROPERTYを付けないUObjectポインタは、GCから見えず、対象が回収されてもnullにならない。 UEのUCLASSマクロは、C++コンパイラが解釈する言語拡張である。"
+  source: C++ Wiki
+  status: published
+  summary: 正誤を判定し、誤りは訂正してください。 UPROPERTYを付けないUObjectポインタは、GCから見えず、対象が回収されてもnullにならない。 UEのUCLASSマクロは、C++コンパイラが解釈する言語拡張である。
+  section: practice
+  format: exercise
+  domain: game
+  collection: cpp-exercises
+  order: 10
 ---
 
-# 第10部 演習 — Unreal Engineとの対応
+<div id="第10部-演習-—-unreal-engineとの対応" class="study-legacy-anchor" aria-hidden="true"></div>
+
+# Unreal Engineと標準C++の演習
 
 ## 問1. 概念確認
 
@@ -91,4 +97,4 @@ UEは全プラットフォームで同一の挙動・メモリ管理・ABIを保
 
 ---
 
-前: [Gameplay Framework](/game/unreal/gameplay-framework.html) | [カテゴリ目次](/game/unreal/) | [第11部: ケーススタディへ](/design/case-studies/)
+関連項目：[Gameplay Framework](/game/unreal/gameplay-framework.html) | [この分野の学習ガイド](/game/unreal/) | [関連項目](/design/case-studies/)

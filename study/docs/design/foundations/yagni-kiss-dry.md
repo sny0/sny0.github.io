@@ -1,10 +1,12 @@
 ---
-title: "YAGNI・KISS・DRY と早すぎる抽象化・早すぎる最適化"
+title: YAGNI・KISS・DRY と早すぎる抽象化・早すぎる最適化
 study:
-  source: "C++ Wiki"
-  kind: "本文"
-  status: "既存原稿"
+  source: C++ Wiki
+  status: published
   summary: "設計をやりすぎないための3原則です。 YAGNI (You Aren't Gonna Need It): 「今必要ない機能」は作るな。必要になってから作れ。 KISS (Keep It Simple, Stupid): 同じ問題を解けるなら単純な方を選べ。"
+  section: reference
+  format: article
+  domain: design
 ---
 
 # YAGNI・KISS・DRY と早すぎる抽象化・早すぎる最適化
@@ -21,7 +23,7 @@ study:
 
 ## 解決したい問題
 
-第1部でここまで学んだ道具(分離・抽象化・ポリモーフィズム)は、使うほど良いものではありません。**将来への投資はすべて、当たらなければ純粋なコスト**です。この3原則は投資の掛け金を抑えるための原則です。
+設計の道具(分離・抽象化・ポリモーフィズム)は、使うほど良いものではありません。**将来への投資はすべて、当たらなければ純粋なコスト**です。この3原則は投資の掛け金を抑えるための原則です。
 
 ## YAGNI
 
@@ -134,4 +136,4 @@ constexpr float kCriticalMultiplier = 1.5f;
 
 ---
 
-前: [設計の品質特性](/design/foundations/quality-attributes.html) | [カテゴリ目次](/design/foundations/) | 次: [技術的負債・コードの臭い・リファクタリング](/design/foundations/tech-debt-and-refactoring.html)
+関連項目：[設計の品質特性](/design/foundations/quality-attributes.html) / [学習ガイド](/design/foundations/) / [技術的負債・コードの臭い・リファクタリング](/design/foundations/tech-debt-and-refactoring.html)

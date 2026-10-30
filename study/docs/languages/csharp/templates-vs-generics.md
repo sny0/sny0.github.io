@@ -1,10 +1,12 @@
 ---
-title: "テンプレートとジェネリック"
+title: テンプレートとジェネリック
 study:
-  source: "C++ Wiki"
-  kind: "本文"
-  status: "既存原稿"
+  source: C++ Wiki
+  status: published
   summary: "構文は瓜二つ(List と std::vector )ですが、仕組みは正反対に近い: C#ジェネリック = 1つのコード+実行時の型情報(ランタイムが面倒を見る) C++テンプレート = コンパイル時のコード生成器(型ごとに完全な実物を作る)"
+  section: reference
+  format: article
+  domain: languages
 ---
 
 # テンプレートとジェネリック
@@ -86,4 +88,4 @@ C#で書いた経験のあるジェネリックメソッド(例: `T GetOrDefault
 
 ---
 
-前: [ポインタと参照型](/languages/csharp/pointers-references-value-semantics.html) | [カテゴリ目次](/languages/csharp/) | 次: [仮想関数とvirtual/override](/languages/csharp/virtual-and-polymorphism.html)
+関連項目：[ポインタと参照型](/languages/csharp/pointers-references-value-semantics.html) / [学習ガイド](/languages/csharp/) / [仮想関数とvirtual/override](/languages/csharp/virtual-and-polymorphism.html)

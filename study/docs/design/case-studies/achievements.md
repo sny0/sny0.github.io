@@ -1,13 +1,17 @@
 ---
-title: "ケーススタディ 05: 実績システム"
+title: 実績システムの設計
 study:
-  source: "C++ Wiki"
-  kind: "本文"
-  status: "既存原稿"
-  summary: "実績が30個に → ゲームロジックの至る所に実績チェックが寄生(ジャンプ処理が実績を知っている=依存の方向が最悪) 「ノーダメージでボス撃破」「10秒以内に5体」→ 複数イベントの組み合わせ・時間条件がその場しのぎのフラグに"
+  source: C++ Wiki
+  status: published
+  summary: 実績が30個に → ゲームロジックの至る所に実績チェックが寄生(ジャンプ処理が実績を知っている=依存の方向が最悪) 「ノーダメージでボス撃破」「10秒以内に5体」→ 複数イベントの組み合わせ・時間条件がその場しのぎのフラグに
+  section: reference
+  format: article
+  domain: design
 ---
 
-# ケーススタディ 05: 実績システム
+<div id="ケーススタディ-05-実績システム" class="study-legacy-anchor" aria-hidden="true"></div>
+
+# 実績システムの設計
 
 ## 素朴な実装
 
@@ -101,4 +105,4 @@ struct AchievementDef {              // JSONやScriptableObjectから
 
 ---
 
-前: [ステート異常](/design/case-studies/status-effects.html) | [カテゴリ目次](/design/case-studies/) | 次: [セーブデータ](/design/case-studies/save-data.html)
+関連項目：[ステート異常](/design/case-studies/status-effects.html) / [学習ガイド](/design/case-studies/) / [セーブデータ](/design/case-studies/save-data.html)

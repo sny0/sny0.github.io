@@ -1,10 +1,12 @@
 ---
-title: "値型と参照・ポインタ・参照"
+title: 値型と参照・ポインタ・参照
 study:
-  source: "C++ Wiki"
-  kind: "本文"
-  status: "既存原稿"
+  source: C++ Wiki
+  status: published
   summary: "C++の変数は既定で値そのもの(代入=中身のコピー)。他の場所にあるものを指したいときだけ、ポインタ(T*: アドレスを入れる変数)か参照(T&: 既存の変数の別名)で明示します。C#の「class=参照型、struct=値型」という型ごとの区別はC++にはなく、使う側がその都度選びます。"
+  section: reference
+  format: article
+  domain: languages
 ---
 
 # 値型と参照・ポインタ・参照
@@ -119,4 +121,4 @@ samples/values_and_refs.cpp を改造し、(a) 値渡し関数内での変更が
 
 ---
 
-前: [カテゴリ目次](/languages/cpp/) | 次: [const と const correctness](/languages/cpp/const-correctness.html)
+関連項目：[学習ガイド](/languages/cpp/) / [const と const correctness](/languages/cpp/const-correctness.html)

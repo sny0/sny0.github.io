@@ -1,10 +1,12 @@
 ---
-title: "Shared Memory と Atomic"
+title: Shared Memory と Atomic
 study:
-  source: "RenderingWiki"
-  kind: "本文"
-  status: "既存原稿"
+  source: RenderingWiki
+  status: published
   summary: "Shared Memory (HLSL: groupshared、CUDA: __shared__、GLSL: shared) は、スレッドグループ内の全スレッドが共有するSMオンチップの高速メモリです。Atomic操作は複数スレッドから同一アドレスへの競合書き込みを安全に行う命令群です。この2つと"
+  section: reference
+  format: article
+  domain: graphics
 ---
 
 # Shared Memory と Atomic

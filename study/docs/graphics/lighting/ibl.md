@@ -1,10 +1,12 @@
 ---
-title: "IBL (イメージベースドライティング)"
+title: IBL (イメージベースドライティング)
 study:
-  source: "RenderingWiki"
-  kind: "本文"
-  status: "既存原稿"
-  summary: "IBL (Image-Based Lighting) は、環境全体を撮影/描画した画像 (環境マップ) を光源として使う技術です。PBRの反射率方程式のうち「環境光の積分」部分を、事前畳み込み済みキューブマップで近似します。「解析ライト+IBL」が現代のリアルタイムライティングの基本形であり、PBR"
+  source: RenderingWiki
+  status: published
+  summary: IBL (Image-Based Lighting) は、環境全体を撮影/描画した画像 (環境マップ) を光源として使う技術です。PBRの反射率方程式のうち「環境光の積分」部分を、事前畳み込み済みキューブマップで近似します。「解析ライト+IBL」が現代のリアルタイムライティングの基本形であり、PBR
+  section: reference
+  format: article
+  domain: graphics
 ---
 
 # IBL (イメージベースドライティング)

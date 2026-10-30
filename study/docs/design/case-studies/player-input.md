@@ -1,13 +1,17 @@
 ---
-title: "ケーススタディ 01: プレイヤー入力"
+title: プレイヤー入力の設計
 study:
-  source: "C++ Wiki"
-  kind: "本文"
-  status: "既存原稿"
+  source: C++ Wiki
+  status: published
   summary: "この段階では正しい。 ジャム・プロトタイプならこれで出荷までいけます。 パッド対応: 全if文に || Input::GetButton(...) が増殖 キーコンフィグ: ハードコードされたKey::Aを差し替える場所がない"
+  section: reference
+  format: article
+  domain: design
 ---
 
-# ケーススタディ 01: プレイヤー入力
+<div id="ケーススタディ-01-プレイヤー入力" class="study-legacy-anchor" aria-hidden="true"></div>
+
+# プレイヤー入力の設計
 
 ## 素朴な実装
 
@@ -99,4 +103,4 @@ FrameInput ReadInput() {    // 読み取りをこの1関数に集約(構造体�
 
 ---
 
-前: [カテゴリ目次](/design/case-studies/) | 次: [武器切り替え](/design/case-studies/weapon-switching.html)
+関連項目：[学習ガイド](/design/case-studies/) / [武器切り替え](/design/case-studies/weapon-switching.html)

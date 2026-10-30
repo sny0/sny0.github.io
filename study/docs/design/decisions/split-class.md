@@ -1,10 +1,12 @@
 ---
 title: "判断ガイド: クラスを分けるべきか"
 study:
-  source: "C++ Wiki"
-  kind: "本文"
-  status: "既存原稿"
+  source: C++ Wiki
+  status: published
   summary: "根拠: SRP、責務、凝集度 分けるシグナル: 変更履歴に別種の理由が混在/UI・保存・通信の都合がロジックに混入/テストのセットアップが巨大/「このクラスのこの辺だけ触る」という会話が頻発"
+  section: reference
+  format: article
+  domain: design
 ---
 
 # 判断ガイド: クラスを分けるべきか
@@ -54,4 +56,4 @@ Q3. 分けた後の2つは、独立して変更・テストできるか?
 
 ---
 
-前: [カテゴリ目次](/design/decisions/) | 次: [インターフェースを作るべきか](/design/decisions/create-interface.html)
+関連項目：[学習ガイド](/design/decisions/) / [インターフェースを作るべきか](/design/decisions/create-interface.html)

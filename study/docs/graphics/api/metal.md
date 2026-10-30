@@ -1,10 +1,12 @@
 ---
-title: "Metal"
+title: Metal
 study:
-  source: "RenderingWiki"
-  kind: "本文"
-  status: "既存原稿"
-  summary: "MetalはAppleの明示的グラフィックス/コンピュートAPIです (2014)。明示的API世代で最初に出荷されたにもかかわらず、DX12/Vulkanより大幅に書きやすいのが特徴で、「明示性と人間工学のバランス」の成功例とされます。iOS/macOS/visionOSの唯一の第一級APIであり"
+  source: RenderingWiki
+  status: published
+  summary: MetalはAppleの明示的グラフィックス/コンピュートAPIです (2014)。明示的API世代で最初に出荷されたにもかかわらず、DX12/Vulkanより大幅に書きやすいのが特徴で、「明示性と人間工学のバランス」の成功例とされます。iOS/macOS/visionOSの唯一の第一級APIであり
+  section: reference
+  format: article
+  domain: graphics
 ---
 
 # Metal

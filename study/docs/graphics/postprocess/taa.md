@@ -1,10 +1,12 @@
 ---
-title: "TAA (Temporal Anti-Aliasing)"
+title: TAA (Temporal Anti-Aliasing)
 study:
-  source: "RenderingWiki"
-  kind: "本文"
-  status: "既存原稿"
-  summary: "TAAは、サンプル位置を毎フレーム微小にずらし (ジッタ)、過去フレームの結果を再投影して蓄積することで、時間方向にスーパーサンプリングを実現するAAです。2010年代半ばからAAA開発の標準AAとなり、さらにあらゆる確率的手法 (SSAO/SSR/GI/影のノイズ) の共通の再構成基盤として、現代"
+  source: RenderingWiki
+  status: published
+  summary: TAAは、サンプル位置を毎フレーム微小にずらし (ジッタ)、過去フレームの結果を再投影して蓄積することで、時間方向にスーパーサンプリングを実現するAAです。2010年代半ばからAAA開発の標準AAとなり、さらにあらゆる確率的手法 (SSAO/SSR/GI/影のノイズ) の共通の再構成基盤として、現代
+  section: reference
+  format: article
+  domain: graphics
 ---
 
 # TAA (Temporal Anti-Aliasing)

@@ -1,13 +1,17 @@
 ---
-title: "ケーススタディ 03: 敵AI"
+title: 敵AIの設計
 study:
-  source: "C++ Wiki"
-  kind: "本文"
-  status: "既存原稿"
-  summary: "雑魚1種ならこれで完成です。 「見失ったら最後の位置を探す」→ 状態(探索中)の記憶が必要 → boolフラグ追加 「攻撃後は2秒クールダウン」「スタン中は動けない」→ フラグとタイマーが増殖し、if条件が !isStunned && !isSearching && cooldown <= 0 &&"
+  source: C++ Wiki
+  status: published
+  summary: 雑魚1種ならこれで完成です。 「見失ったら最後の位置を探す」→ 状態(探索中)の記憶が必要 → boolフラグ追加 「攻撃後は2秒クールダウン」「スタン中は動けない」→ フラグとタイマーが増殖し、if条件が !isStunned && !isSearching && cooldown <= 0 &&
+  section: reference
+  format: article
+  domain: design
 ---
 
-# ケーススタディ 03: 敵AI
+<div id="ケーススタディ-03-敵ai" class="study-legacy-anchor" aria-hidden="true"></div>
+
+# 敵AIの設計
 
 ## 素朴な実装
 
@@ -91,4 +95,4 @@ void Enemy::Update(float dt) {
 
 ---
 
-前: [武器切り替え](/design/case-studies/weapon-switching.html) | [カテゴリ目次](/design/case-studies/) | 次: [ステート異常](/design/case-studies/status-effects.html)
+関連項目：[武器切り替え](/design/case-studies/weapon-switching.html) / [学習ガイド](/design/case-studies/) / [ステート異常](/design/case-studies/status-effects.html)

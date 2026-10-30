@@ -1,10 +1,12 @@
 ---
 title: "LSP: リスコフの置換原則 (Liskov Substitution Principle)"
 study:
-  source: "C++ Wiki"
-  kind: "本文"
-  status: "既存原稿"
+  source: C++ Wiki
+  status: published
   summary: "> 基底型のオブジェクトを使っている場所は、その派生型のオブジェクトに置き換えても、プログラムの正しさが保たれなければならない。 ポイントは「コンパイルが通る」ではなく「呼び出し側が基底型に対して持っている期待(契約)を裏切らない」ことです。契約には次が含まれます。"
+  section: reference
+  format: article
+  domain: design
 ---
 
 # LSP: リスコフの置換原則 (Liskov Substitution Principle)
@@ -175,4 +177,4 @@ public class CursedPickup : Pickup {
 
 ---
 
-前: [OCP](/design/solid/ocp.html) | [カテゴリ目次](/design/solid/) | 次: [ISP: インターフェース分離の原則](/design/solid/isp.html)
+関連項目：[OCP](/design/solid/ocp.html) / [学習ガイド](/design/solid/) / [ISP: インターフェース分離の原則](/design/solid/isp.html)

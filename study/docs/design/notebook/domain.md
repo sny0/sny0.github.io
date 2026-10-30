@@ -1,17 +1,17 @@
 ---
-title: "DDD — 業務の言葉でモデルを作る"
+title: DDD — 業務の言葉でモデルを作る
 study:
-  source: "設計の手帖"
-  kind: "本文"
-  status: "既存原稿"
-  summary: "DDD はフォルダ構成や Entity 基底クラスの導入ではありません。業務の理解を、会話とコードで一致させる取り組みです。"
+  source: 設計の手帖
+  status: published
+  summary: DDD はフォルダ構成や Entity 基底クラスの導入ではありません。業務の理解を、会話とコードで一致させる取り組みです。
+  section: reference
+  format: article
+  domain: design
 ---
 
 # DDD — 業務の言葉でモデルを作る
 
 DDD はフォルダ構成や Entity 基底クラスの導入ではありません。業務の理解を、会話とコードで一致させる取り組みです。
-
-03 · アプリ全体を設計する / DDD・Entity・Repository / Model the language of the domain / 応用 / 12分
 
 タグ: DDD / Entity / Aggregate / Value Object / Repository / Domain Service
 

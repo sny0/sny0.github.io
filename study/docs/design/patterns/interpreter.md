@@ -1,10 +1,12 @@
 ---
-title: "Interpreter"
+title: Interpreter
 study:
-  source: "C++ Wiki"
-  kind: "本文"
-  status: "既存原稿"
-  summary: "繰り返し現れる要求のバリエーションを、小さな言語(文法を持つデータ)として表現し、それを解釈・実行する仕組みを作りたい。「企画がコードを書かずに条件式・数式・スクリプトを書ける」状態を作る道具です。"
+  source: C++ Wiki
+  status: published
+  summary: 繰り返し現れる要求のバリエーションを、小さな言語(文法を持つデータ)として表現し、それを解釈・実行する仕組みを作りたい。「企画がコードを書かずに条件式・数式・スクリプトを書ける」状態を作る道具です。
+  section: reference
+  format: article
+  domain: design
 ---
 
 # Interpreter
@@ -175,4 +177,4 @@ Unityで自前の式言語を組むより、既存の仕組みに乗るのが普
 
 ---
 
-前: [Command](/design/patterns/command.html) | [カテゴリ目次](/design/patterns/) | 次: [Iterator](/design/patterns/iterator.html)
+関連項目：[Command](/design/patterns/command.html) / [学習ガイド](/design/patterns/) / [Iterator](/design/patterns/iterator.html)

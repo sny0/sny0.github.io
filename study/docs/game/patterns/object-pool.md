@@ -1,10 +1,12 @@
 ---
-title: "Object Pool(通常のnew/deleteとの比較)"
+title: Object Pool(通常のnew/deleteとの比較)
 study:
-  source: "C++ Wiki"
-  kind: "本文"
-  status: "既存原稿"
+  source: C++ Wiki
+  status: published
   summary: "頻繁に生成・破棄されるオブジェクト(弾、パーティクル、ヒット表示)を、毎回new/deleteせず、確保済みの「プール」から貸し出して返却・再利用するパターン。 速度: ヒープ確保・解放は(自作の単純なアロケータに比べて)高価で、実行時間が不定(→ ヒープ)"
+  section: reference
+  format: article
+  domain: game
 ---
 
 # Object Pool(通常のnew/deleteとの比較)
@@ -99,7 +101,7 @@ private:
 ## Unreal Engine との対応
 
 - 発射物・エフェクトのActorプールは自作が一般的(SpawnActorは高価)。Niagaraはエミッタ内部でプール管理
-- UObjectのライフサイクル(GC)とプールの相性に注意: 参照を`UPROPERTY`で保持して回収を防ぐ(→ [第10部](/game/unreal/gc-and-object-pointers.html))
+- UObjectのライフサイクル(GC)とプールの相性に注意: 参照を`UPROPERTY`で保持して回収を防ぐ(→ [UEのGCとオブジェクト参照](/game/unreal/gc-and-object-pointers.html))
 
 ## 使う場面 / 使わない場面
 
@@ -128,4 +130,4 @@ samples/object_pool.cpp に世代付きハンドル(`struct Handle { uint32_t in
 
 ---
 
-前: [Service Locator と DI](/game/patterns/service-locator-and-di.html) | [カテゴリ目次](/game/patterns/) | 次: [最適化系パターン](/game/patterns/optimization-patterns.html)
+関連項目：[Service Locator と DI](/game/patterns/service-locator-and-di.html) | [この分野の学習ガイド](/game/patterns/) | [最適化系パターン](/game/patterns/optimization-patterns.html)

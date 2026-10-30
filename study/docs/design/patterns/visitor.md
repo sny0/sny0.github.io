@@ -1,10 +1,12 @@
 ---
-title: "Visitor"
+title: Visitor
 study:
-  source: "C++ Wiki"
-  kind: "本文"
-  status: "既存原稿"
-  summary: "安定したクラス階層(シーンノード、式ツリー)に対して、新しい操作を階層側のクラスを変更せずに追加したい。「型ごとの処理」を階層の外に置き、操作の追加を新クラス1つで済ませる。"
+  source: C++ Wiki
+  status: published
+  summary: 安定したクラス階層(シーンノード、式ツリー)に対して、新しい操作を階層側のクラスを変更せずに追加したい。「型ごとの処理」を階層の外に置き、操作の追加を新クラス1つで済ませる。
+  section: reference
+  format: article
+  domain: design
 ---
 
 # Visitor
@@ -195,4 +197,4 @@ int CountPolygons(SceneNode node) => node switch {
 
 ---
 
-前: [Template Method](/design/patterns/template-method.html) | [カテゴリ目次](/design/patterns/) | 次: [演習](/design/patterns/exercises.html)
+関連項目：[Template Method](/design/patterns/template-method.html) / [学習ガイド](/design/patterns/) / [演習](/design/patterns/exercises.html)

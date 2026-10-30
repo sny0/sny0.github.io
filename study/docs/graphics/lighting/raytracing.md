@@ -1,10 +1,12 @@
 ---
-title: "ハードウェアレイトレーシング (DXR / Vulkan Ray Tracing)"
+title: ハードウェアレイトレーシング (DXR / Vulkan Ray Tracing)
 study:
-  source: "RenderingWiki"
-  kind: "本文"
-  status: "既存原稿"
-  summary: "ハードウェアレイトレーシングは、BVH (境界ボリューム階層) の走査と三角形交差判定を専用回路 (RTコア) で加速し、シーンに対して任意のレイを飛ばせる機能です。2018年のNVIDIA Turing + DXRで幕を開け、影・反射・GI・パストレーシングという「ラスタライズが苦手な問題」への直"
+  source: RenderingWiki
+  status: published
+  summary: ハードウェアレイトレーシングは、BVH (境界ボリューム階層) の走査と三角形交差判定を専用回路 (RTコア) で加速し、シーンに対して任意のレイを飛ばせる機能です。2018年のNVIDIA Turing + DXRで幕を開け、影・反射・GI・パストレーシングという「ラスタライズが苦手な問題」への直
+  section: reference
+  format: article
+  domain: graphics
 ---
 
 # ハードウェアレイトレーシング (DXR / Vulkan Ray Tracing)

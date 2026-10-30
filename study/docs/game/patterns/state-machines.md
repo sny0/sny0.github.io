@@ -1,10 +1,12 @@
 ---
-title: "有限ステートマシンと階層型ステートマシン(State と Strategy の比較つき)"
+title: 有限ステートマシンと階層型ステートマシン(State と Strategy の比較つき)
 study:
-  source: "C++ Wiki"
-  kind: "本文"
-  status: "既存原稿"
+  source: C++ Wiki
+  status: published
   summary: "有限ステートマシン(FSM: Finite State Machine): 「有限個の状態+遷移ルール」でオブジェクトの振る舞いを整理する、Stateパターンの一般形。実装はクラスでもenum+switchでもテーブルでもよい"
+  section: reference
+  format: article
+  domain: game
 ---
 
 # 有限ステートマシンと階層型ステートマシン(State と Strategy の比較つき)
@@ -146,4 +148,4 @@ samples/fsm_guard.cpp に「Search(見失ったら最後の目撃地点へ行き
 
 ---
 
-前: [Type Object・Subclass Sandbox・Bytecode](/game/patterns/type-object-and-sandbox.html) | [カテゴリ目次](/game/patterns/) | 次: [Behavior Tree と Blackboard](/game/patterns/behavior-tree-and-blackboard.html)
+関連項目：[Type Object・Subclass Sandbox・Bytecode](/game/patterns/type-object-and-sandbox.html) | [この分野の学習ガイド](/game/patterns/) | [Behavior Tree と Blackboard](/game/patterns/behavior-tree-and-blackboard.html)

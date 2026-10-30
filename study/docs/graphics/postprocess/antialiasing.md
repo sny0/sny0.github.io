@@ -1,10 +1,12 @@
 ---
-title: "アンチエイリアシング (MSAA / FXAA / SMAA)"
+title: アンチエイリアシング (MSAA / FXAA / SMAA)
 study:
-  source: "RenderingWiki"
-  kind: "本文"
-  status: "既存原稿"
-  summary: "エイリアシングは、連続的な画像信号を離散的なピクセルでサンプリングすることによる折り返し歪みです。ジオメトリのエッジのギザギザ (ジャギー)、細部のちらつき (シマー) として現れます。このページではサンプリング理論の基礎と、空間的AA — SSAA / MSAA (ハードウェア系) と FXAA "
+  source: RenderingWiki
+  status: published
+  summary: エイリアシングは、連続的な画像信号を離散的なピクセルでサンプリングすることによる折り返し歪みです。ジオメトリのエッジのギザギザ (ジャギー)、細部のちらつき (シマー) として現れます。このページではサンプリング理論の基礎と、空間的AA — SSAA / MSAA (ハードウェア系) と FXAA
+  section: reference
+  format: article
+  domain: graphics
 ---
 
 # アンチエイリアシング (MSAA / FXAA / SMAA)

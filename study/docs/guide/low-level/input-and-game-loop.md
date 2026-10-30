@@ -1,13 +1,33 @@
 ---
-title: "第14章 入力とゲームループ ── パッドの旅とフレームの解剖学"
+title: 第14章 入力とゲームループ
 study:
-  source: "IT教本"
-  kind: "学習ガイド"
-  status: "学習計画・概要"
-  summary: "ゲームループはゲームプログラムの心臓であり、この教本の題名 「ボタンを押してから画面に出るまで」の背骨である。 可変フレームレートの罠、固定タイムステップ、入力遅延、VSync ──"
+  source: IT教本
+  status: outline
+  summary: |-
+    入力の状態と押し始め、実時間と更新時間、描画と表示を分けて学ぶための学習計画・概要です。短いループを作って挙動を観察し、遅延や時間刻みの方針を言葉にします。
+
+    ## 関連する辞典本文・実践
+
+    - [Game LoopとUpdate](/game/patterns/game-loop-and-
+  section: learning
+  format: path
+  domain: game
+  collection: low-level
+  order: 15
 ---
 
-# 第14章 入力とゲームループ ── パッドの旅とフレームの解剖学
+<div id="第14章-入力とゲームループ-──-パッドの旅とフレームの解剖学" class="study-legacy-anchor" aria-hidden="true"></div>
+
+# 第14章 入力とゲームループ
+
+## このページで案内すること
+
+入力の状態と押し始め、実時間と更新時間、描画と表示を分けて学ぶための**学習計画・概要**です。短いループを作って挙動を観察し、遅延や時間刻みの方針を言葉にします。
+
+## 関連する辞典本文・実践
+
+- [Game LoopとUpdate](/game/patterns/game-loop-and-update.html)、[Command Bufferと入力](/game/patterns/command-buffer-and-input.html)で、更新と入力の扱いを調べられます。
+- [小さなシューティング](/game/shooter-design.html)には、固定tickと入力保持を使ったC++・Unityの実装があります。
 
 ## 学ぶ理由
 

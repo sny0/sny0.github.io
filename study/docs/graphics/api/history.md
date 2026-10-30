@@ -1,10 +1,12 @@
 ---
-title: "グラフィックスAPIの歴史"
+title: グラフィックスAPIの歴史
 study:
-  source: "RenderingWiki"
-  kind: "本文"
-  status: "既存原稿"
-  summary: "グラフィックスAPIはアプリケーションとGPUドライバの間の契約です。30年の歴史は「抽象度を上げてきた前半」と「抽象を剥がして明示化した後半」に分かれます。この転換の物語を理解すると、DX12/Vulkanの一見不可解な複雑さが「すべて必然だった」と分かります。"
+  source: RenderingWiki
+  status: published
+  summary: グラフィックスAPIはアプリケーションとGPUドライバの間の契約です。30年の歴史は「抽象度を上げてきた前半」と「抽象を剥がして明示化した後半」に分かれます。この転換の物語を理解すると、DX12/Vulkanの一見不可解な複雑さが「すべて必然だった」と分かります。
+  section: reference
+  format: history
+  domain: graphics
 ---
 
 # グラフィックスAPIの歴史

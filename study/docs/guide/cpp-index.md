@@ -1,15 +1,21 @@
 ---
-title: "目次 — 設計原則・デザインパターン・C++の仕組み"
+title: 設計とC++の学習コース
 study:
-  source: "C++ Wiki"
-  kind: "索引"
-  status: "既存原稿"
-  summary: "このページから全カテゴリ・全ページへ移動できます。学習順に迷ったら 学習ロードマップ へ。 学習ロードマップ / 用語集 / 参考文献 / 総合演習 / 総合演習の解答 設計とは何を決める行為なのか"
+  source: C++ Wiki
+  status: published
+  summary: 設計原則・デザインパターン・C++の仕組みを、関連づけて読むための学習コースです。用語や仕組みを調べるときは技術辞典から探せます。学習順に迷ったら学習ロードマップへ進んでください。
+  section: learning
+  format: path
+  domain: design
+  collection: cpp-design
+  order: -1
 ---
 
-# 目次 — 設計原則・デザインパターン・C++の仕組み
+<div id="目次-—-設計原則・デザインパターン・c-の仕組み" class="study-legacy-anchor" aria-hidden="true"></div>
 
-このページから全カテゴリ・全ページへ移動できます。学習順に迷ったら [学習ロードマップ](/guide/cpp-roadmap.html) へ。
+# 設計とC++の学習コース
+
+設計原則・デザインパターン・C++の仕組みを、関連づけて読むための学習コースです。用語や仕組みを調べるときは[技術辞典](/)から探せます。学習順に迷ったら[学習ロードマップ](/guide/cpp-roadmap.html)へ進んでください。
 
 - [学習ロードマップ](/guide/cpp-roadmap.html) / [用語集](/guide/cpp-glossary.html) / [参考文献](/guide/cpp-references.html) / [総合演習](/guide/exercises/) / [総合演習の解答](/guide/exercises/answers.html)
 

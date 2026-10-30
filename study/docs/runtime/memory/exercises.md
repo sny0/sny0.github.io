@@ -1,13 +1,19 @@
 ---
-title: "第7部 演習 — メモリと実行時"
+title: メモリと実行時の演習
 study:
-  source: "C++ Wiki"
-  kind: "演習"
-  status: "既存原稿"
-  summary: "正誤を判定し、誤りは訂正してください。 スコープを抜けた変数のメモリを指すポインタは、次の確保が起きるまでは安全に使える。 shared_ptrの循環参照は、C#のGCと同様に自動回収される。"
+  source: C++ Wiki
+  status: published
+  summary: 正誤を判定し、誤りは訂正してください。 スコープを抜けた変数のメモリを指すポインタは、次の確保が起きるまでは安全に使える。 shared_ptrの循環参照は、C#のGCと同様に自動回収される。
+  section: practice
+  format: exercise
+  domain: runtime
+  collection: cpp-exercises
+  order: 7
 ---
 
-# 第7部 演習 — メモリと実行時
+<div id="第7部-演習-—-メモリと実行時" class="study-legacy-anchor" aria-hidden="true"></div>
+
+# メモリと実行時の演習
 
 ## 問1. 概念確認
 
@@ -101,4 +107,4 @@ C++の典型事故は「まだ使っているのに解放される」(use-after-
 
 ---
 
-前: [GCとの違い](/runtime/memory/gc-and-csharp-comparison.html) | [カテゴリ目次](/runtime/memory/) | [第8部: ビルドとライブラリへ](/tools/build/)
+関連項目：[GCとの違い](/runtime/memory/gc-and-csharp-comparison.html) / [学習ガイド](/runtime/memory/) / [ビルドとライブラリを学ぶ](/tools/build/)

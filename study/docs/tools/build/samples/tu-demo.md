@@ -1,10 +1,14 @@
 ---
 title: "C++サンプル: tu_demo"
 study:
-  source: "C++ Wiki"
-  kind: "サンプル索引"
-  status: "既存原稿"
-  summary: "C++ Wikiで参照するソース一式です。コンパイル済み実行物は配布しません。 enemy.cpp enemy.h main.cpp radar.cpp radar.h README.md"
+  source: C++ Wiki
+  status: published
+  summary: C++ Wikiで参照するソース一式です。コンパイル済み実行物は配布しません。 enemy.cpp enemy.h main.cpp radar.cpp radar.h README.md
+  section: practice
+  format: sample
+  domain: tools
+  collection: cpp-samples
+  order: 2
 ---
 
 # C++サンプル: tu_demo

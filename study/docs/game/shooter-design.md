@@ -1,12 +1,25 @@
 ---
-title: "小さなシューティングの設計 — C++とUnityで作る"
+title: 小さなシューティングの設計 — C++とUnityで作る
 study:
-  source: "新規執筆"
-  kind: "実装例"
-  status: "初版"
+  source: 新規執筆
+  status: published
   domain: game
-  summary: "2D縦シューティングを、画面の絵、責務の図、時間と消去の図解、動かせる当たり判定から設計する。C++とUnityの実装へつなぐ。"
-  aliases: [シューティング, STG, shooting, shooter, ゲーム設計, 縦スクロール, raylib, Unity, 図解, 当たり判定]
+  summary: 2D縦シューティングを、画面の絵、責務の図、時間と消去の図解、動かせる当たり判定から設計する。C++とUnityの実装へつなぐ。
+  aliases:
+    - シューティング
+    - STG
+    - shooting
+    - shooter
+    - ゲーム設計
+    - 縦スクロール
+    - raylib
+    - Unity
+    - 図解
+    - 当たり判定
+  section: practice
+  format: tutorial
+  collection: shooter
+  order: 1
 ---
 
 # 小さなシューティングの設計 — C++とUnityで作る

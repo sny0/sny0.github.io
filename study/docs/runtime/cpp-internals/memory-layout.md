@@ -1,10 +1,12 @@
 ---
-title: "メモリレイアウト・パディング・アラインメント・エンディアン"
+title: メモリレイアウト・パディング・アラインメント・エンディアン
 study:
-  source: "C++ Wiki"
-  kind: "本文"
-  status: "既存原稿"
+  source: C++ Wiki
+  status: published
   summary: "実行中のプログラム(プロセス)の仮想アドレス空間は、役割ごとの領域に分かれています(配置は典型例。OSにより詳細は異なる)。 スタック: 確保はポインタをずらすだけ(超高速)。サイズ上限あり(典型1〜8MB → 深い再帰や巨大ローカル配列でstack overflow)。寿命はスコープ"
+  section: reference
+  format: article
+  domain: runtime
 ---
 
 # メモリレイアウト・パディング・アラインメント・エンディアン
@@ -34,7 +36,7 @@ study:
 - **ヒープ**: 任意サイズ・任意寿命。確保は管理コストあり、[断片化](/runtime/memory/allocators-and-pools.html)する
 - **書けない領域に書くと**OSがアクセス違反(Segmentation Fault / Access Violation)で止める——「ぬるぽで即死」の正体は大抵、低アドレス(マップされていないページ)への書き込み
 
-各領域の「寿命」の言語上の分類([記憶域期間](/runtime/memory/storage-duration-and-lifetime.html))は第7部で扱います。
+各領域の「寿命」の言語上の分類は、[記憶域期間と寿命](/runtime/memory/storage-duration-and-lifetime.html)の項目で扱います。
 
 ## アラインメントとパディング
 
@@ -108,4 +110,4 @@ samples/struct_layout.cpp で、(a) メンバ並び替えによるsizeof変化�
 
 ---
 
-前: [RTTI・例外処理の仕組み](/runtime/cpp-internals/exceptions-and-rtti-impl.html) | [カテゴリ目次](/runtime/cpp-internals/) | 次: [関数呼び出し・コールスタック・呼出規約](/runtime/cpp-internals/function-calls-and-cpu.html)
+関連項目：[RTTI・例外処理の仕組み](/runtime/cpp-internals/exceptions-and-rtti-impl.html) / [学習ガイド](/runtime/cpp-internals/) / [関数呼び出し・コールスタック・呼出規約](/runtime/cpp-internals/function-calls-and-cpu.html)

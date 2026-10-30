@@ -1,10 +1,12 @@
 ---
-title: "MSL (Metal Shading Language)"
+title: MSL (Metal Shading Language)
 study:
-  source: "RenderingWiki"
-  kind: "本文"
-  status: "既存原稿"
-  summary: "MSL (Metal Shading Language) はAppleのMetal API専用シェーダ言語で、C++14ベースという他言語にない特徴を持ちます。テンプレート・ポインタ・名前空間が使え、シェーダ言語の中で最も「普通のプログラミング言語」に近い設計です。iOS/macOS/visionO"
+  source: RenderingWiki
+  status: published
+  summary: MSL (Metal Shading Language) はAppleのMetal API専用シェーダ言語で、C++14ベースという他言語にない特徴を持ちます。テンプレート・ポインタ・名前空間が使え、シェーダ言語の中で最も「普通のプログラミング言語」に近い設計です。iOS/macOS/visionO
+  section: reference
+  format: article
+  domain: graphics
 ---
 
 # MSL (Metal Shading Language)

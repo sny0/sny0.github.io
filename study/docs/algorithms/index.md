@@ -3,12 +3,12 @@
   "title": "データ構造・アルゴリズム",
   "study": {
     "source": "統合ガイド",
-    "kind": "分野索引",
-    "status": "初版",
-    "domain": "algorithms",
+    "status": "published",
     "generated": true,
-    "catalog": true,
-    "summary": "操作手順、計算量、不変条件から道具を選ぶ。"
+    "catalog": false,
+    "section": "reference",
+    "format": "index",
+    "domain": "algorithms"
   }
 }
 ---
@@ -17,16 +17,22 @@
 
 操作手順、計算量、不変条件から道具を選ぶ。
 
-## いま読める項目
+## 辞典の本文
 
-- [第10章 データ構造・アルゴリズム・ゲーム数学 ── ゲームに効くものだけを深く](/guide/low-level/algorithms-and-game-math.html) — 学習ガイド
+この分野の専用の辞典本文は準備中です。学習計画や分野の目次を、詳しい解説本文として数えてはいません。
 
-## これから充実させる項目
+## この分野の学習ガイド
+
+- [第10章 データ構造・アルゴリズム・ゲーム数学](/guide/low-level/algorithms-and-game-math.html) — 学習計画・概要
+
+## 作って試す
+
+この分野専用の実践教材は準備中です。[実践・サンプル一覧](/practice/)に公開中の題材をまとめています。
+
+## 扱う範囲・増補する項目
 
 - 配列・ハッシュ・ヒープ・木
 - 探索・ソート
 - BFS・Dijkstra・A*
 - BVH
 - 空間分割
-
-本文・概要・学習計画を区別しながら増補します。[疑問から選ぶ読み進め方](/guide/learning-paths.html)にも、この分野とのつながりをまとめています。

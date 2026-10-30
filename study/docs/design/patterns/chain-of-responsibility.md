@@ -1,10 +1,12 @@
 ---
-title: "Chain of Responsibility"
+title: Chain of Responsibility
 study:
-  source: "C++ Wiki"
-  kind: "本文"
-  status: "既存原稿"
+  source: C++ Wiki
+  status: published
   summary: "要求(イベント・リクエスト)を処理できる候補が複数あり、誰が処理すべきかを送信側が知らずに済ませたい。候補を鎖状に繋ぎ、処理できる者が現れるまで順に回す。 Handler: 要求を処理するか、次へ回すかを決めるインターフェース"
+  section: reference
+  format: article
+  domain: design
 ---
 
 # Chain of Responsibility
@@ -181,4 +183,4 @@ public class DamagePipeline {
 
 ---
 
-前: [Proxy](/design/patterns/proxy.html) | [カテゴリ目次](/design/patterns/) | 次: [Command](/design/patterns/command.html)
+関連項目：[Proxy](/design/patterns/proxy.html) / [学習ガイド](/design/patterns/) / [Command](/design/patterns/command.html)

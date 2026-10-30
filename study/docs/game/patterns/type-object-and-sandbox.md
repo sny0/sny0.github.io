@@ -1,10 +1,12 @@
 ---
-title: "Type Object・Subclass Sandbox・Bytecode"
+title: Type Object・Subclass Sandbox・Bytecode
 study:
-  source: "C++ Wiki"
-  kind: "本文"
-  status: "既存原稿"
+  source: C++ Wiki
+  status: published
   summary: "「振る舞いや種類をコードからデータへ移す」系譜の3パターンです。データ化の度合いが軽い順に並べています。共通の動機: 種類の追加・調整をプログラマとビルドから切り離し、企画のイテレーションを速くする。"
+  section: reference
+  format: article
+  domain: game
 ---
 
 # Type Object・Subclass Sandbox・Bytecode
@@ -62,7 +64,7 @@ private:
 - 失: **種類ごとの特殊な振る舞い**が表現しにくい(データは値しか持てない)。「ドラゴンだけ3回行動」はどうする? → 振る舞いIDでコード側の分岐を引く/次のSubclass Sandboxとの併用/Bytecodeへ
 - 使わない: 種類が数個で振る舞いの差が大きい(素直にクラスで)
 
-Unity: **ScriptableObjectがType Objectの公式実装**。UE: DataTable / DataAsset(→ [第10部](/game/unreal/gameplay-framework.html))。
+Unity: **ScriptableObjectがType Objectの公式実装**。UE: DataTable / DataAsset(→ [Gameplay Framework](/game/unreal/gameplay-framework.html))。
 
 ---
 
@@ -159,7 +161,7 @@ int Execute(const std::vector<std::uint8_t>& code, const std::vector<int>& stats
 - 失: **デバッガが効かない**(自作VMの中はブレークポイントを張れない。デバッグ表示・逆アセンブラを自作する羽目に)。命令セットの設計・保守という言語処理系の仕事を抱え込む
 - 使わない: 定義したい振る舞いが少ない・単純(Type Objectのデータ+数個の分岐で足りる)。既存スクリプト言語(Lua)で済む——**自作VMはLua導入すら重い制約(実行環境・審査・超軽量要件)があるときの手段**
 
-実例: ポケモンの技エフェクト(原典の例)、MOD対応ゲームのスクリプト、シェーダ(GPUに送るバイトコード)、そして**UnityのIL2CPPが変換するIL自体**もバイトコードです(→ [第9部](/languages/csharp/il2cpp.html))。
+実例: ポケモンの技エフェクト(原典の例)、MOD対応ゲームのスクリプト、シェーダ(GPUに送るバイトコード)、そして**UnityのIL2CPPが変換するIL自体**もバイトコードです(→ [IL2CPP](/languages/csharp/il2cpp.html))。
 
 ---
 
@@ -183,4 +185,4 @@ samples/type_object.cpp に「攻撃パターンID」を追加し、IDからコ�
 
 ---
 
-前: [最適化系パターン](/game/patterns/optimization-patterns.html) | [カテゴリ目次](/game/patterns/) | 次: [ステートマシン(FSM/HSM)](/game/patterns/state-machines.html)
+関連項目：[最適化系パターン](/game/patterns/optimization-patterns.html) | [この分野の学習ガイド](/game/patterns/) | [ステートマシン(FSM/HSM)](/game/patterns/state-machines.html)

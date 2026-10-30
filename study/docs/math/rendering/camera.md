@@ -1,10 +1,12 @@
 ---
-title: "カメラと射影"
+title: カメラと射影
 study:
-  source: "RenderingWiki"
-  kind: "本文"
-  status: "既存原稿"
-  summary: "カメラは3Dシーンを2D画像に落とすための視点の定義です。数学的には2つの行列 — 世界をカメラ視点に組み替えるビュー行列と、視錐台を立方体に押し込める射影行列 — で表現されます。このページでは両行列を導出し、透視投影・深度精度 (Reverse-Z)・視錐台カリングまでを扱います。"
+  source: RenderingWiki
+  status: published
+  summary: カメラは3Dシーンを2D画像に落とすための視点の定義です。数学的には2つの行列 — 世界をカメラ視点に組み替えるビュー行列と、視錐台を立方体に押し込める射影行列 — で表現されます。このページでは両行列を導出し、透視投影・深度精度 (Reverse-Z)・視錐台カリングまでを扱います。
+  section: reference
+  format: article
+  domain: math
 ---
 
 # カメラと射影

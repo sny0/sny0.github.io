@@ -1,10 +1,12 @@
 ---
-title: "Lumen"
+title: Lumen
 study:
-  source: "RenderingWiki"
-  kind: "本文"
-  status: "既存原稿"
-  summary: "LumenはUE5の完全動的グローバルイルミネーション&リフレクションシステムです (2021)。ライトマップベイクを不要にし、時刻変化・破壊・動的ジオメトリに追従するGIを、ハイエンドだけでなくコンソール(30/60fps)でも動かすことを目標に設計されました。技術的には単一の新技術ではなく、SD"
+  source: RenderingWiki
+  status: published
+  summary: LumenはUE5の完全動的グローバルイルミネーション&リフレクションシステムです (2021)。ライトマップベイクを不要にし、時刻変化・破壊・動的ジオメトリに追従するGIを、ハイエンドだけでなくコンソール(30/60fps)でも動かすことを目標に設計されました。技術的には単一の新技術ではなく、SD
+  section: reference
+  format: article
+  domain: graphics
 ---
 
 # Lumen

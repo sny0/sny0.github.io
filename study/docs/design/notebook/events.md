@@ -1,17 +1,17 @@
 ---
-title: "通知と疎結合 — Observer・Event・Mediator"
+title: 通知と疎結合 — Observer・Event・Mediator
 study:
-  source: "設計の手帖"
-  kind: "本文"
-  status: "既存原稿"
-  summary: "通知は直接の結び付きを減らします。その代わり、呼び出しの流れと寿命を見えるようにする必要があります。"
+  source: 設計の手帖
+  status: published
+  summary: 通知は直接の結び付きを減らします。その代わり、呼び出しの流れと寿命を見えるようにする必要があります。
+  section: reference
+  format: article
+  domain: design
 ---
 
 # 通知と疎結合 — Observer・Event・Mediator
 
 通知は直接の結び付きを減らします。その代わり、呼び出しの流れと寿命を見えるようにする必要があります。
-
-02 · パターンを道具にする / Observer とイベント設計 / Publish facts, manage lifetimes / 応用 / 9分
 
 タグ: Observer / Event / Mediator / 購読 / イベント駆動
 

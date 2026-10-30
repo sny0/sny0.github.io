@@ -1,10 +1,12 @@
 ---
-title: "アップスケーリング — DLSS / FSR / XeSS"
+title: アップスケーリング — DLSS / FSR / XeSS
 study:
-  source: "RenderingWiki"
-  kind: "本文"
-  status: "既存原稿"
-  summary: "時間的アップスケーラは、低解像度でレンダリングしたフレームを、ジッタ+モーションベクタ+過去フレームの蓄積から高解像度に再構成する技術です。TAA の直系進化であり、「4Kをネイティブで描くのではなく、1080p〜1440pで描いて賢く拡大する」ことでレイトレーシング世代のGPUコストを賄う、現代リ"
+  source: RenderingWiki
+  status: published
+  summary: 時間的アップスケーラは、低解像度でレンダリングしたフレームを、ジッタ+モーションベクタ+過去フレームの蓄積から高解像度に再構成する技術です。TAA の直系進化であり、「4Kをネイティブで描くのではなく、1080p〜1440pで描いて賢く拡大する」ことでレイトレーシング世代のGPUコストを賄う、現代リ
+  section: reference
+  format: article
+  domain: graphics
 ---
 
 # アップスケーリング — DLSS / FSR / XeSS

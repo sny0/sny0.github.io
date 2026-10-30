@@ -1,10 +1,12 @@
 ---
-title: "設計の品質特性 — 変更容易性・テスト容易性・拡張性・可読性・保守性・再利用性"
+title: 設計の品質特性 — 変更容易性・テスト容易性・拡張性・可読性・保守性・再利用性
 study:
-  source: "C++ Wiki"
-  kind: "本文"
-  status: "既存原稿"
+  source: C++ Wiki
+  status: published
   summary: "「良い設計」は一枚岩ではなく、複数の品質特性の組み合わせです。しかも特性同士はトレードオフすることがあります。何を優先するかを決めるのが設計判断です。 変更容易性(modifiability): 仕様変更のとき、直す箇所が少なく・特定しやすく・影響が閉じていること。"
+  section: reference
+  format: article
+  domain: design
 ---
 
 # 設計の品質特性 — 変更容易性・テスト容易性・拡張性・可読性・保守性・再利用性
@@ -128,4 +130,4 @@ private:
 
 ---
 
-前: [ポリモーフィズムとインターフェース](/design/foundations/polymorphism-interface.html) | [カテゴリ目次](/design/foundations/) | 次: [YAGNI・KISS・DRY](/design/foundations/yagni-kiss-dry.html)
+関連項目：[ポリモーフィズムとインターフェース](/design/foundations/polymorphism-interface.html) / [学習ガイド](/design/foundations/) / [YAGNI・KISS・DRY](/design/foundations/yagni-kiss-dry.html)

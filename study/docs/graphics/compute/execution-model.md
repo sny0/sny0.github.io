@@ -1,10 +1,12 @@
 ---
-title: "GPU並列実行モデル — Warp / Wave / SIMT"
+title: GPU並列実行モデル — Warp / Wave / SIMT
 study:
-  source: "RenderingWiki"
-  kind: "本文"
-  status: "既存原稿"
-  summary: "GPUはスレッドをWarp/Wave等の単位にまとめ、同じ命令をactiveなレーン群へ発行して高いスループットを得ます。NVIDIAのWarpは32本、AMDは世代・設定によりWave32/64等を使います。NVIDIAのプログラミングモデルではこれを SIMT (Single Instructi"
+  source: RenderingWiki
+  status: published
+  summary: GPUはスレッドをWarp/Wave等の単位にまとめ、同じ命令をactiveなレーン群へ発行して高いスループットを得ます。NVIDIAのWarpは32本、AMDは世代・設定によりWave32/64等を使います。NVIDIAのプログラミングモデルではこれを SIMT (Single Instructi
+  section: reference
+  format: article
+  domain: graphics
 ---
 
 # GPU並列実行モデル — Warp / Wave / SIMT

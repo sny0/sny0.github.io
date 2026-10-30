@@ -1,13 +1,17 @@
 ---
-title: "ケーススタディ 11: サウンド管理"
+title: サウンド管理の設計
 study:
-  source: "C++ Wiki"
-  kind: "本文"
-  status: "既存原稿"
+  source: C++ Wiki
+  status: published
   summary: "同時発音の氾濫: 敵10体同時死亡でSEが10重に鳴り音割れ(集約・間引きの場所がない) ミドルウェア変更(FMOD→Wwise)で全呼び出し箇所を書き換え(Adapterの不在)"
+  section: reference
+  format: article
+  domain: design
 ---
 
-# ケーススタディ 11: サウンド管理
+<div id="ケーススタディ-11-サウンド管理" class="study-legacy-anchor" aria-hidden="true"></div>
+
+# サウンド管理の設計
 
 ## 素朴な実装
 
@@ -76,4 +80,4 @@ void Enemy::Die() {
 
 ---
 
-前: [画面遷移](/design/case-studies/screen-transition.html) | [カテゴリ目次](/design/case-studies/) | 次: [アイテム効果](/design/case-studies/item-effects.html)
+関連項目：[画面遷移](/design/case-studies/screen-transition.html) / [学習ガイド](/design/case-studies/) / [アイテム効果](/design/case-studies/item-effects.html)

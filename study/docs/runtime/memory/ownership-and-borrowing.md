@@ -1,10 +1,12 @@
 ---
-title: "所有権と借用"
+title: 所有権と借用
 study:
-  source: "C++ Wiki"
-  kind: "本文"
-  status: "既存原稿"
+  source: C++ Wiki
+  status: published
   summary: "所有権 (ownership): 「このオブジェクトを破棄する責任を誰が持つか」。C++設計の背骨で、スマートポインタは所有権を型で表す道具 借用 (borrowing): 所有せず「一時的に使わせてもらう」こと(参照・非所有ポインタ)。借用は所有者より長生きしてはいけない——この規律を、C++では"
+  section: reference
+  format: article
+  domain: runtime
 ---
 
 # 所有権と借用
@@ -98,4 +100,4 @@ class Turret {
 
 ---
 
-前: [記憶域期間とスコープ・寿命](/runtime/memory/storage-duration-and-lifetime.html) | [カテゴリ目次](/runtime/memory/) | 次: [メモリバグ図鑑](/runtime/memory/memory-bugs.html)
+関連項目：[記憶域期間とスコープ・寿命](/runtime/memory/storage-duration-and-lifetime.html) / [学習ガイド](/runtime/memory/) / [メモリバグ図鑑](/runtime/memory/memory-bugs.html)

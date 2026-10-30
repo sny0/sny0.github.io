@@ -1,10 +1,12 @@
 ---
-title: "UEのスマートポインタ — TSharedPtr・TUniquePtr・TWeakPtr・TSoftObjectPtr"
+title: UEのスマートポインタ — TSharedPtr・TUniquePtr・TWeakPtr・TSoftObjectPtr
 study:
-  source: "C++ Wiki"
-  kind: "本文"
-  status: "既存原稿"
-  summary: "UEは標準の std::shared_ptr 等を使わず、同じ概念の独自実装(TSharedPtr等)を持ちます。使い分けの考え方は標準スマートポインタと同一で、適用対象が「非UObject」に限られる点だけがUE特有の重要ルールです。"
+  source: C++ Wiki
+  status: published
+  summary: UEは標準の std::shared_ptr 等を使わず、同じ概念の独自実装(TSharedPtr等)を持ちます。使い分けの考え方は標準スマートポインタと同一で、適用対象が「非UObject」に限られる点だけがUE特有の重要ルールです。
+  section: reference
+  format: article
+  domain: game
 ---
 
 # UEのスマートポインタ — TSharedPtr・TUniquePtr・TWeakPtr・TSoftObjectPtr
@@ -81,4 +83,4 @@ UStaticMesh* Mesh = HeavyMesh.LoadSynchronous();            // または Streama
 
 ---
 
-前: [UBT・Module・Build.cs](/game/unreal/build-system-ubt.html) | [カテゴリ目次](/game/unreal/) | 次: [UEのDelegateとInterface](/game/unreal/delegates-and-interfaces.html)
+関連項目：[UBT・Module・Build.cs](/game/unreal/build-system-ubt.html) | [この分野の学習ガイド](/game/unreal/) | [UEのDelegateとInterface](/game/unreal/delegates-and-interfaces.html)

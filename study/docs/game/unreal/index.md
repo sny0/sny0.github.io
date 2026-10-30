@@ -1,17 +1,23 @@
 ---
-title: "第10部: Unreal Engineとの対応"
+title: Unreal Engineと標準C++をつなぐ学習ガイド
 study:
-  source: "C++ Wiki"
-  kind: "索引"
-  status: "既存原稿"
-  summary: "UEのC++は「標準C++の上に、エンジン独自の層(リフレクション・GC・独自コンテナ・ビルドツール)を被せたもの」です。この章は各ページで必ず「標準C++ではどう書くか」と「UEではなぜ独自の方法を使うか」を対比します。UE独自仕様を標準C++と混同しないことが、両方を正しく学ぶ鍵です。"
+  source: C++ Wiki
+  status: published
+  summary: 標準C++の仕組みと、UObject・GC・リフレクション・UBTの対応を順に読む。
+  section: learning
+  format: path
+  domain: game
+  collection: cpp-design
+  order: 10
 ---
 
-# 第10部: Unreal Engineとの対応
+<div id="第10部-unreal-engineとの対応" class="study-legacy-anchor" aria-hidden="true"></div>
 
-UEのC++は「標準C++の上に、**エンジン独自の層**(リフレクション・GC・独自コンテナ・ビルドツール)を被せたもの」です。この章は各ページで必ず「**標準C++ではどう書くか**」と「**UEではなぜ独自の方法を使うか**」を対比します。UE独自仕様を標準C++と混同しないことが、両方を正しく学ぶ鍵です。
+# Unreal Engineと標準C++をつなぐ学習ガイド
 
-## ページ一覧
+UEのC++は「標準C++の上に、**エンジン独自の層**(リフレクション・GC・独自コンテナ・ビルドツール)を被せたもの」です。このガイドから読む各本文では「**標準C++ではどう書くか**」と「**UEではなぜ独自の方法を使うか**」を対比します。UE独自仕様を標準C++と混同しないことが、両方を正しく学ぶ鍵です。
+
+## 本文を読む順序
 
 1. [UObject・Actor・ActorComponent](/game/unreal/uobject-actor-component.html)
 2. [UEのガベージコレクションと UPROPERTY・TObjectPtr・TWeakObjectPtr](/game/unreal/gc-and-object-pointers.html)
@@ -21,9 +27,9 @@ UEのC++は「標準C++の上に、**エンジン独自の層**(リフレクシ�
 6. [UEの Delegate と Interface](/game/unreal/delegates-and-interfaces.html)
 7. [Gameplay Framework・Subsystem・Slate/UMG・DataAsset/DataTable](/game/unreal/gameplay-framework.html)
 
-仕上げに [演習](/game/unreal/exercises.html)。
+仕組みを確認したら、「実践・サンプル」の[Unreal Engine演習](/game/unreal/exercises.html)で確かめられます。
 
-## 全体対応表(この章の地図)
+## 全体対応表
 
 | 領域 | 標準C++ | UE |
 |---|---|---|
@@ -37,8 +43,8 @@ UEのC++は「標準C++の上に、**エンジン独自の層**(リフレクシ�
 
 ## 前提
 
-第5〜7部(特に[スマートポインタ](/languages/cpp/smart-pointers.html)、[所有権](/runtime/memory/ownership-and-borrowing.html)、[翻訳単位](/runtime/cpp-internals/translation-units-and-headers.html))を先に読むと、「UEがなぜそうしたか」が理解できます。
+[スマートポインタ](/languages/cpp/smart-pointers.html)、[所有権](/runtime/memory/ownership-and-borrowing.html)、[翻訳単位](/runtime/cpp-internals/translation-units-and-headers.html)を先に読むと、「UEがなぜそうしたか」が理解できます。
 
 ---
 
-[全体目次](/guide/cpp-index.html) | 次: [UObject・Actor・ActorComponent](/game/unreal/uobject-actor-component.html)
+[C++・設計の学習ガイド](/guide/cpp-index.html) | [UObject・Actor・ActorComponentの本文](/game/unreal/uobject-actor-component.html)

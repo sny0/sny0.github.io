@@ -1,15 +1,21 @@
 ---
-title: "第8部: ビルドとライブラリ"
+title: ビルドとライブラリを学ぶ
 study:
-  source: "C++ Wiki"
-  kind: "索引"
-  status: "既存原稿"
-  summary: "第6部で「ビルドの中で何が起きるか」を学びました。この章は「ビルドをどう運用するか」——道具(コンパイラ、CMake)、構成(Debug/Release)、速度、品質ツール、そしてリンクエラーとの戦い方です。"
+  source: C++ Wiki
+  status: published
+  summary: C++の内部的な仕組みでは「ビルドの中で何が起きるか」を扱います。この章は「ビルドをどう運用するか」——道具(コンパイラ、CMake)、構成(Debug/Release)、速度、品質ツール、そしてリンクエラーとの戦い方です。
+  section: learning
+  format: path
+  domain: tools
+  collection: cpp-design
+  order: 8
 ---
 
-# 第8部: ビルドとライブラリ
+<div id="第8部-ビルドとライブラリ" class="study-legacy-anchor" aria-hidden="true"></div>
 
-第6部で「ビルドの中で何が起きるか」を学びました。この章は「**ビルドをどう運用するか**」——道具(コンパイラ、CMake)、構成(Debug/Release)、速度、品質ツール、そしてリンクエラーとの戦い方です。
+# ビルドとライブラリを学ぶ
+
+[C++の内部的な仕組み](/runtime/cpp-internals/)では「ビルドの中で何が起きるか」を扱います。この章は「**ビルドをどう運用するか**」——道具(コンパイラ、CMake)、構成(Debug/Release)、速度、品質ツール、そしてリンクエラーとの戦い方です。
 
 ## 読む順番
 
@@ -25,7 +31,7 @@ study:
 
 ## 前提
 
-[第6部: main.cppからCPU命令までの旅](/runtime/cpp-internals/build-pipeline-journey.html) を先に読んでください。この章はその運用編です。
+[main.cpp から CPU命令までの旅](/runtime/cpp-internals/build-pipeline-journey.html) を先に読んでください。この章はその運用編です。
 
 ---
 

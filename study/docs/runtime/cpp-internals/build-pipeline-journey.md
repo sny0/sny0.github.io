@@ -1,10 +1,12 @@
 ---
-title: "main.cpp から CPU命令までの旅"
+title: main.cpp から CPU命令までの旅
 study:
-  source: "C++ Wiki"
-  kind: "本文"
-  status: "既存原稿"
-  summary: "g++ main.cpp と打ってからゲームが動くまで、コードは7つの姿を経ます。この1本の旅を通しで理解すれば、ビルドエラー・リンクエラー・実行時クラッシュが「どの段階の問題か」を切り分けられるようになります。"
+  source: C++ Wiki
+  status: published
+  summary: g++ main.cpp と打ってからゲームが動くまで、コードは7つの姿を経ます。この1本の旅を通しで理解すれば、ビルドエラー・リンクエラー・実行時クラッシュが「どの段階の問題か」を切り分けられるようになります。
+  section: reference
+  format: article
+  domain: compilers
 ---
 
 # main.cpp から CPU命令までの旅
@@ -137,7 +139,7 @@ CPUは「命令を取ってくる(フェッチ)→解読(デコード)→実行�
 
 ## Unity/C# との対応
 
-C#は「コンパイル→IL(中間言語)→実行時にJIT/事前にAOT」という2段構え。C++は**実行前にすべて機械語まで落とす**(JITなし)。UnityのIL2CPPは「IL→C++→この旅」という変換で、まさにこのページの旅に合流します(→ [第9部](/languages/csharp/il2cpp.html))。アセンブリ(.dll)のロードは⑤の動的リンクに相当します。
+C#は「コンパイル→IL(中間言語)→実行時にJIT/事前にAOT」という2段構え。C++は**実行前にすべて機械語まで落とす**(JITなし)。UnityのIL2CPPは「IL→C++→この旅」という変換で、まさにこのページの旅に合流します(→ [ネイティブビルドと IL2CPP](/languages/csharp/il2cpp.html))。アセンブリ(.dll)のロードは⑤の動的リンクに相当します。
 
 ## 理解度チェック
 
@@ -151,4 +153,4 @@ C#は「コンパイル→IL(中間言語)→実行時にJIT/事前にAOT」と�
 
 ---
 
-前: [カテゴリ目次](/runtime/cpp-internals/) | 次: [翻訳単位・ヘッダー・ODR](/runtime/cpp-internals/translation-units-and-headers.html)
+関連項目：[学習ガイド](/runtime/cpp-internals/) / [翻訳単位・ヘッダー・ODR](/runtime/cpp-internals/translation-units-and-headers.html)

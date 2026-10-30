@@ -1,10 +1,12 @@
 ---
-title: "Command Buffer と入力処理(Commandパターンとの関係)"
+title: Command Buffer と入力処理(Commandパターンとの関係)
 study:
-  source: "C++ Wiki"
-  kind: "本文"
-  status: "既存原稿"
+  source: C++ Wiki
+  status: published
   summary: "Command Buffer: 「やるべき操作」をその場で実行せずリストに記録し、後でまとめて実行する仕組み。Commandパターン+Event Queue的な遅延実行の複合形。描画・物理・並列処理の世界の基盤技術"
+  section: reference
+  format: article
+  domain: game
 ---
 
 # Command Buffer と入力処理(Commandパターンとの関係)
@@ -147,4 +149,4 @@ samples/input_actions.cpp に「Pollの結果を毎フレーム`std::vector<Fram
 
 ---
 
-前: [Behavior Tree と Blackboard](/game/patterns/behavior-tree-and-blackboard.html) | [カテゴリ目次](/game/patterns/) | 次: [MVC・MVP・MVVM](/game/patterns/mvc-mvp-mvvm.html)
+関連項目：[Behavior Tree と Blackboard](/game/patterns/behavior-tree-and-blackboard.html) | [この分野の学習ガイド](/game/patterns/) | [MVC・MVP・MVVM](/game/patterns/mvc-mvp-mvvm.html)

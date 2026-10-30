@@ -1,10 +1,12 @@
 ---
-title: "Behavior Tree と Blackboard"
+title: Behavior Tree と Blackboard
 study:
-  source: "C++ Wiki"
-  kind: "本文"
-  status: "既存原稿"
+  source: C++ Wiki
+  status: published
   summary: "Behavior Tree(BT、行動ツリー): AIの行動選択を「毎フレーム、木の根から評価し直す」ツリーで表す。優先度と条件分岐の構造化に強く、FSMの「遷移の絡まり」を解消する"
+  section: reference
+  format: article
+  domain: game
 ---
 
 # Behavior Tree と Blackboard
@@ -147,4 +149,4 @@ samples/behavior_tree.cpp に「HPが30%未満なら逃げる(最優先)」の�
 
 ---
 
-前: [ステートマシン(FSM/HSM)](/game/patterns/state-machines.html) | [カテゴリ目次](/game/patterns/) | 次: [Command Buffer と入力処理](/game/patterns/command-buffer-and-input.html)
+関連項目：[ステートマシン(FSM/HSM)](/game/patterns/state-machines.html) | [この分野の学習ガイド](/game/patterns/) | [Command Buffer と入力処理](/game/patterns/command-buffer-and-input.html)

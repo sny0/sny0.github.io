@@ -1,10 +1,12 @@
 ---
-title: "Vulkan"
+title: Vulkan
 study:
-  source: "RenderingWiki"
-  kind: "本文"
-  status: "既存原稿"
-  summary: "Khronosの明示的API。対応実装・機能差を確認し、主要概念とVulkan 1.3のフレーム同期を学びます。"
+  source: RenderingWiki
+  status: published
+  summary: Khronosの明示的API。対応実装・機能差を確認し、主要概念とVulkan 1.3のフレーム同期を学びます。
+  section: reference
+  format: article
+  domain: graphics
 ---
 
 # Vulkan

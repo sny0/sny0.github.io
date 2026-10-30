@@ -1,10 +1,12 @@
 ---
-title: "RAII (Resource Acquisition Is Initialization)"
+title: RAII (Resource Acquisition Is Initialization)
 study:
-  source: "C++ Wiki"
-  kind: "本文"
-  status: "既存原稿"
-  summary: "「リソースの確保をコンストラクタで、解放をデストラクタで行い、リソースの寿命をオブジェクトの寿命に一致させる」— C++最重要のイディオムです。名前は分かりにくいですが、意味は「後片付けを型に組み込む」。スマートポインタ、vector、stringなど、C++標準ライブラリの大半はRAIIでできてい"
+  source: C++ Wiki
+  status: published
+  summary: 「リソースの確保をコンストラクタで、解放をデストラクタで行い、リソースの寿命をオブジェクトの寿命に一致させる」— C++最重要のイディオムです。名前は分かりにくいですが、意味は「後片付けを型に組み込む」。スマートポインタ、vector、stringなど、C++標準ライブラリの大半はRAIIでできてい
+  section: reference
+  format: article
+  domain: languages
 ---
 
 # RAII (Resource Acquisition Is Initialization)
@@ -95,7 +97,7 @@ void AddScore(int s) {
 
 ## C#との違い
 
-- C#の対応物は `using`/`IDisposable`(→ [第9部で詳細比較](/languages/csharp/destructor-dispose-raii-using.html))。ただし**usingは書き忘れられる**(Disposeを呼ぶかは使う側の責任)のに対し、RAIIは**型の性質**なので使う側は何も書かない
+- C#の対応物は `using`/`IDisposable`(→ [デストラクタと Dispose / RAII と using](/languages/csharp/destructor-dispose-raii-using.html))。ただし**usingは書き忘れられる**(Disposeを呼ぶかは使う側の責任)のに対し、RAIIは**型の性質**なので使う側は何も書かない
 - GCはメモリしか回収しない&タイミング不定。RAIIは全リソースを決定的タイミングで解放
 
 ## Unity開発者が誤解しやすい点
@@ -151,4 +153,4 @@ samples/raii_file.cpp を参考に、「構築で計測開始、破棄で経過�
 
 ---
 
-前: [コンストラクタ・デストラクタ・コピー・ムーブ](/languages/cpp/ctor-dtor-copy-move.html) | [カテゴリ目次](/languages/cpp/) | 次: [継承・仮想関数](/languages/cpp/inheritance-and-virtual.html)
+関連項目：[コンストラクタ・デストラクタ・コピー・ムーブ](/languages/cpp/ctor-dtor-copy-move.html) / [学習ガイド](/languages/cpp/) / [継承・仮想関数](/languages/cpp/inheritance-and-virtual.html)

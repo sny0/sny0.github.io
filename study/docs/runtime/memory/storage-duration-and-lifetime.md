@@ -1,10 +1,12 @@
 ---
-title: "記憶域期間とスコープ・寿命の違い"
+title: 記憶域期間とスコープ・寿命の違い
 study:
-  source: "C++ Wiki"
-  kind: "本文"
-  status: "既存原稿"
-  summary: "C++のオブジェクトには「いつ生まれ、いつ死ぬか」の分類=記憶域期間 (storage duration) が3+1種類あります。そしてスコープ(名前が見える範囲)と寿命(実体が生きている期間)は別物——この区別が曖昧だとdangling系のバグを理解できません。"
+  source: C++ Wiki
+  status: published
+  summary: C++のオブジェクトには「いつ生まれ、いつ死ぬか」の分類=記憶域期間 (storage duration) が3+1種類あります。そしてスコープ(名前が見える範囲)と寿命(実体が生きている期間)は別物——この区別が曖昧だとdangling系のバグを理解できません。
+  section: reference
+  format: article
+  domain: runtime
 ---
 
 # 記憶域期間とスコープ・寿命の違い
@@ -86,7 +88,7 @@ Game g_game{ g_audio.Volume() };   // これのどちらが先か、保証がな
 
 1. 「ローカル変数を返しても大丈夫」— C#では常に安全(値はコピー、参照はGCが延命)。C++では**参照・ポインタで返した瞬間にUB予備軍**
 2. 「staticはシーンをまたいで残る便利な置き場」— C++のstaticは初期化・破棄順という別の危険を持つ
-3. `Awake/OnDestroy` のようなエンジン管理の寿命と、C++の言語寿命は別レイヤー。UEではさらにGC寿命が重なる(→ [第10部](/game/unreal/gc-and-object-pointers.html))
+3. `Awake/OnDestroy` のようなエンジン管理の寿命と、C++の言語寿命は別レイヤー。UEではさらにGC寿命が重なる(→ [UEのガベージコレクションと UPROPERTY・TObjectPtr・TWeakObjectPtr](/game/unreal/gc-and-object-pointers.html))
 
 ## ゲーム開発での使用例
 
@@ -106,4 +108,4 @@ samples/lifetime_demo.cpp(検証済み)で、(a) デストラクタの実行順(
 
 ---
 
-前: [カテゴリ目次](/runtime/memory/) | 次: [所有権と借用](/runtime/memory/ownership-and-borrowing.html)
+関連項目：[学習ガイド](/runtime/memory/) / [所有権と借用](/runtime/memory/ownership-and-borrowing.html)

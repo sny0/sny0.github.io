@@ -1,20 +1,26 @@
 ---
-title: "リアルタイムグラフィックス完全Wiki"
+title: リアルタイムグラフィックスを学ぶ
 study:
-  source: "RenderingWiki"
-  kind: "索引"
-  status: "既存原稿"
-  summary: "GPUとレンダリングを一つの知識体系として学ぶ ゲームプログラマのための「一生物の教材」。GPUの仕組みから Unity / Unreal / DirectX12 / Vulkan、そして最先端のGI・アップスケーリングまで。"
+  source: RenderingWiki
+  status: published
+  summary: GPU・数学・パイプライン・APIの本文を順番に読み、描画の実践へ進むための入口。
+  section: learning
+  format: path
+  domain: graphics
+  collection: rendering
+  order: -1
 ---
 
-# リアルタイムグラフィックス完全Wiki
+<div id="リアルタイムグラフィックス完全wiki" class="study-legacy-anchor" aria-hidden="true"></div>
 
-GPUとレンダリングを一つの知識体系として学ぶ
+# リアルタイムグラフィックスを学ぶ
 
-ゲームプログラマのための「一生物の教材」。GPUの仕組みから Unity / Unreal / DirectX12 / Vulkan、そして最先端のGI・アップスケーリングまで。
+GPUとレンダリングを順番に学ぶための入口です。各項目の詳しい説明は技術辞典にあり、このガイドでは読む順序と分野のつながりを案内します。
+
+まず全体の読み順を選び、必要な本文を読み、実践教材で確かめます。既に知っている内容は飛ばし、疑問のある項目へ戻って使えます。
 
 - [学習を始める](/guide/rendering/roadmap.html)
-- [このWikiについて](/guide/rendering/about.html)
+- [描画の学習ガイドについて](/guide/rendering/about.html)
 - [技術全史年表](/guide/rendering/timeline.html)
 
 ## GPU基礎
@@ -79,7 +85,7 @@ Unity SRP / URP / HDRP、Unreal Engine のレンダラー。商用エンジン�
 
 ## ゼロからレンダラーを作る
 
-最終章。CPUからGPUまで、1フレームが描画されるまでを実装を通して総まとめ。
+実践・サンプルの教材です。CPUからGPUまで、1フレームが描画されるまでを設計とコード断片で追います。
 
 [この項目を読む](/graphics/capstone/01-design.html)
 

@@ -1,10 +1,12 @@
 ---
-title: "RenderGraph / FrameGraph"
+title: RenderGraph / FrameGraph
 study:
-  source: "RenderingWiki"
-  kind: "本文"
-  status: "既存原稿"
-  summary: "RenderGraph (FrameGraph) は、フレームの全レンダーパスとリソースの依存関係を宣言的なグラフとして構築し、バリア挿入・リソース生存期間管理・パス順序を自動化するアーキテクチャです。DX12/Vulkanの「明示的な自由」がもたらした管理地獄への、エンジンレベルの回答であり、Fr"
+  source: RenderingWiki
+  status: published
+  summary: RenderGraph (FrameGraph) は、フレームの全レンダーパスとリソースの依存関係を宣言的なグラフとして構築し、バリア挿入・リソース生存期間管理・パス順序を自動化するアーキテクチャです。DX12/Vulkanの「明示的な自由」がもたらした管理地獄への、エンジンレベルの回答であり、Fr
+  section: reference
+  format: article
+  domain: graphics
 ---
 
 # RenderGraph / FrameGraph

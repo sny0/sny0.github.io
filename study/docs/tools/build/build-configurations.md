@@ -1,17 +1,19 @@
 ---
-title: "ビルド構成 — Debug/Development/Release/Shipping・シンボルファイル・PDB・デバッガ"
+title: ビルド構成 — Debug/Development/Release/Shipping・シンボルファイル・PDB・デバッガ
 study:
-  source: "C++ Wiki"
-  kind: "本文"
-  status: "既存原稿"
-  summary: "同じソースから「何を優先するか」別に複数の成果物を作り分けるのがビルド構成 (configuration)。最適化・チェック・デバッグ情報・ログの4軸の組み合わせです(最適化の中身は → 第6部)。"
+  source: C++ Wiki
+  status: published
+  summary: 最適化・チェック・デバッグ情報・ログの違いから、Debug・Development・Release・Shippingを整理する。
+  section: reference
+  format: article
+  domain: tools
 ---
 
 # ビルド構成 — Debug/Development/Release/Shipping・シンボルファイル・PDB・デバッガ
 
 ## 一言で言うと
 
-同じソースから「**何を優先するか**」別に複数の成果物を作り分けるのが**ビルド構成 (configuration)**。最適化・チェック・デバッグ情報・ログの4軸の組み合わせです(最適化の中身は → [第6部](/runtime/cpp-internals/optimization-and-ub.html))。
+同じソースから「**何を優先するか**」別に複数の成果物を作り分けるのが**ビルド構成 (configuration)**。最適化・チェック・デバッグ情報・ログの4軸の組み合わせです(最適化の中身は → [コンパイラ最適化・未定義動作の影響・Debug/Release・ゼロコスト抽象化](/runtime/cpp-internals/optimization-and-ub.html))。
 
 ## ゲーム開発の典型4構成
 
@@ -78,4 +80,4 @@ samples/cmake_demo/ を `-DCMAKE_BUILD_TYPE=Debug` と `Release` でそれぞれ
 
 ---
 
-前: [ビルドツール: CMake](/tools/build/build-tools-cmake.html) | [カテゴリ目次](/tools/build/) | 次: [ビルド時間](/tools/build/build-speed.html)
+関連項目：[ビルドツール: CMake](/tools/build/build-tools-cmake.html) / [学習ガイド](/tools/build/) / [ビルド時間](/tools/build/build-speed.html)

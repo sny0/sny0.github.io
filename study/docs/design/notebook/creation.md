@@ -1,17 +1,17 @@
 ---
-title: "生成を整理する — Factory と Builder"
+title: 生成を整理する — Factory と Builder
 study:
-  source: "設計の手帖"
-  kind: "本文"
-  status: "既存原稿"
-  summary: "生成手順や実装選択が呼び出す側へ散らばったとき、作り方を名前のある場所へ集めます。"
+  source: 設計の手帖
+  status: published
+  summary: 生成手順や実装選択が呼び出す側へ散らばったとき、作り方を名前のある場所へ集めます。
+  section: reference
+  format: article
+  domain: design
 ---
 
 # 生成を整理する — Factory と Builder
 
 生成手順や実装選択が呼び出す側へ散らばったとき、作り方を名前のある場所へ集めます。
-
-02 · パターンを道具にする / Factory・Builder・Singleton / Control how objects are born / 基礎 / 9分
 
 タグ: Factory / Builder / Abstract Factory / Singleton
 

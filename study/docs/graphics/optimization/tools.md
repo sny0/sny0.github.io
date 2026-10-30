@@ -1,10 +1,12 @@
 ---
-title: "デバッグ・プロファイリングツール — RenderDoc / PIX / Nsight / Frame Debugger"
+title: デバッグ・プロファイリングツール — RenderDoc / PIX / Nsight / Frame Debugger
 study:
-  source: "RenderingWiki"
-  kind: "本文"
-  status: "既存原稿"
-  summary: "GPUの中は見えません — ツールなしでは。このページでは4大ツール — RenderDoc (万能フレームデバッガ)、PIX (DX12公式)、Nsight Graphics (NVIDIA深掘り)、Unity Frame Debugger — の役割分担と使い方の型を解説します。「描画がおかしい"
+  source: RenderingWiki
+  status: published
+  summary: GPUの中は見えません — ツールなしでは。このページでは4大ツール — RenderDoc (万能フレームデバッガ)、PIX (DX12公式)、Nsight Graphics (NVIDIA深掘り)、Unity Frame Debugger — の役割分担と使い方の型を解説します。「描画がおかしい
+  section: reference
+  format: article
+  domain: graphics
 ---
 
 # デバッグ・プロファイリングツール — RenderDoc / PIX / Nsight / Frame Debugger

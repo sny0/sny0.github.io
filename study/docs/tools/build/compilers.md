@@ -1,10 +1,12 @@
 ---
 title: "三大コンパイラ: MSVC・Clang・GCC"
 study:
-  source: "C++ Wiki"
-  kind: "本文"
-  status: "既存原稿"
-  summary: "C++には主要な処理系が3つあり、ゲーム開発では複数と付き合うのが普通です(Windows=MSVC、コンソール機=Clangベースが多い、Linuxサーバー=GCC/Clang)。標準準拠の共通部分と、処理系ごとの差分(フラグ・拡張・ABI)を分けて把握します。"
+  source: C++ Wiki
+  status: published
+  summary: C++には主要な処理系が3つあり、ゲーム開発では複数と付き合うのが普通です(Windows=MSVC、コンソール機=Clangベースが多い、Linuxサーバー=GCC/Clang)。標準準拠の共通部分と、処理系ごとの差分(フラグ・拡張・ABI)を分けて把握します。
+  section: reference
+  format: article
+  domain: compilers
 ---
 
 # 三大コンパイラ: MSVC・Clang・GCC
@@ -72,4 +74,4 @@ samples/ の任意のサンプルを `-Wall -Wextra` 付きでビルドし、警
 
 ---
 
-前: [ビルドとは何か](/tools/build/what-is-build.html) | [カテゴリ目次](/tools/build/) | 次: [ビルドツール: CMake](/tools/build/build-tools-cmake.html)
+関連項目：[ビルドとは何か](/tools/build/what-is-build.html) / [学習ガイド](/tools/build/) / [ビルドツール: CMake](/tools/build/build-tools-cmake.html)

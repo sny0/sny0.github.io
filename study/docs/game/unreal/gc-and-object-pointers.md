@@ -1,17 +1,19 @@
 ---
-title: "UEのガベージコレクションと UPROPERTY・TObjectPtr・TWeakObjectPtr"
+title: UEのガベージコレクションと UPROPERTY・TObjectPtr・TWeakObjectPtr
 study:
-  source: "C++ Wiki"
-  kind: "本文"
-  status: "既存原稿"
-  summary: "UEはUObjectに限定したマーク&スイープGCを自作しています。「C++なのにGC」——第7部で学んだ2つの世界がUEでは同居しており、「このポインタはGCに見えているか?」が生死を分ける独自ルールになります。"
+  source: C++ Wiki
+  status: published
+  summary: UObjectのGCと、UPROPERTY・TObjectPtr・TWeakObjectPtrなどの参照が寿命にどう関係するかを調べる。
+  section: reference
+  format: article
+  domain: game
 ---
 
 # UEのガベージコレクションと UPROPERTY・TObjectPtr・TWeakObjectPtr
 
 ## 一言で言うと
 
-UEは**UObjectに限定した**マーク&スイープGCを自作しています。「C++なのにGC」——[第7部で学んだ2つの世界](/runtime/memory/gc-and-csharp-comparison.html)がUEでは**同居**しており、「このポインタはGCに見えているか?」が生死を分ける独自ルールになります。
+UEは**UObjectに限定した**マーク&スイープGCを自作しています。「C++なのにGC」——[RAIIとGCの二つの管理方式](/runtime/memory/gc-and-csharp-comparison.html)がUEでは**同居**しており、「このポインタはGCに見えているか?」が生死を分ける独自ルールになります。
 
 ## 仕組み(概要)
 
@@ -44,7 +46,7 @@ class ATurret : public AActor {
 | `TSoftObjectPtr<T>` | アセットへの**パス参照**(ロードを強制しない) | [Proxy](/design/patterns/proxy.html)(遅延ロード) |
 | 生ポインタ `T*` | 関数引数・ローカルなど**一時的な借用のみ** | 非所有生ポインタ([借用](/runtime/memory/ownership-and-borrowing.html)) |
 
-- 使い分けの原則は第7部と同型: **メンバとして保存するならGCに見える形(TObjectPtr+UPROPERTY)か弱参照(TWeakObjectPtr)**、関数スコープの借用は生ポインタで可
+- 使い分けの原則は[所有権と借用](/runtime/memory/ownership-and-borrowing.html)と同型: **メンバとして保存するならGCに見える形(TObjectPtr+UPROPERTY)か弱参照(TWeakObjectPtr)**、関数スコープの借用は生ポインタで可
 - 「相手(敵・アイテム)が先に消えるかもしれない参照」は `TWeakObjectPtr`+IsValid()——[ロックオンカメラ問題](/runtime/memory/exercises.html)のUE公式解
 
 ## Actorの破棄はGCだけではない
@@ -75,8 +77,8 @@ class ATurret : public AActor {
 
 ## 演習
 
-「ロックオンカメラ(ターゲットの敵が消えるかもしれない)」を、(a) 標準C++(第7部演習の解答)、(b) UE(TWeakObjectPtr+IsValid)の両方の骨格で書き、同じ問題への2つの解法として対比してください。
+「ロックオンカメラ(ターゲットの敵が消えるかもしれない)」を、(a) 標準C++([メモリ管理の演習](/runtime/memory/exercises.html)を参照)、(b) UE(TWeakObjectPtr+IsValid)の両方の骨格で書き、同じ問題への2つの解法として対比してください。
 
 ---
 
-前: [UObject・Actor・ActorComponent](/game/unreal/uobject-actor-component.html) | [カテゴリ目次](/game/unreal/) | 次: [リフレクションとUHT](/game/unreal/reflection-and-uht.html)
+関連項目：[UObject・Actor・ActorComponent](/game/unreal/uobject-actor-component.html) | [この分野の学習ガイド](/game/unreal/) | [リフレクションとUHT](/game/unreal/reflection-and-uht.html)

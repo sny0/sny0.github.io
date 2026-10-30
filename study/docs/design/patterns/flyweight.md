@@ -1,10 +1,12 @@
 ---
-title: "Flyweight"
+title: Flyweight
 study:
-  source: "C++ Wiki"
-  kind: "本文"
-  status: "既存原稿"
-  summary: "同種のオブジェクトが大量(数千〜数百万)にあり、各個体が同じデータのコピーを持つせいでメモリを浪費している。共有できる部分(不変)と個体ごとの部分(可変)を分離し、共有部分を1つだけ持ちたい。"
+  source: C++ Wiki
+  status: published
+  summary: 同種のオブジェクトが大量(数千〜数百万)にあり、各個体が同じデータのコピーを持つせいでメモリを浪費している。共有できる部分(不変)と個体ごとの部分(可変)を分離し、共有部分を1つだけ持ちたい。
+  section: reference
+  format: article
+  domain: design
 ---
 
 # Flyweight
@@ -170,4 +172,4 @@ public class Enemy : MonoBehaviour {              // 個体
 
 ---
 
-前: [Facade](/design/patterns/facade.html) | [カテゴリ目次](/design/patterns/) | 次: [Proxy](/design/patterns/proxy.html)
+関連項目：[Facade](/design/patterns/facade.html) / [学習ガイド](/design/patterns/) / [Proxy](/design/patterns/proxy.html)

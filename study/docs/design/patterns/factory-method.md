@@ -1,10 +1,12 @@
 ---
-title: "Factory Method"
+title: Factory Method
 study:
-  source: "C++ Wiki"
-  kind: "本文"
-  status: "既存原稿"
-  summary: "「どの具象クラスを生成するか」の決定を、使う側のコードから切り離したい。new Goblin() と直接書くと、呼び出し側が具象型に結合し、生成する種類を変えるたびに呼び出し側を修正することになります。"
+  source: C++ Wiki
+  status: published
+  summary: 「どの具象クラスを生成するか」の決定を、使う側のコードから切り離したい。new Goblin() と直接書くと、呼び出し側が具象型に結合し、生成する種類を変えるたびに呼び出し側を修正することになります。
+  section: reference
+  format: article
+  domain: design
 ---
 
 # Factory Method
@@ -207,4 +209,4 @@ Unityでは「生成の可変点」はサブクラスよりも**Prefab/Scriptabl
 
 ---
 
-前: [カテゴリ目次](/design/patterns/) | 次: [Abstract Factory](/design/patterns/abstract-factory.html)
+関連項目：[学習ガイド](/design/patterns/) / [Abstract Factory](/design/patterns/abstract-factory.html)

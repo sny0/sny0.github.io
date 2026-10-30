@@ -1,17 +1,17 @@
 ---
-title: "関数型・データ指向・CQRS — クラス以外の視点"
+title: 関数型・データ指向・CQRS — クラス以外の視点
 study:
-  source: "設計の手帖"
-  kind: "本文"
-  status: "既存原稿"
-  summary: "設計の知識が増えるほど、どこでもクラス階層を使う必要はなくなります。変わるものと制約に合う方法を選びます。"
+  source: 設計の手帖
+  status: published
+  summary: 設計の知識が増えるほど、どこでもクラス階層を使う必要はなくなります。変わるものと制約に合う方法を選びます。
+  section: reference
+  format: article
+  domain: design
 ---
 
 # 関数型・データ指向・CQRS — クラス以外の視点
 
 設計の知識が増えるほど、どこでもクラス階層を使う必要はなくなります。変わるものと制約に合う方法を選びます。
-
-05 · 視野を広げ、使ってみる / 関数型・データ指向・CQRS / Choose the right axis of change / 応用 / 10分
 
 タグ: 関数型 / 純粋関数 / Data-Oriented / ECS / CQRS / モノリス
 

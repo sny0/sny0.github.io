@@ -1,13 +1,17 @@
 ---
-title: "ケーススタディ 06: セーブデータ"
+title: セーブデータの設計
 study:
-  source: "C++ Wiki"
-  kind: "本文"
-  status: "既存原稿"
+  source: C++ Wiki
+  status: published
   summary: "項目追加でセーブ互換が壊れる: int level を足した瞬間、旧セーブが読めない(サイズもオフセットもズレる)。アップデートで全員のセーブが消えるのは炎上事故 構造体直書きはパディング・エンディアン・型サイズが実装依存——コンパイラ更新や機種違いで読めなくなる"
+  section: reference
+  format: article
+  domain: design
 ---
 
-# ケーススタディ 06: セーブデータ
+<div id="ケーススタディ-06-セーブデータ" class="study-legacy-anchor" aria-hidden="true"></div>
+
+# セーブデータの設計
 
 ## 素朴な実装
 
@@ -65,7 +69,7 @@ class ISaveStorage { public: virtual ~ISaveStorage() = default;
 
 ## 案B: リフレクション/自動シリアライズ案
 
-C#(JsonUtility等)やUE(UPROPERTYの自動シリアライズ → [第10部](/game/unreal/reflection-and-uht.html))ではゲームオブジェクトを直接直列化できる。
+C#(JsonUtility等)やUE(UPROPERTYの自動シリアライズ → [リフレクション — UCLASS・UFUNCTION・UPROPERTY・Unreal Header Tool](/game/unreal/reflection-and-uht.html))ではゲームオブジェクトを直接直列化できる。
 
 - 利点: スナップショット構造体が不要(二重管理消滅)
 - 欠点: **内部構造の変更が即セーブ互換の破壊**になる(壁がない)。「エディタでの変数リネームでセーブが壊れた」はUnity/UEの定番事故。大規模・長期運用ほど案Aの「壁」が効く
@@ -95,4 +99,4 @@ PlayerPrefs的なキーバリュー保存(`SetInt("hp", hp)`)。項目が10個�
 
 ---
 
-前: [実績システム](/design/case-studies/achievements.html) | [カテゴリ目次](/design/case-studies/) | 次: [ダメージ計算](/design/case-studies/damage-calculation.html)
+関連項目：[実績システム](/design/case-studies/achievements.html) / [学習ガイド](/design/case-studies/) / [ダメージ計算](/design/case-studies/damage-calculation.html)

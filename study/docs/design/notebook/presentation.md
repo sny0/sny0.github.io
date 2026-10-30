@@ -1,17 +1,17 @@
 ---
-title: "MVC・MVP・MVVM — 画面の責務を分ける"
+title: MVC・MVP・MVVM — 画面の責務を分ける
 study:
-  source: "設計の手帖"
-  kind: "本文"
-  status: "既存原稿"
-  summary: "画面のイベントハンドラーに全部書く状態から抜け出すために、入力・表示・状態の置き場所を考えます。"
+  source: 設計の手帖
+  status: published
+  summary: 画面のイベントハンドラーに全部書く状態から抜け出すために、入力・表示・状態の置き場所を考えます。
+  section: reference
+  format: article
+  domain: design
 ---
 
 # MVC・MVP・MVVM — 画面の責務を分ける
 
 画面のイベントハンドラーに全部書く状態から抜け出すために、入力・表示・状態の置き場所を考えます。
-
-03 · アプリ全体を設計する / MVC・MVP・MVVM / Separate the screen from the rules / 基礎 / 9分
 
 タグ: MVC / MVP / MVVM / Controller / Presenter / ViewModel
 

@@ -1,10 +1,12 @@
 ---
-title: "OpenGL"
+title: OpenGL
 study:
-  source: "RenderingWiki"
-  kind: "本文"
-  status: "既存原稿"
-  summary: "OpenGLは1992年にSGIが公開した最古参のクロスプラットフォーム3D APIです。「グローバルなステートマシン」という設計を核とし、30年の後方互換を保ちながら拡張されてきました。現在は新規開発での採用は減りましたが、学習資料の豊富さ・WebGL/GLESとしての遍在・「旧世代APIの設計」"
+  source: RenderingWiki
+  status: published
+  summary: OpenGLは1992年にSGIが公開した最古参のクロスプラットフォーム3D APIです。「グローバルなステートマシン」という設計を核とし、30年の後方互換を保ちながら拡張されてきました。現在は新規開発での採用は減りましたが、学習資料の豊富さ・WebGL/GLESとしての遍在・「旧世代APIの設計」
+  section: reference
+  format: article
+  domain: graphics
 ---
 
 # OpenGL

@@ -1,10 +1,12 @@
 ---
-title: "GLSL"
+title: GLSL
 study:
-  source: "RenderingWiki"
-  kind: "本文"
-  status: "既存原稿"
-  summary: "GLSL (OpenGL Shading Language) はKhronosのOpenGL/Vulkan向けシェーダ言語です。2004年にOpenGL 2.0で標準化され、20年にわたりクロスプラットフォームシェーダの共通語として使われてきました。現在は「OpenGL用の実行時コンパイル言語」と「"
+  source: RenderingWiki
+  status: published
+  summary: GLSL (OpenGL Shading Language) はKhronosのOpenGL/Vulkan向けシェーダ言語です。2004年にOpenGL 2.0で標準化され、20年にわたりクロスプラットフォームシェーダの共通語として使われてきました。現在は「OpenGL用の実行時コンパイル言語」と「
+  section: reference
+  format: article
+  domain: graphics
 ---
 
 # GLSL

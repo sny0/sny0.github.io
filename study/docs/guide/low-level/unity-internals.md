@@ -1,20 +1,40 @@
 ---
-title: "第16章 Unityの内部 ── 「内部実装を想像できる」ようになる"
+title: 第16章 Unityの内部を調べる
 study:
-  source: "IT教本"
-  kind: "学習ガイド"
-  status: "学習計画・概要"
-  summary: "Unityはソース非公開(参照用C#部分を除く)だが、ここまでの知識があれば 内部を高精度で推測できる。「GetComponentはなぜ遅い」「GC Allocを なぜ避ける」「IL2CPPとは何か」「DOTSはなぜ速い」── これらを"
+  source: IT教本
+  status: outline
+  summary: |-
+    C#とネイティブ側の境界、GC、実行方式、描画を調べるための学習計画・概要です。非公開部分の内部像は説明モデルとして扱い、公開資料・参照ソース・計測で確認した事実と区別します。一般C#の基礎を網羅する本文ではありません。
+
+    ## 関連する辞典本文・実践
+
+    - [IL2CPP](/langua
+  section: learning
+  format: path
+  domain: game
+  collection: low-level
+  order: 17
 ---
 
-# 第16章 Unityの内部 ── 「内部実装を想像できる」ようになる
+<div id="第16章-unityの内部-──-「内部実装を想像できる」ようになる" class="study-legacy-anchor" aria-hidden="true"></div>
+
+# 第16章 Unityの内部を調べる
+
+## このページで案内すること
+
+C#とネイティブ側の境界、GC、実行方式、描画を調べるための**学習計画・概要**です。非公開部分の内部像は説明モデルとして扱い、公開資料・参照ソース・計測で確認した事実と区別します。一般C#の基礎を網羅する本文ではありません。
+
+## 関連する辞典本文・実践
+
+- [IL2CPP](/languages/csharp/il2cpp.html)と[管理ヒープ・UnityのGC Alloc](/runtime/memory/gc-and-csharp-comparison.html)で、実行とメモリの仕組みを調べられます。
+- [UnityのレンダラーとSRP](/graphics/engine/unity-renderer.html)、[Unityのシューティング実装](/game/shooter-unity.html)で、描画と小さな実装へ進めます。
 
 ## 学ぶ理由
 
-Unityはソース非公開(参照用C#部分を除く)だが、ここまでの知識があれば
-**内部を高精度で推測できる**。「GetComponentはなぜ遅い」「GC Allocを
-なぜ避ける」「IL2CPPとは何か」「DOTSはなぜ速い」── これらを
-仕組みから説明できることが、Unityでの設計力・最適化力に直結する。
+Unityには、参照用C#ソースなど公開されている部分と、一般にはソースを参照できない部分がある。
+**公開資料や参照ソースを読み、内部像の仮説を計測で確かめる**。
+GetComponentやGC Allocのコスト、IL2CPPの変換経路、DOTSのデータ配置を、
+対象バージョンの仕様と実測に結び付けることが、設計や最適化の判断に役立つ。
 また「マネージド言語がネイティブとどう共存するか」という主題は
 スクリプト搭載エンジン全般(Lua, GDScript等)に通じる一般教養である。
 
@@ -23,7 +43,7 @@ Unityはソース非公開(参照用C#部分を除く)だが、ここまでの�
 - Unityの2世界構造(C++エンジンコア+C#ユーザーコード)を説明できる
 - C#のコンパイルと実行(IL→Mono JIT / IL2CPP AOT)を説明できる
 - GCの仕組み(世代別/インクリメンタル)とGC Alloc回避術を原理から説明できる
-- GameObject/Componentの内部表現とGetComponent等のコストを推測できる
+- GameObject/Componentの説明モデルを使い、GetComponent等のコストを資料と計測で調べられる
 - DOTS(ECS/Jobs/Burst)がこれまでの章のどの原理の応用かを説明できる
 - Unityプロファイラ/Frame Debuggerで問題を切り分けられる
 

@@ -1,10 +1,12 @@
 ---
 title: "ビルドツール: CMake・Visual Studioプロジェクト・Make・Ninja"
 study:
-  source: "C++ Wiki"
-  kind: "本文"
-  status: "既存原稿"
+  source: C++ Wiki
+  status: published
   summary: "Make: 最古参。Makefile に「成果物: 依存 → コマンド」を書く。依存グラフ思考の原点 Ninja: Make の高速版(生成される前提の割り切った設計)。CMakeの相棒として現代の主流"
+  section: reference
+  format: article
+  domain: tools
 ---
 
 # ビルドツール: CMake・Visual Studioプロジェクト・Make・Ninja
@@ -77,8 +79,8 @@ main.o: main.cpp enemy.h        # ヘッダー依存も書く(実際はコンパ
 ## C#/Unityとの対応
 
 - `.csproj`(SDKスタイル)がCMakeLists.txt相当。ただしC#はソース列挙・依存解決が自動で、書くことが激減している
-- Unityの Assembly Definition が「ターゲット分割+依存の宣言」に対応(→ [第9部](/languages/csharp/headers-vs-asmdef.html))
-- UEは Build.cs / Target.cs + UBT が CMake の役割(→ [第10部](/game/unreal/build-system-ubt.html))。**UE案件ではCMakeは書かない**が、依存宣言・モジュール分割という考え方は同一
+- Unityの Assembly Definition が「ターゲット分割+依存の宣言」に対応(→ [ヘッダー分割と Assembly Definition](/languages/csharp/headers-vs-asmdef.html))
+- UEは Build.cs / Target.cs + UBT が CMake の役割(→ [Unreal Build Tool・Module・Build.cs・Target.cs](/game/unreal/build-system-ubt.html))。**UE案件ではCMakeは書かない**が、依存宣言・モジュール分割という考え方は同一
 
 ## 実務の指針
 
@@ -98,4 +100,4 @@ samples/cmake_demo/ を `cmake -S . -B build && cmake --build build` でビル�
 
 ---
 
-前: [三大コンパイラ](/tools/build/compilers.html) | [カテゴリ目次](/tools/build/) | 次: [ビルド構成](/tools/build/build-configurations.html)
+関連項目：[三大コンパイラ](/tools/build/compilers.html) / [学習ガイド](/tools/build/) / [ビルド構成](/tools/build/build-configurations.html)

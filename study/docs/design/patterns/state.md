@@ -1,10 +1,12 @@
 ---
-title: "State"
+title: State
 study:
-  source: "C++ Wiki"
-  kind: "本文"
-  status: "既存原稿"
-  summary: "オブジェクトの振る舞いが「状態」によって大きく変わり、状態の種類と遷移が増えるにつれて、フラグとif文の網が壊れ始める。状態ごとの振る舞いを別クラスに分け、遷移を明示的にしたい。"
+  source: C++ Wiki
+  status: published
+  summary: オブジェクトの振る舞いが「状態」によって大きく変わり、状態の種類と遷移が増えるにつれて、フラグとif文の網が壊れ始める。状態ごとの振る舞いを別クラスに分け、遷移を明示的にしたい。
+  section: reference
+  format: article
+  domain: design
 ---
 
 # State
@@ -173,7 +175,7 @@ UnityのAnimator Controller(ステートマシン)やUEのStateTreeは、この�
 
 ## 似たパターンとの違い
 
-- [Strategy](/design/patterns/strategy.html): 構造は同じ(振る舞いの委譲)。**Stateは自分で遷移する**(状態が次の状態を知る)、Strategyは外から与えられて交換される。詳細比較は[第4部](/game/patterns/state-machines.html)
+- [Strategy](/design/patterns/strategy.html): 構造は同じ(振る舞いの委譲)。**Stateは自分で遷移する**(状態が次の状態を知る)、Strategyは外から与えられて交換される。詳細比較は[有限ステートマシンと階層型ステートマシン(State と Strategy の比較つき)](/game/patterns/state-machines.html)
 - [Type Object](/game/patterns/type-object-and-sandbox.html): 種類による違い(静的)vs 時間による違い(動的)
 
 ## 実務でよく見かける変形
@@ -204,4 +206,4 @@ ON/OFFの2状態のドアに State パターン一式(IDoorState, OpenState, Clo
 
 ---
 
-前: [Observer](/design/patterns/observer.html) | [カテゴリ目次](/design/patterns/) | 次: [Strategy](/design/patterns/strategy.html)
+関連項目：[Observer](/design/patterns/observer.html) / [学習ガイド](/design/patterns/) / [Strategy](/design/patterns/strategy.html)

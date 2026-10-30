@@ -1,10 +1,12 @@
 ---
-title: "Facade"
+title: Facade
 study:
-  source: "C++ Wiki"
-  kind: "本文"
-  status: "既存原稿"
-  summary: "複雑なサブシステム(多数のクラス・正しい呼び出し順・初期化の作法)を使うたびに、利用側がその複雑さを全部知る必要がある。よく使う操作をまとめた「一枚窓口」を置いて、日常の利用を単純にしたい。"
+  source: C++ Wiki
+  status: published
+  summary: 複雑なサブシステム(多数のクラス・正しい呼び出し順・初期化の作法)を使うたびに、利用側がその複雑さを全部知る必要がある。よく使う操作をまとめた「一枚窓口」を置いて、日常の利用を単純にしたい。
+  section: reference
+  format: article
+  domain: design
 ---
 
 # Facade
@@ -156,4 +158,4 @@ public class SceneFlow {
 
 ---
 
-前: [Decorator](/design/patterns/decorator.html) | [カテゴリ目次](/design/patterns/) | 次: [Flyweight](/design/patterns/flyweight.html)
+関連項目：[Decorator](/design/patterns/decorator.html) / [学習ガイド](/design/patterns/) / [Flyweight](/design/patterns/flyweight.html)

@@ -1,10 +1,12 @@
 ---
-title: "仮想関数と virtual/override / コンパイル時多態と実行時多態"
+title: 仮想関数と virtual/override / コンパイル時多態と実行時多態
 study:
-  source: "C++ Wiki"
-  kind: "本文"
-  status: "既存原稿"
+  source: C++ Wiki
+  status: published
   summary: "言語機能の詳細は継承と仮想関数、内部の仕組みはvtableで説明済み。ここではC#との差分に集中します。 規約: 上書きには必ず override を書く(C++11以降)。書けばC#と同等の検査が手に入ります。"
+  section: reference
+  format: article
+  domain: languages
 ---
 
 # 仮想関数と virtual/override / コンパイル時多態と実行時多態
@@ -86,4 +88,4 @@ C#の多態はほぼ実行時(virtual/interface。ジェネリックも制約は
 
 ---
 
-前: [テンプレートとジェネリック](/languages/csharp/templates-vs-generics.html) | [カテゴリ目次](/languages/csharp/) | 次: [関数ポインタとdelegate](/languages/csharp/delegates-events-function-pointers.html)
+関連項目：[テンプレートとジェネリック](/languages/csharp/templates-vs-generics.html) / [学習ガイド](/languages/csharp/) / [関数ポインタとdelegate](/languages/csharp/delegates-events-function-pointers.html)

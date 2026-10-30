@@ -1,10 +1,12 @@
 ---
-title: "シャドウ"
+title: シャドウ
 study:
-  source: "RenderingWiki"
-  kind: "本文"
-  status: "既存原稿"
-  summary: "影は「光源から見えない場所」です。リアルタイムでの標準解はシャドウマッピング — 光源を仮想カメラとして深度マップを描き、シェーディング時に「その点は光源から見えるか」を深度比較で判定する手法です。単純な原理に対し、エイリアシング・アクネ・ピーターパニングという魔物が潜み、CSM・PCF・PCSSな"
+  source: RenderingWiki
+  status: published
+  summary: 影は「光源から見えない場所」です。リアルタイムでの標準解はシャドウマッピング — 光源を仮想カメラとして深度マップを描き、シェーディング時に「その点は光源から見えるか」を深度比較で判定する手法です。単純な原理に対し、エイリアシング・アクネ・ピーターパニングという魔物が潜み、CSM・PCF・PCSSな
+  section: reference
+  format: article
+  domain: graphics
 ---
 
 # シャドウ

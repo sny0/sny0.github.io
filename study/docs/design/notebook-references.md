@@ -1,10 +1,12 @@
 ---
-title: "設計の手帖の参考資料"
+title: 設計の手帖の参考資料
 study:
-  source: "設計の手帖"
-  kind: "参考資料"
-  status: "既存原稿"
-  summary: "Bjarne Stroustrup / Herb Sutter ほか 資料を開く インターフェース、所有権、クラス設計の指針。規格書そのものではありません。 Microsoft Learn"
+  source: 設計の手帖
+  status: published
+  summary: Bjarne Stroustrup / Herb Sutter ほか 資料を開く インターフェース、所有権、クラス設計の指針。規格書そのものではありません。 Microsoft Learn
+  section: reference
+  format: references
+  domain: design
 ---
 
 # 設計の手帖の参考資料

@@ -1,10 +1,12 @@
 ---
-title: "Compute Shader"
+title: Compute Shader
 study:
-  source: "RenderingWiki"
-  kind: "本文"
-  status: "既存原稿"
-  summary: "Compute Shaderはグラフィックスパイプラインから独立してGPUの演算能力を使うためのシェーダです。頂点もピクセルも関係なく、「N個のスレッドグループを起動し、各グループ内のスレッドが協調して任意の計算を行う」というシンプルな実行モデルを持ちます。現代レンダリングの最先端 (GPU Dri"
+  source: RenderingWiki
+  status: published
+  summary: Compute Shaderはグラフィックスパイプラインから独立してGPUの演算能力を使うためのシェーダです。頂点もピクセルも関係なく、「N個のスレッドグループを起動し、各グループ内のスレッドが協調して任意の計算を行う」というシンプルな実行モデルを持ちます。現代レンダリングの最先端 (GPU Dri
+  section: reference
+  format: article
+  domain: graphics
 ---
 
 # Compute Shader

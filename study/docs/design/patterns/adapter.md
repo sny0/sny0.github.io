@@ -1,10 +1,12 @@
 ---
-title: "Adapter"
+title: Adapter
 study:
-  source: "C++ Wiki"
-  kind: "本文"
-  status: "既存原稿"
+  source: C++ Wiki
+  status: published
   summary: "既存のクラス(変更できない・したくない)のインターフェースが、こちらの欲しい形と合わない。変換器を挟んで、変更せずに接続したい。 Target: クライアントが期待するインターフェース(こちらの語彙)"
+  section: reference
+  format: article
+  domain: design
 ---
 
 # Adapter
@@ -154,4 +156,4 @@ public class UnityAdsAdapter : IAdsService {
 
 ---
 
-前: [Singleton](/design/patterns/singleton.html) | [カテゴリ目次](/design/patterns/) | 次: [Bridge](/design/patterns/bridge.html)
+関連項目：[Singleton](/design/patterns/singleton.html) / [学習ガイド](/design/patterns/) / [Bridge](/design/patterns/bridge.html)

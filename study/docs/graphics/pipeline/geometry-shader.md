@@ -1,10 +1,12 @@
 ---
-title: "Geometry Shader"
+title: Geometry Shader
 study:
-  source: "RenderingWiki"
-  kind: "本文"
-  status: "既存原稿"
-  summary: "Geometry Shader (GS) は、プリミティブ (三角形・線・点) 単位で実行され、プリミティブを増減・変形できるオプションのステージです。DX10 (2006) で鳴り物入りで登場しましたが、アーキテクチャ上の根本的な性能問題により「歴史に学ぶための技術」となり、現在はMesh Sha"
+  source: RenderingWiki
+  status: published
+  summary: Geometry Shader (GS) は、プリミティブ (三角形・線・点) 単位で実行され、プリミティブを増減・変形できるオプションのステージです。DX10 (2006) で鳴り物入りで登場しましたが、アーキテクチャ上の根本的な性能問題により「歴史に学ぶための技術」となり、現在はMesh Sha
+  section: reference
+  format: article
+  domain: graphics
 ---
 
 # Geometry Shader

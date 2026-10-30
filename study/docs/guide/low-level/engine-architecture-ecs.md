@@ -1,13 +1,33 @@
 ---
-title: "第15章 ゲームエンジンアーキテクチャとECS ── エンジンの解剖学"
+title: 第15章 ゲームエンジンの構成とECS
 study:
-  source: "IT教本"
-  kind: "学習ガイド"
-  status: "学習計画・概要"
-  summary: "ここまでの全章は部品だった。この章で部品を「エンジン」に組み上げる。 エンジンの層構造・ゲームオブジェクトモデル・アセットパイプライン・ シーン管理を一般論として理解しておくと、次章以降のUnity/UEが"
+  source: IT教本
+  status: outline
+  summary: |-
+    エンジンを構成する責務とデータの流れを整理し、小さな構成で試すための学習計画・概要です。ECSは構成方法の一つとして学び、規模や用途に合わせて他の設計とも比較します。
+
+    ## 関連する辞典本文・実践
+
+    - [責務と関心の分離](/design/foundations/responsibili
+  section: learning
+  format: path
+  domain: game
+  collection: low-level
+  order: 16
 ---
 
-# 第15章 ゲームエンジンアーキテクチャとECS ── エンジンの解剖学
+<div id="第15章-ゲームエンジンアーキテクチャとecs-──-エンジンの解剖学" class="study-legacy-anchor" aria-hidden="true"></div>
+
+# 第15章 ゲームエンジンの構成とECS
+
+## このページで案内すること
+
+エンジンを構成する責務とデータの流れを整理し、小さな構成で試すための**学習計画・概要**です。ECSは構成方法の一つとして学び、規模や用途に合わせて他の設計とも比較します。
+
+## 関連する辞典本文・実践
+
+- [責務と関心の分離](/design/foundations/responsibility-and-separation.html)で、構成を分ける根拠を確認できます。
+- [ECS](/game/ecs.html)と[Componentとの比較](/game/patterns/component-and-ecs.html)で、データ配置・Query・構成変更を調べられます。
 
 ## 学ぶ理由
 

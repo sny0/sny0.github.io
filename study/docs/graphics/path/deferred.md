@@ -1,10 +1,12 @@
 ---
-title: "Deferred Rendering"
+title: Deferred Rendering
 study:
-  source: "RenderingWiki"
-  kind: "本文"
-  status: "既存原稿"
-  summary: "Deferred Rendering (遅延レンダリング) は、「何が見えるか」と「どう照らすか」を分離する方式です。第1パス (Geometry Pass) で全オブジェクトのマテリアル属性 (アルベド・法線・粗さ...) を G-Buffer と呼ばれる複数のテクスチャに書き出し、第2パス (L"
+  source: RenderingWiki
+  status: published
+  summary: Deferred Rendering (遅延レンダリング) は、「何が見えるか」と「どう照らすか」を分離する方式です。第1パス (Geometry Pass) で全オブジェクトのマテリアル属性 (アルベド・法線・粗さ...) を G-Buffer と呼ばれる複数のテクスチャに書き出し、第2パス (L
+  section: reference
+  format: article
+  domain: graphics
 ---
 
 # Deferred Rendering
