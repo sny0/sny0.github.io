@@ -1771,6 +1771,42 @@
       "aliases": []
     },
     {
+      "title": "シューティング実装例 — C#とUnity 6",
+      "url": "/game/shooter-unity.html",
+      "domain": "game",
+      "kind": "実装例",
+      "summary": "Unity 6の小さな縦シューティング。純C# ModelをMonoBehaviourへ接続し、入力・固定更新・Sprite表示を分ける。",
+      "source": "新規執筆",
+      "status": "モデル検証済み",
+      "aliases": [
+        "シューティング",
+        "STG",
+        "C#",
+        "Unity",
+        "MonoBehaviour",
+        "Input System",
+        "サンプル"
+      ]
+    },
+    {
+      "title": "シューティング実装例 — C++17とraylib",
+      "url": "/game/shooter-cpp.html",
+      "domain": "game",
+      "kind": "実装例",
+      "summary": "raylib 5.5で動かす小さな縦シューティング。純C++ Model、入力・描画、CMake、モデル検査を完全なファイルで読む。",
+      "source": "新規執筆",
+      "status": "モデル検証済み",
+      "aliases": [
+        "シューティング",
+        "STG",
+        "C++",
+        "raylib",
+        "固定更新",
+        "ゲームループ",
+        "サンプル"
+      ]
+    },
+    {
       "title": "シンボル・名前修飾・リンケージ・ABI",
       "url": "/runtime/cpp-internals/symbols-and-linkage.html",
       "domain": "runtime",
@@ -2424,6 +2460,25 @@
       "source": "C++ Wiki",
       "status": "既存原稿",
       "aliases": []
+    },
+    {
+      "title": "小さなシューティングの設計 — C++とUnityで作る",
+      "url": "/game/shooter-design.html",
+      "domain": "game",
+      "kind": "実装例",
+      "summary": "2D縦シューティングを、仕様、データ、更新順、入力と描画の境界から設計する。C++とUnityの同じルールの実装へつなぐ。",
+      "source": "新規執筆",
+      "status": "初版",
+      "aliases": [
+        "シューティング",
+        "STG",
+        "shooting",
+        "shooter",
+        "ゲーム設計",
+        "縦スクロール",
+        "raylib",
+        "Unity"
+      ]
     },
     {
       "title": "小さな注文アプリで、設計を一巡する",

@@ -34,6 +34,9 @@
 - [Service Locator と Dependency Injection(比較)](/game/patterns/service-locator-and-di.html) — 本文
 - [有限ステートマシンと階層型ステートマシン(State と Strategy の比較つき)](/game/patterns/state-machines.html) — 本文
 - [Type Object・Subclass Sandbox・Bytecode](/game/patterns/type-object-and-sandbox.html) — 本文
+- [シューティング実装例 — C++17とraylib](/game/shooter-cpp.html) — 実装例
+- [小さなシューティングの設計 — C++とUnityで作る](/game/shooter-design.html) — 実装例
+- [シューティング実装例 — C#とUnity 6](/game/shooter-unity.html) — 実装例
 - [Unreal Build Tool・Module・Build.cs・Target.cs](/game/unreal/build-system-ubt.html) — 本文
 - [UEの Delegate と Interface](/game/unreal/delegates-and-interfaces.html) — 本文
 - [第10部 演習 — Unreal Engineとの対応](/game/unreal/exercises.html) — 演習

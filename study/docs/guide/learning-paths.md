@@ -37,6 +37,8 @@
 3. [数学](/math/)と[グラフィックス](/graphics/)から座標・GPU・表示へ進む。
 4. [計測](/guide/low-level/debugging-and-profiling.html)で、CPU・GPU・待機・確保のどこが重いか確かめる。
 
+まとまった実装を追うなら、[小さなシューティングの設計](/game/shooter-design.html)から[C++版](/game/shooter-cpp.html)と[Unity版](/game/shooter-unity.html)へ進めます。仕様・データ・更新順を対応させて読みます。
+
 ## URLを開いてからページが見えるまで
 
 [ネットワーク](/network/)のDNS・接続・HTTPから、[ブラウザ](/browser/)の解析・実行・描画へ進む系列です。この系列は現在、基礎本文を充実させる段階で、分野索引に項目を整理しています。
