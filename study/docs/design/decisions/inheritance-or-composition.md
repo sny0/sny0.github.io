@@ -1,10 +1,12 @@
 ---
 title: "判断ガイド: 継承かコンポジションか"
 study:
-  source: "C++ Wiki"
-  kind: "本文"
-  status: "既存原稿"
+  source: C++ Wiki
+  status: published
   summary: "根拠: 継承・委譲・コンポジション、LSP、Strategy 継承の危険シグナル: 空実装のoverride/基底のprotectedメンバを派生が直接いじる/「〜だけど〜しない」型(飛べない鳥)/派生の追加のたび基底に条件分岐が増える"
+  section: reference
+  format: article
+  domain: design
 ---
 
 # 判断ガイド: 継承かコンポジションか
@@ -58,4 +60,4 @@ Q4. 「特徴の組み合わせ」を表現したいか?(飛ぶ×撃つ×分裂)
 
 ---
 
-前: [インターフェースを作るべきか](/design/decisions/create-interface.html) | [カテゴリ目次](/design/decisions/) | 次: [抽象化すべきか・パターンを使うべきか](/design/decisions/abstraction-and-patterns.html)
+関連項目：[インターフェースを作るべきか](/design/decisions/create-interface.html) / [学習ガイド](/design/decisions/) / [抽象化すべきか・パターンを使うべきか](/design/decisions/abstraction-and-patterns.html)

@@ -1,10 +1,12 @@
 ---
 title: "DIP: 依存性逆転の原則 (Dependency Inversion Principle)"
 study:
-  source: "C++ Wiki"
-  kind: "本文"
-  status: "既存原稿"
+  source: C++ Wiki
+  status: published
   summary: "> 上位モジュール(方針)は下位モジュール(詳細)に依存すべきではない。両者は抽象に依存すべきである。 > 抽象は詳細に依存すべきではない。詳細が抽象に依存すべきである。 上位(方針): ゲームのルール・進行など「何をしたいか」を決めるコード"
+  section: reference
+  format: article
+  domain: design
 ---
 
 # DIP: 依存性逆転の原則 (Dependency Inversion Principle)
@@ -52,7 +54,7 @@ private:
 
 - クエストの進行ルール(方針)をテストするのに、SteamとFMODの実環境が必要。
 - 保存先をコンシューマ機のセーブAPIに変えると、**クエストのコードを修正**することになる。方針が詳細の都合で書き換わる=依存の方向が悪い(→ [依存の方向](/design/foundations/dependency.html))。
-- `#include` 連鎖で、QuestSystemを使う全ファイルがSteam SDKのヘッダーに引きずられる(ビルド時間にも波及 → [第6部](/runtime/cpp-internals/translation-units-and-headers.html))。
+- `#include` 連鎖で、QuestSystemを使う全ファイルがSteam SDKのヘッダーに引きずられる(ビルド時間にも波及 → [翻訳単位・ヘッダー・include・前方宣言・ODR](/runtime/cpp-internals/translation-units-and-headers.html))。
 
 ## 改善後のコード例(C++版)
 
@@ -179,4 +181,4 @@ MonoBehaviourはコンストラクタを持てないため、Unityでは `[Seria
 
 ---
 
-前: [ISP](/design/solid/isp.html) | [カテゴリ目次](/design/solid/) | 次: [演習](/design/solid/exercises.html)
+関連項目：[ISP](/design/solid/isp.html) / [学習ガイド](/design/solid/) / [演習](/design/solid/exercises.html)

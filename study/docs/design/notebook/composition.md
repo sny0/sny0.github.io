@@ -1,17 +1,17 @@
 ---
-title: "継承より合成、そして依存性の注入"
+title: 継承より合成、そして依存性の注入
 study:
-  source: "設計の手帖"
-  kind: "本文"
-  status: "既存原稿"
-  summary: "「何の一種か」で階層を増やす代わりに、「どんな機能を使うか」で組み立てる方法を学びます。"
+  source: 設計の手帖
+  status: published
+  summary: 「何の一種か」で階層を増やす代わりに、「どんな機能を使うか」で組み立てる方法を学びます。
+  section: reference
+  format: article
+  domain: design
 ---
 
 # 継承より合成、そして依存性の注入
 
 「何の一種か」で階層を増やす代わりに、「どんな機能を使うか」で組み立てる方法を学びます。
-
-01 · 設計の土台 / 合成・インターフェース・DI / Compose small capabilities / 基礎 / 10分
 
 タグ: 合成 / DI / interface / 所有権 / 委譲
 

@@ -1,10 +1,12 @@
 ---
-title: "翻訳単位・ヘッダー・include・前方宣言・ODR"
+title: 翻訳単位・ヘッダー・include・前方宣言・ODR
 study:
-  source: "C++ Wiki"
-  kind: "本文"
-  status: "既存原稿"
-  summary: "C++のビルドは「.cppごとに独立してコンパイルし、後でリンクで合体」する方式です。この「独立してコンパイルされる単位」が翻訳単位で、ヘッダーファイルは「複数の翻訳単位に同じ宣言を配るためのコピペ機構」にすぎません。C#にはこの仕組みが丸ごと存在しないため、Unity経験者の最初の壁になります。"
+  source: C++ Wiki
+  status: published
+  summary: C++のビルドは「.cppごとに独立してコンパイルし、後でリンクで合体」する方式です。この「独立してコンパイルされる単位」が翻訳単位で、ヘッダーファイルは「複数の翻訳単位に同じ宣言を配るためのコピペ機構」にすぎません。C#にはこの仕組みが丸ごと存在しないため、Unity経験者の最初の壁になります。
+  section: reference
+  format: article
+  domain: compilers
 ---
 
 # 翻訳単位・ヘッダー・include・前方宣言・ODR
@@ -145,4 +147,4 @@ C#のコンパイラは**アセンブリ内の全ソースを一度に見る**+�
 
 ---
 
-前: [main.cppからCPU命令までの旅](/runtime/cpp-internals/build-pipeline-journey.html) | [カテゴリ目次](/runtime/cpp-internals/) | 次: [シンボル・名前修飾・リンケージ・ABI](/runtime/cpp-internals/symbols-and-linkage.html)
+関連項目：[main.cppからCPU命令までの旅](/runtime/cpp-internals/build-pipeline-journey.html) / [学習ガイド](/runtime/cpp-internals/) / [シンボル・名前修飾・リンケージ・ABI](/runtime/cpp-internals/symbols-and-linkage.html)

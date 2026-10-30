@@ -1,17 +1,17 @@
 ---
-title: "クラス名を、役割の説明書にする"
+title: クラス名を、役割の説明書にする
 study:
-  source: "設計の手帖"
-  kind: "本文"
-  status: "既存原稿"
-  summary: "語尾を覚えるだけでなく、「何に対して、どんな責任を持つか」が伝わる名前を選びます。"
+  source: 設計の手帖
+  status: published
+  summary: 語尾を覚えるだけでなく、「何に対して、どんな責任を持つか」が伝わる名前を選びます。
+  section: reference
+  format: article
+  domain: design
 ---
 
 # クラス名を、役割の説明書にする
 
 語尾を覚えるだけでなく、「何に対して、どんな責任を持つか」が伝わる名前を選びます。
-
-05 · 視野を広げ、使ってみる / クラス名の読み方・付け方 / Let the name explain the job / 入門 / 9分
 
 タグ: 命名 / Service / Manager / Handler / Repository / Factory / DTO
 

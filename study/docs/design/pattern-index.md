@@ -1,10 +1,12 @@
 ---
-title: "設計パターンの索引"
+title: 設計パターンの索引
 study:
-  source: "設計の手帖"
-  kind: "索引"
-  status: "既存原稿"
+  source: 設計の手帖
+  status: published
   summary: "分類: 振る舞い 方法を差し替える 使う場面: 送料や割引方式が増える Strategy・State・Command 分類: 振る舞い 状態と遷移を明示する 使う場面: 状態ごとの条件分岐が増える"
+  section: reference
+  format: index
+  domain: design
 ---
 
 # 設計パターンの索引

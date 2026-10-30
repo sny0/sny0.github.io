@@ -1,10 +1,12 @@
 ---
-title: "MVC・MVP・MVVM(比較)"
+title: MVC・MVP・MVVM(比較)
 study:
-  source: "C++ Wiki"
-  kind: "本文"
-  status: "既存原稿"
+  source: C++ Wiki
+  status: published
   summary: "UIの設計で「データとロジック(Model)」と「見た目(View)」を分離し、その間の仲介者の作り方で3流派に分かれます。 MVC (Model-View-Controller): 入力をControllerが受け、Modelを更新。ViewはModelを(多くの場合Observerで)監視して表"
+  section: reference
+  format: article
+  domain: game
 ---
 
 # MVC・MVP・MVVM(比較)
@@ -145,4 +147,4 @@ public class ShopPresenter {
 
 ---
 
-前: [Command Buffer と入力処理](/game/patterns/command-buffer-and-input.html) | [カテゴリ目次](/game/patterns/) | 次: [Reactive Programming](/game/patterns/reactive-and-message-bus.html)
+関連項目：[Command Buffer と入力処理](/game/patterns/command-buffer-and-input.html) | [この分野の学習ガイド](/game/patterns/) | [Reactive Programming](/game/patterns/reactive-and-message-bus.html)

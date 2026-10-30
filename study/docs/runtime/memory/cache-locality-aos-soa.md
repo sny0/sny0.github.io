@@ -1,10 +1,12 @@
 ---
-title: "キャッシュ局所性と AoS / SoA"
+title: キャッシュ局所性と AoS / SoA
 study:
-  source: "C++ Wiki"
-  kind: "本文"
-  status: "既存原稿"
+  source: C++ Wiki
+  status: published
   summary: "キャッシュ局所性 (cache locality): 「次に使うデータが、既にキャッシュに載っている」度合い。空間的局所性(近くのデータを使う)と時間的局所性(同じデータを繰り返し使う)がある(ハードの仕組みは → キャッシュ)"
+  section: reference
+  format: article
+  domain: runtime
 ---
 
 # キャッシュ局所性と AoS / SoA
@@ -109,4 +111,4 @@ samples/aos_soa_bench.cpp で要素数を1万/10万/100万と変えて実行し�
 
 ---
 
-前: [並行処理のバグ](/runtime/memory/concurrency-bugs.html) | [カテゴリ目次](/runtime/memory/) | 次: [placement new・allocator・pool・arena](/runtime/memory/allocators-and-pools.html)
+関連項目：[並行処理のバグ](/runtime/memory/concurrency-bugs.html) / [学習ガイド](/runtime/memory/) / [placement new・allocator・pool・arena](/runtime/memory/allocators-and-pools.html)

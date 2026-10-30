@@ -1,10 +1,12 @@
 ---
-title: "Proxy"
+title: Proxy
 study:
-  source: "C++ Wiki"
-  kind: "本文"
-  status: "既存原稿"
-  summary: "あるオブジェクトへのアクセスを制御したい——重いものを必要になるまで作らない(仮想プロキシ)、アクセス権を確認する(保護プロキシ)、遠隔のものを手元にあるように見せる(リモートプロキシ)。利用側には本物と同じインターフェースのまま、間に代理を挟む。"
+  source: C++ Wiki
+  status: published
+  summary: あるオブジェクトへのアクセスを制御したい——重いものを必要になるまで作らない(仮想プロキシ)、アクセス権を確認する(保護プロキシ)、遠隔のものを手元にあるように見せる(リモートプロキシ)。利用側には本物と同じインターフェースのまま、間に代理を挟む。
+  section: reference
+  format: article
+  domain: design
 ---
 
 # Proxy
@@ -105,7 +107,7 @@ public class EnemySpawner : MonoBehaviour {
 }
 ```
 
-UEの `TSoftObjectPtr` も同じ役割(パスだけ保持し、要求時にロード)です(→ [第10部](/game/unreal/smart-pointers.html))。
+UEの `TSoftObjectPtr` も同じ役割(パスだけ保持し、要求時にロード)です(→ [UEのスマートポインタ — TSharedPtr・TUniquePtr・TWeakPtr・TSoftObjectPtr](/game/unreal/smart-pointers.html))。
 
 ## ゲームでの具体例
 
@@ -167,4 +169,4 @@ UEの `TSoftObjectPtr` も同じ役割(パスだけ保持し、要求時にロ�
 
 ---
 
-前: [Flyweight](/design/patterns/flyweight.html) | [カテゴリ目次](/design/patterns/) | 次: [Chain of Responsibility](/design/patterns/chain-of-responsibility.html)
+関連項目：[Flyweight](/design/patterns/flyweight.html) / [学習ガイド](/design/patterns/) / [Chain of Responsibility](/design/patterns/chain-of-responsibility.html)

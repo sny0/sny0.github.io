@@ -1,10 +1,12 @@
 ---
-title: "auto・decltype・constexpr・consteval(型推論とコンパイル時計算)"
+title: auto・decltype・constexpr・consteval(型推論とコンパイル時計算)
 study:
-  source: "C++ Wiki"
-  kind: "本文"
-  status: "既存原稿"
-  summary: "auto は「初期化子から型をコンパイラに推論させる」機能。動的型付けではありません——型はコンパイル時に完全に確定し、以後変わりません(C#の var と同じ)。 「auto = コピー、auto& = 参照、const auto& = 読み取り参照」と覚える。C#のvarは参照型なら常に参照なの"
+  source: C++ Wiki
+  status: published
+  summary: auto は「初期化子から型をコンパイラに推論させる」機能。動的型付けではありません——型はコンパイル時に完全に確定し、以後変わりません(C#の var と同じ)。 「auto = コピー、auto& = 参照、const auto& = 読み取り参照」と覚える。C#のvarは参照型なら常に参照なの
+  section: reference
+  format: article
+  domain: languages
 ---
 
 # auto・decltype・constexpr・consteval(型推論とコンパイル時計算)
@@ -151,4 +153,4 @@ samples/constexpr_table.cpp の経験値テーブルを「レベル間の必要�
 
 ---
 
-前: [例外](/languages/cpp/exceptions.html) | [カテゴリ目次](/languages/cpp/) | 次: [static・inline・friend](/languages/cpp/static-inline-friend.html)
+関連項目：[例外](/languages/cpp/exceptions.html) / [学習ガイド](/languages/cpp/) / [static・inline・friend](/languages/cpp/static-inline-friend.html)

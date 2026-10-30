@@ -3,12 +3,12 @@
   "title": "OS",
   "study": {
     "source": "統合ガイド",
-    "kind": "分野索引",
-    "status": "初版",
-    "domain": "os",
+    "status": "published",
     "generated": true,
-    "catalog": true,
-    "summary": "プロセス、メモリ、スレッド、入出力の仕組みを調べる。"
+    "catalog": false,
+    "section": "reference",
+    "format": "index",
+    "domain": "os"
   }
 }
 ---
@@ -17,11 +17,19 @@
 
 プロセス、メモリ、スレッド、入出力の仕組みを調べる。
 
-## いま読める項目
+## 辞典の本文
 
-- [第8章 OS ── プロセス・スレッド・仮想メモリ・システムコール](/guide/low-level/operating-system.html) — 学習ガイド
+この分野の専用の辞典本文は準備中です。学習計画や分野の目次を、詳しい解説本文として数えてはいません。
 
-## これから充実させる項目
+## この分野の学習ガイド
+
+- [第8章 OSの仕組み](/guide/low-level/operating-system.html) — 学習計画・概要
+
+## 作って試す
+
+この分野専用の実践教材は準備中です。[実践・サンプル一覧](/practice/)に公開中の題材をまとめています。
+
+## 扱う範囲・増補する項目
 
 - カーネル
 - プロセス・スレッド
@@ -30,5 +38,3 @@
 - ファイル・非同期I/O
 - IPC
 - 権限
-
-本文・概要・学習計画を区別しながら増補します。[疑問から選ぶ読み進め方](/guide/learning-paths.html)にも、この分野とのつながりをまとめています。

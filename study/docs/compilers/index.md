@@ -3,12 +3,12 @@
   "title": "コンパイラとツールチェーン",
   "study": {
     "source": "統合ガイド",
-    "kind": "分野索引",
-    "status": "初版",
-    "domain": "compilers",
+    "status": "published",
     "generated": true,
-    "catalog": true,
-    "summary": "ソースコードが実行可能になるまでを追う。"
+    "catalog": false,
+    "section": "reference",
+    "format": "index",
+    "domain": "compilers"
   }
 }
 ---
@@ -17,11 +17,25 @@
 
 ソースコードが実行可能になるまでを追う。
 
-## いま読める項目
+## 辞典の本文
 
-- [第7章 コンパイラ・リンカ・実行ファイル(ELF/PE)・ABI](/guide/low-level/compiler-linker-executable.html) — 学習ガイド
+- [main.cpp から CPU命令までの旅](/runtime/cpp-internals/build-pipeline-journey.html)
+- [オブジェクトファイル・実行ファイル・静的ライブラリ・動的ライブラリ・DLL](/runtime/cpp-internals/object-files-and-libraries.html)
+- [コンパイラ最適化・未定義動作の影響・Debug/Release・ゼロコスト抽象化](/runtime/cpp-internals/optimization-and-ub.html)
+- [シンボル・名前修飾・リンケージ・ABI](/runtime/cpp-internals/symbols-and-linkage.html)
+- [テンプレートの実体化と inline の実際](/runtime/cpp-internals/template-instantiation-and-inline.html)
+- [三大コンパイラ: MSVC・Clang・GCC](/tools/build/compilers.html)
+- [翻訳単位・ヘッダー・include・前方宣言・ODR](/runtime/cpp-internals/translation-units-and-headers.html)
 
-## これから充実させる項目
+## この分野の学習ガイド
+
+- [第7章 コンパイラ・リンカ・実行ファイル・ABI](/guide/low-level/compiler-linker-executable.html) — 学習計画・概要
+
+## 作って試す
+
+この分野専用の実践教材は準備中です。[実践・サンプル一覧](/practice/)に公開中の題材をまとめています。
+
+## 扱う範囲・増補する項目
 
 - 字句・構文・型検査
 - AST・IR・SSA
@@ -31,5 +45,3 @@
 - ABI
 - ローダー
 - デバッグ情報
-
-本文・概要・学習計画を区別しながら増補します。[疑問から選ぶ読み進め方](/guide/learning-paths.html)にも、この分野とのつながりをまとめています。

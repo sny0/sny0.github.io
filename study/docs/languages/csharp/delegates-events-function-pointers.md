@@ -1,10 +1,12 @@
 ---
-title: "関数ポインタと delegate / Observer と event"
+title: 関数ポインタと delegate / Observer と event
 study:
-  source: "C++ Wiki"
-  kind: "本文"
-  status: "既存原稿"
-  summary: "言語機能の詳細はラムダ式・関数ポインタ・std::function、設計面はObserverで説明済み。ここでは対応関係を整理します。 C#のdelegateは多機能な統合パッケージです。C++では機能ごとに別の道具に分かれます。"
+  source: C++ Wiki
+  status: published
+  summary: 言語機能の詳細はラムダ式・関数ポインタ・std::function、設計面はObserverで説明済み。ここでは対応関係を整理します。 C#のdelegateは多機能な統合パッケージです。C++では機能ごとに別の道具に分かれます。
+  section: reference
+  format: article
+  domain: languages
 ---
 
 # 関数ポインタと delegate / Observer と event
@@ -73,7 +75,7 @@ private:
 
 | UnityEvent | C++での近似 |
 |---|---|
-| インスペクタで配線 | 対応物なし(データ駆動の配線を自作するか、UEのBlueprint/Delegateへ → [第10部](/game/unreal/delegates-and-interfaces.html)) |
+| インスペクタで配線 | 対応物なし(データ駆動の配線を自作するか、UEのBlueprint/Delegateへ → [UEの Delegate と Interface](/game/unreal/delegates-and-interfaces.html)) |
 | SerializeされたPersistentCall | 文字列/IDベースの自作イベントテーブル |
 | 動的呼び出し(遅い) | std::functionのリスト(比較にならないほど速い) |
 
@@ -95,4 +97,4 @@ private:
 
 ---
 
-前: [仮想関数とvirtual/override](/languages/csharp/virtual-and-polymorphism.html) | [カテゴリ目次](/languages/csharp/) | 次: [ヘッダー分割とAssembly Definition](/languages/csharp/headers-vs-asmdef.html)
+関連項目：[仮想関数とvirtual/override](/languages/csharp/virtual-and-polymorphism.html) / [学習ガイド](/languages/csharp/) / [ヘッダー分割とAssembly Definition](/languages/csharp/headers-vs-asmdef.html)

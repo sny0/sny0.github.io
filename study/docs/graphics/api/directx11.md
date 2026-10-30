@@ -1,10 +1,12 @@
 ---
-title: "DirectX 11"
+title: DirectX 11
 study:
-  source: "RenderingWiki"
-  kind: "本文"
-  status: "既存原稿"
-  summary: "DirectX 11 (2009) は「ドライバが面倒を見てくれる」世代のAPIの完成形です。ステートオブジェクト・Compute Shader・Tessellationを備え、10年以上にわたりWindowsゲーム開発の標準であり続けました。DX12より遥かに書きやすく、今でも「とりあえずGPUを"
+  source: RenderingWiki
+  status: published
+  summary: DirectX 11 (2009) は「ドライバが面倒を見てくれる」世代のAPIの完成形です。ステートオブジェクト・Compute Shader・Tessellationを備え、10年以上にわたりWindowsゲーム開発の標準であり続けました。DX12より遥かに書きやすく、今でも「とりあえずGPUを
+  section: reference
+  format: article
+  domain: graphics
 ---
 
 # DirectX 11

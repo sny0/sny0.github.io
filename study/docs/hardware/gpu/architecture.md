@@ -1,10 +1,12 @@
 ---
-title: "GPUアーキテクチャ詳解"
+title: GPUアーキテクチャ詳解
 study:
-  source: "RenderingWiki"
-  kind: "本文"
-  status: "既存原稿"
-  summary: "このページではGPUの内部構造を、シェーダコア (SM/CU)・SIMT実行・メモリ階層・固定機能ユニットの4つの軸で解説します。ここを理解すると、「なぜ分岐が遅いのか」「なぜメモリアクセスパターンが性能を支配するのか」「occupancyとは何か」といった、シェーダ最適化のすべての疑問に答えられる"
+  source: RenderingWiki
+  status: published
+  summary: このページではGPUの内部構造を、シェーダコア (SM/CU)・SIMT実行・メモリ階層・固定機能ユニットの4つの軸で解説します。ここを理解すると、「なぜ分岐が遅いのか」「なぜメモリアクセスパターンが性能を支配するのか」「occupancyとは何か」といった、シェーダ最適化のすべての疑問に答えられる
+  section: reference
+  format: article
+  domain: hardware
 ---
 
 # GPUアーキテクチャ詳解

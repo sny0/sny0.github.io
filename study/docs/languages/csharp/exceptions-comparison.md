@@ -1,10 +1,12 @@
 ---
-title: "C++例外と C#例外"
+title: C++例外と C#例外
 study:
-  source: "C++ Wiki"
-  kind: "本文"
-  status: "既存原稿"
-  summary: "言語機能の詳細と業界事情は例外のページ、内部実装は例外処理の仕組みで説明済み。ここでは対応と差分を整理します。 C#の例外の大半は「ランタイムの安全網」、C++の例外は「自分で投げたものだけ」。C++でtry-catchを書いてもメモリバグは捕まりません(→ 捕まえるのはサニタイザの仕事)。"
+  source: C++ Wiki
+  status: published
+  summary: 言語機能の詳細と業界事情は例外のページ、内部実装は例外処理の仕組みで説明済み。ここでは対応と差分を整理します。 C#の例外の大半は「ランタイムの安全網」、C++の例外は「自分で投げたものだけ」。C++でtry-catchを書いてもメモリバグは捕まりません(→ 捕まえるのはサニタイザの仕事)。
+  section: reference
+  format: article
+  domain: languages
 ---
 
 # C++例外と C#例外
@@ -67,7 +69,7 @@ C++に finally がないのは欠落ではなく、[RAII](/languages/cpp/raii.ht
 | 「見つからない」程度の失敗 | TryGetValueパターン | optional / bool戻り(例外は使わない) |
 | プログラミングエラー(契約違反) | Debug.Assert / 例外 | assert(Shippingで無効化)+クラッシュレポート |
 | ゲームループ内の高頻度失敗 | 例外は避ける(Unityでも遅い) | 例外は使わない(共通) |
-| エンジンの流儀 | Unity: 例外は使えるが投げっぱなしはログ汚染 | UE: 例外非使用(check/ensure文化 → [第10部](/game/unreal/)) |
+| エンジンの流儀 | Unity: 例外は使えるが投げっぱなしはログ汚染 | UE: 例外非使用(check/ensure文化 → [Unreal Engineと標準C++をつなぐ学習ガイド](/game/unreal/)) |
 
 「高頻度パスに例外を使わない」は両言語共通の結論で、違いは「C++にはそもそも例外を切る文化圏がある」ことです。
 
@@ -89,4 +91,4 @@ C++に finally がないのは欠落ではなく、[RAII](/languages/cpp/raii.ht
 
 ---
 
-前: [手動メモリ管理とGC](/languages/csharp/memory-management-vs-gc.html) | [カテゴリ目次](/languages/csharp/) | 次: [演習](/languages/csharp/exercises.html)
+関連項目：[手動メモリ管理とGC](/languages/csharp/memory-management-vs-gc.html) / [学習ガイド](/languages/csharp/) / [演習](/languages/csharp/exercises.html)

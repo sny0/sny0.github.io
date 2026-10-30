@@ -1,10 +1,12 @@
 ---
-title: "関数呼び出し・コールスタック・呼出規約・レジスタ"
+title: 関数呼び出し・コールスタック・呼出規約・レジスタ
 study:
-  source: "C++ Wiki"
-  kind: "本文"
-  status: "既存原稿"
-  summary: "関数呼び出しは「戻り先を記録してジャンプ」する仕組みで、その記録場所+ローカル変数の置き場がコールスタックです。引数と戻り値の受け渡しルール(呼出規約)はABIの一部で、デバッガのスタックトレースはこの構造を読んでいます。"
+  source: C++ Wiki
+  status: published
+  summary: 関数呼び出しは「戻り先を記録してジャンプ」する仕組みで、その記録場所+ローカル変数の置き場がコールスタックです。引数と戻り値の受け渡しルール(呼出規約)はABIの一部で、デバッガのスタックトレースはこの構造を読んでいます。
+  section: reference
+  format: article
+  domain: runtime
 ---
 
 # 関数呼び出し・コールスタック・呼出規約・レジスタ
@@ -72,7 +74,7 @@ int CalcDamage(int atk, int def) {
 | 直接call | 数サイクル(予測が当たれば) |
 | 仮想関数(間接call) | +数サイクル+インライン化阻害(→ [vtable](/runtime/cpp-internals/vtable-and-virtual-calls.html)) |
 | DLL境界の呼び出し | +間接ジャンプ(IAT経由) |
-| C#⇔ネイティブ(P/Invoke) | 数十〜数百サイクル(マーシャリング込み → [第9部](/languages/csharp/il2cpp.html)) |
+| C#⇔ネイティブ(P/Invoke) | 数十〜数百サイクル(マーシャリング込み → [ネイティブビルドと IL2CPP](/languages/csharp/il2cpp.html)) |
 
 「関数を分けると遅くなる?」への答え: 小さい関数はインライン化されるので**設計上は分けてよい**。呼び出しコストを理由に関数をまとめるのは、計測で示されたホットスポットだけ(→ [早すぎる最適化](/design/foundations/yagni-kiss-dry.html))。
 
@@ -105,4 +107,4 @@ godbolt.orgで `CalcDamage` を `-O0` と `-O2` でコンパイルし、(a) 引�
 
 ---
 
-前: [メモリレイアウト](/runtime/cpp-internals/memory-layout.html) | [カテゴリ目次](/runtime/cpp-internals/) | 次: [キャッシュ・分岐予測・SIMD](/runtime/cpp-internals/cache-branch-simd.html)
+関連項目：[メモリレイアウト](/runtime/cpp-internals/memory-layout.html) / [学習ガイド](/runtime/cpp-internals/) / [キャッシュ・分岐予測・SIMD](/runtime/cpp-internals/cache-branch-simd.html)

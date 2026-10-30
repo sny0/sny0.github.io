@@ -1,10 +1,12 @@
 ---
-title: "placement new・allocator・memory pool・arena allocator・fragmentation"
+title: placement new・allocator・memory pool・arena allocator・fragmentation
 study:
-  source: "C++ Wiki"
-  kind: "本文"
-  status: "既存原稿"
-  summary: "placement new、固定サイズプール、アリーナ、STL allocatorの役割と、断片化・寿命・計測による選択を整理します。"
+  source: C++ Wiki
+  status: published
+  summary: placement new、固定サイズプール、アリーナ、STL allocatorの役割と、断片化・寿命・計測による選択を整理します。
+  section: reference
+  format: article
+  domain: runtime
 ---
 
 # placement new・allocator・memory pool・arena allocator・fragmentation
@@ -36,7 +38,7 @@ e->~Enemy();                        // 破棄も分離: デストラクタだけ
 
 ## memory pool(同サイズ特化)
 
-[Object Pool](/game/patterns/object-pool.html)(第4部)の下位層版: **同サイズのブロック**をフリーリストで貸し借りします。空きブロックがある状態でのフリーリスト操作はO(1)にできますが、領域の追加確保や構築・破棄のコストは別です。固定サイズブロック間の外部断片化を抑えられても、内部の余りや未使用容量までゼロになるわけではありません。弾・ノード・メッセージなど「同じ型を大量に出し入れ」する対象に。
+[Object Pool](/game/patterns/object-pool.html)の下位層版: **同サイズのブロック**をフリーリストで貸し借りします。空きブロックがある状態でのフリーリスト操作はO(1)にできますが、領域の追加確保や構築・破棄のコストは別です。固定サイズブロック間の外部断片化を抑えられても、内部の余りや未使用容量までゼロになるわけではありません。弾・ノード・メッセージなど「同じ型を大量に出し入れ」する対象に。
 
 ```
 プール: [■][□][■][□][□][■]...(全ブロック同サイズ)
@@ -84,7 +86,7 @@ std::pmr::vector<int> v(&arena);    // このvectorの確保はすべてarenaか
 ## 全体地図(どの層の話か)
 
 ```
-[Object Pool(第4部)]  ゲームオブジェクトの再利用(リセット・ハンドル管理込み)
+[Object Pool]  ゲームオブジェクトの再利用(リセット・ハンドル管理込み)
 [memory pool / arena]   バイト供給の戦略(このページ)
 [malloc / new]          汎用ヒープ(OSから貰った領域を管理)
 [OS(VirtualAlloc/mmap)] ページ単位の供給
@@ -94,7 +96,7 @@ std::pmr::vector<int> v(&arena);    // このvectorの確保はすべてarenaか
 
 - C#の通常の管理オブジェクトはGC管理下に置かれ、その確保先をC++のコンテナ用allocatorのように任意に差し替えるわけではありません。一方、`stackalloc` や、対応する.NETでの [NativeMemory](https://learn.microsoft.com/en-us/dotnet/api/system.runtime.interopservices.nativememory) 等によるネイティブ確保もあるため、GCヒープ一択ではありません。プールや `ArrayPool<T>` 等による再利用と、構造体/`Span<T>` の利用は、実際にどの確保が減るかを確認して使います
 - Unityの `NativeArray` 等では、`Allocator.Temp` / `TempJob` / `Persistent` によって使用可能な寿命・スレッド・解放規則等が異なります。すべてを同じフレームアリーナと見なさず、[Collections 2.1のAllocator overview](https://docs.unity3d.com/Packages/com.unity.collections@2.1/manual/allocator-overview.html)等で対象の版の契約を確認します
-- UEには `FMemStack`(フレームアロケータ)、各種プールが内蔵(→ [第10部](/game/unreal/))
+- UEには `FMemStack`(フレームアロケータ)、各種プールが内蔵(→ [Unreal Engineと標準C++をつなぐ学習ガイド](/game/unreal/))
 
 ## Unity開発者が誤解しやすい点
 
@@ -119,4 +121,4 @@ samples/arena_allocator.cpp を拡張し、「フレームの一時文字列組�
 
 ---
 
-前: [キャッシュ局所性とAoS/SoA](/runtime/memory/cache-locality-aos-soa.html) | [カテゴリ目次](/runtime/memory/) | 次: [GCとの違い(C#管理ヒープ)](/runtime/memory/gc-and-csharp-comparison.html)
+関連項目：[キャッシュ局所性とAoS/SoA](/runtime/memory/cache-locality-aos-soa.html) / [学習ガイド](/runtime/memory/) / [GCとの違い(C#管理ヒープ)](/runtime/memory/gc-and-csharp-comparison.html)

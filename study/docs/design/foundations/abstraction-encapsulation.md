@@ -1,10 +1,12 @@
 ---
-title: "抽象化・カプセル化・情報隠蔽"
+title: 抽象化・カプセル化・情報隠蔽
 study:
-  source: "C++ Wiki"
-  kind: "本文"
-  status: "既存原稿"
+  source: C++ Wiki
+  status: published
   summary: "抽象化(abstraction): 使う側にとって重要なことだけを残し、詳細を削ぎ落とすこと。「何をするか」を残し「どうやるか」を消す。 カプセル化(encapsulation): データとそれを操作するコードを1つにまとめること。"
+  section: reference
+  format: article
+  domain: design
 ---
 
 # 抽象化・カプセル化・情報隠蔽
@@ -91,7 +93,7 @@ private:
 
 ## 「漏れる抽象」という限界
 
-抽象化は完全にはなりません。例えば `std::vector` は「伸びる配列」という抽象ですが、伸びるときに要素が**メモリ上で引っ越す**という詳細は、イテレータ無効化という形で漏れてきます(→ [STLコンテナ](/languages/cpp/stl.html))。**抽象の下で何が起きているかをいつでも覗ける**ことが、C++プログラマの強みになります(第6部・第7部)。
+抽象化は完全にはなりません。例えば `std::vector` は「伸びる配列」という抽象ですが、伸びるときに要素が**メモリ上で引っ越す**という詳細は、イテレータ無効化という形で漏れてきます(→ [STLコンテナ](/languages/cpp/stl.html))。**抽象の下で何が起きているかをいつでも覗ける**ことが、C++プログラマの強みになります([C++の内部的な仕組み](/runtime/cpp-internals/)、[メモリと実行時](/runtime/memory/))。
 
 ## ゲーム開発での例
 
@@ -101,11 +103,11 @@ private:
 ## Unity/C# との対応
 
 - C#の `private` + プロパティが同じ役割。`public int hp;` をインスペクタに出したいがために全部publicにするのは情報隠蔽の放棄です(`[SerializeField] private` を使う)。
-- C# には `internal`(アセンブリ内公開)があり、C++にはこれに直接対応するものがない(→ [第9部](/languages/csharp/headers-vs-asmdef.html))。
+- C# には `internal`(アセンブリ内公開)があり、C++にはこれに直接対応するものがない(→ [ヘッダー分割と Assembly Definition](/languages/csharp/headers-vs-asmdef.html))。
 
 ## Unreal Engine との対応
 
-- `UPROPERTY(EditAnywhere)` 等でエディタ公開とコード上のアクセス制御を別々に指定できます。エディタに見せることとコードに見せることは別の決定です(→ [第10部](/game/unreal/reflection-and-uht.html))。
+- `UPROPERTY(EditAnywhere)` 等でエディタ公開とコード上のアクセス制御を別々に指定できます。エディタに見せることとコードに見せることは別の決定です(→ [リフレクション — UCLASS・UFUNCTION・UPROPERTY・Unreal Header Tool](/game/unreal/reflection-and-uht.html))。
 
 ## よくある誤解
 
@@ -135,4 +137,4 @@ private:
 
 ---
 
-前: [依存関係と依存の方向](/design/foundations/dependency.html) | [カテゴリ目次](/design/foundations/) | 次: [継承・委譲・コンポジション](/design/foundations/inheritance-delegation-composition.html)
+関連項目：[依存関係と依存の方向](/design/foundations/dependency.html) / [学習ガイド](/design/foundations/) / [継承・委譲・コンポジション](/design/foundations/inheritance-delegation-composition.html)

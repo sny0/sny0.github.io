@@ -1,13 +1,19 @@
 ---
-title: "第4部 演習 — ゲームプログラミングパターン"
+title: ゲームプログラミングパターンの演習
 study:
-  source: "C++ Wiki"
-  kind: "演習"
-  status: "既存原稿"
-  summary: "正誤を判定し、誤りは訂正してください。 Event QueueはObserverと違い、発行者と購読者の「時間的結合」を切る。 ECSはComponentパターンの改良版であり、常に上位互換である。"
+  source: C++ Wiki
+  status: published
+  summary: 正誤を判定し、誤りは訂正してください。 Event QueueはObserverと違い、発行者と購読者の「時間的結合」を切る。 ECSはComponentパターンの改良版であり、常に上位互換である。
+  section: practice
+  format: exercise
+  domain: game
+  collection: cpp-exercises
+  order: 4
 ---
 
-# 第4部 演習 — ゲームプログラミングパターン
+<div id="第4部-演習-—-ゲームプログラミングパターン" class="study-legacy-anchor" aria-hidden="true"></div>
+
+# ゲームプログラミングパターンの演習
 
 ## 問1. 概念確認
 
@@ -91,4 +97,4 @@ Pub/Subバス導入後、「アイテム取得イベントで所持数UIが更�
 
 ---
 
-前: [Reactive Programming](/game/patterns/reactive-and-message-bus.html) | [カテゴリ目次](/game/patterns/) | [第5部: C++の言語機能へ](/languages/cpp/)
+関連項目：[Reactive Programming](/game/patterns/reactive-and-message-bus.html) | [この分野の学習ガイド](/game/patterns/) | [関連項目](/languages/cpp/)

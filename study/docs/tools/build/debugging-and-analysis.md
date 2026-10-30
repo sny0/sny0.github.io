@@ -1,10 +1,12 @@
 ---
-title: "品質のための道具 — 静的解析・サニタイザ・警告レベル・CI"
+title: 品質のための道具 — 静的解析・サニタイザ・警告レベル・CI
 study:
-  source: "C++ Wiki"
-  kind: "本文"
-  status: "既存原稿"
-  summary: "バグを「実行して踏む」前に機械に見つけさせる4つの層です。検出が早いほど安い(コンパイル時 < テスト実行時 < QA < ユーザー環境)という原則で並べます。 コンパイラの警告は「合法だが怪しいコード」の検出器です。"
+  source: C++ Wiki
+  status: published
+  summary: バグを「実行して踏む」前に機械に見つけさせる4つの層です。検出が早いほど安い(コンパイル時 < テスト実行時 < QA < ユーザー環境)という原則で並べます。 コンパイラの警告は「合法だが怪しいコード」の検出器です。
+  section: reference
+  format: article
+  domain: tools
 ---
 
 # 品質のための道具 — 静的解析・サニタイザ・警告レベル・CI
@@ -90,7 +92,7 @@ C#は言語がチェックを内蔵しているぶん道具が少なくて済ん
 ## 理解度チェック
 
 1. 「検出が早いほど安い」の4段階を言えますか。
-2. ASanが劇的に有効なバグの種類は?(第7部のバグ図鑑と対応させて)
+2. ASanが劇的に有効なバグの種類は?([メモリバグ図鑑](/runtime/memory/memory-bugs.html)と対応させて)
 3. CIで「2コンパイラ×2構成」を回す理由は?
 
 ## 演習
@@ -99,4 +101,4 @@ samples/ の任意のサンプルに意図的な範囲外アクセスを仕込�
 
 ---
 
-前: [ビルド時間](/tools/build/build-speed.html) | [カテゴリ目次](/tools/build/) | 次: [リンクエラー](/tools/build/link-errors.html)
+関連項目：[ビルド時間](/tools/build/build-speed.html) / [学習ガイド](/tools/build/) / [リンクエラー](/tools/build/link-errors.html)

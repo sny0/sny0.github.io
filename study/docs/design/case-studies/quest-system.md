@@ -1,13 +1,17 @@
 ---
-title: "ケーススタディ 13: クエスト"
+title: クエストの設計
 study:
-  source: "C++ Wiki"
-  kind: "本文"
-  status: "既存原稿"
-  summary: "「スライムを10体倒せ」「薬草を5個集めて村長に渡せ」——受注・進捗・達成・報酬の管理です。 クエスト30本 → OnEnemyKilled / OnItemPicked / OnNpcTalked がクエスト別ifの山に。進捗変数(killCount_)がクエストの数だけManagerに増殖"
+  source: C++ Wiki
+  status: published
+  summary: 「スライムを10体倒せ」「薬草を5個集めて村長に渡せ」——受注・進捗・達成・報酬の管理です。 クエスト30本 → OnEnemyKilled / OnItemPicked / OnNpcTalked がクエスト別ifの山に。進捗変数(killCount_)がクエストの数だけManagerに増殖
+  section: reference
+  format: article
+  domain: design
 ---
 
-# ケーススタディ 13: クエスト
+<div id="ケーススタディ-13-クエスト" class="study-legacy-anchor" aria-hidden="true"></div>
+
+# クエストの設計
 
 「スライムを10体倒せ」「薬草を5個集めて村長に渡せ」——受注・進捗・達成・報酬の管理です。
 
@@ -106,4 +110,4 @@ class QuestSystem {
 
 ---
 
-前: [アイテム効果](/design/case-studies/item-effects.html) | [カテゴリ目次](/design/case-studies/) | 次: [イベント通知](/design/case-studies/event-notification.html)
+関連項目：[アイテム効果](/design/case-studies/item-effects.html) / [学習ガイド](/design/case-studies/) / [イベント通知](/design/case-studies/event-notification.html)

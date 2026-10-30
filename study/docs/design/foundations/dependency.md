@@ -1,10 +1,12 @@
 ---
-title: "依存関係と依存の方向"
+title: 依存関係と依存の方向
 study:
-  source: "C++ Wiki"
-  kind: "本文"
-  status: "既存原稿"
-  summary: "依存(dependency)とは「A のコードが B を知っている(B が変わると A が壊れうる)」関係。依存の方向を制御することが設計の中心技術です。原則は「変わりやすいものに依存しない。変わりにくいものに依存させる」。"
+  source: C++ Wiki
+  status: published
+  summary: 依存(dependency)とは「A のコードが B を知っている(B が変わると A が壊れうる)」関係。依存の方向を制御することが設計の中心技術です。原則は「変わりやすいものに依存しない。変わりにくいものに依存させる」。
+  section: reference
+  format: article
+  domain: design
 ---
 
 # 依存関係と依存の方向
@@ -157,8 +159,8 @@ void SetupUi(BattleLogic& battle, HpBarWidget& bar) {
 
 ## 演習
 
-`Quest → Player → Inventory → Quest`(クエストアイテム所持チェックのため)という循環があるとします。どこをどう切るか、2案作って利点欠点を比較してください(類題の解答: [第1部演習](/design/foundations/exercises.html))。
+`Quest → Player → Inventory → Quest`(クエストアイテム所持チェックのため)という循環があるとします。どこをどう切るか、2案作って利点欠点を比較してください(類題の解答: [設計の基礎の演習](/design/foundations/exercises.html))。
 
 ---
 
-前: [凝集度と結合度](/design/foundations/cohesion-and-coupling.html) | [カテゴリ目次](/design/foundations/) | 次: [抽象化・カプセル化・情報隠蔽](/design/foundations/abstraction-encapsulation.html)
+関連項目：[凝集度と結合度](/design/foundations/cohesion-and-coupling.html) / [学習ガイド](/design/foundations/) / [抽象化・カプセル化・情報隠蔽](/design/foundations/abstraction-encapsulation.html)

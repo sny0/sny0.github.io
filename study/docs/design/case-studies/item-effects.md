@@ -1,13 +1,17 @@
 ---
-title: "ケーススタディ 12: アイテム効果"
+title: アイテム効果の設計
 study:
-  source: "C++ Wiki"
-  kind: "本文"
-  status: "既存原稿"
-  summary: "「ポーションはHP回復、エリクサーは全回復、爆弾は範囲ダメージ、鍵は扉を開ける」——使うと何かが起きるものの設計です。 アイテム100種でswitchが巨大化。効果の説明文・アイコンは別の場所にあり、効果とデータの二重管理(説明は回復60、実装は50のズレ事故)"
+  source: C++ Wiki
+  status: published
+  summary: 「ポーションはHP回復、エリクサーは全回復、爆弾は範囲ダメージ、鍵は扉を開ける」——使うと何かが起きるものの設計です。 アイテム100種でswitchが巨大化。効果の説明文・アイコンは別の場所にあり、効果とデータの二重管理(説明は回復60、実装は50のズレ事故)
+  section: reference
+  format: article
+  domain: design
 ---
 
-# ケーススタディ 12: アイテム効果
+<div id="ケーススタディ-12-アイテム効果" class="study-legacy-anchor" aria-hidden="true"></div>
+
+# アイテム効果の設計
 
 「ポーションはHP回復、エリクサーは全回復、爆弾は範囲ダメージ、鍵は扉を開ける」——**使うと何かが起きる**ものの設計です。
 
@@ -103,4 +107,4 @@ OnEquip系 → [ステート異常](04_status_effects.md)の効果リストに�
 
 ---
 
-前: [サウンド管理](/design/case-studies/sound-manager.html) | [カテゴリ目次](/design/case-studies/) | 次: [クエスト](/design/case-studies/quest-system.html)
+関連項目：[サウンド管理](/design/case-studies/sound-manager.html) / [学習ガイド](/design/case-studies/) / [クエスト](/design/case-studies/quest-system.html)

@@ -1,10 +1,14 @@
 ---
-title: "2. デバイス初期化とスワップチェイン"
+title: 2. デバイス初期化とスワップチェイン
 study:
-  source: "RenderingWiki"
-  kind: "本文"
-  status: "既存原稿"
-  summary: "「クリアカラーで塗った画面が毎フレーム表示される」まで。描画はまだしません。ここで作る Device 層はレンダラーの心臓であり、CPUとGPUの並走・同期の知識をコードに落とします。"
+  source: RenderingWiki
+  status: published
+  summary: 「クリアカラーで塗った画面が毎フレーム表示される」まで。描画はまだしません。ここで作る Device 層はレンダラーの心臓であり、CPUとGPUの並走・同期の知識をコードに落とします。
+  section: practice
+  format: tutorial
+  domain: graphics
+  collection: renderer-project
+  order: 2
 ---
 
 # 2. デバイス初期化とスワップチェイン

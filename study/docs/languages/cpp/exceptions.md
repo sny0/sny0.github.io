@@ -1,10 +1,12 @@
 ---
-title: "例外"
+title: 例外
 study:
-  source: "C++ Wiki"
-  kind: "本文"
-  status: "既存原稿"
-  summary: "エラーを戻り値ではなく別経路(throw/catch)で伝搬させる仕組み。C#と構文は似ていますが、C++では「使わない」という選択が実在し、ゲーム業界では無効化する文化も広い——この点がC#との最大の違いです。"
+  source: C++ Wiki
+  status: published
+  summary: エラーを戻り値ではなく別経路(throw/catch)で伝搬させる仕組み。C#と構文は似ていますが、C++では「使わない」という選択が実在し、ゲーム業界では無効化する文化も広い——この点がC#との最大の違いです。
+  section: reference
+  format: article
+  domain: languages
 ---
 
 # 例外
@@ -69,7 +71,7 @@ if (auto item = FindItem(id)) { Use(*item); }
 ## ゲーム業界の現実(重要)
 
 - 多くのゲームスタジオ・エンジンは**例外を無効化**(`-fno-exceptions`, MSVCの`/EHs-c-`)してきた歴史があります。理由: 実行時コスト(サイズ・最適化阻害)への懸念、コンソール機の制約(過去)、「フレーム中に投げて安全に継続する設計が難しい」こと
-- **Unreal Engineは例外非使用が基本**(チェック(check/ensure)とログで代替)。標準C++の教科書通りに例外を書くとUEでは浮きます(→ [第10部](/game/unreal/))
+- **Unreal Engineは例外非使用が基本**(チェック(check/ensure)とログで代替)。標準C++の教科書通りに例外を書くとUEでは浮きます(→ [Unreal Engineと標準C++をつなぐ学習ガイド](/game/unreal/))
 - 一方、ツール・エディタ・サーバーサイドC++では普通に使われる。**「所属する環境の流儀に従う」が正解**で、これは技術的優劣の問題ではなくエコシステムの選択です
 
 ## C#との違い
@@ -124,4 +126,4 @@ samples/exceptions_raii.cpp(検証済み)で、throw時にローカルのRAIIオ
 
 ---
 
-前: [enum・enum class・namespace](/languages/cpp/enums-and-namespaces.html) | [カテゴリ目次](/languages/cpp/) | 次: [auto・decltype・constexpr・consteval](/languages/cpp/auto-and-constexpr.html)
+関連項目：[enum・enum class・namespace](/languages/cpp/enums-and-namespaces.html) / [学習ガイド](/languages/cpp/) / [auto・decltype・constexpr・consteval](/languages/cpp/auto-and-constexpr.html)

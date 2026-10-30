@@ -1,10 +1,12 @@
 ---
-title: "Forward+ / Tiled / Clustered Rendering"
+title: Forward+ / Tiled / Clustered Rendering
 study:
-  source: "RenderingWiki"
-  kind: "本文"
-  status: "既存原稿"
-  summary: "Forward+ (Tiled Forward) と Clustered Shading は、Compute ShaderによるライトカリングをForward Renderingに組み合わせた方式です。画面をタイル (2D) またはクラスタ (3D=タイル×深度スライス) に分割し、各領域に影響する"
+  source: RenderingWiki
+  status: published
+  summary: Forward+ (Tiled Forward) と Clustered Shading は、Compute ShaderによるライトカリングをForward Renderingに組み合わせた方式です。画面をタイル (2D) またはクラスタ (3D=タイル×深度スライス) に分割し、各領域に影響する
+  section: reference
+  format: article
+  domain: graphics
 ---
 
 # Forward+ / Tiled / Clustered Rendering

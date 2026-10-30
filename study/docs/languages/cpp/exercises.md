@@ -1,13 +1,19 @@
 ---
-title: "第5部 演習 — C++の言語機能"
+title: C++の言語機能の演習
 study:
-  source: "C++ Wiki"
-  kind: "演習"
-  status: "既存原稿"
-  summary: "正誤を判定し、誤りは訂正してください。 Enemy b = a; は、C++ではaとbが同じ実体を指す。 std::move(x) はxの中身を移動させる関数である。 Rule of Zeroとは、特殊メンバ関数を一切書かずに済む設計を指す。"
+  source: C++ Wiki
+  status: published
+  summary: 正誤を判定し、誤りは訂正してください。 Enemy b = a; は、C++ではaとbが同じ実体を指す。 std::move(x) はxの中身を移動させる関数である。 Rule of Zeroとは、特殊メンバ関数を一切書かずに済む設計を指す。
+  section: practice
+  format: exercise
+  domain: languages
+  collection: cpp-exercises
+  order: 5
 ---
 
-# 第5部 演習 — C++の言語機能
+<div id="第5部-演習-—-c-の言語機能" class="study-legacy-anchor" aria-hidden="true"></div>
+
+# C++の言語機能の演習
 
 ## 問1. 概念確認
 
@@ -105,4 +111,4 @@ private:
 
 ---
 
-前: [未定義動作](/languages/cpp/undefined-behavior.html) | [カテゴリ目次](/languages/cpp/) | [第6部: C++の内部的な仕組みへ](/runtime/cpp-internals/)
+関連項目：[未定義動作](/languages/cpp/undefined-behavior.html) / [学習ガイド](/languages/cpp/) / [C++の内部的な仕組みを学ぶ](/runtime/cpp-internals/)

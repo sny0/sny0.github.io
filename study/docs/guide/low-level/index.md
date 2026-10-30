@@ -1,45 +1,63 @@
 ---
-title: "ゲームプログラマのための完全理解教本"
+title: 低レイヤからゲームの仕組みを学ぶ
 study:
-  source: "IT教本"
-  kind: "学習ガイド"
-  status: "学習計画・概要"
-  summary: "対象読者: ゲームプログラマ2年目。エンジンは使えるが、その下で何が起きているかを 「大学4年間 + ゲーム会社新人教育 + エンジン開発者育成」レベルで理解したい人。 下から上へ、ただしゲームに必要な最短経路で。"
+  source: IT教本
+  status: published
+  summary: 入力から画面表示までを、情報表現・CPU・メモリ・OS・言語・GPUの順にたどる学習コースです。各章は学ぶ範囲、短い概説、演習、参考資料をまとめた学習計画・概要です。章を読むだけで、各分野の詳解や実装検証まで済むものではありません。下の章順は学習の目安で、疑問がある章から入っても構いません。
+  section: learning
+  format: index
+  domain: game
+  collection: low-level
+  order: 0
 ---
 
-# ゲームプログラマのための完全理解教本
-## 「パッドのボタンを押してから、画面にゲームが表示されるまで」をブラックボックスなしで理解する
+<div id="ゲームプログラマのための完全理解教本" class="study-legacy-anchor" aria-hidden="true"></div>
 
-対象読者: ゲームプログラマ2年目。エンジンは使えるが、その下で何が起きているかを
-「大学4年間 + ゲーム会社新人教育 + エンジン開発者育成」レベルで理解したい人。
+# 低レイヤからゲームの仕組みを学ぶ
+
+## このページで案内すること
+
+入力から画面表示までを、情報表現・CPU・メモリ・OS・言語・GPUの順にたどる学習コースです。各章は学ぶ範囲、短い概説、演習、参考資料をまとめた**学習計画・概要**です。章を読むだけで、各分野の詳解や実装検証まで済むものではありません。下の章順は学習の目安で、疑問がある章から入っても構いません。
+
+## 関連する辞典本文・実践
+
+- [ソースコードからCPU命令まで](/runtime/cpp-internals/build-pipeline-journey.html)と[アロケータ](/runtime/memory/allocators-and-pools.html)で、個別の仕組みを調べられます。
+- [ECS](/game/ecs.html)ではデータと更新の構成、[小さなシューティング](/game/shooter-design.html)では動く実装へのつなぎ方を扱います。
+
+情報表現、C、アセンブリ、OSなどは、このコースの概説が中心で、専用の辞典本文がまだ揃っていません。各章の冒頭に、既存本文へのリンクと未整備の範囲を示します。
+
+## 入力から表示までを学ぶ
+
+対象読者: エンジンを使った経験があり、その下で何が起きているかを調べたい人。
+実装や資料の読解を通じ、ゲームが動く仕組みを段階的に理解するための学習案です。
 
 ---
 
 ## 目次
 
-| 章 | ファイル | テーマ |
+| 章 | 学習案内 | テーマ |
 |----|---------|--------|
-| 第0章 | [00_学習全体マップ.md](/guide/low-level/learning-map.html) | 全体像・学習戦略・環境構築 |
-| 第1章 | [01_コンピュータとは何か.md](/guide/low-level/computer-and-data.html) | 情報の表現・2進数・ノイマン型 |
-| 第2章 | [02_電気_CPU_命令.md](/guide/low-level/electricity-cpu-instructions.html) | 論理回路→CPU→命令セット |
-| 第3章 | [03_メモリとキャッシュ.md](/guide/low-level/memory-and-cache.html) | メモリ階層・キャッシュ・データ指向の土台 |
-| 第4章 | [04_アセンブリ.md](/guide/low-level/assembly.html) | x64アセンブリ・VSで逆アセンブリを読む |
-| 第5章 | [05_C言語.md](/guide/low-level/c-language.html) | メモリと機械語への接続 |
-| 第6章 | [06_ポインタとメモリ管理.md](/guide/low-level/pointers-and-memory.html) | ポインタ・記憶域・アロケータ |
-| 第7章 | [07_コンパイラ_リンカ_実行ファイル.md](/guide/low-level/compiler-linker-executable.html) | コンパイラ・リンカ・ELF/PE・ABI |
-| 第8章 | [08_OS.md](/guide/low-level/operating-system.html) | プロセス・スレッド・仮想メモリ・システムコール |
-| 第9章 | [09_Cpp.md](/guide/low-level/cpp-language.html) | C++ ── ゲーム業界の母語 |
-| 第10章 | [10_データ構造_アルゴリズム_ゲーム数学.md](/guide/low-level/algorithms-and-game-math.html) | ゲームに効くDS/Algo・線形代数 |
-| 第11章 | [11_GPUアーキテクチャ.md](/guide/low-level/gpu-architecture.html) | GPUはなぜ速いのか |
-| 第12章 | [12_レンダリングパイプラインとシェーダ.md](/guide/low-level/rendering-pipeline-shaders.html) | 頂点からピクセルまで |
-| 第13章 | [13_グラフィックスAPI.md](/guide/low-level/graphics-apis.html) | OpenGL / DirectX 12 / Vulkan |
-| 第14章 | [14_入力とゲームループ.md](/guide/low-level/input-and-game-loop.html) | パッド入力の旅・時間・フレーム |
-| 第15章 | [15_ゲームエンジンアーキテクチャとECS.md](/guide/low-level/engine-architecture-ecs.html) | エンジンの解剖学・ECS |
-| 第16章 | [16_Unityの内部.md](/guide/low-level/unity-internals.html) | C#/IL2CPP/DOTS・内部実装を想像する |
-| 第17章 | [17_UnrealEngineの内部.md](/guide/low-level/unreal-internals.html) | UE5ソースコードリーディング |
-| 第18章 | [18_デバッグとプロファイリング.md](/guide/low-level/debugging-and-profiling.html) | VS・RenderDoc・PIX・Tracy |
-| 最終章 | [19_最終章_ボタンから画面まで.md](/guide/low-level/button-to-screen.html) | 全章統合 ── 1フレームの完全な旅 |
-| 発展章 | [20_発展編.md](/guide/low-level/advanced-topics.html) | トップレベルを目指す人向けトピック |
+| 第0章 | [学習全体マップ](/guide/low-level/learning-map.html) | 全体像・学習戦略・環境構築 |
+| 第1章 | [コンピュータと情報の表現](/guide/low-level/computer-and-data.html) | 情報の表現・2進数・ノイマン型 |
+| 第2章 | [論理回路・CPU・命令](/guide/low-level/electricity-cpu-instructions.html) | 論理回路→CPU→命令セット |
+| 第3章 | [メモリ階層とキャッシュ](/guide/low-level/memory-and-cache.html) | メモリ階層・キャッシュ・データ指向の土台 |
+| 第4章 | [アセンブリと逆アセンブリ](/guide/low-level/assembly.html) | x64アセンブリ・VSで逆アセンブリを読む |
+| 第5章 | [C言語とメモリ](/guide/low-level/c-language.html) | メモリと機械語への接続 |
+| 第6章 | [ポインタとメモリ管理](/guide/low-level/pointers-and-memory.html) | ポインタ・記憶域・アロケータ |
+| 第7章 | [コンパイラ・リンカ・実行ファイル・ABI](/guide/low-level/compiler-linker-executable.html) | コンパイラ・リンカ・ELF/PE・ABI |
+| 第8章 | [OSの仕組み](/guide/low-level/operating-system.html) | プロセス・スレッド・仮想メモリ・システムコール |
+| 第9章 | [C++の型・寿命・実行](/guide/low-level/cpp-language.html) | C++ ── ゲーム業界の母語 |
+| 第10章 | [データ構造・アルゴリズム・ゲーム数学](/guide/low-level/algorithms-and-game-math.html) | ゲームに効くDS/Algo・線形代数 |
+| 第11章 | [GPUアーキテクチャ](/guide/low-level/gpu-architecture.html) | 並列実行とメモリ階層 |
+| 第12章 | [レンダリングパイプラインとシェーダ](/guide/low-level/rendering-pipeline-shaders.html) | 頂点からピクセルまで |
+| 第13章 | [グラフィックスAPI](/guide/low-level/graphics-apis.html) | OpenGL / DirectX 12 / Vulkan |
+| 第14章 | [入力とゲームループ](/guide/low-level/input-and-game-loop.html) | パッド入力の旅・時間・フレーム |
+| 第15章 | [ゲームエンジンの構成とECS](/guide/low-level/engine-architecture-ecs.html) | エンジンの解剖学・ECS |
+| 第16章 | [Unityの内部を調べる](/guide/low-level/unity-internals.html) | C#/IL2CPP/DOTS・資料と計測で調べる |
+| 第17章 | [Unreal Engineのソースを読む](/guide/low-level/unreal-internals.html) | UE5ソースコードリーディング |
+| 第18章 | [デバッグとプロファイリング](/guide/low-level/debugging-and-profiling.html) | VS・RenderDoc・PIX・Tracy |
+| 最終章 | [ボタンを押してから画面に出るまで](/guide/low-level/button-to-screen.html) | 全章統合 ── 入力から表示まで |
+| 発展章 | [専門テーマを選ぶ](/guide/low-level/advanced-topics.html) | 目的に応じて選ぶ専門テーマ |
 
 ---
 
@@ -59,15 +77,17 @@ study:
 
 ---
 
-## このロードマップを完了した人は何ができるようになるか
+## このコースで目指すこと
+
+以下は、関連本文や参考資料を読み、演習・実装・計測を重ねて目指す到達点です。
+このコースの概説を読むだけで、すべてを習得できるという意味ではありません。
 
 ### 具体的なスキル
 - **UE5のソースコードが読める**: `FEngineLoop::Tick()` から `RHICmdList` 経由で
   D3D12/Vulkanのコマンド発行までコールスタックを追い、UObject/GC/リフレクションの
   仕組みを説明できる。
-- **Unityの内部実装を想像できる**: 「`GetComponent`はなぜ遅いか」「IL2CPPは
-  C#をどうC++に変換するか」「DOTSはなぜ速いか」をメモリレイアウトと
-  キャッシュの言葉で説明できる。
+- **Unityの仕組みを資料と計測で調べる**: `GetComponent`のコスト要因や、IL2CPPの
+  変換経路、DOTSのデータ配置を調べる。公開された仕様、説明モデル、実測を区別する。
 - **RenderDocでGPUを追える**: 1フレームをキャプチャして、ドローコール単位で
   頂点入力→VS→ラスタライズ→PS→出力マージャを検査し、描画バグの原因
   (ステート設定ミス、UV反転、深度テスト失敗など)を特定できる。
@@ -87,8 +107,8 @@ study:
   計測に基づいて系統的に切り分けられる。
 - クラッシュを前に「再起動して祈る」ではなく、ダンプとレジスタと
   メモリレイアウトから原因を論理的に特定できる。
-- 新しいエンジン・API・言語に出会っても「下のレイヤは同じ」なので
-  ドキュメントの行間が読め、習得が桁違いに速くなる。
+- 新しいエンジン・API・言語に出会ったとき、既知の仕組みとの共通点と違いを探し、
+  調べるべき仕様や計測対象を選べるようにする。
 
 ---
 

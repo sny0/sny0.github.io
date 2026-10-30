@@ -1,10 +1,12 @@
 ---
-title: "UObject・Actor・ActorComponent"
+title: UObject・Actor・ActorComponent
 study:
-  source: "C++ Wiki"
-  kind: "本文"
-  status: "既存原稿"
+  source: C++ Wiki
+  status: published
   summary: "UObject: UEの管理対象オブジェクトの基底クラス。これを継承するとリフレクション・GC・シリアライズ・エディタ統合のフルセットが付いてくる AActor: レベルに配置できるもの(UObjectの子孫)。UnityのGameObjectに相当"
+  section: reference
+  format: article
+  domain: game
 ---
 
 # UObject・Actor・ActorComponent
@@ -27,13 +29,13 @@ public:
 private:
     float hp_ = 100;
 };
-// 所有: std::vector<std::unique_ptr<Enemy>>、参照: 生ポインタ/ハンドル(第7部)
+// 所有: std::vector<std::unique_ptr<Enemy>>、参照: 生ポインタ/ハンドル(所有権と借用を参照)
 ```
 
 UEが独自の基底(UObject)を強制する理由:
 
 1. **エディタ統合**: プロパティをエディタに表示・編集・保存するには型情報(リフレクション)が要る。C++標準のRTTIでは全く足りない(→ [リフレクション](/game/unreal/reflection-and-uht.html))
-2. **GC**: レベル・Actor・アセットが複雑に参照し合う世界では、所有の木([第7部](/runtime/memory/ownership-and-borrowing.html))を人手で管理するより到達可能性ベースのGCが現実的、という設計判断(→ [GC](/game/unreal/gc-and-object-pointers.html))
+2. **GC**: レベル・Actor・アセットが複雑に参照し合う世界では、所有の木([所有権と借用](/runtime/memory/ownership-and-borrowing.html))を人手で管理するより到達可能性ベースのGCが現実的、という設計判断(→ [GC](/game/unreal/gc-and-object-pointers.html))
 3. ネットワークレプリケーション・シリアライズ・Blueprint連携も、全部リフレクションの上に載っている
 
 つまり「UObject = これらのサービスの加入契約」。**サービスが不要な純粋ロジック(数学、アルゴリズム)はUObjectにしない**のが正しい使い分けです(普通のC++クラスもUEで普通に使えます)。
@@ -96,4 +98,4 @@ public:
 
 ---
 
-前: [カテゴリ目次](/game/unreal/) | 次: [UEのGCとUPROPERTY](/game/unreal/gc-and-object-pointers.html)
+関連項目：[この分野の学習ガイド](/game/unreal/) | [UEのGCとUPROPERTY](/game/unreal/gc-and-object-pointers.html)

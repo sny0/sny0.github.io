@@ -1,10 +1,12 @@
 ---
 title: "判断ガイド: イベントを使うべきか・依存性注入を使うべきか・Singletonを許容できるか"
 study:
-  source: "C++ Wiki"
-  kind: "本文"
-  status: "既存原稿"
+  source: C++ Wiki
+  status: published
   summary: "使わない場面: 因果を追いたいコアロジック、1フレームの遅延が致命的な判定、隣のクラスを呼ぶだけの場面 トレードオフ: 疎結合 ⇔ 制御フローの不可視化(「なぜ起きた」が追えないコードは疎結合の失敗形)"
+  section: reference
+  format: article
+  domain: design
 ---
 
 # 判断ガイド: イベントを使うべきか・依存性注入を使うべきか・Singletonを許容できるか
@@ -73,4 +75,4 @@ Q4. それでもSingletonにするなら:
 
 ---
 
-前: [抽象化・パターンの判断](/design/decisions/abstraction-and-patterns.html) | [カテゴリ目次](/design/decisions/) | 次: [C++の選択](/design/decisions/cpp-choices.html)
+関連項目：[抽象化・パターンの判断](/design/decisions/abstraction-and-patterns.html) / [学習ガイド](/design/decisions/) / [C++の選択](/design/decisions/cpp-choices.html)

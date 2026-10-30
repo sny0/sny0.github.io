@@ -1,10 +1,12 @@
 ---
-title: "Abstract Factory"
+title: Abstract Factory
 study:
-  source: "C++ Wiki"
-  kind: "本文"
-  status: "既存原稿"
+  source: C++ Wiki
+  status: published
   summary: "互いに関連する複数のオブジェクト一族を、組み合わせを間違えずに生成したい。例: PC版UIのボタンとPS5版UIのスクロールバーが混ざってはいけない。 AbstractFactory: 一族の各製品を作る生成メソッド群の宣言(CreateButton(), CreateScrollBar())"
+  section: reference
+  format: article
+  domain: design
 ---
 
 # Abstract Factory
@@ -154,7 +156,7 @@ public class UiTheme : ScriptableObject {          // これがConcreteFactory�
 
 ## 実務でよく見かける変形
 
-- データ駆動版: 「テーマ設定ファイル」にアセットIDのセットを書き、汎用ローダーが読む(UEのDataAssetも同型 → [第10部](/game/unreal/gameplay-framework.html))
+- データ駆動版: 「テーマ設定ファイル」にアセットIDのセットを書き、汎用ローダーが読む(UEのDataAssetも同型 → [Gameplay Framework・Subsystem・Slate/UMG・DataAsset/DataTable](/game/unreal/gameplay-framework.html))
 - 部分適用版: 全製品でなく、混在事故が実際に起きる2〜3製品だけをセット化
 
 ## 過剰設計になる例
@@ -179,4 +181,4 @@ public class UiTheme : ScriptableObject {          // これがConcreteFactory�
 
 ---
 
-前: [Factory Method](/design/patterns/factory-method.html) | [カテゴリ目次](/design/patterns/) | 次: [Builder](/design/patterns/builder.html)
+関連項目：[Factory Method](/design/patterns/factory-method.html) / [学習ガイド](/design/patterns/) / [Builder](/design/patterns/builder.html)

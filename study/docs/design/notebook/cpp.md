@@ -1,17 +1,17 @@
 ---
-title: "C++ — 所有権・RAII・値の意味を設計する"
+title: C++ — 所有権・RAII・値の意味を設計する
 study:
-  source: "設計の手帖"
-  kind: "本文"
-  status: "既存原稿"
-  summary: "C++ では、どんな操作ができるかと同じくらい、誰が所有し、いつ破棄するかがインターフェースの一部です。"
+  source: 設計の手帖
+  status: published
+  summary: C++ では、どんな操作ができるかと同じくらい、誰が所有し、いつ破棄するかがインターフェースの一部です。
+  section: reference
+  format: article
+  domain: design
 ---
 
 # C++ — 所有権・RAII・値の意味を設計する
 
 C++ では、どんな操作ができるかと同じくらい、誰が所有し、いつ破棄するかがインターフェースの一部です。
-
-04 · 言語ごとの設計 / C++ の所有権と型設計 / Make lifetimes explicit / 応用 / 14分
 
 タグ: C++ / RAII / Rule of Zero / unique_ptr / Pimpl / concepts / CRTP
 

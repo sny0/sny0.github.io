@@ -1,10 +1,12 @@
 ---
-title: "ビルド時間 — incremental build・PCH・Unity Build・C++でビルドが遅くなる理由"
+title: ビルド時間 — incremental build・PCH・Unity Build・C++でビルドが遅くなる理由
 study:
-  source: "C++ Wiki"
-  kind: "本文"
-  status: "既存原稿"
+  source: C++ Wiki
+  status: published
   summary: "#includeの爆発: #include だけで数万行が翻訳単位に貼り付く(プリプロセッサ)。100個の.cppが同じヘッダーを含めば、同じ数万行を100回パースする テンプレートの再実体化: vector を使う全翻訳単位で実体化→リンカが重複を捨てる。「作っては捨てる」の山(→ 実体化)"
+  section: reference
+  format: article
+  domain: tools
 ---
 
 # ビルド時間 — incremental build・PCH・Unity Build・C++でビルドが遅くなる理由
@@ -62,7 +64,7 @@ target_precompile_headers(game_core PRIVATE <vector> <string> <memory> "engine/c
 ## C#/Unityとの対応
 
 - C#のコンパイルが速い理由: ヘッダーがない(メタデータ参照)、テンプレート再実体化がない(ジェネリックは実行時)、パース対象が書いた分だけ——**C++の遅さの原因が構造的に存在しない**
-- Unityで遅いのは主にドメインリロードとアセット処理で、コンパイル自体は速い。Assembly Definition分割は「変更の波及範囲を狭める」というこのページと同じ思考(→ [第9部](/languages/csharp/headers-vs-asmdef.html))
+- Unityで遅いのは主にドメインリロードとアセット処理で、コンパイル自体は速い。Assembly Definition分割は「変更の波及範囲を狭める」というこのページと同じ思考(→ [ヘッダー分割と Assembly Definition](/languages/csharp/headers-vs-asmdef.html))
 - UEのビルドが遅いのは、まさにこのページの問題との戦い(UBTのPCH+Unity Build+モジュール分割は全部このページの対策の実装)
 
 ## 実務指針(優先順)
@@ -85,4 +87,4 @@ samples/cmake_demo/ に `set(CMAKE_UNITY_BUILD ON)` を試し、(a) フルビル
 
 ---
 
-前: [ビルド構成](/tools/build/build-configurations.html) | [カテゴリ目次](/tools/build/) | 次: [品質のための道具](/tools/build/debugging-and-analysis.html)
+関連項目：[ビルド構成](/tools/build/build-configurations.html) / [学習ガイド](/tools/build/) / [品質のための道具](/tools/build/debugging-and-analysis.html)

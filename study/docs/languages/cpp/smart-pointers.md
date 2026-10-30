@@ -1,10 +1,12 @@
 ---
-title: "スマートポインタ"
+title: スマートポインタ
 study:
-  source: "C++ Wiki"
-  kind: "本文"
-  status: "既存原稿"
+  source: C++ Wiki
+  status: published
   summary: "「deleteを人間が書かない」ためのRAIIラッパ。所有権の形ごとに3種類あります。 std::unique_ptr : 所有者は常に1人。コピー不可・ムーブで譲渡。既定の選択肢"
+  section: reference
+  format: article
+  domain: languages
 ---
 
 # スマートポインタ
@@ -123,7 +125,7 @@ C#では「参照を持つ=生かし続ける」ですが、C++のunique_ptr世�
 
 1. `Destroy(gameObject)` の感覚(マークして後で消える、参照はnull的になる)に一番近いのは**weak_ptr+shared_ptr**やハンドル方式。unique_ptrのdeleteは即時で、残った生ポインタは**nullにならない**(danglingになる)
 2. 「とりあえずshared_ptrはGCの代わり」— 循環を回収しない点で決定的に違う
-3. UEには独自のスマートポインタ群(TUniquePtr/TSharedPtr)とUObject用のGCがあり、標準のshared_ptrを**UObjectに使ってはいけない**(→ [第10部](/game/unreal/smart-pointers.html))
+3. UEには独自のスマートポインタ群(TUniquePtr/TSharedPtr)とUObject用のGCがあり、標準のshared_ptrを**UObjectに使ってはいけない**(→ [UEのスマートポインタ — TSharedPtr・TUniquePtr・TWeakPtr・TSoftObjectPtr](/game/unreal/smart-pointers.html))
 
 ## ゲーム開発での使用例
 
@@ -160,4 +162,4 @@ samples/smart_pointers.cpp(検証済み)で、(a) unique_ptrのムーブによ�
 
 ---
 
-前: [キャスト](/languages/cpp/casts.html) | [カテゴリ目次](/languages/cpp/) | 次: [STLコンテナ・イテレータ・アルゴリズム・ranges](/languages/cpp/stl.html)
+関連項目：[キャスト](/languages/cpp/casts.html) / [学習ガイド](/languages/cpp/) / [STLコンテナ・イテレータ・アルゴリズム・ranges](/languages/cpp/stl.html)

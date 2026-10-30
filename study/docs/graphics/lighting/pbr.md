@@ -1,10 +1,12 @@
 ---
-title: "PBR (物理ベースレンダリング)"
+title: PBR (物理ベースレンダリング)
 study:
-  source: "RenderingWiki"
-  kind: "本文"
-  status: "既存原稿"
-  summary: "PBR (Physically Based Rendering) は、光と物質の相互作用を物理法則に基づいてモデル化するシェーディングの枠組みです。エネルギー保存・フレネル反射・マイクロファセット理論を柱とし、「アルベド・メタリック・ラフネス」という直感的なパラメータで、あらゆる照明環境で破綻しない"
+  source: RenderingWiki
+  status: published
+  summary: PBR (Physically Based Rendering) は、光と物質の相互作用を物理法則に基づいてモデル化するシェーディングの枠組みです。エネルギー保存・フレネル反射・マイクロファセット理論を柱とし、「アルベド・メタリック・ラフネス」という直感的なパラメータで、あらゆる照明環境で破綻しない
+  section: reference
+  format: article
+  domain: graphics
 ---
 
 # PBR (物理ベースレンダリング)

@@ -1,10 +1,12 @@
 ---
-title: "ヘッダー分割と Assembly Definition"
+title: ヘッダー分割と Assembly Definition
 study:
-  source: "C++ Wiki"
-  kind: "本文"
-  status: "既存原稿"
+  source: C++ Wiki
+  status: published
   summary: "C++のヘッダー/ライブラリ分割とUnityのAssembly Definition(.asmdef)は、仕組みは全く別物ですが、目的は同じです: 「コードの依存関係を物理的に構造化し、ビルド時間と設計秩序を守る」。C#で.asmdefを整理した経験は、C++のモジュール分割設計にそのまま活きます。"
+  section: reference
+  format: article
+  domain: languages
 ---
 
 # ヘッダー分割と Assembly Definition
@@ -22,7 +24,7 @@ C++のヘッダー/ライブラリ分割とUnityのAssembly Definition(.asmdef)�
 | 参照がないと型が見えない | includeパス+リンクがないと使えない | C++は2段階(宣言と実体) |
 | internal(アセンブリ内公開) | 無名namespace(翻訳単位内)/ 非公開ヘッダー(ライブラリ内) | **C++に完全対応物なし** |
 | 循環参照はエラー | 循環リンクは(静的ライブラリでは)通ってしまうことがある | C++の方が緩い=自衛が必要 |
-| asmdef分割でスクリプトコンパイル高速化 | ヘッダー衛生・分割でビルド高速化([第8部](/tools/build/build-speed.html)) | 目的同一 |
+| asmdef分割でスクリプトコンパイル高速化 | ヘッダー衛生・分割でビルド高速化([ビルド時間 — incremental build・PCH・Unity Build・C++でビルドが遅くなる理由](/tools/build/build-speed.html)) | 目的同一 |
 
 ## 決定的な違い: 「宣言の配布」という仕事の有無
 
@@ -57,7 +59,7 @@ CMakeで core が ui にリンクしていたら設計違反 — レビューで
 | Unityの経験則 | C++での対応 |
 |---|---|
 | 巨大な単一Assembly-CSharp.dllは変更のたび全コンパイル | 「何でも入りヘッダー」が全再コンパイルを誘発 |
-| よく変わるゲームコードと安定した基盤を別asmdefに | 変更頻度でヘッダー・ライブラリを層別([第8部](/tools/build/build-speed.html)) |
+| よく変わるゲームコードと安定した基盤を別asmdefに | 変更頻度でヘッダー・ライブラリを層別([ビルド時間 — incremental build・PCH・Unity Build・C++でビルドが遅くなる理由](/tools/build/build-speed.html)) |
 | Editor専用asmdefで本体から分離 | ツール・エディタコードの別ターゲット化 |
 
 **「変更頻度の高いものに、多くのものを依存させない」**という原則は両者共通で、Unityでの整理経験がそのまま通用します。
@@ -80,4 +82,4 @@ CMakeで core が ui にリンクしていたら設計違反 — レビューで
 
 ---
 
-前: [関数ポインタとdelegate](/languages/csharp/delegates-events-function-pointers.html) | [カテゴリ目次](/languages/csharp/) | 次: [ネイティブビルドとIL2CPP](/languages/csharp/il2cpp.html)
+関連項目：[関数ポインタとdelegate](/languages/csharp/delegates-events-function-pointers.html) / [学習ガイド](/languages/csharp/) / [ネイティブビルドとIL2CPP](/languages/csharp/il2cpp.html)

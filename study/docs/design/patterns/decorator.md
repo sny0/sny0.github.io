@@ -1,10 +1,12 @@
 ---
-title: "Decorator"
+title: Decorator
 study:
-  source: "C++ Wiki"
-  kind: "本文"
-  status: "既存原稿"
+  source: C++ Wiki
+  status: published
   summary: "オブジェクトに機能を動的に・組み合わせ自由に追加したい。継承で「機能付きサブクラス」を作ると組み合わせの数だけクラスが爆発し、実行時の付け外しもできない。 Component: 共通インターフェース(例: IDamageCalculator)"
+  section: reference
+  format: article
+  domain: design
 ---
 
 # Decorator
@@ -183,4 +185,4 @@ public class DamagePipeline {
 
 ---
 
-前: [Composite](/design/patterns/composite.html) | [カテゴリ目次](/design/patterns/) | 次: [Facade](/design/patterns/facade.html)
+関連項目：[Composite](/design/patterns/composite.html) / [学習ガイド](/design/patterns/) / [Facade](/design/patterns/facade.html)

@@ -1,10 +1,12 @@
 ---
-title: "ポリモーフィズムとインターフェース"
+title: ポリモーフィズムとインターフェース
 study:
-  source: "C++ Wiki"
-  kind: "本文"
-  status: "既存原稿"
-  summary: "ポリモーフィズム(polymorphism、多態性)とは、同じ呼び出しコードが相手によって違う振る舞いをすること。インターフェースとは「何ができるか」だけを定めた約束で、ポリモーフィズムの受け口です。呼ぶ側は約束だけを知り、相手が誰かを知りません。"
+  source: C++ Wiki
+  status: published
+  summary: ポリモーフィズム(polymorphism、多態性)とは、同じ呼び出しコードが相手によって違う振る舞いをすること。インターフェースとは「何ができるか」だけを定めた約束で、ポリモーフィズムの受け口です。呼ぶ側は約束だけを知り、相手が誰かを知りません。
+  section: reference
+  format: article
+  domain: design
 ---
 
 # ポリモーフィズムとインターフェース
@@ -105,11 +107,11 @@ C++には「同じ呼び出しで違う振る舞い」を実現する仕組み�
 ## Unity/C# との対応
 
 - C#の `interface` がそのまま対応。`GetComponent<IDamageable>()` のようにインターフェースでコンポーネントを取れるのは強力な定石です。
-- C#では全メソッドが既定で非virtualなのはC++と同じですが、C#のinterface実装は暗黙、C++のoverrideは明示という違いがあります(→ [第9部](/languages/csharp/virtual-and-polymorphism.html))。
+- C#では全メソッドが既定で非virtualなのはC++と同じですが、C#のinterface実装は暗黙、C++のoverrideは明示という違いがあります(→ [仮想関数と virtual/override / コンパイル時多態と実行時多態](/languages/csharp/virtual-and-polymorphism.html))。
 
 ## Unreal Engine との対応
 
-- UEのInterfaceは `UINTERFACE` マクロで宣言する独自形式(Blueprint連携のため)。標準C++の抽象クラスとは書き方が異なります(→ [第10部](/game/unreal/delegates-and-interfaces.html))。
+- UEのInterfaceは `UINTERFACE` マクロで宣言する独自形式(Blueprint連携のため)。標準C++の抽象クラスとは書き方が異なります(→ [UEの Delegate と Interface](/game/unreal/delegates-and-interfaces.html))。
 
 ## よくある誤解
 
@@ -140,4 +142,4 @@ C++には「同じ呼び出しで違う振る舞い」を実現する仕組み�
 
 ---
 
-前: [継承・委譲・コンポジション](/design/foundations/inheritance-delegation-composition.html) | [カテゴリ目次](/design/foundations/) | 次: [設計の品質特性](/design/foundations/quality-attributes.html)
+関連項目：[継承・委譲・コンポジション](/design/foundations/inheritance-delegation-composition.html) / [学習ガイド](/design/foundations/) / [設計の品質特性](/design/foundations/quality-attributes.html)

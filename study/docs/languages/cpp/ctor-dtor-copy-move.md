@@ -1,10 +1,12 @@
 ---
-title: "コンストラクタ・デストラクタ・コピー・ムーブ(Rule of Zero/Three/Five)"
+title: コンストラクタ・デストラクタ・コピー・ムーブ(Rule of Zero/Three/Five)
 study:
-  source: "C++ Wiki"
-  kind: "本文"
-  status: "既存原稿"
-  summary: "C++のオブジェクトには誕生(コンストラクタ)・複製(コピー)・引っ越し(ムーブ)・死(デストラクタ)の儀式があり、6つの特殊メンバ関数がそれを担います。これらはコンパイラが自動生成しますが、リソース(メモリ・ファイル等)を生で持つクラスだけは自分で書く必要がある——それを整理した経験則が Rule"
+  source: C++ Wiki
+  status: published
+  summary: C++のオブジェクトには誕生(コンストラクタ)・複製(コピー)・引っ越し(ムーブ)・死(デストラクタ)の儀式があり、6つの特殊メンバ関数がそれを担います。これらはコンパイラが自動生成しますが、リソース(メモリ・ファイル等)を生で持つクラスだけは自分で書く必要がある——それを整理した経験則が Rule
+  section: reference
+  format: article
+  domain: languages
 ---
 
 # コンストラクタ・デストラクタ・コピー・ムーブ(Rule of Zero/Three/Five)
@@ -109,7 +111,7 @@ public:
 ## C#との違い
 
 - C#にコピーコンストラクタ・ムーブはない(classは参照の代入、structは常に浅いコピー)。**「代入の意味を型が定義する」**のはC++特有
-- デストラクタ(ファイナライザ)はC#では「いつ呼ばれるか不明・呼ばれないかも」。C++は決定的。C#の`Dispose`/`using`がC++のデストラクタ/RAIIに対応(→ [第9部](/languages/csharp/destructor-dispose-raii-using.html))
+- デストラクタ(ファイナライザ)はC#では「いつ呼ばれるか不明・呼ばれないかも」。C++は決定的。C#の`Dispose`/`using`がC++のデストラクタ/RAIIに対応(→ [デストラクタと Dispose / RAII と using](/languages/csharp/destructor-dispose-raii-using.html))
 
 ## Unity開発者が誤解しやすい点
 
@@ -152,4 +154,4 @@ samples/rule_of_five.cpp(生メモリを持つBufferクラス)で、(a) コピ�
 
 ---
 
-前: [構造体・クラス・アクセス指定子](/languages/cpp/structs-and-classes.html) | [カテゴリ目次](/languages/cpp/) | 次: [RAII](/languages/cpp/raii.html)
+関連項目：[構造体・クラス・アクセス指定子](/languages/cpp/structs-and-classes.html) / [学習ガイド](/languages/cpp/) / [RAII](/languages/cpp/raii.html)

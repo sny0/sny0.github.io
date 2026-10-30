@@ -1,13 +1,19 @@
 ---
-title: "第1部 演習 — 設計の基礎"
+title: 設計の基礎の演習
 study:
-  source: "C++ Wiki"
-  kind: "演習"
-  status: "既存原稿"
-  summary: "解答は各問の直後に折りたたみで置いています。まず自力で答えてから開いてください。 次の記述の正誤を判定し、誤りなら訂正してください。 凝集度はモジュール間の関係を表す指標である。"
+  source: C++ Wiki
+  status: published
+  summary: 解答は各問の直後に折りたたみで置いています。まず自力で答えてから開いてください。 次の記述の正誤を判定し、誤りなら訂正してください。 凝集度はモジュール間の関係を表す指標である。
+  section: practice
+  format: exercise
+  domain: design
+  collection: cpp-exercises
+  order: 1
 ---
 
-# 第1部 演習 — 設計の基礎
+<div id="第1部-演習-—-設計の基礎" class="study-legacy-anchor" aria-hidden="true"></div>
+
+# 設計の基礎の演習
 
 解答は各問の直後に折りたたみで置いています。まず自力で答えてから開いてください。
 
@@ -111,4 +117,4 @@ UI(HPバー)とAIが**結合している**こと。典型的には (1) 神クラ
 
 ---
 
-前: [技術的負債・リファクタリング](/design/foundations/tech-debt-and-refactoring.html) | [カテゴリ目次](/design/foundations/) | [第2部: SOLID原則へ](/design/solid/)
+関連項目：[技術的負債・リファクタリング](/design/foundations/tech-debt-and-refactoring.html) / [学習ガイド](/design/foundations/) / [SOLID原則を学ぶ](/design/solid/)

@@ -1,10 +1,12 @@
 ---
-title: "ポインタと参照型 / 値セマンティクスと class・struct"
+title: ポインタと参照型 / 値セマンティクスと class・struct
 study:
-  source: "C++ Wiki"
-  kind: "本文"
-  status: "既存原稿"
-  summary: "C#の「class/structの選択」に相当する判断を、C++では変数を書くたびに行う——これがC++習得の第一関門であり、同時に性能を制御できる自由の源です(→ 値と参照の基礎)。"
+  source: C++ Wiki
+  status: published
+  summary: C#の「class/structの選択」に相当する判断を、C++では変数を書くたびに行う——これがC++習得の第一関門であり、同時に性能を制御できる自由の源です(→ 値と参照の基礎)。
+  section: reference
+  format: article
+  domain: languages
 ---
 
 # ポインタと参照型 / 値セマンティクスと class・struct
@@ -60,7 +62,7 @@ C#では「基本class、パフォーマンスが要るときだけstruct」で�
 1. **「代入したのに反映されない」**: `Enemy target = enemies[0]; target.hp = 0;` — targetはコピー。`Enemy& target = enemies[0];` が意図(C#のstructで同じ罠を踏んだ経験があれば、その全面版と理解)
 2. **「参照を保存したら壊れた」**: C#では参照保存は常に安全(GCが延命)。C++では[寿命](/runtime/memory/storage-duration-and-lifetime.html)・[イテレータ無効化](/languages/cpp/stl.html)を考える
 3. **「とりあえずnewでヒープに」**: C#の癖。C++では値・スタックが既定(速く、安全で、自動解放)
-4. Transformのような「エンジン内実体へのハンドル」感覚は、C++ではポインタ+所有権設計([第7部](/runtime/memory/ownership-and-borrowing.html))で自作する側になる
+4. Transformのような「エンジン内実体へのハンドル」感覚は、C++ではポインタ+所有権設計([所有権と借用](/runtime/memory/ownership-and-borrowing.html))で自作する側になる
 
 ## 理解度チェック
 
@@ -74,4 +76,4 @@ C#では「基本class、パフォーマンスが要るときだけstruct」で�
 
 ---
 
-前: [デストラクタとDispose](/languages/csharp/destructor-dispose-raii-using.html) | [カテゴリ目次](/languages/csharp/) | 次: [テンプレートとジェネリック](/languages/csharp/templates-vs-generics.html)
+関連項目：[デストラクタとDispose](/languages/csharp/destructor-dispose-raii-using.html) / [学習ガイド](/languages/csharp/) / [テンプレートとジェネリック](/languages/csharp/templates-vs-generics.html)

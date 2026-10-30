@@ -1,10 +1,12 @@
 ---
 title: "判断ガイド: 最適化すべきか・リファクタリングすべきか"
 study:
-  source: "C++ Wiki"
-  kind: "本文"
-  status: "既存原稿"
+  source: C++ Wiki
+  status: published
   summary: "どちらも「機能が増えない作業」への投資判断です。共通原則: 痛みの証拠(計測・履歴)を要求し、投資対効果で決める。 トレードオフ: 速度 ⇔ 可読性・移植性・開発速度。「最適化した状態」は保守コストが高いので、目標を満たしたら止める"
+  section: reference
+  format: article
+  domain: design
 ---
 
 # 判断ガイド: 最適化すべきか・リファクタリングすべきか
@@ -65,4 +67,4 @@ Q4. 実行: 機能追加と混ぜず、小さく、動かしたまま
 
 ---
 
-前: [C++の選択](/design/decisions/cpp-choices.html) | [カテゴリ目次](/design/decisions/) | 次: [演習](/design/decisions/exercises.html)
+関連項目：[C++の選択](/design/decisions/cpp-choices.html) / [学習ガイド](/design/decisions/) / [演習](/design/decisions/exercises.html)

@@ -1,10 +1,12 @@
 ---
-title: "CPUとGPUの役割分担"
+title: CPUとGPUの役割分担
 study:
-  source: "RenderingWiki"
-  kind: "本文"
-  status: "既存原稿"
-  summary: "リアルタイムレンダリングは CPUとGPUの分業 で成り立っています。CPUは「何を描くか」を決めてコマンドを組み立て、GPUは「実際に描く」を実行します。両者は非同期に並走するパイプラインであり、この関係を理解しないと、最適化もAPI設計 (DX12/Vulkanのコマンドバッファ) も理解できま"
+  source: RenderingWiki
+  status: published
+  summary: リアルタイムレンダリングは CPUとGPUの分業 で成り立っています。CPUは「何を描くか」を決めてコマンドを組み立て、GPUは「実際に描く」を実行します。両者は非同期に並走するパイプラインであり、この関係を理解しないと、最適化もAPI設計 (DX12/Vulkanのコマンドバッファ) も理解できま
+  section: reference
+  format: article
+  domain: hardware
 ---
 
 # CPUとGPUの役割分担

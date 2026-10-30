@@ -1,10 +1,12 @@
 ---
-title: "static・inline・friend"
+title: static・inline・friend
 study:
-  source: "C++ Wiki"
-  kind: "本文"
-  status: "既存原稿"
-  summary: "3つとも「1つのキーワードに複数の意味がある」ため混乱しやすい機能です。文脈ごとに分解します。 C#のstaticと同じ概念。個々のインスタンスではなく型に属します。 寿命はプログラム終了まで(→ 静的記憶域期間)"
+  source: C++ Wiki
+  status: published
+  summary: 3つとも「1つのキーワードに複数の意味がある」ため混乱しやすい機能です。文脈ごとに分解します。 C#のstaticと同じ概念。個々のインスタンスではなく型に属します。 寿命はプログラム終了まで(→ 静的記憶域期間)
+  section: reference
+  format: article
+  domain: languages
 ---
 
 # static・inline・friend
@@ -124,4 +126,4 @@ samples/static_inline.cpp(検証済み)で、(a) 関数内staticが呼び出し�
 
 ---
 
-前: [auto・decltype・constexpr・consteval](/languages/cpp/auto-and-constexpr.html) | [カテゴリ目次](/languages/cpp/) | 次: [キャスト](/languages/cpp/casts.html)
+関連項目：[auto・decltype・constexpr・consteval](/languages/cpp/auto-and-constexpr.html) / [学習ガイド](/languages/cpp/) / [キャスト](/languages/cpp/casts.html)

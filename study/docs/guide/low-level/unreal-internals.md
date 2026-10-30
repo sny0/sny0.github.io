@@ -1,17 +1,37 @@
 ---
-title: "第17章 Unreal Engineの内部 ── UE5ソースコードリーディング"
+title: 第17章 Unreal Engineのソースを読む
 study:
-  source: "IT教本"
-  kind: "学習ガイド"
-  status: "学習計画・概要"
-  summary: "UE5はソースが読める産業最高峰エンジンであり、この教本の卒業試験場だ。 ここまでの16章はすべて「UE5を原文で読むための語彙」だったと言ってよい。 UObject/GC/リフレクション(第9章の拡張)、モジュールとDLL(第7章)、"
+  source: IT教本
+  status: outline
+  summary: |-
+    UEのソースで追う入口を選び、一般的な仕組みとエンジン独自の実装を対応させる学習計画・概要です。参照するバージョンにより構成や名称が変わるため、手元のソースとデバッガで確かめながら読みます。
+
+    ## 関連する辞典本文・実践
+
+    - [UObject・Actor・ActorComponent](
+  section: learning
+  format: path
+  domain: game
+  collection: low-level
+  order: 18
 ---
 
-# 第17章 Unreal Engineの内部 ── UE5ソースコードリーディング
+<div id="第17章-unreal-engineの内部-──-ue5ソースコードリーディング" class="study-legacy-anchor" aria-hidden="true"></div>
+
+# 第17章 Unreal Engineのソースを読む
+
+## このページで案内すること
+
+UEのソースで追う入口を選び、一般的な仕組みとエンジン独自の実装を対応させる**学習計画・概要**です。参照するバージョンにより構成や名称が変わるため、手元のソースとデバッガで確かめながら読みます。
+
+## 関連する辞典本文・実践
+
+- [UObject・Actor・ActorComponent](/game/unreal/uobject-actor-component.html)と[GC・UPROPERTY](/game/unreal/gc-and-object-pointers.html)で、UE固有の型と寿命を調べられます。
+- [UBT・Module・Build.cs](/game/unreal/build-system-ubt.html)、[Unrealのレンダラー](/graphics/engine/unreal-renderer.html)で、読む対象の構成を確認できます。
 
 ## 学ぶ理由
 
-UE5は**ソースが読める産業最高峰エンジン**であり、この教本の卒業試験場だ。
+UE5は**ソースを参照できる大規模なゲームエンジン**であり、このコースの知識を確かめる題材になる。
 ここまでの16章はすべて「UE5を原文で読むための語彙」だったと言ってよい。
 UObject/GC/リフレクション(第9章の拡張)、モジュールとDLL(第7章)、
 TaskGraph(第8章)、RHI(第13章)、レンダースレッド(第8,11章)──
@@ -38,7 +58,7 @@ UEの各機構を「一般原理の実装例」として読み解く。
    - モジュール構造: Runtime/Core, CoreUObject, Engine, RHI, Renderer...
      各モジュール=DLL(第7章の実物)。`*.Build.cs`と`MODULE_API`
    - 歩き方: シンボル検索(Ctrl+T)、参照検索、そして
-     **「ブレークポイント+コールスタック」が最強の読解ツール**
+     **ブレークポイントとコールスタックで、実際の呼出し経路を確かめる**
 2. **Coreモジュール ── ここまでの教本の答え合わせ**
    - TArray/TMap/FString(第9章自作コンテナの産業版)
    - FMemory/FMallocBinned2(第6章アロケータの産業版)

@@ -1,10 +1,12 @@
 ---
-title: "Mediator"
+title: Mediator
 study:
-  source: "C++ Wiki"
-  kind: "本文"
-  status: "既存原稿"
+  source: C++ Wiki
+  status: published
   summary: "多数のオブジェクトが互いに直接参照し合って通信すると、N個の部品にN×Nの結合が生まれる。相互作用を仲介役1つに集約し、各部品は仲介役だけを知る形にしたい。 Mediator: 部品間の調整ロジックを一手に持つ(誰が変わったら誰を更新するか)"
+  section: reference
+  format: article
+  domain: design
 ---
 
 # Mediator
@@ -163,7 +165,7 @@ public class EquipScreen : MonoBehaviour {
 ## 実務でよく見かける変形
 
 - Presenter(MVP)/ Controller: UIにおけるMediatorの制度化
-- GameMode/審判クラス: ルール調整のMediator(UEのGameModeもこの役割 → [第10部](/game/unreal/gameplay-framework.html))
+- GameMode/審判クラス: ルール調整のMediator(UEのGameModeもこの役割 → [Gameplay Framework・Subsystem・Slate/UMG・DataAsset/DataTable](/game/unreal/gameplay-framework.html))
 
 ## 過剰設計になる例
 
@@ -186,4 +188,4 @@ public class EquipScreen : MonoBehaviour {
 
 ---
 
-前: [Iterator](/design/patterns/iterator.html) | [カテゴリ目次](/design/patterns/) | 次: [Memento](/design/patterns/memento.html)
+関連項目：[Iterator](/design/patterns/iterator.html) / [学習ガイド](/design/patterns/) / [Memento](/design/patterns/memento.html)

@@ -1,7 +1,17 @@
 ---
-layout: page
-title: 技術辞典
-description: コンピュータ内部・言語・開発ツール・3DCG・ゲーム開発を、分野と用語から調べる。
+{
+  "title": "技術辞典",
+  "layout": "page",
+  "study": {
+    "source": "統合ガイド",
+    "status": "published",
+    "generated": true,
+    "catalog": false,
+    "section": "reference",
+    "format": "index",
+    "domain": "guide"
+  }
+}
 ---
 
-<StudyCatalog />
+<StudyCatalog section="reference" />

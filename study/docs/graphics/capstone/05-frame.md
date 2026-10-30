@@ -1,13 +1,19 @@
 ---
-title: "5. 1フレーム完全実装 — 影・ライト・ポスト"
+title: 5. 1フレームの構成 — 影・ライト・ポスト
 study:
-  source: "RenderingWiki"
-  kind: "本文"
-  status: "既存原稿"
-  summary: "最終ステップです。シャドウマップ・PBR+IBLライティング・ブルーム+トーンマップを統合し、「1フレームが描画されるまで」の全工程を自分のコードで説明できる状態に到達します。"
+  source: RenderingWiki
+  status: published
+  summary: シャドウマップ、PBR・IBL、ブルーム、トーンマップを1フレームへ統合する設計と主要コードを追う。
+  section: practice
+  format: tutorial
+  domain: graphics
+  collection: renderer-project
+  order: 5
 ---
 
-# 5. 1フレーム完全実装 — 影・ライト・ポスト
+<div id="_5-1フレーム完全実装-—-影・ライト・ポスト" class="study-legacy-anchor" aria-hidden="true"></div>
+
+# 5. 1フレームの構成 — 影・ライト・ポスト
 
 ## このステップの目標
 
@@ -58,7 +64,7 @@ b.newLayout = VK_IMAGE_LAYOUT_DEPTH_READ_ONLY_OPTIMAL;
 b.image = shadowImage;  // ... (Synchronization2の「文」として読む: vulkan章)
 ```
 
-## 5.3 PBR Fragment Shader — 第8章の統合
+## 5.3 PBR Fragment Shader — ライティングの統合
 
 [PBR](/graphics/lighting/pbr.html)・[IBL](/graphics/lighting/ibl.html)・[シャドウ](/graphics/lighting/shadow.html) の各ページのコードをそのまま結合します:
 
@@ -145,7 +151,7 @@ float4 main(float4 positionCS : SV_Position) : SV_Target0 {
 
 ## 5.5 完成 — そして観察
 
-完成したら、必ず以下をやってください。**このWikiの全章がフレームの中に見えます**:
+完成したら、必ず以下をやってください。**辞典で調べた技術をフレームの中に対応付けられます**:
 
 1. **RenderDocでフルキャプチャ** — Event Browserに Shadow→Forward→Bloom→Tonemap→Final FS が並び、各バリアが挟まっている。Texture Viewerでシャドウマップ (ライトから見た深度) とHDRバッファを目視
 2. **タイムスタンプ計測** ([最適化基礎](/graphics/optimization/basics.html) のコード) — 各パスのms内訳を出す。どこが最も高いか?
@@ -170,9 +176,9 @@ float4 main(float4 positionCS : SV_Position) : SV_Target0 {
 
 ## 最後に — 1フレームの旅、再訪
 
-第1章で見た「CPUとGPUの並走」から始まり、行列がメッシュをクリップ空間へ運び、ラスタライザがフラグメントを列挙し、あなたのBRDFが光を計算し、バリアがパスを繋ぎ、トーンマップがHDRを画面の8bitへ畳む — **1フレームの全工程を、あなたは今、自分の書いたコードで説明できます。**
+[CPUとGPUの役割分担](/hardware/gpu/cpu-vs-gpu.html)で見た並走から始まり、行列がメッシュをクリップ空間へ運び、ラスタライザがフラグメントを列挙し、あなたのBRDFが光を計算し、バリアがパスを繋ぎ、トーンマップがHDRを画面の8bitへ畳む — **1フレームの全工程を、あなたは今、自分の書いたコードで説明できます。**
 
-ここから先は、このWikiの各章が「読む資料」から「実装の設計図」に変わります。新しい技術が出たら、このレンダラーに足してみてください。それがこのWikiの意図した使い方です。
+ここから先は、辞典の各本文が「読む資料」から「実装の設計図」に変わります。新しい技術が出たら、このレンダラーに足してみてください。疑問のある技術を調べ、実装で確かめる往復に使えます。
 
 ## 前提知識
 
@@ -196,7 +202,7 @@ float4 main(float4 positionCS : SV_Position) : SV_Target0 {
    パス構成: Forward PassをG-Buffer Pass(マテリアル書き出し)とLighting Pass(フルスクリーン/Compute)に分割し、間にバリアを追加。シェーダ: PBR計算をライティングパスに移し、G-Bufferのエンコード/デコード(法線圧縮、深度からの位置再構成)を実装。制約: 半透明用のForwardパスを残す必要があり、MSAAは事実上放棄(TAA実装が実質必須に)、G-BufferのRGBA16F×複数枚分の帯域増を許容する。
    :::
 
-3. **「新しいGI手法が発表された」とき、このWikiとレンダラーをどう使って理解・検証するか。**
+3. **「新しいGI手法が発表された」とき、辞典とレンダラーをどう使って理解・検証するか。**
    ::: details 解答
    まず[GI総論]の「シーン表現×光輸送×再構成」フレームで論文を分解し、既存手法(プローブ/SDF/RT/スクリーンスペース)との差分を特定する。次に自作レンダラーに最小構成で実装(多くの場合Computeパス追加+リソース追加)し、RenderDocとタイムスタンプで品質・コストを参照実装や既存手法と比較する。Wikiには新ページとして「歴史・それ以前・解決した課題」の型で追記し、関連ページへリンクを張る。
    :::
@@ -206,7 +212,7 @@ float4 main(float4 positionCS : SV_Position) : SV_Target0 {
 - vkguide.dev (全編) / Sascha Willems examples — 本章の先の実装例の宝庫
 - Alexander Overvoorde, *Vulkan Tutorial* / Microsoft *DirectX-Graphics-Samples MiniEngine*
 - Wicked Engine / Granite / Filament — 読める中規模オープンソースレンダラー御三家
-- このWikiの全章 — あなたの設計図として
+- 辞典の関連本文 — あなたの設計図として
 - [Microsoft: Converting data for the color space](https://learn.microsoft.com/en-us/windows/win32/direct3ddxgi/converting-data-color-space)
 - [Microsoft: DirectX with Advanced Color](https://learn.microsoft.com/en-us/windows/win32/direct3darticles/high-dynamic-range)
 - [Microsoft DXC: SPIR-V — Vulkan specific Image Formats](https://github.com/microsoft/DirectXShaderCompiler/blob/main/docs/SPIR-V.rst)

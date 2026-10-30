@@ -1,17 +1,17 @@
 ---
-title: "設計は「変更の置き場所」を決めること"
+title: 設計は「変更の置き場所」を決めること
 study:
-  source: "設計の手帖"
-  kind: "本文"
-  status: "既存原稿"
-  summary: "きれいなクラス図よりも、次の変更をどこに書けばよいか分かること。設計の出発点をここに置きます。"
+  source: 設計の手帖
+  status: published
+  summary: きれいなクラス図よりも、次の変更をどこに書けばよいか分かること。設計の出発点をここに置きます。
+  section: reference
+  format: article
+  domain: design
 ---
 
 # 設計は「変更の置き場所」を決めること
 
 きれいなクラス図よりも、次の変更をどこに書けばよいか分かること。設計の出発点をここに置きます。
-
-01 · 設計の土台 / 設計の目的と考え方 / Think in responsibilities / 入門 / 7分
 
 タグ: 責務 / 凝集度 / 結合度 / KISS / YAGNI / DRY
 

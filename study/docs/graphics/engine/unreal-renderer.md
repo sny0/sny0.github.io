@@ -1,10 +1,12 @@
 ---
-title: "Unreal Engine のレンダラー"
+title: Unreal Engine のレンダラー
 study:
-  source: "RenderingWiki"
-  kind: "本文"
-  status: "既存原稿"
-  summary: "Unreal Engineのレンダラーは、Deferred Shadingを基軸に、Nanite (仮想化ジオメトリ)・Lumen (動的GI)・Virtual Shadow Maps・TSRという「UE5四点セット」を統合した、現代最先端の商用レンダラーです。アーキテクチャは GameThread"
+  source: RenderingWiki
+  status: published
+  summary: Unreal Engineのレンダラーは、Deferred Shadingを基軸に、Nanite (仮想化ジオメトリ)・Lumen (動的GI)・Virtual Shadow Maps・TSRという「UE5四点セット」を統合した、現代最先端の商用レンダラーです。アーキテクチャは GameThread
+  section: reference
+  format: article
+  domain: graphics
 ---
 
 # Unreal Engine のレンダラー

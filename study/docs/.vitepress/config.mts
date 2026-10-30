@@ -1,6 +1,15 @@
 import { pathToFileURL } from 'node:url'
 import path from 'node:path'
 import sidebar from './sidebar.json'
+import catalog from './catalog.json'
+
+const sectionMatch = (section: string) => {
+  const paths = [catalog.sections.find(item => item.id === section)!.url,
+    ...catalog.entries.filter(item => item.section === section).map(item => item.url),
+    ...(section === 'reference' ? ['/guide/about.html', ...catalog.domains.map(item => `/${item.id}/`)] : []),
+    ...(section === 'learning' ? ['/guide/'] : [])]
+  return '^(?:' + paths.map(url => url.replace(/[.*+?^${}()|[\]\\]/g, '\\$&').replace(/\\\.html$/, '(?:\\.html)?').replace(/\/$/, '/(?:index(?:\\.html)?)?')).join('|') + ')$'
+}
 
 // Optional local dependency reuse. Normal installs and CI use npm's packages.
 const sharedModules = process.env.STUDY_NODE_MODULES
@@ -33,17 +42,18 @@ export default withMermaid(defineConfig({
     siteTitle: 'Sny0 Study',
     logo: '/favicon.svg',
     nav: [
-      { text: '辞典', link: '/' },
-      { text: '読み進め方', link: '/guide/learning-paths.html' },
+      { text: '技術辞典', link: '/', activeMatch: sectionMatch('reference') },
+      { text: '学習ガイド', link: '/learn/', activeMatch: sectionMatch('learning') },
+      { text: '実践・サンプル', link: '/practice/', activeMatch: sectionMatch('practice') },
       { text: '用語・別名', link: '/terms/' },
       { text: 'この辞典', link: '/guide/about.html' },
       { text: 'sny0.com', link: 'https://sny0.com/' }
     ],
     sidebar,
     outline: { level: [2, 3], label: 'このページ' },
-    docFooter: { prev: '前の項目', next: '次の項目' },
+    docFooter: { prev: false, next: false },
     darkModeSwitchLabel: 'ダークモード',
-    sidebarMenuLabel: '分野・項目',
+    sidebarMenuLabel: 'この入口の目次',
     returnToTopLabel: 'ページ上部へ',
     editLink: { pattern: 'https://github.com/sny0/sny0.github.io/edit/main/study/docs/:path', text: 'GitHubでこのページを編集' },
     socialLinks: [{ icon: 'github', link: 'https://github.com/sny0/sny0.github.io/tree/main/study' }],
@@ -51,7 +61,7 @@ export default withMermaid(defineConfig({
       provider: 'local',
       options: {
         translations: {
-          button: { buttonText: '全文検索', buttonAriaLabel: '技術辞典を全文検索' },
+          button: { buttonText: '全文検索', buttonAriaLabel: 'サイト全体を全文検索' },
           modal: {
             noResultsText: '一致する項目がありません',
             resetButtonTitle: '検索語を消す',

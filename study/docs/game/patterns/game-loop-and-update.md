@@ -1,10 +1,12 @@
 ---
-title: "Game Loop と Update Method"
+title: Game Loop と Update Method
 study:
-  source: "C++ Wiki"
-  kind: "本文"
-  status: "既存原稿"
+  source: C++ Wiki
+  status: published
   summary: "Game Loop: 「入力を読み→世界を更新し→描画する」を回し続ける、ゲームの心臓部。時間の進め方を決めるパターン。 Update Method: ループの中で、各オブジェクトに「1フレーム分の自分の処理」(Update(dt))をさせるパターン。UnityのUpdate()の正体。"
+  section: reference
+  format: article
+  domain: game
 ---
 
 # Game Loop と Update Method
@@ -140,4 +142,4 @@ public:
 
 ---
 
-前: [カテゴリ目次](/game/patterns/) | 次: [Component と ECS](/game/patterns/component-and-ecs.html)
+関連項目：[この分野の学習ガイド](/game/patterns/) | [Component と ECS](/game/patterns/component-and-ecs.html)

@@ -1,10 +1,12 @@
 ---
-title: "Forward Rendering"
+title: Forward Rendering
 study:
-  source: "RenderingWiki"
-  kind: "本文"
-  status: "既存原稿"
+  source: RenderingWiki
+  status: published
   summary: "Forward Renderingは最も素直なレンダリング方式です: オブジェクトを1つずつ描画し、そのFragment Shader内でその場でライティングまで完結させます。歴史的に最初の方式であり、Deferredの隆盛を経て、Forward+/Clusteredという進化形で現代の主役に返り咲"
+  section: reference
+  format: article
+  domain: graphics
 ---
 
 # Forward Rendering

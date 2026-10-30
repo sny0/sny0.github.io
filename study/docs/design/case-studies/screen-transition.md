@@ -1,13 +1,17 @@
 ---
-title: "ケーススタディ 10: 画面遷移"
+title: 画面遷移の設計
 study:
-  source: "C++ Wiki"
-  kind: "本文"
-  status: "既存原稿"
-  summary: "タイトル→ステージ選択→ゲーム→ポーズ→リザルト——「今どの画面で、次にどこへ行けるか」の管理です。 小さいゲームならこのenum+switchのFSMで十分です(FSM)。"
+  source: C++ Wiki
+  status: published
+  summary: タイトル→ステージ選択→ゲーム→ポーズ→リザルト——「今どの画面で、次にどこへ行けるか」の管理です。 小さいゲームならこのenum+switchのFSMで十分です(FSM)。
+  section: reference
+  format: article
+  domain: design
 ---
 
-# ケーススタディ 10: 画面遷移
+<div id="ケーススタディ-10-画面遷移" class="study-legacy-anchor" aria-hidden="true"></div>
+
+# 画面遷移の設計
 
 タイトル→ステージ選択→ゲーム→ポーズ→リザルト——「今どの画面で、次にどこへ行けるか」の管理です。
 
@@ -107,4 +111,4 @@ enum+switch(素朴版)+ポーズだけ特別扱い(`bool paused` でゲーム更
 
 ---
 
-前: [オブジェクト生成](/design/case-studies/object-spawning.html) | [カテゴリ目次](/design/case-studies/) | 次: [サウンド管理](/design/case-studies/sound-manager.html)
+関連項目：[オブジェクト生成](/design/case-studies/object-spawning.html) / [学習ガイド](/design/case-studies/) / [サウンド管理](/design/case-studies/sound-manager.html)

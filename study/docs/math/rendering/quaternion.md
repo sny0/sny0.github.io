@@ -1,10 +1,12 @@
 ---
-title: "クォータニオン"
+title: クォータニオン
 study:
-  source: "RenderingWiki"
-  kind: "本文"
-  status: "既存原稿"
-  summary: "クォータニオン (四元数) は3D回転を4つの数 $(x, y, z, w)$ で表現する数学的道具です。オイラー角のジンバルロックがなく、回転行列より省メモリで、滑らかな補間 (slerp) ができるため、ゲームエンジンの回転表現の標準となっています。"
+  source: RenderingWiki
+  status: published
+  summary: クォータニオン (四元数) は3D回転を4つの数 $(x, y, z, w)$ で表現する数学的道具です。オイラー角のジンバルロックがなく、回転行列より省メモリで、滑らかな補間 (slerp) ができるため、ゲームエンジンの回転表現の標準となっています。
+  section: reference
+  format: article
+  domain: math
 ---
 
 # クォータニオン

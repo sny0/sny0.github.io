@@ -1,10 +1,12 @@
 ---
 title: "SRP: 単一責任の原則 (Single Responsibility Principle)"
 study:
-  source: "C++ Wiki"
-  kind: "本文"
-  status: "既存原稿"
+  source: C++ Wiki
+  status: published
   summary: "> モジュール(クラス・関数・ファイル)を変更する理由は、ただ1つであるべきである。 原文のニュアンスは「A module should be responsible to one, and only one, actor(モジュールはただ1つのアクター=変更を要求する人々に対して責任を負うべき)」"
+  section: reference
+  format: article
+  domain: design
 ---
 
 # SRP: 単一責任の原則 (Single Responsibility Principle)
@@ -135,7 +137,7 @@ Unityの Component 分割は SRP を実践する自然な受け皿です。「1 
 
 - SRPは**分け方**の原則。分けた後の**繋ぎ方**を整えるのが [DIP](/design/solid/dip.html)、拡張の受け口を作るのが [OCP](/design/solid/ocp.html)。
 - インターフェース版のSRPが [ISP](/design/solid/isp.html)(クライアントの種類ごとにインターフェースを分ける)。
-- 凝集度(→ [第1部](/design/foundations/cohesion-and-coupling.html))を「変更理由」という判定基準で運用可能にしたものがSRP、と捉えると整理しやすいです。
+- 凝集度(→ [凝集度と結合度(比較ページ)](/design/foundations/cohesion-and-coupling.html))を「変更理由」という判定基準で運用可能にしたものがSRP、と捉えると整理しやすいです。
 
 ## 適用しすぎた場合の弊害
 
@@ -177,4 +179,4 @@ Unityの Component 分割は SRP を実践する自然な受け皿です。「1 
 
 ---
 
-前: [カテゴリ目次](/design/solid/) | 次: [OCP: 開放閉鎖の原則](/design/solid/ocp.html)
+関連項目：[学習ガイド](/design/solid/) / [OCP: 開放閉鎖の原則](/design/solid/ocp.html)

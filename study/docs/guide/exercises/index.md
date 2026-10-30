@@ -1,32 +1,38 @@
 ---
-title: "総合演習"
+title: C++と設計の総合演習
 study:
-  source: "C++ Wiki"
-  kind: "索引"
-  status: "既存原稿"
-  summary: "各カテゴリの演習(下のリンク一覧)を終えた人向けの、分野横断の総合問題です。解答は answers.md にあります。 あるプロジェクトのコードレビューで、次のクラスに出会いました。"
+  source: C++ Wiki
+  status: published
+  summary: 各カテゴリの演習(下のリンク一覧)を終えた人向けの、分野横断の総合問題です。解答は answers.md にあります。 あるプロジェクトのコードレビューで、次のクラスに出会いました。
+  section: practice
+  format: exercise
+  domain: design
+  collection: cpp-exercises
+  order: 13
 ---
 
-# 総合演習
+<div id="総合演習" class="study-legacy-anchor" aria-hidden="true"></div>
 
-各カテゴリの演習(下のリンク一覧)を終えた人向けの、**分野横断の総合問題**です。解答は [answers.md](/guide/exercises/answers.html) にあります。
+# C++と設計の総合演習
+
+各カテゴリの演習(下のリンク一覧)を終えた人向けの、**分野横断の総合問題**です。解答は [総合演習の解答](/guide/exercises/answers.html) にあります。
 
 ## カテゴリ別演習へのリンク
 
 | カテゴリ | 演習 |
 |---|---|
-| 第1部 設計の基礎 | [exercises](/design/foundations/exercises.html) |
-| 第2部 SOLID | [exercises](/design/solid/exercises.html) |
-| 第3部 GoFパターン | [exercises](/design/patterns/exercises.html) |
-| 第4部 ゲームパターン | [exercises](/game/patterns/exercises.html) |
-| 第5部 C++言語 | [exercises](/languages/cpp/exercises.html) |
-| 第6部 C++内部 | [exercises](/runtime/cpp-internals/exercises.html) |
-| 第7部 メモリと実行時 | [exercises](/runtime/memory/exercises.html) |
-| 第8部 ビルド | [exercises](/tools/build/exercises.html) |
-| 第9部 Unity/C# | [exercises](/languages/csharp/exercises.html) |
-| 第10部 UE | [exercises](/game/unreal/exercises.html) |
-| 第11部 ケーススタディ | [exercises](/design/case-studies/exercises.html) |
-| 第12部 判断ガイド | [exercises](/design/decisions/exercises.html) |
+| 設計の基礎 | [exercises](/design/foundations/exercises.html) |
+| SOLID | [exercises](/design/solid/exercises.html) |
+| GoFパターン | [exercises](/design/patterns/exercises.html) |
+| ゲームパターン | [exercises](/game/patterns/exercises.html) |
+| C++言語 | [exercises](/languages/cpp/exercises.html) |
+| C++内部 | [exercises](/runtime/cpp-internals/exercises.html) |
+| メモリと実行時 | [exercises](/runtime/memory/exercises.html) |
+| ビルド | [exercises](/tools/build/exercises.html) |
+| Unity/C# | [exercises](/languages/csharp/exercises.html) |
+| UE | [exercises](/game/unreal/exercises.html) |
+| ケーススタディ | [exercises](/design/case-studies/exercises.html) |
+| 判断ガイド | [exercises](/design/decisions/exercises.html) |
 
 ---
 

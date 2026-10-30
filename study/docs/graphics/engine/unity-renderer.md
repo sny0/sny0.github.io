@@ -1,10 +1,12 @@
 ---
-title: "Unity のレンダラーと SRP"
+title: Unity のレンダラーと SRP
 study:
-  source: "RenderingWiki"
-  kind: "本文"
-  status: "既存原稿"
-  summary: "Unityのレンダリングは、SRP (Scriptable Render Pipeline) — 「レンダーパイプラインの構成をC#で記述する」アーキテクチャ — を土台に、その上の2つの公式実装 URP (幅広い機種) と HDRP (ハイエンド) で構成されます。このページではSRPの仕組みと、"
+  source: RenderingWiki
+  status: published
+  summary: Unityのレンダリングは、SRP (Scriptable Render Pipeline) — 「レンダーパイプラインの構成をC#で記述する」アーキテクチャ — を土台に、その上の2つの公式実装 URP (幅広い機種) と HDRP (ハイエンド) で構成されます。このページではSRPの仕組みと、
+  section: reference
+  format: article
+  domain: graphics
 ---
 
 # Unity のレンダラーと SRP

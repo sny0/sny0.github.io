@@ -1,10 +1,12 @@
 ---
-title: "未定義動作・実装定義・未規定動作"
+title: 未定義動作・実装定義・未規定動作
 study:
-  source: "C++ Wiki"
-  kind: "本文"
-  status: "既存原稿"
+  source: C++ Wiki
+  status: published
   summary: "C++標準は、すべてのコードの動作を定義していません。「定義されていない度合い」に3段階あります。 未定義動作 (UB: Undefined Behavior): 標準が一切の要求をしない。何が起きてもよい(クラッシュ、黙って壊れる、たまたま動く)。プログラムに含めてはいけない"
+  section: reference
+  format: article
+  domain: languages
 ---
 
 # 未定義動作・実装定義・未規定動作
@@ -41,7 +43,7 @@ int z = ++i + i++;              // 5. 同一変数への非順序の複数副作
 
 float f; float g = f * 2;       // 6. 未初期化変数の読み取り
 
-// 7. データレース(同期なしの複数スレッド読み書き → 第7部)
+// 7. データレース(同期なしの複数スレッド読み書き → 並行処理のバグの項目を参照)
 // 8. strict aliasing違反(reinterpret_castで別型として読む → キャスト)
 // 9. ダングリング参照(寿命切れのローカルへの参照を返す)
 ```
@@ -110,4 +112,4 @@ samples/ub_examples.cpp(**コンパイルはするが実行しない**注釈付�
 
 ---
 
-前: [STL](/languages/cpp/stl.html) | [カテゴリ目次](/languages/cpp/) | 次: [演習](/languages/cpp/exercises.html)
+関連項目：[STL](/languages/cpp/stl.html) / [学習ガイド](/languages/cpp/) / [演習](/languages/cpp/exercises.html)

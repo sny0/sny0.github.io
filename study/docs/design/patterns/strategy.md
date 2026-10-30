@@ -1,10 +1,12 @@
 ---
-title: "Strategy"
+title: Strategy
 study:
-  source: "C++ Wiki"
-  kind: "本文"
-  status: "既存原稿"
-  summary: "同じ目的を達成するアルゴリズムが複数あり(移動経路の探し方、難易度ごとのAI、ソート順)、それを使うコードから選択と実装を分離したい。アルゴリズムを差し替え可能な部品にする。"
+  source: C++ Wiki
+  status: published
+  summary: 同じ目的を達成するアルゴリズムが複数あり(移動経路の探し方、難易度ごとのAI、ソート順)、それを使うコードから選択と実装を分離したい。アルゴリズムを差し替え可能な部品にする。
+  section: reference
+  format: article
+  domain: design
 ---
 
 # Strategy
@@ -161,7 +163,7 @@ public class Enemy : MonoBehaviour {
 
 ## 似たパターンとの違い
 
-- [State](/design/patterns/state.html): 構造は同一。**誰が差し替えるか**が違う——Strategyは外部が選ぶ(自分では替わらない)、Stateは自分の判断で遷移する。詳細比較は[第4部: ステートマシン](/game/patterns/state-machines.html)
+- [State](/design/patterns/state.html): 構造は同一。**誰が差し替えるか**が違う——Strategyは外部が選ぶ(自分では替わらない)、Stateは自分の判断で遷移する。詳細比較は[有限ステートマシンと階層型ステートマシン(State と Strategy の比較つき)](/game/patterns/state-machines.html)
 - [Template Method](/design/patterns/template-method.html): 差し替えの手段が継承(サブクラスがフックを上書き)か、コンポジション(部品を注入)か。現代はStrategy優勢(→ [継承かコンポジションか](/design/foundations/inheritance-delegation-composition.html))
 - [Command](/design/patterns/command.html): 「操作の実体化」(発行して運ぶ)vs 「やり方の差し替え」(装着して使う)
 
@@ -192,4 +194,4 @@ public class Enemy : MonoBehaviour {
 
 ---
 
-前: [State](/design/patterns/state.html) | [カテゴリ目次](/design/patterns/) | 次: [Template Method](/design/patterns/template-method.html)
+関連項目：[State](/design/patterns/state.html) / [学習ガイド](/design/patterns/) / [Template Method](/design/patterns/template-method.html)

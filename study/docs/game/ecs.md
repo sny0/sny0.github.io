@@ -1,11 +1,13 @@
 ---
-title: "ECS — Entity Component System"
-description: "EntityのIDと寿命、Componentの配置、Query、構成変更、並列実行と性能判断を説明します。"
+title: ECS — Entity Component System
+description: EntityのIDと寿命、Componentの配置、Query、構成変更、並列実行と性能判断を説明します。
 study:
-  source: "新規執筆"
-  kind: "本文草稿"
-  status: "草稿"
-  summary: "EntityのIDと寿命、Componentの配置、Query、構成変更、並列実行と性能判断を説明します。"
+  source: 新規執筆
+  status: draft
+  summary: EntityのIDと寿命、Componentの配置、Query、構成変更、並列実行と性能判断を説明します。
+  section: reference
+  format: article
+  domain: game
 ---
 
 

@@ -1,10 +1,12 @@
 ---
-title: "Singleton"
+title: Singleton
 study:
-  source: "C++ Wiki"
-  kind: "本文"
-  status: "既存原稿"
-  summary: "あるクラスのインスタンスがプログラム全体で1つだけであることを保証し、どこからでもアクセスできるようにしたい。 ただし先に言っておくと、この2つの要求(唯一性と全域アクセス)は別物で、問題を起こすのは主に後者です。Singletonは「最も有名で、最も乱用されるパターン」であり、このページの主目的は"
+  source: C++ Wiki
+  status: published
+  summary: あるクラスのインスタンスがプログラム全体で1つだけであることを保証し、どこからでもアクセスできるようにしたい。 ただし先に言っておくと、この2つの要求(唯一性と全域アクセス)は別物で、問題を起こすのは主に後者です。Singletonは「最も有名で、最も乱用されるパターン」であり、このページの主目的は
+  section: reference
+  format: article
+  domain: design
 ---
 
 # Singleton
@@ -32,7 +34,7 @@ study:
 // C++20(問題例)
 AudioManager g_audio;   // グローバル変数
 // 問題: 他のグローバル変数の初期化から使われると初期化順が未規定で危険
-//(いわゆる static initialization order fiasco → 第7部参照)
+//(いわゆる static initialization order fiasco → 記憶域期間と寿命の項目を参照)
 ```
 
 ## パターン適用後のC++コード
@@ -145,4 +147,4 @@ Unity特有の注意: シーン再読込・実行順・エディタのドメイ�
 
 ---
 
-前: [Prototype](/design/patterns/prototype.html) | [カテゴリ目次](/design/patterns/) | 次: [Adapter](/design/patterns/adapter.html)
+関連項目：[Prototype](/design/patterns/prototype.html) / [学習ガイド](/design/patterns/) / [Adapter](/design/patterns/adapter.html)

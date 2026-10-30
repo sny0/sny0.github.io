@@ -1,10 +1,12 @@
 ---
-title: "GPU Driven Rendering"
+title: GPU Driven Rendering
 study:
-  source: "RenderingWiki"
-  kind: "本文"
-  status: "既存原稿"
-  summary: "GPU Driven Renderingは、「何を描くか」の決定 (カリング・LOD選択・描画リスト構築) をCPUからGPUへ移すアーキテクチャです。Compute Shaderでシーン全体の可視性を判定し、Indirect Draw (GPUが書いた引数でGPU自身が描画) で実行します。ドロー"
+  source: RenderingWiki
+  status: published
+  summary: GPU Driven Renderingは、「何を描くか」の決定 (カリング・LOD選択・描画リスト構築) をCPUからGPUへ移すアーキテクチャです。Compute Shaderでシーン全体の可視性を判定し、Indirect Draw (GPUが書いた引数でGPU自身が描画) で実行します。ドロー
+  section: reference
+  format: article
+  domain: graphics
 ---
 
 # GPU Driven Rendering

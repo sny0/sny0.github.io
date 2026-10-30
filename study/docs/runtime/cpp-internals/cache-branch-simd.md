@@ -1,10 +1,12 @@
 ---
-title: "キャッシュ・分岐予測・SIMD"
+title: キャッシュ・分岐予測・SIMD
 study:
-  source: "C++ Wiki"
-  kind: "本文"
-  status: "既存原稿"
-  summary: "現代CPUの性能は「計算の速さ」ではなく「データと命令をいかに待たずに供給し続けるか」で決まります。ゲームの最適化に直結する3つのハードウェア機構を扱います。数値は典型的なオーダーで、実際のCPUごとに異なります(実装依存)。"
+  source: C++ Wiki
+  status: published
+  summary: 現代CPUの性能は「計算の速さ」ではなく「データと命令をいかに待たずに供給し続けるか」で決まります。ゲームの最適化に直結する3つのハードウェア機構を扱います。数値は典型的なオーダーで、実際のCPUごとに異なります(実装依存)。
+  section: reference
+  format: article
+  domain: runtime
 ---
 
 # キャッシュ・分岐予測・SIMD
@@ -38,10 +40,10 @@ std::vector<Enemy> enemies;
 // さらに: Updateで使うメンバだけを詰める(ホットデータ分離)→ 1ラインに載る個体数が増える
 ```
 
-これが[Data Locality](/game/patterns/optimization-patterns.html)、[AoS/SoA](/runtime/memory/cache-locality-aos-soa.html)、[ECS](/game/patterns/component-and-ecs.html)の物理的根拠です。「リストよりvector」「小さい構造体」「使うものを近くに」——第4部・第7部の最適化パターンはすべてこのページの応用。
+これが[Data Locality](/game/patterns/optimization-patterns.html)、[AoS/SoA](/runtime/memory/cache-locality-aos-soa.html)、[ECS](/game/patterns/component-and-ecs.html)の物理的根拠です。「リストよりvector」「小さい構造体」「使うものを近くに」——最適化パターンやデータ配置を考えるときは、この仕組みを土台にします。
 
 - **命令キャッシュ**も同じ: コードが大きい(過剰なインライン化・テンプレートブロート)と命令供給が詰まる
-- [false sharing](/runtime/memory/concurrency-bugs.html): マルチスレッドで同じラインの別データを書き合うと、ライン所有権の奪い合いで激減速(第7部)
+- [false sharing](/runtime/memory/concurrency-bugs.html): マルチスレッドで同じラインの別データを書き合うと、ライン所有権の奪い合いで激減速
 
 ## 分岐予測
 
@@ -113,4 +115,4 @@ samples/cache_bench.cpp(検証済み: 同じ合計計算を「連続配列」と
 
 ---
 
-前: [関数呼び出しとCPU](/runtime/cpp-internals/function-calls-and-cpu.html) | [カテゴリ目次](/runtime/cpp-internals/) | 次: [コンパイラ最適化とUB](/runtime/cpp-internals/optimization-and-ub.html)
+関連項目：[関数呼び出しとCPU](/runtime/cpp-internals/function-calls-and-cpu.html) / [学習ガイド](/runtime/cpp-internals/) / [コンパイラ最適化とUB](/runtime/cpp-internals/optimization-and-ub.html)

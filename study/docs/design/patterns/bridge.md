@@ -1,10 +1,12 @@
 ---
-title: "Bridge"
+title: Bridge
 study:
-  source: "C++ Wiki"
-  kind: "本文"
-  status: "既存原稿"
-  summary: "独立に変化する2つの軸(抽象=何をするか/実装=どうやるか)を1つの継承階層に押し込むと、組み合わせの数だけクラスが爆発する。2軸を別々の階層に分け、参照(橋)で繋ぎたい。"
+  source: C++ Wiki
+  status: published
+  summary: 独立に変化する2つの軸(抽象=何をするか/実装=どうやるか)を1つの継承階層に押し込むと、組み合わせの数だけクラスが爆発する。2軸を別々の階層に分け、参照(橋)で繋ぎたい。
+  section: reference
+  format: article
+  domain: design
 ---
 
 # Bridge
@@ -175,4 +177,4 @@ public class ExplosionHaptic : HapticEffect {
 
 ---
 
-前: [Adapter](/design/patterns/adapter.html) | [カテゴリ目次](/design/patterns/) | 次: [Composite](/design/patterns/composite.html)
+関連項目：[Adapter](/design/patterns/adapter.html) / [学習ガイド](/design/patterns/) / [Composite](/design/patterns/composite.html)

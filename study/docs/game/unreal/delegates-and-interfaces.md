@@ -1,10 +1,12 @@
 ---
-title: "UEの Delegate と Interface"
+title: UEの Delegate と Interface
 study:
-  source: "C++ Wiki"
-  kind: "本文"
-  status: "既存原稿"
-  summary: "C++にはdelegate/eventの言語機能がないため、UEはマクロで型を生成する独自Delegateシステムを持ちます。 C++内で完結する通知は非Dynamic(速い)、BPに公開する・保存する通知だけDynamic——Unityの「C# event vs UnityEvent」の使い分け("
+  source: C++ Wiki
+  status: published
+  summary: C++にはdelegate/eventの言語機能がないため、UEはマクロで型を生成する独自Delegateシステムを持ちます。 C++内で完結する通知は非Dynamic(速い)、BPに公開する・保存する通知だけDynamic——Unityの「C# event vs UnityEvent」の使い分け(
+  section: reference
+  format: article
+  domain: game
 ---
 
 # UEの Delegate と Interface
@@ -43,7 +45,7 @@ public:
 | **Dynamic** Delegate / Multicast | 遅い(**名前で検索**して呼ぶ) | **可** | 可 | リフレクション([UFUNCTION必須](/game/unreal/reflection-and-uht.html)) |
 
 - **C++内で完結する通知は非Dynamic**(速い)、**BPに公開する・保存する通知だけDynamic**——Unityの「C# event vs UnityEvent」の使い分け(→ [Observer](/design/patterns/observer.html))と完全に同型の判断です
-- 寿命の安全: `AddUObject`系はUObjectの生死をチェックして死んだ購読を呼ばない(→ [第9部で自作したRAIIトークン](/languages/csharp/delegates-events-function-pointers.html)の役割をGC統合で実現)。それでも明示的な `Remove`(EndPlay等で)が行儀の良い作法
+- 寿命の安全: `AddUObject`系はUObjectの生死をチェックして死んだ購読を呼ばない(→ [通知のRAIIトークン](/languages/csharp/delegates-events-function-pointers.html)の役割をGC統合で実現)。それでも明示的な `Remove`(EndPlay等で)が行儀の良い作法
 
 ## Interface — UINTERFACEの独自形式
 
@@ -82,7 +84,7 @@ class ABarrel : public AActor, public IDamageable { /* ... */ };
 
 1. UnityEventの感覚で全部Dynamicにする——C++内部の高頻度通知が名前検索呼び出しになり遅い。**公開範囲で種類を選ぶ**
 2. C# interfaceの感覚で `dynamic_cast` や直接キャストで判定——UEでは `Implements<U>()`+`Execute_` の作法(BP実装を取りこぼすため)
-3. 「マクロだらけで気持ち悪い」— マクロの裏の必然(リフレクション・BP連携・RTTIなし)を[第10部の各ページ](/game/unreal/)で追えば、全部説明がつく
+3. 「マクロだらけで気持ち悪い」— マクロの裏の必然(リフレクション・BP連携・RTTIなし)を[Unreal Engineの学習ガイド](/game/unreal/)で追えば、全部説明がつく
 
 ## 理解度チェック
 
@@ -96,4 +98,4 @@ class ABarrel : public AActor, public IDamageable { /* ... */ };
 
 ---
 
-前: [UEのスマートポインタ](/game/unreal/smart-pointers.html) | [カテゴリ目次](/game/unreal/) | 次: [Gameplay Framework](/game/unreal/gameplay-framework.html)
+関連項目：[UEのスマートポインタ](/game/unreal/smart-pointers.html) | [この分野の学習ガイド](/game/unreal/) | [Gameplay Framework](/game/unreal/gameplay-framework.html)

@@ -1,17 +1,17 @@
 ---
-title: "Layered・Clean・Hexagonal — 境界と依存の向き"
+title: Layered・Clean・Hexagonal — 境界と依存の向き
 study:
-  source: "設計の手帖"
-  kind: "本文"
-  status: "既存原稿"
-  summary: "パターンがクラスの連携を扱うなら、アーキテクチャはシステムの大きな境界を扱います。"
+  source: 設計の手帖
+  status: published
+  summary: パターンがクラスの連携を扱うなら、アーキテクチャはシステムの大きな境界を扱います。
+  section: reference
+  format: article
+  domain: design
 ---
 
 # Layered・Clean・Hexagonal — 境界と依存の向き
 
 パターンがクラスの連携を扱うなら、アーキテクチャはシステムの大きな境界を扱います。
-
-03 · アプリ全体を設計する / レイヤーとアーキテクチャ / Keep the core independent / 応用 / 12分
 
 タグ: Layered / Clean Architecture / Hexagonal / Ports and Adapters / Vertical Slice
 

@@ -1,10 +1,12 @@
 ---
-title: "const と const correctness"
+title: const と const correctness
 study:
-  source: "C++ Wiki"
-  kind: "本文"
-  status: "既存原稿"
-  summary: "const は「これは変更しない」という約束をコンパイラに検査させる仕組み。const correctness とは、コード全体で「変更するもの/しないもの」を一貫して型に刻む規律です。ドキュメントではなく、破るとコンパイルエラーになる契約である点が価値です。"
+  source: C++ Wiki
+  status: published
+  summary: const は「これは変更しない」という約束をコンパイラに検査させる仕組み。const correctness とは、コード全体で「変更するもの/しないもの」を一貫して型に刻む規律です。ドキュメントではなく、破るとコンパイルエラーになる契約である点が価値です。
+  section: reference
+  format: article
+  domain: languages
 ---
 
 # const と const correctness
@@ -126,4 +128,4 @@ samples/values_and_refs.cpp の関数群にconstを可能な限り付けてく�
 
 ---
 
-前: [値型と参照・ポインタ・参照](/languages/cpp/values-pointers-references.html) | [カテゴリ目次](/languages/cpp/) | 次: [配列と文字列](/languages/cpp/arrays-and-strings.html)
+関連項目：[値型と参照・ポインタ・参照](/languages/cpp/values-pointers-references.html) / [学習ガイド](/languages/cpp/) / [配列と文字列](/languages/cpp/arrays-and-strings.html)

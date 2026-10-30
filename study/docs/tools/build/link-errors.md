@@ -1,10 +1,12 @@
 ---
-title: "リンクエラー — 未解決外部シンボル・多重定義・ABI互換性"
+title: リンクエラー — 未解決外部シンボル・多重定義・ABI互換性
 study:
-  source: "C++ Wiki"
-  kind: "本文"
-  status: "既存原稿"
+  source: C++ Wiki
+  status: published
   summary: "リンクエラーはC++入門者を最も絶望させるエラーですが、原因はほぼ3パターンです。仕組み(シンボルとリンケージ)を前提に、症状→原因→処方の逆引きとしてまとめます。 意味: 「この関数を呼ぶコードはあるが、定義(実体)がどの.o/ライブラリにもない」。コンパイルは通っている(宣言はあった)ことに注意"
+  section: reference
+  format: article
+  domain: tools
 ---
 
 # リンクエラー — 未解決外部シンボル・多重定義・ABI互換性
@@ -70,7 +72,7 @@ c++filt "_ZN5Enemy10TakeDamageEi"      # 修飾名の復元
 
 - C#のマネージドアセンブリは、ヘッダー/オブジェクトファイルを結ぶC++と異なる方式で型を参照する。一方で、参照や対象APIの不一致、実行時のアセンブリ読み込み失敗、必要な型/メソッドの不足は起こる。ネイティブプラグインにはDLLの所在・対象CPU・ABI・シンボルの条件もある
 - Unityの**IL2CPPビルド時のネイティブリンクエラー**(プラグインのシンボル不足など)は本ページの例に対応する。strippingで必要な管理コードが除かれる問題は区別し、必要に応じてlink.xml等で保持する(→ [IL2CPP](/languages/csharp/il2cpp.html))
-- UEでは「モジュールの依存(Build.csのDependencyModuleNames)書き忘れ」が未解決シンボルの主因(→ [第10部](/game/unreal/build-system-ubt.html))
+- UEでは「モジュールの依存(Build.csのDependencyModuleNames)書き忘れ」が未解決シンボルの主因(→ [Unreal Build Tool・Module・Build.cs・Target.cs](/game/unreal/build-system-ubt.html))
 
 ## 理解度チェック
 
@@ -84,4 +86,4 @@ c++filt "_ZN5Enemy10TakeDamageEi"      # 修飾名の復元
 
 ---
 
-前: [品質のための道具](/tools/build/debugging-and-analysis.html) | [カテゴリ目次](/tools/build/) | 次: [演習](/tools/build/exercises.html)
+関連項目：[品質のための道具](/tools/build/debugging-and-analysis.html) / [学習ガイド](/tools/build/) / [演習](/tools/build/exercises.html)

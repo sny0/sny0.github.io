@@ -1,17 +1,21 @@
 ---
-title: "4. 最初の三角形からメッシュ描画へ"
+title: 4. 最初の三角形からメッシュ描画へ
 study:
-  source: "RenderingWiki"
-  kind: "本文"
-  status: "既存原稿"
-  summary: "グラフィックスプログラミングの通過儀礼 — 三角形 — を経て、glTFメッシュをカメラ付きで描画するまで。 第2章の数学 と 第3章のパイプライン がコードとして結晶するステップです。"
+  source: RenderingWiki
+  status: published
+  summary: グラフィックスプログラミングの通過儀礼 — 三角形 — を経て、glTFメッシュをカメラ付きで描画するまで。 第2章の数学 と 第3章のパイプライン がコードとして結晶するステップです。
+  section: practice
+  format: tutorial
+  domain: graphics
+  collection: renderer-project
+  order: 4
 ---
 
 # 4. 最初の三角形からメッシュ描画へ
 
 ## このステップの目標
 
-グラフィックスプログラミングの通過儀礼 — **三角形** — を経て、glTFメッシュをカメラ付きで描画するまで。 [第2章の数学](/math/rendering/transform.html) と [第3章のパイプライン](/graphics/pipeline/overview.html) がコードとして結晶するステップです。
+グラフィックスプログラミングの通過儀礼 — **三角形** — を経て、glTFメッシュをカメラ付きで描画するまで。 [座標変換](/math/rendering/transform.html) と [パイプライン全体像](/graphics/pipeline/overview.html) がコードとして結晶するステップです。
 
 ## 4.1 三角形 — 頂点バッファなしの最小構成
 

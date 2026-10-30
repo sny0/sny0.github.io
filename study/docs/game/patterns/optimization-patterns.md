@@ -1,10 +1,12 @@
 ---
 title: "最適化系パターン: Dirty Flag・Spatial Partition・Data Locality・Double Buffer"
 study:
-  source: "C++ Wiki"
-  kind: "本文"
-  status: "既存原稿"
-  summary: "4つとも「計測で問題が確認されてから使う」パターンです。共通の代償は「コードが素直でなくなる」こと。先に早すぎる最適化を読んでください。 高価な再計算を「変更があったときだけ」行うための目印(dirty=汚れた=要再計算)。"
+  source: C++ Wiki
+  status: published
+  summary: 4つとも「計測で問題が確認されてから使う」パターンです。共通の代償は「コードが素直でなくなる」こと。先に早すぎる最適化を読んでください。 高価な再計算を「変更があったときだけ」行うための目印(dirty=汚れた=要再計算)。
+  section: reference
+  format: article
+  domain: game
 ---
 
 # 最適化系パターン: Dirty Flag・Spatial Partition・Data Locality・Double Buffer
@@ -186,4 +188,4 @@ samples/spatial_grid.cpp を使い、1万点の近傍探索を総当たりとグ
 
 ---
 
-前: [Object Pool](/game/patterns/object-pool.html) | [カテゴリ目次](/game/patterns/) | 次: [Type Object・Subclass Sandbox・Bytecode](/game/patterns/type-object-and-sandbox.html)
+関連項目：[Object Pool](/game/patterns/object-pool.html) | [この分野の学習ガイド](/game/patterns/) | [Type Object・Subclass Sandbox・Bytecode](/game/patterns/type-object-and-sandbox.html)

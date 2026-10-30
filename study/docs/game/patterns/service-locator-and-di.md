@@ -1,10 +1,12 @@
 ---
-title: "Service Locator と Dependency Injection(比較)"
+title: Service Locator と Dependency Injection(比較)
 study:
-  source: "C++ Wiki"
-  kind: "本文"
-  status: "既存原稿"
+  source: C++ Wiki
+  status: published
   summary: "どちらも「あるクラスが必要とする依存(サウンド、セーブ、時間)を、具象クラスのハードコードやSingleton直呼びなしで手に入れる」ための仕組みです。 Service Locator: 「サービスの電話帳」を1つ置き、必要な側が自分で問い合わせる(Locator::Get ())"
+  section: reference
+  format: article
+  domain: game
 ---
 
 # Service Locator と Dependency Injection(比較)
@@ -99,7 +101,7 @@ DIコンテナ(VContainer等)は、この組み立て(誰に何を渡すか)を�
 
 ## Unreal Engine との対応
 
-- **Subsystem**(GameInstanceSubsystem等)がUE公式のService Locator: `GetSubsystem<UMyAudioSubsystem>()` で全域から取得、寿命はエンジン管理(→ [第10部](/game/unreal/gameplay-framework.html))
+- **Subsystem**(GameInstanceSubsystem等)がUE公式のService Locator: `GetSubsystem<UMyAudioSubsystem>()` で全域から取得、寿命はエンジン管理(→ [Gameplay Framework](/game/unreal/gameplay-framework.html))
 - Actorへの注入はSpawn時のパラメータ渡しやコンポーネント参照で行う(DIコンテナ文化は薄い)
 
 ## 使う場面 / 使わない場面
@@ -132,4 +134,4 @@ samples/service_locator.cpp をDI版(コンストラクタ注入)に書き換え
 
 ---
 
-前: [Event Queue・Pub/Sub](/game/patterns/event-queue-and-pubsub.html) | [カテゴリ目次](/game/patterns/) | 次: [Object Pool](/game/patterns/object-pool.html)
+関連項目：[Event Queue・Pub/Sub](/game/patterns/event-queue-and-pubsub.html) | [この分野の学習ガイド](/game/patterns/) | [Object Pool](/game/patterns/object-pool.html)

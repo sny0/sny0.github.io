@@ -1,10 +1,12 @@
 ---
-title: "キャスト"
+title: キャスト
 study:
-  source: "C++ Wiki"
-  kind: "本文"
-  status: "既存原稿"
-  summary: "型変換を意図別の4種類のキャストで明示するのがC++流です。C形式キャスト (int)x は「4種類のどれか(最悪の組み合わせ)を黙って選ぶ」ため、検索もレビューもできない危険な省略記法として原則使いません。"
+  source: C++ Wiki
+  status: published
+  summary: 型変換を意図別の4種類のキャストで明示するのがC++流です。C形式キャスト (int)x は「4種類のどれか(最悪の組み合わせ)を黙って選ぶ」ため、検索もレビューもできない危険な省略記法として原則使いません。
+  section: reference
+  format: article
+  domain: languages
 ---
 
 # キャスト
@@ -36,7 +38,7 @@ if (auto* boss = dynamic_cast<BossEnemy*>(enemy)) {   // 失敗ならnullptr(参
 ```
 
 - [RTTI](/runtime/cpp-internals/exceptions-and-rtti-impl.html)(実行時型情報)を使って安全に検査。**仮想関数を持つ型にのみ使える**
-- コストあり(型情報の照合。継承階層を辿る)。RTTI自体を無効化するプロジェクトもある(UEは独自のCast&lt;>を使う → [第10部](/game/unreal/uobject-actor-component.html))
+- コストあり(型情報の照合。継承階層を辿る)。RTTI自体を無効化するプロジェクトもある(UEは独自のCast&lt;>を使う → [UObject・Actor・ActorComponent](/game/unreal/uobject-actor-component.html))
 - **設計のサイン**: dynamic_castの連鎖は「基底のインターフェース不足」の症状([LSP](/design/solid/lsp.html)、[Visitor](/design/patterns/visitor.html)参照)。ただし単発の「能力問い合わせ」(`IDamageable`への横キャスト)は実用的な妥協
 
 ### const_cast(constの除去)
@@ -123,4 +125,4 @@ samples/casts_demo.cpp(検証済み)で、(a) int除算の罠、(b) dynamic_cast
 
 ---
 
-前: [static・inline・friend](/languages/cpp/static-inline-friend.html) | [カテゴリ目次](/languages/cpp/) | 次: [スマートポインタ](/languages/cpp/smart-pointers.html)
+関連項目：[static・inline・friend](/languages/cpp/static-inline-friend.html) / [学習ガイド](/languages/cpp/) / [スマートポインタ](/languages/cpp/smart-pointers.html)

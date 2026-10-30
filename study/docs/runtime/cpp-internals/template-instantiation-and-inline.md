@@ -1,10 +1,12 @@
 ---
-title: "テンプレートの実体化と inline の実際"
+title: テンプレートの実体化と inline の実際
 study:
-  source: "C++ Wiki"
-  kind: "本文"
-  status: "既存原稿"
+  source: C++ Wiki
+  status: published
   summary: "テンプレートの実体化: Max が使われた瞬間、その翻訳単位内に int 版の実物コードが生成されること。「テンプレートはヘッダーに書く」「ビルドが遅くなる」「同じコードが何度も作られる」——すべてこの仕組みから導かれる"
+  section: reference
+  format: article
+  domain: compilers
 ---
 
 # テンプレートの実体化と inline の実際
@@ -75,7 +77,7 @@ int y = Add(x, 1);
 
 ## C#との対応
 
-- C#ジェネリックは実行時(JIT)に実体化(値型のみ特殊化)。C++はコンパイル時に全部(→ [第9部](/languages/csharp/templates-vs-generics.html))
+- C#ジェネリックは実行時(JIT)に実体化(値型のみ特殊化)。C++はコンパイル時に全部(→ [テンプレートとジェネリック](/languages/csharp/templates-vs-generics.html))
 - C#のインライン展開はJITが行い、`[MethodImpl(MethodImplOptions.AggressiveInlining)]` がヒント。概念は同じで、タイミング(実行時vs事前)が違う
 - IL2CPPではC#ジェネリックがC++テンプレート的な実体化に落ち、「使った組み合わせだけ生成」の性質がAOTの制約(実行時に新しい組み合わせを作れない)として現れる
 
@@ -97,4 +99,4 @@ int y = Add(x, 1);
 
 ---
 
-前: [オブジェクトファイルとライブラリ](/runtime/cpp-internals/object-files-and-libraries.html) | [カテゴリ目次](/runtime/cpp-internals/) | 次: [vtable・vptr・仮想関数呼び出し](/runtime/cpp-internals/vtable-and-virtual-calls.html)
+関連項目：[オブジェクトファイルとライブラリ](/runtime/cpp-internals/object-files-and-libraries.html) / [学習ガイド](/runtime/cpp-internals/) / [vtable・vptr・仮想関数呼び出し](/runtime/cpp-internals/vtable-and-virtual-calls.html)

@@ -1,12 +1,23 @@
 ---
-title: "シューティング実装例 — C#とUnity 6"
+title: シューティング実装例 — C#とUnity 6
 study:
-  source: "新規執筆"
-  kind: "実装例"
-  status: "モデル検証済み"
+  source: 新規執筆
+  status: published
   domain: game
-  summary: "Unity 6の小さな縦シューティング。純C# ModelをMonoBehaviourへ接続し、入力・固定更新・Sprite表示を分ける。"
-  aliases: [シューティング, STG, C#, Unity, MonoBehaviour, Input System, サンプル]
+  summary: Unity 6の小さな縦シューティング。純C# ModelをMonoBehaviourへ接続し、入力・固定更新・Sprite表示を分ける。
+  aliases:
+    - シューティング
+    - STG
+    - C#
+    - Unity
+    - MonoBehaviour
+    - Input System
+    - サンプル
+  section: practice
+  format: tutorial
+  collection: shooter
+  order: 3
+  verification: モデル検証済み
 ---
 
 # シューティング実装例 — C#とUnity 6

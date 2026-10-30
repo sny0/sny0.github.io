@@ -1,10 +1,12 @@
 ---
-title: "技術的負債・コードの臭い・リファクタリング"
+title: 技術的負債・コードの臭い・リファクタリング
 study:
-  source: "C++ Wiki"
-  kind: "本文"
-  status: "既存原稿"
+  source: C++ Wiki
+  status: published
   summary: "技術的負債(technical debt): 「今すぐ動かす」ために「後で直すコスト」を借金すること。借金自体は戦略であり、問題は無自覚な借金と未返済の利息。 コードの臭い(code smell): バグではないが、設計上の問題を示唆する兆候。"
+  section: reference
+  format: article
+  domain: design
 ---
 
 # 技術的負債・コードの臭い・リファクタリング
@@ -125,4 +127,4 @@ study:
 
 ---
 
-前: [YAGNI・KISS・DRY](/design/foundations/yagni-kiss-dry.html) | [カテゴリ目次](/design/foundations/) | 次: [演習](/design/foundations/exercises.html)
+関連項目：[YAGNI・KISS・DRY](/design/foundations/yagni-kiss-dry.html) / [学習ガイド](/design/foundations/) / [演習](/design/foundations/exercises.html)

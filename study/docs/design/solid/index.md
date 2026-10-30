@@ -1,15 +1,21 @@
 ---
-title: "第2部: SOLID原則"
+title: SOLID原則を学ぶ
 study:
-  source: "C++ Wiki"
-  kind: "索引"
-  status: "既存原稿"
-  summary: "SOLIDは、オブジェクト指向設計の経験則5つの頭文字です(Robert C. Martinの整理による)。第1部の概念(責務・結合・依存の方向)を「原則」の形に定式化したものです。"
+  source: C++ Wiki
+  status: published
+  summary: SOLIDは、オブジェクト指向設計の経験則5つの頭文字です(Robert C. Martinの整理による)。設計の基礎の概念(責務・結合・依存の方向)を「原則」の形に定式化したものです。
+  section: learning
+  format: path
+  domain: design
+  collection: cpp-design
+  order: 2
 ---
 
-# 第2部: SOLID原則
+<div id="第2部-solid原則" class="study-legacy-anchor" aria-hidden="true"></div>
 
-SOLIDは、オブジェクト指向設計の経験則5つの頭文字です(Robert C. Martinの整理による)。第1部の概念(責務・結合・依存の方向)を「原則」の形に定式化したものです。
+# SOLID原則を学ぶ
+
+SOLIDは、オブジェクト指向設計の経験則5つの頭文字です(Robert C. Martinの整理による)。[設計の基礎](/design/foundations/)の概念(責務・結合・依存の方向)を「原則」の形に定式化したものです。
 
 | 略 | 名前 | 一言で |
 |---|---|---|

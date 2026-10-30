@@ -1,10 +1,12 @@
 ---
-title: "Component と Entity Component System(比較つき)"
+title: Component と Entity Component System(比較つき)
 study:
-  source: "C++ Wiki"
-  kind: "本文"
-  status: "既存原稿"
+  source: C++ Wiki
+  status: published
   summary: "Component パターン: ゲームオブジェクトを「機能の部品(コンポーネント)の入れ物」にする。継承ツリーの爆発を防ぐ、Unityの基本構造。 ECS (Entity Component System): さらに進めて、データ(Component)とロジック(System)を完全に分離し、データ"
+  section: reference
+  format: article
+  domain: game
 ---
 
 # Component と Entity Component System(比較つき)
@@ -127,7 +129,7 @@ void MoveSystem(World& w, float dt) {
 
 ## Unreal Engine との対応
 
-- Actor + ActorComponent = Component パターン(→ [第10部](/game/unreal/uobject-actor-component.html))。ただしUEはActor継承(ACharacter等)も太く、**継承とComponentの混合設計**
+- Actor + ActorComponent = Component パターン(→ [UObject・Actor・ActorComponent](/game/unreal/uobject-actor-component.html))。ただしUEはActor継承(ACharacter等)も太く、**継承とComponentの混合設計**
 - Mass Entity フレームワークがUEのECS(群衆向け)
 
 ## 使う場面 / 使わない場面
@@ -159,4 +161,4 @@ samples/ecs_minimal.cpp に「寿命(Lifetime)コンポーネント」と「寿�
 
 ---
 
-前: [Game Loop と Update Method](/game/patterns/game-loop-and-update.html) | [カテゴリ目次](/game/patterns/) | 次: [Event Queue・Message Bus・Pub/Sub](/game/patterns/event-queue-and-pubsub.html)
+関連項目：[Game Loop と Update Method](/game/patterns/game-loop-and-update.html) | [この分野の学習ガイド](/game/patterns/) | [Event Queue・Message Bus・Pub/Sub](/game/patterns/event-queue-and-pubsub.html)

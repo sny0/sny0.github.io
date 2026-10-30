@@ -1,10 +1,12 @@
 ---
 title: "判断ガイド: 抽象化すべきか・デザインパターンを使うべきか"
 study:
-  source: "C++ Wiki"
-  kind: "本文"
-  status: "既存原稿"
-  summary: "適用するシグナル: 各ケーススタディの「破綻する過程」(第11部)と同じ症状が自分のコードに出ている 適用しないシグナル: 「勉強したから使ってみたい」/仕様が固まっていない(抽象の軸を外す)/チームがそのパターンを読めない(保守者の語彙も設計制約)"
+  source: C++ Wiki
+  status: published
+  summary: 変更の証拠、設計の複雑さ、保守の負担から、抽象化やパターンを導入するか判断する。
+  section: reference
+  format: article
+  domain: design
 ---
 
 # 判断ガイド: 抽象化すべきか・デザインパターンを使うべきか
@@ -39,7 +41,7 @@ Q3. パターンなしの簡潔案(関数分割・データ化・switch集約)�
 
 ## 判断材料
 
-- **適用するシグナル**: 各ケーススタディの「破綻する過程」([第11部](/design/case-studies/))と同じ症状が自分のコードに出ている
+- **適用するシグナル**: 各ケーススタディの「破綻する過程」([設計ケーススタディの読み進め方](/design/case-studies/))と同じ症状が自分のコードに出ている
 - **適用しないシグナル**: 「勉強したから使ってみたい」/仕様が固まっていない(抽象の軸を外す)/チームがそのパターンを読めない(保守者の語彙も設計制約)
 
 ## 例外(先に抽象化してよいもの)
@@ -64,4 +66,4 @@ Q3. パターンなしの簡潔案(関数分割・データ化・switch集約)�
 
 ---
 
-前: [継承かコンポジションか](/design/decisions/inheritance-or-composition.html) | [カテゴリ目次](/design/decisions/) | 次: [イベント・DI・Singletonの判断](/design/decisions/events-di-singleton.html)
+関連項目：[継承かコンポジションか](/design/decisions/inheritance-or-composition.html) / [学習ガイド](/design/decisions/) / [イベント・DI・Singletonの判断](/design/decisions/events-di-singleton.html)

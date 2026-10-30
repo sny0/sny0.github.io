@@ -1,10 +1,12 @@
 ---
-title: "設計とは何を決める行為なのか"
+title: 設計とは何を決める行為なのか
 study:
-  source: "C++ Wiki"
-  kind: "本文"
-  status: "既存原稿"
-  summary: "設計とは「変更が来たとき、どこを直せば済むようにしておくか」を決める行為です。動くコードを書く行為ではなく、コードの分け方と繋ぎ方を決める行為です。 ゲーム開発のコードは必ず変更されます。企画は仕様を変え、レベルデザイナーはパラメータを変え、プラットフォームは増え、パフォーマンス要件は途中で判明しま"
+  source: C++ Wiki
+  status: published
+  summary: 設計とは「変更が来たとき、どこを直せば済むようにしておくか」を決める行為です。動くコードを書く行為ではなく、コードの分け方と繋ぎ方を決める行為です。 ゲーム開発のコードは必ず変更されます。企画は仕様を変え、レベルデザイナーはパラメータを変え、プラットフォームは増え、パフォーマンス要件は途中で判明しま
+  section: reference
+  format: article
+  domain: design
 ---
 
 # 設計とは何を決める行為なのか
@@ -67,7 +69,7 @@ void TakeDamage(int amount, DamageType type, Player* attacker) {
 具体的な手法は以降の章で扱うので、ここでは「何を決めるか」だけ示します。
 
 ```cpp
-// C++20(方向性を示す骨格。EventBus等の実装は第4部参照)
+// C++20(方向性を示す骨格。EventBus等の実装は通知方式の解説を参照)
 struct Enemy {
     int hp = 100;
     // Enemyは「ダメージを受けてHPが変わる」ことだけに責任を持つ
@@ -108,11 +110,11 @@ struct Enemy {
 
 ## Unity/C# との対応
 
-MonoBehaviour に何でも書いた「神クラス」化した Player.cs は、上の問題例と同じ状態です。Unity では `UnityEvent` / C# の `event` / ScriptableObject などが「繋ぎ方」の道具になります(→ [第9部](/languages/csharp/))。
+MonoBehaviour に何でも書いた「神クラス」化した Player.cs は、上の問題例と同じ状態です。Unity では `UnityEvent` / C# の `event` / ScriptableObject などが「繋ぎ方」の道具になります(→ [C++とUnity/C#の違いを学ぶ](/languages/csharp/))。
 
 ## Unreal Engine との対応
 
-UE では Actor / Component の分割、Delegate による通知、Subsystem への役割の切り出しが同じ判断に対応します(→ [第10部](/game/unreal/))。
+UE では Actor / Component の分割、Delegate による通知、Subsystem への役割の切り出しが同じ判断に対応します(→ [Unreal Engineと標準C++をつなぐ学習ガイド](/game/unreal/))。
 
 ## よくある誤解
 

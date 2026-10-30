@@ -1,10 +1,12 @@
 ---
-title: "Tessellation"
+title: Tessellation
 study:
-  source: "RenderingWiki"
-  kind: "本文"
-  status: "既存原稿"
-  summary: "Tessellation (テッセレーション) は、粗いパッチをGPU上で細かい三角形群に分割するためのステージ群です。DX11 (2009) で導入され、Hull Shader (制御) → Tessellator (固定機能分割) → Domain Shader (頂点配置) の3段で構成されま"
+  source: RenderingWiki
+  status: published
+  summary: Tessellation (テッセレーション) は、粗いパッチをGPU上で細かい三角形群に分割するためのステージ群です。DX11 (2009) で導入され、Hull Shader (制御) → Tessellator (固定機能分割) → Domain Shader (頂点配置) の3段で構成されま
+  section: reference
+  format: article
+  domain: graphics
 ---
 
 # Tessellation

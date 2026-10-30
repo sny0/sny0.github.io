@@ -1,10 +1,12 @@
 ---
-title: "Composite"
+title: Composite
 study:
-  source: "C++ Wiki"
-  kind: "本文"
-  status: "既存原稿"
+  source: C++ Wiki
+  status: published
   summary: "「個」と「個の集まり」を同じインターフェースで扱いたい。ツリー構造(UI階層、シーングラフ)で、葉(単体)と枝(グループ)を区別せずに操作したい。 Component: 葉と枝に共通のインターフェース(Draw(), Move())"
+  section: reference
+  format: article
+  domain: design
 ---
 
 # Composite
@@ -159,4 +161,4 @@ parentObject.transform.position += Vector3.up;   // 子は自動追従
 
 ---
 
-前: [Bridge](/design/patterns/bridge.html) | [カテゴリ目次](/design/patterns/) | 次: [Decorator](/design/patterns/decorator.html)
+関連項目：[Bridge](/design/patterns/bridge.html) / [学習ガイド](/design/patterns/) / [Decorator](/design/patterns/decorator.html)

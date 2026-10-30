@@ -1,10 +1,12 @@
 ---
-title: "並列アルゴリズム — Reduction / Prefix Sum (Scan)"
+title: 並列アルゴリズム — Reduction / Prefix Sum (Scan)
 study:
-  source: "RenderingWiki"
-  kind: "本文"
-  status: "既存原稿"
+  source: RenderingWiki
+  status: published
   summary: "逐次なら自明なループ (合計を取る、累積和を作る) は、数千スレッドのGPUでは専用の並列アルゴリズムになります。代表が Reduction (集約: 合計・最大値など) と Prefix Sum / Scan (累積和) です。特にScanは「並列プログラミングの万能部品」であり、コンパクション・"
+  section: reference
+  format: article
+  domain: graphics
 ---
 
 # 並列アルゴリズム — Reduction / Prefix Sum (Scan)

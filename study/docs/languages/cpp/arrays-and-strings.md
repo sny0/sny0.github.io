@@ -1,10 +1,12 @@
 ---
-title: "配列と文字列"
+title: 配列と文字列
 study:
-  source: "C++ Wiki"
-  kind: "本文"
-  status: "既存原稿"
-  summary: "C++の生配列 int a[10] は「メモリ上に連続して並んだ10個のint」そのもの。サイズ情報も境界チェックも付いていない 実務ではstd::array(固定長)とstd::vector(可変長)を使う"
+  source: C++ Wiki
+  status: published
+  summary: C++の生配列 int a[10] は「メモリ上に連続して並んだ10個のint」そのもの。サイズ情報も境界チェックも付いていない 実務ではstd::array(固定長)とstd::vector(可変長)を使う
+  section: reference
+  format: article
+  domain: languages
 ---
 
 # 配列と文字列
@@ -137,4 +139,4 @@ samples/arrays_strings.cpp(検証済み)で、(a) vectorの容量(capacity)がpu
 
 ---
 
-前: [const と const correctness](/languages/cpp/const-correctness.html) | [カテゴリ目次](/languages/cpp/) | 次: [構造体・クラス・アクセス指定子](/languages/cpp/structs-and-classes.html)
+関連項目：[const と const correctness](/languages/cpp/const-correctness.html) / [学習ガイド](/languages/cpp/) / [構造体・クラス・アクセス指定子](/languages/cpp/structs-and-classes.html)

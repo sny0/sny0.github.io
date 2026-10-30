@@ -1,10 +1,12 @@
 ---
-title: "行列"
+title: 行列
 study:
-  source: "RenderingWiki"
-  kind: "本文"
-  status: "既存原稿"
-  summary: "行列は空間の変換 (移動・回転・拡縮・射影) を1つのデータで表現する道具です。3Dグラフィックスでは4x4行列がすべての座標変換の共通言語であり、GPUのVertex Shaderは本質的に「毎頂点に行列を掛ける機械」です。"
+  source: RenderingWiki
+  status: published
+  summary: 行列は空間の変換 (移動・回転・拡縮・射影) を1つのデータで表現する道具です。3Dグラフィックスでは4x4行列がすべての座標変換の共通言語であり、GPUのVertex Shaderは本質的に「毎頂点に行列を掛ける機械」です。
+  section: reference
+  format: article
+  domain: math
 ---
 
 # 行列

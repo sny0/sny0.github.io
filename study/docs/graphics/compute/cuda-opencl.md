@@ -1,10 +1,12 @@
 ---
-title: "CUDA と OpenCL"
+title: CUDA と OpenCL
 study:
-  source: "RenderingWiki"
-  kind: "本文"
-  status: "既存原稿"
-  summary: "CUDA (NVIDIA, 2007) と OpenCL (Khronos, 2009) は、グラフィックスAPIから独立した汎用GPU計算 (GPGPU) のためのプラットフォームです。ゲーム開発では Compute Shader が主役ですが、CUDAは機械学習・オフラインレンダリング・ツール開"
+  source: RenderingWiki
+  status: published
+  summary: CUDA (NVIDIA, 2007) と OpenCL (Khronos, 2009) は、グラフィックスAPIから独立した汎用GPU計算 (GPGPU) のためのプラットフォームです。ゲーム開発では Compute Shader が主役ですが、CUDAは機械学習・オフラインレンダリング・ツール開
+  section: reference
+  format: article
+  domain: graphics
 ---
 
 # CUDA と OpenCL

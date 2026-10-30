@@ -1,17 +1,17 @@
 ---
-title: "C# — GC・Dispose・非同期処理の境界"
+title: C# — GC・Dispose・非同期処理の境界
 study:
-  source: "設計の手帖"
-  kind: "本文"
-  status: "既存原稿"
-  summary: "GC があっても、ファイル・接続・購読の寿命は設計が必要です。非同期処理も、完了・失敗・キャンセルを契約に含めます。"
+  source: 設計の手帖
+  status: published
+  summary: GC があっても、ファイル・接続・購読の寿命は設計が必要です。非同期処理も、完了・失敗・キャンセルを契約に含めます。
+  section: reference
+  format: article
+  domain: design
 ---
 
 # C# — GC・Dispose・非同期処理の境界
 
 GC があっても、ファイル・接続・購読の寿命は設計が必要です。非同期処理も、完了・失敗・キャンセルを契約に含めます。
-
-04 · 言語ごとの設計 / C# の寿命と非同期設計 / Design beyond garbage collection / 応用 / 12分
 
 タグ: C# / IDisposable / async / await / record / DI / CancellationToken
 

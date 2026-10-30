@@ -1,10 +1,12 @@
 ---
-title: "並行処理のバグ — data race・race condition・false sharing"
+title: 並行処理のバグ — data race・race condition・false sharing
 study:
-  source: "C++ Wiki"
-  kind: "本文"
-  status: "既存原稿"
+  source: C++ Wiki
+  status: published
   summary: "data race(データ競合): 2つ以上のスレッドが同期なしに同じメモリに触れ、少なくとも1つが書き込み——C++では未定義動作 race condition(競合状態): 実行タイミング(順序)によって結果が変わる論理バグ。データ競合がなくても起きる"
+  section: reference
+  format: article
+  domain: runtime
 ---
 
 # 並行処理のバグ — data race・race condition・false sharing
@@ -96,4 +98,4 @@ samples/atomic_counter.cpp(検証済み: 2スレッドで非atomic/atomicカウ�
 
 ---
 
-前: [メモリバグ図鑑](/runtime/memory/memory-bugs.html) | [カテゴリ目次](/runtime/memory/) | 次: [キャッシュ局所性と AoS/SoA](/runtime/memory/cache-locality-aos-soa.html)
+関連項目：[メモリバグ図鑑](/runtime/memory/memory-bugs.html) / [学習ガイド](/runtime/memory/) / [キャッシュ局所性と AoS/SoA](/runtime/memory/cache-locality-aos-soa.html)

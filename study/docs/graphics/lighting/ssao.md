@@ -1,10 +1,12 @@
 ---
-title: "SSAO (Screen-Space Ambient Occlusion)"
+title: SSAO (Screen-Space Ambient Occlusion)
 study:
-  source: "RenderingWiki"
-  kind: "本文"
-  status: "既存原稿"
-  summary: "SSAOは深度バッファ (と法線) だけを使って、近傍ジオメトリによる環境光の遮蔽 (Ambient Occlusion) を画面空間で近似する技術です。2007年のCrysisで登場し、「G-Bufferから安価にGI風の陰影を得る」画面空間技法時代の扉を開きました。原理・限界・進化 (HBAO→"
+  source: RenderingWiki
+  status: published
+  summary: SSAOは深度バッファ (と法線) だけを使って、近傍ジオメトリによる環境光の遮蔽 (Ambient Occlusion) を画面空間で近似する技術です。2007年のCrysisで登場し、「G-Bufferから安価にGI風の陰影を得る」画面空間技法時代の扉を開きました。原理・限界・進化 (HBAO→
+  section: reference
+  format: article
+  domain: graphics
 ---
 
 # SSAO (Screen-Space Ambient Occlusion)

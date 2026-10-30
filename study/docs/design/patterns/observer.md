@@ -1,10 +1,12 @@
 ---
-title: "Observer"
+title: Observer
 study:
-  source: "C++ Wiki"
-  kind: "本文"
-  status: "既存原稿"
-  summary: "「Aで起きたことに、B・C・Dが反応したい。しかしAはB・C・Dを知りたくない」。変化の発生源と反応する側を疎結合にする、ゲーム開発で最重要のパターンです。C#の event はこのパターンの言語機能化です。"
+  source: C++ Wiki
+  status: published
+  summary: 「Aで起きたことに、B・C・Dが反応したい。しかしAはB・C・Dを知りたくない」。変化の発生源と反応する側を疎結合にする、ゲーム開発で最重要のパターンです。C#の event はこのパターンの言語機能化です。
+  section: reference
+  format: article
+  domain: design
 ---
 
 # Observer
@@ -151,7 +153,7 @@ public class HpBarView : MonoBehaviour {
 
 ## 似たパターンとの違い
 
-- [Event Queue / Pub-Sub](/game/patterns/event-queue-and-pubsub.html): Observerは**同期・直接購読**(発行者オブジェクトを知って登録)。Queueは**遅延**、Pub/Subは**チャネル経由で相互に匿名**。詳細比較は第4部で
+- [Event Queue / Pub-Sub](/game/patterns/event-queue-and-pubsub.html): Observerは**同期・直接購読**(発行者オブジェクトを知って登録)。Queueは**遅延**、Pub/Subは**チャネル経由で相互に匿名**。詳しい違いはリンク先の比較で扱います
 - [Mediator](/design/patterns/mediator.html): 調整ロジックの中央集権。ObserverはMediatorへの通知手段として併用される
 
 ## 実務でよく見かける変形
@@ -181,4 +183,4 @@ public class HpBarView : MonoBehaviour {
 
 ---
 
-前: [Memento](/design/patterns/memento.html) | [カテゴリ目次](/design/patterns/) | 次: [State](/design/patterns/state.html)
+関連項目：[Memento](/design/patterns/memento.html) / [学習ガイド](/design/patterns/) / [State](/design/patterns/state.html)

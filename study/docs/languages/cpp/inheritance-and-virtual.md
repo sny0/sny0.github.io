@@ -1,10 +1,12 @@
 ---
-title: "継承・仮想関数・純粋仮想関数・抽象クラス・多重継承・override/final"
+title: 継承・仮想関数・純粋仮想関数・抽象クラス・多重継承・override/final
 study:
-  source: "C++ Wiki"
-  kind: "本文"
-  status: "既存原稿"
-  summary: "C++の継承は「基底のメンバを引き継ぎ、基底として扱える」仕組み。ただしメンバ関数は既定で非virtual(上書きしても基底経由の呼び出しは切り替わらない)で、動的に振る舞いを切り替えたい関数だけ virtual を付けます。C#(全メソッドがvirtual可能・overrideが厳格)との差分が事"
+  source: C++ Wiki
+  status: published
+  summary: C++の継承は「基底のメンバを引き継ぎ、基底として扱える」仕組み。ただしメンバ関数は既定で非virtual(上書きしても基底経由の呼び出しは切り替わらない)で、動的に振る舞いを切り替えたい関数だけ virtual を付けます。C#(全メソッドがvirtual可能・overrideが厳格)との差分が事
+  section: reference
+  format: article
+  domain: languages
 ---
 
 # 継承・仮想関数・純粋仮想関数・抽象クラス・多重継承・override/final
@@ -115,7 +117,7 @@ C++は複数の基底を持てます(C#はclass1つ+interface複数)。
 ## ゲーム開発での使用例
 
 - インターフェース(`IDamageable`, `IWeapon`)による差し替え: [ポリモーフィズム](/design/foundations/polymorphism-interface.html)、[Strategy](/design/patterns/strategy.html)、[State](/design/patterns/state.html)の実装手段
-- エンジン規約への準拠(UEの `AActor::Tick` override → [第10部](/game/unreal/uobject-actor-component.html))
+- エンジン規約への準拠(UEの `AActor::Tick` override → [UObject・Actor・ActorComponent](/game/unreal/uobject-actor-component.html))
 - 深い実装継承の敵階層は避ける(→ [継承・委譲・コンポジション](/design/foundations/inheritance-delegation-composition.html))
 
 ## 使う場面 / 使わない場面
@@ -147,4 +149,4 @@ samples/inheritance_virtual.cpp で、(a) overrideを外してタイポした場
 
 ---
 
-前: [RAII](/languages/cpp/raii.html) | [カテゴリ目次](/languages/cpp/) | 次: [関数オーバーロードと演算子オーバーロード](/languages/cpp/overloading.html)
+関連項目：[RAII](/languages/cpp/raii.html) / [学習ガイド](/languages/cpp/) / [関数オーバーロードと演算子オーバーロード](/languages/cpp/overloading.html)

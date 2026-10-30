@@ -1,10 +1,12 @@
 ---
 title: "ISP: インターフェース分離の原則 (Interface Segregation Principle)"
 study:
-  source: "C++ Wiki"
-  kind: "本文"
-  status: "既存原稿"
+  source: C++ Wiki
+  status: published
   summary: "> クライアントは、自分が使わないメソッドへの依存を強制されるべきではない。 「太った(fat)インターフェース」を、クライアント(呼び出し側)の種類ごとに小さく分けよ、という原則です。分割の基準は「実装側の都合」ではなく「呼び出し側がどのまとまりで使うか」である点が肝です。"
+  section: reference
+  format: article
+  domain: design
 ---
 
 # ISP: インターフェース分離の原則 (Interface Segregation Principle)
@@ -150,4 +152,4 @@ void OnHit(Collider other) {
 
 ---
 
-前: [LSP](/design/solid/lsp.html) | [カテゴリ目次](/design/solid/) | 次: [DIP: 依存性逆転の原則](/design/solid/dip.html)
+関連項目：[LSP](/design/solid/lsp.html) / [学習ガイド](/design/solid/) / [DIP: 依存性逆転の原則](/design/solid/dip.html)

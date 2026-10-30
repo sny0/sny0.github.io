@@ -1,10 +1,12 @@
 ---
-title: "Fragment Shader (Pixel Shader)"
+title: Fragment Shader (Pixel Shader)
 study:
-  source: "RenderingWiki"
-  kind: "本文"
-  status: "既存原稿"
-  summary: "Fragment Shader (FS、DirectX用語ではPixel Shader/PS) は、ラスタライザが列挙した各フラグメントに対して色を計算するプログラムです。ライティング・テクスチャリング・マテリアル表現という「絵作りの本体」はここに集中しており、GPU時間の大半を消費するステージでも"
+  source: RenderingWiki
+  status: published
+  summary: Fragment Shader (FS、DirectX用語ではPixel Shader/PS) は、ラスタライザが列挙した各フラグメントに対して色を計算するプログラムです。ライティング・テクスチャリング・マテリアル表現という「絵作りの本体」はここに集中しており、GPU時間の大半を消費するステージでも
+  section: reference
+  format: article
+  domain: graphics
 ---
 
 # Fragment Shader (Pixel Shader)

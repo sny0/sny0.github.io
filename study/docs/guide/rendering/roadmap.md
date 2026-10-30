@@ -1,43 +1,49 @@
 ---
-title: "学習ロードマップ"
+title: 描画の学習ロードマップ
 study:
-  source: "RenderingWiki"
-  kind: "学習ガイド"
-  status: "既存原稿"
-  summary: "このWikiの全ページは一つの知識ツリーを形成しています。ここでは「どの順番で読むか」を提示します。 何をやるにもここが土台です。飛ばさないでください。 手を動かし始めるフェーズです。シェーダ言語→APIの順を推奨します。"
+  source: RenderingWiki
+  status: published
+  summary: GPUと数学からシェーダ・API・ライティング・最適化・エンジンへ進む読み順。
+  section: learning
+  format: path
+  domain: graphics
+  collection: rendering
+  order: 1
 ---
 
-# 学習ロードマップ
+<div id="学習ロードマップ" class="study-legacy-anchor" aria-hidden="true"></div>
 
-このWikiの全ページは一つの知識ツリーを形成しています。ここでは「どの順番で読むか」を提示します。
+# 描画の学習ロードマップ
+
+描画に関する技術辞典の本文を、前提のつながりに沿って読むためのガイドです。以下は推奨する経路です。既に知っている項目は飛ばし、目的に必要なところから参照してください。
 
 ## 知識ツリー全体像
 
 ```mermaid
 flowchart TD
-    A[第1章 GPU基礎] --> C[第3章 レンダリングパイプライン]
-    B[第2章 3D数学] --> C
-    C --> D[第4章 シェーダ言語]
-    C --> E[第5章 グラフィックスAPI]
-    A --> F[第6章 GPUコンピューティング]
+    A[GPU基礎] --> C[レンダリングパイプライン]
+    B[3D数学] --> C
+    C --> D[シェーダ言語]
+    C --> E[グラフィックスAPI]
+    A --> F[GPUコンピューティング]
     D --> F
-    C --> G[第7章 レンダリング方式]
-    B --> H[第8章 ライティングとGI]
+    C --> G[レンダリング方式]
+    B --> H[ライティングとGI]
     G --> H
-    H --> I[第9章 ポストプロセスとAA]
-    F --> J[第10章 GPU最適化]
+    H --> I[ポストプロセスとAA]
+    F --> J[GPU最適化]
     E --> J
-    G --> K[第11章 エンジンのレンダラー]
+    G --> K[エンジンのレンダラー]
     H --> K
     J --> K
-    E --> L[最終章 ゼロからレンダラーを作る]
+    E --> L[実践 レンダラーを作る]
     K --> L
     I --> L
 ```
 
-## フェーズ1: 土台 (必修)
+## フェーズ1: 土台を確認する
 
-何をやるにもここが土台です。**飛ばさないでください。**
+GPU・数学・パイプラインの前提を確認します。不明な項目を補いながら進めます。
 
 | 順序 | ページ | 到達目標 |
 |---|---|---|
@@ -46,7 +52,7 @@ flowchart TD
 | 3 | [GPUアーキテクチャ詳解](/hardware/gpu/architecture.html) | SM/CU、SIMT、メモリ階層を図に描ける |
 | 4 | [ベクトル](/math/rendering/vector.html) → [行列](/math/rendering/matrix.html) → [座標変換](/math/rendering/transform.html) | MVP変換を自力で導出できる |
 | 5 | [カメラと射影](/math/rendering/camera.html) → [クォータニオン](/math/rendering/quaternion.html) | 透視投影行列の各要素の意味を説明できる |
-| 6 | [パイプライン全体像](/graphics/pipeline/overview.html) から第3章を順に | 頂点がピクセルになるまでを工程ごとに説明できる |
+| 6 | [パイプライン全体像](/graphics/pipeline/overview.html) → [Vertex Shader](/graphics/pipeline/vertex-shader.html) → [ラスタライゼーション](/graphics/pipeline/rasterization.html) → [Fragment Shader](/graphics/pipeline/fragment-shader.html) → [出力結合](/graphics/pipeline/output-merger.html) | 頂点がピクセルになるまでを工程ごとに説明できる |
 
 ## フェーズ2: シェーダとAPI
 
@@ -93,7 +99,7 @@ flowchart TD
 
 ## フェーズ7: 総仕上げ — ゼロからレンダラーを作る
 
-[最終章](/graphics/capstone/01-design.html) では、これまでの全知識を使って1フレームが描画されるまでを実装します。ここまでの章を読み終えていれば、各ステップで「なぜそうするのか」がすべて分かる状態になっているはずです。
+[レンダラーの設計・実装](/graphics/capstone/01-design.html)は「実践・サンプル」にある教材です。各ステップの設計とコード断片を追い、分からない概念を辞典の本文へ戻って調べます。
 
 ## 学習スタイル別の入り口
 
@@ -102,5 +108,5 @@ flowchart TD
 | まず全体像を掴みたい | [技術全史年表](/guide/rendering/timeline.html) → フェーズ1 |
 | Unityをすでに使っている | [Unity のレンダラーと SRP](/graphics/engine/unity-renderer.html) を読み、分からない用語を辿って戻る |
 | UEをすでに使っている | [Unreal Engine のレンダラー](/graphics/engine/unreal-renderer.html) から同様に |
-| 低レベルから積み上げたい | フェーズ1 → フェーズ2 を厳密に順番に |
-| とにかく手を動かしたい | [最終章](/graphics/capstone/01-design.html) を読みながら、詰まったページに戻る |
+| 低レベルから積み上げたい | フェーズ1 → フェーズ2で前提を確認する |
+| とにかく手を動かしたい | [レンダラーの設計・実装](/graphics/capstone/01-design.html) を読みながら、詰まったページに戻る |

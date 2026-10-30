@@ -1,10 +1,12 @@
 ---
-title: "STLコンテナ・イテレータ・アルゴリズム・ranges"
+title: STLコンテナ・イテレータ・アルゴリズム・ranges
 study:
-  source: "C++ Wiki"
-  kind: "本文"
-  status: "既存原稿"
-  summary: "STL(標準テンプレートライブラリ)は「コンテナ(入れ物)」「イテレータ(位置)」「アルゴリズム(処理)」を分離した設計で、任意の組み合わせで使えます。C#のSystem.Collections.Generic+LINQに相当しますが、実行時コストの見え方が大きく違います。"
+  source: C++ Wiki
+  status: published
+  summary: STL(標準テンプレートライブラリ)は「コンテナ(入れ物)」「イテレータ(位置)」「アルゴリズム(処理)」を分離した設計で、任意の組み合わせで使えます。C#のSystem.Collections.Generic+LINQに相当しますが、実行時コストの見え方が大きく違います。
+  section: reference
+  format: article
+  domain: languages
 ---
 
 # STLコンテナ・イテレータ・アルゴリズム・ranges
@@ -145,4 +147,4 @@ samples/stl_basics.cpp(検証済み)で、(a) erase_ifによる安全な走査�
 
 ---
 
-前: [スマートポインタ](/languages/cpp/smart-pointers.html) | [カテゴリ目次](/languages/cpp/) | 次: [未定義動作・実装定義・未規定動作](/languages/cpp/undefined-behavior.html)
+関連項目：[スマートポインタ](/languages/cpp/smart-pointers.html) / [学習ガイド](/languages/cpp/) / [未定義動作・実装定義・未規定動作](/languages/cpp/undefined-behavior.html)

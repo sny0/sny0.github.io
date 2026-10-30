@@ -1,13 +1,33 @@
 ---
-title: "第13章 グラフィックスAPI ── OpenGL / DirectX 12 / Vulkan"
+title: 第13章 グラフィックスAPI
 study:
-  source: "IT教本"
-  kind: "学習ガイド"
-  status: "学習計画・概要"
-  summary: "エンジンのレンダラはグラフィックスAPIの上に建つ。UE5のRHI、UnityのSRPは D3D12/Vulkan/Metalの抽象化層だ。モダンAPI(D3D12/Vulkan)は"
+  source: IT教本
+  status: outline
+  summary: |-
+    描画APIの共通概念を押さえ、資源管理・コマンド・同期を一つのAPIで試すための学習計画・概要です。全APIを同時に習得することを求めるものではありません。比較してから、使う環境に合う実験対象を選びます。
+
+    ## 関連する辞典本文・実践
+
+    - [API横断比較](/graphics/api/
+  section: learning
+  format: path
+  domain: graphics
+  collection: low-level
+  order: 14
 ---
 
-# 第13章 グラフィックスAPI ── OpenGL / DirectX 12 / Vulkan
+<div id="第13章-グラフィックスapi-──-opengl-directx-12-vulkan" class="study-legacy-anchor" aria-hidden="true"></div>
+
+# 第13章 グラフィックスAPI
+
+## このページで案内すること
+
+描画APIの共通概念を押さえ、資源管理・コマンド・同期を一つのAPIで試すための**学習計画・概要**です。全APIを同時に習得することを求めるものではありません。比較してから、使う環境に合う実験対象を選びます。
+
+## 関連する辞典本文・実践
+
+- [API横断比較](/graphics/api/comparison.html)で、共通点と責任範囲の違いを整理できます。
+- [OpenGL](/graphics/api/opengl.html)、[Direct3D 12](/graphics/api/directx12.html)、[Vulkan](/graphics/api/vulkan.html)で、個別の仕組みを調べられます。
 
 ## 学ぶ理由
 

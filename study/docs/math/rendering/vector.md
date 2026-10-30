@@ -1,10 +1,12 @@
 ---
-title: "ベクトル"
+title: ベクトル
 study:
-  source: "RenderingWiki"
-  kind: "本文"
-  status: "既存原稿"
-  summary: "ベクトルは3Dグラフィックスにおける最も基本的なデータ型で、位置・方向・速度・法線・色まで、あらゆるものを表現します。レンダリングの計算は突き詰めれば「ベクトルと行列の演算の膨大な繰り返し」であり、GPUのレジスタもシェーダ言語の型 (float3, vec3) もベクトルを前提に設計されています。"
+  source: RenderingWiki
+  status: published
+  summary: ベクトルは3Dグラフィックスにおける最も基本的なデータ型で、位置・方向・速度・法線・色まで、あらゆるものを表現します。レンダリングの計算は突き詰めれば「ベクトルと行列の演算の膨大な繰り返し」であり、GPUのレジスタもシェーダ言語の型 (float3, vec3) もベクトルを前提に設計されています。
+  section: reference
+  format: article
+  domain: math
 ---
 
 # ベクトル

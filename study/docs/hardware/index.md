@@ -3,12 +3,12 @@
   "title": "ハードウェア",
   "study": {
     "source": "統合ガイド",
-    "kind": "分野索引",
-    "status": "初版",
-    "domain": "hardware",
+    "status": "published",
     "generated": true,
-    "catalog": true,
-    "summary": "CPU・GPU・キャッシュから、命令とデータが動く仕組みを調べる。"
+    "catalog": false,
+    "section": "reference",
+    "format": "index",
+    "domain": "hardware"
   }
 }
 ---
@@ -17,16 +17,23 @@
 
 CPU・GPU・キャッシュから、命令とデータが動く仕組みを調べる。
 
-## いま読める項目
+## 辞典の本文
 
-- [第2章 電気・CPU・命令 ── 機械はどうやって「計算」するのか](/guide/low-level/electricity-cpu-instructions.html) — 学習ガイド
-- [第11章 GPUアーキテクチャ ── 多数の処理を並列に進める仕組み](/guide/low-level/gpu-architecture.html) — 学習ガイド
-- [第3章 メモリとキャッシュ ── 現代ゲーム最適化の主戦場](/guide/low-level/memory-and-cache.html) — 学習ガイド
-- [GPUアーキテクチャ詳解](/hardware/gpu/architecture.html) — 本文
-- [CPUとGPUの役割分担](/hardware/gpu/cpu-vs-gpu.html) — 本文
-- [GPUとは何か](/hardware/gpu/what-is-gpu.html) — 本文
+- [CPUとGPUの役割分担](/hardware/gpu/cpu-vs-gpu.html)
+- [GPUアーキテクチャ詳解](/hardware/gpu/architecture.html)
+- [GPUとは何か](/hardware/gpu/what-is-gpu.html)
 
-## これから充実させる項目
+## この分野の学習ガイド
+
+- [第2章 論理回路・CPU・命令](/guide/low-level/electricity-cpu-instructions.html) — 学習計画・概要
+- [第3章 メモリ階層とキャッシュ](/guide/low-level/memory-and-cache.html) — 学習計画・概要
+- [第11章 GPUアーキテクチャ](/guide/low-level/gpu-architecture.html) — 学習計画・概要
+
+## 作って試す
+
+この分野専用の実践教材は準備中です。[実践・サンプル一覧](/practice/)に公開中の題材をまとめています。
+
+## 扱う範囲・増補する項目
 
 - 論理回路
 - ISA・レジスタ
@@ -35,5 +42,3 @@ CPU・GPU・キャッシュから、命令とデータが動く仕組みを調�
 - キャッシュ・TLB
 - SIMD
 - 割り込み・DMA
-
-本文・概要・学習計画を区別しながら増補します。[疑問から選ぶ読み進め方](/guide/learning-paths.html)にも、この分野とのつながりをまとめています。

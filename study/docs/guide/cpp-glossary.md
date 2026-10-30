@@ -1,13 +1,17 @@
 ---
-title: "用語集"
+title: C++・設計の用語集
 study:
-  source: "C++ Wiki"
-  kind: "用語"
-  status: "既存原稿"
-  summary: "五十音順・アルファベット順の混合で、カテゴリごとに整理しています。各用語の詳細は詳細ページへのリンクを参照してください。 目次に戻る"
+  source: C++ Wiki
+  status: published
+  summary: 五十音順・アルファベット順の混合で、カテゴリごとに整理しています。各用語の詳細は詳細ページへのリンクを参照してください。 目次に戻る
+  section: reference
+  format: glossary
+  domain: languages
 ---
 
-# 用語集
+<div id="用語集" class="study-legacy-anchor" aria-hidden="true"></div>
+
+# C++・設計の用語集
 
 五十音順・アルファベット順の混合で、カテゴリごとに整理しています。各用語の詳細は詳細ページへのリンクを参照してください。
 
@@ -37,14 +41,14 @@ study:
 | 技術的負債 | 「今すぐ動かす」ために「後で直すコスト」を借りること | [技術的負債](/design/foundations/tech-debt-and-refactoring.html) |
 | コードの臭い | バグではないが設計問題を示唆する兆候 | 同上 |
 | リファクタリング | 外部の振る舞いを変えずに内部構造を改善すること | 同上 |
-| SRP/OCP/LSP/ISP/DIP | SOLID原則の5つ | [第2部](/design/solid/) |
+| SRP/OCP/LSP/ISP/DIP | SOLID原則の5つ | [SOLID原則を学ぶ](/design/solid/) |
 | ショットガン手術 | 1つの変更で多数のファイルを修正する羽目になる状態 | [SRP](/design/solid/srp.html) |
 
 ## パターン用語
 
 | 用語 | 一言定義 | 詳細 |
 |---|---|---|
-| デザインパターン | 繰り返し現れる設計問題への定型解のカタログ | [第3部](/design/patterns/) |
+| デザインパターン | 繰り返し現れる設計問題への定型解のカタログ | [GoFデザインパターンを学ぶ](/design/patterns/) |
 | GoF | Gang of Four。23パターンを整理した4人の著者 | 同上 |
 | Singleton | 唯一のインスタンス+全域アクセス(乱用注意) | [Singleton](/design/patterns/singleton.html) |
 | Observer | 変化を購読者に通知する(C#のeventの正体) | [Observer](/design/patterns/observer.html) |

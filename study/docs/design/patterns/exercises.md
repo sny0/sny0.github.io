@@ -1,13 +1,19 @@
 ---
-title: "第3部 演習 — GoFデザインパターン"
+title: GoFデザインパターンの演習
 study:
-  source: "C++ Wiki"
-  kind: "演習"
-  status: "既存原稿"
-  summary: "パターン名の暗記ではなく「問題→選択肢→判断」の練習です。まず自力で解いてから解答を開いてください。 次の要求に対して第一候補となるパターン(または「パターン不要」)を答えてください。"
+  source: C++ Wiki
+  status: published
+  summary: パターン名の暗記ではなく「問題→選択肢→判断」の練習です。まず自力で解いてから解答を開いてください。 次の要求に対して第一候補となるパターン(または「パターン不要」)を答えてください。
+  section: practice
+  format: exercise
+  domain: design
+  collection: cpp-exercises
+  order: 3
 ---
 
-# 第3部 演習 — GoFデザインパターン
+<div id="第3部-演習-—-gofデザインパターン" class="study-legacy-anchor" aria-hidden="true"></div>
+
+# GoFデザインパターンの演習
 
 パターン名の暗記ではなく「問題→選択肢→判断」の練習です。まず自力で解いてから解答を開いてください。
 
@@ -100,4 +106,4 @@ Observer実装で「ステージを2周すると、敵死亡時のスコア加�
 
 ---
 
-前: [Visitor](/design/patterns/visitor.html) | [カテゴリ目次](/design/patterns/) | [第4部: ゲームプログラミングパターンへ](/game/patterns/)
+関連項目：[Visitor](/design/patterns/visitor.html) / [学習ガイド](/design/patterns/) / [ゲームプログラミングパターンの学習ガイド](/game/patterns/)

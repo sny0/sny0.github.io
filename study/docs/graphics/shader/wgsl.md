@@ -1,10 +1,12 @@
 ---
-title: "WGSL"
+title: WGSL
 study:
-  source: "RenderingWiki"
-  kind: "本文"
-  status: "既存原稿"
-  summary: "WGSL (WebGPU Shading Language) はWebGPUのために新規設計されたシェーダ言語です (2023年、W3C)。Web実行の安全性要求から、未定義動作の排除・厳密な型システム・仕様の完全な形式化を特徴とします。Rustに似た構文を持ち、ブラウザ内で各ネイティブAPI (D"
+  source: RenderingWiki
+  status: published
+  summary: WGSL (WebGPU Shading Language) はWebGPUのために新規設計されたシェーダ言語です (2023年、W3C)。Web実行の安全性要求から、未定義動作の排除・厳密な型システム・仕様の完全な形式化を特徴とします。Rustに似た構文を持ち、ブラウザ内で各ネイティブAPI (D
+  section: reference
+  format: article
+  domain: graphics
 ---
 
 # WGSL

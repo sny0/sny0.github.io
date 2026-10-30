@@ -1,10 +1,12 @@
 ---
-title: "クラス名辞典"
+title: クラス名辞典
 study:
-  source: "設計の手帖"
-  kind: "用語"
-  status: "既存原稿"
+  source: 設計の手帖
+  status: published
   summary: "設計の手帖に収録されている50の名前を、役割・例・注意点から引く辞典です。 分類: ドメイン 同一性を持ち、状態の変化を追う。 Entity と DB 行は常に同じ単位ではない。"
+  section: reference
+  format: glossary
+  domain: design
 ---
 
 # クラス名辞典

@@ -1,10 +1,12 @@
 ---
 title: "OCP: 開放閉鎖の原則 (Open-Closed Principle)"
 study:
-  source: "C++ Wiki"
-  kind: "本文"
-  status: "既存原稿"
+  source: C++ Wiki
+  status: published
   summary: "> ソフトウェアの構成要素は、拡張に対して開いていて(open for extension)、修正に対して閉じている(closed for modification)べきである。"
+  section: reference
+  format: article
+  domain: design
 ---
 
 # OCP: 開放閉鎖の原則 (Open-Closed Principle)
@@ -73,7 +75,7 @@ private:
 };
 ```
 
-**何が変わったか**: 「1スキルの知識」が1クラスに集まり(SRP)、追加が新クラスの追加だけで済むようになった(OCP)。仕組みはポリモーフィズム(→ [第1部](/design/foundations/polymorphism-interface.html))。
+**何が変わったか**: 「1スキルの知識」が1クラスに集まり(SRP)、追加が新クラスの追加だけで済むようになった(OCP)。仕組みはポリモーフィズム(→ [ポリモーフィズムとインターフェース](/design/foundations/polymorphism-interface.html))。
 
 なおOCPを満たす手段は仮想関数だけではありません。**テンプレート**(コンパイル時)、**std::functionの登録**、**データ駆動**(スキルをデータで記述 → [Type Object](/game/patterns/type-object-and-sandbox.html))でも同じ性質を実現できます。
 
@@ -151,4 +153,4 @@ public class FireballSkill : Skill {
 
 ---
 
-前: [SRP](/design/solid/srp.html) | [カテゴリ目次](/design/solid/) | 次: [LSP: リスコフの置換原則](/design/solid/lsp.html)
+関連項目：[SRP](/design/solid/srp.html) / [学習ガイド](/design/solid/) / [LSP: リスコフの置換原則](/design/solid/lsp.html)

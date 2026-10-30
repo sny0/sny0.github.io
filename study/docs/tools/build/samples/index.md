@@ -1,13 +1,19 @@
 ---
-title: "samples — 検証済みコード例"
+title: C++のコードサンプル集
 study:
-  source: "C++ Wiki"
-  kind: "サンプル索引"
-  status: "既存原稿"
-  summary: "docs/ の主要コード例に対応する、単体でコンパイル可能な最小サンプル集です。 全 .cpp は main を持ち、実行すると簡単な動作確認出力を出します printfの書式は %u / %ld +明示キャストに統一しています(検証環境MinGW.orgのCランタイムが %zu / %lld 未対"
+  source: C++ Wiki
+  status: published
+  summary: docs/ の主要コード例に対応する、単体でコンパイル可能な最小サンプル集です。 全 .cpp は main を持ち、実行すると簡単な動作確認出力を出します printfの書式は %u / %ld +明示キャストに統一しています(検証環境MinGW.orgのCランタイムが %zu / %lld 未対
+  section: practice
+  format: index
+  domain: tools
+  collection: cpp-samples
+  order: 0
 ---
 
-# samples — 検証済みコード例
+<div id="samples-—-検証済みコード例" class="study-legacy-anchor" aria-hidden="true"></div>
+
+# C++のコードサンプル集
 
 docs/ の主要コード例に対応する、単体でコンパイル可能な最小サンプル集です。
 

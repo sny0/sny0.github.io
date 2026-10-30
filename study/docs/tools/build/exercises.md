@@ -1,13 +1,19 @@
 ---
-title: "第8部 演習 — ビルドとライブラリ"
+title: ビルドとライブラリの演習
 study:
-  source: "C++ Wiki"
-  kind: "演習"
-  status: "既存原稿"
-  summary: "次の道具はどの層のものですか(メタビルド/ビルドシステム/コンパイラ/リンカ/その他)。 Ninja 2. CMake 3. cl.exe 4. link.exe 5. clang-tidy 6. AddressSanitizer"
+  source: C++ Wiki
+  status: published
+  summary: 次の道具はどの層のものですか(メタビルド/ビルドシステム/コンパイラ/リンカ/その他)。 Ninja 2. CMake 3. cl.exe 4. link.exe 5. clang-tidy 6. AddressSanitizer
+  section: practice
+  format: exercise
+  domain: tools
+  collection: cpp-exercises
+  order: 8
 ---
 
-# 第8部 演習 — ビルドとライブラリ
+<div id="第8部-演習-—-ビルドとライブラリ" class="study-legacy-anchor" aria-hidden="true"></div>
+
+# ビルドとライブラリの演習
 
 ## 問1. 概念確認
 
@@ -85,4 +91,4 @@ C#は通常ヘッダーではなくアセンブリのメタデータから型を
 
 ---
 
-前: [リンクエラー](/tools/build/link-errors.html) | [カテゴリ目次](/tools/build/) | [第9部: Unity/C#との対応へ](/languages/csharp/)
+関連項目：[リンクエラー](/tools/build/link-errors.html) / [学習ガイド](/tools/build/) / [C++とUnity/C#の違いを学ぶ](/languages/csharp/)

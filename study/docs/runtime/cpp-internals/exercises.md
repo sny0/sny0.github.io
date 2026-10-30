@@ -1,13 +1,19 @@
 ---
-title: "第6部 演習 — C++の内部的な仕組み"
+title: C++の内部的な仕組みの演習
 study:
-  source: "C++ Wiki"
-  kind: "演習"
-  status: "既存原稿"
+  source: C++ Wiki
+  status: published
   summary: "次のエラー・現象は、ビルドパイプラインのどの段階の問題ですか(旅の地図の①〜⑦で答え、理由を一言)。 error: 'Enemy' was not declared in this scope"
+  section: practice
+  format: exercise
+  domain: runtime
+  collection: cpp-exercises
+  order: 6
 ---
 
-# 第6部 演習 — C++の内部的な仕組み
+<div id="第6部-演習-—-c-の内部的な仕組み" class="study-legacy-anchor" aria-hidden="true"></div>
+
+# C++の内部的な仕組みの演習
 
 ## 問1. 概念確認
 
@@ -107,4 +113,4 @@ int Sum(const std::vector<int>& v) {
 
 ---
 
-前: [コンパイラ最適化とUB](/runtime/cpp-internals/optimization-and-ub.html) | [カテゴリ目次](/runtime/cpp-internals/) | [第7部: メモリと実行時へ](/runtime/memory/)
+関連項目：[コンパイラ最適化とUB](/runtime/cpp-internals/optimization-and-ub.html) / [学習ガイド](/runtime/cpp-internals/) / [メモリと実行時を学ぶ](/runtime/memory/)

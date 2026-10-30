@@ -1,13 +1,19 @@
 ---
-title: "総合演習 解答"
+title: C++と設計の総合演習 — 解答
 study:
-  source: "C++ Wiki"
-  kind: "演習"
-  status: "既存原稿"
+  source: C++ Wiki
+  status: published
   summary: "結論だけでなく、判断理由・他の正解候補・トレードオフを含めて解説します。自分の解答と「結論」ではなく「根拠」を比較してください。 設計の観点: 責務の混在: 敵の更新・毒処理・スコア・UI更新・入力・セーブが1クラスに(SRP、神クラス)"
+  section: practice
+  format: exercise
+  domain: design
+  collection: cpp-exercises
+  order: 14
 ---
 
-# 総合演習 解答
+<div id="総合演習-解答" class="study-legacy-anchor" aria-hidden="true"></div>
+
+# C++と設計の総合演習 — 解答
 
 結論だけでなく、判断理由・他の正解候補・トレードオフを含めて解説します。自分の解答と「結論」ではなく「根拠」を比較してください。
 

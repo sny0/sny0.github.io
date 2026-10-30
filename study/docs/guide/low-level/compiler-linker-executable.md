@@ -1,13 +1,33 @@
 ---
-title: "第7章 コンパイラ・リンカ・実行ファイル(ELF/PE)・ABI"
+title: 第7章 コンパイラ・リンカ・実行ファイル・ABI
 study:
-  source: "IT教本"
-  kind: "学習ガイド"
-  status: "学習計画・概要"
-  summary: "「ビルド」ボタンの中身は最大級のブラックボックスだ。UE5のビルドは 数千の翻訳単位のコンパイルとリンクであり、リンクエラー(未解決シンボル、 重複定義)、DLL境界の問題、ABI非互換クラッシュ、ビルド時間との戦いは"
+  source: IT教本
+  status: outline
+  summary: |-
+    ソースから実行ファイルまでの段階を分け、コンパイル・リンク・ロードを観察するための学習計画・概要です。既存本文はC++のビルドとABIを中心に扱います。字句解析・構文解析・IRなど、コンパイラ内部の専用詳解は未整備です。
+
+    ## 関連する辞典本文・実践
+
+    - [main.cppからCPU命令
+  section: learning
+  format: path
+  domain: compilers
+  collection: low-level
+  order: 8
 ---
 
-# 第7章 コンパイラ・リンカ・実行ファイル(ELF/PE)・ABI
+<div id="第7章-コンパイラ・リンカ・実行ファイル-elf-pe-・abi" class="study-legacy-anchor" aria-hidden="true"></div>
+
+# 第7章 コンパイラ・リンカ・実行ファイル・ABI
+
+## このページで案内すること
+
+ソースから実行ファイルまでの段階を分け、コンパイル・リンク・ロードを観察するための**学習計画・概要**です。既存本文はC++のビルドとABIを中心に扱います。字句解析・構文解析・IRなど、コンパイラ内部の専用詳解は未整備です。
+
+## 関連する辞典本文・実践
+
+- [main.cppからCPU命令まで](/runtime/cpp-internals/build-pipeline-journey.html)と[翻訳単位・ヘッダー・ODR](/runtime/cpp-internals/translation-units-and-headers.html)で、処理の段階を追えます。
+- [シンボル・リンケージ・ABI](/runtime/cpp-internals/symbols-and-linkage.html)、[オブジェクト・実行ファイル・ライブラリ](/runtime/cpp-internals/object-files-and-libraries.html)では、各段階の成果物を調べられます。
 
 ## 学ぶ理由
 

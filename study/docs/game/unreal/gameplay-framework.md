@@ -1,10 +1,12 @@
 ---
-title: "Gameplay Framework・Subsystem・Slate/UMG・DataAsset/DataTable"
+title: Gameplay Framework・Subsystem・Slate/UMG・DataAsset/DataTable
 study:
-  source: "C++ Wiki"
-  kind: "本文"
-  status: "既存原稿"
+  source: C++ Wiki
+  status: published
   summary: "UEは「ゲームには大抵これがある」という役割クラス群を最初から提供します。Unityが白紙(全部自作)なのと対照的な設計思想です。 Controller と Pawn の分離が肝: 「乗り物に乗り換える」「観戦する」「AIに操作を渡す」が Possess の切り替えで表現できる——Strategy/"
+  section: reference
+  format: article
+  domain: game
 ---
 
 # Gameplay Framework・Subsystem・Slate/UMG・DataAsset/DataTable
@@ -82,4 +84,4 @@ public:
 
 ---
 
-前: [UEのDelegateとInterface](/game/unreal/delegates-and-interfaces.html) | [カテゴリ目次](/game/unreal/) | 次: [演習](/game/unreal/exercises.html)
+関連項目：[UEのDelegateとInterface](/game/unreal/delegates-and-interfaces.html) | [この分野の学習ガイド](/game/unreal/) | [演習](/game/unreal/exercises.html)

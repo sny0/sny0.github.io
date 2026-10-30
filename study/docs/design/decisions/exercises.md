@@ -1,13 +1,19 @@
 ---
-title: "第12部 演習 — 判断ガイド"
+title: 判断ガイドの演習
 study:
-  source: "C++ Wiki"
-  kind: "演習"
-  status: "既存原稿"
-  summary: "判断フローを「使う」練習です。結論だけでなく、どの質問で分岐したかを言えることが目標です。 次の主張の問題点を、該当する判断ガイドを引いて指摘してください。 「このクラスは500行を超えたので分割すべきだ」"
+  source: C++ Wiki
+  status: published
+  summary: 判断フローを「使う」練習です。結論だけでなく、どの質問で分岐したかを言えることが目標です。 次の主張の問題点を、該当する判断ガイドを引いて指摘してください。 「このクラスは500行を超えたので分割すべきだ」
+  section: practice
+  format: exercise
+  domain: design
+  collection: cpp-exercises
+  order: 12
 ---
 
-# 第12部 演習 — 判断ガイド
+<div id="第12部-演習-—-判断ガイド" class="study-legacy-anchor" aria-hidden="true"></div>
+
+# 判断ガイドの演習
 
 判断フローを「使う」練習です。結論だけでなく、**どの質問で分岐したか**を言えることが目標です。
 
@@ -63,7 +69,7 @@ study:
 
 ## 問6. 説明問題
 
-このWiki全体を貫く「トレードオフで判断する」という姿勢を、後輩への1分間の説明として文章化してください(5文以内)。
+この技術辞典全体を貫く「トレードオフで判断する」という姿勢を、後輩への1分間の説明として文章化してください(5文以内)。
 
 <details><summary>解答例</summary>
 
@@ -72,14 +78,14 @@ study:
 
 ## 問7. 小規模実装問題(判断の実地演習)
 
-自分の現行プロジェクト(なければ[第11部演習の問7](/design/case-studies/exercises.html)のWave Survival)から機能追加を1つ選び、実装**前**に以下を書いてから実装してください。
+自分の現行プロジェクト(なければ[ケーススタディの演習](/design/case-studies/exercises.html)のWave Survival)から機能追加を1つ選び、実装**前**に以下を書いてから実装してください。
 
 1. 適用した判断ガイドと、通った分岐(Q1→Q2→…)
 2. 採用案と、比較した「より素朴な案」
 3. 実装後: 判断は正しかったか、想定と違った点
 
-この「判断ログ」の習慣がこのWikiの最終目標です。
+この「判断ログ」の習慣がこの演習の目標です。
 
 ---
 
-前: [最適化・リファクタリングの判断](/design/decisions/optimize-or-refactor.html) | [カテゴリ目次](/design/decisions/) | [全体目次へ](/guide/cpp-index.html)
+関連項目：[最適化・リファクタリングの判断](/design/decisions/optimize-or-refactor.html) / [学習ガイド](/design/decisions/) / [全体目次へ](/guide/cpp-index.html)

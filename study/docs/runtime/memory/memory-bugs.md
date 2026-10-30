@@ -1,10 +1,12 @@
 ---
-title: "メモリバグ図鑑 — dangling pointer・use-after-free・double free・memory leak・buffer overflow・stack overflow"
+title: メモリバグ図鑑 — dangling pointer・use-after-free・double free・memory leak・buffer overflow・stack overflow
 study:
-  source: "C++ Wiki"
-  kind: "本文"
-  status: "既存原稿"
-  summary: "C++のメモリバグは種類が有限です。全部未定義動作または資源枯渇であり、症状・原因・予防・検出ツールをセットで覚えれば怖さは激減します。 死んだオブジェクトを指すポインタ・参照(dangling)を使うとUAF。C++バグの王様です。"
+  source: C++ Wiki
+  status: published
+  summary: C++のメモリバグは種類が有限です。全部未定義動作または資源枯渇であり、症状・原因・予防・検出ツールをセットで覚えれば怖さは激減します。 死んだオブジェクトを指すポインタ・参照(dangling)を使うとUAF。C++バグの王様です。
+  section: reference
+  format: article
+  domain: runtime
 ---
 
 # メモリバグ図鑑 — dangling pointer・use-after-free・double free・memory leak・buffer overflow・stack overflow
@@ -130,4 +132,4 @@ samples/memory_bugs_annotated.cpp(**読む教材**: 各バグがコメント付�
 
 ---
 
-前: [所有権と借用](/runtime/memory/ownership-and-borrowing.html) | [カテゴリ目次](/runtime/memory/) | 次: [並行処理のバグ](/runtime/memory/concurrency-bugs.html)
+関連項目：[所有権と借用](/runtime/memory/ownership-and-borrowing.html) / [学習ガイド](/runtime/memory/) / [並行処理のバグ](/runtime/memory/concurrency-bugs.html)

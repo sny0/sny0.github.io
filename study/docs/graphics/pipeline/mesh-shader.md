@@ -1,10 +1,12 @@
 ---
-title: "Mesh Shader / Task Shader"
+title: Mesh Shader / Task Shader
 study:
-  source: "RenderingWiki"
-  kind: "本文"
-  status: "既存原稿"
-  summary: "Mesh Shader は、従来の IA→VS→(Tess)→(GS) というジオメトリパイプライン前半を、Compute Shader型の実行モデルで丸ごと置き換える新しいステージです。前段の Task Shader (DX12ではAmplification Shader) と組み合わせ、「スレッ"
+  source: RenderingWiki
+  status: published
+  summary: Mesh Shader は、従来の IA→VS→(Tess)→(GS) というジオメトリパイプライン前半を、Compute Shader型の実行モデルで丸ごと置き換える新しいステージです。前段の Task Shader (DX12ではAmplification Shader) と組み合わせ、「スレッ
+  section: reference
+  format: article
+  domain: graphics
 ---
 
 # Mesh Shader / Task Shader

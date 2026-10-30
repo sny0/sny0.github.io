@@ -1,17 +1,19 @@
 ---
-title: "レンダリングパイプライン全体像"
+title: レンダリングパイプライン全体像
 study:
-  source: "RenderingWiki"
-  kind: "本文"
-  status: "既存原稿"
-  summary: "レンダリングパイプラインは、頂点データが画面のピクセルになるまでの一連の工程です。プログラム可能なステージ (Vertex/Fragment Shader等) と固定機能ステージ (ラスタライザ、出力結合等) が交互に並ぶ「工場の生産ライン」であり、このWikiの第3章はこのラインを1工程ずつ歩いて"
+  source: RenderingWiki
+  status: published
+  summary: 頂点データが画面のピクセルになるまでを、プログラム可能なステージと固定機能ステージのつながりから調べる。
+  section: reference
+  format: article
+  domain: graphics
 ---
 
 # レンダリングパイプライン全体像
 
 ## 概要
 
-レンダリングパイプラインは、**頂点データが画面のピクセルになるまでの一連の工程**です。プログラム可能なステージ (Vertex/Fragment Shader等) と固定機能ステージ (ラスタライザ、出力結合等) が交互に並ぶ「工場の生産ライン」であり、このWikiの第3章はこのラインを1工程ずつ歩いていきます。
+レンダリングパイプラインは、**頂点データが画面のピクセルになるまでの一連の工程**です。プログラム可能なステージ (Vertex/Fragment Shader等) と固定機能ステージ (ラスタライザ、出力結合等) が交互に並ぶ「工場の生産ライン」であり、関連する本文では、このラインを1工程ずつ調べられます。
 
 ## なぜ必要なのか
 
@@ -149,7 +151,7 @@ float4 PSMain(VSOut i) : SV_Target {
 
 ## 次に読むべきページ
 
-第3章を順に:
+各工程の本文:
 1. [Vertex Shader](/graphics/pipeline/vertex-shader.html)
 2. [ラスタライゼーション](/graphics/pipeline/rasterization.html)
 3. [Fragment Shader](/graphics/pipeline/fragment-shader.html)

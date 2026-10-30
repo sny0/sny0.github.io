@@ -1,10 +1,12 @@
 ---
-title: "SSR (Screen-Space Reflections)"
+title: SSR (Screen-Space Reflections)
 study:
-  source: "RenderingWiki"
-  kind: "本文"
-  status: "既存原稿"
-  summary: "SSR (Screen-Space Reflections) は、深度バッファとカラーバッファを使い、画面内に映っているものの反射をレイマーチングで求める技術です。濡れた床・水面・光沢のある机に映る像を、追加のシーン描画なしで実現します。リフレクションプローブ (IBL) の「動的でない・視差が粗い"
+  source: RenderingWiki
+  status: published
+  summary: SSR (Screen-Space Reflections) は、深度バッファとカラーバッファを使い、画面内に映っているものの反射をレイマーチングで求める技術です。濡れた床・水面・光沢のある机に映る像を、追加のシーン描画なしで実現します。リフレクションプローブ (IBL) の「動的でない・視差が粗い
+  section: reference
+  format: article
+  domain: graphics
 ---
 
 # SSR (Screen-Space Reflections)

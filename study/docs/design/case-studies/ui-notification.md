@@ -1,13 +1,17 @@
 ---
-title: "ケーススタディ 08: UI通知"
+title: UI通知の設計
 study:
-  source: "C++ Wiki"
-  kind: "本文"
-  status: "既存原稿"
-  summary: "「ダメージ数値のポップ」「クエスト達成トースト」「HPバー更新」——ゲーム内の出来事を画面に映す配線の設計です。 UIの改修(HUD構造変更)のたびにゲームロジックがコンパイルエラー(依存の方向が逆)"
+  source: C++ Wiki
+  status: published
+  summary: 「ダメージ数値のポップ」「クエスト達成トースト」「HPバー更新」——ゲーム内の出来事を画面に映す配線の設計です。 UIの改修(HUD構造変更)のたびにゲームロジックがコンパイルエラー(依存の方向が逆)
+  section: reference
+  format: article
+  domain: design
 ---
 
-# ケーススタディ 08: UI通知
+<div id="ケーススタディ-08-ui通知" class="study-legacy-anchor" aria-hidden="true"></div>
+
+# UI通知の設計
 
 「ダメージ数値のポップ」「クエスト達成トースト」「HPバー更新」——ゲーム内の出来事を画面に映す配線の設計です。
 
@@ -90,4 +94,4 @@ HPバー・所持金など「特定の状態を常に映す」UIは、キュー�
 
 ---
 
-前: [ダメージ計算](/design/case-studies/damage-calculation.html) | [カテゴリ目次](/design/case-studies/) | 次: [オブジェクト生成](/design/case-studies/object-spawning.html)
+関連項目：[ダメージ計算](/design/case-studies/damage-calculation.html) / [学習ガイド](/design/case-studies/) / [オブジェクト生成](/design/case-studies/object-spawning.html)

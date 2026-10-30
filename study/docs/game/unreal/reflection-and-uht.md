@@ -1,10 +1,12 @@
 ---
-title: "リフレクション — UCLASS・UFUNCTION・UPROPERTY・Unreal Header Tool"
+title: リフレクション — UCLASS・UFUNCTION・UPROPERTY・Unreal Header Tool
 study:
-  source: "C++ Wiki"
-  kind: "本文"
-  status: "既存原稿"
-  summary: "リフレクション=「実行時に型の情報(クラス名・プロパティ一覧・関数一覧)を調べ、操作できる仕組み」。C#では言語標準(GetType()、属性)ですが、C++にはほぼ存在しない(RTTIは型の同定のみ)。UEはこれをコード生成で自作しました——UCLASS()等のマクロとUnreal Header "
+  source: C++ Wiki
+  status: published
+  summary: リフレクション=「実行時に型の情報(クラス名・プロパティ一覧・関数一覧)を調べ、操作できる仕組み」。C#では言語標準(GetType()、属性)ですが、C++にはほぼ存在しない(RTTIは型の同定のみ)。UEはこれをコード生成で自作しました——UCLASS()等のマクロとUnreal Header
+  section: reference
+  format: article
+  domain: game
 ---
 
 # リフレクション — UCLASS・UFUNCTION・UPROPERTY・Unreal Header Tool
@@ -85,4 +87,4 @@ UEプロジェクトを持っている場合: 任意のUCLASSヘッダーの `*.
 
 ---
 
-前: [UEのGCとUPROPERTY](/game/unreal/gc-and-object-pointers.html) | [カテゴリ目次](/game/unreal/) | 次: [UBT・Module・Build.cs](/game/unreal/build-system-ubt.html)
+関連項目：[UEのGCとUPROPERTY](/game/unreal/gc-and-object-pointers.html) | [この分野の学習ガイド](/game/unreal/) | [UBT・Module・Build.cs](/game/unreal/build-system-ubt.html)

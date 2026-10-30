@@ -1,10 +1,12 @@
 ---
-title: "凝集度と結合度(比較ページ)"
+title: 凝集度と結合度(比較ページ)
 study:
-  source: "C++ Wiki"
-  kind: "本文"
-  status: "既存原稿"
-  summary: "凝集度(cohesion) = 1つのモジュール(クラス・関数・ファイル)の中身がどれだけ関連し合っているか。高いほど良い。 結合度(coupling) = モジュール同士がどれだけ互いを知っているか。低い(弱い)ほど良い。"
+  source: C++ Wiki
+  status: published
+  summary: 凝集度(cohesion) = 1つのモジュール(クラス・関数・ファイル)の中身がどれだけ関連し合っているか。高いほど良い。 結合度(coupling) = モジュール同士がどれだけ互いを知っているか。低い(弱い)ほど良い。
+  section: reference
+  format: article
+  domain: design
 ---
 
 # 凝集度と結合度(比較ページ)
@@ -164,4 +166,4 @@ public:
 
 ---
 
-前: [責務と関心の分離](/design/foundations/responsibility-and-separation.html) | [カテゴリ目次](/design/foundations/) | 次: [依存関係と依存の方向](/design/foundations/dependency.html)
+関連項目：[責務と関心の分離](/design/foundations/responsibility-and-separation.html) / [学習ガイド](/design/foundations/) / [依存関係と依存の方向](/design/foundations/dependency.html)

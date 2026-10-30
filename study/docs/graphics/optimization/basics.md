@@ -1,10 +1,12 @@
 ---
-title: "GPU最適化の基礎"
+title: GPU最適化の基礎
 study:
-  source: "RenderingWiki"
-  kind: "本文"
-  status: "既存原稿"
-  summary: "GPU最適化とは、フレーム時間を計測し、ボトルネックを特定し、それを解消するという規律あるプロセスです。このページでは最適化の方法論 (計測→特定→仮説→検証)、GPUのボトルネックの分類 (ジオメトリ/シェーディング/帯域/CPU)、そして定番の最適化技法カタログを提供します。憶測での最適化は禁物"
+  source: RenderingWiki
+  status: published
+  summary: GPU最適化とは、フレーム時間を計測し、ボトルネックを特定し、それを解消するという規律あるプロセスです。このページでは最適化の方法論 (計測→特定→仮説→検証)、GPUのボトルネックの分類 (ジオメトリ/シェーディング/帯域/CPU)、そして定番の最適化技法カタログを提供します。憶測での最適化は禁物
+  section: reference
+  format: article
+  domain: graphics
 ---
 
 # GPU最適化の基礎

@@ -1,10 +1,12 @@
 ---
-title: "ガベージコレクションとの違い — C#の管理ヒープ・UnityのGC Allocとの比較"
+title: ガベージコレクションとの違い — C#の管理ヒープ・UnityのGC Allocとの比較
 study:
-  source: "C++ Wiki"
-  kind: "本文"
-  status: "既存原稿"
-  summary: "C++は「解放の責任を型と設計で表す」(RAII・所有権)、C#は「解放をランタイムが後で回収する」(GC)。どちらもメモリ管理であり、コストの払い方が違うだけです。この比較を正しく理解すると、UnityのGC Alloc対策がC++の知識で説明でき、逆にC++の設計がC#の経験で腑に落ちます。"
+  source: C++ Wiki
+  status: published
+  summary: C++は「解放の責任を型と設計で表す」(RAII・所有権)、C#は「解放をランタイムが後で回収する」(GC)。どちらもメモリ管理であり、コストの払い方が違うだけです。この比較を正しく理解すると、UnityのGC Alloc対策がC++の知識で説明でき、逆にC++の設計がC#の経験で腑に落ちます。
+  section: reference
+  format: article
+  domain: runtime
 ---
 
 # ガベージコレクションとの違い — C#の管理ヒープ・UnityのGC Allocとの比較
@@ -51,7 +53,7 @@ UnityのGC(Boehm GC)は上記の.NET GCと違い**非世代・非コンパクシ
 
 ## C++にGCを入れる選択肢は?
 
-- 技術的には存在する(Boehm GC、参照カウントの徹底=Objective-C的方式)。UEは**UObjectに限定したマーク&スイープGC**を自作している(→ [第10部](/game/unreal/gc-and-object-pointers.html))——「ゲームオブジェクトの複雑な所有関係」にはGCが合理的、という設計判断
+- 技術的には存在する(Boehm GC、参照カウントの徹底=Objective-C的方式)。UEは**UObjectに限定したマーク&スイープGC**を自作している(→ [UEのガベージコレクションと UPROPERTY・TObjectPtr・TWeakObjectPtr](/game/unreal/gc-and-object-pointers.html))——「ゲームオブジェクトの複雑な所有関係」にはGCが合理的、という設計判断
 - 全域GCをC++で使わない理由: 決定性の喪失、ポインタの自由(GCはどこがポインタか知る必要がある)、RAIIとの相性——**C++の強みを消してまで得るものが少ない**
 
 ## Unity開発者が誤解しやすい点
@@ -79,4 +81,4 @@ UnityのGC(Boehm GC)は上記の.NET GCと違い**非世代・非コンパクシ
 
 ---
 
-前: [placement new・allocator・pool・arena](/runtime/memory/allocators-and-pools.html) | [カテゴリ目次](/runtime/memory/) | 次: [演習](/runtime/memory/exercises.html)
+関連項目：[placement new・allocator・pool・arena](/runtime/memory/allocators-and-pools.html) / [学習ガイド](/runtime/memory/) / [演習](/runtime/memory/exercises.html)

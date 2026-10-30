@@ -1,10 +1,12 @@
 ---
-title: "WebGPU"
+title: WebGPU
 study:
-  source: "RenderingWiki"
-  kind: "本文"
-  status: "既存原稿"
-  summary: "WebGPUはWeb標準の明示的グラフィックス/コンピュートAPIです (2023, W3C)。DX12/Vulkan/Metalの設計を、Webサンドボックスの安全性要求の下で再蒸留した「第4の明示的API」であり、ブラウザ内で各ネイティブAPIの上に実装されます。JavaScriptだけでなく、"
+  source: RenderingWiki
+  status: published
+  summary: WebGPUはWeb標準の明示的グラフィックス/コンピュートAPIです (2023, W3C)。DX12/Vulkan/Metalの設計を、Webサンドボックスの安全性要求の下で再蒸留した「第4の明示的API」であり、ブラウザ内で各ネイティブAPIの上に実装されます。JavaScriptだけでなく、
+  section: reference
+  format: article
+  domain: graphics
 ---
 
 # WebGPU

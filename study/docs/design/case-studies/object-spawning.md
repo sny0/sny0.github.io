@@ -1,13 +1,17 @@
 ---
-title: "ケーススタディ 09: オブジェクト生成"
+title: オブジェクト生成の設計
 study:
-  source: "C++ Wiki"
-  kind: "本文"
-  status: "既存原稿"
-  summary: "「敵・弾・エフェクト・アイテムをいつ、誰が、どうやって作るか」。生成はFactory Method/Prototype/Object Poolの交差点です。 敵種が増える → make_unique の分岐がスポーン箇所ごとに複製(Factory Methodの問題そのもの)"
+  source: C++ Wiki
+  status: published
+  summary: 「敵・弾・エフェクト・アイテムをいつ、誰が、どうやって作るか」。生成はFactory Method/Prototype/Object Poolの交差点です。 敵種が増える → make_unique の分岐がスポーン箇所ごとに複製(Factory Methodの問題そのもの)
+  section: reference
+  format: article
+  domain: design
 ---
 
-# ケーススタディ 09: オブジェクト生成
+<div id="ケーススタディ-09-オブジェクト生成" class="study-legacy-anchor" aria-hidden="true"></div>
+
+# オブジェクト生成の設計
 
 「敵・弾・エフェクト・アイテムをいつ、誰が、どうやって作るか」。生成は[Factory Method](/design/patterns/factory-method.html)/[Prototype](/design/patterns/prototype.html)/[Object Pool](/game/patterns/object-pool.html)の交差点です。
 
@@ -87,4 +91,4 @@ public:
 
 ---
 
-前: [UI通知](/design/case-studies/ui-notification.html) | [カテゴリ目次](/design/case-studies/) | 次: [画面遷移](/design/case-studies/screen-transition.html)
+関連項目：[UI通知](/design/case-studies/ui-notification.html) / [学習ガイド](/design/case-studies/) / [画面遷移](/design/case-studies/screen-transition.html)

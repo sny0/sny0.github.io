@@ -1,13 +1,17 @@
 ---
-title: "ケーススタディ 04: ステート異常(状態異常)"
+title: ステート異常(状態異常)の設計
 study:
-  source: "C++ Wiki"
-  kind: "本文"
-  status: "既存原稿"
-  summary: "氷結・燃焼・スロウ追加 → 効果ごとにフラグ+タイマー2本がCharacterに増殖(4効果で変数12本) 「毒は重ねがけで効果増」「同じバフは上書き」→ 重複ルールがif文の枝に"
+  source: C++ Wiki
+  status: published
+  summary: 氷結・燃焼・スロウ追加 → 効果ごとにフラグ+タイマー2本がCharacterに増殖(4効果で変数12本) 「毒は重ねがけで効果増」「同じバフは上書き」→ 重複ルールがif文の枝に
+  section: reference
+  format: article
+  domain: design
 ---
 
-# ケーススタディ 04: ステート異常(状態異常)
+<div id="ケーススタディ-04-ステート異常-状態異常" class="study-legacy-anchor" aria-hidden="true"></div>
+
+# ステート異常(状態異常)の設計
 
 ## 素朴な実装
 
@@ -111,4 +115,4 @@ struct StatusFlags { TimedFlag poison, freeze, haste; };   // Characterはこれ
 
 ---
 
-前: [敵AI](/design/case-studies/enemy-ai.html) | [カテゴリ目次](/design/case-studies/) | 次: [実績システム](/design/case-studies/achievements.html)
+関連項目：[敵AI](/design/case-studies/enemy-ai.html) / [学習ガイド](/design/case-studies/) / [実績システム](/design/case-studies/achievements.html)
