@@ -23,6 +23,42 @@
   --study-draft-text: #4a5c79;
 }
 
+/* Teaching diagrams keep their own readable paper and short captions. */
+.vp-doc .study-figure {
+  margin: 28px 0;
+  padding: 16px;
+  border: 1px solid var(--vp-c-divider);
+  border-radius: 12px;
+  background: var(--vp-c-bg);
+}
+.vp-doc .study-figure img {
+  display: block;
+  width: 100%;
+  height: auto;
+  margin: 0 auto;
+  border-radius: 8px;
+  background: #fcfdfb;
+}
+.vp-doc .study-figure-playfield img { max-width: 480px; }
+.vp-doc .study-figure figcaption {
+  margin-top: 12px;
+  color: var(--vp-c-text-2);
+  font-size: .85rem;
+  line-height: 1.8;
+}
+.vp-doc .study-figure figcaption strong { color: var(--vp-c-text-1); }
+.vp-doc .study-figure-key {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px 18px;
+  margin: 12px 0 0;
+  padding: 0;
+  list-style: none;
+  font-size: .9rem;
+}
+.vp-doc .study-figure-key li { margin: 0; }
+@media (max-width: 480px) { .vp-doc .study-figure { padding: 10px; } }
+
 .dark {
   --vp-c-brand-1: #a5d4b5;
   --vp-c-brand-2: #8ac59f;

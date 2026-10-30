@@ -5,13 +5,19 @@ study:
   kind: "実装例"
   status: "初版"
   domain: game
-  summary: "2D縦シューティングを、仕様、データ、更新順、入力と描画の境界から設計する。C++とUnityの同じルールの実装へつなぐ。"
-  aliases: [シューティング, STG, shooting, shooter, ゲーム設計, 縦スクロール, raylib, Unity]
+  summary: "2D縦シューティングを、画面の絵、責務の図、時間と消去の図解、動かせる当たり判定から設計する。C++とUnityの実装へつなぐ。"
+  aliases: [シューティング, STG, shooting, shooter, ゲーム設計, 縦スクロール, raylib, Unity, 図解, 当たり判定]
 ---
 
 # 小さなシューティングの設計 — C++とUnityで作る
 
 「左右に動いて弾を撃ち、降ってくる敵を倒す」ゲームを題材に、**何を決めてからコードにするか**を追います。丸い図形だけで作り、画像・音・アセット管理を加える前に、操作とルールの一周を完成させます。
+
+<figure class="study-figure study-figure-playfield">
+  <img src="/images/shooter/playfield.svg" alt="縦シューティングの模式図。下の青い自機を操作し、金色の弾を上へ撃ち、上から下へ来る赤い敵を倒す。" width="640" height="738" />
+  <ul class="study-figure-key"><li>① 自機：移動する</li><li>② 弾：上へ進む</li><li>③ 敵：下へ進む</li></ul>
+  <figcaption><strong>まず、作るものを絵でつかむ。</strong> 同じ画面に見える自機・弾・敵も、更新するデータと表示の役割は分けます。これは実機キャプチャではなく、仕様を説明する模式図です。<a href="/study/images/shooter/playfield.svg" target="_blank" rel="noopener noreferrer">画面の図を拡大</a></figcaption>
+</figure>
 
 同じルールの完全なソースを2種類用意しています。
 
@@ -43,6 +49,11 @@ study:
 ## 2. 1フレームと1tickを分ける
 
 **フレーム**は入力を読み、画面を描く単位です。**tick**はゲームの状態を一段進める単位です。この例のtickは1/60秒です。描画が速いフレームではtickを進めず、遅いフレームでは複数tick進める場合があります。
+
+<figure class="study-figure">
+  <img src="/images/shooter/timing.svg" alt="同じ約66.7ミリ秒の理想例。120fpsの8フレームでは0回と1回の更新を交互に、30fpsの2フレームでは各2回更新し、どちらも4tick進む。" width="680" height="984" />
+  <figcaption><strong>絵を描く回数と、世界を進める回数は別。</strong> 一定のフレーム時間を仮定した説明用の例です。現実の入力・フレーム時間の揺れまで同じになることは意味しません。<a href="/study/images/shooter/timing.svg" target="_blank" rel="noopener noreferrer">時間の図を拡大</a></figcaption>
+</figure>
 
 ```mermaid
 flowchart TD
@@ -76,6 +87,11 @@ Game Over中も入力と描画は続けます。Modelの通常更新だけを止
 ## 3. データの所有者を決める
 
 最初は「同じ振る舞いがあるから基底クラスを作る」より、**どのデータを誰が変更してよいか**を決めます。
+
+<figure class="study-figure">
+  <img src="/images/shooter/architecture.svg" alt="入力を読み固定tickへ渡す外側のループ、ルールと状態を所有するModel、状態を読んで画面へ写す表示側の関係。C++のmainとWorld、UnityのShooterDemoとShooterModelを対応させる。" width="640" height="1440" />
+  <figcaption><strong>キーを読む・状態を進める・絵を描く、の置き場所を分ける。</strong> 矢印は入力やデータの流れです。クラスの継承関係を表す図ではありません。<a href="/study/images/shooter/architecture.svg" target="_blank" rel="noopener noreferrer">役割分担の図を拡大</a></figcaption>
+</figure>
 
 | データ・資源 | 所有者 | 変更する場所 |
 | --- | --- | --- |
@@ -116,6 +132,11 @@ C++版は教材を小さくするため値の状態を公開しています。�
 
 弾と敵の二重ループ中で`erase`や`RemoveAt`をすると、反復中の要素の位置や参照が変わります。例えば敵を1体消した結果、次の敵の検査を飛ばしたり、C++の無効になった参照を使ったりする原因になります。
 
+<figure class="study-figure">
+  <img src="/images/shooter/lifecycle.svg" alt="1tick内の3段階。弾1個と重なった敵A・Bを調べ、弾と敵Aだけを無効化して100点加算。走査後に無効要素を取り除き、有効な敵Bだけを残す。" width="640" height="1670" />
+  <figcaption><strong>先に印を付け、走査が終わってから詰める。</strong> 判定順を調べるために敵を重ねた説明用の配置です。3コマは1tickの中の処理段階で、弾1個でA・Bの両方に加点しない点を示しています。<a href="/study/images/shooter/lifecycle.svg" target="_blank" rel="noopener noreferrer">消去の図を拡大</a></figcaption>
+</figure>
+
 本例では衝突中は`alive = false`と記録し、最後に掃除します。衝突判定では既に無効なものを飛ばし、弾が1体に当たったら、その弾についての敵探索を終えます。これで「同じ敵に二重加点」「弾1個で重なった敵を全部倒す」を防ぎます。遅らせる消去にも、**無効と記録した直後から、その要素を判定対象に戻さない**という約束が必要です。
 
 ## 5. 当たり判定を小さく実装する
@@ -125,6 +146,8 @@ C++版は教材を小さくするため値の状態を公開しています。�
 $$
 (a_x-b_x)^2 + (a_y-b_y)^2 \leq (a_r+b_r)^2
 $$
+
+<ShooterCollisionDiagram />
 
 距離の平方どうしを比較できるので、この判定には平方根は不要です。弾64個・敵32体の上限なら、弾対敵の単純な組合せは最大2,048組です。これは処理の上限を見積もる値で、実測時間の保証ではありません。最初はこの方法を計測し、大量の対象が必要になったら空間分割やBroad Phaseを検討します。
 
@@ -140,6 +163,11 @@ $$
 | 表示 | Modelの円をraylibで描く | Modelの位置をSpriteRendererへ写す |
 | 論理座標 | 640×720の座標を使う | 100pxを1unitとし、yを反転してUnity座標へ写す |
 | 片付け | アプリが確保した描画資源を終了時に解放 | 自分で生成した表示用オブジェクト・Sprite等を終了時に破棄 |
+
+<figure class="study-figure">
+  <img src="/images/shooter/coordinates.svg" alt="Modelは左上原点で下向きがプラス、Unityワールドは画面中央を原点に上向きがプラス。Modelの自機位置320,650は100pxを1unitとしてUnityの0,-2.9へ写る。" width="640" height="1094" />
+  <figcaption><strong>同じ位置でも、座標の書き方が違う。</strong> Modelの論理座標からUnityのワールド座標への変換です。実際のディスプレイのピクセル数とは区別します。<a href="/study/images/shooter/coordinates.svg" target="_blank" rel="noopener noreferrer">座標の図を拡大</a></figcaption>
+</figure>
 
 両版とも衝突はModel内で計算します。Unity版にRigidbody2DやCollider2Dを付け足すと、別の衝突経路が加わります。Unityの物理で動かす設計へ変える場合は、位置の所有者、`FixedUpdate`、物理イベントの受取り方をまとめて見直してください。
 

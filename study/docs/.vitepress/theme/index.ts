@@ -4,6 +4,7 @@ import DefaultTheme from 'vitepress/theme'
 import StudyCatalog from './StudyCatalog.vue'
 import ArticleMeta from './ArticleMeta.vue'
 import AnnualHighlights from './AnnualHighlights.vue'
+import ShooterCollisionDiagram from './ShooterCollisionDiagram.vue'
 import './style.css'
 
 export default {
@@ -14,5 +15,6 @@ export default {
   enhanceApp({ app }) {
     app.component('StudyCatalog', StudyCatalog)
     app.component('AnnualHighlights', AnnualHighlights)
+    app.component('ShooterCollisionDiagram', ShooterCollisionDiagram)
   }
 } satisfies Theme
