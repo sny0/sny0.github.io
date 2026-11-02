@@ -1,0 +1,103 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="760" height="1460" viewBox="0 0 760 1460" role="img" aria-labelledby="memory-title memory-desc">
+  <title id="memory-title">仮想アドレスから物理ページへの変換</title>
+  <desc id="memory-desc">縦方向に読む模式図。プロセスAの連続した仮想ページV0、V1、V2、V3を、物理ページP2、P7、P4、P9へ対応付ける。RAM上では間に別の用途のページがある。V1内のオフセット0x80へのアクセスでは、CPUがTLBの変換情報を利用し、ミス時はページ表などを参照する。変換と権限が有効ならP7内の同じオフセットへアクセスする。TLBミスだけでページフォルトとは限らない。ページフォルト時はOSが準備して再開するか、不正なアクセスとして例外を通知するか判断する。矢印は変換情報の参照手順であり、データのコピーではない。</desc>
+  <defs>
+    <marker id="memory-arrow" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="8" markerHeight="8" orient="auto" markerUnits="userSpaceOnUse">
+      <path d="M1 1L9 5L1 9" fill="none" stroke="#245d48" stroke-width="2"/>
+    </marker>
+  </defs>
+  <style>
+    text { font-family: system-ui, "Noto Sans JP", "Yu Gothic", Meiryo, sans-serif; fill: #26352e; }
+    .heading { font-size: 28px; font-weight: 700; }
+    .body { font-size: 24px; }
+    .center { text-anchor: middle; }
+    .flow { fill: none; stroke: #245d48; stroke-width: 3; marker-end: url(#memory-arrow); }
+    .page { fill: #e1eee5; stroke: #245d48; stroke-width: 2; }
+    .other { fill: #f2f3f1; stroke: #bac7bd; stroke-width: 2; }
+  </style>
+  <rect width="760" height="1460" rx="20" fill="#f4f8f4"/>
+  <text x="32" y="49" font-size="34" font-weight="700">仮想アドレスから物理ページへ</text>
+  <text x="32" y="88" class="body">連続した仮想領域を、離れたRAMで支えられる</text>
+
+  <rect x="24" y="110" width="712" height="190" rx="15" fill="#fff"/>
+  <text x="44" y="151" class="heading">① プロセスAの仮想アドレス</text>
+  <rect x="44" y="176" width="168" height="74" class="page"/>
+  <rect x="212" y="176" width="168" height="74" fill="#245d48" stroke="#245d48" stroke-width="2"/>
+  <rect x="380" y="176" width="168" height="74" class="page"/>
+  <rect x="548" y="176" width="168" height="74" class="page"/>
+  <g class="center" font-size="34" font-weight="700">
+    <text x="128" y="224">V0</text>
+    <text x="296" y="224" style="fill:#fff">V1</text>
+    <text x="464" y="224">V2</text>
+    <text x="632" y="224">V3</text>
+  </g>
+  <text x="44" y="281" class="body">隣り合うアドレス。物理的な隣接は不要</text>
+  <path d="M380 303V334" class="flow"/>
+
+  <rect x="24" y="338" width="712" height="442" rx="15" fill="#fff"/>
+  <text x="44" y="379" class="heading">② CPUのMMU：変換と権限</text>
+  <rect x="44" y="402" width="672" height="58" rx="9" fill="#e1eee5"/>
+  <path d="M455 402V460" fill="none" stroke="#bad1c2" stroke-width="2"/>
+  <text x="249" y="439" font-size="26" class="center">アクセスする仮想ページ V1</text>
+  <text x="585" y="439" font-size="26" class="center">ページ内 +0x80</text>
+  <path d="M380 462V484H174V508" class="flow"/>
+
+  <rect x="44" y="512" width="260" height="92" rx="12" fill="#e1eee5" stroke="#245d48" stroke-width="2"/>
+  <text x="174" y="550" font-size="30" font-weight="700" class="center">TLB</text>
+  <text x="174" y="585" class="body center">変換情報のキャッシュ</text>
+  <path d="M308 558H428" class="flow"/>
+  <text x="368" y="541" class="body center">ミス</text>
+  <rect x="432" y="512" width="284" height="92" rx="12" fill="#f4f8f4" stroke="#245d48" stroke-width="2"/>
+  <text x="574" y="550" font-size="30" font-weight="700" class="center">ページ表</text>
+  <text x="574" y="585" class="body center">OSが管理・CPUが参照</text>
+  <path d="M174 607V687" class="flow"/>
+  <path d="M574 607V687" class="flow"/>
+  <text x="103" y="640" class="body center">ヒット</text>
+  <text x="642" y="640" class="body center">変換可</text>
+  <rect x="44" y="692" width="672" height="66" rx="10" fill="#245d48"/>
+  <text x="380" y="734" class="heading center" style="fill:#fff">V1 → P7、ページ内 +0x80</text>
+  <path d="M380 783V817" class="flow"/>
+
+  <rect x="24" y="822" width="712" height="240" rx="15" fill="#fff"/>
+  <text x="44" y="864" class="heading">③ RAMの物理ページ（番号は模式例）</text>
+  <rect x="44" y="888" width="84" height="94" class="page"/>
+  <rect x="128" y="888" width="84" height="94" class="other"/>
+  <rect x="212" y="888" width="84" height="94" class="page"/>
+  <rect x="296" y="888" width="84" height="94" class="other"/>
+  <rect x="380" y="888" width="84" height="94" class="other"/>
+  <rect x="464" y="888" width="84" height="94" fill="#245d48" stroke="#245d48" stroke-width="2"/>
+  <rect x="548" y="888" width="84" height="94" class="other"/>
+  <rect x="632" y="888" width="84" height="94" class="page"/>
+  <g font-size="28" font-weight="700" class="center">
+    <text x="86" y="928">P2</text>
+    <text x="170" y="928">P3</text>
+    <text x="254" y="928">P4</text>
+    <text x="338" y="928">P5</text>
+    <text x="422" y="928">P6</text>
+    <text x="506" y="928" style="fill:#fff">P7</text>
+    <text x="590" y="928">P8</text>
+    <text x="674" y="928">P9</text>
+  </g>
+  <g class="body center">
+    <text x="86" y="966">V0</text>
+    <text x="170" y="966">別</text>
+    <text x="254" y="966">V2</text>
+    <text x="338" y="966">別</text>
+    <text x="422" y="966">別</text>
+    <text x="506" y="966" style="fill:#fff">V1</text>
+    <text x="590" y="966">別</text>
+    <text x="674" y="966">V3</text>
+  </g>
+  <text x="380" y="1017" class="body center">V0→P2 / V1→P7 / V2→P4 / V3→P9</text>
+  <text x="380" y="1048" class="body center">淡緑・濃緑＝この領域、灰＝別の用途</text>
+
+  <rect x="24" y="1100" width="712" height="205" rx="15" fill="#e6f1e8" stroke="#bad1c2" stroke-width="2"/>
+  <text x="44" y="1144" class="heading">有効な対応がない・保護違反など</text>
+  <text x="44" y="1185" class="heading">ページフォルト → OSが判断</text>
+  <text x="44" y="1225" class="body">必要な準備・再開 / 不正なら例外</text>
+  <text x="44" y="1265" class="body">ディスクI/Oが発生するとは限らない</text>
+
+  <text x="32" y="1354" class="body">矢印：変換情報の参照手順（コピーではない）</text>
+  <text x="32" y="1394" font-size="26" font-weight="700">TLBミス ≠ ページフォルト</text>
+  <text x="32" y="1433" class="body">模式図：ページ表の階層・データキャッシュは省略</text>
+</svg>
