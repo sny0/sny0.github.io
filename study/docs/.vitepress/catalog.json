@@ -41,8 +41,8 @@
       "id": "os",
       "title": "OS",
       "description": "プロセス、メモリ、スレッド、入出力の仕組みを調べる。",
-      "count": 0,
-      "status": "辞典本文を準備中"
+      "count": 1,
+      "status": "辞典本文あり"
     },
     {
       "id": "compilers",
@@ -62,7 +62,7 @@
       "id": "runtime",
       "title": "実行時の仕組み",
       "description": "確保・所有・解放から、GC、非同期、言語境界へつなぐ。",
-      "count": 12,
+      "count": 13,
       "status": "辞典本文あり"
     },
     {
@@ -130,6 +130,13 @@
     }
   ],
   "collections": [
+    {
+      "id": "memory-observation",
+      "section": "practice",
+      "title": "Windowsでメモリの状態を観察する",
+      "description": "C++で予約・コミット・初回書込み・解放を分け、仮想メモリとプロセスの指標を確かめる。",
+      "start": "/practice/memory/windows-memory-observation.html"
+    },
     {
       "id": "questions",
       "section": "learning",
@@ -2117,6 +2124,40 @@
       ]
     },
     {
+      "title": "malloc・newから解放まで — アロケータとOSの境界",
+      "url": "/runtime/memory/allocation-journey.html",
+      "file": "runtime/memory/allocation-journey.md",
+      "domain": "runtime",
+      "section": "reference",
+      "format": "article",
+      "status": "published",
+      "summary": "メモリ確保の再利用経路、必要時のOS要求、オブジェクトの初期化・破棄、解放とOS返却の違いをつなぐ。",
+      "source": "新規執筆",
+      "aliases": [
+        "malloc",
+        "free",
+        "new",
+        "delete",
+        "operator new",
+        "メモリ確保",
+        "アロック",
+        "ヒープ",
+        "サイズクラス",
+        "フリーリスト",
+        "tcache",
+        "alloc",
+        "allocate"
+      ],
+      "links": [
+        "/runtime/memory/allocators-and-pools.html",
+        "/os/virtual-memory.html",
+        "/runtime/memory/memory-bugs.html",
+        "/runtime/memory/ownership-and-borrowing.html",
+        "/game/patterns/object-pool.html",
+        "/practice/memory/windows-memory-observation.html"
+      ]
+    },
+    {
       "title": "Mediator",
       "url": "/design/patterns/mediator.html",
       "file": "design/patterns/mediator.md",
@@ -2406,6 +2447,9 @@
       ],
       "links": [
         "/game/patterns/object-pool.html",
+        "/runtime/memory/allocation-journey.html",
+        "/os/virtual-memory.html",
+        "/practice/memory/windows-memory-observation.html",
         "/game/unreal/",
         "/runtime/memory/cache-locality-aos-soa.html",
         "/runtime/memory/",
@@ -3376,6 +3420,38 @@
       ]
     },
     {
+      "title": "Windowsで予約・コミット・初回書き込みを観察する",
+      "url": "/practice/memory/windows-memory-observation.html",
+      "file": "practice/memory/windows-memory-observation.md",
+      "domain": "os",
+      "section": "practice",
+      "format": "sample",
+      "status": "published",
+      "summary": "VirtualAllocで16MiBを予約・コミットし、ページごとの初回書き込み、decommit、releaseをVirtualQueryとプロセス統計で観察するC++17サンプル。",
+      "source": "新規執筆",
+      "aliases": [
+        "VirtualAlloc",
+        "VirtualQuery",
+        "VirtualFree",
+        "MEM_RESERVE",
+        "MEM_COMMIT",
+        "MEM_DECOMMIT",
+        "MEM_RELEASE",
+        "PrivateUsage",
+        "WorkingSetSize",
+        "初回アクセス"
+      ],
+      "collection": "memory-observation",
+      "order": 1,
+      "verification": "Windows x64で実行確認",
+      "links": [
+        "/os/virtual-memory.html",
+        "/runtime/memory/allocation-journey.html",
+        "/runtime/memory/allocators-and-pools.html",
+        "/runtime/memory/storage-duration-and-lifetime.html"
+      ]
+    },
+    {
       "title": "YAGNI・KISS・DRY と早すぎる抽象化・早すぎる最適化",
       "url": "/design/foundations/yagni-kiss-dry.html",
       "file": "design/foundations/yagni-kiss-dry.md",
@@ -3551,17 +3627,17 @@
       "section": "reference",
       "format": "article",
       "status": "published",
-      "summary": "C++は「解放の責任を型と設計で表す」(RAII・所有権)、C#は「解放をランタイムが後で回収する」(GC)。どちらもメモリ管理であり、コストの払い方が違うだけです。この比較を正しく理解すると、UnityのGC Alloc対策がC++の知識で説明でき、逆にC++の設計がC#の経験で腑に落ちます。",
+      "summary": "C++のRAIIと.NET・UnityのGCを、確保、破棄、回収、再利用、OSへの返却と計測の違いから比較する。",
       "source": "C++ Wiki",
       "aliases": [],
       "links": [
-        "/runtime/memory/allocators-and-pools.html",
-        "/game/patterns/object-pool.html",
-        "/languages/cpp/lambdas-and-functions.html",
+        "/runtime/memory/allocation-journey.html",
+        "/runtime/memory/storage-duration-and-lifetime.html",
         "/game/unreal/gc-and-object-pointers.html",
-        "/languages/cpp/raii.html",
+        "/practice/memory/windows-memory-observation.html",
+        "/runtime/memory/allocators-and-pools.html",
         "/runtime/memory/",
-        "/runtime/memory/exercises.html"
+        "/runtime/memory/ownership-and-borrowing.html"
       ]
     },
     {
@@ -5029,6 +5105,48 @@
       ]
     },
     {
+      "title": "仮想メモリ — アドレス変換・ページ・予約とコミット",
+      "url": "/os/virtual-memory.html",
+      "file": "os/virtual-memory.md",
+      "domain": "os",
+      "section": "reference",
+      "format": "article",
+      "status": "published",
+      "summary": "仮想アドレスが物理ページへ対応する仕組みと、Windowsの予約・コミット・常駐を区別する。TLB、ページフォルト、遅延割当、コピーオンライト、保護と観察方法を調べる。",
+      "source": "新規執筆",
+      "aliases": [
+        "virtual memory",
+        "仮想メモリ",
+        "仮想アドレス",
+        "物理アドレス",
+        "アドレス空間",
+        "ページ",
+        "page table",
+        "ページ表",
+        "TLB",
+        "MMU",
+        "page fault",
+        "ページフォルト",
+        "demand paging",
+        "demand-zero",
+        "copy-on-write",
+        "COW",
+        "reserve",
+        "commit",
+        "resident",
+        "working set",
+        "ワーキングセット",
+        "VirtualAlloc"
+      ],
+      "verification": "Windows API契約とIntel SDMの一次資料照合（2026-11-02）",
+      "links": [
+        "/runtime/memory/memory-bugs.html",
+        "/runtime/memory/allocation-journey.html",
+        "/runtime/memory/allocators-and-pools.html",
+        "/practice/memory/windows-memory-observation.html"
+      ]
+    },
+    {
       "title": "仮想関数と virtual/override / コンパイル時多態と実行時多態",
       "url": "/languages/csharp/virtual-and-polymorphism.html",
       "file": "languages/csharp/virtual-and-polymorphism.md",
@@ -5170,17 +5288,18 @@
       "section": "reference",
       "format": "article",
       "status": "published",
-      "summary": "C++のオブジェクトには「いつ生まれ、いつ死ぬか」の分類=記憶域期間 (storage duration) が3+1種類あります。そしてスコープ(名前が見える範囲)と寿命(実体が生きている期間)は別物——この区別が曖昧だとdangling系のバグを理解できません。",
+      "summary": "名前が使えるスコープ、記憶域を保持する期間、オブジェクトの寿命を分け、C++とC#・Unityの違いを調べる。",
       "source": "C++ Wiki",
       "aliases": [],
       "links": [
-        "/runtime/memory/memory-bugs.html",
-        "/design/patterns/singleton.html",
-        "/languages/cpp/values-pointers-references.html",
-        "/game/unreal/gc-and-object-pointers.html",
-        "/runtime/memory/allocators-and-pools.html",
+        "/os/virtual-memory.html",
+        "/runtime/memory/allocation-journey.html",
+        "/languages/cpp/raii.html",
         "/runtime/memory/ownership-and-borrowing.html",
-        "/runtime/memory/"
+        "/runtime/memory/memory-bugs.html",
+        "/runtime/memory/allocators-and-pools.html",
+        "/runtime/memory/gc-and-csharp-comparison.html",
+        "/practice/memory/windows-memory-observation.html"
       ]
     },
     {
@@ -5223,8 +5342,10 @@
       "order": 0,
       "links": [
         "/runtime/memory/storage-duration-and-lifetime.html",
+        "/runtime/memory/allocation-journey.html",
+        "/os/virtual-memory.html",
+        "/practice/memory/windows-memory-observation.html",
         "/runtime/memory/allocators-and-pools.html",
-        "/guide/low-level/operating-system.html",
         "/runtime/memory/memory-bugs.html",
         "/runtime/memory/cache-locality-aos-soa.html",
         "/runtime/cpp-internals/build-pipeline-journey.html",
@@ -5519,6 +5640,7 @@
         "/runtime/memory/ownership-and-borrowing.html",
         "/runtime/memory/memory-bugs.html",
         "/languages/cpp/smart-pointers.html",
+        "/runtime/memory/allocation-journey.html",
         "/game/unreal/gc-and-object-pointers.html",
         "/runtime/memory/exercises.html",
         "/languages/csharp/il2cpp.html",
@@ -6465,12 +6587,15 @@
       "section": "learning",
       "format": "path",
       "status": "outline",
-      "summary": "ポインタの読み方から確保・所有・解放へ進み、アロケータやメモリバグを観察するための学習計画・概要です。短い概説と演習で調べる順序を決め、個別の規則や実装例は辞典本文へ進んで確認します。\n\n## 関連する辞典本文・実践\n\n- [記憶域期間と寿命](/runtime/memory/storage",
+      "summary": "ポインタ、記憶域、汎用・用途別アロケータを学び、OSへの要求と実際のページ状態を観察するための計画。",
       "source": "IT教本",
       "aliases": [],
       "collection": "low-level",
       "order": 7,
       "links": [
+        "/runtime/memory/allocation-journey.html",
+        "/os/virtual-memory.html",
+        "/practice/memory/windows-memory-observation.html",
         "/runtime/memory/storage-duration-and-lifetime.html",
         "/runtime/memory/ownership-and-borrowing.html",
         "/runtime/memory/allocators-and-pools.html",
@@ -6509,12 +6634,14 @@
       "section": "learning",
       "format": "path",
       "status": "outline",
-      "summary": "プロセス・スレッド・仮想メモリ・システムコール・I/Oを学ぶ順序と観察課題をまとめた学習計画・概要です。OS各機構の専用詳解はまだ揃っていません。このページの概説と章末の資料を足場に、手元のOSで挙動を確かめます。\n\n## 関連する辞典本文・実践\n\n- [アロケータ](/runtime/me",
+      "summary": "プロセス、スレッド、仮想メモリ、システムコール、I/Oを学ぶ計画。仮想メモリの辞典本文とWindowsの観察例へつなぐ。",
       "source": "IT教本",
       "aliases": [],
       "collection": "low-level",
       "order": 9,
       "links": [
+        "/os/virtual-memory.html",
+        "/practice/memory/windows-memory-observation.html",
         "/runtime/memory/allocators-and-pools.html",
         "/runtime/memory/concurrency-bugs.html"
       ],
@@ -7157,7 +7284,8 @@
       "source": "統合ガイド",
       "aliases": [],
       "links": [
-        "/runtime/memory/allocators-and-pools.html",
+        "/runtime/memory/allocation-journey.html",
+        "/os/virtual-memory.html",
         "/game/ecs.html",
         "/runtime/memory/storage-duration-and-lifetime.html",
         "/graphics/shader/hlsl.html",

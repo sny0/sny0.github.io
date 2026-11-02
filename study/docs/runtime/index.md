@@ -19,6 +19,7 @@
 
 ## 辞典の本文
 
+- [malloc・newから解放まで — アロケータとOSの境界](/runtime/memory/allocation-journey.html)
 - [placement new・allocator・memory pool・arena allocator・fragmentation](/runtime/memory/allocators-and-pools.html)
 - [RTTI・dynamic_cast・例外処理の仕組み](/runtime/cpp-internals/exceptions-and-rtti-impl.html)
 - [vtable・vptr・仮想関数呼び出し](/runtime/cpp-internals/vtable-and-virtual-calls.html)

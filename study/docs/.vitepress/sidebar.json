@@ -45,8 +45,12 @@
       "collapsed": true,
       "items": [
         {
-          "text": "本文を準備中",
+          "text": "分野の目次",
           "link": "/os/"
+        },
+        {
+          "text": "仮想メモリ — アドレス変換・ページ・予約とコミット",
+          "link": "/os/virtual-memory.html"
         }
       ]
     },
@@ -217,6 +221,10 @@
         {
           "text": "分野の目次",
           "link": "/runtime/"
+        },
+        {
+          "text": "malloc・newから解放まで — アロケータとOSの境界",
+          "link": "/runtime/memory/allocation-journey.html"
         },
         {
           "text": "placement new・allocator・memory pool・arena allocator・fragmentation",
@@ -1049,6 +1057,10 @@
       "collapsed": false,
       "items": [
         {
+          "text": "Windowsでメモリの状態を観察する",
+          "link": "/practice/memory/windows-memory-observation.html"
+        },
+        {
           "text": "小さなシューティングを作る",
           "link": "/game/shooter-design.html"
         },
@@ -1106,6 +1118,10 @@
       "collapsed": true,
       "items": [
         {
+          "text": "Windowsでメモリの状態を観察する",
+          "link": "/practice/memory/windows-memory-observation.html"
+        },
+        {
           "text": "小さなシューティングを作る",
           "link": "/game/shooter-design.html"
         },
@@ -1158,6 +1174,10 @@
       "text": "ほかの実践・サンプル",
       "collapsed": true,
       "items": [
+        {
+          "text": "Windowsでメモリの状態を観察する",
+          "link": "/practice/memory/windows-memory-observation.html"
+        },
         {
           "text": "小さなシューティングを作る",
           "link": "/game/shooter-design.html"
@@ -1212,6 +1232,10 @@
       "collapsed": true,
       "items": [
         {
+          "text": "Windowsでメモリの状態を観察する",
+          "link": "/practice/memory/windows-memory-observation.html"
+        },
+        {
           "text": "小さなシューティングを作る",
           "link": "/game/shooter-design.html"
         },
@@ -1264,6 +1288,10 @@
       "text": "ほかの実践・サンプル",
       "collapsed": true,
       "items": [
+        {
+          "text": "Windowsでメモリの状態を観察する",
+          "link": "/practice/memory/windows-memory-observation.html"
+        },
         {
           "text": "小さなシューティングを作る",
           "link": "/game/shooter-design.html"
@@ -1318,6 +1346,10 @@
       "collapsed": true,
       "items": [
         {
+          "text": "Windowsでメモリの状態を観察する",
+          "link": "/practice/memory/windows-memory-observation.html"
+        },
+        {
           "text": "小さなシューティングを作る",
           "link": "/game/shooter-design.html"
         },
@@ -1363,6 +1395,10 @@
       "collapsed": true,
       "items": [
         {
+          "text": "Windowsでメモリの状態を観察する",
+          "link": "/practice/memory/windows-memory-observation.html"
+        },
+        {
           "text": "小さなシューティングを作る",
           "link": "/game/shooter-design.html"
         },
@@ -1407,6 +1443,10 @@
       "text": "ほかの実践・サンプル",
       "collapsed": true,
       "items": [
+        {
+          "text": "Windowsでメモリの状態を観察する",
+          "link": "/practice/memory/windows-memory-observation.html"
+        },
         {
           "text": "小さなシューティングを作る",
           "link": "/game/shooter-design.html"
@@ -1667,6 +1707,10 @@
       "collapsed": true,
       "items": [
         {
+          "text": "Windowsでメモリの状態を観察する",
+          "link": "/practice/memory/windows-memory-observation.html"
+        },
+        {
           "text": "小さなシューティングを作る",
           "link": "/game/shooter-design.html"
         },
@@ -1756,6 +1800,10 @@
       "collapsed": true,
       "items": [
         {
+          "text": "Windowsでメモリの状態を観察する",
+          "link": "/practice/memory/windows-memory-observation.html"
+        },
+        {
           "text": "小さなシューティングを作る",
           "link": "/game/shooter-design.html"
         },
@@ -1800,6 +1848,10 @@
       "text": "ほかの実践・サンプル",
       "collapsed": true,
       "items": [
+        {
+          "text": "Windowsでメモリの状態を観察する",
+          "link": "/practice/memory/windows-memory-observation.html"
+        },
         {
           "text": "小さなシューティングを作る",
           "link": "/game/shooter-design.html"
@@ -1889,6 +1941,10 @@
       "text": "ほかの実践・サンプル",
       "collapsed": true,
       "items": [
+        {
+          "text": "Windowsでメモリの状態を観察する",
+          "link": "/practice/memory/windows-memory-observation.html"
+        },
         {
           "text": "小さなシューティングを作る",
           "link": "/game/shooter-design.html"
@@ -2064,6 +2120,10 @@
       "collapsed": true,
       "items": [
         {
+          "text": "Windowsでメモリの状態を観察する",
+          "link": "/practice/memory/windows-memory-observation.html"
+        },
+        {
           "text": "小さなシューティングを作る",
           "link": "/game/shooter-design.html"
         },
@@ -2237,6 +2297,10 @@
       "text": "ほかの実践・サンプル",
       "collapsed": true,
       "items": [
+        {
+          "text": "Windowsでメモリの状態を観察する",
+          "link": "/practice/memory/windows-memory-observation.html"
+        },
         {
           "text": "小さなシューティングを作る",
           "link": "/game/shooter-design.html"
@@ -2412,6 +2476,10 @@
       "collapsed": true,
       "items": [
         {
+          "text": "Windowsでメモリの状態を観察する",
+          "link": "/practice/memory/windows-memory-observation.html"
+        },
+        {
           "text": "小さなシューティングを作る",
           "link": "/game/shooter-design.html"
         },
@@ -2586,6 +2654,10 @@
       "collapsed": true,
       "items": [
         {
+          "text": "Windowsでメモリの状態を観察する",
+          "link": "/practice/memory/windows-memory-observation.html"
+        },
+        {
           "text": "小さなシューティングを作る",
           "link": "/game/shooter-design.html"
         },
@@ -2674,6 +2746,10 @@
       "text": "ほかの実践・サンプル",
       "collapsed": true,
       "items": [
+        {
+          "text": "Windowsでメモリの状態を観察する",
+          "link": "/practice/memory/windows-memory-observation.html"
+        },
         {
           "text": "小さなシューティングを作る",
           "link": "/game/shooter-design.html"
@@ -2778,6 +2854,47 @@
       ]
     }
   ],
+  "/practice/memory/windows-memory-observation.md": [
+    {
+      "text": "実践・サンプル一覧",
+      "link": "/practice/"
+    },
+    {
+      "text": "Windowsでメモリの状態を観察する",
+      "items": [
+        {
+          "text": "Windowsで予約・コミット・初回書き込みを観察する",
+          "link": "/practice/memory/windows-memory-observation.html"
+        }
+      ]
+    },
+    {
+      "text": "ほかの実践・サンプル",
+      "collapsed": true,
+      "items": [
+        {
+          "text": "小さなシューティングを作る",
+          "link": "/game/shooter-design.html"
+        },
+        {
+          "text": "小さなレンダラーを作る",
+          "link": "/graphics/capstone/01-design.html"
+        },
+        {
+          "text": "C++と設計の演習",
+          "link": "/guide/exercises/"
+        },
+        {
+          "text": "C++のビルドサンプル",
+          "link": "/tools/build/samples/"
+        },
+        {
+          "text": "小さなアプリで設計を試す",
+          "link": "/design/notebook/practice.html"
+        }
+      ]
+    }
+  ],
   "/design/case-studies/exercises.md": [
     {
       "text": "実践・サンプル一覧",
@@ -2848,6 +2965,10 @@
       "text": "ほかの実践・サンプル",
       "collapsed": true,
       "items": [
+        {
+          "text": "Windowsでメモリの状態を観察する",
+          "link": "/practice/memory/windows-memory-observation.html"
+        },
         {
           "text": "小さなシューティングを作る",
           "link": "/game/shooter-design.html"
@@ -2937,6 +3058,10 @@
       "text": "ほかの実践・サンプル",
       "collapsed": true,
       "items": [
+        {
+          "text": "Windowsでメモリの状態を観察する",
+          "link": "/practice/memory/windows-memory-observation.html"
+        },
         {
           "text": "小さなシューティングを作る",
           "link": "/game/shooter-design.html"
@@ -3068,6 +3193,10 @@
       "collapsed": true,
       "items": [
         {
+          "text": "Windowsでメモリの状態を観察する",
+          "link": "/practice/memory/windows-memory-observation.html"
+        },
+        {
           "text": "小さなレンダラーを作る",
           "link": "/graphics/capstone/01-design.html"
         },
@@ -3112,6 +3241,10 @@
       "text": "ほかの実践・サンプル",
       "collapsed": true,
       "items": [
+        {
+          "text": "Windowsでメモリの状態を観察する",
+          "link": "/practice/memory/windows-memory-observation.html"
+        },
         {
           "text": "小さなレンダラーを作る",
           "link": "/graphics/capstone/01-design.html"
@@ -3201,6 +3334,10 @@
       "text": "ほかの実践・サンプル",
       "collapsed": true,
       "items": [
+        {
+          "text": "Windowsでメモリの状態を観察する",
+          "link": "/practice/memory/windows-memory-observation.html"
+        },
         {
           "text": "小さなシューティングを作る",
           "link": "/game/shooter-design.html"
@@ -3375,6 +3512,10 @@
       "text": "ほかの実践・サンプル",
       "collapsed": true,
       "items": [
+        {
+          "text": "Windowsでメモリの状態を観察する",
+          "link": "/practice/memory/windows-memory-observation.html"
+        },
         {
           "text": "小さなシューティングを作る",
           "link": "/game/shooter-design.html"
@@ -3697,6 +3838,10 @@
       "collapsed": true,
       "items": [
         {
+          "text": "Windowsでメモリの状態を観察する",
+          "link": "/practice/memory/windows-memory-observation.html"
+        },
+        {
           "text": "小さなレンダラーを作る",
           "link": "/graphics/capstone/01-design.html"
         },
@@ -3733,6 +3878,10 @@
       "text": "ほかの実践・サンプル",
       "collapsed": true,
       "items": [
+        {
+          "text": "Windowsでメモリの状態を観察する",
+          "link": "/practice/memory/windows-memory-observation.html"
+        },
         {
           "text": "小さなシューティングを作る",
           "link": "/game/shooter-design.html"
@@ -3992,6 +4141,10 @@
       "text": "ほかの実践・サンプル",
       "collapsed": true,
       "items": [
+        {
+          "text": "Windowsでメモリの状態を観察する",
+          "link": "/practice/memory/windows-memory-observation.html"
+        },
         {
           "text": "小さなシューティングを作る",
           "link": "/game/shooter-design.html"
@@ -6708,6 +6861,10 @@
       "text": "ほかの実践・サンプル",
       "collapsed": true,
       "items": [
+        {
+          "text": "Windowsでメモリの状態を観察する",
+          "link": "/practice/memory/windows-memory-observation.html"
+        },
         {
           "text": "小さなシューティングを作る",
           "link": "/game/shooter-design.html"

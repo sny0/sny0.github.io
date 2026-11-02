@@ -102,7 +102,7 @@ float heightmap[2048 * 2048];   // ローカルに16MBの配列(即死)
 
 ## C#との対応(なぜC#ではこれらが「ない」のか)
 
-- UAF/dangling: GCが「参照が残る限り延命」するので原理的に発生しない(代わりに「消したつもりが生きている」= 論理リーク)
+- UAF/dangling: 通常の安全な管理参照を通じたアクセスでは、GCが追跡する到達可能な管理オブジェクトを任意のdeleteで先に破棄する問題を避けられる。ただしunsafe、解放済みのネイティブ領域、Unityのネイティブ実体の寿命まで保護するわけではない。[寿命とGC](/runtime/memory/storage-duration-and-lifetime.html)も参照
 - double free: 解放の概念自体がない
 - buffer overflow: 境界チェックで例外化(IndexOutOfRange)
 - leak: GCでも起きる(staticに溜める、イベント購読で延命)——形を変えて存在

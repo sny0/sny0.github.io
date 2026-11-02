@@ -45,26 +45,15 @@ e->~Enemy();                        // 破棄も分離: デストラクタだけ
         フリーリスト: 空きブロックを鎖で繋ぐ → Acquire=先頭を外す、Release=先頭に繋ぐ
 ```
 
-## arena allocator(同寿命特化。линейный/bump allocator とも)
+## arena allocator(同寿命特化。bump allocatorとも)
 
-```cpp
-// C++20 — ポインタを進めるだけの最速アロケータ(検証済み: samples/arena_allocator.cpp)
-class Arena {
-public:
-    explicit Arena(std::size_t bytes) : buffer_(bytes), offset_(0) {}
+<a href="/study/samples/cpp/arena_allocator.cpp" download>アリーナのコード全体</a>では、実際のアドレスを基準にアラインメントを合わせ、ゼロサイズ・不正なalignment・容量不足を失敗として扱います。クラス部分を同じ配布ファイルから掲載します（`<memory>`等のincludeと実行例は全体のコードを参照）。
 
-    void* Allocate(std::size_t size, std::size_t align) {
-        std::size_t p = (offset_ + align - 1) & ~(align - 1);   // アラインメント調整
-        if (p + size > buffer_.size()) return nullptr;          // 満杯ポリシーは設計判断
-        offset_ = p + size;
-        return buffer_.data() + p;
-    }
-    void Reset() { offset_ = 0; }    // 全部まとめて「解放」(個別解放はできない/しない)
-private:
-    std::vector<std::byte> buffer_;
-    std::size_t offset_;
-};
-```
+<<< @/public/samples/cpp/arena_allocator.cpp#arena-class
+
+2026年11月2日、Windows x64・MSVC 19.35.32217.1・C++20・Release・`/W4 /WX /permissive- /EHsc /utf-8`で、配布コードのビルドと実行を確認しました。警告はなく、実行例の終了コードは0です。別の検査では、実アドレスの64/256byte整列、領域の非重複、容量不足・巨大な要求・不正なalignment・ゼロサイズ、`Reset()`後の再利用など27項目を確認しています。他の処理系やマルチスレッド対応は、この検証の対象外です。
+
+`std::align`は、指定した領域の中に要求サイズとアラインメントを満たす場所を見つけます。[作業草案の契約](https://eel.is/c++draft/ptr.align)も参照してください。オフセットだけを丸める方法では、先頭アドレス自体の整列を無条件には保証できません。
 
 - **確保はアラインメント調整・容量確認・ポインタ更新**が中心です。汎用確保との速度差は負荷や実装に依存し、固定の倍率や最速を保証しません。個別解放はせず、`Reset()` はデストラクタを呼ばずに領域を再利用可能にします
 - 用途: **フレームアロケータ**(毎フレームの一時データ→フレーム末尾でReset)、ロード時アロケータ(レベルの全データ→アンロードでReset)
@@ -75,15 +64,21 @@ private:
 STLコンテナは確保戦略を差し替えられます: `std::vector<T, MyAllocator<T>>`。C++17の **polymorphic memory resource (pmr)** が現代の形:
 
 ```cpp
+#include <cstddef>
 #include <memory_resource>
+#include <vector>
 std::byte buf[4096];
 std::pmr::monotonic_buffer_resource arena(buf, sizeof(buf));   // 標準のアリーナ実装
-std::pmr::vector<int> v(&arena);    // このvectorの確保はすべてarenaから(型は同じpmr::vectorのまま)
+std::pmr::vector<int> v(&arena);    // 確保要求をarenaへ渡す(型は同じpmr::vectorのまま)
 ```
 
-(検証環境GCC 9.2はpmr対応。ただし本Wikiのサンプルは自作Arenaで概念を示しています)
+この例の`buf`は初期領域です。不足すると`monotonic_buffer_resource`は上流のresourceへ追加の確保を要求するため、「4096byteを超えると必ず失敗する固定容量アリーナ」ではありません。[標準の確保手順](https://eel.is/c++draft/mem.res.monotonic.buffer.mem)も参照してください。
+
+配布サンプルは自作Arenaで概念を示します。STLへの注入と、OSからページを取得する操作は別の層です。
 
 ## 全体地図(どの層の話か)
+
+[malloc/newからOSへ至る経路](/runtime/memory/allocation-journey.html)と[仮想メモリの状態](/os/virtual-memory.html)は別記事で掘り下げます。[Windowsの観察サンプル](/practice/memory/windows-memory-observation.html)では、予約・コミット・常駐を分けて確認できます。
 
 ```
 [Object Pool]  ゲームオブジェクトの再利用(リセット・ハンドル管理込み)
@@ -101,8 +96,8 @@ std::pmr::vector<int> v(&arena);    // このvectorの確保はすべてarenaか
 ## Unity開発者が誤解しやすい点
 
 1. 「メモリ確保はいつも同じ時間」— 汎用アロケータにはキャッシュ等で済む経路もあり、探索・ロック・OSからの領域取得等が必要な経路もあります。大量確保の影響はサイズ・寿命・スレッド・実装で異なるため、フレーム時間とメモリ使用量を計測します。C++の確保とC#のGC停止は別の処理として観察します
-2. 「アロケータ自作は変態技」— フレームアロケータは50行で書けて効果が大きい、ゲーム業界の標準装備
-3. `Allocator.Temp` の「1フレーム制限」を不便と思っていた人は、このページで理由(Resetモデル)が腑に落ちるはず
+2. フレーム単位の再利用が有効かは、データの寿命と実測で判断します。短い実装例でも、整列、容量不足、スレッド、破棄、保持量の設計は必要です。
+3. UnityのAllocatorの寿命・解放規則は、使用するCollectionsの版とAPIで確認します。すべてが自作アリーナと同じResetモデルではありません。
 
 ## 使う場面 / 使わない場面
 
