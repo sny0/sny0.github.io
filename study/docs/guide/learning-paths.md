@@ -25,9 +25,10 @@
 ## 「確保する」と内部で何が起きるか
 
 1. [記憶域期間・スコープ・寿命](/runtime/memory/storage-duration-and-lifetime.html)を区別する。
-2. [アロケータ](/runtime/memory/allocators-and-pools.html)で、小さい領域の再利用とOSへの追加要求を調べる。
-3. [OSを学ぶ計画](/guide/low-level/operating-system.html)で、仮想メモリ・ページフォルトとのつながりを整理する。OS専用の辞典本文は未整備です。
-4. [メモリバグ](/runtime/memory/memory-bugs.html)と[キャッシュ局所性](/runtime/memory/cache-locality-aos-soa.html)から、正しさと配置を確かめる。
+2. [malloc/newの内部](/runtime/memory/allocation-journey.html)で、空き領域の再利用、必要時のOS要求、構築・破棄を追う。
+3. [仮想メモリ](/os/virtual-memory.html)で、アドレス空間、ページ、予約・コミット・常駐、ページフォルトを区別する。
+4. [Windows/C++の観察サンプル](/practice/memory/windows-memory-observation.html)で、予約・コミット・初回書込み・解放を実際に分けて確かめる。
+5. [用途別アロケータ](/runtime/memory/allocators-and-pools.html)、[メモリバグ](/runtime/memory/memory-bugs.html)、[キャッシュ局所性](/runtime/memory/cache-locality-aos-soa.html)へ進む。
 
 ## ソースコードがCPUで動くまで
 

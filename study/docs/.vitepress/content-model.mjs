@@ -12,6 +12,7 @@ export const formatLabels = {
 export const statusLabels = { published: '公開中', outline: '学習計画・概要', draft: '草稿', planned: '執筆予定' }
 
 export const collections = [
+  { id: 'memory-observation', section: 'practice', title: 'Windowsでメモリの状態を観察する', description: 'C++で予約・コミット・初回書込み・解放を分け、仮想メモリとプロセスの指標を確かめる。', start: '/practice/memory/windows-memory-observation.html' },
   { id: 'questions', section: 'learning', title: '疑問から選ぶ読み順', description: 'メモリ確保、実行、描画など、いまの疑問から関連する本文をたどる。', start: '/guide/learning-paths.html' },
   { id: 'cpp-design', section: 'learning', title: 'C++とゲーム設計を学ぶ', description: '設計原則、言語、メモリ、ビルド、エンジンとの対応を目的別に読む。', start: '/guide/cpp-roadmap.html' },
   { id: 'rendering', section: 'learning', title: 'リアルタイム描画を学ぶ', description: 'GPUと数学から、パイプライン、シェーダ、描画APIへ進む。', start: '/guide/rendering/roadmap.html' },

@@ -18,7 +18,8 @@
 
 | 用語・別名 | 説明への入口 |
 | --- | --- |
-| [alloc / allocate / malloc / アロック / メモリ確保](/runtime/memory/allocators-and-pools.html) | 確保・初期化・解放、アロケータとOSの関係 |
+| [alloc / allocate / malloc / アロック / メモリ確保](/runtime/memory/allocation-journey.html) | 確保・初期化・解放、再利用とOSへの要求の関係 |
+| [仮想メモリ / reserve / commit / resident / ページフォルト](/os/virtual-memory.html) | アドレス変換と、予約・コミット・常駐の違い |
 | [ECS / Entity Component System](/game/ecs.html) | ID、Component、System、Query、格納方式 |
 | [RAII / 所有 / 寿命](/runtime/memory/storage-duration-and-lifetime.html) | 記憶域、寿命、後片付けの区別 |
 | [HLSL](/graphics/shader/hlsl.html) | Direct3Dやエンジンで使うシェーダ言語 |

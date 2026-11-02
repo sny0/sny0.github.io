@@ -17,7 +17,7 @@ study:
 
 C++のメモリ管理は「毎回deleteを手で書く」ではありません。現代C++は:
 
-1. **値とスコープ**(そもそもヒープを使わない)— 第一選択
+1. **値とスコープ** — 局所的な所有から考える。ただし値の内部にあるvectorやstring等が動的確保する場合はある
 2. **RAII+スマートポインタ**(解放は型が自動でやる)— ヒープが要るとき
 3. **生のnew/delete** — RAII部品の内部実装のみ(ゲームロジックには現れない)
 
@@ -30,16 +30,18 @@ C++のメモリ管理は「毎回deleteを手で書く」ではありません�
 | GC Allocをプロファイラで監視 | ヒープ確保をプロファイラ/自作カウンタで監視 | [アロケータ](/runtime/memory/allocators-and-pools.html) |
 | Update内でnewしない | フレーム内のヒープ確保を避ける(値・再利用・アリーナ) | 同上 |
 | オブジェクトプール | Object Pool(同じ)+ memory pool | [Object Pool](/game/patterns/object-pool.html) |
-| struct/NativeArrayで管理外に置く | それが**通常の状態**(全部が管理外) | [値セマンティクス](/languages/csharp/pointers-references-value-semantics.html) |
-| 参照をnullにしてGCに任せる | 所有者の破棄=即解放。非所有参照の無効化は**自分の問題** | [所有権](/runtime/memory/ownership-and-borrowing.html) |
-| Destroy(gameObject)+MissingReference例外 | delete+dangling(**例外は出ない**。UB) | [メモリバグ](/runtime/memory/memory-bugs.html) |
+| structの利用 / NativeArrayの利用 | 値型の表現を選ぶことと、ネイティブ領域を明示管理することを分ける。structだけで管理外やスタック配置にはならない | [値セマンティクス](/languages/csharp/pointers-references-value-semantics.html) |
+| 不要な強い参照を手放す | C++では所有者の破棄がオブジェクト破棄や記憶域返却へつながる。OSへの返却は別。非所有参照は寿命を延ばさない | [所有権](/runtime/memory/ownership-and-borrowing.html) |
+| Destroyによるネイティブ側の破棄 | C++でも、破棄後の非所有参照を使う問題と、所有者による破棄を分ける。未定義動作は通常の例外処理で回復できる契約ではない | [メモリバグ](/runtime/memory/memory-bugs.html) |
 | WeakReference(ほぼ使わない) | weak_ptr/世代ハンドル(**日常の道具**) | [スマートポインタ](/languages/cpp/smart-pointers.html) |
 
 ## 思考の転換ポイント3つ
 
-1. **「確保コスト」の意識が逆転する**: C#では確保は速く回収が痛い。C++では汎用確保がそこそこ重く、解放は決定的。→ C++では「フレーム中の確保そのもの」を設計で消す(事前確保・プール・アリーナ)
-2. **「参照を持つ」ことの意味が逆転する**: C#の参照は延命保証つき。C++の参照・ポインタは**ただの矢印**(寿命は別管理)。「誰が所有者か」を先に決めるのがC++の設計手順
+1. **確保・破棄・回収を分けて測る**: 両環境とも、再利用だけで済む経路と、領域の補充・回収・初期化などが必要な経路があります。言語名だけで速度を決めず、頻度・サイズ・寿命・フレーム時間をそろえて測ります。
+2. **参照・所有・到達可能性を区別する**: 通常の安全な管理参照を通じた利用はGCが扱い、C++の生ポインタや参照は通常非所有です。C#でも字句スコープだけが生存保証ではなく、unsafe・ネイティブ資源の寿命は別に考えます。
 3. **リークの形が変わる**: C#のリークは「参照の残留」(イベント購読・static)。C++のリークは「所有者の不在」(生new・循環shared_ptr)。**どちらも設計の失敗**であり、GCはそれを免除しない
+
+根拠となる[C#の値型](https://learn.microsoft.com/en-us/dotnet/csharp/language-reference/builtin-types/value-types)と[.NETのGCのルート・生存情報](https://learn.microsoft.com/en-us/dotnet/standard/garbage-collection/fundamentals)も参照してください。OS側は[malloc/newの内部](/runtime/memory/allocation-journey.html)へつながります。
 
 ## 実務でのハイブリッド感覚
 
