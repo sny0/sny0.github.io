@@ -41,7 +41,7 @@
       "id": "os",
       "title": "OS",
       "description": "プロセス、メモリ、スレッド、入出力の仕組みを調べる。",
-      "count": 1,
+      "count": 2,
       "status": "辞典本文あり"
     },
     {
@@ -130,6 +130,13 @@
     }
   ],
   "collections": [
+    {
+      "id": "process-observation",
+      "section": "practice",
+      "title": "Windowsでプロセスとスレッドを観察する",
+      "description": "C++でmain前の記録、PID・TID、子プロセスとワーカースレッドを確かめる。",
+      "start": "/practice/process/windows-process-observation.html"
+    },
     {
       "id": "memory-observation",
       "section": "practice",
@@ -2105,21 +2112,24 @@
       "section": "reference",
       "format": "article",
       "status": "published",
-      "summary": "g++ main.cpp と打ってからゲームが動くまで、コードは7つの姿を経ます。この1本の旅を通しで理解すれば、ビルドエラー・リンクエラー・実行時クラッシュが「どの段階の問題か」を切り分けられるようになります。",
+      "summary": "前処理、コンパイル、アセンブル、リンク、プロセス起動、ランタイム初期化、関数の実行を分け、言語規則と実装の境界を調べる。",
       "source": "C++ Wiki",
       "aliases": [],
+      "verification": "一次資料照合（2026-11-03）",
       "links": [
         "/languages/cpp/auto-and-constexpr.html",
         "/runtime/cpp-internals/translation-units-and-headers.html",
         "/runtime/cpp-internals/optimization-and-ub.html",
         "/runtime/cpp-internals/symbols-and-linkage.html",
         "/tools/build/link-errors.html",
-        "/runtime/cpp-internals/memory-layout.html",
+        "/os/virtual-memory.html",
         "/runtime/cpp-internals/object-files-and-libraries.html",
+        "/os/process-startup.html",
         "/runtime/memory/storage-duration-and-lifetime.html",
         "/runtime/cpp-internals/function-calls-and-cpu.html",
         "/runtime/cpp-internals/cache-branch-simd.html",
         "/languages/csharp/il2cpp.html",
+        "/practice/process/windows-process-observation.html",
         "/runtime/cpp-internals/"
       ]
     },
@@ -3417,6 +3427,38 @@
         "/graphics/shader/spirv.html",
         "/graphics/shader/hlsl.html",
         "/graphics/shader/glsl.html"
+      ]
+    },
+    {
+      "title": "WindowsでPID・TID・子プロセスとmain前の初期化を観察する",
+      "url": "/practice/process/windows-process-observation.html",
+      "file": "practice/process/windows-process-observation.md",
+      "domain": "os",
+      "section": "practice",
+      "format": "sample",
+      "status": "published",
+      "summary": "C++17で自分のPID/TID、同じプロセスのworker、CreateProcessWで作る子、namespace-scope初期化の目印を観察する。",
+      "source": "新規執筆",
+      "aliases": [
+        "PID",
+        "TID",
+        "CreateProcessW",
+        "PROCESS_INFORMATION",
+        "std::thread",
+        "atomic",
+        "join",
+        "wmain",
+        "CRT",
+        "子プロセス",
+        "スレッド"
+      ],
+      "collection": "process-observation",
+      "order": 1,
+      "verification": "Windows x64で実行確認",
+      "links": [
+        "/os/process-startup.html",
+        "/os/virtual-memory.html",
+        "/runtime/cpp-internals/build-pipeline-journey.html"
       ]
     },
     {
@@ -4884,13 +4926,16 @@
       "section": "reference",
       "format": "article",
       "status": "published",
-      "summary": "実行中のプログラム(プロセス)の仮想アドレス空間は、役割ごとの領域に分かれています(配置は典型例。OSにより詳細は異なる)。 スタック: 確保はポインタをずらすだけ(超高速)。サイズ上限あり(典型1〜8MB → 深い再帰や巨大ローカル配列でstack overflow)。寿命はスコープ",
+      "summary": "プロセス内の仮想メモリ領域と、型のアラインメント・パディング・バイト順を区別する。物理配置や言語上の寿命と混同しない。",
       "source": "C++ Wiki",
       "aliases": [],
       "links": [
+        "/os/process-startup.html",
         "/runtime/memory/memory-bugs.html",
+        "/runtime/memory/allocation-journey.html",
         "/runtime/memory/allocators-and-pools.html",
         "/runtime/memory/storage-duration-and-lifetime.html",
+        "/os/virtual-memory.html",
         "/game/patterns/optimization-patterns.html",
         "/runtime/cpp-internals/cache-branch-simd.html",
         "/runtime/cpp-internals/exceptions-and-rtti-impl.html",
@@ -5264,17 +5309,21 @@
       "section": "reference",
       "format": "article",
       "status": "published",
-      "summary": "関数呼び出しは「戻り先を記録してジャンプ」する仕組みで、その記録場所+ローカル変数の置き場がコールスタックです。引数と戻り値の受け渡しルール(呼出規約)はABIの一部で、デバッガのスタックトレースはこの構造を読んでいます。",
+      "summary": "x64の関数呼び出しを、引数・戻り値・レジスタ・スタック・ABIから調べる。最適化とスタックトレースの限界、WindowsとSystem Vの違いを区別する。",
       "source": "C++ Wiki",
       "aliases": [],
+      "verification": "一次資料照合（2026-11-03）",
       "links": [
         "/tools/build/build-configurations.html",
+        "/runtime/memory/storage-duration-and-lifetime.html",
         "/runtime/memory/memory-bugs.html",
+        "/os/process-startup.html",
+        "/os/virtual-memory.html",
         "/runtime/cpp-internals/symbols-and-linkage.html",
         "/design/decisions/cpp-choices.html",
-        "/runtime/cpp-internals/vtable-and-virtual-calls.html",
-        "/languages/csharp/il2cpp.html",
         "/design/foundations/yagni-kiss-dry.html",
+        "/languages/csharp/il2cpp.html",
+        "/practice/process/windows-process-observation.html",
         "/runtime/cpp-internals/memory-layout.html",
         "/runtime/cpp-internals/",
         "/runtime/cpp-internals/cache-branch-simd.html"
@@ -5352,6 +5401,8 @@
         "/runtime/cpp-internals/translation-units-and-headers.html",
         "/runtime/cpp-internals/symbols-and-linkage.html",
         "/runtime/cpp-internals/object-files-and-libraries.html",
+        "/os/process-startup.html",
+        "/practice/process/windows-process-observation.html",
         "/runtime/cpp-internals/function-calls-and-cpu.html",
         "/game/patterns/game-loop-and-update.html",
         "/game/ecs.html",
@@ -5595,6 +5646,44 @@
         "/tools/build/what-is-build.html",
         "/tools/build/",
         "/tools/build/build-tools-cmake.html"
+      ]
+    },
+    {
+      "title": "実行ファイルを起動してmainへ到達するまで — プロセス・スレッド・ローダー",
+      "url": "/os/process-startup.html",
+      "file": "os/process-startup.md",
+      "domain": "os",
+      "section": "reference",
+      "format": "article",
+      "status": "published",
+      "summary": "WindowsのEXE起動を、プロセスと初期スレッドの作成、イメージとDLLの準備、ローダー、PEエントリポイント、CRT、mainに分けて追う。共有アドレス空間、TLS、静的初期化、スケジューラと終了処理も区別する。",
+      "source": "新規執筆",
+      "aliases": [
+        "process",
+        "プロセス",
+        "thread",
+        "スレッド",
+        "loader",
+        "ローダー",
+        "process startup",
+        "プロセス起動",
+        "PE",
+        "entry point",
+        "エントリポイント",
+        "mainCRTStartup",
+        "CRT",
+        "CreateProcess",
+        "TLS",
+        "コンテキストスイッチ"
+      ],
+      "verification": "Microsoft Learn・C++標準ドラフトの一次資料照合（2026-11-03）",
+      "links": [
+        "/runtime/cpp-internals/build-pipeline-journey.html",
+        "/os/virtual-memory.html",
+        "/runtime/cpp-internals/object-files-and-libraries.html",
+        "/runtime/memory/concurrency-bugs.html",
+        "/languages/csharp/il2cpp.html",
+        "/practice/process/windows-process-observation.html"
       ]
     },
     {
@@ -6612,12 +6701,14 @@
       "section": "learning",
       "format": "path",
       "status": "outline",
-      "summary": "ソースから実行ファイルまでの段階を分け、コンパイル・リンク・ロードを観察するための学習計画・概要です。既存本文はC++のビルドとABIを中心に扱います。字句解析・構文解析・IRなど、コンパイラ内部の専用詳解は未整備です。\n\n## 関連する辞典本文・実践\n\n- [main.cppからCPU命令",
+      "summary": "コンパイル・リンク・ロードを学ぶ計画。C++のビルドとABI、Windowsでの起動処理の辞典本文につなぐ。構文解析やIRの詳解は準備中。",
       "source": "IT教本",
       "aliases": [],
       "collection": "low-level",
       "order": 8,
       "links": [
+        "/os/process-startup.html",
+        "/practice/process/windows-process-observation.html",
         "/runtime/cpp-internals/build-pipeline-journey.html",
         "/runtime/cpp-internals/translation-units-and-headers.html",
         "/runtime/cpp-internals/symbols-and-linkage.html",
@@ -6634,12 +6725,14 @@
       "section": "learning",
       "format": "path",
       "status": "outline",
-      "summary": "プロセス、スレッド、仮想メモリ、システムコール、I/Oを学ぶ計画。仮想メモリの辞典本文とWindowsの観察例へつなぐ。",
+      "summary": "プロセス、スレッド、仮想メモリ、システムコール、I/Oを学ぶ計画。起動処理と仮想メモリの辞典本文、Windowsの観察例へつなぐ。",
       "source": "IT教本",
       "aliases": [],
       "collection": "low-level",
       "order": 9,
       "links": [
+        "/os/process-startup.html",
+        "/practice/process/windows-process-observation.html",
         "/os/virtual-memory.html",
         "/practice/memory/windows-memory-observation.html",
         "/runtime/memory/allocators-and-pools.html",
@@ -7284,6 +7377,7 @@
       "source": "統合ガイド",
       "aliases": [],
       "links": [
+        "/os/process-startup.html",
         "/runtime/memory/allocation-journey.html",
         "/os/virtual-memory.html",
         "/game/ecs.html",

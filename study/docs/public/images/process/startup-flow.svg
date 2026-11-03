@@ -1,0 +1,68 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="760" height="1860" viewBox="0 0 760 1860" role="img" aria-labelledby="startup-title startup-desc">
+  <title id="startup-title">WindowsのコンソールEXEを起動してmainへ進む流れ</title>
+  <desc id="startup-desc">通常のMSVCとCRTを使うWindowsコンソールEXEの模式図。起動元の要求、子プロセスと初期スレッドの作成、実行イメージと依存DLLの準備、ローダーの初期化、PEエントリポイント、CRTの初期化、mainの呼び出しと正常終了へ進む。CreateProcessの復帰はmainへの到達や成功を保証しない。図はAPI内部の厳密な時系列や全処理を示さない。</desc>
+  <defs>
+    <marker id="startup-arrow" markerWidth="10" markerHeight="10" refX="8" refY="5" orient="auto" markerUnits="userSpaceOnUse"><path d="M0 0L9 5L0 10Z" fill="#245d48"/></marker>
+  </defs>
+  <style>
+    text { font-family: "BIZ UDPGothic", "Yu Gothic", Meiryo, sans-serif; fill: #26352e; }
+    .heading { font-size: 28px; font-weight: 700; }
+    .body { font-size: 24px; }
+    .flow { fill: none; stroke: #245d48; stroke-width: 3; marker-end: url(#startup-arrow); }
+    .box { fill: #fff; stroke: #adc2b3; stroke-width: 2; }
+  </style>
+  <rect width="760" height="1860" rx="20" fill="#f4f8f4"/>
+  <text x="32" y="54" font-size="34" font-weight="700">EXEを起動してmainへ</text>
+  <text x="32" y="96" class="body">Windows x64・通常のMSVCコンソールEXEの例</text>
+  <text x="32" y="132" class="body">図は役割の流れ。API内部の厳密な時系列は省略</text>
+
+  <rect x="24" y="162" width="712" height="130" rx="14" class="box"/>
+  <text x="44" y="204" class="heading">① 起動元が要求する</text>
+  <text x="44" y="246" class="body">例：親プロセスからCreateProcessWを呼ぶ</text>
+  <path d="M380 296V330" class="flow"/>
+
+  <rect x="24" y="344" width="712" height="144" rx="14" class="box"/>
+  <text x="44" y="386" class="heading">② 子プロセスと初期スレッドを用意</text>
+  <text x="44" y="427" class="body">仮想アドレス空間・資源と、実行する単位</text>
+  <text x="44" y="466" class="body">同じEXEでも、別のプロセスとして動く</text>
+  <path d="M380 492V526" class="flow"/>
+
+  <rect x="24" y="540" width="712" height="144" rx="14" class="box"/>
+  <text x="44" y="582" class="heading">③ 実行イメージと依存関係を準備</text>
+  <text x="44" y="623" class="body">EXE・依存DLLのマップ、必要な再配置</text>
+  <text x="44" y="662" class="body">インポートの解決など（詳細・遅延処理は本文へ）</text>
+  <path d="M380 688V722" class="flow"/>
+
+  <rect x="24" y="736" width="712" height="144" rx="14" class="box"/>
+  <text x="44" y="778" class="heading">④ ローダー側の初期化から開始点へ</text>
+  <text x="44" y="819" class="body">DLLの初期化・TLS関連の処理なども関係する</text>
+  <text x="44" y="858" class="body">子の初期化完了と、親へのAPI復帰は別の話</text>
+  <path d="M380 884V918" class="flow"/>
+
+  <rect x="24" y="932" width="712" height="130" rx="14" fill="#fff5dc" stroke="#b08327" stroke-width="2"/>
+  <text x="44" y="974" class="heading">⑤ EXEのPEエントリポイント</text>
+  <text x="44" y="1016" class="body">この構成の通常例：mainCRTStartup</text>
+  <path d="M380 1066V1100" class="flow"/>
+
+  <rect x="24" y="1114" width="712" height="144" rx="14" class="box"/>
+  <text x="44" y="1156" class="heading">⑥ CRTのスタートアップ処理</text>
+  <text x="44" y="1197" class="body">実行時ライブラリの初期化・引数の準備</text>
+  <text x="44" y="1236" class="body">対象の非ローカル変数の動的初期化など</text>
+  <path d="M380 1262V1296" class="flow"/>
+
+  <rect x="24" y="1310" width="712" height="144" rx="14" fill="#245d48"/>
+  <text x="44" y="1352" class="heading" style="fill:#fff">⑦ main(argc, argv)を呼ぶ</text>
+  <text x="44" y="1393" class="body" style="fill:#fff">ここからアプリケーションの処理を書く</text>
+  <text x="44" y="1432" class="body" style="fill:#fff">ワーカースレッドの作成なども、この後に行える</text>
+  <path d="M380 1458V1492" class="flow"/>
+
+  <rect x="24" y="1506" width="712" height="144" rx="14" class="box"/>
+  <text x="44" y="1548" class="heading">正常なreturnから終了処理へ</text>
+  <text x="44" y="1589" class="body">CRT・言語の終了処理を経てプロセスが終了</text>
+  <text x="44" y="1628" class="body">強制終了は同じ後片付けを保証しない</text>
+
+  <text x="32" y="1711" class="body" font-weight="700">PEの開始点 ≠ main ≠ CPUが最初に実行する命令</text>
+  <text x="32" y="1756" class="body">DLL不足・初期化失敗などでmainへ届かない場合もある</text>
+  <text x="32" y="1796" class="body">CreateProcessの成功だけでは、mainの到達は分からない</text>
+  <text x="32" y="1836" class="body">別の処理系・起動方式・実行基盤では流れを確認する</text>
+</svg>

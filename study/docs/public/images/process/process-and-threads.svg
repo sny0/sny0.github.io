@@ -1,0 +1,56 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="760" height="1310" viewBox="0 0 760 1310" role="img" aria-labelledby="threads-title threads-desc">
+  <title id="threads-title">プロセス内で共有するものとスレッドごとに持つもの</title>
+  <desc id="threads-desc">プロセスAは一つの仮想アドレス空間やコード、グローバル領域、ヒープ等をスレッド間で共有する。初期スレッドとワーカースレッドはそれぞれレジスタの実行状態、ユーザースタック、TLSなどを持つ。ただしユーザースタックやTLSも同一プロセスのアドレス空間内にある。別プロセスBには別のアドレス空間とPIDがあり、共有メモリやIPC等の仕組みで連携する。</desc>
+  <defs>
+    <marker id="shared-arrow" markerWidth="10" markerHeight="10" refX="8" refY="5" orient="auto" markerUnits="userSpaceOnUse"><path d="M0 0L9 5L0 10Z" fill="#245d48"/></marker>
+  </defs>
+  <style>
+    text { font-family: "BIZ UDPGothic", "Yu Gothic", Meiryo, sans-serif; fill: #26352e; }
+    .heading { font-size: 28px; font-weight: 700; }
+    .body { font-size: 24px; }
+    .flow { fill: none; stroke: #245d48; stroke-width: 3; marker-end: url(#shared-arrow); }
+  </style>
+  <rect width="760" height="1310" rx="20" fill="#f4f8f4"/>
+  <text x="32" y="54" font-size="32" font-weight="700">プロセスの共有資源とスレッド</text>
+  <text x="32" y="95" class="body">Windowsの概念図。アドレスの配置図ではありません</text>
+
+  <rect x="24" y="128" width="712" height="700" rx="16" fill="#fff" stroke="#245d48" stroke-width="2"/>
+  <text x="44" y="174" class="heading">プロセスA：PID A</text>
+  <text x="44" y="215" class="body">このプロセスの仮想アドレス空間・資源</text>
+  <rect x="44" y="244" width="672" height="134" rx="12" fill="#e1eee5"/>
+  <text x="64" y="286" class="heading">スレッド間で共有する</text>
+  <text x="64" y="326" class="body">実行コード・グローバル領域・ヒープなど</text>
+  <text x="64" y="362" class="body">プロセスのハンドルなどの資源</text>
+
+  <path d="M205 414V383" class="flow"/>
+  <path d="M555 414V383" class="flow"/>
+  <rect x="44" y="426" width="322" height="244" rx="12" fill="#eef2fb" stroke="#6779a0" stroke-width="2"/>
+  <text x="64" y="469" class="heading">初期スレッド</text>
+  <text x="64" y="509" class="body">TID A1</text>
+  <text x="64" y="551" class="body">レジスタの実行状態</text>
+  <text x="64" y="593" class="body">ユーザースタック</text>
+  <text x="64" y="635" class="body">TLSなど</text>
+
+  <rect x="394" y="426" width="322" height="244" rx="12" fill="#fff5dc" stroke="#b08327" stroke-width="2"/>
+  <text x="414" y="469" class="heading">ワーカースレッド</text>
+  <text x="414" y="509" class="body">TID A2</text>
+  <text x="414" y="551" class="body">レジスタの実行状態</text>
+  <text x="414" y="593" class="body">ユーザースタック</text>
+  <text x="414" y="635" class="body">TLSなど</text>
+
+  <text x="44" y="716" class="body">スタック・TLSも、同じ仮想アドレス空間内にある</text>
+  <text x="44" y="756" class="body">スレッド専用という意味での保護境界ではない</text>
+  <text x="44" y="796" class="body">共有データの読み書きには、必要な同期を設計する</text>
+
+  <rect x="24" y="864" width="712" height="238" rx="16" fill="#fff" stroke="#6779a0" stroke-width="2"/>
+  <text x="44" y="910" class="heading">別のプロセスB：PID B</text>
+  <text x="44" y="952" class="body">別の仮想アドレス空間と、そのプロセスのスレッド</text>
+  <text x="44" y="994" class="body">同じ数値のアドレスでも、同じデータとは限らない</text>
+  <text x="44" y="1036" class="body">連携にはIPC・共有メモリなどの仕組みを使う</text>
+  <text x="44" y="1078" class="body">親子関係だけで、通常の変数を共有するわけではない</text>
+
+  <text x="32" y="1164" class="body" font-weight="700">OSは実行可能なスレッドへCPU時間を割り当てる</text>
+  <text x="32" y="1206" class="body">ワーカーを増やしても、常に並列・高速になるとは限らない</text>
+  <text x="32" y="1248" class="body">ここで示す空間は仮想アドレス。物理RAMの区画ではない</text>
+  <text x="32" y="1288" class="body">共有メモリ・保護・権限の詳細は本文を参照</text>
+</svg>
