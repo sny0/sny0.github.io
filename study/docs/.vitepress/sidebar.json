@@ -13,8 +13,12 @@
       "collapsed": true,
       "items": [
         {
-          "text": "本文を準備中",
+          "text": "分野の目次",
           "link": "/data/"
+        },
+        {
+          "text": "整数をビット列・16進数・バイト列で読む",
+          "link": "/data/integer-bits-and-bytes.html"
         }
       ]
     },
@@ -1061,6 +1065,10 @@
       "collapsed": false,
       "items": [
         {
+          "text": "C++で整数とバイト列を観察する",
+          "link": "/practice/data/integer-byte-observation.html"
+        },
+        {
           "text": "Windowsでプロセスとスレッドを観察する",
           "link": "/practice/process/windows-process-observation.html"
         },
@@ -1126,6 +1134,10 @@
       "collapsed": true,
       "items": [
         {
+          "text": "C++で整数とバイト列を観察する",
+          "link": "/practice/data/integer-byte-observation.html"
+        },
+        {
           "text": "Windowsでプロセスとスレッドを観察する",
           "link": "/practice/process/windows-process-observation.html"
         },
@@ -1186,6 +1198,10 @@
       "text": "ほかの実践・サンプル",
       "collapsed": true,
       "items": [
+        {
+          "text": "C++で整数とバイト列を観察する",
+          "link": "/practice/data/integer-byte-observation.html"
+        },
         {
           "text": "Windowsでプロセスとスレッドを観察する",
           "link": "/practice/process/windows-process-observation.html"
@@ -1248,6 +1264,10 @@
       "collapsed": true,
       "items": [
         {
+          "text": "C++で整数とバイト列を観察する",
+          "link": "/practice/data/integer-byte-observation.html"
+        },
+        {
           "text": "Windowsでプロセスとスレッドを観察する",
           "link": "/practice/process/windows-process-observation.html"
         },
@@ -1308,6 +1328,10 @@
       "text": "ほかの実践・サンプル",
       "collapsed": true,
       "items": [
+        {
+          "text": "C++で整数とバイト列を観察する",
+          "link": "/practice/data/integer-byte-observation.html"
+        },
         {
           "text": "Windowsでプロセスとスレッドを観察する",
           "link": "/practice/process/windows-process-observation.html"
@@ -1370,6 +1394,10 @@
       "collapsed": true,
       "items": [
         {
+          "text": "C++で整数とバイト列を観察する",
+          "link": "/practice/data/integer-byte-observation.html"
+        },
+        {
           "text": "Windowsでプロセスとスレッドを観察する",
           "link": "/practice/process/windows-process-observation.html"
         },
@@ -1380,6 +1408,55 @@
         {
           "text": "小さなシューティングを作る",
           "link": "/game/shooter-design.html"
+        },
+        {
+          "text": "C++と設計の演習",
+          "link": "/guide/exercises/"
+        },
+        {
+          "text": "C++のビルドサンプル",
+          "link": "/tools/build/samples/"
+        },
+        {
+          "text": "小さなアプリで設計を試す",
+          "link": "/design/notebook/practice.html"
+        }
+      ]
+    }
+  ],
+  "/practice/data/integer-byte-observation.md": [
+    {
+      "text": "実践・サンプル一覧",
+      "link": "/practice/"
+    },
+    {
+      "text": "C++で整数とバイト列を観察する",
+      "items": [
+        {
+          "text": "C++20で整数の値・ビット・保存するbyte順を観察する",
+          "link": "/practice/data/integer-byte-observation.html"
+        }
+      ]
+    },
+    {
+      "text": "ほかの実践・サンプル",
+      "collapsed": true,
+      "items": [
+        {
+          "text": "Windowsでプロセスとスレッドを観察する",
+          "link": "/practice/process/windows-process-observation.html"
+        },
+        {
+          "text": "Windowsでメモリの状態を観察する",
+          "link": "/practice/memory/windows-memory-observation.html"
+        },
+        {
+          "text": "小さなシューティングを作る",
+          "link": "/game/shooter-design.html"
+        },
+        {
+          "text": "小さなレンダラーを作る",
+          "link": "/graphics/capstone/01-design.html"
         },
         {
           "text": "C++と設計の演習",
@@ -1422,6 +1499,10 @@
       "text": "ほかの実践・サンプル",
       "collapsed": true,
       "items": [
+        {
+          "text": "C++で整数とバイト列を観察する",
+          "link": "/practice/data/integer-byte-observation.html"
+        },
         {
           "text": "Windowsでプロセスとスレッドを観察する",
           "link": "/practice/process/windows-process-observation.html"
@@ -1475,6 +1556,10 @@
       "text": "ほかの実践・サンプル",
       "collapsed": true,
       "items": [
+        {
+          "text": "C++で整数とバイト列を観察する",
+          "link": "/practice/data/integer-byte-observation.html"
+        },
         {
           "text": "Windowsでプロセスとスレッドを観察する",
           "link": "/practice/process/windows-process-observation.html"
@@ -1743,6 +1828,10 @@
       "collapsed": true,
       "items": [
         {
+          "text": "C++で整数とバイト列を観察する",
+          "link": "/practice/data/integer-byte-observation.html"
+        },
+        {
           "text": "Windowsでプロセスとスレッドを観察する",
           "link": "/practice/process/windows-process-observation.html"
         },
@@ -1840,6 +1929,10 @@
       "collapsed": true,
       "items": [
         {
+          "text": "C++で整数とバイト列を観察する",
+          "link": "/practice/data/integer-byte-observation.html"
+        },
+        {
           "text": "Windowsでプロセスとスレッドを観察する",
           "link": "/practice/process/windows-process-observation.html"
         },
@@ -1892,6 +1985,10 @@
       "text": "ほかの実践・サンプル",
       "collapsed": true,
       "items": [
+        {
+          "text": "C++で整数とバイト列を観察する",
+          "link": "/practice/data/integer-byte-observation.html"
+        },
         {
           "text": "Windowsでプロセスとスレッドを観察する",
           "link": "/practice/process/windows-process-observation.html"
@@ -1989,6 +2086,10 @@
       "text": "ほかの実践・サンプル",
       "collapsed": true,
       "items": [
+        {
+          "text": "C++で整数とバイト列を観察する",
+          "link": "/practice/data/integer-byte-observation.html"
+        },
         {
           "text": "Windowsでプロセスとスレッドを観察する",
           "link": "/practice/process/windows-process-observation.html"
@@ -2172,6 +2273,10 @@
       "collapsed": true,
       "items": [
         {
+          "text": "C++で整数とバイト列を観察する",
+          "link": "/practice/data/integer-byte-observation.html"
+        },
+        {
           "text": "Windowsでプロセスとスレッドを観察する",
           "link": "/practice/process/windows-process-observation.html"
         },
@@ -2353,6 +2458,10 @@
       "text": "ほかの実践・サンプル",
       "collapsed": true,
       "items": [
+        {
+          "text": "C++で整数とバイト列を観察する",
+          "link": "/practice/data/integer-byte-observation.html"
+        },
         {
           "text": "Windowsでプロセスとスレッドを観察する",
           "link": "/practice/process/windows-process-observation.html"
@@ -2536,6 +2645,10 @@
       "collapsed": true,
       "items": [
         {
+          "text": "C++で整数とバイト列を観察する",
+          "link": "/practice/data/integer-byte-observation.html"
+        },
+        {
           "text": "Windowsでプロセスとスレッドを観察する",
           "link": "/practice/process/windows-process-observation.html"
         },
@@ -2718,6 +2831,10 @@
       "collapsed": true,
       "items": [
         {
+          "text": "C++で整数とバイト列を観察する",
+          "link": "/practice/data/integer-byte-observation.html"
+        },
+        {
           "text": "Windowsでプロセスとスレッドを観察する",
           "link": "/practice/process/windows-process-observation.html"
         },
@@ -2814,6 +2931,10 @@
       "text": "ほかの実践・サンプル",
       "collapsed": true,
       "items": [
+        {
+          "text": "C++で整数とバイト列を観察する",
+          "link": "/practice/data/integer-byte-observation.html"
+        },
         {
           "text": "Windowsでプロセスとスレッドを観察する",
           "link": "/practice/process/windows-process-observation.html"
@@ -2945,6 +3066,10 @@
       "collapsed": true,
       "items": [
         {
+          "text": "C++で整数とバイト列を観察する",
+          "link": "/practice/data/integer-byte-observation.html"
+        },
+        {
           "text": "Windowsでメモリの状態を観察する",
           "link": "/practice/memory/windows-memory-observation.html"
         },
@@ -2989,6 +3114,10 @@
       "text": "ほかの実践・サンプル",
       "collapsed": true,
       "items": [
+        {
+          "text": "C++で整数とバイト列を観察する",
+          "link": "/practice/data/integer-byte-observation.html"
+        },
         {
           "text": "Windowsでプロセスとスレッドを観察する",
           "link": "/practice/process/windows-process-observation.html"
@@ -3087,6 +3216,10 @@
       "collapsed": true,
       "items": [
         {
+          "text": "C++で整数とバイト列を観察する",
+          "link": "/practice/data/integer-byte-observation.html"
+        },
+        {
           "text": "Windowsでプロセスとスレッドを観察する",
           "link": "/practice/process/windows-process-observation.html"
         },
@@ -3183,6 +3316,10 @@
       "text": "ほかの実践・サンプル",
       "collapsed": true,
       "items": [
+        {
+          "text": "C++で整数とバイト列を観察する",
+          "link": "/practice/data/integer-byte-observation.html"
+        },
         {
           "text": "Windowsでプロセスとスレッドを観察する",
           "link": "/practice/process/windows-process-observation.html"
@@ -3322,6 +3459,10 @@
       "collapsed": true,
       "items": [
         {
+          "text": "C++で整数とバイト列を観察する",
+          "link": "/practice/data/integer-byte-observation.html"
+        },
+        {
           "text": "Windowsでプロセスとスレッドを観察する",
           "link": "/practice/process/windows-process-observation.html"
         },
@@ -3374,6 +3515,10 @@
       "text": "ほかの実践・サンプル",
       "collapsed": true,
       "items": [
+        {
+          "text": "C++で整数とバイト列を観察する",
+          "link": "/practice/data/integer-byte-observation.html"
+        },
         {
           "text": "Windowsでプロセスとスレッドを観察する",
           "link": "/practice/process/windows-process-observation.html"
@@ -3471,6 +3616,10 @@
       "text": "ほかの実践・サンプル",
       "collapsed": true,
       "items": [
+        {
+          "text": "C++で整数とバイト列を観察する",
+          "link": "/practice/data/integer-byte-observation.html"
+        },
         {
           "text": "Windowsでプロセスとスレッドを観察する",
           "link": "/practice/process/windows-process-observation.html"
@@ -3653,6 +3802,10 @@
       "text": "ほかの実践・サンプル",
       "collapsed": true,
       "items": [
+        {
+          "text": "C++で整数とバイト列を観察する",
+          "link": "/practice/data/integer-byte-observation.html"
+        },
         {
           "text": "Windowsでプロセスとスレッドを観察する",
           "link": "/practice/process/windows-process-observation.html"
@@ -3983,6 +4136,10 @@
       "collapsed": true,
       "items": [
         {
+          "text": "C++で整数とバイト列を観察する",
+          "link": "/practice/data/integer-byte-observation.html"
+        },
+        {
           "text": "Windowsでプロセスとスレッドを観察する",
           "link": "/practice/process/windows-process-observation.html"
         },
@@ -4027,6 +4184,10 @@
       "text": "ほかの実践・サンプル",
       "collapsed": true,
       "items": [
+        {
+          "text": "C++で整数とバイト列を観察する",
+          "link": "/practice/data/integer-byte-observation.html"
+        },
         {
           "text": "Windowsでプロセスとスレッドを観察する",
           "link": "/practice/process/windows-process-observation.html"
@@ -4294,6 +4455,10 @@
       "text": "ほかの実践・サンプル",
       "collapsed": true,
       "items": [
+        {
+          "text": "C++で整数とバイト列を観察する",
+          "link": "/practice/data/integer-byte-observation.html"
+        },
         {
           "text": "Windowsでプロセスとスレッドを観察する",
           "link": "/practice/process/windows-process-observation.html"
@@ -7018,6 +7183,10 @@
       "text": "ほかの実践・サンプル",
       "collapsed": true,
       "items": [
+        {
+          "text": "C++で整数とバイト列を観察する",
+          "link": "/practice/data/integer-byte-observation.html"
+        },
         {
           "text": "Windowsでプロセスとスレッドを観察する",
           "link": "/practice/process/windows-process-observation.html"

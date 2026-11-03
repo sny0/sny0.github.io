@@ -1,0 +1,71 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="760" height="1460" viewBox="0 0 760 1460" role="img" aria-labelledby="integer-title integer-desc">
+  <title id="integer-title">同じ整数を数値・ビット列・バイト列で読む</title>
+  <desc id="integer-desc">32bitの符号なし整数0x12345678を例にする。10進数では305419896。上位桁から読む16進表示の12、34、56、78は、それぞれ8bitの00010010、00110100、01010110、01111000に対応する。8bitを1byteとする4byteの保存形式では、アドレス昇順にlittle endianなら78、56、34、12、big endianなら12、34、56、78と並ぶ。byte内のbitは反転しない。実メモリの形式と保存形式の指定は別である。</desc>
+  <style>
+    text { font-family: "BIZ UDPGothic", "Yu Gothic", Meiryo, sans-serif; fill: #26352e; }
+    .heading { font-size: 28px; font-weight: 700; }
+    .body { font-size: 24px; }
+    .code { font-family: Consolas, monospace; }
+    .center { text-anchor: middle; }
+  </style>
+  <rect width="760" height="1460" rx="20" fill="#f4f8f4"/>
+  <text x="32" y="54" font-size="32" font-weight="700">整数の値・表記・バイト列</text>
+  <text x="32" y="96" class="body">例：32bitの符号なし整数、1byte = 8bitの形式</text>
+
+  <rect x="24" y="128" width="712" height="166" rx="14" fill="#fff"/>
+  <text x="44" y="172" class="heading">① 値は同じ。基数で書き方が変わる</text>
+  <text x="44" y="225" font-size="32" class="code">305419896 = 0x12345678</text>
+  <text x="44" y="269" class="body">左は10進表記、右は16進表記</text>
+
+  <rect x="24" y="326" width="712" height="296" rx="14" fill="#fff"/>
+  <text x="44" y="370" class="heading">② ビット表示は、上位の桁から読む</text>
+  <text x="44" y="412" class="body">16進数1桁 = 4bit。2桁をまとめると8bit</text>
+  <g class="center">
+    <rect x="44" y="442" width="168" height="124" fill="#e1eee5"/>
+    <rect x="212" y="442" width="168" height="124" fill="#edf1fa"/>
+    <rect x="380" y="442" width="168" height="124" fill="#fff0d3"/>
+    <rect x="548" y="442" width="168" height="124" fill="#eee8f4"/>
+    <g font-size="34" font-weight="700" class="code">
+      <text x="128" y="489">12</text><text x="296" y="489">34</text>
+      <text x="464" y="489">56</text><text x="632" y="489">78</text>
+    </g>
+    <g class="body code">
+      <text x="128" y="539">00010010</text><text x="296" y="539">00110100</text>
+      <text x="464" y="539">01010110</text><text x="632" y="539">01111000</text>
+    </g>
+  </g>
+  <text x="44" y="601" class="body">例：16進数の1は0001、2は0010 → 12は00010010</text>
+
+  <rect x="24" y="654" width="712" height="564" rx="14" fill="#fff"/>
+  <text x="44" y="698" class="heading">③ 保存する4byteを、アドレス昇順に読む</text>
+  <text x="44" y="741" class="body">各byteの値は16進表示。左ほど小さいアドレス</text>
+  <g class="body code center" fill="#526057">
+    <text x="128" y="788">+0</text><text x="296" y="788">+1</text>
+    <text x="464" y="788">+2</text><text x="632" y="788">+3</text>
+  </g>
+  <text x="44" y="837" class="heading">Little endian：下位のbyteから</text>
+  <g class="center code" font-size="34" font-weight="700">
+    <rect x="44" y="860" width="168" height="76" fill="#eee8f4"/>
+    <rect x="212" y="860" width="168" height="76" fill="#fff0d3"/>
+    <rect x="380" y="860" width="168" height="76" fill="#edf1fa"/>
+    <rect x="548" y="860" width="168" height="76" fill="#e1eee5"/>
+    <text x="128" y="911">78</text><text x="296" y="911">56</text>
+    <text x="464" y="911">34</text><text x="632" y="911">12</text>
+  </g>
+  <text x="44" y="996" class="heading">Big endian：上位のbyteから</text>
+  <g class="center code" font-size="34" font-weight="700">
+    <rect x="44" y="1019" width="168" height="76" fill="#e1eee5"/>
+    <rect x="212" y="1019" width="168" height="76" fill="#edf1fa"/>
+    <rect x="380" y="1019" width="168" height="76" fill="#fff0d3"/>
+    <rect x="548" y="1019" width="168" height="76" fill="#eee8f4"/>
+    <text x="128" y="1070">12</text><text x="296" y="1070">34</text>
+    <text x="464" y="1070">56</text><text x="632" y="1070">78</text>
+  </g>
+  <text x="44" y="1147" class="body">順番が変わるのはbyte。各byte内のbitは反転しない</text>
+  <text x="44" y="1188" class="body">正しく対応する規則で読むと、どちらも同じ値に戻る</text>
+
+  <text x="32" y="1280" class="heading">実メモリの形式と、保存形式の指定は別</text>
+  <text x="32" y="1325" class="body">nativeのbyte列は環境で確認する</text>
+  <text x="32" y="1366" class="body">ファイル・通信の形式は、仕様でバイト順を決めて読む</text>
+  <text x="32" y="1407" class="body">byte列だけでは、型・幅・符号・バイト順は決まらない</text>
+</svg>
