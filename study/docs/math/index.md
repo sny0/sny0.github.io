@@ -24,6 +24,7 @@
 - [ベクトル](/math/rendering/vector.html)
 - [行列](/math/rendering/matrix.html)
 - [座標変換](/math/rendering/transform.html)
+- [浮動小数点の比較と誤差の扱い — 絶対許容差・相対許容差を決める](/math/floating-point-comparison.html)
 
 ## この分野の学習ガイド
 
@@ -31,7 +32,7 @@
 
 ## 作って試す
 
-この分野専用の実践教材は準備中です。[実践・サンプル一覧](/practice/)に公開中の題材をまとめています。
+- [C++とC#でfloatの近似比較と限界を観察する](/practice/math/float-comparison-observation.html)
 
 ## 扱う範囲・増補する項目
 

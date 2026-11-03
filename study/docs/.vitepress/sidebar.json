@@ -339,6 +339,10 @@
         {
           "text": "座標変換",
           "link": "/math/rendering/transform.html"
+        },
+        {
+          "text": "浮動小数点の比較と誤差の扱い — 絶対許容差・相対許容差を決める",
+          "link": "/math/floating-point-comparison.html"
         }
       ]
     },
@@ -1073,6 +1077,10 @@
       "collapsed": false,
       "items": [
         {
+          "text": "C++とC#でfloatの比較を確かめる",
+          "link": "/practice/math/float-comparison-observation.html"
+        },
+        {
           "text": "C++とC#で文字の表現を観察する",
           "link": "/practice/data/unicode-observation.html"
         },
@@ -1150,6 +1158,10 @@
       "collapsed": true,
       "items": [
         {
+          "text": "C++とC#でfloatの比較を確かめる",
+          "link": "/practice/math/float-comparison-observation.html"
+        },
+        {
           "text": "C++とC#で文字の表現を観察する",
           "link": "/practice/data/unicode-observation.html"
         },
@@ -1222,6 +1234,10 @@
       "text": "ほかの実践・サンプル",
       "collapsed": true,
       "items": [
+        {
+          "text": "C++とC#でfloatの比較を確かめる",
+          "link": "/practice/math/float-comparison-observation.html"
+        },
         {
           "text": "C++とC#で文字の表現を観察する",
           "link": "/practice/data/unicode-observation.html"
@@ -1296,6 +1312,10 @@
       "collapsed": true,
       "items": [
         {
+          "text": "C++とC#でfloatの比較を確かめる",
+          "link": "/practice/math/float-comparison-observation.html"
+        },
+        {
           "text": "C++とC#で文字の表現を観察する",
           "link": "/practice/data/unicode-observation.html"
         },
@@ -1368,6 +1388,10 @@
       "text": "ほかの実践・サンプル",
       "collapsed": true,
       "items": [
+        {
+          "text": "C++とC#でfloatの比較を確かめる",
+          "link": "/practice/math/float-comparison-observation.html"
+        },
         {
           "text": "C++とC#で文字の表現を観察する",
           "link": "/practice/data/unicode-observation.html"
@@ -1442,6 +1466,10 @@
       "collapsed": true,
       "items": [
         {
+          "text": "C++とC#でfloatの比較を確かめる",
+          "link": "/practice/math/float-comparison-observation.html"
+        },
+        {
           "text": "C++とC#で文字の表現を観察する",
           "link": "/practice/data/unicode-observation.html"
         },
@@ -1499,6 +1527,10 @@
       "collapsed": true,
       "items": [
         {
+          "text": "C++とC#でfloatの比較を確かめる",
+          "link": "/practice/math/float-comparison-observation.html"
+        },
+        {
           "text": "C++とC#で文字の表現を観察する",
           "link": "/practice/data/unicode-observation.html"
         },
@@ -1555,6 +1587,10 @@
       "text": "ほかの実践・サンプル",
       "collapsed": true,
       "items": [
+        {
+          "text": "C++とC#でfloatの比較を確かめる",
+          "link": "/practice/math/float-comparison-observation.html"
+        },
         {
           "text": "C++とC#で文字の表現を観察する",
           "link": "/practice/data/unicode-observation.html"
@@ -1621,6 +1657,10 @@
       "collapsed": true,
       "items": [
         {
+          "text": "C++とC#でfloatの比較を確かめる",
+          "link": "/practice/math/float-comparison-observation.html"
+        },
+        {
           "text": "C++とC#で文字の表現を観察する",
           "link": "/practice/data/unicode-observation.html"
         },
@@ -1686,6 +1726,10 @@
       "collapsed": true,
       "items": [
         {
+          "text": "C++とC#でfloatの比較を確かめる",
+          "link": "/practice/math/float-comparison-observation.html"
+        },
+        {
           "text": "C++とC#で文字の表現を観察する",
           "link": "/practice/data/unicode-observation.html"
         },
@@ -1724,6 +1768,67 @@
       ]
     }
   ],
+  "/practice/math/float-comparison-observation.md": [
+    {
+      "text": "実践・サンプル一覧",
+      "link": "/practice/"
+    },
+    {
+      "text": "C++とC#でfloatの比較を確かめる",
+      "items": [
+        {
+          "text": "C++とC#でfloatの近似比較と限界を観察する",
+          "link": "/practice/math/float-comparison-observation.html"
+        }
+      ]
+    },
+    {
+      "text": "ほかの実践・サンプル",
+      "collapsed": true,
+      "items": [
+        {
+          "text": "C++とC#で文字の表現を観察する",
+          "link": "/practice/data/unicode-observation.html"
+        },
+        {
+          "text": "C++でfloatの表現と刻み幅を観察する",
+          "link": "/practice/data/float-spacing-observation.html"
+        },
+        {
+          "text": "C++で整数とバイト列を観察する",
+          "link": "/practice/data/integer-byte-observation.html"
+        },
+        {
+          "text": "Windowsでプロセスとスレッドを観察する",
+          "link": "/practice/process/windows-process-observation.html"
+        },
+        {
+          "text": "Windowsでメモリの状態を観察する",
+          "link": "/practice/memory/windows-memory-observation.html"
+        },
+        {
+          "text": "小さなシューティングを作る",
+          "link": "/game/shooter-design.html"
+        },
+        {
+          "text": "小さなレンダラーを作る",
+          "link": "/graphics/capstone/01-design.html"
+        },
+        {
+          "text": "C++と設計の演習",
+          "link": "/guide/exercises/"
+        },
+        {
+          "text": "C++のビルドサンプル",
+          "link": "/tools/build/samples/"
+        },
+        {
+          "text": "小さなアプリで設計を試す",
+          "link": "/design/notebook/practice.html"
+        }
+      ]
+    }
+  ],
   "/practice/data/unicode-observation.md": [
     {
       "text": "実践・サンプル一覧",
@@ -1742,6 +1847,10 @@
       "text": "ほかの実践・サンプル",
       "collapsed": true,
       "items": [
+        {
+          "text": "C++とC#でfloatの比較を確かめる",
+          "link": "/practice/math/float-comparison-observation.html"
+        },
         {
           "text": "C++でfloatの表現と刻み幅を観察する",
           "link": "/practice/data/float-spacing-observation.html"
@@ -2022,6 +2131,10 @@
       "collapsed": true,
       "items": [
         {
+          "text": "C++とC#でfloatの比較を確かめる",
+          "link": "/practice/math/float-comparison-observation.html"
+        },
+        {
           "text": "C++とC#で文字の表現を観察する",
           "link": "/practice/data/unicode-observation.html"
         },
@@ -2131,6 +2244,10 @@
       "collapsed": true,
       "items": [
         {
+          "text": "C++とC#でfloatの比較を確かめる",
+          "link": "/practice/math/float-comparison-observation.html"
+        },
+        {
           "text": "C++とC#で文字の表現を観察する",
           "link": "/practice/data/unicode-observation.html"
         },
@@ -2195,6 +2312,10 @@
       "text": "ほかの実践・サンプル",
       "collapsed": true,
       "items": [
+        {
+          "text": "C++とC#でfloatの比較を確かめる",
+          "link": "/practice/math/float-comparison-observation.html"
+        },
         {
           "text": "C++とC#で文字の表現を観察する",
           "link": "/practice/data/unicode-observation.html"
@@ -2304,6 +2425,10 @@
       "text": "ほかの実践・サンプル",
       "collapsed": true,
       "items": [
+        {
+          "text": "C++とC#でfloatの比較を確かめる",
+          "link": "/practice/math/float-comparison-observation.html"
+        },
         {
           "text": "C++とC#で文字の表現を観察する",
           "link": "/practice/data/unicode-observation.html"
@@ -2499,6 +2624,10 @@
       "collapsed": true,
       "items": [
         {
+          "text": "C++とC#でfloatの比較を確かめる",
+          "link": "/practice/math/float-comparison-observation.html"
+        },
+        {
           "text": "C++とC#で文字の表現を観察する",
           "link": "/practice/data/unicode-observation.html"
         },
@@ -2692,6 +2821,10 @@
       "text": "ほかの実践・サンプル",
       "collapsed": true,
       "items": [
+        {
+          "text": "C++とC#でfloatの比較を確かめる",
+          "link": "/practice/math/float-comparison-observation.html"
+        },
         {
           "text": "C++とC#で文字の表現を観察する",
           "link": "/practice/data/unicode-observation.html"
@@ -2887,6 +3020,10 @@
       "collapsed": true,
       "items": [
         {
+          "text": "C++とC#でfloatの比較を確かめる",
+          "link": "/practice/math/float-comparison-observation.html"
+        },
+        {
           "text": "C++とC#で文字の表現を観察する",
           "link": "/practice/data/unicode-observation.html"
         },
@@ -3081,6 +3218,10 @@
       "collapsed": true,
       "items": [
         {
+          "text": "C++とC#でfloatの比較を確かめる",
+          "link": "/practice/math/float-comparison-observation.html"
+        },
+        {
           "text": "C++とC#で文字の表現を観察する",
           "link": "/practice/data/unicode-observation.html"
         },
@@ -3189,6 +3330,10 @@
       "text": "ほかの実践・サンプル",
       "collapsed": true,
       "items": [
+        {
+          "text": "C++とC#でfloatの比較を確かめる",
+          "link": "/practice/math/float-comparison-observation.html"
+        },
         {
           "text": "C++とC#で文字の表現を観察する",
           "link": "/practice/data/unicode-observation.html"
@@ -3332,6 +3477,10 @@
       "collapsed": true,
       "items": [
         {
+          "text": "C++とC#でfloatの比較を確かめる",
+          "link": "/practice/math/float-comparison-observation.html"
+        },
+        {
           "text": "C++とC#で文字の表現を観察する",
           "link": "/practice/data/unicode-observation.html"
         },
@@ -3388,6 +3537,10 @@
       "text": "ほかの実践・サンプル",
       "collapsed": true,
       "items": [
+        {
+          "text": "C++とC#でfloatの比較を確かめる",
+          "link": "/practice/math/float-comparison-observation.html"
+        },
         {
           "text": "C++とC#で文字の表現を観察する",
           "link": "/practice/data/unicode-observation.html"
@@ -3498,6 +3651,10 @@
       "collapsed": true,
       "items": [
         {
+          "text": "C++とC#でfloatの比較を確かめる",
+          "link": "/practice/math/float-comparison-observation.html"
+        },
+        {
           "text": "C++とC#で文字の表現を観察する",
           "link": "/practice/data/unicode-observation.html"
         },
@@ -3606,6 +3763,10 @@
       "text": "ほかの実践・サンプル",
       "collapsed": true,
       "items": [
+        {
+          "text": "C++とC#でfloatの比較を確かめる",
+          "link": "/practice/math/float-comparison-observation.html"
+        },
         {
           "text": "C++とC#で文字の表現を観察する",
           "link": "/practice/data/unicode-observation.html"
@@ -3757,6 +3918,10 @@
       "collapsed": true,
       "items": [
         {
+          "text": "C++とC#でfloatの比較を確かめる",
+          "link": "/practice/math/float-comparison-observation.html"
+        },
+        {
           "text": "C++とC#で文字の表現を観察する",
           "link": "/practice/data/unicode-observation.html"
         },
@@ -3821,6 +3986,10 @@
       "text": "ほかの実践・サンプル",
       "collapsed": true,
       "items": [
+        {
+          "text": "C++とC#でfloatの比較を確かめる",
+          "link": "/practice/math/float-comparison-observation.html"
+        },
         {
           "text": "C++とC#で文字の表現を観察する",
           "link": "/practice/data/unicode-observation.html"
@@ -3930,6 +4099,10 @@
       "text": "ほかの実践・サンプル",
       "collapsed": true,
       "items": [
+        {
+          "text": "C++とC#でfloatの比較を確かめる",
+          "link": "/practice/math/float-comparison-observation.html"
+        },
         {
           "text": "C++とC#で文字の表現を観察する",
           "link": "/practice/data/unicode-observation.html"
@@ -4124,6 +4297,10 @@
       "text": "ほかの実践・サンプル",
       "collapsed": true,
       "items": [
+        {
+          "text": "C++とC#でfloatの比較を確かめる",
+          "link": "/practice/math/float-comparison-observation.html"
+        },
         {
           "text": "C++とC#で文字の表現を観察する",
           "link": "/practice/data/unicode-observation.html"
@@ -4466,6 +4643,10 @@
       "collapsed": true,
       "items": [
         {
+          "text": "C++とC#でfloatの比較を確かめる",
+          "link": "/practice/math/float-comparison-observation.html"
+        },
+        {
           "text": "C++とC#で文字の表現を観察する",
           "link": "/practice/data/unicode-observation.html"
         },
@@ -4522,6 +4703,10 @@
       "text": "ほかの実践・サンプル",
       "collapsed": true,
       "items": [
+        {
+          "text": "C++とC#でfloatの比較を確かめる",
+          "link": "/practice/math/float-comparison-observation.html"
+        },
         {
           "text": "C++とC#で文字の表現を観察する",
           "link": "/practice/data/unicode-observation.html"
@@ -4801,6 +4986,10 @@
       "text": "ほかの実践・サンプル",
       "collapsed": true,
       "items": [
+        {
+          "text": "C++とC#でfloatの比較を確かめる",
+          "link": "/practice/math/float-comparison-observation.html"
+        },
         {
           "text": "C++とC#で文字の表現を観察する",
           "link": "/practice/data/unicode-observation.html"
@@ -7537,6 +7726,10 @@
       "text": "ほかの実践・サンプル",
       "collapsed": true,
       "items": [
+        {
+          "text": "C++とC#でfloatの比較を確かめる",
+          "link": "/practice/math/float-comparison-observation.html"
+        },
         {
           "text": "C++とC#で文字の表現を観察する",
           "link": "/practice/data/unicode-observation.html"
