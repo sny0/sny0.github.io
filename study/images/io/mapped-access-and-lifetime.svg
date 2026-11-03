@@ -1,0 +1,40 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="760" height="1510" viewBox="0 0 760 1510" role="img" aria-labelledby="mapped-title mapped-desc">
+  <title id="mapped-title">マップした領域へのアクセスと、ビューの寿命</title>
+  <desc id="mapped-desc">マップはファイルの範囲を仮想アドレスへ対応付ける操作で、全データが物理RAMへ読み込まれた証明ではない。アクセス時にページが参照可能なら読み、ページフォルトならRAM内ページの再利用や必要なストレージI/Oを伴う場合がある。I/O待ちやエラーが生じ得るため、マッピングは非同期読み取りAPIと同じではない。例では参照を使い終えてからビュー、マッピングオブジェクト、ファイルの順に解放する。Unmap後のポインタは使わない。実行例は読取り専用で、故意のフォルトや性能測定は行わない。</desc>
+  <style>
+    text { font-family: "BIZ UDPGothic", "Yu Gothic", Meiryo, sans-serif; fill: #26352e; }
+    .heading { font-size: 28px; font-weight: 700; }
+    .body { font-size: 24px; }
+    .center { text-anchor: middle; }
+  </style>
+  <rect width="760" height="1510" rx="20" fill="#f4f8f4"/>
+  <text x="32" y="54" font-size="32" font-weight="700">マップすることと、RAMにあることは別</text>
+  <text x="32" y="98" class="body">ファイルの範囲を、仮想アドレスへ対応付ける</text>
+  <rect x="24" y="130" width="712" height="210" rx="14" fill="#fff"/>
+  <text x="44" y="176" class="heading">① ビューを作る</text>
+  <text x="44" y="220" class="body">アプリからアクセスする範囲と保護を設定</text>
+  <text x="44" y="262" class="body">全ファイルが物理RAMへ載った、とは判断しない</text>
+  <text x="44" y="304" class="body">今回の例は読み取り専用。マップ先へ書き込まない</text>
+  <rect x="24" y="368" width="712" height="490" rx="14" fill="#fff"/>
+  <text x="44" y="414" class="heading">② 実際にバイトへアクセスする</text>
+  <rect x="48" y="442" width="664" height="84" rx="10" fill="#dcece0"/>
+  <text x="68" y="494" class="body">必要なページが参照可能 → 内容を読み取る</text>
+  <rect x="48" y="550" width="664" height="210" rx="10" fill="#f1eee5"/>
+  <text x="68" y="592" class="body">ページフォルト → OSが必要な対応を行う</text>
+  <text x="68" y="634" class="body">・RAM内のページを再利用できる場合もある</text>
+  <text x="68" y="676" class="body">・ストレージI/Oが必要なら待機する場合もある</text>
+  <text x="68" y="718" class="body">・I/Oの失敗などがアクセス時の例外になり得る</text>
+  <text x="44" y="814" class="body">ページフォルトの発生数と、物理I/O回数は別の指標</text>
+  <rect x="24" y="886" width="712" height="334" rx="14" fill="#fff"/>
+  <text x="44" y="932" class="heading">③ 参照を使い終えてから解放する</text>
+  <text x="44" y="976" class="body">この例の所有：file → mapping → view</text>
+  <rect x="48" y="1004" width="664" height="110" rx="10" fill="#e2eafa"/>
+  <text x="68" y="1046" class="body">参照を使い終える → viewをunmap / dispose</text>
+  <text x="68" y="1088" class="body">→ mappingを閉じる → fileを閉じる</text>
+  <text x="44" y="1176" class="body">Unmap後に、古いポインタや参照を使わない</text>
+  <text x="32" y="1280" class="heading">マッピングは、I/Oをなくす仕組みではない</text>
+  <text x="32" y="1326" class="body">非同期APIのように、完了をawaitする契約とは異なる</text>
+  <text x="32" y="1368" class="body">通常のreadより必ず高速になる、とは限らない</text>
+  <text x="32" y="1410" class="body">実行例は内容・位置・寿命を確認。ページ状態は未追跡</text>
+  <text x="32" y="1452" class="body">書込み・COW・永続化は、別の契約として確認する</text>
+</svg>

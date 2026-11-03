@@ -1,0 +1,44 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="760" height="1510" viewBox="0 0 760 1510" role="img" aria-labelledby="addresses-title addresses-desc">
+  <title id="addresses-title">ファイル内の位置と、マッピングした領域内の位置を分ける</title>
+  <desc id="addresses-desc">実行時のWindows allocation granularityをGとする。長さG+32のファイルのG+5から8バイトを読む例。C++ではMapViewOfFileのファイルオフセットをGに整列し、長さ13バイトを要求する。返された仮想アドレスをAとすると、必要なデータはA+5から8バイト。C#のCreateViewAccessorにはG+5と長さ8を指定し、ReadArrayのposition0から読む。C#のアクセサー内位置と、低位のマッピングで必要な整列は区別する。Gはページサイズとは別の量。</desc>
+  <style>
+    text { font-family: "BIZ UDPGothic", "Yu Gothic", Meiryo, sans-serif; fill: #26352e; }
+    .heading { font-size: 28px; font-weight: 700; }
+    .body { font-size: 24px; }
+    .mono { font-family: Consolas, monospace; font-size: 27px; }
+    .center { text-anchor: middle; }
+  </style>
+  <rect width="760" height="1510" rx="20" fill="#f4f8f4"/>
+  <text x="32" y="54" font-size="32" font-weight="700">ファイル位置と、ビュー内の位置を分ける</text>
+  <text x="32" y="98" class="body">G = Windowsのallocation granularity（実行時取得）</text>
+  <rect x="24" y="130" width="712" height="312" rx="14" fill="#fff"/>
+  <text x="44" y="176" class="heading">① ファイル：長さG + 32 bytes</text>
+  <text x="44" y="220" class="body">読みたい範囲：G + 5から8 bytes</text>
+  <rect x="48" y="250" width="192" height="66" rx="8" fill="#f1eee5"/>
+  <rect x="248" y="250" width="464" height="66" rx="8" fill="#dcece0"/>
+  <text x="144" y="292" class="body center">Gから5 bytes</text>
+  <text x="480" y="292" class="body center">欲しい8 bytes</text>
+  <text x="48" y="354" class="body">G</text><text x="248" y="354" class="body">G + 5</text><text x="612" y="354" class="body">G + 13</text>
+  <text x="44" y="406" class="mono">41 42 00 0D 0A E3 81 82</text>
+  <rect x="24" y="470" width="712" height="408" rx="14" fill="#fff"/>
+  <text x="44" y="516" class="heading">② C++ / MapViewOfFile</text>
+  <text x="44" y="560" class="body">file offset = G、要求する長さ = 5 + 8 = 13</text>
+  <text x="44" y="602" class="body">開始位置をGの倍数に整列する</text>
+  <rect x="48" y="634" width="664" height="110" rx="10" fill="#e2eafa"/>
+  <text x="68" y="676" class="body">戻り値Aは、プロセスの仮想アドレス</text>
+  <text x="68" y="718" class="body">A + 5から8 bytes → ファイルのG + 5から読む</text>
+  <text x="44" y="796" class="body">AとGは異なる座標。Aはファイルの物理位置ではない</text>
+  <text x="44" y="838" class="body">UnmapにはAを渡す。A + 5を渡さない</text>
+  <rect x="24" y="906" width="712" height="334" rx="14" fill="#fff"/>
+  <text x="44" y="952" class="heading">③ C# / MemoryMappedViewAccessor</text>
+  <text x="44" y="996" class="body">CreateViewAccessor(offset: G + 5, size: 8, Read)</text>
+  <rect x="48" y="1028" width="664" height="110" rx="10" fill="#e2eafa"/>
+  <text x="68" y="1070" class="body">ReadArray(position: 0)で、欲しい範囲の先頭へ</text>
+  <text x="68" y="1112" class="body">accessorの位置0 → ファイルのG + 5</text>
+  <text x="44" y="1194" class="body">低位の整列と、公開APIの論理位置を区別する</text>
+  <text x="32" y="1300" class="heading">Gとページサイズも、同じ量ではない</text>
+  <text x="32" y="1346" class="body">G = 65536なら、G + 5 = 65541（説明例）</text>
+  <text x="32" y="1388" class="body">図は論理的な要求範囲。OSが扱うページ数は別</text>
+  <text x="32" y="1430" class="body">位置・長さ・ファイル範囲を検査してからアクセスする</text>
+  <text x="32" y="1472" class="body">通常のreadでも同じ8 bytesを読み、内容を照合する</text>
+</svg>
