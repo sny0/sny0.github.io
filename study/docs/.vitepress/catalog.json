@@ -41,7 +41,7 @@
       "id": "os",
       "title": "OS",
       "description": "プロセス、メモリ、スレッド、入出力の仕組みを調べる。",
-      "count": 3,
+      "count": 4,
       "status": "辞典本文あり"
     },
     {
@@ -130,6 +130,13 @@
     }
   ],
   "collections": [
+    {
+      "id": "async-file-read-observation",
+      "section": "practice",
+      "title": "C++とC#で同期・非同期I/Oを比べる",
+      "description": "同じファイルを同期・非同期で読み、要求の発行、完了結果、バッファを使える時点を確かめる。",
+      "start": "/practice/io/async-file-read-observation.html"
+    },
     {
       "id": "file-read-observation",
       "section": "practice",
@@ -921,6 +928,36 @@
       "verification": "Windowsで両言語を実行確認",
       "links": [
         "/runtime/thread-synchronization.html"
+      ]
+    },
+    {
+      "title": "C++とC#で非同期readの開始・完了・寿命を観察する",
+      "url": "/practice/io/async-file-read-observation.html",
+      "file": "practice/io/async-file-read-observation.md",
+      "domain": "os",
+      "section": "practice",
+      "format": "sample",
+      "status": "published",
+      "summary": "同じ12bytesを同期readと非同期readで読み比べ、即時完了・pending・EOF・ValueTaskの状態と、結果回収まで保つbufferの寿命を観察する。",
+      "source": "新規執筆",
+      "aliases": [
+        "非同期I/O",
+        "overlapped",
+        "OVERLAPPED",
+        "ReadFile",
+        "GetOverlappedResult",
+        "ReadAsync",
+        "ValueTask",
+        "await",
+        "EOF",
+        "キャンセル"
+      ],
+      "collection": "async-file-read-observation",
+      "order": 1,
+      "verification": "Windowsで両言語を実行確認",
+      "links": [
+        "/os/asynchronous-file-io.html",
+        "/practice/io/file-read-observation.html"
       ]
     },
     {
@@ -5076,7 +5113,9 @@
       ],
       "verification": "一次資料照合（2026-11-04）",
       "links": [
+        "/os/asynchronous-file-io.html",
         "/data/unicode-and-encoding.html",
+        "/practice/io/async-file-read-observation.html",
         "/practice/io/file-read-observation.html"
       ]
     },
@@ -5774,7 +5813,7 @@
       "section": "learning",
       "format": "path",
       "status": "published",
-      "summary": "整数・浮動小数点とその比較、文字コード、メモリ確保、起動、同期、ファイル読み取り、入力と描画、Webの疑問から関連する本文をたどる。",
+      "summary": "整数・浮動小数点とその比較、文字コード、メモリ確保、起動、同期、ファイル読み取りと非同期I/O、入力と描画、Webの疑問から関連する本文をたどる。",
       "source": "統合ガイド",
       "aliases": [],
       "collection": "questions",
@@ -5810,6 +5849,8 @@
         "/runtime/memory/concurrency-bugs.html",
         "/os/file-read-journey.html",
         "/practice/io/file-read-observation.html",
+        "/os/asynchronous-file-io.html",
+        "/practice/io/async-file-read-observation.html",
         "/game/patterns/game-loop-and-update.html",
         "/game/ecs.html",
         "/graphics/pipeline/overview.html",
@@ -7196,7 +7237,9 @@
         "/practice/threads/inventory-synchronization.html",
         "/runtime/memory/concurrency-bugs.html",
         "/os/file-read-journey.html",
-        "/practice/io/file-read-observation.html"
+        "/practice/io/file-read-observation.html",
+        "/os/asynchronous-file-io.html",
+        "/practice/io/async-file-read-observation.html"
       ],
       "previous": "/guide/low-level/compiler-linker-executable.html",
       "next": "/guide/low-level/cpp-language.html"
@@ -7586,6 +7629,40 @@
       ]
     },
     {
+      "title": "非同期I/O — 要求・完了・バッファの寿命",
+      "url": "/os/asynchronous-file-io.html",
+      "file": "os/asynchronous-file-io.md",
+      "domain": "os",
+      "section": "reference",
+      "format": "article",
+      "status": "published",
+      "summary": "非同期ファイル読み取りを要求・完了通知・結果回収に分ける。WindowsのOVERLAPPED、pendingと即時完了、キャンセル後の寿命、C#のReadAsyncとawait、ゲームでの完了後処理を区別する。",
+      "source": "新規執筆",
+      "aliases": [
+        "asynchronous I/O",
+        "非同期I/O",
+        "overlapped I/O",
+        "OVERLAPPED",
+        "ERROR_IO_PENDING",
+        "GetOverlappedResult",
+        "CancelIoEx",
+        "IRP",
+        "IOCP",
+        "ReadAsync",
+        "await",
+        "ValueTask",
+        "continuation",
+        "継続",
+        "backpressure",
+        "バックプレッシャー"
+      ],
+      "verification": "一次資料照合（2026-11-04）",
+      "links": [
+        "/os/file-read-journey.html",
+        "/practice/io/async-file-read-observation.html"
+      ]
+    },
+    {
       "title": "描画の学習ガイドについて",
       "url": "/guide/rendering/about.html",
       "file": "guide/rendering/about.md",
@@ -7874,6 +7951,7 @@
       "source": "統合ガイド",
       "aliases": [],
       "links": [
+        "/os/asynchronous-file-io.html",
         "/os/file-read-journey.html",
         "/runtime/thread-synchronization.html",
         "/math/floating-point-comparison.html",

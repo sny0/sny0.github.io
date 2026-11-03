@@ -18,7 +18,7 @@ study:
 
 ## このページで案内すること
 
-プロセス・スレッド・仮想メモリ・システムコール・I/Oを学ぶ順序と観察課題をまとめた**学習計画・概要**です。起動処理とプロセス・スレッドの基本、仮想メモリ、スレッド間のデータ共有、ファイル読取りは専用の本文へ進めます。スケジューラ内部や非同期I/Oの詳解など、まだ揃っていないテーマもあります。このページの概説と章末の資料を足場に、手元のOSで挙動を確かめます。
+プロセス・スレッド・仮想メモリ・システムコール・I/Oを学ぶ順序と観察課題をまとめた**学習計画・概要**です。起動処理とプロセス・スレッドの基本、仮想メモリ、スレッド間のデータ共有、同期・非同期のファイル読取りは専用の本文へ進めます。スケジューラ内部やIOCPの実践的な詳解など、まだ揃っていないテーマもあります。このページの概説と章末の資料を足場に、手元のOSで挙動を確かめます。
 
 ## 関連する辞典本文・実践
 
@@ -30,6 +30,7 @@ study:
 - [スレッド間の安全なデータ共有](/runtime/thread-synchronization.html)でmutex・C#のlock・共有状態の寿命を調べ、[在庫の観察例](/practice/threads/inventory-synchronization.html)で守る範囲と完了待ちを確かめられます。
 - [並行処理のバグ](/runtime/memory/concurrency-bugs.html)は、共有データを扱う際の問題を調べる入口です。仮想メモリやスケジューラ全体の説明を代替する記事ではありません。
 - [ファイルを開いて読むまでの流れ](/os/file-read-journey.html)でハンドル・ストリーム・読取り位置・実際の読取り量・EOFを調べ、[ファイル読取りの観察例](/practice/io/file-read-observation.html)で確かめられます。
+- [非同期ファイルI/O](/os/asynchronous-file-io.html)で要求の開始と完了、バッファや要求情報の寿命を調べ、[同期・非同期の観察例](/practice/io/async-file-read-observation.html)で同じ内容を読み比べられます。
 
 ## 学ぶ理由
 
@@ -49,6 +50,7 @@ study:
 - 割り込み→ドライバ→アプリというパッド入力の経路を説明できる
 - ジョブシステムの設計原理を説明できる
 - 通常のファイル読取りで、要求量・実際の読取り量・位置・EOF・失敗を分けて確認できる
+- 非同期I/Oの開始と完了を分け、未完了の要求が使うバッファや管理情報の寿命を説明できる
 
 ## 前提知識
 
@@ -109,7 +111,8 @@ study:
 7. **ファイルI/Oと時間**
    - まず通常のファイルを開き、ハンドルやストリームから読み、実際に得たbyte数と位置、EOF、失敗を区別する。[読取りの辞典本文](/os/file-read-journey.html)と[観察例](/practice/io/file-read-observation.html)へ
    - Windowsの通常の読取りではシステムのファイルキャッシュが関わる。アプリ側のバッファや記憶装置側のキャッシュとは分け、APIのread一回が物理ディスクの読取り一回とは考えない。開き直してもキャッシュが空になる保証はなく、1回目と2回目の時間差だけで物理I/Oや特定のキャッシュの効果を断定しない。[Windowsのファイルキャッシュ](https://learn.microsoft.com/en-us/windows/win32/fileio/file-caching)を参照
-   - 同期I/Oと非同期I/Oは、完了をどう待つか、完了結果をどう受け取るかの違いを学ぶ。WindowsのOverlapped I/Oでもすぐ完了する場合や呼出し側が待つ場合があり、非同期を選べば必ず高速になるわけではない。要求中のバッファや管理情報の寿命も必要になる。IOCPなどの詳解は発展項目へ。[Microsoftの同期・非同期I/O](https://learn.microsoft.com/en-us/windows/win32/fileio/synchronous-and-asynchronous-i-o)を参照
+   - 同期I/Oと非同期I/Oは、完了をどう待つか、完了結果をどう受け取るかの違いを学ぶ。WindowsのOverlapped I/Oでもすぐ完了する場合や呼出し側が待つ場合があり、非同期を選べば必ず高速になるわけではない。要求中のバッファや管理情報は完了まで有効に保ち、同期版のEOF判定も無条件に流用しない。[非同期I/Oの本文](/os/asynchronous-file-io.html)、[Microsoftの同期・非同期I/O](https://learn.microsoft.com/en-us/windows/win32/fileio/synchronous-and-asynchronous-i-o)を参照
+   - 観察例ではC++のOVERLAPPEDと手動リセットイベント、C#／.NET 10の`FileOptions.Asynchronous`と`ReadAsync`を扱う。`async`や`await`は要求ごとの専用スレッド作成を意味しない。IOCPの実践詳解は次の発展項目とする。[Microsoftのasyncとスレッド](https://learn.microsoft.com/en-us/dotnet/csharp/asynchronous-programming/task-asynchronous-programming-model#threads)を参照
    - 高精度タイマ QueryPerformanceCounter(第14章で使用)
 8. **(演習として)OS自作という選択肢**
    - 『ゼロからのOS自作入門』は最高の理解をくれるが時間も莫大。
@@ -151,6 +154,7 @@ study:
 6. WSLで `strace ./a.out` を実行し、printfやmallocの裏で走る
    システムコール(write, mmap, brk)を観察せよ。
 7. [ファイル読取りの観察例](/practice/io/file-read-observation.html)を実行し、要求した量と実際の読取り量、位置の変化、EOF、失敗を確認せよ。扱う既知のbyte列と照合し、読んでいないバッファ部分まで有効なデータとして使わない理由を説明せよ。
+8. [同期・非同期の読取り観察例](/practice/io/async-file-read-observation.html)で、同じデータを読む結果と完了の受取りを比べよ。内容の一致を確かめ、開始後の未完了状態が毎回現れることや、非同期版が必ず速いことを期待条件にしない。
 
 ## おすすめ書籍
 
@@ -226,4 +230,6 @@ study:
 - [Microsoft: ReadFile — 読取り量と位置](https://learn.microsoft.com/en-us/windows/win32/api/fileapi/nf-fileapi-readfile)
 - [Microsoft: File Caching](https://learn.microsoft.com/en-us/windows/win32/fileio/file-caching)、[Synchronous and Asynchronous I/O](https://learn.microsoft.com/en-us/windows/win32/fileio/synchronous-and-asynchronous-i-o)
 - [Microsoft: Creating a File View](https://learn.microsoft.com/en-us/windows/win32/memory/creating-a-file-view)
+- [Microsoft: Testing for the End of a File](https://learn.microsoft.com/en-us/windows/win32/fileio/testing-for-the-end-of-a-file)、[GetOverlappedResult](https://learn.microsoft.com/en-us/windows/win32/api/ioapiset/nf-ioapiset-getoverlappedresult)
+- [Microsoft: asyncとスレッド](https://learn.microsoft.com/en-us/dotnet/csharp/asynchronous-programming/task-asynchronous-programming-model#threads)
 - [Intel 64 and IA-32 Architecture / Optimization manuals](https://www.intel.com/content/www/us/en/developer/articles/technical/intel-sdm.html)

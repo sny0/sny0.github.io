@@ -71,6 +71,10 @@
         {
           "text": "実行ファイルを起動してmainへ到達するまで — プロセス・スレッド・ローダー",
           "link": "/os/process-startup.html"
+        },
+        {
+          "text": "非同期I/O — 要求・完了・バッファの寿命",
+          "link": "/os/asynchronous-file-io.html"
         }
       ]
     },
@@ -1085,6 +1089,10 @@
       "collapsed": false,
       "items": [
         {
+          "text": "C++とC#で同期・非同期I/Oを比べる",
+          "link": "/practice/io/async-file-read-observation.html"
+        },
+        {
           "text": "C++とC#でファイルの読み取りを観察する",
           "link": "/practice/io/file-read-observation.html"
         },
@@ -1174,6 +1182,10 @@
       "collapsed": true,
       "items": [
         {
+          "text": "C++とC#で同期・非同期I/Oを比べる",
+          "link": "/practice/io/async-file-read-observation.html"
+        },
+        {
           "text": "C++とC#でファイルの読み取りを観察する",
           "link": "/practice/io/file-read-observation.html"
         },
@@ -1258,6 +1270,10 @@
       "text": "ほかの実践・サンプル",
       "collapsed": true,
       "items": [
+        {
+          "text": "C++とC#で同期・非同期I/Oを比べる",
+          "link": "/practice/io/async-file-read-observation.html"
+        },
         {
           "text": "C++とC#でファイルの読み取りを観察する",
           "link": "/practice/io/file-read-observation.html"
@@ -1344,6 +1360,10 @@
       "collapsed": true,
       "items": [
         {
+          "text": "C++とC#で同期・非同期I/Oを比べる",
+          "link": "/practice/io/async-file-read-observation.html"
+        },
+        {
           "text": "C++とC#でファイルの読み取りを観察する",
           "link": "/practice/io/file-read-observation.html"
         },
@@ -1428,6 +1448,10 @@
       "text": "ほかの実践・サンプル",
       "collapsed": true,
       "items": [
+        {
+          "text": "C++とC#で同期・非同期I/Oを比べる",
+          "link": "/practice/io/async-file-read-observation.html"
+        },
         {
           "text": "C++とC#でファイルの読み取りを観察する",
           "link": "/practice/io/file-read-observation.html"
@@ -1514,6 +1538,10 @@
       "collapsed": true,
       "items": [
         {
+          "text": "C++とC#で同期・非同期I/Oを比べる",
+          "link": "/practice/io/async-file-read-observation.html"
+        },
+        {
           "text": "C++とC#でファイルの読み取りを観察する",
           "link": "/practice/io/file-read-observation.html"
         },
@@ -1583,6 +1611,10 @@
       "collapsed": true,
       "items": [
         {
+          "text": "C++とC#で同期・非同期I/Oを比べる",
+          "link": "/practice/io/async-file-read-observation.html"
+        },
+        {
           "text": "C++とC#でファイルの読み取りを観察する",
           "link": "/practice/io/file-read-observation.html"
         },
@@ -1651,6 +1683,10 @@
       "text": "ほかの実践・サンプル",
       "collapsed": true,
       "items": [
+        {
+          "text": "C++とC#で同期・非同期I/Oを比べる",
+          "link": "/practice/io/async-file-read-observation.html"
+        },
         {
           "text": "C++とC#でファイルの読み取りを観察する",
           "link": "/practice/io/file-read-observation.html"
@@ -1729,6 +1765,10 @@
       "collapsed": true,
       "items": [
         {
+          "text": "C++とC#で同期・非同期I/Oを比べる",
+          "link": "/practice/io/async-file-read-observation.html"
+        },
+        {
           "text": "C++とC#でファイルの読み取りを観察する",
           "link": "/practice/io/file-read-observation.html"
         },
@@ -1806,6 +1846,10 @@
       "collapsed": true,
       "items": [
         {
+          "text": "C++とC#で同期・非同期I/Oを比べる",
+          "link": "/practice/io/async-file-read-observation.html"
+        },
+        {
           "text": "C++とC#でファイルの読み取りを観察する",
           "link": "/practice/io/file-read-observation.html"
         },
@@ -1874,6 +1918,10 @@
       "text": "ほかの実践・サンプル",
       "collapsed": true,
       "items": [
+        {
+          "text": "C++とC#で同期・非同期I/Oを比べる",
+          "link": "/practice/io/async-file-read-observation.html"
+        },
         {
           "text": "C++とC#でファイルの読み取りを観察する",
           "link": "/practice/io/file-read-observation.html"
@@ -1944,6 +1992,10 @@
       "collapsed": true,
       "items": [
         {
+          "text": "C++とC#で同期・非同期I/Oを比べる",
+          "link": "/practice/io/async-file-read-observation.html"
+        },
+        {
           "text": "C++とC#でファイルの読み取りを観察する",
           "link": "/practice/io/file-read-observation.html"
         },
@@ -2012,6 +2064,10 @@
       "text": "ほかの実践・サンプル",
       "collapsed": true,
       "items": [
+        {
+          "text": "C++とC#で同期・非同期I/Oを比べる",
+          "link": "/practice/io/async-file-read-observation.html"
+        },
         {
           "text": "C++とC#で在庫の同期を確かめる",
           "link": "/practice/threads/inventory-synchronization.html"
@@ -2082,8 +2138,85 @@
       "collapsed": true,
       "items": [
         {
+          "text": "C++とC#で同期・非同期I/Oを比べる",
+          "link": "/practice/io/async-file-read-observation.html"
+        },
+        {
           "text": "C++とC#でファイルの読み取りを観察する",
           "link": "/practice/io/file-read-observation.html"
+        },
+        {
+          "text": "C++とC#でfloatの比較を確かめる",
+          "link": "/practice/math/float-comparison-observation.html"
+        },
+        {
+          "text": "C++とC#で文字の表現を観察する",
+          "link": "/practice/data/unicode-observation.html"
+        },
+        {
+          "text": "C++でfloatの表現と刻み幅を観察する",
+          "link": "/practice/data/float-spacing-observation.html"
+        },
+        {
+          "text": "C++で整数とバイト列を観察する",
+          "link": "/practice/data/integer-byte-observation.html"
+        },
+        {
+          "text": "Windowsでプロセスとスレッドを観察する",
+          "link": "/practice/process/windows-process-observation.html"
+        },
+        {
+          "text": "Windowsでメモリの状態を観察する",
+          "link": "/practice/memory/windows-memory-observation.html"
+        },
+        {
+          "text": "小さなシューティングを作る",
+          "link": "/game/shooter-design.html"
+        },
+        {
+          "text": "小さなレンダラーを作る",
+          "link": "/graphics/capstone/01-design.html"
+        },
+        {
+          "text": "C++と設計の演習",
+          "link": "/guide/exercises/"
+        },
+        {
+          "text": "C++のビルドサンプル",
+          "link": "/tools/build/samples/"
+        },
+        {
+          "text": "小さなアプリで設計を試す",
+          "link": "/design/notebook/practice.html"
+        }
+      ]
+    }
+  ],
+  "/practice/io/async-file-read-observation.md": [
+    {
+      "text": "実践・サンプル一覧",
+      "link": "/practice/"
+    },
+    {
+      "text": "C++とC#で同期・非同期I/Oを比べる",
+      "items": [
+        {
+          "text": "C++とC#で非同期readの開始・完了・寿命を観察する",
+          "link": "/practice/io/async-file-read-observation.html"
+        }
+      ]
+    },
+    {
+      "text": "ほかの実践・サンプル",
+      "collapsed": true,
+      "items": [
+        {
+          "text": "C++とC#でファイルの読み取りを観察する",
+          "link": "/practice/io/file-read-observation.html"
+        },
+        {
+          "text": "C++とC#で在庫の同期を確かめる",
+          "link": "/practice/threads/inventory-synchronization.html"
         },
         {
           "text": "C++とC#でfloatの比較を確かめる",
@@ -2373,6 +2506,10 @@
       "collapsed": true,
       "items": [
         {
+          "text": "C++とC#で同期・非同期I/Oを比べる",
+          "link": "/practice/io/async-file-read-observation.html"
+        },
+        {
           "text": "C++とC#でファイルの読み取りを観察する",
           "link": "/practice/io/file-read-observation.html"
         },
@@ -2494,6 +2631,10 @@
       "collapsed": true,
       "items": [
         {
+          "text": "C++とC#で同期・非同期I/Oを比べる",
+          "link": "/practice/io/async-file-read-observation.html"
+        },
+        {
           "text": "C++とC#でファイルの読み取りを観察する",
           "link": "/practice/io/file-read-observation.html"
         },
@@ -2570,6 +2711,10 @@
       "text": "ほかの実践・サンプル",
       "collapsed": true,
       "items": [
+        {
+          "text": "C++とC#で同期・非同期I/Oを比べる",
+          "link": "/practice/io/async-file-read-observation.html"
+        },
         {
           "text": "C++とC#でファイルの読み取りを観察する",
           "link": "/practice/io/file-read-observation.html"
@@ -2691,6 +2836,10 @@
       "text": "ほかの実践・サンプル",
       "collapsed": true,
       "items": [
+        {
+          "text": "C++とC#で同期・非同期I/Oを比べる",
+          "link": "/practice/io/async-file-read-observation.html"
+        },
         {
           "text": "C++とC#でファイルの読み取りを観察する",
           "link": "/practice/io/file-read-observation.html"
@@ -2898,6 +3047,10 @@
       "collapsed": true,
       "items": [
         {
+          "text": "C++とC#で同期・非同期I/Oを比べる",
+          "link": "/practice/io/async-file-read-observation.html"
+        },
+        {
           "text": "C++とC#でファイルの読み取りを観察する",
           "link": "/practice/io/file-read-observation.html"
         },
@@ -3103,6 +3256,10 @@
       "text": "ほかの実践・サンプル",
       "collapsed": true,
       "items": [
+        {
+          "text": "C++とC#で同期・非同期I/Oを比べる",
+          "link": "/practice/io/async-file-read-observation.html"
+        },
         {
           "text": "C++とC#でファイルの読み取りを観察する",
           "link": "/practice/io/file-read-observation.html"
@@ -3310,6 +3467,10 @@
       "collapsed": true,
       "items": [
         {
+          "text": "C++とC#で同期・非同期I/Oを比べる",
+          "link": "/practice/io/async-file-read-observation.html"
+        },
+        {
           "text": "C++とC#でファイルの読み取りを観察する",
           "link": "/practice/io/file-read-observation.html"
         },
@@ -3516,6 +3677,10 @@
       "collapsed": true,
       "items": [
         {
+          "text": "C++とC#で同期・非同期I/Oを比べる",
+          "link": "/practice/io/async-file-read-observation.html"
+        },
+        {
           "text": "C++とC#でファイルの読み取りを観察する",
           "link": "/practice/io/file-read-observation.html"
         },
@@ -3636,6 +3801,10 @@
       "text": "ほかの実践・サンプル",
       "collapsed": true,
       "items": [
+        {
+          "text": "C++とC#で同期・非同期I/Oを比べる",
+          "link": "/practice/io/async-file-read-observation.html"
+        },
         {
           "text": "C++とC#でファイルの読み取りを観察する",
           "link": "/practice/io/file-read-observation.html"
@@ -3791,6 +3960,10 @@
       "collapsed": true,
       "items": [
         {
+          "text": "C++とC#で同期・非同期I/Oを比べる",
+          "link": "/practice/io/async-file-read-observation.html"
+        },
+        {
           "text": "C++とC#でファイルの読み取りを観察する",
           "link": "/practice/io/file-read-observation.html"
         },
@@ -3859,6 +4032,10 @@
       "text": "ほかの実践・サンプル",
       "collapsed": true,
       "items": [
+        {
+          "text": "C++とC#で同期・非同期I/Oを比べる",
+          "link": "/practice/io/async-file-read-observation.html"
+        },
         {
           "text": "C++とC#でファイルの読み取りを観察する",
           "link": "/practice/io/file-read-observation.html"
@@ -3981,6 +4158,10 @@
       "collapsed": true,
       "items": [
         {
+          "text": "C++とC#で同期・非同期I/Oを比べる",
+          "link": "/practice/io/async-file-read-observation.html"
+        },
+        {
           "text": "C++とC#でファイルの読み取りを観察する",
           "link": "/practice/io/file-read-observation.html"
         },
@@ -4101,6 +4282,10 @@
       "text": "ほかの実践・サンプル",
       "collapsed": true,
       "items": [
+        {
+          "text": "C++とC#で同期・非同期I/Oを比べる",
+          "link": "/practice/io/async-file-read-observation.html"
+        },
         {
           "text": "C++とC#でファイルの読み取りを観察する",
           "link": "/practice/io/file-read-observation.html"
@@ -4264,6 +4449,10 @@
       "collapsed": true,
       "items": [
         {
+          "text": "C++とC#で同期・非同期I/Oを比べる",
+          "link": "/practice/io/async-file-read-observation.html"
+        },
+        {
           "text": "C++とC#でファイルの読み取りを観察する",
           "link": "/practice/io/file-read-observation.html"
         },
@@ -4340,6 +4529,10 @@
       "text": "ほかの実践・サンプル",
       "collapsed": true,
       "items": [
+        {
+          "text": "C++とC#で同期・非同期I/Oを比べる",
+          "link": "/practice/io/async-file-read-observation.html"
+        },
         {
           "text": "C++とC#でファイルの読み取りを観察する",
           "link": "/practice/io/file-read-observation.html"
@@ -4461,6 +4654,10 @@
       "text": "ほかの実践・サンプル",
       "collapsed": true,
       "items": [
+        {
+          "text": "C++とC#で同期・非同期I/Oを比べる",
+          "link": "/practice/io/async-file-read-observation.html"
+        },
         {
           "text": "C++とC#でファイルの読み取りを観察する",
           "link": "/practice/io/file-read-observation.html"
@@ -4667,6 +4864,10 @@
       "text": "ほかの実践・サンプル",
       "collapsed": true,
       "items": [
+        {
+          "text": "C++とC#で同期・非同期I/Oを比べる",
+          "link": "/practice/io/async-file-read-observation.html"
+        },
         {
           "text": "C++とC#でファイルの読み取りを観察する",
           "link": "/practice/io/file-read-observation.html"
@@ -5021,6 +5222,10 @@
       "collapsed": true,
       "items": [
         {
+          "text": "C++とC#で同期・非同期I/Oを比べる",
+          "link": "/practice/io/async-file-read-observation.html"
+        },
+        {
           "text": "C++とC#でファイルの読み取りを観察する",
           "link": "/practice/io/file-read-observation.html"
         },
@@ -5089,6 +5294,10 @@
       "text": "ほかの実践・サンプル",
       "collapsed": true,
       "items": [
+        {
+          "text": "C++とC#で同期・非同期I/Oを比べる",
+          "link": "/practice/io/async-file-read-observation.html"
+        },
         {
           "text": "C++とC#でファイルの読み取りを観察する",
           "link": "/practice/io/file-read-observation.html"
@@ -5380,6 +5589,10 @@
       "text": "ほかの実践・サンプル",
       "collapsed": true,
       "items": [
+        {
+          "text": "C++とC#で同期・非同期I/Oを比べる",
+          "link": "/practice/io/async-file-read-observation.html"
+        },
         {
           "text": "C++とC#でファイルの読み取りを観察する",
           "link": "/practice/io/file-read-observation.html"
@@ -8128,6 +8341,10 @@
       "text": "ほかの実践・サンプル",
       "collapsed": true,
       "items": [
+        {
+          "text": "C++とC#で同期・非同期I/Oを比べる",
+          "link": "/practice/io/async-file-read-observation.html"
+        },
         {
           "text": "C++とC#でファイルの読み取りを観察する",
           "link": "/practice/io/file-read-observation.html"

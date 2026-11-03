@@ -102,6 +102,8 @@ C#では、例えば`FileMode.Open`と`FileAccess.Read`で`FileStream`を開き�
 
 **EOF**はEnd Of File、ファイルの終わりです。今回のように**要求数が0より大きい同期ファイル読み取り**では、Windowsの`ReadFile`が成功して実際数0ならEOFとして扱います。C#でも、正の数を要求した`FileStream.Read`の戻り値0で、読める内容が終わったと判断します。要求数そのものが0なら、0が返ってもEOFの根拠にはなりません。[Microsoft: Testing for the End of a File](https://learn.microsoft.com/en-us/windows/win32/fileio/testing-for-the-end-of-a-file)
 
+このWindowsの判定を、OVERLAPPEDを使う非同期読み取りへそのまま移しません。非同期版では、開始時の`ReadFile`や完了結果を受け取る`GetOverlappedResult`で`ERROR_HANDLE_EOF`を扱う場合があります。開始の戻り値と完了結果、EOFを分ける手順は[非同期ファイルI/Oの本文](/os/asynchronous-file-io.html)で説明します。[Microsoft: 同期と非同期で異なるEOFの検査](https://learn.microsoft.com/en-us/windows/win32/fileio/testing-for-the-end-of-a-file)
+
 このbyte列の`00`はNUL、`0D 0A`はCRとLFですが、`ReadFile`と`FileStream`はそのまま読みます。NULで内容を打ち切ったり、改行を一byteへ変換したりしません。末尾の`FF`もEOFマークではありません。
 
 失敗はEOFと分けます。同期`ReadFile`が失敗したら、その直後にエラー情報を確保します。C#の読取り例外も、実際数0として握りつぶしません。固定長ヘッダーなど「必要な数を読み切る」処理では、EOFまでに必要数へ届かなければ、ファイルの不足として別に検査します。
@@ -130,7 +132,9 @@ Windowsでは`SetFilePointerEx`、C#では`FileStream.Position`や`Seek`で位�
 
 Windowsの非同期読み取りは、`FILE_FLAG_OVERLAPPED`で開くなど、完了の扱いが別です。`ReadFile`の`FALSE`と`ERROR_IO_PENDING`は、その場合には失敗ではなく進行中を示します。完了するまでバッファや要求情報を有効に保つ必要があり、同期の戻り値判定だけを流用しません。非同期用ハンドルでも、常に即時復帰するとは限りません。[Microsoft: ReadFile — asynchronous operations](https://learn.microsoft.com/en-us/windows/win32/api/fileapi/nf-fileapi-readfile)
 
-C#にも`ReadAsync`がありますが、非同期化は「ストレージが速くなった」という意味ではありません。完了の受取り、エラー、キャンセル、資源の寿命を管理する別の設計です。今回の実践は同期版を観察します。[Microsoft: Asynchronous File I/O](https://learn.microsoft.com/en-us/dotnet/standard/io/asynchronous-file-i-o)
+C#にも`ReadAsync`がありますが、非同期化は「ストレージが速くなった」という意味ではありません。完了の受取り、エラー、キャンセル、資源の寿命を管理する別の設計です。`async`や`await`から、要求ごとに専用の別スレッドが作られるとも判断しません。[Microsoft: Asynchronous File I/O](https://learn.microsoft.com/en-us/dotnet/standard/io/asynchronous-file-i-o)、[asyncとスレッドの関係](https://learn.microsoft.com/en-us/dotnet/csharp/asynchronous-programming/task-asynchronous-programming-model#threads)
+
+[非同期ファイルI/Oの本文](/os/asynchronous-file-io.html)と[同期・非同期の読取りを比較する観察例](/practice/io/async-file-read-observation.html)では、C++のOVERLAPPEDと手動リセットイベント、C#／.NET 10の`FileOptions.Asynchronous`と`ReadAsync`へ進みます。このページの実践は同期版の基礎を確認するもので、IOCPによる多数の要求の処理は別の発展項目です。
 
 ## ゲームのアセット読込みにつなげる
 
