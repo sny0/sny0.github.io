@@ -1,0 +1,57 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="760" height="1410" viewBox="0 0 760 1410" role="img" aria-labelledby="binary32-title binary32-desc">
+  <title id="binary32-title">binary32の格納する32bitと有効精度</title>
+  <desc id="binary32-desc">IEEE 754 binary32の形式モデル。1.5は符号0、格納指数127、小数部の最上位bitが1で残りが0。格納するのは符号1bit、指数8bit、小数部23bit。正規化数では先頭の1を補うため有効精度は24bitとなる。指数0のゼロとsubnormal、指数255の無限大とNaNは別の規則で読む。この図は上位bitを左に書いた表記であり、アドレス順のbyte列ではない。</desc>
+  <style>
+    text { font-family: "BIZ UDPGothic", "Yu Gothic", Meiryo, sans-serif; fill: #26352e; }
+    .heading { font-size: 28px; font-weight: 700; }
+    .body { font-size: 24px; }
+    .code { font-family: Consolas, monospace; }
+    .center { text-anchor: middle; }
+  </style>
+  <rect width="760" height="1410" rx="20" fill="#f4f8f4"/>
+  <text x="32" y="54" font-size="32" font-weight="700">binary32の32bitを読む</text>
+  <text x="32" y="96" class="body">ビット表現は上位bitが左。例は1.5</text>
+
+  <rect x="24" y="128" width="712" height="260" rx="14" fill="#fff"/>
+  <text x="44" y="172" class="heading">1.5の形式上の表記：0x3FC00000</text>
+  <g class="body code center">
+    <text x="39" y="214">31</text>
+    <text x="138" y="214">30 … 23</text>
+    <text x="479" y="214">22 … 0</text>
+    <rect x="28" y="236" width="22" height="74" fill="#f5dfe2"/>
+    <rect x="50" y="236" width="176" height="74" fill="#e2eafa"/>
+    <rect x="226" y="236" width="506" height="74" fill="#dcece0"/>
+    <text x="39" y="284">0</text>
+    <text x="138" y="284">01111111</text>
+    <text x="479" y="284">10000000000000000000000</text>
+  </g>
+  <text x="44" y="353" class="body">s = 0、E = 127、F = 4194304（2²²）</text>
+
+  <rect x="24" y="420" width="712" height="302" rx="14" fill="#fff"/>
+  <text x="44" y="464" class="heading">格納するbitと、有効精度を分ける</text>
+  <rect x="44" y="493" width="14" height="20" fill="#f5dfe2"/>
+  <text x="72" y="511" class="body">符号 s：1bit</text>
+  <rect x="44" y="537" width="14" height="20" fill="#e2eafa"/>
+  <text x="72" y="555" class="body">格納する指数 E：8bit（バイアス127）</text>
+  <rect x="44" y="581" width="14" height="20" fill="#dcece0"/>
+  <text x="72" y="599" class="body">格納する小数部 F：23bit</text>
+  <text x="44" y="653" class="body" font-weight="700">正規化数は先頭の1を含め、有効精度24bit</text>
+  <text x="44" y="695" class="body">格納する23bitと、有効精度24bitを区別する</text>
+
+  <rect x="24" y="754" width="712" height="220" rx="14" fill="#fff"/>
+  <text x="44" y="798" class="heading">正規化数：1 ≤ E ≤ 254</text>
+  <text x="44" y="843" class="body code">x = (-1)^s * (1 + F/2^23) * 2^(E-127)</text>
+  <text x="44" y="888" class="body">1.5では s = 0、E = 127、F = 2²²</text>
+  <text x="44" y="933" class="body">値は +1 × (1 + 1/2) × 2⁰ = 1.5</text>
+
+  <rect x="24" y="1006" width="712" height="244" rx="14" fill="#fff"/>
+  <text x="44" y="1050" class="heading">特別な指数の領域は別の規則</text>
+  <text x="44" y="1095" class="body">E = 0：F = 0なら±0、F ≠ 0ならsubnormal</text>
+  <text x="44" y="1137" class="body">subnormalは先頭の1を補わない</text>
+  <text x="44" y="1179" class="body">E = 255：F = 0なら±∞、F ≠ 0ならNaN</text>
+  <text x="44" y="1221" class="body">NaNは値の等号比較では判定できない</text>
+
+  <text x="32" y="1309" class="body" font-weight="700">この図はIEEE 754 binary32の形式モデル</text>
+  <text x="32" y="1350" class="body">C++のfloatという型名だけで、この形式とは決まらない</text>
+  <text x="32" y="1391" class="body">ビット表記の順と、アドレス順のbyte列は別</text>
+</svg>

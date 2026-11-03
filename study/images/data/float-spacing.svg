@@ -1,0 +1,66 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="760" height="1470" viewBox="0 0 760 1470" role="img" aria-labelledby="spacing-title spacing-desc">
+  <title id="spacing-title">binary32の隣接値と、値の尺度による刻み幅の違い</title>
+  <desc id="spacing-desc">正のbinary32の隣接値の概念図。各段で縮尺を変えている。1の直前との差は2のマイナス24乗、直後との差は2のマイナス23乗。100000の前後は1/128。2の24乗である16777216の直前との差は1、直後との差は2。16777217は隣接する16777216と16777218の中点で表せず、最近接偶数丸めでは16777216になる。subnormalの刻み幅は一定で、全域を同じ相対精度として扱わない。</desc>
+  <style>
+    text { font-family: "BIZ UDPGothic", "Yu Gothic", Meiryo, sans-serif; fill: #26352e; }
+    .heading { font-size: 28px; font-weight: 700; }
+    .body { font-size: 24px; }
+    .code { font-family: Consolas, monospace; }
+    .center { text-anchor: middle; }
+    .axis { stroke: #6c7e71; stroke-width: 2; }
+    .tick { stroke: #245d48; stroke-width: 3; }
+    .point { fill: #245d48; }
+  </style>
+  <rect width="760" height="1470" rx="20" fill="#f4f8f4"/>
+  <text x="32" y="54" font-size="32" font-weight="700">値の大きさで変わるfloatの刻み幅</text>
+  <text x="32" y="96" class="body">binary32の概念図。各段で縮尺を変えている</text>
+
+  <rect x="24" y="130" width="712" height="300" rx="14" fill="#fff"/>
+  <text x="44" y="174" class="heading">① 1.0の前後</text>
+  <text x="44" y="216" class="body">前の差：2⁻²⁴　　次の差：2⁻²³</text>
+  <path d="M80 284H680" class="axis"/>
+  <path d="M120 270V298M293 270V298M640 270V298" class="tick"/>
+  <circle cx="293" cy="284" r="7" class="point"/>
+  <g class="center body">
+    <text x="120" y="335">1 − 2⁻²⁴</text>
+    <text x="293" y="335">1</text>
+    <text x="640" y="335">1 + 2⁻²³</text>
+  </g>
+  <text x="44" y="391" class="body">epsilonは、1から次の値までの差（2⁻²³）</text>
+
+  <rect x="24" y="462" width="712" height="260" rx="14" fill="#fff"/>
+  <text x="44" y="506" class="heading">② 100000付近</text>
+  <text x="44" y="548" class="body">前後の刻み幅：1/128 = 0.0078125</text>
+  <path d="M80 596H680" class="axis"/>
+  <path d="M140 582V610M380 582V610M620 582V610" class="tick"/>
+  <circle cx="380" cy="596" r="7" class="point"/>
+  <g class="center body code">
+    <text x="140" y="649">100000-1/128</text>
+    <text x="380" y="649">100000</text>
+    <text x="620" y="649">100000+1/128</text>
+  </g>
+  <text x="44" y="695" class="body">座標の1unitが何mか、という尺度にも関係する</text>
+
+  <rect x="24" y="754" width="712" height="342" rx="14" fill="#fff"/>
+  <text x="44" y="798" class="heading">③ 2²⁴ = 16777216付近</text>
+  <text x="44" y="840" class="body">前の差：1　　次の差：2</text>
+  <path d="M80 888H680" class="axis"/>
+  <path d="M120 874V902M293 874V902M640 874V902" class="tick"/>
+  <circle cx="293" cy="888" r="7" class="point"/>
+  <path d="M467 864V908" stroke="#b08327" stroke-width="3" stroke-dasharray="5 4"/>
+  <g class="center body code">
+    <text x="120" y="942">16777215</text>
+    <text x="293" y="942">16777216</text>
+    <text x="640" y="942">16777218</text>
+  </g>
+  <text x="44" y="1003" class="body" fill="#93650b">16777217は中点（binary32では表せない）</text>
+  <text x="44" y="1052" class="body" font-weight="700">最近接・偶数丸めでは、2²⁴ + 1 → 2²⁴</text>
+
+  <text x="32" y="1162" class="heading">大きい値ほど、細かい差を保持しにくい</text>
+  <text x="32" y="1208" class="body">正の正規化数の同じ指数区間では、刻み幅は一定</text>
+  <text x="32" y="1249" class="body">2の冪の境界では、前と次の差が異なる場合がある</text>
+  <text x="32" y="1306" class="body">subnormalでは、刻み幅が2⁻¹⁴⁹で一定になる</text>
+  <text x="32" y="1347" class="body">0付近まで、ずっと同じ相対精度が続くわけではない</text>
+  <text x="32" y="1404" class="body" font-weight="700">epsilonを全域の比較許容値として一律に使わない</text>
+  <text x="32" y="1445" class="body">計算・比較の条件と、必要な精度を用途ごとに確認する</text>
+</svg>
