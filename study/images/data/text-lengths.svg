@@ -1,0 +1,67 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="760" height="1310" viewBox="0 0 760 1310" role="img" aria-labelledby="length-title length-desc">
+  <title id="length-title">バイト、コード単位、スカラー値、書記素クラスタで長さを数える</title>
+  <desc id="length-desc">AはUTF-8で1バイト、UTF-16で1コード単位、1スカラー値、1拡張書記素クラスタ。あは3バイト、1単位、1スカラー、1クラスタ。顔の絵文字U+1F600は4バイト、2単位、1スカラー、1クラスタ。eと結合アキュートアクセントU+0301の列は3バイト、2単位、2スカラー、1クラスタ。C++の文字列のsizeは要素数、C#のstring.LengthはUTF-16コード単位数で、見た目の文字数の一般的な答えにはならない。</desc>
+  <style>
+    text { font-family: "BIZ UDPGothic", "Yu Gothic", Meiryo, sans-serif; fill: #26352e; }
+    .heading { font-size: 28px; font-weight: 700; }
+    .body { font-size: 24px; }
+    .code { font-family: Consolas, monospace; }
+    .center { text-anchor: middle; }
+  </style>
+  <rect width="760" height="1310" rx="20" fill="#f4f8f4"/>
+  <text x="32" y="54" font-size="32" font-weight="700">「長さ」は数える単位で変わる</text>
+  <text x="32" y="98" class="body">すべて正しいUnicode列。BOM・終端NULは除く</text>
+
+  <rect x="24" y="132" width="712" height="530" rx="14" fill="#fff"/>
+  <g class="body center" font-weight="700">
+    <text x="388" y="174">UTF-8</text>
+    <text x="388" y="210">バイト</text>
+    <text x="493" y="174">UTF-16</text>
+    <text x="493" y="210">単位</text>
+    <text x="600" y="174">スカラー</text>
+    <text x="600" y="210">値</text>
+    <text x="694" y="174">書記素</text>
+    <text x="694" y="210">クラスタ</text>
+  </g>
+  <path d="M40 232h680 M40 330h680 M40 428h680 M40 526h680" stroke="#d2dfd6" stroke-width="2"/>
+  <g class="body">
+    <text x="44" y="276" font-weight="700">A</text>
+    <text x="44" y="310" class="code">U+0041</text>
+    <text x="44" y="374" font-weight="700">あ</text>
+    <text x="44" y="408" class="code">U+3042</text>
+    <text x="44" y="472" font-weight="700">顔の絵文字</text>
+    <text x="44" y="506" class="code">U+1F600</text>
+    <text x="44" y="570" font-weight="700">e ＋ 結合アクセント</text>
+    <text x="44" y="604" class="code">U+0065 U+0301</text>
+  </g>
+  <g class="heading center code">
+    <text x="388" y="291">1</text><text x="493" y="291">1</text><text x="600" y="291">1</text><text x="694" y="291">1</text>
+    <text x="388" y="389">3</text><text x="493" y="389">1</text><text x="600" y="389">1</text><text x="694" y="389">1</text>
+    <text x="388" y="487">4</text><text x="493" y="487">2</text><text x="600" y="487">1</text><text x="694" y="487">1</text>
+    <text x="388" y="585">3</text><text x="493" y="585">2</text><text x="600" y="585">2</text><text x="694" y="585">1</text>
+  </g>
+  <text x="44" y="645" class="body">書記素の列は、この4例の拡張書記素クラスタ数</text>
+
+  <rect x="24" y="690" width="712" height="268" rx="14" fill="#fff"/>
+  <text x="44" y="736" class="heading">2つのスカラー値が、1つのまとまりに</text>
+  <rect x="44" y="762" width="230" height="94" rx="10" fill="#e2eafa"/>
+  <text x="159" y="800" class="heading center">e</text>
+  <text x="159" y="837" class="body code center">U+0065</text>
+  <text x="302" y="817" class="heading center">＋</text>
+  <rect x="330" y="762" width="230" height="94" rx="10" fill="#f6e6ce"/>
+  <text x="445" y="800" class="body center">結合アクセント</text>
+  <text x="445" y="837" class="body code center">U+0301</text>
+  <path d="M578 808h36m-10-8 10 8-10 8" fill="none" stroke="#47765a" stroke-width="3"/>
+  <rect x="628" y="776" width="76" height="70" rx="10" fill="#dcece0"/>
+  <text x="666" y="823" font-size="38" class="center">e&#x0301;</text>
+  <text x="44" y="903" class="body">書記素クラスタは、利用者が文字として扱う</text>
+  <text x="44" y="943" class="body">まとまりの近似。常に字形の個数と一致はしない</text>
+
+  <rect x="24" y="986" width="712" height="218" rx="14" fill="#fff"/>
+  <text x="44" y="1032" class="heading">言語のAPIが何を数えるか確認する</text>
+  <text x="44" y="1076" class="body code">C++20: u8string.size() → char8_t要素数</text>
+  <text x="44" y="1118" class="body code">C++20: u16string.size() → char16_t要素数</text>
+  <text x="44" y="1160" class="body code">C#: string.Length → UTF-16コード単位数</text>
+  <text x="32" y="1254" class="body">任意の列の検証・分割は、対応するAPIで行う</text>
+  <text x="32" y="1294" class="body">フォントの字形・描画結果は、別の層の話</text>
+</svg>
