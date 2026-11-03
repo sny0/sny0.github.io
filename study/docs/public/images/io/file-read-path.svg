@@ -1,0 +1,49 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="760" height="1510" viewBox="0 0 760 1510" role="img" aria-labelledby="read-title read-desc">
+  <title id="read-title">アプリの読み取りからファイルキャッシュと保存装置まで</title>
+  <desc id="read-desc">通常のキャッシュ付きローカルファイル読み取りの概念図。アプリは開いたハンドルまたはストリームと現在位置を使い、読み取り先バッファを渡す。FileStreamなどのライブラリ内バッファで満たせる場合はOSへの読み取り要求を省ける。必要時はOSへ要求し、OSのファイルキャッシュにあればそこから取得する。なければファイルシステムとドライバを通じ保存装置へ要求し、データを受け取る。読み取りAPIの呼出回数と物理I/O回数は一致せず、図は固定のコピー回数や実装順序を表さない。</desc>
+  <style>
+    text { font-family: "BIZ UDPGothic", "Yu Gothic", Meiryo, sans-serif; fill: #26352e; }
+    .heading { font-size: 28px; font-weight: 700; }
+    .body { font-size: 24px; }
+    .center { text-anchor: middle; }
+    .arrow { fill: none; stroke: #526d5c; stroke-width: 3; marker-end: url(#arrow); }
+  </style>
+  <defs><marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse"><path d="M0 0L10 5 0 10Z" fill="#526d5c"/></marker></defs>
+  <rect width="760" height="1510" rx="20" fill="#f4f8f4"/>
+  <text x="32" y="54" font-size="32" font-weight="700">「読む」は、毎回SSDへ行くとは限らない</text>
+  <text x="32" y="98" class="body">通常のキャッシュ付きローカルファイルの概念図</text>
+  <rect x="24" y="130" width="712" height="430" rx="14" fill="#fff"/>
+  <text x="44" y="176" class="heading">① アプリとライブラリ</text>
+  <text x="44" y="220" class="body">open：名前から、開いたファイルの参照を得る</text>
+  <text x="44" y="260" class="body">権限・共有条件も確認。全データはまだ読まない</text>
+  <rect x="48" y="290" width="664" height="104" rx="10" fill="#e2eafa"/>
+  <text x="68" y="332" class="heading">read：読み取り先と最大バイト数を渡す</text>
+  <text x="68" y="374" class="body">アプリのバッファへ、実際に読めた分を受け取る</text>
+  <rect x="48" y="414" width="664" height="118" rx="10" fill="#e9efe6"/>
+  <text x="68" y="454" class="body">ライブラリ内バッファ（FileStreamなど）</text>
+  <text x="68" y="494" class="body">ここで満たせれば、OSへのread要求を省ける</text>
+  <path d="M380 562V604" class="arrow"/>
+  <text x="400" y="594" class="body">必要な場合だけOSへ</text>
+  <rect x="24" y="624" width="712" height="322" rx="14" fill="#fff"/>
+  <text x="44" y="672" class="heading">② OSのファイルキャッシュ（RAM）</text>
+  <text x="44" y="714" class="body">CPUのL1/L2キャッシュとは、別の仕組み</text>
+  <rect x="48" y="742" width="314" height="168" rx="10" fill="#dcece0"/>
+  <text x="205" y="786" class="heading center">必要な範囲がある</text>
+  <text x="205" y="830" class="body center">キャッシュの内容を</text>
+  <text x="205" y="870" class="body center">アプリ側へ渡せる</text>
+  <rect x="390" y="742" width="322" height="168" rx="10" fill="#f1eee5"/>
+  <text x="551" y="786" class="heading center">必要な範囲がない</text>
+  <text x="551" y="830" class="body center">不足分を取得する</text>
+  <text x="551" y="870" class="body center">処理へ進む ↓</text>
+  <path d="M550 946V988" class="arrow"/>
+  <rect x="24" y="1010" width="712" height="280" rx="14" fill="#fff"/>
+  <text x="44" y="1058" class="heading">③ ファイルシステム・ドライバ・保存装置</text>
+  <text x="44" y="1102" class="body">ファイル内の範囲を、保存先への要求につなぐ</text>
+  <text x="44" y="1144" class="body">SSD / HDDなどからデータを取得して返す</text>
+  <text x="44" y="1186" class="body">先読み・まとめ読み・装置側キャッシュも関与</text>
+  <text x="44" y="1244" class="body">同期readは、完了または失敗まで呼出元を待たせ得る</text>
+  <text x="32" y="1340" class="heading">3つの回数が、同じになるとは限らない</text>
+  <text x="32" y="1386" class="body">API呼出 / OS読取要求 / 物理I/O の回数を区別</text>
+  <text x="32" y="1428" class="body">実行例はbytesと位置を観察。物理I/Oは測定しない</text>
+  <text x="32" y="1470" class="body">closeしても、OSキャッシュが直ちに消えるとは限らない</text>
+</svg>

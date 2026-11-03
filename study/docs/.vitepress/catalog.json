@@ -41,7 +41,7 @@
       "id": "os",
       "title": "OS",
       "description": "プロセス、メモリ、スレッド、入出力の仕組みを調べる。",
-      "count": 2,
+      "count": 3,
       "status": "辞典本文あり"
     },
     {
@@ -130,6 +130,13 @@
     }
   ],
   "collections": [
+    {
+      "id": "file-read-observation",
+      "section": "practice",
+      "title": "C++とC#でファイルの読み取りを観察する",
+      "description": "要求数・実読取数・位置・EOFを、自己所有の一時ファイルで確かめる。",
+      "start": "/practice/io/file-read-observation.html"
+    },
     {
       "id": "thread-synchronization",
       "section": "practice",
@@ -856,6 +863,37 @@
       ]
     },
     {
+      "title": "C++とC#でファイルのbytes・位置・EOFを観察する",
+      "url": "/practice/io/file-read-observation.html",
+      "file": "practice/io/file-read-observation.md",
+      "domain": "os",
+      "section": "practice",
+      "format": "sample",
+      "status": "published",
+      "summary": "12bytesの一時fixtureを5byte bufferで読み、要求と実読取数・offset・EOF・seek後の再読・missing fileの失敗を比較する。",
+      "source": "新規執筆",
+      "aliases": [
+        "FileStream",
+        "ReadFile",
+        "CreateFileW",
+        "SetFilePointerEx",
+        "GetFileSizeEx",
+        "EOF",
+        "seek",
+        "offset",
+        "ファイルI/O",
+        "バッファ",
+        "OSキャッシュ"
+      ],
+      "collection": "file-read-observation",
+      "order": 1,
+      "verification": "Windowsで両言語を実行確認",
+      "links": [
+        "/os/file-read-journey.html",
+        "/practice/data/unicode-observation.html"
+      ]
+    },
+    {
       "title": "C++とC#で在庫の確認・更新を一つのロックで守る",
       "url": "/practice/threads/inventory-synchronization.html",
       "file": "practice/threads/inventory-synchronization.md",
@@ -1102,7 +1140,8 @@
       "collection": "cpp-samples",
       "order": 0,
       "links": [
-        "/practice/threads/inventory-synchronization.html"
+        "/practice/threads/inventory-synchronization.html",
+        "/practice/io/file-read-observation.html"
       ]
     },
     {
@@ -2749,13 +2788,15 @@
       "section": "reference",
       "format": "article",
       "status": "published",
-      "summary": "「リソースの確保をコンストラクタで、解放をデストラクタで行い、リソースの寿命をオブジェクトの寿命に一致させる」— C++最重要のイディオムです。名前は分かりにくいですが、意味は「後片付けを型に組み込む」。スマートポインタ、vector、stringなど、C++標準ライブラリの大半はRAIIでできてい",
+      "summary": "リソースの所有と後片付けをオブジェクトの寿命へ結び付ける。通常のスコープ終了、早期return、例外の巻き戻しで解放する仕組みを調べる。",
       "source": "C++ Wiki",
       "aliases": [
         "RAII",
         "リソースの寿命管理"
       ],
       "links": [
+        "/os/file-read-journey.html",
+        "/practice/io/file-read-observation.html",
         "/design/patterns/observer.html",
         "/languages/csharp/destructor-dispose-raii-using.html",
         "/runtime/memory/allocators-and-pools.html",
@@ -5004,6 +5045,42 @@
       ]
     },
     {
+      "title": "ファイルを読むと内部で何が起きるか",
+      "url": "/os/file-read-journey.html",
+      "file": "os/file-read-journey.md",
+      "domain": "os",
+      "section": "reference",
+      "format": "article",
+      "status": "published",
+      "summary": "アプリの受取バッファ、ライブラリの緩衝、OSのファイルキャッシュ、ファイルシステムとストレージを分けて読む。要求数と実際数、ファイル位置、短いread、EOFとエラー、デコードと所有権も扱う。",
+      "source": "新規執筆",
+      "aliases": [
+        "file I/O",
+        "ファイルI/O",
+        "ファイル読み取り",
+        "ReadFile",
+        "CreateFileW",
+        "FileStream",
+        "ファイルキャッシュ",
+        "file cache",
+        "buffer",
+        "バッファ",
+        "buffered I/O",
+        "EOF",
+        "end of file",
+        "short read",
+        "seek",
+        "ファイル位置",
+        "同期I/O",
+        "非同期I/O"
+      ],
+      "verification": "一次資料照合（2026-11-04）",
+      "links": [
+        "/data/unicode-and-encoding.html",
+        "/practice/io/file-read-observation.html"
+      ]
+    },
+    {
       "title": "プレイヤー入力の設計",
       "url": "/design/case-studies/player-input.html",
       "file": "design/case-studies/player-input.md",
@@ -5697,7 +5774,7 @@
       "section": "learning",
       "format": "path",
       "status": "published",
-      "summary": "整数・浮動小数点とその比較、文字コード、メモリ確保、プログラムの起動、スレッドの同期、入力と描画、Webの疑問から関連する本文をたどる。",
+      "summary": "整数・浮動小数点とその比較、文字コード、メモリ確保、起動、同期、ファイル読み取り、入力と描画、Webの疑問から関連する本文をたどる。",
       "source": "統合ガイド",
       "aliases": [],
       "collection": "questions",
@@ -5731,6 +5808,8 @@
         "/runtime/thread-synchronization.html",
         "/practice/threads/inventory-synchronization.html",
         "/runtime/memory/concurrency-bugs.html",
+        "/os/file-read-journey.html",
+        "/practice/io/file-read-observation.html",
         "/game/patterns/game-loop-and-update.html",
         "/game/ecs.html",
         "/graphics/pipeline/overview.html",
@@ -7101,12 +7180,12 @@
       "section": "learning",
       "format": "path",
       "status": "outline",
-      "summary": "プロセス、スレッド、仮想メモリ、システムコール、I/Oを学ぶ計画。起動・メモリ・データ共有の辞典本文と観察例へつなぐ。",
+      "summary": "プロセス、スレッド、仮想メモリ、システムコール、I/Oを学ぶ計画。起動・メモリ・データ共有・ファイル読取りの辞典本文と観察例へつなぐ。",
       "source": "IT教本",
       "aliases": [],
       "collection": "low-level",
       "order": 9,
-      "verification": "同期項目の一次資料照合（2026-11-04）",
+      "verification": "同期・I/O項目の一次資料照合（2026-11-04）",
       "links": [
         "/os/process-startup.html",
         "/practice/process/windows-process-observation.html",
@@ -7115,7 +7194,9 @@
         "/runtime/memory/allocators-and-pools.html",
         "/runtime/thread-synchronization.html",
         "/practice/threads/inventory-synchronization.html",
-        "/runtime/memory/concurrency-bugs.html"
+        "/runtime/memory/concurrency-bugs.html",
+        "/os/file-read-journey.html",
+        "/practice/io/file-read-observation.html"
       ],
       "previous": "/guide/low-level/compiler-linker-executable.html",
       "next": "/guide/low-level/cpp-language.html"
@@ -7793,6 +7874,7 @@
       "source": "統合ガイド",
       "aliases": [],
       "links": [
+        "/os/file-read-journey.html",
         "/runtime/thread-synchronization.html",
         "/math/floating-point-comparison.html",
         "/data/unicode-and-encoding.html",

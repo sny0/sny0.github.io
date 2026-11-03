@@ -19,6 +19,8 @@ study:
 
 `atomic_counter.cpp`は2026-11-04に、安全なatomic加算と終了待ちのC++20例へ更新しました。`std::jthread`に対応する標準ライブラリが必要で、以下の古いGCC 9.2での一括確認には含めません。MSVC 19.35、x64 Release、`/std:c++20 /W4 /WX /permissive- /EHsc /utf-8`でビルドし、200,000回の加算結果と終了0を確認しています。共有する複数の状態をロックで守る例は[在庫消費の実践](/practice/threads/inventory-synchronization.html)を参照してください。
 
+`raii_file.cpp`は、通常経路と早期returnでのcloseを示す例です。固定名のファイルを上書き・削除する旧版を廃止し、OSのnullデバイスへ出力する形へ更新しました。保存処理の例ではありません。ファイルの読み取りは[C++・C#の観察サンプル](/practice/io/file-read-observation.html)を参照してください。更新版は上記MSVC環境で確認し、古いGCCでの一括確認からは除きます。
+
 ## ビルド方法(検証環境: MinGW GCC 9.2, -std=c++2a)
 
 ```
@@ -35,7 +37,7 @@ g++ -std=c++2a -Wall -Wextra -o out.exe samples/<name>.cpp
 一括コンパイル確認(PowerShell):
 
 ```powershell
-Get-ChildItem samples/*.cpp | Where-Object Name -ne 'atomic_counter.cpp' | ForEach-Object { g++ -std=c++2a -Wall -Wextra -c $_.FullName -o NUL }
+Get-ChildItem samples/*.cpp | Where-Object Name -notin @('atomic_counter.cpp', 'raii_file.cpp') | ForEach-Object { g++ -std=c++2a -Wall -Wextra -c $_.FullName -o NUL }
 ```
 
 

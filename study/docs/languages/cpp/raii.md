@@ -3,7 +3,7 @@ title: RAII (Resource Acquisition Is Initialization)
 study:
   source: C++ Wiki
   status: published
-  summary: 「リソースの確保をコンストラクタで、解放をデストラクタで行い、リソースの寿命をオブジェクトの寿命に一致させる」— C++最重要のイディオムです。名前は分かりにくいですが、意味は「後片付けを型に組み込む」。スマートポインタ、vector、stringなど、C++標準ライブラリの大半はRAIIでできてい
+  summary: リソースの所有と後片付けをオブジェクトの寿命へ結び付ける。通常のスコープ終了、早期return、例外の巻き戻しで解放する仕組みを調べる。
   section: reference
   format: article
   domain: languages
@@ -65,7 +65,9 @@ void SaveGame(const GameState& state) {
 }                                        // ← 必ず ~File() が走り、closeされる
 ```
 
-検証済みサンプル: <a href="/study/samples/cpp/raii_file.cpp">samples/raii_file.cpp</a>
+実行できる所有・closeの例: <a href="/study/samples/cpp/raii_file.cpp">samples/raii_file.cpp</a>。2026-11-04更新版はOSのnullデバイスへ出力し、通常経路と早期returnでのcloseを検査します。固定名のファイルを作成・削除する処理はありません。MSVC 19.35、Windows x64で確認しています。
+
+上の`SaveGame`は資源管理に絞った説明用断片です。RAIIが後片付けを呼ぶことと、書込み・closeが成功してデータを保存できたことは別です。保存結果が必要なら、書込みと明示的なcloseなどの結果も検査します。実ファイルの読み取りは[ファイルI/Oの本文](/os/file-read-journey.html)と[C++・C#の実践](/practice/io/file-read-observation.html)を参照してください。
 
 ## 仕組み: なぜ「必ず」なのか
 

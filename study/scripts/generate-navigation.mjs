@@ -162,7 +162,7 @@ ${collections.filter(item => item.section === 'learning').map(item => `- [${item
 
 writePage('guide/learning-paths.md', '疑問から選ぶ読み順', {
   section: 'learning', format: 'path', domain: 'guide', catalog: true, collection: 'questions', order: 0,
-  summary: '整数・浮動小数点とその比較、文字コード、メモリ確保、プログラムの起動、スレッドの同期、入力と描画、Webの疑問から関連する本文をたどる。'
+  summary: '整数・浮動小数点とその比較、文字コード、メモリ確保、起動、同期、ファイル読み取り、入力と描画、Webの疑問から関連する本文をたどる。'
 }, `# 疑問から選ぶ読み順
 
 辞典を最初から順番に読む必要はありません。いまの疑問に関係する本文から選びます。
@@ -213,6 +213,12 @@ writePage('guide/learning-paths.md', '疑問から選ぶ読み順', {
 2. [C++・C#の在庫消費サンプル](/practice/threads/inventory-synchronization.html)で、確認と消費、Snapshot、終了待ちと寿命を確かめる。
 3. [並行処理のバグ](/runtime/memory/concurrency-bugs.html)で、データ競合・競合状態・false sharingの違いを調べる。
 
+## ファイルを読むと内部で何が起きるか
+
+1. [ファイルを読む仕組み](/os/file-read-journey.html)で、アプリのバッファ、OSのファイルキャッシュ、ストレージへの要求を分ける。
+2. [C++・C#の読み取り観察](/practice/io/file-read-observation.html)で、要求数と実読取数、ファイル位置、EOF、seek、失敗を確かめる。
+3. テキストとして解釈するときは[Unicodeと文字コード](/data/unicode-and-encoding.html)へ進む。
+
 ## 入力からゲーム画面まで
 
 1. [ゲームループ](/game/patterns/game-loop-and-update.html)で入力・更新・描画の時間を分ける。
@@ -229,6 +235,7 @@ writePage('guide/learning-paths.md', '疑問から選ぶ読み順', {
 [ビデオゲーム史](/history/video-games.html)の作品・ハード・媒体・流通と、[リアルタイム3D技術史](/guide/rendering/timeline.html)の技術の変化から、気になった仕組みへ進みます。`)
 
 const termRows = [
+  ['ファイルI/O / read / FileStream / ReadFile / EOF / seek / ファイルキャッシュ / ページキャッシュ', '/os/file-read-journey.html', '読み取り要求と実読取数、ファイル位置、OSキャッシュと保存装置の違いを調べる'],
   ['スレッド同期 / mutex / lock / lock_guard / 排他制御 / critical section / happens-before / join', '/runtime/thread-synchronization.html', '共有する状態、ロックの排他と同期、終了待ちとオブジェクトの寿命を結び付ける'],
   ['近似一致 / 絶対許容差 / 相対許容差 / 浮動小数点の比較 / NaN / Inf', '/math/floating-point-comparison.html', '厳密な等値、用途に応じた近似判定、特殊値と非推移性を区別する'],
   ['Unicode / 文字コード / UTF-8 / UTF-16 / コードポイント / サロゲートペア / BOM / 文字化け', '/data/unicode-and-encoding.html', '文字の番号、コード単位、バイト列と、長さの数え方を区別する'],
