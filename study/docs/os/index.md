@@ -19,6 +19,7 @@
 
 ## 辞典の本文
 
+- [ファイルを読むと内部で何が起きるか](/os/file-read-journey.html)
 - [仮想メモリ — アドレス変換・ページ・予約とコミット](/os/virtual-memory.html)
 - [実行ファイルを起動してmainへ到達するまで — プロセス・スレッド・ローダー](/os/process-startup.html)
 
@@ -28,6 +29,7 @@
 
 ## 作って試す
 
+- [C++とC#でファイルのbytes・位置・EOFを観察する](/practice/io/file-read-observation.html)
 - [WindowsでPID・TID・子プロセスとmain前の初期化を観察する](/practice/process/windows-process-observation.html)
 - [Windowsで予約・コミット・初回書き込みを観察する](/practice/memory/windows-memory-observation.html)
 

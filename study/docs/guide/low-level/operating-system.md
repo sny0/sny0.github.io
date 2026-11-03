@@ -3,8 +3,8 @@ title: 第8章 OSの仕組み
 study:
   source: IT教本
   status: outline
-  summary: プロセス、スレッド、仮想メモリ、システムコール、I/Oを学ぶ計画。起動・メモリ・データ共有の辞典本文と観察例へつなぐ。
-  verification: 同期項目の一次資料照合（2026-11-04）
+  summary: プロセス、スレッド、仮想メモリ、システムコール、I/Oを学ぶ計画。起動・メモリ・データ共有・ファイル読取りの辞典本文と観察例へつなぐ。
+  verification: 同期・I/O項目の一次資料照合（2026-11-04）
   section: learning
   format: path
   domain: os
@@ -18,7 +18,7 @@ study:
 
 ## このページで案内すること
 
-プロセス・スレッド・仮想メモリ・システムコール・I/Oを学ぶ順序と観察課題をまとめた**学習計画・概要**です。起動処理とプロセス・スレッドの基本、仮想メモリには専用の辞典本文があります。スケジューラ内部やI/Oなど、ほかの詳解はまだ揃っていません。このページの概説と章末の資料を足場に、手元のOSで挙動を確かめます。
+プロセス・スレッド・仮想メモリ・システムコール・I/Oを学ぶ順序と観察課題をまとめた**学習計画・概要**です。起動処理とプロセス・スレッドの基本、仮想メモリ、スレッド間のデータ共有、ファイル読取りは専用の本文へ進めます。スケジューラ内部や非同期I/Oの詳解など、まだ揃っていないテーマもあります。このページの概説と章末の資料を足場に、手元のOSで挙動を確かめます。
 
 ## 関連する辞典本文・実践
 
@@ -29,6 +29,7 @@ study:
 - [アロケータ](/runtime/memory/allocators-and-pools.html)で、アプリ側の領域管理とOSへの要求を区別できます。
 - [スレッド間の安全なデータ共有](/runtime/thread-synchronization.html)でmutex・C#のlock・共有状態の寿命を調べ、[在庫の観察例](/practice/threads/inventory-synchronization.html)で守る範囲と完了待ちを確かめられます。
 - [並行処理のバグ](/runtime/memory/concurrency-bugs.html)は、共有データを扱う際の問題を調べる入口です。仮想メモリやスケジューラ全体の説明を代替する記事ではありません。
+- [ファイルを開いて読むまでの流れ](/os/file-read-journey.html)でハンドル・ストリーム・読取り位置・実際の読取り量・EOFを調べ、[ファイル読取りの観察例](/practice/io/file-read-observation.html)で確かめられます。
 
 ## 学ぶ理由
 
@@ -47,6 +48,7 @@ study:
 - データ競合、mutexで守る範囲、atomic操作の保証を区別できる。ロックフリーは発展項目として位置付ける
 - 割り込み→ドライバ→アプリというパッド入力の経路を説明できる
 - ジョブシステムの設計原理を説明できる
+- 通常のファイル読取りで、要求量・実際の読取り量・位置・EOF・失敗を分けて確認できる
 
 ## 前提知識
 
@@ -78,7 +80,7 @@ study:
      不正なアドレス/保護違反等でAccess Violationに至る場合を分ける
      → **0xC0000005はOSの保護機構がバグを検出してくれた瞬間**
    - VirtualAlloc(予約/コミットの2段階)── 大型ゲームのメモリ戦略
-   - メモリマップドファイル ── アセットストリーミングの基盤技術
+   - メモリマップドファイルは、ファイルの一部などをプロセスの仮想アドレス空間へ対応付けてアクセスする方式。マップしただけで全内容が物理RAMへ読み込まれる、I/Oがなくなる、通常のreadより必ず速い、という意味ではない。[Windowsのファイルビュー](https://learn.microsoft.com/en-us/windows/win32/memory/creating-a-file-view)を参照
    - TLBミスとヒュージページ(大規模ゲームの最適化)
 4. **スレッドとスケジューリング**
    - スレッド = 実行文脈(レジスタ+スタック)。同一プロセス内でメモリ共有
@@ -105,8 +107,9 @@ study:
    - **入力遅延の分解**: パッドスキャン+USBポーリング+OS+
      ゲームループの待ち+表示遅延
 7. **ファイルI/Oと時間**
-   - 同期I/O vs 非同期I/O(Overlapped/IOCP)── ストリーミングの基盤
-   - ページキャッシュ(2回目のロードが速い理由)
+   - まず通常のファイルを開き、ハンドルやストリームから読み、実際に得たbyte数と位置、EOF、失敗を区別する。[読取りの辞典本文](/os/file-read-journey.html)と[観察例](/practice/io/file-read-observation.html)へ
+   - Windowsの通常の読取りではシステムのファイルキャッシュが関わる。アプリ側のバッファや記憶装置側のキャッシュとは分け、APIのread一回が物理ディスクの読取り一回とは考えない。開き直してもキャッシュが空になる保証はなく、1回目と2回目の時間差だけで物理I/Oや特定のキャッシュの効果を断定しない。[Windowsのファイルキャッシュ](https://learn.microsoft.com/en-us/windows/win32/fileio/file-caching)を参照
+   - 同期I/Oと非同期I/Oは、完了をどう待つか、完了結果をどう受け取るかの違いを学ぶ。WindowsのOverlapped I/Oでもすぐ完了する場合や呼出し側が待つ場合があり、非同期を選べば必ず高速になるわけではない。要求中のバッファや管理情報の寿命も必要になる。IOCPなどの詳解は発展項目へ。[Microsoftの同期・非同期I/O](https://learn.microsoft.com/en-us/windows/win32/fileio/synchronous-and-asynchronous-i-o)を参照
    - 高精度タイマ QueryPerformanceCounter(第14章で使用)
 8. **(演習として)OS自作という選択肢**
    - 『ゼロからのOS自作入門』は最高の理解をくれるが時間も莫大。
@@ -126,7 +129,7 @@ study:
 | 現場の事象 | この章の知識 |
 |---|---|
 | Access Violation (0xC0000005) | 仮想メモリの保護 |
-| ロード最適化・アセットストリーミング | 非同期I/O・mmap・ページキャッシュ |
+| ロード最適化・アセットストリーミング | 要求量・実読取り量・待機とキャッシュ条件。必要に応じて非同期I/Oやファイルマッピング |
 | ジョブシステム/ワーカースレッド設計 | スレッド・同期・ワークスティーリング |
 | 「たまに壊れる」マルチスレッドバグ | データ競合・アトミック |
 | 入力遅延の計測と削減 | USBポーリング・割り込み・経路分解 |
@@ -147,8 +150,7 @@ study:
    コンソール表示せよ(第14章の先取り。10行で書ける)。
 6. WSLで `strace ./a.out` を実行し、printfやmallocの裏で走る
    システムコール(write, mmap, brk)を観察せよ。
-7. 大きなファイルの読み込みを1回目と2回目で計測し、ページキャッシュの
-   効果を確認せよ。
+7. [ファイル読取りの観察例](/practice/io/file-read-observation.html)を実行し、要求した量と実際の読取り量、位置の変化、EOF、失敗を確認せよ。扱う既知のbyte列と照合し、読んでいないバッファ部分まで有効なデータとして使わない理由を説明せよ。
 
 ## おすすめ書籍
 
@@ -191,7 +193,7 @@ study:
 5. CPU中心のジョブのworker数をCPU数から検討する理由と、常にその数が最適とは限らない条件は?
 6. パッドのボタン押下がゲームに届くまでの経路を、割り込み/ポーリング/
    ドライバの言葉で説明せよ。
-7. ロード時間の2回目が速いのはなぜか。
+7. ファイルの読取り要求量と、実際に得た量が異なる場合をどう扱うか。再読込みの時間差だけで、特定のキャッシュや物理ディスクの読取りを断定できるか。
 8. ジョブシステムはなぜ「スレッドを毎回作る」設計にしないのか。
 
 ---
@@ -221,4 +223,7 @@ study:
 - [Microsoft: Scheduling Priorities](https://learn.microsoft.com/en-us/windows/win32/procthread/scheduling-priorities)
 - [C++20草案 N4861: data races](https://timsong-cpp.github.io/cppwp/n4861/intro.races)、[mutex requirements](https://timsong-cpp.github.io/cppwp/n4861/thread.mutex.requirements)
 - [Microsoft: C# lock](https://learn.microsoft.com/en-us/dotnet/csharp/language-reference/statements/lock)
+- [Microsoft: ReadFile — 読取り量と位置](https://learn.microsoft.com/en-us/windows/win32/api/fileapi/nf-fileapi-readfile)
+- [Microsoft: File Caching](https://learn.microsoft.com/en-us/windows/win32/fileio/file-caching)、[Synchronous and Asynchronous I/O](https://learn.microsoft.com/en-us/windows/win32/fileio/synchronous-and-asynchronous-i-o)
+- [Microsoft: Creating a File View](https://learn.microsoft.com/en-us/windows/win32/memory/creating-a-file-view)
 - [Intel 64 and IA-32 Architecture / Optimization manuals](https://www.intel.com/content/www/us/en/developer/articles/technical/intel-sdm.html)
