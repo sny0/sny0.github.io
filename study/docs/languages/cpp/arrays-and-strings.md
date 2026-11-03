@@ -82,9 +82,11 @@ std::string_view sv = name;        // 参照するだけ(所有しない・コ�
 void PrintName(std::string_view n);   // 読むだけの引数はstring_viewが現代の定石
 ```
 
-- `std::string` はほぼ `std::vector<char>`+文字列操作。**SSO(小文字列最適化)**: 多くの実装は短い文字列(典型的に15文字程度まで — 実装依存)をヒープ確保せずstring本体内に格納する
+- `std::string` は`char`の連続した要素列を所有する文字列型。**SSO（小文字列最適化）**を採用する実装では、短い列をstring本体内に格納して別領域の確保を避ける。しきい値は実装依存で、見た目の文字数ではなく`char`の要素数で考える
 - `string_view` は「先頭ポインタ+長さ」だけの軽量ビュー。**参照先より長生きさせてはいけない**(danglingの新たな入口)
-- リテラル `"Slime"` は実行ファイルの読み取り専用領域に置かれる(→ [メモリレイアウト](/runtime/cpp-internals/memory-layout.html))
+- 文字列リテラル`"Slime"`の配列は静的記憶域期間を持ち、書き換えると未定義動作になる。実行ファイルのどの領域に置くかは実装による（→ [メモリレイアウト](/runtime/cpp-internals/memory-layout.html)、[C++20草案: lex.string](https://timsong-cpp.github.io/cppwp/n4861/lex.string)）
+
+`std::string`という型名だけではUTF-8などの文字コードは決まりません。`size()`は`char`の要素数で、見た目の文字数ではありません。C++20の`std::u8string`・`std::u16string`、C#の`string.Length`との違いは[Unicodeと文字コード](/data/unicode-and-encoding.html)で、具体的な値は[C++・C#の観察例](/practice/data/unicode-observation.html)で調べられます。[C++20草案: basic.string](https://timsong-cpp.github.io/cppwp/n4861/basic.string)、[string.capacity](https://timsong-cpp.github.io/cppwp/n4861/string.capacity)
 
 ## C#との違い
 
@@ -101,7 +103,7 @@ void PrintName(std::string_view n);   // 読むだけの引数はstring_viewが�
 
 1. 「配列は安全なもの」— C#の常識。C++の生配列と `v[i]` は範囲チェックしません。デバッグビルドでチェック付きの `at()` やアサートを活用する
 2. 「文字列連結は罪(GC Alloc)」— C++ではGCはないが、**再確保**というコストはある。ループ内連結は `reserve` で緩和
-3. `char*` の文字列はNUL終端(`'\0'`)前提のC流儀。`std::string` と混ぜるときの `c_str()` の寿命(元のstringが生きている間だけ有効)に注意
+3. Cの文字列APIは一般にNUL終端(`'\0'`)を前提にする。`char*`という型だけで終端や文字コードが保証されるわけではない。`c_str()`の返すポインタは元のstringの破棄や、再確保などを伴う変更で無効になり得る。`std::string`は途中にもNULを保持できるため、NUL終端APIへ渡すと長さの解釈も変わる（[C++20草案: string.require](https://timsong-cpp.github.io/cppwp/n4861/string.require)、[string.accessors](https://timsong-cpp.github.io/cppwp/n4861/string.accessors)）
 
 ## ゲーム開発での使用例
 

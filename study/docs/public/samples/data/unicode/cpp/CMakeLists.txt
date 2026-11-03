@@ -1,0 +1,11 @@
+cmake_minimum_required(VERSION 3.20)
+project(unicode_observation LANGUAGES CXX)
+
+add_executable(unicode_observation main.cpp)
+target_compile_features(unicode_observation PRIVATE cxx_std_20)
+set_target_properties(unicode_observation PROPERTIES CXX_EXTENSIONS OFF)
+if(MSVC)
+    target_compile_options(unicode_observation PRIVATE /W4 /WX /permissive- /EHsc /utf-8)
+else()
+    target_compile_options(unicode_observation PRIVATE -Wall -Wextra -Wpedantic -Werror)
+endif()

@@ -1,0 +1,68 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="760" height="1450" viewBox="0 0 760 1450" role="img" aria-labelledby="encoding-title encoding-desc">
+  <title id="encoding-title">A、あ、顔の絵文字をUTF-8とUTF-16で表す</title>
+  <desc id="encoding-desc">すべて16進表記。AのコードポイントU+0041はUTF-8で41、UTF-16のコード単位で0041。あのU+3042はUTF-8でE3 81 82、UTF-16で3042。顔の絵文字U+1F600はUTF-8でF0 9F 98 80、UTF-16でD83D DE00のサロゲートペア。UTF-16LEのバイト列では各16ビットのコード単位を下位バイトから書く。BOMと終端NULは省略する。</desc>
+  <style>
+    text { font-family: "BIZ UDPGothic", "Yu Gothic", Meiryo, sans-serif; fill: #26352e; }
+    .heading { font-size: 28px; font-weight: 700; }
+    .body { font-size: 24px; }
+    .code { font-family: Consolas, monospace; font-size: 28px; }
+    .label { font-size: 24px; font-weight: 700; }
+  </style>
+  <rect width="760" height="1450" rx="20" fill="#f4f8f4"/>
+  <text x="32" y="54" font-size="32" font-weight="700">文字の番号からバイト列へ</text>
+  <text x="32" y="98" class="body">数値は16進表記。1バイト＝8bitの例</text>
+  <text x="32" y="138" class="body">文字の番号 → 符号化 → 保存するバイト列</text>
+
+  <rect x="24" y="166" width="712" height="326" rx="14" fill="#fff"/>
+  <text x="44" y="212" class="heading">A</text>
+  <text x="112" y="212" class="code">U+0041</text>
+  <text x="330" y="212" class="body">コードポイント</text>
+  <rect x="40" y="236" width="680" height="70" rx="8" fill="#e2eafa"/>
+  <text x="56" y="281" class="label">UTF-8</text>
+  <text x="278" y="281" class="code">41</text>
+  <text x="56" y="350" class="label">UTF-16の単位</text>
+  <text x="278" y="350" class="code">0041</text>
+  <path d="M304 366v24m-8-8 8 8 8-8" fill="none" stroke="#47765a" stroke-width="3"/>
+  <rect x="40" y="406" width="680" height="66" rx="8" fill="#dcece0"/>
+  <text x="56" y="449" class="label">UTF-16LE</text>
+  <text x="278" y="449" class="code">41 00</text>
+
+  <rect x="24" y="516" width="712" height="326" rx="14" fill="#fff"/>
+  <text x="44" y="562" class="heading">あ</text>
+  <text x="112" y="562" class="code">U+3042</text>
+  <text x="330" y="562" class="body">コードポイント</text>
+  <rect x="40" y="586" width="680" height="70" rx="8" fill="#e2eafa"/>
+  <text x="56" y="631" class="label">UTF-8</text>
+  <text x="278" y="631" class="code">E3 81 82</text>
+  <text x="56" y="700" class="label">UTF-16の単位</text>
+  <text x="278" y="700" class="code">3042</text>
+  <path d="M304 716v24m-8-8 8 8 8-8" fill="none" stroke="#47765a" stroke-width="3"/>
+  <rect x="40" y="756" width="680" height="66" rx="8" fill="#dcece0"/>
+  <text x="56" y="799" class="label">UTF-16LE</text>
+  <text x="278" y="799" class="code">42 30</text>
+
+  <rect x="24" y="866" width="712" height="370" rx="14" fill="#fff"/>
+  <g transform="translate(63 909)" aria-hidden="true">
+    <circle r="22" fill="#f4d56a"/>
+    <circle cx="-8" cy="-5" r="2.8" fill="#26352e"/>
+    <circle cx="8" cy="-5" r="2.8" fill="#26352e"/>
+    <path d="M-11 4q11 16 22 0z" fill="#26352e"/>
+  </g>
+  <text x="112" y="914" class="code">U+1F600</text>
+  <text x="330" y="914" class="body">コードポイント</text>
+  <rect x="40" y="938" width="680" height="70" rx="8" fill="#e2eafa"/>
+  <text x="56" y="983" class="label">UTF-8</text>
+  <text x="278" y="983" class="code">F0 9F 98 80</text>
+  <text x="56" y="1052" class="label">UTF-16の単位</text>
+  <text x="278" y="1052" class="code">D83D  DE00</text>
+  <text x="278" y="1093" class="body">2単位で1つのスカラー値</text>
+  <path d="M360 1107v22m-8-8 8 8 8-8" fill="none" stroke="#47765a" stroke-width="3"/>
+  <rect x="40" y="1146" width="680" height="68" rx="8" fill="#dcece0"/>
+  <text x="56" y="1190" class="label">UTF-16LE</text>
+  <text x="278" y="1190" class="code">3D D8  00 DE</text>
+
+  <text x="32" y="1290" class="body" font-weight="700">UTF-16の単位の値と、保存するbyte順は別</text>
+  <text x="32" y="1332" class="body">同じペアをUTF-16BEで保存：D8 3D DE 00</text>
+  <text x="32" y="1374" class="body">UTF-8は8bit単位の列。LE／BEの区別はない</text>
+  <text x="32" y="1416" class="body">BOMと終端NULは省略。顔の絵は説明用</text>
+</svg>
