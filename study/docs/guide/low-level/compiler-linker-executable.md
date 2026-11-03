@@ -3,12 +3,7 @@ title: 第7章 コンパイラ・リンカ・実行ファイル・ABI
 study:
   source: IT教本
   status: outline
-  summary: |-
-    ソースから実行ファイルまでの段階を分け、コンパイル・リンク・ロードを観察するための学習計画・概要です。既存本文はC++のビルドとABIを中心に扱います。字句解析・構文解析・IRなど、コンパイラ内部の専用詳解は未整備です。
-
-    ## 関連する辞典本文・実践
-
-    - [main.cppからCPU命令
+  summary: コンパイル・リンク・ロードを学ぶ計画。C++のビルドとABI、Windowsでの起動処理の辞典本文につなぐ。構文解析やIRの詳解は準備中。
   section: learning
   format: path
   domain: compilers
@@ -25,6 +20,8 @@ study:
 ソースから実行ファイルまでの段階を分け、コンパイル・リンク・ロードを観察するための**学習計画・概要**です。既存本文はC++のビルドとABIを中心に扱います。字句解析・構文解析・IRなど、コンパイラ内部の専用詳解は未整備です。
 
 ## 関連する辞典本文・実践
+
+- [実行ファイルを起動してmainへ到達するまで](/os/process-startup.html)と[Windows/C++の観察サンプル](/practice/process/windows-process-observation.html)で、ビルド後の起動と実行を確かめられます。
 
 - [main.cppからCPU命令まで](/runtime/cpp-internals/build-pipeline-journey.html)と[翻訳単位・ヘッダー・ODR](/runtime/cpp-internals/translation-units-and-headers.html)で、処理の段階を追えます。
 - [シンボル・リンケージ・ABI](/runtime/cpp-internals/symbols-and-linkage.html)、[オブジェクト・実行ファイル・ライブラリ](/runtime/cpp-internals/object-files-and-libraries.html)では、各段階の成果物を調べられます。
@@ -78,8 +75,9 @@ study:
    - セクション: .text/.data/.rdata/.bss、ヘッダ、エントリポイント
    - PE(Windows): インポートテーブル(IAT)/エクスポート、`dumpbin /headers`
    - ELF(Linux/多くのコンソールの親戚): `readelf -a` で観察(WSL)
-   - main()の前に走るもの: CRT起動コード(mainCRTStartup)、
-     グローバルコンストラクタ ── 「main前クラッシュ」の正体
+   - MSVCの通常のコンソールEXEでは、PEの開始点はmainとは別のCRT起動コード
+     （mainCRTStartup等）。ローダー側の処理、CRT初期化、対象の非ローカル変数の
+     動的初期化なども、mainより前の失敗要因になる。すべてのstatic変数の初期化がmain前とは限らない
 5. **動的リンク(DLL/共有ライブラリ)**
    - ロード時リンクと実行時(LoadLibrary/GetProcAddress)
    - __declspec(dllexport/dllimport)、UEの `MODULENAME_API` マクロの正体
@@ -112,7 +110,7 @@ study:
 | プラグインSDKがC APIな理由 | ABI非互換 |
 | リリースビルドでだけ挙動が変わる | 最適化とUB |
 | ビルド20分…を速くしたい | 翻訳単位・ヘッダ依存・LTO |
-| main前にクラッシュ | グローバルコンストラクタ・CRT |
+| main前に失敗 | 依存DLLのロード、ローダー側の初期化、CRT・非ローカル変数の動的初期化等 |
 | C++ホットリロード | DLL再ロード |
 
 ## 演習

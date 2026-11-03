@@ -179,7 +179,9 @@ writePage('guide/learning-paths.md', '疑問から選ぶ読み順', {
 
 1. [ビルドの旅](/runtime/cpp-internals/build-pipeline-journey.html)でコンパイルとリンクをたどる。
 2. [翻訳単位・ヘッダー](/runtime/cpp-internals/translation-units-and-headers.html)、[シンボル・ABI](/runtime/cpp-internals/symbols-and-linkage.html)、[実行ファイル・ライブラリ](/runtime/cpp-internals/object-files-and-libraries.html)を調べる。
-3. [関数呼び出し・レジスタ](/runtime/cpp-internals/function-calls-and-cpu.html)へ進む。
+3. [実行ファイルを起動してmainへ到達するまで](/os/process-startup.html)で、プロセス・スレッド、ローダー、CRTの役割を分ける。
+4. [Windows/C++のプロセス観察](/practice/process/windows-process-observation.html)で、main前の記録、親子プロセス、ワーカースレッドのPID・TIDを確かめる。
+5. [関数呼び出し・レジスタ](/runtime/cpp-internals/function-calls-and-cpu.html)へ進む。
 
 ## 入力からゲーム画面まで
 
@@ -197,6 +199,7 @@ writePage('guide/learning-paths.md', '疑問から選ぶ読み順', {
 [ビデオゲーム史](/history/video-games.html)の作品・ハード・媒体・流通と、[リアルタイム3D技術史](/guide/rendering/timeline.html)の技術の変化から、気になった仕組みへ進みます。`)
 
 const termRows = [
+  ['プロセス / スレッド / PID / TID / ローダー / エントリポイント / CRT', '/os/process-startup.html', '実行環境と実行単位、EXEの開始点からmainまでの違い'],
   ['alloc / allocate / malloc / アロック / メモリ確保', '/runtime/memory/allocation-journey.html', '確保・初期化・解放、再利用とOSへの要求の関係'],
   ['仮想メモリ / reserve / commit / resident / ページフォルト', '/os/virtual-memory.html', 'アドレス変換と、予約・コミット・常駐の違い'],
   ['ECS / Entity Component System', '/game/ecs.html', 'ID、Component、System、Query、格納方式'],

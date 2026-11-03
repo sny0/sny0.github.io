@@ -51,6 +51,10 @@
         {
           "text": "仮想メモリ — アドレス変換・ページ・予約とコミット",
           "link": "/os/virtual-memory.html"
+        },
+        {
+          "text": "実行ファイルを起動してmainへ到達するまで — プロセス・スレッド・ローダー",
+          "link": "/os/process-startup.html"
         }
       ]
     },
@@ -1057,6 +1061,10 @@
       "collapsed": false,
       "items": [
         {
+          "text": "Windowsでプロセスとスレッドを観察する",
+          "link": "/practice/process/windows-process-observation.html"
+        },
+        {
           "text": "Windowsでメモリの状態を観察する",
           "link": "/practice/memory/windows-memory-observation.html"
         },
@@ -1118,6 +1126,10 @@
       "collapsed": true,
       "items": [
         {
+          "text": "Windowsでプロセスとスレッドを観察する",
+          "link": "/practice/process/windows-process-observation.html"
+        },
+        {
           "text": "Windowsでメモリの状態を観察する",
           "link": "/practice/memory/windows-memory-observation.html"
         },
@@ -1174,6 +1186,10 @@
       "text": "ほかの実践・サンプル",
       "collapsed": true,
       "items": [
+        {
+          "text": "Windowsでプロセスとスレッドを観察する",
+          "link": "/practice/process/windows-process-observation.html"
+        },
         {
           "text": "Windowsでメモリの状態を観察する",
           "link": "/practice/memory/windows-memory-observation.html"
@@ -1232,6 +1248,10 @@
       "collapsed": true,
       "items": [
         {
+          "text": "Windowsでプロセスとスレッドを観察する",
+          "link": "/practice/process/windows-process-observation.html"
+        },
+        {
           "text": "Windowsでメモリの状態を観察する",
           "link": "/practice/memory/windows-memory-observation.html"
         },
@@ -1288,6 +1308,10 @@
       "text": "ほかの実践・サンプル",
       "collapsed": true,
       "items": [
+        {
+          "text": "Windowsでプロセスとスレッドを観察する",
+          "link": "/practice/process/windows-process-observation.html"
+        },
         {
           "text": "Windowsでメモリの状態を観察する",
           "link": "/practice/memory/windows-memory-observation.html"
@@ -1346,6 +1370,10 @@
       "collapsed": true,
       "items": [
         {
+          "text": "Windowsでプロセスとスレッドを観察する",
+          "link": "/practice/process/windows-process-observation.html"
+        },
+        {
           "text": "Windowsでメモリの状態を観察する",
           "link": "/practice/memory/windows-memory-observation.html"
         },
@@ -1395,6 +1423,10 @@
       "collapsed": true,
       "items": [
         {
+          "text": "Windowsでプロセスとスレッドを観察する",
+          "link": "/practice/process/windows-process-observation.html"
+        },
+        {
           "text": "Windowsでメモリの状態を観察する",
           "link": "/practice/memory/windows-memory-observation.html"
         },
@@ -1443,6 +1475,10 @@
       "text": "ほかの実践・サンプル",
       "collapsed": true,
       "items": [
+        {
+          "text": "Windowsでプロセスとスレッドを観察する",
+          "link": "/practice/process/windows-process-observation.html"
+        },
         {
           "text": "Windowsでメモリの状態を観察する",
           "link": "/practice/memory/windows-memory-observation.html"
@@ -1707,6 +1743,10 @@
       "collapsed": true,
       "items": [
         {
+          "text": "Windowsでプロセスとスレッドを観察する",
+          "link": "/practice/process/windows-process-observation.html"
+        },
+        {
           "text": "Windowsでメモリの状態を観察する",
           "link": "/practice/memory/windows-memory-observation.html"
         },
@@ -1800,6 +1840,10 @@
       "collapsed": true,
       "items": [
         {
+          "text": "Windowsでプロセスとスレッドを観察する",
+          "link": "/practice/process/windows-process-observation.html"
+        },
+        {
           "text": "Windowsでメモリの状態を観察する",
           "link": "/practice/memory/windows-memory-observation.html"
         },
@@ -1848,6 +1892,10 @@
       "text": "ほかの実践・サンプル",
       "collapsed": true,
       "items": [
+        {
+          "text": "Windowsでプロセスとスレッドを観察する",
+          "link": "/practice/process/windows-process-observation.html"
+        },
         {
           "text": "Windowsでメモリの状態を観察する",
           "link": "/practice/memory/windows-memory-observation.html"
@@ -1941,6 +1989,10 @@
       "text": "ほかの実践・サンプル",
       "collapsed": true,
       "items": [
+        {
+          "text": "Windowsでプロセスとスレッドを観察する",
+          "link": "/practice/process/windows-process-observation.html"
+        },
         {
           "text": "Windowsでメモリの状態を観察する",
           "link": "/practice/memory/windows-memory-observation.html"
@@ -2120,6 +2172,10 @@
       "collapsed": true,
       "items": [
         {
+          "text": "Windowsでプロセスとスレッドを観察する",
+          "link": "/practice/process/windows-process-observation.html"
+        },
+        {
           "text": "Windowsでメモリの状態を観察する",
           "link": "/practice/memory/windows-memory-observation.html"
         },
@@ -2297,6 +2353,10 @@
       "text": "ほかの実践・サンプル",
       "collapsed": true,
       "items": [
+        {
+          "text": "Windowsでプロセスとスレッドを観察する",
+          "link": "/practice/process/windows-process-observation.html"
+        },
         {
           "text": "Windowsでメモリの状態を観察する",
           "link": "/practice/memory/windows-memory-observation.html"
@@ -2476,6 +2536,10 @@
       "collapsed": true,
       "items": [
         {
+          "text": "Windowsでプロセスとスレッドを観察する",
+          "link": "/practice/process/windows-process-observation.html"
+        },
+        {
           "text": "Windowsでメモリの状態を観察する",
           "link": "/practice/memory/windows-memory-observation.html"
         },
@@ -2654,6 +2718,10 @@
       "collapsed": true,
       "items": [
         {
+          "text": "Windowsでプロセスとスレッドを観察する",
+          "link": "/practice/process/windows-process-observation.html"
+        },
+        {
           "text": "Windowsでメモリの状態を観察する",
           "link": "/practice/memory/windows-memory-observation.html"
         },
@@ -2746,6 +2814,10 @@
       "text": "ほかの実践・サンプル",
       "collapsed": true,
       "items": [
+        {
+          "text": "Windowsでプロセスとスレッドを観察する",
+          "link": "/practice/process/windows-process-observation.html"
+        },
         {
           "text": "Windowsでメモリの状態を観察する",
           "link": "/practice/memory/windows-memory-observation.html"
@@ -2854,6 +2926,51 @@
       ]
     }
   ],
+  "/practice/process/windows-process-observation.md": [
+    {
+      "text": "実践・サンプル一覧",
+      "link": "/practice/"
+    },
+    {
+      "text": "Windowsでプロセスとスレッドを観察する",
+      "items": [
+        {
+          "text": "WindowsでPID・TID・子プロセスとmain前の初期化を観察する",
+          "link": "/practice/process/windows-process-observation.html"
+        }
+      ]
+    },
+    {
+      "text": "ほかの実践・サンプル",
+      "collapsed": true,
+      "items": [
+        {
+          "text": "Windowsでメモリの状態を観察する",
+          "link": "/practice/memory/windows-memory-observation.html"
+        },
+        {
+          "text": "小さなシューティングを作る",
+          "link": "/game/shooter-design.html"
+        },
+        {
+          "text": "小さなレンダラーを作る",
+          "link": "/graphics/capstone/01-design.html"
+        },
+        {
+          "text": "C++と設計の演習",
+          "link": "/guide/exercises/"
+        },
+        {
+          "text": "C++のビルドサンプル",
+          "link": "/tools/build/samples/"
+        },
+        {
+          "text": "小さなアプリで設計を試す",
+          "link": "/design/notebook/practice.html"
+        }
+      ]
+    }
+  ],
   "/practice/memory/windows-memory-observation.md": [
     {
       "text": "実践・サンプル一覧",
@@ -2872,6 +2989,10 @@
       "text": "ほかの実践・サンプル",
       "collapsed": true,
       "items": [
+        {
+          "text": "Windowsでプロセスとスレッドを観察する",
+          "link": "/practice/process/windows-process-observation.html"
+        },
         {
           "text": "小さなシューティングを作る",
           "link": "/game/shooter-design.html"
@@ -2966,6 +3087,10 @@
       "collapsed": true,
       "items": [
         {
+          "text": "Windowsでプロセスとスレッドを観察する",
+          "link": "/practice/process/windows-process-observation.html"
+        },
+        {
           "text": "Windowsでメモリの状態を観察する",
           "link": "/practice/memory/windows-memory-observation.html"
         },
@@ -3058,6 +3183,10 @@
       "text": "ほかの実践・サンプル",
       "collapsed": true,
       "items": [
+        {
+          "text": "Windowsでプロセスとスレッドを観察する",
+          "link": "/practice/process/windows-process-observation.html"
+        },
         {
           "text": "Windowsでメモリの状態を観察する",
           "link": "/practice/memory/windows-memory-observation.html"
@@ -3193,6 +3322,10 @@
       "collapsed": true,
       "items": [
         {
+          "text": "Windowsでプロセスとスレッドを観察する",
+          "link": "/practice/process/windows-process-observation.html"
+        },
+        {
           "text": "Windowsでメモリの状態を観察する",
           "link": "/practice/memory/windows-memory-observation.html"
         },
@@ -3241,6 +3374,10 @@
       "text": "ほかの実践・サンプル",
       "collapsed": true,
       "items": [
+        {
+          "text": "Windowsでプロセスとスレッドを観察する",
+          "link": "/practice/process/windows-process-observation.html"
+        },
         {
           "text": "Windowsでメモリの状態を観察する",
           "link": "/practice/memory/windows-memory-observation.html"
@@ -3334,6 +3471,10 @@
       "text": "ほかの実践・サンプル",
       "collapsed": true,
       "items": [
+        {
+          "text": "Windowsでプロセスとスレッドを観察する",
+          "link": "/practice/process/windows-process-observation.html"
+        },
         {
           "text": "Windowsでメモリの状態を観察する",
           "link": "/practice/memory/windows-memory-observation.html"
@@ -3512,6 +3653,10 @@
       "text": "ほかの実践・サンプル",
       "collapsed": true,
       "items": [
+        {
+          "text": "Windowsでプロセスとスレッドを観察する",
+          "link": "/practice/process/windows-process-observation.html"
+        },
         {
           "text": "Windowsでメモリの状態を観察する",
           "link": "/practice/memory/windows-memory-observation.html"
@@ -3838,6 +3983,10 @@
       "collapsed": true,
       "items": [
         {
+          "text": "Windowsでプロセスとスレッドを観察する",
+          "link": "/practice/process/windows-process-observation.html"
+        },
+        {
           "text": "Windowsでメモリの状態を観察する",
           "link": "/practice/memory/windows-memory-observation.html"
         },
@@ -3878,6 +4027,10 @@
       "text": "ほかの実践・サンプル",
       "collapsed": true,
       "items": [
+        {
+          "text": "Windowsでプロセスとスレッドを観察する",
+          "link": "/practice/process/windows-process-observation.html"
+        },
         {
           "text": "Windowsでメモリの状態を観察する",
           "link": "/practice/memory/windows-memory-observation.html"
@@ -4141,6 +4294,10 @@
       "text": "ほかの実践・サンプル",
       "collapsed": true,
       "items": [
+        {
+          "text": "Windowsでプロセスとスレッドを観察する",
+          "link": "/practice/process/windows-process-observation.html"
+        },
         {
           "text": "Windowsでメモリの状態を観察する",
           "link": "/practice/memory/windows-memory-observation.html"
@@ -6861,6 +7018,10 @@
       "text": "ほかの実践・サンプル",
       "collapsed": true,
       "items": [
+        {
+          "text": "Windowsでプロセスとスレッドを観察する",
+          "link": "/practice/process/windows-process-observation.html"
+        },
         {
           "text": "Windowsでメモリの状態を観察する",
           "link": "/practice/memory/windows-memory-observation.html"
