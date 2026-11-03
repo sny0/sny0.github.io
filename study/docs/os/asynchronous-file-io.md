@@ -17,6 +17,8 @@ study:
 
 ここではWindowsの通常ファイルを対象に、C++のOVERLAPPED I/OとC#の`FileStream.ReadAsync`を説明します。他OSやすべてのランタイムが同じ内部方式とはしません。ファイル位置、実際に読めた数、キャッシュ、byteとデコードの区別は[ファイルを読む仕組み](/os/file-read-journey.html)を参照してください。
 
+[メモリマップドファイル](/os/memory-mapped-files.html)は、ファイルの範囲を仮想アドレス空間へ対応付ける別のアクセス方式です。マッピングしただけで全データの読取りが完了したり、非同期readを発行したりしたことにはなりません。ビューへのアクセス自体でページの準備やI/Oを待つ場合があるため、このページの「要求を発行して後から完了を回収する」手順と区別します。[Microsoft: File Mapping](https://learn.microsoft.com/en-us/windows/win32/memory/file-mapping)
+
 ## 同期・非同期と、並列実行は別の軸
 
 同期読み取りは、操作の完了や失敗を待ってから呼出し元へ戻ります。非同期読み取りは、未完了の要求を保持し、後から完了を受け取る仕組みを持ちます。そこで空いた時間を、別の計算や別の要求の処理へ使える場合があります。[Microsoft: Synchronous and Asynchronous I/O](https://learn.microsoft.com/en-us/windows/win32/fileio/synchronous-and-asynchronous-i-o)
@@ -127,6 +129,10 @@ Windows版.NET **v10.0.0の実装例**では、OSへの読み取りが必要に�
 **I/O完了、継続処理の実行、アセットの利用可能化は別の段階**です。継続処理（continuation）は、完了後に進める残りの処理です。通知を受けても、いつ・どのスレッドでその処理を実行するかは、ランタイムや実行文脈にも依存します。
 
 アセットのbyteが届いた後にも、展開、デコード、データ構造の構築、GPUへの転送などが残ります。メインスレッドで行う必要のあるエンジンAPIや登録処理は、その条件を守って接続します。今回の確認はコンソール／.NETの例であり、UnityやUIの実行文脈での再開動作を検証したものではありません。
+
+GPUが使う資源の解放も、CPU側の読取り完了や参照数だけでは決められません。例えばD3D12では、使用を含むGPU処理の完了をフェンスで追跡し、再利用・解放できる時点を管理します。具体的な同期方法はAPIの契約に従います。[Microsoft: Fence-Based Resource Management](https://learn.microsoft.com/en-us/windows/win32/direct3d12/fence-based-resource-management)
+
+Readyの条件、登録する段階、要求の世代、所有権と解放をまとめた設計は[実行時のアセットロード](/game/asset-loading.html)を参照してください。[状態と寿命の観察例](/practice/assets/asset-lifecycle-model.html)は、単一スレッドの決定的なモデルです。実際のI/Oやワーカー、GPU、Unityでの完了・スレッド動作を検証するサンプルではありません。
 
 要求を増やし続けると、未完了バッファや要求情報も増えます。**バックプレッシャー**は、新規発行を待たせるなどして処理中の量を制限する考え方です。同時要求数や保持するbyte数に予算を設け、完了後の処理が追い付く量に抑えます。Windowsの`ReadFile`にも、未処理の非同期要求が多すぎる場合のメモリ関連の失敗が記載されています。[Microsoft: ReadFile — outstanding requests](https://learn.microsoft.com/en-us/windows/win32/api/fileapi/nf-fileapi-readfile)
 

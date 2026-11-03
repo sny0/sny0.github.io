@@ -1,0 +1,40 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="760" height="1510" viewBox="0 0 760 1510" role="img" aria-labelledby="stages-title stages-desc">
+  <title id="stages-title">I/Oの完了から、アセットがゲームで利用可能になるまで</title>
+  <desc id="stages-desc">制作時のインポートやクックと、実行時のロードを分ける。実行時は要求、バイト取得、形式の検証や展開・デコード、エンジン登録やGPU転送、必要な完了条件の確認を経てReadyとなる。利用が終わってもGPUなどが参照中なら、実際の資源解放を遅らせる必要がある。実行例はRequested、Reading、CpuReady、Registering、Ready、ReleasedとFailed、Cancelledを扱う単一スレッドの状態モデルで、実I/O、圧縮展開、GPUやエンジン登録は実行しない。</desc>
+  <style>
+    text { font-family: "BIZ UDPGothic", "Yu Gothic", Meiryo, sans-serif; fill: #26352e; }
+    .heading { font-size: 28px; font-weight: 700; }
+    .body { font-size: 24px; }
+  </style>
+  <rect width="760" height="1510" rx="20" fill="#f4f8f4"/>
+  <text x="32" y="54" font-size="32" font-weight="700">読めたことと、ゲームで使えることは別</text>
+  <text x="32" y="98" class="body">各段階の完了条件と、データの所有者を決める</text>
+  <rect x="24" y="130" width="712" height="170" rx="14" fill="#fff"/>
+  <text x="44" y="176" class="heading">制作時：インポート・クック・パッケージ</text>
+  <text x="44" y="220" class="body">画像・モデル等の元データ → 対象環境向けデータ</text>
+  <text x="44" y="262" class="body">実行時には、下の段階を経て利用可能にする</text>
+  <rect x="24" y="328" width="712" height="170" rx="14" fill="#fff"/>
+  <text x="44" y="374" class="heading">① 要求とbyte取得　Requested → Reading</text>
+  <text x="44" y="418" class="body">ID・世代・優先度・依存を確認し、読み取りを発行</text>
+  <text x="44" y="460" class="body">通常read / 非同期I/O / マッピング等から選ぶ</text>
+  <rect x="24" y="526" width="712" height="170" rx="14" fill="#fff"/>
+  <text x="44" y="572" class="heading">② CPU側の処理　→ CpuReady</text>
+  <text x="44" y="616" class="body">長さ・形式の検証、必要な展開・デコード・構築</text>
+  <text x="44" y="658" class="body">I/Oが終わっただけでは、この段階も未完了</text>
+  <rect x="24" y="724" width="712" height="212" rx="14" fill="#fff"/>
+  <text x="44" y="770" class="heading">③ 登録・転送　→ Registering</text>
+  <text x="44" y="814" class="body">エンジンや描画APIのthread・queue条件に従う</text>
+  <text x="44" y="856" class="body">GPUへ渡すなら、転送や参照の完了条件も管理</text>
+  <text x="44" y="898" class="body">登録を要求しただけで、利用可能とは判断しない</text>
+  <rect x="24" y="964" width="712" height="170" rx="14" fill="#dcece0"/>
+  <text x="44" y="1010" class="heading">④ 利用可能　→ Ready</text>
+  <text x="44" y="1054" class="body">現世代・依存・登録・必要な同期の条件が揃う</text>
+  <text x="44" y="1096" class="body">ゲーム側へ、使ってよい参照を公開する</text>
+  <rect x="24" y="1162" width="712" height="170" rx="14" fill="#fff"/>
+  <text x="44" y="1208" class="heading">⑤ 利用終了　→ 解放・回収</text>
+  <text x="44" y="1252" class="body">CPU上の利用終了と、GPU等の参照終了を分ける</text>
+  <text x="44" y="1294" class="body">資源ごとの安全な時点で解放し、予算を戻す</text>
+  <text x="32" y="1390" class="body">失敗・キャンセルも扱う。Ready前は使わせない</text>
+  <text x="32" y="1432" class="body">実行例は状態と所有権のモデル。実I/O・GPU処理は別</text>
+  <text x="32" y="1474" class="body">モデルは形式検証のみ。展開・デコードは実演しない</text>
+</svg>

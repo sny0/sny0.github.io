@@ -3,12 +3,7 @@ title: 第15章 ゲームエンジンの構成とECS
 study:
   source: IT教本
   status: outline
-  summary: |-
-    エンジンを構成する責務とデータの流れを整理し、小さな構成で試すための学習計画・概要です。ECSは構成方法の一つとして学び、規模や用途に合わせて他の設計とも比較します。
-
-    ## 関連する辞典本文・実践
-
-    - [責務と関心の分離](/design/foundations/responsibili
+  summary: エンジンの責務とデータの流れを学ぶ計画。ECSと他の構成方法を比較し、アセットロードの状態・登録・所有権を辞典本文と実践へつなぐ。
   section: learning
   format: path
   domain: game
@@ -28,6 +23,8 @@ study:
 
 - [責務と関心の分離](/design/foundations/responsibility-and-separation.html)で、構成を分ける根拠を確認できます。
 - [ECS](/game/ecs.html)と[Componentとの比較](/game/patterns/component-and-ecs.html)で、データ配置・Query・構成変更を調べられます。
+- [実行時のアセットロード](/game/asset-loading.html)で読取り完了とReady、登録・所有権・解放を分け、[状態と寿命の実践](/practice/assets/asset-lifecycle-model.html)で世代を含むモデルを確かめられます。実践は単一スレッドの決定的なコンソール例で、実ファイルI/O、ワーカー、GPU、Unityは扱いません。
+- 読取り方式の違いは[ファイルread](/os/file-read-journey.html)、[非同期I/O](/os/asynchronous-file-io.html)、[メモリマップドファイル](/os/memory-mapped-files.html)へ進みます。マッピングの範囲と寿命は[専用の観察例](/practice/io/mapped-file-observation.html)で確認できます。
 
 ## 学ぶ理由
 
@@ -44,6 +41,7 @@ study:
 - ゲームオブジェクトモデル3類型(継承/コンポーネント/ECS)の得失を説明できる
 - アーキタイプ型とスパースセット型ECSの内部実装を説明できる
 - アセットパイプライン(インポート→クック→ロード)の役割を説明できる
+- 実行時ロードの読取り・デコード・登録・利用可能化と、要求の世代・資源の所有・解放を分けて説明できる
 - 数千行規模の「ミニエンジン」を自力で設計・実装できる
 
 ## 前提知識
@@ -86,8 +84,10 @@ study:
    - ソースアセット(FBX/PNG)→インポート→中間形式→**クック**
      (プラットフォーム別最適形式)→パッケージ→実行時ロード
    - 参照の表現(GUID/パス)、依存グラフ、ホットリロード
-   - 実行時: 非同期ロード(第8章I/O回収)、参照カウント、
-     ストリーミング(距離ベース、UEのWorld Partitionの原理)
+   - 実行時: 読取り→展開/デコード→登録・転送→Readyを分ける。必要な段階はアセットの種類とAPIで異なり、I/O完了だけではReadyにならない。[アセットロードの本文](/game/asset-loading.html)へ
+   - 登録を行えるスレッドは対象APIの契約に従う。例えば多くのUnity APIはメインスレッドから呼ぶ必要があり、バックグラウンド処理の終了だけでは呼出し条件を満たさない。[Unity: 完了と継続](https://docs.unity.com/en-us/engine/6000.0/manual/scripting/optimization/async-await-support/async-awaitable-continuations)
+   - 参照数は所有の管理に使うが、GPUが参照中の資源を即時解放できるとは限らない。例えばD3D12では使用を含むGPU処理の完了をフェンスで追跡する。[Microsoft: Fence-Based Resource Management](https://learn.microsoft.com/en-us/windows/win32/direct3d12/fence-based-resource-management)
+   - ストリーミング(距離ベース、UEのWorld Partitionなど)。要求の世代と所有権を保ち、古いロード結果を新しい要求の結果として登録しない設計を学ぶ
 5. **フレームの全体オーケストレーション**
    - システム更新順序、フェーズ(入力→ゲーム→物理→アニメ→
      カメラ→カリング→描画コマンド→提出)
@@ -133,8 +133,7 @@ study:
    add/remove/get、view(複数component横断イテレーション)。500行程度)。
 4. システム: MovementSystem、CollisionSystem(グリッド)、
    RenderSystem(スプライトバッチング)を実装せよ。
-5. リソース: テクスチャ/サウンドのキャッシュ付きローダ(参照カウント)を
-   実装せよ。
+5. リソース: まず[状態と寿命のモデル](/practice/assets/asset-lifecycle-model.html)で、成功・失敗・古い世代の結果・解放を確かめよ。その後、テクスチャ/サウンドのキャッシュ付きローダを実装し、参照数、登録スレッド、GPU使用完了など、対象APIに応じた解放条件を決めよ。
 6. これらで**小ゲームを1本完成させよ**(シューティングや
    Vampire Survivors風など、物量が出るものがECSの真価を示す)。
 7. 敵1万体を出し、(第18章の道具で)プロファイルして
@@ -199,5 +198,6 @@ study:
        → [RHI提出(第13章)] → [Present]
   ↑ この工程表・部品配置・メモリ計画を設計するのがエンジン設計
   ↑ Unity/UEは この図の巨大産業版(次の2章で内部を見る)
-アセット: FBX/PNG →(クック)→ 最適バイナリ →(非同期ロード)→ VRAM/ヒープ
+アセット: FBX/PNG →(クック)→ 最適バイナリ → 読取 → 展開/デコード
+          → 登録・転送 → 利用可能(Ready。必要な段階は種類・APIによる)
 ```
