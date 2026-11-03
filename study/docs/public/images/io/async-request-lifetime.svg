@@ -1,0 +1,43 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="760" height="1510" viewBox="0 0 760 1510" role="img" aria-labelledby="lifetime-title lifetime-desc">
+  <title id="lifetime-title">非同期要求の完了まで、バッファと要求情報を保持する</title>
+  <desc id="lifetime-desc">要求を準備し、発行後、結果が未確定の間は読取先バッファ、要求情報、イベントやファイルの所有権を保持する。Windows実行例は要求専用OVERLAPPEDとイベント、明示的offsetを使い、GetOverlappedResultで終端結果を受け取る。C#実行例はReadAsyncが返すValueTaskを一度awaitし、その後にだけbufferを使う。キャンセル要求の受付はI/O完了とは別であり、CancelIoExの後も成功、キャンセル、その他の失敗という完了結果を確認するまで領域を再利用しない。</desc>
+  <style>
+    text { font-family: "BIZ UDPGothic", "Yu Gothic", Meiryo, sans-serif; fill: #26352e; }
+    .heading { font-size: 28px; font-weight: 700; }
+    .body { font-size: 24px; }
+    .center { text-anchor: middle; }
+    .arrow { fill: none; stroke: #526d5c; stroke-width: 3; marker-end: url(#arrow); }
+  </style>
+  <defs><marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse"><path d="M0 0L10 5 0 10Z" fill="#526d5c"/></marker></defs>
+  <rect width="760" height="1510" rx="20" fill="#f4f8f4"/>
+  <text x="32" y="54" font-size="32" font-weight="700">発行したら、完了まで寿命をつなぐ</text>
+  <text x="32" y="98" class="body">要求を受け付けたことと、結果の確定は別</text>
+  <rect x="24" y="130" width="712" height="188" rx="14" fill="#fff"/>
+  <text x="44" y="176" class="heading">① 要求を準備する</text>
+  <text x="44" y="220" class="body">読取先・要求サイズ・位置・完了の受取方法を決める</text>
+  <text x="44" y="262" class="body">Windows例：要求専用OVERLAPPED + event</text>
+  <path d="M380 320V356" class="arrow"/>
+  <rect x="24" y="378" width="712" height="368" rx="14" fill="#fff"/>
+  <text x="44" y="424" class="heading">② 発行後：完了結果が未確定の間</text>
+  <rect x="48" y="450" width="664" height="156" rx="10" fill="#f1eee5"/>
+  <text x="68" y="492" class="body">読取先バッファ・要求情報・完了通知の資源を保持</text>
+  <text x="68" y="534" class="body">読取先を参照・上書き・解放・再利用しない</text>
+  <text x="68" y="576" class="body">未完了のまま、所有するスコープを抜けない</text>
+  <text x="44" y="652" class="body">C++：FALSE + ERROR_IO_PENDING は進行中</text>
+  <text x="44" y="694" class="body">C#：未完了のValueTaskは、awaitで完了を受け取る</text>
+  <path d="M380 748V784" class="arrow"/>
+  <rect x="24" y="806" width="712" height="254" rx="14" fill="#fff"/>
+  <text x="44" y="852" class="heading">③ 完了結果を回収する</text>
+  <text x="44" y="896" class="body">成功なら実読取数を確認し、その範囲だけ使う</text>
+  <text x="44" y="938" class="body">EOF・キャンセル・その他の失敗も区別する</text>
+  <rect x="48" y="964" width="664" height="68" rx="10" fill="#dcece0"/>
+  <text x="380" y="1008" class="body center">完了と所有権を確認して、再利用・解放へ</text>
+  <rect x="24" y="1092" width="712" height="248" rx="14" fill="#fff"/>
+  <text x="44" y="1138" class="heading">キャンセル要求は、完了の代わりにならない</text>
+  <text x="44" y="1182" class="body">CancelIoExはキャンセルを要求し、完了を待たない</text>
+  <text x="44" y="1224" class="body">通常成功との競走もある。終端結果を回収する</text>
+  <text x="44" y="1282" class="body">要求を出した直後にbufferを返却する設計は危険</text>
+  <text x="32" y="1394" class="body">C++例はイベント方式。C#の内部通知方式とは分ける</text>
+  <text x="32" y="1436" class="body">await後の継続処理と、OSのI/O完了も同じ瞬間ではない</text>
+  <text x="32" y="1478" class="body">キャンセルは契約の説明。今回のコードでは実演しない</text>
+</svg>

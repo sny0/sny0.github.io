@@ -11,7 +11,7 @@
     "domain": "guide",
     "collection": "questions",
     "order": 0,
-    "summary": "整数・浮動小数点とその比較、文字コード、メモリ確保、起動、同期、ファイル読み取り、入力と描画、Webの疑問から関連する本文をたどる。"
+    "summary": "整数・浮動小数点とその比較、文字コード、メモリ確保、起動、同期、ファイル読み取りと非同期I/O、入力と描画、Webの疑問から関連する本文をたどる。"
   }
 }
 ---
@@ -73,6 +73,12 @@
 1. [ファイルを読む仕組み](/os/file-read-journey.html)で、アプリのバッファ、OSのファイルキャッシュ、ストレージへの要求を分ける。
 2. [C++・C#の読み取り観察](/practice/io/file-read-observation.html)で、要求数と実読取数、ファイル位置、EOF、seek、失敗を確かめる。
 3. テキストとして解釈するときは[Unicodeと文字コード](/data/unicode-and-encoding.html)へ進む。
+
+## I/Oの完了を待ちながら、別の処理を進めるには
+
+1. [非同期I/O](/os/asynchronous-file-io.html)で、要求の発行と完了、即時完了、待機と継続、バッファの寿命を分ける。
+2. [C++・C#の同期・非同期比較](/practice/io/async-file-read-observation.html)で、同じファイルを読み、完了結果と内容の一致を確かめる。
+3. 複数の処理から状態を共有するときは[スレッドと同期](/runtime/thread-synchronization.html)も確認する。
 
 ## 入力からゲーム画面まで
 

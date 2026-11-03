@@ -18,6 +18,7 @@
 
 | 用語・別名 | 説明への入口 |
 | --- | --- |
+| [非同期I/O / asynchronous I/O / Overlapped I/O / ERROR_IO_PENDING / ReadAsync / await / IOCP](/os/asynchronous-file-io.html) | 要求の発行、完了結果、待機と継続、バッファを再利用できる時点を調べる |
 | [ファイルI/O / read / FileStream / ReadFile / EOF / seek / ファイルキャッシュ / ページキャッシュ](/os/file-read-journey.html) | 読み取り要求と実読取数、ファイル位置、OSキャッシュと保存装置の違いを調べる |
 | [スレッド同期 / mutex / lock / lock_guard / 排他制御 / critical section / happens-before / join](/runtime/thread-synchronization.html) | 共有する状態、ロックの排他と同期、終了待ちとオブジェクトの寿命を結び付ける |
 | [近似一致 / 絶対許容差 / 相対許容差 / 浮動小数点の比較 / NaN / Inf](/math/floating-point-comparison.html) | 厳密な等値、用途に応じた近似判定、特殊値と非推移性を区別する |

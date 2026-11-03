@@ -1,0 +1,58 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="760" height="1510" viewBox="0 0 760 1510" role="img" aria-labelledby="timeline-title timeline-desc">
+  <title id="timeline-title">同期I/Oと非同期I/Oで、結果を使える時点を比べる</title>
+  <desc id="timeline-desc">未完了のI/Oがある場合の説明用時系列。同期では読み取りの呼出しから結果が戻るまで呼出元スレッドが待ち得る。非同期では要求発行後、完了を回収する前に別の処理を行える。C++実行例はその後GetOverlappedResultで必要ならスレッドをブロックして待つ。C#のawaitは未完了ならメソッドを中断して呼出元へ制御を戻し、完了後に続きを実行する。即時完了も可能で、処理の重なりや高速化を保証する図ではない。</desc>
+  <style>
+    text { font-family: "BIZ UDPGothic", "Yu Gothic", Meiryo, sans-serif; fill: #26352e; }
+    .heading { font-size: 28px; font-weight: 700; }
+    .body { font-size: 24px; }
+    .center { text-anchor: middle; }
+    .arrow { fill: none; stroke: #526d5c; stroke-width: 3; marker-end: url(#arrow); }
+  </style>
+  <defs><marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse"><path d="M0 0L10 5 0 10Z" fill="#526d5c"/></marker></defs>
+  <rect width="760" height="1510" rx="20" fill="#f4f8f4"/>
+  <text x="32" y="54" font-size="32" font-weight="700">同期と非同期：いつ、結果を使えるか</text>
+  <text x="32" y="98" class="body">下向きに時間。未完了になる場合の説明用時系列</text>
+  <rect x="24" y="130" width="712" height="442" rx="14" fill="#fff"/>
+  <text x="44" y="176" class="heading">同期read：結果が戻ってから、その続きを実行</text>
+  <text x="207" y="222" class="body center">呼出元スレッド</text>
+  <text x="555" y="222" class="body center">OS側のI/O</text>
+  <rect x="60" y="248" width="294" height="64" rx="9" fill="#e2eafa"/>
+  <text x="207" y="290" class="body center">readを呼び出す</text>
+  <path d="M358 278H392" class="arrow"/>
+  <rect x="402" y="248" width="294" height="222" rx="9" fill="#e9efe6"/>
+  <text x="549" y="310" class="body center">キャッシュの参照や</text>
+  <text x="549" y="352" class="body center">必要な下位I/Oを処理</text>
+  <text x="549" y="414" class="body center">完了・結果の返却</text>
+  <rect x="60" y="328" width="294" height="142" rx="9" fill="#f1eee5"/>
+  <text x="207" y="380" class="body center">必要なら</text>
+  <text x="207" y="422" class="body center">このスレッドが待つ</text>
+  <path d="M402 452H366" class="arrow"/>
+  <rect x="60" y="488" width="636" height="58" rx="9" fill="#dcece0"/>
+  <text x="378" y="526" class="body center">戻り値を確認 → 読み取ったbytesを使う</text>
+  <rect x="24" y="600" width="712" height="568" rx="14" fill="#fff"/>
+  <text x="44" y="646" class="heading">非同期read：発行と、結果の回収を分ける</text>
+  <text x="207" y="692" class="body center">呼出元の処理</text>
+  <text x="555" y="692" class="body center">OS側のI/O</text>
+  <rect x="60" y="718" width="294" height="64" rx="9" fill="#e2eafa"/>
+  <text x="207" y="760" class="body center">要求を発行して戻る</text>
+  <path d="M358 748H392" class="arrow"/>
+  <rect x="402" y="718" width="294" height="254" rx="9" fill="#e9efe6"/>
+  <text x="549" y="780" class="body center">キャッシュの参照や</text>
+  <text x="549" y="822" class="body center">必要な下位I/Oを処理</text>
+  <text x="549" y="916" class="body center">完了を通知する</text>
+  <rect x="60" y="802" width="294" height="122" rx="9" fill="#e2eafa"/>
+  <text x="207" y="848" class="body center">別の処理を進める</text>
+  <text x="207" y="890" class="body center">読取先には触らない</text>
+  <rect x="60" y="944" width="294" height="108" rx="9" fill="#f1eee5"/>
+  <text x="207" y="986" class="body center">結果が必要な時点で</text>
+  <text x="207" y="1028" class="body center">完了を確認・回収</text>
+  <path d="M548 976V1010H370" class="arrow"/>
+  <rect x="60" y="1078" width="636" height="64" rx="9" fill="#dcece0"/>
+  <text x="378" y="1120" class="body center">完了結果を確認 → 読み取ったbytesを使う</text>
+  <text x="32" y="1222" class="heading">完了を受け取る方法も、区別する</text>
+  <text x="32" y="1270" class="body">C++例：結果待ちではスレッドをブロックし得る</text>
+  <text x="32" y="1312" class="body">C#のawait：未完了ならメソッドを中断して戻る</text>
+  <text x="32" y="1354" class="body">完了後に続きを実行。新しいスレッドの作成は必須でない</text>
+  <text x="32" y="1422" class="body">即時完了もある。非同期APIの即時復帰は保証しない</text>
+  <text x="32" y="1464" class="body">横幅や高さは所要時間を表さず、高速化も保証しない</text>
+</svg>
