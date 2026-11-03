@@ -1,0 +1,59 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="760" height="1600" viewBox="0 0 760 1600" role="img" aria-labelledby="consume-title consume-desc">
+  <title id="consume-title">在庫の確認と消費を同じロック区間で守る</title>
+  <desc id="consume-desc">初期在庫1の説明用時系列。各確認と各減算を個別に同じロックで守っても、AとBがともに1を確認し、その後に再確認せず減算すれば在庫がマイナスになる。データ競合がないことと、確認して消費する処理の正しさは別。一つのTryConsumeとしてロックすると、先に取得したAが残数を0、消費数を1へ更新して解放し、Bは取得後に残数0を確認して失敗する。先に取得するスレッドは固定されない。実行例は初期在庫17で40回試行し、成功17、失敗23を確かめる。</desc>
+  <style>
+    text { font-family: "BIZ UDPGothic", "Yu Gothic", Meiryo, sans-serif; fill: #26352e; }
+    .heading { font-size: 28px; font-weight: 700; }
+    .body { font-size: 24px; }
+    .center { text-anchor: middle; }
+  </style>
+  <rect width="760" height="1600" rx="20" fill="#f4f8f4"/>
+  <text x="32" y="54" font-size="32" font-weight="700">確認と消費を、一まとまりで守る</text>
+  <text x="32" y="98" class="body">各操作が安全でも、操作の間に別の処理が入る</text>
+  <text x="32" y="138" class="body">下向きに時間が進む。取得順は説明用の一例</text>
+
+  <rect x="24" y="166" width="712" height="644" rx="14" fill="#fff"/>
+  <text x="44" y="212" class="heading">確認と減算を、別々にロックした場合</text>
+  <text x="44" y="254" class="body">初期残数1。減算時に再確認しない設計の例</text>
+  <text x="214" y="296" class="heading center">スレッドA</text>
+  <text x="554" y="296" class="heading center">スレッドB</text>
+  <path d="M48 320v382m-7-10 7 10 7-10" fill="none" stroke="#71877a" stroke-width="2"/>
+  <rect x="72" y="316" width="284" height="82" rx="9" fill="#e2eafa"/>
+  <text x="214" y="350" class="body center">残数1を確認</text>
+  <text x="214" y="384" class="body center">→ ロックを解放</text>
+  <rect x="412" y="420" width="284" height="82" rx="9" fill="#e2eafa"/>
+  <text x="554" y="454" class="body center">残数1を確認</text>
+  <text x="554" y="488" class="body center">→ ロックを解放</text>
+  <rect x="72" y="524" width="284" height="82" rx="9" fill="#e2eafa"/>
+  <text x="214" y="558" class="body center">残数を1 → 0へ減算</text>
+  <text x="214" y="592" class="body center">→ ロックを解放</text>
+  <rect x="412" y="628" width="284" height="82" rx="9" fill="#f5dfe2"/>
+  <text x="554" y="662" class="body center">残数を0 → −1へ減算</text>
+  <text x="554" y="696" class="body center">→ ロックを解放</text>
+  <text x="44" y="758" class="body">各操作は同じロックを使用。データ競合がなくても</text>
+  <text x="44" y="798" class="body">「残数は負にならない」という規則を破り得る</text>
+
+  <rect x="24" y="838" width="712" height="620" rx="14" fill="#fff"/>
+  <text x="44" y="884" class="heading">確認と消費を、一つのロック区間にする</text>
+  <text x="44" y="926" class="body">初期状態：残数1、消費数0</text>
+  <rect x="64" y="956" width="292" height="242" rx="10" fill="#dcece0"/>
+  <text x="210" y="994" class="heading center">A：ロック取得</text>
+  <text x="210" y="1036" class="body center">残数1を確認</text>
+  <text x="210" y="1078" class="body center">残数0・消費数1へ更新</text>
+  <text x="210" y="1120" class="body center">成功の戻り値を決める</text>
+  <text x="210" y="1162" class="body center">スコープを出て解放</text>
+  <rect x="404" y="956" width="292" height="154" rx="10" fill="#f1eee5"/>
+  <text x="550" y="998" class="heading center">B：同じロックを待つ</text>
+  <text x="550" y="1040" class="body center">Aの処理途中には</text>
+  <text x="550" y="1082" class="body center">割り込んで更新しない</text>
+  <path d="M356 1162h25v34h23m-9-7 9 7-9 7" fill="none" stroke="#47765a" stroke-width="3"/>
+  <rect x="404" y="1154" width="292" height="170" rx="10" fill="#dcece0"/>
+  <text x="550" y="1194" class="heading center">B：ロック取得</text>
+  <text x="550" y="1236" class="body center">残数0なので失敗</text>
+  <text x="550" y="1278" class="body center">状態を変えずに解放</text>
+  <text x="44" y="1384" class="body" font-weight="700">残数0 ＋ 消費数1 ＝ 初期数1を保つ</text>
+  <text x="44" y="1426" class="body">全アクセスが、同じロック規約に従う必要がある</text>
+
+  <text x="32" y="1516" class="body" font-weight="700">実行例：初期在庫17、4worker × 10回の試行</text>
+  <text x="32" y="1558" class="body">成功17・失敗23。各workerの成功数は未指定</text>
+</svg>

@@ -1,0 +1,13 @@
+cmake_minimum_required(VERSION 3.20)
+project(inventory_synchronization LANGUAGES CXX)
+
+find_package(Threads REQUIRED)
+add_executable(inventory_synchronization main.cpp)
+target_compile_features(inventory_synchronization PRIVATE cxx_std_20)
+target_link_libraries(inventory_synchronization PRIVATE Threads::Threads)
+set_target_properties(inventory_synchronization PROPERTIES CXX_EXTENSIONS OFF)
+if(MSVC)
+    target_compile_options(inventory_synchronization PRIVATE /W4 /WX /permissive- /EHsc /utf-8)
+else()
+    target_compile_options(inventory_synchronization PRIVATE -Wall -Wextra -Wpedantic -Werror)
+endif()

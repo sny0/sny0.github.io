@@ -1,56 +1,33 @@
-// C++20 — 非atomic/atomicカウンタの比較(docs/07_memory_and_runtime/04)
-// 注意: 非atomic版はデータ競合(UB)のデモ。教材としてのみ実行する。
-//       結果が「たまたま」一致する環境もある(UBは検出保証がない、の実例)。
-// 検証環境(MinGW.org GCC 9.2)はstd::thread非対応のため、_WIN32ではWin32スレッドで代替。
+// C++20: two workers increment one atomic counter without a data race.
+// Build with a C++20 standard library that provides std::jthread.
+// relaxed is enough for this counter; it does not publish unrelated data.
+// The parent reads the result only after both workers have been joined.
 #include <atomic>
 #include <cstdio>
-
-#if defined(_WIN32)
-#include <windows.h>
-using ThreadFn = DWORD(WINAPI*)(LPVOID);
-static void RunTwo(ThreadFn fn, void* arg) {
-    HANDLE h1 = CreateThread(nullptr, 0, fn, arg, 0, nullptr);
-    HANDLE h2 = CreateThread(nullptr, 0, fn, arg, 0, nullptr);
-    WaitForSingleObject(h1, INFINITE);
-    WaitForSingleObject(h2, INFINITE);
-    CloseHandle(h1);
-    CloseHandle(h2);
-}
-#else
+#include <exception>
 #include <thread>
-template <class F>
-static void RunTwoStd(F f) {
-    std::thread t1(f), t2(f);
-    t1.join();
-    t2.join();
-}
-#endif
-
-constexpr int kLoops = 100000;
-std::atomic<int> g_safeCount{0};
-int g_racyCount = 0;
-
-#if defined(_WIN32)
-static DWORD WINAPI SafeWork(LPVOID) {
-    for (int i = 0; i < kLoops; ++i) g_safeCount.fetch_add(1, std::memory_order_relaxed);
-    return 0;
-}
-static DWORD WINAPI RacyWork(LPVOID) {
-    for (int i = 0; i < kLoops; ++i) ++g_racyCount;   // データ競合(UB)
-    return 0;
-}
-#endif
 
 int main() {
-#if defined(_WIN32)
-    RunTwo(SafeWork, nullptr);
-    RunTwo(RacyWork, nullptr);
-#else
-    RunTwoStd([] { for (int i = 0; i < kLoops; ++i) g_safeCount.fetch_add(1, std::memory_order_relaxed); });
-    RunTwoStd([] { for (int i = 0; i < kLoops; ++i) ++g_racyCount; });
-#endif
-    std::printf("atomic  : expected=%d actual=%d\n", kLoops * 2, g_safeCount.load());
-    std::printf("racy(UB): expected=%d actual=%d %s\n", kLoops * 2, g_racyCount,
-                g_racyCount == kLoops * 2 ? "(今回は偶然一致 — 保証はない)" : "(欠損を観察)");
-    return 0;
+    try {
+        constexpr int loops = 100000;
+        constexpr int expected = loops * 2;
+        // Declared before the workers so it also survives constructor failure.
+        std::atomic<int> count{0};
+        const auto increment = [&count]() noexcept {
+            for (int i = 0; i < loops; ++i) {
+                count.fetch_add(1, std::memory_order_relaxed);
+            }
+        };
+        std::jthread first(increment);
+        std::jthread second(increment);
+        first.join();
+        second.join();
+        const int actual = count.load(std::memory_order_relaxed);
+        std::printf("atomic RMW: expected=%d actual=%d %s\n",
+                    expected, actual, actual == expected ? "PASS" : "FAIL");
+        return actual == expected ? 0 : 1;
+    } catch (const std::exception& error) {
+        std::fprintf(stderr, "FAIL: %s\n", error.what());
+        return 1;
+    }
 }
