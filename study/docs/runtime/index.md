@@ -26,6 +26,7 @@
 - [ガベージコレクションとの違い — C#の管理ヒープ・UnityのGC Allocとの比較](/runtime/memory/gc-and-csharp-comparison.html)
 - [キャッシュ・分岐予測・SIMD](/runtime/cpp-internals/cache-branch-simd.html)
 - [キャッシュ局所性と AoS / SoA](/runtime/memory/cache-locality-aos-soa.html)
+- [スレッドと同期 — 共有状態の不変条件をmutexとlockで守る](/runtime/thread-synchronization.html)
 - [メモリバグ図鑑 — dangling pointer・use-after-free・double free・memory leak・buffer overflow・stack overflow](/runtime/memory/memory-bugs.html)
 - [メモリレイアウト・パディング・アラインメント・エンディアン](/runtime/cpp-internals/memory-layout.html)
 - [関数呼び出し・コールスタック・呼出規約・レジスタ](/runtime/cpp-internals/function-calls-and-cpu.html)
@@ -41,6 +42,7 @@
 
 ## 作って試す
 
+- [C++とC#で在庫の確認・更新を一つのロックで守る](/practice/threads/inventory-synchronization.html)
 - [C++の内部的な仕組みの演習](/runtime/cpp-internals/exercises.html)
 - [メモリと実行時の演習](/runtime/memory/exercises.html)
 

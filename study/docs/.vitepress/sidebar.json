@@ -267,6 +267,10 @@
           "link": "/runtime/memory/cache-locality-aos-soa.html"
         },
         {
+          "text": "スレッドと同期 — 共有状態の不変条件をmutexとlockで守る",
+          "link": "/runtime/thread-synchronization.html"
+        },
+        {
           "text": "メモリバグ図鑑 — dangling pointer・use-after-free・double free・memory leak・buffer overflow・stack overflow",
           "link": "/runtime/memory/memory-bugs.html"
         },
@@ -1077,6 +1081,10 @@
       "collapsed": false,
       "items": [
         {
+          "text": "C++とC#で在庫の同期を確かめる",
+          "link": "/practice/threads/inventory-synchronization.html"
+        },
+        {
           "text": "C++とC#でfloatの比較を確かめる",
           "link": "/practice/math/float-comparison-observation.html"
         },
@@ -1158,6 +1166,10 @@
       "collapsed": true,
       "items": [
         {
+          "text": "C++とC#で在庫の同期を確かめる",
+          "link": "/practice/threads/inventory-synchronization.html"
+        },
+        {
           "text": "C++とC#でfloatの比較を確かめる",
           "link": "/practice/math/float-comparison-observation.html"
         },
@@ -1234,6 +1246,10 @@
       "text": "ほかの実践・サンプル",
       "collapsed": true,
       "items": [
+        {
+          "text": "C++とC#で在庫の同期を確かめる",
+          "link": "/practice/threads/inventory-synchronization.html"
+        },
         {
           "text": "C++とC#でfloatの比較を確かめる",
           "link": "/practice/math/float-comparison-observation.html"
@@ -1312,6 +1328,10 @@
       "collapsed": true,
       "items": [
         {
+          "text": "C++とC#で在庫の同期を確かめる",
+          "link": "/practice/threads/inventory-synchronization.html"
+        },
+        {
           "text": "C++とC#でfloatの比較を確かめる",
           "link": "/practice/math/float-comparison-observation.html"
         },
@@ -1388,6 +1408,10 @@
       "text": "ほかの実践・サンプル",
       "collapsed": true,
       "items": [
+        {
+          "text": "C++とC#で在庫の同期を確かめる",
+          "link": "/practice/threads/inventory-synchronization.html"
+        },
         {
           "text": "C++とC#でfloatの比較を確かめる",
           "link": "/practice/math/float-comparison-observation.html"
@@ -1466,6 +1490,10 @@
       "collapsed": true,
       "items": [
         {
+          "text": "C++とC#で在庫の同期を確かめる",
+          "link": "/practice/threads/inventory-synchronization.html"
+        },
+        {
           "text": "C++とC#でfloatの比較を確かめる",
           "link": "/practice/math/float-comparison-observation.html"
         },
@@ -1527,6 +1555,10 @@
       "collapsed": true,
       "items": [
         {
+          "text": "C++とC#で在庫の同期を確かめる",
+          "link": "/practice/threads/inventory-synchronization.html"
+        },
+        {
           "text": "C++とC#でfloatの比較を確かめる",
           "link": "/practice/math/float-comparison-observation.html"
         },
@@ -1587,6 +1619,10 @@
       "text": "ほかの実践・サンプル",
       "collapsed": true,
       "items": [
+        {
+          "text": "C++とC#で在庫の同期を確かめる",
+          "link": "/practice/threads/inventory-synchronization.html"
+        },
         {
           "text": "C++とC#でfloatの比較を確かめる",
           "link": "/practice/math/float-comparison-observation.html"
@@ -1657,6 +1693,10 @@
       "collapsed": true,
       "items": [
         {
+          "text": "C++とC#で在庫の同期を確かめる",
+          "link": "/practice/threads/inventory-synchronization.html"
+        },
+        {
           "text": "C++とC#でfloatの比較を確かめる",
           "link": "/practice/math/float-comparison-observation.html"
         },
@@ -1726,6 +1766,10 @@
       "collapsed": true,
       "items": [
         {
+          "text": "C++とC#で在庫の同期を確かめる",
+          "link": "/practice/threads/inventory-synchronization.html"
+        },
+        {
           "text": "C++とC#でfloatの比較を確かめる",
           "link": "/practice/math/float-comparison-observation.html"
         },
@@ -1786,6 +1830,10 @@
       "text": "ほかの実践・サンプル",
       "collapsed": true,
       "items": [
+        {
+          "text": "C++とC#で在庫の同期を確かめる",
+          "link": "/practice/threads/inventory-synchronization.html"
+        },
         {
           "text": "C++とC#で文字の表現を観察する",
           "link": "/practice/data/unicode-observation.html"
@@ -1848,8 +1896,77 @@
       "collapsed": true,
       "items": [
         {
+          "text": "C++とC#で在庫の同期を確かめる",
+          "link": "/practice/threads/inventory-synchronization.html"
+        },
+        {
           "text": "C++とC#でfloatの比較を確かめる",
           "link": "/practice/math/float-comparison-observation.html"
+        },
+        {
+          "text": "C++でfloatの表現と刻み幅を観察する",
+          "link": "/practice/data/float-spacing-observation.html"
+        },
+        {
+          "text": "C++で整数とバイト列を観察する",
+          "link": "/practice/data/integer-byte-observation.html"
+        },
+        {
+          "text": "Windowsでプロセスとスレッドを観察する",
+          "link": "/practice/process/windows-process-observation.html"
+        },
+        {
+          "text": "Windowsでメモリの状態を観察する",
+          "link": "/practice/memory/windows-memory-observation.html"
+        },
+        {
+          "text": "小さなシューティングを作る",
+          "link": "/game/shooter-design.html"
+        },
+        {
+          "text": "小さなレンダラーを作る",
+          "link": "/graphics/capstone/01-design.html"
+        },
+        {
+          "text": "C++と設計の演習",
+          "link": "/guide/exercises/"
+        },
+        {
+          "text": "C++のビルドサンプル",
+          "link": "/tools/build/samples/"
+        },
+        {
+          "text": "小さなアプリで設計を試す",
+          "link": "/design/notebook/practice.html"
+        }
+      ]
+    }
+  ],
+  "/practice/threads/inventory-synchronization.md": [
+    {
+      "text": "実践・サンプル一覧",
+      "link": "/practice/"
+    },
+    {
+      "text": "C++とC#で在庫の同期を確かめる",
+      "items": [
+        {
+          "text": "C++とC#で在庫の確認・更新を一つのロックで守る",
+          "link": "/practice/threads/inventory-synchronization.html"
+        }
+      ]
+    },
+    {
+      "text": "ほかの実践・サンプル",
+      "collapsed": true,
+      "items": [
+        {
+          "text": "C++とC#でfloatの比較を確かめる",
+          "link": "/practice/math/float-comparison-observation.html"
+        },
+        {
+          "text": "C++とC#で文字の表現を観察する",
+          "link": "/practice/data/unicode-observation.html"
         },
         {
           "text": "C++でfloatの表現と刻み幅を観察する",
@@ -2131,6 +2248,10 @@
       "collapsed": true,
       "items": [
         {
+          "text": "C++とC#で在庫の同期を確かめる",
+          "link": "/practice/threads/inventory-synchronization.html"
+        },
+        {
           "text": "C++とC#でfloatの比較を確かめる",
           "link": "/practice/math/float-comparison-observation.html"
         },
@@ -2244,6 +2365,10 @@
       "collapsed": true,
       "items": [
         {
+          "text": "C++とC#で在庫の同期を確かめる",
+          "link": "/practice/threads/inventory-synchronization.html"
+        },
+        {
           "text": "C++とC#でfloatの比較を確かめる",
           "link": "/practice/math/float-comparison-observation.html"
         },
@@ -2312,6 +2437,10 @@
       "text": "ほかの実践・サンプル",
       "collapsed": true,
       "items": [
+        {
+          "text": "C++とC#で在庫の同期を確かめる",
+          "link": "/practice/threads/inventory-synchronization.html"
+        },
         {
           "text": "C++とC#でfloatの比較を確かめる",
           "link": "/practice/math/float-comparison-observation.html"
@@ -2425,6 +2554,10 @@
       "text": "ほかの実践・サンプル",
       "collapsed": true,
       "items": [
+        {
+          "text": "C++とC#で在庫の同期を確かめる",
+          "link": "/practice/threads/inventory-synchronization.html"
+        },
         {
           "text": "C++とC#でfloatの比較を確かめる",
           "link": "/practice/math/float-comparison-observation.html"
@@ -2624,6 +2757,10 @@
       "collapsed": true,
       "items": [
         {
+          "text": "C++とC#で在庫の同期を確かめる",
+          "link": "/practice/threads/inventory-synchronization.html"
+        },
+        {
           "text": "C++とC#でfloatの比較を確かめる",
           "link": "/practice/math/float-comparison-observation.html"
         },
@@ -2821,6 +2958,10 @@
       "text": "ほかの実践・サンプル",
       "collapsed": true,
       "items": [
+        {
+          "text": "C++とC#で在庫の同期を確かめる",
+          "link": "/practice/threads/inventory-synchronization.html"
+        },
         {
           "text": "C++とC#でfloatの比較を確かめる",
           "link": "/practice/math/float-comparison-observation.html"
@@ -3020,6 +3161,10 @@
       "collapsed": true,
       "items": [
         {
+          "text": "C++とC#で在庫の同期を確かめる",
+          "link": "/practice/threads/inventory-synchronization.html"
+        },
+        {
           "text": "C++とC#でfloatの比較を確かめる",
           "link": "/practice/math/float-comparison-observation.html"
         },
@@ -3218,6 +3363,10 @@
       "collapsed": true,
       "items": [
         {
+          "text": "C++とC#で在庫の同期を確かめる",
+          "link": "/practice/threads/inventory-synchronization.html"
+        },
+        {
           "text": "C++とC#でfloatの比較を確かめる",
           "link": "/practice/math/float-comparison-observation.html"
         },
@@ -3330,6 +3479,10 @@
       "text": "ほかの実践・サンプル",
       "collapsed": true,
       "items": [
+        {
+          "text": "C++とC#で在庫の同期を確かめる",
+          "link": "/practice/threads/inventory-synchronization.html"
+        },
         {
           "text": "C++とC#でfloatの比較を確かめる",
           "link": "/practice/math/float-comparison-observation.html"
@@ -3477,6 +3630,10 @@
       "collapsed": true,
       "items": [
         {
+          "text": "C++とC#で在庫の同期を確かめる",
+          "link": "/practice/threads/inventory-synchronization.html"
+        },
+        {
           "text": "C++とC#でfloatの比較を確かめる",
           "link": "/practice/math/float-comparison-observation.html"
         },
@@ -3537,6 +3694,10 @@
       "text": "ほかの実践・サンプル",
       "collapsed": true,
       "items": [
+        {
+          "text": "C++とC#で在庫の同期を確かめる",
+          "link": "/practice/threads/inventory-synchronization.html"
+        },
         {
           "text": "C++とC#でfloatの比較を確かめる",
           "link": "/practice/math/float-comparison-observation.html"
@@ -3651,6 +3812,10 @@
       "collapsed": true,
       "items": [
         {
+          "text": "C++とC#で在庫の同期を確かめる",
+          "link": "/practice/threads/inventory-synchronization.html"
+        },
+        {
           "text": "C++とC#でfloatの比較を確かめる",
           "link": "/practice/math/float-comparison-observation.html"
         },
@@ -3763,6 +3928,10 @@
       "text": "ほかの実践・サンプル",
       "collapsed": true,
       "items": [
+        {
+          "text": "C++とC#で在庫の同期を確かめる",
+          "link": "/practice/threads/inventory-synchronization.html"
+        },
         {
           "text": "C++とC#でfloatの比較を確かめる",
           "link": "/practice/math/float-comparison-observation.html"
@@ -3918,6 +4087,10 @@
       "collapsed": true,
       "items": [
         {
+          "text": "C++とC#で在庫の同期を確かめる",
+          "link": "/practice/threads/inventory-synchronization.html"
+        },
+        {
           "text": "C++とC#でfloatの比較を確かめる",
           "link": "/practice/math/float-comparison-observation.html"
         },
@@ -3986,6 +4159,10 @@
       "text": "ほかの実践・サンプル",
       "collapsed": true,
       "items": [
+        {
+          "text": "C++とC#で在庫の同期を確かめる",
+          "link": "/practice/threads/inventory-synchronization.html"
+        },
         {
           "text": "C++とC#でfloatの比較を確かめる",
           "link": "/practice/math/float-comparison-observation.html"
@@ -4099,6 +4276,10 @@
       "text": "ほかの実践・サンプル",
       "collapsed": true,
       "items": [
+        {
+          "text": "C++とC#で在庫の同期を確かめる",
+          "link": "/practice/threads/inventory-synchronization.html"
+        },
         {
           "text": "C++とC#でfloatの比較を確かめる",
           "link": "/practice/math/float-comparison-observation.html"
@@ -4297,6 +4478,10 @@
       "text": "ほかの実践・サンプル",
       "collapsed": true,
       "items": [
+        {
+          "text": "C++とC#で在庫の同期を確かめる",
+          "link": "/practice/threads/inventory-synchronization.html"
+        },
         {
           "text": "C++とC#でfloatの比較を確かめる",
           "link": "/practice/math/float-comparison-observation.html"
@@ -4643,6 +4828,10 @@
       "collapsed": true,
       "items": [
         {
+          "text": "C++とC#で在庫の同期を確かめる",
+          "link": "/practice/threads/inventory-synchronization.html"
+        },
+        {
           "text": "C++とC#でfloatの比較を確かめる",
           "link": "/practice/math/float-comparison-observation.html"
         },
@@ -4703,6 +4892,10 @@
       "text": "ほかの実践・サンプル",
       "collapsed": true,
       "items": [
+        {
+          "text": "C++とC#で在庫の同期を確かめる",
+          "link": "/practice/threads/inventory-synchronization.html"
+        },
         {
           "text": "C++とC#でfloatの比較を確かめる",
           "link": "/practice/math/float-comparison-observation.html"
@@ -4986,6 +5179,10 @@
       "text": "ほかの実践・サンプル",
       "collapsed": true,
       "items": [
+        {
+          "text": "C++とC#で在庫の同期を確かめる",
+          "link": "/practice/threads/inventory-synchronization.html"
+        },
         {
           "text": "C++とC#でfloatの比較を確かめる",
           "link": "/practice/math/float-comparison-observation.html"
@@ -7726,6 +7923,10 @@
       "text": "ほかの実践・サンプル",
       "collapsed": true,
       "items": [
+        {
+          "text": "C++とC#で在庫の同期を確かめる",
+          "link": "/practice/threads/inventory-synchronization.html"
+        },
         {
           "text": "C++とC#でfloatの比較を確かめる",
           "link": "/practice/math/float-comparison-observation.html"

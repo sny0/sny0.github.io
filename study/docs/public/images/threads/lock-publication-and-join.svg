@@ -1,0 +1,51 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="760" height="1450" viewBox="0 0 760 1450" role="img" aria-labelledby="publication-title publication-desc">
+  <title id="publication-title">同じmutexでの受け渡しと、終了待ちによる結果の受け渡し</title>
+  <desc id="publication-desc">上段はC++20の同じmutexについて、Aの書き込みからunlock、後のBによる成功したlock、Bの読み取りへhappens-beforeの関係がつながる図。単にCPUのキャッシュを全部消す仕組みという説明ではない。下段は親が共有状態と結果配列を初期化し、workerを開始して、各workerの終了に対応するjoinが戻った後に結果を読み、すべて終了してから共有状態を破棄する流れ。joinは実行中のworker同士のアクセスを保護しない。</desc>
+  <style>
+    text { font-family: "BIZ UDPGothic", "Yu Gothic", Meiryo, sans-serif; fill: #26352e; }
+    .heading { font-size: 28px; font-weight: 700; }
+    .body { font-size: 24px; }
+    .code { font-family: Consolas, monospace; }
+    .center { text-anchor: middle; }
+  </style>
+  <rect width="760" height="1450" rx="20" fill="#f4f8f4"/>
+  <text x="32" y="54" font-size="32" font-weight="700">ロックと終了待ちがつなぐ順序</text>
+  <text x="32" y="98" class="body">上段はC++20の規則。同じmutex Mを使う</text>
+
+  <rect x="24" y="130" width="712" height="542" rx="14" fill="#fff"/>
+  <text x="44" y="176" class="heading">保護した書き込み → 次の保護した読み取り</text>
+  <text x="209" y="224" class="heading center">スレッドA</text>
+  <text x="551" y="224" class="heading center">スレッドB</text>
+  <rect x="64" y="248" width="290" height="236" rx="10" fill="#e2eafa"/>
+  <text x="209" y="290" class="body center code">M.lock()</text>
+  <text x="209" y="340" class="body center">残数などを書き込む</text>
+  <path d="M209 356v52m-8-9 8 9 8-9" fill="none" stroke="#71877a" stroke-width="2"/>
+  <text x="209" y="454" class="body center code">M.unlock()</text>
+  <rect x="406" y="398" width="290" height="184" rx="10" fill="#dcece0"/>
+  <text x="551" y="454" class="body center code">M.lock() 成功</text>
+  <path d="M551 470v36m-8-9 8 9 8-9" fill="none" stroke="#71877a" stroke-width="2"/>
+  <text x="551" y="552" class="body center">保護した状態を読む</text>
+  <path d="M354 448h52m-10-8 10 8-10 8" fill="none" stroke="#47765a" stroke-width="3"/>
+  <text x="44" y="620" class="body code">unlock → 後の成功したlock: synchronizes-with</text>
+  <text x="44" y="660" class="body">前の書き込みと後の読み取りに順序を与える</text>
+
+  <rect x="24" y="700" width="712" height="570" rx="14" fill="#fff"/>
+  <text x="44" y="746" class="heading">結果を読む前に、workerの終了を待つ</text>
+  <rect x="64" y="772" width="632" height="72" rx="9" fill="#e2eafa"/>
+  <text x="380" y="818" class="body center">親：共有状態・結果配列を初期化 → worker開始</text>
+  <path d="M380 854v28m-8-9 8 9 8-9" fill="none" stroke="#71877a" stroke-width="2"/>
+  <rect x="64" y="894" width="632" height="88" rx="9" fill="#f1eee5"/>
+  <text x="380" y="932" class="body center">worker：処理 → 自分の結果slotへ書く → 終了</text>
+  <text x="380" y="966" class="body center">共有在庫はロックで守る。結果slotは担当を分ける</text>
+  <path d="M380 992v28m-8-9 8 9 8-9" fill="none" stroke="#47765a" stroke-width="3"/>
+  <rect x="64" y="1032" width="632" height="96" rx="9" fill="#dcece0"/>
+  <text x="380" y="1072" class="body center">親：全workerのjoinが正常に戻る</text>
+  <text x="380" y="1112" class="body center">→ 結果slotを読み、集計・検査する</text>
+  <path d="M380 1138v26m-8-9 8 9 8-9" fill="none" stroke="#71877a" stroke-width="2"/>
+  <text x="380" y="1212" class="body center">全workerの終了後に、共有状態・mutexを破棄</text>
+  <text x="44" y="1254" class="body">途中の生成失敗・例外でも、この寿命の順序を守る</text>
+
+  <text x="32" y="1324" class="body" font-weight="700">joinは、実行中のworker同士のアクセスを守らない</text>
+  <text x="32" y="1366" class="body">排他と終了待ちは、それぞれの役割で使う</text>
+  <text x="32" y="1408" class="body">C#版のlock・Joinの規則は、本文で別に確認する</text>
+</svg>

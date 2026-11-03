@@ -3,7 +3,8 @@ title: 第8章 OSの仕組み
 study:
   source: IT教本
   status: outline
-  summary: プロセス、スレッド、仮想メモリ、システムコール、I/Oを学ぶ計画。起動処理と仮想メモリの辞典本文、Windowsの観察例へつなぐ。
+  summary: プロセス、スレッド、仮想メモリ、システムコール、I/Oを学ぶ計画。起動・メモリ・データ共有の辞典本文と観察例へつなぐ。
+  verification: 同期項目の一次資料照合（2026-11-04）
   section: learning
   format: path
   domain: os
@@ -26,6 +27,7 @@ study:
 - [仮想メモリ](/os/virtual-memory.html)で予約・コミット・常駐、ページ表・TLB・ページフォルトを調べ、[Windows/C++の観察サンプル](/practice/memory/windows-memory-observation.html)で確かめられます。
 
 - [アロケータ](/runtime/memory/allocators-and-pools.html)で、アプリ側の領域管理とOSへの要求を区別できます。
+- [スレッド間の安全なデータ共有](/runtime/thread-synchronization.html)でmutex・C#のlock・共有状態の寿命を調べ、[在庫の観察例](/practice/threads/inventory-synchronization.html)で守る範囲と完了待ちを確かめられます。
 - [並行処理のバグ](/runtime/memory/concurrency-bugs.html)は、共有データを扱う際の問題を調べる入口です。仮想メモリやスケジューラ全体の説明を代替する記事ではありません。
 
 ## 学ぶ理由
@@ -42,7 +44,7 @@ study:
 - カーネル/ユーザーモード、システムコールの仕組みを説明できる
 - プロセスとスレッドの違い、コンテキストスイッチのコストを説明できる
 - 仮想メモリ(ページング、ページテーブル、TLB、ページフォルト)を説明できる
-- 排他制御(ミューテックス、アトミック、ロックフリーの概念)を使い分けられる
+- データ競合、mutexで守る範囲、atomic操作の保証を区別できる。ロックフリーは発展項目として位置付ける
 - 割り込み→ドライバ→アプリというパッド入力の経路を説明できる
 - ジョブシステムの設計原理を説明できる
 
@@ -86,11 +88,12 @@ study:
      SMT、I/O待ち、ジョブ粒度も考慮する。総スレッド数の最適値が常にコア数とは限らない
    - CPUアフィニティ(コンソール開発ではコア割り当てを明示することも)
 5. **同期と並行性(ゲーム実務の核心)**
-   - データ競合とは何か(未定義動作)
-   - ミューテックス/クリティカルセクション、条件変数、セマフォ
-   - **アトミック操作**(lock cmpxchg等のCPU命令が正体)
+   - C++20のデータ競合: 異なるスレッドで競合する操作の少なくとも一方が非atomicで、どちら向きにもhappens-beforeがなければ未定義動作。単に「同時刻に触ったか」では判定しない。[C++20草案の定義](https://timsong-cpp.github.io/cppwp/n4861/intro.races#21)を参照
+   - まずmutexで、共有状態の関係する読み書きを同じ保護方針にそろえる。C#の`lock`もAPIの契約に従って使い、C++20の未定義動作の規則とC#の保証を一括りにしない。詳しくは[同期の本文](/runtime/thread-synchronization.html)へ
+   - atomic操作の不可分性と、別の通常データを公開する順序の保証を区別する。特定のCPU命令一つと同一視せず、型や環境によってロックフリーではない実装もある。[C++20草案の順序](https://timsong-cpp.github.io/cppwp/n4861/atomics.order)と[ロックフリー性](https://timsong-cpp.github.io/cppwp/n4861/atomics.lockfree)を参照
+   - 条件変数・セマフォは、mutexによる共有状態の保護と完了待ちの基本から発展させる
    - デッドロック(ロック順序)、優先度逆転
-   - メモリオーダー(acquire/release)は「存在と怖さ」を知る程度でよい
+   - acquire/releaseなどのメモリオーダーは、どの操作の間に同期ができるかを調べる発展項目。キャッシュを即座に全CPUへ反映させる命令という説明ではない
    - **ゲームのジョブシステム**: スレッドプール+ワークスティーリング+
      フレームを小さなジョブに分割(UE Tasks / Unity C# JobSystem の原理)
 6. **割り込みとデバイスドライバ、入力の経路**
@@ -115,7 +118,7 @@ study:
 - **仮想メモリ** ── 現代OSの中心発明。AVも隔離もストリーミングもこれ
 - **OSへの要求にもコストがある** ── 呼出し回数・要求内容・待機を測り、必要ならバッチングする
 - **スレッドは無料ではない** ── コンテキストスイッチ・同期コスト
-- **データ競合=UB** ── 「たまに壊れるマルチスレッドバグ」の正体
+- **C++20のデータ競合は未定義動作** ── 偶然正しい結果が出ても安全の証明にはならず、同期があっても一連の処理の論理バグは残り得る
 - **入力はポーリングで刻まれている** ── 遅延理解の鍵
 
 ## ゲーム開発との関係
@@ -136,8 +139,7 @@ study:
    書け。タスクマネージャの「コミット済み」と「ワーキングセット」の違いを観察。
 2. わざとnullptrに書き込み、VSで例外コード0xC0000005を確認。
    「なぜOSはこれを検出できるのか」をページテーブルの言葉で説明せよ。
-3. スレッド8本で共有カウンタを (a)保護なし (b)mutex (c)atomic で
-   インクリメントし、結果と速度を比較せよ。(a)の値が狂う理由を説明せよ。
+3. [在庫の同期を観察するサンプル](/practice/threads/inventory-synchronization.html)を実行し、確認と消費を同じロック区間に置く理由、読取りの保護、workerの完了待ちを説明せよ。data raceのある非保護版を実行して結果や速度を比較する課題にはしない。
 4. **ミニジョブシステム**: スレッドプール+ジョブキュー(mutex+条件変数)を
    実装し、1万個の粒子更新をジョブ分割して並列化せよ。コア数と
    スループットの関係を計測せよ。
@@ -217,4 +219,6 @@ study:
 - [Microsoft: SYSTEM_INFO — page size and allocation granularity](https://learn.microsoft.com/en-us/windows/win32/api/sysinfoapi/ns-sysinfoapi-system_info)
 - [Microsoft: Virtual Address Space](https://learn.microsoft.com/en-us/windows/win32/memory/virtual-address-space)
 - [Microsoft: Scheduling Priorities](https://learn.microsoft.com/en-us/windows/win32/procthread/scheduling-priorities)
+- [C++20草案 N4861: data races](https://timsong-cpp.github.io/cppwp/n4861/intro.races)、[mutex requirements](https://timsong-cpp.github.io/cppwp/n4861/thread.mutex.requirements)
+- [Microsoft: C# lock](https://learn.microsoft.com/en-us/dotnet/csharp/language-reference/statements/lock)
 - [Intel 64 and IA-32 Architecture / Optimization manuals](https://www.intel.com/content/www/us/en/developer/articles/technical/intel-sdm.html)

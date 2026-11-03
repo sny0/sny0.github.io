@@ -11,7 +11,7 @@
     "domain": "guide",
     "collection": "questions",
     "order": 0,
-    "summary": "整数・浮動小数点とその比較、文字コード、メモリ確保、プログラムの起動、入力と描画、Webの疑問から関連する本文をたどる。"
+    "summary": "整数・浮動小数点とその比較、文字コード、メモリ確保、プログラムの起動、スレッドの同期、入力と描画、Webの疑問から関連する本文をたどる。"
   }
 }
 ---
@@ -61,6 +61,12 @@
 3. [実行ファイルを起動してmainへ到達するまで](/os/process-startup.html)で、プロセス・スレッド、ローダー、CRTの役割を分ける。
 4. [Windows/C++のプロセス観察](/practice/process/windows-process-observation.html)で、main前の記録、親子プロセス、ワーカースレッドのPID・TIDを確かめる。
 5. [関数呼び出し・レジスタ](/runtime/cpp-internals/function-calls-and-cpu.html)へ進む。
+
+## スレッド間でデータを安全に共有するには
+
+1. [スレッドと同期](/runtime/thread-synchronization.html)で、共有状態と不変条件、同じロックで守る範囲、データを受け渡す順序を調べる。
+2. [C++・C#の在庫消費サンプル](/practice/threads/inventory-synchronization.html)で、確認と消費、Snapshot、終了待ちと寿命を確かめる。
+3. [並行処理のバグ](/runtime/memory/concurrency-bugs.html)で、データ競合・競合状態・false sharingの違いを調べる。
 
 ## 入力からゲーム画面まで
 

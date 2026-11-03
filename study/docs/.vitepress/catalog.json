@@ -62,7 +62,7 @@
       "id": "runtime",
       "title": "実行時の仕組み",
       "description": "確保・所有・解放から、GC、非同期、言語境界へつなぐ。",
-      "count": 13,
+      "count": 14,
       "status": "辞典本文あり"
     },
     {
@@ -130,6 +130,13 @@
     }
   ],
   "collections": [
+    {
+      "id": "thread-synchronization",
+      "section": "practice",
+      "title": "C++とC#で在庫の同期を確かめる",
+      "description": "確認と消費を同じロックで守り、共有状態・スナップショット・終了待ちと寿命を観察する。",
+      "start": "/practice/threads/inventory-synchronization.html"
+    },
     {
       "id": "float-comparison-observation",
       "section": "practice",
@@ -849,6 +856,36 @@
       ]
     },
     {
+      "title": "C++とC#で在庫の確認・更新を一つのロックで守る",
+      "url": "/practice/threads/inventory-synchronization.html",
+      "file": "practice/threads/inventory-synchronization.md",
+      "domain": "runtime",
+      "section": "practice",
+      "format": "sample",
+      "status": "published",
+      "summary": "在庫17件に4 workerが各10回アクセスし、確認と更新・Snapshotを同じlockで守る。専用結果slotとjoin、生成失敗時の後片付けも観察する。",
+      "source": "新規執筆",
+      "aliases": [
+        "thread",
+        "mutex",
+        "lock_guard",
+        "jthread",
+        "lock",
+        "Monitor",
+        "Thread.Join",
+        "競合",
+        "排他制御",
+        "critical section",
+        "不変条件"
+      ],
+      "collection": "thread-synchronization",
+      "order": 1,
+      "verification": "Windowsで両言語を実行確認",
+      "links": [
+        "/runtime/thread-synchronization.html"
+      ]
+    },
+    {
       "title": "C++とUnity/C#の違いを学ぶ",
       "url": "/languages/csharp/",
       "file": "languages/csharp/index.md",
@@ -1059,12 +1096,14 @@
       "section": "practice",
       "format": "index",
       "status": "published",
-      "summary": "docs/ の主要コード例に対応する、単体でコンパイル可能な最小サンプル集です。 全 .cpp は main を持ち、実行すると簡単な動作確認出力を出します printfの書式は %u / %ld +明示キャストに統一しています(検証環境MinGW.orgのCランタイムが %zu / %lld 未対",
+      "summary": "C++の配布コードをまとめた索引。古いMinGWで確認された例と、更新したMSVC向けの例を区別し、実行しない注釈用コードも明記する。",
       "source": "C++ Wiki",
       "aliases": [],
       "collection": "cpp-samples",
       "order": 0,
-      "links": []
+      "links": [
+        "/practice/threads/inventory-synchronization.html"
+      ]
     },
     {
       "title": "C++の言語機能の演習",
@@ -4516,6 +4555,42 @@
       ]
     },
     {
+      "title": "スレッドと同期 — 共有状態の不変条件をmutexとlockで守る",
+      "url": "/runtime/thread-synchronization.html",
+      "file": "runtime/thread-synchronization.md",
+      "domain": "runtime",
+      "section": "reference",
+      "format": "article",
+      "status": "published",
+      "summary": "在庫の確認から消費までを一つのクリティカルセクションにまとめ、読み取りも同じロックで守る。C++とC#の排他、更新の受け渡し、Snapshot、joinと共有物の寿命、デッドロックを区別する。",
+      "source": "新規執筆",
+      "aliases": [
+        "thread synchronization",
+        "スレッド同期",
+        "mutex",
+        "ミューテックス",
+        "std::mutex",
+        "lock_guard",
+        "クリティカルセクション",
+        "critical section",
+        "lock",
+        "Monitor",
+        "排他制御",
+        "不変条件",
+        "happens-before",
+        "synchronizes-with",
+        "Snapshot",
+        "join",
+        "デッドロック"
+      ],
+      "verification": "一次資料照合（2026-11-04）",
+      "links": [
+        "/os/process-startup.html",
+        "/runtime/memory/concurrency-bugs.html",
+        "/practice/threads/inventory-synchronization.html"
+      ]
+    },
+    {
       "title": "セーブデータの設計",
       "url": "/design/case-studies/save-data.html",
       "file": "design/case-studies/save-data.md",
@@ -5622,7 +5697,7 @@
       "section": "learning",
       "format": "path",
       "status": "published",
-      "summary": "整数・浮動小数点とその比較、文字コード、メモリ確保、プログラムの起動、入力と描画、Webの疑問から関連する本文をたどる。",
+      "summary": "整数・浮動小数点とその比較、文字コード、メモリ確保、プログラムの起動、スレッドの同期、入力と描画、Webの疑問から関連する本文をたどる。",
       "source": "統合ガイド",
       "aliases": [],
       "collection": "questions",
@@ -5653,6 +5728,9 @@
         "/os/process-startup.html",
         "/practice/process/windows-process-observation.html",
         "/runtime/cpp-internals/function-calls-and-cpu.html",
+        "/runtime/thread-synchronization.html",
+        "/practice/threads/inventory-synchronization.html",
+        "/runtime/memory/concurrency-bugs.html",
         "/game/patterns/game-loop-and-update.html",
         "/game/ecs.html",
         "/graphics/pipeline/overview.html",
@@ -7023,17 +7101,20 @@
       "section": "learning",
       "format": "path",
       "status": "outline",
-      "summary": "プロセス、スレッド、仮想メモリ、システムコール、I/Oを学ぶ計画。起動処理と仮想メモリの辞典本文、Windowsの観察例へつなぐ。",
+      "summary": "プロセス、スレッド、仮想メモリ、システムコール、I/Oを学ぶ計画。起動・メモリ・データ共有の辞典本文と観察例へつなぐ。",
       "source": "IT教本",
       "aliases": [],
       "collection": "low-level",
       "order": 9,
+      "verification": "同期項目の一次資料照合（2026-11-04）",
       "links": [
         "/os/process-startup.html",
         "/practice/process/windows-process-observation.html",
         "/os/virtual-memory.html",
         "/practice/memory/windows-memory-observation.html",
         "/runtime/memory/allocators-and-pools.html",
+        "/runtime/thread-synchronization.html",
+        "/practice/threads/inventory-synchronization.html",
         "/runtime/memory/concurrency-bugs.html"
       ],
       "previous": "/guide/low-level/compiler-linker-executable.html",
@@ -7601,11 +7682,14 @@
       "section": "reference",
       "format": "article",
       "status": "published",
-      "summary": "data race(データ競合): 2つ以上のスレッドが同期なしに同じメモリに触れ、少なくとも1つが書き込み——C++では未定義動作 race condition(競合状態): 実行タイミング(順序)によって結果が変わる論理バグ。データ競合がなくても起きる",
+      "summary": "C++20のdata race、同期があっても起きるrace condition、性能に影響するfalse sharingを区別する。atomicやmutexの保証と、C#・Unityで確認する条件も整理する。",
       "source": "C++ Wiki",
       "aliases": [],
+      "verification": "一次資料照合（2026-11-04）",
       "links": [
         "/runtime/cpp-internals/cache-branch-simd.html",
+        "/runtime/thread-synchronization.html",
+        "/practice/threads/inventory-synchronization.html",
         "/runtime/cpp-internals/optimization-and-ub.html",
         "/game/patterns/optimization-patterns.html",
         "/runtime/memory/memory-bugs.html",
@@ -7709,6 +7793,7 @@
       "source": "統合ガイド",
       "aliases": [],
       "links": [
+        "/runtime/thread-synchronization.html",
         "/math/floating-point-comparison.html",
         "/data/unicode-and-encoding.html",
         "/data/floating-point-spacing.html",
