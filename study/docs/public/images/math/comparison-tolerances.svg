@@ -1,0 +1,57 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="760" height="1510" viewBox="0 0 760 1510" role="img" aria-labelledby="tolerance-title tolerance-desc">
+  <title id="tolerance-title">絶対許容差と相対許容差を単位と規模から選ぶ</title>
+  <desc id="tolerance-desc">説明用に1座標単位を1メートルとする。絶対許容差0.25、相対許容差0なら、0と0.125は一致とし、0と0.5はしない。相対許容差のみ1/1024とすると、1024と1025は差1が許容幅1025/1024以下なので一致とするが、0と0.125は一致としない。両許容差を組み合わせる例では、差が絶対許容差と相対許容幅の大きい方以下か調べる。示した数値は説明用であり、すべてのゲームに使う推奨値ではない。</desc>
+  <style>
+    text { font-family: "BIZ UDPGothic", "Yu Gothic", Meiryo, sans-serif; fill: #26352e; }
+    .heading { font-size: 28px; font-weight: 700; }
+    .body { font-size: 24px; }
+    .code { font-family: Consolas, monospace; }
+    .center { text-anchor: middle; }
+    .ok { fill: #286443; font-weight: 700; }
+    .no { fill: #a13b43; font-weight: 700; }
+  </style>
+  <rect width="760" height="1510" rx="20" fill="#f4f8f4"/>
+  <text x="32" y="54" font-size="32" font-weight="700">許容差には単位と規模がある</text>
+  <text x="32" y="98" class="body">この図は一次元の座標。1unit＝1mの例</text>
+  <text x="32" y="138" class="body">数値は説明用。用途に応じて予算を決める</text>
+
+  <rect x="24" y="166" width="712" height="392" rx="14" fill="#fff"/>
+  <text x="44" y="212" class="heading">絶対許容差：同じ単位の差を許す</text>
+  <text x="44" y="254" class="body">absTol＝0.25m、relTol＝0、基準 a＝0m</text>
+  <rect x="232" y="320" width="284" height="50" rx="8" fill="#dcece0"/>
+  <path d="M72 345h610m-10-8 10 8-10 8 M90 336v18 M232 336v18 M374 336v18 M516 336v18 M658 336v18" fill="none" stroke="#526b5c" stroke-width="2"/>
+  <circle cx="374" cy="345" r="6" fill="#26352e"/>
+  <circle cx="445" cy="345" r="8" fill="#286443"/>
+  <circle cx="658" cy="345" r="8" fill="#a13b43"/>
+  <text x="445" y="304" class="body center ok">b＝0.125</text>
+  <text x="658" y="304" class="body center no">b＝0.5</text>
+  <g class="body code center">
+    <text x="90" y="409">−0.5</text><text x="232" y="409">−0.25</text><text x="374" y="409">0</text><text x="516" y="409">0.25</text><text x="658" y="409">0.5</text>
+  </g>
+  <text x="44" y="471" class="body ok">|0 − 0.125| ≤ 0.25 → 一致とする</text>
+  <text x="44" y="520" class="body no">|0 − 0.5| ＞ 0.25 → 一致としない</text>
+
+  <rect x="24" y="586" width="712" height="370" rx="14" fill="#fff"/>
+  <text x="44" y="632" class="heading">相対許容差：値の規模に割合を掛ける</text>
+  <text x="44" y="674" class="body">absTol＝0、relTol＝1/1024（無次元）</text>
+  <text x="44" y="722" class="body">a＝1024m、b＝1025m → 差は1m</text>
+  <rect x="40" y="744" width="680" height="142" rx="8" fill="#e2eafa"/>
+  <text x="56" y="786" class="body code">scale = max(|a|, |b|) = 1025m</text>
+  <text x="56" y="828" class="body code">limit = (1025/1024)m = 1.0009765625m</text>
+  <text x="56" y="870" class="body ok">差1m ≤ limit → 一致とする</text>
+  <text x="44" y="932" class="body">1/1024は説明用の割合。精度の保証値ではない</text>
+
+  <rect x="24" y="984" width="712" height="366" rx="14" fill="#fff"/>
+  <text x="44" y="1030" class="heading">ゼロ付近には絶対許容差も検討する</text>
+  <text x="44" y="1074" class="body">a＝0m、b＝0.125mで、相対許容差だけなら</text>
+  <text x="44" y="1116" class="body code">limit = (0.125/1024)m = 0.0001220703125m</text>
+  <text x="44" y="1158" class="body no">差0.125m ＞ limit → 一致としない</text>
+  <rect x="40" y="1182" width="680" height="140" rx="8" fill="#dcece0"/>
+  <text x="56" y="1226" class="body">二つを組み合わせる、この教材の判定：</text>
+  <text x="56" y="1270" class="body code">diff ≤ max(absTol, relTol × scale)</text>
+  <text x="56" y="1310" class="body">どちらか一方の許容幅に収まれば一致とする</text>
+
+  <text x="32" y="1404" class="body" font-weight="700">absTol＝0.25mとrelTol＝1/1024を併用すると</text>
+  <text x="32" y="1446" class="body">この図の0対0.125、1024対1025はどちらも一致</text>
+  <text x="32" y="1488" class="body">一致判定は、元の値が正確だったという保証ではない</text>
+</svg>

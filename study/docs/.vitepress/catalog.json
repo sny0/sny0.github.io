@@ -83,7 +83,7 @@
       "id": "math",
       "title": "数学・数値計算",
       "description": "座標と式を、描画やシミュレーションへ結び付ける。",
-      "count": 5,
+      "count": 6,
       "status": "辞典本文あり"
     },
     {
@@ -130,6 +130,13 @@
     }
   ],
   "collections": [
+    {
+      "id": "float-comparison-observation",
+      "section": "practice",
+      "title": "C++とC#でfloatの比較を確かめる",
+      "description": "絶対・相対許容差とNaN・Infの扱いを明示し、境界・非推移性・失われた座標差を観察する。",
+      "start": "/practice/math/float-comparison-observation.html"
+    },
     {
       "id": "unicode-observation",
       "section": "practice",
@@ -779,6 +786,36 @@
       "collection": "cpp-samples",
       "order": 2,
       "links": []
+    },
+    {
+      "title": "C++とC#でfloatの近似比較と限界を観察する",
+      "url": "/practice/math/float-comparison-observation.html",
+      "file": "practice/math/float-comparison-observation.md",
+      "domain": "math",
+      "section": "practice",
+      "format": "sample",
+      "status": "published",
+      "summary": "binary32入力の差をdoubleで計算する近似比較を両言語で試し、絶対・相対許容差の境界、NaN・Inf、不正tol、非推移性、失われた座標差を観察する。",
+      "source": "新規執筆",
+      "aliases": [
+        "float",
+        "double",
+        "近似比較",
+        "絶対誤差",
+        "相対誤差",
+        "tolerance",
+        "epsilon",
+        "NaN",
+        "Infinity",
+        "非推移性"
+      ],
+      "collection": "float-comparison-observation",
+      "order": 1,
+      "verification": "Windowsで両言語を実行確認",
+      "links": [
+        "/math/floating-point-comparison.html",
+        "/practice/data/float-spacing-observation.html"
+      ]
     },
     {
       "title": "C++とC#でUnicodeのバイト列と文字列の長さを観察する",
@@ -1677,6 +1714,8 @@
       ],
       "verification": "一次資料照合（2026-11-03）",
       "links": [
+        "/math/floating-point-comparison.html",
+        "/practice/math/float-comparison-observation.html",
         "/practice/data/float-spacing-observation.html",
         "/data/integer-bits-and-bytes.html",
         "/guide/low-level/computer-and-data.html"
@@ -5583,7 +5622,7 @@
       "section": "learning",
       "format": "path",
       "status": "published",
-      "summary": "整数・浮動小数点、メモリ確保、プログラムの起動、入力と描画、Webの疑問から関連する本文をたどる。",
+      "summary": "整数・浮動小数点とその比較、文字コード、メモリ確保、プログラムの起動、入力と描画、Webの疑問から関連する本文をたどる。",
       "source": "統合ガイド",
       "aliases": [],
       "collection": "questions",
@@ -5596,6 +5635,8 @@
         "/practice/data/float-spacing-observation.html",
         "/math/rendering/transform.html",
         "/math/rendering/camera.html",
+        "/math/floating-point-comparison.html",
+        "/practice/math/float-comparison-observation.html",
         "/data/unicode-and-encoding.html",
         "/practice/data/unicode-observation.html",
         "/runtime/memory/storage-duration-and-lifetime.html",
@@ -6834,6 +6875,8 @@
         "/practice/data/integer-byte-observation.html",
         "/data/floating-point-spacing.html",
         "/practice/data/float-spacing-observation.html",
+        "/math/floating-point-comparison.html",
+        "/practice/math/float-comparison-observation.html",
         "/data/unicode-and-encoding.html",
         "/practice/data/unicode-observation.html",
         "/runtime/cpp-internals/memory-layout.html",
@@ -7496,6 +7539,38 @@
       ]
     },
     {
+      "title": "浮動小数点の比較と誤差の扱い — 絶対許容差・相対許容差を決める",
+      "url": "/math/floating-point-comparison.html",
+      "file": "math/floating-point-comparison.md",
+      "domain": "math",
+      "section": "reference",
+      "format": "article",
+      "status": "published",
+      "summary": "厳密な等値と近似一致の目的を分け、絶対許容差と相対許容差を単位・値域・用途から決める。binary32入力用の比較方針、NaNや無限大、非推移性、到達判定、保存時に失う情報も扱う。",
+      "source": "新規執筆",
+      "aliases": [
+        "floating point comparison",
+        "浮動小数点比較",
+        "近似一致",
+        "approximate equality",
+        "absolute tolerance",
+        "絶対許容差",
+        "relative tolerance",
+        "相対許容差",
+        "epsilon",
+        "Single.Epsilon",
+        "NaN",
+        "非推移性",
+        "ヒステリシス"
+      ],
+      "verification": "一次資料照合（2026-11-03）",
+      "links": [
+        "/data/floating-point-spacing.html",
+        "/practice/math/float-comparison-observation.html",
+        "/guide/low-level/computer-and-data.html"
+      ]
+    },
+    {
       "title": "武器切り替えの設計",
       "url": "/design/case-studies/weapon-switching.html",
       "file": "design/case-studies/weapon-switching.md",
@@ -7634,6 +7709,7 @@
       "source": "統合ガイド",
       "aliases": [],
       "links": [
+        "/math/floating-point-comparison.html",
         "/data/unicode-and-encoding.html",
         "/data/floating-point-spacing.html",
         "/data/integer-bits-and-bytes.html",

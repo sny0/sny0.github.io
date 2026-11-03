@@ -162,7 +162,7 @@ ${collections.filter(item => item.section === 'learning').map(item => `- [${item
 
 writePage('guide/learning-paths.md', '疑問から選ぶ読み順', {
   section: 'learning', format: 'path', domain: 'guide', catalog: true, collection: 'questions', order: 0,
-  summary: '整数・浮動小数点、メモリ確保、プログラムの起動、入力と描画、Webの疑問から関連する本文をたどる。'
+  summary: '整数・浮動小数点とその比較、文字コード、メモリ確保、プログラムの起動、入力と描画、Webの疑問から関連する本文をたどる。'
 }, `# 疑問から選ぶ読み順
 
 辞典を最初から順番に読む必要はありません。いまの疑問に関係する本文から選びます。
@@ -178,6 +178,12 @@ writePage('guide/learning-paths.md', '疑問から選ぶ読み順', {
 1. [floatが表せる値と丸め](/data/floating-point-spacing.html)で、binary32の有効精度、表現できる値の間隔、丸めを調べる。
 2. [C++のfloat観察サンプル](/practice/data/float-spacing-observation.html)で、ビット表現、隣接値、2の冪の境界、epsilonの意味を確かめる。
 3. [座標変換](/math/rendering/transform.html)と[カメラ・深度](/math/rendering/camera.html)で、描画で数値の尺度を扱う場面へつなぐ。
+
+## floatを等しいと判定するには
+
+1. [浮動小数点の比較と許容差](/math/floating-point-comparison.html)で、厳密な等値と近似一致、単位を持つ絶対許容差と無次元の相対許容差を分ける。
+2. [C++・C#の比較サンプル](/practice/math/float-comparison-observation.html)で、境界・NaN・Inf・非推移性・保存時に失われた座標差を確かめる。
+3. 表現できる値の間隔から調べたい場合は[floatの刻み幅](/data/floating-point-spacing.html)へ戻る。
 
 ## 文字はどのようにバイト列になるか
 
@@ -217,6 +223,7 @@ writePage('guide/learning-paths.md', '疑問から選ぶ読み順', {
 [ビデオゲーム史](/history/video-games.html)の作品・ハード・媒体・流通と、[リアルタイム3D技術史](/guide/rendering/timeline.html)の技術の変化から、気になった仕組みへ進みます。`)
 
 const termRows = [
+  ['近似一致 / 絶対許容差 / 相対許容差 / 浮動小数点の比較 / NaN / Inf', '/math/floating-point-comparison.html', '厳密な等値、用途に応じた近似判定、特殊値と非推移性を区別する'],
   ['Unicode / 文字コード / UTF-8 / UTF-16 / コードポイント / サロゲートペア / BOM / 文字化け', '/data/unicode-and-encoding.html', '文字の番号、コード単位、バイト列と、長さの数え方を区別する'],
   ['float / binary32 / 浮動小数点 / 丸め / 刻み幅 / epsilon / nextafter', '/data/floating-point-spacing.html', 'ビット表現と有効精度、隣接値、最近接・偶数丸めを区別する'],
   ['bit / byte / 2進数 / 16進数 / 整数表現 / 2の補数 / エンディアン', '/data/integer-bits-and-bytes.html', '値と表記、符号の解釈、アドレス順のバイト列を区別する'],

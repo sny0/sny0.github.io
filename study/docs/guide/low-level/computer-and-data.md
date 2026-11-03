@@ -26,6 +26,7 @@ study:
 - [整数とバイト列の観察](/practice/data/integer-byte-observation.html)で、小さなC++プログラムによる確認へ進めます。
 - [浮動小数点と値の間隔](/data/floating-point-spacing.html)で、binary32の表現、丸め、値の大きさと刻み幅の関係を調べられます。
 - [浮動小数点の間隔を観察する](/practice/data/float-spacing-observation.html)で、0.1、2^24、大きな座標の例を確認できます。
+- [浮動小数点の比較設計](/math/floating-point-comparison.html)と[比較の観察例](/practice/math/float-comparison-observation.html)で、一致と近似一致、用途に応じた許容差の選び方へ進めます。
 - [Unicodeと文字の符号化](/data/unicode-and-encoding.html)で、文字の単位、UTF-8・UTF-16、バイト列の違いを調べられます。
 - [Unicodeの表現を観察する](/practice/data/unicode-observation.html)で、同じテキストを異なる符号化と単位で読みます。
 - [メモリレイアウト・エンディアン](/runtime/cpp-internals/memory-layout.html)では、構造体の整列・パディングと、バイト順を区別します。
@@ -71,7 +72,8 @@ study:
    - 正規化数では、絶対値が大きくなると隣の表現可能な値までの**絶対的な間隔**が段階的に広がる。大座標で小さな移動が丸められる理由の一つであり、カメラ相対の計算や原点移動を検討する。0近くの非正規化数（subnormal）の領域では間隔は一定で、相対精度は下がる。[MSVCのIEEE表現と非正規化数](https://learn.microsoft.com/en-us/cpp/build/ieee-floating-point-representation?view=msvc-170)を参照
    - 特殊値: NaN, Inf, ±0。NaNと自身の`==`比較は偽になるなど、通常の有限値とは扱いが異なる。すべての関数や最適化設定で同じ伝播をすると決めつけない
    - `0.1 + 0.2 != 0.3`は、例えば`double`がbinary64で、各段階をその精度の最近接・偶数丸めで評価する場合の例。表現できない10進数の変換と、加算時の丸めを分けて読む。`float`版でも常に不一致になる、という規則ではない。中間精度・丸めモード・コンパイラ設定も確認する。[MSVCの浮動小数点設定](https://learn.microsoft.com/en-us/cpp/build/reference/fp-specify-floating-point-behavior?view=msvc-170)を参照
-   - 比較方法は用途で選ぶ。`numeric_limits<float>::epsilon()`は1とその次の表現可能な値の差であり、任意の値の誤差上限や万能な許容値ではない。近似一致には値の規模に応じた相対許容誤差と、0付近の絶対許容誤差を検討する。厳密一致が必要な場面やNaN/Infも別途扱う。[C++20草案のepsilon](https://timsong-cpp.github.io/cppwp/n4861/numeric.limits.members)と[浮動小数点の本文](/data/floating-point-spacing.html)へ
+   - 比較方法は用途で選ぶ。`numeric_limits<float>::epsilon()`は1とその次の表現可能な値の差であり、任意の値の誤差上限や万能な許容値ではない。[C++20草案のepsilon](https://timsong-cpp.github.io/cppwp/n4861/numeric.limits.members)を参照
+   - `==`による一致を求める場面と、差を許す近似一致を分ける。近似一致では、値と同じ単位で指定する絶対許容差と、値の規模に応じた相対許容差を検討する。NaN/Infなどの扱いも含め、[比較設計の本文](/math/floating-point-comparison.html)と[観察例](/practice/math/float-comparison-observation.html)で確認する。すべての`==`を近似比較に置き換える規則ではない
 4. **文字と色の表現**
    - ASCII、Unicode、UTF-8/UTF-16。OSやエンジンの名前だけで文字列の形式を決めず、使用するAPIやファイル形式の仕様を確認する
    - バイト数、符号化のコード単位数、コードポイント数、利用者が認識する文字のまとまりを区別する。単に文字列の長さを取得しても、何を数えたかは型とAPIによる。詳細は[Unicodeの本文](/data/unicode-and-encoding.html)へ

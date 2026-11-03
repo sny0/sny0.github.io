@@ -1,0 +1,49 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="760" height="1400" viewBox="0 0 760 1400" role="img" aria-labelledby="pitfall-title pitfall-desc">
+  <title id="pitfall-title">近似一致は推移的でなく、保存時に消えた差も復元しない</title>
+  <desc id="pitfall-desc">絶対許容差1、相対許容差0では、0と0.75、0.75と1.5はそれぞれ近いが、0と1.5は近くない。近似一致を等値関係やソートの比較器へそのまま使えない。別の例ではbinary32の16777216に1を加えて最近接偶数へ丸めると16777216へ戻る。後から厳密比較や近似比較をしても失われた1は復元できない。今回はNaNをfalse、同符号の無限大をtrueとする教材独自の比較方針を用いる。</desc>
+  <style>
+    text { font-family: "BIZ UDPGothic", "Yu Gothic", Meiryo, sans-serif; fill: #26352e; }
+    .heading { font-size: 28px; font-weight: 700; }
+    .body { font-size: 24px; }
+    .code { font-family: Consolas, monospace; }
+    .center { text-anchor: middle; }
+  </style>
+  <rect width="760" height="1400" rx="20" fill="#f4f8f4"/>
+  <text x="32" y="54" font-size="32" font-weight="700">「近い」の判定には限界がある</text>
+  <text x="32" y="98" class="body">近似一致は、数値の厳密な等値と役割が違う</text>
+
+  <rect x="24" y="130" width="712" height="406" rx="14" fill="#fff"/>
+  <text x="44" y="176" class="heading">AがBに近く、BがCに近くても…</text>
+  <text x="44" y="218" class="body">absTol＝1、relTol＝0。すべて正確な二進分数</text>
+  <path d="M116 294h520" stroke="#a8bbae" stroke-width="3"/>
+  <g class="heading center">
+    <circle cx="130" cy="294" r="11" fill="#5478ac"/><text x="130" y="268">A</text><text x="130" y="342">0</text>
+    <circle cx="380" cy="294" r="11" fill="#5478ac"/><text x="380" y="268">B</text><text x="380" y="342">0.75</text>
+    <circle cx="630" cy="294" r="11" fill="#5478ac"/><text x="630" y="268">C</text><text x="630" y="342">1.5</text>
+  </g>
+  <text x="44" y="396" class="body">A対B：差0.75 ≤ 1 → true</text>
+  <text x="44" y="438" class="body">B対C：差0.75 ≤ 1 → true</text>
+  <text x="44" y="480" class="body" fill="#a13b43">A対C：差1.5 ＞ 1 → false（推移的でない）</text>
+  <text x="44" y="520" class="body">同一キーの判定や並べ替えへ、そのまま流用しない</text>
+
+  <rect x="24" y="564" width="712" height="412" rx="14" fill="#fff"/>
+  <text x="44" y="610" class="heading">保存時に消えた差は、比較で戻せない</text>
+  <text x="44" y="652" class="body">binary32、最近接偶数。1unit＝1mとする例</text>
+  <rect x="40" y="678" width="680" height="178" rx="8" fill="#e2eafa"/>
+  <text x="56" y="722" class="body code">保存した a = 16777216</text>
+  <text x="56" y="764" class="body code">数学上の a + 1 = 16777217</text>
+  <text x="56" y="806" class="body code">floatへ丸めた b = 16777216</text>
+  <text x="56" y="846" class="body">入力時・演算時の丸めと、比較は別の段階</text>
+  <text x="44" y="902" class="body">a == b はtrue。許容差0でも一致する</text>
+  <text x="44" y="944" class="body">後からdoubleへ変換しても、失われた1mは戻らない</text>
+
+  <rect x="24" y="1004" width="712" height="254" rx="14" fill="#fff"/>
+  <text x="44" y="1050" class="heading">特殊値の方針も、比較の仕様に含める</text>
+  <text x="44" y="1092" class="body">許容値が有効なら、NaNを含む入力はfalse</text>
+  <text x="44" y="1134" class="body">今回：同符号のInfはtrue、他のInfの組はfalse</text>
+  <text x="44" y="1176" class="body">+0と−0は数値として一致。ビットの一致とは別</text>
+  <text x="44" y="1218" class="body">許容値の不正は、値の一致を調べる前に例外とする</text>
+
+  <text x="32" y="1312" class="body" font-weight="700">到達判定・衝突・画面のちらつきには用途別の設計を</text>
+  <text x="32" y="1354" class="body">距離、通過の検出、clamp、ヒステリシスも検討する</text>
+</svg>
