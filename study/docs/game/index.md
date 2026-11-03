@@ -36,6 +36,7 @@
 - [UEのスマートポインタ — TSharedPtr・TUniquePtr・TWeakPtr・TSoftObjectPtr](/game/unreal/smart-pointers.html)
 - [Unreal Build Tool・Module・Build.cs・Target.cs](/game/unreal/build-system-ubt.html)
 - [UObject・Actor・ActorComponent](/game/unreal/uobject-actor-component.html)
+- [ゲームのアセットロード設計 — 状態・世代・所有権](/game/asset-loading.html)
 - [リフレクション — UCLASS・UFUNCTION・UPROPERTY・Unreal Header Tool](/game/unreal/reflection-and-uht.html)
 - [最適化系パターン: Dirty Flag・Spatial Partition・Data Locality・Double Buffer](/game/patterns/optimization-patterns.html)
 - [有限ステートマシンと階層型ステートマシン(State と Strategy の比較つき)](/game/patterns/state-machines.html)
@@ -55,6 +56,7 @@
 
 ## 作って試す
 
+- [C++とC#でアセットの状態・世代・所有権を検証する](/practice/assets/asset-lifecycle-model.html)
 - [小さなシューティングの設計 — C++とUnityで作る](/game/shooter-design.html)
 - [シューティング実装例 — C++17とraylib](/game/shooter-cpp.html)
 - [シューティング実装例 — C#とUnity 6](/game/shooter-unity.html)

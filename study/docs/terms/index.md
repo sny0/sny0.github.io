@@ -18,6 +18,8 @@
 
 | 用語・別名 | 説明への入口 |
 | --- | --- |
+| [メモリマップドファイル / file mapping / mmap / MapViewOfFile / MemoryMappedFile / ビュー](/os/memory-mapped-files.html) | ファイルの範囲と仮想アドレスを対応付け、ページとビューの寿命を調べる |
+| [アセットロード / asset loading / リソース管理 / cook / 読み込み完了 / 利用可能 / 世代トークン](/game/asset-loading.html) | byte取得から登録・利用可能化・解放までの状態と所有権を整理する |
 | [非同期I/O / asynchronous I/O / Overlapped I/O / ERROR_IO_PENDING / ReadAsync / await / IOCP](/os/asynchronous-file-io.html) | 要求の発行、完了結果、待機と継続、バッファを再利用できる時点を調べる |
 | [ファイルI/O / read / FileStream / ReadFile / EOF / seek / ファイルキャッシュ / ページキャッシュ](/os/file-read-journey.html) | 読み取り要求と実読取数、ファイル位置、OSキャッシュと保存装置の違いを調べる |
 | [スレッド同期 / mutex / lock / lock_guard / 排他制御 / critical section / happens-before / join](/runtime/thread-synchronization.html) | 共有する状態、ロックの排他と同期、終了待ちとオブジェクトの寿命を結び付ける |

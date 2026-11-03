@@ -12,6 +12,8 @@ export const formatLabels = {
 export const statusLabels = { published: '公開中', outline: '学習計画・概要', draft: '草稿', planned: '執筆予定' }
 
 export const collections = [
+  { id: 'mapped-file-observation', section: 'practice', title: 'C++とC#で読み取り専用のファイルマッピングを観察する', description: '通常のreadと同じバイト列を読み、ファイル位置・ビュー内の位置・整列・寿命を確かめる。', start: '/practice/io/mapped-file-observation.html' },
+  { id: 'asset-lifecycle-model', section: 'practice', title: 'C++とC#でアセットの状態と寿命を試す', description: '状態遷移モデルで、利用可能になる時点、古い完了の破棄、キャンセル後の回収を確かめる。', start: '/practice/assets/asset-lifecycle-model.html' },
   { id: 'async-file-read-observation', section: 'practice', title: 'C++とC#で同期・非同期I/Oを比べる', description: '同じファイルを同期・非同期で読み、要求の発行、完了結果、バッファを使える時点を確かめる。', start: '/practice/io/async-file-read-observation.html' },
   { id: 'file-read-observation', section: 'practice', title: 'C++とC#でファイルの読み取りを観察する', description: '要求数・実読取数・位置・EOFを、自己所有の一時ファイルで確かめる。', start: '/practice/io/file-read-observation.html' },
   { id: 'thread-synchronization', section: 'practice', title: 'C++とC#で在庫の同期を確かめる', description: '確認と消費を同じロックで守り、共有状態・スナップショット・終了待ちと寿命を観察する。', start: '/practice/threads/inventory-synchronization.html' },

@@ -58,6 +58,8 @@ study:
 
 以下は、通常の`VirtualAlloc`によるプライベートメモリの説明です。ファイルマッピングなど、別のAPIで作る領域まで同じ手順になるとは限りません。
 
+ファイルの内容を仮想アドレス空間へ対応付ける方式は、[メモリマップドファイル](/os/memory-mapped-files.html)で扱います。ビューを作ることと、全内容がRAMへ読み込まれていることは別です。必要なページへのアクセスで、ページの準備やI/Oを待つ場合もあります。これは`ReadAsync`などの非同期readを発行したこととも異なります。[Microsoft: File Mapping](https://learn.microsoft.com/en-us/windows/win32/memory/file-mapping)
+
 | 言葉 | 何を確保・確認するか | その時点でRAMを占有するか |
 | --- | --- | --- |
 | 予約（reserve） | そのプロセスで使う仮想アドレスの範囲を取り置く | 対象データの物理ページは割り当てない |
@@ -98,6 +100,8 @@ Windowsでは、退避先へのアクセスなしに解決できるものをsoft
 Windowsの具体例は、`MapViewOfFile`の`FILE_MAP_COPY`で作るビューです。書き込んだページはそのプロセス用のコピーになり、元ファイルへは書き戻されません。通常の書込み可能な共有ビューとは契約が異なります。「共有されているページなら、必ず書込み時にコピーされる」とは考えません。
 
 また、**実際のコピーを遅らせることと、コミット量の計上を遅らせることも別**です。`FILE_MAP_COPY`では全ページが書き換えられ得るため、ビュー全体についてコミット量が計上されます。[Microsoft: MapViewOfFile — FILE_MAP_COPY](https://learn.microsoft.com/en-us/windows/win32/api/memoryapi/nf-memoryapi-mapviewoffile)
+
+[ファイルマッピングの観察例](/practice/io/mapped-file-observation.html)では、ファイルに対応するビューと、その範囲・寿命を確かめます。マッピング元のファイル、マッピングオブジェクト、ビューは別の資源です。ビューを解除した後は、そのアドレスやそこを借りた参照を使いません。[Microsoft: Closing a File Mapping Object](https://learn.microsoft.com/en-us/windows/win32/memory/closing-a-file-mapping-object)
 
 ## 保護が防ぐもの・防がないもの
 

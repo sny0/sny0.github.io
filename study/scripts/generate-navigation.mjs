@@ -162,7 +162,7 @@ ${collections.filter(item => item.section === 'learning').map(item => `- [${item
 
 writePage('guide/learning-paths.md', '疑問から選ぶ読み順', {
   section: 'learning', format: 'path', domain: 'guide', catalog: true, collection: 'questions', order: 0,
-  summary: '整数・浮動小数点とその比較、文字コード、メモリ確保、起動、同期、ファイル読み取りと非同期I/O、入力と描画、Webの疑問から関連する本文をたどる。'
+  summary: '整数・浮動小数点、文字コード、メモリ確保、起動、同期、ファイルI/Oとマッピング、アセットロード、入力と描画、Webの疑問から本文をたどる。'
 }, `# 疑問から選ぶ読み順
 
 辞典を最初から順番に読む必要はありません。いまの疑問に関係する本文から選びます。
@@ -225,6 +225,18 @@ writePage('guide/learning-paths.md', '疑問から選ぶ読み順', {
 2. [C++・C#の同期・非同期比較](/practice/io/async-file-read-observation.html)で、同じファイルを読み、完了結果と内容の一致を確かめる。
 3. 複数の処理から状態を共有するときは[スレッドと同期](/runtime/thread-synchronization.html)も確認する。
 
+## ファイルをメモリへのアクセスとして読むには
+
+1. [メモリマップドファイル](/os/memory-mapped-files.html)で、ファイル内位置と仮想アドレス、ページフォルト、ビューの寿命を分ける。
+2. [C++・C#の読み取り専用マッピング](/practice/io/mapped-file-observation.html)で、通常のreadと内容を照合し、整列した位置と使いたい範囲の対応を確かめる。
+3. アドレス変換の基礎は[仮想メモリ](/os/virtual-memory.html)、実行時の組立ては[アセットロード設計](/game/asset-loading.html)へ進む。
+
+## アセットが読み終わってから、ゲームで使えるまで
+
+1. [アセットロード設計](/game/asset-loading.html)で、読み取り、展開・検証、登録、利用可能化、解放を分ける。
+2. [C++・C#の状態と寿命のモデル](/practice/assets/asset-lifecycle-model.html)で、古い要求の完了、キャンセル、失敗を含む所有権の移動を確かめる。
+3. 実I/Oの完了待ちは[非同期I/O](/os/asynchronous-file-io.html)、共有するキューや状態の保護は[スレッドと同期](/runtime/thread-synchronization.html)も確認する。
+
 ## 入力からゲーム画面まで
 
 1. [ゲームループ](/game/patterns/game-loop-and-update.html)で入力・更新・描画の時間を分ける。
@@ -241,6 +253,8 @@ writePage('guide/learning-paths.md', '疑問から選ぶ読み順', {
 [ビデオゲーム史](/history/video-games.html)の作品・ハード・媒体・流通と、[リアルタイム3D技術史](/guide/rendering/timeline.html)の技術の変化から、気になった仕組みへ進みます。`)
 
 const termRows = [
+  ['メモリマップドファイル / file mapping / mmap / MapViewOfFile / MemoryMappedFile / ビュー', '/os/memory-mapped-files.html', 'ファイルの範囲と仮想アドレスを対応付け、ページとビューの寿命を調べる'],
+  ['アセットロード / asset loading / リソース管理 / cook / 読み込み完了 / 利用可能 / 世代トークン', '/game/asset-loading.html', 'byte取得から登録・利用可能化・解放までの状態と所有権を整理する'],
   ['非同期I/O / asynchronous I/O / Overlapped I/O / ERROR_IO_PENDING / ReadAsync / await / IOCP', '/os/asynchronous-file-io.html', '要求の発行、完了結果、待機と継続、バッファを再利用できる時点を調べる'],
   ['ファイルI/O / read / FileStream / ReadFile / EOF / seek / ファイルキャッシュ / ページキャッシュ', '/os/file-read-journey.html', '読み取り要求と実読取数、ファイル位置、OSキャッシュと保存装置の違いを調べる'],
   ['スレッド同期 / mutex / lock / lock_guard / 排他制御 / critical section / happens-before / join', '/runtime/thread-synchronization.html', '共有する状態、ロックの排他と同期、終了待ちとオブジェクトの寿命を結び付ける'],

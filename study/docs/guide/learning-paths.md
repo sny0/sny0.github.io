@@ -11,7 +11,7 @@
     "domain": "guide",
     "collection": "questions",
     "order": 0,
-    "summary": "整数・浮動小数点とその比較、文字コード、メモリ確保、起動、同期、ファイル読み取りと非同期I/O、入力と描画、Webの疑問から関連する本文をたどる。"
+    "summary": "整数・浮動小数点、文字コード、メモリ確保、起動、同期、ファイルI/Oとマッピング、アセットロード、入力と描画、Webの疑問から本文をたどる。"
   }
 }
 ---
@@ -79,6 +79,18 @@
 1. [非同期I/O](/os/asynchronous-file-io.html)で、要求の発行と完了、即時完了、待機と継続、バッファの寿命を分ける。
 2. [C++・C#の同期・非同期比較](/practice/io/async-file-read-observation.html)で、同じファイルを読み、完了結果と内容の一致を確かめる。
 3. 複数の処理から状態を共有するときは[スレッドと同期](/runtime/thread-synchronization.html)も確認する。
+
+## ファイルをメモリへのアクセスとして読むには
+
+1. [メモリマップドファイル](/os/memory-mapped-files.html)で、ファイル内位置と仮想アドレス、ページフォルト、ビューの寿命を分ける。
+2. [C++・C#の読み取り専用マッピング](/practice/io/mapped-file-observation.html)で、通常のreadと内容を照合し、整列した位置と使いたい範囲の対応を確かめる。
+3. アドレス変換の基礎は[仮想メモリ](/os/virtual-memory.html)、実行時の組立ては[アセットロード設計](/game/asset-loading.html)へ進む。
+
+## アセットが読み終わってから、ゲームで使えるまで
+
+1. [アセットロード設計](/game/asset-loading.html)で、読み取り、展開・検証、登録、利用可能化、解放を分ける。
+2. [C++・C#の状態と寿命のモデル](/practice/assets/asset-lifecycle-model.html)で、古い要求の完了、キャンセル、失敗を含む所有権の移動を確かめる。
+3. 実I/Oの完了待ちは[非同期I/O](/os/asynchronous-file-io.html)、共有するキューや状態の保護は[スレッドと同期](/runtime/thread-synchronization.html)も確認する。
 
 ## 入力からゲーム画面まで
 

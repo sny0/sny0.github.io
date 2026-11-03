@@ -136,8 +136,12 @@ C#にも`ReadAsync`がありますが、非同期化は「ストレージが速�
 
 [非同期ファイルI/Oの本文](/os/asynchronous-file-io.html)と[同期・非同期の読取りを比較する観察例](/practice/io/async-file-read-observation.html)では、C++のOVERLAPPEDと手動リセットイベント、C#／.NET 10の`FileOptions.Asynchronous`と`ReadAsync`へ進みます。このページの実践は同期版の基礎を確認するもので、IOCPによる多数の要求の処理は別の発展項目です。
 
+別のアクセス方式が[メモリマップドファイル](/os/memory-mapped-files.html)です。ファイルの範囲をプロセスの仮想アドレス空間へ対応付け、そのビューから内容を扱います。全内容のRAMへの一括読込みや、非同期readの発行を意味せず、アクセス時にページの準備やI/Oが必要になる場合があります。通常のreadより常に速いとは決めず、範囲と寿命を[マッピングの観察例](/practice/io/mapped-file-observation.html)で確かめます。[Microsoft: File Mapping](https://learn.microsoft.com/en-us/windows/win32/memory/file-mapping)、[Reading and Writing From a File View](https://learn.microsoft.com/en-us/windows/win32/memory/reading-and-writing-from-a-file-view)
+
 ## ゲームのアセット読込みにつなげる
 
 テクスチャや音声などは、byteが届いた後にも、展開・形式の解析・画像や音声のデコード・GPUへの転送などが関わります。「ファイルread完了」と「ゲームで使用可能」は別の段階です。フレームの遅延を調べるときは、読み取り待ちと、その後のCPU処理や転送を分けます。エンジンやGPU APIへ登録する処理は、そのAPIのスレッド条件にも従います。
+
+その後の状態・所有権・古い要求結果の扱いは[実行時のアセットロード](/game/asset-loading.html)へ進みます。[アセットの寿命を観察する実践](/practice/assets/asset-lifecycle-model.html)は、単一スレッドの決定的なコンソールモデルで状態・世代・所有を確かめるもので、実際のファイルI/O、ワーカー、GPU、Unityを動かす例ではありません。
 
 [C++とC#でファイルの読み取りを観察する](/practice/io/file-read-observation.html)では、専用の一時領域に固定データを作り、要求数と実際数、位置、seek、EOF、存在しないファイルの失敗を確認します。warm cacheは、必要なデータが既にキャッシュにある状態を指します。**直前に作った小さなファイルやwarm cacheでの成功は、物理I/Oの発生を観測した証拠ではありません。** この実験が確かめるのはAPIの結果と内容であり、機器の読取り回数や性能は別の観測を必要とします。

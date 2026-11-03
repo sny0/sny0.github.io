@@ -1,0 +1,41 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="760" height="1510" viewBox="0 0 760 1510" role="img" aria-labelledby="ownership-title ownership-desc">
+  <title id="ownership-title">古い要求の完了を破棄し、所有していた資源を回収する</title>
+  <desc id="ownership-desc">世代1の処理が進行中にキャンセルし、新しい世代2を要求する例。表示上の現状態を変えても旧要求の領域は完了まで保持する。実行モデルは進行中slot一件とstaging八バイトの予算を使い、旧要求が予算を保持する間は新世代をRequestedで待たせる。旧世代の完了はReadyを更新せず、read完了ならslotとstagingを回収し、MockSinkの登録成功なら返されたModelTokenも解放する。現世代と状態が一致する完了だけを受け入れる。実GPUの参照終了やfenceは別の実装上の契約。</desc>
+  <style>
+    text { font-family: "BIZ UDPGothic", "Yu Gothic", Meiryo, sans-serif; fill: #26352e; }
+    .heading { font-size: 28px; font-weight: 700; }
+    .body { font-size: 24px; }
+  </style>
+  <rect width="760" height="1510" rx="20" fill="#f4f8f4"/>
+  <text x="32" y="54" font-size="32" font-weight="700">進行中の要求は、取消し後も所有が残る</text>
+  <text x="32" y="98" class="body">単一スレッドのモデル例。時間・threadの実測図ではない</text>
+  <rect x="24" y="130" width="712" height="208" rx="14" fill="#fff"/>
+  <text x="44" y="176" class="heading">① 世代1の要求が進行中</text>
+  <text x="44" y="220" class="body">Reading / Registering：未完了slotを1件保持</text>
+  <text x="44" y="262" class="body">staging予算8 bytesを、その要求が所有する</text>
+  <text x="44" y="304" class="body">実コードではOS/GPU処理の代わりにeventを注入</text>
+  <rect x="24" y="366" width="712" height="250" rx="14" fill="#fff"/>
+  <text x="44" y="412" class="heading">② 取消し → 新しい世代2を要求</text>
+  <text x="44" y="456" class="body">現在の要求はRequested。古い完了を採用しない</text>
+  <rect x="48" y="484" width="664" height="104" rx="10" fill="#f1eee5"/>
+  <text x="68" y="526" class="body">旧slotとstagingは、まだ返さない</text>
+  <text x="68" y="568" class="body">予算が空くまで世代2のBeginReadは待つ</text>
+  <rect x="24" y="644" width="712" height="292" rx="14" fill="#fff"/>
+  <text x="44" y="690" class="heading">③ 世代1の遅い完了が届く</text>
+  <text x="44" y="734" class="body">eventの世代と、現在の世代・状態を検査</text>
+  <text x="44" y="776" class="body">旧readの完了 → slot / stagingを回収して破棄</text>
+  <text x="44" y="818" class="body">旧登録の成功 → 返されたModelTokenも解放</text>
+  <rect x="48" y="846" width="664" height="62" rx="10" fill="#e2eafa"/>
+  <text x="68" y="888" class="body">古い完了で、世代2をReadyにしない</text>
+  <rect x="24" y="964" width="712" height="208" rx="14" fill="#dcece0"/>
+  <text x="44" y="1010" class="heading">④ 予算が戻る → 世代2を進められる</text>
+  <text x="44" y="1054" class="body">現世代・現状態に合う完了だけを受け入れる</text>
+  <text x="44" y="1096" class="body">最終利用後は、所有者がtokenを一度だけ解放</text>
+  <text x="44" y="1138" class="body">検査：pending・staging・生存tokenが最後に0</text>
+  <text x="32" y="1250" class="heading">予算と解放条件は、資源ごとに決める</text>
+  <text x="32" y="1296" class="body">一般の設計：要求数 / CPU bytes / 転送 / VRAM等</text>
+  <text x="32" y="1338" class="body">今回のモデル：slot上限1 / staging上限8 bytes</text>
+  <text x="32" y="1380" class="body">世代番号も有限。周回時の扱いを決める</text>
+  <text x="32" y="1422" class="body">実GPUの利用終了・fence・thread同期は実装しない</text>
+  <text x="32" y="1464" class="body">MockSinkのtokenは実際のGPU資源ではない</text>
+</svg>

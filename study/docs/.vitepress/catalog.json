@@ -41,7 +41,7 @@
       "id": "os",
       "title": "OS",
       "description": "プロセス、メモリ、スレッド、入出力の仕組みを調べる。",
-      "count": 4,
+      "count": 5,
       "status": "辞典本文あり"
     },
     {
@@ -111,7 +111,7 @@
       "id": "game",
       "title": "ゲームとエンジン",
       "description": "入力、時間、ECSと各サブシステムの関係を調べる。",
-      "count": 20,
+      "count": 21,
       "status": "辞典本文あり"
     },
     {
@@ -130,6 +130,20 @@
     }
   ],
   "collections": [
+    {
+      "id": "mapped-file-observation",
+      "section": "practice",
+      "title": "C++とC#で読み取り専用のファイルマッピングを観察する",
+      "description": "通常のreadと同じバイト列を読み、ファイル位置・ビュー内の位置・整列・寿命を確かめる。",
+      "start": "/practice/io/mapped-file-observation.html"
+    },
+    {
+      "id": "asset-lifecycle-model",
+      "section": "practice",
+      "title": "C++とC#でアセットの状態と寿命を試す",
+      "description": "状態遷移モデルで、利用可能になる時点、古い完了の破棄、キャンセル後の回収を確かめる。",
+      "start": "/practice/assets/asset-lifecycle-model.html"
+    },
     {
       "id": "async-file-read-observation",
       "section": "practice",
@@ -870,6 +884,36 @@
       ]
     },
     {
+      "title": "C++とC#でアセットの状態・世代・所有権を検証する",
+      "url": "/practice/assets/asset-lifecycle-model.html",
+      "file": "practice/assets/asset-lifecycle-model.md",
+      "domain": "game",
+      "section": "practice",
+      "format": "sample",
+      "status": "published",
+      "summary": "実I/OやGPUを使わないsingle-threadモデルで、Ready前の使用拒否、失敗、取消後のslot保持、古い世代の完了回収、論理予算と解放を検証する。",
+      "source": "新規執筆",
+      "aliases": [
+        "asset",
+        "アセット",
+        "generation",
+        "世代",
+        "所有権",
+        "backpressure",
+        "cancel",
+        "MockSink",
+        "状態遷移"
+      ],
+      "collection": "asset-lifecycle-model",
+      "order": 1,
+      "verification": "Windowsで両言語を実行確認",
+      "links": [
+        "/game/asset-loading.html",
+        "/practice/io/file-read-observation.html",
+        "/practice/io/async-file-read-observation.html"
+      ]
+    },
+    {
       "title": "C++とC#でファイルのbytes・位置・EOFを観察する",
       "url": "/practice/io/file-read-observation.html",
       "file": "practice/io/file-read-observation.md",
@@ -928,6 +972,34 @@
       "verification": "Windowsで両言語を実行確認",
       "links": [
         "/runtime/thread-synchronization.html"
+      ]
+    },
+    {
+      "title": "C++とC#で読取り専用ファイルマッピングを観察する",
+      "url": "/practice/io/mapped-file-observation.html",
+      "file": "practice/io/mapped-file-observation.md",
+      "domain": "os",
+      "section": "practice",
+      "format": "sample",
+      "status": "published",
+      "summary": "同じ8byteを通常のreadと読取り専用ビューで照合する。Windowsの割当粒度、Win32のビュー内位置、.NETのアクセサー内位置とPointerOffset、解除前に参照利用を終える所有関係を観察する。",
+      "source": "新規執筆",
+      "aliases": [
+        "メモリマップドファイル",
+        "memory-mapped file",
+        "MapViewOfFile",
+        "CreateFileMapping",
+        "MemoryMappedFile",
+        "CreateViewAccessor",
+        "PointerOffset",
+        "readonly map"
+      ],
+      "collection": "mapped-file-observation",
+      "order": 1,
+      "verification": "Windowsで両言語を実行確認",
+      "links": [
+        "/os/memory-mapped-files.html",
+        "/game/asset-loading.html"
       ]
     },
     {
@@ -4346,6 +4418,42 @@
       ]
     },
     {
+      "title": "ゲームのアセットロード設計 — 状態・世代・所有権",
+      "url": "/game/asset-loading.html",
+      "file": "game/asset-loading.md",
+      "domain": "game",
+      "section": "reference",
+      "format": "article",
+      "status": "published",
+      "summary": "アセット要求からbyte取得、展開・検証、GPU転送やエンジン登録、利用可能、解放までを整理する。取消後の所有権、古い完了、依存関係、予算とbackpressureも扱う。",
+      "source": "新規執筆",
+      "aliases": [
+        "asset loading",
+        "アセットロード",
+        "streaming",
+        "import",
+        "cook",
+        "Addressables",
+        "AssetManager",
+        "StreamableHandle",
+        "generation",
+        "世代",
+        "ownership",
+        "backpressure",
+        "GPU fence"
+      ],
+      "verification": "一次資料照合（2026-11-04）",
+      "links": [
+        "/os/file-read-journey.html",
+        "/os/asynchronous-file-io.html",
+        "/os/memory-mapped-files.html",
+        "/runtime/thread-synchronization.html",
+        "/practice/assets/asset-lifecycle-model.html",
+        "/practice/io/file-read-observation.html",
+        "/practice/io/async-file-read-observation.html"
+      ]
+    },
+    {
       "title": "ゲームプログラミングパターンの演習",
       "url": "/game/patterns/exercises.html",
       "file": "game/patterns/exercises.md",
@@ -5116,6 +5224,10 @@
         "/os/asynchronous-file-io.html",
         "/data/unicode-and-encoding.html",
         "/practice/io/async-file-read-observation.html",
+        "/os/memory-mapped-files.html",
+        "/practice/io/mapped-file-observation.html",
+        "/game/asset-loading.html",
+        "/practice/assets/asset-lifecycle-model.html",
         "/practice/io/file-read-observation.html"
       ]
     },
@@ -5342,6 +5454,41 @@
         "/tools/build/debugging-and-analysis.html",
         "/runtime/memory/",
         "/runtime/memory/concurrency-bugs.html"
+      ]
+    },
+    {
+      "title": "メモリマップドファイル — ファイルの範囲をアドレスへ対応させる",
+      "url": "/os/memory-mapped-files.html",
+      "file": "os/memory-mapped-files.md",
+      "domain": "os",
+      "section": "reference",
+      "format": "article",
+      "status": "published",
+      "summary": "ファイルオフセットと仮想アドレスの対応、ビューの整列、ページフォルトによる待ち、ビューと参照の寿命を説明する。Windowsと.NETの読取り専用マッピングを中心に、書込み・COW・flushとの境界を区別する。",
+      "source": "新規執筆",
+      "aliases": [
+        "メモリマップドファイル",
+        "memory-mapped file",
+        "file mapping",
+        "mmap",
+        "マッピング",
+        "ファイルビュー",
+        "CreateFileMapping",
+        "MapViewOfFile",
+        "UnmapViewOfFile",
+        "MemoryMappedFile",
+        "MemoryMappedViewAccessor",
+        "PointerOffset",
+        "allocation granularity"
+      ],
+      "verification": "一次資料照合（2026-11-04）",
+      "links": [
+        "/os/virtual-memory.html",
+        "/os/file-read-journey.html",
+        "/os/asynchronous-file-io.html",
+        "/data/integer-bits-and-bytes.html",
+        "/game/asset-loading.html",
+        "/practice/io/mapped-file-observation.html"
       ]
     },
     {
@@ -5614,6 +5761,8 @@
       ],
       "verification": "Windows API契約とIntel SDMの一次資料照合（2026-11-02）",
       "links": [
+        "/os/memory-mapped-files.html",
+        "/practice/io/mapped-file-observation.html",
         "/runtime/memory/memory-bugs.html",
         "/runtime/memory/allocation-journey.html",
         "/runtime/memory/allocators-and-pools.html",
@@ -5813,7 +5962,7 @@
       "section": "learning",
       "format": "path",
       "status": "published",
-      "summary": "整数・浮動小数点とその比較、文字コード、メモリ確保、起動、同期、ファイル読み取りと非同期I/O、入力と描画、Webの疑問から関連する本文をたどる。",
+      "summary": "整数・浮動小数点、文字コード、メモリ確保、起動、同期、ファイルI/Oとマッピング、アセットロード、入力と描画、Webの疑問から本文をたどる。",
       "source": "統合ガイド",
       "aliases": [],
       "collection": "questions",
@@ -5851,6 +6000,10 @@
         "/practice/io/file-read-observation.html",
         "/os/asynchronous-file-io.html",
         "/practice/io/async-file-read-observation.html",
+        "/os/memory-mapped-files.html",
+        "/practice/io/mapped-file-observation.html",
+        "/game/asset-loading.html",
+        "/practice/assets/asset-lifecycle-model.html",
         "/game/patterns/game-loop-and-update.html",
         "/game/ecs.html",
         "/graphics/pipeline/overview.html",
@@ -6976,7 +7129,7 @@
       "section": "learning",
       "format": "path",
       "status": "outline",
-      "summary": "エンジンを構成する責務とデータの流れを整理し、小さな構成で試すための学習計画・概要です。ECSは構成方法の一つとして学び、規模や用途に合わせて他の設計とも比較します。\n\n## 関連する辞典本文・実践\n\n- [責務と関心の分離](/design/foundations/responsibili",
+      "summary": "エンジンの責務とデータの流れを学ぶ計画。ECSと他の構成方法を比較し、アセットロードの状態・登録・所有権を辞典本文と実践へつなぐ。",
       "source": "IT教本",
       "aliases": [],
       "collection": "low-level",
@@ -6984,7 +7137,13 @@
       "links": [
         "/design/foundations/responsibility-and-separation.html",
         "/game/ecs.html",
-        "/game/patterns/component-and-ecs.html"
+        "/game/patterns/component-and-ecs.html",
+        "/game/asset-loading.html",
+        "/practice/assets/asset-lifecycle-model.html",
+        "/os/file-read-journey.html",
+        "/os/asynchronous-file-io.html",
+        "/os/memory-mapped-files.html",
+        "/practice/io/mapped-file-observation.html"
       ],
       "previous": "/guide/low-level/input-and-game-loop.html",
       "next": "/guide/low-level/unity-internals.html"
@@ -7239,7 +7398,11 @@
         "/os/file-read-journey.html",
         "/practice/io/file-read-observation.html",
         "/os/asynchronous-file-io.html",
-        "/practice/io/async-file-read-observation.html"
+        "/practice/io/async-file-read-observation.html",
+        "/os/memory-mapped-files.html",
+        "/practice/io/mapped-file-observation.html",
+        "/game/asset-loading.html",
+        "/practice/assets/asset-lifecycle-model.html"
       ],
       "previous": "/guide/low-level/compiler-linker-executable.html",
       "next": "/guide/low-level/cpp-language.html"
@@ -7659,6 +7822,9 @@
       "verification": "一次資料照合（2026-11-04）",
       "links": [
         "/os/file-read-journey.html",
+        "/os/memory-mapped-files.html",
+        "/game/asset-loading.html",
+        "/practice/assets/asset-lifecycle-model.html",
         "/practice/io/async-file-read-observation.html"
       ]
     },
@@ -7951,6 +8117,8 @@
       "source": "統合ガイド",
       "aliases": [],
       "links": [
+        "/os/memory-mapped-files.html",
+        "/game/asset-loading.html",
         "/os/asynchronous-file-io.html",
         "/os/file-read-journey.html",
         "/runtime/thread-synchronization.html",

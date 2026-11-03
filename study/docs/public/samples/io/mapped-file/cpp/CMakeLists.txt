@@ -1,0 +1,10 @@
+cmake_minimum_required(VERSION 3.20)
+project(mapped_file_observation LANGUAGES CXX)
+if(NOT WIN32 OR NOT MSVC)
+    message(FATAL_ERROR "This sample requires Windows and MSVC (including its SEH support).")
+endif()
+
+add_executable(mapped_file_observation main.cpp)
+target_compile_features(mapped_file_observation PRIVATE cxx_std_20)
+set_target_properties(mapped_file_observation PROPERTIES CXX_EXTENSIONS OFF)
+target_compile_options(mapped_file_observation PRIVATE /W4 /WX /permissive- /EHsc /utf-8)
