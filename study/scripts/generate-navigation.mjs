@@ -179,6 +179,12 @@ writePage('guide/learning-paths.md', '疑問から選ぶ読み順', {
 2. [C++のfloat観察サンプル](/practice/data/float-spacing-observation.html)で、ビット表現、隣接値、2の冪の境界、epsilonの意味を確かめる。
 3. [座標変換](/math/rendering/transform.html)と[カメラ・深度](/math/rendering/camera.html)で、描画で数値の尺度を扱う場面へつなぐ。
 
+## 文字はどのようにバイト列になるか
+
+1. [Unicodeと文字コード](/data/unicode-and-encoding.html)で、コードポイント、UTF-8／UTF-16のコード単位、バイト列を分ける。
+2. [C++・C#の文字列観察サンプル](/practice/data/unicode-observation.html)で、日本語・絵文字・結合文字の表現と、長さの数え方を比べる。
+3. [整数とバイト列](/data/integer-bits-and-bytes.html)のエンディアンと結び付け、ファイルやAPIの文字コードを確認する。
+
 ## 「確保する」と内部で何が起きるか
 
 1. [記憶域期間・スコープ・寿命](/runtime/memory/storage-duration-and-lifetime.html)を区別する。
@@ -211,6 +217,7 @@ writePage('guide/learning-paths.md', '疑問から選ぶ読み順', {
 [ビデオゲーム史](/history/video-games.html)の作品・ハード・媒体・流通と、[リアルタイム3D技術史](/guide/rendering/timeline.html)の技術の変化から、気になった仕組みへ進みます。`)
 
 const termRows = [
+  ['Unicode / 文字コード / UTF-8 / UTF-16 / コードポイント / サロゲートペア / BOM / 文字化け', '/data/unicode-and-encoding.html', '文字の番号、コード単位、バイト列と、長さの数え方を区別する'],
   ['float / binary32 / 浮動小数点 / 丸め / 刻み幅 / epsilon / nextafter', '/data/floating-point-spacing.html', 'ビット表現と有効精度、隣接値、最近接・偶数丸めを区別する'],
   ['bit / byte / 2進数 / 16進数 / 整数表現 / 2の補数 / エンディアン', '/data/integer-bits-and-bytes.html', '値と表記、符号の解釈、アドレス順のバイト列を区別する'],
   ['プロセス / スレッド / PID / TID / ローダー / エントリポイント / CRT', '/os/process-startup.html', '実行環境と実行単位、EXEの開始点からmainまでの違い'],

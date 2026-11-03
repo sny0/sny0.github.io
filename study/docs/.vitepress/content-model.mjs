@@ -12,6 +12,7 @@ export const formatLabels = {
 export const statusLabels = { published: '公開中', outline: '学習計画・概要', draft: '草稿', planned: '執筆予定' }
 
 export const collections = [
+  { id: 'unicode-observation', section: 'practice', title: 'C++とC#で文字の表現を観察する', description: 'UTF-8のバイト列、UTF-16のコード単位、文字列の長さと不正な入力の扱いを比較する。', start: '/practice/data/unicode-observation.html' },
   { id: 'float-observation', section: 'practice', title: 'C++でfloatの表現と刻み幅を観察する', description: 'binary32のビット表現、nextafterによる隣接値、丸めとepsilonの関係を確かめる。', start: '/practice/data/float-spacing-observation.html' },
   { id: 'integer-observation', section: 'practice', title: 'C++で整数とバイト列を観察する', description: '値・ビット表示・実メモリのバイト列と、明示的なLE/BE形式の違いを確かめる。', start: '/practice/data/integer-byte-observation.html' },
   { id: 'process-observation', section: 'practice', title: 'Windowsでプロセスとスレッドを観察する', description: 'C++でmain前の記録、PID・TID、子プロセスとワーカースレッドを確かめる。', start: '/practice/process/windows-process-observation.html' },

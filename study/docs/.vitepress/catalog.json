@@ -27,7 +27,7 @@
       "id": "data",
       "title": "情報表現とバイナリ",
       "description": "数値・文字・バイト列を、メモリやファイルの表現へつなぐ。",
-      "count": 2,
+      "count": 3,
       "status": "辞典本文あり"
     },
     {
@@ -130,6 +130,13 @@
     }
   ],
   "collections": [
+    {
+      "id": "unicode-observation",
+      "section": "practice",
+      "title": "C++とC#で文字の表現を観察する",
+      "description": "UTF-8のバイト列、UTF-16のコード単位、文字列の長さと不正な入力の扱いを比較する。",
+      "start": "/practice/data/unicode-observation.html"
+    },
     {
       "id": "float-observation",
       "section": "practice",
@@ -772,6 +779,37 @@
       "collection": "cpp-samples",
       "order": 2,
       "links": []
+    },
+    {
+      "title": "C++とC#でUnicodeのバイト列と文字列の長さを観察する",
+      "url": "/practice/data/unicode-observation.html",
+      "file": "practice/data/unicode-observation.md",
+      "domain": "data",
+      "section": "practice",
+      "format": "sample",
+      "status": "published",
+      "summary": "A・あ・😀・結合アクセントのUTF-8バイト列、UTF-16コード単位、スカラー値、書記素クラスタを比較し、C#では不正列の拒否とUTF-16LE/BEのバイト列も観察する。",
+      "source": "新規執筆",
+      "aliases": [
+        "Unicode",
+        "UTF-8",
+        "UTF-16",
+        "UTF-32",
+        "char8_t",
+        "char16_t",
+        "Rune",
+        "StringInfo",
+        "surrogate",
+        "grapheme",
+        "文字数"
+      ],
+      "collection": "unicode-observation",
+      "order": 1,
+      "verification": "Windowsで両言語を実行確認",
+      "links": [
+        "/data/unicode-and-encoding.html",
+        "/practice/data/integer-byte-observation.html"
+      ]
     },
     {
       "title": "C++とUnity/C#の違いを学ぶ",
@@ -3214,6 +3252,49 @@
       ]
     },
     {
+      "title": "Unicodeと文字コード — コードポイントからUTF-8・UTF-16のバイト列へ",
+      "url": "/data/unicode-and-encoding.html",
+      "file": "data/unicode-and-encoding.md",
+      "domain": "data",
+      "section": "reference",
+      "format": "article",
+      "status": "published",
+      "summary": "コードポイント、Unicodeスカラー値、UTFのコード単位、バイト列、書記素クラスタを区別する。UTF-8とUTF-16、サロゲート、BOM、不正列、C++とC#の文字列の長さを具体例で読む。",
+      "source": "新規執筆",
+      "aliases": [
+        "Unicode",
+        "文字コード",
+        "文字エンコーディング",
+        "code point",
+        "コードポイント",
+        "Unicode scalar value",
+        "Unicodeスカラー値",
+        "code unit",
+        "コード単位",
+        "UTF-8",
+        "UTF-16",
+        "UTF-16LE",
+        "UTF-16BE",
+        "ASCII",
+        "surrogate",
+        "サロゲート",
+        "grapheme cluster",
+        "書記素クラスタ",
+        "結合文字",
+        "BOM",
+        "文字化け",
+        "char8_t",
+        "u8string",
+        "u16string"
+      ],
+      "verification": "一次資料照合（2026-11-03）",
+      "links": [
+        "/data/integer-bits-and-bytes.html",
+        "/practice/data/unicode-observation.html",
+        "/guide/low-level/computer-and-data.html"
+      ]
+    },
+    {
       "title": "Unity のレンダラーと SRP",
       "url": "/graphics/engine/unity-renderer.html",
       "file": "graphics/engine/unity-renderer.md",
@@ -5515,6 +5596,8 @@
         "/practice/data/float-spacing-observation.html",
         "/math/rendering/transform.html",
         "/math/rendering/camera.html",
+        "/data/unicode-and-encoding.html",
+        "/practice/data/unicode-observation.html",
         "/runtime/memory/storage-duration-and-lifetime.html",
         "/runtime/memory/allocation-journey.html",
         "/os/virtual-memory.html",
@@ -6740,7 +6823,7 @@
       "section": "learning",
       "format": "path",
       "status": "outline",
-      "summary": "ビット・整数・浮動小数点・文字の表現を学ぶ順序と演習を案内し、整数表現と浮動小数点の辞典本文・観察例へつなぐ。",
+      "summary": "ビット・整数・浮動小数点・文字の表現を学ぶ順序と演習を案内し、整数・浮動小数点・Unicodeの辞典本文と観察例へつなぐ。",
       "source": "IT教本",
       "aliases": [],
       "collection": "low-level",
@@ -6751,6 +6834,8 @@
         "/practice/data/integer-byte-observation.html",
         "/data/floating-point-spacing.html",
         "/practice/data/float-spacing-observation.html",
+        "/data/unicode-and-encoding.html",
+        "/practice/data/unicode-observation.html",
         "/runtime/cpp-internals/memory-layout.html",
         "/design/case-studies/save-data.html"
       ],
@@ -7084,6 +7169,8 @@
         "/runtime/memory/memory-bugs.html",
         "/languages/cpp/stl.html",
         "/runtime/cpp-internals/memory-layout.html",
+        "/data/unicode-and-encoding.html",
+        "/practice/data/unicode-observation.html",
         "/game/patterns/optimization-patterns.html",
         "/design/decisions/cpp-choices.html",
         "/languages/cpp/values-pointers-references.html",
@@ -7547,6 +7634,7 @@
       "source": "統合ガイド",
       "aliases": [],
       "links": [
+        "/data/unicode-and-encoding.html",
         "/data/floating-point-spacing.html",
         "/data/integer-bits-and-bytes.html",
         "/os/process-startup.html",

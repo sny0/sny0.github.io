@@ -21,6 +21,10 @@
           "link": "/data/floating-point-spacing.html"
         },
         {
+          "text": "Unicodeと文字コード — コードポイントからUTF-8・UTF-16のバイト列へ",
+          "link": "/data/unicode-and-encoding.html"
+        },
+        {
           "text": "整数をビット列・16進数・バイト列で読む",
           "link": "/data/integer-bits-and-bytes.html"
         }
@@ -1069,6 +1073,10 @@
       "collapsed": false,
       "items": [
         {
+          "text": "C++とC#で文字の表現を観察する",
+          "link": "/practice/data/unicode-observation.html"
+        },
+        {
           "text": "C++でfloatの表現と刻み幅を観察する",
           "link": "/practice/data/float-spacing-observation.html"
         },
@@ -1142,6 +1150,10 @@
       "collapsed": true,
       "items": [
         {
+          "text": "C++とC#で文字の表現を観察する",
+          "link": "/practice/data/unicode-observation.html"
+        },
+        {
           "text": "C++でfloatの表現と刻み幅を観察する",
           "link": "/practice/data/float-spacing-observation.html"
         },
@@ -1210,6 +1222,10 @@
       "text": "ほかの実践・サンプル",
       "collapsed": true,
       "items": [
+        {
+          "text": "C++とC#で文字の表現を観察する",
+          "link": "/practice/data/unicode-observation.html"
+        },
         {
           "text": "C++でfloatの表現と刻み幅を観察する",
           "link": "/practice/data/float-spacing-observation.html"
@@ -1280,6 +1296,10 @@
       "collapsed": true,
       "items": [
         {
+          "text": "C++とC#で文字の表現を観察する",
+          "link": "/practice/data/unicode-observation.html"
+        },
+        {
           "text": "C++でfloatの表現と刻み幅を観察する",
           "link": "/practice/data/float-spacing-observation.html"
         },
@@ -1348,6 +1368,10 @@
       "text": "ほかの実践・サンプル",
       "collapsed": true,
       "items": [
+        {
+          "text": "C++とC#で文字の表現を観察する",
+          "link": "/practice/data/unicode-observation.html"
+        },
         {
           "text": "C++でfloatの表現と刻み幅を観察する",
           "link": "/practice/data/float-spacing-observation.html"
@@ -1418,6 +1442,10 @@
       "collapsed": true,
       "items": [
         {
+          "text": "C++とC#で文字の表現を観察する",
+          "link": "/practice/data/unicode-observation.html"
+        },
+        {
           "text": "C++でfloatの表現と刻み幅を観察する",
           "link": "/practice/data/float-spacing-observation.html"
         },
@@ -1471,6 +1499,10 @@
       "collapsed": true,
       "items": [
         {
+          "text": "C++とC#で文字の表現を観察する",
+          "link": "/practice/data/unicode-observation.html"
+        },
+        {
           "text": "C++で整数とバイト列を観察する",
           "link": "/practice/data/integer-byte-observation.html"
         },
@@ -1523,6 +1555,10 @@
       "text": "ほかの実践・サンプル",
       "collapsed": true,
       "items": [
+        {
+          "text": "C++とC#で文字の表現を観察する",
+          "link": "/practice/data/unicode-observation.html"
+        },
         {
           "text": "C++でfloatの表現と刻み幅を観察する",
           "link": "/practice/data/float-spacing-observation.html"
@@ -1585,6 +1621,10 @@
       "collapsed": true,
       "items": [
         {
+          "text": "C++とC#で文字の表現を観察する",
+          "link": "/practice/data/unicode-observation.html"
+        },
+        {
           "text": "C++でfloatの表現と刻み幅を観察する",
           "link": "/practice/data/float-spacing-observation.html"
         },
@@ -1646,6 +1686,10 @@
       "collapsed": true,
       "items": [
         {
+          "text": "C++とC#で文字の表現を観察する",
+          "link": "/practice/data/unicode-observation.html"
+        },
+        {
           "text": "C++でfloatの表現と刻み幅を観察する",
           "link": "/practice/data/float-spacing-observation.html"
         },
@@ -1672,6 +1716,63 @@
         {
           "text": "C++と設計の演習",
           "link": "/guide/exercises/"
+        },
+        {
+          "text": "小さなアプリで設計を試す",
+          "link": "/design/notebook/practice.html"
+        }
+      ]
+    }
+  ],
+  "/practice/data/unicode-observation.md": [
+    {
+      "text": "実践・サンプル一覧",
+      "link": "/practice/"
+    },
+    {
+      "text": "C++とC#で文字の表現を観察する",
+      "items": [
+        {
+          "text": "C++とC#でUnicodeのバイト列と文字列の長さを観察する",
+          "link": "/practice/data/unicode-observation.html"
+        }
+      ]
+    },
+    {
+      "text": "ほかの実践・サンプル",
+      "collapsed": true,
+      "items": [
+        {
+          "text": "C++でfloatの表現と刻み幅を観察する",
+          "link": "/practice/data/float-spacing-observation.html"
+        },
+        {
+          "text": "C++で整数とバイト列を観察する",
+          "link": "/practice/data/integer-byte-observation.html"
+        },
+        {
+          "text": "Windowsでプロセスとスレッドを観察する",
+          "link": "/practice/process/windows-process-observation.html"
+        },
+        {
+          "text": "Windowsでメモリの状態を観察する",
+          "link": "/practice/memory/windows-memory-observation.html"
+        },
+        {
+          "text": "小さなシューティングを作る",
+          "link": "/game/shooter-design.html"
+        },
+        {
+          "text": "小さなレンダラーを作る",
+          "link": "/graphics/capstone/01-design.html"
+        },
+        {
+          "text": "C++と設計の演習",
+          "link": "/guide/exercises/"
+        },
+        {
+          "text": "C++のビルドサンプル",
+          "link": "/tools/build/samples/"
         },
         {
           "text": "小さなアプリで設計を試す",
@@ -1921,6 +2022,10 @@
       "collapsed": true,
       "items": [
         {
+          "text": "C++とC#で文字の表現を観察する",
+          "link": "/practice/data/unicode-observation.html"
+        },
+        {
           "text": "C++でfloatの表現と刻み幅を観察する",
           "link": "/practice/data/float-spacing-observation.html"
         },
@@ -2026,6 +2131,10 @@
       "collapsed": true,
       "items": [
         {
+          "text": "C++とC#で文字の表現を観察する",
+          "link": "/practice/data/unicode-observation.html"
+        },
+        {
           "text": "C++でfloatの表現と刻み幅を観察する",
           "link": "/practice/data/float-spacing-observation.html"
         },
@@ -2086,6 +2195,10 @@
       "text": "ほかの実践・サンプル",
       "collapsed": true,
       "items": [
+        {
+          "text": "C++とC#で文字の表現を観察する",
+          "link": "/practice/data/unicode-observation.html"
+        },
         {
           "text": "C++でfloatの表現と刻み幅を観察する",
           "link": "/practice/data/float-spacing-observation.html"
@@ -2191,6 +2304,10 @@
       "text": "ほかの実践・サンプル",
       "collapsed": true,
       "items": [
+        {
+          "text": "C++とC#で文字の表現を観察する",
+          "link": "/practice/data/unicode-observation.html"
+        },
         {
           "text": "C++でfloatの表現と刻み幅を観察する",
           "link": "/practice/data/float-spacing-observation.html"
@@ -2382,6 +2499,10 @@
       "collapsed": true,
       "items": [
         {
+          "text": "C++とC#で文字の表現を観察する",
+          "link": "/practice/data/unicode-observation.html"
+        },
+        {
           "text": "C++でfloatの表現と刻み幅を観察する",
           "link": "/practice/data/float-spacing-observation.html"
         },
@@ -2571,6 +2692,10 @@
       "text": "ほかの実践・サンプル",
       "collapsed": true,
       "items": [
+        {
+          "text": "C++とC#で文字の表現を観察する",
+          "link": "/practice/data/unicode-observation.html"
+        },
         {
           "text": "C++でfloatの表現と刻み幅を観察する",
           "link": "/practice/data/float-spacing-observation.html"
@@ -2762,6 +2887,10 @@
       "collapsed": true,
       "items": [
         {
+          "text": "C++とC#で文字の表現を観察する",
+          "link": "/practice/data/unicode-observation.html"
+        },
+        {
           "text": "C++でfloatの表現と刻み幅を観察する",
           "link": "/practice/data/float-spacing-observation.html"
         },
@@ -2952,6 +3081,10 @@
       "collapsed": true,
       "items": [
         {
+          "text": "C++とC#で文字の表現を観察する",
+          "link": "/practice/data/unicode-observation.html"
+        },
+        {
           "text": "C++でfloatの表現と刻み幅を観察する",
           "link": "/practice/data/float-spacing-observation.html"
         },
@@ -3056,6 +3189,10 @@
       "text": "ほかの実践・サンプル",
       "collapsed": true,
       "items": [
+        {
+          "text": "C++とC#で文字の表現を観察する",
+          "link": "/practice/data/unicode-observation.html"
+        },
         {
           "text": "C++でfloatの表現と刻み幅を観察する",
           "link": "/practice/data/float-spacing-observation.html"
@@ -3195,6 +3332,10 @@
       "collapsed": true,
       "items": [
         {
+          "text": "C++とC#で文字の表現を観察する",
+          "link": "/practice/data/unicode-observation.html"
+        },
+        {
           "text": "C++でfloatの表現と刻み幅を観察する",
           "link": "/practice/data/float-spacing-observation.html"
         },
@@ -3247,6 +3388,10 @@
       "text": "ほかの実践・サンプル",
       "collapsed": true,
       "items": [
+        {
+          "text": "C++とC#で文字の表現を観察する",
+          "link": "/practice/data/unicode-observation.html"
+        },
         {
           "text": "C++でfloatの表現と刻み幅を観察する",
           "link": "/practice/data/float-spacing-observation.html"
@@ -3353,6 +3498,10 @@
       "collapsed": true,
       "items": [
         {
+          "text": "C++とC#で文字の表現を観察する",
+          "link": "/practice/data/unicode-observation.html"
+        },
+        {
           "text": "C++でfloatの表現と刻み幅を観察する",
           "link": "/practice/data/float-spacing-observation.html"
         },
@@ -3457,6 +3606,10 @@
       "text": "ほかの実践・サンプル",
       "collapsed": true,
       "items": [
+        {
+          "text": "C++とC#で文字の表現を観察する",
+          "link": "/practice/data/unicode-observation.html"
+        },
         {
           "text": "C++でfloatの表現と刻み幅を観察する",
           "link": "/practice/data/float-spacing-observation.html"
@@ -3604,6 +3757,10 @@
       "collapsed": true,
       "items": [
         {
+          "text": "C++とC#で文字の表現を観察する",
+          "link": "/practice/data/unicode-observation.html"
+        },
+        {
           "text": "C++でfloatの表現と刻み幅を観察する",
           "link": "/practice/data/float-spacing-observation.html"
         },
@@ -3664,6 +3821,10 @@
       "text": "ほかの実践・サンプル",
       "collapsed": true,
       "items": [
+        {
+          "text": "C++とC#で文字の表現を観察する",
+          "link": "/practice/data/unicode-observation.html"
+        },
         {
           "text": "C++でfloatの表現と刻み幅を観察する",
           "link": "/practice/data/float-spacing-observation.html"
@@ -3769,6 +3930,10 @@
       "text": "ほかの実践・サンプル",
       "collapsed": true,
       "items": [
+        {
+          "text": "C++とC#で文字の表現を観察する",
+          "link": "/practice/data/unicode-observation.html"
+        },
         {
           "text": "C++でfloatの表現と刻み幅を観察する",
           "link": "/practice/data/float-spacing-observation.html"
@@ -3959,6 +4124,10 @@
       "text": "ほかの実践・サンプル",
       "collapsed": true,
       "items": [
+        {
+          "text": "C++とC#で文字の表現を観察する",
+          "link": "/practice/data/unicode-observation.html"
+        },
         {
           "text": "C++でfloatの表現と刻み幅を観察する",
           "link": "/practice/data/float-spacing-observation.html"
@@ -4297,6 +4466,10 @@
       "collapsed": true,
       "items": [
         {
+          "text": "C++とC#で文字の表現を観察する",
+          "link": "/practice/data/unicode-observation.html"
+        },
+        {
           "text": "C++でfloatの表現と刻み幅を観察する",
           "link": "/practice/data/float-spacing-observation.html"
         },
@@ -4349,6 +4522,10 @@
       "text": "ほかの実践・サンプル",
       "collapsed": true,
       "items": [
+        {
+          "text": "C++とC#で文字の表現を観察する",
+          "link": "/practice/data/unicode-observation.html"
+        },
         {
           "text": "C++でfloatの表現と刻み幅を観察する",
           "link": "/practice/data/float-spacing-observation.html"
@@ -4624,6 +4801,10 @@
       "text": "ほかの実践・サンプル",
       "collapsed": true,
       "items": [
+        {
+          "text": "C++とC#で文字の表現を観察する",
+          "link": "/practice/data/unicode-observation.html"
+        },
         {
           "text": "C++でfloatの表現と刻み幅を観察する",
           "link": "/practice/data/float-spacing-observation.html"
@@ -7356,6 +7537,10 @@
       "text": "ほかの実践・サンプル",
       "collapsed": true,
       "items": [
+        {
+          "text": "C++とC#で文字の表現を観察する",
+          "link": "/practice/data/unicode-observation.html"
+        },
         {
           "text": "C++でfloatの表現と刻み幅を観察する",
           "link": "/practice/data/float-spacing-observation.html"
