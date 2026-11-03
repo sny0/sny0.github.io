@@ -18,6 +18,7 @@
 
 | 用語・別名 | 説明への入口 |
 | --- | --- |
+| [bit / byte / 2進数 / 16進数 / 整数表現 / 2の補数 / エンディアン](/data/integer-bits-and-bytes.html) | 値と表記、符号の解釈、アドレス順のバイト列を区別する |
 | [プロセス / スレッド / PID / TID / ローダー / エントリポイント / CRT](/os/process-startup.html) | 実行環境と実行単位、EXEの開始点からmainまでの違い |
 | [alloc / allocate / malloc / アロック / メモリ確保](/runtime/memory/allocation-journey.html) | 確保・初期化・解放、再利用とOSへの要求の関係 |
 | [仮想メモリ / reserve / commit / resident / ページフォルト](/os/virtual-memory.html) | アドレス変換と、予約・コミット・常駐の違い |

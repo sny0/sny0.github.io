@@ -1,0 +1,47 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="760" height="1200" viewBox="0 0 760 1200" role="img" aria-labelledby="signed-title signed-desc">
+  <title id="signed-title">同じ8bitを符号なしと2の補数で読む</title>
+  <desc id="signed-desc">説明用の8bit整数モデル。unsignedは0から255、2の補数のsignedはマイナス128から127。00000000はどちらも0、01111111はどちらも127、10000000はunsignedで128、signedでマイナス128、11111111はunsignedで255、signedでマイナス1。同じビット列でも型による解釈が異なる。値を他の整数型へ変換する規則や、演算の規則は別に確認する。C++の小型整数には整数昇格も関わる。</desc>
+  <style>
+    text { font-family: "BIZ UDPGothic", "Yu Gothic", Meiryo, sans-serif; fill: #26352e; }
+    .heading { font-size: 28px; font-weight: 700; }
+    .body { font-size: 24px; }
+    .code { font-family: Consolas, monospace; }
+    .center { text-anchor: middle; }
+  </style>
+  <rect width="760" height="1200" rx="20" fill="#f4f8f4"/>
+  <text x="32" y="54" font-size="32" font-weight="700">同じビット列、異なる整数の解釈</text>
+  <text x="32" y="96" class="body">説明用の8bitモデル。C++の演算型は別途確認する</text>
+
+  <rect x="24" y="128" width="712" height="166" rx="14" fill="#fff"/>
+  <text x="44" y="172" class="heading">表せる範囲</text>
+  <text x="44" y="218" class="body">符号なし：0 〜 255</text>
+  <text x="44" y="263" class="body">2の補数の符号付き：−128 〜 127</text>
+
+  <rect x="24" y="326" width="712" height="384" rx="14" fill="#fff"/>
+  <g class="center">
+    <text x="177" y="375" class="heading">8bitの並び</text>
+    <text x="446" y="375" class="heading">符号なし</text>
+    <text x="629" y="375" class="heading">符号付き</text>
+    <path d="M44 397H716" stroke="#c2d0c5" stroke-width="2"/>
+    <g font-size="30" class="code">
+      <text x="177" y="450">00000000</text><text x="446" y="450">0</text><text x="629" y="450">0</text>
+      <text x="177" y="520">01111111</text><text x="446" y="520">127</text><text x="629" y="520">127</text>
+    </g>
+    <rect x="44" y="545" width="672" height="140" rx="10" fill="#fff0d3"/>
+    <g font-size="30" class="code">
+      <text x="177" y="590">10000000</text><text x="446" y="590">128</text><text x="629" y="590">−128</text>
+      <text x="177" y="660">11111111</text><text x="446" y="660">255</text><text x="629" y="660">−1</text>
+    </g>
+  </g>
+
+  <rect x="24" y="742" width="712" height="166" rx="14" fill="#e1eee5"/>
+  <text x="44" y="786" class="heading">2の補数では、最上位bitの重みが負</text>
+  <text x="44" y="831" class="body">最上位bitが1なら：−128 + 下位7bitの値</text>
+  <text x="44" y="876" class="body">11111111なら、−128 + 127 = −1</text>
+
+  <text x="32" y="972" class="heading">表現・数値変換・演算の規則を分ける</text>
+  <text x="32" y="1019" class="body">キャストは、任意の型で同じbyte列を読み直す操作とは別</text>
+  <text x="32" y="1060" class="body">C++では、符号付き整数演算の溢れは未定義動作</text>
+  <text x="32" y="1101" class="body">小型整数の計算では、int等への整数昇格も確認する</text>
+  <text x="32" y="1142" class="body">この表だけから、C++の式全体の型や結果は決められない</text>
+</svg>

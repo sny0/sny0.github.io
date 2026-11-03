@@ -12,6 +12,7 @@ export const formatLabels = {
 export const statusLabels = { published: '公開中', outline: '学習計画・概要', draft: '草稿', planned: '執筆予定' }
 
 export const collections = [
+  { id: 'integer-observation', section: 'practice', title: 'C++で整数とバイト列を観察する', description: '値・ビット表示・実メモリのバイト列と、明示的なLE/BE形式の違いを確かめる。', start: '/practice/data/integer-byte-observation.html' },
   { id: 'process-observation', section: 'practice', title: 'Windowsでプロセスとスレッドを観察する', description: 'C++でmain前の記録、PID・TID、子プロセスとワーカースレッドを確かめる。', start: '/practice/process/windows-process-observation.html' },
   { id: 'memory-observation', section: 'practice', title: 'Windowsでメモリの状態を観察する', description: 'C++で予約・コミット・初回書込み・解放を分け、仮想メモリとプロセスの指標を確かめる。', start: '/practice/memory/windows-memory-observation.html' },
   { id: 'questions', section: 'learning', title: '疑問から選ぶ読み順', description: 'メモリ確保、実行、描画など、いまの疑問から関連する本文をたどる。', start: '/guide/learning-paths.html' },

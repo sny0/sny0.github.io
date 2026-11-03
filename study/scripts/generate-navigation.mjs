@@ -162,10 +162,16 @@ ${collections.filter(item => item.section === 'learning').map(item => `- [${item
 
 writePage('guide/learning-paths.md', '疑問から選ぶ読み順', {
   section: 'learning', format: 'path', domain: 'guide', catalog: true, collection: 'questions', order: 0,
-  summary: 'メモリ確保、実行、入力と描画、Webの流れなど、疑問から関連する本文をたどる。'
+  summary: '整数表現、メモリ確保、プログラムの起動、入力と描画、Webの疑問から関連する本文をたどる。'
 }, `# 疑問から選ぶ読み順
 
 辞典を最初から順番に読む必要はありません。いまの疑問に関係する本文から選びます。
+
+## 整数はメモリにどう並ぶか
+
+1. [整数をビット列・16進数・バイト列で読む](/data/integer-bits-and-bytes.html)で、値、表記、符号の解釈、バイト順を分ける。
+2. [C++の整数・バイト列観察サンプル](/practice/data/integer-byte-observation.html)で、型の幅と実メモリ、明示的なLE/BE形式を比較する。
+3. [メモリレイアウトとアラインメント](/runtime/cpp-internals/memory-layout.html)で、オブジェクトを置く場所やパディングとの違いを調べる。
 
 ## 「確保する」と内部で何が起きるか
 
@@ -199,6 +205,7 @@ writePage('guide/learning-paths.md', '疑問から選ぶ読み順', {
 [ビデオゲーム史](/history/video-games.html)の作品・ハード・媒体・流通と、[リアルタイム3D技術史](/guide/rendering/timeline.html)の技術の変化から、気になった仕組みへ進みます。`)
 
 const termRows = [
+  ['bit / byte / 2進数 / 16進数 / 整数表現 / 2の補数 / エンディアン', '/data/integer-bits-and-bytes.html', '値と表記、符号の解釈、アドレス順のバイト列を区別する'],
   ['プロセス / スレッド / PID / TID / ローダー / エントリポイント / CRT', '/os/process-startup.html', '実行環境と実行単位、EXEの開始点からmainまでの違い'],
   ['alloc / allocate / malloc / アロック / メモリ確保', '/runtime/memory/allocation-journey.html', '確保・初期化・解放、再利用とOSへの要求の関係'],
   ['仮想メモリ / reserve / commit / resident / ページフォルト', '/os/virtual-memory.html', 'アドレス変換と、予約・コミット・常駐の違い'],

@@ -27,8 +27,8 @@
       "id": "data",
       "title": "情報表現とバイナリ",
       "description": "数値・文字・バイト列を、メモリやファイルの表現へつなぐ。",
-      "count": 0,
-      "status": "辞典本文を準備中"
+      "count": 1,
+      "status": "辞典本文あり"
     },
     {
       "id": "hardware",
@@ -130,6 +130,13 @@
     }
   ],
   "collections": [
+    {
+      "id": "integer-observation",
+      "section": "practice",
+      "title": "C++で整数とバイト列を観察する",
+      "description": "値・ビット表示・実メモリのバイト列と、明示的なLE/BE形式の違いを確かめる。",
+      "start": "/practice/data/integer-byte-observation.html"
+    },
     {
       "id": "process-observation",
       "section": "practice",
@@ -667,6 +674,36 @@
         "/game/unreal/smart-pointers.html",
         "/game/unreal/gameplay-framework.html",
         "/guide/cpp-index.html"
+      ]
+    },
+    {
+      "title": "C++20で整数の値・ビット・保存するbyte順を観察する",
+      "url": "/practice/data/integer-byte-observation.html",
+      "file": "practice/data/integer-byte-observation.md",
+      "domain": "data",
+      "section": "practice",
+      "format": "sample",
+      "status": "published",
+      "summary": "0x12345678の表記とnative object bytesを見比べ、明示したlittle/big-endianの4byte配列をencode/decodeする標準C++20サンプル。",
+      "source": "新規執筆",
+      "aliases": [
+        "整数",
+        "バイナリ",
+        "endian",
+        "little-endian",
+        "big-endian",
+        "uint32_t",
+        "int32_t",
+        "CHAR_BIT",
+        "memcpy",
+        "ビット演算"
+      ],
+      "collection": "integer-observation",
+      "order": 1,
+      "verification": "Windows x64で実行確認",
+      "links": [
+        "/data/integer-bits-and-bytes.html",
+        "/runtime/cpp-internals/memory-layout.html"
       ]
     },
     {
@@ -4929,6 +4966,7 @@
       "summary": "プロセス内の仮想メモリ領域と、型のアラインメント・パディング・バイト順を区別する。物理配置や言語上の寿命と混同しない。",
       "source": "C++ Wiki",
       "aliases": [],
+      "verification": "一次資料照合（2026-11-03）",
       "links": [
         "/os/process-startup.html",
         "/runtime/memory/memory-bugs.html",
@@ -4937,6 +4975,8 @@
         "/runtime/memory/storage-duration-and-lifetime.html",
         "/os/virtual-memory.html",
         "/game/patterns/optimization-patterns.html",
+        "/data/integer-bits-and-bytes.html",
+        "/practice/data/integer-byte-observation.html",
         "/runtime/cpp-internals/cache-branch-simd.html",
         "/runtime/cpp-internals/exceptions-and-rtti-impl.html",
         "/runtime/cpp-internals/",
@@ -5384,12 +5424,15 @@
       "section": "learning",
       "format": "path",
       "status": "published",
-      "summary": "メモリ確保、実行、入力と描画、Webの流れなど、疑問から関連する本文をたどる。",
+      "summary": "整数表現、メモリ確保、プログラムの起動、入力と描画、Webの疑問から関連する本文をたどる。",
       "source": "統合ガイド",
       "aliases": [],
       "collection": "questions",
       "order": 0,
       "links": [
+        "/data/integer-bits-and-bytes.html",
+        "/practice/data/integer-byte-observation.html",
+        "/runtime/cpp-internals/memory-layout.html",
         "/runtime/memory/storage-duration-and-lifetime.html",
         "/runtime/memory/allocation-journey.html",
         "/os/virtual-memory.html",
@@ -5881,6 +5924,47 @@
         "/design/naming.html",
         "/design/pattern-index.html",
         "/design/notebook-references.html"
+      ]
+    },
+    {
+      "title": "整数をビット列・16進数・バイト列で読む",
+      "url": "/data/integer-bits-and-bytes.html",
+      "file": "data/integer-bits-and-bytes.md",
+      "domain": "data",
+      "section": "reference",
+      "format": "article",
+      "status": "published",
+      "summary": "整数の値・基数による表記・型のビット表現・メモリのバイト列を分けて読む。unsignedの剰余、2の補数、C++20の変換規則、整数昇格、エンディアンと保存形式を区別する。",
+      "source": "新規執筆",
+      "aliases": [
+        "bit",
+        "ビット",
+        "byte",
+        "バイト",
+        "octet",
+        "オクテット",
+        "binary",
+        "2進数",
+        "hexadecimal",
+        "16進数",
+        "unsigned",
+        "signed",
+        "2の補数",
+        "two's complement",
+        "integer promotion",
+        "整数昇格",
+        "endianness",
+        "エンディアン",
+        "little-endian",
+        "big-endian",
+        "CHAR_BIT",
+        "uint32_t"
+      ],
+      "verification": "一次資料照合（2026-11-03）",
+      "links": [
+        "/runtime/cpp-internals/memory-layout.html",
+        "/practice/data/integer-byte-observation.html",
+        "/guide/low-level/computer-and-data.html"
       ]
     },
     {
@@ -6575,12 +6659,15 @@
       "section": "learning",
       "format": "path",
       "status": "outline",
-      "summary": "ビット列から整数・浮動小数点・文字・ファイル表現へ進むための学習計画・概要です。表現の違いを小さなプログラムで観察する題材を選びます。Unicodeやファイル形式などの専用の辞典本文は、まだ整備していません。\n\n## 関連する辞典本文・実践\n\n- [メモリレイアウト・エンディアン](/run",
+      "summary": "ビット・整数・浮動小数点・文字の表現を学ぶ順序と演習を案内し、整数表現の辞典本文と観察例へつなぐ。",
       "source": "IT教本",
       "aliases": [],
       "collection": "low-level",
       "order": 2,
+      "verification": "一次資料照合（2026-11-03）",
       "links": [
+        "/data/integer-bits-and-bytes.html",
+        "/practice/data/integer-byte-observation.html",
         "/runtime/cpp-internals/memory-layout.html",
         "/design/case-studies/save-data.html"
       ],
@@ -7377,6 +7464,7 @@
       "source": "統合ガイド",
       "aliases": [],
       "links": [
+        "/data/integer-bits-and-bytes.html",
         "/os/process-startup.html",
         "/runtime/memory/allocation-journey.html",
         "/os/virtual-memory.html",
