@@ -27,7 +27,7 @@
       "id": "data",
       "title": "情報表現とバイナリ",
       "description": "数値・文字・バイト列を、メモリやファイルの表現へつなぐ。",
-      "count": 1,
+      "count": 2,
       "status": "辞典本文あり"
     },
     {
@@ -130,6 +130,13 @@
     }
   ],
   "collections": [
+    {
+      "id": "float-observation",
+      "section": "practice",
+      "title": "C++でfloatの表現と刻み幅を観察する",
+      "description": "binary32のビット表現、nextafterによる隣接値、丸めとepsilonの関係を確かめる。",
+      "start": "/practice/data/float-spacing-observation.html"
+    },
     {
       "id": "integer-observation",
       "section": "practice",
@@ -674,6 +681,36 @@
         "/game/unreal/smart-pointers.html",
         "/game/unreal/gameplay-framework.html",
         "/guide/cpp-index.html"
+      ]
+    },
+    {
+      "title": "C++20でfloatの表現間隔と丸めを観察する",
+      "url": "/practice/data/float-spacing-observation.html",
+      "file": "practice/data/float-spacing-observation.md",
+      "domain": "data",
+      "section": "practice",
+      "format": "sample",
+      "status": "published",
+      "summary": "binary32相当のfloatをbit_castとnextafterで観察し、値の大きさによる表現間隔、境界の上下差、2^24付近のnearest-evenを調べるC++20サンプル。",
+      "source": "新規執筆",
+      "aliases": [
+        "float",
+        "binary32",
+        "nextafter",
+        "epsilon",
+        "FE_TONEAREST",
+        "bit_cast",
+        "浮動小数点",
+        "丸め",
+        "ULP",
+        "NaN"
+      ],
+      "collection": "float-observation",
+      "order": 1,
+      "verification": "Windows x64で実行確認",
+      "links": [
+        "/data/floating-point-spacing.html",
+        "/practice/data/integer-byte-observation.html"
       ]
     },
     {
@@ -1567,6 +1604,44 @@
         "/design/patterns/template-method.html",
         "/design/case-studies/object-spawning.html",
         "/design/patterns/"
+      ]
+    },
+    {
+      "title": "floatが表せる値と丸め — binary32の表現と刻み幅",
+      "url": "/data/floating-point-spacing.html",
+      "file": "data/floating-point-spacing.md",
+      "domain": "data",
+      "section": "reference",
+      "format": "article",
+      "status": "published",
+      "summary": "binary32の符号・指数・小数部から値を読み、normalとsubnormalの刻み幅、最近接偶数への丸め、0.1fと大きな座標の精度を調べる。C++20の保証とMSVCの実行条件、epsilonとnextafterの役割も区別する。",
+      "source": "新規執筆",
+      "aliases": [
+        "float",
+        "floating point",
+        "浮動小数点",
+        "binary32",
+        "IEEE 754",
+        "IEC 559",
+        "significand",
+        "仮数",
+        "指数",
+        "丸め",
+        "最近接偶数",
+        "round to nearest ties to even",
+        "normal",
+        "subnormal",
+        "非正規化数",
+        "epsilon",
+        "nextafter",
+        "bit_cast",
+        "numeric_limits"
+      ],
+      "verification": "一次資料照合（2026-11-03）",
+      "links": [
+        "/practice/data/float-spacing-observation.html",
+        "/data/integer-bits-and-bytes.html",
+        "/guide/low-level/computer-and-data.html"
       ]
     },
     {
@@ -3730,8 +3805,11 @@
       "summary": "カメラは3Dシーンを2D画像に落とすための視点の定義です。数学的には2つの行列 — 世界をカメラ視点に組み替えるビュー行列と、視錐台を立方体に押し込める射影行列 — で表現されます。このページでは両行列を導出し、透視投影・深度精度 (Reverse-Z)・視錐台カリングまでを扱います。",
       "source": "RenderingWiki",
       "aliases": [],
+      "verification": "一次資料照合（2026-11-03）",
       "links": [
         "/graphics/optimization/gpu-driven.html",
+        "/data/floating-point-spacing.html",
+        "/practice/data/float-spacing-observation.html",
         "/graphics/lighting/shadow.html",
         "/math/rendering/vector.html",
         "/math/rendering/matrix.html",
@@ -5424,7 +5502,7 @@
       "section": "learning",
       "format": "path",
       "status": "published",
-      "summary": "整数表現、メモリ確保、プログラムの起動、入力と描画、Webの疑問から関連する本文をたどる。",
+      "summary": "整数・浮動小数点、メモリ確保、プログラムの起動、入力と描画、Webの疑問から関連する本文をたどる。",
       "source": "統合ガイド",
       "aliases": [],
       "collection": "questions",
@@ -5433,6 +5511,10 @@
         "/data/integer-bits-and-bytes.html",
         "/practice/data/integer-byte-observation.html",
         "/runtime/cpp-internals/memory-layout.html",
+        "/data/floating-point-spacing.html",
+        "/practice/data/float-spacing-observation.html",
+        "/math/rendering/transform.html",
+        "/math/rendering/camera.html",
         "/runtime/memory/storage-duration-and-lifetime.html",
         "/runtime/memory/allocation-journey.html",
         "/os/virtual-memory.html",
@@ -5449,7 +5531,6 @@
         "/runtime/cpp-internals/function-calls-and-cpu.html",
         "/game/patterns/game-loop-and-update.html",
         "/game/ecs.html",
-        "/math/rendering/transform.html",
         "/graphics/pipeline/overview.html",
         "/game/shooter-design.html",
         "/game/shooter-cpp.html",
@@ -6659,7 +6740,7 @@
       "section": "learning",
       "format": "path",
       "status": "outline",
-      "summary": "ビット・整数・浮動小数点・文字の表現を学ぶ順序と演習を案内し、整数表現の辞典本文と観察例へつなぐ。",
+      "summary": "ビット・整数・浮動小数点・文字の表現を学ぶ順序と演習を案内し、整数表現と浮動小数点の辞典本文・観察例へつなぐ。",
       "source": "IT教本",
       "aliases": [],
       "collection": "low-level",
@@ -6668,6 +6749,8 @@
       "links": [
         "/data/integer-bits-and-bytes.html",
         "/practice/data/integer-byte-observation.html",
+        "/data/floating-point-spacing.html",
+        "/practice/data/float-spacing-observation.html",
         "/runtime/cpp-internals/memory-layout.html",
         "/design/case-studies/save-data.html"
       ],
@@ -7464,6 +7547,7 @@
       "source": "統合ガイド",
       "aliases": [],
       "links": [
+        "/data/floating-point-spacing.html",
         "/data/integer-bits-and-bytes.html",
         "/os/process-startup.html",
         "/runtime/memory/allocation-journey.html",
