@@ -19,6 +19,7 @@
 
 ## 辞典の本文
 
+- [floatが表せる値と丸め — binary32の表現と刻み幅](/data/floating-point-spacing.html)
 - [整数をビット列・16進数・バイト列で読む](/data/integer-bits-and-bytes.html)
 
 ## この分野の学習ガイド
@@ -27,6 +28,7 @@
 
 ## 作って試す
 
+- [C++20でfloatの表現間隔と丸めを観察する](/practice/data/float-spacing-observation.html)
 - [C++20で整数の値・ビット・保存するbyte順を観察する](/practice/data/integer-byte-observation.html)
 
 ## 扱う範囲・増補する項目

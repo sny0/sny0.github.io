@@ -3,7 +3,7 @@ title: 第1章 コンピュータと情報の表現
 study:
   source: IT教本
   status: outline
-  summary: ビット・整数・浮動小数点・文字の表現を学ぶ順序と演習を案内し、整数表現の辞典本文と観察例へつなぐ。
+  summary: ビット・整数・浮動小数点・文字の表現を学ぶ順序と演習を案内し、整数表現と浮動小数点の辞典本文・観察例へつなぐ。
   verification: 一次資料照合（2026-11-03）
   section: learning
   format: path
@@ -24,6 +24,8 @@ study:
 
 - [ビット・バイト・整数表現](/data/integer-bits-and-bytes.html)で、整数の幅、符号、型変換、バイト順を調べられます。
 - [整数とバイト列の観察](/practice/data/integer-byte-observation.html)で、小さなC++プログラムによる確認へ進めます。
+- [浮動小数点と値の間隔](/data/floating-point-spacing.html)で、binary32の表現、丸め、値の大きさと刻み幅の関係を調べられます。
+- [浮動小数点の間隔を観察する](/practice/data/float-spacing-observation.html)で、0.1、2^24、大きな座標の例を確認できます。
 - [メモリレイアウト・エンディアン](/runtime/cpp-internals/memory-layout.html)では、構造体の整列・パディングと、バイト順を区別します。
 - [セーブデータのケーススタディ](/design/case-studies/save-data.html)では、表現の知識を保存形式の設計へつなげられます。
 
@@ -62,14 +64,11 @@ study:
      これを選ぶだけで決定性が保証されるわけではなく、丸め・溢れ・処理順も揃える
 3. **浮動小数点 (IEEE 754)**
    - 本章では一般的なIEEE 754 binary32のfloatを例にする:
-     符号1 + 指数8 + 格納する仮数部23bit。C/C++の型名だけでこの形式が保証されるわけではない
-   - 精度の偏り: 0付近は細かく、大きくなるほど粗い
-     → **オープンワールドで原点から離れるとアニメがガタつく理由**
-     (対策: カメラ相対レンダリング、ワールドオリジンシフト)
-   - 特殊値: NaN, Inf, -0。NaNは伝染する(`NaN != NaN` に注意)
-   - binary64の例では `0.1 + 0.2 != 0.3` となる。比較方法は用途で選ぶ。
-     近似一致は値の規模に応じた相対許容誤差と、0付近の絶対許容誤差を検討する。
-     型のepsilonを全ての値へ固定で当てはめない。厳密一致が必要な場合やNaN/Infも別途扱う
+     符号1 + 指数8 + 格納する仮数部23bit。正規化数では先頭の1を含めて有効精度24bitとなる。C/C++の型名だけでこの形式が保証されるわけではない
+   - 正規化数では、絶対値が大きくなると隣の表現可能な値までの**絶対的な間隔**が段階的に広がる。大座標で小さな移動が丸められる理由の一つであり、カメラ相対の計算や原点移動を検討する。0近くの非正規化数（subnormal）の領域では間隔は一定で、相対精度は下がる。[MSVCのIEEE表現と非正規化数](https://learn.microsoft.com/en-us/cpp/build/ieee-floating-point-representation?view=msvc-170)を参照
+   - 特殊値: NaN, Inf, ±0。NaNと自身の`==`比較は偽になるなど、通常の有限値とは扱いが異なる。すべての関数や最適化設定で同じ伝播をすると決めつけない
+   - `0.1 + 0.2 != 0.3`は、例えば`double`がbinary64で、各段階をその精度の最近接・偶数丸めで評価する場合の例。表現できない10進数の変換と、加算時の丸めを分けて読む。`float`版でも常に不一致になる、という規則ではない。中間精度・丸めモード・コンパイラ設定も確認する。[MSVCの浮動小数点設定](https://learn.microsoft.com/en-us/cpp/build/reference/fp-specify-floating-point-behavior?view=msvc-170)を参照
+   - 比較方法は用途で選ぶ。`numeric_limits<float>::epsilon()`は1とその次の表現可能な値の差であり、任意の値の誤差上限や万能な許容値ではない。近似一致には値の規模に応じた相対許容誤差と、0付近の絶対許容誤差を検討する。厳密一致が必要な場面やNaN/Infも別途扱う。[C++20草案のepsilon](https://timsong-cpp.github.io/cppwp/n4861/numeric.limits.members)と[浮動小数点の本文](/data/floating-point-spacing.html)へ
 4. **文字と色の表現**
    - ASCII、Unicode、UTF-8/UTF-16。OSやエンジンの名前だけで文字列の形式を決めず、使用するAPIやファイル形式の仕様を確認する
    - 色: RGBA8888、リニア色空間とsRGB(第12章で再訪)
@@ -85,14 +84,14 @@ study:
 - **ビット列の意味は形式と解釈で決まる。** 同じ32ビットでも、整数、binary32の浮動小数点、色など、選んだ形式によって意味が変わる。値を変換するキャストと、表現のバイトを調べる操作は別であり、任意の型のポインタで読み替えてよいわけではない。
 - **2の補数**: 加算の仕組みを使って減算も扱える整数表現
 - **浮動小数点には表現と演算の丸めがある**: 許容できる誤差と、その扱いを設計する
-- **精度は相対的**: binary32の精度は10進数で約7桁が目安だが、どの10進数でも7桁まで正確に保持できるという意味ではない
+- **値の間隔と許容誤差を区別する**: binary32の正規化数の精度は10進数で約7桁が目安だが、10進小数がその桁まで正確に格納されるという意味ではない。非正規化数では相対精度も下がる
 
 ## ゲーム開発との関係
 
 | 現場の事象 | この章の知識 |
 |---|---|
 | ビットフラグでの状態管理 | ビット演算 |
-| 座標が大きいと物理・アニメが暴れる | floatの相対精度 |
+| 座標が大きいと物理・アニメが暴れる | floatの値の間隔と演算時の丸め |
 | リプレイ再現が環境でズレる | 演算順・コンパイラ設定・乱数・更新順の再現性。固定小数点も選択肢 |
 | セーブデータ/アセットのバイナリ解析 | 16進ダンプ、エンディアン |
 | 日本語ファイル名/テキストの文字化け | UTF-8/UTF-16 |
@@ -101,8 +100,8 @@ study:
 ## 演習
 
 1. 電卓を使わず 0xDEADBEEF を10進・2進に変換せよ。
-2. `float`がbinary32で最近接・偶数丸めの環境で、`float f = 16777216.0f; f += 1.0f;` の結果を観察せよ。値が増えない理由を、有効精度24ビット（通常の正規化数では先頭の1を含む）から説明せよ。
-3. `CHAR_BIT == 8`、`sizeof(float) == sizeof(std::uint32_t) == 4`、`float`がbinary32の環境で、`memcpy`により`float`の表現を`std::uint32_t`へ写し、符号・指数・仮数を分解せよ（1.0f、-2.5f、0.1f）。整数と浮動小数点のバイト順が対応することも確認する。サイズが合わない状態でコピーしない。
+2. `float`がbinary32で、加算結果をその精度の最近接・偶数丸めで格納する環境で、`float f = 16777216.0f; f += 1.0f;` を観察せよ。`std::nextafter`で2^24の次の値も調べ、間隔2の中間にある2^24+1が元の値へ丸められる理由を、有効精度24bitと併せて説明せよ。まずは[実践の条件と確認手順](/practice/data/float-spacing-observation.html)を使う。
+3. `CHAR_BIT == 8`、`sizeof(float) == sizeof(std::uint32_t) == 4`、`float`がbinary32の環境で、`memcpy`により`float`の表現を`std::uint32_t`へ写し、符号・指数・仮数を分解せよ（1.0f、-2.5f、0.1f）。整数と浮動小数点のバイト順が対応することも確認する。サイズが合わない状態でコピーしない。保存された表現と加算時の丸めは別々に観察する。
 4. プレイヤー状態(ジャンプ中/無敵/ダッシュ中...)を1つの`std::uint32_t`の
    ビットフラグで管理する関数群(set/clear/test)を書け。
 5. バイナリエディタ(VSの「バイナリで開く」やHxD)でBMPファイルを開き、
@@ -166,6 +165,8 @@ study:
 - [WG14 N1570: C11 committee draft (5.1.2.3, 6.2.4, 6.5, 6.7.2.1)](https://www.open-std.org/jtc1/sc22/wg14/www/docs/n1570.pdf)
 - [Microsoft: Single.Equals — comparison tolerance](https://learn.microsoft.com/en-us/dotnet/api/system.single.equals?view=net-10.0)
 - [MSVC: /fp floating-point behavior](https://learn.microsoft.com/en-us/cpp/build/reference/fp-specify-floating-point-behavior?view=msvc-170)
+- [MSVC: IEEE Floating-Point Representation](https://learn.microsoft.com/en-us/cpp/build/ieee-floating-point-representation?view=msvc-170)
+- [C++20草案 N4861: numeric_limits](https://timsong-cpp.github.io/cppwp/n4861/numeric.limits.members)
 - [Box2D: Determinism](https://box2d.org/posts/2024/08/determinism/)
 
-整数に関するC++20の説明を2026-11-03に一次資料と照合しました。N4861へのリンクは規格草案本文のHTML表示です。このページの演習は学習題材であり、今回すべての環境で実行したものではありません。
+整数に関するC++20の説明と、浮動小数点の表現・実行条件・epsilonの説明を2026-11-03に一次資料と照合しました。N4861へのリンクは規格草案本文のHTML表示です。このページの演習は学習題材であり、今回すべての環境で実行したものではありません。

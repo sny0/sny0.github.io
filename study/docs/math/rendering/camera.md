@@ -4,6 +4,7 @@ study:
   source: RenderingWiki
   status: published
   summary: カメラは3Dシーンを2D画像に落とすための視点の定義です。数学的には2つの行列 — 世界をカメラ視点に組み替えるビュー行列と、視錐台を立方体に押し込める射影行列 — で表現されます。このページでは両行列を導出し、透視投影・深度精度 (Reverse-Z)・視錐台カリングまでを扱います。
+  verification: 一次資料照合（2026-11-03）
   section: reference
   format: article
   domain: math
@@ -23,7 +24,7 @@ study:
 
 ## 歴史・誕生した背景
 
-透視図法はルネサンス期 (Brunelleschi, 1420年頃) に遡り、CGでは1960年代にユタ大学で行列形式に定式化されました。OpenGLの `gluLookAt` / `gluPerspective` (1992) がAPIとして標準化。2000年代後半、深度バッファの精度問題への解として **Reverse-Z** が広まり (Reed 2015 の解説が有名)、現在のAAA開発の標準になっています。
+透視図法はルネサンス期 (Brunelleschi, 1420年頃) に遡り、CGでは1960年代にユタ大学で行列形式に定式化されました。OpenGLの `gluLookAt` / `gluPerspective` (1992) がAPIとして標準化。深度バッファの精度を改善する技法の一つに**Reverse-Z**があり、Nathan Reedの[NVIDIA公式解説](https://developer.nvidia.com/blog/visualizing-depth-precision/)では、浮動小数点と固定小数点の深度形式を分けて効果を比較しています。
 
 ## それ以前の技術
 
@@ -35,7 +36,7 @@ study:
 
 ## 現在の位置づけ
 
-全エンジン・全APIの共通基盤。実務上のポイントは「Reverse-Z + Infinite Far Plane」が現代の既定解であること、そして射影行列からパラメータ (near/far/fov) を逆算する技術がポストプロセスで頻出することです。
+ビュー・射影変換は多くの3D描画で使われる基盤です。Reverse-Zや無限遠の遠平面は設計上の選択肢であり、すべてのエンジン・APIで必須の設定ではありません。射影、深度形式、近遠クリップ、深度比較をそろえ、ポストプロセスで深度を復元する式にも同じ規約を使います。
 
 ## 内部動作
 
@@ -77,23 +78,29 @@ $$
 
 $$z_{ndc} = \frac{f}{f-n} - \frac{nf}{(f-n)\,z_{view}}$$
 
-この式は $z_{view}$ に対して**非線形 (1/zに比例)** で、深度精度は近距離に極端に偏ります。
+この式は $z_{view}$ に対して**非線形（1/zを係数と定数で変換した形）**です。等間隔に量子化した深度をこの式で読むと、視点からの距離の刻みは近くで細かく、遠くで粗くなります。実際の誤差は、深度形式や近遠平面、頂点変換の丸めにも依存します。
 
-### Reverse-Z — 現代の標準
+<div id="reverse-z-—-現代の標準" class="study-legacy-anchor" aria-hidden="true"></div>
 
-浮動小数点は0付近の精度が高いため、通常のZ (近=0) では「精度が高い数値域」と「1/zで精度が高い近距離」が重なり、**遠方の精度が壊滅**します。深度を反転 (近=1, 遠=0) すると両者が打ち消し合い、ほぼ均一な精度が得られます。
+### Reverse-Zと浮動小数点の深度精度
+
+ここでは**透視射影と浮動小数点の深度バッファ**を使い、射影後の深度と保存する深度をともに`[0,1]`の範囲として扱う場合を考えます。通常のZ（近=0、遠=1）では、遠方が1付近へ押し込まれます。Reverse-Z（近=1、遠=0）は、正規化数の範囲で0に近い側ほど値の間隔が細かくなる性質を遠方に割り当て、1/zの非線形性による偏りを緩和します。とくに遠方の距離を区別する精度を改善できますが、**世界座標での絶対的な間隔が全域で一定になるわけではありません**。[NVIDIAの比較と条件](https://developer.nvidia.com/blog/visualizing-depth-precision/)を参照してください。
+
+固定小数点（UNORM）の深度は保存値の刻みが等間隔なので、順序を反転するだけでは浮動小数点のような刻み幅の利点は得られません。また、Reverse-Zで大座標の頂点位置の誤差まで解消できるわけではありません。値の間隔の基礎は[浮動小数点の本文](/data/floating-point-spacing.html)、実際の刻み幅の確認は[観察例](/practice/data/float-spacing-observation.html)で扱います。
 
 ```mermaid
 flowchart LR
     subgraph 通常Z
-        A["float精度: 0付近に集中"] --> B["1/z: 近距離に集中"] --> C["遠方でZ-fighting多発 ❌"]
+        A["float深度・近0/遠1"] --> B["遠方が1付近へ集中"] --> C["遠方の距離を区別しにくい"]
     end
     subgraph ReverseZ
-        D["float精度: 0付近に集中 (=遠方)"] --> E["1/z: 近距離に集中"] --> F["精度がほぼ均一 ✅"]
+        D["float深度・近1/遠0"] --> E["遠方に細かい刻みを割り当て"] --> F["遠方の深度精度を改善"]
     end
 ```
 
-実装は (1) 射影行列のnear/farを入れ替え、(2) 深度比較を `GREATER` に、(3) クリアを0に、の3点セット。UnityもUEも内部でReverse-Zを使用しています。
+典型的には、射影で近=1・遠=0にし、viewportの深度範囲を整合させ、深度比較を`GREATER`などにして0でクリアします。比較の等号の扱い、深度バイアス、深度を読む処理も確認が必要です。DirectXMathでは、有限で正かつ異なる近遠距離を`XMMatrixPerspectiveFovLH`へ逆順に渡す方法が文書化されていますが、あらゆる射影関数へ無条件に適用できる手順ではありません。[MicrosoftのAPI契約](https://learn.microsoft.com/en-us/windows/win32/api/directxmath/nf-directxmath-xmmatrixperspectivefovlh)を参照してください。
+
+APIの深度規約も区別します。Vulkanの`VkViewport`は`minDepth > maxDepth`も許し、viewportでも反転を表せます。射影側とviewport側で意図せず二重に反転しないようにします。OpenGLの従来のNDC深度範囲`[-1,1]`では、深度を保存する直前に向きを変えるだけで上記と同じ利点になるとは限りません。対応する環境では`glClipControl`の`GL_ZERO_TO_ONE`などで規約をそろえます。[Vulkanのviewport](https://docs.vulkan.org/refpages/latest/refpages/source/VkViewport.html)と[Khronosのclip-control仕様](https://raw.githubusercontent.com/KhronosGroup/OpenGL-Registry/main/extensions/ARB/ARB_clip_control.txt)を参照してください。
 
 ### 正射影 (Orthographic)
 
@@ -106,20 +113,20 @@ $w$ に $z$ を仕込まない (最下行が $(0,0,0,1)$) ため遠近感が出�
 ## 各環境での扱い
 
 ### Unity
-`Camera` コンポーネント。`camera.worldToCameraMatrix` / `camera.projectionMatrix`。**GPUへ渡る直前に `GL.GetGPUProjectionMatrix()` でプラットフォーム差 (Y反転・Reverse-Z) が適用される**二段構えに注意。シェーダ側マクロ `UNITY_REVERSED_Z` で分岐できます。
+`Camera`の`worldToCameraMatrix` / `projectionMatrix`と、GPU用の射影行列を区別します。自分で行列を渡す場合、`GL.GetGPUProjectionMatrix(proj, renderIntoTexture)`で対象API用へ調整し、描画先に応じた引数を使います。Reverse-Zの使用は対象APIで異なるため、`SystemInfo.usesReversedZBuffer`やシェーダ側の`UNITY_REVERSED_Z`で確認します。[Unity 6の行列変換API](https://docs.unity3d.com/6000.0/Documentation/ScriptReference/GL.GetGPUProjectionMatrix.html)と[プラットフォーム間の深度規約](https://docs.unity3d.com/6000.0/Documentation/Manual/SL-PlatformDifferences.html)を参照してください。
 
 ### Unreal Engine
-`FMinimalViewInfo` → `FSceneView`。UEは**無限遠 + Reverse-Z**が既定。シェーダでは `View.ViewToClip` など。大ワールドのためビュー行列はカメラ相対 (TranslatedWorld) 基準です。
+`FMinimalViewInfo` → `FSceneView`、シェーダでは`View.ViewToClip`などを調べます。実際の射影規約や無限遠の扱いは、使用するエンジン版と描画経路で確認します。カメラ相対の空間（TranslatedWorld）など、大座標の誤差を減らす工夫は深度バッファの向きとは別に考えます。
 
 ### DirectX 12
-API自体はカメラ概念を持たず、アプリがDirectXMath (`XMMatrixLookAtLH`, `XMMatrixPerspectiveFovLH`) で構築して定数バッファへ。Reverse-Zは `D3D12_COMPARISON_FUNC_GREATER` + クリア値0で実現。
+アプリがDirectXMath（`XMMatrixLookAtLH`、`XMMatrixPerspectiveFovLH`など）で行列を構築して渡します。Reverse-Zでは、反転した射影とviewportの規約に加え、`D3D12_COMPARISON_FUNC_GREATER`などの比較、クリア値0、深度形式をそろえます。比較関数とクリア値だけを変えても射影は反転しません。
 
 ### Vulkan
-同様にアプリ責務。glm + `GLM_FORCE_DEPTH_ZERO_TO_ONE` + Y反転が定番。`VkViewport` の `minDepth/maxDepth` と深度比較 `VK_COMPARE_OP_GREATER` でReverse-Z。
+射影とviewportはアプリが設定します。GLMを使う場合も、深度範囲と左右の座標系を明示し、Yの向きの調整は別に扱います。Reverse-Zは、射影またはviewportの深度範囲で意図した向きへ変換し、`VK_COMPARE_OP_GREATER`などの比較とクリア値を合わせます。`minDepth/maxDepth`は名前に反して大小関係を逆にできます。[VkViewportの仕様](https://docs.vulkan.org/refpages/latest/refpages/source/VkViewport.html)を参照してください。
 
 ## コード例
 
-Reverse-Z 射影行列 (C++ / glm, 無限遠版):
+Reverse-Z 射影行列（C++ / GLM、左手系・列ベクトル、NDC深度`[0,1]`、無限遠版の断片）です。`0 < fovY < π`、`aspect > 0`、`zNear > 0`の有限値を前提に、viewportの深度範囲は0〜1のまま使います。描画APIへの組み込みと実行検証はこの例に含みません。
 
 ```cpp
 // 近=1, 遠(無限)=0 になる透視射影
@@ -135,7 +142,7 @@ glm::mat4 PerspectiveReverseZInfinite(float fovY, float aspect, float zNear) {
 }
 ```
 
-視錐台平面の抽出とAABBカリング:
+視錐台平面の抽出とAABBカリングの次の断片は、**NDC深度`[-1,1]`のクリップ範囲を前提**にしています。直前の`[0,1]`のReverse-Z行列とそのまま組み合わせる例ではありません。深度範囲や無限遠の射影が違う場合は、深度方向の平面の抽出と扱いも合わせる必要があります。
 
 ```cpp
 // Gribb-Hartmann: viewProj の行の和/差が平面になる
@@ -158,6 +165,7 @@ bool AabbVisible(const glm::vec4 planes[6], glm::vec3 c, glm::vec3 e) {
 ## 前提知識
 
 - [ベクトル](/math/rendering/vector.html), [行列](/math/rendering/matrix.html), [座標変換](/math/rendering/transform.html)
+- [浮動小数点と値の間隔](/data/floating-point-spacing.html)
 
 ## 次に読むべきページ
 
@@ -174,7 +182,7 @@ bool AabbVisible(const glm::vec4 planes[6], glm::vec3 c, glm::vec3 e) {
 
 2. **Reverse-Zが深度精度を改善する原理を、浮動小数点の性質と絡めて説明せよ。**
    ::: details 解答
-   NDC深度は1/z_viewに比例し近距離に精度が集中する。floatも0付近に精度が集中する。通常Z(近=0)では両方の高精度域が近距離に重なり遠方が壊滅するが、Reverse-Z(遠=0)ではfloatの高精度域が遠方に割り当てられ、1/zの偏りと相殺して全域でほぼ均一な精度になる。
+   透視射影の深度は1/z_viewを係数と定数で変換した形になる。浮動小数点深度と0〜1の深度規約を使う場合、Reverse-Z（近=1、遠=0）は遠方へ細かい保存値の刻みを割り当て、遠方の距離を区別する精度を改善する。世界座標での絶対精度が全域で一定になる保証ではなく、近遠平面、変換の丸め、深度形式やAPIの規約にも依存する。等間隔の固定小数点深度では、単なる反転から同じ刻み幅の利点は得られない。
    :::
 
 3. **シャドウマップで平行光源に正射影を使う理由は。**
@@ -184,7 +192,12 @@ bool AabbVisible(const glm::vec4 planes[6], glm::vec3 c, glm::vec3 e) {
 
 ## 参考資料
 
-- Nathan Reed, *"Depth Precision Visualized"* (2015) — Reverse-Z解説の決定版
+- [Nathan Reed: Visualizing Depth Precision（NVIDIA公式）](https://developer.nvidia.com/blog/visualizing-depth-precision/)
+- [Microsoft: XMMatrixPerspectiveFovLH](https://learn.microsoft.com/en-us/windows/win32/api/directxmath/nf-directxmath-xmmatrixperspectivefovlh)
+- [Khronos: VkViewport](https://docs.vulkan.org/refpages/latest/refpages/source/VkViewport.html)
+- [Khronos: ARB_clip_control](https://raw.githubusercontent.com/KhronosGroup/OpenGL-Registry/main/extensions/ARB/ARB_clip_control.txt)
 - Gribb & Hartmann, *"Fast Extraction of Viewing Frustum Planes from the World-View-Projection Matrix"*
 - Song Ho Ahn, *OpenGL Projection Matrix*
 - Real-Time Rendering 4th ed., Chapter 4.7
+
+Reverse-Zの精度とAPI規約に関する説明を2026-11-03に一次資料と照合しました。コードは前提を示す断片であり、このページの描画コードの実行、各エンジンの全描画経路での動作検証は今回の確認に含みません。
