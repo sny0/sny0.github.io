@@ -4,6 +4,8 @@
 
 `atomic_counter.cpp`は2026-11-04に、安全なatomic加算と終了待ちのC++20例へ更新しました。`std::jthread`対応の標準ライブラリが必要で、以下のGCC 9.2での一括確認からは除きます。MSVC 19.35、x64 Release、`/std:c++20 /W4 /WX /permissive- /EHsc /utf-8`で無警告ビルド、200000回の加算と終了0を確認しました。非atomicのデータ競合を実行する版は含みません。
 
+`raii_file.cpp`も2026-11-04に更新しました。固定名ファイルの上書き・削除を廃止し、OSのnullデバイスへ出力してRAIIのcloseだけを確かめます。保存処理ではありません。上記MSVC環境で通常経路・早期return・close数を確認し、古いGCCでの一括確認からは除きます。実ファイルの読み取りは https://sny0.com/study/practice/io/file-read-observation.html を参照してください。
+
 ## ビルド方法(検証環境: MinGW GCC 9.2, -std=c++2a)
 
 ```
@@ -20,5 +22,5 @@ g++ -std=c++2a -Wall -Wextra -o out.exe samples/<name>.cpp
 一括コンパイル確認(PowerShell):
 
 ```powershell
-Get-ChildItem samples/*.cpp | Where-Object Name -ne 'atomic_counter.cpp' | ForEach-Object { g++ -std=c++2a -Wall -Wextra -c $_.FullName -o NUL }
+Get-ChildItem samples/*.cpp | Where-Object Name -notin @('atomic_counter.cpp', 'raii_file.cpp') | ForEach-Object { g++ -std=c++2a -Wall -Wextra -c $_.FullName -o NUL }
 ```

@@ -1,0 +1,41 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="760" height="1390" viewBox="0 0 760 1390" role="img" aria-labelledby="position-title position-desc">
+  <title id="position-title">12バイトのファイルを読み、位置とEOFを確かめる</title>
+  <desc id="position-desc">ファイル長12バイト、初期位置0、要求5バイトの一実行例。5バイト、5バイト、2バイト、0バイトと読み、位置は5、10、12、12になる。実際に読めた数だけ位置が進み、0バイトでEOFに達したことを知る。EOFはファイルに入った特別なバイトではなく、NULも普通のデータ。offset5へseekした後、3バイトE3 81 82を読み直すと位置8になる。一般のReadが必ずこの分割で返す保証ではない。</desc>
+  <style>
+    text { font-family: "BIZ UDPGothic", "Yu Gothic", Meiryo, sans-serif; fill: #26352e; }
+    .heading { font-size: 28px; font-weight: 700; }
+    .body { font-size: 24px; }
+    .mono { font-family: Consolas, monospace; font-size: 27px; }
+    .center { text-anchor: middle; }
+  </style>
+  <rect width="760" height="1390" rx="20" fill="#f4f8f4"/>
+  <text x="32" y="54" font-size="32" font-weight="700">要求数・実読取数・位置を分ける</text>
+  <text x="32" y="98" class="body">ファイル長12 bytes。通常ファイルの同期read例</text>
+  <rect x="24" y="130" width="712" height="184" rx="14" fill="#fff"/>
+  <text x="44" y="174" class="heading">保存されたバイト列（16進数）</text>
+  <text x="44" y="224" class="mono">41 42 00 0D 0A E3 81 82 10 20 FE FF</text>
+  <text x="44" y="278" class="body">NUL・CRLFもデータ。末尾にEOFの印は入れない</text>
+  <rect x="24" y="342" width="712" height="516" rx="14" fill="#fff"/>
+  <text x="44" y="388" class="heading">要求は毎回5 bytes → 実際の数を使う</text>
+  <text x="44" y="432" class="body">各呼出しで、前回のバッファ内容を上書きする</text>
+  <text x="62" y="490" class="heading">開始位置</text>
+  <text x="252" y="490" class="heading">実読取数</text>
+  <text x="454" y="490" class="heading">次の位置</text>
+  <path d="M44 510H712M44 582H712M44 654H712M44 726H712" stroke="#d7e0d9" stroke-width="2"/>
+  <text x="116" y="556" class="mono center">0</text><text x="310" y="556" class="mono center">5</text><text x="518" y="556" class="mono center">5</text>
+  <text x="116" y="628" class="mono center">5</text><text x="310" y="628" class="mono center">5</text><text x="518" y="628" class="mono center">10</text>
+  <text x="116" y="700" class="mono center">10</text><text x="310" y="700" class="mono center">2</text><text x="518" y="700" class="mono center">12</text>
+  <text x="116" y="772" class="mono center">12</text><text x="310" y="772" class="mono center">0</text><text x="518" y="772" class="mono center">12</text>
+  <text x="606" y="772" class="body">EOF</text>
+  <text x="44" y="830" class="body">末尾の2 bytesだけ有効。残り3 bytesは今回の結果外</text>
+  <rect x="24" y="886" width="712" height="244" rx="14" fill="#fff"/>
+  <text x="44" y="932" class="heading">seekは、次に読む位置を変更する</text>
+  <text x="44" y="978" class="body">位置12 → seek(5) → 位置5（ファイル長は12）</text>
+  <text x="44" y="1024" class="body">3 bytesを読む → E3 81 82 → 位置8</text>
+  <text x="44" y="1070" class="body">バイト列の再読と、UTF-8としての解釈は別の処理</text>
+  <text x="32" y="1180" class="heading">5 → 5 → 2 → 0 は、この実行の観察例</text>
+  <text x="32" y="1226" class="body">一般のReadが、常にこの分割で返す保証ではない</text>
+  <text x="32" y="1268" class="body">要求数より少なくても、正の数ならその分を処理する</text>
+  <text x="32" y="1310" class="body">成功時の0（非ゼロ要求）はEOF。失敗は別に扱う</text>
+  <text x="32" y="1352" class="body">この図の位置は、アプリから見た論理的な位置</text>
+</svg>
