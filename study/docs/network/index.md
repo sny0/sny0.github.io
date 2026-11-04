@@ -19,6 +19,7 @@
 
 ## 辞典の本文
 
+- [HTTP通信 — 要求・応答と本文の区切り](/network/http-messages.html)
 - [ソケットとTCP通信 — send/recvの内部とメッセージ境界](/network/tcp-sockets.html)
 
 ## この分野の学習ガイド
@@ -27,6 +28,7 @@
 
 ## 作って試す
 
+- [C++とC#でHTTPのヘッダー・本文・終端を観察する](/practice/network/http-message-observation.html)
 - [C++とC#でTCPのフレーム復元と半閉鎖を観察する](/practice/network/tcp-loopback-observation.html)
 
 ## 扱う範囲・増補する項目

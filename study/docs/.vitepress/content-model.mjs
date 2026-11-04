@@ -12,6 +12,7 @@ export const formatLabels = {
 export const statusLabels = { published: '公開中', outline: '学習計画・概要', draft: '草稿', planned: '執筆予定' }
 
 export const collections = [
+  { id: 'http-message-observation', section: 'practice', title: 'C++とC#でHTTPの要求と応答を観察する', description: 'ローカルのGET一回から、ヘッダーと本文、Content-Length、受信の終了を確かめる。', start: '/practice/network/http-message-observation.html' },
   { id: 'tcp-loopback-observation', section: 'practice', title: 'C++とC#でTCPのバイト列と半閉鎖を観察する', description: '同じPC内の接続で、送受信量、長さ付きメッセージ、EOF、アプリ応答を確かめる。', start: '/practice/network/tcp-loopback-observation.html' },
   { id: 'mapped-file-observation', section: 'practice', title: 'C++とC#で読み取り専用のファイルマッピングを観察する', description: '通常のreadと同じバイト列を読み、ファイル位置・ビュー内の位置・整列・寿命を確かめる。', start: '/practice/io/mapped-file-observation.html' },
   { id: 'asset-lifecycle-model', section: 'practice', title: 'C++とC#でアセットの状態と寿命を試す', description: '状態遷移モデルで、利用可能になる時点、古い完了の破棄、キャンセル後の回収を確かめる。', start: '/practice/assets/asset-lifecycle-model.html' },

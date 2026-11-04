@@ -11,7 +11,7 @@
     "domain": "guide",
     "collection": "questions",
     "order": 0,
-    "summary": "整数・浮動小数点、文字コード、メモリ確保、起動、同期、ファイルI/Oとマッピング、アセットロード、TCP通信、入力と描画、Webの疑問から本文をたどる。"
+    "summary": "整数・浮動小数点、文字コード、メモリ確保、起動、同期、ファイルI/Oとマッピング、アセットロード、TCP・HTTP通信、入力と描画、Webの疑問から本文をたどる。"
   }
 }
 ---
@@ -105,9 +105,15 @@
 2. [C++・C#のローカル通信](/practice/network/tcp-loopback-observation.html)で、長さ付きメッセージを復元し、送信停止後の応答と受信EOFを確かめる。
 3. 待機と非同期処理の基本は[非同期I/O](/os/asynchronous-file-io.html)へ進む。今回の通信例は、非ブロッキング操作とreadiness待ちを使う。
 
+## TCPのバイト列が、Webの要求と応答になるまで
+
+1. [HTTP通信](/network/http-messages.html)で、要求行、状態コード、ヘッダー、本文の形式と長さを分ける。
+2. [C++・C#のHTTP観察](/practice/network/http-message-observation.html)で、ローカルのGETと応答を照合し、本文のバイト数と文字数、メッセージ完成とEOFを確かめる。
+3. 下の層から調べる場合は[TCPとソケット](/network/tcp-sockets.html)、文字の表現は[Unicodeと文字コード](/data/unicode-and-encoding.html)へ戻る。
+
 ## URLを開いてからページが見えるまで
 
-[ネットワーク](/network/)には[ソケットとTCPの本文](/network/tcp-sockets.html)があります。DNS・TLS・HTTPと[ブラウザ](/browser/)の専用詳解は準備中です。通信の基礎と、URLから表示までの全体像を区別して増補します。
+[ネットワーク](/network/)には[TCPとソケット](/network/tcp-sockets.html)、[HTTPの要求と応答](/network/http-messages.html)の本文があります。DNS・TLSと[ブラウザ](/browser/)の専用詳解は準備中です。通信の基礎と、URLから表示までの全体像を区別して増補します。
 
 ## 作り方の変化を歴史から見る
 

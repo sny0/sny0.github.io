@@ -135,6 +135,6 @@ Windowsの`select`やC#の`Poll`は、進めそうな操作や終了を待つ道
 
 受信完了を別スレッドやイベントで扱う場合も、共有状態とバッファの所有期間を決めます。[スレッド同期](/runtime/thread-synchronization.html)や[非同期I/O](/os/asynchronous-file-io.html)の「要求・完了・利用」を分ける考え方につながりますが、ファイルAPIの契約をソケットへそのまま移しません。
 
-ゲームでは必要な順序、期限、再送、帯域、認証などから通信方式を選びます。ここだけでTCPとUDPの優劣は決めません。UDP・QUIC、TLSによる保護、DNS、HTTPはそれぞれ別の発展項目とします。
+ゲームでは必要な順序、期限、再送、帯域、認証などから通信方式を選びます。ここだけでTCPとUDPの優劣は決めません。Webの要求・応答へ進む場合は[HTTP通信](/network/http-messages.html)へ進んでください。UDP・QUIC、TLSによる保護、DNSはそれぞれ別の発展項目とします。
 
 [C++とC#でTCPループバックを観察する](/practice/network/tcp-loopback-observation.html)では、既知の2フレーム、部分的なAPI処理、アプリ側ACK、両方向の送信終了を照合します。実パケットの境界、再送、外部ネットワーク性能、物理NICの動作は観測対象に含めません。
