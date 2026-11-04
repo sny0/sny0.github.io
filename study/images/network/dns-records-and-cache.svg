@@ -1,0 +1,42 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="760" height="1510" viewBox="0 0 760 1510" role="img" aria-labelledby="dns-cache-title dns-cache-desc">
+  <title id="dns-cache-title">DNSのレコード、TTL、否定応答と名前解決APIの限界</title>
+  <desc id="dns-cache-desc">説明用の名前とアドレスを使い、AはIPv4、AAAAはIPv6、CNAMEは別名先の名前を示すと整理する。通常のキャッシュでは残りTTLが減り、再利用のたびに元のTTLへ戻すものではない。期限後の再取得やstale運用の例外を区別する。NXDOMAINは名前が存在しない応答、NODATAはその型の答えがない応答で、timeoutやSERVFAILとは異なる。実践の名前解決APIからはTTLや採用元を直接確認できず、これらの図の値は実測ではない。</desc>
+  <style>
+    text { font-family: "BIZ UDPGothic", "Yu Gothic", Meiryo, sans-serif; fill: #26352e; }
+    .heading { font-size: 28px; font-weight: 700; }
+    .body { font-size: 24px; }
+    .mono { font-family: Consolas, monospace; font-size: 26px; }
+  </style>
+  <rect width="760" height="1510" rx="20" fill="#f4f8f4"/>
+  <text x="32" y="54" font-size="32" font-weight="700">名前・型・残りTTLを、別々に考える</text>
+  <text x="32" y="98" class="body">以下は説明用の値。公開名の実際の応答ではない</text>
+  <rect x="24" y="130" width="712" height="200" rx="14" fill="#fff"/>
+  <text x="44" y="176" class="heading">① 型が違えば、求める答えも違う</text>
+  <text x="44" y="220" class="mono">edge.example.net.  A     192.0.2.10</text>
+  <text x="44" y="262" class="mono">edge.example.net.  AAAA  2001:db8::10</text>
+  <text x="44" y="304" class="body">AはIPv4、AAAAはIPv6。複数の候補もあり得る</text>
+  <rect x="24" y="358" width="712" height="160" rx="14" fill="#e2eafa"/>
+  <text x="44" y="404" class="heading">② CNAMEは、別名先の名前を示す</text>
+  <text x="44" y="448" class="mono">www.example.com. → edge.example.net.</text>
+  <text x="44" y="490" class="body">CNAME自体がIPを返すレコードではない</text>
+  <rect x="24" y="546" width="712" height="292" rx="14" fill="#e9efe6"/>
+  <text x="44" y="592" class="heading">③ TTL30秒の答えを、キャッシュする例</text>
+  <text x="44" y="636" class="body">受信時 → 残り30秒</text>
+  <text x="44" y="678" class="body">20秒後 → 残り10秒</text>
+  <text x="44" y="720" class="body">再利用しても、通常は元の30秒へ戻さない</text>
+  <text x="44" y="762" class="body">期限後は通常再取得。stale提供などの例外もある</text>
+  <text x="44" y="804" class="body">管理者の変更が、全キャッシュへ即時配信される訳ではない</text>
+  <rect x="24" y="866" width="712" height="200" rx="14" fill="#fff"/>
+  <text x="44" y="912" class="heading">④ 答えがない理由も、区別する</text>
+  <text x="44" y="956" class="body">NXDOMAIN：名前がない ／ NODATA：その型の答えなし</text>
+  <text x="44" y="998" class="body">timeout・SERVFAILなどとは異なる結果</text>
+  <text x="44" y="1040" class="body">名前や型の不存在も、否定応答としてキャッシュし得る</text>
+  <rect x="24" y="1094" width="712" height="200" rx="14" fill="#dcece0"/>
+  <text x="44" y="1140" class="heading">⑤ 今回のAPIが返すのは、IP候補など</text>
+  <text x="44" y="1184" class="body">TTLや、hosts・キャッシュ・DNSの採用元は未観測</text>
+  <text x="44" y="1226" class="body">同じ結果や短い所要時間だけでは、経路を断定しない</text>
+  <text x="44" y="1268" class="body">公開名の候補は、数・順序・値を固定しない</text>
+  <text x="32" y="1384" class="heading">答えを得ることと、接続できることは別</text>
+  <text x="32" y="1430" class="body">IPv4 / IPv6の利用可否や相手の稼働は、別に確認する</text>
+  <text x="32" y="1472" class="body">名前解決APIだけで、HTTPやTLSの成功は決まらない</text>
+</svg>
