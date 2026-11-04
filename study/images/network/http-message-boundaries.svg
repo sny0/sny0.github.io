@@ -1,0 +1,44 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="760" height="1510" viewBox="0 0 760 1510" role="img" aria-labelledby="boundary-title boundary-desc">
+  <title id="boundary-title">HTTPヘッダーと本文、受信単位とEOFの違い</title>
+  <desc id="boundary-desc">HTTP/1.1の応答では、状態行とヘッダーをCRLFで区切り、CRLFCRLFという空行の後に本文が続く。この教材のContent-Lengthは9で、UTF-8のHTTP、空白、あ、改行を表す九バイトが本文。七個のUnicodeコードポイントとは異なる。TCPの受信は空行の途中で分かれたり、本文まで続けて返したりするため、累積し余りを保持する。本文の完成と接続のEOFは別であり、九バイトに不足してEOFなら未完成と判定する。</desc>
+  <style>
+    text { font-family: "BIZ UDPGothic", "Yu Gothic", Meiryo, sans-serif; fill: #26352e; }
+    .heading { font-size: 28px; font-weight: 700; }
+    .body { font-size: 24px; }
+    .mono { font-family: Consolas, monospace; font-size: 24px; }
+  </style>
+  <rect width="760" height="1510" rx="20" fill="#f4f8f4"/>
+  <text x="32" y="54" font-size="32" font-weight="700">本文の長さは、文字数ではなくバイト数</text>
+  <text x="32" y="98" class="body">HTTP/1.1の応答を、ヘッダーと本文に分ける</text>
+  <rect x="24" y="130" width="712" height="340" rx="14" fill="#fff"/>
+  <text x="44" y="176" class="heading">① ヘッダーの末尾は、空行で区切る</text>
+  <text x="44" y="220" class="mono">HTTP/1.1 200 OK\r\n</text>
+  <text x="44" y="262" class="mono">Date: ...\r\n</text>
+  <text x="44" y="304" class="mono">Content-Type: text/plain; charset=utf-8\r\n</text>
+  <text x="44" y="346" class="mono">Content-Length: 9\r\n</text>
+  <text x="44" y="388" class="mono">Connection: close\r\n</text>
+  <rect x="40" y="408" width="680" height="42" rx="8" fill="#dcece0"/>
+  <text x="52" y="438" class="mono">\r\n</text>
+  <text x="162" y="438" class="body">← この空行まででヘッダー部が終了</text>
+  <rect x="24" y="498" width="712" height="212" rx="14" fill="#e9efe6"/>
+  <text x="44" y="544" class="heading">② 次の9byteが、この応答の本文</text>
+  <text x="44" y="588" class="mono">48 54 54 50 20 E3 81 82 0A</text>
+  <text x="44" y="630" class="body">UTF-8で解釈すると「HTTP あ」+ 改行</text>
+  <text x="44" y="672" class="body">Unicodeコードポイント7個、UTF-8は9byte</text>
+  <rect x="24" y="738" width="712" height="254" rx="14" fill="#fff"/>
+  <text x="44" y="784" class="heading">③ recvの区切りから、HTTPを復元する</text>
+  <text x="44" y="828" class="body">空行の途中で分かれる場合も、本文が続く場合もある</text>
+  <text x="44" y="870" class="mono">... 0D 0A 0D | 0A 48 54 54 50 ...</text>
+  <text x="44" y="912" class="body">上はバイト列の分割例。空行の後は本文へ持ち越す</text>
+  <text x="44" y="954" class="body">7byte上限はアプリの要求量。パケットの長さではない</text>
+  <rect x="24" y="1020" width="712" height="212" rx="14" fill="#e2eafa"/>
+  <text x="44" y="1066" class="heading">④ 本文の完成と、EOFを別に判定する</text>
+  <text x="44" y="1110" class="body">CL=9なら9byteを確認。不足でEOFなら未完成</text>
+  <text x="44" y="1152" class="body">今回はConnection: closeなので、その後EOFも確認</text>
+  <text x="44" y="1194" class="body">一般のHTTP/1.1では、接続を再利用できる</text>
+  <text x="32" y="1308" class="heading">この図は、固定GETへの200応答の例</text>
+  <text x="32" y="1354" class="body">Dateの値は説明のため省略。実行時にUTCで生成する</text>
+  <text x="32" y="1396" class="body">ヘッダーのbyte数は、Content-Lengthへ含めない</text>
+  <text x="32" y="1438" class="body">HEADや204などの本文規則、chunkedは別に扱う</text>
+  <text x="32" y="1480" class="body">リセット・期限切れを、正常なEOFに置き換えない</text>
+</svg>
