@@ -131,7 +131,7 @@ OSの名前解決APIが返すエラーは、こうしたDNS応答を含む処理
 
 名前解決が成功しても、相手のportが開いていること、TCP接続が成功すること、HTTPが成功することは確定しません。返ったアドレスは接続先の候補です。
 
-HTTPの`Host`などは、要求対象の名前を伝える仕事を持ちます。HTTPSでは、TLSで接続相手が元の対象名に対して適切かも確認します。解決したIPでURLの名前を機械的に置き換えれば、同じHTTP／HTTPSの意味と認証条件を保てるとは限りません。[HTTPの要求と対象](/network/http-messages.html)、[RFC 9110 §4.3.4: HTTPSの相手確認](https://www.rfc-editor.org/rfc/rfc9110.html#section-4.3.4)
+HTTPの`Host`などは、要求対象の名前を伝える仕事を持ちます。HTTPSでは、[TLSと証明書](/network/tls-https.html)で接続相手が元の対象名に対して適切かも確認します。解決したIPでURLの名前を機械的に置き換えれば、同じHTTP／HTTPSの意味と認証条件を保てるとは限りません。[HTTPの要求と対象](/network/http-messages.html)、[RFC 9110 §4.3.4: HTTPSの相手確認](https://www.rfc-editor.org/rfc/rfc9110.html#section-4.3.4)
 
 ## 観察記事で確かめる範囲
 

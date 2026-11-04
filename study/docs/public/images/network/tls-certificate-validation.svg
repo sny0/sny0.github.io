@@ -1,0 +1,41 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="760" height="1510" viewBox="0 0 760 1510" role="img" aria-labelledby="tls-cert-title tls-cert-desc">
+  <title id="tls-cert-title">証明書、期待する相手名、信頼方針を分けて検証する</title>
+  <desc id="tls-cert-desc">URLから期待する相手名を得て、サーバー証明書のSAN、期間、用途などを確認し、利用側の信頼アンカーへ至る証明書経路を検証する。SNIやHTTP Hostを送ることは相手の認証そのものではない。サーバーが証明書を提示するだけで、そのrootへの信頼が成立するものでもない。失効確認の条件はAPIと環境の方針による。APIから得る証明書の識別値、TLS版、暗号方式と、認証の成立、HTTPの結果を分ける。実行例は標準の検証をAPIに任せ、全ハンドシェイクを追跡しない。</desc>
+  <style>
+    text { font-family: "BIZ UDPGothic", "Yu Gothic", Meiryo, sans-serif; fill: #26352e; }
+    .heading { font-size: 28px; font-weight: 700; }
+    .body { font-size: 24px; }
+  </style>
+  <rect width="760" height="1510" rx="20" fill="#f4f8f4"/>
+  <text x="32" y="54" font-size="32" font-weight="700">証明書は、名前と信頼の方針で検証する</text>
+  <text x="32" y="98" class="body">証明書の取得、信頼の検証、HTTPの成功を分ける</text>
+  <rect x="24" y="130" width="712" height="160" rx="14" fill="#fff"/>
+  <text x="44" y="176" class="heading">① 期待する相手名を、URLから確認</text>
+  <text x="44" y="220" class="body">https://example.com/ の相手名は example.com</text>
+  <text x="44" y="262" class="body">SNI・HTTP Hostを送ること自体は認証ではない</text>
+  <rect x="24" y="318" width="712" height="284" rx="14" fill="#e2eafa"/>
+  <text x="44" y="364" class="heading">② サーバー証明書と、信頼経路を調べる</text>
+  <text x="44" y="408" class="body">サーバー証明書：SAN・公開鍵・有効期間など</text>
+  <text x="44" y="450" class="body">↓ 中間CAなどの証明書の署名を確認</text>
+  <text x="44" y="492" class="body">↓ 利用側が信頼するアンカーへ</text>
+  <text x="44" y="534" class="body">サーバーの提示だけで、rootへの信頼は生まれない</text>
+  <text x="44" y="576" class="body">root証明書が毎回送られる、という図ではない</text>
+  <rect x="24" y="630" width="712" height="200" rx="14" fill="#fff"/>
+  <text x="44" y="676" class="heading">③ 名前・期間・用途・信頼などを照合</text>
+  <text x="44" y="720" class="body">SANの対象名と、期待した名前を照合する</text>
+  <text x="44" y="762" class="body">有効期間・server認証用途・経路などを検証</text>
+  <text x="44" y="804" class="body">失効確認や追加条件は、API・環境の方針による</text>
+  <rect x="24" y="858" width="712" height="160" rx="14" fill="#e9efe6"/>
+  <text x="44" y="904" class="heading">④ 暗号化と、正しい相手の認証は別</text>
+  <text x="44" y="948" class="body">暗号化できただけでは、正しい相手とは決まらない</text>
+  <text x="44" y="990" class="body">APIの認証失敗を、HTTPの成功へ置き換えない</text>
+  <rect x="24" y="1046" width="712" height="200" rx="14" fill="#dcece0"/>
+  <text x="44" y="1092" class="heading">⑤ 観察できる情報と、保証の範囲</text>
+  <text x="44" y="1136" class="body">API：TLS版・暗号方式・証明書・HTTPの結果</text>
+  <text x="44" y="1178" class="body">証明書のSHA-256値だけでは、認証は成立しない</text>
+  <text x="44" y="1220" class="body">TLS成功だけで、Web内容や処理が安全とは限らない</text>
+  <text x="32" y="1354" class="heading">実践は、標準の検証をAPIに任せる</text>
+  <text x="32" y="1400" class="body">接続情報の取得は、全メッセージの追跡ではない</text>
+  <text x="32" y="1442" class="body">信頼設定・相手の応答・取得できる情報は変わる</text>
+  <text x="32" y="1484" class="body">実行例はHTTP/1.1。HTTP/3の動作は別の範囲</text>
+</svg>
