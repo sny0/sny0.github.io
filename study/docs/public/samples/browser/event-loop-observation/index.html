@@ -1,0 +1,101 @@
+<!doctype html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="light">
+  <title>イベントループの順序を観察する | Sny0 Study</title>
+  <link rel="canonical" href="https://sny0.com/study/samples/browser/event-loop-observation/index.html">
+  <link rel="stylesheet" href="./styles.css">
+  <script src="./main.js" defer></script>
+</head>
+<body>
+  <main>
+    <header class="page-header">
+      <a href="https://sny0.com/study/practice/browser/event-loop-observation.html">Sny0 Studyの解説へ戻る</a>
+      <p class="eyebrow">JavaScript / Browser event loop</p>
+      <h1>予約した順と、<br>実行された順を比べる</h1>
+      <p>各ケースの予測を読んでから実行し、下のログで確かめます。Promise・await・timer・rAFを、有限の小さな処理で見比べる実験です。</p>
+    </header>
+
+    <noscript><p class="notice">この実験の操作にはJavaScriptが必要です。</p></noscript>
+
+    <div class="case-grid">
+      <section class="case-card" data-case="A" aria-labelledby="heading-a">
+        <p class="case-label">CASE A</p>
+        <h2 id="heading-a">同期・Promise・await</h2>
+        <p>Promiseのexecutorと、async関数のawaitより前は、呼出し中に実行されます。</p>
+        <details>
+          <summary>このケースの予測順を見る</summary>
+          <ol class="prediction">
+            <li><code>sync:start</code></li>
+            <li><code>Promise:executor</code></li>
+            <li><code>async:before-await</code></li>
+            <li><code>sync:end</code></li>
+            <li><code>Promise:then</code></li>
+            <li><code>queueMicrotask</code></li>
+            <li><code>async:after-await</code></li>
+            <li><code>timer:0ms</code></li>
+          </ol>
+        </details>
+        <button type="button" data-run="A">ケースAを実行</button>
+      </section>
+
+      <section class="case-card" data-case="B" aria-labelledby="heading-b">
+        <p class="case-label">CASE B</p>
+        <h2 id="heading-b">途中で追加するmicrotask</h2>
+        <p>microtaskの中で次を予約します。3つで終わり、その後timerへ進みます。</p>
+        <details>
+          <summary>このケースの予測順を見る</summary>
+          <ol class="prediction">
+            <li><code>sync:start</code></li>
+            <li><code>sync:end</code></li>
+            <li><code>microtask:1</code></li>
+            <li><code>microtask:2</code></li>
+            <li><code>microtask:3</code></li>
+            <li><code>timer:0ms</code></li>
+          </ol>
+        </details>
+        <button type="button" data-run="B">ケースBを実行</button>
+      </section>
+
+      <section class="case-card" data-case="C" aria-labelledby="heading-c">
+        <p class="case-label">CASE C</p>
+        <h2 id="heading-c">rAFとtimerを比べる</h2>
+        <p>Promise・rAF・timerを予約します。コード上の予約順だけで、rAFとtimerの相対順は決めません。</p>
+        <details>
+          <summary>固定する部分と観察する部分を見る</summary>
+          <ol class="prediction">
+            <li><code>sync:start</code></li>
+            <li><code>sync:end</code></li>
+            <li><code>Promise:then</code></li>
+          </ol>
+          <p class="help">この後の<code>rAF:callback</code>と<code>timer:0ms</code>は実際の順を観察します。両方が終わるまで実行中です。</p>
+        </details>
+        <button type="button" data-run="C">ケースCを実行</button>
+      </section>
+    </div>
+
+    <section class="panel" aria-labelledby="log-heading">
+      <div class="log-heading">
+        <h2 id="log-heading">実行ログ <span class="subtle">最新40件</span></h2>
+        <button type="button" id="reset" class="secondary">ログと予約を初期化</button>
+      </div>
+      <p id="run-state" class="run-state">待機中。ケースを一つ選んでください。</p>
+      <p id="visibility-state" class="help"></p>
+      <p class="help">時刻はログ記録時の<code>performance.now()</code>です。rAFの引数timestampは別に記載します。どちらもpaint・画面表示の完了時刻ではありません。</p>
+      <p id="empty-log" class="empty-log">まだ実行ログはありません。</p>
+      <ol id="event-log" class="event-log"></ol>
+    </section>
+
+    <aside class="notice" aria-labelledby="limits-heading">
+      <h2 id="limits-heading">観察するときの注意</h2>
+      <p><code>setTimeout(..., 0)</code>は、その行でcallbackを即実行する指定ではありません。rAFは描画の更新に関係するcallbackで、独立した「万能FIFO task queue」に全部を並べるモデルでは説明しません。</p>
+      <p>非表示のタブではrAFが遅延・抑制され得ます。ケースCが待機したままならタブを表示するか、初期化してください。初期化は常時使え、timerとrAFを取り消し、古い世代のmicrotaskからの記録も無視します。</p>
+      <p>外部依存、fetch、storage、analyticsはありません。無限のmicrotask連鎖、busy loop、毎フレームのループは実行しません。ログを表示するDOM更新も処理の一部です。</p>
+    </aside>
+    <p id="announcement" class="visually-hidden" role="status" aria-live="polite" aria-atomic="true"></p>
+    <footer><a href="https://sny0.com/study/practice/browser/event-loop-observation.html">手順とソースの解説を読む</a></footer>
+  </main>
+</body>
+</html>

@@ -30,7 +30,8 @@ export default withMermaid(defineConfig({
     hostname: 'https://sny0.com',
     transformItems: items => [
       ...items.map(item => ({ ...item, url: '/study/' + item.url.replace(/^\/+/, '') })),
-      { url: '/study/samples/browser/render-observation/index.html' }
+      { url: '/study/samples/browser/render-observation/index.html' },
+      { url: '/study/samples/browser/event-loop-observation/index.html' }
     ]
   },
   head: [

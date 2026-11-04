@@ -1,0 +1,47 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="760" height="1510" viewBox="0 0 760 1510" role="img" aria-labelledby="title desc">
+  <title id="title">タスク、マイクロタスク、描画更新の関係</title>
+  <desc id="desc">複数のタスク源から実行可能なタスクを選び、JavaScriptの実行と所定のマイクロタスクチェックポイントを処理する概念図。描画更新は描画機会に応じて予定され、一タスクごとの表示を保証しない。</desc>
+  <defs>
+    <style>text{font-family:'BIZ UDPGothic','Yu Gothic',Meiryo,sans-serif;fill:#26352e}.title{font-size:32px;font-weight:700}.head{font-size:28px;font-weight:700}.body{font-size:24px}.small{font-size:22px}.card{fill:white;stroke:#739483;stroke-width:2}.arrow{fill:none;stroke:#567963;stroke-width:3;marker-end:url(#a)}</style>
+    <marker id="a" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto"><path d="M0 0L10 5L0 10Z" fill="#567963"/></marker>
+  </defs>
+  <rect width="760" height="1510" rx="24" fill="#f4f8f4"/>
+  <text x="40" y="56" class="title">イベントループと描画の機会</text>
+  <text x="40" y="96" class="body">Window側の概念図。細かな条件は本文へ。</text>
+  <rect x="36" y="122" width="668" height="226" rx="18" fill="#e2eafa"/>
+  <text x="60" y="164" class="head">タスクの発生源は複数ある</text>
+  <text x="60" y="204" class="body">ユーザー入力 ／ timer ／ 通信など</text>
+  <text x="60" y="244" class="body">描画の機会に応じて、描画更新も予定する。</text>
+  <text x="60" y="287" class="small">全種類を一つの万能FIFOに並べたモデルではない。</text>
+  <text x="60" y="321" class="small">異なる発生源の相対順を、登録時刻だけで決めない。</text>
+  <path d="M370 350V380" class="arrow"/>
+  <rect x="36" y="388" width="668" height="160" rx="18" class="card"/>
+  <text x="60" y="430" class="head">実行可能なタスクを選んで処理</text>
+  <text x="60" y="470" class="body">通常の同期JavaScriptは、呼出しをたどって</text>
+  <text x="60" y="508" class="body">実行する。別のcallbackが勝手に割り込まない。</text>
+  <text x="60" y="538" class="small">長い同期処理は、同じ実行先での入力等を待たせる。</text>
+  <path d="M370 550V578" class="arrow"/>
+  <rect x="36" y="586" width="668" height="212" rx="18" fill="#dcece0"/>
+  <text x="60" y="628" class="head">マイクロタスクのチェックポイント</text>
+  <text x="60" y="668" class="body">Promiseの反応やqueueMicrotaskの続きを処理</text>
+  <text x="60" y="706" class="body">途中で追加されたものも、空になるまで進める。</text>
+  <text x="60" y="750" class="small">タスク末尾に加え、scriptやcallbackを終える際など</text>
+  <text x="60" y="784" class="small">仕様で定める節目にも行う。詳細条件は省略。</text>
+  <path d="M706 692H734V462H707" class="arrow"/>
+  <rect x="36" y="836" width="688" height="224" rx="18" class="card"/>
+  <text x="60" y="878" class="head">描画更新タスクでは（概念）</text>
+  <text x="60" y="918" class="body">rAFなどのcallbackと、必要な描画更新を行う。</text>
+  <text x="60" y="956" class="body">毎タスク後の描画や、固定60Hzは保証しない。</text>
+  <text x="60" y="1000" class="small">描画更新の内部にも、複数の処理やcheckpointがある。</text>
+  <text x="60" y="1034" class="small">rAFの実行は、物理画面への表示完了通知ではない。</text>
+  <rect x="36" y="1086" width="688" height="178" rx="18" fill="#e2eafa"/>
+  <text x="60" y="1128" class="head">Promise ／ timer ／ rAFを区別する</text>
+  <text x="60" y="1168" class="body">Promiseの続きはマイクロタスクとして進む。</text>
+  <text x="60" y="1206" class="body">timer 0msとrAFの相対順は固定しない。</text>
+  <text x="60" y="1240" class="small">同じ観測順が何度出ても、仕様の保証とは別。</text>
+  <rect x="36" y="1290" width="688" height="184" rx="18" fill="#e9efe6"/>
+  <text x="60" y="1332" class="head">空にならないマイクロタスク列に注意</text>
+  <text x="60" y="1372" class="body">続きを追加し続けると、次のタスクや描画更新を</text>
+  <text x="60" y="1410" class="body">待たせる。Promiseだけで繰り返しても解決しない。</text>
+  <text x="60" y="1450" class="small">付属の実験は3個の有限列。無限連鎖は実行しない。</text>
+</svg>

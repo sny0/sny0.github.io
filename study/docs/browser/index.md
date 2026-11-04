@@ -19,6 +19,7 @@ URLを開いてから描画されるまでを、通信・実行・表示に分�
 
 ## 辞典の本文
 
+- [イベントループ・Promise・async/await — 実行順と描画の関係](/browser/event-loop-promises.html)
 - [ブラウザの描画 — HTMLから画面のピクセルまで](/browser/rendering-journey.html)
 
 ## この分野の学習ガイド
@@ -28,6 +29,7 @@ URLを開いてから描画されるまでを、通信・実行・表示に分�
 ## 作って試す
 
 - [HTML・CSS・JavaScriptでブラウザの変更と計測を観察する](/practice/browser/render-observation.html)
+- [ブラウザでPromise・await・timer・rAFの順序を観察する](/practice/browser/event-loop-observation.html)
 
 ## 扱う範囲・増補する項目
 

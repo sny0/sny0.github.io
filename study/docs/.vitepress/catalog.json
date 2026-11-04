@@ -69,7 +69,7 @@
       "id": "browser",
       "title": "ブラウザ",
       "description": "URLを開いてから描画されるまでを、通信・実行・表示に分ける。",
-      "count": 1,
+      "count": 2,
       "status": "辞典本文あり"
     },
     {
@@ -130,6 +130,13 @@
     }
   ],
   "collections": [
+    {
+      "id": "event-loop-observation",
+      "section": "practice",
+      "title": "ブラウザでPromiseとawaitの実行順を観察する",
+      "description": "同期処理、Promise、有限のマイクロタスク列、timerとrAFのcallbackを記録し、保証される順序と観測した順序を分ける。",
+      "start": "/practice/browser/event-loop-observation.html"
+    },
     {
       "id": "render-observation",
       "section": "practice",
@@ -4315,6 +4322,47 @@
       ]
     },
     {
+      "title": "イベントループ・Promise・async/await — 実行順と描画の関係",
+      "url": "/browser/event-loop-promises.html",
+      "file": "browser/event-loop-promises.md",
+      "domain": "browser",
+      "section": "reference",
+      "format": "article",
+      "status": "published",
+      "summary": "ブラウザのJavaScriptで、同期実行、task、microtask、Promiseの状態確定、await後の継続を分けて説明する。非同期I/OとCPU仕事、タイマーと描画の機会、エラー処理と実行順の観測の限界を整理する。",
+      "source": "新規執筆",
+      "aliases": [
+        "event loop",
+        "イベントループ",
+        "task",
+        "task source",
+        "microtask",
+        "マイクロタスク",
+        "microtask checkpoint",
+        "run-to-completion",
+        "execution stack",
+        "Promise",
+        "executor",
+        "settlement",
+        "reaction",
+        "async",
+        "await",
+        "continuation",
+        "継続",
+        "queueMicrotask",
+        "setTimeout",
+        "requestAnimationFrame",
+        "starvation"
+      ],
+      "verification": "一次資料照合（2026-11-04）",
+      "links": [
+        "/browser/rendering-journey.html",
+        "/network/http-messages.html",
+        "/os/asynchronous-file-io.html",
+        "/practice/browser/event-loop-observation.html"
+      ]
+    },
+    {
       "title": "イベント通知(通知設計の総合判断)の設計",
       "url": "/design/case-studies/event-notification.html",
       "file": "design/case-studies/event-notification.md",
@@ -5598,6 +5646,34 @@
       ]
     },
     {
+      "title": "ブラウザでPromise・await・timer・rAFの順序を観察する",
+      "url": "/practice/browser/event-loop-observation.html",
+      "file": "practice/browser/event-loop-observation.md",
+      "domain": "browser",
+      "section": "practice",
+      "format": "sample",
+      "status": "published",
+      "summary": "同期処理、Promise executor、then、queueMicrotask、await後の継続、timer、rAFを有限の3ケースで実行し、予測できる順序と実行して観察する順序を区別する。",
+      "source": "新規執筆",
+      "aliases": [
+        "イベントループ",
+        "Promise",
+        "async",
+        "await",
+        "queueMicrotask",
+        "microtask",
+        "setTimeout",
+        "requestAnimationFrame",
+        "rAF"
+      ],
+      "collection": "event-loop-observation",
+      "order": 1,
+      "verification": "ブラウザ実行確認（2026-11-04、ローカルHTTP）",
+      "links": [
+        "/browser/event-loop-promises.html"
+      ]
+    },
+    {
       "title": "ブラウザの描画 — HTMLから画面のピクセルまで",
       "url": "/browser/rendering-journey.html",
       "file": "browser/rendering-journey.md",
@@ -5639,7 +5715,8 @@
         "/network/http-messages.html",
         "/data/unicode-and-encoding.html",
         "/os/process-startup.html",
-        "/practice/browser/render-observation.html"
+        "/practice/browser/render-observation.html",
+        "/browser/event-loop-promises.html"
       ]
     },
     {
@@ -6431,6 +6508,8 @@
         "/practice/network/https-observation.html",
         "/browser/rendering-journey.html",
         "/practice/browser/render-observation.html",
+        "/browser/event-loop-promises.html",
+        "/practice/browser/event-loop-observation.html",
         "/history/video-games.html",
         "/guide/rendering/timeline.html"
       ]
@@ -8542,6 +8621,7 @@
       "source": "統合ガイド",
       "aliases": [],
       "links": [
+        "/browser/event-loop-promises.html",
         "/browser/rendering-journey.html",
         "/network/tls-https.html",
         "/network/dns-resolution.html",
