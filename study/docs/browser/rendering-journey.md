@@ -108,4 +108,4 @@ JavaScriptで`textContent`、class、styleなどを変えると、エンジン�
 
 [描画変更と寸法APIの実践](/practice/browser/render-observation.html)では、外部依存のないHTML・CSS・classic JavaScriptで、幅、背景色、transform、opacity、DOMの文字内容を変更し、スタイル値や寸法を明示的に採取します。これはC++やC#で描画エンジンを自作する例ではなく、ブラウザが公開するAPIを使う観察です。
 
-得られた値は「この時点でAPIが返した文書の状態」です。そこから実際のLayout／Paintの回数、レイヤー数、GPUだけで実行されたことまでは判断しません。それらには開発者ツールのPerformance記録など、別の観測手段が必要です。イベントループ、ページの可視性による実行制御、描画トレースの読み方は、その観測条件を掘り下げる別のテーマです。
+得られた値は「この時点でAPIが返した文書の状態」です。そこから実際のLayout／Paintの回数、レイヤー数、GPUだけで実行されたことまでは判断しません。それらには開発者ツールのPerformance記録など、別の観測手段が必要です。JavaScriptの続きと描画機会の関係は、[イベントループ・Promise・async/await](/browser/event-loop-promises.html)で扱います。ページの可視性による実行制御や描画トレースの読み方も、観測条件を掘り下げるテーマです。

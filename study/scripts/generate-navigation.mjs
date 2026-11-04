@@ -274,11 +274,18 @@ writePage('guide/learning-paths.md', '疑問から選ぶ読み順', {
 2. [ブラウザの描画](/browser/rendering-journey.html)で、受信したHTMLからDOM、スタイル、レイアウト、描画、合成までをつなぐ。
 3. [DOMと描画の変化を観察する](/practice/browser/render-observation.html)で、幅・色・移動・透明度を変え、寸法APIとrAFで確認できる範囲を試す。
 
+## Promiseやawaitの続きは、いつ動くのか
+
+1. [イベントループ・Promise・async/await](/browser/event-loop-promises.html)で、同期処理、タスク、マイクロタスク、描画機会を区別する。
+2. [Promiseとawaitの実行順を観察する](/practice/browser/event-loop-observation.html)で、有限のコードから実行順を記録する。timerとrAFの相対順は固定しない。
+3. 画面の更新は[ブラウザの描画](/browser/rendering-journey.html)、要求の発行と完了は[非同期I/O](/os/asynchronous-file-io.html)へつなげる。
+
 ## 作り方の変化を歴史から見る
 
 [ビデオゲーム史](/history/video-games.html)の作品・ハード・媒体・流通と、[リアルタイム3D技術史](/guide/rendering/timeline.html)の技術の変化から、気になった仕組みへ進みます。`)
 
 const termRows = [
+  ['イベントループ / event loop / task / microtask / マイクロタスク / Promise / async / await / queueMicrotask / setTimeout', '/browser/event-loop-promises.html', '同期処理と非同期の続き、Promiseの状態、実行順と描画機会の関係を調べる'],
   ['DOM / CSSOM / スタイル計算 / layout / paint / raster / composite / rAF / requestAnimationFrame', '/browser/rendering-journey.html', 'HTMLからピクセルまでの段階と、変更後の更新、寸法取得、描画前のcallbackを調べる'],
   ['TLS / HTTPS / 証明書 / SAN / CA / 信頼アンカー / SNI / ALPN / 鍵共有 / CertificateVerify / AEAD', '/network/tls-https.html', '暗号化と相手の検証、鍵共有、証明書の信頼、TLSとHTTPの境界を調べる'],
   ['DNS / 名前解決 / リゾルバー / 権威DNS / A / AAAA / CNAME / TTL / NXDOMAIN / NODATA', '/network/dns-resolution.html', '名前解決API、委任をたどる問い合わせ、レコードとキャッシュ、失敗の違いを調べる'],

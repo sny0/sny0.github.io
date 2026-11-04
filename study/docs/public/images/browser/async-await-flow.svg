@@ -1,0 +1,48 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="760" height="1510" viewBox="0 0 760 1510" role="img" aria-labelledby="title desc">
+  <title id="title">async関数とawaitの続きが実行されるまで</title>
+  <desc id="desc">async関数はawait前まで同期に実行し、awaitで残りを中断して呼出し元が続く。待つ値の結果に応じてマイクロタスクとして再開し、返却するPromiseが最終結果を表す。新しいスレッドを作る機能ではない。</desc>
+  <defs>
+    <style>text{font-family:'BIZ UDPGothic','Yu Gothic',Meiryo,sans-serif;fill:#26352e}.title{font-size:32px;font-weight:700}.head{font-size:28px;font-weight:700}.body{font-size:24px}.small{font-size:22px}.card{fill:white;stroke:#739483;stroke-width:2}.arrow{fill:none;stroke:#567963;stroke-width:3;marker-end:url(#a)}</style>
+    <marker id="a" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto"><path d="M0 0L10 5L0 10Z" fill="#567963"/></marker>
+  </defs>
+  <rect width="760" height="1510" rx="24" fill="#f4f8f4"/>
+  <text x="40" y="56" class="title">awaitで中断するのは「関数の続き」</text>
+  <text x="40" y="96" class="body">通常のPromiseをawaitする場合の概念図</text>
+  <rect x="36" y="122" width="688" height="160" rx="18" class="card"/>
+  <text x="60" y="164" class="head">① async関数を呼び出す</text>
+  <text x="60" y="204" class="body">最初のawaitまでの本体は同期に実行する。</text>
+  <text x="60" y="242" class="body">呼んだ瞬間に別スレッドへ送る指定ではない。</text>
+  <text x="60" y="272" class="small">awaitに達する前の重い計算も、その場で仕事になる。</text>
+  <path d="M380 284V314" class="arrow"/>
+  <rect x="36" y="322" width="688" height="190" rx="18" fill="#e2eafa"/>
+  <text x="60" y="364" class="head">② awaitに達して、残りを中断する</text>
+  <text x="60" y="404" class="body">待つ値をPromiseとして扱い、結果につなぐ。</text>
+  <text x="60" y="442" class="body">呼出し元には、このasync関数のPromiseが返る。</text>
+  <text x="60" y="485" class="small">既にfulfilledでも、awaitの続きはその場で直結しない。</text>
+  <path d="M380 514V544" class="arrow"/>
+  <rect x="36" y="552" width="688" height="160" rx="18" class="card"/>
+  <text x="60" y="594" class="head">③ 呼出し元の同期処理が続く</text>
+  <text x="60" y="634" class="body">待つ側の関数は中断しても、JavaScript全体を</text>
+  <text x="60" y="672" class="body">ブロックして完了を待つ形にはならない。</text>
+  <text x="60" y="702" class="small">Promiseは結果と続きのつながりを表す。</text>
+  <path d="M380 714V744" class="arrow"/>
+  <rect x="36" y="752" width="688" height="204" rx="18" fill="#dcece0"/>
+  <text x="60" y="794" class="head">④ 結果に応じてマイクロタスクで再開</text>
+  <text x="60" y="834" class="body">fulfilled → await式の値を得て続ける。</text>
+  <text x="60" y="872" class="body">rejected → await式からthrowとして進む。</text>
+  <text x="60" y="915" class="small">catchで扱える。途中に別のawaitがあれば再び中断。</text>
+  <text x="60" y="947" class="small">再開はチェックポイントでの処理に従う。</text>
+  <path d="M380 958V988" class="arrow"/>
+  <rect x="36" y="996" width="688" height="186" rx="18" class="card"/>
+  <text x="60" y="1038" class="head">⑤ 呼出し元が受けたPromiseへ結果を反映</text>
+  <text x="60" y="1078" class="body">通常の値をreturn → その値でfulfilled</text>
+  <text x="60" y="1116" class="body">未処理の例外 → その理由でrejected</text>
+  <text x="60" y="1159" class="small">呼出し元もawaitやthen/catchで結果へつなげられる。</text>
+  <rect x="36" y="1210" width="688" height="264" rx="18" fill="#e9efe6"/>
+  <text x="60" y="1252" class="head">「待つ仕組み」と「仕事をする場所」は別</text>
+  <text x="60" y="1292" class="body">PromiseやawaitだけでCPU処理は並列化しない。</text>
+  <text x="60" y="1330" class="body">I/Oの進行、workerなどの実行資源は別に考える。</text>
+  <text x="60" y="1376" class="small">await Promise.resolve()を繰り返しても、</text>
+  <text x="60" y="1410" class="small">毎回次のタスクやpaintへ譲る保証はない。</text>
+  <text x="60" y="1444" class="small">C#のTask/awaitとは、実行基盤の規則を分けて読む。</text>
+</svg>
