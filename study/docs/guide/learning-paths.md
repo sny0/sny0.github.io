@@ -11,7 +11,7 @@
     "domain": "guide",
     "collection": "questions",
     "order": 0,
-    "summary": "整数・浮動小数点、文字コード、メモリ確保、起動、同期、ファイルI/Oとマッピング、アセットロード、入力と描画、Webの疑問から本文をたどる。"
+    "summary": "整数・浮動小数点、文字コード、メモリ確保、起動、同期、ファイルI/Oとマッピング、アセットロード、TCP通信、入力と描画、Webの疑問から本文をたどる。"
   }
 }
 ---
@@ -99,9 +99,15 @@
 3. [座標変換](/math/rendering/transform.html)と[描画パイプライン](/graphics/pipeline/overview.html)から画面へつなぐ。
 4. 作って試すなら[シューティングの設計](/game/shooter-design.html)を読み、[C++版](/game/shooter-cpp.html)または[Unity版](/game/shooter-unity.html)へ進む。
 
+## sendしたデータが、相手のアプリへ届くまで
+
+1. [ソケットとTCP通信](/network/tcp-sockets.html)で、IP・ポート、送受信バッファ、バイト列とメッセージ、半閉鎖を分ける。
+2. [C++・C#のローカル通信](/practice/network/tcp-loopback-observation.html)で、長さ付きメッセージを復元し、送信停止後の応答と受信EOFを確かめる。
+3. 待機と非同期処理の基本は[非同期I/O](/os/asynchronous-file-io.html)へ進む。今回の通信例は、非ブロッキング操作とreadiness待ちを使う。
+
 ## URLを開いてからページが見えるまで
 
-[ネットワーク](/network/)と[ブラウザ](/browser/)の専用本文は準備中です。両ページには扱う範囲を記しています。学習計画と、既に読める詳しい説明を区別して増補します。
+[ネットワーク](/network/)には[ソケットとTCPの本文](/network/tcp-sockets.html)があります。DNS・TLS・HTTPと[ブラウザ](/browser/)の専用詳解は準備中です。通信の基礎と、URLから表示までの全体像を区別して増補します。
 
 ## 作り方の変化を歴史から見る
 

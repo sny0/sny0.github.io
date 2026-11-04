@@ -17,6 +17,8 @@ study:
 
 ここではWindowsの通常ファイルを対象に、C++のOVERLAPPED I/OとC#の`FileStream.ReadAsync`を説明します。他OSやすべてのランタイムが同じ内部方式とはしません。ファイル位置、実際に読めた数、キャッシュ、byteとデコードの区別は[ファイルを読む仕組み](/os/file-read-journey.html)を参照してください。
 
+[TCPソケット](/network/tcp-sockets.html)で非blockingソケットを`select`／`Poll`で待つ方法は、操作できる状態を調べる**readiness**の方式です。発行済み要求の完了を受け取る方式と区別します。読取り可能という通知だけでデータの到着やアプリのメッセージ完成を決めず、実際の受信結果でデータ・EOF・エラーを判断します。[Microsoft: select](https://learn.microsoft.com/en-us/windows/win32/api/winsock2/nf-winsock2-select)、[Socket.Poll](https://learn.microsoft.com/en-us/dotnet/api/system.net.sockets.socket.poll?view=net-10.0)
+
 [メモリマップドファイル](/os/memory-mapped-files.html)は、ファイルの範囲を仮想アドレス空間へ対応付ける別のアクセス方式です。マッピングしただけで全データの読取りが完了したり、非同期readを発行したりしたことにはなりません。ビューへのアクセス自体でページの準備やI/Oを待つ場合があるため、このページの「要求を発行して後から完了を回収する」手順と区別します。[Microsoft: File Mapping](https://learn.microsoft.com/en-us/windows/win32/memory/file-mapping)
 
 ## 同期・非同期と、並列実行は別の軸
@@ -92,6 +94,8 @@ Windowsのカーネル側には、ドライバーへI/Oを渡す**IRP**（I/O Re
 同期`ReadFile`の「成功して実際数0」というEOF判定を、OVERLAPPED版へそのまま移しません。非同期版では、開始時や結果の回収時に`ERROR_HANDLE_EOF`としてEOFを受け取る場合があります。通常のエラーと区別して読み取りを終えます。[Microsoft: Testing for the End of a File](https://learn.microsoft.com/en-us/windows/win32/fileio/testing-for-the-end-of-a-file)
 
 末尾までの残りが要求数より少なければ、その分だけ成功して返ることもあります。読み取れた部分を処理し、必要な長さに足りるかはアプリの形式に従って検査します。byteの内容、要求数と実際数の扱いは[同期ファイル読取りの記事](/os/file-read-journey.html)と共通ですが、完了を受け取る契約を混同しません。
+
+TCPの正の長さを要求した通常の`recv`では、相手が送信を正常終了し、届いているデータを読み終えると0を受け取ります。接続リセットなどのエラーや、自分の送信方向を閉じる操作とは別です。ファイルの`ERROR_HANDLE_EOF`判定を流用せず、[ループバック実践](/practice/network/tcp-loopback-observation.html)で受信の終端と応答を確かめます。[Microsoft: recv](https://learn.microsoft.com/en-us/windows/win32/api/winsock2/nf-winsock2-recv)
 
 ## C#のReadAsyncと、一度だけのawait
 

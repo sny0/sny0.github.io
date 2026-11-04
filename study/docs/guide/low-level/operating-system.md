@@ -3,7 +3,7 @@ title: 第8章 OSの仕組み
 study:
   source: IT教本
   status: outline
-  summary: プロセス、スレッド、仮想メモリ、システムコール、I/Oを学ぶ計画。起動・メモリ・データ共有・ファイル読取りの辞典本文と観察例へつなぐ。
+  summary: プロセス、スレッド、仮想メモリ、システムコール、I/Oを学ぶ計画。起動・メモリ・データ共有・ファイル読取り・TCPソケットの辞典本文と観察例へつなぐ。
   verification: 同期・I/O項目の一次資料照合（2026-11-04）
   section: learning
   format: path
@@ -33,6 +33,7 @@ study:
 - [非同期ファイルI/O](/os/asynchronous-file-io.html)で要求の開始と完了、バッファや要求情報の寿命を調べ、[同期・非同期の観察例](/practice/io/async-file-read-observation.html)で同じ内容を読み比べられます。
 - [メモリマップドファイル](/os/memory-mapped-files.html)でファイル・仮想アドレス・ページの関係を調べ、[マッピングの観察例](/practice/io/mapped-file-observation.html)でビューの範囲と寿命を確かめられます。
 - I/Oの先の状態・登録・所有権は[実行時のアセットロード](/game/asset-loading.html)へ進みます。[状態と寿命の実践](/practice/assets/asset-lifecycle-model.html)は実I/OやGPUを使わないモデルです。
+- [TCPとソケット](/network/tcp-sockets.html)で接続・バイト列・受信の区切り・送信終了を調べ、[ループバック通信の観察例](/practice/network/tcp-loopback-observation.html)で部分送受信とEOF、アプリの応答を確かめられます。
 
 ## 学ぶ理由
 
@@ -54,6 +55,7 @@ study:
 - 通常のファイル読取りで、要求量・実際の読取り量・位置・EOF・失敗を分けて確認できる
 - 非同期I/Oの開始と完了を分け、未完了の要求が使うバッファや管理情報の寿命を説明できる
 - ファイルマッピングとreadを区別し、ビューの作成・アクセス・解除の境界を説明できる
+- TCPのバイト列とアプリのメッセージ境界、readinessとI/O完了、受信EOFと送信終了を区別できる
 
 ## 前提知識
 
@@ -117,6 +119,8 @@ study:
    - 同期I/Oと非同期I/Oは、完了をどう待つか、完了結果をどう受け取るかの違いを学ぶ。WindowsのOverlapped I/Oでもすぐ完了する場合や呼出し側が待つ場合があり、非同期を選べば必ず高速になるわけではない。要求中のバッファや管理情報は完了まで有効に保ち、同期版のEOF判定も無条件に流用しない。[非同期I/Oの本文](/os/asynchronous-file-io.html)、[Microsoftの同期・非同期I/O](https://learn.microsoft.com/en-us/windows/win32/fileio/synchronous-and-asynchronous-i-o)を参照
    - 観察例ではC++のOVERLAPPEDと手動リセットイベント、C#／.NET 10の`FileOptions.Asynchronous`と`ReadAsync`を扱う。`async`や`await`は要求ごとの専用スレッド作成を意味しない。IOCPの実践詳解は次の発展項目とする。[Microsoftのasyncとスレッド](https://learn.microsoft.com/en-us/dotnet/csharp/asynchronous-programming/task-asynchronous-programming-model#threads)を参照
    - アセットの読取り完了とゲームで利用可能なReadyを区別する。展開・デコード・登録・転送などの条件は[アセットロードの本文](/game/asset-loading.html)で学び、OSのI/O契約とエンジン側の状態管理をつなぐ
+   - ネットワークでは[TCPソケットの本文](/network/tcp-sockets.html)で、バイト列を必要量まで累積し、アプリがメッセージの区切りを決める。`send`の成功は相手の受信・解析完了の保証ではなく、必要ならアプリの応答で確認する。[Microsoft: send](https://learn.microsoft.com/en-us/windows/win32/api/winsock2/nf-winsock2-send)を参照
+   - 非blockingソケットの`select`や`Poll`は、送受信できる状態などを調べる方式。発行済みOVERLAPPED要求の完了回収とは別で、通知後も実際の送受信結果を確認する。読取り可能にはデータだけでなく接続終了やエラーも含まれ得る。[Microsoft: select](https://learn.microsoft.com/en-us/windows/win32/api/winsock2/nf-winsock2-select)、[Socket.Poll](https://learn.microsoft.com/en-us/dotnet/api/system.net.sockets.socket.poll?view=net-10.0)を参照
    - 高精度タイマ QueryPerformanceCounter(第14章で使用)
 8. **(演習として)OS自作という選択肢**
    - 『ゼロからのOS自作入門』は最高の理解をくれるが時間も莫大。
@@ -160,6 +164,7 @@ study:
 7. [ファイル読取りの観察例](/practice/io/file-read-observation.html)を実行し、要求した量と実際の読取り量、位置の変化、EOF、失敗を確認せよ。扱う既知のbyte列と照合し、読んでいないバッファ部分まで有効なデータとして使わない理由を説明せよ。
 8. [同期・非同期の読取り観察例](/practice/io/async-file-read-observation.html)で、同じデータを読む結果と完了の受取りを比べよ。内容の一致を確かめ、開始後の未完了状態が毎回現れることや、非同期版が必ず速いことを期待条件にしない。
 9. [ファイルマッピングの観察例](/practice/io/mapped-file-observation.html)で既知のbyte列を読み、ファイル内の位置とビュー内の位置、ビューの範囲と寿命を説明せよ。成功だけから全ページの常駐や通常のreadより速いことを結論にしない。
+10. [TCPループバックの観察例](/practice/network/tcp-loopback-observation.html)で、部分的な送受信を累積し、長さ付きメッセージ、片方向の送信終了、相手アプリの応答を区別せよ。APIへ渡す小さな要求量やログの分割を、実際のパケットの区切りとして扱わない。
 
 ## おすすめ書籍
 

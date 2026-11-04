@@ -76,8 +76,8 @@
       "id": "network",
       "title": "ネットワーク",
       "description": "通信の層と失敗を、Webとゲームの両方から調べる。",
-      "count": 0,
-      "status": "辞典本文を準備中"
+      "count": 1,
+      "status": "辞典本文あり"
     },
     {
       "id": "math",
@@ -130,6 +130,13 @@
     }
   ],
   "collections": [
+    {
+      "id": "tcp-loopback-observation",
+      "section": "practice",
+      "title": "C++とC#でTCPのバイト列と半閉鎖を観察する",
+      "description": "同じPC内の接続で、送受信量、長さ付きメッセージ、EOF、アプリ応答を確かめる。",
+      "start": "/practice/network/tcp-loopback-observation.html"
+    },
     {
       "id": "mapped-file-observation",
       "section": "practice",
@@ -850,6 +857,37 @@
       "links": [
         "/math/floating-point-comparison.html",
         "/practice/data/float-spacing-observation.html"
+      ]
+    },
+    {
+      "title": "C++とC#でTCPのフレーム復元と半閉鎖を観察する",
+      "url": "/practice/network/tcp-loopback-observation.html",
+      "file": "practice/network/tcp-loopback-observation.md",
+      "domain": "network",
+      "section": "practice",
+      "format": "sample",
+      "status": "published",
+      "summary": "自己プロセスのIPv4 loopbackへ接続し、最大3byteずつの送受信から2framesを復元する。共通deadline、半閉鎖後の逆向きACK、EOF、closeを確認する。",
+      "source": "新規執筆",
+      "aliases": [
+        "TCP",
+        "socket",
+        "loopback",
+        "Winsock",
+        "Socket.Select",
+        "framing",
+        "big-endian",
+        "half-close",
+        "半閉鎖",
+        "EOF",
+        "WouldBlock",
+        "deadline"
+      ],
+      "collection": "tcp-loopback-observation",
+      "order": 1,
+      "verification": "Windowsで両言語を実行確認",
+      "links": [
+        "/network/tcp-sockets.html"
       ]
     },
     {
@@ -4799,6 +4837,49 @@
       ]
     },
     {
+      "title": "ソケットとTCP通信 — send/recvの内部とメッセージ境界",
+      "url": "/network/tcp-sockets.html",
+      "file": "network/tcp-sockets.md",
+      "domain": "network",
+      "section": "reference",
+      "format": "article",
+      "status": "published",
+      "summary": "IP・port・接続・ソケットを区別し、TCPの送受信バッファと順序制御、部分的なsend/recv、長さ付きフレーム、半閉鎖、アプリ側ACKと期限を説明する。",
+      "source": "新規執筆",
+      "aliases": [
+        "socket",
+        "ソケット",
+        "TCP",
+        "IP",
+        "port",
+        "ポート",
+        "endpoint",
+        "listener",
+        "accept",
+        "connect",
+        "send",
+        "recv",
+        "byte stream",
+        "バイトストリーム",
+        "framing",
+        "メッセージ境界",
+        "length prefix",
+        "half-close",
+        "半閉鎖",
+        "WouldBlock",
+        "application ACK",
+        "loopback"
+      ],
+      "verification": "一次資料照合（2026-11-04）",
+      "links": [
+        "/os/file-read-journey.html",
+        "/data/integer-bits-and-bytes.html",
+        "/runtime/thread-synchronization.html",
+        "/os/asynchronous-file-io.html",
+        "/practice/network/tcp-loopback-observation.html"
+      ]
+    },
+    {
       "title": "ダメージ計算の設計",
       "url": "/design/case-studies/damage-calculation.html",
       "file": "design/case-studies/damage-calculation.md",
@@ -5962,7 +6043,7 @@
       "section": "learning",
       "format": "path",
       "status": "published",
-      "summary": "整数・浮動小数点、文字コード、メモリ確保、起動、同期、ファイルI/Oとマッピング、アセットロード、入力と描画、Webの疑問から本文をたどる。",
+      "summary": "整数・浮動小数点、文字コード、メモリ確保、起動、同期、ファイルI/Oとマッピング、アセットロード、TCP通信、入力と描画、Webの疑問から本文をたどる。",
       "source": "統合ガイド",
       "aliases": [],
       "collection": "questions",
@@ -6010,6 +6091,8 @@
         "/game/shooter-design.html",
         "/game/shooter-cpp.html",
         "/game/shooter-unity.html",
+        "/network/tcp-sockets.html",
+        "/practice/network/tcp-loopback-observation.html",
         "/history/video-games.html",
         "/guide/rendering/timeline.html"
       ]
@@ -7380,7 +7463,7 @@
       "section": "learning",
       "format": "path",
       "status": "outline",
-      "summary": "プロセス、スレッド、仮想メモリ、システムコール、I/Oを学ぶ計画。起動・メモリ・データ共有・ファイル読取りの辞典本文と観察例へつなぐ。",
+      "summary": "プロセス、スレッド、仮想メモリ、システムコール、I/Oを学ぶ計画。起動・メモリ・データ共有・ファイル読取り・TCPソケットの辞典本文と観察例へつなぐ。",
       "source": "IT教本",
       "aliases": [],
       "collection": "low-level",
@@ -7402,7 +7485,9 @@
         "/os/memory-mapped-files.html",
         "/practice/io/mapped-file-observation.html",
         "/game/asset-loading.html",
-        "/practice/assets/asset-lifecycle-model.html"
+        "/practice/assets/asset-lifecycle-model.html",
+        "/network/tcp-sockets.html",
+        "/practice/network/tcp-loopback-observation.html"
       ],
       "previous": "/guide/low-level/compiler-linker-executable.html",
       "next": "/guide/low-level/cpp-language.html"
@@ -7822,7 +7907,9 @@
       "verification": "一次資料照合（2026-11-04）",
       "links": [
         "/os/file-read-journey.html",
+        "/network/tcp-sockets.html",
         "/os/memory-mapped-files.html",
+        "/practice/network/tcp-loopback-observation.html",
         "/game/asset-loading.html",
         "/practice/assets/asset-lifecycle-model.html",
         "/practice/io/async-file-read-observation.html"
@@ -8117,6 +8204,7 @@
       "source": "統合ガイド",
       "aliases": [],
       "links": [
+        "/network/tcp-sockets.html",
         "/os/memory-mapped-files.html",
         "/game/asset-loading.html",
         "/os/asynchronous-file-io.html",
