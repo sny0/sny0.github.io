@@ -1,0 +1,52 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="760" height="1510" viewBox="0 0 760 1510" role="img" aria-labelledby="title desc">
+  <title id="title">Web Workerへの依頼と結果の受信</title>
+  <desc id="desc">ページ側のWindowとWorker側の別globalがメッセージで依頼と結果を渡す図。起動後のready、typeと要求ID、停止と再起動の世代を区別し、DOMの更新はページ側で行う。</desc>
+  <defs>
+    <style>text{font-family:'BIZ UDPGothic','Yu Gothic',Meiryo,sans-serif;fill:#26352e}.title{font-size:32px;font-weight:700}.head{font-size:28px;font-weight:700}.body{font-size:24px}.small{font-size:22px}.card{fill:white;stroke:#739483;stroke-width:2}.arrow{fill:none;stroke:#567963;stroke-width:3;marker-end:url(#a)}</style>
+    <marker id="a" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto"><path d="M0 0L10 5L0 10Z" fill="#567963"/></marker>
+  </defs>
+  <rect width="760" height="1510" rx="24" fill="#f4f8f4"/>
+  <text x="40" y="56" class="title">Web Workerとのメッセージ往復</text>
+  <text x="40" y="96" class="body">別の実行主体へ依頼し、結果を受け取る</text>
+  <rect x="36" y="122" width="332" height="140" rx="18" fill="#e2eafa"/>
+  <text x="58" y="164" class="head">ページ側：Window</text>
+  <text x="58" y="205" class="body">入力・DOM・表示の更新</text>
+  <text x="58" y="242" class="small">ページ側の実行状態を持つ</text>
+  <rect x="392" y="122" width="332" height="140" rx="18" fill="#dcece0"/>
+  <text x="414" y="164" class="head">Worker側：別global</text>
+  <text x="414" y="205" class="body">計算・データの処理など</text>
+  <text x="414" y="242" class="small">ページのDOMは直接触れない</text>
+  <rect x="36" y="292" width="688" height="150" rx="18" class="card"/>
+  <text x="60" y="334" class="head">① 起動し、準備完了を確かめる</text>
+  <text x="60" y="374" class="body">new Worker → script取得・初期化 → ready受信</text>
+  <text x="60" y="414" class="small">コンストラクターのreturnだけでは準備完了ではない。</text>
+  <rect x="36" y="468" width="688" height="188" rx="18" fill="#e2eafa"/>
+  <text x="60" y="510" class="head">② postMessageで依頼する</text>
+  <text x="60" y="551" class="body">ページ側</text>
+  <text x="570" y="551" class="body">Worker側</text>
+  <path d="M80 574H680" class="arrow"/>
+  <text x="60" y="614" class="small">送信時にシリアライズ・転送の処理を行う。</text>
+  <text x="60" y="644" class="small">受信側のmessage処理は後。returnは仕事の完了ではない。</text>
+  <rect x="36" y="682" width="688" height="188" rx="18" fill="#dcece0"/>
+  <text x="60" y="724" class="head">③ 結果を返信し、ページ側で表示する</text>
+  <text x="60" y="765" class="body">ページ側</text>
+  <text x="570" y="765" class="body">Worker側</text>
+  <path d="M680 788H80" class="arrow"/>
+  <text x="60" y="828" class="small">Workerの結果を受信 → ページ側のJavaScriptがDOM更新</text>
+  <text x="60" y="858" class="small">メッセージ受信と、画面への表示完了も別の出来事。</text>
+  <rect x="36" y="896" width="688" height="180" rx="18" class="card"/>
+  <text x="60" y="938" class="head">④ typeと要求IDで対応を確かめる</text>
+  <text x="60" y="978" class="body">受信順と、依頼した仕事の完了順は区別する。</text>
+  <text x="60" y="1016" class="body">コピー・転送・返信の条件を通信の約束にする。</text>
+  <text x="60" y="1054" class="small">同じchannelの順序と、全体での同時進行は別の話。</text>
+  <rect x="36" y="1102" width="688" height="180" rx="18" class="card"/>
+  <text x="60" y="1144" class="head">⑤ 停止・再起動は別の状態遷移</text>
+  <text x="60" y="1184" class="body">terminateは、完了や返信・後片付けを保証しない。</text>
+  <text x="60" y="1222" class="body">古い世代の応答で、新しいUIを更新しない。</text>
+  <text x="60" y="1260" class="small">世代の確認による表示の無効化と、処理の取消しは別。</text>
+  <rect x="36" y="1308" width="688" height="166" rx="18" fill="#e9efe6"/>
+  <text x="60" y="1350" class="head">実行資源と費用は、別に考える</text>
+  <text x="60" y="1390" class="body">OSスレッド・プロセスへの固定の対応は仮定しない。</text>
+  <text x="60" y="1428" class="body">起動・コピー・通信の費用があり、速度向上は条件次第。</text>
+  <text x="60" y="1460" class="small">付属例は同originのHTTP(S)配信で動かす。</text>
+</svg>

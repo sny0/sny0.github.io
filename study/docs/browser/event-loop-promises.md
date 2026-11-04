@@ -106,7 +106,7 @@ result.then((value) => console.log("result", value));
 
 一方、Promiseのexecutorや`then`、`await`後に大量の計算を書くと、それを実行する時間は必要です。Promiseで包んでもCPU仕事が自動的に並列化されたり、メインスレッドから移ったりはしません。重い同期処理が長く続けば、メインスレッドで実行する入力への反応や描画側の仕事を遅らせ得ます。[web.dev: Optimize long tasks](https://web.dev/articles/optimize-long-tasks)
 
-別の実行主体でJavaScriptを動かすWeb Workerは、この問題と関係する別の仕組みです。DOMへ直接アクセスできる範囲や、メッセージでの受け渡しなどが変わるため、Promiseの言い換えとしては扱いません。Workerでの分担は後続のテーマです。
+別の実行主体でJavaScriptを動かす[Web Worker](/browser/web-workers-messages.html)は、この問題と関係する別の仕組みです。DOMへ直接アクセスできる範囲や、メッセージでの受け渡しなどが変わるため、Promiseの言い換えとしては扱いません。Workerへの依頼と結果の受信、データのコピー・転送は専用の記事で説明します。
 
 ## timerの0と、requestAnimationFrameは別の指定
 

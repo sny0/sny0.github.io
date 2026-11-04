@@ -1,0 +1,107 @@
+<!doctype html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="light">
+  <link rel="canonical" href="https://sny0.com/study/samples/browser/worker-message-observation/index.html">
+  <title>Web Workerとメッセージの観察 | Sny0 Study</title>
+  <link rel="stylesheet" href="./styles.css">
+  <script src="./main.js" defer></script>
+</head>
+<body>
+  <main>
+    <header class="page-header">
+      <a href="https://sny0.com/study/practice/browser/worker-message-observation.html">Sny0 Studyの解説へ戻る</a>
+      <p class="eyebrow">Web Worker / Structured clone / Transfer</p>
+      <h1>Workerへ送ると、<br>元のデータはどうなる？</h1>
+      <p>16バイトの同じデータでコピーとtransferを比較します。workerの起動完了を待ち、一件ずつ要求と返信を見比べる実験です。</p>
+    </header>
+    <noscript><p class="notice">操作にはJavaScriptが必要です。</p></noscript>
+
+    <section class="panel" aria-labelledby="lifecycle-heading">
+      <h2 id="lifecycle-heading">1. Workerを起動する</h2>
+      <p id="hosting-note" class="help">HTTPまたはHTTPSで、このページとworker.jsを同じoriginから配信してください。</p>
+      <div class="actions">
+        <button type="button" id="start">Workerを起動</button>
+        <button type="button" id="stop" class="secondary" disabled>Workerを停止</button>
+        <button type="button" id="counter-button" class="secondary">mainカウンター +1</button>
+        <span class="counter">カウンター：<output id="counter-value">0</output></span>
+      </div>
+      <p id="worker-state" class="state-line" data-state="stopped">状態：停止</p>
+      <p id="job-state" class="help">要求はありません。</p>
+      <p class="help">起動と各要求には8秒のsoft timeoutを設けます。厳密な実時間の終了保証ではありません。カウンターは待機中も操作できます。</p>
+    </section>
+
+    <section aria-labelledby="cases-heading">
+      <h2 id="cases-heading">2. readyになったら一つ試す</h2>
+      <div class="case-grid">
+        <article class="case-card">
+          <p class="case-label">A / COPY</p>
+          <h3>コピーして送る</h3>
+          <p>転送リストなしのpostMessage。workerで先頭を255へ変えても、送信元の先頭は0のままです。</p>
+          <button type="button" data-job="copy" disabled>A：コピーを送る</button>
+        </article>
+        <article class="case-card">
+          <p class="case-label">B / TRANSFER</p>
+          <h3>所有権を移して送る</h3>
+          <p>bufferをpayloadと転送リストへ入れます。送信直後は元のbyteLengthが0。返信時もtransferします。</p>
+          <button type="button" data-job="transfer" disabled>B：transferで送る</button>
+        </article>
+        <article class="case-card">
+          <p class="case-label">C / DELAYED REPLY</p>
+          <h3>3秒の遅延応答</h3>
+          <p>workerのtimerへ3000msを指定します。重いCPU処理ではありません。待つ間にカウンターや停止を試せます。</p>
+          <button type="button" data-job="delay" disabled>C：遅延応答を待つ</button>
+        </article>
+        <article class="case-card">
+          <p class="case-label">D / DATA CLONE ERROR</p>
+          <h3>関数は送れる？</h3>
+          <p>関数を含む値を送ろうとして、main側のpostMessageが同期的に投げるDataCloneErrorを確認します。</p>
+          <button type="button" data-job="function" disabled>D：関数を送ってみる</button>
+        </article>
+      </div>
+    </section>
+
+    <section class="panel" aria-labelledby="values-heading">
+      <h2 id="values-heading">3. 送信元・worker・返信を比べる</h2>
+      <p class="help">payloadは16バイトの0〜15。workerは変更前の長さ・先頭・合計120を調べ、先頭だけ255へ変更します。数値はこのfixtureの検査条件です。</p>
+      <table>
+        <caption id="table-caption">まだ要求していません。</caption>
+        <thead><tr><th scope="col">観察する値</th><th scope="col">結果</th></tr></thead>
+        <tbody>
+          <tr><th scope="row">送信前 sender.byteLength</th><td id="sender-before">—</td></tr>
+          <tr><th scope="row">送信後 sender.byteLength</th><td id="sender-after">—</td></tr>
+          <tr><th scope="row">送信後 sender先頭</th><td id="sender-first">—</td></tr>
+          <tr><th scope="row">worker変更前 byteLength</th><td id="worker-length">—</td></tr>
+          <tr><th scope="row">worker変更前 first</th><td id="worker-first">—</td></tr>
+          <tr><th scope="row">worker変更前 sum</th><td id="worker-sum">—</td></tr>
+          <tr><th scope="row">返信 result.byteLength</th><td id="result-length">—</td></tr>
+          <tr><th scope="row">返信 result先頭</th><td id="result-first">—</td></tr>
+          <tr><th scope="row">transfer返却後 worker.byteLength</th><td id="worker-after">—</td></tr>
+          <tr><th scope="row">遅延応答 / mainでの経過時間</th><td id="delay-result">—</td></tr>
+          <tr><th scope="row">同期postMessageの例外</th><td id="clone-error">—</td></tr>
+        </tbody>
+      </table>
+    </section>
+
+    <section class="panel" aria-labelledby="log-heading">
+      <div class="log-heading">
+        <h2 id="log-heading">通信と操作のログ <span class="subtle">最新40件</span></h2>
+        <button type="button" id="clear-log" class="secondary">表示ログを消す</button>
+      </div>
+      <p class="help">表示ログを消してもworkerや要求は停止しません。時刻はmainがログを記録したperformance.now()です。</p>
+      <ol id="event-log" class="event-log"></ol>
+    </section>
+
+    <aside class="notice" aria-labelledby="limits-heading">
+      <h2 id="limits-heading">この実験の範囲</h2>
+      <p>HTTPまたはHTTPSで、このページとworker.jsを同じoriginから配信してください。手元でもローカルHTTPサーバーから開きます。Workerの起動時にスクリプトを取得し、実験中は固定のメッセージをやり取りします。</p>
+      <p>mainとworkerは、それぞれのイベントループでメッセージを処理します。workerの値をmainが直接読むのではなく、返信された値を表示します。copyとtransferの速度やGPU・CPU性能を比較するベンチマークではありません。</p>
+      <p>停止はmainからWorker.terminate()を呼び、古いworkerからの表示を無効にします。停止ボタンのクリック処理自体は、mainで実行中のJavaScriptへ割り込む命令ではありません。</p>
+    </aside>
+    <p id="announcement" class="visually-hidden" role="status" aria-live="polite" aria-atomic="true"></p>
+    <footer><a href="https://sny0.com/study/practice/browser/worker-message-observation.html">実験の手順とソースの解説を読む</a></footer>
+  </main>
+</body>
+</html>

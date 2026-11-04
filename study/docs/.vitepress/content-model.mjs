@@ -12,6 +12,7 @@ export const formatLabels = {
 export const statusLabels = { published: '公開中', outline: '学習計画・概要', draft: '草稿', planned: '執筆予定' }
 
 export const collections = [
+  { id: 'worker-message-observation', section: 'practice', title: 'Web Workerでコピー・転送・停止を観察する', description: '同じ16バイトを複製または転送して往復し、バッファの状態、要求ID、停止と再起動、送信時の例外を確かめる。', start: '/practice/browser/worker-message-observation.html' },
   { id: 'event-loop-observation', section: 'practice', title: 'ブラウザでPromiseとawaitの実行順を観察する', description: '同期処理、Promise、有限のマイクロタスク列、timerとrAFのcallbackを記録し、保証される順序と観測した順序を分ける。', start: '/practice/browser/event-loop-observation.html' },
   { id: 'render-observation', section: 'practice', title: 'ブラウザでDOMと描画の変化を観察する', description: '幅・色・移動・透明度とDOMテキストを変更し、寸法APIとrAFで分かる範囲を確かめる。', start: '/practice/browser/render-observation.html' },
   { id: 'https-observation', section: 'practice', title: 'C++とC#でHTTPSの接続情報を観察する', description: '標準の証明書検証を保ったGETで、TLS情報、証明書、HTTP応答を区別して確認する。', start: '/practice/network/https-observation.html' },
