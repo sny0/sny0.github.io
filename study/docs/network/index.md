@@ -19,6 +19,7 @@
 
 ## 辞典の本文
 
+- [DNSと名前解決 — 名前から接続先が決まるまで](/network/dns-resolution.html)
 - [HTTP通信 — 要求・応答と本文の区切り](/network/http-messages.html)
 - [ソケットとTCP通信 — send/recvの内部とメッセージ境界](/network/tcp-sockets.html)
 
@@ -29,6 +30,7 @@
 ## 作って試す
 
 - [C++とC#でHTTPのヘッダー・本文・終端を観察する](/practice/network/http-message-observation.html)
+- [C++とC#でOSの名前解決結果と取消しの境界を観察する](/practice/network/name-resolution-observation.html)
 - [C++とC#でTCPのフレーム復元と半閉鎖を観察する](/practice/network/tcp-loopback-observation.html)
 
 ## 扱う範囲・増補する項目

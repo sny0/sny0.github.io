@@ -1,0 +1,144 @@
+---
+title: DNSと名前解決 — 名前から接続先が決まるまで
+study:
+  source: 新規執筆
+  section: reference
+  format: article
+  status: published
+  domain: network
+  summary: OSの名前解決API、hostsとキャッシュ、再帰リゾルバーと権威サーバー、DNSの委任を区別する。A・AAAA・CNAME・TTLと失敗の種類を読み、接続成功やTLS認証との境界を説明する。
+  aliases: [DNS, 名前解決, name resolution, resolver, stub resolver, recursive resolver, authoritative server, 権威サーバー, 再帰, 反復, referral, delegation, 委任, zone, A, AAAA, CNAME, TTL, NXDOMAIN, NODATA, SERVFAIL, negative cache, DoH, DoT, DNSSEC, GetAddrInfoExW, GetHostAddressesAsync]
+  verification: 一次資料照合（2026-11-04）
+---
+
+# DNSと名前解決 — 名前から接続先が決まるまで
+
+**名前解決**は、ホスト名などから、接続に使えるアドレス情報を得る処理です。DNSはそのために使う分散した名前の仕組みですが、OSの名前解決APIが毎回外部へDNSパケットを送るとは限りません。ローカル設定やキャッシュで結果が得られる場合もあります。
+
+[HTTP](/network/http-messages.html)のURLに名前を使う場合、まず接続先の候補を調べ、その後に[TCPなどの接続](/network/tcp-sockets.html)へ進みます。`/study-demo`というHTTPのパスをDNSへ問い合わせるわけではありません。名前からアドレスを得ることと、portを選んで接続することも分けます。
+
+## アプリが呼ぶ名前解決API
+
+Windowsの`GetAddrInfoExW`は、名前や数値IPの文字列からアドレス情報を得るAPIです。どの名前空間のproviderを使うかなどを指定でき、DNSだけに限定しない機能も持ちます。C#の`Dns.GetHostAddressesAsync`も、名前またはIP文字列に対するアドレス一覧を非同期操作として返します。[Microsoft: GetAddrInfoExW](https://learn.microsoft.com/en-us/windows/win32/api/ws2tcpip/nf-ws2tcpip-getaddrinfoexw)、[Dns.GetHostAddressesAsync](https://learn.microsoft.com/en-us/dotnet/api/system.net.dns.gethostaddressesasync?view=net-10.0)
+
+アプリから見ると「名前を渡して候補を得た」という一回の処理でも、その裏には次のような分岐があり得ます。
+
+- アプリ自身が保持する結果を再利用する。
+- OSのローカル設定やキャッシュで答えが出る。
+- 設定されたリゾルバーへ問い合わせ、そこでもキャッシュを使う。
+- さらに別のDNSサーバーをたどって結果を得る。
+
+**hostsファイル**は、ローカルで名前とIPを対応付ける設定です。WindowsのDNS Clientは、hostsの内容をキャッシュへ取り込む構成も説明されています。「hosts、OSキャッシュ、DNS問い合わせが常に独立した箱としてこの順に動く」と固定しません。利用API、OS、アプリ、ネットワーク設定によって経路が変わります。[Microsoft: DNS queries and lookups](https://learn.microsoft.com/en-us/windows-server/networking/dns/queries-lookups)
+
+数値IPを扱う操作も、ホスト名に対するDNS問い合わせとは区別します。例えばWin32の`AI_NUMERICHOST`は、名前解決サービスを呼ばず数値アドレスとして扱わせる指定です。APIの名前に「名前解決」が含まれることだけで、外部DNSとの通信が起きたとは判断しません。[Microsoft: GetAddrInfoExW — AI_NUMERICHOST](https://learn.microsoft.com/en-us/windows/win32/api/ws2tcpip/nf-ws2tcpip-getaddrinfoexw)
+
+## リゾルバーと権威サーバーの役割
+
+**リゾルバー**（resolver）は、名前に関する問い合わせを処理して結果を得る側です。DNSでは、次の役割を分けると流れが見えます。
+
+| 役割 | 主な仕事 |
+| --- | --- |
+| スタブリゾルバー | 解決全体を自分だけでは行わず、通常は再帰リゾルバーへ依頼する |
+| 再帰リゾルバー | 依頼を受け、必要な問い合わせを進めて答えや失敗を返す。一般にキャッシュも使う |
+| 権威サーバー | 自分が担当するゾーンのデータを持ち、その範囲について答える |
+
+**再帰**（recursive）は、依頼先へ「必要な作業を進め、最終的な答えを返してほしい」と頼む方式です。**反復**（iterative）では、答えや次に聞くべきサーバーの紹介を受け、問い合わせる側が次へ進みます。この紹介が**referral**です。[IETF RFC 1034 §4.3.1](https://www.rfc-editor.org/rfc/rfc1034.html#section-4.3.1)
+
+一般的な構成では、スタブからの再帰的な依頼を受けたリゾルバーが、権威サーバーへの反復的な問い合わせを進めます。つまり「再帰リゾルバー自身が次のサーバーへ問い合わせる」ことと、「rootサーバーが代わりに最後まで調べる」ことは別です。
+
+権威を持つことと、再帰サービスを提供することも別の役割です。一つのソフトウェアが両方を担う構成もありますが、権威サーバーなら誰にでも再帰サービスを提供するとは限りません。[IETF RFC 9499 §6: DNS Servers and Clients](https://www.rfc-editor.org/rfc/rfc9499.html#section-6)
+
+## DNSの木、ゾーン、委任
+
+DNSの名前は木構造です。例えば`www.example.com.`は、root、`com`、`example`、`www`という階層を表します。最後の`.`はrootまで含む完全な名前の表記です。名前の末尾を省略した文字列に検索サフィックスを付けるかなどは、名前解決側の設定にも関係します。
+
+```text
+.                 root
+└─ com.
+   └─ example.com.
+      └─ www.example.com.
+```
+
+**ゾーン**は、この木のうち、ある管理単位が権威を持って扱う範囲です。ラベルが一つ増えるたび、必ず別のゾーンになるわけではありません。親のゾーンから子の管理を別の権威サーバーへ任せる境界を**委任**（delegation）と呼び、NSレコードなどで示します。[RFC 1034 §4.2](https://www.rfc-editor.org/rfc/rfc1034.html#section-4.2)
+
+関連するキャッシュがない場合の概念例では、再帰リゾルバーがroot側からTLDの権威サーバーを知り、TLD側から対象ゾーンの権威サーバーを知り、そこで目的のレコードを得ます。TLDは`com`などの最上位ドメインです。rootが世界中の全ホストのIP一覧を保持して返すモデルではありません。
+
+実際には委任情報のキャッシュから途中を省略したり、別の再帰リゾルバーへ転送したりできます。**すべての名前解決が、毎回root→TLD→対象ゾーンの順に外部通信するわけではありません。**
+
+<figure class="study-figure">
+  <img src="/images/network/dns-resolution-path.svg" alt="アプリの名前解決APIからローカル設定やキャッシュで解決する分岐と、設定済み再帰リゾルバーへ進む分岐を示す。必要な場合にリゾルバーがroot、TLD、対象ゾーンの権威サーバーへの紹介をたどる概念図で、毎回の必須経路ではない。" width="760" height="1510" />
+  <figcaption><strong>アプリの一回の名前解決と、DNSサーバー間の問い合わせを分ける。</strong> hostsや各キャッシュの処理順、問い合わせの回数を固定する図ではありません。実践でrootやTLDへの通信を追跡したものでもありません。<a href="/study/images/network/dns-resolution-path.svg" target="_blank" rel="noopener noreferrer">名前解決の経路を拡大</a></figcaption>
+</figure>
+
+## A・AAAA・CNAMEと、複数の接続候補
+
+DNSは、名前に型付きの**リソースレコード**（RR）を関連付けます。名前からアドレスを得るときは、次の型が重要です。
+
+| 型 | 表すもの |
+| --- | --- |
+| `A` | IPv4の32bitアドレス |
+| `AAAA` | IPv6の128bitアドレス |
+| `CNAME` | この名前が別の名前の別名であること |
+| `NS` | ゾーンの権威サーバーを示す情報などに使う名前 |
+
+一つの名前に複数のAやAAAAがある場合もあります。逆に、問い合わせた名前が両方の型を必ず持つとは限りません。[RFC 1035 §3.4.1: A](https://www.rfc-editor.org/rfc/rfc1035.html#section-3.4.1)、[RFC 3596 §2: AAAA](https://www.rfc-editor.org/rfc/rfc3596.html#section-2)
+
+CNAMEはIPそのものではないため、必要なアドレスを得るには参照先の名前をさらに解決する場合があります。これはHTTPのリダイレクトではなく、DNS内の名前の関係です。別名から別のゾーンへ進むこともあり、木を下る一回だけの処理には収まりません。[RFC 1034 §3.6.2: Aliases and canonical names](https://www.rfc-editor.org/rfc/rfc1034.html#section-3.6.2)
+
+OSのAPIが返す候補一覧と、DNS応答のレコードを一対一の同じ並びとして扱いません。アドレスファミリー、OSやアプリの方針、利用可能なネットワークなどが関わります。**先頭のIPが常に最速で、必ず接続できるという意味ではありません。** 結果のIP、個数、順序を固定した期待値にせず、接続段階で候補と失敗を扱います。
+
+## TTLと、いくつものキャッシュ
+
+**TTL**（Time To Live）は、DNSのレコードをキャッシュして使う時間を秒で示す値です。IPパケットの寿命に使うTTLとは別のフィールドです。キャッシュした側は経過時間を考慮し、通常の再利用期間を管理します。[RFC 1035 §4.1.3](https://www.rfc-editor.org/rfc/rfc1035.html#section-4.1.3)
+
+例えば説明用に、取得時のTTLを30秒とします。20秒後の残り時間は、単純なモデルなら10秒です。しかし、その時点で権威側の設定を変えても、既に古い値を持つキャッシュへ即座に更新通知が届くわけではありません。新しいTTLを短く設定することと、以前のTTLで保持された値を直ちに消すことも別です。
+
+アプリ、OS、再帰リゾルバーがそれぞれ情報を保持する場合があります。CNAMEとその先のアドレスのTTLも、同じ一本の時計とは限りません。**アプリを起動し直したことや、同じAPIを二度呼んだことだけでは、すべてのキャッシュの状態は分かりません。**
+
+「存在しない」という結果も保持されることがあります。これが**ネガティブキャッシュ**です。NXDOMAINやNODATAのキャッシュ時間には、権威側のSOAレコードから決める規則があります。SOAはゾーンの管理情報を表すレコードです。新しい名前を追加しても、以前の否定結果が残っている利用者へ即時反映するとは限りません。[RFC 2308 §3 / §5](https://www.rfc-editor.org/rfc/rfc2308.html#section-5)
+
+<figure class="study-figure">
+  <img src="/images/network/dns-records-and-cache.svg" alt="AがIPv4、AAAAがIPv6、CNAMEが別名の参照を表すことと、複数候補やTTLによるキャッシュを示す。NXDOMAIN、NODATA、SERVFAIL、タイムアウトを区別し、APIの結果だけでは経路やキャッシュヒットを確定できない。" width="760" height="1510" />
+  <figcaption><strong>名前に一つの永久固定IPが付くモデルにしない。</strong> TTLの値やレコードは説明用で、実践の固定期待値ではありません。取得時間だけでキャッシュヒットを判定しません。<a href="/study/images/network/dns-records-and-cache.svg" target="_blank" rel="noopener noreferrer">レコードとキャッシュの図を拡大</a></figcaption>
+</figure>
+
+## 見つからない、答えられない、返ってこない
+
+| 結果 | 意味 |
+| --- | --- |
+| `NXDOMAIN` | 対象の名前が存在しないというDNS応答 |
+| `NODATA` | 名前はあるが、求めた型のレコードがないという否定結果 |
+| `SERVFAIL` | DNSサーバー側が問い合わせを処理できなかったという応答 |
+| タイムアウト | 待機期限までに必要な結果を得られなかった。名前の不存在を証明しない |
+
+NODATAは、DNSのヘッダーにその名前の専用エラーコードが入るという意味ではありません。`NOERROR`という応答コードと、答えや権威情報などの内容から判定します。単に回答欄が空ならすべてNODATA、とも扱いません。CNAMEがある場合、最終的にどの名前について否定されたかも確認します。[RFC 9499 §3](https://www.rfc-editor.org/rfc/rfc9499.html#section-3)、[RFC 2308 §2.2](https://www.rfc-editor.org/rfc/rfc2308.html#section-2.2)
+
+OSの名前解決APIが返すエラーは、こうしたDNS応答を含む処理全体の結果です。APIの例外名や失敗コードだけを、観測していないDNSパケットの内容と同一視しません。通信の失敗、設定、型の違いなどを分けて調べます。
+
+## DNSはUDPだけではない
+
+通常のDNSにはUDPとTCPの両方があります。従来のDNS over UDPの512byteという制約だけを、現在のDNSすべての上限にしません。`EDNS(0)`は拡張機構で、UDPで受け取れる大きさなどを通知でき、512byteを超える応答も扱えます。[RFC 6891 §4.3](https://www.rfc-editor.org/rfc/rfc6891.html#section-4.3)
+
+応答が切り詰められたことを示す**TCフラグ**を受け、TCPで再試行する経路もあります。TCPはゾーン転送だけの手段ではありません。「DNSは必ずUDP一往復」「大きいから必ずTCPだった」と、APIの結果だけで決めません。[RFC 7766 §4 / §5](https://www.rfc-editor.org/rfc/rfc7766.html#section-5)
+
+## 通信経路の保護と、DNSデータの検証
+
+**DoH**（DNS over HTTPS）はDNSの問い合わせ・応答をHTTPSで運び、**DoT**（DNS over TLS）はTLSで運びます。例えば端末から利用するリゾルバーまでの通信を保護する仕組みです。問い合わせ先のリゾルバー自身が内容を読めなくなることや、そこから先の全経路が同じ方式になることを意味しません。[RFC 8484](https://www.rfc-editor.org/rfc/rfc8484.html)、[RFC 7858](https://www.rfc-editor.org/rfc/rfc7858.html)
+
+**DNSSEC**は別の仕組みで、署名や信頼の連鎖を使い、DNSデータの出所と完全性を検証します。必要な署名と検証の条件を満たした場合の保証であり、アドレス一覧を得ただけでは検証した証拠になりません。**DNSSEC自体は問い合わせや回答を暗号化して隠す機能ではありません。** WebサーバーのTLS証明書を検証する処理とも別です。[RFC 4033 §3 / §4](https://www.rfc-editor.org/rfc/rfc4033.html#section-4)
+
+## 名前解決から、接続とアプリの利用へ
+
+名前解決が成功しても、相手のportが開いていること、TCP接続が成功すること、HTTPが成功することは確定しません。返ったアドレスは接続先の候補です。
+
+HTTPの`Host`などは、要求対象の名前を伝える仕事を持ちます。HTTPSでは、TLSで接続相手が元の対象名に対して適切かも確認します。解決したIPでURLの名前を機械的に置き換えれば、同じHTTP／HTTPSの意味と認証条件を保てるとは限りません。[HTTPの要求と対象](/network/http-messages.html)、[RFC 9110 §4.3.4: HTTPSの相手確認](https://www.rfc-editor.org/rfc/rfc9110.html#section-4.3.4)
+
+## 観察記事で確かめる範囲
+
+[OSの名前解決APIをC++とC#で観察する](/practice/network/name-resolution-observation.html)では、既定で`127.0.0.1`、`::1`、`localhost`を扱い、`--live`を明示したときだけ公開名`example.com.`を加えます。既定では外部名を指定しませんが、利用環境を含めネットワーク通信がゼロであると検証するものではありません。
+
+C++は`GetAddrInfoExW`で`NS_ALL`を指定し、C#は`Dns.GetHostAddressesAsync`を使います。数値入力は入力したIPとの一致、`localhost`はループバックを含むことを教材の検査条件とします。公開名のIP・個数・順序は固定の正解にしません。これらの一覧だけではTTL、情報源、DNS問い合わせ数は分かりません。
+
+取消しを要求する目安は、入力ごとの問い合わせにつき8秒です。C++は期限後の取消し要求でも自分の完了を回収してから結果やイベントを解放し、C#もtokenを通じて取消しを要求した後に最後までawaitします。**取消し要求は内部処理の即時停止や、実時間8秒以内の復帰を保証するものではありません。** [Microsoft: GetAddrInfoExCancel — cancellation and completion](https://learn.microsoft.com/en-us/windows/win32/api/ws2tcpip/nf-ws2tcpip-getaddrinfoexcancel)、[GetHostAddressesAsync — CancellationToken](https://learn.microsoft.com/en-us/dotnet/api/system.net.dns.gethostaddressesasync?view=net-10.0)
+
+結果一覧や所要時間だけで、hostsを使った、キャッシュにヒットした、root・TLD・権威サーバーを訪れた、とは確定しません。この実践はその通信経路を追跡しません。他OSやUnity、DoH・DoT・DNSSECの実装検証も別の範囲です。
