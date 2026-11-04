@@ -1,0 +1,52 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="760" height="1510" viewBox="0 0 760 1510" role="img" aria-labelledby="title desc">
+  <title id="title">ArrayBufferのコピーと転送</title>
+  <desc id="desc">既知16バイトのArrayBufferをコピーした場合は元が残り、転送した場合は元が切り離されbyteLengthが0になる比較図。Workerが先頭を255へ書き換え、転送して返す場合はWorker側も切り離される。共有メモリや物理ゼロコピーの測定とは区別する。</desc>
+  <defs>
+    <style>text{font-family:'BIZ UDPGothic','Yu Gothic',Meiryo,sans-serif;fill:#26352e}.title{font-size:32px;font-weight:700}.head{font-size:28px;font-weight:700}.body{font-size:24px}.small{font-size:22px}.card{fill:white;stroke:#739483;stroke-width:2}.arrow{fill:none;stroke:#567963;stroke-width:3;marker-end:url(#a)}</style>
+    <marker id="a" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto"><path d="M0 0L10 5L0 10Z" fill="#567963"/></marker>
+  </defs>
+  <rect width="760" height="1510" rx="24" fill="#f4f8f4"/>
+  <text x="40" y="56" class="title">コピーと転送で、手元の状態が変わる</text>
+  <text x="40" y="96" class="body">同じ16 byteのArrayBufferを渡す場合</text>
+  <rect x="36" y="122" width="688" height="322" rx="18" class="card"/>
+  <text x="60" y="164" class="head">① コピー：transfer listなし</text>
+  <rect x="56" y="190" width="296" height="102" rx="12" fill="#e2eafa"/>
+  <text x="76" y="228" class="body">ページ側の元buffer</text>
+  <text x="76" y="269" class="body">16 byte ／ 先頭0</text>
+  <rect x="408" y="190" width="296" height="102" rx="12" fill="#dcece0"/>
+  <text x="428" y="228" class="body">Worker側のコピー</text>
+  <text x="428" y="269" class="body">16 byte ／ 先頭0</text>
+  <path d="M354 241H404" class="arrow"/>
+  <text x="60" y="338" class="body">Workerで先頭を255へ変更しても、元の先頭は0。</text>
+  <text x="60" y="377" class="body">返されたコピーは16 byte、先頭255になる。</text>
+  <text x="60" y="419" class="small">同じバイト領域を共有しながら書き換える方式ではない。</text>
+  <rect x="36" y="470" width="688" height="370" rx="18" class="card"/>
+  <text x="60" y="512" class="head">② 転送：payloadのbuffer ＋ [buffer]</text>
+  <rect x="56" y="538" width="296" height="102" rx="12" fill="#e2eafa"/>
+  <text x="76" y="576" class="body">ページ側の送信直後</text>
+  <text x="76" y="617" class="body">元のbyteLength = 0</text>
+  <rect x="408" y="538" width="296" height="102" rx="12" fill="#dcece0"/>
+  <text x="428" y="576" class="body">Worker側の受信後</text>
+  <text x="428" y="617" class="body">16 byte ／ 先頭0</text>
+  <path d="M354 589H404" class="arrow"/>
+  <text x="60" y="684" class="body">Workerで先頭を255へ変更し、転送で返す。</text>
+  <path d="M680 716H80" class="arrow"/>
+  <text x="60" y="757" class="body">ページ側の受信：16 byte、先頭255</text>
+  <text x="60" y="795" class="body">Worker側の返送後：旧bufferのbyteLength = 0</text>
+  <text x="60" y="827" class="small">元のJSオブジェクトが、返信でそのまま復活するわけではない。</text>
+  <rect x="36" y="866" width="688" height="182" rx="18" fill="#e2eafa"/>
+  <text x="60" y="908" class="head">切り離し（detach）を確認する</text>
+  <text x="60" y="948" class="body">この例は、既知の長さ16が0になる変化を観察。</text>
+  <text x="60" y="986" class="body">転送済みの元bufferで、以前のバイトは扱えない。</text>
+  <text x="60" y="1024" class="small">停止しても、送信前の元bufferが復元される保証はない。</text>
+  <rect x="36" y="1074" width="688" height="180" rx="18" fill="#dcece0"/>
+  <text x="60" y="1116" class="head">共有メモリ・物理コピー回数とは区別</text>
+  <text x="60" y="1156" class="body">SharedArrayBuffer / Atomicsは別の仕組み。</text>
+  <text x="60" y="1194" class="body">detachは、物理的なzero-copyや速度の測定ではない。</text>
+  <text x="60" y="1232" class="small">今回のサンプルは共有メモリを使わない。</text>
+  <rect x="36" y="1280" width="688" height="194" rx="18" fill="#e9efe6"/>
+  <text x="60" y="1322" class="head">transfer listだけではデータを添付しない</text>
+  <text x="60" y="1362" class="body">送る値からbufferを参照できる形にする。</text>
+  <text x="60" y="1400" class="body">TypedArrayはビュー。転送するのはそのbuffer。</text>
+  <text x="60" y="1442" class="small">コピー・転送・共有を、通信の設計時に選び分ける。</text>
+</svg>
