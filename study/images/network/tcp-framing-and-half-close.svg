@@ -1,0 +1,56 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="760" height="1510" viewBox="0 0 760 1510" role="img" aria-labelledby="framing-title framing-desc">
+  <title id="framing-title">長さ付きメッセージと、TCPの送信半閉鎖</title>
+  <desc id="framing-desc">二つのメッセージを二バイトのビッグエンディアン長さと本文で表す。本文六バイトと四バイト、長さを合わせて計十四バイトを送る。送受信の要求上限三バイトはアプリ側の設定で、TCPパケットの分割を示すものではない。clientは全データ送信後に送信だけ停止する。serverは二メッセージと受信EOFを確認し、アプリ応答四バイトを返して送信を停止する。clientは送信半閉鎖後も応答と受信EOFを得る。切断エラーや期限切れは正常EOFと区別する。</desc>
+  <style>
+    text { font-family: "BIZ UDPGothic", "Yu Gothic", Meiryo, sans-serif; fill: #26352e; }
+    .heading { font-size: 28px; font-weight: 700; }
+    .body { font-size: 24px; }
+    .mono { font-family: Consolas, monospace; font-size: 27px; }
+    .center { text-anchor: middle; }
+    .arrow { fill: none; stroke: #526d5c; stroke-width: 3; marker-end: url(#arrow); }
+  </style>
+  <defs><marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse"><path d="M0 0L10 5 0 10Z" fill="#526d5c"/></marker></defs>
+  <rect width="760" height="1510" rx="20" fill="#f4f8f4"/>
+  <text x="32" y="54" font-size="32" font-weight="700">境界はアプリで決め、半閉鎖を区別する</text>
+  <text x="32" y="98" class="body">既知の2メッセージを、一つのTCPバイト列で送る</text>
+  <rect x="24" y="130" width="712" height="272" rx="14" fill="#fff"/>
+  <text x="44" y="176" class="heading">① 2byteの長さ（BE）+ 本文</text>
+  <text x="44" y="224" class="mono">00 06  41 42 00 E3 81 82</text>
+  <text x="44" y="266" class="mono">00 04  10 20 30 40</text>
+  <text x="44" y="318" class="body">本文6 bytesと4 bytes。長さも含めて計14 bytes</text>
+  <text x="44" y="360" class="body">NULも本文の一部。lengthを検査してから読む</text>
+  <rect x="24" y="430" width="712" height="188" rx="14" fill="#fff"/>
+  <text x="44" y="476" class="heading">② 今回の要求上限は、send / recvとも3 bytes</text>
+  <text x="44" y="520" class="body">返った数だけ進め、不足分を累積して復元する</text>
+  <text x="44" y="562" class="body">この上限はアプリの都合。TCPパケットサイズではない</text>
+  <rect x="24" y="646" width="712" height="568" rx="14" fill="#fff"/>
+  <text x="44" y="692" class="heading">③ 半閉鎖した後も、反対向きには受信できる</text>
+  <text x="198" y="740" class="heading center">client</text>
+  <text x="564" y="740" class="heading center">server</text>
+  <rect x="52" y="770" width="282" height="62" rx="9" fill="#e2eafa"/>
+  <text x="193" y="812" class="body center">14 bytesを送信</text>
+  <path d="M344 800H410" class="arrow"/>
+  <rect x="422" y="770" width="282" height="62" rx="9" fill="#e9efe6"/>
+  <text x="563" y="812" class="body center">解析完了は未確認</text>
+  <rect x="52" y="858" width="282" height="62" rx="9" fill="#f1eee5"/>
+  <text x="193" y="900" class="body center">shutdown(SEND)</text>
+  <path d="M344 888H410" class="arrow"/>
+  <rect x="422" y="858" width="282" height="62" rx="9" fill="#e9efe6"/>
+  <text x="563" y="900" class="body center">本文復元 → EOF（0）</text>
+  <rect x="422" y="946" width="282" height="62" rx="9" fill="#e2eafa"/>
+  <text x="563" y="988" class="body center">アプリ応答を送信</text>
+  <path d="M410 976H344" class="arrow"/>
+  <rect x="52" y="946" width="282" height="62" rx="9" fill="#dcece0"/>
+  <text x="193" y="988" class="body center">4F 4B 00 01を受信</text>
+  <rect x="422" y="1034" width="282" height="62" rx="9" fill="#f1eee5"/>
+  <text x="563" y="1076" class="body center">shutdown(SEND)</text>
+  <path d="M410 1064H344" class="arrow"/>
+  <rect x="52" y="1034" width="282" height="62" rx="9" fill="#dcece0"/>
+  <text x="193" y="1076" class="body center">受信EOF（0）確認</text>
+  <text x="44" y="1166" class="body">最後に、各ソケットを閉じて所有する資源を解放する</text>
+  <text x="32" y="1274" class="heading">受信0・エラー・期限切れを区別する</text>
+  <text x="32" y="1320" class="body">今回の受信0は、正の要求で得た正常な受信終了</text>
+  <text x="32" y="1362" class="body">WouldBlockは準備待ち。resetやtimeoutは別の結果</text>
+  <text x="32" y="1404" class="body">アプリ応答は、この例で決めた規約。TCPのACKとは別</text>
+  <text x="32" y="1446" class="body">図はアプリの手順。パケットやFINの時刻は実測しない</text>
+</svg>
