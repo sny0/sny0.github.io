@@ -31,7 +31,8 @@ export default withMermaid(defineConfig({
     transformItems: items => [
       ...items.map(item => ({ ...item, url: '/study/' + item.url.replace(/^\/+/, '') })),
       { url: '/study/samples/browser/render-observation/index.html' },
-      { url: '/study/samples/browser/event-loop-observation/index.html' }
+      { url: '/study/samples/browser/event-loop-observation/index.html' },
+      { url: '/study/samples/browser/worker-message-observation/index.html' }
     ]
   },
   head: [

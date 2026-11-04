@@ -69,7 +69,7 @@
       "id": "browser",
       "title": "ブラウザ",
       "description": "URLを開いてから描画されるまでを、通信・実行・表示に分ける。",
-      "count": 2,
+      "count": 3,
       "status": "辞典本文あり"
     },
     {
@@ -130,6 +130,13 @@
     }
   ],
   "collections": [
+    {
+      "id": "worker-message-observation",
+      "section": "practice",
+      "title": "Web Workerでコピー・転送・停止を観察する",
+      "description": "同じ16バイトを複製または転送して往復し、バッファの状態、要求ID、停止と再起動、送信時の例外を確かめる。",
+      "start": "/practice/browser/worker-message-observation.html"
+    },
     {
       "id": "event-loop-observation",
       "section": "practice",
@@ -4139,6 +4146,73 @@
       ]
     },
     {
+      "title": "Web Workerでコピー・transfer・停止を観察する",
+      "url": "/practice/browser/worker-message-observation.html",
+      "file": "practice/browser/worker-message-observation.md",
+      "domain": "browser",
+      "section": "practice",
+      "format": "sample",
+      "status": "published",
+      "summary": "同じ16バイトをWorkerへコピーまたはtransferで送り、送信元・返信・返却後の状態を比較する。ready待ち、一件の未完了要求、遅延応答、同期DataCloneError、停止と古い返信の無効化も扱う。",
+      "source": "新規執筆",
+      "aliases": [
+        "Web Worker",
+        "Worker",
+        "postMessage",
+        "structured clone",
+        "ArrayBuffer",
+        "transfer",
+        "detached",
+        "DataCloneError",
+        "terminate"
+      ],
+      "collection": "worker-message-observation",
+      "order": 1,
+      "verification": "ブラウザ実行確認（2026-11-04、ローカルHTTP）",
+      "links": [
+        "/browser/web-workers-messages.html"
+      ]
+    },
+    {
+      "title": "Web Workerとメッセージ通信 — 実行の分担とデータの所有権",
+      "url": "/browser/web-workers-messages.html",
+      "file": "browser/web-workers-messages.md",
+      "domain": "browser",
+      "section": "reference",
+      "format": "article",
+      "status": "published",
+      "summary": "Dedicated Workerの実行環境とメッセージ通信を説明する。structured cloneとArrayBufferの移譲、送信時の処理と受信イベント、返信の識別、エラー、終了とキャンセルを分け、処理場所とデータ所有権の境界を整理する。",
+      "source": "新規執筆",
+      "aliases": [
+        "Web Worker",
+        "Dedicated Worker",
+        "WorkerGlobalScope",
+        "DedicatedWorkerGlobalScope",
+        "agent",
+        "postMessage",
+        "message",
+        "structured clone",
+        "structured serialization",
+        "transfer",
+        "transferable",
+        "transfer list",
+        "ArrayBuffer",
+        "detach",
+        "DataCloneError",
+        "messageerror",
+        "terminate",
+        "generation",
+        "世代",
+        "協調キャンセル"
+      ],
+      "verification": "一次資料照合（2026-11-04）",
+      "links": [
+        "/browser/event-loop-promises.html",
+        "/browser/rendering-journey.html",
+        "/practice/browser/worker-message-observation.html"
+      ]
+    },
+    {
       "title": "WebGPU",
       "url": "/graphics/api/webgpu.html",
       "file": "graphics/api/webgpu.md",
@@ -4359,6 +4433,7 @@
         "/browser/rendering-journey.html",
         "/network/http-messages.html",
         "/os/asynchronous-file-io.html",
+        "/browser/web-workers-messages.html",
         "/practice/browser/event-loop-observation.html"
       ]
     },
@@ -6510,6 +6585,8 @@
         "/practice/browser/render-observation.html",
         "/browser/event-loop-promises.html",
         "/practice/browser/event-loop-observation.html",
+        "/browser/web-workers-messages.html",
+        "/practice/browser/worker-message-observation.html",
         "/history/video-games.html",
         "/guide/rendering/timeline.html"
       ]
@@ -8621,6 +8698,7 @@
       "source": "統合ガイド",
       "aliases": [],
       "links": [
+        "/browser/web-workers-messages.html",
         "/browser/event-loop-promises.html",
         "/browser/rendering-journey.html",
         "/network/tls-https.html",

@@ -19,6 +19,7 @@ URLを開いてから描画されるまでを、通信・実行・表示に分�
 
 ## 辞典の本文
 
+- [Web Workerとメッセージ通信 — 実行の分担とデータの所有権](/browser/web-workers-messages.html)
 - [イベントループ・Promise・async/await — 実行順と描画の関係](/browser/event-loop-promises.html)
 - [ブラウザの描画 — HTMLから画面のピクセルまで](/browser/rendering-journey.html)
 
@@ -29,6 +30,7 @@ URLを開いてから描画されるまでを、通信・実行・表示に分�
 ## 作って試す
 
 - [HTML・CSS・JavaScriptでブラウザの変更と計測を観察する](/practice/browser/render-observation.html)
+- [Web Workerでコピー・transfer・停止を観察する](/practice/browser/worker-message-observation.html)
 - [ブラウザでPromise・await・timer・rAFの順序を観察する](/practice/browser/event-loop-observation.html)
 
 ## 扱う範囲・増補する項目
