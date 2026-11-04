@@ -1,0 +1,44 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="760" height="1510" viewBox="0 0 760 1510" role="img" aria-labelledby="tls-flow-title tls-flow-desc">
+  <title id="tls-flow-title">TLS 1.3の鍵共有、サーバー認証、HTTP通信の概念例</title>
+  <desc id="tls-flow-desc">ECDHEによる鍵共有とサーバー証明書を使い、クライアントがHTTP要求を送るTLS 1.3の例。ClientHelloとServerHelloから鍵を導出し、暗号化された認証メッセージの証明書、CertificateVerify、Finishedを検証する。クライアントがFinishedを送り、アプリケーション用の鍵でHTTPを保護する。クライアント証明書、PSK、再開、0-RTT、HelloRetryRequest、ECHは省略する。サーバーは自分のFinished後にアプリデータを送信できる場合があり、全方向の送信開始を固定する図ではない。実行例の通信を追跡した図ではない。</desc>
+  <style>
+    text { font-family: "BIZ UDPGothic", "Yu Gothic", Meiryo, sans-serif; fill: #26352e; }
+    .heading { font-size: 28px; font-weight: 700; }
+    .body { font-size: 24px; }
+    .arrow { fill: none; stroke: #526d5c; stroke-width: 3; marker-end: url(#arrow); }
+  </style>
+  <defs><marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse"><path d="M0 0L10 5 0 10Z" fill="#526d5c"/></marker></defs>
+  <rect width="760" height="1510" rx="20" fill="#f4f8f4"/>
+  <text x="32" y="54" font-size="32" font-weight="700">TLS 1.3：鍵を作り、相手を確かめる</text>
+  <text x="32" y="98" class="body">ECDHE + 証明書認証。clientがHTTPを送る例</text>
+  <rect x="24" y="130" width="712" height="160" rx="14" fill="#e2eafa"/>
+  <text x="44" y="176" class="heading">① ClientHello</text>
+  <text x="44" y="220" class="body">対応する版・暗号方式、key_shareなどを提示</text>
+  <text x="44" y="262" class="body">SNIは対象名、ALPNはHTTPなどの選択に関与</text>
+  <path d="M380 292V322" class="arrow"/>
+  <rect x="24" y="344" width="712" height="160" rx="14" fill="#fff"/>
+  <text x="44" y="390" class="heading">② ServerHello → 共有秘密から鍵を導出</text>
+  <text x="44" y="434" class="body">選択した条件と、相手のkey_shareを使う</text>
+  <text x="44" y="476" class="body">証明書の公開鍵で、本文全体を暗号化するのではない</text>
+  <path d="M380 506V536" class="arrow"/>
+  <rect x="24" y="558" width="712" height="244" rx="14" fill="#e9efe6"/>
+  <text x="44" y="604" class="heading">③ サーバーの認証メッセージ（暗号化）</text>
+  <text x="44" y="648" class="body">EncryptedExtensions / Certificate</text>
+  <text x="44" y="690" class="body">CertificateVerify：秘密鍵による署名を検証</text>
+  <text x="44" y="732" class="body">Finished：ハンドシェイクの整合性を確認</text>
+  <text x="44" y="774" class="body">TLS 1.3では、ServerHello後の認証情報を保護</text>
+  <path d="M380 804V834" class="arrow"/>
+  <rect x="24" y="856" width="712" height="160" rx="14" fill="#fff"/>
+  <text x="44" y="902" class="heading">④ client：証明書・対象名などを検証</text>
+  <text x="44" y="946" class="body">信頼経路、SANの対象名、期間・用途などを確認</text>
+  <text x="44" y="988" class="body">署名・Finishedの検証と合わせ、相手を認証する</text>
+  <path d="M380 1018V1048" class="arrow"/>
+  <rect x="24" y="1070" width="712" height="160" rx="14" fill="#dcece0"/>
+  <text x="44" y="1116" class="heading">⑤ client Finished → HTTP要求・応答</text>
+  <text x="44" y="1160" class="body">アプリ用の鍵とAEADで、暗号化・改ざん検出</text>
+  <text x="44" y="1202" class="body">TLSレコードと、TCPやHTTPの区切りは別</text>
+  <text x="32" y="1320" class="heading">図はTLS 1.3の一例。通信の実測ではない</text>
+  <text x="32" y="1366" class="body">serverは自分のFinished後に送信可能な場合がある</text>
+  <text x="32" y="1408" class="body">PSK・再開・0-RTT・HRR・ECHは、この図で省略</text>
+  <text x="32" y="1450" class="body">実際のTLS版や暗号方式は、APIの観察結果で確認する</text>
+</svg>

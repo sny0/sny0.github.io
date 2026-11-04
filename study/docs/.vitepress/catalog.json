@@ -76,7 +76,7 @@
       "id": "network",
       "title": "ネットワーク",
       "description": "通信の層と失敗を、Webとゲームの両方から調べる。",
-      "count": 3,
+      "count": 4,
       "status": "辞典本文あり"
     },
     {
@@ -130,6 +130,13 @@
     }
   ],
   "collections": [
+    {
+      "id": "https-observation",
+      "section": "practice",
+      "title": "C++とC#でHTTPSの接続情報を観察する",
+      "description": "標準の証明書検証を保ったGETで、TLS情報、証明書、HTTP応答を区別して確認する。",
+      "start": "/practice/network/https-observation.html"
+    },
     {
       "id": "name-resolution-observation",
       "section": "practice",
@@ -871,6 +878,33 @@
       "links": [
         "/math/floating-point-comparison.html",
         "/practice/data/float-spacing-observation.html"
+      ]
+    },
+    {
+      "title": "C++とC#でHTTPSの応答とTLS情報を観察する",
+      "url": "/practice/network/https-observation.html",
+      "file": "practice/network/https-observation.md",
+      "domain": "network",
+      "section": "practice",
+      "format": "sample",
+      "status": "published",
+      "summary": "WinHTTPとHttpClientの通常の証明書検証を保ち、固定URLへのGETでHTTP状態・本文長・TLS版・暗号スイート・公開証明書のフィンガープリントを観察する。",
+      "source": "新規執筆",
+      "aliases": [
+        "HTTPS",
+        "TLS",
+        "WinHTTP",
+        "HttpClient",
+        "SslStream",
+        "PlaintextStreamFilter",
+        "証明書"
+      ],
+      "collection": "https-observation",
+      "order": 1,
+      "verification": "Windowsで両言語のHTTPS GETを実行確認",
+      "links": [
+        "/network/tls-https.html",
+        "/network/http-messages.html"
       ]
     },
     {
@@ -1910,6 +1944,7 @@
       "links": [
         "/network/http-messages.html",
         "/network/tcp-sockets.html",
+        "/network/tls-https.html",
         "/practice/network/name-resolution-observation.html"
       ]
     },
@@ -2517,6 +2552,7 @@
       "links": [
         "/network/tcp-sockets.html",
         "/data/unicode-and-encoding.html",
+        "/network/tls-https.html",
         "/network/dns-resolution.html",
         "/practice/network/http-message-observation.html"
       ]
@@ -3561,6 +3597,52 @@
         "/graphics/pipeline/overview.html",
         "/graphics/pipeline/mesh-shader.html",
         "/graphics/optimization/gpu-driven.html"
+      ]
+    },
+    {
+      "title": "TLS・証明書・HTTPS — 暗号化と相手の確認",
+      "url": "/network/tls-https.html",
+      "file": "network/tls-https.md",
+      "domain": "network",
+      "section": "reference",
+      "format": "article",
+      "status": "published",
+      "summary": "TLS 1.3の鍵共有、証明書と秘密鍵の確認、AEADによる通信保護を分けて説明する。証明書チェーンと期待する名前、SNI・ALPN・HTTP Hostの違い、HTTPSの保護範囲とAPI観察の限界を整理する。",
+      "source": "新規執筆",
+      "aliases": [
+        "TLS",
+        "TLS 1.3",
+        "HTTPS",
+        "certificate",
+        "証明書",
+        "PKI",
+        "CA",
+        "SAN",
+        "EKU",
+        "trust anchor",
+        "トラストアンカー",
+        "certificate chain",
+        "証明書チェーン",
+        "hostname verification",
+        "SNI",
+        "ALPN",
+        "ECDHE",
+        "AEAD",
+        "ClientHello",
+        "CertificateVerify",
+        "Finished",
+        "ECH",
+        "session resumption",
+        "0-RTT",
+        "WinHTTP",
+        "HttpClient"
+      ],
+      "verification": "一次資料照合（2026-11-04）",
+      "links": [
+        "/network/dns-resolution.html",
+        "/network/tcp-sockets.html",
+        "/network/http-messages.html",
+        "/practice/network/https-observation.html"
       ]
     },
     {
@@ -5042,6 +5124,7 @@
         "/os/asynchronous-file-io.html",
         "/network/http-messages.html",
         "/network/dns-resolution.html",
+        "/network/tls-https.html",
         "/practice/network/tcp-loopback-observation.html"
       ]
     },
@@ -6209,7 +6292,7 @@
       "section": "learning",
       "format": "path",
       "status": "published",
-      "summary": "整数・浮動小数点、文字コード、メモリ確保、起動、同期、ファイルI/Oとマッピング、アセットロード、DNS・TCP・HTTP通信、入力と描画、Webの疑問から本文をたどる。",
+      "summary": "整数・浮動小数点、文字コード、メモリ確保、起動、同期、ファイルI/Oとマッピング、アセットロード、DNS・TCP・HTTP・TLS通信、入力と描画、Webの疑問から本文をたどる。",
       "source": "統合ガイド",
       "aliases": [],
       "collection": "questions",
@@ -6263,6 +6346,8 @@
         "/practice/network/http-message-observation.html",
         "/network/dns-resolution.html",
         "/practice/network/name-resolution-observation.html",
+        "/network/tls-https.html",
+        "/practice/network/https-observation.html",
         "/history/video-games.html",
         "/guide/rendering/timeline.html"
       ]
@@ -8374,6 +8459,7 @@
       "source": "統合ガイド",
       "aliases": [],
       "links": [
+        "/network/tls-https.html",
         "/network/dns-resolution.html",
         "/network/http-messages.html",
         "/network/tcp-sockets.html",

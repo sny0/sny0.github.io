@@ -18,6 +18,7 @@
 
 | 用語・別名 | 説明への入口 |
 | --- | --- |
+| [TLS / HTTPS / 証明書 / SAN / CA / 信頼アンカー / SNI / ALPN / 鍵共有 / CertificateVerify / AEAD](/network/tls-https.html) | 暗号化と相手の検証、鍵共有、証明書の信頼、TLSとHTTPの境界を調べる |
 | [DNS / 名前解決 / リゾルバー / 権威DNS / A / AAAA / CNAME / TTL / NXDOMAIN / NODATA](/network/dns-resolution.html) | 名前解決API、委任をたどる問い合わせ、レコードとキャッシュ、失敗の違いを調べる |
 | [HTTP / HTTP/1.1 / GET / Host / 状態コード / ヘッダー / Content-Length / Content-Type / CRLF](/network/http-messages.html) | 要求と応答の形式、本文のバイト数、メッセージの完成と接続終了を調べる |
 | [ソケット / socket / TCP / IPアドレス / ポート / send / recv / フレーミング / 半閉鎖 / loopback](/network/tcp-sockets.html) | 送受信バッファ、バイト列の境界、EOFとエラー、接続の終了を調べる |
