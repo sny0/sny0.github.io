@@ -1,0 +1,50 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="760" height="1510" viewBox="0 0 760 1510" role="img" aria-labelledby="path-title path-desc">
+  <title id="path-title">sendから相手のrecvとメッセージ解析まで</title>
+  <desc id="path-desc">送信アプリがsendへ渡したバイト列は、OSの送信側バッファやTCP/IPの処理を通り、相手の受信側バッファからrecvでアプリへ渡される。別ホストならNICやネットワーク経路が関わり、同一ホストのループバックは外部ネットワークや物理NICでの通信を測る例ではない。sendの成功やTCPのACKは相手アプリのメッセージ解析完了を保証しない。API回数とTCPセグメントや物理フレーム数は一対一ではない。図は役割の概念で、コピー回数を固定しない。</desc>
+  <style>
+    text { font-family: "BIZ UDPGothic", "Yu Gothic", Meiryo, sans-serif; fill: #26352e; }
+    .heading { font-size: 28px; font-weight: 700; }
+    .body { font-size: 24px; }
+    .center { text-anchor: middle; }
+    .arrow { fill: none; stroke: #526d5c; stroke-width: 3; marker-end: url(#arrow); }
+  </style>
+  <defs><marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse"><path d="M0 0L10 5 0 10Z" fill="#526d5c"/></marker></defs>
+  <rect width="760" height="1510" rx="20" fill="#f4f8f4"/>
+  <text x="32" y="54" font-size="32" font-weight="700">send成功と、相手の処理完了を区別する</text>
+  <text x="32" y="98" class="body">TCPのバイト列を、アプリからアプリへ渡す概念図</text>
+  <rect x="24" y="130" width="712" height="160" rx="14" fill="#fff"/>
+  <text x="44" y="176" class="heading">① 送信アプリ：sendへバイト列を渡す</text>
+  <text x="44" y="220" class="body">正の戻り値は、今回送信側で受理された数</text>
+  <text x="44" y="262" class="body">相手が読み、解析し終えたという通知ではない</text>
+  <path d="M380 292V324" class="arrow"/>
+  <rect x="24" y="346" width="712" height="160" rx="14" fill="#fff"/>
+  <text x="44" y="392" class="heading">② OS：送信バッファとTCP/IPの処理</text>
+  <text x="44" y="436" class="body">TCPの順序・確認応答・再送・流量制御などが関与</text>
+  <text x="44" y="478" class="body">sendの区切りを、そのまま受信メッセージにしない</text>
+  <path d="M380 508V540" class="arrow"/>
+  <rect x="24" y="562" width="348" height="216" rx="14" fill="#dcece0"/>
+  <text x="198" y="608" class="heading center">同じPC内</text>
+  <text x="198" y="652" class="body center">ループバックの経路</text>
+  <text x="198" y="694" class="body center">今回はこちらを観察</text>
+  <text x="198" y="736" class="body center">物理NICの測定ではない</text>
+  <rect x="392" y="562" width="344" height="216" rx="14" fill="#e2eafa"/>
+  <text x="564" y="608" class="heading center">別のホストへ</text>
+  <text x="564" y="652" class="body center">NIC・リンク・IP経路</text>
+  <text x="564" y="694" class="body center">などを通って届く</text>
+  <text x="564" y="736" class="body center">機器やOSで詳細は異なる</text>
+  <path d="M380 780V812" class="arrow"/>
+  <rect x="24" y="834" width="712" height="160" rx="14" fill="#fff"/>
+  <text x="44" y="880" class="heading">③ 相手OS：TCPの受信バッファ</text>
+  <text x="44" y="924" class="body">相手アプリは、まだこの内容を読んでいない場合もある</text>
+  <text x="44" y="966" class="body">TCPのACKと、アプリの処理結果の応答は別</text>
+  <path d="M380 996V1028" class="arrow"/>
+  <rect x="24" y="1050" width="712" height="160" rx="14" fill="#fff"/>
+  <text x="44" y="1096" class="heading">④ 相手アプリ：recv → メッセージを復元</text>
+  <text x="44" y="1140" class="body">実際に受け取った数だけ処理し、不足分を待つ</text>
+  <text x="44" y="1182" class="body">長さ・形式を検査した後、必要ならアプリ応答を返す</text>
+  <text x="32" y="1280" class="heading">API回数と、ネットワーク上の単位は別</text>
+  <text x="32" y="1326" class="body">send回数 / recv回数 / TCPセグメント数を区別する</text>
+  <text x="32" y="1368" class="body">TCPセグメントと、リンク上のフレームも異なる単位</text>
+  <text x="32" y="1410" class="body">役割を示した図。内部のコピー回数は固定しない</text>
+  <text x="32" y="1452" class="body">今回の実行例では、物理パケットやRTTを追跡しない</text>
+</svg>

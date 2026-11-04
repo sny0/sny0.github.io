@@ -140,7 +140,7 @@ writePage('guide/about.md', 'この技術辞典について', { section: 'refere
 
 ## 記事の状態と確認範囲
 
-「草稿」は増補・推敲中の解説、「学習計画・概要」は学ぶ範囲と演習の案内です。学習計画があるだけの分野を、辞典本文が整っている分野と同じ扱いにはしていません。ブラウザやネットワークなど、専用の本文がまだない分野も明示します。
+「草稿」は増補・推敲中の解説、「学習計画・概要」は学ぶ範囲と演習の案内です。学習計画があるだけの分野を、辞典本文が整っている分野と同じ扱いにはしていません。ブラウザなど、専用の本文がまだない分野も明示します。
 
 公開中という状態は、コードの実行や技術内容の全面的な検証を保証しません。対象の言語・規格・エンジン・OSと、実行確認の範囲は個々の本文に従ってください。「モデル検証済み」等の記録は、そのページに書かれた確認範囲に限ります。
 
@@ -162,7 +162,7 @@ ${collections.filter(item => item.section === 'learning').map(item => `- [${item
 
 writePage('guide/learning-paths.md', '疑問から選ぶ読み順', {
   section: 'learning', format: 'path', domain: 'guide', catalog: true, collection: 'questions', order: 0,
-  summary: '整数・浮動小数点、文字コード、メモリ確保、起動、同期、ファイルI/Oとマッピング、アセットロード、入力と描画、Webの疑問から本文をたどる。'
+  summary: '整数・浮動小数点、文字コード、メモリ確保、起動、同期、ファイルI/Oとマッピング、アセットロード、TCP通信、入力と描画、Webの疑問から本文をたどる。'
 }, `# 疑問から選ぶ読み順
 
 辞典を最初から順番に読む必要はありません。いまの疑問に関係する本文から選びます。
@@ -244,15 +244,22 @@ writePage('guide/learning-paths.md', '疑問から選ぶ読み順', {
 3. [座標変換](/math/rendering/transform.html)と[描画パイプライン](/graphics/pipeline/overview.html)から画面へつなぐ。
 4. 作って試すなら[シューティングの設計](/game/shooter-design.html)を読み、[C++版](/game/shooter-cpp.html)または[Unity版](/game/shooter-unity.html)へ進む。
 
+## sendしたデータが、相手のアプリへ届くまで
+
+1. [ソケットとTCP通信](/network/tcp-sockets.html)で、IP・ポート、送受信バッファ、バイト列とメッセージ、半閉鎖を分ける。
+2. [C++・C#のローカル通信](/practice/network/tcp-loopback-observation.html)で、長さ付きメッセージを復元し、送信停止後の応答と受信EOFを確かめる。
+3. 待機と非同期処理の基本は[非同期I/O](/os/asynchronous-file-io.html)へ進む。今回の通信例は、非ブロッキング操作とreadiness待ちを使う。
+
 ## URLを開いてからページが見えるまで
 
-[ネットワーク](/network/)と[ブラウザ](/browser/)の専用本文は準備中です。両ページには扱う範囲を記しています。学習計画と、既に読める詳しい説明を区別して増補します。
+[ネットワーク](/network/)には[ソケットとTCPの本文](/network/tcp-sockets.html)があります。DNS・TLS・HTTPと[ブラウザ](/browser/)の専用詳解は準備中です。通信の基礎と、URLから表示までの全体像を区別して増補します。
 
 ## 作り方の変化を歴史から見る
 
 [ビデオゲーム史](/history/video-games.html)の作品・ハード・媒体・流通と、[リアルタイム3D技術史](/guide/rendering/timeline.html)の技術の変化から、気になった仕組みへ進みます。`)
 
 const termRows = [
+  ['ソケット / socket / TCP / IPアドレス / ポート / send / recv / フレーミング / 半閉鎖 / loopback', '/network/tcp-sockets.html', '送受信バッファ、バイト列の境界、EOFとエラー、接続の終了を調べる'],
   ['メモリマップドファイル / file mapping / mmap / MapViewOfFile / MemoryMappedFile / ビュー', '/os/memory-mapped-files.html', 'ファイルの範囲と仮想アドレスを対応付け、ページとビューの寿命を調べる'],
   ['アセットロード / asset loading / リソース管理 / cook / 読み込み完了 / 利用可能 / 世代トークン', '/game/asset-loading.html', 'byte取得から登録・利用可能化・解放までの状態と所有権を整理する'],
   ['非同期I/O / asynchronous I/O / Overlapped I/O / ERROR_IO_PENDING / ReadAsync / await / IOCP', '/os/asynchronous-file-io.html', '要求の発行、完了結果、待機と継続、バッファを再利用できる時点を調べる'],
