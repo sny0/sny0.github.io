@@ -11,7 +11,7 @@
     "domain": "guide",
     "collection": "questions",
     "order": 0,
-    "summary": "整数・浮動小数点、文字コード、メモリ確保、起動、同期、ファイルI/Oとマッピング、アセットロード、TCP・HTTP通信、入力と描画、Webの疑問から本文をたどる。"
+    "summary": "整数・浮動小数点、文字コード、メモリ確保、起動、同期、ファイルI/Oとマッピング、アセットロード、DNS・TCP・HTTP通信、入力と描画、Webの疑問から本文をたどる。"
   }
 }
 ---
@@ -111,9 +111,15 @@
 2. [C++・C#のHTTP観察](/practice/network/http-message-observation.html)で、ローカルのGETと応答を照合し、本文のバイト数と文字数、メッセージ完成とEOFを確かめる。
 3. 下の層から調べる場合は[TCPとソケット](/network/tcp-sockets.html)、文字の表現は[Unicodeと文字コード](/data/unicode-and-encoding.html)へ戻る。
 
+## 名前から、接続先のIP候補が決まるまで
+
+1. [DNSと名前解決](/network/dns-resolution.html)で、OSの名前解決、再帰リゾルバー、権威DNS、レコードとキャッシュを分ける。
+2. [C++・C#の名前解決観察](/practice/network/name-resolution-observation.html)で、数値IP・localhost・追加指定する公開名を調べ、APIの結果から分かる範囲を確かめる。
+3. IPを得た後の接続は[TCPとソケット](/network/tcp-sockets.html)、要求と応答は[HTTP通信](/network/http-messages.html)へ進む。
+
 ## URLを開いてからページが見えるまで
 
-[ネットワーク](/network/)には[TCPとソケット](/network/tcp-sockets.html)、[HTTPの要求と応答](/network/http-messages.html)の本文があります。DNS・TLSと[ブラウザ](/browser/)の専用詳解は準備中です。通信の基礎と、URLから表示までの全体像を区別して増補します。
+[ネットワーク](/network/)には[DNSと名前解決](/network/dns-resolution.html)、[TCPとソケット](/network/tcp-sockets.html)、[HTTPの要求と応答](/network/http-messages.html)の本文があります。TLSと[ブラウザ](/browser/)の専用詳解は準備中です。通信の基礎と、URLから表示までの全体像を区別して増補します。
 
 ## 作り方の変化を歴史から見る
 

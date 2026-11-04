@@ -1,0 +1,44 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="760" height="1510" viewBox="0 0 760 1510" role="img" aria-labelledby="dns-path-title dns-path-desc">
+  <title id="dns-path-title">OSの名前解決から、必要に応じてDNSの委任をたどるまで</title>
+  <desc id="dns-path-desc">アプリはOSのAPIに名前と条件を渡し、IP候補を得る。OSでは数値IP、localhost、hosts、キャッシュなどの処理が関わり得る。必要な場合に設定された再帰リゾルバーへ進む。再帰側はキャッシュやforwarderを使い、必要ならルート、TLD、権威サーバーの委任をたどって答えを得る。これは概念上の例で、各層を毎回巡ることや、固定のローカル処理順序を示さない。実践はOS APIの返値を観察し、問い合わせ経路を追跡しない。</desc>
+  <style>
+    text { font-family: "BIZ UDPGothic", "Yu Gothic", Meiryo, sans-serif; fill: #26352e; }
+    .heading { font-size: 28px; font-weight: 700; }
+    .body { font-size: 24px; }
+    .arrow { fill: none; stroke: #526d5c; stroke-width: 3; marker-end: url(#arrow); }
+  </style>
+  <defs><marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse"><path d="M0 0L10 5 0 10Z" fill="#526d5c"/></marker></defs>
+  <rect width="760" height="1510" rx="20" fill="#f4f8f4"/>
+  <text x="32" y="54" font-size="32" font-weight="700">名前解決と、DNSの問い合わせを分ける</text>
+  <text x="32" y="98" class="body">OSのAPIから、必要に応じてDNSの階層へ進む</text>
+  <rect x="24" y="130" width="712" height="160" rx="14" fill="#fff"/>
+  <text x="44" y="176" class="heading">① アプリ：名前からIP候補を求める</text>
+  <text x="44" y="220" class="body">名前解決APIへ、名前とアドレスの条件を渡す</text>
+  <text x="44" y="262" class="body">返値は候補。接続自体は、まだ始まらない</text>
+  <path d="M380 292V322" class="arrow"/>
+  <rect x="24" y="344" width="712" height="200" rx="14" fill="#e2eafa"/>
+  <text x="44" y="390" class="heading">② OSの名前解決と、ローカルの処理</text>
+  <text x="44" y="434" class="body">数値IP・localhost・hosts・各種キャッシュなど</text>
+  <text x="44" y="476" class="body">採用元や処理順は、OS・API・設定によって異なる</text>
+  <text x="44" y="518" class="body">ここは必須の直列順や、実測した経路ではない</text>
+  <text x="44" y="594" class="body">必要なら、設定されたリゾルバーへ</text>
+  <path d="M380 608V638" class="arrow"/>
+  <rect x="24" y="660" width="712" height="200" rx="14" fill="#e9efe6"/>
+  <text x="44" y="706" class="heading">③ 再帰リゾルバー：答えをまとめて返す</text>
+  <text x="44" y="750" class="body">使えるキャッシュがあれば、その答えを再利用</text>
+  <text x="44" y="792" class="body">必要なら、委任先へ問い合わせて答えを探す</text>
+  <text x="44" y="834" class="body">forwarderを通す構成もある</text>
+  <path d="M380 862V892" class="arrow"/>
+  <rect x="24" y="914" width="712" height="274" rx="14" fill="#fff"/>
+  <text x="44" y="960" class="heading">キャッシュが足りないときの概念例</text>
+  <text x="44" y="1004" class="body">ルート . → .com の委任情報</text>
+  <text x="44" y="1046" class="body">.com → example.com の委任情報</text>
+  <text x="44" y="1088" class="body">権威DNS → 管理するゾーンの答え</text>
+  <text x="44" y="1130" class="body">問い合わせるのは再帰側。答えはそこへ返る</text>
+  <text x="44" y="1172" class="body">各段階を、毎回すべて巡るとは限らない</text>
+  <rect x="24" y="1216" width="712" height="132" rx="14" fill="#dcece0"/>
+  <text x="44" y="1262" class="heading">④ アプリへ：IPv4 / IPv6の候補など</text>
+  <text x="44" y="1306" class="body">IPでの接続・HTTP応答・TLS認証は次の段階</text>
+  <text x="32" y="1420" class="body">矢印は役割の概念。実践でDNSパケットは追跡しない</text>
+  <text x="32" y="1462" class="body">同じIPが返っただけで、キャッシュ利用は証明できない</text>
+</svg>

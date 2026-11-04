@@ -76,7 +76,7 @@
       "id": "network",
       "title": "ネットワーク",
       "description": "通信の層と失敗を、Webとゲームの両方から調べる。",
-      "count": 2,
+      "count": 3,
       "status": "辞典本文あり"
     },
     {
@@ -130,6 +130,13 @@
     }
   ],
   "collections": [
+    {
+      "id": "name-resolution-observation",
+      "section": "practice",
+      "title": "C++とC#で名前解決の結果を観察する",
+      "description": "数値IP、localhost、追加指定した公開名をOSのAPIで調べ、成功・失敗・取消と結果の限界を確かめる。",
+      "start": "/practice/network/name-resolution-observation.html"
+    },
     {
       "id": "http-message-observation",
       "section": "practice",
@@ -894,6 +901,39 @@
       "links": [
         "/network/http-messages.html",
         "/practice/network/tcp-loopback-observation.html"
+      ]
+    },
+    {
+      "title": "C++とC#でOSの名前解決結果と取消しの境界を観察する",
+      "url": "/practice/network/name-resolution-observation.html",
+      "file": "practice/network/name-resolution-observation.md",
+      "domain": "network",
+      "section": "practice",
+      "format": "sample",
+      "status": "published",
+      "summary": "数値IPv4/IPv6、localhost、任意のexample.com.をOS APIへ渡し、返されたアドレス・API状態・取消要求期限と完了回収を観察する。DNS通信経路や接続成功は測らない。",
+      "source": "新規執筆",
+      "aliases": [
+        "DNS",
+        "名前解決",
+        "resolver",
+        "GetAddrInfoExW",
+        "GetAddrInfoExCancel",
+        "Dns.GetHostAddressesAsync",
+        "localhost",
+        "NS_ALL",
+        "IPv4",
+        "IPv6",
+        "cancel",
+        "drain"
+      ],
+      "collection": "name-resolution-observation",
+      "order": 1,
+      "verification": "Windowsで両言語を実行確認",
+      "links": [
+        "/network/dns-resolution.html",
+        "/network/tcp-sockets.html",
+        "/network/http-messages.html"
       ]
     },
     {
@@ -1828,6 +1868,52 @@
       ]
     },
     {
+      "title": "DNSと名前解決 — 名前から接続先が決まるまで",
+      "url": "/network/dns-resolution.html",
+      "file": "network/dns-resolution.md",
+      "domain": "network",
+      "section": "reference",
+      "format": "article",
+      "status": "published",
+      "summary": "OSの名前解決API、hostsとキャッシュ、再帰リゾルバーと権威サーバー、DNSの委任を区別する。A・AAAA・CNAME・TTLと失敗の種類を読み、接続成功やTLS認証との境界を説明する。",
+      "source": "新規執筆",
+      "aliases": [
+        "DNS",
+        "名前解決",
+        "name resolution",
+        "resolver",
+        "stub resolver",
+        "recursive resolver",
+        "authoritative server",
+        "権威サーバー",
+        "再帰",
+        "反復",
+        "referral",
+        "delegation",
+        "委任",
+        "zone",
+        "A",
+        "AAAA",
+        "CNAME",
+        "TTL",
+        "NXDOMAIN",
+        "NODATA",
+        "SERVFAIL",
+        "negative cache",
+        "DoH",
+        "DoT",
+        "DNSSEC",
+        "GetAddrInfoExW",
+        "GetHostAddressesAsync"
+      ],
+      "verification": "一次資料照合（2026-11-04）",
+      "links": [
+        "/network/http-messages.html",
+        "/network/tcp-sockets.html",
+        "/practice/network/name-resolution-observation.html"
+      ]
+    },
+    {
       "title": "ECS — Entity Component System",
       "url": "/game/ecs.html",
       "file": "game/ecs.md",
@@ -2431,6 +2517,7 @@
       "links": [
         "/network/tcp-sockets.html",
         "/data/unicode-and-encoding.html",
+        "/network/dns-resolution.html",
         "/practice/network/http-message-observation.html"
       ]
     },
@@ -4954,6 +5041,7 @@
         "/runtime/thread-synchronization.html",
         "/os/asynchronous-file-io.html",
         "/network/http-messages.html",
+        "/network/dns-resolution.html",
         "/practice/network/tcp-loopback-observation.html"
       ]
     },
@@ -6121,7 +6209,7 @@
       "section": "learning",
       "format": "path",
       "status": "published",
-      "summary": "整数・浮動小数点、文字コード、メモリ確保、起動、同期、ファイルI/Oとマッピング、アセットロード、TCP・HTTP通信、入力と描画、Webの疑問から本文をたどる。",
+      "summary": "整数・浮動小数点、文字コード、メモリ確保、起動、同期、ファイルI/Oとマッピング、アセットロード、DNS・TCP・HTTP通信、入力と描画、Webの疑問から本文をたどる。",
       "source": "統合ガイド",
       "aliases": [],
       "collection": "questions",
@@ -6173,6 +6261,8 @@
         "/practice/network/tcp-loopback-observation.html",
         "/network/http-messages.html",
         "/practice/network/http-message-observation.html",
+        "/network/dns-resolution.html",
+        "/practice/network/name-resolution-observation.html",
         "/history/video-games.html",
         "/guide/rendering/timeline.html"
       ]
@@ -8284,6 +8374,7 @@
       "source": "統合ガイド",
       "aliases": [],
       "links": [
+        "/network/dns-resolution.html",
         "/network/http-messages.html",
         "/network/tcp-sockets.html",
         "/os/memory-mapped-files.html",

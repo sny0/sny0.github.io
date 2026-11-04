@@ -162,7 +162,7 @@ ${collections.filter(item => item.section === 'learning').map(item => `- [${item
 
 writePage('guide/learning-paths.md', '疑問から選ぶ読み順', {
   section: 'learning', format: 'path', domain: 'guide', catalog: true, collection: 'questions', order: 0,
-  summary: '整数・浮動小数点、文字コード、メモリ確保、起動、同期、ファイルI/Oとマッピング、アセットロード、TCP・HTTP通信、入力と描画、Webの疑問から本文をたどる。'
+  summary: '整数・浮動小数点、文字コード、メモリ確保、起動、同期、ファイルI/Oとマッピング、アセットロード、DNS・TCP・HTTP通信、入力と描画、Webの疑問から本文をたどる。'
 }, `# 疑問から選ぶ読み順
 
 辞典を最初から順番に読む必要はありません。いまの疑問に関係する本文から選びます。
@@ -256,15 +256,22 @@ writePage('guide/learning-paths.md', '疑問から選ぶ読み順', {
 2. [C++・C#のHTTP観察](/practice/network/http-message-observation.html)で、ローカルのGETと応答を照合し、本文のバイト数と文字数、メッセージ完成とEOFを確かめる。
 3. 下の層から調べる場合は[TCPとソケット](/network/tcp-sockets.html)、文字の表現は[Unicodeと文字コード](/data/unicode-and-encoding.html)へ戻る。
 
+## 名前から、接続先のIP候補が決まるまで
+
+1. [DNSと名前解決](/network/dns-resolution.html)で、OSの名前解決、再帰リゾルバー、権威DNS、レコードとキャッシュを分ける。
+2. [C++・C#の名前解決観察](/practice/network/name-resolution-observation.html)で、数値IP・localhost・追加指定する公開名を調べ、APIの結果から分かる範囲を確かめる。
+3. IPを得た後の接続は[TCPとソケット](/network/tcp-sockets.html)、要求と応答は[HTTP通信](/network/http-messages.html)へ進む。
+
 ## URLを開いてからページが見えるまで
 
-[ネットワーク](/network/)には[TCPとソケット](/network/tcp-sockets.html)、[HTTPの要求と応答](/network/http-messages.html)の本文があります。DNS・TLSと[ブラウザ](/browser/)の専用詳解は準備中です。通信の基礎と、URLから表示までの全体像を区別して増補します。
+[ネットワーク](/network/)には[DNSと名前解決](/network/dns-resolution.html)、[TCPとソケット](/network/tcp-sockets.html)、[HTTPの要求と応答](/network/http-messages.html)の本文があります。TLSと[ブラウザ](/browser/)の専用詳解は準備中です。通信の基礎と、URLから表示までの全体像を区別して増補します。
 
 ## 作り方の変化を歴史から見る
 
 [ビデオゲーム史](/history/video-games.html)の作品・ハード・媒体・流通と、[リアルタイム3D技術史](/guide/rendering/timeline.html)の技術の変化から、気になった仕組みへ進みます。`)
 
 const termRows = [
+  ['DNS / 名前解決 / リゾルバー / 権威DNS / A / AAAA / CNAME / TTL / NXDOMAIN / NODATA', '/network/dns-resolution.html', '名前解決API、委任をたどる問い合わせ、レコードとキャッシュ、失敗の違いを調べる'],
   ['HTTP / HTTP/1.1 / GET / Host / 状態コード / ヘッダー / Content-Length / Content-Type / CRLF', '/network/http-messages.html', '要求と応答の形式、本文のバイト数、メッセージの完成と接続終了を調べる'],
   ['ソケット / socket / TCP / IPアドレス / ポート / send / recv / フレーミング / 半閉鎖 / loopback', '/network/tcp-sockets.html', '送受信バッファ、バイト列の境界、EOFとエラー、接続の終了を調べる'],
   ['メモリマップドファイル / file mapping / mmap / MapViewOfFile / MemoryMappedFile / ビュー', '/os/memory-mapped-files.html', 'ファイルの範囲と仮想アドレスを対応付け、ページとビューの寿命を調べる'],
