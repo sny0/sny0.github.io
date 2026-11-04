@@ -69,8 +69,8 @@
       "id": "browser",
       "title": "ブラウザ",
       "description": "URLを開いてから描画されるまでを、通信・実行・表示に分ける。",
-      "count": 0,
-      "status": "辞典本文を準備中"
+      "count": 1,
+      "status": "辞典本文あり"
     },
     {
       "id": "network",
@@ -130,6 +130,13 @@
     }
   ],
   "collections": [
+    {
+      "id": "render-observation",
+      "section": "practice",
+      "title": "ブラウザでDOMと描画の変化を観察する",
+      "description": "幅・色・移動・透明度とDOMテキストを変更し、寸法APIとrAFで分かる範囲を確かめる。",
+      "start": "/practice/browser/render-observation.html"
+    },
     {
       "id": "https-observation",
       "section": "practice",
@@ -2516,6 +2523,34 @@
       ]
     },
     {
+      "title": "HTML・CSS・JavaScriptでブラウザの変更と計測を観察する",
+      "url": "/practice/browser/render-observation.html",
+      "file": "practice/browser/render-observation.md",
+      "domain": "browser",
+      "section": "practice",
+      "format": "sample",
+      "status": "published",
+      "summary": "実際のブラウザでテキスト・幅・背景色・transform・opacityを個別に変更し、DOM・スタイル・レイアウト寸法・表示位置の値を別操作で比較する。",
+      "source": "新規執筆",
+      "aliases": [
+        "DOM",
+        "CSSOM",
+        "getComputedStyle",
+        "offsetWidth",
+        "getBoundingClientRect",
+        "requestAnimationFrame",
+        "DevTools",
+        "layout",
+        "paint"
+      ],
+      "collection": "render-observation",
+      "order": 1,
+      "verification": "ブラウザ実行確認（2026-11-04、ローカルHTTP）",
+      "links": [
+        "/browser/rendering-journey.html"
+      ]
+    },
+    {
       "title": "HTTP通信 — 要求・応答と本文の区切り",
       "url": "/network/http-messages.html",
       "file": "network/http-messages.md",
@@ -3642,7 +3677,8 @@
         "/network/dns-resolution.html",
         "/network/tcp-sockets.html",
         "/network/http-messages.html",
-        "/practice/network/https-observation.html"
+        "/practice/network/https-observation.html",
+        "/browser/rendering-journey.html"
       ]
     },
     {
@@ -5562,6 +5598,51 @@
       ]
     },
     {
+      "title": "ブラウザの描画 — HTMLから画面のピクセルまで",
+      "url": "/browser/rendering-journey.html",
+      "file": "browser/rendering-journey.md",
+      "domain": "browser",
+      "section": "reference",
+      "format": "article",
+      "status": "published",
+      "summary": "HTMLのバイト列からDOM、CSSのスタイル計算、レイアウト、ペイント、ラスタライズ、合成へ進む流れを説明する。Chromeの実装例とWebの仕様を分け、変更後の再計算、寸法API、描画完了を判断できない観測の境界を整理する。",
+      "source": "新規執筆",
+      "aliases": [
+        "browser rendering",
+        "ブラウザ描画",
+        "DOM",
+        "CSSOM",
+        "cascade",
+        "カスケード",
+        "computed style",
+        "スタイル計算",
+        "layout",
+        "レイアウト",
+        "paint",
+        "ペイント",
+        "rasterization",
+        "ラスタライズ",
+        "compositing",
+        "合成",
+        "renderer",
+        "Blink",
+        "compositor",
+        "requestAnimationFrame",
+        "forced layout",
+        "強制レイアウト"
+      ],
+      "verification": "一次資料照合（2026-11-04）",
+      "links": [
+        "/network/dns-resolution.html",
+        "/network/tcp-sockets.html",
+        "/network/tls-https.html",
+        "/network/http-messages.html",
+        "/data/unicode-and-encoding.html",
+        "/os/process-startup.html",
+        "/practice/browser/render-observation.html"
+      ]
+    },
+    {
       "title": "プレイヤー入力の設計",
       "url": "/design/case-studies/player-input.html",
       "file": "design/case-studies/player-input.md",
@@ -6348,6 +6429,8 @@
         "/practice/network/name-resolution-observation.html",
         "/network/tls-https.html",
         "/practice/network/https-observation.html",
+        "/browser/rendering-journey.html",
+        "/practice/browser/render-observation.html",
         "/history/video-games.html",
         "/guide/rendering/timeline.html"
       ]
@@ -8459,6 +8542,7 @@
       "source": "統合ガイド",
       "aliases": [],
       "links": [
+        "/browser/rendering-journey.html",
         "/network/tls-https.html",
         "/network/dns-resolution.html",
         "/network/http-messages.html",

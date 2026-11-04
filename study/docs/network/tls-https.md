@@ -130,3 +130,5 @@ TLSの版・暗号スイート・サーバー証明書のSHA-256と、HTTPステ
 リダイレクト・HTTPの自動認証・cookieは無効で、本文は64 KiBまでです。WinHTTPは各段階8秒以内の待機設定と30秒の経過時間予算、C#は要求と本文読取りに共通の30秒の取消しを使います。実時間の厳密な上限ではありません。正の数を要求した本文readの正常な結果が0なら、ここでは本文の終了であり、TLSの`close_notify`やTCPのEOFの直接観測ではありません。[Microsoft: WinHttpReadData](https://learn.microsoft.com/en-us/windows/win32/api/winhttp/nf-winhttp-winhttpreaddata)
 
 ハンドシェイク全体、ECDHE内部、実パケット境界は追跡しません。不正証明書、名前の不一致、期限切れ、取消しなどの注入や、他OS・Unityも未検証です。実行結果の細部は実践記事を参照してください。
+
+HTTPSで受け取ったHTMLが表示になる過程は、[ブラウザの描画](/browser/rendering-journey.html)へ進みます。通信の完了と、画面にページが見える時点を分けて追います。

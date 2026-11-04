@@ -125,7 +125,9 @@
 
 ## URLを開いてからページが見えるまで
 
-[ネットワーク](/network/)には[DNSと名前解決](/network/dns-resolution.html)、[TCPとソケット](/network/tcp-sockets.html)、[HTTPの要求と応答](/network/http-messages.html)、[TLS・証明書・HTTPS](/network/tls-https.html)の本文があります。[ブラウザ](/browser/)の専用詳解は準備中です。通信の基礎と、URLから表示までの全体像を区別して増補します。
+1. 通信は[DNSと名前解決](/network/dns-resolution.html)、[TCPとソケット](/network/tcp-sockets.html)、[HTTPの要求と応答](/network/http-messages.html)、[TLS・証明書・HTTPS](/network/tls-https.html)で調べる。
+2. [ブラウザの描画](/browser/rendering-journey.html)で、受信したHTMLからDOM、スタイル、レイアウト、描画、合成までをつなぐ。
+3. [DOMと描画の変化を観察する](/practice/browser/render-observation.html)で、幅・色・移動・透明度を変え、寸法APIとrAFで確認できる範囲を試す。
 
 ## 作り方の変化を歴史から見る
 

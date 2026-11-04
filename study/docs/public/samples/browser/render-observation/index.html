@@ -1,0 +1,92 @@
+<!doctype html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="light">
+  <title>ブラウザの変更と計測 | Sny0 Study</title>
+  <link rel="canonical" href="https://sny0.com/study/samples/browser/render-observation/index.html">
+  <link rel="stylesheet" href="./styles.css">
+  <script src="./main.js" defer></script>
+</head>
+<body>
+  <main>
+    <header class="page-header">
+      <a href="https://sny0.com/study/practice/browser/render-observation.html">Sny0 Studyの解説へ戻る</a>
+      <p class="eyebrow">HTML / CSS / JavaScript</p>
+      <h1>見た目を変えて、<br class="small-break">ブラウザの値を調べる</h1>
+      <p>まず一つ変更し、次に「値を計測する」を押します。変更する操作と、値を読む操作を分けた実験です。</p>
+    </header>
+
+    <noscript><p class="notice">操作にはJavaScriptが必要です。有効にすると変更と計測を試せます。</p></noscript>
+
+    <div class="experiment-grid">
+      <section class="panel" aria-labelledby="preview-heading">
+        <h2 id="preview-heading"><span class="step">1</span> 変更を見比べる</h2>
+        <div id="stage" class="stage">
+          <div id="fixture" class="fixture">Hello</div>
+          <div class="flow-marker" aria-hidden="true"></div>
+          <p class="stage-caption">下の線は、同じ通常フローにある別の要素です。</p>
+        </div>
+        <p class="help">初期値は幅100px × 高さ60pxの<code>border-box</code>です。paddingは8px、borderは2pxで、幅に含まれます。</p>
+      </section>
+
+      <section class="panel" aria-labelledby="controls-heading">
+        <h2 id="controls-heading"><span class="step">2</span> 一項目ずつ切り替える</h2>
+        <div class="toggle-list">
+          <button type="button" data-toggle="text" aria-pressed="false">
+            <span>テキスト <code>textContent</code></span><span data-current>Hello</span>
+          </button>
+          <button type="button" data-toggle="width" aria-pressed="false">
+            <span>幅 <code>width</code></span><span data-current>100px</span>
+          </button>
+          <button type="button" data-toggle="color" aria-pressed="false">
+            <span>背景色 <code>background-color</code></span><span data-current>青</span>
+          </button>
+          <button type="button" data-toggle="transform" aria-pressed="false">
+            <span>位置 <code>transform</code></span><span data-current>なし</span>
+          </button>
+          <button type="button" data-toggle="opacity" aria-pressed="false">
+            <span>透明度 <code>opacity</code></span><span data-current>1</span>
+          </button>
+        </div>
+        <p class="help">押下状態は変更側がONの印です。アニメーションはありません。変更時には計測APIを呼びません。</p>
+      </section>
+    </div>
+
+    <section class="panel" aria-labelledby="measurement-heading">
+      <h2 id="measurement-heading"><span class="step">3</span> 値を読む</h2>
+      <div class="actions">
+        <button type="button" id="measure" class="primary">値を計測する</button>
+        <button type="button" id="raf">rAFを1回予約する</button>
+        <button type="button" id="reset">すべて初期化</button>
+      </div>
+      <p class="help">計測そのものがstyle・layoutの更新を必要にする場合があります。表の値から処理回数やGPU使用の有無は分かりません。</p>
+      <p id="measurement-state" class="state-line">まだ計測していません。</p>
+      <div class="table-wrap">
+        <table>
+          <caption>計測ボタンを押した時点の値（寸法・座標はCSS px）</caption>
+          <thead><tr><th scope="col">項目</th><th scope="col">今回</th><th scope="col">前回との差</th></tr></thead>
+          <tbody id="measurements"><tr><td colspan="3">「値を計測する」で値を表示します。</td></tr></tbody>
+        </table>
+      </div>
+      <p class="help"><code>rect.left / top</code>はviewport基準なのでスクロールでも変わります。<code>rect.left − stage.left</code>は実験枠に対する横位置です。色やtransformの文字列表現はブラウザで異なる場合があります。</p>
+    </section>
+
+    <section class="panel" aria-labelledby="log-heading">
+      <h2 id="log-heading">操作ログ <span class="subtle">最新20件</span></h2>
+      <p id="visibility-state" class="help"></p>
+      <p class="help">rAFはcallbackに入った時点だけを記録します。paint・画面表示の完了通知ではありません。非表示のタブでは遅延・抑制され得ます。</p>
+      <ol id="event-log" class="event-log"></ol>
+    </section>
+
+    <aside class="notice" aria-labelledby="limits-heading">
+      <h2 id="limits-heading">このページだけでは測れないもの</h2>
+      <p>width・色・transform・opacityの変更から、「必ずlayoutした」「paintなし」「GPUだけで処理した」とは断定しません。実際の処理段階はDevToolsのPerformanceやPaint flashingで別に調べます。ログや表の更新自体にも描画処理があります。</p>
+      <p>外部ライブラリ、fetch、storage、analyticsは使いません。4ファイルを同じフォルダに置き、index.htmlを開いて試せます。</p>
+    </aside>
+    <p id="announcement" class="visually-hidden" role="status" aria-live="polite" aria-atomic="true"></p>
+    <footer><a href="https://sny0.com/study/practice/browser/render-observation.html">実験の手順・ソースの解説を読む</a></footer>
+  </main>
+</body>
+</html>
