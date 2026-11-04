@@ -1,0 +1,46 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="760" height="1510" viewBox="0 0 760 1510" role="img" aria-labelledby="exchange-title exchange-desc">
+  <title id="exchange-title">HTTP/1.1の要求と応答が往復するまで</title>
+  <desc id="exchange-desc">クライアントがローカルURLからGET要求とHostを組み立て、TCPへ渡す。サーバーは要求を解析して対象を選び、200という状態コード、Date、Content-Type、Content-Length、Connectionと本文を返す。クライアントはヘッダーと本文を解析する。教材では同一ホストのHTTP/1.1接続で固定のGET一回を扱い、DNSやTLSは使わない。送信成功とTCPのACK、HTTPの応答は別の意味を持つ。</desc>
+  <style>
+    text { font-family: "BIZ UDPGothic", "Yu Gothic", Meiryo, sans-serif; fill: #26352e; }
+    .heading { font-size: 28px; font-weight: 700; }
+    .body { font-size: 24px; }
+    .mono { font-family: Consolas, monospace; font-size: 24px; }
+    .arrow { fill: none; stroke: #526d5c; stroke-width: 3; marker-end: url(#arrow); }
+  </style>
+  <defs><marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse"><path d="M0 0L10 5 0 10Z" fill="#526d5c"/></marker></defs>
+  <rect width="760" height="1510" rx="20" fill="#f4f8f4"/>
+  <text x="32" y="54" font-size="32" font-weight="700">HTTPの要求と応答を組み立てる</text>
+  <text x="32" y="98" class="body">今回はHTTP/1.1のGET一回。DNS・TLSは使わない</text>
+  <rect x="24" y="130" width="712" height="220" rx="14" fill="#fff"/>
+  <text x="44" y="176" class="heading">① クライアント：URLから要求を作る</text>
+  <text x="44" y="220" class="mono">http://127.0.0.1:PORT/study-demo</text>
+  <text x="44" y="262" class="body">methodはGET、要求先は /study-demo</text>
+  <text x="44" y="304" class="body">Hostは127.0.0.1:PORT。PORTはOSが割り当てる</text>
+  <path d="M380 352V382" class="arrow"/>
+  <rect x="24" y="404" width="712" height="160" rx="14" fill="#e2eafa"/>
+  <text x="44" y="450" class="heading">② HTTPメッセージをTCPへ渡す</text>
+  <text x="44" y="494" class="body">要求行 → ヘッダー → 空行（この要求に本文はない）</text>
+  <text x="44" y="536" class="body">APIの区切りと、HTTPの区切りは一致しない</text>
+  <path d="M380 566V596" class="arrow"/>
+  <rect x="24" y="618" width="712" height="160" rx="14" fill="#fff"/>
+  <text x="44" y="664" class="heading">③ サーバー：要求を解析し、対象を選ぶ</text>
+  <text x="44" y="708" class="body">Host・パス・methodを検査し、応答を用意する</text>
+  <text x="44" y="750" class="body">この教材では、既知のUTF-8本文を返す</text>
+  <path d="M380 780V810" class="arrow"/>
+  <rect x="24" y="832" width="712" height="240" rx="14" fill="#e9efe6"/>
+  <text x="44" y="878" class="heading">④ 応答：200 + ヘッダー + 本文9byte</text>
+  <text x="44" y="922" class="mono">Content-Type: text/plain; charset=utf-8</text>
+  <text x="44" y="964" class="body">Dateは生成時のUTC。Content-Lengthは9</text>
+  <text x="44" y="1006" class="mono">Connection: close</text>
+  <text x="44" y="1048" class="body">空行の後に本文。今回の本文は「HTTP あ」+ 改行</text>
+  <path d="M380 1074V1104" class="arrow"/>
+  <rect x="24" y="1126" width="712" height="160" rx="14" fill="#fff"/>
+  <text x="44" y="1172" class="heading">⑤ クライアント：応答を解釈する</text>
+  <text x="44" y="1216" class="body">ヘッダーを解析 → 本文を9byteそろえる</text>
+  <text x="44" y="1258" class="body">HTTP本文の完成と、接続のEOFは別に確認する</text>
+  <text x="32" y="1354" class="heading">通信の各段階が、何を示すかを分ける</text>
+  <text x="32" y="1400" class="body">送信成功・TCPのACK・HTTPの応答は別の結果</text>
+  <text x="32" y="1442" class="body">200も、保存や描画まで保証する合図とは限らない</text>
+  <text x="32" y="1484" class="body">図はHTTP/1.1の例。HTTP/3はQUICを使う</text>
+</svg>

@@ -76,7 +76,7 @@
       "id": "network",
       "title": "ネットワーク",
       "description": "通信の層と失敗を、Webとゲームの両方から調べる。",
-      "count": 1,
+      "count": 2,
       "status": "辞典本文あり"
     },
     {
@@ -130,6 +130,13 @@
     }
   ],
   "collections": [
+    {
+      "id": "http-message-observation",
+      "section": "practice",
+      "title": "C++とC#でHTTPの要求と応答を観察する",
+      "description": "ローカルのGET一回から、ヘッダーと本文、Content-Length、受信の終了を確かめる。",
+      "start": "/practice/network/http-message-observation.html"
+    },
     {
       "id": "tcp-loopback-observation",
       "section": "practice",
@@ -857,6 +864,36 @@
       "links": [
         "/math/floating-point-comparison.html",
         "/practice/data/float-spacing-observation.html"
+      ]
+    },
+    {
+      "title": "C++とC#でHTTPのヘッダー・本文・終端を観察する",
+      "url": "/practice/network/http-message-observation.html",
+      "file": "practice/network/http-message-observation.md",
+      "domain": "network",
+      "section": "practice",
+      "format": "sample",
+      "status": "published",
+      "summary": "固定GETと200応答を自己loopback接続で交換し、CRLFCRLFの受信跨り、本文の持越し、Content-Lengthのバイト数、Date、本文完成と接続EOFの違いを確認する。",
+      "source": "新規執筆",
+      "aliases": [
+        "HTTP/1.1",
+        "Content-Length",
+        "CRLF",
+        "Date",
+        "IMF-fixdate",
+        "ヘッダー",
+        "本文",
+        "TCP",
+        "Socket.Select",
+        "EOF"
+      ],
+      "collection": "http-message-observation",
+      "order": 1,
+      "verification": "Windowsで両言語を実行確認",
+      "links": [
+        "/network/http-messages.html",
+        "/practice/network/tcp-loopback-observation.html"
       ]
     },
     {
@@ -2355,6 +2392,46 @@
         "/graphics/shader/glsl.html",
         "/graphics/shader/spirv.html",
         "/graphics/compute/compute-shader.html"
+      ]
+    },
+    {
+      "title": "HTTP通信 — 要求・応答と本文の区切り",
+      "url": "/network/http-messages.html",
+      "file": "network/http-messages.md",
+      "domain": "network",
+      "section": "reference",
+      "format": "article",
+      "status": "published",
+      "summary": "HTTP/1.1の要求行・応答行・ヘッダー・本文を、送受信するbyte列として読む。Host、CRLF、Content-Length、UTF-8、接続終了を区別し、HTTPの成功とアプリの目的達成の境界を説明する。",
+      "source": "新規執筆",
+      "aliases": [
+        "HTTP",
+        "HTTP/1.1",
+        "HTTP request",
+        "HTTP response",
+        "要求",
+        "応答",
+        "GET",
+        "Host",
+        "request-target",
+        "status code",
+        "ステータスコード",
+        "header",
+        "ヘッダー",
+        "CRLF",
+        "Content-Length",
+        "Content-Type",
+        "Date",
+        "Connection close",
+        "safe",
+        "idempotent",
+        "冪等"
+      ],
+      "verification": "一次資料照合（2026-11-04）",
+      "links": [
+        "/network/tcp-sockets.html",
+        "/data/unicode-and-encoding.html",
+        "/practice/network/http-message-observation.html"
       ]
     },
     {
@@ -4876,6 +4953,7 @@
         "/data/integer-bits-and-bytes.html",
         "/runtime/thread-synchronization.html",
         "/os/asynchronous-file-io.html",
+        "/network/http-messages.html",
         "/practice/network/tcp-loopback-observation.html"
       ]
     },
@@ -6043,7 +6121,7 @@
       "section": "learning",
       "format": "path",
       "status": "published",
-      "summary": "整数・浮動小数点、文字コード、メモリ確保、起動、同期、ファイルI/Oとマッピング、アセットロード、TCP通信、入力と描画、Webの疑問から本文をたどる。",
+      "summary": "整数・浮動小数点、文字コード、メモリ確保、起動、同期、ファイルI/Oとマッピング、アセットロード、TCP・HTTP通信、入力と描画、Webの疑問から本文をたどる。",
       "source": "統合ガイド",
       "aliases": [],
       "collection": "questions",
@@ -6093,6 +6171,8 @@
         "/game/shooter-unity.html",
         "/network/tcp-sockets.html",
         "/practice/network/tcp-loopback-observation.html",
+        "/network/http-messages.html",
+        "/practice/network/http-message-observation.html",
         "/history/video-games.html",
         "/guide/rendering/timeline.html"
       ]
@@ -8204,6 +8284,7 @@
       "source": "統合ガイド",
       "aliases": [],
       "links": [
+        "/network/http-messages.html",
         "/network/tcp-sockets.html",
         "/os/memory-mapped-files.html",
         "/game/asset-loading.html",
