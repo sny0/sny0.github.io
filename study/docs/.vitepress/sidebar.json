@@ -313,8 +313,12 @@
       "collapsed": true,
       "items": [
         {
-          "text": "本文を準備中",
+          "text": "分野の目次",
           "link": "/browser/"
+        },
+        {
+          "text": "ブラウザの描画 — HTMLから画面のピクセルまで",
+          "link": "/browser/rendering-journey.html"
         }
       ]
     },
@@ -1113,6 +1117,10 @@
       "collapsed": false,
       "items": [
         {
+          "text": "ブラウザでDOMと描画の変化を観察する",
+          "link": "/practice/browser/render-observation.html"
+        },
+        {
           "text": "C++とC#でHTTPSの接続情報を観察する",
           "link": "/practice/network/https-observation.html"
         },
@@ -1230,6 +1238,10 @@
       "collapsed": true,
       "items": [
         {
+          "text": "ブラウザでDOMと描画の変化を観察する",
+          "link": "/practice/browser/render-observation.html"
+        },
+        {
           "text": "C++とC#でHTTPSの接続情報を観察する",
           "link": "/practice/network/https-observation.html"
         },
@@ -1342,6 +1354,10 @@
       "text": "ほかの実践・サンプル",
       "collapsed": true,
       "items": [
+        {
+          "text": "ブラウザでDOMと描画の変化を観察する",
+          "link": "/practice/browser/render-observation.html"
+        },
         {
           "text": "C++とC#でHTTPSの接続情報を観察する",
           "link": "/practice/network/https-observation.html"
@@ -1456,6 +1472,10 @@
       "collapsed": true,
       "items": [
         {
+          "text": "ブラウザでDOMと描画の変化を観察する",
+          "link": "/practice/browser/render-observation.html"
+        },
+        {
           "text": "C++とC#でHTTPSの接続情報を観察する",
           "link": "/practice/network/https-observation.html"
         },
@@ -1568,6 +1588,10 @@
       "text": "ほかの実践・サンプル",
       "collapsed": true,
       "items": [
+        {
+          "text": "ブラウザでDOMと描画の変化を観察する",
+          "link": "/practice/browser/render-observation.html"
+        },
         {
           "text": "C++とC#でHTTPSの接続情報を観察する",
           "link": "/practice/network/https-observation.html"
@@ -1682,6 +1706,10 @@
       "collapsed": true,
       "items": [
         {
+          "text": "ブラウザでDOMと描画の変化を観察する",
+          "link": "/practice/browser/render-observation.html"
+        },
+        {
           "text": "C++とC#でHTTPSの接続情報を観察する",
           "link": "/practice/network/https-observation.html"
         },
@@ -1779,6 +1807,10 @@
       "collapsed": true,
       "items": [
         {
+          "text": "ブラウザでDOMと描画の変化を観察する",
+          "link": "/practice/browser/render-observation.html"
+        },
+        {
           "text": "C++とC#でHTTPSの接続情報を観察する",
           "link": "/practice/network/https-observation.html"
         },
@@ -1875,6 +1907,10 @@
       "text": "ほかの実践・サンプル",
       "collapsed": true,
       "items": [
+        {
+          "text": "ブラウザでDOMと描画の変化を観察する",
+          "link": "/practice/browser/render-observation.html"
+        },
         {
           "text": "C++とC#でHTTPSの接続情報を観察する",
           "link": "/practice/network/https-observation.html"
@@ -1981,6 +2017,10 @@
       "collapsed": true,
       "items": [
         {
+          "text": "ブラウザでDOMと描画の変化を観察する",
+          "link": "/practice/browser/render-observation.html"
+        },
+        {
           "text": "C++とC#でHTTPSの接続情報を観察する",
           "link": "/practice/network/https-observation.html"
         },
@@ -2086,6 +2126,10 @@
       "collapsed": true,
       "items": [
         {
+          "text": "ブラウザでDOMと描画の変化を観察する",
+          "link": "/practice/browser/render-observation.html"
+        },
+        {
           "text": "C++とC#でHTTPSの接続情報を観察する",
           "link": "/practice/network/https-observation.html"
         },
@@ -2182,6 +2226,10 @@
       "text": "ほかの実践・サンプル",
       "collapsed": true,
       "items": [
+        {
+          "text": "ブラウザでDOMと描画の変化を観察する",
+          "link": "/practice/browser/render-observation.html"
+        },
         {
           "text": "C++とC#でHTTPSの接続情報を観察する",
           "link": "/practice/network/https-observation.html"
@@ -2280,6 +2328,10 @@
       "collapsed": true,
       "items": [
         {
+          "text": "ブラウザでDOMと描画の変化を観察する",
+          "link": "/practice/browser/render-observation.html"
+        },
+        {
           "text": "C++とC#で名前解決の結果を観察する",
           "link": "/practice/network/name-resolution-observation.html"
         },
@@ -2376,6 +2428,10 @@
       "text": "ほかの実践・サンプル",
       "collapsed": true,
       "items": [
+        {
+          "text": "ブラウザでDOMと描画の変化を観察する",
+          "link": "/practice/browser/render-observation.html"
+        },
         {
           "text": "C++とC#でHTTPSの接続情報を観察する",
           "link": "/practice/network/https-observation.html"
@@ -2474,6 +2530,10 @@
       "collapsed": true,
       "items": [
         {
+          "text": "ブラウザでDOMと描画の変化を観察する",
+          "link": "/practice/browser/render-observation.html"
+        },
+        {
           "text": "C++とC#でHTTPSの接続情報を観察する",
           "link": "/practice/network/https-observation.html"
         },
@@ -2570,6 +2630,10 @@
       "text": "ほかの実践・サンプル",
       "collapsed": true,
       "items": [
+        {
+          "text": "ブラウザでDOMと描画の変化を観察する",
+          "link": "/practice/browser/render-observation.html"
+        },
         {
           "text": "C++とC#でHTTPSの接続情報を観察する",
           "link": "/practice/network/https-observation.html"
@@ -2668,6 +2732,10 @@
       "collapsed": true,
       "items": [
         {
+          "text": "ブラウザでDOMと描画の変化を観察する",
+          "link": "/practice/browser/render-observation.html"
+        },
+        {
           "text": "C++とC#でHTTPSの接続情報を観察する",
           "link": "/practice/network/https-observation.html"
         },
@@ -2764,6 +2832,10 @@
       "text": "ほかの実践・サンプル",
       "collapsed": true,
       "items": [
+        {
+          "text": "ブラウザでDOMと描画の変化を観察する",
+          "link": "/practice/browser/render-observation.html"
+        },
         {
           "text": "C++とC#でHTTPSの接続情報を観察する",
           "link": "/practice/network/https-observation.html"
@@ -2862,6 +2934,10 @@
       "collapsed": true,
       "items": [
         {
+          "text": "ブラウザでDOMと描画の変化を観察する",
+          "link": "/practice/browser/render-observation.html"
+        },
+        {
           "text": "C++とC#でHTTPSの接続情報を観察する",
           "link": "/practice/network/https-observation.html"
         },
@@ -2958,6 +3034,10 @@
       "text": "ほかの実践・サンプル",
       "collapsed": true,
       "items": [
+        {
+          "text": "ブラウザでDOMと描画の変化を観察する",
+          "link": "/practice/browser/render-observation.html"
+        },
         {
           "text": "C++とC#でHTTPSの接続情報を観察する",
           "link": "/practice/network/https-observation.html"
@@ -3056,6 +3136,10 @@
       "collapsed": true,
       "items": [
         {
+          "text": "ブラウザでDOMと描画の変化を観察する",
+          "link": "/practice/browser/render-observation.html"
+        },
+        {
           "text": "C++とC#でHTTPSの接続情報を観察する",
           "link": "/practice/network/https-observation.html"
         },
@@ -3152,6 +3236,10 @@
       "text": "ほかの実践・サンプル",
       "collapsed": true,
       "items": [
+        {
+          "text": "ブラウザでDOMと描画の変化を観察する",
+          "link": "/practice/browser/render-observation.html"
+        },
         {
           "text": "C++とC#でHTTPSの接続情報を観察する",
           "link": "/practice/network/https-observation.html"
@@ -3472,6 +3560,10 @@
       "collapsed": true,
       "items": [
         {
+          "text": "ブラウザでDOMと描画の変化を観察する",
+          "link": "/practice/browser/render-observation.html"
+        },
+        {
           "text": "C++とC#でHTTPSの接続情報を観察する",
           "link": "/practice/network/https-observation.html"
         },
@@ -3621,6 +3713,10 @@
       "collapsed": true,
       "items": [
         {
+          "text": "ブラウザでDOMと描画の変化を観察する",
+          "link": "/practice/browser/render-observation.html"
+        },
+        {
           "text": "C++とC#でHTTPSの接続情報を観察する",
           "link": "/practice/network/https-observation.html"
         },
@@ -3725,6 +3821,10 @@
       "text": "ほかの実践・サンプル",
       "collapsed": true,
       "items": [
+        {
+          "text": "ブラウザでDOMと描画の変化を観察する",
+          "link": "/practice/browser/render-observation.html"
+        },
         {
           "text": "C++とC#でHTTPSの接続情報を観察する",
           "link": "/practice/network/https-observation.html"
@@ -3874,6 +3974,10 @@
       "text": "ほかの実践・サンプル",
       "collapsed": true,
       "items": [
+        {
+          "text": "ブラウザでDOMと描画の変化を観察する",
+          "link": "/practice/browser/render-observation.html"
+        },
         {
           "text": "C++とC#でHTTPSの接続情報を観察する",
           "link": "/practice/network/https-observation.html"
@@ -4109,6 +4213,10 @@
       "collapsed": true,
       "items": [
         {
+          "text": "ブラウザでDOMと描画の変化を観察する",
+          "link": "/practice/browser/render-observation.html"
+        },
+        {
           "text": "C++とC#でHTTPSの接続情報を観察する",
           "link": "/practice/network/https-observation.html"
         },
@@ -4343,6 +4451,10 @@
       "collapsed": true,
       "items": [
         {
+          "text": "ブラウザでDOMと描画の変化を観察する",
+          "link": "/practice/browser/render-observation.html"
+        },
+        {
           "text": "C++とC#でHTTPSの接続情報を観察する",
           "link": "/practice/network/https-observation.html"
         },
@@ -4506,6 +4618,107 @@
       ]
     }
   ],
+  "/practice/browser/render-observation.md": [
+    {
+      "text": "実践・サンプル一覧",
+      "link": "/practice/"
+    },
+    {
+      "text": "ブラウザでDOMと描画の変化を観察する",
+      "items": [
+        {
+          "text": "HTML・CSS・JavaScriptでブラウザの変更と計測を観察する",
+          "link": "/practice/browser/render-observation.html"
+        }
+      ]
+    },
+    {
+      "text": "ほかの実践・サンプル",
+      "collapsed": true,
+      "items": [
+        {
+          "text": "C++とC#でHTTPSの接続情報を観察する",
+          "link": "/practice/network/https-observation.html"
+        },
+        {
+          "text": "C++とC#で名前解決の結果を観察する",
+          "link": "/practice/network/name-resolution-observation.html"
+        },
+        {
+          "text": "C++とC#でHTTPの要求と応答を観察する",
+          "link": "/practice/network/http-message-observation.html"
+        },
+        {
+          "text": "C++とC#でTCPのバイト列と半閉鎖を観察する",
+          "link": "/practice/network/tcp-loopback-observation.html"
+        },
+        {
+          "text": "C++とC#で読み取り専用のファイルマッピングを観察する",
+          "link": "/practice/io/mapped-file-observation.html"
+        },
+        {
+          "text": "C++とC#でアセットの状態と寿命を試す",
+          "link": "/practice/assets/asset-lifecycle-model.html"
+        },
+        {
+          "text": "C++とC#で同期・非同期I/Oを比べる",
+          "link": "/practice/io/async-file-read-observation.html"
+        },
+        {
+          "text": "C++とC#でファイルの読み取りを観察する",
+          "link": "/practice/io/file-read-observation.html"
+        },
+        {
+          "text": "C++とC#で在庫の同期を確かめる",
+          "link": "/practice/threads/inventory-synchronization.html"
+        },
+        {
+          "text": "C++とC#でfloatの比較を確かめる",
+          "link": "/practice/math/float-comparison-observation.html"
+        },
+        {
+          "text": "C++とC#で文字の表現を観察する",
+          "link": "/practice/data/unicode-observation.html"
+        },
+        {
+          "text": "C++でfloatの表現と刻み幅を観察する",
+          "link": "/practice/data/float-spacing-observation.html"
+        },
+        {
+          "text": "C++で整数とバイト列を観察する",
+          "link": "/practice/data/integer-byte-observation.html"
+        },
+        {
+          "text": "Windowsでプロセスとスレッドを観察する",
+          "link": "/practice/process/windows-process-observation.html"
+        },
+        {
+          "text": "Windowsでメモリの状態を観察する",
+          "link": "/practice/memory/windows-memory-observation.html"
+        },
+        {
+          "text": "小さなシューティングを作る",
+          "link": "/game/shooter-design.html"
+        },
+        {
+          "text": "小さなレンダラーを作る",
+          "link": "/graphics/capstone/01-design.html"
+        },
+        {
+          "text": "C++と設計の演習",
+          "link": "/guide/exercises/"
+        },
+        {
+          "text": "C++のビルドサンプル",
+          "link": "/tools/build/samples/"
+        },
+        {
+          "text": "小さなアプリで設計を試す",
+          "link": "/design/notebook/practice.html"
+        }
+      ]
+    }
+  ],
   "/design/solid/exercises.md": [
     {
       "text": "実践・サンプル一覧",
@@ -4576,6 +4789,10 @@
       "text": "ほかの実践・サンプル",
       "collapsed": true,
       "items": [
+        {
+          "text": "ブラウザでDOMと描画の変化を観察する",
+          "link": "/practice/browser/render-observation.html"
+        },
         {
           "text": "C++とC#でHTTPSの接続情報を観察する",
           "link": "/practice/network/https-observation.html"
@@ -4811,6 +5028,10 @@
       "collapsed": true,
       "items": [
         {
+          "text": "ブラウザでDOMと描画の変化を観察する",
+          "link": "/practice/browser/render-observation.html"
+        },
+        {
           "text": "C++とC#でHTTPSの接続情報を観察する",
           "link": "/practice/network/https-observation.html"
         },
@@ -4959,6 +5180,10 @@
       "text": "ほかの実践・サンプル",
       "collapsed": true,
       "items": [
+        {
+          "text": "ブラウザでDOMと描画の変化を観察する",
+          "link": "/practice/browser/render-observation.html"
+        },
         {
           "text": "C++とC#でHTTPSの接続情報を観察する",
           "link": "/practice/network/https-observation.html"
@@ -5142,6 +5367,10 @@
       "collapsed": true,
       "items": [
         {
+          "text": "ブラウザでDOMと描画の変化を観察する",
+          "link": "/practice/browser/render-observation.html"
+        },
+        {
           "text": "C++とC#でHTTPSの接続情報を観察する",
           "link": "/practice/network/https-observation.html"
         },
@@ -5238,6 +5467,10 @@
       "text": "ほかの実践・サンプル",
       "collapsed": true,
       "items": [
+        {
+          "text": "ブラウザでDOMと描画の変化を観察する",
+          "link": "/practice/browser/render-observation.html"
+        },
         {
           "text": "C++とC#でHTTPSの接続情報を観察する",
           "link": "/practice/network/https-observation.html"
@@ -5388,6 +5621,10 @@
       "collapsed": true,
       "items": [
         {
+          "text": "ブラウザでDOMと描画の変化を観察する",
+          "link": "/practice/browser/render-observation.html"
+        },
+        {
           "text": "C++とC#でHTTPSの接続情報を観察する",
           "link": "/practice/network/https-observation.html"
         },
@@ -5536,6 +5773,10 @@
       "text": "ほかの実践・サンプル",
       "collapsed": true,
       "items": [
+        {
+          "text": "ブラウザでDOMと描画の変化を観察する",
+          "link": "/practice/browser/render-observation.html"
+        },
         {
           "text": "C++とC#でHTTPSの接続情報を観察する",
           "link": "/practice/network/https-observation.html"
@@ -5727,6 +5968,10 @@
       "collapsed": true,
       "items": [
         {
+          "text": "ブラウザでDOMと描画の変化を観察する",
+          "link": "/practice/browser/render-observation.html"
+        },
+        {
           "text": "C++とC#でHTTPSの接続情報を観察する",
           "link": "/practice/network/https-observation.html"
         },
@@ -5831,6 +6076,10 @@
       "text": "ほかの実践・サンプル",
       "collapsed": true,
       "items": [
+        {
+          "text": "ブラウザでDOMと描画の変化を観察する",
+          "link": "/practice/browser/render-observation.html"
+        },
         {
           "text": "C++とC#でHTTPSの接続情報を観察する",
           "link": "/practice/network/https-observation.html"
@@ -5980,6 +6229,10 @@
       "text": "ほかの実践・サンプル",
       "collapsed": true,
       "items": [
+        {
+          "text": "ブラウザでDOMと描画の変化を観察する",
+          "link": "/practice/browser/render-observation.html"
+        },
         {
           "text": "C++とC#でHTTPSの接続情報を観察する",
           "link": "/practice/network/https-observation.html"
@@ -6214,6 +6467,10 @@
       "text": "ほかの実践・サンプル",
       "collapsed": true,
       "items": [
+        {
+          "text": "ブラウザでDOMと描画の変化を観察する",
+          "link": "/practice/browser/render-observation.html"
+        },
         {
           "text": "C++とC#でHTTPSの接続情報を観察する",
           "link": "/practice/network/https-observation.html"
@@ -6596,6 +6853,10 @@
       "collapsed": true,
       "items": [
         {
+          "text": "ブラウザでDOMと描画の変化を観察する",
+          "link": "/practice/browser/render-observation.html"
+        },
+        {
           "text": "C++とC#でHTTPSの接続情報を観察する",
           "link": "/practice/network/https-observation.html"
         },
@@ -6692,6 +6953,10 @@
       "text": "ほかの実践・サンプル",
       "collapsed": true,
       "items": [
+        {
+          "text": "ブラウザでDOMと描画の変化を観察する",
+          "link": "/practice/browser/render-observation.html"
+        },
         {
           "text": "C++とC#でHTTPSの接続情報を観察する",
           "link": "/practice/network/https-observation.html"
@@ -7011,6 +7276,10 @@
       "text": "ほかの実践・サンプル",
       "collapsed": true,
       "items": [
+        {
+          "text": "ブラウザでDOMと描画の変化を観察する",
+          "link": "/practice/browser/render-observation.html"
+        },
         {
           "text": "C++とC#でHTTPSの接続情報を観察する",
           "link": "/practice/network/https-observation.html"
@@ -9787,6 +10056,10 @@
       "text": "ほかの実践・サンプル",
       "collapsed": true,
       "items": [
+        {
+          "text": "ブラウザでDOMと描画の変化を観察する",
+          "link": "/practice/browser/render-observation.html"
+        },
         {
           "text": "C++とC#でHTTPSの接続情報を観察する",
           "link": "/practice/network/https-observation.html"

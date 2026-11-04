@@ -1,0 +1,51 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="760" height="1510" viewBox="0 0 760 1510" role="img" aria-labelledby="title desc">
+  <title id="title">HTMLから画面のピクセルまで</title>
+  <desc id="desc">受信と復号・文字の復号、HTMLとCSSの解析、DOMとスタイル、レイアウト、描画命令、ラスタライズ、合成から表示へ進む概念図。解析と追加リソース取得は並行し、更新時には不要な段階を省略できる。</desc>
+  <defs>
+    <style>text{font-family:'BIZ UDPGothic','Yu Gothic',Meiryo,sans-serif;fill:#26352e}.title{font-size:32px;font-weight:700}.head{font-size:28px;font-weight:700}.body{font-size:24px}.small{font-size:22px}.card{fill:white;stroke:#739483;stroke-width:2}.arrow{fill:none;stroke:#567963;stroke-width:3;marker-end:url(#a)}</style>
+    <marker id="a" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto"><path d="M0 0L10 5L0 10Z" fill="#567963"/></marker>
+  </defs>
+  <rect width="760" height="1510" rx="24" fill="#f4f8f4"/>
+  <text x="40" y="56" class="title">HTMLから画面のピクセルまで</text>
+  <text x="40" y="96" class="body">処理の役割を分けた概念図</text>
+  <rect x="36" y="122" width="688" height="126" rx="18" fill="#e2eafa"/>
+  <text x="60" y="163" class="head">① 文書のバイト列を得る</text>
+  <text x="60" y="200" class="body">通信・キャッシュ・Service Workerなど</text>
+  <text x="60" y="233" class="small">HTTPS通信はTLSで復号。文書のバイトを文字へ</text>
+  <path d="M380 250V278" class="arrow"/>
+  <rect x="36" y="286" width="688" height="162" rx="18" class="card"/>
+  <text x="60" y="328" class="head">② HTMLとCSSを解析する</text>
+  <text x="60" y="367" class="body">HTML → 要素・テキスト等のDOM</text>
+  <text x="60" y="405" class="body">CSS → 規則・スタイルシートの構造</text>
+  <text x="60" y="436" class="small">追加リソース取得やスクリプト実行とも相互に関係</text>
+  <path d="M380 450V478" class="arrow"/>
+  <rect x="36" y="486" width="688" height="126" rx="18" class="card"/>
+  <text x="60" y="528" class="head">③ Style：スタイルを求める</text>
+  <text x="60" y="568" class="body">セレクター・カスケード・継承などを適用</text>
+  <text x="60" y="600" class="small">DOMの構造だけでは、見た目は決まらない</text>
+  <path d="M380 614V642" class="arrow"/>
+  <rect x="36" y="650" width="688" height="126" rx="18" class="card"/>
+  <text x="60" y="692" class="head">④ Layout：寸法と配置を求める</text>
+  <text x="60" y="732" class="body">ボックス・行・文字などの位置と大きさ</text>
+  <text x="60" y="764" class="small">DOMノードと配置の構造は、一対一ではない</text>
+  <path d="M380 778V806" class="arrow"/>
+  <rect x="36" y="814" width="688" height="126" rx="18" class="card"/>
+  <text x="60" y="856" class="head">⑤ Paint：描画の命令を作る</text>
+  <text x="60" y="896" class="body">背景・枠・文字などを、描く順序とともに記録</text>
+  <text x="60" y="928" class="small">この段階の命令と、画面上のピクセルは別物</text>
+  <path d="M380 942V970" class="arrow"/>
+  <rect x="36" y="978" width="688" height="126" rx="18" class="card"/>
+  <text x="60" y="1020" class="head">⑥ Raster：ピクセルへ変換する</text>
+  <text x="60" y="1060" class="body">描画命令や画像から、タイル等の画像を作る</text>
+  <text x="60" y="1092" class="small">担当スレッド・CPU/GPUの使い方は実装に依存</text>
+  <path d="M380 1106V1134" class="arrow"/>
+  <rect x="36" y="1142" width="688" height="156" rx="18" fill="#dcece0"/>
+  <text x="60" y="1184" class="head">⑦ Composite → 表示へ渡す</text>
+  <text x="60" y="1224" class="body">配置・変換・透明度等を反映して組み合わせる</text>
+  <text x="60" y="1262" class="body">ブラウザ・OS・表示装置を経て画面へ</text>
+  <text x="60" y="1289" class="small">DOM要素一つが、合成レイヤー一枚とは限らない</text>
+  <rect x="36" y="1330" width="688" height="144" rx="18" fill="#e9efe6"/>
+  <text x="60" y="1370" class="head">更新のたびに全部やり直すわけではない</text>
+  <text x="60" y="1409" class="body">段階の分割・実行順・再利用の単位は実装次第。</text>
+  <text x="60" y="1447" class="body">必要な範囲を更新し、不要な処理は省略できる。</text>
+</svg>

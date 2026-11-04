@@ -12,6 +12,7 @@ export const formatLabels = {
 export const statusLabels = { published: '公開中', outline: '学習計画・概要', draft: '草稿', planned: '執筆予定' }
 
 export const collections = [
+  { id: 'render-observation', section: 'practice', title: 'ブラウザでDOMと描画の変化を観察する', description: '幅・色・移動・透明度とDOMテキストを変更し、寸法APIとrAFで分かる範囲を確かめる。', start: '/practice/browser/render-observation.html' },
   { id: 'https-observation', section: 'practice', title: 'C++とC#でHTTPSの接続情報を観察する', description: '標準の証明書検証を保ったGETで、TLS情報、証明書、HTTP応答を区別して確認する。', start: '/practice/network/https-observation.html' },
   { id: 'name-resolution-observation', section: 'practice', title: 'C++とC#で名前解決の結果を観察する', description: '数値IP、localhost、追加指定した公開名をOSのAPIで調べ、成功・失敗・取消と結果の限界を確かめる。', start: '/practice/network/name-resolution-observation.html' },
   { id: 'http-message-observation', section: 'practice', title: 'C++とC#でHTTPの要求と応答を観察する', description: 'ローカルのGET一回から、ヘッダーと本文、Content-Length、受信の終了を確かめる。', start: '/practice/network/http-message-observation.html' },

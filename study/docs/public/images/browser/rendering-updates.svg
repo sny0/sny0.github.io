@@ -1,0 +1,41 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="760" height="1510" viewBox="0 0 760 1510" role="img" aria-labelledby="title desc">
+  <title id="title">DOMを変更した後に観察できること</title>
+  <desc id="desc">幅・背景色・移動・透明度で必要になり得る処理を比較し、寸法APIでの値の採取とDevToolsでの内部処理計測を分ける図。requestAnimationFrameのcallbackは描画や画面表示の完了通知ではない。</desc>
+  <defs><style>text{font-family:'BIZ UDPGothic','Yu Gothic',Meiryo,sans-serif;fill:#26352e}.title{font-size:32px;font-weight:700}.head{font-size:28px;font-weight:700}.body{font-size:24px}.small{font-size:22px}.card{fill:white;stroke:#739483;stroke-width:2}</style></defs>
+  <rect width="760" height="1510" rx="24" fill="#f4f8f4"/>
+  <text x="40" y="56" class="title">変更後、何を確かめる？</text>
+  <text x="40" y="96" class="body">class属性やtextContentの変更もDOMの変更</text>
+  <rect x="36" y="122" width="688" height="156" rx="18" class="card"/>
+  <text x="60" y="164" class="head">width：100px → 160px</text>
+  <text x="60" y="204" class="body">寸法が変わり、周囲の配置も変わり得る。</text>
+  <text x="60" y="242" class="body">一般にlayout以降の更新が必要になる。</text>
+  <rect x="36" y="300" width="688" height="156" rx="18" class="card"/>
+  <text x="60" y="342" class="head">background-color：青 → オレンジ</text>
+  <text x="60" y="382" class="body">配置が同じでも、描く内容は変わる。</text>
+  <text x="60" y="420" class="body">一般にpaint・raster等の更新が関係する。</text>
+  <rect x="36" y="478" width="688" height="204" rx="18" class="card"/>
+  <text x="60" y="520" class="head">transform / opacity</text>
+  <text x="60" y="560" class="body">既存の画像を再利用し、合成で処理できる</text>
+  <text x="60" y="598" class="body">場合がある。ただし条件と実装による。</text>
+  <text x="60" y="640" class="small">レイヤー構成やrasterの更新が必要な場合もある。</text>
+  <text x="60" y="670" class="small">「必ずGPUだけ」「paintゼロ」とは断定できない。</text>
+  <rect x="36" y="708" width="688" height="270" rx="18" fill="#e2eafa"/>
+  <text x="60" y="750" class="head">実験① APIが返す値を採取</text>
+  <text x="60" y="790" class="body">offsetWidth：変換を含めない整数の寸法</text>
+  <text x="60" y="828" class="body">getBoundingClientRect：変換後の矩形</text>
+  <text x="60" y="866" class="body">translateXで位置が変わっても、幅は同じ。</text>
+  <text x="60" y="910" class="small">寸法読取りは、その場のstyle/layoutを誘発し得る。</text>
+  <text x="60" y="944" class="small">値だけでは内部の実行回数やGPU利用は分からない。</text>
+  <rect x="36" y="1004" width="688" height="172" rx="18" fill="#dcece0"/>
+  <text x="60" y="1046" class="head">実験② 内部処理はDevToolsで調べる</text>
+  <text x="60" y="1086" class="body">Performanceなどで対象操作を記録する。</text>
+  <text x="60" y="1124" class="body">ブラウザの版・条件・計測負荷も考慮する。</text>
+  <text x="60" y="1157" class="small">今回の付属サンプルは、①の値とcallbackを観察する。</text>
+  <rect x="36" y="1202" width="688" height="270" rx="18" fill="#e9efe6"/>
+  <text x="60" y="1244" class="head">rAFは「表示完了」の受領証ではない</text>
+  <text x="60" y="1284" class="body">requestAnimationFrameで1回予約</text>
+  <text x="60" y="1322" class="body">→ callbackで表示に向けた変更</text>
+  <text x="60" y="1360" class="body">→ 必要な描画更新・合成・表示へ</text>
+  <text x="60" y="1405" class="small">実行は描画更新の機会に依存。非表示タブでは</text>
+  <text x="60" y="1439" class="small">遅延・抑制され得る。固定間隔や表示完了は保証しない。</text>
+</svg>

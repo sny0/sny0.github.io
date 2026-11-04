@@ -28,9 +28,10 @@ export default withMermaid(defineConfig({
   lastUpdated: false,
   sitemap: {
     hostname: 'https://sny0.com',
-    transformItems: items => items.map(item => ({
-      ...item, url: '/study/' + item.url.replace(/^\/+/, '')
-    }))
+    transformItems: items => [
+      ...items.map(item => ({ ...item, url: '/study/' + item.url.replace(/^\/+/, '') })),
+      { url: '/study/samples/browser/render-observation/index.html' }
+    ]
   },
   head: [
     ['link', { rel: 'icon', type: 'image/svg+xml', href: '/study/favicon.svg' }],

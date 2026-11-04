@@ -140,7 +140,7 @@ writePage('guide/about.md', 'この技術辞典について', { section: 'refere
 
 ## 記事の状態と確認範囲
 
-「草稿」は増補・推敲中の解説、「学習計画・概要」は学ぶ範囲と演習の案内です。学習計画があるだけの分野を、辞典本文が整っている分野と同じ扱いにはしていません。ブラウザなど、専用の本文がまだない分野も明示します。
+「草稿」は増補・推敲中の解説、「学習計画・概要」は学ぶ範囲と演習の案内です。学習計画があるだけの分野を、辞典本文が整っている分野と同じ扱いにはしていません。各分野の目次で、公開済みの本文と、これから増補する範囲を確認できます。
 
 公開中という状態は、コードの実行や技術内容の全面的な検証を保証しません。対象の言語・規格・エンジン・OSと、実行確認の範囲は個々の本文に従ってください。「モデル検証済み」等の記録は、そのページに書かれた確認範囲に限ります。
 
@@ -270,13 +270,16 @@ writePage('guide/learning-paths.md', '疑問から選ぶ読み順', {
 
 ## URLを開いてからページが見えるまで
 
-[ネットワーク](/network/)には[DNSと名前解決](/network/dns-resolution.html)、[TCPとソケット](/network/tcp-sockets.html)、[HTTPの要求と応答](/network/http-messages.html)、[TLS・証明書・HTTPS](/network/tls-https.html)の本文があります。[ブラウザ](/browser/)の専用詳解は準備中です。通信の基礎と、URLから表示までの全体像を区別して増補します。
+1. 通信は[DNSと名前解決](/network/dns-resolution.html)、[TCPとソケット](/network/tcp-sockets.html)、[HTTPの要求と応答](/network/http-messages.html)、[TLS・証明書・HTTPS](/network/tls-https.html)で調べる。
+2. [ブラウザの描画](/browser/rendering-journey.html)で、受信したHTMLからDOM、スタイル、レイアウト、描画、合成までをつなぐ。
+3. [DOMと描画の変化を観察する](/practice/browser/render-observation.html)で、幅・色・移動・透明度を変え、寸法APIとrAFで確認できる範囲を試す。
 
 ## 作り方の変化を歴史から見る
 
 [ビデオゲーム史](/history/video-games.html)の作品・ハード・媒体・流通と、[リアルタイム3D技術史](/guide/rendering/timeline.html)の技術の変化から、気になった仕組みへ進みます。`)
 
 const termRows = [
+  ['DOM / CSSOM / スタイル計算 / layout / paint / raster / composite / rAF / requestAnimationFrame', '/browser/rendering-journey.html', 'HTMLからピクセルまでの段階と、変更後の更新、寸法取得、描画前のcallbackを調べる'],
   ['TLS / HTTPS / 証明書 / SAN / CA / 信頼アンカー / SNI / ALPN / 鍵共有 / CertificateVerify / AEAD', '/network/tls-https.html', '暗号化と相手の検証、鍵共有、証明書の信頼、TLSとHTTPの境界を調べる'],
   ['DNS / 名前解決 / リゾルバー / 権威DNS / A / AAAA / CNAME / TTL / NXDOMAIN / NODATA', '/network/dns-resolution.html', '名前解決API、委任をたどる問い合わせ、レコードとキャッシュ、失敗の違いを調べる'],
   ['HTTP / HTTP/1.1 / GET / Host / 状態コード / ヘッダー / Content-Length / Content-Type / CRLF', '/network/http-messages.html', '要求と応答の形式、本文のバイト数、メッセージの完成と接続終了を調べる'],
