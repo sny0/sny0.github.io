@@ -18,6 +18,7 @@
 
 | 用語・別名 | 説明への入口 |
 | --- | --- |
+| [クロスオリジン分離 / cross-origin isolation / crossOriginIsolated / COOP / COEP / CORP / require-corp / credentialless / SharedArrayBuffer / Atomics](/browser/cross-origin-isolation.html) | ウィンドウ間の境界、別オリジン資源の読み込み、Worker間で同じメモリを使う条件を調べる |
 | [CSRF / Cross-Site Request Forgery / リクエスト偽造 / Origin / Referer / SameSite / CSRFトークン / synchronizer token](/browser/csrf-and-request-validation.html) | Cookieが付く条件と、送信元・トークンを検査して状態変更を受理する条件を調べる |
 | [XSS / Cross-Site Scripting / DOM XSS / source / sink / textContent / innerHTML / CSP / Content Security Policy / script-src / script-src-attr / nonce / hash / SecurityPolicyViolationEvent](/browser/xss-and-csp.html) | 入力を解釈する箇所、HTMLの生成とコードの実行、CSPによる実行制限を調べる |
 | [Cookie / Set-Cookie / document.cookie / Domain / Path / Max-Age / Secure / HttpOnly / SameSite / セッションID / セッション固定化 / ログアウト](/browser/cookies-and-sessions.html) | 要求にCookieを付ける条件、サーバー側の照合、IDの更新と失効を調べる |

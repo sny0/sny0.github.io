@@ -69,7 +69,7 @@
       "id": "browser",
       "title": "ブラウザ",
       "description": "URLを開いてから描画されるまでを、通信・実行・表示に分ける。",
-      "count": 11,
+      "count": 12,
       "status": "辞典本文あり"
     },
     {
@@ -130,6 +130,13 @@
     }
   ],
   "collections": [
+    {
+      "id": "cross-origin-isolation-observation",
+      "section": "practice",
+      "title": "Workerへのコピーと共有メモリをブラウザで観察する",
+      "description": "WindowとWorkerの分離状態、ArrayBufferのコピー、共有メモリ、別オリジン画像の読み込みを比べる。",
+      "start": "/practice/browser/cross-origin-isolation-observation.html"
+    },
     {
       "id": "csrf-observation",
       "section": "practice",
@@ -4636,7 +4643,9 @@
         "/browser/event-loop-promises.html",
         "/browser/rendering-journey.html",
         "/browser/worker-pool-backpressure.html",
-        "/practice/browser/worker-message-observation.html"
+        "/practice/browser/worker-message-observation.html",
+        "/browser/cross-origin-isolation.html",
+        "/browser/service-worker-offline.html"
       ]
     },
     {
@@ -4811,6 +4820,34 @@
         "/browser/streams-backpressure.html",
         "/practice/browser/worker-pool-observation.html",
         "/game/asset-loading.html"
+      ]
+    },
+    {
+      "title": "Workerへのコピーと共有メモリをブラウザで観察する",
+      "url": "/practice/browser/cross-origin-isolation-observation.html",
+      "file": "practice/browser/cross-origin-isolation-observation.md",
+      "domain": "browser",
+      "section": "practice",
+      "format": "sample",
+      "status": "published",
+      "summary": "WindowとWorkerの分離状態、ArrayBufferのコピーとSharedArrayBufferの共有、COEPが別オリジン画像に与える影響を比べる。",
+      "source": "新規執筆",
+      "aliases": [
+        "COOP",
+        "COEP",
+        "CORP",
+        "crossOriginIsolated",
+        "SharedArrayBuffer",
+        "Atomics",
+        "Web Worker",
+        "structured clone"
+      ],
+      "collection": "cross-origin-isolation-observation",
+      "order": 1,
+      "verification": "Windows上のブラウザで4種類の応答とコピー・共有・別オリジン画像の読み込みを実行確認（2026-11-05）",
+      "links": [
+        "/browser/cross-origin-isolation.html",
+        "/practice/browser/worker-message-observation.html"
       ]
     },
     {
@@ -5358,6 +5395,38 @@
         "/graphics/lighting/pbr.html",
         "/graphics/lighting/ibl.html",
         "/graphics/lighting/shadow.html"
+      ]
+    },
+    {
+      "title": "クロスオリジン分離と共有メモリ — COOP・COEPからSharedArrayBufferまで",
+      "url": "/browser/cross-origin-isolation.html",
+      "file": "browser/cross-origin-isolation.md",
+      "domain": "browser",
+      "section": "reference",
+      "format": "article",
+      "status": "published",
+      "summary": "ウィンドウのグループとリソースの読み込みを制御するCOOP・COEP・CORPを区別し、Workerとメモリを共有する条件とAtomicsを説明する。",
+      "source": "新規執筆",
+      "aliases": [
+        "クロスオリジン分離",
+        "cross-origin isolation",
+        "crossOriginIsolated",
+        "COOP",
+        "COEP",
+        "CORP",
+        "require-corp",
+        "credentialless",
+        "Permissions Policy",
+        "SharedArrayBuffer",
+        "共有メモリ",
+        "Atomics"
+      ],
+      "verification": "WHATWG HTML・Fetch、W3C Secure Contexts・Permissions Policy、ECMAScriptと照合（2026-11-05）",
+      "links": [
+        "/browser/same-origin-cors.html",
+        "/browser/web-workers-messages.html",
+        "/runtime/thread-synchronization.html",
+        "/practice/browser/cross-origin-isolation-observation.html"
       ]
     },
     {
@@ -7232,6 +7301,8 @@
         "/practice/browser/xss-csp-observation.html",
         "/browser/csrf-and-request-validation.html",
         "/practice/browser/csrf-observation.html",
+        "/browser/cross-origin-isolation.html",
+        "/practice/browser/cross-origin-isolation-observation.html",
         "/history/video-games.html",
         "/guide/rendering/timeline.html"
       ]
@@ -8822,6 +8893,7 @@
         "/browser/storage-lifetime.html",
         "/network/http-caching.html",
         "/browser/cookies-and-sessions.html",
+        "/browser/cross-origin-isolation.html",
         "/browser/service-worker-offline.html",
         "/practice/browser/cors-observation.html"
       ]
@@ -9380,6 +9452,7 @@
       "source": "統合ガイド",
       "aliases": [],
       "links": [
+        "/browser/cross-origin-isolation.html",
         "/browser/csrf-and-request-validation.html",
         "/browser/xss-and-csp.html",
         "/browser/cookies-and-sessions.html",
