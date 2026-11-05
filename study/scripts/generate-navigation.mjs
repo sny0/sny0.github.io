@@ -310,11 +310,18 @@ writePage('guide/learning-paths.md', '疑問から選ぶ読み順', {
 2. [保存・再読込・削除の観察](/practice/browser/storage-observation.html)で、3方式へ固定データを保存し、ページ再読込後の読出しと専用データの削除を試す。
 3. 応答の自動的な再利用は[HTTPキャッシュ](/network/http-caching.html)、Request／Responseの本文を扱う流れは[Streams API](/browser/streams-backpressure.html)へつなげる。
 
+## 通信できないとき、保存した応答をどう返すか
+
+1. [Service Workerとオフライン動作](/browser/service-worker-offline.html)で、登録・有効化・ページの制御、fetchへの介入と応答の選択を調べる。
+2. [Service Workerで応答元と登録状態を観察する](/practice/browser/service-worker-observation.html)で、専用scopeの登録、固定GETの代替応答、解除と後片付けを試す。
+3. 応答の明示的な保存は[ブラウザの保存領域](/browser/storage-lifetime.html)、HTTPの再利用と再検証は[HTTPキャッシュ](/network/http-caching.html)で確認する。
+
 ## 作り方の変化を歴史から見る
 
 [ビデオゲーム史](/history/video-games.html)の作品・ハード・媒体・流通と、[リアルタイム3D技術史](/guide/rendering/timeline.html)の技術の変化から、気になった仕組みへ進みます。`)
 
 const termRows = [
+  ['Service Worker / service worker scope / install / waiting / activate / controller / ready / fetch event / respondWith / waitUntil / unregister / オフライン', '/browser/service-worker-offline.html', '登録、ページの制御、要求の介入、保存済み応答の利用、更新と解除を調べる'],
   ['ブラウザ保存領域 / Web Storage / localStorage / sessionStorage / IndexedDB / object store / IDBTransaction / Cache API / CacheStorage / quota / eviction / persist / storage partition', '/browser/storage-lifetime.html', '保存対象、同期・非同期処理、transactionの完了、データの保持と削除を調べる'],
   ['HTTPキャッシュ / HTTP cache / Cache-Control / ETag / If-None-Match / 304 / freshness / max-age / no-cache / no-store / Vary / 再検証', '/network/http-caching.html', '保存した応答の再利用、鮮度、条件付きGET、本文とメタデータの更新を調べる'],
   ['Streams API / ストリーミング / ReadableStream / WritableStream / TransformStream / chunk / pull / desiredSize / highWaterMark / pipeTo / writer.ready / cancel / abort', '/browser/streams-backpressure.html', 'データの供給と消費、キューの閾値、バックプレッシャー、正常終了と中断を調べる'],
