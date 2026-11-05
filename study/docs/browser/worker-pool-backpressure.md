@@ -106,4 +106,4 @@ Workerの生成要求が戻っただけでは、アプリとしてreadyとは限
 
 `navigator.hardwareConcurrency`は、ブラウザへ潜在的に利用可能な論理プロセッサ数に関する情報です。実際より小さい値が返る場合もあり、poolの最適Worker数を返すAPIではありません。メインスレッド、メモリ、他の処理、jobの粒度や受け渡し費用も関わるため、この値と同じ数を作れば最速とは限りません。今回の2個は観察用の固定値です。[MDN: hardwareConcurrency](https://developer.mozilla.org/en-US/docs/Web/API/Navigator/hardwareConcurrency)
 
-同じ考え方は[ゲームのアセットロード設計](/game/asset-loading.html)の、I/O要求数、展開・変換のCPU仕事、GPU登録、保持bytesなどの段階別の予算につながります。一段のWorker数だけで、ロード全体の負荷は制御できません。SharedArrayBuffer／Atomicsによる共有キューや、poolの最適化アルゴリズムは、この章では追加しません。
+同じ考え方は[ゲームのアセットロード設計](/game/asset-loading.html)の、I/O要求数、展開・変換のCPU仕事、GPU登録、保持bytesなどの段階別の予算につながります。一段のWorker数だけで、ロード全体の負荷は制御できません。書き手と読み手が一つずつの共有メモリキューでは、[リングバッファとSPSCキュー](/browser/spsc-ring-buffer.html)で固定容量の満杯判定と枠の再利用を確認できます。

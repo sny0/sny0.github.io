@@ -33,6 +33,7 @@ URLを開いてから描画されるまでを、通信・実行・表示に分�
 - [クロスオリジン分離と共有メモリ — COOP・COEPからSharedArrayBufferまで](/browser/cross-origin-isolation.html)
 - [ブラウザの描画 — HTMLから画面のピクセルまで](/browser/rendering-journey.html)
 - [ブラウザの保存領域 — localStorage・IndexedDB・Cache APIとデータの寿命](/browser/storage-lifetime.html)
+- [リングバッファとSPSCキュー — 満杯・折り返し・受け渡し](/browser/spsc-ring-buffer.html)
 - [同一オリジンポリシーとCORS — 送信と応答の公開](/browser/same-origin-cors.html)
 
 ## この分野の学習ガイド
@@ -56,6 +57,7 @@ URLを開いてから描画されるまでを、通信・実行・表示に分�
 - [ブラウザでCookieの範囲とセッションIDを観察する](/practice/browser/cookie-session-observation.html)
 - [ブラウザでPromise・await・timer・rAFの順序を観察する](/practice/browser/event-loop-observation.html)
 - [ブラウザで同一オリジンとCORSの応答を比べる](/practice/browser/cors-observation.html)
+- [リングバッファの満杯・折り返し・読み出し順を観察する](/practice/browser/ring-buffer-observation.html)
 
 ## 扱う範囲・増補する項目
 

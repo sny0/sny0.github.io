@@ -1,0 +1,108 @@
+<!doctype html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="referrer" content="no-referrer">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'self'; style-src 'self'; worker-src 'self'; base-uri 'none'; form-action 'none'">
+  <title>リングバッファの満杯と折り返しを観察する | Sny0 Study</title>
+  <link rel="canonical" href="https://sny0.com/study/samples/browser/ring-buffer-observation/index.html">
+  <link rel="stylesheet" href="styles.css">
+  <script type="module" src="main.js"></script>
+</head>
+<body>
+  <main>
+    <header>
+      <a href="https://sny0.com/study/practice/browser/ring-buffer-observation.html">実践手順とコードを読む</a>
+      <h1>リングバッファの満杯と折り返しを観察する</h1>
+      <p>同じ4枠を順番に使い、末尾に達したら先頭へ戻ります。入れた順に値を取り出せるか確かめます。</p>
+    </header>
+    <noscript><p>操作するにはJavaScriptを有効にしてください。</p></noscript>
+
+    <section class="card" aria-labelledby="queue-heading">
+      <h2 id="queue-heading">キューを一手ずつ動かす</h2>
+      <p>公開ページでは、キューの処理を1つのスレッドで順番に呼び出します。枠は4つあり、空と満杯を区別するために1枠分を残します。</p>
+      <div class="lab">
+        <div class="board">
+          <p id="ring-caption">進む順番は <code>0 → 1 → 2 → 3 → 0</code> です。</p>
+          <ol class="ring" aria-label="リングバッファの4つの枠" aria-describedby="ring-caption">
+            <li class="slot" id="slot-0" data-slot="0" data-occupied="false">
+              <span class="slot-name">枠 0</span>
+              <strong class="slot-value">空き</strong>
+              <div class="markers"><span class="badge read">R 読む</span><span class="badge write">W 書く</span></div>
+              <span class="arrow right" aria-hidden="true">→</span>
+            </li>
+            <li class="slot" id="slot-1" data-slot="1" data-occupied="false">
+              <span class="slot-name">枠 1</span>
+              <strong class="slot-value">空き</strong>
+              <div class="markers"><span class="badge read" hidden>R 読む</span><span class="badge write" hidden>W 書く</span></div>
+              <span class="arrow down" aria-hidden="true">↓</span>
+            </li>
+            <li class="slot" id="slot-2" data-slot="2" data-occupied="false">
+              <span class="slot-name">枠 2</span>
+              <strong class="slot-value">空き</strong>
+              <div class="markers"><span class="badge read" hidden>R 読む</span><span class="badge write" hidden>W 書く</span></div>
+              <span class="arrow left" aria-hidden="true">←</span>
+            </li>
+            <li class="slot" id="slot-3" data-slot="3" data-occupied="false">
+              <span class="slot-name">枠 3</span>
+              <strong class="slot-value">空き</strong>
+              <div class="markers"><span class="badge read" hidden>R 読む</span><span class="badge write" hidden>W 書く</span></div>
+              <span class="arrow up" aria-hidden="true">↑</span>
+            </li>
+          </ol>
+          <p class="hint">R は次に読む位置、W は次に書く位置です。「空き」は、その枠に未読データがない状態を表します。</p>
+        </div>
+
+        <div>
+          <dl class="facts queue-facts">
+            <div><dt>読み取り位置 R</dt><dd id="read-index">0</dd></div>
+            <div><dt>書き込み位置 W</dt><dd id="write-index">0</dd></div>
+            <div><dt>未読件数</dt><dd><span id="queue-size">0</span> / 3</dd></div>
+            <div><dt>キューの状態</dt><dd id="queue-state">空</dd></div>
+            <div class="wide"><dt>取り出す順番</dt><dd id="queue-order">なし</dd></div>
+            <div><dt>次に入れる値</dt><dd id="next-value">10</dd></div>
+            <div><dt>直前に取り出した値</dt><dd id="last-dequeued">—</dd></div>
+          </dl>
+          <div class="controls">
+            <button id="enqueue" type="button" aria-describedby="next-value" disabled>入れる</button>
+            <button id="dequeue" type="button" disabled>取り出す</button>
+            <button id="reset" type="button" class="secondary" disabled>最初に戻す</button>
+          </div>
+          <p id="queue-status" class="status" role="status" data-state="ready">R と W はどちらも 0 です。</p>
+        </div>
+      </div>
+
+      <details>
+        <summary>満杯と折り返しを試す手順</summary>
+        <ol>
+          <li>「入れる」を3回押して、10、20、30を入れます。</li>
+          <li>もう一度「入れる」を押すと、満杯のため40が保留されます。</li>
+          <li>10を取り出してから40を入れると、W が3から0に戻ります。</li>
+          <li>20を取り出してから50を入れると、枠0が再利用されます。残りは30、40、50の順に取り出せます。</li>
+        </ol>
+      </details>
+      <h3 id="history-heading">操作の履歴 <span class="hint">新しい順に10件</span></h3>
+      <ol id="queue-log" class="history" aria-labelledby="history-heading"><li>まだ操作していません。</li></ol>
+    </section>
+
+    <section class="card" aria-labelledby="worker-heading">
+      <h2 id="worker-heading">2つのWorkerで動かす</h2>
+      <p>書き手と読み手が1つの共有キューを使い、1から12までを受け渡します。両者の処理が終わったあとに結果を表示します。</p>
+      <p id="worker-availability">JavaScriptで実行環境を確認します。</p>
+      <p id="worker-note">クロスオリジン分離が必要です。<a href="https://sny0.com/study/practice/browser/ring-buffer-observation.html#run-locally">付属サーバーの手順</a></p>
+      <button id="run-workers" type="button" aria-describedby="worker-availability" disabled>2つのWorkerで実行</button>
+      <p id="worker-status" class="status" role="status" data-state="ready">未実行</p>
+      <dl class="facts worker-facts">
+        <div><dt>書き込んだ件数</dt><dd id="worker-produced">—</dd></div>
+        <div><dt>読み取った件数</dt><dd id="worker-consumed">—</dd></div>
+        <div><dt>読み取った順序</dt><dd id="worker-order">—</dd></div>
+        <div><dt>最後に読んだ値</dt><dd id="worker-last">—</dd></div>
+        <div><dt>満杯で再試行</dt><dd id="worker-full">—</dd></div>
+        <div><dt>空で再試行</dt><dd id="worker-empty">—</dd></div>
+      </dl>
+      <p class="hint">再試行の回数は、どちらのWorkerがいつ実行されたかで変わります。</p>
+    </section>
+  </main>
+</body>
+</html>
