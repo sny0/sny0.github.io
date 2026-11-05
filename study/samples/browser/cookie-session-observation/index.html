@@ -1,0 +1,62 @@
+<!doctype html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="referrer" content="no-referrer">
+  <title>CookieのPathを観察する | Sny0 Study</title>
+  <link rel="canonical" href="https://sny0.com/study/samples/browser/cookie-session-observation/index.html">
+  <link rel="stylesheet" href="styles.css">
+  <script src="main.js" defer></script>
+</head>
+<body>
+  <main>
+    <header class="panel">
+      <a href="https://sny0.com/study/practice/browser/cookie-session-observation.html">実践手順とコードを読む</a>
+      <h1>CookieのPathを観察する</h1>
+      <p>同じホストに二つの教材用Cookieを保存し、親ページと <code>child/</code> にある子ページで見える組を比べます。</p>
+    </header>
+
+    <section class="panel" aria-labelledby="experiment-heading">
+      <h2 id="experiment-heading">文書のURLとCookieの範囲</h2>
+      <p>保存する値は固定です。2分で期限が切れます。</p>
+      <div class="actions">
+        <button id="save-cookies" type="button" disabled>保存して観察</button>
+        <button id="read-cookies" type="button" disabled>現在の見え方を確認</button>
+        <button id="clear-cookies" type="button" disabled>教材用Cookieを削除</button>
+      </div>
+      <p id="operation-status" role="status" data-state="loading">子ページを読み込んでいます。</p>
+      <table>
+        <caption><code>document.cookie</code> に見える教材用Cookie</caption>
+        <thead>
+          <tr>
+            <th scope="col">CookieのPath</th>
+            <th scope="col">親ページ</th>
+            <th scope="col">子ページ</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <th scope="row">実験フォルダ<code class="scope" id="base-scope">—</code></th>
+            <td id="main-base">未確認</td>
+            <td id="probe-base">未確認</td>
+          </tr>
+          <tr>
+            <th scope="row">子フォルダ<code class="scope" id="child-scope">—</code></th>
+            <td id="main-child">未確認</td>
+            <td id="probe-child">未確認</td>
+          </tr>
+        </tbody>
+      </table>
+      <iframe id="path-probe" title="CookieのPathを調べる子ページ" sandbox="allow-same-origin" hidden></iframe>
+      <noscript><p>この実験にはJavaScriptが必要です。</p></noscript>
+    </section>
+
+    <section class="panel" aria-labelledby="notes-heading">
+      <h2 id="notes-heading">結果の読み方</h2>
+      <p>保存後、実験フォルダのCookieは両方の文書で見えます。子フォルダのCookieは子ページで見えます。同一オリジンの親ページが子ページの <code>Document</code> を参照できるように、<code>Path</code> による選別はアクセス権限の境界として使えません。</p>
+      <p>この画面はJavaScriptから見える組を表示します。HTTPの <code>Set-Cookie</code> と <code>HttpOnly</code>、サーバー側のセッションは付属のローカル実験で確認できます。</p>
+    </section>
+  </main>
+</body>
+</html>
