@@ -1,0 +1,63 @@
+<!doctype html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="referrer" content="no-referrer">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'self'; style-src 'self'; base-uri 'none'; form-action 'none'">
+  <title>CSRFの判定モデル | Sny0 Study</title>
+  <link rel="canonical" href="https://sny0.com/study/samples/browser/csrf-observation/index.html">
+  <link rel="stylesheet" href="styles.css">
+  <script src="main.js" defer></script>
+</head>
+<body>
+  <main>
+    <header class="panel">
+      <a href="https://sny0.com/study/practice/browser/csrf-observation.html">実践手順とコードを読む</a>
+      <p class="badge">ブラウザ上のシミュレーション</p>
+      <h1>CSRFの判定モデル</h1>
+      <p>送信元とサーバーの検査を変えて、カウンターが更新されるかを比べます。操作はページ内の状態だけを変えます。実際のHTTP通信は付属のローカル実験で観察できます。</p>
+    </header>
+
+    <section class="panel" aria-labelledby="control-heading">
+      <h2 id="control-heading">検査を選んで送信元を変える</h2>
+      <p>宛先は <code>http://127.0.0.1:4190</code> です。宛先で発行された <code>SameSite=Strict</code> のセッションCookieが保存されていて、宛先のホスト・パスなどの条件を満たすと仮定します。</p>
+      <label for="policy">サーバーの追加検査</label>
+      <select id="policy" disabled>
+        <option value="none">追加検査なし</option>
+        <option value="origin">Originの完全一致</option>
+        <option value="token">セッションにひも付けたトークン</option>
+      </select>
+      <div class="actions">
+        <button type="button" id="send-trusted" disabled>アプリ側のフォームから送る</button>
+        <button type="button" id="send-foreign" disabled>別オリジンのフォームから送る</button>
+      </div>
+      <noscript><p>このシミュレーションにはJavaScriptが必要です。</p></noscript>
+      <div class="counter-bar">
+        <p>カウンター <strong id="counter">0</strong></p>
+        <button type="button" class="secondary" id="reset" disabled>観察結果をリセット</button>
+      </div>
+    </section>
+
+    <section class="panel" aria-labelledby="observation-heading">
+      <h2 id="observation-heading">直前のPOSTを観察する</h2>
+      <p id="result" data-outcome="idle" role="status">送信元を選んでください。</p>
+      <dl class="observation">
+        <dt>要求のOrigin</dt><dd><code id="request-origin">—</code></dd>
+        <dt>宛先とのサイト判定</dt><dd id="request-site">—</dd>
+        <dt>セッションCookie</dt><dd id="request-cookie">—</dd>
+        <dt>フォームのトークン</dt><dd id="request-token">—</dd>
+        <dt>宛先とのOrigin照合</dt><dd id="origin-check">—</dd>
+        <dt>選んだ追加検査</dt><dd id="policy-check">—</dd>
+        <dt>カウンターの変化</dt><dd id="counter-change">—</dd>
+      </dl>
+    </section>
+
+    <section class="panel" aria-labelledby="details-heading">
+      <h2 id="details-heading">同一サイトでもオリジンは異なる</h2>
+      <p>アプリ側の送信元は <code>http://127.0.0.1:4190</code>、別オリジン側は <code>http://127.0.0.1:4191</code> です。この組み合わせではサイトは同じで、ポートが違うためオリジンは異なります。両方のフォームから送るPOSTにCookieが付く設定です。</p>
+      <p>このモデルでは、アプリ側のフォームだけがサーバーから受け取ったトークンを持ちます。「追加検査なし」と比べると、Origin照合やトークン照合が状態変更を止める位置が分かります。</p>
+    </section>
+  </main>
+</body>
+</html>

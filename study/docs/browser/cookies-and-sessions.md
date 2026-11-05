@@ -86,7 +86,7 @@ HTTP(S)のオリジンはスキーム・ホスト・ポートで区別します�
 
 **XSS** により攻撃者のスクリプトがページ内で実行されると、`HttpOnly` でセッションCookieの直接読取りを抑えられても、そのページから送られた要求にCookieが付くことがあります。データがHTMLやコードに変わる箇所と、実行を制限する仕組みは次の章で扱います。[OWASPのHttpOnly解説](https://cheatsheetseries.owasp.org/cheatsheets/Session_Management_Cheat_Sheet.html#httponly-attribute)、[XSSとCSP](/browser/xss-and-csp.html)
 
-**CSRF** では、攻撃者のサイトが被害者のブラウザに要求を送らせ、そこに付くCookieを利用して状態変更を起こそうとします。`SameSite` で送信される範囲を絞り、アプリ側でも状態変更要求のCSRFトークンや送信元などを検査します。たとえば `Lax` でも、条件に合う別サイトからのトップレベルGETにはCookieが付きます。GETの意味を取得に保つことも、状態変更を分けるうえで重要です。[OWASPのCSRF対策](https://cheatsheetseries.owasp.org/cheatsheets/Cross-Site_Request_Forgery_Prevention_Cheat_Sheet.html)、[HTTPメッセージ](/network/http-messages.html)
+**CSRF** では、別のページから利用者のブラウザに要求を送らせ、そこに付くCookieを利用して状態変更を起こそうとします。`SameSite` はCookieの送信範囲を絞ります。要求を受け取ったアプリが送信元やトークンを照合する手順は、次の章で扱います。[CSRFとリクエスト検証](/browser/csrf-and-request-validation.html)
 
 ## 実践との対応
 

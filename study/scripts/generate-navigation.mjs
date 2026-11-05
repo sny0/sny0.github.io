@@ -334,11 +334,18 @@ writePage('guide/learning-paths.md', '疑問から選ぶ読み順', {
 2. [textContent・innerHTML・CSPの観察](/practice/browser/xss-csp-observation.html)で、同じ入力が文字・要素・イベント処理になる違いを確かめる。
 3. DOMができる段階は[ブラウザの描画](/browser/rendering-journey.html)、スクリプトからCookieを読める条件は[Cookieとセッション](/browser/cookies-and-sessions.html)へつなげる。
 
+## Cookie付きの要求をどの条件で受理するか
+
+1. [CSRFとリクエスト検証](/browser/csrf-and-request-validation.html)で、Cookieが届く条件、送信元の照合、セッションとトークンの照合を区別する。
+2. [CSRFでCookie付きの要求が届く条件を観察する](/practice/browser/csrf-observation.html)で、同一サイトの別オリジンからフォームを送り、受理と拒否を比べる。
+3. Cookieの送信条件は[Cookieとセッション](/browser/cookies-and-sessions.html)、別オリジンの応答公開は[CORS](/browser/same-origin-cors.html)で確認する。
+
 ## 作り方の変化を歴史から見る
 
 [ビデオゲーム史](/history/video-games.html)の作品・ハード・媒体・流通と、[リアルタイム3D技術史](/guide/rendering/timeline.html)の技術の変化から、気になった仕組みへ進みます。`)
 
 const termRows = [
+  ['CSRF / Cross-Site Request Forgery / リクエスト偽造 / Origin / Referer / SameSite / CSRFトークン / synchronizer token', '/browser/csrf-and-request-validation.html', 'Cookieが付く条件と、送信元・トークンを検査して状態変更を受理する条件を調べる'],
   ['XSS / Cross-Site Scripting / DOM XSS / source / sink / textContent / innerHTML / CSP / Content Security Policy / script-src / script-src-attr / nonce / hash / SecurityPolicyViolationEvent', '/browser/xss-and-csp.html', '入力を解釈する箇所、HTMLの生成とコードの実行、CSPによる実行制限を調べる'],
   ['Cookie / Set-Cookie / document.cookie / Domain / Path / Max-Age / Secure / HttpOnly / SameSite / セッションID / セッション固定化 / ログアウト', '/browser/cookies-and-sessions.html', '要求にCookieを付ける条件、サーバー側の照合、IDの更新と失効を調べる'],
   ['同一オリジンポリシー / Same-Origin Policy / SOP / origin / opaque origin / CORS / preflight / OPTIONS / Access-Control-Allow-Origin / no-cors / opaque response', '/browser/same-origin-cors.html', '文書間の境界、別オリジンへの要求、JavaScriptへの応答公開、事前確認を調べる'],
