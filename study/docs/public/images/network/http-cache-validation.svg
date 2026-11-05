@@ -1,0 +1,43 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="760" height="1510" viewBox="0 0 760 1510" role="img" aria-labelledby="title desc">
+  <title id="title">条件付きGETと304で保存本文を再利用する流れ</title>
+  <desc id="desc">初回は200と本文とETagを保存する。次のGETでIf-None-Matchが一致するとサーバーは本文のない304を返す。クライアントのキャッシュが保存本文と更新したメタデータで応答を再構成する。ETag不一致なら200本文を受け取る。通信上の304とアプリAPIから見える応答は区別する。</desc>
+  <defs><style>text{font-family:'BIZ UDPGothic','Yu Gothic',Meiryo,sans-serif;fill:#26352e}.title{font-size:32px;font-weight:700}.head{font-size:28px;font-weight:700}.body{font-size:24px}.small{font-size:22px}.card{fill:white;stroke:#739483;stroke-width:2}.arrow{fill:none;stroke:#567963;stroke-width:3;marker-end:url(#a)}</style>
+    <marker id="a" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto"><path d="M0 0L10 5L0 10Z" fill="#567963"/></marker></defs>
+  <rect width="760" height="1510" rx="24" fill="#f4f8f4"/>
+  <text x="40" y="56" class="title">304は、本文の再送を省く応答</text>
+  <text x="40" y="96" class="body">クライアントの保存応答と、サーバーの確認</text>
+  <rect x="36" y="130" width="688" height="222" rx="18" class="card"/>
+  <text x="60" y="174" class="head">1. 初回取得：本文と検証情報を得る</text>
+  <text x="60" y="216" class="body">GET /resource → 200 OK ＋ 本文</text>
+  <text x="60" y="258" class="body">ETag: "study-v1"　Cache-Control: no-cache</text>
+  <text x="60" y="300" class="body">保存する場合は、本文と必要なヘッダーを保持。</text>
+  <text x="60" y="338" class="small">この固定例は本文10byte。ETagはopaqueな識別子。</text>
+  <path d="M380 354V394" class="arrow"/>
+  <rect x="36" y="398" width="688" height="178" rx="18" fill="#e2eafa"/>
+  <text x="60" y="442" class="head">2. 再検証：保存したETagを送る</text>
+  <text x="60" y="484" class="body">GET /resource</text>
+  <text x="60" y="526" class="body">If-None-Match: "study-v1"</text>
+  <text x="60" y="564" class="small">GETでは弱い比較。一覧中のW/付きtagでも一致し得る。</text>
+  <path d="M380 578V618" class="arrow"/>
+  <rect x="36" y="622" width="688" height="178" rx="18" class="card"/>
+  <text x="60" y="666" class="head">3. 一致：304 Not Modified</text>
+  <text x="60" y="708" class="body">通信上の応答に、本文はない。</text>
+  <text x="60" y="750" class="body">ETagなど、再利用に必要なヘッダーを返す。</text>
+  <text x="60" y="788" class="small">304はエラーでも、空の本文へ置き換える指示でもない。</text>
+  <path d="M380 802V842" class="arrow"/>
+  <rect x="36" y="846" width="688" height="190" rx="18" fill="#dcece0"/>
+  <text x="60" y="890" class="head">4. 保存した本文を使う</text>
+  <text x="60" y="932" class="body">対応する保存応答を特定し、メタデータを更新。</text>
+  <text x="60" y="974" class="body">既存の本文を使って、利用側へ応答を返す。</text>
+  <text x="60" y="1014" class="small">実践ではC++とC#が明示的に本文を保持する。</text>
+  <rect x="36" y="1064" width="688" height="178" rx="18" class="card"/>
+  <text x="60" y="1108" class="head">不一致の場合：200と本文を返す</text>
+  <text x="60" y="1150" class="body">If-None-Match: "study-old" → 200 ＋ 本文</text>
+  <text x="60" y="1192" class="body">固定例では、意図的に異なるtagを送る。</text>
+  <text x="60" y="1230" class="small">サーバーの内容が実際に更新された、という観測ではない。</text>
+  <rect x="36" y="1270" width="688" height="202" rx="18" fill="#e9efe6"/>
+  <text x="60" y="1314" class="head">通信の状態と、APIの見え方を分ける</text>
+  <text x="60" y="1356" class="body">ブラウザは304を内部で処理し、再構成できる。</text>
+  <text x="60" y="1398" class="body">fetchの利用側に200と本文が見える場合もある。</text>
+  <text x="60" y="1440" class="small">実践は実HTTP通信。ブラウザ自動キャッシュは測らない。</text>
+</svg>

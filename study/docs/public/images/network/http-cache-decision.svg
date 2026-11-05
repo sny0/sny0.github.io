@@ -1,0 +1,41 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="760" height="1510" viewBox="0 0 760 1510" role="img" aria-labelledby="title desc">
+  <title id="title">HTTPキャッシュの候補、再利用、再検証の分岐</title>
+  <desc id="desc">要求に合う保存応答を探し、候補がない場合は取得する。再利用条件を満たすfreshな応答は通信を省ける場合がある。再検証が必要ならvalidatorを使い、304か新しい本文を持つ200を受け取る。no-cacheは保存禁止ではなく、no-storeは既存全キャッシュを消去するAPIではない。</desc>
+  <defs><style>text{font-family:'BIZ UDPGothic','Yu Gothic',Meiryo,sans-serif;fill:#26352e}.title{font-size:32px;font-weight:700}.head{font-size:28px;font-weight:700}.body{font-size:24px}.small{font-size:22px}.card{fill:white;stroke:#739483;stroke-width:2}.arrow{fill:none;stroke:#567963;stroke-width:3;marker-end:url(#a)}</style>
+    <marker id="a" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto"><path d="M0 0L10 5L0 10Z" fill="#567963"/></marker></defs>
+  <rect width="760" height="1510" rx="24" fill="#f4f8f4"/>
+  <text x="40" y="56" class="title">保存した応答を、いつ使う？</text>
+  <text x="40" y="96" class="body">保存の可否と、再利用の可否は別に判断する</text>
+  <rect x="36" y="130" width="688" height="174" rx="18" class="card"/>
+  <text x="60" y="174" class="head">要求に合う候補を探す</text>
+  <text x="60" y="216" class="body">method・URI、Varyで指定された要求ヘッダー等。</text>
+  <text x="60" y="258" class="body">利用者や保存領域の分離も、再利用の条件になる。</text>
+  <text x="60" y="292" class="small">同じURLというだけで、すべての利用者へ同じ応答を返さない。</text>
+  <path d="M380 306V346" class="arrow"/>
+  <rect x="36" y="350" width="688" height="158" rx="18" class="card"/>
+  <text x="60" y="394" class="head">A. 候補がない → 通常の取得</text>
+  <text x="60" y="436" class="body">例えば200と本文を受け取り、保存条件を判断。</text>
+  <text x="60" y="478" class="small">キャッシュへ保存したいものを、常に保存できる保証はない。</text>
+  <rect x="36" y="536" width="688" height="190" rx="18" fill="#dcece0"/>
+  <text x="60" y="580" class="head">B. そのまま使える → 保存応答を再利用</text>
+  <text x="60" y="622" class="body">freshで、要求・応答の指示や他の条件も満たす。</text>
+  <text x="60" y="664" class="body">新しいネットワーク要求を省ける場合がある。</text>
+  <text x="60" y="704" class="small">freshは、サーバーの現状と必ず同じという意味ではない。</text>
+  <rect x="36" y="754" width="688" height="230" rx="18" fill="#e2eafa"/>
+  <text x="60" y="798" class="head">C. 再検証が必要 → 条件付きで確認</text>
+  <text x="60" y="840" class="body">ETagがあれば、If-None-Matchで確認できる。</text>
+  <text x="60" y="882" class="body">304：保存した本文を使い、メタデータを更新。</text>
+  <text x="60" y="924" class="body">200：今回返された本文とメタデータを扱う。</text>
+  <text x="60" y="962" class="small">validatorがなければ、通常取得など別の扱いが必要。</text>
+  <rect x="36" y="1012" width="688" height="200" rx="18" class="card"/>
+  <text x="60" y="1056" class="head">時間は「受信後の秒数」だけではない</text>
+  <text x="60" y="1098" class="body">freshness lifetime と current age を比べる。</text>
+  <text x="60" y="1140" class="body">Date・Age・通信や保存中の時間などが関わる。</text>
+  <text x="60" y="1180" class="small">max-ageが、そのまま「手元へ届いてからの残り秒数」ではない。</text>
+  <rect x="36" y="1240" width="688" height="232" rx="18" fill="#e9efe6"/>
+  <text x="60" y="1284" class="head">名前が似た指示を分ける</text>
+  <text x="60" y="1326" class="body">no-cache：保存可。再利用前の検証が必要。</text>
+  <text x="60" y="1368" class="body">no-store：要求・応答の適用範囲で保存を制限。</text>
+  <text x="60" y="1410" class="body">private：共有キャッシュへの保存を制限。</text>
+  <text x="60" y="1450" class="small">no-storeは、既存の全保存領域を消去するAPIとは異なる。</text>
+</svg>
