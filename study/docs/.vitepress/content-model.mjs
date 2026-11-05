@@ -12,6 +12,7 @@ export const formatLabels = {
 export const statusLabels = { published: '公開中', outline: '学習計画・概要', draft: '草稿', planned: '執筆予定' }
 
 export const collections = [
+  { id: 'audio-buffer-observation', section: 'practice', title: 'AudioWorkletで先読みとアンダーランを観察する', description: '同じ音声データを先読みの有無でレンダリングし、不足したフレーム数と波形を比べる。', start: '/practice/browser/audio-buffer-observation.html' },
   { id: 'ring-buffer-observation', section: 'practice', title: 'リングバッファの満杯・折り返し・読み出し順を観察する', description: '4つの枠を使うキューを操作し、読み書き位置と満杯・空の判定、枠の再利用を確かめる。', start: '/practice/browser/ring-buffer-observation.html' },
   { id: 'atomics-observation', section: 'practice', title: 'Workerの競合とAtomicsの待機・通知を観察する', description: '共有カウンターの失われた更新、不可分な加算、準備フラグと通知の順序を比べる。', start: '/practice/browser/atomics-observation.html' },
   { id: 'wasm-abi-observation', section: 'practice', title: 'WebAssemblyへ配列とUTF-8を渡し、メモリ確保を観察する', description: '線形メモリに配列と文字列を置き、ポインタと長さ、アラインメント、アリーナの確保位置を確かめる。', start: '/practice/browser/wasm-abi-observation.html' },

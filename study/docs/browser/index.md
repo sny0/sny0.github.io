@@ -19,6 +19,7 @@ URLを開いてから描画されるまでを、通信・実行・表示に分�
 
 ## 辞典の本文
 
+- [AudioWorkletと音声バッファ — フレーム・先読み・アンダーラン](/browser/audio-worklet-buffering.html)
 - [Cookieとセッション — 要求への付与とサーバー側の寿命](/browser/cookies-and-sessions.html)
 - [CSRFとリクエスト検証 — Cookie付きの要求を受理する条件](/browser/csrf-and-request-validation.html)
 - [Service Workerとオフライン動作 — 登録、制御、応答の選択](/browser/service-worker-offline.html)
@@ -42,6 +43,7 @@ URLを開いてから描画されるまでを、通信・実行・表示に分�
 
 ## 作って試す
 
+- [AudioWorkletで先読みとアンダーランを観察する](/practice/browser/audio-buffer-observation.html)
 - [CSRFでCookie付きの要求が届く条件を観察する](/practice/browser/csrf-observation.html)
 - [HTML・CSS・JavaScriptでブラウザの変更と計測を観察する](/practice/browser/render-observation.html)
 - [localStorage・IndexedDB・Cache APIの保存と完了を観察する](/practice/browser/storage-observation.html)

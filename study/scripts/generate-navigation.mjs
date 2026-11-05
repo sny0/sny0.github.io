@@ -370,11 +370,18 @@ writePage('guide/learning-paths.md', '疑問から選ぶ読み順', {
 2. [リングバッファの満杯・折り返し・読み出し順を観察する](/practice/browser/ring-buffer-observation.html)で、満杯で拒否された値を空きができてから入れ直し、読み出し順を比べる。
 3. 異なるWorkerへの公開順序は[Web Workerと共有メモリの同期](/browser/shared-memory-atomics.html)、受付を制御する方針は[Worker poolとバックプレッシャー](/browser/worker-pool-backpressure.html)へつなげる。
 
+## 音声データが出力に間に合わないと何が起きるか
+
+1. [AudioWorkletと音声バッファ](/browser/audio-worklet-buffering.html)で、サンプルフレーム、レンダリングの処理単位、データの供給不足を区別する。
+2. [AudioWorkletで先読みとアンダーランを観察する](/practice/browser/audio-buffer-observation.html)で、同じ到着の遅れを与え、先読みの有無で波形と不足したフレーム数を比べる。
+3. 待ち行列で枠を使い回す仕組みは[リングバッファとSPSCキュー](/browser/spsc-ring-buffer.html)で確認する。
+
 ## 作り方の変化を歴史から見る
 
 [ビデオゲーム史](/history/video-games.html)の作品・ハード・媒体・流通と、[リアルタイム3D技術史](/guide/rendering/timeline.html)の技術の変化から、気になった仕組みへ進みます。`)
 
 const termRows = [
+  ['AudioWorklet / AudioWorkletProcessor / Web Audio API / PCM / サンプルフレーム / レンダークォンタム / 先読み / アンダーラン / underrun', '/browser/audio-worklet-buffering.html', 'ブラウザの音声処理単位、出力に対する供給不足、先読み用バッファを調べる'],
   ['リングバッファ / ring buffer / circular buffer / SPSC / FIFO / read index / write index / wrap-around', '/browser/spsc-ring-buffer.html', '固定容量の読み書き位置、折り返し、満杯と空、書き手と読み手の間で枠を受け渡す順序を調べる'],
   ['Atomics / アトミック操作 / lost update / 失われた更新 / read-modify-write / Atomics.add / Atomics.wait / Atomics.notify / 準備フラグ', '/browser/shared-memory-atomics.html', '共有値の更新が失われる順序、不可分な加算、フラグと通知を使うデータの受け渡しを調べる'],
   ['Wasm ABI / ポインタと長さ / pointer / byte length / TextEncoder / アラインメント / アリーナ / bump allocator / alloc / cursor', '/browser/wasm-data-and-allocation.html', '配列・文字列を渡す配置と長さの単位、領域の確保・拡張・寿命を調べる'],
