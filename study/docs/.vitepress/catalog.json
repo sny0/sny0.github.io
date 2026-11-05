@@ -69,7 +69,7 @@
       "id": "browser",
       "title": "ブラウザ",
       "description": "URLを開いてから描画されるまでを、通信・実行・表示に分ける。",
-      "count": 12,
+      "count": 13,
       "status": "辞典本文あり"
     },
     {
@@ -130,6 +130,13 @@
     }
   ],
   "collections": [
+    {
+      "id": "wasm-memory-observation",
+      "section": "practice",
+      "title": "WebAssemblyの読み込みと線形メモリを観察する",
+      "description": "Wasmを読み込み、JavaScriptとWasmで同じバイトを読み、境界チェックとメモリの拡張を試す。",
+      "start": "/practice/browser/wasm-memory-observation.html"
+    },
     {
       "id": "cross-origin-isolation-observation",
       "section": "practice",
@@ -4649,6 +4656,69 @@
       ]
     },
     {
+      "title": "WebAssemblyと線形メモリ — バイナリから実行・共有するバイト列まで",
+      "url": "/browser/webassembly-linear-memory.html",
+      "file": "browser/webassembly-linear-memory.md",
+      "domain": "browser",
+      "section": "reference",
+      "format": "article",
+      "status": "published",
+      "summary": "Wasmのバイナリと実行時の状態を分け、JavaScriptとWasmが線形メモリを読み書きする仕組み、拡張と境界検査を説明する。",
+      "source": "新規執筆",
+      "aliases": [
+        "WebAssembly",
+        "Wasm",
+        "WAT",
+        "線形メモリ",
+        "linear memory",
+        "memory32",
+        "instantiate",
+        "instantiateStreaming",
+        "imports",
+        "exports",
+        "LEB128",
+        "i32.load",
+        "i32.store",
+        "memory.grow",
+        "trap"
+      ],
+      "verification": "WebAssembly Core・JavaScript Interface・Web API、V8・Emscripten・rustcの公式資料と照合（2026-11-05）",
+      "links": [
+        "/browser/same-origin-cors.html",
+        "/browser/cross-origin-isolation.html",
+        "/game/asset-loading.html",
+        "/practice/browser/wasm-memory-observation.html"
+      ]
+    },
+    {
+      "title": "WebAssemblyの読み込みと線形メモリを観察する",
+      "url": "/practice/browser/wasm-memory-observation.html",
+      "file": "practice/browser/wasm-memory-observation.md",
+      "domain": "browser",
+      "section": "practice",
+      "format": "sample",
+      "status": "published",
+      "summary": "同じWasmモジュールを2つの経路で読み込み、JavaScriptとWasmから同じ整数を更新し、境界チェックとメモリの拡張を観察する。",
+      "source": "新規執筆",
+      "aliases": [
+        "WebAssembly",
+        "Wasm",
+        "WAT",
+        "instantiateStreaming",
+        "instantiate",
+        "linear memory",
+        "Memory.grow",
+        "DataView",
+        "RuntimeError"
+      ],
+      "collection": "wasm-memory-observation",
+      "order": 1,
+      "verification": "Windows上のブラウザで両読み込み経路、MIME型による切り替え、境界トラップとメモリ拡張を実行確認（2026-11-05）",
+      "links": [
+        "/browser/webassembly-linear-memory.html"
+      ]
+    },
+    {
       "title": "WebGPU",
       "url": "/graphics/api/webgpu.html",
       "file": "graphics/api/webgpu.md",
@@ -5426,7 +5496,8 @@
         "/browser/same-origin-cors.html",
         "/browser/web-workers-messages.html",
         "/runtime/thread-synchronization.html",
-        "/practice/browser/cross-origin-isolation-observation.html"
+        "/practice/browser/cross-origin-isolation-observation.html",
+        "/browser/webassembly-linear-memory.html"
       ]
     },
     {
@@ -7303,6 +7374,8 @@
         "/practice/browser/csrf-observation.html",
         "/browser/cross-origin-isolation.html",
         "/practice/browser/cross-origin-isolation-observation.html",
+        "/browser/webassembly-linear-memory.html",
+        "/practice/browser/wasm-memory-observation.html",
         "/history/video-games.html",
         "/guide/rendering/timeline.html"
       ]
@@ -9452,6 +9525,7 @@
       "source": "統合ガイド",
       "aliases": [],
       "links": [
+        "/browser/webassembly-linear-memory.html",
         "/browser/cross-origin-isolation.html",
         "/browser/csrf-and-request-validation.html",
         "/browser/xss-and-csp.html",

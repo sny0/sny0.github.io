@@ -1,0 +1,68 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="760" height="1040" viewBox="0 0 760 1040" role="img" aria-labelledby="title desc">
+  <title id="title">JavaScriptとWasmが見る線形メモリ</title>
+  <desc id="desc">1ページの線形メモリのオフセット16から19に、JavaScriptがリトルエンディアンで41を書き込む。Wasmが1を加えると同じ4バイトが42になる。非共有メモリを2ページへ拡張すると、古い固定長バッファは切り離され、新しいビューで既存の値を読める。メモリの末尾を越える読み取りはトラップする。</desc>
+  <defs>
+    <style>
+      text{font-family:'BIZ UDPGothic','Yu Gothic',Meiryo,sans-serif;fill:#183440}
+      .title{font-size:35px;font-weight:700}.head{font-size:29px;font-weight:700}
+      .body{font-size:26px}.small{font-size:24px}
+      .code{font-family:Consolas,'Liberation Mono',monospace;font-size:25px}
+      .muted{fill:#3b5963}.green{fill:#085c4d}.warning{fill:#713d24}
+      .panel{fill:#fff;stroke:#a6bcc2;stroke-width:2}
+      .before{fill:#e8ecf8;stroke:#a9b8d8}.after{fill:#e0eee5;stroke:#9dc1ad}
+      .arrow{fill:none;stroke:#4d6e78;stroke-width:3;marker-end:url(#arrowhead)}
+    </style>
+    <marker id="arrowhead" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto">
+      <path d="M0 0L10 5L0 10z" fill="#4d6e78"/>
+    </marker>
+  </defs>
+  <rect width="760" height="1040" rx="24" fill="#eef5f6"/>
+  <text class="title" x="36" y="62">JavaScriptとWasmが見る線形メモリ</text>
+  <text class="body muted" x="36" y="103">1ページから始める非共有メモリの例</text>
+
+  <rect class="panel" x="36" y="135" width="688" height="452" rx="18"/>
+  <text class="head" x="60" y="180">同じオフセット16〜19を読み書き</text>
+  <text class="body" x="60" y="222">最初は65,536バイト。色付きの枠は16進表示。</text>
+  <text class="small muted" x="60" y="270">オフセット</text>
+  <text class="code" text-anchor="middle" x="288" y="270">16</text>
+  <text class="code" text-anchor="middle" x="401" y="270">17</text>
+  <text class="code" text-anchor="middle" x="514" y="270">18</text>
+  <text class="code" text-anchor="middle" x="627" y="270">19</text>
+
+  <text class="small" x="60" y="313">JSが書く</text>
+  <text class="code" x="60" y="346">41</text>
+  <rect class="before" x="239" y="286" width="98" height="65" rx="11"/>
+  <rect class="before" x="352" y="286" width="98" height="65" rx="11"/>
+  <rect class="before" x="465" y="286" width="98" height="65" rx="11"/>
+  <rect class="before" x="578" y="286" width="98" height="65" rx="11"/>
+  <text class="code" text-anchor="middle" x="288" y="326">29</text>
+  <text class="code" text-anchor="middle" x="401" y="326">00</text>
+  <text class="code" text-anchor="middle" x="514" y="326">00</text>
+  <text class="code" text-anchor="middle" x="627" y="326">00</text>
+
+  <path class="arrow" d="M288 357v76"/>
+  <text class="code muted" x="322" y="406">add_at(16, 1)</text>
+
+  <text class="small" x="60" y="471">Wasmが更新</text>
+  <text class="code" x="60" y="504">42</text>
+  <rect class="after" x="239" y="444" width="98" height="65" rx="11"/>
+  <rect class="after" x="352" y="444" width="98" height="65" rx="11"/>
+  <rect class="after" x="465" y="444" width="98" height="65" rx="11"/>
+  <rect class="after" x="578" y="444" width="98" height="65" rx="11"/>
+  <text class="code green" text-anchor="middle" x="288" y="484">2a</text>
+  <text class="code" text-anchor="middle" x="401" y="484">00</text>
+  <text class="code" text-anchor="middle" x="514" y="484">00</text>
+  <text class="code" text-anchor="middle" x="627" y="484">00</text>
+  <text class="small muted" x="60" y="553">下位バイトから並ぶリトルエンディアン。</text>
+
+  <rect class="panel" x="36" y="616" width="688" height="280" rx="18"/>
+  <text class="head" x="60" y="663">拡張後はビューを作り直す</text>
+  <text class="code green" x="60" y="706">memory.grow(1)</text>
+  <text class="body" x="60" y="747">1ページから2ページへ。追加領域はゼロ。</text>
+  <text class="body" x="60" y="790">古い固定長バッファは切り離される。</text>
+  <text class="body" x="60" y="833">新しいビューから既存の値42を読める。</text>
+  <text class="code muted" x="60" y="869">65,536 B → 131,072 B</text>
+
+  <rect x="36" y="925" width="688" height="83" rx="16" fill="#f9ebe1" stroke="#d9b498" stroke-width="2"/>
+  <text class="small warning" x="60" y="973">残り3バイトの位置から4バイト読むとトラップ。</text>
+</svg>

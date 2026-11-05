@@ -1,0 +1,49 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="760" height="1060" viewBox="0 0 760 1060" role="img" aria-labelledby="title desc">
+  <title id="title">Wasmバイナリからインスタンスまで</title>
+  <desc id="desc">ブラウザがWasmバイナリを取得する。先頭8バイトにはマジック番号と形式の版があり、その後にセクション列が続く。検証とコンパイルを経てModuleを用意する。インポートの結び付けやメモリの初期化を行ってInstanceを作る。JavaScriptはexportsから公開された関数やメモリを使う。</desc>
+  <defs>
+    <style>
+      text{font-family:'BIZ UDPGothic','Yu Gothic',Meiryo,sans-serif;fill:#183440}
+      .title{font-size:35px;font-weight:700}.head{font-size:29px;font-weight:700}
+      .body{font-size:26px}.small{font-size:24px}
+      .code{font-family:Consolas,'Liberation Mono',monospace;font-size:25px}
+      .muted{fill:#3b5963}.green{fill:#085c4d}
+      .panel{fill:#fff;stroke:#a6bcc2;stroke-width:2}
+      .arrow{fill:none;stroke:#4d6e78;stroke-width:3;marker-end:url(#arrowhead)}
+    </style>
+    <marker id="arrowhead" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto">
+      <path d="M0 0L10 5L0 10z" fill="#4d6e78"/>
+    </marker>
+  </defs>
+  <rect width="760" height="1060" rx="24" fill="#eef5f6"/>
+  <text class="title" x="36" y="62">Wasmバイナリからインスタンスまで</text>
+  <text class="body muted" x="36" y="103">ブラウザで読み込むときの流れ</text>
+
+  <rect class="panel" x="36" y="137" width="688" height="222" rx="18"/>
+  <text class="head" x="60" y="181">1. バイナリを取得する</text>
+  <text class="body" x="60" y="224">HTTP応答から .wasm のバイト列を受け取る。</text>
+  <rect x="60" y="245" width="306" height="55" rx="11" fill="#e8ecf8" stroke="#a9b8d8"/>
+  <rect x="394" y="245" width="306" height="55" rx="11" fill="#e8ecf8" stroke="#a9b8d8"/>
+  <text class="code" x="80" y="280">00 61 73 6d</text>
+  <text class="code" x="414" y="280">01 00 00 00</text>
+  <text class="small muted" x="60" y="333">マジック番号と形式の版。その後にセクション列。</text>
+
+  <path class="arrow" d="M380 362v32"/>
+  <rect class="panel" x="36" y="400" width="688" height="157" rx="18"/>
+  <text class="head" x="60" y="445">2. 検証してモジュールにする</text>
+  <text class="body" x="60" y="487">型や命令の使い方を検証してコンパイル。</text>
+  <text class="code green" x="60" y="529">WebAssembly.Module</text>
+
+  <path class="arrow" d="M380 560v38"/>
+  <rect class="panel" x="36" y="604" width="688" height="208" rx="18"/>
+  <text class="head" x="60" y="649">3. インスタンスを作る</text>
+  <text class="body" x="60" y="691">インポートがあれば、実際の関数などを渡す。</text>
+  <text class="body" x="60" y="729">メモリなどを初期化して、実行時の状態を作る。</text>
+  <text class="code green" x="60" y="781">WebAssembly.Instance</text>
+
+  <path class="arrow" d="M380 815v39"/>
+  <rect x="36" y="860" width="688" height="162" rx="18" fill="#e0eee5" stroke="#9dc1ad" stroke-width="2"/>
+  <text class="head green" x="60" y="907">4. 公開された関数やメモリを使う</text>
+  <text class="code" x="60" y="954">instance.exports.add_at(16, 1)</text>
+  <text class="code" x="60" y="994">instance.exports.memory.buffer</text>
+</svg>

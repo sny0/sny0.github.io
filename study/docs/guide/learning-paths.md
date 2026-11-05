@@ -201,6 +201,12 @@
 2. [Workerへのコピーと共有メモリを観察する](/practice/browser/cross-origin-isolation-observation.html)で、4種類のヘッダー設定と、コピー・共有の結果を比べる。
 3. データの転送は[Web Workerとメッセージ通信](/browser/web-workers-messages.html)、並行処理の同期は[スレッドと同期](/runtime/thread-synchronization.html)へつなげる。
 
+## WebAssemblyから整数を読み書きするには
+
+1. [WebAssemblyと線形メモリ](/browser/webassembly-linear-memory.html)で、モジュールのバイナリ、インスタンス、バイト位置と境界チェックを区別する。
+2. [WebAssemblyの読み込みと線形メモリを観察する](/practice/browser/wasm-memory-observation.html)で、JavaScriptとWasmから同じバイト列を読み、拡張前後のビューを比べる。
+3. バイト列での整数の表現は[整数とビット・バイト](/data/integer-bits-and-bytes.html)、Workerをまたぐ共有は[クロスオリジン分離と共有メモリ](/browser/cross-origin-isolation.html)で確認する。
+
 ## 作り方の変化を歴史から見る
 
 [ビデオゲーム史](/history/video-games.html)の作品・ハード・媒体・流通と、[リアルタイム3D技術史](/guide/rendering/timeline.html)の技術の変化から、気になった仕組みへ進みます。
