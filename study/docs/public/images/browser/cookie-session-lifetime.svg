@@ -1,0 +1,54 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="760" height="1150" viewBox="0 0 760 1150" role="img" aria-labelledby="title desc">
+  <title id="title">Cookieとサーバーのセッションの寿命</title>
+  <desc id="desc">ブラウザにはCookieとしてセッションIDがあり、サーバーにはIDに対応する利用者、権限、期限の記録がある。ブラウザからIDを送るとサーバーが照合する。Cookieが消えた場合はIDが届かず、サーバーの記録が失効した場合はIDが届いても受理されない。ログアウトではサーバーでIDを無効にし、応答でCookieを期限切れにする。</desc>
+  <defs>
+    <style>
+      text{font-family:'BIZ UDPGothic','Yu Gothic',Meiryo,sans-serif;fill:#183440}
+      .title{font-size:36px;font-weight:700}.head{font-size:30px;font-weight:700}
+      .body{font-size:27px}.label{font-size:25px;font-weight:700}
+      .code{font-family:Consolas,'Liberation Mono',monospace;font-size:26px}
+      .muted{fill:#3b5963}.ok{fill:#085c4d}.error{fill:#793b23}
+      .panel{fill:#fff;stroke:#a6bcc2;stroke-width:2}
+      .arrow{fill:none;stroke:#4d6e78;stroke-width:3;marker-end:url(#arrowhead)}
+    </style>
+    <marker id="arrowhead" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto">
+      <path d="M0 0L10 5L0 10Z" fill="#4d6e78"/>
+    </marker>
+  </defs>
+  <rect width="760" height="1150" rx="24" fill="#eef5f6"/>
+  <text x="36" y="58" class="title">Cookieとサーバーのセッション</text>
+  <text x="36" y="102" class="body muted">ブラウザがIDを送り、サーバーが照合する。</text>
+
+  <rect x="36" y="138" width="688" height="141" rx="20" fill="#e8eaf7" stroke="#b4b9d4" stroke-width="2"/>
+  <text x="60" y="184" class="head">ブラウザが持つもの</text>
+  <text x="60" y="229" class="body">Cookieの値にセッションIDを保存する。</text>
+  <path d="M85 280V371" class="arrow"/>
+  <text x="109" y="323" class="label muted">対象のHTTP要求でIDを送る</text>
+  <text x="109" y="359" class="code">Cookie: sid=ID-A</text>
+
+  <rect x="36" y="375" width="688" height="156" rx="20" fill="#e0eee5" stroke="#a3bfae" stroke-width="2"/>
+  <text x="60" y="421" class="head ok">サーバーが持つもの</text>
+  <text x="60" y="464" class="body"><tspan class="code">ID-A</tspan> に対応する利用者、権限、期限。</text>
+  <text x="60" y="502" class="body">要求で受け取ったIDを記録と照合する。</text>
+
+  <text x="36" y="591" class="head">どこで使えなくなるか</text>
+  <rect x="36" y="620" width="334" height="238" rx="18" class="panel"/>
+  <text x="55" y="668" class="label error">ブラウザ側で期限切れ</text>
+  <text x="55" y="713" class="body">Cookieが消え、</text>
+  <text x="55" y="751" class="body">IDが届かない。</text>
+  <text x="55" y="801" class="body">サーバーの記録が</text>
+  <text x="55" y="839" class="body">まだ残ることがある。</text>
+
+  <rect x="390" y="620" width="334" height="238" rx="18" class="panel"/>
+  <text x="409" y="668" class="label error">サーバー側で失効</text>
+  <text x="409" y="713" class="body">Cookieは残っても、</text>
+  <text x="409" y="751" class="body">届いたIDは無効。</text>
+  <text x="409" y="801" class="body">新しい認証などが</text>
+  <text x="409" y="839" class="body">必要になる。</text>
+
+  <rect x="36" y="900" width="688" height="198" rx="20" fill="#f8e8de" stroke="#d2a58e" stroke-width="2"/>
+  <text x="60" y="947" class="head error">ログアウトは両方を処理する</text>
+  <text x="60" y="995" class="body">サーバーがIDを無効にする。</text>
+  <text x="60" y="1035" class="body">応答でブラウザのCookieを期限切れにする。</text>
+  <text x="60" y="1075" class="code">Set-Cookie: sid=; Max-Age=0; …</text>
+</svg>

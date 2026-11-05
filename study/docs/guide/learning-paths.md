@@ -177,6 +177,12 @@
 2. [ブラウザでCORSの応答を比べる](/practice/browser/cors-observation.html)で、通常ページとsandboxから同じデータをGETし、公開版とローカル配信で結果を比べる。
 3. [HTTPメッセージ](/network/http-messages.html)で要求・応答を確認し、[HTTPキャッシュ](/network/http-caching.html)で応答を再利用する条件へつなげる。
 
+## ページをまたいで、サーバーが同じセッションをどう見つけるか
+
+1. [Cookieとセッション](/browser/cookies-and-sessions.html)で、Cookieを送る条件、サーバーによるIDの照合、ログアウト時の失効を区別する。
+2. [Cookieの範囲とセッションIDを観察する](/practice/browser/cookie-session-observation.html)で、Pathによる見え方と、HttpOnlyのIDが次の要求に付くところを確かめる。
+3. 別オリジンでの応答の読み取りは[CORS](/browser/same-origin-cors.html)、ブラウザ内でのデータ保持は[ブラウザの保存領域](/browser/storage-lifetime.html)へつなげる。
+
 ## 作り方の変化を歴史から見る
 
 [ビデオゲーム史](/history/video-games.html)の作品・ハード・媒体・流通と、[リアルタイム3D技術史](/guide/rendering/timeline.html)の技術の変化から、気になった仕組みへ進みます。

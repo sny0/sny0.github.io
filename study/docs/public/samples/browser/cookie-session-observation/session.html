@@ -1,0 +1,77 @@
+<!doctype html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="robots" content="noindex">
+  <meta name="referrer" content="same-origin">
+  <title>Set-Cookieとセッションの観察 | Sny0 Study</title>
+  <script src="session.js" defer></script>
+  <style>
+    :root { color-scheme: light; font-family: system-ui, sans-serif; color: #162a42; background: #eef3f8; line-height: 1.6; }
+    * { box-sizing: border-box; }
+    body { margin: 0; }
+    main { width: min(100% - 2rem, 54rem); margin: 1.5rem auto 3rem; }
+    header, section { margin-bottom: 1rem; padding: 1rem 1.25rem; border: 1px solid #bbcbdc; border-radius: 0.75rem; background: #fff; }
+    h1, h2 { margin: 0.5rem 0; line-height: 1.35; }
+    h1 { font-size: clamp(1.45rem, 4vw, 2rem); }
+    h2 { font-size: 1.1rem; }
+    p { margin: 0.6rem 0; }
+    a { color: #084d98; }
+    code { overflow-wrap: anywhere; }
+    .buttons { display: flex; flex-wrap: wrap; gap: 0.5rem; margin-top: 0.8rem; }
+    button { min-height: 2.75rem; padding: 0.4rem 0.75rem; border: 1px solid #164e88; border-radius: 0.45rem; color: white; background: #164e88; font: inherit; }
+    button:enabled { cursor: pointer; }
+    button:disabled { opacity: 0.62; }
+    :focus-visible { outline: 3px solid #106bbf; outline-offset: 3px; }
+    table { width: 100%; margin: 0.8rem 0; border-collapse: collapse; text-align: left; }
+    td, th { padding: 0.4rem; border-bottom: 1px solid #bbcbdc; vertical-align: top; }
+    caption { margin-bottom: 0.35rem; text-align: left; font-weight: 600; }
+    dt { font-weight: 600; }
+    dd { margin: 0 0 0.5rem; }
+    #operation { padding: 0.6rem 0.75rem; background: #edf4fb; border-radius: 0.4rem; }
+  </style>
+</head>
+<body>
+  <main>
+    <header>
+      <a href="https://sny0.com/study/practice/browser/cookie-session-observation.html">実践手順とコードを読む</a>
+      <h1>Set-Cookieとセッションの観察</h1>
+      <p>ローカルのサーバーからセッションIDと比較用の目印を受け取り、ページのJavaScriptと次のGETで、それぞれ何が見えるかを確かめます。</p>
+      <p id="launch-note"><code>python server.py --port 4179</code> を実行し、端末に表示されたループバックのURLを開くと操作できます。</p>
+    </header>
+    <section aria-labelledby="observe-heading">
+      <h2 id="observe-heading">セッションの操作</h2>
+      <div class="buttons">
+        <button type="button" id="start" disabled>セッションを開始</button>
+        <button type="button" id="inspect" disabled>状態を確認</button>
+        <button type="button" id="rotate" disabled>IDを更新</button>
+        <button type="button" id="logout" disabled>ログアウト</button>
+      </div>
+      <p id="operation" role="status">ローカルサーバーで実行してください。</p>
+      <table>
+        <caption>直近の状態確認</caption>
+        <thead>
+          <tr><th scope="col">Cookie</th><th scope="col"><code>document.cookie</code></th><th scope="col">状態確認のGETでサーバーが受信</th></tr>
+        </thead>
+        <tbody>
+          <tr><th scope="row">セッションID（HttpOnly）</th><td id="script-id">—</td><td id="received-id">—</td></tr>
+          <tr><th scope="row">比較用の目印</th><td id="script-hint">—</td><td id="received-hint">—</td></tr>
+        </tbody>
+      </table>
+      <dl>
+        <dt>サーバー側の有効なレコード</dt><dd id="server-state">—</dd>
+        <dt>IDの世代（サーバーの記録）</dt><dd id="generation">—</dd>
+      </dl>
+    </section>
+    <section aria-labelledby="notes-heading">
+      <h2 id="notes-heading">各操作で変わるもの</h2>
+      <ul>
+        <li>開始とID更新では、サーバーが新しいセッションIDを発行します。ID更新では、世代が1つ進み、旧IDは無効になります。</li>
+        <li>ログアウトでは、サーバーが現在のIDに対応するレコードを破棄し、Cookieの有効期間を0秒にします。</li>
+        <li>この実験では、Cookieとサーバーのレコードは発行または更新から120秒で失効します。</li>
+      </ul>
+    </section>
+  </main>
+</body>
+</html>
