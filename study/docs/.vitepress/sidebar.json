@@ -317,6 +317,10 @@
           "link": "/browser/"
         },
         {
+          "text": "Service Workerとオフライン動作 — 登録、制御、応答の選択",
+          "link": "/browser/service-worker-offline.html"
+        },
+        {
           "text": "Streams APIとストリーミング処理 — データの流れとbackpressure",
           "link": "/browser/streams-backpressure.html"
         },
@@ -1141,6 +1145,10 @@
       "collapsed": false,
       "items": [
         {
+          "text": "Service Workerで応答元と登録状態を観察する",
+          "link": "/practice/browser/service-worker-observation.html"
+        },
+        {
           "text": "ブラウザで保存・再読込・削除を観察する",
           "link": "/practice/browser/storage-observation.html"
         },
@@ -1286,6 +1294,10 @@
       "collapsed": true,
       "items": [
         {
+          "text": "Service Workerで応答元と登録状態を観察する",
+          "link": "/practice/browser/service-worker-observation.html"
+        },
+        {
           "text": "ブラウザで保存・再読込・削除を観察する",
           "link": "/practice/browser/storage-observation.html"
         },
@@ -1426,6 +1438,10 @@
       "text": "ほかの実践・サンプル",
       "collapsed": true,
       "items": [
+        {
+          "text": "Service Workerで応答元と登録状態を観察する",
+          "link": "/practice/browser/service-worker-observation.html"
+        },
         {
           "text": "ブラウザで保存・再読込・削除を観察する",
           "link": "/practice/browser/storage-observation.html"
@@ -1568,6 +1584,10 @@
       "collapsed": true,
       "items": [
         {
+          "text": "Service Workerで応答元と登録状態を観察する",
+          "link": "/practice/browser/service-worker-observation.html"
+        },
+        {
           "text": "ブラウザで保存・再読込・削除を観察する",
           "link": "/practice/browser/storage-observation.html"
         },
@@ -1708,6 +1728,10 @@
       "text": "ほかの実践・サンプル",
       "collapsed": true,
       "items": [
+        {
+          "text": "Service Workerで応答元と登録状態を観察する",
+          "link": "/practice/browser/service-worker-observation.html"
+        },
         {
           "text": "ブラウザで保存・再読込・削除を観察する",
           "link": "/practice/browser/storage-observation.html"
@@ -1850,6 +1874,10 @@
       "collapsed": true,
       "items": [
         {
+          "text": "Service Workerで応答元と登録状態を観察する",
+          "link": "/practice/browser/service-worker-observation.html"
+        },
+        {
           "text": "ブラウザで保存・再読込・削除を観察する",
           "link": "/practice/browser/storage-observation.html"
         },
@@ -1975,6 +2003,10 @@
       "collapsed": true,
       "items": [
         {
+          "text": "Service Workerで応答元と登録状態を観察する",
+          "link": "/practice/browser/service-worker-observation.html"
+        },
+        {
           "text": "ブラウザで保存・再読込・削除を観察する",
           "link": "/practice/browser/storage-observation.html"
         },
@@ -2099,6 +2131,10 @@
       "text": "ほかの実践・サンプル",
       "collapsed": true,
       "items": [
+        {
+          "text": "Service Workerで応答元と登録状態を観察する",
+          "link": "/practice/browser/service-worker-observation.html"
+        },
         {
           "text": "ブラウザで保存・再読込・削除を観察する",
           "link": "/practice/browser/storage-observation.html"
@@ -2233,6 +2269,10 @@
       "collapsed": true,
       "items": [
         {
+          "text": "Service Workerで応答元と登録状態を観察する",
+          "link": "/practice/browser/service-worker-observation.html"
+        },
+        {
           "text": "ブラウザで保存・再読込・削除を観察する",
           "link": "/practice/browser/storage-observation.html"
         },
@@ -2366,6 +2406,10 @@
       "collapsed": true,
       "items": [
         {
+          "text": "Service Workerで応答元と登録状態を観察する",
+          "link": "/practice/browser/service-worker-observation.html"
+        },
+        {
           "text": "ブラウザで保存・再読込・削除を観察する",
           "link": "/practice/browser/storage-observation.html"
         },
@@ -2490,6 +2534,10 @@
       "text": "ほかの実践・サンプル",
       "collapsed": true,
       "items": [
+        {
+          "text": "Service Workerで応答元と登録状態を観察する",
+          "link": "/practice/browser/service-worker-observation.html"
+        },
         {
           "text": "ブラウザで保存・再読込・削除を観察する",
           "link": "/practice/browser/storage-observation.html"
@@ -2616,6 +2664,10 @@
       "collapsed": true,
       "items": [
         {
+          "text": "Service Workerで応答元と登録状態を観察する",
+          "link": "/practice/browser/service-worker-observation.html"
+        },
+        {
           "text": "ブラウザで保存・再読込・削除を観察する",
           "link": "/practice/browser/storage-observation.html"
         },
@@ -2740,6 +2792,10 @@
       "text": "ほかの実践・サンプル",
       "collapsed": true,
       "items": [
+        {
+          "text": "Service Workerで応答元と登録状態を観察する",
+          "link": "/practice/browser/service-worker-observation.html"
+        },
         {
           "text": "ブラウザで保存・再読込・削除を観察する",
           "link": "/practice/browser/storage-observation.html"
@@ -2866,6 +2922,10 @@
       "collapsed": true,
       "items": [
         {
+          "text": "Service Workerで応答元と登録状態を観察する",
+          "link": "/practice/browser/service-worker-observation.html"
+        },
+        {
           "text": "ブラウザで保存・再読込・削除を観察する",
           "link": "/practice/browser/storage-observation.html"
         },
@@ -2990,6 +3050,10 @@
       "text": "ほかの実践・サンプル",
       "collapsed": true,
       "items": [
+        {
+          "text": "Service Workerで応答元と登録状態を観察する",
+          "link": "/practice/browser/service-worker-observation.html"
+        },
         {
           "text": "ブラウザで保存・再読込・削除を観察する",
           "link": "/practice/browser/storage-observation.html"
@@ -3116,6 +3180,10 @@
       "collapsed": true,
       "items": [
         {
+          "text": "Service Workerで応答元と登録状態を観察する",
+          "link": "/practice/browser/service-worker-observation.html"
+        },
+        {
           "text": "ブラウザで保存・再読込・削除を観察する",
           "link": "/practice/browser/storage-observation.html"
         },
@@ -3240,6 +3308,10 @@
       "text": "ほかの実践・サンプル",
       "collapsed": true,
       "items": [
+        {
+          "text": "Service Workerで応答元と登録状態を観察する",
+          "link": "/practice/browser/service-worker-observation.html"
+        },
         {
           "text": "ブラウザで保存・再読込・削除を観察する",
           "link": "/practice/browser/storage-observation.html"
@@ -3366,6 +3438,10 @@
       "collapsed": true,
       "items": [
         {
+          "text": "Service Workerで応答元と登録状態を観察する",
+          "link": "/practice/browser/service-worker-observation.html"
+        },
+        {
           "text": "ブラウザで保存・再読込・削除を観察する",
           "link": "/practice/browser/storage-observation.html"
         },
@@ -3490,6 +3566,10 @@
       "text": "ほかの実践・サンプル",
       "collapsed": true,
       "items": [
+        {
+          "text": "Service Workerで応答元と登録状態を観察する",
+          "link": "/practice/browser/service-worker-observation.html"
+        },
         {
           "text": "ブラウザで保存・再読込・削除を観察する",
           "link": "/practice/browser/storage-observation.html"
@@ -3616,6 +3696,10 @@
       "collapsed": true,
       "items": [
         {
+          "text": "Service Workerで応答元と登録状態を観察する",
+          "link": "/practice/browser/service-worker-observation.html"
+        },
+        {
           "text": "ブラウザで保存・再読込・削除を観察する",
           "link": "/practice/browser/storage-observation.html"
         },
@@ -3741,6 +3825,10 @@
       "collapsed": true,
       "items": [
         {
+          "text": "Service Workerで応答元と登録状態を観察する",
+          "link": "/practice/browser/service-worker-observation.html"
+        },
+        {
           "text": "ブラウザで保存・再読込・削除を観察する",
           "link": "/practice/browser/storage-observation.html"
         },
@@ -3865,6 +3953,10 @@
       "text": "ほかの実践・サンプル",
       "collapsed": true,
       "items": [
+        {
+          "text": "Service Workerで応答元と登録状態を観察する",
+          "link": "/practice/browser/service-worker-observation.html"
+        },
         {
           "text": "ブラウザで保存・再読込・削除を観察する",
           "link": "/practice/browser/storage-observation.html"
@@ -4213,6 +4305,10 @@
       "collapsed": true,
       "items": [
         {
+          "text": "Service Workerで応答元と登録状態を観察する",
+          "link": "/practice/browser/service-worker-observation.html"
+        },
+        {
           "text": "ブラウザで保存・再読込・削除を観察する",
           "link": "/practice/browser/storage-observation.html"
         },
@@ -4390,6 +4486,10 @@
       "collapsed": true,
       "items": [
         {
+          "text": "Service Workerで応答元と登録状態を観察する",
+          "link": "/practice/browser/service-worker-observation.html"
+        },
+        {
           "text": "ブラウザで保存・再読込・削除を観察する",
           "link": "/practice/browser/storage-observation.html"
         },
@@ -4522,6 +4622,10 @@
       "text": "ほかの実践・サンプル",
       "collapsed": true,
       "items": [
+        {
+          "text": "Service Workerで応答元と登録状態を観察する",
+          "link": "/practice/browser/service-worker-observation.html"
+        },
         {
           "text": "ブラウザで保存・再読込・削除を観察する",
           "link": "/practice/browser/storage-observation.html"
@@ -4699,6 +4803,10 @@
       "text": "ほかの実践・サンプル",
       "collapsed": true,
       "items": [
+        {
+          "text": "Service Workerで応答元と登録状態を観察する",
+          "link": "/practice/browser/service-worker-observation.html"
+        },
         {
           "text": "ブラウザで保存・再読込・削除を観察する",
           "link": "/practice/browser/storage-observation.html"
@@ -4962,6 +5070,10 @@
       "collapsed": true,
       "items": [
         {
+          "text": "Service Workerで応答元と登録状態を観察する",
+          "link": "/practice/browser/service-worker-observation.html"
+        },
+        {
           "text": "ブラウザで保存・再読込・削除を観察する",
           "link": "/practice/browser/storage-observation.html"
         },
@@ -5224,6 +5336,10 @@
       "collapsed": true,
       "items": [
         {
+          "text": "Service Workerで応答元と登録状態を観察する",
+          "link": "/practice/browser/service-worker-observation.html"
+        },
+        {
           "text": "ブラウザで保存・再読込・削除を観察する",
           "link": "/practice/browser/storage-observation.html"
         },
@@ -5434,6 +5550,10 @@
       "collapsed": true,
       "items": [
         {
+          "text": "Service Workerで応答元と登録状態を観察する",
+          "link": "/practice/browser/service-worker-observation.html"
+        },
+        {
           "text": "ブラウザで保存・再読込・削除を観察する",
           "link": "/practice/browser/storage-observation.html"
         },
@@ -5558,6 +5678,139 @@
       "text": "ほかの実践・サンプル",
       "collapsed": true,
       "items": [
+        {
+          "text": "Service Workerで応答元と登録状態を観察する",
+          "link": "/practice/browser/service-worker-observation.html"
+        },
+        {
+          "text": "C++とC#でHTTPの再検証を観察する",
+          "link": "/practice/network/http-cache-observation.html"
+        },
+        {
+          "text": "Streams APIで供給と処理の速度差を観察する",
+          "link": "/practice/browser/stream-backpressure-observation.html"
+        },
+        {
+          "text": "Worker poolで待機数と取消しを観察する",
+          "link": "/practice/browser/worker-pool-observation.html"
+        },
+        {
+          "text": "Web Workerでコピー・転送・停止を観察する",
+          "link": "/practice/browser/worker-message-observation.html"
+        },
+        {
+          "text": "ブラウザでPromiseとawaitの実行順を観察する",
+          "link": "/practice/browser/event-loop-observation.html"
+        },
+        {
+          "text": "ブラウザでDOMと描画の変化を観察する",
+          "link": "/practice/browser/render-observation.html"
+        },
+        {
+          "text": "C++とC#でHTTPSの接続情報を観察する",
+          "link": "/practice/network/https-observation.html"
+        },
+        {
+          "text": "C++とC#で名前解決の結果を観察する",
+          "link": "/practice/network/name-resolution-observation.html"
+        },
+        {
+          "text": "C++とC#でHTTPの要求と応答を観察する",
+          "link": "/practice/network/http-message-observation.html"
+        },
+        {
+          "text": "C++とC#でTCPのバイト列と半閉鎖を観察する",
+          "link": "/practice/network/tcp-loopback-observation.html"
+        },
+        {
+          "text": "C++とC#で読み取り専用のファイルマッピングを観察する",
+          "link": "/practice/io/mapped-file-observation.html"
+        },
+        {
+          "text": "C++とC#でアセットの状態と寿命を試す",
+          "link": "/practice/assets/asset-lifecycle-model.html"
+        },
+        {
+          "text": "C++とC#で同期・非同期I/Oを比べる",
+          "link": "/practice/io/async-file-read-observation.html"
+        },
+        {
+          "text": "C++とC#でファイルの読み取りを観察する",
+          "link": "/practice/io/file-read-observation.html"
+        },
+        {
+          "text": "C++とC#で在庫の同期を確かめる",
+          "link": "/practice/threads/inventory-synchronization.html"
+        },
+        {
+          "text": "C++とC#でfloatの比較を確かめる",
+          "link": "/practice/math/float-comparison-observation.html"
+        },
+        {
+          "text": "C++とC#で文字の表現を観察する",
+          "link": "/practice/data/unicode-observation.html"
+        },
+        {
+          "text": "C++でfloatの表現と刻み幅を観察する",
+          "link": "/practice/data/float-spacing-observation.html"
+        },
+        {
+          "text": "C++で整数とバイト列を観察する",
+          "link": "/practice/data/integer-byte-observation.html"
+        },
+        {
+          "text": "Windowsでプロセスとスレッドを観察する",
+          "link": "/practice/process/windows-process-observation.html"
+        },
+        {
+          "text": "Windowsでメモリの状態を観察する",
+          "link": "/practice/memory/windows-memory-observation.html"
+        },
+        {
+          "text": "小さなシューティングを作る",
+          "link": "/game/shooter-design.html"
+        },
+        {
+          "text": "小さなレンダラーを作る",
+          "link": "/graphics/capstone/01-design.html"
+        },
+        {
+          "text": "C++と設計の演習",
+          "link": "/guide/exercises/"
+        },
+        {
+          "text": "C++のビルドサンプル",
+          "link": "/tools/build/samples/"
+        },
+        {
+          "text": "小さなアプリで設計を試す",
+          "link": "/design/notebook/practice.html"
+        }
+      ]
+    }
+  ],
+  "/practice/browser/service-worker-observation.md": [
+    {
+      "text": "実践・サンプル一覧",
+      "link": "/practice/"
+    },
+    {
+      "text": "Service Workerで応答元と登録状態を観察する",
+      "items": [
+        {
+          "text": "Service Workerの登録・制御・応答元を観察する",
+          "link": "/practice/browser/service-worker-observation.html"
+        }
+      ]
+    },
+    {
+      "text": "ほかの実践・サンプル",
+      "collapsed": true,
+      "items": [
+        {
+          "text": "ブラウザで保存・再読込・削除を観察する",
+          "link": "/practice/browser/storage-observation.html"
+        },
         {
           "text": "C++とC#でHTTPの再検証を観察する",
           "link": "/practice/network/http-cache-observation.html"
@@ -5735,6 +5988,10 @@
       "text": "ほかの実践・サンプル",
       "collapsed": true,
       "items": [
+        {
+          "text": "Service Workerで応答元と登録状態を観察する",
+          "link": "/practice/browser/service-worker-observation.html"
+        },
         {
           "text": "ブラウザで保存・再読込・削除を観察する",
           "link": "/practice/browser/storage-observation.html"
@@ -5946,6 +6203,10 @@
       "collapsed": true,
       "items": [
         {
+          "text": "Service Workerで応答元と登録状態を観察する",
+          "link": "/practice/browser/service-worker-observation.html"
+        },
+        {
           "text": "ブラウザで保存・再読込・削除を観察する",
           "link": "/practice/browser/storage-observation.html"
         },
@@ -6123,6 +6384,10 @@
       "collapsed": true,
       "items": [
         {
+          "text": "Service Workerで応答元と登録状態を観察する",
+          "link": "/practice/browser/service-worker-observation.html"
+        },
+        {
           "text": "ブラウザで保存・再読込・削除を観察する",
           "link": "/practice/browser/storage-observation.html"
         },
@@ -6299,6 +6564,10 @@
       "text": "ほかの実践・サンプル",
       "collapsed": true,
       "items": [
+        {
+          "text": "Service Workerで応答元と登録状態を観察する",
+          "link": "/practice/browser/service-worker-observation.html"
+        },
         {
           "text": "ブラウザで保存・再読込・削除を観察する",
           "link": "/practice/browser/storage-observation.html"
@@ -6510,6 +6779,10 @@
       "collapsed": true,
       "items": [
         {
+          "text": "Service Workerで応答元と登録状態を観察する",
+          "link": "/practice/browser/service-worker-observation.html"
+        },
+        {
           "text": "ブラウザで保存・再読込・削除を観察する",
           "link": "/practice/browser/storage-observation.html"
         },
@@ -6634,6 +6907,10 @@
       "text": "ほかの実践・サンプル",
       "collapsed": true,
       "items": [
+        {
+          "text": "Service Workerで応答元と登録状態を観察する",
+          "link": "/practice/browser/service-worker-observation.html"
+        },
         {
           "text": "ブラウザで保存・再読込・削除を観察する",
           "link": "/practice/browser/storage-observation.html"
@@ -6760,6 +7037,10 @@
       "collapsed": true,
       "items": [
         {
+          "text": "Service Workerで応答元と登録状態を観察する",
+          "link": "/practice/browser/service-worker-observation.html"
+        },
+        {
           "text": "ブラウザで保存・再読込・削除を観察する",
           "link": "/practice/browser/storage-observation.html"
         },
@@ -6884,6 +7165,10 @@
       "text": "ほかの実践・サンプル",
       "collapsed": true,
       "items": [
+        {
+          "text": "Service Workerで応答元と登録状態を観察する",
+          "link": "/practice/browser/service-worker-observation.html"
+        },
         {
           "text": "ブラウザで保存・再読込・削除を観察する",
           "link": "/practice/browser/storage-observation.html"
@@ -7062,6 +7347,10 @@
       "collapsed": true,
       "items": [
         {
+          "text": "Service Workerで応答元と登録状態を観察する",
+          "link": "/practice/browser/service-worker-observation.html"
+        },
+        {
           "text": "ブラウザで保存・再読込・削除を観察する",
           "link": "/practice/browser/storage-observation.html"
         },
@@ -7238,6 +7527,10 @@
       "text": "ほかの実践・サンプル",
       "collapsed": true,
       "items": [
+        {
+          "text": "Service Workerで応答元と登録状態を観察する",
+          "link": "/practice/browser/service-worker-observation.html"
+        },
         {
           "text": "ブラウザで保存・再読込・削除を観察する",
           "link": "/practice/browser/storage-observation.html"
@@ -7457,6 +7750,10 @@
       "collapsed": true,
       "items": [
         {
+          "text": "Service Workerで応答元と登録状態を観察する",
+          "link": "/practice/browser/service-worker-observation.html"
+        },
+        {
           "text": "ブラウザで保存・再読込・削除を観察する",
           "link": "/practice/browser/storage-observation.html"
         },
@@ -7589,6 +7886,10 @@
       "text": "ほかの実践・サンプル",
       "collapsed": true,
       "items": [
+        {
+          "text": "Service Workerで応答元と登録状態を観察する",
+          "link": "/practice/browser/service-worker-observation.html"
+        },
         {
           "text": "ブラウザで保存・再読込・削除を観察する",
           "link": "/practice/browser/storage-observation.html"
@@ -7766,6 +8067,10 @@
       "text": "ほかの実践・サンプル",
       "collapsed": true,
       "items": [
+        {
+          "text": "Service Workerで応答元と登録状態を観察する",
+          "link": "/practice/browser/service-worker-observation.html"
+        },
         {
           "text": "ブラウザで保存・再読込・削除を観察する",
           "link": "/practice/browser/storage-observation.html"
@@ -7977,6 +8282,10 @@
       "collapsed": true,
       "items": [
         {
+          "text": "Service Workerで応答元と登録状態を観察する",
+          "link": "/practice/browser/service-worker-observation.html"
+        },
+        {
           "text": "ブラウザで保存・再読込・削除を観察する",
           "link": "/practice/browser/storage-observation.html"
         },
@@ -8153,6 +8462,10 @@
       "text": "ほかの実践・サンプル",
       "collapsed": true,
       "items": [
+        {
+          "text": "Service Workerで応答元と登録状態を観察する",
+          "link": "/practice/browser/service-worker-observation.html"
+        },
         {
           "text": "ブラウザで保存・再読込・削除を観察する",
           "link": "/practice/browser/storage-observation.html"
@@ -8563,6 +8876,10 @@
       "collapsed": true,
       "items": [
         {
+          "text": "Service Workerで応答元と登録状態を観察する",
+          "link": "/practice/browser/service-worker-observation.html"
+        },
+        {
           "text": "ブラウザで保存・再読込・削除を観察する",
           "link": "/practice/browser/storage-observation.html"
         },
@@ -8687,6 +9004,10 @@
       "text": "ほかの実践・サンプル",
       "collapsed": true,
       "items": [
+        {
+          "text": "Service Workerで応答元と登録状態を観察する",
+          "link": "/practice/browser/service-worker-observation.html"
+        },
         {
           "text": "ブラウザで保存・再読込・削除を観察する",
           "link": "/practice/browser/storage-observation.html"
@@ -9034,6 +9355,10 @@
       "text": "ほかの実践・サンプル",
       "collapsed": true,
       "items": [
+        {
+          "text": "Service Workerで応答元と登録状態を観察する",
+          "link": "/practice/browser/service-worker-observation.html"
+        },
         {
           "text": "ブラウザで保存・再読込・削除を観察する",
           "link": "/practice/browser/storage-observation.html"
@@ -11838,6 +12163,10 @@
       "text": "ほかの実践・サンプル",
       "collapsed": true,
       "items": [
+        {
+          "text": "Service Workerで応答元と登録状態を観察する",
+          "link": "/practice/browser/service-worker-observation.html"
+        },
         {
           "text": "ブラウザで保存・再読込・削除を観察する",
           "link": "/practice/browser/storage-observation.html"

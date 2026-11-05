@@ -19,6 +19,7 @@ URLを開いてから描画されるまでを、通信・実行・表示に分�
 
 ## 辞典の本文
 
+- [Service Workerとオフライン動作 — 登録、制御、応答の選択](/browser/service-worker-offline.html)
 - [Streams APIとストリーミング処理 — データの流れとbackpressure](/browser/streams-backpressure.html)
 - [Web Workerとメッセージ通信 — 実行の分担とデータの所有権](/browser/web-workers-messages.html)
 - [Worker poolと待ち行列の制御 — 受付・実行・取消しを分ける](/browser/worker-pool-backpressure.html)
@@ -34,6 +35,7 @@ URLを開いてから描画されるまでを、通信・実行・表示に分�
 
 - [HTML・CSS・JavaScriptでブラウザの変更と計測を観察する](/practice/browser/render-observation.html)
 - [localStorage・IndexedDB・Cache APIの保存と完了を観察する](/practice/browser/storage-observation.html)
+- [Service Workerの登録・制御・応答元を観察する](/practice/browser/service-worker-observation.html)
 - [Streams APIで遅いsinkとbackpressureを観察する](/practice/browser/stream-backpressure-observation.html)
 - [Web Workerでコピー・transfer・停止を観察する](/practice/browser/worker-message-observation.html)
 - [Worker poolで受付上限・待機取消し・結果破棄を観察する](/practice/browser/worker-pool-observation.html)

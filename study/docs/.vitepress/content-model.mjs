@@ -12,6 +12,7 @@ export const formatLabels = {
 export const statusLabels = { published: '公開中', outline: '学習計画・概要', draft: '草稿', planned: '執筆予定' }
 
 export const collections = [
+  { id: 'service-worker-observation', section: 'practice', title: 'Service Workerで応答元と登録状態を観察する', description: '専用scopeで登録と制御開始を確認し、固定GETのネットワーク応答・保存済み応答・解除を試す。', start: '/practice/browser/service-worker-observation.html' },
   { id: 'storage-observation', section: 'practice', title: 'ブラウザで保存・再読込・削除を観察する', description: 'localStorage・IndexedDB・Cache APIへ固定データを保存し、読出し、ページ再読込、専用データの削除を確かめる。', start: '/practice/browser/storage-observation.html' },
   { id: 'http-cache-observation', section: 'practice', title: 'C++とC#でHTTPの再検証を観察する', description: 'ローカルサーバーへ条件付きGETを送り、200と304、ETagの弱い比較、保存した本文の再利用を確かめる。', start: '/practice/network/http-cache-observation.html' },
   { id: 'stream-backpressure-observation', section: 'practice', title: 'Streams APIで供給と処理の速度差を観察する', description: '有限のデータを遅い書き込み先へ送り、pull、desiredSize、完了と中断を確かめる。', start: '/practice/browser/stream-backpressure-observation.html' },

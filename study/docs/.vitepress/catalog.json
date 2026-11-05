@@ -69,7 +69,7 @@
       "id": "browser",
       "title": "ブラウザ",
       "description": "URLを開いてから描画されるまでを、通信・実行・表示に分ける。",
-      "count": 6,
+      "count": 7,
       "status": "辞典本文あり"
     },
     {
@@ -130,6 +130,13 @@
     }
   ],
   "collections": [
+    {
+      "id": "service-worker-observation",
+      "section": "practice",
+      "title": "Service Workerで応答元と登録状態を観察する",
+      "description": "専用scopeで登録と制御開始を確認し、固定GETのネットワーク応答・保存済み応答・解除を試す。",
+      "start": "/practice/browser/service-worker-observation.html"
+    },
     {
       "id": "storage-observation",
       "section": "practice",
@@ -3415,6 +3422,74 @@
       ]
     },
     {
+      "title": "Service Workerとオフライン動作 — 登録、制御、応答の選択",
+      "url": "/browser/service-worker-offline.html",
+      "file": "browser/service-worker-offline.md",
+      "domain": "browser",
+      "section": "reference",
+      "format": "article",
+      "status": "published",
+      "summary": "Service Workerの登録、install、waiting、activate、ページの制御を説明する。fetchイベントでの応答、Cache APIを使うオフライン動作、更新と登録解除の範囲を整理する。",
+      "source": "新規執筆",
+      "aliases": [
+        "Service Worker",
+        "ServiceWorker",
+        "オフライン",
+        "offline",
+        "scope",
+        "register",
+        "install",
+        "waitUntil",
+        "waiting",
+        "activate",
+        "ready",
+        "controller",
+        "controllerchange",
+        "fetch event",
+        "respondWith",
+        "skipWaiting",
+        "clients.claim",
+        "unregister",
+        "precache",
+        "offline fallback"
+      ],
+      "verification": "一次資料照合（2026-11-05）",
+      "links": [
+        "/browser/web-workers-messages.html",
+        "/browser/storage-lifetime.html",
+        "/network/http-caching.html",
+        "/practice/browser/service-worker-observation.html"
+      ]
+    },
+    {
+      "title": "Service Workerの登録・制御・応答元を観察する",
+      "url": "/practice/browser/service-worker-observation.html",
+      "file": "practice/browser/service-worker-observation.md",
+      "domain": "browser",
+      "section": "practice",
+      "format": "sample",
+      "status": "published",
+      "summary": "専用scopeにService Workerを登録し、readyとcontroller、固定GETのネットワーク応答とcache fallback、登録解除と固定entryの削除を別々に観察する。",
+      "source": "新規執筆",
+      "aliases": [
+        "Service Worker",
+        "install",
+        "activate",
+        "ready",
+        "controller",
+        "network-first",
+        "offline",
+        "Cache API",
+        "unregister"
+      ],
+      "collection": "service-worker-observation",
+      "order": 1,
+      "verification": "Windows上のブラウザで登録・配信停止時の取得・解除を実行確認（2026-11-05）",
+      "links": [
+        "/browser/service-worker-offline.html"
+      ]
+    },
+    {
       "title": "Shared Memory と Atomic",
       "url": "/graphics/compute/shared-memory.html",
       "file": "graphics/compute/shared-memory.md",
@@ -6092,7 +6167,8 @@
       "links": [
         "/browser/event-loop-promises.html",
         "/network/http-caching.html",
-        "/practice/browser/storage-observation.html"
+        "/practice/browser/storage-observation.html",
+        "/browser/service-worker-offline.html"
       ]
     },
     {
@@ -6896,6 +6972,8 @@
         "/practice/browser/stream-backpressure-observation.html",
         "/browser/storage-lifetime.html",
         "/practice/browser/storage-observation.html",
+        "/browser/service-worker-offline.html",
+        "/practice/browser/service-worker-observation.html",
         "/history/video-games.html",
         "/guide/rendering/timeline.html"
       ]
@@ -9007,6 +9085,7 @@
       "source": "統合ガイド",
       "aliases": [],
       "links": [
+        "/browser/service-worker-offline.html",
         "/browser/storage-lifetime.html",
         "/network/http-caching.html",
         "/browser/streams-backpressure.html",

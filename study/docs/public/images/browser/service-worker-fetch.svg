@@ -1,0 +1,45 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="760" height="1510" viewBox="0 0 760 1510" role="img" aria-labelledby="title desc">
+  <title id="title">Service Workerで固定GETの応答元を選ぶ</title>
+  <desc id="desc">制御されたページの固定GETに対して、fetchイベントの配送中にrespondWithで応答のPromiseを渡す。通常モードはネットワークを試し、失敗時は専用Cacheを検索する。疑似オフラインは固定GETだけネットワーク試行を省略する。保存応答がなければ503を返す。ページHTMLなどは通常の読み込みを使う。</desc>
+  <defs>
+    <style>text{font-family:'BIZ UDPGothic','Yu Gothic',Meiryo,sans-serif;fill:#26352e}.title{font-size:32px;font-weight:700}.head{font-size:28px;font-weight:700}.body{font-size:24px}.small{font-size:22px}.card{fill:white;stroke:#739483;stroke-width:2}.arrow{fill:none;stroke:#567963;stroke-width:3;marker-end:url(#a)}</style>
+    <marker id="a" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto"><path d="M0 0L10 5L0 10Z" fill="#567963"/></marker>
+  </defs>
+  <rect width="760" height="1510" rx="24" fill="#f4f8f4"/>
+  <text x="40" y="56" class="title">固定GETに、どの応答を返す？</text>
+  <text x="40" y="96" class="body">実験のService Workerが選ぶ応答の経路</text>
+  <rect x="36" y="130" width="688" height="216" rx="18" class="card"/>
+  <text x="60" y="174" class="head">制御中のページが固定データを要求</text>
+  <text x="60" y="216" class="body">GET payload.json、または専用の疑似モード。</text>
+  <text x="60" y="258" class="body">workerは対象URLとメソッドを照合する。</text>
+  <text x="60" y="300" class="body">fetchイベントの処理中にrespondWithを呼ぶ。</text>
+  <text x="60" y="334" class="small">渡すPromiseの中で、取得やCache照合の完了を待てる。</text>
+  <path d="M380 348V386" class="arrow"/>
+  <rect x="36" y="390" width="688" height="228" rx="18" fill="#e2eafa"/>
+  <text x="60" y="434" class="head">通常GETではネットワークを試す</text>
+  <text x="60" y="476" class="body">fetchへno-storeを指定し、固定本文を確認。</text>
+  <text x="60" y="518" class="body">成功なら、ネットワーク由来の応答を返す。</text>
+  <text x="60" y="560" class="body">通信失敗やHTTPエラーなどは代替応答へ進む。</text>
+  <text x="60" y="602" class="small">通信の失敗と、HTTPステータスの結果を理由で区別する。</text>
+  <path d="M724 560H744V978H725" class="arrow" stroke-dasharray="7 6"/>
+  <rect x="36" y="646" width="688" height="174" rx="18" class="card"/>
+  <text x="60" y="690" class="head">疑似オフラインでは専用Cacheへ進む</text>
+  <text x="60" y="732" class="body">?mode=offlineの固定GETで、この経路を選ぶ。</text>
+  <text x="60" y="774" class="body">ブラウザやOSの通信設定に依存せず試せる。</text>
+  <path d="M380 822V860" class="arrow"/>
+  <rect x="36" y="864" width="688" height="220" rx="18" fill="#dcece0"/>
+  <text x="60" y="908" class="head">専用Cacheの一つのキーを照合</text>
+  <text x="60" y="950" class="body">installで準備したpayload.jsonの応答を探す。</text>
+  <text x="60" y="992" class="body">一致した保存済み本文を、代替応答として返す。</text>
+  <text x="60" y="1034" class="body">応答がなければ、実験用の503で状態を伝える。</text>
+  <text x="60" y="1072" class="small">画面にはstatus・応答元・選択理由を表示する。</text>
+  <rect x="36" y="1112" width="688" height="154" rx="18" class="card"/>
+  <text x="60" y="1156" class="head">観察する単位は、開いたページの取得</text>
+  <text x="60" y="1198" class="body">実験のページやJSは、通常の読み込みを使う。</text>
+  <text x="60" y="1240" class="small">ページ全体をオフライン起動する設計ではHTML等も準備する。</text>
+  <rect x="36" y="1294" width="688" height="178" rx="18" fill="#e9efe6"/>
+  <text x="60" y="1338" class="head">代替応答の選び方はアプリが決める</text>
+  <text x="60" y="1380" class="body">保存するキー、更新条件、エラーの扱いを設計。</text>
+  <text x="60" y="1422" class="body">HTTPキャッシュの再検証と、専用Cache照合を区別。</text>
+  <text x="60" y="1460" class="small">この図は固定GET向けの、ネットワーク優先の一例。</text>
+</svg>

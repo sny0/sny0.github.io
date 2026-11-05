@@ -18,6 +18,7 @@
 
 | 用語・別名 | 説明への入口 |
 | --- | --- |
+| [Service Worker / service worker scope / install / waiting / activate / controller / ready / fetch event / respondWith / waitUntil / unregister / オフライン](/browser/service-worker-offline.html) | 登録、ページの制御、要求の介入、保存済み応答の利用、更新と解除を調べる |
 | [ブラウザ保存領域 / Web Storage / localStorage / sessionStorage / IndexedDB / object store / IDBTransaction / Cache API / CacheStorage / quota / eviction / persist / storage partition](/browser/storage-lifetime.html) | 保存対象、同期・非同期処理、transactionの完了、データの保持と削除を調べる |
 | [HTTPキャッシュ / HTTP cache / Cache-Control / ETag / If-None-Match / 304 / freshness / max-age / no-cache / no-store / Vary / 再検証](/network/http-caching.html) | 保存した応答の再利用、鮮度、条件付きGET、本文とメタデータの更新を調べる |
 | [Streams API / ストリーミング / ReadableStream / WritableStream / TransformStream / chunk / pull / desiredSize / highWaterMark / pipeTo / writer.ready / cancel / abort](/browser/streams-backpressure.html) | データの供給と消費、キューの閾値、バックプレッシャー、正常終了と中断を調べる |
