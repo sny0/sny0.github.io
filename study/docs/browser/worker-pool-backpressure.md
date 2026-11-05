@@ -96,6 +96,8 @@ Workerの生成要求が戻っただけでは、アプリとしてreadyとは限
 
 `terminate()`は、Worker側の`finally`や返信の完走を保証しません。付属例のstopは全Workerをterminateし、その世代の待機・実行中の管理を終了します。restartでは新しい世代と新しいWorkerを作り、readyを確認します。古いイベントで新しいslotやUIを変更しないよう、世代を照合します。世代の更新だけで旧Workerが停止するわけではありません。[WHATWG HTML: Terminate a worker](https://html.spec.whatwg.org/multipage/workers.html#terminate-a-worker)
 
+データを順次処理する流れで、下流の空きに合わせて供給を抑える標準APIは、[Streams APIとストリーミング処理](/browser/streams-backpressure.html)で扱います。poolの受付拒否と、ストリームの需要に応じたpullを区別できます。
+
 ## 固定サンプルが示すことと、測っていないこと
 
 [Worker poolの受付と取消しの実践](/practice/browser/worker-pool-observation.html)は、同じ配信元のHTTP(S)ページと外部classic Workerで動かします。2個のWorker、待機4件、一括7件投入、待機先頭の取消し、実行中一件の結果破棄、stopとrestartを観察します。

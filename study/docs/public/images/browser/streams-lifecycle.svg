@@ -1,0 +1,42 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="760" height="1510" viewBox="0 0 760 1510" role="img" aria-labelledby="title desc">
+  <title id="title">ストリームの正常終了と中断の違い</title>
+  <desc id="desc">正常終了はsourceのcloseから残りの読み出しとsinkのcloseを経てpipeToが成功する。signalで中断すると既存の書き込みを考慮しながらsource.cancelとsink.abortへ伝播し、pipeToが失敗してlockが解放される。中断は副作用の巻き戻しではない。</desc>
+  <defs>
+    <style>text{font-family:'BIZ UDPGothic','Yu Gothic',Meiryo,sans-serif;fill:#26352e}.title{font-size:32px;font-weight:700}.head{font-size:28px;font-weight:700}.body{font-size:24px}.small{font-size:22px}.card{fill:white;stroke:#739483;stroke-width:2}.arrow{fill:none;stroke:#567963;stroke-width:3;marker-end:url(#a)}</style>
+    <marker id="a" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto"><path d="M0 0L10 5L0 10Z" fill="#567963"/></marker>
+  </defs>
+  <rect width="760" height="1510" rx="24" fill="#f4f8f4"/>
+  <text x="40" y="56" class="title">終わることと、中断すること</text>
+  <text x="40" y="96" class="body">pipeToの標準の伝播設定で考える</text>
+  <rect x="36" y="130" width="688" height="300" rx="18" class="card"/>
+  <text x="60" y="174" class="head">正常終了：残りを処理して閉じる</text>
+  <text x="60" y="220" class="body">source：controller.close()で追加供給を終える。</text>
+  <path d="M380 238V266" class="arrow"/>
+  <text x="60" y="306" class="body">キュー内のchunkは、引き続き読み出される。</text>
+  <text x="60" y="350" class="body">sink.close()を経て、pipeToのPromiseが成功。</text>
+  <text x="60" y="396" class="small">sourceのclose呼び出し時点と、下流の完了時点は別。</text>
+  <rect x="36" y="458" width="688" height="358" rx="18" fill="#e2eafa"/>
+  <text x="60" y="502" class="head">中断要求：AbortController.abort()</text>
+  <text x="60" y="548" class="body">pipeToへ渡したsignalが中断を伝える。</text>
+  <text x="60" y="594" class="body">source.cancel(reason)：不要な供給を片付ける。</text>
+  <text x="60" y="640" class="body">sink.abort(reason)：書き込み先を異常終了する。</text>
+  <text x="60" y="686" class="body">進行中のwriteをsignalだけで止める保証はない。</text>
+  <text x="60" y="732" class="body">実践では、同じsignalで待機timerも取り消す。</text>
+  <text x="60" y="784" class="small">状態に応じて伝播。callbackの相対順は固定しない。</text>
+  <path d="M380 818V858" class="arrow"/>
+  <rect x="36" y="862" width="688" height="190" rx="18" class="card"/>
+  <text x="60" y="906" class="head">Promiseの終端まで待つ</text>
+  <text x="60" y="950" class="body">中断時はpipeToのrejectを受け、後始末を確認。</text>
+  <text x="60" y="994" class="body">pipeの終了処理でreader・writerのlockを解放。</text>
+  <text x="60" y="1032" class="small">サンプルは終端後に、新しいストリームを作って再実行する。</text>
+  <rect x="36" y="1080" width="688" height="184" rx="18" fill="#f9e6de"/>
+  <text x="60" y="1124" class="head">中断は、過去の副作用を巻き戻さない</text>
+  <text x="60" y="1168" class="body">すでに保存したデータや、採用済みの結果は残る。</text>
+  <text x="60" y="1212" class="body">取消し可能な待ちと、確定済みの処理を分ける。</text>
+  <text x="60" y="1250" class="small">書き込みが無期限に待つ設計では、中断完了も待ち続け得る。</text>
+  <rect x="36" y="1292" width="688" height="180" rx="18" fill="#e9efe6"/>
+  <text x="60" y="1336" class="head">エラーの伝播も、方向を区別する</text>
+  <text x="60" y="1380" class="body">sourceのerror → sinkのabortへ。</text>
+  <text x="60" y="1424" class="body">sinkのerror → sourceのcancelへ。</text>
+  <text x="60" y="1460" class="small">pipeToのprevent系オプションで、伝播方針は変わる。</text>
+</svg>

@@ -18,6 +18,7 @@
 
 | 用語・別名 | 説明への入口 |
 | --- | --- |
+| [Streams API / ストリーミング / ReadableStream / WritableStream / TransformStream / chunk / pull / desiredSize / highWaterMark / pipeTo / writer.ready / cancel / abort](/browser/streams-backpressure.html) | データの供給と消費、キューの閾値、バックプレッシャー、正常終了と中断を調べる |
 | [Worker pool / ワーカープール / 待ち行列 / bounded queue / admission control / backpressure / バックプレッシャー / drain / shutdown](/browser/worker-pool-backpressure.html) | 実行数と待機数の上限、受付拒否、取消し、結果破棄、停止を調べる |
 | [Web Worker / Dedicated Worker / postMessage / structured clone / 構造化クローン / transfer list / transferable / detach / terminate / messageerror](/browser/web-workers-messages.html) | 実行の分担、メッセージによるデータのコピーと転送、応答と終了の扱いを調べる |
 | [イベントループ / event loop / task / microtask / マイクロタスク / Promise / async / await / queueMicrotask / setTimeout](/browser/event-loop-promises.html) | 同期処理と非同期の続き、Promiseの状態、実行順と描画機会の関係を調べる |
