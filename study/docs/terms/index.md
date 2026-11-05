@@ -18,6 +18,7 @@
 
 | 用語・別名 | 説明への入口 |
 | --- | --- |
+| [XSS / Cross-Site Scripting / DOM XSS / source / sink / textContent / innerHTML / CSP / Content Security Policy / script-src / script-src-attr / nonce / hash / SecurityPolicyViolationEvent](/browser/xss-and-csp.html) | 入力を解釈する箇所、HTMLの生成とコードの実行、CSPによる実行制限を調べる |
 | [Cookie / Set-Cookie / document.cookie / Domain / Path / Max-Age / Secure / HttpOnly / SameSite / セッションID / セッション固定化 / ログアウト](/browser/cookies-and-sessions.html) | 要求にCookieを付ける条件、サーバー側の照合、IDの更新と失効を調べる |
 | [同一オリジンポリシー / Same-Origin Policy / SOP / origin / opaque origin / CORS / preflight / OPTIONS / Access-Control-Allow-Origin / no-cors / opaque response](/browser/same-origin-cors.html) | 文書間の境界、別オリジンへの要求、JavaScriptへの応答公開、事前確認を調べる |
 | [Service Worker / service worker scope / install / waiting / activate / controller / ready / fetch event / respondWith / waitUntil / unregister / オフライン](/browser/service-worker-offline.html) | 登録、ページの制御、要求の介入、保存済み応答の利用、更新と解除を調べる |
