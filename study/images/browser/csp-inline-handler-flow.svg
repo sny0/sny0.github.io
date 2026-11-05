@@ -1,0 +1,52 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="760" height="1100" viewBox="0 0 760 1100" role="img" aria-labelledby="title desc">
+  <title id="title">CSPがイベント属性の実行を検査する</title>
+  <desc id="desc">innerHTMLによるHTMLの解析でボタンとonclick属性ができる。属性のコードをハンドラとして使えるかブラウザがCSPを検査する。許可されていればクリックで属性のコードが動く。script-src-attr noneを適用した場合は属性の実行が拒否され、ボタンは残り、CSP違反を観測できる。</desc>
+  <defs>
+    <style>
+      text{font-family:'BIZ UDPGothic','Yu Gothic',Meiryo,sans-serif;fill:#183440}
+      .title{font-size:36px;font-weight:700}.head{font-size:30px;font-weight:700}
+      .body{font-size:27px}.label{font-size:25px;font-weight:700}
+      .code{font-family:Consolas,'Liberation Mono',monospace;font-size:25px}
+      .directive{font-family:Consolas,'Liberation Mono',monospace;font-size:21px}
+      .muted{fill:#3b5963}.ok{fill:#085c4d}.warn{fill:#793b23}
+      .panel{fill:#fff;stroke:#a6bcc2;stroke-width:2}
+      .arrow{fill:none;stroke:#4d6e78;stroke-width:3;marker-end:url(#arrowhead)}
+    </style>
+    <marker id="arrowhead" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto">
+      <path d="M0 0L10 5L0 10Z" fill="#4d6e78"/>
+    </marker>
+  </defs>
+  <rect width="760" height="1100" rx="24" fill="#eef5f6"/>
+  <text x="36" y="58" class="title">CSPが検査する段階</text>
+  <text x="36" y="102" class="body muted">ボタンの生成と、属性のコードの利用を分ける。</text>
+
+  <rect x="36" y="142" width="688" height="130" rx="20" class="panel"/>
+  <text x="60" y="187" class="head">1. 文字列を挿入する</text>
+  <text x="60" y="232" class="body"><tspan class="code">innerHTML</tspan> がHTMLの断片を解析する。</text>
+  <path d="M380 273V327" class="arrow"/>
+
+  <rect x="36" y="331" width="688" height="132" rx="20" fill="#e8eaf7" stroke="#b4b9d4" stroke-width="2"/>
+  <text x="60" y="377" class="head">2. ボタンと属性ができる</text>
+  <text x="60" y="422" class="body">DOMに <tspan class="code">button</tspan> 要素と <tspan class="code">onclick</tspan> 属性が入る。</text>
+  <path d="M380 464V520" class="arrow"/>
+
+  <rect x="36" y="524" width="688" height="157" rx="20" class="panel"/>
+  <text x="60" y="571" class="head">3. 属性のコードを使えるか検査する</text>
+  <text x="60" y="615" class="body">ブラウザが、その属性をイベントハンドラに</text>
+  <text x="60" y="651" class="body">できるかCSPを確認する。</text>
+
+  <path d="M380 682V742H200V784" class="arrow"/>
+  <path d="M380 742H560V784" class="arrow"/>
+  <rect x="36" y="788" width="328" height="205" rx="20" fill="#e0eee5" stroke="#a3bfae" stroke-width="2"/>
+  <text x="60" y="836" class="head ok">実行を許可</text>
+  <text x="60" y="887" class="body">ボタンを押すと</text>
+  <text x="60" y="928" class="body">属性のコードが動き、</text>
+  <text x="60" y="962" class="body">画面が更新される。</text>
+  <rect x="396" y="788" width="328" height="205" rx="20" fill="#f8e8de" stroke="#d2a58e" stroke-width="2"/>
+  <text x="420" y="836" class="head warn">実行を拒否</text>
+  <text x="420" y="887" class="directive">script-src-attr 'none'</text>
+  <text x="420" y="928" class="body">ボタンは画面に残り、</text>
+  <text x="420" y="962" class="body">CSP違反を観測できる。</text>
+
+  <text x="36" y="1054" class="body muted">HTMLの挿入とコードの実行は別の段階。</text>
+</svg>

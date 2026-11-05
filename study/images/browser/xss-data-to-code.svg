@@ -1,0 +1,54 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="760" height="1020" viewBox="0 0 760 1020" role="img" aria-labelledby="title desc">
+  <title id="title">同じ文字列をテキストとHTMLとして扱う</title>
+  <desc id="desc">ボタンタグとonclick属性を含む同じ文字列をdivに渡す。textContentではテキストノードができ、記号を含む文字列がそのまま表示される。innerHTMLではHTMLが解析されてボタン要素とonclick属性ができる。クリックの処理で許可された属性のコードが実行される。</desc>
+  <defs>
+    <style>
+      text{font-family:'BIZ UDPGothic','Yu Gothic',Meiryo,sans-serif;fill:#183440}
+      .title{font-size:36px;font-weight:700}.head{font-size:30px;font-weight:700}
+      .body{font-size:27px}.label{font-size:25px;font-weight:700}
+      .code{font-family:Consolas,'Liberation Mono',monospace;font-size:26px}
+      .api{font-family:Consolas,'Liberation Mono',monospace;font-size:31px;font-weight:700}
+      .muted{fill:#3b5963}.ok{fill:#085c4d}.warn{fill:#793b23}
+      .panel{fill:#fff;stroke:#a6bcc2;stroke-width:2}
+      .arrow{fill:none;stroke:#4d6e78;stroke-width:3;marker-end:url(#arrowhead)}
+    </style>
+    <marker id="arrowhead" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto">
+      <path d="M0 0L10 5L0 10Z" fill="#4d6e78"/>
+    </marker>
+  </defs>
+  <rect width="760" height="1020" rx="24" fill="#eef5f6"/>
+  <text x="36" y="58" class="title">同じ文字列、異なる解釈</text>
+  <text x="36" y="102" class="body muted">表示用の <tspan class="code">div</tspan> に値を渡す例。</text>
+
+  <rect x="36" y="142" width="688" height="152" rx="20" class="panel"/>
+  <text x="60" y="187" class="head">入力は同じ文字列</text>
+  <text x="60" y="231" class="code">&lt;button onclick="mark()"&gt;</text>
+  <text x="60" y="266" class="code">  実行&lt;/button&gt;</text>
+
+  <path d="M380 295V348H200V392" class="arrow"/>
+  <path d="M380 348H560V392" class="arrow"/>
+  <rect x="36" y="396" width="328" height="207" rx="20" fill="#e0eee5" stroke="#a3bfae" stroke-width="2"/>
+  <text x="60" y="448" class="api ok">textContent</text>
+  <text x="60" y="497" class="label">テキストノードを作る</text>
+  <text x="60" y="542" class="body">タグに見える記号も</text>
+  <text x="60" y="577" class="body">文字として持つ。</text>
+  <rect x="396" y="396" width="328" height="207" rx="20" fill="#e8eaf7" stroke="#b4b9d4" stroke-width="2"/>
+  <text x="420" y="448" class="api">innerHTML</text>
+  <text x="420" y="497" class="label">HTMLの断片を解析する</text>
+  <text x="420" y="542" class="body">ボタン要素を作る。</text>
+  <text x="420" y="577" class="body"><tspan class="code">onclick</tspan> 属性を持つ。</text>
+
+  <path d="M200 604V690" class="arrow"/>
+  <path d="M560 604V690" class="arrow"/>
+  <rect x="36" y="694" width="328" height="192" rx="20" class="panel"/>
+  <text x="60" y="745" class="head ok">文字列を表示</text>
+  <text x="60" y="795" class="body"><tspan class="code">&lt;</tspan> や <tspan class="code">&gt;</tspan> を含む文字が</text>
+  <text x="60" y="831" class="body">画面に並ぶ。</text>
+  <rect x="396" y="694" width="328" height="192" rx="20" fill="#f8e8de" stroke="#d2a58e" stroke-width="2"/>
+  <text x="420" y="745" class="head warn">ボタンを表示</text>
+  <text x="420" y="795" class="body">クリックの処理で、</text>
+  <text x="420" y="831" class="body">許可されたハンドラが</text>
+  <text x="420" y="866" class="body">動く。</text>
+
+  <text x="36" y="951" class="body muted">値を渡す先が、文字列の解釈を決める。</text>
+</svg>
