@@ -20,6 +20,7 @@ URLを開いてから描画されるまでを、通信・実行・表示に分�
 ## 辞典の本文
 
 - [Cookieとセッション — 要求への付与とサーバー側の寿命](/browser/cookies-and-sessions.html)
+- [CSRFとリクエスト検証 — Cookie付きの要求を受理する条件](/browser/csrf-and-request-validation.html)
 - [Service Workerとオフライン動作 — 登録、制御、応答の選択](/browser/service-worker-offline.html)
 - [Streams APIとストリーミング処理 — データの流れとbackpressure](/browser/streams-backpressure.html)
 - [Web Workerとメッセージ通信 — 実行の分担とデータの所有権](/browser/web-workers-messages.html)
@@ -36,6 +37,7 @@ URLを開いてから描画されるまでを、通信・実行・表示に分�
 
 ## 作って試す
 
+- [CSRFでCookie付きの要求が届く条件を観察する](/practice/browser/csrf-observation.html)
 - [HTML・CSS・JavaScriptでブラウザの変更と計測を観察する](/practice/browser/render-observation.html)
 - [localStorage・IndexedDB・Cache APIの保存と完了を観察する](/practice/browser/storage-observation.html)
 - [Service Workerの登録・制御・応答元を観察する](/practice/browser/service-worker-observation.html)

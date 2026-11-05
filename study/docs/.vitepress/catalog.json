@@ -69,7 +69,7 @@
       "id": "browser",
       "title": "ブラウザ",
       "description": "URLを開いてから描画されるまでを、通信・実行・表示に分ける。",
-      "count": 10,
+      "count": 11,
       "status": "辞典本文あり"
     },
     {
@@ -130,6 +130,13 @@
     }
   ],
   "collections": [
+    {
+      "id": "csrf-observation",
+      "section": "practice",
+      "title": "CSRFでCookie付きの要求が届く条件を観察する",
+      "description": "同一サイトの2つのオリジンからフォームを送り、Originとセッショントークンの検査を比べる。",
+      "start": "/practice/browser/csrf-observation.html"
+    },
     {
       "id": "xss-csp-observation",
       "section": "practice",
@@ -1846,7 +1853,7 @@
         "/browser/same-origin-cors.html",
         "/browser/storage-lifetime.html",
         "/browser/xss-and-csp.html",
-        "/network/http-messages.html",
+        "/browser/csrf-and-request-validation.html",
         "/practice/browser/cookie-session-observation.html"
       ]
     },
@@ -1870,6 +1877,66 @@
         "/graphics/api/directx12.html",
         "/graphics/api/vulkan.html",
         "/graphics/optimization/basics.html"
+      ]
+    },
+    {
+      "title": "CSRFでCookie付きの要求が届く条件を観察する",
+      "url": "/practice/browser/csrf-observation.html",
+      "file": "practice/browser/csrf-observation.md",
+      "domain": "browser",
+      "section": "practice",
+      "format": "sample",
+      "status": "published",
+      "summary": "別オリジンのフォームから届くCookie付きのPOSTを、追加の検査をしない場合、Originを照合する場合、セッションに結び付けたトークンを照合する場合で比べる。",
+      "source": "新規執筆",
+      "aliases": [
+        "CSRF",
+        "Origin",
+        "SameSite",
+        "Cookie",
+        "synchronizer token",
+        "POST",
+        "フォーム送信"
+      ],
+      "collection": "csrf-observation",
+      "order": 1,
+      "verification": "Windows上のブラウザで2つの送信元と3経路の組み合わせを実行確認（2026-11-05）",
+      "links": [
+        "/browser/csrf-and-request-validation.html",
+        "/browser/cookies-and-sessions.html"
+      ]
+    },
+    {
+      "title": "CSRFとリクエスト検証 — Cookie付きの要求を受理する条件",
+      "url": "/browser/csrf-and-request-validation.html",
+      "file": "browser/csrf-and-request-validation.md",
+      "domain": "browser",
+      "section": "reference",
+      "format": "article",
+      "status": "published",
+      "summary": "ブラウザがCookieを付けて別オリジンへフォームを送る経路と、サーバーがOriginやCSRFトークンで状態変更を検証する手順を説明する。",
+      "source": "新規執筆",
+      "aliases": [
+        "CSRF",
+        "Cross-Site Request Forgery",
+        "クロスサイトリクエストフォージェリ",
+        "リクエスト偽造",
+        "ambient authority",
+        "Origin",
+        "Referer",
+        "SameSite",
+        "synchronizer token",
+        "CSRFトークン",
+        "CORS",
+        "preflight"
+      ],
+      "verification": "WHATWG標準、RFC 9110、CookieのIETF改訂草案、OWASP資料と照合（2026-11-05）",
+      "links": [
+        "/browser/cookies-and-sessions.html",
+        "/browser/same-origin-cors.html",
+        "/network/http-messages.html",
+        "/browser/xss-and-csp.html",
+        "/practice/browser/csrf-observation.html"
       ]
     },
     {
@@ -7163,6 +7230,8 @@
         "/practice/browser/cookie-session-observation.html",
         "/browser/xss-and-csp.html",
         "/practice/browser/xss-csp-observation.html",
+        "/browser/csrf-and-request-validation.html",
+        "/practice/browser/csrf-observation.html",
         "/history/video-games.html",
         "/guide/rendering/timeline.html"
       ]
@@ -9311,6 +9380,7 @@
       "source": "統合ガイド",
       "aliases": [],
       "links": [
+        "/browser/csrf-and-request-validation.html",
         "/browser/xss-and-csp.html",
         "/browser/cookies-and-sessions.html",
         "/browser/same-origin-cors.html",
