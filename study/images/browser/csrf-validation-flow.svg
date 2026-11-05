@@ -1,0 +1,65 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="760" height="1220" viewBox="0 0 760 1220" role="img" aria-labelledby="title desc">
+  <title id="title">状態変更を行う前にサーバーが要求を検証する</title>
+  <desc id="desc">状態変更を受けたサーバーは、対象メソッド、セッションと操作権限、送信元のオリジン、セッションに結び付いたCSRFトークンを順に調べる。どこかの検証で失敗すれば更新を拒否する。すべて通過した場合は入力値などを検査して更新する。</desc>
+  <defs>
+    <style>
+      text{font-family:'BIZ UDPGothic','Yu Gothic',Meiryo,sans-serif;fill:#183440}
+      .title{font-size:36px;font-weight:700}.head{font-size:29px;font-weight:700}
+      .body{font-size:26px}.label{font-size:23px;font-weight:700}
+      .code{font-family:Consolas,'Liberation Mono',monospace;font-size:26px}
+      .muted{fill:#3b5963}.ok{fill:#085c4d}.warn{fill:#793b23}
+      .panel{fill:#fff;stroke:#a6bcc2;stroke-width:2}
+      .arrow{fill:none;stroke:#4d6e78;stroke-width:3;marker-end:url(#arrowhead)}
+      .failed{fill:none;stroke:#a76647;stroke-width:3}
+      .failed.arrow{marker-end:url(#failure)}
+    </style>
+    <marker id="arrowhead" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto">
+      <path d="M0 0L10 5L0 10Z" fill="#4d6e78"/>
+    </marker>
+    <marker id="failure" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto">
+      <path d="M0 0L10 5L0 10Z" fill="#a76647"/>
+    </marker>
+  </defs>
+  <rect width="760" height="1220" rx="24" fill="#eef5f6"/>
+  <text x="36" y="58" class="title">更新の前に要求を検証する</text>
+  <text x="36" y="102" class="body muted">送信元とトークンの両方を検証する構成の例。</text>
+
+  <rect x="36" y="142" width="540" height="93" rx="18" fill="#e8eaf7" stroke="#b4b9d4" stroke-width="2"/>
+  <text x="60" y="198" class="head">状態変更の要求を受け取る</text>
+  <path d="M306 236V273" class="arrow"/>
+
+  <rect x="36" y="277" width="540" height="119" rx="18" class="panel"/>
+  <text x="60" y="324" class="head">1. 変更用のメソッドか</text>
+  <text x="60" y="366" class="body">この例では <tspan class="code">POST</tspan> を受け付ける。</text>
+  <path d="M306 397V434" class="arrow"/>
+
+  <rect x="36" y="438" width="540" height="119" rx="18" class="panel"/>
+  <text x="60" y="485" class="head">2. セッションと権限があるか</text>
+  <text x="60" y="527" class="body">有効な利用者と、操作できる範囲を確認。</text>
+  <path d="M306 558V595" class="arrow"/>
+
+  <rect x="36" y="599" width="540" height="119" rx="18" class="panel"/>
+  <text x="60" y="646" class="head">3. 送信元を許可しているか</text>
+  <text x="60" y="688" class="body"><tspan class="code">Origin</tspan> を許可オリジンと正確に照合。</text>
+  <path d="M306 719V756" class="arrow"/>
+
+  <rect x="36" y="760" width="540" height="119" rx="18" class="panel"/>
+  <text x="60" y="807" class="head">4. トークンが一致するか</text>
+  <text x="60" y="849" class="body">セッションに結び付けた値と照合。</text>
+
+  <text x="604" y="310" class="label warn">検証失敗</text>
+  <path d="M577 336H662V938" class="failed arrow"/>
+  <path d="M577 497H662M577 658H662M577 819H662" class="failed"/>
+
+  <path d="M306 880V938" class="arrow"/>
+  <rect x="36" y="942" width="540" height="151" rx="18" fill="#e0eee5" stroke="#a3bfae" stroke-width="2"/>
+  <text x="60" y="991" class="head ok">すべての検証を通過</text>
+  <text x="60" y="1036" class="body">入力値なども確認してから</text>
+  <text x="60" y="1072" class="body">状態を更新する。</text>
+
+  <rect x="600" y="942" width="124" height="151" rx="18" fill="#f8e8de" stroke="#d2a58e" stroke-width="2"/>
+  <text x="662" y="1003" class="label warn" text-anchor="middle">更新を</text>
+  <text x="662" y="1040" class="label warn" text-anchor="middle">拒否</text>
+
+  <text x="36" y="1163" class="body muted">Cookieが付いているかと、更新できるかを分ける。</text>
+</svg>

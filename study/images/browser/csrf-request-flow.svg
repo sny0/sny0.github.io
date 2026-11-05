@@ -1,0 +1,48 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="760" height="1120" viewBox="0 0 760 1120" role="img" aria-labelledby="title desc">
+  <title id="title">別オリジンのフォーム送信にCookieが付く経路</title>
+  <desc id="desc">ブラウザにはアカウント側のセッションCookieがある。別オリジンで同一サイトのコミュニティ側から、アカウント側の設定変更先へフォームを送る。宛先とCookieの条件が合うと、ブラウザがCookieを付ける。サーバーがセッションの有効性だけで受理すると、利用者が意図しない設定変更が成立し得る。</desc>
+  <defs>
+    <style>
+      text{font-family:'BIZ UDPGothic','Yu Gothic',Meiryo,sans-serif;fill:#183440}
+      .title{font-size:36px;font-weight:700}.head{font-size:30px;font-weight:700}
+      .body{font-size:27px}.label{font-size:25px;font-weight:700}
+      .code{font-family:Consolas,'Liberation Mono',monospace;font-size:26px}
+      .muted{fill:#3b5963}.ok{fill:#085c4d}.warn{fill:#793b23}
+      .panel{fill:#fff;stroke:#a6bcc2;stroke-width:2}
+      .arrow{fill:none;stroke:#4d6e78;stroke-width:3;marker-end:url(#arrowhead)}
+    </style>
+    <marker id="arrowhead" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto">
+      <path d="M0 0L10 5L0 10Z" fill="#4d6e78"/>
+    </marker>
+  </defs>
+  <rect width="760" height="1120" rx="24" fill="#eef5f6"/>
+  <text x="36" y="58" class="title">別オリジンのフォームとCookie</text>
+  <text x="36" y="102" class="body muted">同一サイトにある二つのオリジンの例。</text>
+
+  <rect x="36" y="142" width="688" height="150" rx="20" fill="#e0eee5" stroke="#a3bfae" stroke-width="2"/>
+  <text x="60" y="188" class="head ok">1. アカウント側にログイン済み</text>
+  <text x="60" y="232" class="code">https://account.example.test</text>
+  <text x="60" y="270" class="body">ブラウザに、このホスト用のCookieがある。</text>
+  <path d="M380 293V335" class="arrow"/>
+
+  <rect x="36" y="339" width="688" height="154" rx="20" fill="#e8eaf7" stroke="#b4b9d4" stroke-width="2"/>
+  <text x="60" y="386" class="head">2. コミュニティ側から送信</text>
+  <text x="60" y="429" class="code">https://community.example.test</text>
+  <text x="60" y="467" class="body">フォームの宛先はアカウント側の設定変更先。</text>
+  <path d="M380 494V536" class="arrow"/>
+
+  <rect x="36" y="540" width="688" height="175" rx="20" class="panel"/>
+  <text x="60" y="587" class="head">3. ブラウザが送信先を確認する</text>
+  <text x="60" y="631" class="code">POST /settings/theme</text>
+  <text x="60" y="670" class="body">条件に合うアカウント側のCookieを付ける。</text>
+  <path d="M380 716V758" class="arrow"/>
+
+  <rect x="36" y="762" width="688" height="134" rx="20" class="panel"/>
+  <text x="60" y="810" class="head">4. サーバーがセッションを照合</text>
+  <text x="60" y="856" class="body">セッションの有効性だけで更新を受理すると</text>
+  <path d="M380 897V939" class="arrow"/>
+
+  <rect x="36" y="943" width="688" height="114" rx="20" fill="#f8e8de" stroke="#d2a58e" stroke-width="2"/>
+  <text x="60" y="991" class="head warn">意図しない設定変更が起きる</text>
+  <text x="60" y="1032" class="body">設定はフォームが指定した値に変わる。</text>
+</svg>
