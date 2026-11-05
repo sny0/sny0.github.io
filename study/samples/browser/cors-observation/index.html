@@ -1,0 +1,95 @@
+<!doctype html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="referrer" content="no-referrer">
+  <title>同一オリジンとCORSの観察 | Sny0 Study</title>
+  <link rel="canonical" href="https://sny0.com/study/samples/browser/cors-observation/index.html">
+  <link rel="stylesheet" href="styles.css">
+  <script src="observe.js" defer></script>
+  <script src="main.js" defer></script>
+</head>
+<body>
+  <main>
+    <header>
+      <a href="https://sny0.com/study/practice/browser/cors-observation.html">実践手順とコードを読む</a>
+      <h1>同一オリジンとCORSの観察</h1>
+      <p>同じ固定テキストを、通常のページとサンドボックス内のiframeから取得します。JavaScriptに渡った応答の種類、ステータス、本文を見比べます。</p>
+    </header>
+
+    <dl class="environment">
+      <dt>通常ページのオリジン</dt><dd><code id="page-origin">—</code></dd>
+      <dt>iframeのオリジン</dt><dd>opaque origin（文字列表現は <code>null</code>）</dd>
+      <dt>取得先</dt><dd><code id="payload-url">payload.txt</code></dd>
+    </dl>
+
+    <div class="experiments">
+      <section data-case="same-origin" aria-labelledby="same-origin-heading">
+        <h2 id="same-origin-heading">1. 同一オリジン</h2>
+        <p>通常のページで <code>mode: "same-origin"</code> を指定します。</p>
+        <button type="button" id="same-origin">通常ページからGET</button>
+        <div class="result" aria-live="polite" aria-atomic="true">
+          <p data-result>未実行</p>
+          <dl>
+            <dt>response.type</dt><dd data-type>—</dd>
+            <dt>response.status</dt><dd data-status>—</dd>
+            <dt>本文</dt><dd data-body>—</dd>
+          </dl>
+        </div>
+      </section>
+
+      <section data-case="cors" aria-labelledby="cors-heading">
+        <h2 id="cors-heading">2. 別オリジンからCORS</h2>
+        <p>iframeから <code>mode: "cors"</code> で、追加ヘッダーのないGETを送ります。</p>
+        <button type="button" id="cors">別オリジンからCORS GET</button>
+        <div class="result" aria-live="polite" aria-atomic="true">
+          <p data-result>未実行</p>
+          <dl>
+            <dt>response.type</dt><dd data-type>—</dd>
+            <dt>response.status</dt><dd data-status>—</dd>
+            <dt>本文</dt><dd data-body>—</dd>
+          </dl>
+        </div>
+      </section>
+
+      <section data-case="no-cors" aria-labelledby="no-cors-heading">
+        <h2 id="no-cors-heading">3. 別オリジンからno-cors</h2>
+        <p>iframeで <code>mode: "no-cors"</code> を指定します。</p>
+        <button type="button" id="no-cors">別オリジンからno-cors GET</button>
+        <div class="result" aria-live="polite" aria-atomic="true">
+          <p data-result>未実行</p>
+          <dl>
+            <dt>response.type</dt><dd data-type>—</dd>
+            <dt>response.status</dt><dd data-status>—</dd>
+            <dt>本文</dt><dd data-body>—</dd>
+          </dl>
+        </div>
+      </section>
+
+      <section data-case="preflight" aria-labelledby="preflight-heading">
+        <h2 id="preflight-heading">4. プリフライトが必要なGET</h2>
+        <p>iframeで <code>mode: "cors"</code> と <code>X-Study-Demo: 1</code> を指定します。</p>
+        <button type="button" id="preflight">カスタムヘッダー付きGET</button>
+        <div class="result" aria-live="polite" aria-atomic="true">
+          <p data-result>未実行</p>
+          <dl>
+            <dt>response.type</dt><dd data-type>—</dd>
+            <dt>response.status</dt><dd data-status>—</dd>
+            <dt>本文</dt><dd data-body>—</dd>
+          </dl>
+        </div>
+      </section>
+    </div>
+
+    <section class="notes" aria-labelledby="notes-heading">
+      <h2 id="notes-heading">結果の読み方</h2>
+      <ul>
+        <li><code>basic</code> と <code>cors</code> は本文を読める応答です。<code>opaque</code> の <code>0</code> は、実際のHTTPステータスを隠した値です。</li>
+        <li>Fetchが拒否されたとき、JavaScriptにResponseは渡りません。通信とCORSのどちらで失敗したかは、DevToolsのNetworkやローカル実験サーバーのログで確認できます。</li>
+        <li>すべての取得で <code>credentials: "omit"</code> を指定します。CORSの許可ヘッダーは配信元の応答で変わります。</li>
+      </ul>
+    </section>
+  </main>
+</body>
+</html>

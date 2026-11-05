@@ -1,0 +1,58 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="760" height="1200" viewBox="0 0 760 1200" role="img" aria-labelledby="title desc">
+  <title id="title">別オリジンへのCORS取得</title>
+  <desc id="desc">別オリジンへのCORS取得では、必要な場合にブラウザが先にOPTIONSを送る。OPTIONSの応答が失敗すると本要求は送られない。プリフライトが通った場合、不要な場合、キャッシュされた許可を使える場合は本要求へ進む。本要求の応答も検査し、通ればJavaScriptが応答の公開部分を読める。失敗した場合も本要求は送られている。</desc>
+  <defs>
+    <style>
+      text{font-family:'BIZ UDPGothic','Yu Gothic',Meiryo,sans-serif;fill:#183440}
+      .title{font-size:36px;font-weight:700}.head{font-size:29px;font-weight:700}
+      .body{font-size:26px}.label{font-size:23px;font-weight:700}
+      .muted{fill:#3b5963}.ok{fill:#085c4d}.error{fill:#843923}
+      .panel{fill:#fff;stroke:#a6bcc2;stroke-width:2}
+      .arrow{fill:none;stroke:#4d6e78;stroke-width:3;marker-end:url(#arrowhead)}
+    </style>
+    <marker id="arrowhead" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto">
+      <path d="M0 0L10 5L0 10Z" fill="#4d6e78"/>
+    </marker>
+  </defs>
+  <rect width="760" height="1200" rx="24" fill="#eef5f6"/>
+  <text x="38" y="58" class="title">別オリジンへのCORS取得</text>
+  <text x="38" y="101" class="body muted">送信前の検査と、応答を受け取った後の検査</text>
+
+  <rect x="36" y="132" width="688" height="122" rx="20" class="panel"/>
+  <text x="60" y="179" class="head">ページが fetch() を呼ぶ</text>
+  <text x="60" y="220" class="body">ブラウザが、メソッドと要求ヘッダーなどを確認。</text>
+  <path d="M230 255V327" class="arrow"/>
+  <text x="253" y="301" class="label muted">事前確認が必要</text>
+  <path d="M692 255V684H600V715" class="arrow"/>
+  <text x="517" y="340" class="label muted">事前確認が</text>
+  <text x="517" y="374" class="label muted">不要か許可済み</text>
+
+  <rect x="36" y="331" width="462" height="191" rx="20" fill="#e8eaf7" stroke="#b4b9d4" stroke-width="2"/>
+  <text x="60" y="375" class="head">先に OPTIONS を送る</text>
+  <text x="60" y="418" class="body">オリジンと予定のメソッド、</text>
+  <text x="60" y="455" class="body">許可が必要なヘッダー名を伝える。</text>
+  <text x="60" y="492" class="body">応答のstatusと許可条件を検査。</text>
+  <path d="M230 524V715" class="arrow"/>
+  <text x="251" y="625" class="label ok">通過</text>
+  <path d="M410 524V555" class="arrow"/>
+  <rect x="351" y="559" width="324" height="105" rx="16" fill="#f8e8de" stroke="#d2a58e" stroke-width="2"/>
+  <text x="371" y="600" class="label error">失敗するとここで終了</text>
+  <text x="371" y="636" class="body">本要求は送られない。</text>
+
+  <rect x="36" y="719" width="688" height="136" rx="20" class="panel"/>
+  <text x="60" y="766" class="head">本要求を送る</text>
+  <text x="60" y="810" class="body">返った応答のCORSヘッダーを検査する。</text>
+  <path d="M195 856V930" class="arrow"/>
+  <path d="M559 856V930" class="arrow"/>
+
+  <rect x="36" y="934" width="324" height="161" rx="18" fill="#e0eee5" stroke="#a3bfae" stroke-width="2"/>
+  <text x="60" y="981" class="head ok">通過</text>
+  <text x="60" y="1026" class="body">JavaScriptで応答の</text>
+  <text x="60" y="1064" class="body">公開部分を読める。</text>
+  <rect x="384" y="934" width="340" height="161" rx="18" fill="#f8e8de" stroke="#d2a58e" stroke-width="2"/>
+  <text x="408" y="981" class="head error">失敗</text>
+  <text x="408" y="1026" class="body">応答は公開されない。</text>
+  <text x="408" y="1064" class="body">本要求は送られている。</text>
+
+  <text x="38" y="1152" class="body muted">どちらの検査で失敗しても、fetch() は拒否される。</text>
+</svg>
