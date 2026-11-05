@@ -141,6 +141,12 @@
 2. [Workerのコピー・転送・停止を観察する](/practice/browser/worker-message-observation.html)で、16バイトの往復、バッファの切り離し、要求ID、停止と再起動を試す。
 3. 同じ実行先の続きを扱う[イベントループ・Promise・async/await](/browser/event-loop-promises.html)と、共有状態を守る[スレッド同期](/runtime/thread-synchronization.html)へつなげる。
 
+## 依頼が増えたとき、Workerと待ち行列をどう管理するか
+
+1. [Worker poolと待ち行列の制御](/browser/worker-pool-backpressure.html)で、受付数・実行数・待機数、上流への抑制、取消しと終了を区別する。
+2. [Worker poolの待機数と取消しを観察する](/practice/browser/worker-pool-observation.html)で、2実行・4待機・1拒否、待機の取消しと結果破棄による違いを確かめる。
+3. [Web Workerの通信](/browser/web-workers-messages.html)でデータの受け渡しを確認し、[アセットロード](/game/asset-loading.html)の段階と利用可能になる条件へつなぐ。
+
 ## 作り方の変化を歴史から見る
 
 [ビデオゲーム史](/history/video-games.html)の作品・ハード・媒体・流通と、[リアルタイム3D技術史](/guide/rendering/timeline.html)の技術の変化から、気になった仕組みへ進みます。

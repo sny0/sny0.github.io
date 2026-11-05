@@ -1,0 +1,104 @@
+<!doctype html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="light">
+  <link rel="canonical" href="https://sny0.com/study/samples/browser/worker-pool-observation/index.html">
+  <title>Worker poolと受付上限の観察 | Sny0 Study</title>
+  <link rel="stylesheet" href="./styles.css">
+  <script src="./main.js" defer></script>
+</head>
+<body>
+  <main>
+    <header class="page-header">
+      <a href="https://sny0.com/study/practice/browser/worker-pool-observation.html">Sny0 Studyの解説へ戻る</a>
+      <p class="eyebrow">Worker pool / FIFO / Backpressure</p>
+      <h1>実行2件、待機4件。<br>7件目はどうする？</h1>
+      <p>固定2つのWorkerへ一件ずつ送ります。待機枠が満杯なら新しい要求を拒否し、待機の取消しと実行中の結果破棄を区別する実験です。</p>
+    </header>
+    <noscript><p class="notice">この実験の操作にはJavaScriptが必要です。</p></noscript>
+
+    <section class="panel" aria-labelledby="controls-heading">
+      <h2 id="controls-heading">1. 起動して、7件をまとめて依頼する</h2>
+      <p id="hosting-note" class="help">HTTPまたはHTTPSで、ページと外部worker.jsを同じoriginから配信してください。</p>
+      <div class="actions">
+        <button type="button" id="start">poolを起動</button>
+        <button type="button" id="stop" class="secondary" disabled>poolを停止</button>
+        <button type="button" id="reset" class="secondary">停止して初期化</button>
+      </div>
+      <p id="pool-state" class="state-line" data-state="stopped">状態：停止</p>
+      <p id="operation-state" class="help">2つのreadyを受け取ってから、要求を受け付けます。</p>
+      <div class="actions">
+        <button type="button" id="batch" disabled>7件まとめて依頼</button>
+        <button type="button" id="cancel-queued" class="secondary" disabled>待機先頭1件を取り消す</button>
+        <button type="button" id="discard-running" class="secondary" disabled>実行中1件の結果を使わない</button>
+      </div>
+      <div class="actions counter-row">
+        <button type="button" id="counter-button" class="secondary">mainカウンター +1</button>
+        <span>カウンター：<output id="counter-value">0</output></span>
+        <span class="subtle">次の要求ID：<output id="next-id">1</output>（初期化でも再利用しません）</span>
+      </div>
+      <p id="last-batch" class="help">一括依頼はまだ実行していません。</p>
+    </section>
+
+    <section class="panel" aria-labelledby="slots-heading">
+      <h2 id="slots-heading">2. 実行枠と待機枠を見る</h2>
+      <div class="capacity-row">
+        <p>ready <strong><output id="ready-count">0</output> / 2</strong></p>
+        <p>実行中 <strong><output id="running-count">0</output> / 2</strong></p>
+        <p>待機 <strong><output id="waiting-count">0</output> / 4</strong></p>
+      </div>
+      <div class="slot-grid">
+        <article id="slot-0" class="slot-card" data-state="stopped">
+          <h3>slot 0</h3><p id="slot-0-state">停止</p><p id="slot-0-job" class="help">要求なし</p>
+        </article>
+        <article id="slot-1" class="slot-card" data-state="stopped">
+          <h3>slot 1</h3><p id="slot-1-state">停止</p><p id="slot-1-job" class="help">要求なし</p>
+        </article>
+      </div>
+      <p class="help">workerは16値の合計120と件数16を求め、timerへ3000msを指定して返信します。CPU性能を比較する処理ではありません。実行中に結果破棄を指定しても、返信を受けるまで実行枠は空けません。</p>
+    </section>
+
+    <section class="panel" aria-labelledby="counts-heading">
+      <h2 id="counts-heading">3. 一件を二重に数えていないか確かめる</h2>
+      <dl class="stats-grid">
+        <div><dt>受付 accepted</dt><dd id="stat-accepted">0</dd></div>
+        <div><dt>採用完了 completed</dt><dd id="stat-completed">0</dd></div>
+        <div><dt>受付拒否 rejected</dt><dd id="stat-rejected">0</dd></div>
+        <div><dt>待機取消 queuedCancelled</dt><dd id="stat-queuedCancelled">0</dd></div>
+        <div><dt>結果破棄 discarded</dt><dd id="stat-discarded">0</dd></div>
+        <div><dt>停止打切り aborted</dt><dd id="stat-aborted">0</dd></div>
+      </dl>
+      <p class="formula"><code>accepted = running + waiting + completed + queuedCancelled + discarded + aborted</code></p>
+      <p id="invariant-state" class="help">不変条件：0 = 0</p>
+      <p class="help">結果破棄待ちはrunningの中です。rejectedはacceptedの外です。表示履歴を整理しても集計は残し、「停止して初期化」で集計・履歴を消します。</p>
+    </section>
+
+    <section class="panel" aria-labelledby="jobs-heading">
+      <h2 id="jobs-heading">要求の状態</h2>
+      <p class="help">未完了の全件と、終端に達した最新20件だけを表示します。FIFOは待機から送る順序で、異なるworkerの完了順を固定するものではありません。</p>
+      <table>
+        <caption>要求IDはページの生存中に再利用しません</caption>
+        <thead><tr><th scope="col">ID</th><th scope="col">状態</th><th scope="col">slot / 補足</th><th scope="col">採用結果</th></tr></thead>
+        <tbody id="job-rows"><tr><td colspan="4">要求はまだありません。</td></tr></tbody>
+      </table>
+    </section>
+
+    <section class="panel" aria-labelledby="log-heading">
+      <h2 id="log-heading">操作と通信のログ <span class="subtle">最新60件</span></h2>
+      <p class="help">時刻はmainが記録したperformance.now()です。paint完了やCPU処理時間ではありません。</p>
+      <ol id="event-log" class="event-log"></ol>
+    </section>
+
+    <aside class="notice" aria-labelledby="limits-heading">
+      <h2 id="limits-heading">取消し・破棄・停止の違い</h2>
+      <p>待機取消しは未送信の要求をqueueから除きます。実行中の結果破棄は仕事を止めず、結果を回収してから枠を空けます。pool停止は全workerをterminateし、待機と実行中をabortedにします。自動retryはありません。</p>
+      <p>ready待ちは各workerに8秒、ジョブはdispatch時から8秒のsoft timeoutです。queueの待機期限は設けません。背景タブ等ではtimerが遅延し得るため、厳密な実時間の保証ではありません。</p>
+      <p>外部ライブラリ、fetch、storage、analytics、アニメーション、busy loopは使いません。file://では起動せず、HTTP(s)で同じoriginから配信する構成です。</p>
+    </aside>
+    <p id="announcement" class="visually-hidden" role="status" aria-live="polite" aria-atomic="true"></p>
+    <footer><a href="https://sny0.com/study/practice/browser/worker-pool-observation.html">実験の手順とソースの解説を読む</a></footer>
+  </main>
+</body>
+</html>

@@ -1,0 +1,57 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="760" height="1510" viewBox="0 0 760 1510" role="img" aria-labelledby="title desc">
+  <title id="title">実行枠2と待機枠4を持つWorker pool</title>
+  <desc id="desc">7件を依頼すると最初の2件をWorkerへ送り、次の4件を待機させ、最後の1件を拒否する設計例。実行中の仕事が終わると待機の先頭を空いた枠へ送る。受付制限と上流への抑制を区別する。</desc>
+  <defs>
+    <style>text{font-family:'BIZ UDPGothic','Yu Gothic',Meiryo,sans-serif;fill:#26352e}.title{font-size:32px;font-weight:700}.head{font-size:28px;font-weight:700}.body{font-size:24px}.small{font-size:22px}.card{fill:white;stroke:#739483;stroke-width:2}.arrow{fill:none;stroke:#567963;stroke-width:3;marker-end:url(#a)}</style>
+    <marker id="a" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto"><path d="M0 0L10 5L0 10Z" fill="#567963"/></marker>
+  </defs>
+  <rect width="760" height="1510" rx="24" fill="#f4f8f4"/>
+  <text x="40" y="56" class="title">実行枠2と待機枠4を分ける</text>
+  <text x="40" y="96" class="body">7件を同じ入口へ依頼する、固定条件の例</text>
+  <text x="42" y="156" class="head">依頼：ID 1〜7</text>
+  <g class="body" text-anchor="middle">
+    <rect x="42" y="180" width="88" height="60" rx="12" fill="#e2eafa"/><text x="86" y="219">1</text>
+    <rect x="140" y="180" width="88" height="60" rx="12" fill="#e2eafa"/><text x="184" y="219">2</text>
+    <rect x="238" y="180" width="88" height="60" rx="12" fill="#dcece0"/><text x="282" y="219">3</text>
+    <rect x="336" y="180" width="88" height="60" rx="12" fill="#dcece0"/><text x="380" y="219">4</text>
+    <rect x="434" y="180" width="88" height="60" rx="12" fill="#dcece0"/><text x="478" y="219">5</text>
+    <rect x="532" y="180" width="88" height="60" rx="12" fill="#dcece0"/><text x="576" y="219">6</text>
+    <rect x="630" y="180" width="88" height="60" rx="12" fill="#f9e6de"/><text x="674" y="219">7</text>
+  </g>
+  <rect x="36" y="282" width="688" height="224" rx="18" class="card"/>
+  <text x="60" y="324" class="head">実行中：2 / 2</text>
+  <rect x="60" y="346" width="308" height="126" rx="12" fill="#e2eafa"/>
+  <text x="82" y="389" class="head">Worker 1</text>
+  <text x="82" y="434" class="body">ID 1を割り当て中</text>
+  <rect x="392" y="346" width="308" height="126" rx="12" fill="#e2eafa"/>
+  <text x="414" y="389" class="head">Worker 2</text>
+  <text x="414" y="434" class="body">ID 2を割り当て中</text>
+  <path d="M380 544V510" class="arrow"/>
+  <rect x="36" y="546" width="688" height="214" rx="18" class="card"/>
+  <text x="60" y="588" class="head">待機中：4 / 4</text>
+  <g class="body" text-anchor="middle">
+    <rect x="60" y="616" width="144" height="60" rx="12" fill="#dcece0"/><text x="132" y="655">ID 3</text>
+    <rect x="220" y="616" width="144" height="60" rx="12" fill="#dcece0"/><text x="292" y="655">ID 4</text>
+    <rect x="380" y="616" width="144" height="60" rx="12" fill="#dcece0"/><text x="452" y="655">ID 5</text>
+    <rect x="540" y="616" width="144" height="60" rx="12" fill="#dcece0"/><text x="612" y="655">ID 6</text>
+  </g>
+  <text x="60" y="716" class="body">空いた実行枠へ、待機の先頭を送る。</text>
+  <text x="60" y="748" class="small">この時点では、待機4件をWorkerへまだ送っていない。</text>
+  <rect x="36" y="786" width="688" height="142" rx="18" fill="#f9e6de"/>
+  <text x="60" y="828" class="head">ID 7は受付を拒否する</text>
+  <text x="60" y="868" class="body">待機枠も満杯。受理6件と、拒否1件を区別。</text>
+  <text x="60" y="906" class="small">待機を無制限に増やして、後回しにし続ける設計にはしない。</text>
+  <rect x="36" y="954" width="688" height="182" rx="18" fill="#e2eafa"/>
+  <text x="60" y="996" class="head">実行数と待機数は、別の上限</text>
+  <text x="60" y="1036" class="body">実行だけ制限しても、待機のメモリは増え得る。</text>
+  <text x="60" y="1074" class="body">件数に加え、入力byte数や待ち時間も設計する。</text>
+  <text x="60" y="1112" class="small">今回の例は16値の固定入力。一般の大容量処理とは分ける。</text>
+  <rect x="36" y="1162" width="688" height="156" rx="18" fill="#dcece0"/>
+  <text x="60" y="1204" class="head">満杯の情報を、供給側へ返す</text>
+  <text x="60" y="1244" class="body">供給側も生成や送信を抑えて、流量を調整する。</text>
+  <text x="60" y="1284" class="small">サンプルは拒否の表示と受付操作の制限。自動再試行はない。</text>
+  <rect x="36" y="1344" width="688" height="130" rx="18" fill="#e9efe6"/>
+  <text x="60" y="1386" class="head">固定2は、最適数の保証ではない</text>
+  <text x="60" y="1426" class="body">Workerの数、CPUの並列度、速度向上は別に考える。</text>
+  <text x="60" y="1460" class="small">付属例のtimer待ちは、CPU性能のベンチマークではない。</text>
+</svg>

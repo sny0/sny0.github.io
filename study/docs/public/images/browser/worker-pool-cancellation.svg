@@ -1,0 +1,51 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="760" height="1510" viewBox="0 0 760 1510" role="img" aria-labelledby="title desc">
+  <title id="title">待機取消し、実行結果の破棄、Pool停止</title>
+  <desc id="desc">待機取消しは送信前にキューから除き枠を空ける。実行中の結果破棄は応答まで実行枠を保持する。Pool停止はWorkerをterminateして未完了を停止による終了へ分類し、受理数の状態集計を二重計上しない。</desc>
+  <defs>
+    <style>text{font-family:'BIZ UDPGothic','Yu Gothic',Meiryo,sans-serif;fill:#26352e}.title{font-size:32px;font-weight:700}.head{font-size:28px;font-weight:700}.body{font-size:24px}.small{font-size:22px}.card{fill:white;stroke:#739483;stroke-width:2}.arrow{fill:none;stroke:#567963;stroke-width:3;marker-end:url(#a)}</style>
+    <marker id="a" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto"><path d="M0 0L10 5L0 10Z" fill="#567963"/></marker>
+  </defs>
+  <rect width="760" height="1510" rx="24" fill="#f4f8f4"/>
+  <text x="40" y="56" class="title">待機取消しと結果破棄を区別する</text>
+  <text x="40" y="96" class="body">枠を戻してよい時点が異なる</text>
+  <rect x="36" y="122" width="688" height="250" rx="18" class="card"/>
+  <text x="60" y="164" class="head">① 待機中の取消し</text>
+  <rect x="60" y="192" width="276" height="72" rx="12" fill="#dcece0"/>
+  <text x="144" y="238" class="body">待機中</text>
+  <rect x="424" y="192" width="276" height="72" rx="12" fill="#e9efe6"/>
+  <text x="500" y="238" class="body">取消済み</text>
+  <path d="M340 228H420" class="arrow"/>
+  <text x="60" y="308" class="body">送信前のキューから外す。待機枠はすぐ空く。</text>
+  <text x="60" y="346" class="small">Workerに未送信の仕事なので、実行を停止する手順とは別。</text>
+  <rect x="36" y="398" width="688" height="362" rx="18" class="card"/>
+  <text x="60" y="440" class="head">② 実行中の結果を使わない</text>
+  <rect x="60" y="470" width="176" height="82" rx="12" fill="#e2eafa"/>
+  <text x="104" y="522" class="body">実行中</text>
+  <rect x="280" y="470" width="176" height="82" rx="12" fill="#f9e6de"/>
+  <text x="318" y="522" class="body">破棄待ち</text>
+  <rect x="500" y="470" width="176" height="82" rx="12" fill="#e9efe6"/>
+  <text x="538" y="522" class="body">破棄済み</text>
+  <path d="M240 511H276" class="arrow"/><path d="M460 511H496" class="arrow"/>
+  <text x="60" y="600" class="body">印を付けても、実行枠は保持する。</text>
+  <text x="60" y="638" class="body">結果が返ったら破棄し、そこで実行枠を解放する。</text>
+  <text x="60" y="684" class="small">破棄待ちは実行中に含める。未完了のWorkerへ別の仕事を</text>
+  <text x="60" y="718" class="small">重ねると、一つの実行枠に複数依頼が隠れてしまう。</text>
+  <rect x="36" y="786" width="688" height="208" rx="18" fill="#e2eafa"/>
+  <text x="60" y="828" class="head">③ Pool全体を停止する</text>
+  <text x="60" y="868" class="body">Workerをterminateし、未完了を停止で終了へ分類。</text>
+  <text x="60" y="906" class="body">待機中も実行中も片付け、タイマーを解除する。</text>
+  <text x="60" y="950" class="small">再起動は新しい世代。古い返信で新しい状態を更新しない。</text>
+  <text x="60" y="980" class="small">terminateは、完了や返信を待つdrainとは異なる。</text>
+  <rect x="36" y="1020" width="688" height="250" rx="18" fill="#dcece0"/>
+  <text x="60" y="1062" class="head">仕事を、一つの状態へ数える</text>
+  <text x="60" y="1108" class="body">受理数 = 実行中 + 待機中 + 完了</text>
+  <text x="60" y="1146" class="body">　　　 + 待機取消 + 結果破棄 + 停止で終了</text>
+  <text x="60" y="1192" class="small">拒否された依頼は受理数に含めない。</text>
+  <text x="60" y="1226" class="small">同じ要求を、二回終端へ数えない。</text>
+  <text x="60" y="1258" class="small">これは教材で定めた集計。Web APIが付ける保証ではない。</text>
+  <rect x="36" y="1296" width="688" height="178" rx="18" fill="#e9efe6"/>
+  <text x="60" y="1338" class="head">取消し・timeout・停止を混ぜない</text>
+  <text x="60" y="1378" class="body">実行側8秒の計時は、dispatchした時点から。</text>
+  <text x="60" y="1416" class="body">キューで待つ期限とは区別する。</text>
+  <text x="60" y="1456" class="small">今回の例は待機の期限なし。時間上限はsoft timeout。</text>
+</svg>
