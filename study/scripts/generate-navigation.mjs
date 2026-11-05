@@ -316,11 +316,18 @@ writePage('guide/learning-paths.md', '疑問から選ぶ読み順', {
 2. [Service Workerで応答元と登録状態を観察する](/practice/browser/service-worker-observation.html)で、専用scopeの登録、固定GETの代替応答、解除と後片付けを試す。
 3. 応答の明示的な保存は[ブラウザの保存領域](/browser/storage-lifetime.html)、HTTPの再利用と再検証は[HTTPキャッシュ](/network/http-caching.html)で確認する。
 
+## 別オリジンへの通信で、応答を読めるかは何で決まるか
+
+1. [同一オリジンポリシーとCORS](/browser/same-origin-cors.html)で、文書間の境界、応答の公開、preflightによる事前確認を区別する。
+2. [ブラウザでCORSの応答を比べる](/practice/browser/cors-observation.html)で、通常ページとsandboxから同じデータをGETし、公開版とローカル配信で結果を比べる。
+3. [HTTPメッセージ](/network/http-messages.html)で要求・応答を確認し、[HTTPキャッシュ](/network/http-caching.html)で応答を再利用する条件へつなげる。
+
 ## 作り方の変化を歴史から見る
 
 [ビデオゲーム史](/history/video-games.html)の作品・ハード・媒体・流通と、[リアルタイム3D技術史](/guide/rendering/timeline.html)の技術の変化から、気になった仕組みへ進みます。`)
 
 const termRows = [
+  ['同一オリジンポリシー / Same-Origin Policy / SOP / origin / opaque origin / CORS / preflight / OPTIONS / Access-Control-Allow-Origin / no-cors / opaque response', '/browser/same-origin-cors.html', '文書間の境界、別オリジンへの要求、JavaScriptへの応答公開、事前確認を調べる'],
   ['Service Worker / service worker scope / install / waiting / activate / controller / ready / fetch event / respondWith / waitUntil / unregister / オフライン', '/browser/service-worker-offline.html', '登録、ページの制御、要求の介入、保存済み応答の利用、更新と解除を調べる'],
   ['ブラウザ保存領域 / Web Storage / localStorage / sessionStorage / IndexedDB / object store / IDBTransaction / Cache API / CacheStorage / quota / eviction / persist / storage partition', '/browser/storage-lifetime.html', '保存対象、同期・非同期処理、transactionの完了、データの保持と削除を調べる'],
   ['HTTPキャッシュ / HTTP cache / Cache-Control / ETag / If-None-Match / 304 / freshness / max-age / no-cache / no-store / Vary / 再検証', '/network/http-caching.html', '保存した応答の再利用、鮮度、条件付きGET、本文とメタデータの更新を調べる'],

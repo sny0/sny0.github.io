@@ -110,7 +110,7 @@ staleだから必ず本文を捨てるわけではなく、再検証で使える
 
 ブラウザ内の保存機構も区別します。**HTTPキャッシュ**はHTTPの規則で応答を再利用し、**Cache API**はアプリがRequest／Responseを明示的に保存・選択するAPIです。Cache APIの保存物がHTTPキャッシュの期限で自動更新されるわけではなく、HTTPのキャッシュ指示をそのまま自動適用する仕組みでもありません。[MDN: Cache](https://developer.mozilla.org/en-US/docs/Web/API/Cache)
 
-localStorage・IndexedDB・Cache APIの使い分けと、保存してから失われるまでの条件は、[ブラウザの保存領域とデータの寿命](/browser/storage-lifetime.html)で扱います。
+localStorage・IndexedDB・Cache APIの使い分けと、保存してから失われるまでの条件は、[ブラウザの保存領域とデータの寿命](/browser/storage-lifetime.html)で扱います。別オリジンへの事前確認を記録するpreflight cacheは、[同一オリジンポリシーとCORS](/browser/same-origin-cors.html)で扱います。
 
 **bfcache**は、戻る・進むのために文書やJavaScriptの状態などを保持・復元する仕組みです。HTTP応答だけの保存とは異なります。さらにService Workerは要求を仲介し、Cache APIなどから応答を返す経路も作れます。「キャッシュから表示した」という言葉だけでは、どの層を使ったか分かりません。[web.dev: Back/forward cache](https://web.dev/articles/bfcache)、[ブラウザの描画](/browser/rendering-journey.html)
 

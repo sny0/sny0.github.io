@@ -69,7 +69,7 @@
       "id": "browser",
       "title": "ブラウザ",
       "description": "URLを開いてから描画されるまでを、通信・実行・表示に分ける。",
-      "count": 7,
+      "count": 8,
       "status": "辞典本文あり"
     },
     {
@@ -130,6 +130,13 @@
     }
   ],
   "collections": [
+    {
+      "id": "cors-observation",
+      "section": "practice",
+      "title": "ブラウザで同一オリジンとCORSの応答を比べる",
+      "description": "同じ固定テキストを通常ページとsandboxから取得し、応答の読み取りとpreflightの違いを確かめる。",
+      "start": "/practice/browser/cors-observation.html"
+    },
     {
       "id": "service-worker-observation",
       "section": "practice",
@@ -2665,6 +2672,7 @@
       "links": [
         "/network/http-messages.html",
         "/browser/storage-lifetime.html",
+        "/browser/same-origin-cors.html",
         "/browser/rendering-journey.html",
         "/practice/network/http-cache-observation.html"
       ]
@@ -3458,6 +3466,7 @@
         "/browser/web-workers-messages.html",
         "/browser/storage-lifetime.html",
         "/network/http-caching.html",
+        "/browser/same-origin-cors.html",
         "/practice/browser/service-worker-observation.html"
       ]
     },
@@ -6091,6 +6100,33 @@
       ]
     },
     {
+      "title": "ブラウザで同一オリジンとCORSの応答を比べる",
+      "url": "/practice/browser/cors-observation.html",
+      "file": "practice/browser/cors-observation.md",
+      "domain": "browser",
+      "section": "practice",
+      "format": "sample",
+      "status": "published",
+      "summary": "同じ固定テキストを通常ページとsandbox付きiframeから取得し、応答を読める条件とpreflightで実際のGETが止まる条件を確かめる。",
+      "source": "新規執筆",
+      "aliases": [
+        "同一オリジン",
+        "CORS",
+        "fetch",
+        "iframe sandbox",
+        "opaque response",
+        "Origin",
+        "OPTIONS",
+        "preflight"
+      ],
+      "collection": "cors-observation",
+      "order": 1,
+      "verification": "Windows上のブラウザでローカル配信の3条件を実行確認（2026-11-05）",
+      "links": [
+        "/browser/same-origin-cors.html"
+      ]
+    },
+    {
       "title": "ブラウザの描画 — HTMLから画面のピクセルまで",
       "url": "/browser/rendering-journey.html",
       "file": "browser/rendering-journey.md",
@@ -6974,6 +7010,8 @@
         "/practice/browser/storage-observation.html",
         "/browser/service-worker-offline.html",
         "/practice/browser/service-worker-observation.html",
+        "/browser/same-origin-cors.html",
+        "/practice/browser/cors-observation.html",
         "/history/video-games.html",
         "/guide/rendering/timeline.html"
       ]
@@ -8532,6 +8570,42 @@
       ]
     },
     {
+      "title": "同一オリジンポリシーとCORS — 送信と応答の公開",
+      "url": "/browser/same-origin-cors.html",
+      "file": "browser/same-origin-cors.md",
+      "domain": "browser",
+      "section": "reference",
+      "format": "article",
+      "status": "published",
+      "summary": "オリジンの境界、同一オリジンポリシー、CORSの応答検査を整理する。OPTIONSによるプリフライト、資格情報、no-corsで見える応答を区別する。",
+      "source": "新規執筆",
+      "aliases": [
+        "オリジン",
+        "origin",
+        "同一オリジンポリシー",
+        "same-origin policy",
+        "SOP",
+        "same-site",
+        "opaque origin",
+        "CORS",
+        "Cross-Origin Resource Sharing",
+        "プリフライト",
+        "preflight",
+        "Access-Control-Allow-Origin",
+        "credentials",
+        "no-cors",
+        "opaque response",
+        "CSRF"
+      ],
+      "verification": "一次資料照合（2026-11-05）",
+      "links": [
+        "/browser/storage-lifetime.html",
+        "/network/http-caching.html",
+        "/browser/service-worker-offline.html",
+        "/practice/browser/cors-observation.html"
+      ]
+    },
+    {
       "title": "配列と文字列",
       "url": "/languages/cpp/arrays-and-strings.html",
       "file": "languages/cpp/arrays-and-strings.md",
@@ -9085,6 +9159,7 @@
       "source": "統合ガイド",
       "aliases": [],
       "links": [
+        "/browser/same-origin-cors.html",
         "/browser/service-worker-offline.html",
         "/browser/storage-lifetime.html",
         "/network/http-caching.html",

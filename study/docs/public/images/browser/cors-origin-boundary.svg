@@ -1,0 +1,49 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="760" height="978" viewBox="0 0 760 978" role="img" aria-labelledby="title desc">
+  <title id="title">ブラウザが比べるオリジン</title>
+  <desc id="desc">HTTPSのapp.example.comで既定ポート443を使うページを基準にする。パスが違ってもスキーム、ホスト、ポートが一致すれば同一オリジン。ホスト、ポート、スキームのどれかが違えば別オリジン。サンドボックスの文書には独自の不透明なオリジンが割り当てられ、文字列にするとnullになる。</desc>
+  <defs>
+    <style>
+      text{font-family:'BIZ UDPGothic','Yu Gothic',Meiryo,sans-serif;fill:#183440}
+      .title{font-size:36px;font-weight:700}.head{font-size:30px;font-weight:700}
+      .body{font-size:27px}.label{font-size:25px;font-weight:700}
+      .url{font-family:Consolas,'Liberation Mono',monospace;font-size:27px}
+      .muted{fill:#3b5963}.accent{fill:#085c4d}.warning{fill:#794220}
+      .panel{fill:#fff;stroke:#a6bcc2;stroke-width:2}
+    </style>
+  </defs>
+  <rect width="760" height="978" rx="24" fill="#eef5f6"/>
+  <text x="38" y="58" class="title">ブラウザが比べるオリジン</text>
+  <text x="38" y="101" class="body muted">HTTP(S)では、次の3要素が境界を決める。</text>
+
+  <rect x="36" y="132" width="688" height="235" rx="20" class="panel"/>
+  <text x="60" y="177" class="head">基準のページ</text>
+  <text x="60" y="219" class="url">https://app.example.com/study/</text>
+  <rect x="60" y="242" width="153" height="96" rx="12" fill="#dceeea"/>
+  <rect x="228" y="242" width="273" height="96" rx="12" fill="#dceeea"/>
+  <rect x="516" y="242" width="184" height="96" rx="12" fill="#dceeea"/>
+  <text x="80" y="278" class="label">スキーム</text>
+  <text x="248" y="278" class="label">ホスト</text>
+  <text x="536" y="278" class="label">ポート</text>
+  <text x="80" y="316" class="url accent">https</text>
+  <text x="248" y="316" class="url accent">app.example.com</text>
+  <text x="536" y="316" class="url accent">443</text>
+  <text x="602" y="315" class="label accent">既定</text>
+
+  <rect x="36" y="393" width="688" height="132" rx="20" fill="#e0eee5" stroke="#a3bfae" stroke-width="2"/>
+  <text x="60" y="437" class="head accent">同じオリジン</text>
+  <text x="60" y="476" class="url">https://app.example.com/data.json</text>
+  <text x="60" y="508" class="body">パスだけが異なり、3要素は同じ。</text>
+
+  <rect x="36" y="551" width="688" height="180" rx="20" class="panel"/>
+  <text x="60" y="596" class="head warning">別のオリジン</text>
+  <text x="60" y="645" class="url">https://api.example.com/data.json</text>
+  <text x="60" y="693" class="url">https://app.example.com:8443/</text>
+  <text x="695" y="645" class="label warning" text-anchor="end">ホスト差</text>
+  <text x="695" y="693" class="label warning" text-anchor="end">ポート差</text>
+
+  <rect x="36" y="757" width="688" height="183" rx="20" fill="#e8eaf7" stroke="#b4b9d4" stroke-width="2"/>
+  <text x="60" y="803" class="head">サンドボックス内の文書</text>
+  <text x="60" y="847" class="url">iframe sandbox="allow-scripts"</text>
+  <text x="60" y="888" class="body">配信元が同じでも、文書に独自の境界ができる。</text>
+  <text x="60" y="922" class="body">不透明なオリジンを文字列にすると null。</text>
+</svg>

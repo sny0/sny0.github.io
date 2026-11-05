@@ -26,6 +26,7 @@ URLを開いてから描画されるまでを、通信・実行・表示に分�
 - [イベントループ・Promise・async/await — 実行順と描画の関係](/browser/event-loop-promises.html)
 - [ブラウザの描画 — HTMLから画面のピクセルまで](/browser/rendering-journey.html)
 - [ブラウザの保存領域 — localStorage・IndexedDB・Cache APIとデータの寿命](/browser/storage-lifetime.html)
+- [同一オリジンポリシーとCORS — 送信と応答の公開](/browser/same-origin-cors.html)
 
 ## この分野の学習ガイド
 
@@ -40,6 +41,7 @@ URLを開いてから描画されるまでを、通信・実行・表示に分�
 - [Web Workerでコピー・transfer・停止を観察する](/practice/browser/worker-message-observation.html)
 - [Worker poolで受付上限・待機取消し・結果破棄を観察する](/practice/browser/worker-pool-observation.html)
 - [ブラウザでPromise・await・timer・rAFの順序を観察する](/practice/browser/event-loop-observation.html)
+- [ブラウザで同一オリジンとCORSの応答を比べる](/practice/browser/cors-observation.html)
 
 ## 扱う範囲・増補する項目
 
