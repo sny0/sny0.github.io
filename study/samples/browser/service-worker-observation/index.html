@@ -1,0 +1,106 @@
+<!doctype html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="light">
+  <link rel="canonical" href="https://sny0.com/study/samples/browser/service-worker-observation/index.html">
+  <title>Service Workerの制御と応答元を観察する | Sny0 Study</title>
+  <link rel="stylesheet" href="./styles.css">
+  <script src="./main.js" defer></script>
+</head>
+<body>
+  <main>
+    <header class="page-header">
+      <a href="https://sny0.com/study/practice/browser/service-worker-observation.html">Sny0 Studyの解説へ戻る</a>
+      <p class="eyebrow">Service Worker / Lifecycle / Cache API</p>
+      <h1>登録・制御・応答元を<br>分けて見る</h1>
+      <p>このフォルダ専用のWorkerを明示的に登録し、ready、現在のcontroller、固定GETの応答元を観察します。</p>
+    </header>
+    <noscript><p class="notice">操作にはJavaScriptが必要です。</p></noscript>
+
+    <section class="panel" aria-labelledby="scope-heading">
+      <h2 id="scope-heading">実験の対象</h2>
+      <dl class="names">
+        <div><dt>scope</dt><dd><code id="scope-value"></code></dd></div>
+        <div><dt>script</dt><dd><code id="script-value"></code></dd></div>
+        <div><dt>固定GET・正規cache key</dt><dd><code id="payload-value"></code></dd></div>
+        <div><dt>cache名</dt><dd><code id="cache-name"></code></dd></div>
+      </dl>
+      <p id="guard-state" class="help">専用scopeとscriptを照合します。</p>
+    </section>
+
+    <section class="panel" aria-labelledby="lifecycle-heading">
+      <h2 id="lifecycle-heading">1. 登録して、現在のcontrollerを見る</h2>
+      <div class="actions">
+        <button type="button" id="register" disabled>実験用Workerを登録</button>
+        <button type="button" id="refresh" class="secondary" disabled>状態を再確認</button>
+        <button type="button" id="reload" class="secondary">このページを再読み込み</button>
+      </div>
+      <p id="operation-status" class="state-line" data-state="idle">待機中。登録の有無を確認します。</p>
+      <table>
+        <caption>それぞれ異なる状態を観察する</caption>
+        <thead><tr><th scope="col">観察する値</th><th scope="col">表示</th></tr></thead>
+        <tbody>
+          <tr><th scope="row">exact scopeの現在の登録</th><td id="registration-state" data-kind="unknown">未確認</td></tr>
+          <tr><th scope="row">登録のライフサイクル</th><td id="lifecycle-state">—</td></tr>
+          <tr><th scope="row">このページのreadyの解決履歴</th><td id="ready-state" data-kind="pending">pending</td></tr>
+          <tr><th scope="row">このページの現在のcontroller</th><td id="controller-state" data-kind="none">未確認</td></tr>
+        </tbody>
+      </table>
+      <p class="help">readyがfulfilledになっても、初回のページではcontrollerがnullの場合があります。activeを確認してから、通常の再読み込みを試します。ready欄はこのページで観測した履歴です。</p>
+    </section>
+
+    <section class="panel" aria-labelledby="fetch-heading">
+      <h2 id="fetch-heading">2. 同じ固定データの応答元を比べる</h2>
+      <div class="actions">
+        <button type="button" id="network" disabled>通常の固定GET</button>
+        <button type="button" id="simulate-offline" class="secondary" disabled>疑似オフラインの固定GET</button>
+      </div>
+      <p class="help">疑似オフラインは専用の<code>?mode=offline</code>付きGETでWorker内のネットワーク分岐を省きます。実際の回線遮断は、別途ネットワークの失敗を観察する操作です。</p>
+      <table>
+        <caption>固定GETの観測結果</caption>
+        <thead><tr><th scope="col">項目</th><th scope="col">今回</th></tr></thead>
+        <tbody>
+          <tr><th scope="row">URL</th><td id="request-url">未実行</td></tr>
+          <tr><th scope="row">応答状態</th><td id="request-status">未実行</td></tr>
+          <tr><th scope="row">応答元ヘッダー</th><td id="response-source">—</td></tr>
+          <tr><th scope="row">分岐の理由</th><td id="response-reason">—</td></tr>
+        </tbody>
+      </table>
+      <pre id="response-body" class="payload">—</pre>
+      <p class="help"><code>network</code>はWorkerのfetchから得たデータ、<code>cache-fallback</code>はネットワーク側の失敗後の保存データ、<code>cache-simulated</code>は疑似オフラインでの保存データです。観測ヘッダーがない場合は、このWorkerが応答を作ったことを確認できていません。</p>
+    </section>
+
+    <section class="panel" aria-labelledby="cleanup-heading">
+      <h2 id="cleanup-heading">3. 解除・再読み込み・entry削除</h2>
+      <div class="actions">
+        <button type="button" id="unregister" class="secondary" disabled>実験の登録を解除</button>
+        <button type="button" id="cleanup-cache" class="secondary" disabled>保存した固定entryを削除</button>
+      </div>
+      <ol class="steps">
+        <li>実験の登録を解除し、現在のcontrollerを確認します。</li>
+        <li>他の実験タブを閉じ、このページを通常の方法で再読み込みします。</li>
+        <li>現在の専用登録とcontrollerが消えたことを確認して、固定entryを削除します。</li>
+      </ol>
+      <p class="help">解除後も、読み込み済みのページは以前のWorkerに制御される場合があります。entry削除は正規payload URL一つに限定し、cacheコンテナは残します。他タブの状態は各タブで確認してください。</p>
+    </section>
+
+    <section class="panel" aria-labelledby="log-heading">
+      <div class="log-heading">
+        <h2 id="log-heading">操作とライフサイクルのログ <span class="subtle">最新60件</span></h2>
+        <button type="button" id="clear-log" class="secondary">表示ログを消す</button>
+      </div>
+      <ol id="event-log" class="event-log"></ol>
+    </section>
+
+    <aside class="notice" aria-labelledby="limits-heading">
+      <h2 id="limits-heading">実験の範囲</h2>
+      <p>HTTPSまたはsecure contextのlocalhost HTTPで開きます。実行対象は固定JSONのGETです。ページ、CSS、JS等は通常どおり配信サーバーから読み込みます。</p>
+      <p>Workerのネットワーク試行には本文読取りまで同じ3秒の中断signalと2048バイトの読取り上限を使います。cacheへのフォールバックは専用の正規キー一つです。cache missや読取り失敗はHTTP 503で表示します。</p>
+    </aside>
+    <p id="announcement" class="visually-hidden" role="status" aria-live="polite" aria-atomic="true"></p>
+    <footer><a href="https://sny0.com/study/practice/browser/service-worker-observation.html">実験の手順とソースの解説を読む</a></footer>
+  </main>
+</body>
+</html>

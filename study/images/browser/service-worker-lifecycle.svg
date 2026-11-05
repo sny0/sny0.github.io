@@ -1,0 +1,46 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="760" height="1510" viewBox="0 0 760 1510" role="img" aria-labelledby="title desc">
+  <title id="title">Service Workerの登録からページの制御、解除まで</title>
+  <desc id="desc">実験フォルダのscopeへ登録し、installで保存を準備する。更新時は既存ページが旧workerを使用している間に新workerが待機する。有効化を経て次の通常ナビゲーションでページのcontrollerが付く。登録解除後は再読み込みで制御を離れ、専用Cacheの対象応答を別の操作で片付ける。</desc>
+  <defs>
+    <style>text{font-family:'BIZ UDPGothic','Yu Gothic',Meiryo,sans-serif;fill:#26352e}.title{font-size:32px;font-weight:700}.head{font-size:28px;font-weight:700}.body{font-size:24px}.small{font-size:22px}.card{fill:white;stroke:#739483;stroke-width:2}.arrow{fill:none;stroke:#567963;stroke-width:3;marker-end:url(#a)}</style>
+    <marker id="a" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto"><path d="M0 0L10 5L0 10Z" fill="#567963"/></marker>
+  </defs>
+  <rect width="760" height="1510" rx="24" fill="#f4f8f4"/>
+  <text x="40" y="56" class="title">登録から、ページを制御するまで</text>
+  <text x="40" y="96" class="body">登録・有効化・現在の担当を順に観察する</text>
+  <rect x="36" y="130" width="688" height="178" rx="18" class="card"/>
+  <text x="60" y="174" class="head">1. registerで専用scopeを登録</text>
+  <text x="60" y="216" class="body">実験フォルダのsw.jsと、そのフォルダを指定。</text>
+  <text x="60" y="258" class="body">scopeは、登録が対応するページを選ぶ範囲。</text>
+  <text x="60" y="294" class="small">利用するのはHTTPSやlocalhostなどのsecure context。</text>
+  <path d="M380 310V344" class="arrow"/>
+  <rect x="36" y="348" width="688" height="174" rx="18" fill="#e2eafa"/>
+  <text x="60" y="392" class="head">2. installで応答を準備</text>
+  <text x="60" y="434" class="body">ローカルで作ったResponseを専用Cacheへ保存。</text>
+  <text x="60" y="476" class="body">waitUntilに渡した処理の結果をinstallへ反映する。</text>
+  <text x="60" y="508" class="small">準備のPromiseがrejectすると、そのinstallは失敗する。</text>
+  <path d="M380 524V558" class="arrow"/>
+  <rect x="36" y="562" width="688" height="162" rx="18" class="card"/>
+  <text x="60" y="606" class="head">3. 更新時はwaitingで順番を待つ</text>
+  <text x="60" y="648" class="body">既存ページが旧workerを使う間、新workerは待機。</text>
+  <text x="60" y="690" class="small">初回登録では、旧workerの利用がないため先へ進める。</text>
+  <path d="M380 726V760" class="arrow"/>
+  <rect x="36" y="764" width="688" height="174" rx="18" fill="#dcece0"/>
+  <text x="60" y="808" class="head">4. active枠に入り、activateを実行</text>
+  <text x="60" y="850" class="body">readyは、該当する登録のactive枠を確認する窓口。</text>
+  <text x="60" y="892" class="body">処理を終えたworkerはactivatedへ進む。</text>
+  <text x="60" y="924" class="small">実験では、登録状態と現在ページのcontrollerを別々に表示。</text>
+  <path d="M380 940V974" class="arrow"/>
+  <rect x="36" y="978" width="688" height="182" rx="18" class="card"/>
+  <text x="60" y="1022" class="head">5. 次の通常読み込みで担当が付く</text>
+  <text x="60" y="1064" class="body">ページを再読み込みし、controllerのscriptを照合。</text>
+  <text x="60" y="1106" class="body">担当workerが固定GETのfetchイベントを処理する。</text>
+  <text x="60" y="1144" class="small">この実験は、通常の有効化とページ読み込みを観察する。</text>
+  <rect x="36" y="1188" width="688" height="284" rx="18" fill="#e9efe6"/>
+  <text x="60" y="1232" class="head">解除と片付けには段階がある</text>
+  <text x="60" y="1274" class="body">unregisterで、今後の読み込み向けの登録を解除。</text>
+  <text x="60" y="1316" class="body">既存ページでは、旧controllerが担当を続け得る。</text>
+  <text x="60" y="1358" class="body">再読み込みして、そのページの制御が外れたか確認。</text>
+  <text x="60" y="1400" class="body">他の実験タブを閉じ、専用Cacheの対象応答を削除。</text>
+  <text x="60" y="1444" class="small">登録の状態と、保存した応答の寿命を個別に扱う。</text>
+</svg>
