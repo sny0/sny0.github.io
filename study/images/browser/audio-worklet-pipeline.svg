@@ -1,0 +1,53 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="760" height="1050" viewBox="0 0 760 1050" role="img" aria-labelledby="title desc">
+  <title id="title">AudioWorkletがPCMを出力ブロックへ書く流れ</title>
+  <desc id="desc">ページ側でモノラルPCMと供給予定を用意し、AudioWorkletNodeを音声グラフに接続する。レンダリング側のAudioWorkletProcessorは、供給予定に達したデータをキューに入れる。processが出力配列の長さだけ読み、キューにないフレームを0で埋める。OfflineAudioContextは結果をAudioBufferとして返す。</desc>
+  <style>
+    text { font-family: "Noto Sans CJK JP", "Yu Gothic UI", Meiryo, sans-serif; fill: #183446; }
+    .title { font-size: 34px; font-weight: 700; }
+    .subtitle { font-size: 23px; fill: #385462; }
+    .label { font-size: 26px; font-weight: 700; }
+    .body { font-size: 22px; }
+    .small { font-size: 20px; }
+    .mono { font-family: Consolas, "Yu Gothic UI", monospace; }
+    .panel { fill: #fff; stroke: #a6b8c2; stroke-width: 2; }
+    .step { fill: #e4eef7; stroke: #abc3d3; }
+    .arrow { fill: none; stroke: #4d6877; stroke-width: 3; marker-end: url(#arrow); }
+  </style>
+  <defs>
+    <marker id="arrow" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto">
+      <path d="M0 0L8 4L0 8Z" fill="#4d6877"/>
+    </marker>
+  </defs>
+  <rect width="760" height="1050" rx="24" fill="#eaf2f4"/>
+  <text class="title" x="35" y="65">AudioWorkletで音声を出力する</text>
+  <text class="subtitle" x="35" y="103">公開実験ではグラフの処理結果をメモリに保存します。</text>
+
+  <rect class="panel" x="35" y="133" width="690" height="181" rx="17"/>
+  <text class="label" x="57" y="176">ページ側で準備する</text>
+  <text class="body" x="57" y="215">モノラルPCMと、各まとまりの供給予定を用意する。</text>
+  <text class="body" x="57" y="249">モジュールを読み込み、グラフにノードをつなぐ。</text>
+  <text class="small mono" x="57" y="281">addModule() → AudioWorkletNode → destination</text>
+
+  <path class="arrow" d="M380 327V367"/>
+  <text class="small" x="401" y="352">レンダリングを開始</text>
+
+  <rect class="panel" x="35" y="380" width="690" height="417" rx="17"/>
+  <text class="label" x="57" y="424">レンダリング側でブロックを作る</text>
+  <text class="body mono" x="57" y="460">AudioWorkletProcessor.process()</text>
+  <rect class="step" x="57" y="485" width="646" height="75" rx="12"/>
+  <text class="body" x="75" y="516">各出力フレームで、供給時刻を調べる。</text>
+  <text class="body" x="75" y="543">届いたPCMをキューへ入れる。</text>
+  <path class="arrow" d="M380 570V599"/>
+  <rect class="step" x="57" y="611" width="646" height="104" rx="12"/>
+  <text class="body" x="75" y="651">先に入れた値から出力配列へ書く。</text>
+  <text class="body" x="75" y="687">キューが空なら、足りないフレームを0で埋める。</text>
+  <text class="small mono" x="57" y="755">outputs[0][0].length = 今回のフレーム数</text>
+
+  <path class="arrow" d="M380 810V850"/>
+  <text class="small" x="401" y="835">ブロックを順に蓄積</text>
+
+  <rect class="panel" x="35" y="863" width="690" height="150" rx="17"/>
+  <text class="label" x="57" y="907">処理結果を受け取る</text>
+  <text class="body" x="57" y="947">OfflineAudioContextがAudioBufferを返す。</text>
+  <text class="small" x="57" y="980">48,000 Hz × 1秒 = 48,000フレーム</text>
+</svg>
