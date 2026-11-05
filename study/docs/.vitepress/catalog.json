@@ -69,7 +69,7 @@
       "id": "browser",
       "title": "ブラウザ",
       "description": "URLを開いてから描画されるまでを、通信・実行・表示に分ける。",
-      "count": 5,
+      "count": 6,
       "status": "辞典本文あり"
     },
     {
@@ -130,6 +130,13 @@
     }
   ],
   "collections": [
+    {
+      "id": "storage-observation",
+      "section": "practice",
+      "title": "ブラウザで保存・再読込・削除を観察する",
+      "description": "localStorage・IndexedDB・Cache APIへ固定データを保存し、読出し、ページ再読込、専用データの削除を確かめる。",
+      "start": "/practice/browser/storage-observation.html"
+    },
     {
       "id": "http-cache-observation",
       "section": "practice",
@@ -2650,6 +2657,7 @@
       "verification": "一次資料照合（2026-11-05）",
       "links": [
         "/network/http-messages.html",
+        "/browser/storage-lifetime.html",
         "/browser/rendering-journey.html",
         "/practice/network/http-cache-observation.html"
       ]
@@ -2812,6 +2820,33 @@
         "/design/naming.html",
         "/design/pattern-index.html",
         "/design/notebook-references.html"
+      ]
+    },
+    {
+      "title": "localStorage・IndexedDB・Cache APIの保存と完了を観察する",
+      "url": "/practice/browser/storage-observation.html",
+      "file": "practice/browser/storage-observation.md",
+      "domain": "browser",
+      "section": "practice",
+      "format": "sample",
+      "status": "published",
+      "summary": "専用namespaceの固定レコード一つだけを保存・読出し・削除し、localStorageの同期返値、IndexedDBのtransaction完了、Cache APIのPromiseとResponse消費を比較する。",
+      "source": "新規執筆",
+      "aliases": [
+        "ブラウザ保存領域",
+        "localStorage",
+        "IndexedDB",
+        "Cache API",
+        "transaction",
+        "QuotaExceededError",
+        "SecurityError",
+        "bodyUsed"
+      ],
+      "collection": "storage-observation",
+      "order": 1,
+      "verification": "Windows上のブラウザで保存・再読込・削除を実行確認（2026-11-05）",
+      "links": [
+        "/browser/storage-lifetime.html"
       ]
     },
     {
@@ -6027,6 +6062,40 @@
       ]
     },
     {
+      "title": "ブラウザの保存領域 — localStorage・IndexedDB・Cache APIとデータの寿命",
+      "url": "/browser/storage-lifetime.html",
+      "file": "browser/storage-lifetime.md",
+      "domain": "browser",
+      "section": "reference",
+      "format": "article",
+      "status": "published",
+      "summary": "localStorage、IndexedDB、Cache APIのデータ形式と完了の意味を整理する。origin・partition、トランザクションの寿命、容量制限、永続化の許可と削除条件を分けて説明する。",
+      "source": "新規執筆",
+      "aliases": [
+        "ブラウザストレージ",
+        "Web Storage",
+        "localStorage",
+        "sessionStorage",
+        "IndexedDB",
+        "object store",
+        "IDBTransaction",
+        "Cache API",
+        "CacheStorage",
+        "storage event",
+        "quota",
+        "StorageManager",
+        "persist",
+        "eviction",
+        "storage partitioning"
+      ],
+      "verification": "一次資料照合（2026-11-05）",
+      "links": [
+        "/browser/event-loop-promises.html",
+        "/network/http-caching.html",
+        "/practice/browser/storage-observation.html"
+      ]
+    },
+    {
       "title": "プレイヤー入力の設計",
       "url": "/design/case-studies/player-input.html",
       "file": "design/case-studies/player-input.md",
@@ -6825,6 +6894,8 @@
         "/browser/worker-pool-backpressure.html",
         "/practice/browser/worker-pool-observation.html",
         "/practice/browser/stream-backpressure-observation.html",
+        "/browser/storage-lifetime.html",
+        "/practice/browser/storage-observation.html",
         "/history/video-games.html",
         "/guide/rendering/timeline.html"
       ]
@@ -8936,6 +9007,7 @@
       "source": "統合ガイド",
       "aliases": [],
       "links": [
+        "/browser/storage-lifetime.html",
         "/network/http-caching.html",
         "/browser/streams-backpressure.html",
         "/browser/worker-pool-backpressure.html",
