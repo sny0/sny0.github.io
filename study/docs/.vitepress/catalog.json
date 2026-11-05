@@ -69,7 +69,7 @@
       "id": "browser",
       "title": "ブラウザ",
       "description": "URLを開いてから描画されるまでを、通信・実行・表示に分ける。",
-      "count": 4,
+      "count": 5,
       "status": "辞典本文あり"
     },
     {
@@ -130,6 +130,13 @@
     }
   ],
   "collections": [
+    {
+      "id": "stream-backpressure-observation",
+      "section": "practice",
+      "title": "Streams APIで供給と処理の速度差を観察する",
+      "description": "有限のデータを遅い書き込み先へ送り、pull、desiredSize、完了と中断を確かめる。",
+      "start": "/practice/browser/stream-backpressure-observation.html"
+    },
     {
       "id": "worker-pool-observation",
       "section": "practice",
@@ -3593,6 +3600,75 @@
       ]
     },
     {
+      "title": "Streams APIで遅いsinkとbackpressureを観察する",
+      "url": "/practice/browser/stream-backpressure-observation.html",
+      "file": "practice/browser/stream-backpressure-observation.md",
+      "domain": "browser",
+      "section": "practice",
+      "format": "sample",
+      "status": "published",
+      "summary": "ReadableStreamをpipeToで遅いWritableStreamへ接続し、enqueue前後のdesiredSize・教材側の未消費数・通常完了・中断後の後片付けを区別して観察する。",
+      "source": "新規執筆",
+      "aliases": [
+        "Streams API",
+        "ReadableStream",
+        "WritableStream",
+        "pipeTo",
+        "desiredSize",
+        "CountQueuingStrategy",
+        "backpressure",
+        "AbortController"
+      ],
+      "collection": "stream-backpressure-observation",
+      "order": 1,
+      "verification": "一次資料照合・Node.js実行（2026-11-05）",
+      "links": [
+        "/browser/streams-backpressure.html"
+      ]
+    },
+    {
+      "title": "Streams APIとストリーミング処理 — データの流れとbackpressure",
+      "url": "/browser/streams-backpressure.html",
+      "file": "browser/streams-backpressure.md",
+      "domain": "browser",
+      "section": "reference",
+      "format": "article",
+      "status": "published",
+      "summary": "ReadableStream、WritableStream、TransformStreamの役割とchunk・待ち行列を説明する。highWaterMarkとdesiredSize、writeとreadyのPromise、pipeToの伝播、終了・取消し・lock、UTF-8の分割境界を整理する。",
+      "source": "新規執筆",
+      "aliases": [
+        "Streams API",
+        "streaming",
+        "ストリーミング",
+        "ReadableStream",
+        "WritableStream",
+        "TransformStream",
+        "chunk",
+        "underlying source",
+        "underlying sink",
+        "pull",
+        "push",
+        "backpressure",
+        "desiredSize",
+        "highWaterMark",
+        "writer.ready",
+        "pipeTo",
+        "pipeThrough",
+        "cancel",
+        "abort",
+        "close",
+        "releaseLock",
+        "TextDecoderStream"
+      ],
+      "verification": "一次資料照合（2026-11-05）",
+      "links": [
+        "/browser/worker-pool-backpressure.html",
+        "/browser/web-workers-messages.html",
+        "/data/unicode-and-encoding.html",
+        "/practice/browser/stream-backpressure-observation.html"
+      ]
+    },
+    {
       "title": "TAA (Temporal Anti-Aliasing)",
       "url": "/graphics/postprocess/taa.html",
       "file": "graphics/postprocess/taa.md",
@@ -4389,6 +4465,7 @@
       "links": [
         "/browser/web-workers-messages.html",
         "/browser/event-loop-promises.html",
+        "/browser/streams-backpressure.html",
         "/practice/browser/worker-pool-observation.html",
         "/game/asset-loading.html"
       ]
@@ -6667,6 +6744,8 @@
         "/practice/browser/worker-message-observation.html",
         "/browser/worker-pool-backpressure.html",
         "/practice/browser/worker-pool-observation.html",
+        "/browser/streams-backpressure.html",
+        "/practice/browser/stream-backpressure-observation.html",
         "/history/video-games.html",
         "/guide/rendering/timeline.html"
       ]
@@ -8778,6 +8857,7 @@
       "source": "統合ガイド",
       "aliases": [],
       "links": [
+        "/browser/streams-backpressure.html",
         "/browser/worker-pool-backpressure.html",
         "/browser/web-workers-messages.html",
         "/browser/event-loop-promises.html",

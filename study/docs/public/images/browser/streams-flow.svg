@@ -1,0 +1,49 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="760" height="1510" viewBox="0 0 760 1510" role="img" aria-labelledby="title desc">
+  <title id="title">Streams APIのデータとバックプレッシャーの向き</title>
+  <desc id="desc">供給元から読み取りキュー、pipeTo、書き込み先へデータが流れる。遅い書き込み先の空きに応じて読み取りが抑えられ、pullによる供給も減る。highWaterMarkは強制上限ではなく閾値である。</desc>
+  <defs>
+    <style>text{font-family:'BIZ UDPGothic','Yu Gothic',Meiryo,sans-serif;fill:#26352e}.title{font-size:32px;font-weight:700}.head{font-size:28px;font-weight:700}.body{font-size:24px}.small{font-size:22px}.card{fill:white;stroke:#739483;stroke-width:2}.arrow{fill:none;stroke:#567963;stroke-width:3;marker-end:url(#a)}.back{fill:none;stroke:#5377ac;stroke-width:3;stroke-dasharray:8 6;marker-end:url(#b)}</style>
+    <marker id="a" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto"><path d="M0 0L10 5L0 10Z" fill="#567963"/></marker>
+    <marker id="b" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto"><path d="M0 0L10 5L0 10Z" fill="#5377ac"/></marker>
+  </defs>
+  <rect width="760" height="1510" rx="24" fill="#f4f8f4"/>
+  <text x="40" y="56" class="title">供給を、処理の速さへ合わせる</text>
+  <text x="40" y="96" class="body">実線：データ　破線：需要・抑制の向き</text>
+  <rect x="36" y="130" width="618" height="186" rx="18" class="card"/>
+  <text x="60" y="174" class="head">underlying source：供給元</text>
+  <text x="60" y="216" class="body">pullの呼び出しに応じてchunkを生成。</text>
+  <text x="60" y="256" class="body">今回の実践は、固定8個だけを順に送る。</text>
+  <text x="60" y="294" class="small">enqueueを無制限に繰り返すproducerにはしない。</text>
+  <path d="M345 318V360" class="arrow"/>
+  <rect x="36" y="364" width="618" height="228" rx="18" class="card"/>
+  <text x="60" y="408" class="head">ReadableStreamのキュー</text>
+  <g class="body" text-anchor="middle">
+    <rect x="60" y="432" width="130" height="54" rx="10" fill="#dcece0"/><text x="125" y="468">chunk</text>
+    <rect x="210" y="432" width="130" height="54" rx="10" fill="#dcece0"/><text x="275" y="468">chunk</text>
+  </g>
+  <text x="60" y="532" class="body">desiredSize = HWM − キューの合計size</text>
+  <text x="60" y="570" class="small">図の2枠は概念図。実際の内部キューの表示ではない。</text>
+  <path d="M345 594V636" class="arrow"/>
+  <rect x="36" y="640" width="618" height="180" rx="18" fill="#e2eafa"/>
+  <text x="60" y="684" class="head">pipeTo：読み取り先と書き込み先を接続</text>
+  <text x="60" y="726" class="body">下流の空きを待ち、次の読み取りを進める。</text>
+  <text x="60" y="766" class="body">ReadableとWritableは、それぞれ別のキュー。</text>
+  <text x="60" y="802" class="small">この接続だけで、別スレッドのCPU処理にはならない。</text>
+  <path d="M345 822V864" class="arrow"/>
+  <rect x="36" y="868" width="618" height="192" rx="18" class="card"/>
+  <text x="60" y="912" class="head">WritableStream → underlying sink</text>
+  <text x="60" y="954" class="body">writeが返すPromiseで、処理完了を知らせる。</text>
+  <text x="60" y="994" class="body">遅いsinkの待ちが、上流の供給へ伝わる。</text>
+  <text x="60" y="1034" class="small">今回のtimer待ちは、書き込みの遅さを見せる教材。</text>
+  <path d="M656 964H696V226H656" class="back"/>
+  <rect x="36" y="1090" width="688" height="170" rx="18" fill="#dcece0"/>
+  <text x="60" y="1134" class="head">highWaterMarkは、強制上限ではない</text>
+  <text x="60" y="1176" class="body">desiredSizeが0以下でもenqueue自体は可能。</text>
+  <text x="60" y="1216" class="body">供給元が需要に従って、生成や入力を抑える。</text>
+  <text x="60" y="1250" class="small">件数・byte数など、sizeの単位も明示する。</text>
+  <rect x="36" y="1288" width="688" height="184" rx="18" fill="#e9efe6"/>
+  <text x="60" y="1332" class="head">どの範囲を数えたかを分ける</text>
+  <text x="60" y="1374" class="body">キュー、処理中、生成済みの未完了数は別の値。</text>
+  <text x="60" y="1414" class="body">HWMだけで、ブラウザ全体の使用メモリは決まらない。</text>
+  <text x="60" y="1452" class="small">ネットワークやOSのバッファ、処理途中の保持も別にある。</text>
+</svg>

@@ -147,6 +147,12 @@
 2. [Worker poolの待機数と取消しを観察する](/practice/browser/worker-pool-observation.html)で、2実行・4待機・1拒否、待機の取消しと結果破棄による違いを確かめる。
 3. [Web Workerの通信](/browser/web-workers-messages.html)でデータの受け渡しを確認し、[アセットロード](/game/asset-loading.html)の段階と利用可能になる条件へつなぐ。
 
+## 読み込みより処理が遅いとき、供給をどう抑えるか
+
+1. [Streams APIとストリーミング処理](/browser/streams-backpressure.html)で、chunk、queue、pull、バックプレッシャー、終了の伝播を区別する。
+2. [Streams APIで供給と処理の速度差を観察する](/practice/browser/stream-backpressure-observation.html)で、有限のデータを遅いsinkへ送り、先読みと中断を確かめる。
+3. 仕事の受付数は[Worker pool](/browser/worker-pool-backpressure.html)、文字の境界は[Unicodeとエンコーディング](/data/unicode-and-encoding.html)、利用可能になる条件は[アセットロード](/game/asset-loading.html)へつなげる。
+
 ## 作り方の変化を歴史から見る
 
 [ビデオゲーム史](/history/video-games.html)の作品・ハード・媒体・流通と、[リアルタイム3D技術史](/guide/rendering/timeline.html)の技術の変化から、気になった仕組みへ進みます。

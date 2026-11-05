@@ -19,6 +19,7 @@ URLを開いてから描画されるまでを、通信・実行・表示に分�
 
 ## 辞典の本文
 
+- [Streams APIとストリーミング処理 — データの流れとbackpressure](/browser/streams-backpressure.html)
 - [Web Workerとメッセージ通信 — 実行の分担とデータの所有権](/browser/web-workers-messages.html)
 - [Worker poolと待ち行列の制御 — 受付・実行・取消しを分ける](/browser/worker-pool-backpressure.html)
 - [イベントループ・Promise・async/await — 実行順と描画の関係](/browser/event-loop-promises.html)
@@ -31,6 +32,7 @@ URLを開いてから描画されるまでを、通信・実行・表示に分�
 ## 作って試す
 
 - [HTML・CSS・JavaScriptでブラウザの変更と計測を観察する](/practice/browser/render-observation.html)
+- [Streams APIで遅いsinkとbackpressureを観察する](/practice/browser/stream-backpressure-observation.html)
 - [Web Workerでコピー・transfer・停止を観察する](/practice/browser/worker-message-observation.html)
 - [Worker poolで受付上限・待機取消し・結果破棄を観察する](/practice/browser/worker-pool-observation.html)
 - [ブラウザでPromise・await・timer・rAFの順序を観察する](/practice/browser/event-loop-observation.html)

@@ -12,6 +12,7 @@ export const formatLabels = {
 export const statusLabels = { published: '公開中', outline: '学習計画・概要', draft: '草稿', planned: '執筆予定' }
 
 export const collections = [
+  { id: 'stream-backpressure-observation', section: 'practice', title: 'Streams APIで供給と処理の速度差を観察する', description: '有限のデータを遅い書き込み先へ送り、pull、desiredSize、完了と中断を確かめる。', start: '/practice/browser/stream-backpressure-observation.html' },
   { id: 'worker-pool-observation', section: 'practice', title: 'Worker poolで待機数と取消しを観察する', description: '実行枠2・待機枠4へ7件を依頼し、受付拒否、待機取消し、実行中の結果破棄、停止と再起動を確かめる。', start: '/practice/browser/worker-pool-observation.html' },
   { id: 'worker-message-observation', section: 'practice', title: 'Web Workerでコピー・転送・停止を観察する', description: '同じ16バイトを複製または転送して往復し、バッファの状態、要求ID、停止と再起動、送信時の例外を確かめる。', start: '/practice/browser/worker-message-observation.html' },
   { id: 'event-loop-observation', section: 'practice', title: 'ブラウザでPromiseとawaitの実行順を観察する', description: '同期処理、Promise、有限のマイクロタスク列、timerとrAFのcallbackを記録し、保証される順序と観測した順序を分ける。', start: '/practice/browser/event-loop-observation.html' },

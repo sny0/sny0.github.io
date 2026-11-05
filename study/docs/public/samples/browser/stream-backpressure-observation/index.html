@@ -1,0 +1,108 @@
+<!doctype html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="light">
+  <link rel="canonical" href="https://sny0.com/study/samples/browser/stream-backpressure-observation/index.html">
+  <title>Streams APIとbackpressureの観察 | Sny0 Study</title>
+  <link rel="stylesheet" href="./styles.css">
+  <script src="./main.js" defer></script>
+</head>
+<body>
+  <main>
+    <header class="page-header">
+      <a href="https://sny0.com/study/practice/browser/stream-backpressure-observation.html">Sny0 Studyの解説へ戻る</a>
+      <p class="eyebrow">ReadableStream → pipeTo → WritableStream</p>
+      <h1>遅い消費側へ、<br>どこまで先読みする？</h1>
+      <p>pullで8個のchunkを作り、600msのtimerを待つsinkへ接続します。実際のStreams APIで、desiredSizeと教材側の件数を分けて観察します。</p>
+    </header>
+    <noscript><p class="notice">操作にはJavaScriptが必要です。</p></noscript>
+
+    <section class="panel" aria-labelledby="controls-heading">
+      <h2 id="controls-heading">1. 接続して、完了または中断を待つ</h2>
+      <div class="actions">
+        <button type="button" id="start">8chunkのpipeToを開始</button>
+        <button type="button" id="abort" class="secondary" disabled>中断を要求</button>
+        <button type="button" id="reset" class="secondary">中断して初期化</button>
+      </div>
+      <p id="stream-state" class="state-line" data-state="idle">状態：待機中</p>
+      <p id="operation-state" class="help">完了はpipeToのPromiseがfulfilledになった時点です。中断要求後も、Promiseがsettledになるまで再実行しません。</p>
+      <div class="actions counter-row">
+        <button type="button" id="counter-button" class="secondary">mainカウンター +1</button>
+        <span>カウンター：<output id="counter-value">0</output></span>
+      </div>
+      <p id="support-note" class="help">外部データの取得はありません。timerは正確な実行時刻の保証ではなく、背景タブや負荷で遅延し得ます。</p>
+    </section>
+
+    <section class="panel" aria-labelledby="pipeline-heading">
+      <h2 id="pipeline-heading">2. 生成と消費を見る</h2>
+      <div class="pipeline-grid">
+        <article class="stage-card">
+          <h3>ReadableStream</h3>
+          <p>CountQueuingStrategy<br><strong>HWM = 2</strong></p>
+          <p class="help">1chunkは4バイト。pullで一つずつ生成し、8個enqueueしたらcloseを要求します。</p>
+        </article>
+        <article class="stage-card">
+          <h3>pipeTo</h3>
+          <p>signalで中断要求</p>
+          <p class="help">下流の進行に応じて読み書きします。内部queueの配列を直接表示するAPIは使っていません。</p>
+        </article>
+        <article class="stage-card">
+          <h3>WritableStream</h3>
+          <p>CountQueuingStrategy<br><strong>HWM = 1</strong></p>
+          <p class="help">writeは600msのtimer Promiseを待ちます。同時に動くwriteは一つです。</p>
+        </article>
+      </div>
+      <dl class="stats-grid">
+        <div><dt>生成 generated</dt><dd id="generated-count">0</dd></div>
+        <div><dt>write開始 started</dt><dd id="started-count">0</dd></div>
+        <div><dt>通常消費完了 completed</dt><dd id="completed-count">0</dd></div>
+        <div><dt>未消費の累計差 outstanding</dt><dd id="outstanding-count">0</dd></div>
+      </dl>
+      <p class="formula"><code>outstanding = generated − completed</code></p>
+      <p class="help">outstandingは教材が数えた累計差です。中断後の破棄対象も含み、現在の内部queue長や保持メモリ量を表しません。</p>
+      <table>
+        <caption>役割を分けて読む</caption>
+        <thead><tr><th scope="col">値</th><th scope="col">今回</th></tr></thead>
+        <tbody>
+          <tr><th scope="row">生成済み・write未開始の累計差</th><td id="not-started-count">0</td></tr>
+          <tr><th scope="row">sinkで進行中のchunk</th><td id="active-chunk">なし</td></tr>
+          <tr><th scope="row">中断で待機を片付けたwrite</th><td id="interrupted-count">0</td></tr>
+          <tr><th scope="row">直近enqueue前 → 後のdesiredSize</th><td id="latest-desired">未記録</td></tr>
+          <tr><th scope="row">source.cancel callback回数</th><td id="source-cancel-count">0</td></tr>
+          <tr><th scope="row">sink.abort callback回数</th><td id="sink-abort-count">0</td></tr>
+          <tr><th scope="row">pipeToの終端</th><td id="pipe-outcome">未開始</td></tr>
+          <tr><th scope="row">ReadableStream.locked</th><td id="readable-locked">未作成</td></tr>
+          <tr><th scope="row">WritableStream.locked</th><td id="writable-locked">未作成</td></tr>
+        </tbody>
+      </table>
+      <p class="help">生成済み・write未開始数も教材側の差分です。Readableのqueue、pipe内部の読取り、Writableのqueueを分解した数ではありません。HWMはcount単位で、バイト数のhard capではありません。</p>
+    </section>
+
+    <section class="panel" aria-labelledby="enqueue-heading">
+      <h2 id="enqueue-heading">enqueueした時点の記録</h2>
+      <table>
+        <caption>controller.desiredSizeをenqueueの直前と直後に読む</caption>
+        <thead><tr><th scope="col">chunk</th><th scope="col">前</th><th scope="col">後</th></tr></thead>
+        <tbody id="enqueue-rows"><tr><td colspan="3">まだ生成していません。</td></tr></tbody>
+      </table>
+    </section>
+
+    <section class="panel" aria-labelledby="log-heading">
+      <h2 id="log-heading">処理とcallbackのログ <span class="subtle">最新60件</span></h2>
+      <p class="help">mainが記録したperformance.now()です。source.cancel、sink.abort、pipeToの拒否の順を固定保証するものではありません。</p>
+      <ol id="event-log" class="event-log"></ol>
+    </section>
+
+    <aside class="notice" aria-labelledby="limits-heading">
+      <h2 id="limits-heading">中断の後片付けと観測範囲</h2>
+      <p>pipeToと進行中writeの待機timerへ同じsignalを使います。中断時はtimerをclearし、その待機Promiseとwriteをsignal.reasonでrejectして片付けます。このwriteを通常消費完了には数えません。writeの部分的な作用が自動rollbackされる意味ではありません。</p>
+      <p>中断要求後も、既に読み取られたchunkのwriteが始まる場合があります。その待機も同じsignalで片付けます。実際のsource.cancelとsink.abortのcallbackを記録しますが、状態によって両方が必ず呼ばれるとは限りません。sourceが既にclosedの場合、両callbackが0回でも進行中writeのrejectがpipeToへ伝わる経路があります。pipeToの終端を回収してからlock状態を表示し、再実行できます。</p>
+      <p>固定8chunkのメモリ内モデルです。ネットワークfetch、ファイル保存、CPU並列処理、メモリ使用量の上限保証を実演するコードではありません。外部ライブラリ、storage、analytics、busy loopは使いません。</p>
+    </aside>
+    <p id="announcement" class="visually-hidden" role="status" aria-live="polite" aria-atomic="true"></p>
+    <footer><a href="https://sny0.com/study/practice/browser/stream-backpressure-observation.html">実験の手順とソースの解説を読む</a></footer>
+  </main>
+</body>
+</html>
