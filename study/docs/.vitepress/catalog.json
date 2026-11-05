@@ -69,7 +69,7 @@
       "id": "browser",
       "title": "ブラウザ",
       "description": "URLを開いてから描画されるまでを、通信・実行・表示に分ける。",
-      "count": 13,
+      "count": 14,
       "status": "辞典本文あり"
     },
     {
@@ -130,6 +130,13 @@
     }
   ],
   "collections": [
+    {
+      "id": "wasm-abi-observation",
+      "section": "practice",
+      "title": "WebAssemblyへ配列とUTF-8を渡し、メモリ確保を観察する",
+      "description": "線形メモリに配列と文字列を置き、ポインタと長さ、アラインメント、アリーナの確保位置を確かめる。",
+      "start": "/practice/browser/wasm-abi-observation.html"
+    },
     {
       "id": "wasm-memory-observation",
       "section": "practice",
@@ -4687,7 +4694,41 @@
         "/browser/same-origin-cors.html",
         "/browser/cross-origin-isolation.html",
         "/game/asset-loading.html",
-        "/practice/browser/wasm-memory-observation.html"
+        "/practice/browser/wasm-memory-observation.html",
+        "/browser/wasm-data-and-allocation.html"
+      ]
+    },
+    {
+      "title": "WebAssemblyのデータ受け渡しとメモリ確保 — ポインタ・長さ・アリーナ",
+      "url": "/browser/wasm-data-and-allocation.html",
+      "file": "browser/wasm-data-and-allocation.md",
+      "domain": "browser",
+      "section": "reference",
+      "format": "article",
+      "status": "published",
+      "summary": "JavaScriptの配列と文字列をWasmの線形メモリに並べる規約と、アリーナが領域を確保・再利用する流れを説明する。",
+      "source": "新規執筆",
+      "aliases": [
+        "WebAssembly",
+        "Wasm",
+        "ABI",
+        "pointer",
+        "length",
+        "UTF-8",
+        "TextEncoder",
+        "alignment",
+        "padding",
+        "arena",
+        "bump allocator",
+        "alloc",
+        "cursor",
+        "reset"
+      ],
+      "verification": "WebAssembly Core・JavaScript Interface、WHATWG Encoding、ECMAScript、WebAssembly Basic C ABIと照合（2026-11-05）",
+      "links": [
+        "/browser/webassembly-linear-memory.html",
+        "/data/unicode-and-encoding.html",
+        "/practice/browser/wasm-abi-observation.html"
       ]
     },
     {
@@ -4716,6 +4757,37 @@
       "verification": "Windows上のブラウザで両読み込み経路、MIME型による切り替え、境界トラップとメモリ拡張を実行確認（2026-11-05）",
       "links": [
         "/browser/webassembly-linear-memory.html"
+      ]
+    },
+    {
+      "title": "WebAssemblyへ配列とUTF-8を渡し、メモリ確保を観察する",
+      "url": "/practice/browser/wasm-abi-observation.html",
+      "file": "practice/browser/wasm-abi-observation.md",
+      "domain": "browser",
+      "section": "practice",
+      "format": "sample",
+      "status": "published",
+      "summary": "配列とUTF-8を線形メモリに配置し、ポインタと長さをWasmへ渡す。アラインメント、確保に失敗する条件、メモリ拡張とリセットを観察する。",
+      "source": "新規執筆",
+      "aliases": [
+        "WebAssembly",
+        "Wasm",
+        "ABI",
+        "pointer",
+        "length",
+        "UTF-8",
+        "TextEncoder",
+        "アリーナ",
+        "bump allocator",
+        "alloc",
+        "alignment"
+      ],
+      "collection": "wasm-abi-observation",
+      "order": 1,
+      "verification": "Windows上のブラウザで配列・UTF-8・アラインメント、確保失敗と拡張後の成功、リセット後の再利用を確認（2026-11-05）",
+      "links": [
+        "/browser/wasm-data-and-allocation.html",
+        "/data/unicode-and-encoding.html"
       ]
     },
     {
@@ -7376,6 +7448,8 @@
         "/practice/browser/cross-origin-isolation-observation.html",
         "/browser/webassembly-linear-memory.html",
         "/practice/browser/wasm-memory-observation.html",
+        "/browser/wasm-data-and-allocation.html",
+        "/practice/browser/wasm-abi-observation.html",
         "/history/video-games.html",
         "/guide/rendering/timeline.html"
       ]
@@ -9525,6 +9599,7 @@
       "source": "統合ガイド",
       "aliases": [],
       "links": [
+        "/browser/wasm-data-and-allocation.html",
         "/browser/webassembly-linear-memory.html",
         "/browser/cross-origin-isolation.html",
         "/browser/csrf-and-request-validation.html",

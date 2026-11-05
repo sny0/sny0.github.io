@@ -85,3 +85,5 @@ WasmからJavaScriptを呼びたい場合は、モジュールが関数をイン
 ## 実践との対応
 
 実践ページでは、WATと変換済みの `.wasm` を照らし合わせ、先頭8バイト、JavaScriptからの書き込み、Wasmの更新、拡張後のビュー、境界を越える読み取りを順に確認できます。[WebAssemblyと線形メモリの実験](/practice/browser/wasm-memory-observation.html)
+
+配列や文字列を置く場所を確保し、ポインタと長さでWasmへ伝える方法は、[WebAssemblyのデータ受け渡しとメモリ確保](/browser/wasm-data-and-allocation.html)で扱います。

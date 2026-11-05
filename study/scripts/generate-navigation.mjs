@@ -352,11 +352,18 @@ writePage('guide/learning-paths.md', '疑問から選ぶ読み順', {
 2. [WebAssemblyの読み込みと線形メモリを観察する](/practice/browser/wasm-memory-observation.html)で、JavaScriptとWasmから同じバイト列を読み、拡張前後のビューを比べる。
 3. バイト列での整数の表現は[整数とビット・バイト](/data/integer-bits-and-bytes.html)、Workerをまたぐ共有は[クロスオリジン分離と共有メモリ](/browser/cross-origin-isolation.html)で確認する。
 
+## 配列や文字列をWasmへ渡すとき、どこに何を置くか
+
+1. [WebAssemblyのデータ受け渡しとメモリ確保](/browser/wasm-data-and-allocation.html)で、ポインタと長さの単位、配置、確保位置とメモリの容量を整理する。
+2. [Wasmへ配列とUTF-8を渡す実験](/practice/browser/wasm-abi-observation.html)で、実際のバイト列、アラインメントによる空き、確保失敗と拡張を観察する。
+3. 文字列のバイト表現は[Unicodeとエンコーディング](/data/unicode-and-encoding.html)、メモリ確保を実行環境の内側から見る場合は[メモリ確保の内部](/runtime/memory/allocation-journey.html)へつなげる。
+
 ## 作り方の変化を歴史から見る
 
 [ビデオゲーム史](/history/video-games.html)の作品・ハード・媒体・流通と、[リアルタイム3D技術史](/guide/rendering/timeline.html)の技術の変化から、気になった仕組みへ進みます。`)
 
 const termRows = [
+  ['Wasm ABI / ポインタと長さ / pointer / byte length / TextEncoder / アラインメント / アリーナ / bump allocator / alloc / cursor', '/browser/wasm-data-and-allocation.html', '配列・文字列を渡す配置と長さの単位、領域の確保・拡張・寿命を調べる'],
   ['WebAssembly / Wasm / WAT / WebAssembly.Module / WebAssembly.Instance / import / export / instantiateStreaming / 線形メモリ / linear memory / Memory.grow / trap', '/browser/webassembly-linear-memory.html', 'バイナリの読み込みと実体化、JavaScriptとの境界、バイト列の読み書きと拡張を調べる'],
   ['クロスオリジン分離 / cross-origin isolation / crossOriginIsolated / COOP / COEP / CORP / require-corp / credentialless / SharedArrayBuffer / Atomics', '/browser/cross-origin-isolation.html', 'ウィンドウ間の境界、別オリジン資源の読み込み、Worker間で同じメモリを使う条件を調べる'],
   ['CSRF / Cross-Site Request Forgery / リクエスト偽造 / Origin / Referer / SameSite / CSRFトークン / synchronizer token', '/browser/csrf-and-request-validation.html', 'Cookieが付く条件と、送信元・トークンを検査して状態変更を受理する条件を調べる'],

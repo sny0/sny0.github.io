@@ -1,0 +1,57 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="760" height="1100" viewBox="0 0 760 1100" role="img" aria-labelledby="title desc">
+  <title id="title">配列とUTF-8のバイト配置</title>
+  <desc id="desc">配列10、マイナス2、32は位置1024から12バイトを占める。sum_i32に渡す長さは3要素。A、猫、ゲームコントローラーの絵文字は位置1040からUTF-8の8バイトを占める。sum_u8に渡す長さは8バイト。</desc>
+  <defs>
+    <style>
+      text{font-family:'BIZ UDPGothic','Yu Gothic',Meiryo,sans-serif;fill:#183440}
+      .title{font-size:36px;font-weight:700}.head{font-size:29px;font-weight:700}
+      .body{font-size:26px}.small{font-size:23px}
+      .code{font-family:Consolas,'Liberation Mono',monospace;font-size:25px}
+      .muted{fill:#3b5963}.green{fill:#085c4d}
+      .panel{fill:#fff;stroke:#a6bcc2;stroke-width:2}
+      .array{fill:#e8ecf8;stroke:#a9b8d8}.utf8{fill:#e0eee5;stroke:#9dc1ad}
+    </style>
+  </defs>
+  <rect width="760" height="1100" rx="24" fill="#eef5f6"/>
+  <text class="title" x="36" y="62">配列とUTF-8のバイト配置</text>
+  <text class="body muted" x="36" y="103">開始位置と、決めた単位の長さを渡す。</text>
+
+  <rect class="panel" x="36" y="136" width="688" height="404" rx="18"/>
+  <text class="head" x="60" y="184">32ビット整数の配列</text>
+  <text class="code" x="60" y="227">[10, -2, 32]</text>
+  <text class="body muted" x="60" y="268">1要素4バイト。下位バイトから順に置く。</text>
+  <text class="code" text-anchor="middle" x="162" y="313">1024–1027</text>
+  <text class="code" text-anchor="middle" x="380" y="313">1028–1031</text>
+  <text class="code" text-anchor="middle" x="598" y="313">1032–1035</text>
+  <rect class="array" x="60" y="333" width="204" height="96" rx="11"/>
+  <rect class="array" x="278" y="333" width="204" height="96" rx="11"/>
+  <rect class="array" x="496" y="333" width="204" height="96" rx="11"/>
+  <text class="code" text-anchor="middle" x="162" y="371">10</text>
+  <text class="code" text-anchor="middle" x="380" y="371">-2</text>
+  <text class="code" text-anchor="middle" x="598" y="371">32</text>
+  <text class="code muted" text-anchor="middle" x="162" y="406">0a 00 00 00</text>
+  <text class="code muted" text-anchor="middle" x="380" y="406">fe ff ff ff</text>
+  <text class="code muted" text-anchor="middle" x="598" y="406">20 00 00 00</text>
+  <text class="code green" x="60" y="473">sum_i32(1024, 3)</text>
+  <text class="body" x="60" y="512">長さは3要素。読み取る量は12バイト。</text>
+
+  <rect class="panel" x="36" y="569" width="688" height="495" rx="18"/>
+  <text class="head" x="60" y="618">UTF-8の文字列</text>
+  <text class="body" x="60" y="662">A猫🎮 をTextEncoderでUTF-8に変換。</text>
+  <text class="body muted" x="60" y="706">コードポイントは3個、UTF-16の単位は4個。</text>
+  <text class="code" text-anchor="middle" x="122" y="758">1040</text>
+  <text class="code" text-anchor="middle" x="301" y="758">1041–1043</text>
+  <text class="code" text-anchor="middle" x="559" y="758">1044–1047</text>
+  <rect class="utf8" x="60" y="780" width="124" height="103" rx="11"/>
+  <rect class="utf8" x="198" y="780" width="206" height="103" rx="11"/>
+  <rect class="utf8" x="418" y="780" width="282" height="103" rx="11"/>
+  <text class="code" text-anchor="middle" x="122" y="821">A</text>
+  <text class="body" text-anchor="middle" x="301" y="821">猫</text>
+  <text class="code" text-anchor="middle" x="559" y="821">U+1F3AE</text>
+  <text class="code muted" text-anchor="middle" x="122" y="858">41</text>
+  <text class="code muted" text-anchor="middle" x="301" y="858">e7 8c ab</text>
+  <text class="code muted" text-anchor="middle" x="559" y="858">f0 9f 8e ae</text>
+  <text class="code green" x="60" y="941">sum_u8(1040, 8)</text>
+  <text class="body" x="60" y="984">長さは8バイト。各バイトを符号なしで読む。</text>
+  <text class="small muted" x="60" y="1029">各枠の下段はメモリに並ぶ16進のバイト。</text>
+</svg>
