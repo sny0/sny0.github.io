@@ -111,6 +111,12 @@
 2. [C++・C#のHTTP観察](/practice/network/http-message-observation.html)で、ローカルのGETと応答を照合し、本文のバイト数と文字数、メッセージ完成とEOFを確かめる。
 3. 下の層から調べる場合は[TCPとソケット](/network/tcp-sockets.html)、文字の表現は[Unicodeと文字コード](/data/unicode-and-encoding.html)へ戻る。
 
+## 保存したHTTP応答を、いつ再利用できるか
+
+1. [HTTPキャッシュ](/network/http-caching.html)で、保存、freshness、再検証、Cache-Control、ETagと304の役割を調べる。
+2. [C++・C#のHTTP再検証](/practice/network/http-cache-observation.html)で、ローカルサーバーへ条件付きGETを送り、304に本文がないことと、保存した本文を使う流れを確かめる。
+3. メッセージの構造は[HTTP通信](/network/http-messages.html)、本文を段階的に扱う仕組みは[Streams API](/browser/streams-backpressure.html)へつなげる。
+
 ## 名前から、接続先のIP候補が決まるまで
 
 1. [DNSと名前解決](/network/dns-resolution.html)で、OSの名前解決、再帰リゾルバー、権威DNS、レコードとキャッシュを分ける。

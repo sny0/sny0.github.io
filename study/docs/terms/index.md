@@ -18,6 +18,7 @@
 
 | 用語・別名 | 説明への入口 |
 | --- | --- |
+| [HTTPキャッシュ / HTTP cache / Cache-Control / ETag / If-None-Match / 304 / freshness / max-age / no-cache / no-store / Vary / 再検証](/network/http-caching.html) | 保存した応答の再利用、鮮度、条件付きGET、本文とメタデータの更新を調べる |
 | [Streams API / ストリーミング / ReadableStream / WritableStream / TransformStream / chunk / pull / desiredSize / highWaterMark / pipeTo / writer.ready / cancel / abort](/browser/streams-backpressure.html) | データの供給と消費、キューの閾値、バックプレッシャー、正常終了と中断を調べる |
 | [Worker pool / ワーカープール / 待ち行列 / bounded queue / admission control / backpressure / バックプレッシャー / drain / shutdown](/browser/worker-pool-backpressure.html) | 実行数と待機数の上限、受付拒否、取消し、結果破棄、停止を調べる |
 | [Web Worker / Dedicated Worker / postMessage / structured clone / 構造化クローン / transfer list / transferable / detach / terminate / messageerror](/browser/web-workers-messages.html) | 実行の分担、メッセージによるデータのコピーと転送、応答と終了の扱いを調べる |

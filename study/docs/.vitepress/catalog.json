@@ -76,7 +76,7 @@
       "id": "network",
       "title": "ネットワーク",
       "description": "通信の層と失敗を、Webとゲームの両方から調べる。",
-      "count": 4,
+      "count": 5,
       "status": "辞典本文あり"
     },
     {
@@ -130,6 +130,13 @@
     }
   ],
   "collections": [
+    {
+      "id": "http-cache-observation",
+      "section": "practice",
+      "title": "C++とC#でHTTPの再検証を観察する",
+      "description": "ローカルサーバーへ条件付きGETを送り、200と304、ETagの弱い比較、保存した本文の再利用を確かめる。",
+      "start": "/practice/network/http-cache-observation.html"
+    },
     {
       "id": "stream-backpressure-observation",
       "section": "practice",
@@ -884,6 +891,33 @@
       "collection": "cpp-samples",
       "order": 2,
       "links": []
+    },
+    {
+      "title": "C++とC#でETag・304・保存本文の再利用を観察する",
+      "url": "/practice/network/http-cache-observation.html",
+      "file": "practice/network/http-cache-observation.md",
+      "domain": "network",
+      "section": "practice",
+      "format": "sample",
+      "status": "published",
+      "summary": "loopbackのNodeサーバーへ4回の条件付きGETを送り、200の本文保存、ETagによる304、弱い比較とtag list、不一致時の200を明示的なクライアントモデルで観察する。",
+      "source": "新規執筆",
+      "aliases": [
+        "HTTPキャッシュ",
+        "ETag",
+        "If-None-Match",
+        304,
+        "no-cache",
+        "WinHTTP",
+        "HttpClient",
+        "条件付きGET"
+      ],
+      "collection": "http-cache-observation",
+      "order": 1,
+      "verification": "Windowsで両言語の実HTTP通信を実行確認（2026-11-05）",
+      "links": [
+        "/network/http-caching.html"
+      ]
     },
     {
       "title": "C++とC#でfloatの近似比較と限界を観察する",
@@ -2579,6 +2613,48 @@
       ]
     },
     {
+      "title": "HTTPキャッシュ — 保存・鮮度・再検証と304応答",
+      "url": "/network/http-caching.html",
+      "file": "network/http-caching.md",
+      "domain": "network",
+      "section": "reference",
+      "format": "article",
+      "status": "published",
+      "summary": "HTTP応答の保存可否、freshnessとage、条件付き要求による再検証を分けて説明する。Cache-Control、ETagとIf-None-Match、304の本文再利用、キャッシュのキーと保存区画、ブラウザの別の保存機構を整理する。",
+      "source": "新規執筆",
+      "aliases": [
+        "HTTP cache",
+        "HTTPキャッシュ",
+        "Cache-Control",
+        "freshness",
+        "fresh",
+        "stale",
+        "current_age",
+        "Age",
+        "max-age",
+        "s-maxage",
+        "no-cache",
+        "no-store",
+        "private",
+        "shared cache",
+        "Vary",
+        "ETag",
+        "strong validator",
+        "weak validator",
+        "If-None-Match",
+        "revalidation",
+        "再検証",
+        "304 Not Modified",
+        "cache partition"
+      ],
+      "verification": "一次資料照合（2026-11-05）",
+      "links": [
+        "/network/http-messages.html",
+        "/browser/rendering-journey.html",
+        "/practice/network/http-cache-observation.html"
+      ]
+    },
+    {
       "title": "HTTP通信 — 要求・応答と本文の区切り",
       "url": "/network/http-messages.html",
       "file": "network/http-messages.md",
@@ -2614,6 +2690,7 @@
       "verification": "一次資料照合（2026-11-04）",
       "links": [
         "/network/tcp-sockets.html",
+        "/network/http-caching.html",
         "/data/unicode-and-encoding.html",
         "/network/tls-https.html",
         "/network/dns-resolution.html",
@@ -6732,6 +6809,9 @@
         "/practice/network/tcp-loopback-observation.html",
         "/network/http-messages.html",
         "/practice/network/http-message-observation.html",
+        "/network/http-caching.html",
+        "/practice/network/http-cache-observation.html",
+        "/browser/streams-backpressure.html",
         "/network/dns-resolution.html",
         "/practice/network/name-resolution-observation.html",
         "/network/tls-https.html",
@@ -6744,7 +6824,6 @@
         "/practice/browser/worker-message-observation.html",
         "/browser/worker-pool-backpressure.html",
         "/practice/browser/worker-pool-observation.html",
-        "/browser/streams-backpressure.html",
         "/practice/browser/stream-backpressure-observation.html",
         "/history/video-games.html",
         "/guide/rendering/timeline.html"
@@ -8857,6 +8936,7 @@
       "source": "統合ガイド",
       "aliases": [],
       "links": [
+        "/network/http-caching.html",
         "/browser/streams-backpressure.html",
         "/browser/worker-pool-backpressure.html",
         "/browser/web-workers-messages.html",
