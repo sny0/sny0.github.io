@@ -31,7 +31,7 @@ study:
 
 最初の実験では、`Atomics.load()` と `Atomics.store()` がそれぞれアトミックでも、二つの呼び出しの間に別の処理が入ります。二番目では `Atomics.add()` が読み取り・加算・書き戻しを一つの操作として行います。[ECMAScriptのAtomics](https://tc39.es/ecma262/multipage/structured-data.html#sec-atomics-object)
 
-## 手元で動かす
+## 手元で動かす {#run-locally}
 
 次の6ファイルを同じフォルダに保存します。
 
