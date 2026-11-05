@@ -1,0 +1,53 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="760" height="1160" viewBox="0 0 760 1160" role="img" aria-labelledby="title desc">
+  <title id="title">SPSCキューでデータを公開し、枠を再利用する順序</title>
+  <desc id="desc">書き手は値を書いてから書き位置Wをアトミックに更新します。読み手はその更新を確認してから値を読みます。読み手は値を読み終えてから読み位置Rをアトミックに更新します。書き手はその更新を確認して後で空いた枠を再利用します。Wを更新するのは書き手だけ、Rを更新するのは読み手だけです。</desc>
+  <style>
+    text { font-family: "Noto Sans CJK JP", "Yu Gothic UI", Meiryo, sans-serif; fill: #183446; }
+    .title { font-size: 35px; font-weight: 700; }
+    .subtitle { font-size: 23px; fill: #385462; }
+    .label { font-size: 25px; font-weight: 700; }
+    .body { font-size: 23px; }
+    .small { font-size: 20px; }
+    .mono { font-family: Consolas, "Yu Gothic UI", monospace; }
+    .panel { fill: #fff; stroke: #a6b8c2; stroke-width: 2; }
+  </style>
+  <defs>
+    <marker id="arrow" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto">
+      <path d="M0 0L8 4L0 8Z" fill="#4d6877"/>
+    </marker>
+  </defs>
+  <rect width="760" height="1160" rx="24" fill="#eaf2f4"/>
+  <text class="title" x="35" y="65">二つのカーソルで受け渡す</text>
+  <text class="subtitle" x="35" y="103">書き手がWを、読み手がRを進めます。</text>
+
+  <rect class="panel" x="35" y="133" width="690" height="436" rx="17"/>
+  <text class="label" x="57" y="177">1. 書いた値を読み手へ公開する</text>
+  <rect x="57" y="202" width="646" height="122" rx="12" fill="#e0efea" stroke="#adc7bf"/>
+  <text class="body" x="77" y="234" font-weight="700">書き手</text>
+  <text class="body" x="77" y="270">枠に値を書き込む。</text>
+  <text class="body" x="77" y="302">値を書いた後で、Atomics.store でWを進める。</text>
+  <path d="M380 333V382" fill="none" stroke="#4d6877" stroke-width="3" marker-end="url(#arrow)"/>
+  <text class="small" x="401" y="365">Wの更新を読み取る</text>
+  <rect x="57" y="391" width="646" height="122" rx="12" fill="#e4eef7" stroke="#abc3d3"/>
+  <text class="body" x="77" y="423" font-weight="700">読み手</text>
+  <text class="body" x="77" y="459">Atomics.load でWを読み、空かどうか確認する。</text>
+  <text class="body" x="77" y="491">空でなければ、Rの枠から値を読む。</text>
+  <text class="small" x="57" y="545">値を書く → Wを公開する → Wを確認する → 値を読む</text>
+
+  <rect class="panel" x="35" y="594" width="690" height="436" rx="17"/>
+  <text class="label" x="57" y="638">2. 読み終えた枠を書き手へ戻す</text>
+  <rect x="57" y="663" width="646" height="122" rx="12" fill="#e4eef7" stroke="#abc3d3"/>
+  <text class="body" x="77" y="695" font-weight="700">読み手</text>
+  <text class="body" x="77" y="731">枠から値を読み終える。</text>
+  <text class="body" x="77" y="763">読み終えた後で、Atomics.store でRを進める。</text>
+  <path d="M380 794V843" fill="none" stroke="#4d6877" stroke-width="3" marker-end="url(#arrow)"/>
+  <text class="small" x="401" y="826">Rの更新を読み取る</text>
+  <rect x="57" y="852" width="646" height="122" rx="12" fill="#e0efea" stroke="#adc7bf"/>
+  <text class="body" x="77" y="884" font-weight="700">書き手</text>
+  <text class="body" x="77" y="920">Atomics.load でRを読み、満杯かどうか確認する。</text>
+  <text class="body" x="77" y="952">空きがあれば、Wが指す枠に書き込める。</text>
+  <text class="small" x="57" y="1006">値を読む → Rを公開する → Rを確認する → 枠を再利用</text>
+
+  <text class="small" x="35" y="1081">読み手の確認には「値を読んでよいか」と、</text>
+  <text class="small" x="35" y="1113">書き手の確認には「枠に書いてよいか」が対応します。</text>
+</svg>

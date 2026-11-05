@@ -1,0 +1,117 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="760" height="1300" viewBox="0 0 760 1300" role="img" aria-labelledby="title desc">
+  <title id="title">リングバッファの空、満杯、折り返し</title>
+  <desc id="desc">枠は0から3までの4個です。読み位置Rと書き位置Wは0から始まります。10、20、30を入れると満杯です。10を取り出して40を枠3に入れると、Wは0に折り返します。20を取り出して50を枠0に入れた後は、30、40、50の順に取り出せます。</desc>
+  <style>
+    text { font-family: "Noto Sans CJK JP", "Yu Gothic UI", Meiryo, sans-serif; fill: #183446; }
+    .title { font-size: 35px; font-weight: 700; }
+    .subtitle { font-size: 23px; fill: #385462; }
+    .label { font-size: 25px; font-weight: 700; }
+    .body { font-size: 23px; }
+    .small { font-size: 20px; }
+    .mono { font-family: Consolas, "Yu Gothic UI", monospace; }
+    .panel { fill: #fff; stroke: #a6b8c2; stroke-width: 2; }
+  </style>
+  <rect width="760" height="1300" rx="24" fill="#eaf2f4"/>
+  <text class="title" x="35" y="65">リングバッファの位置を追う</text>
+  <text class="subtitle" x="35" y="103">Rは次に読む位置、Wは次に書く位置です。</text>
+  <g>
+    <rect class="panel" x="35" y="133" width="690" height="202" rx="17"/>
+    <text class="label" x="53" y="177">1. 空から始める</text>
+    <text class="body mono" x="705" y="177" text-anchor="end">R=0   W=0</text>
+    <rect x="53" y="201" width="160" height="82" rx="10" fill="#f3f6f7" stroke="#c4d1d6"/>
+    <text class="small" x="66" y="229">枠0</text>
+    <text class="label mono" x="133" y="265" text-anchor="middle">—</text>
+    <text class="small mono" x="198" y="229" text-anchor="end" fill="#385462">R・W</text>
+    <rect x="217" y="201" width="160" height="82" rx="10" fill="#f3f6f7" stroke="#c4d1d6"/>
+    <text class="small" x="230" y="229">枠1</text>
+    <text class="label mono" x="297" y="265" text-anchor="middle">—</text>
+    <rect x="381" y="201" width="160" height="82" rx="10" fill="#f3f6f7" stroke="#c4d1d6"/>
+    <text class="small" x="394" y="229">枠2</text>
+    <text class="label mono" x="461" y="265" text-anchor="middle">—</text>
+    <rect x="545" y="201" width="160" height="82" rx="10" fill="#f3f6f7" stroke="#c4d1d6"/>
+    <text class="small" x="558" y="229">枠3</text>
+    <text class="label mono" x="625" y="265" text-anchor="middle">—</text>
+    <text class="small" x="53" y="315">RとWが同じなので、取り出せる値はありません。</text>
+  </g>
+  <g>
+    <rect class="panel" x="35" y="352" width="690" height="202" rx="17"/>
+    <text class="label" x="53" y="396">2. 10・20・30を入れる</text>
+    <text class="body mono" x="705" y="396" text-anchor="end">R=0   W=3</text>
+    <rect x="53" y="420" width="160" height="82" rx="10" fill="#e4eef7" stroke="#a7bfce"/>
+    <text class="small" x="66" y="448">枠0</text>
+    <text class="label mono" x="133" y="484" text-anchor="middle">10</text>
+    <text class="small mono" x="198" y="448" text-anchor="end" fill="#385462">R</text>
+    <rect x="217" y="420" width="160" height="82" rx="10" fill="#e4eef7" stroke="#a7bfce"/>
+    <text class="small" x="230" y="448">枠1</text>
+    <text class="label mono" x="297" y="484" text-anchor="middle">20</text>
+    <rect x="381" y="420" width="160" height="82" rx="10" fill="#e4eef7" stroke="#a7bfce"/>
+    <text class="small" x="394" y="448">枠2</text>
+    <text class="label mono" x="461" y="484" text-anchor="middle">30</text>
+    <rect x="545" y="420" width="160" height="82" rx="10" fill="#f3f6f7" stroke="#c4d1d6"/>
+    <text class="small" x="558" y="448">枠3</text>
+    <text class="label mono" x="625" y="484" text-anchor="middle">—</text>
+    <text class="small mono" x="690" y="448" text-anchor="end" fill="#385462">W</text>
+    <text class="small" x="53" y="534">次のWが0なので満杯です。40の挿入は断ります。</text>
+  </g>
+  <g>
+    <rect class="panel" x="35" y="571" width="690" height="202" rx="17"/>
+    <text class="label" x="53" y="615">3. 10を取り出す</text>
+    <text class="body mono" x="705" y="615" text-anchor="end">R=1   W=3</text>
+    <rect x="53" y="639" width="160" height="82" rx="10" fill="#f3f6f7" stroke="#c4d1d6"/>
+    <text class="small" x="66" y="667">枠0</text>
+    <text class="label mono" x="133" y="703" text-anchor="middle">—</text>
+    <rect x="217" y="639" width="160" height="82" rx="10" fill="#e4eef7" stroke="#a7bfce"/>
+    <text class="small" x="230" y="667">枠1</text>
+    <text class="label mono" x="297" y="703" text-anchor="middle">20</text>
+    <text class="small mono" x="362" y="667" text-anchor="end" fill="#385462">R</text>
+    <rect x="381" y="639" width="160" height="82" rx="10" fill="#e4eef7" stroke="#a7bfce"/>
+    <text class="small" x="394" y="667">枠2</text>
+    <text class="label mono" x="461" y="703" text-anchor="middle">30</text>
+    <rect x="545" y="639" width="160" height="82" rx="10" fill="#f3f6f7" stroke="#c4d1d6"/>
+    <text class="small" x="558" y="667">枠3</text>
+    <text class="label mono" x="625" y="703" text-anchor="middle">—</text>
+    <text class="small mono" x="690" y="667" text-anchor="end" fill="#385462">W</text>
+    <text class="small" x="53" y="753">Rを1へ進めます。これで40を入れられます。</text>
+  </g>
+  <g>
+    <rect class="panel" x="35" y="790" width="690" height="202" rx="17"/>
+    <text class="label" x="53" y="834">4. 40を入れる</text>
+    <text class="body mono" x="705" y="834" text-anchor="end">R=1   W=0</text>
+    <rect x="53" y="858" width="160" height="82" rx="10" fill="#f3f6f7" stroke="#c4d1d6"/>
+    <text class="small" x="66" y="886">枠0</text>
+    <text class="label mono" x="133" y="922" text-anchor="middle">—</text>
+    <text class="small mono" x="198" y="886" text-anchor="end" fill="#385462">W</text>
+    <rect x="217" y="858" width="160" height="82" rx="10" fill="#e4eef7" stroke="#a7bfce"/>
+    <text class="small" x="230" y="886">枠1</text>
+    <text class="label mono" x="297" y="922" text-anchor="middle">20</text>
+    <text class="small mono" x="362" y="886" text-anchor="end" fill="#385462">R</text>
+    <rect x="381" y="858" width="160" height="82" rx="10" fill="#e4eef7" stroke="#a7bfce"/>
+    <text class="small" x="394" y="886">枠2</text>
+    <text class="label mono" x="461" y="922" text-anchor="middle">30</text>
+    <rect x="545" y="858" width="160" height="82" rx="10" fill="#e4eef7" stroke="#a7bfce"/>
+    <text class="small" x="558" y="886">枠3</text>
+    <text class="label mono" x="625" y="922" text-anchor="middle">40</text>
+    <text class="small" x="53" y="972">40を枠3に書くとWは0へ戻り、再び満杯になります。</text>
+  </g>
+  <g>
+    <rect class="panel" x="35" y="1009" width="690" height="202" rx="17"/>
+    <text class="label" x="53" y="1053">5. 20を読み、50を入れる</text>
+    <text class="body mono" x="705" y="1053" text-anchor="end">R=2   W=1</text>
+    <rect x="53" y="1077" width="160" height="82" rx="10" fill="#e4eef7" stroke="#a7bfce"/>
+    <text class="small" x="66" y="1105">枠0</text>
+    <text class="label mono" x="133" y="1141" text-anchor="middle">50</text>
+    <rect x="217" y="1077" width="160" height="82" rx="10" fill="#f3f6f7" stroke="#c4d1d6"/>
+    <text class="small" x="230" y="1105">枠1</text>
+    <text class="label mono" x="297" y="1141" text-anchor="middle">—</text>
+    <text class="small mono" x="362" y="1105" text-anchor="end" fill="#385462">W</text>
+    <rect x="381" y="1077" width="160" height="82" rx="10" fill="#e4eef7" stroke="#a7bfce"/>
+    <text class="small" x="394" y="1105">枠2</text>
+    <text class="label mono" x="461" y="1141" text-anchor="middle">30</text>
+    <text class="small mono" x="526" y="1105" text-anchor="end" fill="#385462">R</text>
+    <rect x="545" y="1077" width="160" height="82" rx="10" fill="#e4eef7" stroke="#a7bfce"/>
+    <text class="small" x="558" y="1105">枠3</text>
+    <text class="label mono" x="625" y="1141" text-anchor="middle">40</text>
+    <text class="small" x="53" y="1191">10が入っていた枠0を再利用。FIFOの順は30 → 40 → 50。</text>
+  </g>
+  <text class="small" x="35" y="1257">「—」はキューの外。読み終えた値が配列に残ることがあります。</text>
+</svg>

@@ -219,6 +219,12 @@
 2. [Workerの競合とAtomicsの待機・通知を観察する](/practice/browser/atomics-observation.html)で、読み取りと書き込みの順序をたどる。実際のWorkerで確認する場合はローカル配信を使う。
 3. 共有できる条件は[クロスオリジン分離と共有メモリ](/browser/cross-origin-isolation.html)、複数の値を一緒に守る設計は[スレッドと同期](/runtime/thread-synchronization.html)で調べる。
 
+## 固定サイズのメモリで値を順番に渡すには
+
+1. [リングバッファとSPSCキュー](/browser/spsc-ring-buffer.html)で、読み書き位置が末尾から先頭に戻る仕組みと、空・満杯の判定を整理する。
+2. [リングバッファの満杯・折り返し・読み出し順を観察する](/practice/browser/ring-buffer-observation.html)で、満杯で拒否された値を空きができてから入れ直し、読み出し順を比べる。
+3. 異なるWorkerへの公開順序は[Web Workerと共有メモリの同期](/browser/shared-memory-atomics.html)、受付を制御する方針は[Worker poolとバックプレッシャー](/browser/worker-pool-backpressure.html)へつなげる。
+
 ## 作り方の変化を歴史から見る
 
 [ビデオゲーム史](/history/video-games.html)の作品・ハード・媒体・流通と、[リアルタイム3D技術史](/guide/rendering/timeline.html)の技術の変化から、気になった仕組みへ進みます。

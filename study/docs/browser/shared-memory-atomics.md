@@ -58,3 +58,5 @@ study:
 ## 実践との対応
 
 公開ページのステップ実験では、操作の順番と値の変化を一つずつ追えます。実際のWorkerで動かすには、ページとWorkerが `SharedArrayBuffer` を共有できる配信環境が必要です。実践ページには、クロスオリジン分離に必要な応答ヘッダーを付けてローカルで配信する手順もあります。[Workerの競合とAtomicsの待機・通知を観察する](/practice/browser/atomics-observation.html)
+
+複数の値を順番に受け渡し、読み終えた枠を使い回す例は、[リングバッファとSPSCキュー](/browser/spsc-ring-buffer.html)で扱います。
