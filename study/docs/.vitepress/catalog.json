@@ -69,7 +69,7 @@
       "id": "browser",
       "title": "ブラウザ",
       "description": "URLを開いてから描画されるまでを、通信・実行・表示に分ける。",
-      "count": 9,
+      "count": 10,
       "status": "辞典本文あり"
     },
     {
@@ -130,6 +130,13 @@
     }
   ],
   "collections": [
+    {
+      "id": "xss-csp-observation",
+      "section": "practice",
+      "title": "textContent・innerHTML・CSPの違いを観察する",
+      "description": "同じ文字列から要素が作られるか、イベント属性が実行されるか、CSP違反が通知されるかを比べる。",
+      "start": "/practice/browser/xss-csp-observation.html"
+    },
     {
       "id": "cookie-session-observation",
       "section": "practice",
@@ -1838,6 +1845,7 @@
       "links": [
         "/browser/same-origin-cors.html",
         "/browser/storage-lifetime.html",
+        "/browser/xss-and-csp.html",
         "/network/http-messages.html",
         "/practice/browser/cookie-session-observation.html"
       ]
@@ -3973,6 +3981,33 @@
       ]
     },
     {
+      "title": "textContent・innerHTML・CSPの違いを観察する",
+      "url": "/practice/browser/xss-csp-observation.html",
+      "file": "practice/browser/xss-csp-observation.md",
+      "domain": "browser",
+      "section": "practice",
+      "format": "sample",
+      "status": "published",
+      "summary": "同じ固定のボタン文字列をテキストまたはHTMLとして挿入し、ボタンの生成、イベント属性の実行、CSPによる拒否を別々に確かめる。",
+      "source": "新規執筆",
+      "aliases": [
+        "XSS",
+        "CSP",
+        "textContent",
+        "innerHTML",
+        "onclick",
+        "script-src-attr",
+        "sandbox",
+        "securitypolicyviolation"
+      ],
+      "collection": "xss-csp-observation",
+      "order": 1,
+      "verification": "Windows上のブラウザでDOM生成・クリック処理・CSP違反の通知を実行確認（2026-11-05）",
+      "links": [
+        "/browser/xss-and-csp.html"
+      ]
+    },
+    {
       "title": "TLS・証明書・HTTPS — 暗号化と相手の確認",
       "url": "/network/tls-https.html",
       "file": "network/tls-https.md",
@@ -4709,6 +4744,44 @@
         "/browser/streams-backpressure.html",
         "/practice/browser/worker-pool-observation.html",
         "/game/asset-loading.html"
+      ]
+    },
+    {
+      "title": "XSSとCSP — データがコードとして実行される境界",
+      "url": "/browser/xss-and-csp.html",
+      "file": "browser/xss-and-csp.md",
+      "domain": "browser",
+      "section": "reference",
+      "format": "article",
+      "status": "published",
+      "summary": "XSSが成立する入力と出力の経路、文字列をテキストやHTMLとして扱う処理の違い、CSPによるスクリプト実行の制限を説明する。",
+      "source": "新規執筆",
+      "aliases": [
+        "XSS",
+        "Cross-Site Scripting",
+        "クロスサイトスクリプティング",
+        "反射型",
+        "蓄積型",
+        "DOM-based XSS",
+        "source",
+        "sink",
+        "textContent",
+        "innerHTML",
+        "出力エンコード",
+        "サニタイズ",
+        "CSP",
+        "Content Security Policy",
+        "script-src",
+        "script-src-attr",
+        "nonce",
+        "hash",
+        "Report-Only"
+      ],
+      "verification": "WHATWG標準、W3CのCSP Level 3作業草案、OWASP資料と照合（2026-11-05）",
+      "links": [
+        "/browser/same-origin-cors.html",
+        "/browser/cookies-and-sessions.html",
+        "/practice/browser/xss-csp-observation.html"
       ]
     },
     {
@@ -7088,6 +7161,8 @@
         "/practice/browser/cors-observation.html",
         "/browser/cookies-and-sessions.html",
         "/practice/browser/cookie-session-observation.html",
+        "/browser/xss-and-csp.html",
+        "/practice/browser/xss-csp-observation.html",
         "/history/video-games.html",
         "/guide/rendering/timeline.html"
       ]
@@ -9236,6 +9311,7 @@
       "source": "統合ガイド",
       "aliases": [],
       "links": [
+        "/browser/xss-and-csp.html",
         "/browser/cookies-and-sessions.html",
         "/browser/same-origin-cors.html",
         "/browser/service-worker-offline.html",
