@@ -1,0 +1,39 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="760" height="1510" viewBox="0 0 760 1510" role="img" aria-labelledby="title desc">
+  <title id="title">ブラウザの三つの保存APIと保存区画</title>
+  <desc id="desc">localStorageは文字列のキーと値を同期に扱う。IndexedDBは構造化された値をトランザクションで非同期に扱う。Cache APIはRequestとResponseを明示的に保存する。originや区画、利用者設定によってアクセスできる範囲が分かれ、いずれも保存成功だけで永久保持は保証されない。</desc>
+  <defs><style>text{font-family:'BIZ UDPGothic','Yu Gothic',Meiryo,sans-serif;fill:#26352e}.title{font-size:32px;font-weight:700}.head{font-size:28px;font-weight:700}.body{font-size:24px}.small{font-size:22px}.card{fill:white;stroke:#739483;stroke-width:2}</style></defs>
+  <rect width="760" height="1510" rx="24" fill="#f4f8f4"/>
+  <text x="40" y="56" class="title">何を保存するかで、APIを選ぶ</text>
+  <text x="40" y="96" class="body">保存対象・実行方法・寿命を別々に考える</text>
+  <rect x="36" y="130" width="688" height="176" rx="18" class="card"/>
+  <text x="60" y="174" class="head">まず、アクセスできる保存区画</text>
+  <text x="60" y="216" class="body">originは、scheme・host・portの組合せ。</text>
+  <text x="60" y="258" class="body">ブラウザは埋込み文脈などで、さらに分離し得る。</text>
+  <text x="60" y="294" class="small">同じhostでもHTTPとHTTPS、異なるportは別origin。</text>
+  <rect x="36" y="334" width="688" height="236" rx="18" fill="#dcece0"/>
+  <text x="60" y="378" class="head">localStorage：小さな文字列の設定など</text>
+  <text x="60" y="420" class="body">文字列key → 文字列value。呼出しは同期。</text>
+  <text x="60" y="462" class="body">オブジェクトなら、JSON等への変換を自分で行う。</text>
+  <text x="60" y="504" class="body">一連の読取・計算・書込が、まとめてatomicではない。</text>
+  <text x="60" y="546" class="small">大きなデータや、複数タブの排他制御を任せる場所ではない。</text>
+  <rect x="36" y="598" width="688" height="236" rx="18" fill="#e2eafa"/>
+  <text x="60" y="642" class="head">IndexedDB：構造化されたレコード</text>
+  <text x="60" y="684" class="body">object store・key・indexでデータを扱う。</text>
+  <text x="60" y="726" class="body">非同期requestを、transactionの範囲で実行する。</text>
+  <text x="60" y="768" class="body">requestの成功と、transaction完了を分ける。</text>
+  <text x="60" y="810" class="small">structured cloneで保存。元のJS参照そのものではない。</text>
+  <rect x="36" y="862" width="688" height="236" rx="18" class="card"/>
+  <text x="60" y="906" class="head">Cache API：RequestとResponse</text>
+  <text x="60" y="948" class="body">アプリが、どの応答を保存・選択するかを決める。</text>
+  <text x="60" y="990" class="body">HTTPキャッシュの鮮度規則を自動適用しない。</text>
+  <text x="60" y="1032" class="body">Windowでも使用可。Service Workerの登録は不要。</text>
+  <text x="60" y="1074" class="small">secure contextが必要。例：HTTPS・localhostのHTTP。</text>
+  <rect x="36" y="1126" width="688" height="154" rx="18" fill="#e9efe6"/>
+  <text x="60" y="1170" class="head">三つを、ひとつのtransactionにはできない</text>
+  <text x="60" y="1212" class="body">各APIの成功、部分失敗、再試行を区別する。</text>
+  <text x="60" y="1254" class="small">サンプルは方式ごとに操作し、ひとつの保存名だけを使う。</text>
+  <rect x="36" y="1308" width="688" height="164" rx="18" class="card"/>
+  <text x="60" y="1352" class="head">保存成功は、永久保持の約束ではない</text>
+  <text x="60" y="1394" class="body">利用者の削除、容量圧迫、ブラウザの方針が関わる。</text>
+  <text x="60" y="1436" class="small">同期APIやPromiseの成功から、物理ディスクの状態は読めない。</text>
+</svg>
