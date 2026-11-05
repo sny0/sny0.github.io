@@ -358,11 +358,18 @@ writePage('guide/learning-paths.md', '疑問から選ぶ読み順', {
 2. [Wasmへ配列とUTF-8を渡す実験](/practice/browser/wasm-abi-observation.html)で、実際のバイト列、アラインメントによる空き、確保失敗と拡張を観察する。
 3. 文字列のバイト表現は[Unicodeとエンコーディング](/data/unicode-and-encoding.html)、メモリ確保を実行環境の内側から見る場合は[メモリ確保の内部](/runtime/memory/allocation-journey.html)へつなげる。
 
+## 2つのWorkerが同じ値を更新すると何が起きるか
+
+1. [Web Workerと共有メモリの同期](/browser/shared-memory-atomics.html)で、失われた更新、不可分な加算、待機と通知を区別する。
+2. [Workerの競合とAtomicsの待機・通知を観察する](/practice/browser/atomics-observation.html)で、読み取りと書き込みの順序をたどる。実際のWorkerで確認する場合はローカル配信を使う。
+3. 共有できる条件は[クロスオリジン分離と共有メモリ](/browser/cross-origin-isolation.html)、複数の値を一緒に守る設計は[スレッドと同期](/runtime/thread-synchronization.html)で調べる。
+
 ## 作り方の変化を歴史から見る
 
 [ビデオゲーム史](/history/video-games.html)の作品・ハード・媒体・流通と、[リアルタイム3D技術史](/guide/rendering/timeline.html)の技術の変化から、気になった仕組みへ進みます。`)
 
 const termRows = [
+  ['Atomics / アトミック操作 / lost update / 失われた更新 / read-modify-write / Atomics.add / Atomics.wait / Atomics.notify / 準備フラグ', '/browser/shared-memory-atomics.html', '共有値の更新が失われる順序、不可分な加算、フラグと通知を使うデータの受け渡しを調べる'],
   ['Wasm ABI / ポインタと長さ / pointer / byte length / TextEncoder / アラインメント / アリーナ / bump allocator / alloc / cursor', '/browser/wasm-data-and-allocation.html', '配列・文字列を渡す配置と長さの単位、領域の確保・拡張・寿命を調べる'],
   ['WebAssembly / Wasm / WAT / WebAssembly.Module / WebAssembly.Instance / import / export / instantiateStreaming / 線形メモリ / linear memory / Memory.grow / trap', '/browser/webassembly-linear-memory.html', 'バイナリの読み込みと実体化、JavaScriptとの境界、バイト列の読み書きと拡張を調べる'],
   ['クロスオリジン分離 / cross-origin isolation / crossOriginIsolated / COOP / COEP / CORP / require-corp / credentialless / SharedArrayBuffer / Atomics', '/browser/cross-origin-isolation.html', 'ウィンドウ間の境界、別オリジン資源の読み込み、Worker間で同じメモリを使う条件を調べる'],

@@ -73,3 +73,5 @@ HTTPで配信するDedicated Workerの入口は、起点のスクリプト応答
 公開サンプルでは、現在の分離状態を確認し、通常の `ArrayBuffer` をWorkerへコピーした後の値を比較できます。ローカル版では、同じページをヘッダーなし、COOPのみ、COEPのみ、両方ありで配信します。別ポートの画像を読み込んだ結果と、Workerへ共有バッファを渡せる条件を分けて観察します。[クロスオリジン分離と共有メモリを観察する](/practice/browser/cross-origin-isolation-observation.html)
 
 同じ実行環境でJavaScriptとWasmがバイト列を読み書きする例は、[WebAssemblyと線形メモリ](/browser/webassembly-linear-memory.html)で扱います。
+
+2つのWorkerで共有する値を更新する場合は、読み取りと書き戻しの間に別の更新が入ることがあります。更新を失う条件や、準備済みのデータを渡す手順は[Web Workerと共有メモリの同期](/browser/shared-memory-atomics.html)で扱います。

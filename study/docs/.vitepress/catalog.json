@@ -69,7 +69,7 @@
       "id": "browser",
       "title": "ブラウザ",
       "description": "URLを開いてから描画されるまでを、通信・実行・表示に分ける。",
-      "count": 14,
+      "count": 15,
       "status": "辞典本文あり"
     },
     {
@@ -130,6 +130,13 @@
     }
   ],
   "collections": [
+    {
+      "id": "atomics-observation",
+      "section": "practice",
+      "title": "Workerの競合とAtomicsの待機・通知を観察する",
+      "description": "共有カウンターの失われた更新、不可分な加算、準備フラグと通知の順序を比べる。",
+      "start": "/practice/browser/atomics-observation.html"
+    },
     {
       "id": "wasm-abi-observation",
       "section": "practice",
@@ -4663,6 +4670,40 @@
       ]
     },
     {
+      "title": "Web Workerと共有メモリの同期 — Atomics・競合・待機",
+      "url": "/browser/shared-memory-atomics.html",
+      "file": "browser/shared-memory-atomics.md",
+      "domain": "browser",
+      "section": "reference",
+      "format": "article",
+      "status": "published",
+      "summary": "二つのWorkerが同じ整数を更新するときの更新の取りこぼしと、Atomicsによる不可分な加算、フラグを使ったデータの受け渡しを図解する。",
+      "source": "新規執筆",
+      "aliases": [
+        "Web Worker",
+        "Dedicated Worker",
+        "SharedArrayBuffer",
+        "共有メモリ",
+        "Atomics",
+        "Atomics.add",
+        "Atomics.load",
+        "Atomics.store",
+        "Atomics.wait",
+        "Atomics.notify",
+        "RMW",
+        "lost update",
+        "更新の取りこぼし",
+        "条件待ち"
+      ],
+      "verification": "ECMAScriptのAtomics・メモリモデルとWHATWG HTMLのエージェントの定義に照合（2026-11-05）",
+      "links": [
+        "/browser/cross-origin-isolation.html",
+        "/browser/web-workers-messages.html",
+        "/runtime/thread-synchronization.html",
+        "/practice/browser/atomics-observation.html"
+      ]
+    },
+    {
       "title": "WebAssemblyと線形メモリ — バイナリから実行・共有するバイト列まで",
       "url": "/browser/webassembly-linear-memory.html",
       "file": "browser/webassembly-linear-memory.md",
@@ -4728,7 +4769,8 @@
       "links": [
         "/browser/webassembly-linear-memory.html",
         "/data/unicode-and-encoding.html",
-        "/practice/browser/wasm-abi-observation.html"
+        "/practice/browser/wasm-abi-observation.html",
+        "/browser/shared-memory-atomics.html"
       ]
     },
     {
@@ -4962,6 +5004,34 @@
         "/browser/streams-backpressure.html",
         "/practice/browser/worker-pool-observation.html",
         "/game/asset-loading.html"
+      ]
+    },
+    {
+      "title": "Workerの競合とAtomicsの待機・通知を観察する",
+      "url": "/practice/browser/atomics-observation.html",
+      "file": "practice/browser/atomics-observation.md",
+      "domain": "browser",
+      "section": "practice",
+      "format": "sample",
+      "status": "published",
+      "summary": "二つのWorkerの更新順序をたどり、同じカウンターを増やす操作と、準備フラグを使ったデータの受け渡しを観察する。",
+      "source": "新規執筆",
+      "aliases": [
+        "Atomics",
+        "Atomics.add",
+        "Atomics.wait",
+        "Atomics.notify",
+        "SharedArrayBuffer",
+        "lost update",
+        "アトミック操作",
+        "失われた更新"
+      ],
+      "collection": "atomics-observation",
+      "order": 1,
+      "verification": "Windowsのブラウザで実Workerの更新の取りこぼし、不可分な加算、待機・通知後のデータ読み取りを確認（2026-11-05）",
+      "links": [
+        "/browser/shared-memory-atomics.html",
+        "/browser/cross-origin-isolation.html"
       ]
     },
     {
@@ -5569,7 +5639,8 @@
         "/browser/web-workers-messages.html",
         "/runtime/thread-synchronization.html",
         "/practice/browser/cross-origin-isolation-observation.html",
-        "/browser/webassembly-linear-memory.html"
+        "/browser/webassembly-linear-memory.html",
+        "/browser/shared-memory-atomics.html"
       ]
     },
     {
@@ -5964,7 +6035,8 @@
       "links": [
         "/os/process-startup.html",
         "/runtime/memory/concurrency-bugs.html",
-        "/practice/threads/inventory-synchronization.html"
+        "/practice/threads/inventory-synchronization.html",
+        "/browser/shared-memory-atomics.html"
       ]
     },
     {
@@ -7450,6 +7522,8 @@
         "/practice/browser/wasm-memory-observation.html",
         "/browser/wasm-data-and-allocation.html",
         "/practice/browser/wasm-abi-observation.html",
+        "/browser/shared-memory-atomics.html",
+        "/practice/browser/atomics-observation.html",
         "/history/video-games.html",
         "/guide/rendering/timeline.html"
       ]
@@ -9599,6 +9673,7 @@
       "source": "統合ガイド",
       "aliases": [],
       "links": [
+        "/browser/shared-memory-atomics.html",
         "/browser/wasm-data-and-allocation.html",
         "/browser/webassembly-linear-memory.html",
         "/browser/cross-origin-isolation.html",

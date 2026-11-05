@@ -1,0 +1,50 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="760" height="1100" viewBox="0 0 760 1100" role="img" aria-labelledby="title description">
+  <title id="title">共有データを書いてから通知する</title>
+  <desc id="description">受け手のWorkerはフラグが0のときに待機を試みる。送り手のWorkerはデータ42を書き、フラグを1にしてから通知する。受け手はフラグを読み直し、1ならデータを読む。最初の読み取りで0を見た後、waitの比較より先にフラグが1になった場合は、waitからnot-equalが返る。</desc>
+  <defs>
+    <marker id="arrow" markerWidth="10" markerHeight="10" refX="7" refY="4" orient="auto">
+      <path d="M0 0l8 4-8 4z" fill="#526f78"/>
+    </marker>
+  </defs>
+  <style>
+    text { font-family: system-ui, 'Yu Gothic UI', 'Meiryo', sans-serif; fill: #18313b; }
+    .title { font-size: 35px; font-weight: 750; }
+    .heading { font-size: 29px; font-weight: 700; }
+    .body { font-size: 24px; }
+    .code { font-family: 'Cascadia Mono', Consolas, monospace; font-size: 23px; }
+    .card { fill: #ffffff; stroke: #aabec6; stroke-width: 2; }
+    .green { fill: #e2f0eb; stroke: #a3c3b6; stroke-width: 2; }
+    .blue { fill: #e5eef9; stroke: #adc1d7; stroke-width: 2; }
+    .muted { fill: #405c66; }
+    .arrow { stroke: #526f78; stroke-width: 3; marker-end: url(#arrow); }
+  </style>
+  <rect width="760" height="1100" rx="26" fill="#ebf3f6"/>
+  <text class="title" x="36" y="63">共有データを書いてから通知する</text>
+  <text class="body muted" x="36" y="106">受け手のWorkerが先に待機した場合。</text>
+
+  <rect class="blue" x="36" y="138" width="688" height="184" rx="18"/>
+  <text class="heading" x="60" y="184">1. Workerが準備フラグを調べる</text>
+  <text class="code" x="60" y="225">Atomics.load(slots, Ready) → 0</text>
+  <text class="code" x="60" y="263">Atomics.wait(slots, Ready, 0, timeoutMs)</text>
+  <text class="body muted" x="60" y="298">待機に入る前にも、値が0かを確かめる。</text>
+  <path class="arrow" d="M380 330v32"/>
+
+  <rect class="green" x="36" y="370" width="688" height="246" rx="18"/>
+  <text class="heading" x="60" y="416">2. 別のWorkerが書いて通知する</text>
+  <text class="code" x="60" y="459">slots[Payload] = 42</text>
+  <text class="code" x="60" y="500">Atomics.store(slots, Ready, 1)</text>
+  <text class="code" x="60" y="541">Atomics.notify(slots, Ready, 1) → 1</text>
+  <text class="body muted" x="60" y="588">フラグを立ててから、待機中のWorkerを起こす。</text>
+  <path class="arrow" d="M380 624v32"/>
+
+  <rect class="blue" x="36" y="664" width="688" height="210" rx="18"/>
+  <text class="heading" x="60" y="710">3. Workerがフラグを読み直す</text>
+  <text class="code" x="60" y="752">Atomics.wait の戻り値 → "ok"</text>
+  <text class="code" x="60" y="791">Atomics.load(slots, Ready) → 1</text>
+  <text class="body muted" x="60" y="839">1を確認できたので、データ42を読む。</text>
+
+  <rect class="card" x="36" y="900" width="688" height="164" rx="18"/>
+  <text class="heading" x="60" y="946">load と wait の比較の間に1になったら</text>
+  <text class="body muted" x="60" y="991"><tspan class="code">wait</tspan> の比較で <tspan class="code">"not-equal"</tspan> が返る。</text>
+  <text class="body muted" x="60" y="1029">フラグを読み直せば、データを受け取れる。</text>
+</svg>
