@@ -36,7 +36,13 @@ for(const [file,text] of documents) {
 }
 const sitemap=fs.readFileSync(path.join(dist,'sitemap.xml'),'utf8')
 const sitemapUrls=[...sitemap.matchAll(/<loc>([^<]+)<\/loc>/g)].map(match=>match[1])
-if(sitemapUrls.length!==htmlFiles.length-1 || sitemapUrls.some(url=>!url.startsWith('https://sny0.com/study/')))errors.push('Sitemap must cover the public pages under sny0.com/study/')
+const indexableHtml=[...documents].filter(([file,text])=>file!==path.join(dist,'404.html')
+  && !/<meta\s+name=["']robots["']\s+content=["']noindex["']\s*\/?>/i.test(text))
+const sitemapPages=new Set(sitemapUrls.map(url=>url.endsWith('/') ? url+'index.html' : url))
+if(sitemapUrls.length!==indexableHtml.length || indexableHtml.some(([file])=>{
+  const relative=path.relative(dist,file).split(path.sep).join('/')
+  return !sitemapPages.has(new URL(relative,'https://sny0.com/study/').href)
+}))errors.push('Sitemap must cover the indexable pages under sny0.com/study/')
 if(!documents.get(path.join(dist,'game/ecs.html'))?.includes('Sparse Set'))errors.push('ECS chapter missing')
 if(!documents.get(path.join(dist,'history/video-games.html'))?.includes('2026'))errors.push('History annual content missing')
 if(errors.length){console.error([...new Set(errors)].join('\n'));process.exit(1)}

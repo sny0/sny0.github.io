@@ -171,6 +171,12 @@
 2. [Service Workerで応答元と登録状態を観察する](/practice/browser/service-worker-observation.html)で、専用scopeの登録、固定GETの代替応答、解除と後片付けを試す。
 3. 応答の明示的な保存は[ブラウザの保存領域](/browser/storage-lifetime.html)、HTTPの再利用と再検証は[HTTPキャッシュ](/network/http-caching.html)で確認する。
 
+## 別オリジンへの通信で、応答を読めるかは何で決まるか
+
+1. [同一オリジンポリシーとCORS](/browser/same-origin-cors.html)で、文書間の境界、応答の公開、preflightによる事前確認を区別する。
+2. [ブラウザでCORSの応答を比べる](/practice/browser/cors-observation.html)で、通常ページとsandboxから同じデータをGETし、公開版とローカル配信で結果を比べる。
+3. [HTTPメッセージ](/network/http-messages.html)で要求・応答を確認し、[HTTPキャッシュ](/network/http-caching.html)で応答を再利用する条件へつなげる。
+
 ## 作り方の変化を歴史から見る
 
 [ビデオゲーム史](/history/video-games.html)の作品・ハード・媒体・流通と、[リアルタイム3D技術史](/guide/rendering/timeline.html)の技術の変化から、気になった仕組みへ進みます。

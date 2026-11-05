@@ -95,6 +95,10 @@ Cache APIの中身は、アプリが名前を付けて管理します。HTTPキ�
 
 名前付きCacheの削除には別に`caches.delete(name)`などを使います。登録とCacheは寿命が異なるため、解除後も保存した応答をページから確認できます。名前付きCacheの一覧には、同じ保存領域を使う別アプリのものも含まれます。後片付けで指定するのは、当該アプリが所有するCache名です。[Service WorkersのCacheの寿命](https://w3c.github.io/ServiceWorker/#cache-lifetimes)
 
+## オリジンの境界
+
+Service Workerのscopeは、登録が担当するページのURLの範囲です。制御下のページが別オリジンへ要求した場合、Workerを経由しても、応答を読み取れる条件にはFetchの規則が適用されます。`no-cors`で受け取ったopaqueな応答の本文はWorkerからも読めません。[同一オリジンポリシーとCORS](/browser/same-origin-cors.html)
+
 ## 実践との対応
 
 実践では教材専用ディレクトリをscopeにし、登録と再読み込みの前後でcontrollerを観察します。ワーカーは`payload.json`のGETで通常の取得を試し、失敗時にはinstallで専用Cacheに保存した応答を返します。`?mode=offline`は対象の要求だけ通常の取得を省略する、教材用の疑似オフライン分岐です。HTMLやCSS、JavaScriptは通常の配信から読み込みます。登録解除後は再読み込みでcontrollerを確認し、専用Cacheの対象応答を別の操作で削除します。[Service Workerの登録と応答を観察する](/practice/browser/service-worker-observation.html)
