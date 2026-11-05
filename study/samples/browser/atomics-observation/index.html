@@ -1,0 +1,120 @@
+<!doctype html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="referrer" content="no-referrer">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'self'; style-src 'self'; worker-src 'self'; base-uri 'none'; form-action 'none'">
+  <title>共有メモリの競合とAtomicsを観察する | Sny0 Study</title>
+  <link rel="canonical" href="https://sny0.com/study/samples/browser/atomics-observation/index.html">
+  <link rel="stylesheet" href="styles.css">
+  <script src="main.js" defer></script>
+</head>
+<body>
+  <main>
+    <header>
+      <a href="https://sny0.com/study/practice/browser/atomics-observation.html">実践手順とコードを読む</a>
+      <h1>共有メモリの競合とAtomicsを観察する</h1>
+      <p>2つのWorkerが同じ値を更新する例と、データの準備完了を知らせる例を見ていきます。</p>
+    </header>
+
+    <section aria-labelledby="model-heading">
+      <h2 id="model-heading">手順を1つずつ進めるモデル</h2>
+      <p>操作の順番を固定して再現するモデルです。公開ページでそのまま動きます。</p>
+      <div class="cases">
+        <section class="card" data-model="split" aria-labelledby="split-heading">
+          <h3 id="split-heading">1. 読み取りと書き込みを分ける</h3>
+          <p>Worker AとBが共有カウンターを読み、それぞれ読んだ値に1を足して書き戻します。</p>
+          <dl class="facts">
+            <div><dt>共有カウンター</dt><dd id="model-split-counter" data-field="counter">0</dd></div>
+            <div><dt>Aが読んだ値</dt><dd id="model-split-a" data-field="a">—</dd></div>
+            <div><dt>Bが読んだ値</dt><dd id="model-split-b" data-field="b">—</dd></div>
+          </dl>
+          <div class="controls">
+            <button type="button" id="step-split" data-step disabled>次の操作</button>
+            <button type="button" id="reset-split" data-reset disabled>最初に戻す</button>
+          </div>
+          <p id="model-split-status" class="status" role="status" data-status>0 / 4 手順</p>
+          <ol id="model-split-log" aria-label="読み取りと書き込みの履歴" data-log></ol>
+        </section>
+
+        <section class="card" data-model="add" aria-labelledby="add-heading">
+          <h3 id="add-heading">2. <code>Atomics.add</code> で加算する</h3>
+          <p>各Workerが読み取り・加算・書き込みを一つの操作として実行します。戻り値は加算前の値です。</p>
+          <dl class="facts">
+            <div><dt>共有カウンター</dt><dd id="model-add-counter" data-field="counter">0</dd></div>
+            <div><dt>Aの戻り値</dt><dd id="model-add-a" data-field="a">—</dd></div>
+            <div><dt>Bの戻り値</dt><dd id="model-add-b" data-field="b">—</dd></div>
+          </dl>
+          <div class="controls">
+            <button type="button" id="step-add" data-step disabled>次の操作</button>
+            <button type="button" id="reset-add" data-reset disabled>最初に戻す</button>
+          </div>
+          <p id="model-add-status" class="status" role="status" data-status>0 / 2 手順</p>
+          <ol id="model-add-log" aria-label="不可分な加算の履歴" data-log></ol>
+        </section>
+
+        <section class="card wide" data-model="wait" aria-labelledby="wait-heading">
+          <h3 id="wait-heading">3. フラグを更新して待機者を起こす</h3>
+          <p>ここでは読み手が待機したあとに、書き手がデータを用意します。読み手は起床後にフラグを確認します。</p>
+          <dl class="facts">
+            <div><dt>共有データ</dt><dd id="model-wait-payload" data-field="payload">0</dd></div>
+            <div><dt>準備完了フラグ</dt><dd id="model-wait-flag" data-field="flag">0</dd></div>
+            <div><dt>読み手の状態</dt><dd id="model-wait-reader" data-field="reader">未開始</dd></div>
+            <div><dt>読み手が得た値</dt><dd id="model-wait-read" data-field="read">—</dd></div>
+          </dl>
+          <div class="controls">
+            <button type="button" id="step-wait" data-step disabled>次の操作</button>
+            <button type="button" id="reset-wait" data-reset disabled>最初に戻す</button>
+          </div>
+          <p id="model-wait-status" class="status" role="status" data-status>0 / 5 手順</p>
+          <ol id="model-wait-log" aria-label="待機と通知の履歴" data-log></ol>
+        </section>
+      </div>
+    </section>
+
+    <section aria-labelledby="worker-heading">
+      <h2 id="worker-heading">2つのWorkerで実行する</h2>
+      <p id="worker-availability" class="status">JavaScriptで実行環境を確認します。</p>
+      <p id="worker-note">実行にはクロスオリジン分離と共有メモリのAPIが必要です。<a href="https://sny0.com/study/practice/browser/atomics-observation.html#手元で動かす">付属サーバーの手順</a></p>
+      <p class="technical">このページの <code>crossOriginIsolated</code> は <strong id="cross-origin-isolated">—</strong> です。</p>
+      <div class="cases">
+        <section class="card" data-worker="split" aria-labelledby="worker-split-heading">
+          <h3 id="worker-split-heading">読み取りと書き込みを分ける</h3>
+          <p>ページ側は両方の読み取り結果を待ち、それから書き込みを指示します。</p>
+          <button type="button" id="run-split" data-run aria-describedby="worker-availability" disabled>Workerで分けて加算</button>
+          <p id="worker-split-status" class="status" role="status" data-status>未実行</p>
+          <dl class="facts">
+            <div><dt>Aが読んだ値</dt><dd id="worker-split-a" data-field="a">—</dd></div>
+            <div><dt>Bが読んだ値</dt><dd id="worker-split-b" data-field="b">—</dd></div>
+            <div><dt>共有カウンター</dt><dd id="worker-split-counter" data-field="counter">—</dd></div>
+          </dl>
+        </section>
+        <section class="card" data-worker="add" aria-labelledby="worker-add-heading">
+          <h3 id="worker-add-heading"><code>Atomics.add</code> で加算する</h3>
+          <p>どちらが先に加算するかによって、各Workerの戻り値は入れ替わります。</p>
+          <button type="button" id="run-add" data-run aria-describedby="worker-availability" disabled>Workerで不可分に加算</button>
+          <p id="worker-add-status" class="status" role="status" data-status>未実行</p>
+          <dl class="facts">
+            <div><dt>Aの戻り値</dt><dd id="worker-add-a" data-field="a">—</dd></div>
+            <div><dt>Bの戻り値</dt><dd id="worker-add-b" data-field="b">—</dd></div>
+            <div><dt>共有カウンター</dt><dd id="worker-add-counter" data-field="counter">—</dd></div>
+          </dl>
+        </section>
+        <section class="card wide" data-worker="wait" aria-labelledby="worker-wait-heading">
+          <h3 id="worker-wait-heading">データを公開して読み手に知らせる</h3>
+          <p>読み手がフラグ0を確認すると、ページは書き手に公開を指示します。書き手の通知が待機開始より先に届く場合もあります。</p>
+          <button type="button" id="run-wait" data-run aria-describedby="worker-availability" disabled>Workerで待機と通知を実行</button>
+          <p id="worker-wait-status" class="status" role="status" data-status>未実行</p>
+          <dl class="facts">
+            <div><dt>読み手の待機結果</dt><dd id="worker-wait-return" data-field="waitResult">—</dd></div>
+            <div><dt><code>notify</code> が起こした数</dt><dd id="worker-wait-woken" data-field="woken">—</dd></div>
+            <div><dt>読み手が確認したフラグ</dt><dd id="worker-wait-flag" data-field="flag">—</dd></div>
+            <div><dt>読み手が得た値</dt><dd id="worker-wait-read" data-field="read">—</dd></div>
+          </dl>
+        </section>
+      </div>
+    </section>
+  </main>
+</body>
+</html>

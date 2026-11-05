@@ -1,0 +1,78 @@
+:root {
+  color-scheme: light;
+  font-family: system-ui, sans-serif;
+  line-height: 1.6;
+  color: #172940;
+  background: #eef3f8;
+}
+
+* { box-sizing: border-box; }
+body { margin: 0; }
+main { width: min(100% - 2rem, 66rem); margin: 1.5rem auto 3rem; }
+header, .card {
+  min-width: 0;
+  padding: 1rem 1.15rem;
+  border: 1px solid #bbcbdc;
+  border-radius: 0.75rem;
+  background: #fff;
+}
+main > section { margin-top: 1.6rem; }
+h1, h2, h3 { line-height: 1.35; }
+h1 { margin: 0.45rem 0; font-size: clamp(1.45rem, 4vw, 2rem); }
+h2 { margin: 0; font-size: clamp(1.2rem, 3vw, 1.45rem); }
+h3 { margin: 0; font-size: 1.08rem; }
+p { margin: 0.55rem 0; }
+a { color: #084d98; }
+code { overflow-wrap: anywhere; }
+
+.cases {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 0.8rem;
+  margin-top: 0.85rem;
+}
+.wide { grid-column: 1 / -1; }
+.facts {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 8rem), 1fr));
+  gap: 0.45rem;
+  margin: 0.6rem 0;
+}
+.facts > div {
+  min-width: 0;
+  padding: 0.4rem 0.65rem;
+  border-radius: 0.45rem;
+  background: #edf4fb;
+}
+dt { font-size: 0.85rem; font-weight: 600; overflow-wrap: anywhere; }
+dd { margin: 0; font: 1rem/1.55 ui-monospace, monospace; overflow-wrap: anywhere; }
+
+.controls { display: flex; flex-wrap: wrap; gap: 0.5rem; }
+button {
+  min-height: 2.75rem;
+  max-width: 100%;
+  padding: 0.4rem 0.75rem;
+  border: 1px solid #174d83;
+  border-radius: 0.45rem;
+  color: #fff;
+  background: #174d83;
+  font: inherit;
+  overflow-wrap: anywhere;
+  cursor: pointer;
+}
+button:hover:not(:disabled) { background: #103d6c; }
+button[data-reset] { color: #123d68; background: #fff; }
+button[data-reset]:hover:not(:disabled) { background: #e3eef8; }
+button:disabled { opacity: 0.66; cursor: default; }
+:focus-visible { outline: 3px solid #106bbf; outline-offset: 3px; }
+
+.status { font-weight: 600; }
+.technical { color: #40566d; }
+[data-state="error"] { color: #8b2923; }
+ol { margin: 0.55rem 0 0; padding-inline-start: 1.7rem; }
+ol:empty { margin: 0; }
+li + li { margin-top: 0.25rem; }
+
+@media (max-width: 49rem) {
+  .cases { grid-template-columns: 1fr; }
+}
