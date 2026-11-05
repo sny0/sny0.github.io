@@ -1,0 +1,92 @@
+<!doctype html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="referrer" content="no-referrer">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'self'; style-src 'self'; base-uri 'none'; form-action 'none'">
+  <title>AudioWorkletで音声バッファを観察する | Sny0 Study</title>
+  <link rel="canonical" href="https://sny0.com/study/samples/browser/audio-buffer-observation/index.html">
+  <link rel="stylesheet" href="styles.css">
+  <script type="module" src="main.js"></script>
+</head>
+<body>
+  <main>
+    <header class="card">
+      <a href="https://sny0.com/study/practice/browser/audio-buffer-observation.html">実践手順とコードを読む</a>
+      <h1>AudioWorkletで音声バッファを観察する</h1>
+      <p>同じ1秒分のPCMを使い、途中の100 ms分の供給を75 ms遅らせます。先読みがある場合とない場合で、出力がどう変わるか比べます。</p>
+    </header>
+
+    <section class="card" aria-labelledby="render-heading">
+      <h2 id="render-heading">先読みの有無で比較する</h2>
+      <p>供給の時刻を固定し、<code>OfflineAudioContext</code> の中で実際の <code>AudioWorklet</code> を実行します。供給が間に合わなかったフレームには0を出力します。</p>
+      <button id="render-audio" type="button" disabled>両条件をレンダリング</button>
+      <p id="render-status" class="status" data-state="ready" role="status">未実行です。レンダリング中は音が出ません。</p>
+      <p class="hint"><a href="https://sny0.com/study/practice/browser/audio-buffer-observation.html#run-locally">手元で動かす手順</a></p>
+      <noscript><p>操作するにはJavaScriptを有効にしてください。</p></noscript>
+      <dl class="facts common-facts">
+        <div><dt>サンプルレート</dt><dd><span id="render-rate">—</span> Hz</dd></div>
+        <div><dt>各条件の出力フレーム数</dt><dd id="render-frames">—</dd></div>
+        <div><dt>チャンネル数</dt><dd id="render-channels">—</dd></div>
+      </dl>
+    </section>
+
+    <div class="comparison">
+      <section class="card result" id="without-lead" aria-labelledby="without-lead-heading">
+        <h2 id="without-lead-heading">先読みなし</h2>
+        <p class="hint">各チャンクを、通常は出力予定の時刻に供給します。</p>
+        <figure>
+          <svg class="wave-chart" viewBox="0 0 720 120" role="img" aria-label="先読みなしの出力波形。未実行。">
+            <rect class="gap-band" x="0" y="0" width="0" height="120"/>
+            <path class="grid-lines" d="M0 60H720 M180 0V120 M360 0V120 M540 0V120"/>
+            <path class="waveform" d=""/>
+          </svg>
+          <div class="ticks" aria-hidden="true"><span>0</span><span>250</span><span>500</span><span>750</span><span>1,000 ms</span></div>
+          <figcaption>出力波形。赤い帯は不足して0を埋めた区間です。</figcaption>
+        </figure>
+        <dl class="facts result-facts">
+          <div class="missing"><dt>不足フレーム数</dt><dd id="without-lead-missing">—</dd></div>
+          <div><dt>元のPCMを出力したフレーム数</dt><dd id="without-lead-delivered">—</dd></div>
+          <div class="wide"><dt>不足区間のフレーム番号</dt><dd id="without-lead-gap">—</dd></div>
+          <div><dt>終了時に残ったフレーム数</dt><dd id="without-lead-queued">—</dd></div>
+          <div><dt>入り切らなかったフレーム数</dt><dd id="without-lead-overflow">—</dd></div>
+          <div class="wide"><dt><code>process()</code> が受け取った1ブロックのフレーム数</dt><dd id="without-lead-quantum">—</dd></div>
+        </dl>
+        <button id="listen-without-lead" type="button" class="secondary" disabled>先読みなしの音を聞く</button>
+      </section>
+
+      <section class="card result" id="with-lead" aria-labelledby="with-lead-heading">
+        <h2 id="with-lead-heading">100 msの先読み</h2>
+        <p class="hint">各チャンクを出力予定より最大100 ms早く供給します。</p>
+        <figure>
+          <svg class="wave-chart" viewBox="0 0 720 120" role="img" aria-label="100 ms先読みの出力波形。未実行。">
+            <rect class="gap-band" x="0" y="0" width="0" height="120"/>
+            <path class="grid-lines" d="M0 60H720 M180 0V120 M360 0V120 M540 0V120"/>
+            <path class="waveform" d=""/>
+          </svg>
+          <div class="ticks" aria-hidden="true"><span>0</span><span>250</span><span>500</span><span>750</span><span>1,000 ms</span></div>
+          <figcaption>同じ時間軸で出力波形を比べられます。</figcaption>
+        </figure>
+        <dl class="facts result-facts">
+          <div class="missing"><dt>不足フレーム数</dt><dd id="with-lead-missing">—</dd></div>
+          <div><dt>元のPCMを出力したフレーム数</dt><dd id="with-lead-delivered">—</dd></div>
+          <div class="wide"><dt>不足区間のフレーム番号</dt><dd id="with-lead-gap">—</dd></div>
+          <div><dt>終了時に残ったフレーム数</dt><dd id="with-lead-queued">—</dd></div>
+          <div><dt>入り切らなかったフレーム数</dt><dd id="with-lead-overflow">—</dd></div>
+          <div class="wide"><dt><code>process()</code> が受け取った1ブロックのフレーム数</dt><dd id="with-lead-quantum">—</dd></div>
+        </dl>
+        <button id="listen-with-lead" type="button" class="secondary" disabled>100 ms先読みの音を聞く</button>
+      </section>
+    </div>
+
+    <section class="card note" aria-labelledby="play-heading">
+      <h2 id="play-heading">できあがった1秒の音を聞く</h2>
+      <p>各条件の「音を聞く」を押すと、レンダリング済みの音を一度だけ再生します。</p>
+      <button id="stop-playback" type="button" class="secondary" disabled>再生を停止</button>
+      <p id="playback-status" class="status" data-state="ready" role="status">再生していません。</p>
+      <p class="hint">波形は、実際の出力を短い区間に分け、それぞれの最小値と最大値を描いたものです。ここでの不足は、固定した供給条件でのキューの枯渇を数えた結果です。</p>
+    </section>
+  </main>
+</body>
+</html>

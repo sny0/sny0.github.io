@@ -1,0 +1,63 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="760" height="1010" viewBox="0 0 760 1010" role="img" aria-labelledby="title desc">
+  <title id="title">音声データが遅れたときの先読みの効果</title>
+  <desc id="desc">番号4のまとまりを出力する予定は400ミリ秒。75ミリ秒の供給遅れを与える。先読みなしでは475ミリ秒に到着し、400以上475ミリ秒未満の3,600フレームに0を出力する。100ミリ秒先読みすると375ミリ秒に到着して400ミリ秒の出力予定に間に合う。縦線は予定時刻と実際の到着を示す。</desc>
+  <style>
+    text { font-family: "Noto Sans CJK JP", "Yu Gothic UI", Meiryo, sans-serif; fill: #183446; }
+    .title { font-size: 35px; font-weight: 700; }
+    .subtitle { font-size: 23px; fill: #385462; }
+    .label { font-size: 26px; font-weight: 700; }
+    .body { font-size: 22px; }
+    .small { font-size: 19px; }
+    .panel { fill: #fff; stroke: #a6b8c2; stroke-width: 2; }
+    .line { fill: none; stroke: #607d8b; stroke-width: 2; }
+    .planned { stroke: #354d5b; stroke-dasharray: 6 5; }
+    .arrived { stroke: #187164; }
+    .pcm { fill: #d9efe6; stroke: #8db6a7; }
+    .gap { fill: #fde9e0; stroke: #c78268; }
+    .gap-text { fill: #783b27; }
+  </style>
+  <rect width="760" height="1010" rx="24" fill="#eaf2f4"/>
+  <text class="title" x="35" y="65">先読みが75 msの遅れを吸収する</text>
+  <text class="subtitle" x="35" y="103">番号4のまとまりは400 msから出力する予定です。</text>
+
+  <rect class="panel" x="35" y="133" width="690" height="362" rx="17"/>
+  <text class="label" x="57" y="178">先読みなし</text>
+  <text class="body" x="57" y="217">予定の400 msを過ぎてから、475 msに届く。</text>
+  <text class="small" x="289" y="257" text-anchor="end">出力予定</text>
+  <text class="small" x="611" y="257">到着</text>
+  <rect class="pcm" x="100" y="293" width="200" height="57"/>
+  <rect class="gap" x="300" y="293" width="300" height="57"/>
+  <rect class="pcm" x="600" y="293" width="100" height="57"/>
+  <text class="small" x="200" y="329" text-anchor="middle">PCMを出力</text>
+  <text class="body gap-text" x="450" y="329" text-anchor="middle">75 msの無音</text>
+  <text class="small" x="650" y="329" text-anchor="middle">再開</text>
+  <path class="line planned" d="M300 242V383"/>
+  <path class="line arrived" d="M600 242V383"/>
+  <path class="line" d="M100 383H700M100 383V390M200 383V390M300 383V390M600 383V390M700 383V390"/>
+  <text class="small" x="100" y="417" text-anchor="middle">350</text>
+  <text class="small" x="200" y="417" text-anchor="middle">375</text>
+  <text class="small" x="300" y="417" text-anchor="middle">400</text>
+  <text class="small" x="600" y="417" text-anchor="middle">475</text>
+  <text class="small" x="700" y="417" text-anchor="end">500 ms</text>
+  <text class="body gap-text" x="57" y="464">19,200以上22,800未満の3,600フレームを0で埋める。</text>
+
+  <rect class="panel" x="35" y="518" width="690" height="362" rx="17"/>
+  <text class="label" x="57" y="563">100 ms先読み</text>
+  <text class="body" x="57" y="602">遅れても375 msに届くので、400 msに間に合う。</text>
+  <text class="small" x="189" y="642" text-anchor="end">到着</text>
+  <text class="small" x="311" y="642">出力予定</text>
+  <rect class="pcm" x="100" y="678" width="600" height="57"/>
+  <text class="small" x="450" y="714" text-anchor="middle">PCMの出力が続く</text>
+  <path class="line arrived" d="M200 627V768"/>
+  <path class="line planned" d="M300 627V768"/>
+  <path class="line" d="M100 768H700M100 768V775M200 768V775M300 768V775M600 768V775M700 768V775"/>
+  <text class="small" x="100" y="802" text-anchor="middle">350</text>
+  <text class="small" x="200" y="802" text-anchor="middle">375</text>
+  <text class="small" x="300" y="802" text-anchor="middle">400</text>
+  <text class="small" x="600" y="802" text-anchor="middle">475</text>
+  <text class="small" x="700" y="802" text-anchor="end">500 ms</text>
+  <text class="body" x="57" y="849">この条件では、欠けたフレームは0。</text>
+
+  <text class="small" x="35" y="928">横軸はグラフ内の時刻です。番号4の前後を拡大しています。</text>
+  <text class="small" x="35" y="960">先読みは供給予定を早め、400 msの出力予定はそのままです。</text>
+</svg>

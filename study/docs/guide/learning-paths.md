@@ -225,6 +225,12 @@
 2. [リングバッファの満杯・折り返し・読み出し順を観察する](/practice/browser/ring-buffer-observation.html)で、満杯で拒否された値を空きができてから入れ直し、読み出し順を比べる。
 3. 異なるWorkerへの公開順序は[Web Workerと共有メモリの同期](/browser/shared-memory-atomics.html)、受付を制御する方針は[Worker poolとバックプレッシャー](/browser/worker-pool-backpressure.html)へつなげる。
 
+## 音声データが出力に間に合わないと何が起きるか
+
+1. [AudioWorkletと音声バッファ](/browser/audio-worklet-buffering.html)で、サンプルフレーム、レンダリングの処理単位、データの供給不足を区別する。
+2. [AudioWorkletで先読みとアンダーランを観察する](/practice/browser/audio-buffer-observation.html)で、同じ到着の遅れを与え、先読みの有無で波形と不足したフレーム数を比べる。
+3. 待ち行列で枠を使い回す仕組みは[リングバッファとSPSCキュー](/browser/spsc-ring-buffer.html)で確認する。
+
 ## 作り方の変化を歴史から見る
 
 [ビデオゲーム史](/history/video-games.html)の作品・ハード・媒体・流通と、[リアルタイム3D技術史](/guide/rendering/timeline.html)の技術の変化から、気になった仕組みへ進みます。

@@ -69,7 +69,7 @@
       "id": "browser",
       "title": "ブラウザ",
       "description": "URLを開いてから描画されるまでを、通信・実行・表示に分ける。",
-      "count": 16,
+      "count": 17,
       "status": "辞典本文あり"
     },
     {
@@ -130,6 +130,13 @@
     }
   ],
   "collections": [
+    {
+      "id": "audio-buffer-observation",
+      "section": "practice",
+      "title": "AudioWorkletで先読みとアンダーランを観察する",
+      "description": "同じ音声データを先読みの有無でレンダリングし、不足したフレーム数と波形を比べる。",
+      "start": "/practice/browser/audio-buffer-observation.html"
+    },
     {
       "id": "ring-buffer-observation",
       "section": "practice",
@@ -645,6 +652,64 @@
         "/design/case-studies/sound-manager.html",
         "/design/patterns/singleton.html",
         "/design/patterns/"
+      ]
+    },
+    {
+      "title": "AudioWorkletで先読みとアンダーランを観察する",
+      "url": "/practice/browser/audio-buffer-observation.html",
+      "file": "practice/browser/audio-buffer-observation.md",
+      "domain": "browser",
+      "section": "practice",
+      "format": "sample",
+      "status": "published",
+      "summary": "到着の遅れを含む同じ音声を二つの先読み設定で処理し、不足したフレーム数、波形、出力枠に入りきらなかった末尾を比べる。",
+      "source": "新規執筆",
+      "aliases": [
+        "AudioWorklet",
+        "AudioWorkletProcessor",
+        "OfflineAudioContext",
+        "Web Audio API",
+        "PCM",
+        "underrun",
+        "アンダーラン",
+        "先読み"
+      ],
+      "collection": "audio-buffer-observation",
+      "order": 1,
+      "verification": "Windowsのブラウザで両条件の波形・不足区間・残量、生成した音の再生終了を確認（2026-11-06）",
+      "links": [
+        "/browser/audio-worklet-buffering.html"
+      ]
+    },
+    {
+      "title": "AudioWorkletと音声バッファ — フレーム・先読み・アンダーラン",
+      "url": "/browser/audio-worklet-buffering.html",
+      "file": "browser/audio-worklet-buffering.md",
+      "domain": "browser",
+      "section": "reference",
+      "format": "article",
+      "status": "published",
+      "summary": "音声をフレーム単位で出力する仕組みと、供給が遅れたときの無音、先読みが吸収できる遅れを図解する。",
+      "source": "新規執筆",
+      "aliases": [
+        "Web Audio API",
+        "AudioWorklet",
+        "AudioWorkletNode",
+        "AudioWorkletProcessor",
+        "OfflineAudioContext",
+        "PCM",
+        "sample rate",
+        "render quantum",
+        "アンダーラン",
+        "underrun",
+        "先読み",
+        "プリバッファ"
+      ],
+      "verification": "W3C Web Audio APIのAudioBuffer・AudioWorklet・音声グラフのレンダリングに照合（2026-11-06）",
+      "links": [
+        "/browser/spsc-ring-buffer.html",
+        "/browser/streams-backpressure.html",
+        "/practice/browser/audio-buffer-observation.html"
       ]
     },
     {
@@ -7187,7 +7252,8 @@
         "/browser/shared-memory-atomics.html",
         "/browser/worker-pool-backpressure.html",
         "/browser/streams-backpressure.html",
-        "/practice/browser/ring-buffer-observation.html"
+        "/practice/browser/ring-buffer-observation.html",
+        "/browser/audio-worklet-buffering.html"
       ]
     },
     {
@@ -7597,6 +7663,8 @@
         "/practice/browser/atomics-observation.html",
         "/browser/spsc-ring-buffer.html",
         "/practice/browser/ring-buffer-observation.html",
+        "/browser/audio-worklet-buffering.html",
+        "/practice/browser/audio-buffer-observation.html",
         "/history/video-games.html",
         "/guide/rendering/timeline.html"
       ]
@@ -9746,6 +9814,7 @@
       "source": "統合ガイド",
       "aliases": [],
       "links": [
+        "/browser/audio-worklet-buffering.html",
         "/browser/spsc-ring-buffer.html",
         "/browser/shared-memory-atomics.html",
         "/browser/wasm-data-and-allocation.html",
