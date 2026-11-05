@@ -1,0 +1,103 @@
+<!doctype html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="light">
+  <link rel="canonical" href="https://sny0.com/study/samples/browser/storage-observation/index.html">
+  <title>ブラウザ保存領域の観察 | Sny0 Study</title>
+  <link rel="stylesheet" href="./styles.css">
+  <script src="./main.js" defer></script>
+</head>
+<body>
+  <main>
+    <header class="page-header">
+      <a href="https://sny0.com/study/practice/browser/storage-observation.html">Sny0 Studyの解説へ戻る</a>
+      <p class="eyebrow">localStorage / IndexedDB / Cache API</p>
+      <h1>保存の返値と、<br>処理完了を比べる</h1>
+      <p>同じ固定レコード一つを、3種類の保存APIで扱います。保存後にページを再読み込みし、もう一度「読出し」を押してみます。</p>
+    </header>
+    <noscript><p class="notice">操作にはJavaScriptが必要です。</p></noscript>
+
+    <section class="panel" aria-labelledby="scope-heading">
+      <h2 id="scope-heading">このサンプルだけの保存先</h2>
+      <p class="help">origin：<code id="origin-value"></code></p>
+      <pre id="sample-record" class="record"></pre>
+      <p class="help">ページを開いただけでは保存・読出しを行いません。任意入力や個人情報は使いません。同じサンプルの保存先に既存の値がある場合、「保存」で上書きします。削除するのも下記の専用key/entry一つだけです。</p>
+      <dl class="names">
+        <div><dt>localStorage key</dt><dd><code id="local-key"></code></dd></div>
+        <div><dt>IndexedDB DB / store / key</dt><dd><code id="idb-name"></code></dd></div>
+        <div><dt>Cache API cache名</dt><dd><code id="cache-name"></code></dd></div>
+        <div><dt>Cache APIの架空Request key</dt><dd><code id="cache-key"></code></dd></div>
+      </dl>
+      <p class="help">架空Requestへネットワーク要求は送りません。Cache APIにはローカルで作ったResponseを保存します。Service Workerの登録は不要です。</p>
+    </section>
+
+    <section class="panel" aria-labelledby="status-heading">
+      <h2 id="status-heading">操作状態と再読み込み</h2>
+      <p id="operation-status" class="state-line" data-state="idle">待機中。まだ保存APIを操作していません。</p>
+      <div class="actions">
+        <button type="button" id="reload" class="secondary">ページを再読み込み</button>
+        <button type="button" id="clear-log" class="secondary">表示ログを消す</button>
+      </div>
+      <p class="help">保存操作の完了後に再読み込み、各方式の読出しを操作します。ログや画面内の結果は再読み込みで消えます。API操作中は他の保存操作と、この再読み込みボタンを無効にします。</p>
+    </section>
+
+    <div class="storage-grid">
+      <section class="storage-card" aria-labelledby="local-heading">
+        <p class="case-label">SYNCHRONOUS</p><h2 id="local-heading">localStorage</h2>
+        <p>文字列を同期APIで保存します。この例ではJSONへ変換します。</p>
+        <div class="actions">
+          <button type="button" id="local-save" data-backend="local" data-action="save">localStorageに保存</button>
+          <button type="button" id="local-read" class="secondary" data-backend="local" data-action="read">localStorageを読出し</button>
+          <button type="button" id="local-delete" class="secondary" data-backend="local" data-action="delete">localStorageのサンプルだけ削除</button>
+        </div>
+        <h3>APIの返値</h3><p id="local-api-return" class="api-value">未操作</p>
+        <h3>完了の確認</h3><p id="local-completion" class="help">未操作</p>
+        <h3>最終結果</h3><pre id="local-result" class="record">未操作</pre>
+      </section>
+
+      <section class="storage-card" aria-labelledby="idb-heading">
+        <p class="case-label">REQUEST / TRANSACTION</p><h2 id="idb-heading">IndexedDB</h2>
+        <p>request.successとtransaction.completeを分けて記録します。</p>
+        <div class="actions">
+          <button type="button" id="idb-save" data-backend="idb" data-action="save">IndexedDBに保存</button>
+          <button type="button" id="idb-read" class="secondary" data-backend="idb" data-action="read">IndexedDBを読出し</button>
+          <button type="button" id="idb-delete" class="secondary" data-backend="idb" data-action="delete">IndexedDBのサンプルだけ削除</button>
+        </div>
+        <h3>APIの返値</h3><p id="idb-api-return" class="api-value">未操作</p>
+        <h3>完了の確認</h3><p id="idb-completion" class="help">未操作</p>
+        <h3>最終結果</h3><pre id="idb-result" class="record">未操作</pre>
+      </section>
+
+      <section class="storage-card" aria-labelledby="cache-heading">
+        <p class="case-label">REQUEST / RESPONSE</p><h2 id="cache-heading">Cache API</h2>
+        <p>ローカルResponseをputし、matchの返値とbodyのconsumeを観察します。</p>
+        <div class="actions">
+          <button type="button" id="cache-save" data-backend="cache" data-action="save">Cache APIに保存</button>
+          <button type="button" id="cache-read" class="secondary" data-backend="cache" data-action="read">Cache APIを読出し</button>
+          <button type="button" id="cache-delete" class="secondary" data-backend="cache" data-action="delete">Cache APIのサンプルだけ削除</button>
+        </div>
+        <h3>APIの返値</h3><p id="cache-api-return" class="api-value">未操作</p>
+        <h3>完了の確認</h3><p id="cache-completion" class="help">未操作</p>
+        <h3>最終結果</h3><pre id="cache-result" class="record">未操作</pre>
+      </section>
+    </div>
+
+    <section class="panel" aria-labelledby="log-heading">
+      <h2 id="log-heading">操作と完了通知のログ <span class="subtle">最新60件</span></h2>
+      <p class="help">mainが記録したperformance.now()です。ディスク書込み完了時刻や将来のデータ保持を保証する測定ではありません。</p>
+      <ol id="event-log" class="event-log"></ol>
+    </section>
+
+    <aside class="notice" aria-labelledby="limits-heading">
+      <h2 id="limits-heading">残るもの・操作しないもの</h2>
+      <p>専用レコードを削除しても、空のIndexedDB DB/storeやCacheコンテナは残ります。IndexedDBの初回読出しでも専用schemaを準備する場合があります。Cache読出し/削除ではhasで存在を確認してからopenしますが、別タブとの間でatomicな操作にはなりません。</p>
+      <p>HTTPS、またはsecure contextのlocalhost HTTPで開きます。file://は対象外です。容量制限、アクセス制限、API利用不可、対象なし、データ不一致を別に表示します。保存領域が将来も必ず保持される保証や、物理ディスクのdurability試験ではありません。</p>
+      <p>localStorage.clear、DB全削除、origin全体の削除は行いません。他のkey・DB・cacheは操作せず、永続化permissionも要求しません。外部ライブラリ、外部fetch、analytics、Service Worker登録はありません。</p>
+    </aside>
+    <p id="announcement" class="visually-hidden" role="status" aria-live="polite" aria-atomic="true"></p>
+    <footer><a href="https://sny0.com/study/practice/browser/storage-observation.html">実験の手順とソースの解説を読む</a></footer>
+  </main>
+</body>
+</html>

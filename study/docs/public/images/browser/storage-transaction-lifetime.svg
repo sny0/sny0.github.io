@@ -1,0 +1,43 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="760" height="1510" viewBox="0 0 760 1510" role="img" aria-labelledby="title desc">
+  <title id="title">IndexedDBのrequest成功、transaction完了、データの寿命</title>
+  <desc id="desc">書き込みtransactionを作り、activeな間にputなどを投入する。request successはまだtransaction全体の成功ではない。completeの後に保存成功と表示し、abortなら失敗として扱う。ページ再読込後の読出し確認と、長期保持や永続バックアップの保証は異なる。</desc>
+  <defs><style>text{font-family:'BIZ UDPGothic','Yu Gothic',Meiryo,sans-serif;fill:#26352e}.title{font-size:32px;font-weight:700}.head{font-size:28px;font-weight:700}.body{font-size:24px}.small{font-size:22px}.card{fill:white;stroke:#739483;stroke-width:2}.arrow{fill:none;stroke:#567963;stroke-width:3;marker-end:url(#a)}</style>
+    <marker id="a" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto"><path d="M0 0L10 5L0 10Z" fill="#567963"/></marker></defs>
+  <rect width="760" height="1510" rx="24" fill="#f4f8f4"/>
+  <text x="40" y="56" class="title">どの「完了」を観測したのか</text>
+  <text x="40" y="96" class="body">IndexedDBの書込みから、後の読出しへ</text>
+  <rect x="36" y="130" width="688" height="184" rx="18" class="card"/>
+  <text x="60" y="174" class="head">1. 接続し、transactionを作る</text>
+  <text x="60" y="216" class="body">必要なobject storeと、readwrite等のmodeを指定。</text>
+  <text x="60" y="258" class="body">activeな間に、putなどのrequestを投入する。</text>
+  <text x="60" y="300" class="small">無関係なtimer・fetch待ちを挟むと、inactiveになり得る。</text>
+  <path d="M380 316V356" class="arrow"/>
+  <rect x="36" y="360" width="688" height="174" rx="18" fill="#e2eafa"/>
+  <text x="60" y="404" class="head">2. requestのsuccess</text>
+  <text x="60" y="446" class="body">そのrequestが成功し、resultを得られる。</text>
+  <text x="60" y="488" class="body">この後、transaction全体が失敗する場合もある。</text>
+  <text x="60" y="522" class="small">ここでは、まだtransaction全体を保存成功と表示しない。</text>
+  <path d="M380 536V576" class="arrow"/>
+  <rect x="36" y="580" width="688" height="188" rx="18" fill="#dcece0"/>
+  <text x="60" y="624" class="head">3. transactionの終端を受け取る</text>
+  <text x="60" y="666" class="body">complete：このtransactionの成功を確認。</text>
+  <text x="60" y="708" class="body">abort：このtransactionの変更はcommitされない。</text>
+  <text x="60" y="750" class="small">error・abortを回収し、使い終えた接続をcloseする。</text>
+  <path d="M380 770V810" class="arrow"/>
+  <rect x="36" y="814" width="688" height="184" rx="18" class="card"/>
+  <text x="60" y="858" class="head">4. ページを再読み込みして、再び読む</text>
+  <text x="60" y="900" class="body">JS変数は作り直されても、保存物を読める場合がある。</text>
+  <text x="60" y="942" class="body">今回の再読出しと、永久に残る保証は別。</text>
+  <text x="60" y="984" class="small">異なるorigin・保存区画なら、同じ保存名でも別の領域。</text>
+  <rect x="36" y="1026" width="688" height="198" rx="18" fill="#e9efe6"/>
+  <text x="60" y="1070" class="head">容量と保持方針も、別の観測</text>
+  <text x="60" y="1112" class="body">estimate：usageとquotaの推定。予約容量ではない。</text>
+  <text x="60" y="1154" class="body">persist：保持方針の要求。許可や永久保存の保証はない。</text>
+  <text x="60" y="1196" class="small">サンプルはpersistを要求せず、保持方針を変更しない。</text>
+  <rect x="36" y="1252" width="688" height="220" rx="18" class="card"/>
+  <text x="60" y="1296" class="head">削除は、対象と範囲を指定する</text>
+  <text x="60" y="1338" class="body">専用key・record・cache entryだけを操作する。</text>
+  <text x="60" y="1380" class="body">空のDBやcacheのコンテナが残る場合もある。</text>
+  <text x="60" y="1422" class="body">削除後のnot foundと、APIの失敗を分けて表示。</text>
+  <text x="60" y="1458" class="small">全originの消去、全cacheの削除、他の保存名の操作はしない。</text>
+</svg>

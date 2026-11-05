@@ -304,11 +304,18 @@ writePage('guide/learning-paths.md', '疑問から選ぶ読み順', {
 2. [Streams APIで供給と処理の速度差を観察する](/practice/browser/stream-backpressure-observation.html)で、有限のデータを遅いsinkへ送り、先読みと中断を確かめる。
 3. 仕事の受付数は[Worker pool](/browser/worker-pool-backpressure.html)、文字の境界は[Unicodeとエンコーディング](/data/unicode-and-encoding.html)、利用可能になる条件は[アセットロード](/game/asset-loading.html)へつなげる。
 
+## ブラウザのどこへ保存し、いつまで残るのか
+
+1. [ブラウザの保存領域とデータの寿命](/browser/storage-lifetime.html)で、localStorage・IndexedDB・Cache API、保存区画、transaction、容量と保持方針を区別する。
+2. [保存・再読込・削除の観察](/practice/browser/storage-observation.html)で、3方式へ固定データを保存し、ページ再読込後の読出しと専用データの削除を試す。
+3. 応答の自動的な再利用は[HTTPキャッシュ](/network/http-caching.html)、Request／Responseの本文を扱う流れは[Streams API](/browser/streams-backpressure.html)へつなげる。
+
 ## 作り方の変化を歴史から見る
 
 [ビデオゲーム史](/history/video-games.html)の作品・ハード・媒体・流通と、[リアルタイム3D技術史](/guide/rendering/timeline.html)の技術の変化から、気になった仕組みへ進みます。`)
 
 const termRows = [
+  ['ブラウザ保存領域 / Web Storage / localStorage / sessionStorage / IndexedDB / object store / IDBTransaction / Cache API / CacheStorage / quota / eviction / persist / storage partition', '/browser/storage-lifetime.html', '保存対象、同期・非同期処理、transactionの完了、データの保持と削除を調べる'],
   ['HTTPキャッシュ / HTTP cache / Cache-Control / ETag / If-None-Match / 304 / freshness / max-age / no-cache / no-store / Vary / 再検証', '/network/http-caching.html', '保存した応答の再利用、鮮度、条件付きGET、本文とメタデータの更新を調べる'],
   ['Streams API / ストリーミング / ReadableStream / WritableStream / TransformStream / chunk / pull / desiredSize / highWaterMark / pipeTo / writer.ready / cancel / abort', '/browser/streams-backpressure.html', 'データの供給と消費、キューの閾値、バックプレッシャー、正常終了と中断を調べる'],
   ['Worker pool / ワーカープール / 待ち行列 / bounded queue / admission control / backpressure / バックプレッシャー / drain / shutdown', '/browser/worker-pool-backpressure.html', '実行数と待機数の上限、受付拒否、取消し、結果破棄、停止を調べる'],

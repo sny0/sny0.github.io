@@ -34,7 +34,8 @@ export default withMermaid(defineConfig({
       { url: '/study/samples/browser/event-loop-observation/index.html' },
       { url: '/study/samples/browser/worker-message-observation/index.html' },
       { url: '/study/samples/browser/worker-pool-observation/index.html' },
-      { url: '/study/samples/browser/stream-backpressure-observation/index.html' }
+      { url: '/study/samples/browser/stream-backpressure-observation/index.html' },
+      { url: '/study/samples/browser/storage-observation/index.html' }
     ]
   },
   head: [
