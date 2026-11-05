@@ -115,4 +115,4 @@ Worker側の`self.close()`は、自分のキューにあるtaskを破棄し、�
 
 [Workerのコピーと移譲の実践](/practice/browser/worker-message-observation.html)では、HTTP配信したページと外部classic Workerで、ready、要求と返信、既知の非空ArrayBufferのコピーと移譲前後を観察します。DOMの更新はページ側です。この観測から、OSスレッド数、速度向上、物理コピー回数、画面への表示完了までは判断しません。
 
-SharedArrayBufferとAtomicsによる共有メモリは、メッセージで所有権を渡す方法とは別です。同期の規則や、cross-origin isolationに関する条件も加わるため、今回は扱わず、COOP／COEPの設定も追加しません。また、要求の仲介やオフライン対応などに関わるService Workerは、この章のDedicated Workerとは用途や寿命が異なります。[MDN: Service Worker API](https://developer.mozilla.org/en-US/docs/Web/API/Service_Worker_API)
+同じデータ領域を複数の実行主体で使う場合は、SharedArrayBufferとAtomicsが関わります。ブラウザの条件と、コピーした場合との実験は[クロスオリジン分離と共有メモリ](/browser/cross-origin-isolation.html)で扱います。要求の仲介やオフライン対応は[Service Workerとオフライン動作](/browser/service-worker-offline.html)を参照してください。

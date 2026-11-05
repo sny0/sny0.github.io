@@ -1,0 +1,47 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="760" height="1060" viewBox="0 0 760 1060" role="img" aria-labelledby="title desc">
+  <title id="title">クロスオリジン分離の二つの境界</title>
+  <desc id="desc">COOPのsame-originはオリジンや方針が異なるポップアップを別の閲覧コンテキストグループに分け、openerを通じた連絡を切り離す。COEPのrequire-corpは、別オリジンの画像についてno-corsならCORP、corsならCORSを検査する。セキュアコンテキストやPermissions Policyの条件も満たすかをcrossOriginIsolatedで確かめる。</desc>
+  <defs>
+    <style>
+      text{font-family:'BIZ UDPGothic','Yu Gothic',Meiryo,sans-serif;fill:#183440}
+      .title{font-size:35px;font-weight:700}.head{font-size:29px;font-weight:700}
+      .body{font-size:26px}.label{font-size:25px;font-weight:700}
+      .code{font-family:Consolas,'Liberation Mono',monospace;font-size:24px}
+      .muted{fill:#3b5963}.ok{fill:#085c4d}.warn{fill:#793b23}
+      .panel{fill:#fff;stroke:#a6bcc2;stroke-width:2}
+    </style>
+  </defs>
+  <rect width="760" height="1060" rx="24" fill="#eef5f6"/>
+  <text class="title" x="36" y="62">クロスオリジン分離の境界</text>
+  <text class="body muted" x="36" y="101">別ウィンドウとの関係と、画像の読み込み</text>
+
+  <rect class="panel" x="36" y="136" width="688" height="240" rx="18"/>
+  <text class="head" x="60" y="181">1. COOPでウィンドウを分ける</text>
+  <text class="code muted" x="60" y="221">Cross-Origin-Opener-Policy: same-origin</text>
+  <rect x="60" y="248" width="240" height="60" rx="12" fill="#e0eee5" stroke="#9dc1ad"/>
+  <text class="label ok" x="79" y="286">開いた側のページ</text>
+  <rect x="434" y="248" width="266" height="60" rx="12" fill="#f7e8db" stroke="#d4ac91"/>
+  <text class="label warn" x="451" y="286">別オリジンの窓</text>
+  <path d="M310 278h114" stroke="#728a91" stroke-width="3" stroke-dasharray="6 5"/>
+  <path d="m358 270 18 16m0-16-18 16" stroke="#a96141" stroke-width="4"/>
+  <text class="body" x="60" y="347">別グループへ移ると opener の関係が切れる。</text>
+
+  <rect class="panel" x="36" y="405" width="688" height="295" rx="18"/>
+  <text class="head" x="60" y="450">2. COEPで取り込む応答を検査する</text>
+  <text class="code muted" x="60" y="490">Cross-Origin-Embedder-Policy: require-corp</text>
+  <text class="body" x="60" y="531">別オリジンの画像を要求する場合</text>
+  <rect x="60" y="552" width="310" height="108" rx="12" fill="#e8ecf8" stroke="#a9b8d8"/>
+  <text class="code" x="81" y="590">no-cors</text>
+  <text class="body" x="81" y="632">配信元のCORPを検査</text>
+  <rect x="390" y="552" width="310" height="108" rx="12" fill="#e8ecf8" stroke="#a9b8d8"/>
+  <text class="code" x="411" y="590">cors</text>
+  <text class="body" x="411" y="632">応答のCORSを検査</text>
+
+  <rect x="36" y="729" width="688" height="245" rx="18" fill="#e0eee5" stroke="#9dc1ad" stroke-width="2"/>
+  <text class="head ok" x="60" y="774">3. 実行環境で分離状態を確認する</text>
+  <text class="body" x="60" y="818">COOPとCOEPの組み合わせに加え、</text>
+  <text class="body" x="60" y="854">セキュアコンテキストと機能の許可が必要。</text>
+  <rect x="60" y="881" width="640" height="55" rx="10" fill="#fff" stroke="#abc6b6"/>
+  <text class="code ok" x="81" y="916">self.crossOriginIsolated</text>
+  <text class="body muted" x="36" y="1025">ページとWorkerのそれぞれで実測する。</text>
+</svg>

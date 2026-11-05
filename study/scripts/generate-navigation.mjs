@@ -340,11 +340,18 @@ writePage('guide/learning-paths.md', '疑問から選ぶ読み順', {
 2. [CSRFでCookie付きの要求が届く条件を観察する](/practice/browser/csrf-observation.html)で、同一サイトの別オリジンからフォームを送り、受理と拒否を比べる。
 3. Cookieの送信条件は[Cookieとセッション](/browser/cookies-and-sessions.html)、別オリジンの応答公開は[CORS](/browser/same-origin-cors.html)で確認する。
 
+## ブラウザのWorkerと、同じメモリを共有するには
+
+1. [クロスオリジン分離と共有メモリ](/browser/cross-origin-isolation.html)で、COOP・COEP・CORPと、分離状態が成立する条件を整理する。
+2. [Workerへのコピーと共有メモリを観察する](/practice/browser/cross-origin-isolation-observation.html)で、4種類のヘッダー設定と、コピー・共有の結果を比べる。
+3. データの転送は[Web Workerとメッセージ通信](/browser/web-workers-messages.html)、並行処理の同期は[スレッドと同期](/runtime/thread-synchronization.html)へつなげる。
+
 ## 作り方の変化を歴史から見る
 
 [ビデオゲーム史](/history/video-games.html)の作品・ハード・媒体・流通と、[リアルタイム3D技術史](/guide/rendering/timeline.html)の技術の変化から、気になった仕組みへ進みます。`)
 
 const termRows = [
+  ['クロスオリジン分離 / cross-origin isolation / crossOriginIsolated / COOP / COEP / CORP / require-corp / credentialless / SharedArrayBuffer / Atomics', '/browser/cross-origin-isolation.html', 'ウィンドウ間の境界、別オリジン資源の読み込み、Worker間で同じメモリを使う条件を調べる'],
   ['CSRF / Cross-Site Request Forgery / リクエスト偽造 / Origin / Referer / SameSite / CSRFトークン / synchronizer token', '/browser/csrf-and-request-validation.html', 'Cookieが付く条件と、送信元・トークンを検査して状態変更を受理する条件を調べる'],
   ['XSS / Cross-Site Scripting / DOM XSS / source / sink / textContent / innerHTML / CSP / Content Security Policy / script-src / script-src-attr / nonce / hash / SecurityPolicyViolationEvent', '/browser/xss-and-csp.html', '入力を解釈する箇所、HTMLの生成とコードの実行、CSPによる実行制限を調べる'],
   ['Cookie / Set-Cookie / document.cookie / Domain / Path / Max-Age / Secure / HttpOnly / SameSite / セッションID / セッション固定化 / ログアウト', '/browser/cookies-and-sessions.html', '要求にCookieを付ける条件、サーバー側の照合、IDの更新と失効を調べる'],

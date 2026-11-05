@@ -40,7 +40,8 @@ export default withMermaid(defineConfig({
       { url: '/study/samples/browser/cors-observation/index.html' },
       { url: '/study/samples/browser/cookie-session-observation/index.html' },
       { url: '/study/samples/browser/xss-csp-observation/index.html' },
-      { url: '/study/samples/browser/csrf-observation/index.html' }
+      { url: '/study/samples/browser/csrf-observation/index.html' },
+      { url: '/study/samples/browser/cross-origin-isolation-observation/index.html' }
     ]
   },
   head: [

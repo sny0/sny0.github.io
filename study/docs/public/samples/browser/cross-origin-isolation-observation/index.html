@@ -1,0 +1,87 @@
+<!doctype html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="referrer" content="no-referrer">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'self'; style-src 'self'; worker-src 'self'; img-src http://127.0.0.1:4195; base-uri 'none'; form-action 'none'">
+  <title>クロスオリジン分離と共有メモリの観察 | Sny0 Study</title>
+  <link rel="canonical" href="https://sny0.com/study/samples/browser/cross-origin-isolation-observation/index.html">
+  <link rel="stylesheet" href="styles.css">
+  <script src="main.js" defer></script>
+</head>
+<body>
+  <main>
+    <header>
+      <a href="https://sny0.com/study/practice/browser/cross-origin-isolation-observation.html">実践手順とコードを読む</a>
+      <h1>クロスオリジン分離と共有メモリの観察</h1>
+      <p>Workerに32ビット整数を1つ渡し、Workerが値を変えた後に、ページ側から何が見えるかを比べます。</p>
+      <nav id="local-modes" aria-label="ローカル配信モード" hidden></nav>
+    </header>
+
+    <section class="environment" aria-labelledby="environment-heading">
+      <h2 id="environment-heading">この実行環境の観測値</h2>
+      <dl>
+        <dt>Window の <code>isSecureContext</code></dt><dd id="secure-context">—</dd>
+        <dt>Window の <code>crossOriginIsolated</code></dt><dd id="window-isolated">—</dd>
+        <dt><code>SharedArrayBuffer</code> が公開されている</dt><dd id="shared-buffer">—</dd>
+        <dt><code>Atomics.add</code> と <code>Atomics.load</code> が公開されている</dt><dd id="atomics">—</dd>
+        <dt>Worker が返した <code>crossOriginIsolated</code></dt><dd id="worker-isolated">—</dd>
+      </dl>
+      <p id="environment">この実験をHTTP(S)のページで開き、JavaScriptを有効にしてください。</p>
+    </section>
+
+    <div class="experiments">
+      <section data-case="copy" aria-labelledby="copy-heading">
+        <h2 id="copy-heading">1. コピーしたデータを変更</h2>
+        <p><code>ArrayBuffer</code> を転送リストなしの <code>postMessage()</code> で渡します。Workerはコピーされた側の値を1増やします。</p>
+        <button type="button" id="run-copy" disabled>ArrayBuffer のコピーを試す</button>
+        <div class="result" aria-live="polite" aria-atomic="true">
+          <p data-result>未実行</p>
+          <dl>
+            <dt>ページ側の初期値</dt><dd data-parent-before>—</dd>
+            <dt>Workerの変更前</dt><dd data-worker-before>—</dd>
+            <dt>Workerの変更後</dt><dd data-worker-after>—</dd>
+            <dt>完了通知後のページ側</dt><dd data-parent-after>—</dd>
+          </dl>
+        </div>
+      </section>
+
+      <section data-case="shared" aria-labelledby="shared-heading">
+        <h2 id="shared-heading">2. 共有したデータを変更</h2>
+        <p><code>SharedArrayBuffer</code> を渡し、Workerで <code>Atomics.add()</code> を使います。ページは完了通知を受けて <code>Atomics.load()</code> で読みます。</p>
+        <button type="button" id="run-shared" aria-describedby="shared-note" disabled>SharedArrayBuffer の共有を試す</button>
+        <p id="shared-note">実行条件を確認しています。</p>
+        <div class="result" aria-live="polite" aria-atomic="true">
+          <p data-result>未実行</p>
+          <dl>
+            <dt>ページ側の初期値</dt><dd data-parent-before>—</dd>
+            <dt>Workerの変更前</dt><dd data-worker-before>—</dd>
+            <dt>Workerの変更後</dt><dd data-worker-after>—</dd>
+            <dt>完了通知後のページ側</dt><dd data-parent-after>—</dd>
+          </dl>
+        </div>
+      </section>
+    </div>
+
+    <section id="image-probe" class="image-probe" aria-labelledby="image-heading" hidden>
+      <h2 id="image-heading">3. 別オリジンの画像を読み込む</h2>
+      <p>別ポートのサーバーから、同じ絵を2通りの応答ヘッダーで読み込みます。画像には <code>crossorigin</code> を付けず、no-CORSで要求します。</p>
+      <button type="button" id="run-images" disabled>2つの画像の読み込みを試す</button>
+      <div class="result" aria-live="polite" aria-atomic="true">
+        <p id="images-result">未実行</p>
+        <dl>
+          <dt>CORPヘッダーなし</dt><dd id="image-unmarked">—</dd>
+          <dt><code>Cross-Origin-Resource-Policy: cross-origin</code></dt><dd id="image-allowed">—</dd>
+        </dl>
+      </div>
+      <p><code>load</code> は読み込み成功、<code>error</code> は拒否や通信の失敗です。ページのCOEPと画像のCORPを変えるときは、ほかの条件をそろえて比べます。</p>
+    </section>
+
+    <section class="notes" aria-labelledby="notes-heading">
+      <h2 id="notes-heading">ローカル配信で変えられる条件</h2>
+      <p>付属サーバーでは、ヘッダーなし、COOPのみ、COEPのみ、両方ありの4つのページを同じコードで試せます。画像の比較もそのサーバーで使えます。</p>
+    </section>
+  </main>
+</body>
+</html>

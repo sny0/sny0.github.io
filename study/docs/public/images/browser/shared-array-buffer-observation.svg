@@ -1,0 +1,52 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="760" height="1040" viewBox="0 0 760 1040" role="img" aria-labelledby="title desc">
+  <title id="title">Workerに送ったバッファのコピーと共有</title>
+  <desc id="desc">初期値0の32ビット整数を持つバッファをページからWorkerに送り、Workerが1を加える。転送リストなしのArrayBufferではバイトがコピーされ、ページ側は0、Worker側は1になる。SharedArrayBufferでは別々のオブジェクトが同じ共有データブロックを参照し、WorkerのAtomics.addの後にページもAtomics.loadで1を読める。</desc>
+  <defs>
+    <style>
+      text{font-family:'BIZ UDPGothic','Yu Gothic',Meiryo,sans-serif;fill:#183440}
+      .title{font-size:35px;font-weight:700}.head{font-size:29px;font-weight:700}
+      .body{font-size:26px}.label{font-size:25px;font-weight:700}
+      .code{font-family:Consolas,'Liberation Mono',monospace;font-size:24px}
+      .muted{fill:#3b5963}.ok{fill:#085c4d}
+      .panel{fill:#fff;stroke:#a6bcc2;stroke-width:2}
+      .arrow{fill:none;stroke:#4d6e78;stroke-width:3;marker-end:url(#arrowhead)}
+    </style>
+    <marker id="arrowhead" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto">
+      <path d="M0 0L10 5L0 10z" fill="#4d6e78"/>
+    </marker>
+  </defs>
+  <rect width="760" height="1040" rx="24" fill="#eef5f6"/>
+  <text class="title" x="36" y="62">Workerへのコピーと共有</text>
+  <text class="body muted" x="36" y="101">初期値は0。Workerが1を加えた後を比べる。</text>
+
+  <rect class="panel" x="36" y="136" width="688" height="352" rx="18"/>
+  <text class="head" x="60" y="181">ArrayBufferをコピー</text>
+  <text class="body" x="60" y="225">転送リストを指定せずに送る。</text>
+  <rect x="60" y="276" width="252" height="144" rx="12" fill="#e8ecf8" stroke="#a9b8d8"/>
+  <text class="label" x="81" y="316">ページのビュー</text>
+  <text class="body" x="81" y="356">元のバイト列</text>
+  <text class="code" x="81" y="393">0 → 0</text>
+  <rect x="448" y="276" width="252" height="144" rx="12" fill="#e0eee5" stroke="#9dc1ad"/>
+  <text class="label ok" x="469" y="316">Workerのビュー</text>
+  <text class="body" x="469" y="356">複製したバイト列</text>
+  <text class="code ok" x="469" y="393">0 → 1</text>
+  <path class="arrow" d="M322 333h116"/>
+  <text class="label muted" x="342" y="371">コピー</text>
+  <text class="body muted" x="60" y="459">別々のデータなので、送信元は0のまま。</text>
+
+  <rect class="panel" x="36" y="518" width="688" height="453" rx="18"/>
+  <text class="head" x="60" y="563">SharedArrayBufferを共有</text>
+  <text class="body" x="60" y="607">受け取った側にもビューを作る。</text>
+  <rect x="60" y="637" width="252" height="65" rx="12" fill="#e8ecf8" stroke="#a9b8d8"/>
+  <text class="label" x="81" y="679">ページのビュー</text>
+  <rect x="448" y="637" width="252" height="65" rx="12" fill="#e8ecf8" stroke="#a9b8d8"/>
+  <text class="label" x="469" y="679">Workerのビュー</text>
+  <path class="arrow" d="M186 704v30h94v31"/>
+  <path class="arrow" d="M574 704v30h-94v31"/>
+  <rect x="172" y="772" width="416" height="87" rx="12" fill="#e0eee5" stroke="#9dc1ad"/>
+  <text class="label ok" x="194" y="808">同じ共有データブロック</text>
+  <text class="code ok" x="194" y="840">0 → 1</text>
+  <text class="body" x="60" y="907">WorkerがAtomics.addで1を加える。</text>
+  <text class="body" x="60" y="944">ページもAtomics.loadで1を読める。</text>
+  <text class="body muted" x="36" y="1016">更新の完了を受け取ってから値を観測する。</text>
+</svg>
