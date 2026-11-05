@@ -37,7 +37,8 @@ export default withMermaid(defineConfig({
       { url: '/study/samples/browser/stream-backpressure-observation/index.html' },
       { url: '/study/samples/browser/storage-observation/index.html' },
       { url: '/study/samples/browser/service-worker-observation/index.html' },
-      { url: '/study/samples/browser/cors-observation/index.html' }
+      { url: '/study/samples/browser/cors-observation/index.html' },
+      { url: '/study/samples/browser/cookie-session-observation/index.html' }
     ]
   },
   head: [

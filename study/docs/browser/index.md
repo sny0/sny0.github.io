@@ -19,6 +19,7 @@ URLを開いてから描画されるまでを、通信・実行・表示に分�
 
 ## 辞典の本文
 
+- [Cookieとセッション — 要求への付与とサーバー側の寿命](/browser/cookies-and-sessions.html)
 - [Service Workerとオフライン動作 — 登録、制御、応答の選択](/browser/service-worker-offline.html)
 - [Streams APIとストリーミング処理 — データの流れとbackpressure](/browser/streams-backpressure.html)
 - [Web Workerとメッセージ通信 — 実行の分担とデータの所有権](/browser/web-workers-messages.html)
@@ -40,6 +41,7 @@ URLを開いてから描画されるまでを、通信・実行・表示に分�
 - [Streams APIで遅いsinkとbackpressureを観察する](/practice/browser/stream-backpressure-observation.html)
 - [Web Workerでコピー・transfer・停止を観察する](/practice/browser/worker-message-observation.html)
 - [Worker poolで受付上限・待機取消し・結果破棄を観察する](/practice/browser/worker-pool-observation.html)
+- [ブラウザでCookieの範囲とセッションIDを観察する](/practice/browser/cookie-session-observation.html)
 - [ブラウザでPromise・await・timer・rAFの順序を観察する](/practice/browser/event-loop-observation.html)
 - [ブラウザで同一オリジンとCORSの応答を比べる](/practice/browser/cors-observation.html)
 

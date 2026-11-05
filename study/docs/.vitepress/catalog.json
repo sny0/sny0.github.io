@@ -69,7 +69,7 @@
       "id": "browser",
       "title": "ブラウザ",
       "description": "URLを開いてから描画されるまでを、通信・実行・表示に分ける。",
-      "count": 8,
+      "count": 9,
       "status": "辞典本文あり"
     },
     {
@@ -130,6 +130,13 @@
     }
   ],
   "collections": [
+    {
+      "id": "cookie-session-observation",
+      "section": "practice",
+      "title": "ブラウザでCookieの範囲とセッションIDを観察する",
+      "description": "CookieのPathと、HTTPで受け渡すHttpOnlyのID、サーバー側の記録と失効を比べる。",
+      "start": "/practice/browser/cookie-session-observation.html"
+    },
     {
       "id": "cors-observation",
       "section": "practice",
@@ -1795,6 +1802,44 @@
         "/languages/cpp/auto-and-constexpr.html",
         "/languages/cpp/",
         "/languages/cpp/arrays-and-strings.html"
+      ]
+    },
+    {
+      "title": "Cookieとセッション — 要求への付与とサーバー側の寿命",
+      "url": "/browser/cookies-and-sessions.html",
+      "file": "browser/cookies-and-sessions.md",
+      "domain": "browser",
+      "section": "reference",
+      "format": "article",
+      "status": "published",
+      "summary": "Set-Cookieを受け取ってからCookieが次の要求に付くまでを説明する。属性とcredentialsの条件、セッションIDの照合、ブラウザとサーバーそれぞれの期限を整理する。",
+      "source": "新規執筆",
+      "aliases": [
+        "Cookie",
+        "HTTP cookie",
+        "Set-Cookie",
+        "cookie jar",
+        "host-only",
+        "Domain",
+        "Path",
+        "Expires",
+        "Max-Age",
+        "Secure",
+        "HttpOnly",
+        "SameSite",
+        "credentials",
+        "セッション",
+        "セッションID",
+        "session fixation",
+        "CSRF",
+        "XSS"
+      ],
+      "verification": "RFC 6265、IETFの改訂草案、WHATWG標準と照合（2026-11-05）",
+      "links": [
+        "/browser/same-origin-cors.html",
+        "/browser/storage-lifetime.html",
+        "/network/http-messages.html",
+        "/practice/browser/cookie-session-observation.html"
       ]
     },
     {
@@ -6072,6 +6117,34 @@
       ]
     },
     {
+      "title": "ブラウザでCookieの範囲とセッションIDを観察する",
+      "url": "/practice/browser/cookie-session-observation.html",
+      "file": "practice/browser/cookie-session-observation.md",
+      "domain": "browser",
+      "section": "practice",
+      "format": "sample",
+      "status": "published",
+      "summary": "公開版でCookieのPathとdocument.cookieの見え方を比べ、ローカルサーバーでSet-Cookie、HttpOnly、セッションの照合と失効を観察する。",
+      "source": "新規執筆",
+      "aliases": [
+        "Cookie",
+        "document.cookie",
+        "Cookie Path",
+        "Set-Cookie",
+        "HttpOnly",
+        "SameSite",
+        "セッションID",
+        "ログアウト"
+      ],
+      "collection": "cookie-session-observation",
+      "order": 1,
+      "verification": "Windows上のブラウザでPathによる見え方、再読み込み、HttpOnly、ID更新とログアウトを確認（2026-11-05）",
+      "links": [
+        "/browser/cookies-and-sessions.html",
+        "/browser/same-origin-cors.html"
+      ]
+    },
+    {
       "title": "ブラウザでPromise・await・timer・rAFの順序を観察する",
       "url": "/practice/browser/event-loop-observation.html",
       "file": "practice/browser/event-loop-observation.md",
@@ -6202,6 +6275,7 @@
       "verification": "一次資料照合（2026-11-05）",
       "links": [
         "/browser/event-loop-promises.html",
+        "/browser/cookies-and-sessions.html",
         "/network/http-caching.html",
         "/practice/browser/storage-observation.html",
         "/browser/service-worker-offline.html"
@@ -7012,6 +7086,8 @@
         "/practice/browser/service-worker-observation.html",
         "/browser/same-origin-cors.html",
         "/practice/browser/cors-observation.html",
+        "/browser/cookies-and-sessions.html",
+        "/practice/browser/cookie-session-observation.html",
         "/history/video-games.html",
         "/guide/rendering/timeline.html"
       ]
@@ -8601,6 +8677,7 @@
       "links": [
         "/browser/storage-lifetime.html",
         "/network/http-caching.html",
+        "/browser/cookies-and-sessions.html",
         "/browser/service-worker-offline.html",
         "/practice/browser/cors-observation.html"
       ]
@@ -9159,6 +9236,7 @@
       "source": "統合ガイド",
       "aliases": [],
       "links": [
+        "/browser/cookies-and-sessions.html",
         "/browser/same-origin-cors.html",
         "/browser/service-worker-offline.html",
         "/browser/storage-lifetime.html",

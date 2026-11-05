@@ -100,6 +100,8 @@ CORS検査を通過した`404`や`500`の本応答は、HTTP statusを持つ`Res
 
 複数のオリジンを許可する構成では、要求の`Origin`を許可リストと照合し、一致した値を`Access-Control-Allow-Origin`に返します。応答が`Origin`によって変わる場合は`Vary: Origin`を指定し、HTTPキャッシュが別のオリジン用の応答を使い回すことを防ぎます。プリフライトの許可を再利用する時間は、別に`Access-Control-Max-Age`で指定できます。[WHATWG FetchのCORS protocol and HTTP caches](https://fetch.spec.whatwg.org/#cors-protocol-and-http-caches)、[HTTPキャッシュ](/network/http-caching.html)
 
+要求にCookieが付く条件と、受け取ったIDをサーバーがどう照合するかは、[Cookieとセッション](/browser/cookies-and-sessions.html)で扱います。
+
 ## 更新を許可する判断はサーバーで行う
 
 サーバーには、利用者の認証、その操作を行う権限の確認、必要に応じた**CSRF**（利用者のセッションを使った意図しない送信）への対策が必要です。たとえば状態を変更するフォームが別サイトから送信され、条件次第でCookieが付くことがあります。応答の読み取りが制限されても更新は起き得るため、サーバーがCSRFトークンの照合などで要求を検査します。[OWASPのCSRF対策](https://cheatsheetseries.owasp.org/cheatsheets/Cross-Site_Request_Forgery_Prevention_Cheat_Sheet.html)

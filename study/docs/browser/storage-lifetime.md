@@ -56,7 +56,7 @@ Web Storageは**同期API**です。呼び出し中は、そのJavaScript実行�
 
 **storageイベント**は、共有する保存領域を別のdocumentが変更したことを知らせます。変更を行ったwindow自身には発火しません。通知を受けて表示を更新できますが、複数操作を原子的にする仕組みではありません。[MDN: storage event](https://developer.mozilla.org/en-US/docs/Web/API/Window/storage_event)
 
-`sessionStorage`も同期の文字列保存ですが、originに加えてタブなどのtop-level browsing contextに結び付くページセッションが基本単位です。同じタブの再読み込みでは保持されます。localStorageと同じ長期保存先として扱いません。Cookieは条件に合うHTTP要求へ送る用途なども持つ別の仕組みで、これらの保存領域と同一ではありません。[MDN: sessionStorage](https://developer.mozilla.org/en-US/docs/Web/API/Window/sessionStorage)
+`sessionStorage`も同期の文字列保存ですが、originに加えてタブなどのtop-level browsing contextに結び付くページセッションが基本単位です。同じタブの再読み込みでは保持されます。localStorageと同じ長期保存先として扱いません。Cookieが条件に合うHTTP要求へ送られる仕組みは、[Cookieとセッション](/browser/cookies-and-sessions.html)で扱います。[MDN: sessionStorage](https://developer.mozilla.org/en-US/docs/Web/API/Window/sessionStorage)
 
 ## IndexedDB — レコードとトランザクション
 

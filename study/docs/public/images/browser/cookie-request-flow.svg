@@ -1,0 +1,57 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="760" height="1180" viewBox="0 0 760 1180" role="img" aria-labelledby="title desc">
+  <title id="title">Cookieはいつ要求に付くか</title>
+  <desc id="desc">HTTPS応答のSet-Cookieに入っている名前と値を、ブラウザはPath、期限、Secure、SameSiteなどと一緒に保存する。次の要求時にブラウザが送信条件を調べる。例のPathはstudy配下に一致するため名前と値をCookieヘッダーに付ける。assets配下にはこのCookieを付けない。</desc>
+  <defs>
+    <style>
+      text{font-family:'BIZ UDPGothic','Yu Gothic',Meiryo,sans-serif;fill:#183440}
+      .title{font-size:38px;font-weight:700}.head{font-size:30px;font-weight:700}
+      .body{font-size:27px}.label{font-size:25px;font-weight:700}
+      .code{font-family:Consolas,'Liberation Mono',monospace;font-size:26px}
+      .smallcode{font-family:Consolas,'Liberation Mono',monospace;font-size:23px}
+      .muted{fill:#3b5963}.ok{fill:#085c4d}.error{fill:#793b23}
+      .panel{fill:#fff;stroke:#a6bcc2;stroke-width:2}
+      .arrow{fill:none;stroke:#4d6e78;stroke-width:3;marker-end:url(#arrowhead)}
+    </style>
+    <marker id="arrowhead" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto">
+      <path d="M0 0L10 5L0 10Z" fill="#4d6e78"/>
+    </marker>
+  </defs>
+  <rect width="760" height="1180" rx="24" fill="#eef5f6"/>
+  <text x="36" y="58" class="title">Cookieはいつ要求に付くか</text>
+  <text x="36" y="103" class="body muted">同じホストへのHTTPS取得を例に見る。</text>
+
+  <rect x="36" y="137" width="688" height="178" rx="20" class="panel"/>
+  <text x="60" y="182" class="head">1. サーバーが応答で設定する</text>
+  <text x="60" y="228" class="code">Set-Cookie: study_theme=dark</text>
+  <text x="60" y="271" class="body">あわせてパス、期限、通信条件などを指定。</text>
+  <path d="M380 316V363" class="arrow"/>
+
+  <rect x="36" y="367" width="688" height="209" rx="20" fill="#e8eaf7" stroke="#b4b9d4" stroke-width="2"/>
+  <text x="60" y="412" class="head">2. ブラウザが検査して保存する</text>
+  <text x="60" y="453" class="code">study_theme = dark</text>
+  <text x="60" y="493" class="body">設定したホストだけ。パスは <tspan class="code">/study/</tspan>。</text>
+  <text x="60" y="536" class="code">Max-Age=600, Secure, SameSite=Lax</text>
+  <path d="M380 577V623" class="arrow"/>
+
+  <rect x="36" y="627" width="688" height="171" rx="20" class="panel"/>
+  <text x="60" y="671" class="head">3. 次の要求に付けるか選ぶ</text>
+  <text x="60" y="715" class="body">ホストとパス、期限、通信やサイトの条件、</text>
+  <text x="60" y="753" class="body">資格情報の設定、ブラウザの制限を確認。</text>
+  <path d="M380 799V830H203V878" class="arrow"/>
+  <path d="M380 830H557V878" class="arrow"/>
+
+  <rect x="36" y="882" width="334" height="218" rx="18" fill="#e0eee5" stroke="#a3bfae" stroke-width="2"/>
+  <text x="56" y="927" class="label ok">条件が合う</text>
+  <text x="56" y="966" class="smallcode">GET /study/a.html</text>
+  <text x="56" y="1010" class="label">Cookieヘッダー</text>
+  <text x="56" y="1046" class="smallcode">study_theme=dark</text>
+  <text x="56" y="1081" class="label ok">名前と値を送信</text>
+
+  <rect x="390" y="882" width="334" height="218" rx="18" fill="#f8e8de" stroke="#d2a58e" stroke-width="2"/>
+  <text x="410" y="927" class="label error">パスが範囲外</text>
+  <text x="410" y="966" class="smallcode">GET /assets/logo.svg</text>
+  <text x="410" y="1010" class="body">このCookieは</text>
+  <text x="410" y="1048" class="body">要求に付かない。</text>
+
+  <text x="36" y="1147" class="body muted">Pathなどの属性はブラウザの判断に使われる。</text>
+</svg>

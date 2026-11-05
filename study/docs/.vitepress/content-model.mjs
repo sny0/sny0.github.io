@@ -12,6 +12,7 @@ export const formatLabels = {
 export const statusLabels = { published: '公開中', outline: '学習計画・概要', draft: '草稿', planned: '執筆予定' }
 
 export const collections = [
+  { id: 'cookie-session-observation', section: 'practice', title: 'ブラウザでCookieの範囲とセッションIDを観察する', description: 'CookieのPathと、HTTPで受け渡すHttpOnlyのID、サーバー側の記録と失効を比べる。', start: '/practice/browser/cookie-session-observation.html' },
   { id: 'cors-observation', section: 'practice', title: 'ブラウザで同一オリジンとCORSの応答を比べる', description: '同じ固定テキストを通常ページとsandboxから取得し、応答の読み取りとpreflightの違いを確かめる。', start: '/practice/browser/cors-observation.html' },
   { id: 'service-worker-observation', section: 'practice', title: 'Service Workerで応答元と登録状態を観察する', description: '専用scopeで登録と制御開始を確認し、固定GETのネットワーク応答・保存済み応答・解除を試す。', start: '/practice/browser/service-worker-observation.html' },
   { id: 'storage-observation', section: 'practice', title: 'ブラウザで保存・再読込・削除を観察する', description: 'localStorage・IndexedDB・Cache APIへ固定データを保存し、読出し、ページ再読込、専用データの削除を確かめる。', start: '/practice/browser/storage-observation.html' },
