@@ -1,0 +1,56 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="760" height="1140" viewBox="0 0 760 1140" role="img" aria-labelledby="title desc">
+  <title id="title">アリーナの確保・拡張・リセット</title>
+  <desc id="desc">配列12バイトを1024から置き、次の確保は8バイト境界の1040から。パディング4バイトを挟み、UTF-8の8バイトを置くとcursorは1048になる。1ページの状態では65536バイトの確保に失敗し、明示的に2ページへ拡張すると成功する。resetはcursorを1024へ戻す。ページ数と既存のバイトは保持される。</desc>
+  <defs>
+    <style>
+      text{font-family:'BIZ UDPGothic','Yu Gothic',Meiryo,sans-serif;fill:#183440}
+      .title{font-size:36px;font-weight:700}.head{font-size:29px;font-weight:700}
+      .body{font-size:26px}.small{font-size:23px}
+      .code{font-family:Consolas,'Liberation Mono',monospace;font-size:25px}
+      .muted{fill:#3b5963}.green{fill:#085c4d}.warning{fill:#713d24}
+      .panel{fill:#fff;stroke:#a6bcc2;stroke-width:2}
+      .array{fill:#e8ecf8;stroke:#a9b8d8}.utf8{fill:#e0eee5;stroke:#9dc1ad}
+      .pad{fill:#f9ebe1;stroke:#d9b498}
+      .arrow{fill:none;stroke:#4d6e78;stroke-width:3;marker-end:url(#arrowhead)}
+    </style>
+    <marker id="arrowhead" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto">
+      <path d="M0 0L10 5L0 10z" fill="#4d6e78"/>
+    </marker>
+  </defs>
+  <rect width="760" height="1140" rx="24" fill="#eef5f6"/>
+  <text class="title" x="36" y="62">アリーナの確保・拡張・リセット</text>
+  <text class="body muted" x="36" y="103">次の空き位置 cursor を追う。</text>
+
+  <rect class="panel" x="36" y="136" width="688" height="321" rx="18"/>
+  <text class="head" x="60" y="184">1. 配列とUTF-8用の領域を確保する</text>
+  <text class="body" x="60" y="229">次の開始位置を8の倍数にそろえる。</text>
+  <rect class="array" x="60" y="254" width="270" height="100" rx="11"/>
+  <rect class="pad" x="330" y="254" width="137" height="100" rx="11"/>
+  <rect class="utf8" x="467" y="254" width="233" height="100" rx="11"/>
+  <text class="small" text-anchor="middle" x="195" y="293">配列 12 B</text>
+  <text class="small warning" text-anchor="middle" x="398" y="293">隙間 4 B</text>
+  <text class="small" text-anchor="middle" x="583" y="293">UTF-8 8 B</text>
+  <text class="code muted" text-anchor="middle" x="195" y="330">1024–1035</text>
+  <text class="code muted" text-anchor="middle" x="398" y="330">1036–1039</text>
+  <text class="code muted" text-anchor="middle" x="583" y="330">1040–1047</text>
+  <text class="code green" x="60" y="403">cursor = 1024 → 1036 → 1048</text>
+  <text class="small muted" x="60" y="436">位置は線形メモリの先頭から数える。</text>
+  <path class="arrow" d="M380 462v34"/>
+
+  <rect class="panel" x="36" y="501" width="688" height="182" rx="18"/>
+  <text class="head" x="60" y="550">2. 現在の容量で確保を試す</text>
+  <text class="code muted" x="60" y="594">65,536 - 1,048 = 64,488 B</text>
+  <text class="body warning" x="60" y="642">1ページ分は収まらず、cursorは1048。</text>
+  <path class="arrow" d="M380 688v34"/>
+
+  <rect class="panel" x="36" y="727" width="688" height="185" rx="18"/>
+  <text class="head" x="60" y="776">3. メモリを拡張して確保し直す</text>
+  <text class="body green" x="60" y="820">memory.grow(1) 後の容量は131,072 B。</text>
+  <text class="body" x="60" y="869">1ページ分を切り出すと、cursorは66584。</text>
+  <path class="arrow" d="M380 917v34"/>
+
+  <rect class="panel" x="36" y="956" width="688" height="148" rx="18"/>
+  <text class="head" x="60" y="1004">4. リセットで位置を巻き戻す</text>
+  <text class="code green" x="60" y="1047">reset() → cursor = 1024</text>
+  <text class="small muted" x="60" y="1082">再利用の準備。2ページと既存のバイトは残る。</text>
+</svg>
