@@ -1,0 +1,116 @@
+<!doctype html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="referrer" content="no-referrer">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'self' 'wasm-unsafe-eval'; style-src 'self'; connect-src 'self'; base-uri 'none'; form-action 'none'">
+  <title>Wasmへのデータの受け渡しとメモリ確保 | Sny0 Study</title>
+  <link rel="canonical" href="https://sny0.com/study/samples/browser/wasm-abi-observation/index.html">
+  <link rel="stylesheet" href="styles.css">
+  <script src="main.js" defer></script>
+</head>
+<body>
+  <main>
+    <header>
+      <a href="https://sny0.com/study/practice/browser/wasm-abi-observation.html">実践手順とコードを読む</a>
+      <h1>Wasmへのデータの受け渡しとメモリ確保</h1>
+      <p>Wasmで領域を確保し、JavaScriptでバイト列を書きます。Wasmの関数には開始位置と長さを渡します。</p>
+    </header>
+
+    <section class="card" aria-labelledby="load-heading">
+      <h2 id="load-heading">実験を始める</h2>
+      <p><code>arena.wasm</code> を読み込みます。この教材のアリーナは位置1024から始まり、確保の開始位置を8バイト境界にそろえます。</p>
+      <button type="button" id="load-module" disabled>インスタンスを作り直す</button>
+      <p id="operation-status" class="status" role="status">この実験をHTTP(S)で開き、JavaScriptを有効にしてください。</p>
+      <dl class="facts" aria-label="現在のメモリ">
+        <div><dt>線形メモリのページ数</dt><dd id="memory-pages">—</dd></div>
+        <div><dt>線形メモリのバイト長</dt><dd id="memory-size">—</dd></div>
+        <div><dt>現在の確保カーソル</dt><dd id="current-cursor">—</dd></div>
+      </dl>
+    </section>
+
+    <div class="experiments">
+      <section class="card" data-case="array" aria-labelledby="array-heading">
+        <h2 id="array-heading">1. 整数配列を渡す</h2>
+        <p><code>[10, -2, 32]</code> を符号付き32ビットのリトルエンディアンで書きます。<code>sum_i32</code> に渡す長さは要素数です。</p>
+        <button type="button" id="send-array" disabled>i32配列を渡す</button>
+        <div class="result" aria-live="polite" aria-atomic="true">
+          <p data-result>未実行</p>
+          <dl>
+            <dt>カーソル（前 → 後）</dt><dd><span id="array-before" data-field="before">—</span> → <span id="array-after" data-field="after">—</span></dd>
+            <dt>開始位置</dt><dd id="array-start" data-field="start">—</dd>
+            <dt>確保サイズ</dt><dd id="array-size" data-field="size">—</dd>
+            <dt>境界をそろえるために空けたバイト数</dt><dd id="array-padding" data-field="padding">—</dd>
+            <dt>書き込んだバイト（16進数）</dt><dd id="array-bytes" data-field="bytes">—</dd>
+            <dt>Wasmに渡した引数</dt><dd id="array-call" data-field="call">—</dd>
+            <dt>Wasmが返した合計</dt><dd id="array-value" data-field="value">—</dd>
+          </dl>
+        </div>
+      </section>
+
+      <section class="card" data-case="text" aria-labelledby="text-heading">
+        <h2 id="text-heading">2. UTF-8の文字列を渡す</h2>
+        <p><code>A猫🎮</code> を <code>TextEncoder</code> でUTF-8にします。<code>sum_u8</code> は受け取ったバイトの数値を合計します。</p>
+        <button type="button" id="send-text" disabled>UTF-8の文字列を渡す</button>
+        <div class="result" aria-live="polite" aria-atomic="true">
+          <p data-result>未実行</p>
+          <dl>
+            <dt>カーソル（前 → 後）</dt><dd><span id="text-before" data-field="before">—</span> → <span id="text-after" data-field="after">—</span></dd>
+            <dt>開始位置</dt><dd id="text-start" data-field="start">—</dd>
+            <dt>確保サイズ</dt><dd id="text-size" data-field="size">—</dd>
+            <dt>境界をそろえるために空けたバイト数</dt><dd id="text-padding" data-field="padding">—</dd>
+            <dt>JavaScriptの <code>string.length</code></dt><dd id="text-code-units" data-field="code-units">—</dd>
+            <dt>コードポイント数</dt><dd id="text-code-points" data-field="code-points">—</dd>
+            <dt>書き込んだバイト（16進数）</dt><dd id="text-bytes" data-field="bytes">—</dd>
+            <dt>Wasmに渡した引数</dt><dd id="text-call" data-field="call">—</dd>
+            <dt>Wasmが返したバイトの合計</dt><dd id="text-value" data-field="value">—</dd>
+          </dl>
+        </div>
+      </section>
+
+      <section class="card" data-case="capacity" aria-labelledby="capacity-heading">
+        <h2 id="capacity-heading">3. 1ページ分の確保を試す</h2>
+        <p><code>alloc(65536)</code> で、今ある線形メモリの空きに1ページ分が収まるかを調べます。確保した領域には値を書きません。</p>
+        <button type="button" id="try-capacity" disabled>1ページ分を確保</button>
+        <div class="result" aria-live="polite" aria-atomic="true">
+          <p data-result>未実行</p>
+          <dl>
+            <dt><code>alloc</code> の戻り値</dt><dd id="capacity-start" data-field="start">—</dd>
+            <dt>カーソル（前 → 後）</dt><dd><span id="capacity-before" data-field="before">—</span> → <span id="capacity-after" data-field="after">—</span></dd>
+            <dt>メモリのバイト長（前 → 後）</dt><dd><span id="capacity-memory-before" data-field="memory-before">—</span> → <span id="capacity-memory-after" data-field="memory-after">—</span></dd>
+          </dl>
+        </div>
+      </section>
+
+      <section class="card" data-case="grow" aria-labelledby="grow-heading">
+        <h2 id="grow-heading">4. 線形メモリを拡張する</h2>
+        <p>JavaScriptの <code>memory.grow(1)</code> で空き容量を増やします。拡張後に手順3を実行すると、拡張前と同じ大きさを要求できます。</p>
+        <button type="button" id="grow-memory" aria-describedby="grow-note" disabled>メモリを1ページ増やす</button>
+        <p id="grow-note">読み込み後に実行できます。</p>
+        <div class="result" aria-live="polite" aria-atomic="true">
+          <p data-result>未実行</p>
+          <dl>
+            <dt>メモリのバイト長（前 → 後）</dt><dd><span id="grow-memory-before" data-field="memory-before">—</span> → <span id="grow-memory-after" data-field="memory-after">—</span></dd>
+            <dt>カーソル（前 → 後）</dt><dd><span id="grow-before" data-field="before">—</span> → <span id="grow-after" data-field="after">—</span></dd>
+          </dl>
+        </div>
+      </section>
+    </div>
+
+    <section class="card" data-case="reset" aria-labelledby="reset-heading">
+      <h2 id="reset-heading">5. アリーナをリセットする</h2>
+      <p><code>reset()</code> はカーソルを1024へ戻します。前に確保した領域の使用はそこで終わります。位置1024からの生のバイトを前後で見比べます。</p>
+      <button type="button" id="reset-arena" disabled>アリーナをリセット</button>
+      <div class="result" aria-live="polite" aria-atomic="true">
+        <p data-result>未実行</p>
+        <dl>
+          <dt>カーソル（前 → 後）</dt><dd><span id="reset-before" data-field="before">—</span> → <span id="reset-after" data-field="after">—</span></dd>
+          <dt>位置1024〜1035の生バイト（前）</dt><dd id="reset-bytes-before" data-field="bytes-before">—</dd>
+          <dt>位置1024〜1035の生バイト（後）</dt><dd id="reset-bytes-after" data-field="bytes-after">—</dd>
+        </dl>
+      </div>
+    </section>
+  </main>
+</body>
+</html>

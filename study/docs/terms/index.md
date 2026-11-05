@@ -18,6 +18,7 @@
 
 | 用語・別名 | 説明への入口 |
 | --- | --- |
+| [Wasm ABI / ポインタと長さ / pointer / byte length / TextEncoder / アラインメント / アリーナ / bump allocator / alloc / cursor](/browser/wasm-data-and-allocation.html) | 配列・文字列を渡す配置と長さの単位、領域の確保・拡張・寿命を調べる |
 | [WebAssembly / Wasm / WAT / WebAssembly.Module / WebAssembly.Instance / import / export / instantiateStreaming / 線形メモリ / linear memory / Memory.grow / trap](/browser/webassembly-linear-memory.html) | バイナリの読み込みと実体化、JavaScriptとの境界、バイト列の読み書きと拡張を調べる |
 | [クロスオリジン分離 / cross-origin isolation / crossOriginIsolated / COOP / COEP / CORP / require-corp / credentialless / SharedArrayBuffer / Atomics](/browser/cross-origin-isolation.html) | ウィンドウ間の境界、別オリジン資源の読み込み、Worker間で同じメモリを使う条件を調べる |
 | [CSRF / Cross-Site Request Forgery / リクエスト偽造 / Origin / Referer / SameSite / CSRFトークン / synchronizer token](/browser/csrf-and-request-validation.html) | Cookieが付く条件と、送信元・トークンを検査して状態変更を受理する条件を調べる |
