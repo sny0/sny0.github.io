@@ -1,0 +1,98 @@
+<!doctype html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="referrer" content="no-referrer">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'self' 'wasm-unsafe-eval'; style-src 'self'; connect-src 'self'; base-uri 'none'; form-action 'none'">
+  <title>WebAssemblyと線形メモリの観察 | Sny0 Study</title>
+  <link rel="canonical" href="https://sny0.com/study/samples/browser/wasm-memory-observation/index.html">
+  <link rel="stylesheet" href="styles.css">
+  <script src="main.js" defer></script>
+</head>
+<body>
+  <main>
+    <header>
+      <a href="https://sny0.com/study/practice/browser/wasm-memory-observation.html">実践手順とコードを読む</a>
+      <h1>WebAssemblyと線形メモリの観察</h1>
+      <p>Wasmのインスタンスが公開したメモリをJavaScriptから読み、同じ場所をWasmの関数で更新します。</p>
+    </header>
+
+    <section class="card" aria-labelledby="load-heading">
+      <h2 id="load-heading">1. モジュールを読み込む</h2>
+      <p><code>memory.wasm</code> を取得し、実行できるインスタンスを作ります。読み込みのたびにメモリのバイト位置16を41で初期化します。</p>
+      <div class="actions">
+        <button type="button" id="load-module" disabled>配信条件に合わせて読み込む</button>
+        <button type="button" id="load-bytes" disabled>ArrayBuffer で読み込む</button>
+      </div>
+      <div class="result" aria-live="polite" aria-atomic="true">
+        <p id="operation-status">この実験をHTTP(S)で開き、JavaScriptを有効にしてください。</p>
+        <dl>
+          <dt>取得先</dt><dd id="module-url">—</dd>
+          <dt>応答の <code>Content-Type</code></dt><dd id="response-mime">—</dd>
+          <dt>使用したAPI</dt><dd id="load-method">—</dd>
+        </dl>
+      </div>
+    </section>
+
+    <section class="card" aria-labelledby="memory-heading">
+      <h2 id="memory-heading">2. 線形メモリの現在値</h2>
+      <p>このモジュールの1ページは65,536バイトです。位置16からの4バイトをリトルエンディアンの符号付き32ビット整数として読みます。</p>
+      <dl class="memory">
+        <dt>現在のページ数</dt><dd id="memory-pages">—</dd>
+        <dt>現在のバイト長</dt><dd id="memory-size">—</dd>
+        <dt>位置16の整数</dt><dd id="current-value">—</dd>
+        <dt>位置16〜19のバイト（16進数）</dt><dd id="current-bytes">—</dd>
+      </dl>
+    </section>
+
+    <div class="experiments">
+      <section class="card" data-case="add" aria-labelledby="add-heading">
+        <h2 id="add-heading">3. Wasmから1を加える</h2>
+        <p>Wasmの <code>add_at(16, 1)</code> は、位置16から4バイトを読んで加算し、結果を同じ位置に書き戻します。</p>
+        <button type="button" id="add-one" disabled>Wasm の関数を呼ぶ</button>
+        <div class="result" aria-live="polite" aria-atomic="true">
+          <p data-result>未実行</p>
+          <dl>
+            <dt>変更前</dt><dd id="add-before">—</dd>
+            <dt>関数の戻り値</dt><dd id="add-return">—</dd>
+            <dt>JavaScriptから読んだ変更後</dt><dd id="add-after">—</dd>
+          </dl>
+        </div>
+      </section>
+
+      <section class="card" data-case="trap" aria-labelledby="trap-heading">
+        <h2 id="trap-heading">4. メモリの境界を越える</h2>
+        <p>末尾から3バイトの位置を渡し、4バイトを読もうとしたときの動作を確認します。</p>
+        <button type="button" id="trap-access" disabled>範囲外の読み取りを試す</button>
+        <div class="result" aria-live="polite" aria-atomic="true">
+          <p data-result>未実行</p>
+          <dl>
+            <dt>読み取り開始位置</dt><dd id="trap-offset">—</dd>
+            <dt>発生した例外</dt><dd id="trap-error">—</dd>
+            <dt>位置16の整数（前 → 後）</dt><dd id="trap-value">—</dd>
+            <dt>メモリのバイト長（前 → 後）</dt><dd id="trap-size">—</dd>
+          </dl>
+        </div>
+      </section>
+
+      <section class="card grow" data-case="grow" aria-labelledby="grow-heading">
+        <h2 id="grow-heading">5. 1ページ拡張する</h2>
+        <p><code>memory.grow(1)</code> を呼ぶ前後で、同じ <code>Uint8Array</code> と、拡張後に作ったビューのバイト長を比べます。</p>
+        <button type="button" id="grow-memory" aria-describedby="grow-note" disabled>メモリを1ページ拡張</button>
+        <p id="grow-note">読み込み後に実行できます。</p>
+        <div class="result" aria-live="polite" aria-atomic="true">
+          <p data-result>未実行</p>
+          <dl>
+            <dt><code>grow(1)</code> が返した拡張前のページ数</dt><dd id="grow-return">—</dd>
+            <dt>元のビューのバイト長（前 → 後）</dt><dd><span id="old-view-length-before">—</span> → <span id="old-view-length">—</span></dd>
+            <dt>新しいビューのバイト長</dt><dd id="new-view-length">—</dd>
+            <dt>位置16の整数（前 → 後）</dt><dd id="grow-value">—</dd>
+            <dt>追加ページの先頭4バイト（16進数）</dt><dd id="new-page-bytes">—</dd>
+          </dl>
+        </div>
+      </section>
+    </div>
+  </main>
+</body>
+</html>
