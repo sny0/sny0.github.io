@@ -213,6 +213,12 @@
 2. [Wasmへ配列とUTF-8を渡す実験](/practice/browser/wasm-abi-observation.html)で、実際のバイト列、アラインメントによる空き、確保失敗と拡張を観察する。
 3. 文字列のバイト表現は[Unicodeとエンコーディング](/data/unicode-and-encoding.html)、メモリ確保を実行環境の内側から見る場合は[メモリ確保の内部](/runtime/memory/allocation-journey.html)へつなげる。
 
+## 2つのWorkerが同じ値を更新すると何が起きるか
+
+1. [Web Workerと共有メモリの同期](/browser/shared-memory-atomics.html)で、失われた更新、不可分な加算、待機と通知を区別する。
+2. [Workerの競合とAtomicsの待機・通知を観察する](/practice/browser/atomics-observation.html)で、読み取りと書き込みの順序をたどる。実際のWorkerで確認する場合はローカル配信を使う。
+3. 共有できる条件は[クロスオリジン分離と共有メモリ](/browser/cross-origin-isolation.html)、複数の値を一緒に守る設計は[スレッドと同期](/runtime/thread-synchronization.html)で調べる。
+
 ## 作り方の変化を歴史から見る
 
 [ビデオゲーム史](/history/video-games.html)の作品・ハード・媒体・流通と、[リアルタイム3D技術史](/guide/rendering/timeline.html)の技術の変化から、気になった仕組みへ進みます。

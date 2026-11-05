@@ -67,3 +67,5 @@ Wasmのload命令が検査するのは、アクセスが**線形メモリ全体*
 ## 実践との対応
 
 ブラウザで配列と文字列を送り、確保前後の `cursor` と先頭のずれ、線形メモリに並んだバイト、Wasmの戻り値を確認できます。1ページ分の確保、明示的な拡張、リセットもそれぞれ実行します。[配列・文字列とアリーナの実験](/practice/browser/wasm-abi-observation.html)
+
+複数のWorkerが同じメモリを読み書きする場合は、誰が書き込み、いつ読めるかを決めます。その順序は[Web Workerと共有メモリの同期](/browser/shared-memory-atomics.html)で扱います。

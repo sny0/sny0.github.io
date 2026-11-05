@@ -12,6 +12,7 @@ export const formatLabels = {
 export const statusLabels = { published: '公開中', outline: '学習計画・概要', draft: '草稿', planned: '執筆予定' }
 
 export const collections = [
+  { id: 'atomics-observation', section: 'practice', title: 'Workerの競合とAtomicsの待機・通知を観察する', description: '共有カウンターの失われた更新、不可分な加算、準備フラグと通知の順序を比べる。', start: '/practice/browser/atomics-observation.html' },
   { id: 'wasm-abi-observation', section: 'practice', title: 'WebAssemblyへ配列とUTF-8を渡し、メモリ確保を観察する', description: '線形メモリに配列と文字列を置き、ポインタと長さ、アラインメント、アリーナの確保位置を確かめる。', start: '/practice/browser/wasm-abi-observation.html' },
   { id: 'wasm-memory-observation', section: 'practice', title: 'WebAssemblyの読み込みと線形メモリを観察する', description: 'Wasmを読み込み、JavaScriptとWasmで同じバイトを読み、境界チェックとメモリの拡張を試す。', start: '/practice/browser/wasm-memory-observation.html' },
   { id: 'cross-origin-isolation-observation', section: 'practice', title: 'Workerへのコピーと共有メモリをブラウザで観察する', description: 'WindowとWorkerの分離状態、ArrayBufferのコピー、共有メモリ、別オリジン画像の読み込みを比べる。', start: '/practice/browser/cross-origin-isolation-observation.html' },

@@ -43,7 +43,8 @@ export default withMermaid(defineConfig({
       { url: '/study/samples/browser/csrf-observation/index.html' },
       { url: '/study/samples/browser/cross-origin-isolation-observation/index.html' },
       { url: '/study/samples/browser/wasm-memory-observation/index.html' },
-      { url: '/study/samples/browser/wasm-abi-observation/index.html' }
+      { url: '/study/samples/browser/wasm-abi-observation/index.html' },
+      { url: '/study/samples/browser/atomics-observation/index.html' }
     ]
   },
   head: [

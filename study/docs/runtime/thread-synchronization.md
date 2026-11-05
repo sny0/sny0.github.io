@@ -133,3 +133,5 @@ C#の`Thread.Join()`も、対象スレッドの終了を待つAPIです。タイ
 C++20の`volatile`もC#の`volatile`も、今回の複数操作をまとめた排他の代わりにはなりません。両言語の`volatile`の保証が同じという意味でもありません。「volatileを付ければ常に最新値で安全」と判断せず、必要な排他と順序を持つ道具を選びます。[N4861: data races](https://timsong-cpp.github.io/cppwp/n4861/intro.races)、[Microsoft: C# volatile](https://learn.microsoft.com/en-us/dotnet/csharp/language-reference/keywords/volatile)
 
 競合や寿命の失敗例は[並行処理のバグ](/runtime/memory/concurrency-bugs.html)、完全な所有関係と検査を含むコンソール例は[在庫の確認と消費をC++／C#で同期する](/practice/threads/inventory-synchronization.html)へつなぎます。この単位ではUnity上の動作検証はしていません。Unityへ持ち込む際は、使用するAPIのスレッド条件を個別に確認します。
+
+ブラウザでも、共有メモリ上の読み取りと書き戻しの間に、別のWorkerの更新が入ります。個々の操作を不可分にする場合と、読み取り・加算・書き戻しを一つの操作にする場合は、[Web Workerと共有メモリの同期](/browser/shared-memory-atomics.html)で比較できます。
