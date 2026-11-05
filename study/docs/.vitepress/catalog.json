@@ -69,7 +69,7 @@
       "id": "browser",
       "title": "ブラウザ",
       "description": "URLを開いてから描画されるまでを、通信・実行・表示に分ける。",
-      "count": 3,
+      "count": 4,
       "status": "辞典本文あり"
     },
     {
@@ -130,6 +130,13 @@
     }
   ],
   "collections": [
+    {
+      "id": "worker-pool-observation",
+      "section": "practice",
+      "title": "Worker poolで待機数と取消しを観察する",
+      "description": "実行枠2・待機枠4へ7件を依頼し、受付拒否、待機取消し、実行中の結果破棄、停止と再起動を確かめる。",
+      "start": "/practice/browser/worker-pool-observation.html"
+    },
     {
       "id": "worker-message-observation",
       "section": "practice",
@@ -4209,6 +4216,7 @@
       "links": [
         "/browser/event-loop-promises.html",
         "/browser/rendering-journey.html",
+        "/browser/worker-pool-backpressure.html",
         "/practice/browser/worker-message-observation.html"
       ]
     },
@@ -4313,6 +4321,76 @@
         "/runtime/memory/allocation-journey.html",
         "/runtime/memory/allocators-and-pools.html",
         "/runtime/memory/storage-duration-and-lifetime.html"
+      ]
+    },
+    {
+      "title": "Worker poolで受付上限・待機取消し・結果破棄を観察する",
+      "url": "/practice/browser/worker-pool-observation.html",
+      "file": "practice/browser/worker-pool-observation.md",
+      "domain": "browser",
+      "section": "practice",
+      "format": "sample",
+      "status": "published",
+      "summary": "固定2つのWorkerと4件のFIFO待機枠で7件をまとめて依頼し、受付拒否・未送信の取消し・実行中の結果破棄・全停止を別々に集計する。",
+      "source": "新規執筆",
+      "aliases": [
+        "Worker pool",
+        "Web Worker",
+        "backpressure",
+        "バックプレッシャー",
+        "FIFO",
+        "queue",
+        "取消し",
+        "結果破棄",
+        "受付上限"
+      ],
+      "collection": "worker-pool-observation",
+      "order": 1,
+      "verification": "ブラウザ実行確認（2026-11-05、ローカルHTTP）",
+      "links": [
+        "/browser/worker-pool-backpressure.html",
+        "/practice/browser/worker-message-observation.html"
+      ]
+    },
+    {
+      "title": "Worker poolと待ち行列の制御 — 受付・実行・取消しを分ける",
+      "url": "/browser/worker-pool-backpressure.html",
+      "file": "browser/worker-pool-backpressure.md",
+      "domain": "browser",
+      "section": "reference",
+      "format": "article",
+      "status": "published",
+      "summary": "Workerを再利用するpoolを、受付上限、待ち行列、実行枠、結果の採用という別の状態で設計する。backpressureの上流への伝達、待機取消しと実行中の結果破棄、世代、終了、待ち時間とタイムアウトを整理する。",
+      "source": "新規執筆",
+      "aliases": [
+        "Worker pool",
+        "ワーカープール",
+        "job queue",
+        "待ち行列",
+        "bounded queue",
+        "backpressure",
+        "バックプレッシャー",
+        "admission control",
+        "受付制御",
+        "concurrency limit",
+        "slot",
+        "実行枠",
+        "queued",
+        "running",
+        "dispatch",
+        "drain",
+        "shutdown",
+        "head-of-line blocking",
+        "starvation",
+        "結果破棄",
+        "soft timeout"
+      ],
+      "verification": "一次資料照合（2026-11-05）",
+      "links": [
+        "/browser/web-workers-messages.html",
+        "/browser/event-loop-promises.html",
+        "/practice/browser/worker-pool-observation.html",
+        "/game/asset-loading.html"
       ]
     },
     {
@@ -6587,6 +6665,8 @@
         "/practice/browser/event-loop-observation.html",
         "/browser/web-workers-messages.html",
         "/practice/browser/worker-message-observation.html",
+        "/browser/worker-pool-backpressure.html",
+        "/practice/browser/worker-pool-observation.html",
         "/history/video-games.html",
         "/guide/rendering/timeline.html"
       ]
@@ -8698,6 +8778,7 @@
       "source": "統合ガイド",
       "aliases": [],
       "links": [
+        "/browser/worker-pool-backpressure.html",
         "/browser/web-workers-messages.html",
         "/browser/event-loop-promises.html",
         "/browser/rendering-journey.html",
