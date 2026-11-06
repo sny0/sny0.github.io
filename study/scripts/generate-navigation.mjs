@@ -376,11 +376,18 @@ writePage('guide/learning-paths.md', '疑問から選ぶ読み順', {
 2. [AudioWorkletで先読みとアンダーランを観察する](/practice/browser/audio-buffer-observation.html)で、同じ到着の遅れを与え、先読みの有無で波形と不足したフレーム数を比べる。
 3. 待ち行列で枠を使い回す仕組みは[リングバッファとSPSCキュー](/browser/spsc-ring-buffer.html)で確認する。
 
+## 複数の音を重ねると波形はどう変わるか
+
+1. [Web Audioのミキシング](/browser/audio-mixing-and-headroom.html)で、音源ごとのゲイン、加算、出力までの振幅の余裕を確認する。
+2. [Web Audioでゲインとクリッピングを観察する](/practice/browser/audio-mixing-observation.html)で、マスターゲインを変えてクリップ前後の波形とピークを比べる。
+3. 音声フレームの供給と出力の関係は[AudioWorkletと音声バッファ](/browser/audio-worklet-buffering.html)で確認する。
+
 ## 作り方の変化を歴史から見る
 
 [ビデオゲーム史](/history/video-games.html)の作品・ハード・媒体・流通と、[リアルタイム3D技術史](/guide/rendering/timeline.html)の技術の変化から、気になった仕組みへ進みます。`)
 
 const termRows = [
+  ['音声ミキシング / audio mixing / GainNode / gain / ヘッドルーム / headroom / dBFS / クリッピング / WaveShaperNode', '/browser/audio-mixing-and-headroom.html', '音声を加算したときのピークと振幅の余裕、クリップ前にゲインを調整する効果を調べる'],
   ['AudioWorklet / AudioWorkletProcessor / Web Audio API / PCM / サンプルフレーム / レンダークォンタム / 先読み / アンダーラン / underrun', '/browser/audio-worklet-buffering.html', 'ブラウザの音声処理単位、出力に対する供給不足、先読み用バッファを調べる'],
   ['リングバッファ / ring buffer / circular buffer / SPSC / FIFO / read index / write index / wrap-around', '/browser/spsc-ring-buffer.html', '固定容量の読み書き位置、折り返し、満杯と空、書き手と読み手の間で枠を受け渡す順序を調べる'],
   ['Atomics / アトミック操作 / lost update / 失われた更新 / read-modify-write / Atomics.add / Atomics.wait / Atomics.notify / 準備フラグ', '/browser/shared-memory-atomics.html', '共有値の更新が失われる順序、不可分な加算、フラグと通知を使うデータの受け渡しを調べる'],

@@ -69,7 +69,7 @@
       "id": "browser",
       "title": "ブラウザ",
       "description": "URLを開いてから描画されるまでを、通信・実行・表示に分ける。",
-      "count": 17,
+      "count": 18,
       "status": "辞典本文あり"
     },
     {
@@ -130,6 +130,13 @@
     }
   ],
   "collections": [
+    {
+      "id": "audio-mixing-observation",
+      "section": "practice",
+      "title": "Web Audioでゲインとクリッピングを観察する",
+      "description": "二つの波形を足し、クリップ前後のピークと、振幅の基準を超えたフレーム数を比べる。",
+      "start": "/practice/browser/audio-mixing-observation.html"
+    },
     {
       "id": "audio-buffer-observation",
       "section": "practice",
@@ -709,7 +716,8 @@
       "links": [
         "/browser/spsc-ring-buffer.html",
         "/browser/streams-backpressure.html",
-        "/practice/browser/audio-buffer-observation.html"
+        "/practice/browser/audio-buffer-observation.html",
+        "/browser/audio-mixing-and-headroom.html"
       ]
     },
     {
@@ -4672,6 +4680,64 @@
       ]
     },
     {
+      "title": "Web Audioでゲインとクリッピングを観察する",
+      "url": "/practice/browser/audio-mixing-observation.html",
+      "file": "practice/browser/audio-mixing-observation.md",
+      "domain": "browser",
+      "section": "practice",
+      "format": "sample",
+      "status": "published",
+      "summary": "二つの音源と全体のゲインを調整し、加算後のピーク、振幅1を超えたフレーム数、ハードクリップ後の波形を比べる。",
+      "source": "新規執筆",
+      "aliases": [
+        "Web Audio API",
+        "GainNode",
+        "WaveShaperNode",
+        "オーディオミキサー",
+        "ミキシング",
+        "ゲイン",
+        "dBFS",
+        "ヘッドルーム",
+        "クリッピング"
+      ],
+      "collection": "audio-mixing-observation",
+      "order": 1,
+      "verification": "Windowsのブラウザで両プリセット、片方の音源とマスターのミュート、ピークと超過フレーム数を確認（2026-11-06）",
+      "links": [
+        "/browser/audio-mixing-and-headroom.html"
+      ]
+    },
+    {
+      "title": "Web Audioのミキシング — ゲイン・ヘッドルーム・クリッピング",
+      "url": "/browser/audio-mixing-and-headroom.html",
+      "file": "browser/audio-mixing-and-headroom.md",
+      "domain": "browser",
+      "section": "reference",
+      "format": "article",
+      "status": "published",
+      "summary": "同じ時点の音声サンプルを加算し、ゲインを掛ける順序と、クリッピングで波形が変わる仕組みを図解する。",
+      "source": "新規執筆",
+      "aliases": [
+        "Web Audio API",
+        "audio mixing",
+        "ミキシング",
+        "GainNode",
+        "ゲイン",
+        "マスターゲイン",
+        "WaveShaperNode",
+        "ヘッドルーム",
+        "クリッピング",
+        "hard clip",
+        "dBFS",
+        "ピーク"
+      ],
+      "verification": "W3C Web Audio APIのノード入力のミックス・GainNode・WaveShaperNode・AudioBufferに照合（2026-11-06）",
+      "links": [
+        "/practice/browser/audio-mixing-observation.html",
+        "/browser/audio-worklet-buffering.html"
+      ]
+    },
+    {
       "title": "Web Workerでコピー・transfer・停止を観察する",
       "url": "/practice/browser/worker-message-observation.html",
       "file": "practice/browser/worker-message-observation.md",
@@ -7665,6 +7731,8 @@
         "/practice/browser/ring-buffer-observation.html",
         "/browser/audio-worklet-buffering.html",
         "/practice/browser/audio-buffer-observation.html",
+        "/browser/audio-mixing-and-headroom.html",
+        "/practice/browser/audio-mixing-observation.html",
         "/history/video-games.html",
         "/guide/rendering/timeline.html"
       ]
@@ -9814,6 +9882,7 @@
       "source": "統合ガイド",
       "aliases": [],
       "links": [
+        "/browser/audio-mixing-and-headroom.html",
         "/browser/audio-worklet-buffering.html",
         "/browser/spsc-ring-buffer.html",
         "/browser/shared-memory-atomics.html",
