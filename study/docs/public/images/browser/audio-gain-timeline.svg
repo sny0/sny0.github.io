@@ -1,0 +1,56 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="760" height="930" viewBox="0 0 760 930" role="img" aria-labelledby="title desc">
+  <title id="title">音声の時間軸にゲインの変更を予約する</title>
+  <desc id="desc">240ミリ秒から270ミリ秒のゲインを比較する。上段では250ミリ秒のイベントでゲインが1から0に変わる。下段では250ミリ秒の開始値を1に保ち、260ミリ秒の終点に向けて直線的に0に下がる。両条件は再生開始時にも共通の10ミリ秒のフェードインを持つ。</desc>
+  <style>
+    text { font-family: "Noto Sans CJK JP", "Yu Gothic UI", Meiryo, sans-serif; fill: #183446; }
+    .title { font-size: 32px; font-weight: 700; }
+    .sub { font-size: 21px; fill: #385462; }
+    .heading { font-size: 25px; font-weight: 700; }
+    .body { font-size: 20px; }
+    .tick { font-size: 18px; fill: #385462; }
+    .code { font-family: Consolas, monospace; font-size: 18px; }
+    .panel { fill: #fff; stroke: #a6b8c2; stroke-width: 2; }
+    .axis { fill: none; stroke: #8da5b2; stroke-width: 1.5; }
+    .marker { fill: none; stroke: #7594a3; stroke-width: 1.5; stroke-dasharray: 5 4; }
+    .gain { fill: none; stroke: #17616d; stroke-width: 4; stroke-linejoin: round; }
+    .step { stroke: #994735; }
+  </style>
+  <defs>
+    <g id="grid">
+      <rect x="104" y="0" width="600" height="132" rx="5" fill="#f4f8fa"/>
+      <path class="axis" d="M104 0V132H704 M104 0H704"/>
+      <path class="marker" d="M304 0V132 M504 0V132"/>
+      <text class="tick" x="90" y="7" text-anchor="end">1</text>
+      <text class="tick" x="90" y="139" text-anchor="end">0</text>
+      <text class="tick" x="104" y="157" text-anchor="middle">240</text>
+      <text class="tick" x="304" y="157" text-anchor="middle">250</text>
+      <text class="tick" x="504" y="157" text-anchor="middle">260</text>
+      <text class="tick" x="704" y="157" text-anchor="end">270 ms</text>
+    </g>
+  </defs>
+  <rect width="760" height="930" rx="24" fill="#eaf2f4"/>
+  <text class="title" x="36" y="61">音声の時間軸でゲインを変える</text>
+  <text class="sub" x="36" y="100">250 msの切り替えを、同じ目盛で比べます。</text>
+
+  <rect class="panel" x="36" y="126" width="688" height="288" rx="18"/>
+  <text class="heading" x="57" y="167">一度にゼロへ切り替える</text>
+  <use href="#grid" transform="translate(0 201)"/>
+  <path class="gain step" d="M104 201H304V333H704"/>
+  <circle cx="304" cy="333" r="5.5" fill="#994735"/>
+  <text class="body" x="318" y="278">250 msで 1 → 0</text>
+  <text class="code" x="57" y="391">setValueAtTime(0, 0.25)</text>
+
+  <rect class="panel" x="36" y="439" width="688" height="318" rx="18"/>
+  <text class="heading" x="57" y="480">10 msのフェードアウト</text>
+  <use href="#grid" transform="translate(0 514)"/>
+  <path class="gain" d="M104 514H304L504 646H704"/>
+  <circle cx="304" cy="514" r="5.5" fill="#17616d"/>
+  <circle cx="504" cy="646" r="5.5" fill="#17616d"/>
+  <text class="body" x="463" y="582">10 msかけて下げる</text>
+  <text class="code" x="57" y="705">setValueAtTime(1, 0.25)</text>
+  <text class="code" x="57" y="733">linearRampToValueAtTime(0, 0.26)</text>
+
+  <rect class="panel" x="36" y="782" width="688" height="113" rx="18"/>
+  <text class="heading" x="57" y="823">再生の立ち上がりは共通</text>
+  <text class="body" x="57" y="859">0〜10 msで、ゲインを0から1へ上げておきます。</text>
+</svg>
