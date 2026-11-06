@@ -18,6 +18,7 @@
 
 | 用語・別名 | 説明への入口 |
 | --- | --- |
+| [ゲインオートメーション / AudioParam / setValueAtTime / linearRampToValueAtTime / フェード / クリックノイズ / a-rate](/browser/audio-gain-automation.html) | 音声の時刻でゲインを予約し、急な消音とフェードで波形が変わる様子を調べる |
 | [音声ミキシング / audio mixing / GainNode / gain / ヘッドルーム / headroom / dBFS / クリッピング / WaveShaperNode](/browser/audio-mixing-and-headroom.html) | 音声を加算したときのピークと振幅の余裕、クリップ前にゲインを調整する効果を調べる |
 | [AudioWorklet / AudioWorkletProcessor / Web Audio API / PCM / サンプルフレーム / レンダークォンタム / 先読み / アンダーラン / underrun](/browser/audio-worklet-buffering.html) | ブラウザの音声処理単位、出力に対する供給不足、先読み用バッファを調べる |
 | [リングバッファ / ring buffer / circular buffer / SPSC / FIFO / read index / write index / wrap-around](/browser/spsc-ring-buffer.html) | 固定容量の読み書き位置、折り返し、満杯と空、書き手と読み手の間で枠を受け渡す順序を調べる |

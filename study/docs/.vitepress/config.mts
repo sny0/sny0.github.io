@@ -47,7 +47,8 @@ export default withMermaid(defineConfig({
       { url: '/study/samples/browser/atomics-observation/index.html' },
       { url: '/study/samples/browser/ring-buffer-observation/index.html' },
       { url: '/study/samples/browser/audio-buffer-observation/index.html' },
-      { url: '/study/samples/browser/audio-mixing-observation/index.html' }
+      { url: '/study/samples/browser/audio-mixing-observation/index.html' },
+      { url: '/study/samples/browser/audio-fade-observation/index.html' }
     ]
   },
   head: [

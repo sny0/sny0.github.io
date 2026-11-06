@@ -382,11 +382,18 @@ writePage('guide/learning-paths.md', '疑問から選ぶ読み順', {
 2. [Web Audioでゲインとクリッピングを観察する](/practice/browser/audio-mixing-observation.html)で、マスターゲインを変えてクリップ前後の波形とピークを比べる。
 3. 音声フレームの供給と出力の関係は[AudioWorkletと音声バッファ](/browser/audio-worklet-buffering.html)で確認する。
 
+## 再生中の音を急に消すと何が起きるか
+
+1. [Web Audioのゲインオートメーション](/browser/audio-gain-automation.html)で、音声の時刻に沿ってゲインが変わる仕組みと、急な消音で生じる波形の段差を確認する。
+2. [Web Audioで急な消音とフェードを観察する](/practice/browser/audio-fade-observation.html)で、フェードの長さを変え、切り替え前後のサンプル値と波形を比べる。
+3. 複数の音を足し合わせる場合のゲインは[Web Audioのミキシング](/browser/audio-mixing-and-headroom.html)で確認する。
+
 ## 作り方の変化を歴史から見る
 
 [ビデオゲーム史](/history/video-games.html)の作品・ハード・媒体・流通と、[リアルタイム3D技術史](/guide/rendering/timeline.html)の技術の変化から、気になった仕組みへ進みます。`)
 
 const termRows = [
+  ['ゲインオートメーション / AudioParam / setValueAtTime / linearRampToValueAtTime / フェード / クリックノイズ / a-rate', '/browser/audio-gain-automation.html', '音声の時刻でゲインを予約し、急な消音とフェードで波形が変わる様子を調べる'],
   ['音声ミキシング / audio mixing / GainNode / gain / ヘッドルーム / headroom / dBFS / クリッピング / WaveShaperNode', '/browser/audio-mixing-and-headroom.html', '音声を加算したときのピークと振幅の余裕、クリップ前にゲインを調整する効果を調べる'],
   ['AudioWorklet / AudioWorkletProcessor / Web Audio API / PCM / サンプルフレーム / レンダークォンタム / 先読み / アンダーラン / underrun', '/browser/audio-worklet-buffering.html', 'ブラウザの音声処理単位、出力に対する供給不足、先読み用バッファを調べる'],
   ['リングバッファ / ring buffer / circular buffer / SPSC / FIFO / read index / write index / wrap-around', '/browser/spsc-ring-buffer.html', '固定容量の読み書き位置、折り返し、満杯と空、書き手と読み手の間で枠を受け渡す順序を調べる'],

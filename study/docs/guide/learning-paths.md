@@ -237,6 +237,12 @@
 2. [Web Audioでゲインとクリッピングを観察する](/practice/browser/audio-mixing-observation.html)で、マスターゲインを変えてクリップ前後の波形とピークを比べる。
 3. 音声フレームの供給と出力の関係は[AudioWorkletと音声バッファ](/browser/audio-worklet-buffering.html)で確認する。
 
+## 再生中の音を急に消すと何が起きるか
+
+1. [Web Audioのゲインオートメーション](/browser/audio-gain-automation.html)で、音声の時刻に沿ってゲインが変わる仕組みと、急な消音で生じる波形の段差を確認する。
+2. [Web Audioで急な消音とフェードを観察する](/practice/browser/audio-fade-observation.html)で、フェードの長さを変え、切り替え前後のサンプル値と波形を比べる。
+3. 複数の音を足し合わせる場合のゲインは[Web Audioのミキシング](/browser/audio-mixing-and-headroom.html)で確認する。
+
 ## 作り方の変化を歴史から見る
 
 [ビデオゲーム史](/history/video-games.html)の作品・ハード・媒体・流通と、[リアルタイム3D技術史](/guide/rendering/timeline.html)の技術の変化から、気になった仕組みへ進みます。

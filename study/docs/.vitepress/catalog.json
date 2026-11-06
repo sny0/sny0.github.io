@@ -69,7 +69,7 @@
       "id": "browser",
       "title": "ブラウザ",
       "description": "URLを開いてから描画されるまでを、通信・実行・表示に分ける。",
-      "count": 18,
+      "count": 19,
       "status": "辞典本文あり"
     },
     {
@@ -130,6 +130,13 @@
     }
   ],
   "collections": [
+    {
+      "id": "audio-fade-observation",
+      "section": "practice",
+      "title": "Web Audioで急な消音とフェードを観察する",
+      "description": "同じ音を急に消した場合と少しずつ消した場合を比べ、切り替え前後のサンプル値を確かめる。",
+      "start": "/practice/browser/audio-fade-observation.html"
+    },
     {
       "id": "audio-mixing-observation",
       "section": "practice",
@@ -4708,6 +4715,59 @@
       ]
     },
     {
+      "title": "Web Audioで急な消音とフェードを観察する",
+      "url": "/practice/browser/audio-fade-observation.html",
+      "file": "practice/browser/audio-fade-observation.md",
+      "domain": "browser",
+      "section": "practice",
+      "format": "sample",
+      "status": "published",
+      "summary": "同じ音を決めた時刻に消し、急なゲイン変更と線形フェードで隣り合うサンプル値や波形がどう変わるかを比べる。",
+      "source": "新規執筆",
+      "aliases": [
+        "Web Audio API",
+        "AudioParam",
+        "GainNode",
+        "setValueAtTime",
+        "linearRampToValueAtTime",
+        "フェード",
+        "クリックノイズ"
+      ],
+      "collection": "audio-fade-observation",
+      "order": 1,
+      "verification": "Windowsのブラウザで5種類のフェード終了位置、境目のサンプル値と試聴の終了を確認（2026-11-06）",
+      "links": [
+        "/browser/audio-gain-automation.html"
+      ]
+    },
+    {
+      "title": "Web Audioのゲインオートメーション — フェードとクリックノイズ",
+      "url": "/browser/audio-gain-automation.html",
+      "file": "browser/audio-gain-automation.md",
+      "domain": "browser",
+      "section": "reference",
+      "format": "article",
+      "status": "published",
+      "summary": "ゲインの切り替えとフェードを音声の時間軸で予約し、同じ音を止めたときの波形の段差を比べる。",
+      "source": "新規執筆",
+      "aliases": [
+        "Web Audio API",
+        "AudioParam",
+        "GainNode",
+        "setValueAtTime",
+        "linearRampToValueAtTime",
+        "a-rate",
+        "k-rate",
+        "フェード",
+        "クリックノイズ"
+      ],
+      "verification": "W3C Web Audio APIのAudioParam・GainNode・BaseAudioContext・OfflineAudioContextに照合（2026-11-06）",
+      "links": [
+        "/browser/audio-mixing-and-headroom.html",
+        "/practice/browser/audio-fade-observation.html"
+      ]
+    },
+    {
       "title": "Web Audioのミキシング — ゲイン・ヘッドルーム・クリッピング",
       "url": "/browser/audio-mixing-and-headroom.html",
       "file": "browser/audio-mixing-and-headroom.md",
@@ -4734,7 +4794,8 @@
       "verification": "W3C Web Audio APIのノード入力のミックス・GainNode・WaveShaperNode・AudioBufferに照合（2026-11-06）",
       "links": [
         "/practice/browser/audio-mixing-observation.html",
-        "/browser/audio-worklet-buffering.html"
+        "/browser/audio-worklet-buffering.html",
+        "/browser/audio-gain-automation.html"
       ]
     },
     {
@@ -7733,6 +7794,8 @@
         "/practice/browser/audio-buffer-observation.html",
         "/browser/audio-mixing-and-headroom.html",
         "/practice/browser/audio-mixing-observation.html",
+        "/browser/audio-gain-automation.html",
+        "/practice/browser/audio-fade-observation.html",
         "/history/video-games.html",
         "/guide/rendering/timeline.html"
       ]
@@ -9882,6 +9945,7 @@
       "source": "統合ガイド",
       "aliases": [],
       "links": [
+        "/browser/audio-gain-automation.html",
         "/browser/audio-mixing-and-headroom.html",
         "/browser/audio-worklet-buffering.html",
         "/browser/spsc-ring-buffer.html",

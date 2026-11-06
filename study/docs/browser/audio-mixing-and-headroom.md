@@ -50,3 +50,5 @@ study:
 `AudioBuffer` は浮動小数点PCMを保持し、振幅の基準範囲を超える値も格納できます。この実践で観察するクリッピングは、グラフに置いた `WaveShaperNode` の処理です。実際の再生経路や整数PCMへの変換でどこまで表せるかは、使う出力先や形式の仕様で決まります。[W3C Web Audio APIのAudioBuffer](https://www.w3.org/TR/webaudio-1.1/#AudioBuffer)
 
 個別ゲインとマスターゲインを操作して、しきい値を超えたフレーム数や波形を比べられます。連続して出力する音声データを用意する仕組みは、前回の記事で扱います。[ミキシングとクリッピングの実践](/practice/browser/audio-mixing-observation.html)、[AudioWorkletと音声バッファ](/browser/audio-worklet-buffering.html)
+
+再生中にゲインを変えるときは、値に加えて、いつどのくらいの速さで変えるかも波形に影響します。[Web Audioのゲインオートメーション](/browser/audio-gain-automation.html)で、急な消音とフェードの違いを確認できます。

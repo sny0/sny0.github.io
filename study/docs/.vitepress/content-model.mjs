@@ -12,6 +12,7 @@ export const formatLabels = {
 export const statusLabels = { published: '公開中', outline: '学習計画・概要', draft: '草稿', planned: '執筆予定' }
 
 export const collections = [
+  { id: 'audio-fade-observation', section: 'practice', title: 'Web Audioで急な消音とフェードを観察する', description: '同じ音を急に消した場合と少しずつ消した場合を比べ、切り替え前後のサンプル値を確かめる。', start: '/practice/browser/audio-fade-observation.html' },
   { id: 'audio-mixing-observation', section: 'practice', title: 'Web Audioでゲインとクリッピングを観察する', description: '二つの波形を足し、クリップ前後のピークと、振幅の基準を超えたフレーム数を比べる。', start: '/practice/browser/audio-mixing-observation.html' },
   { id: 'audio-buffer-observation', section: 'practice', title: 'AudioWorkletで先読みとアンダーランを観察する', description: '同じ音声データを先読みの有無でレンダリングし、不足したフレーム数と波形を比べる。', start: '/practice/browser/audio-buffer-observation.html' },
   { id: 'ring-buffer-observation', section: 'practice', title: 'リングバッファの満杯・折り返し・読み出し順を観察する', description: '4つの枠を使うキューを操作し、読み書き位置と満杯・空の判定、枠の再利用を確かめる。', start: '/practice/browser/ring-buffer-observation.html' },

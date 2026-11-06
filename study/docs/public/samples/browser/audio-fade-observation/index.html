@@ -1,0 +1,100 @@
+<!doctype html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="referrer" content="no-referrer">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'self'; style-src 'self'; base-uri 'none'; form-action 'none'">
+  <title>Web Audioで音を止める瞬間の波形を観察する | Sny0 Study</title>
+  <link rel="canonical" href="https://sny0.com/study/samples/browser/audio-fade-observation/index.html">
+  <link rel="stylesheet" href="styles.css">
+  <script type="module" src="main.js"></script>
+</head>
+<body>
+  <main>
+    <header class="card">
+      <a href="https://sny0.com/study/practice/browser/audio-fade-observation.html">実践手順とコードを読む</a>
+      <h1>音を止める瞬間の波形を比べる</h1>
+      <p>同じ400 Hzの音を250 msから止めます。ゲインをその場で0にした場合と、時間をかけて0にした場合を比べます。</p>
+    </header>
+
+    <section class="card" aria-labelledby="controls-heading">
+      <h2 id="controls-heading">フェード時間を選ぶ</h2>
+      <p>オフラインで2通りの波形を計算します。音は再生ボタンを押したときに出ます。</p>
+      <div class="actions">
+        <label for="fade-duration">フェード時間</label>
+        <select id="fade-duration" disabled>
+          <option value="1">1 ms</option>
+          <option value="5">5 ms</option>
+          <option value="10" selected>10 ms</option>
+          <option value="20">20 ms</option>
+          <option value="50">50 ms</option>
+        </select>
+        <button id="render-fade" type="button" disabled>波形を計算</button>
+      </div>
+      <p id="fade-status" class="status" data-state="ready" role="status">「波形を計算」で結果を表示します。</p>
+      <p class="hint"><a href="https://sny0.com/study/practice/browser/audio-fade-observation.html#run-locally">手元で動かす手順</a></p>
+      <noscript><p>このサンプルを操作するにはJavaScriptを有効にしてください。</p></noscript>
+    </section>
+
+    <section class="card" aria-labelledby="results-heading">
+      <h2 id="results-heading">ミュート開始の前後を比べる</h2>
+      <p id="rendered-settings">計算に使った設定はここに表示します。</p>
+      <p>青い破線がミュートの開始、赤い点線がフェードの終了です。横軸は音声の時刻（ms）です。</p>
+      <div class="comparison">
+        <figure>
+          <figcaption>瞬時にゲインを0にする</figcaption>
+          <svg id="abrupt-chart" class="chart" viewBox="0 0 420 170" role="img" aria-label="瞬時にゲインを0にする波形。計算前。">
+            <path class="grid" d="M44 15V143H406 M44 24H406 M44 79H406 M44 134H406"/>
+            <text x="38" y="28" text-anchor="end">+0.4</text>
+            <text x="38" y="83" text-anchor="end">0</text>
+            <text x="38" y="138" text-anchor="end">−0.4</text>
+            <line class="start-marker" y1="15" y2="143" visibility="hidden"/>
+            <line class="end-marker" y1="15" y2="143" visibility="hidden"/>
+            <text class="first-time" x="44" y="161" text-anchor="start"></text>
+            <text class="start-time" y="161" text-anchor="middle"></text>
+            <text class="end-time" y="161" text-anchor="middle"></text>
+            <text class="last-time" x="406" y="161" text-anchor="end"></text>
+            <path id="abrupt-wave" class="wave"/>
+          </svg>
+          <dl class="metrics">
+            <div><dt>開始直前のサンプル</dt><dd id="abrupt-before">—</dd></div>
+            <div><dt>開始時のサンプル</dt><dd id="abrupt-after">—</dd></div>
+            <div><dt>差の絶対値</dt><dd id="abrupt-jump">—</dd></div>
+          </dl>
+          <button id="play-abrupt" type="button" class="secondary" disabled>瞬時に止める音を聞く</button>
+        </figure>
+        <figure>
+          <figcaption>ゲインを徐々に0にする</figcaption>
+          <svg id="faded-chart" class="chart" viewBox="0 0 420 170" role="img" aria-label="フェードでゲインを0にする波形。計算前。">
+            <path class="grid" d="M44 15V143H406 M44 24H406 M44 79H406 M44 134H406"/>
+            <text x="38" y="28" text-anchor="end">+0.4</text>
+            <text x="38" y="83" text-anchor="end">0</text>
+            <text x="38" y="138" text-anchor="end">−0.4</text>
+            <line class="start-marker" y1="15" y2="143" visibility="hidden"/>
+            <line class="end-marker" y1="15" y2="143" visibility="hidden"/>
+            <text class="first-time" x="44" y="161" text-anchor="start"></text>
+            <text class="start-time" y="161" text-anchor="middle"></text>
+            <text class="end-time" y="161" text-anchor="middle"></text>
+            <text class="last-time" x="406" y="161" text-anchor="end"></text>
+            <path id="faded-wave" class="wave"/>
+          </svg>
+          <dl class="metrics">
+            <div><dt>開始直前のサンプル</dt><dd id="faded-before">—</dd></div>
+            <div><dt>開始時のサンプル</dt><dd id="faded-after">—</dd></div>
+            <div><dt>差の絶対値</dt><dd id="faded-jump">—</dd></div>
+          </dl>
+          <button id="play-faded" type="button" class="secondary" disabled>フェードで止める音を聞く</button>
+        </figure>
+      </div>
+      <dl class="timing">
+        <div><dt>比較した隣接フレーム</dt><dd id="edge-frames">—</dd></div>
+        <div><dt>フェード終了</dt><dd id="fade-end">—</dd></div>
+      </dl>
+      <p class="hint">試聴の音量は抑えてあります。画面の数値と波形は、試聴用に音量を下げる前の値です。</p>
+      <button id="stop-playback" type="button" class="secondary" disabled>再生を停止</button>
+      <p id="playback-status" class="status" data-state="ready" role="status">再生していません。</p>
+    </section>
+  </main>
+</body>
+</html>
