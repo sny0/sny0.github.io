@@ -72,6 +72,8 @@ Windowsのカーネル側には、ドライバーへI/Oを渡す**IRP**（I/O Re
 
 大量の要求を扱う別の手段には、**IOCP**（I/O Completion Port）があります。複数ハンドルの完了通知をキューで受け取る仕組みです。イベント方式とIOCPでは結果の回収手続きが異なるため、通知と要求の対応を保つ設計が必要です。今回のC++実践ではイベント方式を使います。[Microsoft: I/O Completion Ports](https://learn.microsoft.com/en-us/windows/win32/fileio/i-o-completion-ports)
 
+[I/O完了ポートの解説](/os/io-completion-ports.html)では完了キーと要求ポインターの違いを、[C++のIOCP観察例](/practice/io/iocp-observation.html)では2件の読み取り結果を一つのポートで受け取る方法を確かめられます。
+
 ## 完了を回収するまで寿命を保つ
 
 要求を出した関数のスコープが終わっても、I/Oがそのバッファを使い終えているとは限りません。**処理中の要求に属するバッファ、OVERLAPPED、イベント、ハンドルを、必要な結果回収まで有効に保つ**所有関係を作ります。
@@ -88,6 +90,8 @@ Windowsのカーネル側には、ドライバーへI/Oを渡す**IRP**（I/O Re
 `CancelIoEx`は、対象の進行中のI/Oにキャンセルを要求します。成功して戻っても、キャンセル対象のI/Oがすべて完了するまで待ったことにはなりません。**キャンセル要求後も、OVERLAPPEDやバッファをすぐ解放・再利用しません。** 対応する完了を確認して終端結果を回収します。[Microsoft: CancelIoEx](https://learn.microsoft.com/en-us/windows/win32/api/ioapiset/nf-ioapiset-cancelioex)
 
 キャンセルと通常完了は競走します。最終結果は、通常の成功、`ERROR_OPERATION_ABORTED`によるキャンセル、別のエラーのいずれにもなり得ます。`ERROR_NOT_FOUND`も、「今後その要求の結果を確認しなくてよい」という印ではありません。キャンセル対象が既に見つからない場合にも、所有している要求の最終状態を別に把握する必要があります。
+
+[非同期I/Oのキャンセル](/os/cancelling-overlapped-io.html)では、新しい発行を止め、完了を回収してからワーカーやバッファを片付ける順序を追います。
 
 ## EOFと短い読み取りも、完了結果として扱う
 

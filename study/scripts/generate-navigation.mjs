@@ -225,6 +225,17 @@ writePage('guide/learning-paths.md', '疑問から選ぶ読み順', {
 2. [C++・C#の同期・非同期比較](/practice/io/async-file-read-observation.html)で、同じファイルを読み、完了結果と内容の一致を確かめる。
 3. 複数の処理から状態を共有するときは[スレッドと同期](/runtime/thread-synchronization.html)も確認する。
 
+## WindowsでI/Oの完了をまとめて受け取り、安全に終了するには
+
+1. [I/O完了ポート](/os/io-completion-ports.html)で、完了キーと要求ポインター、発行時の失敗と完了時の失敗を分ける。
+2. [C++のIOCP観察例](/practice/io/iocp-observation.html)で、一つのファイルに出した2件の要求をポートから受け取る。
+3. [非同期I/Oのキャンセル](/os/cancelling-overlapped-io.html)で、停止を要求してから完了を回収し、バッファを解放する順序を確認する。
+
+## ゲームのセーブデータをファイルに保存するには
+
+1. [ファイルの書き込みと永続化](/os/file-write-and-durability.html)で、書き込み成功、読み手への公開、停電後の復旧を別々に考える。
+2. 読み戻し側は[ファイルを読む仕組み](/os/file-read-journey.html)で、短い読み取りやEOFと、ファイルの形式の検査を区別する。
+
 ## ファイルをメモリへのアクセスとして読むには
 
 1. [メモリマップドファイル](/os/memory-mapped-files.html)で、ファイル内位置と仮想アドレス、ページフォルト、ビューの寿命を分ける。
@@ -560,7 +571,10 @@ const termRows = [
   ['ソケット / socket / TCP / IPアドレス / ポート / send / recv / フレーミング / 半閉鎖 / loopback', '/network/tcp-sockets.html', '送受信バッファ、バイト列の境界、EOFとエラー、接続の終了を調べる'],
   ['メモリマップドファイル / file mapping / mmap / MapViewOfFile / MemoryMappedFile / ビュー', '/os/memory-mapped-files.html', 'ファイルの範囲と仮想アドレスを対応付け、ページとビューの寿命を調べる'],
   ['アセットロード / asset loading / リソース管理 / cook / 読み込み完了 / 利用可能 / 世代トークン', '/game/asset-loading.html', 'byte取得から登録・利用可能化・解放までの状態と所有権を整理する'],
-  ['非同期I/O / asynchronous I/O / Overlapped I/O / ERROR_IO_PENDING / ReadAsync / await / IOCP', '/os/asynchronous-file-io.html', '要求の発行、完了結果、待機と継続、バッファを再利用できる時点を調べる'],
+  ['I/O完了ポート / IOCP / CreateIoCompletionPort / GetQueuedCompletionStatus / completion key', '/os/io-completion-ports.html', '同じポートに集まる完了を、ハンドルと要求ごとに見分ける'],
+  ['I/Oキャンセル / CancelIoEx / CancelIo / ERROR_NOT_FOUND / ERROR_OPERATION_ABORTED', '/os/cancelling-overlapped-io.html', 'キャンセル要求と完了を区別して、バッファを解放できる時点を調べる'],
+  ['書き込み / 永続化 / durability / WriteFile / FlushFileBuffers / FILE_FLAG_WRITE_THROUGH / ReplaceFile', '/os/file-write-and-durability.html', '書き込み結果、名前の切り替え、障害後にデータが残る条件を調べる'],
+  ['非同期I/O / asynchronous I/O / Overlapped I/O / ERROR_IO_PENDING / ReadAsync / await', '/os/asynchronous-file-io.html', '要求の発行、完了結果、待機と継続、バッファを再利用できる時点を調べる'],
   ['ファイルI/O / read / FileStream / ReadFile / EOF / seek / ファイルキャッシュ / ページキャッシュ', '/os/file-read-journey.html', '読み取り要求と実読取数、ファイル位置、OSキャッシュと保存装置の違いを調べる'],
   ['スレッド同期 / mutex / lock / lock_guard / 排他制御 / critical section / happens-before / join', '/runtime/thread-synchronization.html', '共有する状態、ロックの排他と同期、終了待ちとオブジェクトの寿命を結び付ける'],
   ['近似一致 / 絶対許容差 / 相対許容差 / 浮動小数点の比較 / NaN / Inf', '/math/floating-point-comparison.html', '厳密な等値、用途に応じた近似判定、特殊値と非推移性を区別する'],

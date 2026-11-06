@@ -33,6 +33,8 @@ study:
 - [並行処理のバグ](/runtime/memory/concurrency-bugs.html)では、共有データを扱う際のデータ競合や、性能に影響するフォールスシェアリングを調べられます。
 - [ファイルを開いて読むまでの流れ](/os/file-read-journey.html)でハンドル・ストリーム・読取り位置・実際の読取り量・EOFを調べ、[ファイル読取りの観察例](/practice/io/file-read-observation.html)で確かめられます。
 - [非同期ファイルI/O](/os/asynchronous-file-io.html)で要求の開始と完了、バッファや要求情報の寿命を調べ、[同期・非同期の観察例](/practice/io/async-file-read-observation.html)で同じ内容を読み比べられます。
+- [I/O完了ポート](/os/io-completion-ports.html)と[非同期I/Oのキャンセル](/os/cancelling-overlapped-io.html)で、複数の完了を受け取る方法と、処理を止めるときの寿命管理を追います。[C++のIOCP観察例](/practice/io/iocp-observation.html)で実際の完了通知を照合できます。
+- [ファイルの書き込みと永続化](/os/file-write-and-durability.html)で、キャッシュに受理された時点と、障害後に復元できる条件を分けて考えます。
 - [メモリマップドファイル](/os/memory-mapped-files.html)でファイル・仮想アドレス・ページの関係を調べ、[マッピングの観察例](/practice/io/mapped-file-observation.html)でビューの範囲と寿命を確かめられます。
 - I/Oの先の状態・登録・所有権は[実行時のアセットロード](/game/asset-loading.html)へ進みます。[状態と寿命の実践](/practice/assets/asset-lifecycle-model.html)は実I/OやGPUを使わないモデルです。
 - [TCPとソケット](/network/tcp-sockets.html)で接続・バイト列・受信の区切り・送信終了を調べ、[ループバック通信の観察例](/practice/network/tcp-loopback-observation.html)で部分送受信とEOF、アプリの応答を確かめられます。

@@ -41,7 +41,7 @@
       "id": "os",
       "title": "OS",
       "description": "プロセス、メモリ、スレッド、入出力の仕組みを調べる。",
-      "count": 10,
+      "count": 13,
       "status": "辞典本文あり"
     },
     {
@@ -130,6 +130,13 @@
     }
   ],
   "collections": [
+    {
+      "id": "iocp-observation",
+      "section": "practice",
+      "title": "C++で2件のファイル読み取りをIOCPから回収する",
+      "description": "同じ完了キーと異なるOVERLAPPEDポインターを照合して、要求ごとの結果を確かめる。",
+      "start": "/practice/io/iocp-observation.html"
+    },
     {
       "id": "windows-pipe-observation",
       "section": "practice",
@@ -1228,6 +1235,32 @@
       "collection": "cpp-samples",
       "order": 2,
       "links": []
+    },
+    {
+      "title": "C++で2件のファイル読み取りをIOCPから回収する",
+      "url": "/practice/io/iocp-observation.html",
+      "file": "practice/io/iocp-observation.md",
+      "domain": "os",
+      "section": "practice",
+      "format": "sample",
+      "status": "published",
+      "summary": "同じファイルに2件の読み取りを出し、同じ完了キーと異なるOVERLAPPEDポインターで結果を区別する。",
+      "source": "新規執筆",
+      "aliases": [
+        "IOCP",
+        "I/O完了ポート",
+        "completion key",
+        "GetQueuedCompletionStatus",
+        "OVERLAPPED"
+      ],
+      "collection": "iocp-observation",
+      "order": 1,
+      "verification": "Windows x64のMSVCでビルド・実行し、同じキーで2件の完了を回収して、それぞれ2バイトのMZを確認（2026-11-06）",
+      "links": [
+        "/os/io-completion-ports.html",
+        "/practice/io/async-file-read-observation.html",
+        "/os/cancelling-overlapped-io.html"
+      ]
     },
     {
       "title": "C++とC#でETag・304・保存本文の再利用を観察する",
@@ -6014,6 +6047,36 @@
       ]
     },
     {
+      "title": "WindowsのI/O完了ポート（IOCP） — 要求の発行と完了の回収",
+      "url": "/os/io-completion-ports.html",
+      "file": "os/io-completion-ports.md",
+      "domain": "os",
+      "section": "reference",
+      "format": "article",
+      "status": "published",
+      "summary": "複数のWindows非同期I/Oの完了を一つのポートで受け取る。完了キーとOVERLAPPEDの対応、即時成功でも通知が届く条件、失敗した完了の判定、ワーカーの並行度を説明する。",
+      "source": "新規執筆",
+      "aliases": [
+        "I/O完了ポート",
+        "IOCP",
+        "I/O Completion Port",
+        "completion key",
+        "完了キー",
+        "CreateIoCompletionPort",
+        "GetQueuedCompletionStatus",
+        "PostQueuedCompletionStatus",
+        "FILE_SKIP_COMPLETION_PORT_ON_SUCCESS"
+      ],
+      "verification": "MicrosoftのWin32 API仕様と解説に照合（2026-11-06）",
+      "links": [
+        "/os/asynchronous-file-io.html",
+        "/os/cancelling-overlapped-io.html",
+        "/os/thread-scheduling.html",
+        "/game/asset-loading.html",
+        "/practice/io/iocp-observation.html"
+      ]
+    },
+    {
       "title": "Windowsのスレッドスケジューリング — 実行・待機・実行可能",
       "url": "/os/thread-scheduling.html",
       "file": "os/thread-scheduling.md",
@@ -6099,6 +6162,61 @@
         "/algorithms/generational-handles.html",
         "/os/process-startup.html",
         "/os/pipes-and-process-io.html"
+      ]
+    },
+    {
+      "title": "Windowsのファイル書き込みと永続化",
+      "url": "/os/file-write-and-durability.html",
+      "file": "os/file-write-and-durability.md",
+      "domain": "os",
+      "section": "reference",
+      "format": "article",
+      "status": "published",
+      "summary": "WriteFileの完了後にデータがどこにあるかを追い、キャッシュのフラッシュ、ファイルの置き換え、ゲームのセーブからの復旧を分けて考える。",
+      "source": "新規執筆",
+      "aliases": [
+        "書き込みキャッシュ",
+        "write-back",
+        "ライトスルー",
+        "durability",
+        "FlushFileBuffers",
+        "FILE_FLAG_WRITE_THROUGH",
+        "FILE_FLAG_NO_BUFFERING",
+        "ReplaceFileW"
+      ],
+      "verification": "MicrosoftのWin32 API仕様に照合し、C#例の出力と保存したバイト列をWindowsで確認（2026-11-06）",
+      "links": [
+        "/os/file-read-journey.html",
+        "/os/asynchronous-file-io.html",
+        "/os/memory-mapped-files.html"
+      ]
+    },
+    {
+      "title": "Windowsの非同期I/Oをキャンセルする — 要求・完了・解放",
+      "url": "/os/cancelling-overlapped-io.html",
+      "file": "os/cancelling-overlapped-io.md",
+      "domain": "os",
+      "section": "reference",
+      "format": "article",
+      "status": "published",
+      "summary": "CancelIoExで指定した要求を中止する仕組みを追い、通常完了との競合、タイムアウト、IOCPで完了を回収してからバッファを解放する手順を解説する。",
+      "source": "新規執筆",
+      "aliases": [
+        "CancelIoEx",
+        "CancelIo",
+        "overlapped I/O cancellation",
+        "非同期I/Oのキャンセル",
+        "ERROR_NOT_FOUND",
+        "ERROR_OPERATION_ABORTED",
+        "キャンセル競合",
+        "完了回収"
+      ],
+      "verification": "Microsoft LearnのキャンセルとI/O完了ポートの資料に照合（2026-11-06）",
+      "links": [
+        "/os/asynchronous-file-io.html",
+        "/game/asset-loading.html",
+        "/os/io-completion-ports.html",
+        "/practice/io/iocp-observation.html"
       ]
     },
     {
@@ -7977,6 +8095,7 @@
       "links": [
         "/os/asynchronous-file-io.html",
         "/data/unicode-and-encoding.html",
+        "/os/file-write-and-durability.html",
         "/practice/io/async-file-read-observation.html",
         "/os/memory-mapped-files.html",
         "/practice/io/mapped-file-observation.html",
@@ -9010,6 +9129,10 @@
         "/practice/io/file-read-observation.html",
         "/os/asynchronous-file-io.html",
         "/practice/io/async-file-read-observation.html",
+        "/os/io-completion-ports.html",
+        "/practice/io/iocp-observation.html",
+        "/os/cancelling-overlapped-io.html",
+        "/os/file-write-and-durability.html",
         "/os/memory-mapped-files.html",
         "/practice/io/mapped-file-observation.html",
         "/game/asset-loading.html",
@@ -10700,6 +10823,10 @@
         "/practice/io/file-read-observation.html",
         "/os/asynchronous-file-io.html",
         "/practice/io/async-file-read-observation.html",
+        "/os/io-completion-ports.html",
+        "/os/cancelling-overlapped-io.html",
+        "/practice/io/iocp-observation.html",
+        "/os/file-write-and-durability.html",
         "/os/memory-mapped-files.html",
         "/practice/io/mapped-file-observation.html",
         "/game/asset-loading.html",
@@ -11333,6 +11460,9 @@
         "/os/file-read-journey.html",
         "/network/tcp-sockets.html",
         "/os/memory-mapped-files.html",
+        "/os/io-completion-ports.html",
+        "/practice/io/iocp-observation.html",
+        "/os/cancelling-overlapped-io.html",
         "/practice/network/tcp-loopback-observation.html",
         "/game/asset-loading.html",
         "/practice/assets/asset-lifecycle-model.html",
@@ -11721,6 +11851,9 @@
         "/network/tcp-sockets.html",
         "/os/memory-mapped-files.html",
         "/game/asset-loading.html",
+        "/os/io-completion-ports.html",
+        "/os/cancelling-overlapped-io.html",
+        "/os/file-write-and-durability.html",
         "/os/asynchronous-file-io.html",
         "/os/file-read-journey.html",
         "/runtime/thread-synchronization.html",

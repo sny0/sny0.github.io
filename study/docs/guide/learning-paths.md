@@ -80,6 +80,17 @@
 2. [C++・C#の同期・非同期比較](/practice/io/async-file-read-observation.html)で、同じファイルを読み、完了結果と内容の一致を確かめる。
 3. 複数の処理から状態を共有するときは[スレッドと同期](/runtime/thread-synchronization.html)も確認する。
 
+## WindowsでI/Oの完了をまとめて受け取り、安全に終了するには
+
+1. [I/O完了ポート](/os/io-completion-ports.html)で、完了キーと要求ポインター、発行時の失敗と完了時の失敗を分ける。
+2. [C++のIOCP観察例](/practice/io/iocp-observation.html)で、一つのファイルに出した2件の要求をポートから受け取る。
+3. [非同期I/Oのキャンセル](/os/cancelling-overlapped-io.html)で、停止を要求してから完了を回収し、バッファを解放する順序を確認する。
+
+## ゲームのセーブデータをファイルに保存するには
+
+1. [ファイルの書き込みと永続化](/os/file-write-and-durability.html)で、書き込み成功、読み手への公開、停電後の復旧を別々に考える。
+2. 読み戻し側は[ファイルを読む仕組み](/os/file-read-journey.html)で、短い読み取りやEOFと、ファイルの形式の検査を区別する。
+
 ## ファイルをメモリへのアクセスとして読むには
 
 1. [メモリマップドファイル](/os/memory-mapped-files.html)で、ファイル内位置と仮想アドレス、ページフォルト、ビューの寿命を分ける。

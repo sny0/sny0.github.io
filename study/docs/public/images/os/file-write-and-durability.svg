@@ -1,0 +1,43 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="760" height="334" viewBox="0 0 760 334" role="img" aria-labelledby="title desc">
+  <title id="title">ファイルの書き込みから不揮発媒体まで</title>
+  <desc id="desc">通常のキャッシュ付きローカルファイルへの書き込み経路。アプリの書き込みバッファ、Windowsのファイルキャッシュ、ストレージ機器側のキャッシュ、不揮発媒体を順に示す。ランタイムの通常のフラッシュとFlushFileBuffersは異なる区間に作用する。</desc>
+  <defs>
+    <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto">
+      <path d="M0 0 10 5 0 10Z" fill="#3b6579"/>
+    </marker>
+  </defs>
+  <rect width="760" height="334" rx="14" fill="#f4f8fa"/>
+  <g font-family="system-ui, sans-serif" fill="#183046">
+    <text x="24" y="43" font-size="24" font-weight="700">ファイルの書き込みから不揮発媒体まで</text>
+    <rect x="24" y="75" width="158" height="105" rx="8" fill="#dcebf4" stroke="#85a7be"/>
+    <rect x="209" y="75" width="158" height="105" rx="8" fill="#e8eff4" stroke="#9aafbf"/>
+    <rect x="394" y="75" width="158" height="105" rx="8" fill="#fff0dc" stroke="#cba572"/>
+    <rect x="579" y="75" width="157" height="105" rx="8" fill="#def0e9" stroke="#85b5a5"/>
+    <g fill="none" stroke="#3b6579" stroke-width="2.5" marker-end="url(#arrow)">
+      <path d="M183 128H205"/>
+      <path d="M368 128H390"/>
+      <path d="M553 128H575"/>
+    </g>
+    <g text-anchor="middle">
+      <g font-size="18" font-weight="700">
+        <text x="103" y="111">アプリ</text>
+        <text x="288" y="111">Windows</text>
+        <text x="473" y="111">ストレージ</text>
+        <text x="657" y="111">不揮発媒体</text>
+      </g>
+      <g font-size="15">
+        <text x="103" y="146">書き込みバッファ</text>
+        <text x="288" y="146">ファイルキャッシュ</text>
+        <text x="473" y="146">機器側のキャッシュ</text>
+        <text x="657" y="146">電源を切っても保持</text>
+      </g>
+    </g>
+    <g fill="none" stroke="#3b6579" stroke-width="2">
+      <path d="M103 192v14h182" marker-end="url(#arrow)"/>
+      <path d="M288 239v14h366" marker-end="url(#arrow)"/>
+    </g>
+    <text x="103" y="230" font-size="16">ランタイムの通常のフラッシュ</text>
+    <text x="288" y="279" font-size="16"><tspan font-weight="700">FlushFileBuffers</tspan><tspan> は保存先への書き出しを求める</tspan></text>
+    <text x="24" y="312" font-size="14" fill="#435a6b">書き出しの動作には、ファイルシステムと機器の仕様が関わる。</text>
+  </g>
+</svg>

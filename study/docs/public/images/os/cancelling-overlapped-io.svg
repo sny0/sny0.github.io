@@ -1,0 +1,53 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="760" height="565" viewBox="0 0 760 565" role="img" aria-labelledby="title description">
+  <title id="title">キャンセル要求からI/Oの完了回収まで</title>
+  <desc id="description">非同期読み取りを発行し、処理中にキャンセルを依頼する例。完了結果は通常完了、ERROR_OPERATION_ABORTED、別のI/Oエラーのいずれか。OVERLAPPEDとバッファは完了パケットを回収し、アプリ側の参照がなくなるまで保持する。</desc>
+  <defs>
+    <marker id="arrow" markerWidth="7" markerHeight="7" refX="6" refY="3.5" orient="auto">
+      <path d="M0 0 L7 3.5 L0 7 Z" fill="#466271"/>
+    </marker>
+  </defs>
+  <rect width="760" height="565" rx="16" fill="#f3f7fa"/>
+  <g font-family="system-ui, sans-serif" fill="#183246">
+    <text x="24" y="43" font-size="25" font-weight="700">キャンセル要求からI/Oの完了回収まで</text>
+    <text x="24" y="73" font-size="16" fill="#455b6b">処理中の読み取りに、キャンセルを依頼する例</text>
+    <g fill="none" stroke="#466271" stroke-width="2.5" marker-end="url(#arrow)">
+      <path d="M380 163v24"/>
+      <path d="M380 258v39"/>
+      <path d="M380 276H134v21"/>
+      <path d="M380 276h246v21"/>
+      <path d="M134 373v38h123"/>
+      <path d="M380 373v19"/>
+      <path d="M626 373v38H503"/>
+      <path d="M380 459v24"/>
+    </g>
+    <g stroke-width="1.5">
+      <rect x="183" y="103" width="394" height="60" rx="8" fill="#e6f0f6" stroke="#8ba8ba"/>
+      <rect x="183" y="189" width="394" height="69" rx="8" fill="#ffedc7" stroke="#c2a370"/>
+      <rect x="24" y="299" width="220" height="74" rx="8" fill="#d6eee5" stroke="#88af9f"/>
+      <rect x="270" y="299" width="220" height="74" rx="8" fill="#fbe3d5" stroke="#c79880"/>
+      <rect x="516" y="299" width="220" height="74" rx="8" fill="#e6ecf3" stroke="#a3b6c7"/>
+      <rect x="259" y="394" width="242" height="65" rx="8" fill="#e6f0f6" stroke="#8ba8ba"/>
+      <rect x="140" y="485" width="480" height="58" rx="8" fill="#d6eee5" stroke="#88af9f"/>
+    </g>
+    <g text-anchor="middle">
+      <g font-size="18" font-weight="700">
+        <text x="380" y="127">読み取りを発行</text>
+        <text x="380" y="216">CancelIoExで中止を依頼</text>
+        <text x="134" y="329">通常完了</text>
+        <text x="380" y="329">キャンセルで完了</text>
+        <text x="626" y="329">別のエラーで完了</text>
+        <text x="380" y="419">完了結果を回収</text>
+        <text x="380" y="510">最後の参照がなくなったら、要求を解放</text>
+      </g>
+      <g font-size="15" fill="#455b6b">
+        <text x="380" y="150">OVERLAPPEDとバッファを渡す</text>
+        <text x="380" y="240">読み取りの最終結果は、この後で受け取る</text>
+        <text x="134" y="353">成功と転送数</text>
+        <text x="380" y="353" font-size="14">ERROR_OPERATION_ABORTED</text>
+        <text x="626" y="353">I/Oのエラーコード</text>
+        <text x="380" y="442">要求を特定して結果を処理</text>
+        <text x="380" y="532">OVERLAPPEDとバッファを再利用できる</text>
+      </g>
+    </g>
+  </g>
+</svg>
