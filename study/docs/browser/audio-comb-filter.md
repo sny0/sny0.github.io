@@ -63,3 +63,5 @@ Web Audioでは各経路に `GainNode` を置き、同じ後段ノードの入�
 ## ブラウザで測って聴く
 
 [コムフィルターの実践](/practice/browser/audio-comb-observation.html)では、`OfflineAudioContext` で1サンプルの入力を二つの経路に通し、ブラウザの `DelayNode` を含むインパルス応答から周波数応答を求めます。まず遅延を2 ms、`g` を1にして最初の谷が250 Hz付近に出ることを確かめます。次に `g` を0.5にすると谷の位置が同じまま浅くなり、遅延を5 msにすると最初の谷が100 Hz付近に移ります。同じノイズを直接音と合成音で聴き比べると、応答に谷が並ぶときの音色の違いを確認できます。[W3C Web Audio APIのOfflineAudioContext](https://www.w3.org/TR/webaudio-1.1/#OfflineAudioContext)
+
+足し合わせた出力を遅延経路に戻すと、音が何度も繰り返されます。間隔と減衰の関係は、[Web Audioのフィードバックディレイ](/browser/audio-feedback-delay.html)で確認できます。

@@ -1,0 +1,49 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="760" height="388" viewBox="0 0 760 388" role="img" aria-labelledby="title desc">
+  <title id="title">フィードバックディレイの加算点と帰還経路</title>
+  <desc id="desc">理想モデルの信号経路。入力と帰還信号を足して出力する。加算点の出力はDelayNodeでT秒遅れ、GainNodeでg倍され、同じ加算点へ戻る。</desc>
+  <defs>
+    <marker id="arrow" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto">
+      <path d="M 0 0 L 10 5 L 0 10 Z" fill="#334155"/>
+    </marker>
+    <marker id="return-arrow" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto">
+      <path d="M 0 0 L 10 5 L 0 10 Z" fill="#6d28d9"/>
+    </marker>
+    <style>
+      text { font-family: "Noto Sans JP", "Yu Gothic", Meiryo, sans-serif; fill: #1f2937; }
+      .title { font-size: 26px; font-weight: 700; }
+      .label { font-size: 21px; font-weight: 700; }
+      .note { font-size: 17px; fill: #475569; }
+      .feedback { fill: #5b21b6; }
+      .wire { fill: none; stroke: #334155; stroke-width: 2.5; }
+      .loop { fill: none; stroke: #6d28d9; stroke-width: 2.5; }
+    </style>
+  </defs>
+  <rect x="1" y="1" width="758" height="386" rx="18" fill="#f8fafc" stroke="#cbd5e1"/>
+  <text x="36" y="49" class="title">出力を遅らせ、加算点へ戻す</text>
+  <text x="36" y="76" class="note">理想モデルの信号経路</text>
+  <rect x="43" y="105" width="136" height="54" rx="10" fill="#fff" stroke="#94a3b8"/>
+  <text x="111" y="140" text-anchor="middle" class="label">入力 x[n]</text>
+  <path d="M 179 132 H 255" class="wire" marker-end="url(#arrow)"/>
+  <circle cx="280" cy="132" r="22" fill="#fff" stroke="#64748b" stroke-width="1.5"/>
+  <text x="280" y="140" text-anchor="middle" class="label">+</text>
+  <text x="280" y="95" text-anchor="middle" class="note">加算点</text>
+  <path d="M 302 132 H 572" class="wire" marker-end="url(#arrow)"/>
+  <rect x="577" y="105" width="140" height="54" rx="10" fill="#fff" stroke="#94a3b8"/>
+  <text x="647" y="140" text-anchor="middle" class="label">出力 y[n]</text>
+
+  <path d="M 506 132 V 211" class="loop" marker-end="url(#return-arrow)"/>
+  <circle cx="506" cy="132" r="5" fill="#6d28d9"/>
+  <rect x="420" y="215" width="172" height="64" rx="10" fill="#f3e8ff" stroke="#a78bfa"/>
+  <text x="506" y="242" text-anchor="middle" class="label feedback">DelayNode</text>
+  <text x="506" y="266" text-anchor="middle" class="note feedback">T 秒遅らせる</text>
+  <path d="M 420 247 H 383" class="loop" marker-end="url(#return-arrow)"/>
+  <rect x="205" y="215" width="174" height="64" rx="10" fill="#f3e8ff" stroke="#a78bfa"/>
+  <text x="292" y="242" text-anchor="middle" class="label feedback">GainNode</text>
+  <text x="292" y="266" text-anchor="middle" class="note feedback">振幅を g 倍にする</text>
+  <path d="M 205 247 H 139 V 182 H 280 V 158" class="loop" marker-end="url(#return-arrow)"/>
+  <text x="163" y="173" class="note feedback">帰還</text>
+
+  <path d="M 36 307 H 724" stroke="#cbd5e1"/>
+  <text x="36" y="339" class="note">出力に含まれる反響も遅延経路に入り、次の周回へ進む。</text>
+  <text x="36" y="366" class="note">ループ1周の時間が反響の間隔になり、振幅は1周ごとに g 倍。</text>
+</svg>

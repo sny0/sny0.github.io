@@ -12,6 +12,7 @@ export const formatLabels = {
 export const statusLabels = { published: '公開中', outline: '学習計画・概要', draft: '草稿', planned: '執筆予定' }
 
 export const collections = [
+  { id: 'audio-feedback-observation', section: 'practice', title: 'Web Audioで反響の間隔と減衰を観察する', description: '遅延時間とフィードバックゲインを変え、反響の時刻と振幅をグラフと試聴で確かめる。', start: '/practice/browser/audio-feedback-observation.html' },
   { id: 'audio-comb-observation', section: 'practice', title: 'Web Audioで遅延とコムフィルターを観察する', description: '同じ音の遅延時間とゲインを変え、打ち消される周波数をグラフと試聴で確かめる。', start: '/practice/browser/audio-comb-observation.html' },
   { id: 'audio-crossfade-observation', section: 'practice', title: 'Web Audioで線形と等電力のクロスフェードを比べる', description: '二つの音を入れ替え、フェードの形と音源の組み合わせで途中の実効値がどう変わるかを観察する。', start: '/practice/browser/audio-crossfade-observation.html' },
   { id: 'audio-fade-observation', section: 'practice', title: 'Web Audioで急な消音とフェードを観察する', description: '同じ音を急に消した場合と少しずつ消した場合を比べ、切り替え前後のサンプル値を確かめる。', start: '/practice/browser/audio-fade-observation.html' },
