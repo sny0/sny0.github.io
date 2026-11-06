@@ -19,7 +19,13 @@
 
 ## 辞典の本文
 
-この分野の専用の辞典本文は準備中です。学習計画や分野の目次を、詳しい解説本文として数えてはいません。
+- [スタック・キュー・デック — どちらの端から入れ、どちらから取るか](/algorithms/queues-and-deques.html)
+- [スパースセットとECSのコンポーネント管理](/algorithms/sparse-sets.html)
+- [ハッシュテーブル — 同じ場所に来たキーをどう探すか](/algorithms/hash-tables.html)
+- [二分ヒープと優先度付きキュー](/algorithms/binary-heaps.html)
+- [二分探索木と順序付き連想コンテナ](/algorithms/search-trees.html)
+- [配列と動的配列 — 添字、容量、再確保](/algorithms/arrays-and-dynamic-arrays.html)
+- [連結リスト — ノードを見つける処理とつなぎ替え](/algorithms/linked-lists.html)
 
 ## この分野の学習ガイド
 
@@ -27,7 +33,7 @@
 
 ## 作って試す
 
-この分野専用の実践教材は準備中です。[実践・サンプル一覧](/practice/)に公開中の題材をまとめています。
+- [スパースセットでIDの追加と削除を試す](/practice/algorithms/sparse-set-observation.html)
 
 ## 扱う範囲・増補する項目
 

@@ -3,12 +3,7 @@ title: 第10章 データ構造・アルゴリズム・ゲーム数学
 study:
   source: IT教本
   status: outline
-  summary: |-
-    ゲームで使うデータ構造・探索・空間分割と、ベクトル・行列などの数学を選んで学ぶ学習計画・概要です。探索・ソート・グラフアルゴリズムの専用本文は未整備のため、演習と章末の資料も使って補います。
-
-    ## 関連する辞典本文・実践
-
-    - [STLコンテナ](/languages/cpp/stl.ht
+  summary: ゲームで使うデータ構造・探索・空間分割と、ベクトル・行列などの数学を選んで学ぶ学習計画。データ構造は技術辞典の各解説とスパースセットの実践につなぐ。
   section: learning
   format: path
   domain: algorithms
@@ -26,6 +21,8 @@ study:
 
 ## 関連する辞典本文・実践
 
+- [データ構造の目次](/algorithms/)から、配列、連結リスト、キュー、ハッシュ表、ヒープ、探索木、スパースセットの解説へ進めます。
+- [スパースセットでIDの追加と削除を試す](/practice/algorithms/sparse-set-observation.html)で、ECSで使うことのあるIDと配列位置の対応を観察できます。
 - [STLコンテナ](/languages/cpp/stl.html)と[空間分割・Data Locality](/game/patterns/optimization-patterns.html)では、道具の選び方を調べられます。
 - [ベクトル](/math/rendering/vector.html)、[行列](/math/rendering/matrix.html)から、座標と変換の本文へ進めます。
 

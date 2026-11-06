@@ -1,0 +1,49 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="760" height="363" viewBox="0 0 760 363" role="img" aria-labelledby="title desc" xml:lang="ja">
+  <title id="title">最小ヒープの二分木と配列</title>
+  <desc id="desc">根は値2の添字0。子は値4の添字1と値3の添字2。値4の子は8と7、値3の子は6。木を段ごとに左から配列に並べると2、4、3、8、7、6になる。</desc>
+  <rect width="760" height="363" rx="18" fill="#f8fafc"/>
+  <g font-family="'Noto Sans JP', 'Yu Gothic', 'Meiryo', sans-serif" fill="#162334">
+    <text x="25" y="40" font-size="23" font-weight="700">木の各段を左から配列に置く</text>
+    <text x="25" y="67" font-size="16" fill="#475569">最小ヒープの例。どの親もその子以下。</text>
+
+    <path d="M380 112 250 165M380 112 510 165M250 165 166 221M250 165 335 221M510 165 427 221" fill="none" stroke="#5a6c80" stroke-width="2"/>
+    <circle cx="380" cy="112" r="24" fill="#dff3eb" stroke="#367061" stroke-width="2.6"/>
+    <g fill="#e7f2fe" stroke="#587ba5" stroke-width="1.5">
+      <circle cx="250" cy="165" r="22"/>
+      <circle cx="510" cy="165" r="22"/>
+      <circle cx="166" cy="221" r="22"/>
+      <circle cx="335" cy="221" r="22"/>
+      <circle cx="427" cy="221" r="22"/>
+    </g>
+    <g text-anchor="middle" font-size="19" font-weight="700">
+      <text x="380" y="119">2</text>
+      <text x="250" y="172">4</text>
+      <text x="510" y="172">3</text>
+      <text x="166" y="228">8</text>
+      <text x="335" y="228">7</text>
+      <text x="427" y="228">6</text>
+    </g>
+
+    <text x="80" y="275" font-size="15" fill="#475569">添字</text>
+    <text x="80" y="316" font-size="17" font-weight="700">配列の値</text>
+    <g text-anchor="middle" font-size="15" fill="#475569">
+      <text x="230" y="275">0</text>
+      <text x="290" y="275">1</text>
+      <text x="350" y="275">2</text>
+      <text x="410" y="275">3</text>
+      <text x="470" y="275">4</text>
+      <text x="530" y="275">5</text>
+    </g>
+    <rect x="200" y="288" width="360" height="43" rx="7" fill="#e7f2fe" stroke="#587ba5" stroke-width="1.5"/>
+    <path d="M207 288H260V331H207Q200 331 200 324V295Q200 288 207 288Z" fill="#dff3eb" stroke="#367061" stroke-width="1.5"/>
+    <path d="M320 288v43m60-43v43m60-43v43m60-43v43" fill="none" stroke="#587ba5" stroke-width="1.5"/>
+    <g text-anchor="middle" font-size="19" font-weight="700">
+      <text x="230" y="316">2</text>
+      <text x="290" y="316">4</text>
+      <text x="350" y="316">3</text>
+      <text x="410" y="316">8</text>
+      <text x="470" y="316">7</text>
+      <text x="530" y="316">6</text>
+    </g>
+  </g>
+</svg>

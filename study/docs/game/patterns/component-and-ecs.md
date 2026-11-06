@@ -157,7 +157,7 @@ void MoveSystem(World& w, float dt) {
 
 ## 演習
 
-samples/ecs_minimal.cpp に「寿命(Lifetime)コンポーネント」と「寿命切れEntityを除去するSystem」を追加してください。除去時に配列の詰め方(swap-and-pop)がindexの意味を壊す問題にどう対処するか考えてください(ヒント: これがEntity IDと世代が必要になる理由です → [Object Pool](/game/patterns/object-pool.html))。
+samples/ecs_minimal.cpp に「寿命(Lifetime)コンポーネント」と「寿命切れEntityを除去するSystem」を追加してください。削除で末尾の要素を移したときは、IDと配列位置の対応を更新します。IDのスロットを再利用する設計なら、世代で古いハンドルを区別します。[スパースセットとECS](/algorithms/sparse-sets.html) · [Object Pool](/game/patterns/object-pool.html)
 
 ---
 

@@ -12,6 +12,7 @@ export const formatLabels = {
 export const statusLabels = { published: '公開中', outline: '学習計画・概要', draft: '草稿', planned: '執筆予定' }
 
 export const collections = [
+  { id: 'sparse-set-observation', section: 'practice', title: 'スパースセットでIDの追加と削除を試す', description: 'IDから位置を引く配列と、IDを詰めた配列の変化を比べる。', start: '/practice/algorithms/sparse-set-observation.html' },
   { id: 'input-latency-observation', section: 'practice', title: '入力遅延を待ち時間と描画時間に分けてみる', description: '入力を読む周期、GPUの待ち、画面の更新周期と走査位置を変えて比べる。', start: '/practice/graphics/input-latency-observation.html' },
   { id: 'swap-chain-observation', section: 'practice', title: 'FIFO・MAILBOX・IMMEDIATEで画面の切り替わりを比べる', description: '同じ描画完了時刻から、表示待ち、絵の置き換え、走査中の切り替わりを比べる。', start: '/practice/graphics/swap-chain-observation.html' },
   { id: 'frame-pacing-observation', section: 'practice', title: '同じ60 FPSで表示間隔を比べる', description: '一定間隔とばらつきのある表示を、動く目印と共通の時間軸で比べる。', start: '/practice/graphics/frame-pacing-observation.html' },

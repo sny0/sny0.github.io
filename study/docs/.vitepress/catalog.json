@@ -90,8 +90,8 @@
       "id": "algorithms",
       "title": "データ構造・アルゴリズム",
       "description": "操作手順、計算量、不変条件から道具を選ぶ。",
-      "count": 0,
-      "status": "辞典本文を準備中"
+      "count": 7,
+      "status": "辞典本文あり"
     },
     {
       "id": "design",
@@ -130,6 +130,13 @@
     }
   ],
   "collections": [
+    {
+      "id": "sparse-set-observation",
+      "section": "practice",
+      "title": "スパースセットでIDの追加と削除を試す",
+      "description": "IDから位置を引く配列と、IDを詰めた配列の変化を比べる。",
+      "start": "/practice/algorithms/sparse-set-observation.html"
+    },
     {
       "id": "input-latency-observation",
       "section": "practice",
@@ -1943,6 +1950,7 @@
         "/game/unreal/uobject-actor-component.html",
         "/game/patterns/optimization-patterns.html",
         "/design/case-studies/enemy-ai.html",
+        "/algorithms/sparse-sets.html",
         "/game/patterns/object-pool.html",
         "/game/patterns/game-loop-and-update.html",
         "/game/patterns/",
@@ -6880,6 +6888,37 @@
       ]
     },
     {
+      "title": "スタック・キュー・デック — どちらの端から入れ、どちらから取るか",
+      "url": "/algorithms/queues-and-deques.html",
+      "file": "algorithms/queues-and-deques.md",
+      "domain": "algorithms",
+      "section": "reference",
+      "format": "article",
+      "status": "published",
+      "summary": "LIFO・FIFO・両端キューの違いを整理し、固定長の配列を折り返して使うキューの添字と満杯の判定を追う。",
+      "source": "新規執筆",
+      "aliases": [
+        "stack",
+        "スタック",
+        "queue",
+        "キュー",
+        "deque",
+        "デック",
+        "両端キュー",
+        "LIFO",
+        "FIFO",
+        "リングキュー",
+        "循環配列"
+      ],
+      "verification": "C++のdeque・コンテナアダプターの規定と.NETのQueueに照合し、C++17の例で満杯・空・折り返しを確認（2026-11-06）",
+      "links": [
+        "/algorithms/binary-heaps.html",
+        "/browser/spsc-ring-buffer.html",
+        "/algorithms/arrays-and-dynamic-arrays.html",
+        "/algorithms/linked-lists.html"
+      ]
+    },
+    {
       "title": "ステート異常(状態異常)の設計",
       "url": "/design/case-studies/status-effects.html",
       "file": "design/case-studies/status-effects.md",
@@ -6898,6 +6937,58 @@
         "/design/case-studies/enemy-ai.html",
         "/design/case-studies/",
         "/design/case-studies/achievements.html"
+      ]
+    },
+    {
+      "title": "スパースセットでIDの追加と削除を試す",
+      "url": "/practice/algorithms/sparse-set-observation.html",
+      "file": "practice/algorithms/sparse-set-observation.md",
+      "domain": "algorithms",
+      "section": "practice",
+      "format": "sample",
+      "status": "published",
+      "summary": "IDの追加・削除を行い、密な配列、IDから引く位置、所属判定を見比べる。",
+      "source": "新規執筆",
+      "aliases": [
+        "スパースセット",
+        "sparse set",
+        "dense",
+        "sparse",
+        "swap-and-pop",
+        "ECS"
+      ],
+      "collection": "sparse-set-observation",
+      "order": 1,
+      "verification": "Nodeで追加・削除5000回と境界条件を検証し、Chromium系ブラウザで削除、再追加、初期状態への復帰を確認（2026-11-06）",
+      "links": [
+        "/algorithms/sparse-sets.html"
+      ]
+    },
+    {
+      "title": "スパースセットとECSのコンポーネント管理",
+      "url": "/algorithms/sparse-sets.html",
+      "file": "algorithms/sparse-sets.md",
+      "domain": "algorithms",
+      "section": "reference",
+      "format": "article",
+      "status": "published",
+      "summary": "整数IDから密な配列の位置を引き、所属判定と末尾を移す削除を定数時間で行う仕組みを調べる。",
+      "source": "新規執筆",
+      "aliases": [
+        "スパースセット",
+        "sparse set",
+        "dense array",
+        "sparse array",
+        "packed array",
+        "swap-and-pop",
+        "ECS",
+        "世代付きID"
+      ],
+      "links": [
+        "/algorithms/hash-tables.html",
+        "/game/patterns/component-and-ecs.html",
+        "/algorithms/arrays-and-dynamic-arrays.html",
+        "/practice/algorithms/sparse-set-observation.html"
       ]
     },
     {
@@ -7282,6 +7373,39 @@
         "/graphics/lighting/pbr.html",
         "/graphics/lighting/lumen.html",
         "/graphics/postprocess/taa.html"
+      ]
+    },
+    {
+      "title": "ハッシュテーブル — 同じ場所に来たキーをどう探すか",
+      "url": "/algorithms/hash-tables.html",
+      "file": "algorithms/hash-tables.md",
+      "domain": "algorithms",
+      "section": "reference",
+      "format": "article",
+      "status": "published",
+      "summary": "ハッシュと等値比較の役割を分け、衝突、削除済みの印、負荷率、再ハッシュを図とリソースキャッシュの例で追う。",
+      "source": "新規執筆",
+      "aliases": [
+        "hash table",
+        "ハッシュテーブル",
+        "ハッシュ表",
+        "ハッシュマップ",
+        "bucket",
+        "バケット",
+        "衝突",
+        "chain",
+        "オープンアドレス法",
+        "tombstone",
+        "負荷率",
+        "rehash",
+        "unordered_map",
+        "Dictionary"
+      ],
+      "verification": "C++の順不同連想コンテナ、.NETのDictionary、CPythonの削除済みスロットの公式資料に照合し、C++20の例を実行（2026-11-06）",
+      "links": [
+        "/algorithms/search-trees.html",
+        "/game/asset-loading.html",
+        "/graphics/optimization/gpu-resource-lifetime.html"
       ]
     },
     {
@@ -8576,6 +8700,14 @@
         "/graphics/optimization/gpu-timestamp-queries.html",
         "/graphics/optimization/gpu-resource-lifetime.html",
         "/graphics/optimization/pipeline-compilation-stutter.html",
+        "/algorithms/arrays-and-dynamic-arrays.html",
+        "/algorithms/linked-lists.html",
+        "/algorithms/queues-and-deques.html",
+        "/algorithms/binary-heaps.html",
+        "/algorithms/hash-tables.html",
+        "/algorithms/search-trees.html",
+        "/algorithms/sparse-sets.html",
+        "/practice/algorithms/sparse-set-observation.html",
         "/history/video-games.html",
         "/guide/rendering/timeline.html"
       ]
@@ -9588,12 +9720,13 @@
       "section": "learning",
       "format": "path",
       "status": "outline",
-      "summary": "ゲームで使うデータ構造・探索・空間分割と、ベクトル・行列などの数学を選んで学ぶ学習計画・概要です。探索・ソート・グラフアルゴリズムの専用本文は未整備のため、演習と章末の資料も使って補います。\n\n## 関連する辞典本文・実践\n\n- [STLコンテナ](/languages/cpp/stl.ht",
+      "summary": "ゲームで使うデータ構造・探索・空間分割と、ベクトル・行列などの数学を選んで学ぶ学習計画。データ構造は技術辞典の各解説とスパースセットの実践につなぐ。",
       "source": "IT教本",
       "aliases": [],
       "collection": "low-level",
       "order": 11,
       "links": [
+        "/practice/algorithms/sparse-set-observation.html",
         "/languages/cpp/stl.html",
         "/game/patterns/optimization-patterns.html",
         "/math/rendering/vector.html",
@@ -10197,6 +10330,65 @@
       ]
     },
     {
+      "title": "二分ヒープと優先度付きキュー",
+      "url": "/algorithms/binary-heaps.html",
+      "file": "algorithms/binary-heaps.md",
+      "domain": "algorithms",
+      "section": "reference",
+      "format": "article",
+      "status": "published",
+      "summary": "完全二分木を配列に格納し、次に処理すべき要素を根から取り出す仕組みを調べる。",
+      "source": "新規執筆",
+      "aliases": [
+        "二分ヒープ",
+        "binary heap",
+        "min-heap",
+        "max-heap",
+        "優先度付きキュー",
+        "priority queue",
+        "std::priority_queue",
+        "PriorityQueue",
+        "heapify"
+      ],
+      "verification": "C++のヒープ操作とpriority_queueの仕様、.NETのPriorityQueue公式資料に照合（2026-11-06）",
+      "links": [
+        "/algorithms/arrays-and-dynamic-arrays.html",
+        "/algorithms/queues-and-deques.html",
+        "/algorithms/search-trees.html"
+      ]
+    },
+    {
+      "title": "二分探索木と順序付き連想コンテナ",
+      "url": "/algorithms/search-trees.html",
+      "file": "algorithms/search-trees.md",
+      "domain": "algorithms",
+      "section": "reference",
+      "format": "article",
+      "status": "published",
+      "summary": "左右の部分木にキーを分け、検索・更新・範囲走査にかかる時間が木の高さで変わる理由を調べる。",
+      "source": "新規執筆",
+      "aliases": [
+        "二分探索木",
+        "binary search tree",
+        "BST",
+        "平衡木",
+        "赤黒木",
+        "red-black tree",
+        "B木",
+        "B-tree",
+        "ordered map",
+        "std::map",
+        "lower_bound",
+        "SortedDictionary",
+        "SortedSet"
+      ],
+      "verification": "C++の順序付き連想コンテナの仕様、.NETのSortedDictionaryとSortedSet、PostgreSQLのB-tree公式資料に照合（2026-11-06）",
+      "links": [
+        "/algorithms/hash-tables.html",
+        "/algorithms/binary-heaps.html"
+      ]
+    },
+    {
       "title": "入力から画面に出るまでの遅延",
       "url": "/graphics/optimization/input-to-display-latency.html",
       "file": "graphics/optimization/input-to-display-latency.md",
@@ -10245,6 +10437,39 @@
       "verification": "Nodeで全1500通りの設定を検証し、Chromium系ブラウザで走査の境界・設定変更・初期値への復帰を確認（2026-11-06）",
       "links": [
         "/graphics/optimization/input-to-display-latency.html"
+      ]
+    },
+    {
+      "title": "配列と動的配列 — 添字、容量、再確保",
+      "url": "/algorithms/arrays-and-dynamic-arrays.html",
+      "file": "algorithms/arrays-and-dynamic-arrays.md",
+      "domain": "algorithms",
+      "section": "reference",
+      "format": "article",
+      "status": "published",
+      "summary": "要素が連続する配列で、添字から位置が分かる理由と、動的配列の容量拡張にかかる処理を調べる。",
+      "source": "新規執筆",
+      "aliases": [
+        "配列",
+        "動的配列",
+        "array",
+        "dynamic array",
+        "std::vector",
+        "List<T>",
+        "size",
+        "capacity",
+        "reserve",
+        "償却計算量",
+        "再確保",
+        "イテレータ無効化"
+      ],
+      "verification": "C++作業草案とMicrosoft Learnに照合し、C++20の例をMSVCで実行（2026-11-06）",
+      "links": [
+        "/game/patterns/optimization-patterns.html",
+        "/algorithms/sparse-sets.html",
+        "/algorithms/queues-and-deques.html",
+        "/algorithms/linked-lists.html",
+        "/languages/cpp/stl.html"
       ]
     },
     {
@@ -10832,6 +11057,13 @@
       "source": "統合ガイド",
       "aliases": [],
       "links": [
+        "/algorithms/arrays-and-dynamic-arrays.html",
+        "/algorithms/linked-lists.html",
+        "/algorithms/queues-and-deques.html",
+        "/algorithms/hash-tables.html",
+        "/algorithms/binary-heaps.html",
+        "/algorithms/search-trees.html",
+        "/algorithms/sparse-sets.html",
         "/graphics/optimization/input-to-display-latency.html",
         "/graphics/optimization/gpu-timestamp-queries.html",
         "/graphics/optimization/gpu-resource-lifetime.html",
@@ -10916,6 +11148,34 @@
         "/languages/cpp/enums-and-namespaces.html",
         "/languages/cpp/",
         "/languages/cpp/auto-and-constexpr.html"
+      ]
+    },
+    {
+      "title": "連結リスト — ノードを見つける処理とつなぎ替え",
+      "url": "/algorithms/linked-lists.html",
+      "file": "algorithms/linked-lists.md",
+      "domain": "algorithms",
+      "section": "reference",
+      "format": "article",
+      "status": "published",
+      "summary": "単方向・双方向リストのノードを図で追い、位置が分かっている場合の追加・削除と、値から位置を探す場合のコストを分ける。",
+      "source": "新規執筆",
+      "aliases": [
+        "連結リスト",
+        "linked list",
+        "単方向リスト",
+        "双方向リスト",
+        "ノード",
+        "std::list",
+        "std::forward_list",
+        "LinkedList<T>",
+        "splice"
+      ],
+      "verification": "C++作業草案とMicrosoft Learnに照合し、C#の例を.NET 5で実行（2026-11-06）",
+      "links": [
+        "/algorithms/arrays-and-dynamic-arrays.html",
+        "/algorithms/queues-and-deques.html",
+        "/languages/cpp/stl.html"
       ]
     }
   ]
