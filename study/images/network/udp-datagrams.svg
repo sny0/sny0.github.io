@@ -1,0 +1,46 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="760" height="410" viewBox="0 0 760 410" role="img" aria-labelledby="title desc">
+  <title id="title">WindowsのUDPソケットからデータグラムを一件ずつ受け取る</title>
+  <desc id="desc">データグラムAとBは別々のrecvfromで受け取る。8バイトのデータグラムは4バイトのバッファに先頭だけが入り、WSAEMSGSIZEになる。空のデータグラムは0を返す。</desc>
+  <defs>
+    <marker id="arrow" viewBox="0 0 8 8" refX="7" refY="4" markerWidth="8" markerHeight="8" orient="auto">
+      <path d="M0 0 8 4 0 8Z" fill="#4f7181" />
+    </marker>
+  </defs>
+  <rect width="760" height="410" rx="16" fill="#eff5f7" />
+  <g font-family="system-ui, 'Yu Gothic UI', 'Meiryo', sans-serif" fill="#173344">
+    <text x="24" y="45" font-size="27" font-weight="700">UDPの受信はデータグラム単位</text>
+    <text x="24" y="75" font-size="16">Windowsでフラグ 0 の recvfrom を呼び出す例</text>
+    <text x="44" y="112" font-size="16" font-weight="700">受信キューの先頭</text>
+    <text x="420" y="112" font-size="16" font-weight="700">この呼び出しの結果</text>
+
+    <rect x="24" y="122" width="278" height="49" rx="9" fill="#daeaf1" stroke="#a3beca" />
+    <rect x="400" y="122" width="336" height="49" rx="9" fill="#e1eee8" stroke="#a6c5b5" />
+    <text x="44" y="153" font-size="18">小さなデータグラム A</text>
+    <text x="420" y="153" font-size="18">A を一件受け取る</text>
+
+    <rect x="24" y="180" width="278" height="49" rx="9" fill="#daeaf1" stroke="#a3beca" />
+    <rect x="400" y="180" width="336" height="49" rx="9" fill="#e1eee8" stroke="#a6c5b5" />
+    <text x="44" y="211" font-size="18">小さなデータグラム B</text>
+    <text x="420" y="211" font-size="18">次の呼び出しで B を受け取る</text>
+
+    <rect x="24" y="238" width="278" height="68" rx="9" fill="#daeaf1" stroke="#a3beca" />
+    <rect x="400" y="238" width="336" height="68" rx="9" fill="#f8ead7" stroke="#d3b789" />
+    <text x="44" y="278" font-size="18">8バイトのデータグラム</text>
+    <text x="420" y="266" font-size="17" font-weight="700">WSAEMSGSIZE</text>
+    <text x="420" y="290" font-size="15">先頭4バイトを格納し、残りを破棄</text>
+    <text x="351" y="263" text-anchor="middle" font-size="12">容量 4 B</text>
+
+    <rect x="24" y="315" width="278" height="49" rx="9" fill="#daeaf1" stroke="#a3beca" />
+    <rect x="400" y="315" width="336" height="49" rx="9" fill="#e1eee8" stroke="#a6c5b5" />
+    <text x="44" y="346" font-size="18">空のデータグラム</text>
+    <text x="420" y="346" font-size="18">0 を返す</text>
+
+    <g fill="none" stroke="#4f7181" stroke-width="2" marker-end="url(#arrow)">
+      <path d="M312 147h76" />
+      <path d="M312 205h76" />
+      <path d="M312 272h76" />
+      <path d="M312 340h76" />
+    </g>
+    <text x="24" y="391" font-size="15">各行は、示したデータグラムが受信側に届いた時点からの例。</text>
+  </g>
+</svg>
