@@ -1,0 +1,74 @@
+<!doctype html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>空間インデックスで範囲を調べる | Sny0 Study</title>
+  <link rel="stylesheet" href="styles.css">
+  <script type="module" src="main.js"></script>
+</head>
+<body>
+  <main>
+    <header>
+      <a href="https://sny0.com/study/practice/algorithms/spatial-query-observation.html">実践手順とコードを読む</a>
+      <h1>空間インデックスで範囲を調べる</h1>
+      <p>同じ48個の円に対して、総当たり・均等グリッド・BVHで、四角い範囲に触れる円を探します。</p>
+    </header>
+
+    <section aria-labelledby="settings-title">
+      <h2 id="settings-title">配置と調べる範囲を選ぶ</h2>
+      <div class="controls" id="controls">
+        <label>円の配置
+          <select id="layout"><option value="spread">分散</option><option value="clustered">左上に密集</option></select>
+        </label>
+        <label>図に重ねる方式
+          <select id="method"><option value="grid">均等グリッド</option><option value="bvh">BVH</option><option value="brute">総当たり</option></select>
+        </label>
+        <label>セルの一辺
+          <select id="cell-size"><option value="32">32</option><option value="64" selected>64</option><option value="128">128</option></select>
+        </label>
+        <div class="range"><label for="query-x">中心 X</label><output id="x-value" for="query-x">230</output>
+          <input type="range" id="query-x" min="0" max="639" value="230">
+        </div>
+        <div class="range"><label for="query-y">中心 Y</label><output id="y-value" for="query-y">140</output>
+          <input type="range" id="query-y" min="0" max="383" value="140">
+        </div>
+        <div class="range"><label for="query-width">範囲の幅</label><output id="width-value" for="query-width">160</output>
+          <input type="range" id="query-width" min="32" max="320" value="160" step="16">
+        </div>
+      </div>
+    </section>
+
+    <section class="observation" aria-labelledby="scene-title">
+      <div>
+        <h2 id="scene-title">対象の範囲と候補</h2>
+        <svg id="scene" viewBox="0 0 640 384" role="img" aria-label="円の配置と検索範囲"></svg>
+        <ul class="legend">
+          <li><span class="key range-key"></span>検索範囲</li>
+          <li><span class="key hit-key"></span>命中</li>
+          <li><span class="key candidate-key"></span>候補だが範囲外</li>
+        </ul>
+        <p id="structure-note"></p>
+        <p>図をクリックしても範囲の中心を動かせます。世界の端では検索範囲を切り取ります。</p>
+      </div>
+      <div>
+        <h2 id="results-title">3方式の結果を比べる</h2>
+        <table aria-labelledby="results-title">
+          <thead><tr><th scope="col">方式</th><th scope="col">詳細判定</th><th scope="col">命中</th></tr></thead>
+          <tbody>
+            <tr id="stats-brute"><th scope="row">総当たり</th><td class="tested"></td><td class="hit-count"></td></tr>
+            <tr id="stats-grid"><th scope="row">均等グリッド</th><td class="tested"></td><td class="hit-count"></td></tr>
+            <tr id="stats-bvh"><th scope="row">BVH</th><td class="tested"></td><td class="hit-count"></td></tr>
+          </tbody>
+        </table>
+        <p class="agreement" id="agreement" aria-live="polite"></p>
+        <p id="grid-detail"></p>
+        <p id="bvh-detail"></p>
+        <p>「詳細判定」は円と検索範囲を実際に照合した回数です。セルやノードを調べる費用、構造を作る時間はこの列に含めていません。</p>
+        <a href="https://sny0.com/study/practice/algorithms/spatial-query-observation.html#run-locally">手元で動かす手順</a>
+        <noscript><p>範囲を動かして比較するにはJavaScriptを有効にします。</p></noscript>
+      </div>
+    </section>
+  </main>
+</body>
+</html>

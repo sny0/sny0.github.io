@@ -1,0 +1,56 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="760" height="374" viewBox="0 0 760 374" role="img" aria-labelledby="title desc" xml:lang="ja">
+  <title id="title">BVHの箱で不要な枝を除外する</title>
+  <desc id="desc">枝1の箱に円AとB、枝2の箱に円CとDが入る。問い合わせの矩形は枝1の箱と重なり、枝2の箱とは重ならない。AとBの形状を調べるとAだけがヒットする。</desc>
+  <rect width="760" height="374" rx="18" fill="#f8fafc"/>
+  <g font-family="'Noto Sans JP', 'Yu Gothic', 'Meiryo', sans-serif" fill="#162334">
+    <text x="25" y="42" font-size="24" font-weight="700">箱で枝を絞り、葉で形状を確かめる</text>
+    <text x="25" y="69" font-size="16" fill="#475569">A・BとC・Dを分けても、子の箱は重なり得る</text>
+
+    <rect x="24" y="94" width="338" height="212" rx="12" fill="#fff" stroke="#cbd5e1"/>
+    <rect x="380" y="94" width="356" height="212" rx="12" fill="#fff" stroke="#cbd5e1"/>
+    <text x="40" y="119" font-size="15" font-weight="700">空間で見た箱</text>
+    <text x="396" y="119" font-size="15" font-weight="700">木で見た問い合わせの経路</text>
+
+    <rect x="48" y="138" width="289" height="143" fill="none" stroke="#64748b" stroke-width="1.8" stroke-dasharray="5 4"/>
+    <rect x="62" y="151" width="153" height="111" fill="#a8ded0" fill-opacity=".30" stroke="#277867" stroke-width="2"/>
+    <rect x="184" y="175" width="137" height="95" fill="#a6c6ef" fill-opacity=".32" stroke="#416999" stroke-width="2"/>
+
+    <g stroke-width="1.6">
+      <circle cx="84" cy="175" r="17" fill="#daf0e7" stroke="#277867"/>
+      <circle cx="199" cy="246" r="15" fill="#daf0e7" stroke="#277867"/>
+      <circle cx="225" cy="194" r="16" fill="#e0ebf9" stroke="#416999"/>
+      <circle cx="297" cy="242" r="16" fill="#e0ebf9" stroke="#416999"/>
+    </g>
+    <rect x="95" y="157" width="64" height="42" fill="#fce7ad" fill-opacity=".52" stroke="#9d5b15" stroke-width="2.5" stroke-dasharray="6 3"/>
+    <g text-anchor="middle" font-size="15" font-weight="700">
+      <text x="84" y="180">A</text>
+      <text x="199" y="251">B</text>
+      <text x="225" y="199">C</text>
+      <text x="297" y="247">D</text>
+      <text x="127" y="183" font-size="13" fill="#7c420e">範囲</text>
+    </g>
+    <text x="68" y="239" font-size="14" font-weight="700" fill="#1d6658">枝1の箱</text>
+    <text x="262" y="205" font-size="14" font-weight="700" fill="#365b87">枝2の箱</text>
+    <text x="51" y="298" font-size="13" fill="#475569">外側の破線は根の箱</text>
+
+    <path d="M558 175L475 193" stroke="#277867" stroke-width="2.3" fill="none"/>
+    <path d="M558 175L642 193" stroke="#64748b" stroke-width="2.3" stroke-dasharray="5 4" fill="none"/>
+    <rect x="471" y="137" width="174" height="38" rx="7" fill="#eef3f7" stroke="#64748b"/>
+    <rect x="396" y="193" width="158" height="45" rx="7" fill="#e1f2eb" stroke="#277867" stroke-width="2"/>
+    <rect x="563" y="193" width="157" height="45" rx="7" fill="#eef3f7" stroke="#64748b" stroke-width="1.8" stroke-dasharray="5 4"/>
+    <g text-anchor="middle" font-size="15" font-weight="700">
+      <text x="558" y="161">根　A・B・C・D</text>
+      <text x="475" y="221" fill="#1d6658">枝1　A・B</text>
+      <text x="642" y="221" fill="#475569">枝2　C・D</text>
+    </g>
+    <g text-anchor="middle" font-size="14" fill="#334155">
+      <text x="475" y="263">A・Bを個別に判定</text>
+      <text x="475" y="285" font-weight="700" fill="#1d6658">Aがヒット</text>
+      <text x="642" y="263">箱に届かない</text>
+      <text x="642" y="285" font-weight="700">C・Dを省く</text>
+    </g>
+
+    <rect x="25" y="325" width="710" height="31" rx="7" fill="#fef3d8"/>
+    <text x="39" y="346" font-size="15" fill="#6d4313">枝1の箱が重なり、A・Bが候補になる。範囲に重なる円だけをヒットにする。</text>
+  </g>
+</svg>
