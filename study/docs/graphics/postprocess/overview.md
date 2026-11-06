@@ -3,7 +3,7 @@ title: ポストプロセスパイプライン
 study:
   source: RenderingWiki
   status: published
-  summary: ポストプロセスは、シーンを描き終えたHDRカラーバッファに対して行う画像処理の総称です。トーンマッピング・ブルーム・被写界深度・モーションブラー・色調補正などが連なる「現像工程」であり、ゲームの絵の「ルック」の大半はここで決まります。実装的にはフルスクリーンパス (またはCompute) の連鎖で、
+  summary: 描画済みの画像にトーンマッピング、ブルーム、被写界深度、色調補正などを適用する。各処理の順序と、HDRやリニア色空間との関係を扱う。
   section: reference
   format: article
   domain: graphics
@@ -13,7 +13,9 @@ study:
 
 ## 概要
 
-ポストプロセスは、**シーンを描き終えたHDRカラーバッファに対して行う画像処理の総称**です。トーンマッピング・ブルーム・被写界深度・モーションブラー・色調補正などが連なる「現像工程」であり、ゲームの絵の「ルック」の大半はここで決まります。実装的にはフルスクリーンパス (またはCompute) の連鎖で、HDRレンダリングとリニア色空間の理解が土台になります。
+ポストプロセスは、**描画済みの画像に行う画像処理**です。トーンマッピング、ブルーム、被写界深度、モーションブラー、色調補正などを、フルスクリーン描画やコンピュート処理でつなぎます。入力の色空間や値の範囲は処理の位置によって変わります。例えばUnreal Engineのポストプロセスマテリアルでは、トーンマッピング前のHDRシーン色と、後の画像を使う段階を選べます。[Epic Gamesのポストプロセスマテリアル](https://dev.epicgames.com/documentation/unreal-engine/post-process-materials-in-unreal-engine)
+
+画像を次のパスへ渡す流れは、[オフスクリーン描画](/graphics/postprocess/render-to-texture.html)と[C++の2パス描画実践](/practice/graphics/render-to-texture-observation.html)で確かめられます。複数パスで一時画像を使い回したり、前のフレームの結果を使ったりする設計は[ピンポンバッファとフレーム履歴](/graphics/postprocess/ping-pong-and-history.html)へ進みます。
 
 ## なぜ必要なのか
 

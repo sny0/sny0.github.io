@@ -82,6 +82,13 @@
 3. [D3D12のキュー間同期](/graphics/optimization/gpu-queue-synchronization.html)で、コピーと描画を別のキューに分けるときのフェンスと状態を追う。
 4. [D3D12のディスクリプターヒープ](/graphics/optimization/d3d12-descriptor-heaps.html)で、シェーダーへ渡す参照と、その参照を再利用する条件を調べる。
 
+## 描いた画像を次のパスで使うには
+
+1. [テクスチャに描き、次のパスで読む](/graphics/postprocess/render-to-texture.html)で、中間画像をRTVとして書き、SRVとして読む流れを追う。
+2. [C++の2パス描画実践](/practice/graphics/render-to-texture-observation.html)で、色を入れ替える前後の全画素を読み戻す。
+3. [ピンポンバッファとフレーム履歴](/graphics/postprocess/ping-pong-and-history.html)で、後処理をつなぐときと前フレームの結果を残すときの違いを調べる。
+4. [描画パスのアタッチメント](/graphics/optimization/render-pass-attachments.html)で、どの画像を残すか、いつ破棄や再利用ができるかを追う。
+
 ## ファイルを読むと内部で何が起きるか
 
 1. [ファイルを読む仕組み](/os/file-read-journey.html)で、アプリのバッファ、OSのファイルキャッシュ、ストレージへの要求を分ける。

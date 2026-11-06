@@ -104,7 +104,7 @@
       "id": "graphics",
       "title": "3DCGとグラフィックス",
       "description": "制作データからGPUの処理、最終表示までをつなぐ。",
-      "count": 68,
+      "count": 71,
       "status": "辞典本文あり"
     },
     {
@@ -130,6 +130,13 @@
     }
   ],
   "collections": [
+    {
+      "id": "render-to-texture-observation",
+      "section": "practice",
+      "title": "C++でテクスチャに描き、次のパスで色を変える",
+      "description": "中間画像を次のパスで読み、色を入れ替えた結果をWARPから読み戻す。",
+      "start": "/practice/graphics/render-to-texture-observation.html"
+    },
     {
       "id": "parallel-command-recording-observation",
       "section": "practice",
@@ -1429,6 +1436,39 @@
       ]
     },
     {
+      "title": "C++でテクスチャに描き、次のパスで色を変える",
+      "url": "/practice/graphics/render-to-texture-observation.html",
+      "file": "practice/graphics/render-to-texture-observation.md",
+      "domain": "graphics",
+      "section": "practice",
+      "format": "sample",
+      "status": "published",
+      "summary": "WARPで左が赤、右が緑の中間画像を作り、次のパスでその画像をSRVから読む。赤と青を入れ替え、2枚の全画素を照合する。",
+      "source": "新規執筆",
+      "aliases": [
+        "render to texture",
+        "offscreen rendering",
+        "RTV",
+        "SRV",
+        "WARP",
+        "SV_VertexID",
+        "SV_Position",
+        "Texture2D.Load",
+        "ポストプロセス"
+      ],
+      "collection": "render-to-texture-observation",
+      "order": 1,
+      "verification": "Windows x64のMSVCとWARPで実行し、各画像の全1024画素の一致と、色の入れ替えを外した場合の不一致を確認（2026-11-07）",
+      "links": [
+        "/graphics/postprocess/render-to-texture.html",
+        "/graphics/optimization/d3d12-descriptor-heaps.html",
+        "/graphics/optimization/d3d12-resource-barriers.html",
+        "/graphics/texture/d3d12-texture-upload.html",
+        "/graphics/postprocess/ping-pong-and-history.html",
+        "/graphics/optimization/render-pass-attachments.html"
+      ]
+    },
+    {
       "title": "C++でワーカーの結果を描画側へ渡し、古い世代を捨てる",
       "url": "/practice/threads/asset-worker-handoff-observation.html",
       "file": "practice/threads/asset-worker-handoff-observation.md",
@@ -2542,6 +2582,39 @@
         "/graphics/compute/parallel-algorithms.html",
         "/graphics/postprocess/upscaling.html",
         "/graphics/lighting/raytracing.html"
+      ]
+    },
+    {
+      "title": "D3D12でテクスチャに描き、次のパスで読む",
+      "url": "/graphics/postprocess/render-to-texture.html",
+      "file": "graphics/postprocess/render-to-texture.md",
+      "domain": "graphics",
+      "section": "reference",
+      "format": "article",
+      "status": "published",
+      "summary": "画面外のテクスチャをRTVで描画先にし、遷移バリアの後にSRVから読む。フルスクリーン三角形とTexture2D.Loadで、描画パス間の色データの受け渡しを追う。",
+      "source": "新規執筆",
+      "aliases": [
+        "render to texture",
+        "offscreen rendering",
+        "render target",
+        "RTV",
+        "SRV",
+        "fullscreen triangle",
+        "SV_Position",
+        "Texture2D.Load",
+        "Texture2D.Sample",
+        "ポストプロセス"
+      ],
+      "verification": "MicrosoftのD3D12リソースとHLSLの仕様に照合（2026-11-07）",
+      "links": [
+        "/graphics/postprocess/overview.html",
+        "/graphics/texture/dds-and-subresources.html",
+        "/graphics/optimization/d3d12-descriptor-heaps.html",
+        "/graphics/optimization/d3d12-resource-barriers.html",
+        "/graphics/postprocess/ping-pong-and-history.html",
+        "/graphics/optimization/swap-chain-and-vsync.html",
+        "/practice/graphics/render-to-texture-observation.html"
       ]
     },
     {
@@ -4486,6 +4559,7 @@
         "/graphics/api/directx12.html",
         "/graphics/api/vulkan.html",
         "/graphics/optimization/basics.html",
+        "/graphics/optimization/render-pass-attachments.html",
         "/graphics/optimization/gpu-driven.html",
         "/graphics/engine/urp.html",
         "/graphics/engine/unreal-renderer.html"
@@ -9111,10 +9185,13 @@
       "section": "reference",
       "format": "article",
       "status": "published",
-      "summary": "ポストプロセスは、シーンを描き終えたHDRカラーバッファに対して行う画像処理の総称です。トーンマッピング・ブルーム・被写界深度・モーションブラー・色調補正などが連なる「現像工程」であり、ゲームの絵の「ルック」の大半はここで決まります。実装的にはフルスクリーンパス (またはCompute) の連鎖で、",
+      "summary": "描画済みの画像にトーンマッピング、ブルーム、被写界深度、色調補正などを適用する。各処理の順序と、HDRやリニア色空間との関係を扱う。",
       "source": "RenderingWiki",
       "aliases": [],
       "links": [
+        "/graphics/postprocess/render-to-texture.html",
+        "/practice/graphics/render-to-texture-observation.html",
+        "/graphics/postprocess/ping-pong-and-history.html",
         "/graphics/postprocess/taa.html",
         "/graphics/postprocess/upscaling.html",
         "/graphics/compute/parallel-algorithms.html",
@@ -9550,6 +9627,44 @@
       ]
     },
     {
+      "title": "レンダーパスのアタッチメントを読み込み、保持し、引き渡す",
+      "url": "/graphics/optimization/render-pass-attachments.html",
+      "file": "graphics/optimization/render-pass-attachments.md",
+      "domain": "graphics",
+      "section": "reference",
+      "format": "article",
+      "status": "published",
+      "summary": "シーン色、深度、表示用の画像を例に、パスの入口で必要な値と出口で残す値を決める。D3D12のBeginRenderPass、状態遷移、一時リソースの再利用をつなげる。",
+      "source": "新規執筆",
+      "aliases": [
+        "render pass",
+        "アタッチメント",
+        "attachment",
+        "BeginRenderPass",
+        "EndRenderPass",
+        "load",
+        "store",
+        "clear",
+        "preserve",
+        "discard",
+        "resolve",
+        "transient resource"
+      ],
+      "verification": "MicrosoftのD3D12レンダーパス・リソース状態・配置リソースの仕様に照合（2026-11-07）",
+      "links": [
+        "/graphics/postprocess/render-to-texture.html",
+        "/graphics/postprocess/overview.html",
+        "/graphics/optimization/swap-chain-and-vsync.html",
+        "/graphics/optimization/d3d12-resource-barriers.html",
+        "/graphics/postprocess/ping-pong-and-history.html",
+        "/practice/graphics/render-to-texture-observation.html",
+        "/graphics/optimization/render-graph.html",
+        "/graphics/optimization/gpu-queue-synchronization.html",
+        "/graphics/optimization/gpu-resource-lifetime.html",
+        "/graphics/optimization/gpu-timestamp-queries.html"
+      ]
+    },
+    {
       "title": "レンダリングパイプライン全体像",
       "url": "/graphics/pipeline/overview.html",
       "file": "graphics/pipeline/overview.md",
@@ -9913,6 +10028,10 @@
         "/practice/graphics/parallel-command-recording-observation.html",
         "/graphics/optimization/gpu-queue-synchronization.html",
         "/graphics/optimization/d3d12-descriptor-heaps.html",
+        "/graphics/postprocess/render-to-texture.html",
+        "/practice/graphics/render-to-texture-observation.html",
+        "/graphics/postprocess/ping-pong-and-history.html",
+        "/graphics/optimization/render-pass-attachments.html",
         "/os/file-read-journey.html",
         "/practice/io/file-read-observation.html",
         "/os/windows-file-cache.html",
@@ -10184,6 +10303,40 @@
         "/design/naming.html",
         "/design/pattern-index.html",
         "/design/notebook-references.html"
+      ]
+    },
+    {
+      "title": "後処理のピンポンバッファとフレーム履歴",
+      "url": "/graphics/postprocess/ping-pong-and-history.html",
+      "file": "graphics/postprocess/ping-pong-and-history.md",
+      "domain": "graphics",
+      "section": "reference",
+      "format": "article",
+      "status": "published",
+      "summary": "2枚のテクスチャを交互に使い、横・縦ブラーの中間結果や、TAAの前フレーム履歴を渡す。読み書きの競合、履歴の無効化、GPU完了までの保持を扱う。",
+      "source": "新規執筆",
+      "aliases": [
+        "ピンポンバッファ",
+        "ping-pong buffer",
+        "ダブルバッファ",
+        "履歴バッファ",
+        "history buffer",
+        "temporal history",
+        "separable blur",
+        "camera cut",
+        "UAV"
+      ],
+      "verification": "MicrosoftのD3D12仕様、AMD FidelityFXのブラーとカメラカット、Unityのカメラ履歴管理の公式資料に照合（2026-11-07）",
+      "links": [
+        "/graphics/postprocess/render-to-texture.html",
+        "/graphics/optimization/d3d12-resource-barriers.html",
+        "/graphics/optimization/render-pass-attachments.html",
+        "/graphics/texture/dds-and-subresources.html",
+        "/graphics/postprocess/taa.html",
+        "/graphics/optimization/swap-chain-and-vsync.html",
+        "/graphics/optimization/parallel-command-recording.html",
+        "/graphics/optimization/gpu-queue-synchronization.html",
+        "/graphics/optimization/gpu-resource-lifetime.html"
       ]
     },
     {
@@ -12656,6 +12809,9 @@
         "/graphics/optimization/d3d12-resource-barriers.html",
         "/graphics/optimization/gpu-queue-synchronization.html",
         "/graphics/optimization/d3d12-descriptor-heaps.html",
+        "/graphics/postprocess/render-to-texture.html",
+        "/graphics/postprocess/ping-pong-and-history.html",
+        "/graphics/optimization/render-pass-attachments.html",
         "/graphics/texture/dds-and-subresources.html",
         "/graphics/texture/d3d12-texture-upload.html",
         "/graphics/texture/texture-streaming-and-mip-residency.html",
