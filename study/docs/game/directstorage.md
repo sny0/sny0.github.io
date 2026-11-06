@@ -28,6 +28,8 @@ study:
 
 `EnqueueSignal`でD3D12フェンスを積むと、その項目より前の要求が完了した後にフェンス値が更新されます。描画側ではこのフェンスで処理順を合わせ、ステータスで結果を確認します。リソースの状態や依存アセット、エンジンへの登録も揃えたところでゲーム側が利用可能とします。[`EnqueueSignal`](https://learn.microsoft.com/en-us/windows/win32/dstorage/dstorage/nf-dstorage-idstoragequeue-enqueuesignal) · [D3D12キュー間の同期](https://learn.microsoft.com/en-us/windows/win32/direct3d12/user-mode-heap-synchronization) · [Direct3D 12の基礎](/graphics/api/directx12.html)
 
+読み取り元の位置とサイズをゲーム側がどこから取得するかは、パックの形式で決まります。名前で目次を引き、検証した範囲を使う流れをパックの解説で扱っています。[アセットパックの構成](/game/asset-pack-files.html)
+
 ## GDeflateで展開する層とテクスチャ形式
 
 **GDeflate**は、DirectStorage 1.1で利用できるようになった可逆圧縮形式です。要求の出力先がシステムメモリならCPUが展開します。D3D12リソースへの出力では、対応するGPUとドライバーの経路で展開できます。ドライバー最適化の経路、組み込みのGPUシェーダー、CPUによる代替経路があり、1.2以降の`IDStorageQueue2::GetCompressionSupport`でキューと圧縮形式に対してランタイムが選んだ経路を調べられます。[MicrosoftのGDeflateと展開経路の解説](https://devblogs.microsoft.com/directx/directstorage-1-1-now-available/) · [`GetCompressionSupport`](https://learn.microsoft.com/en-us/windows/win32/dstorage/dstorage/nf-dstorage-idstoragequeue2-getcompressionsupport)

@@ -1,0 +1,47 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="760" height="424" viewBox="0 0 760 424" role="img" aria-labelledby="title description">
+  <title id="title">配布版17から18へ切り替える</title>
+  <desc id="description">両方のマニフェストが共通素材a1を指す。旧版17は街の素材b2、新版18はc3を指す。更新時に変更された12 MiBを取得して検証し、マニフェストを切り替える。</desc>
+  <defs>
+    <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto">
+      <path d="M0 0 10 5 0 10Z" fill="#49677b"/>
+    </marker>
+  </defs>
+  <rect width="760" height="424" rx="16" fill="#f3f7fa"/>
+  <g font-family="system-ui, sans-serif" fill="#183246">
+    <text x="24" y="42" font-size="24" font-weight="700">変更されたパックを取得して配布版を切り替える</text>
+    <text x="24" y="70" font-size="16" fill="#476476">マニフェストに記録された内容ハッシュで再利用を判定する</text>
+
+    <rect x="24" y="99" width="190" height="85" rx="9" fill="#e3eef4" stroke="#8faaba"/>
+    <rect x="24" y="222" width="190" height="85" rx="9" fill="#e3eef4" stroke="#8faaba"/>
+    <rect x="302" y="157" width="192" height="84" rx="9" fill="#d9ede5" stroke="#83ad9d"/>
+    <rect x="544" y="99" width="192" height="85" rx="9" fill="#fff" stroke="#a5bac7"/>
+    <rect x="544" y="222" width="192" height="85" rx="9" fill="#fff0cd" stroke="#c7a97a"/>
+
+    <g fill="none" stroke="#49677b" stroke-width="2.5" marker-end="url(#arrow)">
+      <path d="M216 123H540"/>
+      <path d="M216 164H253V183H298"/>
+      <path d="M216 246H253V214H298"/>
+      <path d="M216 283H540"/>
+    </g>
+
+    <g text-anchor="middle">
+      <g font-size="18" font-weight="700">
+        <text x="119" y="133">配布版17</text>
+        <text x="119" y="256">配布版18</text>
+        <text x="398" y="184">共通素材 a1…</text>
+        <text x="640" y="132">街の素材 b2…</text>
+        <text x="640" y="255">街の素材 c3…</text>
+      </g>
+      <g font-size="15" fill="#476476">
+        <text x="119" y="159">旧マニフェスト</text>
+        <text x="119" y="282">新マニフェスト</text>
+        <text x="398" y="212">280 MiBを再利用</text>
+        <text x="640" y="158">旧版で使用</text>
+        <text x="640" y="281">12 MiBを取得</text>
+      </g>
+      <rect x="24" y="334" width="712" height="66" rx="9" fill="#fff" stroke="#a5bac7"/>
+      <text x="380" y="360" font-size="17" font-weight="700">新しい一式を検証してから配布版18へ切り替える</text>
+      <text x="380" y="383" font-size="15" fill="#476476">準備中は配布版17のマニフェストを使う</text>
+    </g>
+  </g>
+</svg>

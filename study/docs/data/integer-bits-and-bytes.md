@@ -155,3 +155,5 @@ flags ^= Invincible;                     // 指定ビットを反転する
 ## 関連項目と観察
 
 [整数とバイト列をC++で観察する](/practice/data/integer-byte-observation.html)では、値の表記、nativeなバイト列、明示LE／BEの保存を比較します。[情報表現の学習ガイド](/guide/low-level/computer-and-data.html)は分野全体への案内、[メモリレイアウト](/runtime/cpp-internals/memory-layout.html)は型の整列や配置の解説です。浮動小数点、Unicode、構造体のパディングは別のテーマとして読み分けます。
+
+ファイルに保存された件数や位置を使うときは、演算が折り返す前に範囲を確認します。ゲームの素材をまとめた小さなファイルで、その検査を試せます。[バイナリファイルの範囲検査](/data/binary-file-validation.html) · [C++のアセットパック実践](/practice/io/asset-pack-observation.html)

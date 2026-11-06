@@ -81,6 +81,8 @@
 | [メモリマップドファイル / file mapping / mmap / MapViewOfFile / MemoryMappedFile / ビュー](/os/memory-mapped-files.html) | ファイルの範囲と仮想アドレスを対応付け、ページとビューの寿命を調べる |
 | [アセットロード / asset loading / リソース管理 / cook / 読み込み完了 / 利用可能 / 世代トークン](/game/asset-loading.html) | byte取得から登録・利用可能化・解放までの状態と所有権を整理する |
 | [DirectStorage / GDeflate / GPU展開 / GPU decompression / DSTORAGE_REQUEST](/game/directstorage.html) | Windows PCで読み取りと展開をまとめて要求し、結果をGPUで使うまでの条件を調べる |
+| [アセットパック / パックファイル / TOC / 目次 / asset ID / offset / payload / チャンク圧縮](/game/asset-pack-files.html) | 素材の名前からファイル内の範囲を引き、格納順や読み取り単位を決める |
+| [アセットビルド / cook / 差分配信 / パッチ / content hash / manifest / チャンク](/game/asset-build-and-patches.html) | 配布用データを組み立て、変更された単位を取得し、検証した版に切り替える |
 | [I/O完了ポート / IOCP / CreateIoCompletionPort / GetQueuedCompletionStatus / completion key](/os/io-completion-ports.html) | 同じポートに集まる完了を、ハンドルと要求ごとに見分ける |
 | [I/Oキャンセル / CancelIoEx / CancelIo / ERROR_NOT_FOUND / ERROR_OPERATION_ABORTED](/os/cancelling-overlapped-io.html) | キャンセル要求と完了を区別して、バッファを解放できる時点を調べる |
 | [書き込み / 永続化 / durability / WriteFile / FlushFileBuffers / FILE_FLAG_WRITE_THROUGH / ReplaceFile](/os/file-write-and-durability.html) | 書き込み結果、名前の切り替え、障害後にデータが残る条件を調べる |
@@ -93,6 +95,7 @@
 | [Unicode / 文字コード / UTF-8 / UTF-16 / コードポイント / サロゲートペア / BOM / 文字化け](/data/unicode-and-encoding.html) | 文字の番号、コード単位、バイト列と、長さの数え方を区別する |
 | [float / binary32 / 浮動小数点 / 丸め / 刻み幅 / epsilon / nextafter](/data/floating-point-spacing.html) | ビット表現と有効精度、隣接値、最近接・偶数丸めを区別する |
 | [bit / byte / 2進数 / 16進数 / 整数表現 / 2の補数 / エンディアン](/data/integer-bits-and-bytes.html) | 値と表記、符号の解釈、アドレス順のバイト列を区別する |
+| [バイナリファイル / 範囲検査 / バイナリパーサー / magic number / bounds check / 整数オーバーフロー](/data/binary-file-validation.html) | 件数・オフセット・長さを確かめ、読み取りや確保に使える範囲を決める |
 | [プロセス / スレッド / PID / TID / ローダー / エントリポイント / CRT](/os/process-startup.html) | 実行環境と実行単位、EXEの開始点からmainまでの違い |
 | [alloc / allocate / malloc / アロック / メモリ確保](/runtime/memory/allocation-journey.html) | 確保・初期化・解放、再利用とOSへの要求の関係 |
 | [仮想メモリ / reserve / commit / resident / ページフォルト](/os/virtual-memory.html) | アドレス変換と、予約・コミット・常駐の違い |
