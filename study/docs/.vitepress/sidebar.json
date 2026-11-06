@@ -345,6 +345,10 @@
           "link": "/browser/audio-gain-automation.html"
         },
         {
+          "text": "Web Audioのコムフィルター — 遅延と干渉",
+          "link": "/browser/audio-comb-filter.html"
+        },
+        {
           "text": "Web Audioのミキシング — ゲイン・ヘッドルーム・クリッピング",
           "link": "/browser/audio-mixing-and-headroom.html"
         },
@@ -1197,6 +1201,10 @@
       "collapsed": false,
       "items": [
         {
+          "text": "Web Audioで遅延とコムフィルターを観察する",
+          "link": "/practice/browser/audio-comb-observation.html"
+        },
+        {
           "text": "Web Audioで線形と等電力のクロスフェードを比べる",
           "link": "/practice/browser/audio-crossfade-observation.html"
         },
@@ -1398,6 +1406,10 @@
       "collapsed": true,
       "items": [
         {
+          "text": "Web Audioで遅延とコムフィルターを観察する",
+          "link": "/practice/browser/audio-comb-observation.html"
+        },
+        {
           "text": "Web Audioで線形と等電力のクロスフェードを比べる",
           "link": "/practice/browser/audio-crossfade-observation.html"
         },
@@ -1594,6 +1606,10 @@
       "text": "ほかの実践・サンプル",
       "collapsed": true,
       "items": [
+        {
+          "text": "Web Audioで遅延とコムフィルターを観察する",
+          "link": "/practice/browser/audio-comb-observation.html"
+        },
         {
           "text": "Web Audioで線形と等電力のクロスフェードを比べる",
           "link": "/practice/browser/audio-crossfade-observation.html"
@@ -1792,6 +1808,10 @@
       "collapsed": true,
       "items": [
         {
+          "text": "Web Audioで遅延とコムフィルターを観察する",
+          "link": "/practice/browser/audio-comb-observation.html"
+        },
+        {
           "text": "Web Audioで線形と等電力のクロスフェードを比べる",
           "link": "/practice/browser/audio-crossfade-observation.html"
         },
@@ -1988,6 +2008,10 @@
       "text": "ほかの実践・サンプル",
       "collapsed": true,
       "items": [
+        {
+          "text": "Web Audioで遅延とコムフィルターを観察する",
+          "link": "/practice/browser/audio-comb-observation.html"
+        },
         {
           "text": "Web Audioで線形と等電力のクロスフェードを比べる",
           "link": "/practice/browser/audio-crossfade-observation.html"
@@ -2186,6 +2210,10 @@
       "collapsed": true,
       "items": [
         {
+          "text": "Web Audioで遅延とコムフィルターを観察する",
+          "link": "/practice/browser/audio-comb-observation.html"
+        },
+        {
           "text": "Web Audioで線形と等電力のクロスフェードを比べる",
           "link": "/practice/browser/audio-crossfade-observation.html"
         },
@@ -2366,6 +2394,10 @@
       "text": "ほかの実践・サンプル",
       "collapsed": true,
       "items": [
+        {
+          "text": "Web Audioで遅延とコムフィルターを観察する",
+          "link": "/practice/browser/audio-comb-observation.html"
+        },
         {
           "text": "Web Audioで線形と等電力のクロスフェードを比べる",
           "link": "/practice/browser/audio-crossfade-observation.html"
@@ -2548,6 +2580,10 @@
       "collapsed": true,
       "items": [
         {
+          "text": "Web Audioで遅延とコムフィルターを観察する",
+          "link": "/practice/browser/audio-comb-observation.html"
+        },
+        {
           "text": "Web Audioで線形と等電力のクロスフェードを比べる",
           "link": "/practice/browser/audio-crossfade-observation.html"
         },
@@ -2728,6 +2764,10 @@
       "text": "ほかの実践・サンプル",
       "collapsed": true,
       "items": [
+        {
+          "text": "Web Audioで遅延とコムフィルターを観察する",
+          "link": "/practice/browser/audio-comb-observation.html"
+        },
         {
           "text": "Web Audioで線形と等電力のクロスフェードを比べる",
           "link": "/practice/browser/audio-crossfade-observation.html"
@@ -2918,6 +2958,10 @@
       "collapsed": true,
       "items": [
         {
+          "text": "Web Audioで遅延とコムフィルターを観察する",
+          "link": "/practice/browser/audio-comb-observation.html"
+        },
+        {
           "text": "Web Audioで線形と等電力のクロスフェードを比べる",
           "link": "/practice/browser/audio-crossfade-observation.html"
         },
@@ -3107,6 +3151,10 @@
       "collapsed": true,
       "items": [
         {
+          "text": "Web Audioで遅延とコムフィルターを観察する",
+          "link": "/practice/browser/audio-comb-observation.html"
+        },
+        {
           "text": "Web Audioで線形と等電力のクロスフェードを比べる",
           "link": "/practice/browser/audio-crossfade-observation.html"
         },
@@ -3287,6 +3335,10 @@
       "text": "ほかの実践・サンプル",
       "collapsed": true,
       "items": [
+        {
+          "text": "Web Audioで遅延とコムフィルターを観察する",
+          "link": "/practice/browser/audio-comb-observation.html"
+        },
         {
           "text": "Web Audioで線形と等電力のクロスフェードを比べる",
           "link": "/practice/browser/audio-crossfade-observation.html"
@@ -3469,6 +3521,10 @@
       "collapsed": true,
       "items": [
         {
+          "text": "Web Audioで遅延とコムフィルターを観察する",
+          "link": "/practice/browser/audio-comb-observation.html"
+        },
+        {
           "text": "Web Audioで線形と等電力のクロスフェードを比べる",
           "link": "/practice/browser/audio-crossfade-observation.html"
         },
@@ -3649,6 +3705,10 @@
       "text": "ほかの実践・サンプル",
       "collapsed": true,
       "items": [
+        {
+          "text": "Web Audioで遅延とコムフィルターを観察する",
+          "link": "/practice/browser/audio-comb-observation.html"
+        },
         {
           "text": "Web Audioで線形と等電力のクロスフェードを比べる",
           "link": "/practice/browser/audio-crossfade-observation.html"
@@ -3831,6 +3891,10 @@
       "collapsed": true,
       "items": [
         {
+          "text": "Web Audioで遅延とコムフィルターを観察する",
+          "link": "/practice/browser/audio-comb-observation.html"
+        },
+        {
           "text": "Web Audioで線形と等電力のクロスフェードを比べる",
           "link": "/practice/browser/audio-crossfade-observation.html"
         },
@@ -4011,6 +4075,10 @@
       "text": "ほかの実践・サンプル",
       "collapsed": true,
       "items": [
+        {
+          "text": "Web Audioで遅延とコムフィルターを観察する",
+          "link": "/practice/browser/audio-comb-observation.html"
+        },
         {
           "text": "Web Audioで線形と等電力のクロスフェードを比べる",
           "link": "/practice/browser/audio-crossfade-observation.html"
@@ -4193,6 +4261,10 @@
       "collapsed": true,
       "items": [
         {
+          "text": "Web Audioで遅延とコムフィルターを観察する",
+          "link": "/practice/browser/audio-comb-observation.html"
+        },
+        {
           "text": "Web Audioで線形と等電力のクロスフェードを比べる",
           "link": "/practice/browser/audio-crossfade-observation.html"
         },
@@ -4373,6 +4445,10 @@
       "text": "ほかの実践・サンプル",
       "collapsed": true,
       "items": [
+        {
+          "text": "Web Audioで遅延とコムフィルターを観察する",
+          "link": "/practice/browser/audio-comb-observation.html"
+        },
         {
           "text": "Web Audioで線形と等電力のクロスフェードを比べる",
           "link": "/practice/browser/audio-crossfade-observation.html"
@@ -4555,6 +4631,10 @@
       "collapsed": true,
       "items": [
         {
+          "text": "Web Audioで遅延とコムフィルターを観察する",
+          "link": "/practice/browser/audio-comb-observation.html"
+        },
+        {
           "text": "Web Audioで線形と等電力のクロスフェードを比べる",
           "link": "/practice/browser/audio-crossfade-observation.html"
         },
@@ -4735,6 +4815,10 @@
       "text": "ほかの実践・サンプル",
       "collapsed": true,
       "items": [
+        {
+          "text": "Web Audioで遅延とコムフィルターを観察する",
+          "link": "/practice/browser/audio-comb-observation.html"
+        },
         {
           "text": "Web Audioで線形と等電力のクロスフェードを比べる",
           "link": "/practice/browser/audio-crossfade-observation.html"
@@ -4917,6 +5001,10 @@
       "collapsed": true,
       "items": [
         {
+          "text": "Web Audioで遅延とコムフィルターを観察する",
+          "link": "/practice/browser/audio-comb-observation.html"
+        },
+        {
           "text": "Web Audioで線形と等電力のクロスフェードを比べる",
           "link": "/practice/browser/audio-crossfade-observation.html"
         },
@@ -5098,6 +5186,10 @@
       "collapsed": true,
       "items": [
         {
+          "text": "Web Audioで遅延とコムフィルターを観察する",
+          "link": "/practice/browser/audio-comb-observation.html"
+        },
+        {
           "text": "Web Audioで線形と等電力のクロスフェードを比べる",
           "link": "/practice/browser/audio-crossfade-observation.html"
         },
@@ -5278,6 +5370,10 @@
       "text": "ほかの実践・サンプル",
       "collapsed": true,
       "items": [
+        {
+          "text": "Web Audioで遅延とコムフィルターを観察する",
+          "link": "/practice/browser/audio-comb-observation.html"
+        },
         {
           "text": "Web Audioで線形と等電力のクロスフェードを比べる",
           "link": "/practice/browser/audio-crossfade-observation.html"
@@ -5682,6 +5778,10 @@
       "collapsed": true,
       "items": [
         {
+          "text": "Web Audioで遅延とコムフィルターを観察する",
+          "link": "/practice/browser/audio-comb-observation.html"
+        },
+        {
           "text": "Web Audioで線形と等電力のクロスフェードを比べる",
           "link": "/practice/browser/audio-crossfade-observation.html"
         },
@@ -5915,6 +6015,10 @@
       "collapsed": true,
       "items": [
         {
+          "text": "Web Audioで遅延とコムフィルターを観察する",
+          "link": "/practice/browser/audio-comb-observation.html"
+        },
+        {
           "text": "Web Audioで線形と等電力のクロスフェードを比べる",
           "link": "/practice/browser/audio-crossfade-observation.html"
         },
@@ -6103,6 +6207,10 @@
       "text": "ほかの実践・サンプル",
       "collapsed": true,
       "items": [
+        {
+          "text": "Web Audioで遅延とコムフィルターを観察する",
+          "link": "/practice/browser/audio-comb-observation.html"
+        },
         {
           "text": "Web Audioで線形と等電力のクロスフェードを比べる",
           "link": "/practice/browser/audio-crossfade-observation.html"
@@ -6336,6 +6444,10 @@
       "text": "ほかの実践・サンプル",
       "collapsed": true,
       "items": [
+        {
+          "text": "Web Audioで遅延とコムフィルターを観察する",
+          "link": "/practice/browser/audio-comb-observation.html"
+        },
         {
           "text": "Web Audioで線形と等電力のクロスフェードを比べる",
           "link": "/practice/browser/audio-crossfade-observation.html"
@@ -6655,6 +6767,10 @@
       "collapsed": true,
       "items": [
         {
+          "text": "Web Audioで遅延とコムフィルターを観察する",
+          "link": "/practice/browser/audio-comb-observation.html"
+        },
+        {
           "text": "Web Audioで線形と等電力のクロスフェードを比べる",
           "link": "/practice/browser/audio-crossfade-observation.html"
         },
@@ -6921,6 +7037,10 @@
       "collapsed": true,
       "items": [
         {
+          "text": "Web Audioで遅延とコムフィルターを観察する",
+          "link": "/practice/browser/audio-comb-observation.html"
+        },
+        {
           "text": "Web Audioで線形と等電力のクロスフェードを比べる",
           "link": "/practice/browser/audio-crossfade-observation.html"
         },
@@ -7153,6 +7273,10 @@
       "text": "ほかの実践・サンプル",
       "collapsed": true,
       "items": [
+        {
+          "text": "Web Audioで遅延とコムフィルターを観察する",
+          "link": "/practice/browser/audio-comb-observation.html"
+        },
         {
           "text": "Web Audioで線形と等電力のクロスフェードを比べる",
           "link": "/practice/browser/audio-crossfade-observation.html"
@@ -7420,6 +7544,10 @@
       "collapsed": true,
       "items": [
         {
+          "text": "Web Audioで遅延とコムフィルターを観察する",
+          "link": "/practice/browser/audio-comb-observation.html"
+        },
+        {
           "text": "Web Audioで線形と等電力のクロスフェードを比べる",
           "link": "/practice/browser/audio-crossfade-observation.html"
         },
@@ -7601,6 +7729,10 @@
       "collapsed": true,
       "items": [
         {
+          "text": "Web Audioで遅延とコムフィルターを観察する",
+          "link": "/practice/browser/audio-comb-observation.html"
+        },
+        {
           "text": "Web Audioで線形と等電力のクロスフェードを比べる",
           "link": "/practice/browser/audio-crossfade-observation.html"
         },
@@ -7781,6 +7913,10 @@
       "text": "ほかの実践・サンプル",
       "collapsed": true,
       "items": [
+        {
+          "text": "Web Audioで遅延とコムフィルターを観察する",
+          "link": "/practice/browser/audio-comb-observation.html"
+        },
         {
           "text": "Web Audioで線形と等電力のクロスフェードを比べる",
           "link": "/practice/browser/audio-crossfade-observation.html"
@@ -8014,6 +8150,10 @@
       "text": "ほかの実践・サンプル",
       "collapsed": true,
       "items": [
+        {
+          "text": "Web Audioで遅延とコムフィルターを観察する",
+          "link": "/practice/browser/audio-comb-observation.html"
+        },
         {
           "text": "Web Audioで線形と等電力のクロスフェードを比べる",
           "link": "/practice/browser/audio-crossfade-observation.html"
@@ -8281,6 +8421,10 @@
       "collapsed": true,
       "items": [
         {
+          "text": "Web Audioで遅延とコムフィルターを観察する",
+          "link": "/practice/browser/audio-comb-observation.html"
+        },
+        {
           "text": "Web Audioで線形と等電力のクロスフェードを比べる",
           "link": "/practice/browser/audio-crossfade-observation.html"
         },
@@ -8461,6 +8605,10 @@
       "text": "ほかの実践・サンプル",
       "collapsed": true,
       "items": [
+        {
+          "text": "Web Audioで遅延とコムフィルターを観察する",
+          "link": "/practice/browser/audio-comb-observation.html"
+        },
         {
           "text": "Web Audioで線形と等電力のクロスフェードを比べる",
           "link": "/practice/browser/audio-crossfade-observation.html"
@@ -8695,6 +8843,10 @@
       "collapsed": true,
       "items": [
         {
+          "text": "Web Audioで遅延とコムフィルターを観察する",
+          "link": "/practice/browser/audio-comb-observation.html"
+        },
+        {
           "text": "Web Audioで線形と等電力のクロスフェードを比べる",
           "link": "/practice/browser/audio-crossfade-observation.html"
         },
@@ -8927,6 +9079,10 @@
       "text": "ほかの実践・サンプル",
       "collapsed": true,
       "items": [
+        {
+          "text": "Web Audioで遅延とコムフィルターを観察する",
+          "link": "/practice/browser/audio-comb-observation.html"
+        },
         {
           "text": "Web Audioで線形と等電力のクロスフェードを比べる",
           "link": "/practice/browser/audio-crossfade-observation.html"
@@ -9194,6 +9350,10 @@
       "collapsed": true,
       "items": [
         {
+          "text": "Web Audioで遅延とコムフィルターを観察する",
+          "link": "/practice/browser/audio-comb-observation.html"
+        },
+        {
           "text": "Web Audioで線形と等電力のクロスフェードを比べる",
           "link": "/practice/browser/audio-crossfade-observation.html"
         },
@@ -9374,6 +9534,10 @@
       "text": "ほかの実践・サンプル",
       "collapsed": true,
       "items": [
+        {
+          "text": "Web Audioで遅延とコムフィルターを観察する",
+          "link": "/practice/browser/audio-comb-observation.html"
+        },
         {
           "text": "Web Audioで線形と等電力のクロスフェードを比べる",
           "link": "/practice/browser/audio-crossfade-observation.html"
@@ -9556,6 +9720,195 @@
       "collapsed": true,
       "items": [
         {
+          "text": "Web Audioで遅延とコムフィルターを観察する",
+          "link": "/practice/browser/audio-comb-observation.html"
+        },
+        {
+          "text": "Web Audioで急な消音とフェードを観察する",
+          "link": "/practice/browser/audio-fade-observation.html"
+        },
+        {
+          "text": "Web Audioでゲインとクリッピングを観察する",
+          "link": "/practice/browser/audio-mixing-observation.html"
+        },
+        {
+          "text": "AudioWorkletで先読みとアンダーランを観察する",
+          "link": "/practice/browser/audio-buffer-observation.html"
+        },
+        {
+          "text": "リングバッファの満杯・折り返し・読み出し順を観察する",
+          "link": "/practice/browser/ring-buffer-observation.html"
+        },
+        {
+          "text": "Workerの競合とAtomicsの待機・通知を観察する",
+          "link": "/practice/browser/atomics-observation.html"
+        },
+        {
+          "text": "WebAssemblyへ配列とUTF-8を渡し、メモリ確保を観察する",
+          "link": "/practice/browser/wasm-abi-observation.html"
+        },
+        {
+          "text": "WebAssemblyの読み込みと線形メモリを観察する",
+          "link": "/practice/browser/wasm-memory-observation.html"
+        },
+        {
+          "text": "Workerへのコピーと共有メモリをブラウザで観察する",
+          "link": "/practice/browser/cross-origin-isolation-observation.html"
+        },
+        {
+          "text": "CSRFでCookie付きの要求が届く条件を観察する",
+          "link": "/practice/browser/csrf-observation.html"
+        },
+        {
+          "text": "textContent・innerHTML・CSPの違いを観察する",
+          "link": "/practice/browser/xss-csp-observation.html"
+        },
+        {
+          "text": "ブラウザでCookieの範囲とセッションIDを観察する",
+          "link": "/practice/browser/cookie-session-observation.html"
+        },
+        {
+          "text": "ブラウザで同一オリジンとCORSの応答を比べる",
+          "link": "/practice/browser/cors-observation.html"
+        },
+        {
+          "text": "Service Workerで応答元と登録状態を観察する",
+          "link": "/practice/browser/service-worker-observation.html"
+        },
+        {
+          "text": "ブラウザで保存・再読込・削除を観察する",
+          "link": "/practice/browser/storage-observation.html"
+        },
+        {
+          "text": "C++とC#でHTTPの再検証を観察する",
+          "link": "/practice/network/http-cache-observation.html"
+        },
+        {
+          "text": "Streams APIで供給と処理の速度差を観察する",
+          "link": "/practice/browser/stream-backpressure-observation.html"
+        },
+        {
+          "text": "Worker poolで待機数と取消しを観察する",
+          "link": "/practice/browser/worker-pool-observation.html"
+        },
+        {
+          "text": "Web Workerでコピー・転送・停止を観察する",
+          "link": "/practice/browser/worker-message-observation.html"
+        },
+        {
+          "text": "ブラウザでPromiseとawaitの実行順を観察する",
+          "link": "/practice/browser/event-loop-observation.html"
+        },
+        {
+          "text": "ブラウザでDOMと描画の変化を観察する",
+          "link": "/practice/browser/render-observation.html"
+        },
+        {
+          "text": "C++とC#でHTTPSの接続情報を観察する",
+          "link": "/practice/network/https-observation.html"
+        },
+        {
+          "text": "C++とC#で名前解決の結果を観察する",
+          "link": "/practice/network/name-resolution-observation.html"
+        },
+        {
+          "text": "C++とC#でHTTPの要求と応答を観察する",
+          "link": "/practice/network/http-message-observation.html"
+        },
+        {
+          "text": "C++とC#でTCPのバイト列と半閉鎖を観察する",
+          "link": "/practice/network/tcp-loopback-observation.html"
+        },
+        {
+          "text": "C++とC#で読み取り専用のファイルマッピングを観察する",
+          "link": "/practice/io/mapped-file-observation.html"
+        },
+        {
+          "text": "C++とC#でアセットの状態と寿命を試す",
+          "link": "/practice/assets/asset-lifecycle-model.html"
+        },
+        {
+          "text": "C++とC#で同期・非同期I/Oを比べる",
+          "link": "/practice/io/async-file-read-observation.html"
+        },
+        {
+          "text": "C++とC#でファイルの読み取りを観察する",
+          "link": "/practice/io/file-read-observation.html"
+        },
+        {
+          "text": "C++とC#で在庫の同期を確かめる",
+          "link": "/practice/threads/inventory-synchronization.html"
+        },
+        {
+          "text": "C++とC#でfloatの比較を確かめる",
+          "link": "/practice/math/float-comparison-observation.html"
+        },
+        {
+          "text": "C++とC#で文字の表現を観察する",
+          "link": "/practice/data/unicode-observation.html"
+        },
+        {
+          "text": "C++でfloatの表現と刻み幅を観察する",
+          "link": "/practice/data/float-spacing-observation.html"
+        },
+        {
+          "text": "C++で整数とバイト列を観察する",
+          "link": "/practice/data/integer-byte-observation.html"
+        },
+        {
+          "text": "Windowsでプロセスとスレッドを観察する",
+          "link": "/practice/process/windows-process-observation.html"
+        },
+        {
+          "text": "Windowsでメモリの状態を観察する",
+          "link": "/practice/memory/windows-memory-observation.html"
+        },
+        {
+          "text": "小さなシューティングを作る",
+          "link": "/game/shooter-design.html"
+        },
+        {
+          "text": "小さなレンダラーを作る",
+          "link": "/graphics/capstone/01-design.html"
+        },
+        {
+          "text": "C++と設計の演習",
+          "link": "/guide/exercises/"
+        },
+        {
+          "text": "C++のビルドサンプル",
+          "link": "/tools/build/samples/"
+        },
+        {
+          "text": "小さなアプリで設計を試す",
+          "link": "/design/notebook/practice.html"
+        }
+      ]
+    }
+  ],
+  "/practice/browser/audio-comb-observation.md": [
+    {
+      "text": "実践・サンプル一覧",
+      "link": "/practice/"
+    },
+    {
+      "text": "Web Audioで遅延とコムフィルターを観察する",
+      "items": [
+        {
+          "text": "Web Audioで遅延とコムフィルターを観察する",
+          "link": "/practice/browser/audio-comb-observation.html"
+        }
+      ]
+    },
+    {
+      "text": "ほかの実践・サンプル",
+      "collapsed": true,
+      "items": [
+        {
+          "text": "Web Audioで線形と等電力のクロスフェードを比べる",
+          "link": "/practice/browser/audio-crossfade-observation.html"
+        },
+        {
           "text": "Web Audioで急な消音とフェードを観察する",
           "link": "/practice/browser/audio-fade-observation.html"
         },
@@ -9736,6 +10089,10 @@
       "text": "ほかの実践・サンプル",
       "collapsed": true,
       "items": [
+        {
+          "text": "Web Audioで遅延とコムフィルターを観察する",
+          "link": "/practice/browser/audio-comb-observation.html"
+        },
         {
           "text": "Web Audioで線形と等電力のクロスフェードを比べる",
           "link": "/practice/browser/audio-crossfade-observation.html"
@@ -9918,6 +10275,10 @@
       "collapsed": true,
       "items": [
         {
+          "text": "Web Audioで遅延とコムフィルターを観察する",
+          "link": "/practice/browser/audio-comb-observation.html"
+        },
+        {
           "text": "Web Audioで線形と等電力のクロスフェードを比べる",
           "link": "/practice/browser/audio-crossfade-observation.html"
         },
@@ -10098,6 +10459,10 @@
       "text": "ほかの実践・サンプル",
       "collapsed": true,
       "items": [
+        {
+          "text": "Web Audioで遅延とコムフィルターを観察する",
+          "link": "/practice/browser/audio-comb-observation.html"
+        },
         {
           "text": "Web Audioで線形と等電力のクロスフェードを比べる",
           "link": "/practice/browser/audio-crossfade-observation.html"
@@ -10280,6 +10645,10 @@
       "collapsed": true,
       "items": [
         {
+          "text": "Web Audioで遅延とコムフィルターを観察する",
+          "link": "/practice/browser/audio-comb-observation.html"
+        },
+        {
           "text": "Web Audioで線形と等電力のクロスフェードを比べる",
           "link": "/practice/browser/audio-crossfade-observation.html"
         },
@@ -10460,6 +10829,10 @@
       "text": "ほかの実践・サンプル",
       "collapsed": true,
       "items": [
+        {
+          "text": "Web Audioで遅延とコムフィルターを観察する",
+          "link": "/practice/browser/audio-comb-observation.html"
+        },
         {
           "text": "Web Audioで線形と等電力のクロスフェードを比べる",
           "link": "/practice/browser/audio-crossfade-observation.html"
@@ -10642,6 +11015,10 @@
       "collapsed": true,
       "items": [
         {
+          "text": "Web Audioで遅延とコムフィルターを観察する",
+          "link": "/practice/browser/audio-comb-observation.html"
+        },
+        {
           "text": "Web Audioで線形と等電力のクロスフェードを比べる",
           "link": "/practice/browser/audio-crossfade-observation.html"
         },
@@ -10823,6 +11200,10 @@
       "collapsed": true,
       "items": [
         {
+          "text": "Web Audioで遅延とコムフィルターを観察する",
+          "link": "/practice/browser/audio-comb-observation.html"
+        },
+        {
           "text": "Web Audioで線形と等電力のクロスフェードを比べる",
           "link": "/practice/browser/audio-crossfade-observation.html"
         },
@@ -11003,6 +11384,10 @@
       "text": "ほかの実践・サンプル",
       "collapsed": true,
       "items": [
+        {
+          "text": "Web Audioで遅延とコムフィルターを観察する",
+          "link": "/practice/browser/audio-comb-observation.html"
+        },
         {
           "text": "Web Audioで線形と等電力のクロスフェードを比べる",
           "link": "/practice/browser/audio-crossfade-observation.html"
@@ -11237,6 +11622,10 @@
       "collapsed": true,
       "items": [
         {
+          "text": "Web Audioで遅延とコムフィルターを観察する",
+          "link": "/practice/browser/audio-comb-observation.html"
+        },
+        {
           "text": "Web Audioで線形と等電力のクロスフェードを比べる",
           "link": "/practice/browser/audio-crossfade-observation.html"
         },
@@ -11469,6 +11858,10 @@
       "text": "ほかの実践・サンプル",
       "collapsed": true,
       "items": [
+        {
+          "text": "Web Audioで遅延とコムフィルターを観察する",
+          "link": "/practice/browser/audio-comb-observation.html"
+        },
         {
           "text": "Web Audioで線形と等電力のクロスフェードを比べる",
           "link": "/practice/browser/audio-crossfade-observation.html"
@@ -11744,6 +12137,10 @@
       "collapsed": true,
       "items": [
         {
+          "text": "Web Audioで遅延とコムフィルターを観察する",
+          "link": "/practice/browser/audio-comb-observation.html"
+        },
+        {
           "text": "Web Audioで線形と等電力のクロスフェードを比べる",
           "link": "/practice/browser/audio-crossfade-observation.html"
         },
@@ -11932,6 +12329,10 @@
       "text": "ほかの実践・サンプル",
       "collapsed": true,
       "items": [
+        {
+          "text": "Web Audioで遅延とコムフィルターを観察する",
+          "link": "/practice/browser/audio-comb-observation.html"
+        },
         {
           "text": "Web Audioで線形と等電力のクロスフェードを比べる",
           "link": "/practice/browser/audio-crossfade-observation.html"
@@ -12165,6 +12566,10 @@
       "text": "ほかの実践・サンプル",
       "collapsed": true,
       "items": [
+        {
+          "text": "Web Audioで遅延とコムフィルターを観察する",
+          "link": "/practice/browser/audio-comb-observation.html"
+        },
         {
           "text": "Web Audioで線形と等電力のクロスフェードを比べる",
           "link": "/practice/browser/audio-crossfade-observation.html"
@@ -12432,6 +12837,10 @@
       "collapsed": true,
       "items": [
         {
+          "text": "Web Audioで遅延とコムフィルターを観察する",
+          "link": "/practice/browser/audio-comb-observation.html"
+        },
+        {
           "text": "Web Audioで線形と等電力のクロスフェードを比べる",
           "link": "/practice/browser/audio-crossfade-observation.html"
         },
@@ -12613,6 +13022,10 @@
       "collapsed": true,
       "items": [
         {
+          "text": "Web Audioで遅延とコムフィルターを観察する",
+          "link": "/practice/browser/audio-comb-observation.html"
+        },
+        {
           "text": "Web Audioで線形と等電力のクロスフェードを比べる",
           "link": "/practice/browser/audio-crossfade-observation.html"
         },
@@ -12793,6 +13206,10 @@
       "text": "ほかの実践・サンプル",
       "collapsed": true,
       "items": [
+        {
+          "text": "Web Audioで遅延とコムフィルターを観察する",
+          "link": "/practice/browser/audio-comb-observation.html"
+        },
         {
           "text": "Web Audioで線形と等電力のクロスフェードを比べる",
           "link": "/practice/browser/audio-crossfade-observation.html"
@@ -13026,6 +13443,10 @@
       "text": "ほかの実践・サンプル",
       "collapsed": true,
       "items": [
+        {
+          "text": "Web Audioで遅延とコムフィルターを観察する",
+          "link": "/practice/browser/audio-comb-observation.html"
+        },
         {
           "text": "Web Audioで線形と等電力のクロスフェードを比べる",
           "link": "/practice/browser/audio-crossfade-observation.html"
@@ -13333,6 +13754,10 @@
       "text": "ほかの実践・サンプル",
       "collapsed": true,
       "items": [
+        {
+          "text": "Web Audioで遅延とコムフィルターを観察する",
+          "link": "/practice/browser/audio-comb-observation.html"
+        },
         {
           "text": "Web Audioで線形と等電力のクロスフェードを比べる",
           "link": "/practice/browser/audio-crossfade-observation.html"
@@ -13673,6 +14098,10 @@
       "collapsed": true,
       "items": [
         {
+          "text": "Web Audioで遅延とコムフィルターを観察する",
+          "link": "/practice/browser/audio-comb-observation.html"
+        },
+        {
           "text": "Web Audioで線形と等電力のクロスフェードを比べる",
           "link": "/practice/browser/audio-crossfade-observation.html"
         },
@@ -13853,6 +14282,10 @@
       "text": "ほかの実践・サンプル",
       "collapsed": true,
       "items": [
+        {
+          "text": "Web Audioで遅延とコムフィルターを観察する",
+          "link": "/practice/browser/audio-comb-observation.html"
+        },
         {
           "text": "Web Audioで線形と等電力のクロスフェードを比べる",
           "link": "/practice/browser/audio-crossfade-observation.html"
@@ -14256,6 +14689,10 @@
       "text": "ほかの実践・サンプル",
       "collapsed": true,
       "items": [
+        {
+          "text": "Web Audioで遅延とコムフィルターを観察する",
+          "link": "/practice/browser/audio-comb-observation.html"
+        },
         {
           "text": "Web Audioで線形と等電力のクロスフェードを比べる",
           "link": "/practice/browser/audio-crossfade-observation.html"
@@ -17116,6 +17553,10 @@
       "text": "ほかの実践・サンプル",
       "collapsed": true,
       "items": [
+        {
+          "text": "Web Audioで遅延とコムフィルターを観察する",
+          "link": "/practice/browser/audio-comb-observation.html"
+        },
         {
           "text": "Web Audioで線形と等電力のクロスフェードを比べる",
           "link": "/practice/browser/audio-crossfade-observation.html"

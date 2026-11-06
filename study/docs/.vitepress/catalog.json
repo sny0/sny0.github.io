@@ -69,7 +69,7 @@
       "id": "browser",
       "title": "ブラウザ",
       "description": "URLを開いてから描画されるまでを、通信・実行・表示に分ける。",
-      "count": 20,
+      "count": 21,
       "status": "辞典本文あり"
     },
     {
@@ -130,6 +130,13 @@
     }
   ],
   "collections": [
+    {
+      "id": "audio-comb-observation",
+      "section": "practice",
+      "title": "Web Audioで遅延とコムフィルターを観察する",
+      "description": "同じ音の遅延時間とゲインを変え、打ち消される周波数をグラフと試聴で確かめる。",
+      "start": "/practice/browser/audio-comb-observation.html"
+    },
     {
       "id": "audio-crossfade-observation",
       "section": "practice",
@@ -4775,6 +4782,33 @@
       ]
     },
     {
+      "title": "Web Audioで遅延とコムフィルターを観察する",
+      "url": "/practice/browser/audio-comb-observation.html",
+      "file": "practice/browser/audio-comb-observation.md",
+      "domain": "browser",
+      "section": "practice",
+      "format": "sample",
+      "status": "published",
+      "summary": "同じ音を直接通す経路と少し遅らせる経路に分け、遅延時間とゲインを変えて周波数応答と音色を比べる。",
+      "source": "新規執筆",
+      "aliases": [
+        "Web Audio API",
+        "コムフィルター",
+        "comb filter",
+        "DelayNode",
+        "位相差",
+        "ノッチ",
+        "インパルス応答",
+        "周波数応答"
+      ],
+      "collection": "audio-comb-observation",
+      "order": 1,
+      "verification": "Windowsのブラウザで遅延とゲインによる測定値の変化、両方の試聴の終了を確認（2026-11-06）",
+      "links": [
+        "/browser/audio-comb-filter.html"
+      ]
+    },
+    {
       "title": "Web Audioのクロスフェード — 等ゲイン・等電力・相関",
       "url": "/browser/audio-crossfade.html",
       "file": "browser/audio-crossfade.md",
@@ -4801,7 +4835,8 @@
       "links": [
         "/browser/audio-gain-automation.html",
         "/browser/audio-mixing-and-headroom.html",
-        "/practice/browser/audio-crossfade-observation.html"
+        "/practice/browser/audio-crossfade-observation.html",
+        "/browser/audio-comb-filter.html"
       ]
     },
     {
@@ -4830,6 +4865,35 @@
         "/browser/audio-mixing-and-headroom.html",
         "/practice/browser/audio-fade-observation.html",
         "/browser/audio-crossfade.html"
+      ]
+    },
+    {
+      "title": "Web Audioのコムフィルター — 遅延と干渉",
+      "url": "/browser/audio-comb-filter.html",
+      "file": "browser/audio-comb-filter.md",
+      "domain": "browser",
+      "section": "reference",
+      "format": "article",
+      "status": "published",
+      "summary": "同じ音を二つの経路に分け、片方だけ遅らせて足すと、周波数によって強め合ったり打ち消し合ったりする。遅延時間とゲインから周波数応答を計算し、Web Audioの実測値と比べる。",
+      "source": "新規執筆",
+      "aliases": [
+        "Web Audio API",
+        "コムフィルター",
+        "くし形フィルター",
+        "comb filter",
+        "DelayNode",
+        "フィードフォワード",
+        "位相差",
+        "干渉",
+        "インパルス応答",
+        "周波数応答"
+      ],
+      "verification": "W3C Web Audio APIのDelayNodeとJulius O. SmithのPhysical Audio Signal Processingに照合（2026-11-06）",
+      "links": [
+        "/browser/audio-mixing-and-headroom.html",
+        "/browser/audio-crossfade.html",
+        "/practice/browser/audio-comb-observation.html"
       ]
     },
     {
@@ -7863,6 +7927,8 @@
         "/practice/browser/audio-fade-observation.html",
         "/browser/audio-crossfade.html",
         "/practice/browser/audio-crossfade-observation.html",
+        "/browser/audio-comb-filter.html",
+        "/practice/browser/audio-comb-observation.html",
         "/history/video-games.html",
         "/guide/rendering/timeline.html"
       ]
@@ -10012,6 +10078,7 @@
       "source": "統合ガイド",
       "aliases": [],
       "links": [
+        "/browser/audio-comb-filter.html",
         "/browser/audio-crossfade.html",
         "/browser/audio-gain-automation.html",
         "/browser/audio-mixing-and-headroom.html",

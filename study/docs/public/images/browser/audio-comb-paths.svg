@@ -1,0 +1,55 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="760" height="640" viewBox="0 0 760 640" role="img" aria-labelledby="title desc">
+  <title id="title">コムフィルターの二つの経路とインパルス応答</title>
+  <desc id="desc">一つの入力を二経路に分け、直接経路にはゲイン1/(1+g)、遅延経路には遅延Tとゲインg/(1+g)を適用して足す。遅延2ミリ秒、48キロヘルツ、gが1のとき、インパルス応答は0番と96番に振幅0.5ずつ現れる。</desc>
+  <defs>
+    <marker id="arrow" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M 0 0 L 10 5 L 0 10 z" fill="#475569"/>
+    </marker>
+    <style>
+      text { font-family: "Noto Sans JP", "Yu Gothic", Meiryo, sans-serif; fill: #1f2937; }
+      .title { font-size: 25px; font-weight: 700; }
+      .heading { font-size: 22px; font-weight: 700; }
+      .label { font-size: 19px; font-weight: 700; }
+      .note { font-size: 17px; fill: #475569; }
+      .wire { fill: none; stroke: #475569; stroke-width: 2; }
+      .direct { fill: #1d4ed8; }
+      .delayed { fill: #6d28d9; }
+    </style>
+  </defs>
+  <rect x="1" y="1" width="758" height="638" rx="18" fill="#f8fafc" stroke="#cbd5e1"/>
+  <text x="36" y="48" class="title">直接経路と遅延経路を足す</text>
+  <rect x="294" y="76" width="172" height="48" rx="10" fill="#fff" stroke="#94a3b8"/>
+  <text x="380" y="107" text-anchor="middle" class="label">入力 x[n]</text>
+  <path class="wire" d="M 380 124 V 146 H 190 V 237" marker-end="url(#arrow)"/>
+  <path class="wire" d="M 380 146 H 570 V 166" marker-end="url(#arrow)"/>
+  <circle cx="380" cy="146" r="4" fill="#475569"/>
+  <text x="205" y="185" class="note direct">直接経路</text>
+  <rect x="460" y="168" width="220" height="48" rx="10" fill="#f3e8ff" stroke="#8b5cf6"/>
+  <text x="570" y="199" text-anchor="middle" class="label delayed">DelayNode · T 秒</text>
+  <path class="wire" d="M 570 216 V 237" marker-end="url(#arrow)"/>
+  <rect x="80" y="239" width="220" height="48" rx="10" fill="#dbeafe" stroke="#60a5fa"/>
+  <text x="190" y="270" text-anchor="middle" class="label direct">ゲイン 1 / (1 + g)</text>
+  <rect x="460" y="239" width="220" height="48" rx="10" fill="#f3e8ff" stroke="#8b5cf6"/>
+  <text x="570" y="270" text-anchor="middle" class="label delayed">ゲイン g / (1 + g)</text>
+  <path class="wire" d="M 190 287 V 325 H 355" marker-end="url(#arrow)"/>
+  <path class="wire" d="M 570 287 V 325 H 405" marker-end="url(#arrow)"/>
+  <circle cx="380" cy="325" r="22" fill="#fff" stroke="#94a3b8"/>
+  <text x="380" y="332" text-anchor="middle" class="heading">+</text>
+  <path class="wire" d="M 380 347 V 369" marker-end="url(#arrow)"/>
+  <text x="397" y="370" class="label">出力 y[n]</text>
+  <path d="M 36 394 H 724" stroke="#cbd5e1"/>
+  <text x="36" y="433" class="heading">インパルス応答</text>
+  <text x="36" y="465" class="note">g = 1 · 遅延 2 ms · サンプルレート 48,000 Hz</text>
+  <text x="60" y="500" class="note">振幅</text>
+  <path class="wire" d="M 112 566 H 704" marker-end="url(#arrow)"/>
+  <path d="M 112 516 H 682" stroke="#cbd5e1" stroke-dasharray="5 5"/>
+  <text x="100" y="522" text-anchor="end" class="note">0.5</text>
+  <text x="100" y="571" text-anchor="end" class="note">0</text>
+  <path d="M 143 566 V 516" stroke="#1d4ed8" stroke-width="3"/>
+  <circle cx="143" cy="516" r="6" fill="#1d4ed8"/>
+  <path d="M 554 566 V 516" stroke="#6d28d9" stroke-width="3"/>
+  <circle cx="554" cy="516" r="6" fill="#6d28d9"/>
+  <text x="143" y="595" text-anchor="middle" class="note direct">0</text>
+  <text x="554" y="595" text-anchor="middle" class="note delayed">96</text>
+  <text x="695" y="616" text-anchor="end" class="note">サンプル番号</text>
+</svg>
