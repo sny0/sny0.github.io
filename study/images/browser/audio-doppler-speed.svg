@@ -1,0 +1,53 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="760" height="416" viewBox="0 0 760 416" role="img" aria-labelledby="title desc">
+  <title id="title">聞き手に向かう速度で聞こえる周波数が変わる</title>
+  <desc id="desc">音速343 m/s、音源440 Hzでの理論値。聞き手に向かう速度がマイナス40 m/sでは394.05 Hz、ゼロでは440 Hz、プラス40 m/sでは498.09 Hzになる。</desc>
+  <defs>
+    <style>
+      text { font-family: "Noto Sans JP", "Yu Gothic", Meiryo, sans-serif; fill: #1e293b; }
+      .title { font-size: 26px; font-weight: 700; }
+      .label { font-size: 16px; font-weight: 700; }
+      .note { font-size: 15px; fill: #475569; }
+    </style>
+  </defs>
+  <rect x="1" y="1" width="758" height="414" rx="18" fill="#f8fafc" stroke="#cbd5e1"/>
+  <text x="36" y="48" class="title">聞き手に向かうほど周波数が高くなる</text>
+  <text x="36" y="76" class="note">聞こえる周波数（Hz）。音源は440 Hz、音速は343 m/s。</text>
+  <rect x="84" y="93" width="308" height="237" fill="#f5f3ff"/>
+  <rect x="392" y="93" width="308" height="237" fill="#f0fdfa"/>
+  <g fill="none" stroke="#cbd5e1" stroke-width="1">
+    <path d="M84 93 H700 M84 152.25 H700 M84 270.75 H700"/>
+    <path d="M186.67 93 V330 M289.33 93 V330 M494.67 93 V330 M597.33 93 V330 M700 93 V330"/>
+  </g>
+  <g fill="none" stroke="#94a3b8" stroke-width="1.2" stroke-dasharray="5 5">
+    <path d="M84 223.35 H700 M392 93 V330"/>
+  </g>
+  <path d="M84 93 V330 H700" fill="none" stroke="#475569" stroke-width="1.8"/>
+  <g text-anchor="end" class="note">
+    <text x="72" y="98">550</text>
+    <text x="72" y="157">500</text>
+    <text x="72" y="228">440</text>
+    <text x="72" y="276">400</text>
+    <text x="72" y="335">350</text>
+  </g>
+  <g text-anchor="middle" class="note">
+    <text x="84" y="352">−60</text>
+    <text x="186.67" y="352">−40</text>
+    <text x="289.33" y="352">−20</text>
+    <text x="392" y="352">0</text>
+    <text x="494.67" y="352">+20</text>
+    <text x="597.33" y="352">+40</text>
+    <text x="700" y="352">+60</text>
+  </g>
+  <path d="M84.00 300.98 L99.40 297.65 L114.80 294.27 L130.20 290.84 L145.60 287.36 L161.00 283.82 L176.40 280.23 L191.80 276.58 L207.20 272.88 L222.60 269.11 L238.00 265.29 L253.40 261.40 L268.80 257.45 L284.20 253.43 L299.60 249.35 L315.00 245.20 L330.40 240.97 L345.80 236.68 L361.20 232.31 L376.60 227.87 L392.00 223.35 L407.40 218.75 L422.80 214.07 L438.20 209.30 L453.60 204.45 L469.00 199.51 L484.40 194.47 L499.80 189.35 L515.20 184.12 L530.60 178.80 L546.00 173.38 L561.40 167.85 L576.80 162.21 L592.20 156.46 L607.60 150.60 L623.00 144.62 L638.40 138.51 L653.80 132.28 L669.20 125.93 L684.60 119.43 L700.00 112.81" fill="none" stroke="#0f766e" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"/>
+  <g fill="#f8fafc" stroke="#0f766e" stroke-width="2.5">
+    <circle cx="186.67" cy="277.80" r="5.5"/>
+    <circle cx="392" cy="223.35" r="5.5"/>
+    <circle cx="597.33" cy="154.52" r="5.5"/>
+  </g>
+  <g class="label">
+    <text x="196" y="303">394.05 Hz</text>
+    <text x="404" y="247">440 Hz</text>
+    <text x="584" y="135" text-anchor="end">498.09 Hz</text>
+  </g>
+  <text x="392" y="385" text-anchor="middle" class="note">聞き手に向かう速度（m/s）</text>
+</svg>
