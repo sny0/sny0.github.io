@@ -22,6 +22,8 @@
 - [4大API横断比較 — OpenGL / Vulkan / DirectX 12 / WebGPU](/graphics/api/comparison.html)
 - [Compute Shader](/graphics/compute/compute-shader.html)
 - [CUDA と OpenCL](/graphics/compute/cuda-opencl.html)
+- [D3D12でテクスチャをアップロードする](/graphics/texture/d3d12-texture-upload.html)
+- [DDSの中身とテクスチャのサブリソース](/graphics/texture/dds-and-subresources.html)
 - [Deferred Rendering](/graphics/path/deferred.html)
 - [DirectX 11](/graphics/api/directx11.html)
 - [DirectX 12](/graphics/api/directx12.html)
@@ -66,6 +68,7 @@
 - [シェーダ言語総論と比較](/graphics/shader/overview.html)
 - [シャドウ](/graphics/lighting/shadow.html)
 - [スワップチェーンとVSync — 描画した絵が画面に出るまで](/graphics/optimization/swap-chain-and-vsync.html)
+- [テクスチャストリーミングとmipの常駐](/graphics/texture/texture-streaming-and-mip-residency.html)
 - [デバッグ・プロファイリングツール — RenderDoc / PIX / Nsight / Frame Debugger](/graphics/optimization/tools.html)
 - [ハードウェアレイトレーシング (DXR / Vulkan Ray Tracing)](/graphics/lighting/raytracing.html)
 - [パストレーシング](/graphics/lighting/path-tracing.html)
@@ -89,6 +92,7 @@
 ## 作って試す
 
 - [1. 全体設計 — 1フレームの旅](/graphics/capstone/01-design.html)
+- [C++でDDSの2つのmipをD3D12へ転送して読み戻す](/practice/graphics/dds-upload-observation.html)
 - [FIFO・MAILBOX・IMMEDIATEで画面の切り替わりを比べる](/practice/graphics/swap-chain-observation.html)
 - [同じ60 FPSで表示間隔を比べる](/practice/graphics/frame-pacing-observation.html)
 - [入力遅延を待ち時間と描画時間に分けてみる](/practice/graphics/input-latency-observation.html)

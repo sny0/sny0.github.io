@@ -42,6 +42,9 @@
 | [入力遅延 / input latency / input-to-photon / ポーリング / 入力マーカー](/graphics/optimization/input-to-display-latency.html) | 入力から対象の行が更新されるまでの処理と待ちを分ける |
 | [GPUタイムスタンプ / timestamp query / ResolveQueryData / timestampPeriod / timestampValidBits](/graphics/optimization/gpu-timestamp-queries.html) | GPUコマンドの時刻を読み戻して区間の時間を測る |
 | [GPUフェンス / リソースの寿命 / upload heap / ステージング / descriptor](/graphics/optimization/gpu-resource-lifetime.html) | GPUが使う領域やコマンド格納場所を再利用できる条件を調べる |
+| [DDS / DDS_HEADER / DXGI_FORMAT / mip / subresource / BC7 / cubemap](/graphics/texture/dds-and-subresources.html) | ファイルのヘッダー、テクスチャの形、mipや圧縮ブロックの位置を調べる |
+| [テクスチャ転送 / RowPitch / GetCopyableFootprints / CopyTextureRegion / readback](/graphics/texture/d3d12-texture-upload.html) | CPU側の行をバッファに並べ、コピー、状態遷移、完了の順序を調べる |
+| [テクスチャストリーミング / mip residency / SRV / reserved resource / タイル](/graphics/texture/texture-streaming-and-mip-residency.html) | 先に使うmip、シェーダーに公開する範囲、GPUメモリの予算を調べる |
 | [PSO / パイプラインキャッシュ / シェーダーコンパイル / pipeline cache / warm-up](/graphics/optimization/pipeline-compilation-stutter.html) | 初回使用までに必要なパイプライン作成とキャッシュの役割を調べる |
 | [スワップチェーン / swapchain / VSync / 垂直同期 / Present / scanout / 走査 / ティアリング / FIFO / MAILBOX / IMMEDIATE](/graphics/optimization/swap-chain-and-vsync.html) | 描画済みの絵が画面へ出る順序と時刻、次の描画に画像を使い回せる条件を調べる |
 | [フレームタイム / frame time / フレームペーシング / frame pacing / フレーム予算 / p99 / スタッター](/graphics/optimization/frame-pacing.html) | CPU・GPUの処理時間と表示間隔を分け、カクつきが起きた時刻を調べる |

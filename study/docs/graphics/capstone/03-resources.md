@@ -57,6 +57,8 @@ glTFのアルベド/法線/ORMテクスチャをロードし、ミップ付き�
 4. 全体を `SHADER_READ_ONLY_OPTIMAL` へ遷移
 5. `VkSampler` 作成 (異方性フィルタ+リピート)
 
+配布ファイルにmipを用意する場合は、ファイル上で各段を見つけ、APIのコピー用の配置に並べ直します。DDSを使う例では、D3D12で転送した各段を読み戻して確かめられます。[DDSとサブリソース](/graphics/texture/dds-and-subresources.html) · [D3D12で転送を試す](/practice/graphics/dds-upload-observation.html)
+
 **sRGBの規律** ([ポストプロセス](/graphics/postprocess/overview.html)): アルベドは `VK_FORMAT_R8G8B8A8_SRGB` (ハードウェアがリニア変換)、法線/ORMは `UNORM` (データであって色ではない)。ここを間違えると眠い絵になります。
 
 ## 3.3 ディスクリプタ — 更新頻度で層を分ける

@@ -1,0 +1,65 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="760" height="516" viewBox="0 0 760 516" role="img" aria-labelledby="title desc" xml:lang="ja">
+  <title id="title">CPUの行データをD3D12テクスチャへコピーする</title>
+  <desc id="desc">4×4のRGBA8を例に、CPUの元データでは16バイト間隔で4行が並ぶ。UPLOADバッファでは256バイト間隔で各行の先頭へ16バイトを書き込む。CopyTextureRegionでDEFAULTテクスチャへ転送したあと、COPY_DESTからPIXEL_SHADER_RESOURCEへ状態を変える。</desc>
+  <defs>
+    <marker id="arrow" viewBox="0 0 8 8" refX="7" refY="4" markerWidth="7" markerHeight="7" orient="auto">
+      <path d="M0 0 8 4 0 8Z" fill="#486078"/>
+    </marker>
+  </defs>
+  <rect width="760" height="516" rx="16" fill="#f3f7fa"/>
+  <g font-family="'Noto Sans JP', 'Yu Gothic', 'Meiryo', sans-serif" fill="#183246">
+    <text x="24" y="40" font-size="24" font-weight="700">D3D12テクスチャへ行データをコピーする</text>
+    <text x="24" y="67" font-size="15" fill="#475569">4×4のRGBA8の例。1行は4画素 × 4バイト = 16バイト</text>
+
+    <rect x="24" y="86" width="294" height="258" rx="10" fill="#fff" stroke="#a5bac7"/>
+    <rect x="388" y="86" width="348" height="258" rx="10" fill="#fff" stroke="#a5bac7"/>
+    <text x="43" y="116" font-size="18" font-weight="700">CPUの元データ</text>
+    <text x="407" y="116" font-size="18" font-weight="700">UPLOADバッファ</text>
+    <text x="43" y="140" font-size="14" fill="#475569">次の行まで16バイト</text>
+    <text x="407" y="140" font-size="14" fill="#475569">次の行まで256バイト（RowPitch）</text>
+
+    <g stroke="#81a6b9">
+      <rect x="43" y="158" width="254" height="28" rx="4" fill="#e3eef4"/>
+      <rect x="43" y="194" width="254" height="28" rx="4" fill="#d9ede5"/>
+      <rect x="43" y="230" width="254" height="28" rx="4" fill="#e3eef4"/>
+      <rect x="43" y="266" width="254" height="28" rx="4" fill="#d9ede5"/>
+      <rect x="407" y="158" width="289" height="28" rx="4" fill="#f1f5f8"/>
+      <rect x="407" y="194" width="289" height="28" rx="4" fill="#f1f5f8"/>
+      <rect x="407" y="230" width="289" height="28" rx="4" fill="#f1f5f8"/>
+      <rect x="407" y="266" width="132" height="28" rx="4" fill="#d9ede5"/>
+      <rect x="407" y="158" width="132" height="28" rx="4" fill="#e3eef4"/>
+      <rect x="407" y="194" width="132" height="28" rx="4" fill="#d9ede5"/>
+      <rect x="407" y="230" width="132" height="28" rx="4" fill="#e3eef4"/>
+    </g>
+    <g font-size="13">
+      <text x="55" y="177">0行目　16 B</text>
+      <text x="55" y="213">1行目　16 B</text>
+      <text x="55" y="249">2行目　16 B</text>
+      <text x="55" y="285">3行目　16 B</text>
+      <text x="418" y="177">0行目　16 B</text>
+      <text x="418" y="213">1行目　16 B</text>
+      <text x="418" y="249">2行目　16 B</text>
+      <text x="418" y="285">3行目　16 B</text>
+      <text x="552" y="177" fill="#475569">行間の余白</text>
+      <text x="552" y="213" fill="#475569">行間の余白</text>
+      <text x="552" y="249" fill="#475569">行間の余白</text>
+    </g>
+    <g fill="none" stroke="#486078" stroke-width="1.6" marker-end="url(#arrow)">
+      <path d="M318 172H383"/>
+      <path d="M318 208H383"/>
+      <path d="M318 244H383"/>
+      <path d="M318 280H383"/>
+      <path d="M562 345V370"/>
+      <path d="M562 424V443"/>
+    </g>
+    <text x="43" y="324" font-size="13" fill="#475569">入力形式の行間隔を使って各行を読む</text>
+    <text x="407" y="324" font-size="13" fill="#475569">書き込み位置 = Offset + 行番号 × RowPitch</text>
+
+    <rect x="388" y="374" width="348" height="49" rx="8" fill="#e3eef4" stroke="#81a6b9"/>
+    <text x="407" y="404" font-size="15" font-weight="700">CopyTextureRegion → DEFAULTテクスチャ</text>
+    <rect x="388" y="447" width="348" height="49" rx="8" fill="#d9ede5" stroke="#83ad9d"/>
+    <text x="407" y="477" font-size="14" font-weight="700">COPY_DEST → PIXEL_SHADER_RESOURCE</text>
+    <text x="24" y="399" font-size="14" fill="#475569">コピーは対象のサブリソースごとに記録</text>
+    <text x="24" y="472" font-size="14" fill="#475569">遷移バリアを記録し、次の利用へ進む</text>
+  </g>
+</svg>

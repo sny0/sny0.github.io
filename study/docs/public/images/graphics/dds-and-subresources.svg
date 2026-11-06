@@ -1,0 +1,50 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 760 416" width="760" height="416" role="img" aria-labelledby="dds-title dds-desc">
+  <title id="dds-title">DX10拡張付きDDSのヘッダーと画像の並び</title>
+  <desc id="dds-desc">識別子、基本ヘッダー、DX10拡張に続いて画像データがバイト位置148から始まる。配列要素0のmip 0から2、配列要素1のmip 0から2の順に並ぶ。単一プレーンでのサブリソース番号は0から5。</desc>
+  <rect width="760" height="416" rx="14" fill="#eef4f7"/>
+  <g font-family="system-ui, 'Yu Gothic', sans-serif" fill="#183549">
+    <text x="24" y="44" font-size="25" font-weight="700">DDSのヘッダーと画像データ</text>
+    <text x="24" y="73" font-size="16">DX10拡張あり、配列要素が2つ、mipが3段の例</text>
+    <g stroke="#9db6c6" stroke-width="1.25">
+      <rect x="24" y="98" width="128" height="65" rx="9" fill="#ddebf2"/>
+      <rect x="158" y="98" width="204" height="65" rx="9" fill="#ddebf2"/>
+      <rect x="368" y="98" width="184" height="65" rx="9" fill="#ddebf2"/>
+      <rect x="558" y="98" width="178" height="65" rx="9" fill="#d9ede4"/>
+    </g>
+    <g text-anchor="middle">
+      <g font-size="17" font-weight="700">
+        <text x="88" y="124">識別子</text><text x="260" y="124">基本ヘッダー</text>
+        <text x="460" y="124">DX10拡張</text><text x="647" y="124">画像データ</text>
+      </g>
+      <g font-size="15">
+        <text x="88" y="148">4バイト</text><text x="260" y="148">124バイト</text>
+        <text x="460" y="148">20バイト</text><text x="647" y="148">以下の順序で並ぶ</text>
+      </g>
+    </g>
+    <g fill="#35586d" font-size="14">
+      <text x="24" y="188">位置 0</text><text x="158" y="188">位置 4</text>
+      <text x="368" y="188">位置 128</text><text x="558" y="188">位置 148</text>
+    </g>
+    <line x1="24" x2="736" y1="212" y2="212" stroke="#b7cad5"/>
+    <text x="24" y="249" font-size="17" font-weight="700">画像データの並び</text>
+    <g font-size="16" font-weight="700" text-anchor="middle">
+      <text x="195" y="281">配列要素 0</text><text x="565" y="281">配列要素 1</text>
+    </g>
+    <g stroke="#8eb6a5" stroke-width="1.25" fill="#e0efe8">
+      <rect x="24" y="295" width="110" height="62" rx="9"/><rect x="140" y="295" width="110" height="62" rx="9"/>
+      <rect x="256" y="295" width="110" height="62" rx="9"/><rect x="394" y="295" width="110" height="62" rx="9"/>
+      <rect x="510" y="295" width="110" height="62" rx="9"/><rect x="626" y="295" width="110" height="62" rx="9"/>
+    </g>
+    <g text-anchor="middle">
+      <g font-size="17" font-weight="700">
+        <text x="79" y="322">mip 0</text><text x="195" y="322">mip 1</text><text x="311" y="322">mip 2</text>
+        <text x="449" y="322">mip 0</text><text x="565" y="322">mip 1</text><text x="681" y="322">mip 2</text>
+      </g>
+      <g font-size="15">
+        <text x="79" y="345">番号 0</text><text x="195" y="345">番号 1</text><text x="311" y="345">番号 2</text>
+        <text x="449" y="345">番号 3</text><text x="565" y="345">番号 4</text><text x="681" y="345">番号 5</text>
+      </g>
+    </g>
+    <text x="24" y="391" font-size="15">番号は単一プレーンの場合のD3D12サブリソース番号</text>
+  </g>
+</svg>

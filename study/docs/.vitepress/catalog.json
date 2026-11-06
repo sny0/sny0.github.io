@@ -104,7 +104,7 @@
       "id": "graphics",
       "title": "3DCGとグラフィックス",
       "description": "制作データからGPUの処理、最終表示までをつなぐ。",
-      "count": 58,
+      "count": 61,
       "status": "辞典本文あり"
     },
     {
@@ -130,6 +130,13 @@
     }
   ],
   "collections": [
+    {
+      "id": "dds-upload-observation",
+      "section": "practice",
+      "title": "C++でDDSの2つのmipをD3D12へ転送して読み戻す",
+      "description": "DDSの行をコピー用バッファに配置し、D3D12 WARPで読み戻したデータを照合する。",
+      "start": "/practice/graphics/dds-upload-observation.html"
+    },
     {
       "id": "asset-pack-observation",
       "section": "practice",
@@ -683,6 +690,8 @@
       "links": [
         "/graphics/api/directx12.html",
         "/graphics/api/vulkan.html",
+        "/graphics/texture/dds-and-subresources.html",
+        "/practice/graphics/dds-upload-observation.html",
         "/graphics/postprocess/overview.html",
         "/graphics/pipeline/overview.html",
         "/graphics/shader/spirv.html",
@@ -1275,6 +1284,36 @@
         "/practice/io/async-file-read-observation.html",
         "/os/cancelling-overlapped-io.html",
         "/practice/io/file-io-trace-observation.html"
+      ]
+    },
+    {
+      "title": "C++でDDSの2つのmipをD3D12へ転送して読み戻す",
+      "url": "/practice/graphics/dds-upload-observation.html",
+      "file": "practice/graphics/dds-upload-observation.md",
+      "domain": "graphics",
+      "section": "practice",
+      "format": "sample",
+      "status": "published",
+      "summary": "4×4と2×2のRGBA8をDDSに保存し、D3D12の転送バッファに行単位で詰め直す。WARPでコピーし、読み戻した全80バイトを照合する。",
+      "source": "新規執筆",
+      "aliases": [
+        "DDS",
+        "mip",
+        "D3D12",
+        "WARP",
+        "RowPitch",
+        "GetCopyableFootprints",
+        "CopyTextureRegion",
+        "readback"
+      ],
+      "collection": "dds-upload-observation",
+      "order": 1,
+      "verification": "Windows x64のMSVCでビルドし、D3D12 WARPで2つのmipの全80バイトを照合。サイズ不足と壊れたヘッダーの拒否も確認（2026-11-06）",
+      "links": [
+        "/graphics/texture/dds-and-subresources.html",
+        "/graphics/texture/d3d12-texture-upload.html",
+        "/graphics/optimization/gpu-resource-lifetime.html",
+        "/graphics/texture/texture-streaming-and-mip-residency.html"
       ]
     },
     {
@@ -2360,6 +2399,37 @@
       ]
     },
     {
+      "title": "D3D12でテクスチャをアップロードする",
+      "url": "/graphics/texture/d3d12-texture-upload.html",
+      "file": "graphics/texture/d3d12-texture-upload.md",
+      "domain": "graphics",
+      "section": "reference",
+      "format": "article",
+      "status": "published",
+      "summary": "CPU上の画像を行単位でUPLOADバッファに詰め、D3D12のテクスチャへコピーする。行の間隔、サブリソースの位置、状態遷移、フェンスで追うバッファの寿命を扱う。",
+      "source": "新規執筆",
+      "aliases": [
+        "テクスチャアップロード",
+        "texture upload",
+        "RowPitch",
+        "GetCopyableFootprints",
+        "CopyTextureRegion",
+        "UPLOADヒープ",
+        "DEFAULTヒープ",
+        "COPY_DEST",
+        "PIXEL_SHADER_RESOURCE",
+        "staging buffer"
+      ],
+      "verification": "MicrosoftのD3D12 API仕様とWindowsの開発資料に照合（2026-11-06）",
+      "links": [
+        "/graphics/texture/dds-and-subresources.html",
+        "/graphics/optimization/gpu-resource-lifetime.html",
+        "/graphics/api/directx12.html",
+        "/practice/graphics/dds-upload-observation.html",
+        "/game/directstorage.html"
+      ]
+    },
+    {
       "title": "DDD — 業務の言葉でモデルを作る",
       "url": "/design/notebook/domain.html",
       "file": "design/notebook/domain.md",
@@ -2381,6 +2451,40 @@
         "/design/naming.html",
         "/design/pattern-index.html",
         "/design/notebook-references.html"
+      ]
+    },
+    {
+      "title": "DDSの中身とテクスチャのサブリソース",
+      "url": "/graphics/texture/dds-and-subresources.html",
+      "file": "graphics/texture/dds-and-subresources.md",
+      "domain": "graphics",
+      "section": "reference",
+      "format": "article",
+      "status": "published",
+      "summary": "DDSヘッダーからテクスチャの形式と形を読み、mipと配列スライスごとにデータの位置を求める。BC圧縮のブロック行と読み取り範囲の検査も扱う。",
+      "source": "新規執筆",
+      "aliases": [
+        "DDS",
+        "DDS_HEADER",
+        "DDS_HEADER_DXT10",
+        "DXGI_FORMAT",
+        "mipmap",
+        "mip level",
+        "subresource",
+        "array slice",
+        "row pitch",
+        "BC7",
+        "cubemap"
+      ],
+      "verification": "MicrosoftのDDS仕様、DXGI形式、Direct3D 12のサブリソース資料と照合",
+      "links": [
+        "/game/asset-pack-files.html",
+        "/data/integer-bits-and-bytes.html",
+        "/graphics/capstone/03-resources.html",
+        "/graphics/texture/d3d12-texture-upload.html",
+        "/data/binary-file-validation.html",
+        "/os/file-read-journey.html",
+        "/practice/graphics/dds-upload-observation.html"
       ]
     },
     {
@@ -2489,6 +2593,8 @@
         "/game/asset-loading.html",
         "/graphics/api/directx12.html",
         "/game/asset-pack-files.html",
+        "/graphics/texture/dds-and-subresources.html",
+        "/graphics/texture/d3d12-texture-upload.html",
         "/tools/windows/file-io-tracing.html"
       ]
     },
@@ -2538,6 +2644,7 @@
         "/hardware/gpu/cpu-vs-gpu.html",
         "/graphics/capstone/02-device.html",
         "/graphics/pipeline/overview.html",
+        "/graphics/texture/d3d12-texture-upload.html",
         "/game/directstorage.html",
         "/graphics/api/vulkan.html",
         "/graphics/shader/hlsl.html"
@@ -7891,6 +7998,37 @@
       ]
     },
     {
+      "title": "テクスチャストリーミングとmipの常駐",
+      "url": "/graphics/texture/texture-streaming-and-mip-residency.html",
+      "file": "graphics/texture/texture-streaming-and-mip-residency.md",
+      "domain": "graphics",
+      "section": "reference",
+      "format": "article",
+      "status": "published",
+      "summary": "画面上の見え方に応じて粗いmipから読み、GPUコピーが終わった範囲を描画に公開する。ファイル読み取り量、描画に公開する範囲、GPUメモリの常駐を区別する。",
+      "source": "新規執筆",
+      "aliases": [
+        "texture streaming",
+        "テクスチャストリーミング",
+        "mip streaming",
+        "mip residency",
+        "テクスチャ常駐",
+        "streaming pool",
+        "tiled resources",
+        "packed mips",
+        "virtual texturing"
+      ],
+      "verification": "MicrosoftのDirect3D 12仕様とEpic Gamesのテクスチャストリーミング資料に照合",
+      "links": [
+        "/graphics/pipeline/rasterization.html",
+        "/graphics/texture/dds-and-subresources.html",
+        "/game/asset-pack-files.html",
+        "/game/directstorage.html",
+        "/graphics/texture/d3d12-texture-upload.html",
+        "/game/asset-loading.html"
+      ]
+    },
+    {
       "title": "デストラクタと Dispose / RAII と using",
       "url": "/languages/csharp/destructor-dispose-raii-using.html",
       "file": "languages/csharp/destructor-dispose-raii-using.md",
@@ -9417,6 +9555,10 @@
         "/data/binary-file-validation.html",
         "/practice/io/asset-pack-observation.html",
         "/game/asset-build-and-patches.html",
+        "/graphics/texture/dds-and-subresources.html",
+        "/graphics/texture/d3d12-texture-upload.html",
+        "/practice/graphics/dds-upload-observation.html",
+        "/graphics/texture/texture-streaming-and-mip-residency.html",
         "/game/patterns/game-loop-and-update.html",
         "/game/ecs.html",
         "/graphics/pipeline/overview.html",
@@ -12098,6 +12240,9 @@
         "/graphics/optimization/input-to-display-latency.html",
         "/graphics/optimization/gpu-timestamp-queries.html",
         "/graphics/optimization/gpu-resource-lifetime.html",
+        "/graphics/texture/dds-and-subresources.html",
+        "/graphics/texture/d3d12-texture-upload.html",
+        "/graphics/texture/texture-streaming-and-mip-residency.html",
         "/graphics/optimization/pipeline-compilation-stutter.html",
         "/graphics/optimization/swap-chain-and-vsync.html",
         "/graphics/optimization/frame-pacing.html",
