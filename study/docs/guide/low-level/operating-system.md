@@ -39,6 +39,8 @@ study:
 - [メモリマップドファイル](/os/memory-mapped-files.html)でファイル・仮想アドレス・ページの関係を調べ、[マッピングの観察例](/practice/io/mapped-file-observation.html)でビューの範囲と寿命を確かめられます。
 - I/Oの先の状態・登録・所有権は[実行時のアセットロード](/game/asset-loading.html)へ進みます。[状態と寿命の実践](/practice/assets/asset-lifecycle-model.html)は実I/OやGPUを使わないモデルです。
 - [TCPとソケット](/network/tcp-sockets.html)で接続・バイト列・受信の区切り・送信終了を調べ、[ループバック通信の観察例](/practice/network/tcp-loopback-observation.html)で部分送受信とEOF、アプリの応答を確かめられます。
+- [UDPとデータグラム](/network/udp-datagrams.html)と[ループバック実践](/practice/network/udp-loopback-observation.html)で、メッセージの区切りと短い受信バッファの動作を確かめられます。
+- [PCIeのリンク](/hardware/io/pcie-links.html)と[DMAとIOMMU](/hardware/io/dma-and-iommu.html)で、ドライバーの要求を受けたデバイスがメモリを読み書きし、完了を知らせる仕組みを追えます。
 
 ## 学ぶ理由
 

@@ -28,6 +28,7 @@ study:
 
 - [キャッシュ局所性とAoS / SoA](/runtime/memory/cache-locality-aos-soa.html)から、配列の配置とアクセス順を調べられます。
 - [キャッシュ・分岐予測・SIMD](/runtime/cpp-internals/cache-branch-simd.html)と[並行処理のバグ・false sharing](/runtime/memory/concurrency-bugs.html)で、CPU側の挙動と計測上の注意を確認できます。
+- [DRAMのチャネルと帯域](/hardware/memory/dram-channels-and-bandwidth.html)で、キャッシュにないデータを取りにいく先の構成と、転送速度の見積もりを確認できます。
 
 ## 学ぶ理由
 

@@ -33,8 +33,8 @@
     {
       "id": "hardware",
       "title": "ハードウェア",
-      "description": "CPU・GPU・キャッシュから、命令とデータが動く仕組みを調べる。",
-      "count": 3,
+      "description": "CPU・GPU・メモリ・デバイスの間で、命令とデータがどう動くかを調べる。",
+      "count": 6,
       "status": "辞典本文あり"
     },
     {
@@ -76,7 +76,7 @@
       "id": "network",
       "title": "ネットワーク",
       "description": "通信の層と失敗を、Webとゲームの両方から調べる。",
-      "count": 5,
+      "count": 8,
       "status": "辞典本文あり"
     },
     {
@@ -130,6 +130,13 @@
     }
   ],
   "collections": [
+    {
+      "id": "udp-loopback-observation",
+      "section": "practice",
+      "title": "C++とWinsockでUDPの受信境界を確かめる",
+      "description": "UDPの区切りと、短い受信バッファや空のデータグラムの戻り値を調べる。",
+      "start": "/practice/network/udp-loopback-observation.html"
+    },
     {
       "id": "render-to-texture-observation",
       "section": "practice",
@@ -1885,6 +1892,35 @@
       ]
     },
     {
+      "title": "C++とWinsockでUDPの受信境界を確かめる",
+      "url": "/practice/network/udp-loopback-observation.html",
+      "file": "practice/network/udp-loopback-observation.md",
+      "domain": "network",
+      "section": "practice",
+      "format": "sample",
+      "status": "published",
+      "summary": "127.0.0.1でUDPを送り、受信単位、短いバッファでのWSAEMSGSIZE、空データグラムのあとも受信できることを確認する。",
+      "source": "新規執筆",
+      "aliases": [
+        "UDP",
+        "datagram",
+        "Winsock",
+        "sendto",
+        "recvfrom",
+        "WSAEMSGSIZE",
+        "loopback",
+        "zero-length datagram"
+      ],
+      "collection": "udp-loopback-observation",
+      "order": 1,
+      "verification": "Windows x64のMSVCでビルド。IPv4ループバックで10回実行し、データグラム境界と2種類の戻り値を確認（2026-11-07）",
+      "links": [
+        "/network/udp-datagrams.html",
+        "/network/latency-throughput-and-queues.html",
+        "/practice/network/tcp-loopback-observation.html"
+      ]
+    },
+    {
       "title": "C++とゲーム設計の学習ロードマップ",
       "url": "/guide/cpp-roadmap.html",
       "file": "guide/cpp-roadmap.md",
@@ -2990,6 +3026,37 @@
       ]
     },
     {
+      "title": "DMAとIOMMUでデバイスがメモリにアクセスする仕組み",
+      "url": "/hardware/io/dma-and-iommu.html",
+      "file": "hardware/io/dma-and-iommu.md",
+      "domain": "hardware",
+      "section": "reference",
+      "format": "article",
+      "status": "published",
+      "summary": "ドライバーがデバイスへ転送を指示し、SSDやNICがRAMを読み書きする経路を追う。DMAアドレス、IOMMU、キャッシュと順序、割り込みと完了を扱う。",
+      "source": "新規執筆",
+      "aliases": [
+        "DMA",
+        "direct memory access",
+        "IOMMU",
+        "DMA address",
+        "IOVA",
+        "MMIO",
+        "doorbell",
+        "scatter/gather",
+        "descriptor",
+        "割り込み",
+        "MSI-X"
+      ],
+      "verification": "NVM Expressの仕様、LinuxカーネルのDMA・MMIO資料、Microsoftのドライバー資料に照合（2026-11-07）",
+      "links": [
+        "/os/file-read-journey.html",
+        "/hardware/io/pcie-links.html",
+        "/os/io-completion-ports.html",
+        "/game/directstorage.html"
+      ]
+    },
+    {
       "title": "DNSと名前解決 — 名前から接続先が決まるまで",
       "url": "/network/dns-resolution.html",
       "file": "network/dns-resolution.md",
@@ -3034,6 +3101,37 @@
         "/network/tcp-sockets.html",
         "/network/tls-https.html",
         "/practice/network/name-resolution-observation.html"
+      ]
+    },
+    {
+      "title": "DRAMのチャネルと帯域 — データをどこから、どの速さで読むか",
+      "url": "/hardware/memory/dram-channels-and-bandwidth.html",
+      "file": "hardware/memory/dram-channels-and-bandwidth.md",
+      "domain": "hardware",
+      "section": "reference",
+      "format": "article",
+      "status": "published",
+      "summary": "CPUのメモリコントローラーがチャネル、ランク、バンク、行を選ぶ流れを追う。DDR4・DDR5の理論帯域を計算し、キャッシュにない1件を読む時間との違いを考える。",
+      "source": "新規執筆",
+      "aliases": [
+        "DRAM",
+        "DDR4",
+        "DDR5",
+        "メモリコントローラー",
+        "メモリチャネル",
+        "ランク",
+        "バンク",
+        "row buffer",
+        "MT/s",
+        "CL",
+        "メモリ帯域"
+      ],
+      "verification": "Intel・Micron・ISSIのメモリ仕様とIntelのメモリ計測資料に照合（2026-11-07）",
+      "links": [
+        "/guide/low-level/memory-and-cache.html",
+        "/runtime/memory/cache-locality-aos-soa.html",
+        "/hardware/gpu/cpu-vs-gpu.html",
+        "/hardware/io/dma-and-iommu.html"
       ]
     },
     {
@@ -3882,6 +3980,39 @@
       ]
     },
     {
+      "title": "IPルーティングとEthernetフレーム",
+      "url": "/network/ip-routing-and-ethernet.html",
+      "file": "network/ip-routing-and-ethernet.md",
+      "domain": "network",
+      "section": "reference",
+      "format": "article",
+      "status": "published",
+      "summary": "宛先IPから最長プレフィックス一致で経路を選び、次の機器へEthernetフレームを届ける。ARP、IPv6近隣探索、ホップ制限とtracerouteを扱う。",
+      "source": "新規執筆",
+      "aliases": [
+        "IP routing",
+        "ルーティング",
+        "Ethernet",
+        "MAC address",
+        "ARP",
+        "Neighbor Discovery",
+        "next hop",
+        "デフォルトゲートウェイ",
+        "最長プレフィックス一致",
+        "TTL",
+        "Hop Limit",
+        "ICMP",
+        "tracert"
+      ],
+      "verification": "IETFのIP・ARP・IPv6近隣探索のRFCとMicrosoftの資料に照合し、Find-NetRouteをWindowsで実行確認（2026-11-07）",
+      "links": [
+        "/network/tcp-sockets.html",
+        "/network/udp-datagrams.html",
+        "/network/dns-resolution.html",
+        "/network/latency-throughput-and-queues.html"
+      ]
+    },
+    {
       "title": "ISP: インターフェース分離の原則 (Interface Segregation Principle)",
       "url": "/design/solid/isp.html",
       "file": "design/solid/isp.md",
@@ -4387,6 +4518,35 @@
         "/graphics/lighting/ibl.html",
         "/graphics/lighting/shadow.html",
         "/graphics/lighting/gi.html"
+      ]
+    },
+    {
+      "title": "PCI Expressのリンクとレーン",
+      "url": "/hardware/io/pcie-links.html",
+      "file": "hardware/io/pcie-links.md",
+      "domain": "hardware",
+      "section": "reference",
+      "format": "article",
+      "status": "published",
+      "summary": "CPU側からGPU・NVMe SSD・NICまでのPCIe経路をたどる。リンクの世代と幅、片方向帯域の計算、経路上のボトルネックを扱う。",
+      "source": "新規執筆",
+      "aliases": [
+        "PCI Express",
+        "PCIe",
+        "root complex",
+        "root port",
+        "endpoint",
+        "switch",
+        "lane",
+        "レーン",
+        "リンク幅",
+        "GT/s"
+      ],
+      "verification": "PCI-SIGの公開技術資料、MicrosoftのPCIeレジスター資料、LinuxカーネルのPCI API資料に照合（2026-11-07）",
+      "links": [
+        "/tools/windows/file-io-tracing.html",
+        "/game/directstorage.html",
+        "/hardware/io/dma-and-iommu.html"
       ]
     },
     {
@@ -5203,6 +5363,35 @@
         "/game/patterns/optimization-patterns.html",
         "/game/patterns/",
         "/game/patterns/state-machines.html"
+      ]
+    },
+    {
+      "title": "UDPデータグラムの境界と送受信",
+      "url": "/network/udp-datagrams.html",
+      "file": "network/udp-datagrams.md",
+      "domain": "network",
+      "section": "reference",
+      "format": "article",
+      "status": "published",
+      "summary": "UDPがメッセージを渡す単位を追い、Winsockでの送信元、受信バッファ不足、空のデータグラムを説明する。経路MTU、輻輳制御、ゲームの状態更新にもつなげる。",
+      "source": "新規執筆",
+      "aliases": [
+        "UDP",
+        "datagram",
+        "データグラム",
+        "sendto",
+        "recvfrom",
+        "WSAEMSGSIZE",
+        "path MTU",
+        "PMTU",
+        "IPフラグメント",
+        "QUIC"
+      ],
+      "verification": "IETFのUDP関連RFCとMicrosoftのWinsock仕様に照合（2026-11-07）",
+      "links": [
+        "/network/tcp-sockets.html",
+        "/network/latency-throughput-and-queues.html",
+        "/practice/network/udp-loopback-observation.html"
       ]
     },
     {
@@ -8323,9 +8512,12 @@
         "/data/integer-bits-and-bytes.html",
         "/runtime/thread-synchronization.html",
         "/os/asynchronous-file-io.html",
+        "/network/udp-datagrams.html",
+        "/network/latency-throughput-and-queues.html",
         "/network/http-messages.html",
         "/network/dns-resolution.html",
         "/network/tls-https.html",
+        "/network/ip-routing-and-ethernet.html",
         "/practice/network/tcp-loopback-observation.html"
       ]
     },
@@ -8568,6 +8760,36 @@
         "/languages/csharp/headers-vs-asmdef.html",
         "/languages/csharp/",
         "/languages/csharp/memory-management-vs-gc.html"
+      ]
+    },
+    {
+      "title": "ネットワークの遅延・帯域・待ち行列",
+      "url": "/network/latency-throughput-and-queues.html",
+      "file": "network/latency-throughput-and-queues.md",
+      "domain": "network",
+      "section": "reference",
+      "format": "article",
+      "status": "published",
+      "summary": "RTTと片道遅延、帯域と実効速度を分けて考える。転送が回線を埋めたときのキュー待ちを計算し、ゲーム通信の遅延の分布と期限切れを測る。",
+      "source": "新規執筆",
+      "aliases": [
+        "RTT",
+        "one-way delay",
+        "latency",
+        "throughput",
+        "goodput",
+        "jitter",
+        "BDP",
+        "帯域遅延積",
+        "バッファブロート",
+        "AQM",
+        "輻輳制御"
+      ],
+      "verification": "IETFのIP性能指標・TCP・キュー管理とMicrosoftのping仕様に照合（2026-11-07）",
+      "links": [
+        "/network/tcp-sockets.html",
+        "/network/udp-datagrams.html",
+        "/practice/network/udp-loopback-observation.html"
       ]
     },
     {
@@ -10068,6 +10290,13 @@
         "/game/shooter-unity.html",
         "/network/tcp-sockets.html",
         "/practice/network/tcp-loopback-observation.html",
+        "/network/ip-routing-and-ethernet.html",
+        "/network/udp-datagrams.html",
+        "/practice/network/udp-loopback-observation.html",
+        "/network/latency-throughput-and-queues.html",
+        "/hardware/io/pcie-links.html",
+        "/hardware/io/dma-and-iommu.html",
+        "/hardware/memory/dram-channels-and-bandwidth.html",
         "/network/http-messages.html",
         "/practice/network/http-message-observation.html",
         "/network/http-caching.html",
@@ -11651,7 +11880,8 @@
       "links": [
         "/runtime/memory/cache-locality-aos-soa.html",
         "/runtime/cpp-internals/cache-branch-simd.html",
-        "/runtime/memory/concurrency-bugs.html"
+        "/runtime/memory/concurrency-bugs.html",
+        "/hardware/memory/dram-channels-and-bandwidth.html"
       ],
       "previous": "/guide/low-level/electricity-cpu-instructions.html",
       "next": "/guide/low-level/assembly.html"
@@ -11794,7 +12024,11 @@
         "/game/asset-loading.html",
         "/practice/assets/asset-lifecycle-model.html",
         "/network/tcp-sockets.html",
-        "/practice/network/tcp-loopback-observation.html"
+        "/practice/network/tcp-loopback-observation.html",
+        "/network/udp-datagrams.html",
+        "/practice/network/udp-loopback-observation.html",
+        "/hardware/io/pcie-links.html",
+        "/hardware/io/dma-and-iommu.html"
       ],
       "previous": "/guide/low-level/compiler-linker-executable.html",
       "next": "/guide/low-level/cpp-language.html"
@@ -12854,6 +13088,12 @@
         "/network/dns-resolution.html",
         "/network/http-messages.html",
         "/network/tcp-sockets.html",
+        "/network/udp-datagrams.html",
+        "/network/ip-routing-and-ethernet.html",
+        "/network/latency-throughput-and-queues.html",
+        "/hardware/io/pcie-links.html",
+        "/hardware/io/dma-and-iommu.html",
+        "/hardware/memory/dram-channels-and-bandwidth.html",
         "/os/memory-mapped-files.html",
         "/game/asset-loading.html",
         "/game/directstorage.html",

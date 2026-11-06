@@ -1,0 +1,54 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="760" height="510" viewBox="0 0 760 510" role="img" aria-labelledby="title desc">
+  <title id="title">DMAの依頼、転送、完了とアドレス変換</title>
+  <desc id="desc">CPUが提出キューとドアベルでデバイスへ依頼し、デバイスがRAMへ書き、CPUが完了キューから回収する。CPU仮想アドレスとデバイスのDMAアドレスは、それぞれCPUのページ表とIOMMUを経て同じ物理ページへ対応する。</desc>
+  <defs>
+    <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto">
+      <path d="M0 0 10 5 0 10z" fill="#476278"/>
+    </marker>
+  </defs>
+  <rect width="760" height="510" rx="18" fill="#edf3f7"/>
+  <g font-family="system-ui, 'Yu Gothic', Meiryo, sans-serif" fill="#153147">
+    <text x="24" y="42" font-size="23" font-weight="700">CPUが依頼し、デバイスがRAMへ書く</text>
+    <text x="24" y="70" font-size="15" fill="#476278">PCIe接続のNVMe SSDでホストメモリへ読み出す例。</text>
+
+    <rect x="24" y="95" width="212" height="116" rx="9" fill="#dfeef7" stroke="#a9bdcc"/>
+    <rect x="274" y="95" width="212" height="116" rx="9" fill="#fff0d6" stroke="#cba86d"/>
+    <rect x="524" y="95" width="212" height="116" rx="9" fill="#dcefe6" stroke="#a2c2b3"/>
+    <g text-anchor="middle">
+      <text x="130" y="126" font-size="17" font-weight="700">1 CPUが提出</text>
+      <text x="130" y="153" font-size="14">SQへコマンドを書く</text>
+      <text x="130" y="178" font-size="14">ドアベルで知らせる</text>
+      <text x="380" y="126" font-size="17" font-weight="700">2 デバイスがDMA</text>
+      <text x="380" y="153" font-size="14">SQを読む</text>
+      <text x="380" y="178" font-size="14">RAMへデータを置く</text>
+      <text x="630" y="126" font-size="17" font-weight="700">3 CPUが完了を回収</text>
+      <text x="630" y="153" font-size="14">デバイスがCQへ書く</text>
+      <text x="630" y="178" font-size="14">CPUが結果を確認する</text>
+    </g>
+    <path d="M241 154h27" fill="none" stroke="#476278" stroke-width="2" marker-end="url(#arrow)"/>
+    <path d="M491 154h27" fill="none" stroke="#476278" stroke-width="2" marker-end="url(#arrow)"/>
+
+    <rect x="24" y="232" width="712" height="254" rx="10" fill="#fff" stroke="#a9bdcc"/>
+    <text x="44" y="267" font-size="19" font-weight="700">同じRAMを、それぞれのアドレスで参照する</text>
+    <text x="44" y="293" font-size="14" fill="#476278">IOMMUでDMAアドレスを変換する構成。</text>
+
+    <rect x="44" y="318" width="217" height="52" rx="8" fill="#dfeef7" stroke="#a9bdcc"/>
+    <rect x="44" y="402" width="217" height="52" rx="8" fill="#fff0d6" stroke="#cba86d"/>
+    <rect x="307" y="318" width="174" height="52" rx="8" fill="#f1f5f8" stroke="#a9bdcc"/>
+    <rect x="307" y="402" width="174" height="52" rx="8" fill="#f1f5f8" stroke="#a9bdcc"/>
+    <rect x="540" y="357" width="173" height="59" rx="8" fill="#dcefe6" stroke="#a2c2b3"/>
+    <g text-anchor="middle" font-size="15" font-weight="700">
+      <text x="152" y="350">CPU仮想アドレス</text>
+      <text x="152" y="434">デバイスのDMAアドレス</text>
+      <text x="394" y="350">CPUのページ表</text>
+      <text x="394" y="434">IOMMU</text>
+      <text x="626" y="392">RAMの物理ページ</text>
+    </g>
+    <g fill="none" stroke="#476278" stroke-width="2" marker-end="url(#arrow)">
+      <path d="M267 344h34"/>
+      <path d="M267 428h34"/>
+      <path d="M487 344h22v30h25"/>
+      <path d="M487 428h22v-29h25"/>
+    </g>
+  </g>
+</svg>

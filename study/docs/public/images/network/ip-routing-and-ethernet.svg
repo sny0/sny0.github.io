@@ -1,0 +1,46 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="760" height="388" viewBox="0 0 760 388" role="img" aria-labelledby="title desc">
+  <title id="title">ルーターを越えるIPパケットと区間ごとのEthernetフレーム</title>
+  <desc id="desc">192.0.2.10から198.51.100.8へ送るとき、最初のEthernetフレームはMAC AからR1、二つ目はルーターの出口のMAC R2からBへ送られる。両方に同じ送信元と宛先のIPアドレスが入り、ルーターでTTLが64から63へ減る。</desc>
+  <defs>
+    <marker id="arrow" viewBox="0 0 8 8" refX="7" refY="4" markerWidth="8" markerHeight="8" orient="auto">
+      <path d="M0 0 8 4 0 8Z" fill="#4f7181" />
+    </marker>
+  </defs>
+  <rect width="760" height="388" rx="16" fill="#eff5f7" />
+  <g font-family="system-ui, 'Yu Gothic UI', 'Meiryo', sans-serif" fill="#173344">
+    <text x="24" y="45" font-size="27" font-weight="700">IPパケットを二つのEthernetリンクで運ぶ</text>
+    <text x="24" y="75" font-size="16">送信元と宛先のIPアドレスを保つ転送の例</text>
+
+    <rect x="24" y="98" width="181" height="90" rx="9" fill="#daeaf1" stroke="#a3beca" />
+    <rect x="249" y="98" width="262" height="90" rx="9" fill="#f8ead7" stroke="#d3b789" />
+    <rect x="555" y="98" width="181" height="90" rx="9" fill="#e1eee8" stroke="#a6c5b5" />
+    <g text-anchor="middle">
+      <text x="114" y="124" font-size="17" font-weight="700">送信端末</text>
+      <text x="114" y="150" font-size="16">192.0.2.10/24</text>
+      <text x="114" y="174" font-size="15">MAC A</text>
+      <text x="380" y="124" font-size="17" font-weight="700">ルーター</text>
+      <text x="312" y="150" font-size="15">192.0.2.1</text>
+      <text x="444" y="150" font-size="15">198.51.100.1</text>
+      <text x="312" y="174" font-size="15">MAC R1</text>
+      <text x="444" y="174" font-size="15">MAC R2</text>
+      <text x="646" y="124" font-size="17" font-weight="700">受信端末</text>
+      <text x="646" y="150" font-size="16">198.51.100.8/24</text>
+      <text x="646" y="174" font-size="15">MAC B</text>
+    </g>
+    <path d="M380 137v40" stroke="#d3b789" />
+    <g fill="none" stroke="#4f7181" stroke-width="2" marker-end="url(#arrow)">
+      <path d="M210 145h31" />
+      <path d="M516 145h31" />
+    </g>
+
+    <rect x="24" y="211" width="348" height="70" rx="9" fill="#ffffff" stroke="#b8ccd4" />
+    <rect x="388" y="211" width="348" height="70" rx="9" fill="#ffffff" stroke="#b8ccd4" />
+    <text x="44" y="239" font-size="16" font-weight="700">1番目のフレーム</text>
+    <text x="44" y="265" font-size="16">MAC A → R1　パケットのTTL 64</text>
+    <text x="408" y="239" font-size="16" font-weight="700">2番目のフレーム</text>
+    <text x="408" y="265" font-size="16">MAC R2 → B　パケットのTTL 63</text>
+
+    <rect x="24" y="304" width="712" height="60" rx="9" fill="#daeaf1" stroke="#a3beca" />
+    <text x="44" y="341" font-size="17"><tspan font-weight="700">両区間のIPアドレス</tspan><tspan dx="20">192.0.2.10 → 198.51.100.8</tspan></text>
+  </g>
+</svg>

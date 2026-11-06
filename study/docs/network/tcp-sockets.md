@@ -135,6 +135,10 @@ Windowsの`select`やC#の`Poll`は、進めそうな操作や終了を待つ道
 
 受信完了を別スレッドやイベントで扱う場合も、共有状態とバッファの所有期間を決めます。[スレッド同期](/runtime/thread-synchronization.html)や[非同期I/O](/os/asynchronous-file-io.html)の「要求・完了・利用」を分ける考え方につながりますが、ファイルAPIの契約をソケットへそのまま移しません。
 
-ゲームでは必要な順序、期限、再送、帯域、認証などから通信方式を選びます。ここだけでTCPとUDPの優劣は決めません。Webの要求・応答へ進む場合は[HTTP通信](/network/http-messages.html)、名前からIP候補を得る処理は[DNSと名前解決](/network/dns-resolution.html)、暗号化と相手の確認は[TLS・証明書・HTTPS](/network/tls-https.html)へ進んでください。UDP・QUICの詳解は別の発展項目とします。
+ゲームでは必要な順序、期限、再送、帯域、認証などから通信方式を選びます。UDPでは受け取るデータの区切りと失敗時の扱いが変わります。回線が混雑した場合は、転送量と遅延を分けて測ります。[UDPとデータグラム](/network/udp-datagrams.html) · [通信の遅延と帯域](/network/latency-throughput-and-queues.html)
+
+Webの要求・応答へ進む場合は[HTTP通信](/network/http-messages.html)、名前からIP候補を得る処理は[DNSと名前解決](/network/dns-resolution.html)、暗号化と相手の確認は[TLS・証明書・HTTPS](/network/tls-https.html)へ進んでください。
+
+IPアドレスが決まった後に、OSがどのインターフェースと経由先を選ぶかは、[IPの経路選択とEthernet](/network/ip-routing-and-ethernet.html)で追えます。
 
 [C++とC#でTCPループバックを観察する](/practice/network/tcp-loopback-observation.html)では、既知の2フレーム、部分的なAPI処理、アプリ側ACK、両方向の送信終了を照合します。実パケットの境界、再送、外部ネットワーク性能、物理NICの動作は観測対象に含めません。

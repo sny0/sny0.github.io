@@ -165,6 +165,20 @@
 2. [C++・C#のローカル通信](/practice/network/tcp-loopback-observation.html)で、長さ付きメッセージを復元し、送信停止後の応答と受信EOFを確かめる。
 3. 待機と非同期処理の基本は[非同期I/O](/os/asynchronous-file-io.html)へ進む。今回の通信例は、非ブロッキング操作とreadiness待ちを使う。
 
+## UDPでメッセージを送り、通信の遅れを調べるには
+
+1. [IPの経路選択とEthernet](/network/ip-routing-and-ethernet.html)で、送信先IPから次の経由先を選び、同じリンク上でフレームを届ける流れを追う。
+2. [UDPとデータグラム](/network/udp-datagrams.html)で、送受信の区切り、順序や再送、パケットの大きさを調べる。
+3. [C++のUDPループバック実践](/practice/network/udp-loopback-observation.html)で、受信バッファが足りない場合と空データグラムの戻り値を確かめる。
+4. [通信の遅延と帯域](/network/latency-throughput-and-queues.html)で、RTT、転送量、混雑時のキューを分けて観測する。
+
+## SSDやNICがメモリとデータをやり取りするには
+
+1. [PCIeのリンク](/hardware/io/pcie-links.html)で、CPU側とデバイスをつなぐ経路、レーン数、リンク速度を調べる。
+2. [DMAとIOMMU](/hardware/io/dma-and-iommu.html)で、デバイスから見たアドレス、読み書き、完了通知を追う。
+3. [DRAMのチャネルと帯域](/hardware/memory/dram-channels-and-bandwidth.html)で、メモリ側の転送速度、バンクと行、アクセスの待ち時間を調べる。
+4. アプリが見る操作とOSのディスク要求の違いは[WindowsのファイルI/O計測](/tools/windows/file-io-tracing.html)で確かめる。
+
 ## TCPのバイト列が、Webの要求と応答になるまで
 
 1. [HTTP通信](/network/http-messages.html)で、要求行、状態コード、ヘッダー、本文の形式と長さを分ける。

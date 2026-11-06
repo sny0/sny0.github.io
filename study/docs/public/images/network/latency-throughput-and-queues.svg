@@ -1,0 +1,39 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="760" height="404" viewBox="0 0 760 404" role="img" aria-labelledby="title desc">
+  <title id="title">回線の待ち行列が往復時間を増やす</title>
+  <desc id="desc">10 Mb/sのボトルネックで負荷がないときのRTTは40ミリ秒。一方向の先着順キューで250キロバイトの後ろに並ぶと、待ち時間200ミリ秒が加わり、ほかの条件が同じならRTTは約240ミリ秒になる。</desc>
+  <style>
+    text { font-family: "BIZ UDPGothic", "Yu Gothic", Meiryo, sans-serif; fill: #18352e; }
+    .label { font-size: 19px; font-weight: 700; }
+    .tick { font-size: 17px; text-anchor: middle; }
+    .note { font-size: 18px; fill: #36574d; }
+  </style>
+  <rect width="760" height="404" rx="18" fill="#eef5f2"/>
+  <text x="26" y="45" font-size="28" font-weight="700">回線の待ち行列が往復時間を増やす</text>
+  <text x="26" y="76" class="note">10 Mb/sの出口で、先に並んだ250 kBを送る例</text>
+  <rect x="25" y="98" width="710" height="226" rx="12" fill="#fff" stroke="#afc6bc"/>
+  <g stroke="#d0ddd7" stroke-width="1.5" stroke-dasharray="4 4">
+    <path d="M172 119V263M260 119V263M392 119V263M612 119V263M700 119V263"/>
+  </g>
+  <text x="46" y="158" class="label">負荷なし</text>
+  <text x="46" y="225" class="label">負荷あり</text>
+  <rect x="172" y="128" width="88" height="45" rx="4" fill="#c1e2d4" stroke="#548574"/>
+  <rect x="172" y="195" width="88" height="45" rx="4" fill="#c1e2d4" stroke="#548574"/>
+  <rect x="260" y="195" width="440" height="45" rx="4" fill="#f7e3ae" stroke="#8c6b2e"/>
+  <text x="216" y="156" font-size="18" font-weight="700" text-anchor="middle">40 ms</text>
+  <text x="216" y="223" font-size="18" font-weight="700" text-anchor="middle">40 ms</text>
+  <text x="480" y="223" class="label" text-anchor="middle">前のデータが出るまで 200 ms</text>
+  <path d="M172 264H700" stroke="#577367" stroke-width="2"/>
+  <g stroke="#577367" stroke-width="2">
+    <path d="M172 264v7m88-7v7m132-7v7m220-7v7m88-7v7"/>
+  </g>
+  <g class="tick">
+    <text x="172" y="294">0</text>
+    <text x="260" y="294">40</text>
+    <text x="392" y="294">100</text>
+    <text x="612" y="294">200</text>
+    <text x="700" y="294">240</text>
+  </g>
+  <text x="49" y="294" class="note">RTT（ms）</text>
+  <text x="27" y="354" class="note">待ち時間 = 250,000 byte × 8 ÷ 10,000,000 bit/s = 200 ms</text>
+  <text x="27" y="382" class="note">片方向のキューだけが増え、ほかの時間は同じとした計算例。</text>
+</svg>

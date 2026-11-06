@@ -22,8 +22,11 @@
 - [DNSと名前解決 — 名前から接続先が決まるまで](/network/dns-resolution.html)
 - [HTTPキャッシュ — 保存・鮮度・再検証と304応答](/network/http-caching.html)
 - [HTTP通信 — 要求・応答と本文の区切り](/network/http-messages.html)
+- [IPルーティングとEthernetフレーム](/network/ip-routing-and-ethernet.html)
 - [TLS・証明書・HTTPS — 暗号化と相手の確認](/network/tls-https.html)
+- [UDPデータグラムの境界と送受信](/network/udp-datagrams.html)
 - [ソケットとTCP通信 — send/recvの内部とメッセージ境界](/network/tcp-sockets.html)
+- [ネットワークの遅延・帯域・待ち行列](/network/latency-throughput-and-queues.html)
 
 ## この分野の学習ガイド
 
@@ -36,6 +39,7 @@
 - [C++とC#でHTTPのヘッダー・本文・終端を観察する](/practice/network/http-message-observation.html)
 - [C++とC#でOSの名前解決結果と取消しの境界を観察する](/practice/network/name-resolution-observation.html)
 - [C++とC#でTCPのフレーム復元と半閉鎖を観察する](/practice/network/tcp-loopback-observation.html)
+- [C++とWinsockでUDPの受信境界を確かめる](/practice/network/udp-loopback-observation.html)
 
 ## 扱う範囲・増補する項目
 
