@@ -1,0 +1,48 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="760" height="492" viewBox="0 0 760 492" role="img" aria-labelledby="validation-title validation-desc">
+  <title id="validation-title">64バイトのファイルで開始位置と長さを検査する</title>
+  <desc id="validation-desc">0から12はヘッダー、12から60は2件の索引、60から64はデータ。60から4バイトはデータ領域内。59から1バイトは索引を指すため拒否。62から4バイトはファイル末尾を2バイト越えるため拒否。</desc>
+  <style>
+    text { font-family: "BIZ UDPGothic", "Yu Gothic", Meiryo, sans-serif; fill: #173447; }
+    .heading { font-weight: 700; font-size: 27px; }
+    .body { font-size: 20px; }
+    .small { font-size: 17px; }
+    .label { font-weight: 700; }
+    .mono { font-family: Consolas, monospace; }
+    .center { text-anchor: middle; }
+  </style>
+  <rect width="760" height="492" rx="20" fill="#f2f6f8"/>
+  <text x="30" y="48" class="heading">アセットの範囲を読めるか検査する</text>
+  <text x="30" y="82" class="body">ファイル全体は64バイト、索引は2件</text>
+
+  <g class="body">
+    <rect x="30" y="103" width="152" height="62" fill="#deebf4" stroke="#83a4b9"/>
+    <rect x="182" y="103" width="334" height="62" fill="#ffefd7" stroke="#bd9d69"/>
+    <rect x="516" y="103" width="214" height="62" fill="#dcefe5" stroke="#7ca593"/>
+    <text x="106" y="141" class="center label">ヘッダー</text>
+    <text x="349" y="141" class="center label">索引 2件 × 24バイト</text>
+    <text x="623" y="141" class="center label">データ</text>
+    <path d="M30 166v10m152-10v10m334-10v10m214-10v10" fill="none" stroke="#506b7b" stroke-width="2"/>
+    <text x="30" y="199" class="mono">0</text>
+    <text x="182" y="199" class="mono center">12</text>
+    <text x="516" y="199" class="mono center">60</text>
+    <text x="730" y="199" text-anchor="end" class="mono">64</text>
+  </g>
+
+  <g class="body">
+    <rect x="30" y="218" width="700" height="64" rx="10" fill="#e1f1e9"/>
+    <text x="51" y="258" class="mono label">[60, 64)</text>
+    <text x="184" y="258" class="label">可</text>
+    <text x="260" y="258">開始位置も終端もデータ領域に収まる</text>
+
+    <rect x="30" y="292" width="700" height="64" rx="10" fill="#f9eae3"/>
+    <text x="51" y="332" class="mono label">[59, 60)</text>
+    <text x="184" y="332" class="label">拒否</text>
+    <text x="260" y="332">開始位置が索引を指す</text>
+
+    <rect x="30" y="366" width="700" height="64" rx="10" fill="#f9eae3"/>
+    <text x="51" y="406" class="mono label">[62, 66)</text>
+    <text x="184" y="406" class="label">拒否</text>
+    <text x="260" y="406">残り2バイトに4バイトは収まらない</text>
+  </g>
+  <text x="30" y="463" class="small">[開始, 終端) は開始位置から、終端の手前までの範囲</text>
+</svg>
