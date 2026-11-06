@@ -4004,7 +4004,7 @@
         "ICMP",
         "tracert"
       ],
-      "verification": "IETFのIP・ARP・IPv6近隣探索のRFCとMicrosoftのtracert資料に照合（2026-11-07）",
+      "verification": "IETFのIP・ARP・IPv6近隣探索のRFCとMicrosoftの資料に照合し、Find-NetRouteをWindowsで実行確認（2026-11-07）",
       "links": [
         "/network/tcp-sockets.html",
         "/network/udp-datagrams.html",
