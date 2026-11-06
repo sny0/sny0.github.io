@@ -68,6 +68,13 @@
 2. [C++・C#の在庫消費サンプル](/practice/threads/inventory-synchronization.html)で、確認と消費、Snapshot、終了待ちと寿命を確かめる。
 3. [並行処理のバグ](/runtime/memory/concurrency-bugs.html)で、データ競合・競合状態・false sharingの違いを調べる。
 
+## ワーカーで準備したアセットを描画側へ渡すには
+
+1. [容量を決めたワーカーキュー](/runtime/bounded-worker-queues.html)で、満杯や空で待つ条件、受付の終了と回収の順番を調べる。
+2. [アセットをワーカーから描画側へ渡す設計](/game/asset-worker-handoff.html)で、世代の確認、登録する側の責任、CPUとGPUそれぞれの完了を追う。
+3. [C++のワーカー受け渡し実践](/practice/threads/asset-worker-handoff-observation.html)で、結果キューを回収し、古い世代を捨てて終了する。
+4. [D3D12の並列コマンド記録](/graphics/optimization/parallel-command-recording.html)で、描画コマンド自体を複数スレッドで記録するときの提出順と寿命を調べる。
+
 ## ファイルを読むと内部で何が起きるか
 
 1. [ファイルを読む仕組み](/os/file-read-journey.html)で、アプリのバッファ、OSのファイルキャッシュ、ストレージへの要求を分ける。

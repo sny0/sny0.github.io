@@ -53,3 +53,5 @@ Direct3D 12で、CPUが書けるアップロードバッファの領域Aから�
 Vulkanでは、キュー間の依存関係にセマフォを使います。異なるキューファミリー間で排他共有リソースを引き渡す場合、所有権の移譲が必要な条件では、渡す側のリリースと受け取る側のアクワイアも指定し、セマフォなどでその順序を保証します。CPU側の回収は、対象範囲を使ったすべてのキューについて完了を確認してから行います。[Vulkanの同期と所有権移譲の例](https://docs.vulkan.org/guide/latest/synchronization_examples.html)
 
 関連項目は、キューの進行を使って結果を読み戻す[GPUタイムスタンプクエリ](/graphics/optimization/gpu-timestamp-queries.html)と、D3D12での記録・提出を扱う[DirectX 12](/graphics/api/directx12.html)です。
+
+D3D12のコマンドを複数スレッドで記録する場合は、記録中にどのスレッドがアロケーターを使うかと、GPUがその記録を使い終える時点の両方を管理します。[D3D12の並列コマンド記録](/graphics/optimization/parallel-command-recording.html)

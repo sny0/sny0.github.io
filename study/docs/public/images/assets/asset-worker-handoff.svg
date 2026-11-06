@@ -1,0 +1,54 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="760" height="560" viewBox="0 0 760 560" role="img" aria-labelledby="title desc" xml:lang="ja">
+  <title id="title">アセットの準備結果を描画側へ渡す</title>
+  <desc id="desc">登録側がIDと世代を付けて要求し、ワーカーがCPUデータを作って結果キューに置く。登録側が世代を照合し、古い結果は回収する。現在の結果は登録とGPUコピーに進み、描画に必要な順序が揃ってから公開する。</desc>
+  <defs>
+    <marker id="arrow" viewBox="0 0 8 8" refX="7" refY="4" markerWidth="7" markerHeight="7" orient="auto">
+      <path d="M0 0 8 4 0 8Z" fill="#486078"/>
+    </marker>
+  </defs>
+  <rect width="760" height="560" rx="16" fill="#f3f7fa"/>
+  <g font-family="'Noto Sans JP', 'Yu Gothic', 'Meiryo', sans-serif" fill="#183246">
+    <text x="24" y="42" font-size="24" font-weight="700">アセットの準備結果を描画側へ渡す</text>
+    <text x="24" y="71" font-size="15" fill="#475569">同じアセットIDでも、要求世代が違えば別の結果として扱う</text>
+
+    <g stroke="#9db4c3">
+      <rect x="24" y="99" width="324" height="84" rx="10" fill="#fff"/>
+      <rect x="412" y="99" width="324" height="84" rx="10" fill="#e3eef4"/>
+      <rect x="412" y="218" width="324" height="84" rx="10" fill="#e3eef4"/>
+      <rect x="24" y="218" width="324" height="84" rx="10" fill="#fff"/>
+      <rect x="24" y="360" width="324" height="94" rx="10" fill="#f8ebe1"/>
+      <rect x="412" y="360" width="324" height="94" rx="10" fill="#d9ede5"/>
+      <rect x="412" y="489" width="324" height="50" rx="10" fill="#d9ede5"/>
+    </g>
+
+    <g fill="none" stroke="#486078" stroke-width="2.4" marker-end="url(#arrow)">
+      <path d="M351 141H406"/>
+      <path d="M574 187V212"/>
+      <path d="M408 260H353"/>
+      <path d="M186 306V354"/>
+      <path d="M294 306V329H574V354"/>
+      <path d="M574 458V483"/>
+    </g>
+
+    <g font-size="18" font-weight="700">
+      <text x="42" y="130">登録側が要求を入れる</text>
+      <text x="430" y="130">ワーカーが準備する</text>
+      <text x="430" y="249">結果キューに渡す</text>
+      <text x="42" y="249">登録側が世代を照合する</text>
+      <text x="42" y="392">古い結果を回収する</text>
+      <text x="430" y="392">登録とGPU転送を進める</text>
+      <text x="430" y="521">描画に公開する</text>
+    </g>
+    <g font-size="15">
+      <text x="42" y="158">要求キューにIDと世代を渡す</text>
+      <text x="430" y="158">読み取り、展開、形式の検査</text>
+      <text x="430" y="277">ID、世代、準備済みCPUデータ</text>
+      <text x="42" y="277">現在の要求と照合する</text>
+      <text x="111" y="337" font-size="14">不一致</text>
+      <text x="407" y="319" font-size="14">一致</text>
+      <text x="42" y="421">CPUデータを破棄して予算を返す</text>
+      <text x="430" y="421">フェンスと描画の順序を確認する</text>
+      <text x="24" y="519" fill="#475569">提出済みの転送が使う領域は完了まで保持する</text>
+    </g>
+  </g>
+</svg>

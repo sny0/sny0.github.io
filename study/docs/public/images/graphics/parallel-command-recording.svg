@@ -1,0 +1,52 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="760" height="464" viewBox="0 0 760 464" role="img" aria-labelledby="title desc">
+  <title id="title">D3D12で別々に記録し、依存順に提出する</title>
+  <desc id="desc">ワーカーAが影のリスト、ワーカーBがライティングのリストを別々に記録する。Bが先に記録を終えても提出側はAからBへ並べ、GPUはバリアで影の書き込みと参照を同期する。フェンス値に到達すると使い終えたフレームスロットを再利用できる。</desc>
+  <defs>
+    <marker id="arrow" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M 0 0 L 10 5 L 0 10 z" fill="#455e6d"/>
+    </marker>
+  </defs>
+  <rect width="760" height="464" rx="18" fill="#edf2f5"/>
+  <g font-family="system-ui, 'Yu Gothic', 'Meiryo', sans-serif" fill="#163347">
+    <text x="24" y="42" font-size="24" font-weight="700">D3D12で別々に記録し、依存順に提出する</text>
+    <text x="24" y="68" font-size="14" fill="#385466">1フレームを記録する例。リストとアロケータはワーカー別。</text>
+
+    <rect x="24" y="87" width="712" height="132" rx="12" fill="#fff" stroke="#a6bdca"/>
+    <text x="43" y="114" font-size="16" font-weight="700">CPUの記録</text>
+    <text x="43" y="153" font-size="14" font-weight="700">ワーカーA</text>
+    <text x="43" y="195" font-size="14" font-weight="700">ワーカーB</text>
+    <rect x="154" y="128" width="310" height="34" rx="7" fill="#dfeef3" stroke="#88aebb"/>
+    <rect x="154" y="170" width="229" height="34" rx="7" fill="#e0efe9" stroke="#86b2a2"/>
+    <text x="171" y="151" font-size="15">影のリスト A を記録</text>
+    <text x="171" y="193" font-size="15">ライティングのリスト B を記録</text>
+    <g stroke="#455e6d" stroke-width="2" marker-end="url(#arrow)">
+      <path d="M464 145h23"/>
+      <path d="M383 187h23"/>
+    </g>
+    <text x="498" y="151" font-size="14">A を閉じる</text>
+    <text x="417" y="193" font-size="14">B が先に閉じる</text>
+    <text x="661" y="111" font-size="13" fill="#385466">時間 →</text>
+
+    <path d="M380 223v17" stroke="#455e6d" stroke-width="2" marker-end="url(#arrow)"/>
+    <rect x="24" y="245" width="712" height="112" rx="12" fill="#fff" stroke="#a6bdca"/>
+    <text x="43" y="272" font-size="16" font-weight="700">GPUへ渡す順序</text>
+    <rect x="43" y="286" width="159" height="50" rx="8" fill="#dfeef3" stroke="#88aebb"/>
+    <rect x="232" y="286" width="140" height="50" rx="8" fill="#f7ecd4" stroke="#d1b984"/>
+    <rect x="402" y="286" width="154" height="50" rx="8" fill="#e0efe9" stroke="#86b2a2"/>
+    <rect x="586" y="286" width="131" height="50" rx="8" fill="#ebf0f4" stroke="#a6bdca"/>
+    <g stroke="#455e6d" stroke-width="2" marker-end="url(#arrow)">
+      <path d="M202 311h25"/>
+      <path d="M372 311h25"/>
+      <path d="M556 311h25"/>
+    </g>
+    <text x="122" y="316" text-anchor="middle" font-size="14">A が影を書く</text>
+    <text x="302" y="316" text-anchor="middle" font-size="14">バリアで状態遷移</text>
+    <text x="479" y="316" text-anchor="middle" font-size="14">B が影を読む</text>
+    <text x="651" y="316" text-anchor="middle" font-size="14">フェンス通知</text>
+
+    <path d="M651 357v19" stroke="#455e6d" stroke-width="2" marker-end="url(#arrow)"/>
+    <rect x="24" y="382" width="712" height="57" rx="12" fill="#dce9ef" stroke="#a6bdca"/>
+    <text x="380" y="407" text-anchor="middle" font-size="15" font-weight="700">フェンス到達後、フレームスロットを再利用</text>
+    <text x="380" y="427" text-anchor="middle" font-size="13" fill="#385466">アロケータ、記述子スロット、一時領域</text>
+  </g>
+</svg>

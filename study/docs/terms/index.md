@@ -42,6 +42,7 @@
 | [入力遅延 / input latency / input-to-photon / ポーリング / 入力マーカー](/graphics/optimization/input-to-display-latency.html) | 入力から対象の行が更新されるまでの処理と待ちを分ける |
 | [GPUタイムスタンプ / timestamp query / ResolveQueryData / timestampPeriod / timestampValidBits](/graphics/optimization/gpu-timestamp-queries.html) | GPUコマンドの時刻を読み戻して区間の時間を測る |
 | [GPUフェンス / リソースの寿命 / upload heap / ステージング / descriptor](/graphics/optimization/gpu-resource-lifetime.html) | GPUが使う領域やコマンド格納場所を再利用できる条件を調べる |
+| [並列コマンド記録 / D3D12 / command allocator / command list / フレームスロット](/graphics/optimization/parallel-command-recording.html) | CPUで記録を分担し、GPUへの提出順と記録用メモリの再利用を管理する |
 | [DDS / DDS_HEADER / DXGI_FORMAT / mip / subresource / BC7 / cubemap](/graphics/texture/dds-and-subresources.html) | ファイルのヘッダー、テクスチャの形、mipや圧縮ブロックの位置を調べる |
 | [テクスチャ転送 / RowPitch / GetCopyableFootprints / CopyTextureRegion / readback](/graphics/texture/d3d12-texture-upload.html) | CPU側の行をバッファに並べ、コピー、状態遷移、完了の順序を調べる |
 | [テクスチャストリーミング / mip residency / SRV / reserved resource / タイル](/graphics/texture/texture-streaming-and-mip-residency.html) | 先に使うmip、シェーダーに公開する範囲、GPUメモリの予算を調べる |
@@ -97,6 +98,8 @@
 | [ファイルキャッシュ / ページキャッシュ / Cache Manager / read-ahead / 先読み / FILE_FLAG_NO_BUFFERING](/os/windows-file-cache.html) | ファイルデータの再利用、アクセスのヒント、キャッシュを迂回する際の条件を調べる |
 | [Procmon / Process Monitor / WPR / WPA / ETW / File I/O / Disk Usage](/tools/windows/file-io-tracing.html) | ファイル操作とストレージ側の要求を、時刻、パス、プロセスから調べる |
 | [スレッド同期 / mutex / lock / lock_guard / 排他制御 / critical section / happens-before / join](/runtime/thread-synchronization.html) | 共有する状態、ロックの排他と同期、終了待ちとオブジェクトの寿命を結び付ける |
+| [ワーカーキュー / bounded queue / condition_variable / producer / consumer / backpressure / drain](/runtime/bounded-worker-queues.html) | 容量と待機条件を決め、受付終了後に残っている仕事を回収する |
+| [アセットワーカー / 描画スレッド / 完了キュー / 世代トークン / handoff](/game/asset-worker-handoff.html) | 別スレッドで準備した結果の所有権を移し、描画に登録できる結果を選ぶ |
 | [近似一致 / 絶対許容差 / 相対許容差 / 浮動小数点の比較 / NaN / Inf](/math/floating-point-comparison.html) | 厳密な等値、用途に応じた近似判定、特殊値と非推移性を区別する |
 | [Unicode / 文字コード / UTF-8 / UTF-16 / コードポイント / サロゲートペア / BOM / 文字化け](/data/unicode-and-encoding.html) | 文字の番号、コード単位、バイト列と、長さの数え方を区別する |
 | [float / binary32 / 浮動小数点 / 丸め / 刻み幅 / epsilon / nextafter](/data/floating-point-spacing.html) | ビット表現と有効精度、隣接値、最近接・偶数丸めを区別する |

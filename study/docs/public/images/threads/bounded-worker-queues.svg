@@ -1,0 +1,47 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="760" height="430" viewBox="0 0 760 430" role="img" aria-labelledby="queue-title queue-desc">
+  <title id="queue-title">要求と結果に上限を設け、受け取りを続けて終了する</title>
+  <desc id="queue-desc">要求キューは2件まで、ワーカーは2本、結果キューは1件まで。フレーム側は1件ずつ結果を取り出す。結果キューが満杯だとワーカーが空きを待つ。終了時は要求を閉じ、フレーム側が受け取りを続ける。最後のワーカーが結果キューを閉じ、残りを回収してからjoinする。</desc>
+  <defs>
+    <marker id="queue-arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto">
+      <path d="M0 0L10 5L0 10Z" fill="#48675d"/>
+    </marker>
+  </defs>
+  <style>
+    text { font-family: "BIZ UDPGothic", "Yu Gothic", Meiryo, sans-serif; fill: #19332c; }
+    .title { font-size: 28px; font-weight: 700; }
+    .body { font-size: 18px; }
+    .label { font-size: 20px; font-weight: 700; }
+    .center { text-anchor: middle; }
+  </style>
+  <rect width="760" height="430" rx="18" fill="#eef5f1"/>
+  <text x="28" y="48" class="title">有界キューで要求と結果を渡す</text>
+  <text x="28" y="83" class="body">要求を受け付け、ワーカーの処理を経て、描画側へ渡す例</text>
+
+  <rect x="24" y="108" width="152" height="90" rx="10" fill="#e2eaf7" stroke="#7b92af"/>
+  <rect x="204" y="108" width="152" height="90" rx="10" fill="#fff" stroke="#829c91"/>
+  <rect x="384" y="108" width="152" height="90" rx="10" fill="#f9edcd" stroke="#a78844"/>
+  <rect x="564" y="108" width="172" height="90" rx="10" fill="#dcefe3" stroke="#729382"/>
+  <g fill="none" stroke="#48675d" stroke-width="2" marker-end="url(#queue-arrow)">
+    <path d="M178 153h23"/>
+    <path d="M358 153h23"/>
+    <path d="M538 153h23"/>
+  </g>
+  <g class="center">
+    <text x="100" y="143" class="label">要求キュー</text>
+    <text x="100" y="176" class="body">容量 2件</text>
+    <text x="280" y="143" class="label">ワーカー</text>
+    <text x="280" y="176" class="body">2本で処理</text>
+    <text x="460" y="143" class="label">結果キュー</text>
+    <text x="460" y="176" class="body">容量 1件</text>
+    <text x="650" y="143" class="label">フレーム側</text>
+    <text x="650" y="176" class="body">1件ずつ回収</text>
+  </g>
+
+  <rect x="24" y="216" width="712" height="58" rx="9" fill="#f9edcd" stroke="#a78844"/>
+  <text x="42" y="251" class="body">結果キューが満杯になると、ワーカーは空きができるまで待つ。</text>
+
+  <rect x="24" y="292" width="712" height="114" rx="10" fill="#fff" stroke="#829c91"/>
+  <text x="42" y="324" class="label">終了時も、結果を取り出す</text>
+  <text x="42" y="354" class="body">要求の受付を閉じ、ワーカーの処理中もフレーム側が結果を回収する。</text>
+  <text x="42" y="384" class="body">最後のワーカーが結果キューを閉じ、残りを取り出したら終了を待つ。</text>
+</svg>

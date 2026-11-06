@@ -23,6 +23,7 @@
 - [Compute Shader](/graphics/compute/compute-shader.html)
 - [CUDA と OpenCL](/graphics/compute/cuda-opencl.html)
 - [D3D12でテクスチャをアップロードする](/graphics/texture/d3d12-texture-upload.html)
+- [D3D12のコマンドリストを複数スレッドで記録する](/graphics/optimization/parallel-command-recording.html)
 - [DDSの中身とテクスチャのサブリソース](/graphics/texture/dds-and-subresources.html)
 - [Deferred Rendering](/graphics/path/deferred.html)
 - [DirectX 11](/graphics/api/directx11.html)

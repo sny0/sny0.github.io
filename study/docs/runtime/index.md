@@ -19,6 +19,7 @@
 
 ## 辞典の本文
 
+- [C++の有界キューと条件変数](/runtime/bounded-worker-queues.html)
 - [malloc・newから解放まで — アロケータとOSの境界](/runtime/memory/allocation-journey.html)
 - [placement new・allocator・memory pool・arena allocator・fragmentation](/runtime/memory/allocators-and-pools.html)
 - [RTTI・dynamic_cast・例外処理の仕組み](/runtime/cpp-internals/exceptions-and-rtti-impl.html)
@@ -42,6 +43,7 @@
 
 ## 作って試す
 
+- [C++でワーカーの結果を描画側へ渡し、古い世代を捨てる](/practice/threads/asset-worker-handoff-observation.html)
 - [C++とC#で在庫の確認・更新を一つのロックで守る](/practice/threads/inventory-synchronization.html)
 - [C++の内部的な仕組みの演習](/runtime/cpp-internals/exercises.html)
 - [メモリと実行時の演習](/runtime/memory/exercises.html)

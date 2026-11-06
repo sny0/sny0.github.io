@@ -62,7 +62,7 @@
       "id": "runtime",
       "title": "実行時の仕組み",
       "description": "確保・所有・解放から、GC、非同期、言語境界へつなぐ。",
-      "count": 14,
+      "count": 15,
       "status": "辞典本文あり"
     },
     {
@@ -104,14 +104,14 @@
       "id": "graphics",
       "title": "3DCGとグラフィックス",
       "description": "制作データからGPUの処理、最終表示までをつなぐ。",
-      "count": 64,
+      "count": 65,
       "status": "辞典本文あり"
     },
     {
       "id": "game",
       "title": "ゲームとエンジン",
       "description": "入力、時間、ECSと各サブシステムの関係を調べる。",
-      "count": 24,
+      "count": 25,
       "status": "辞典本文あり"
     },
     {
@@ -130,6 +130,13 @@
     }
   ],
   "collections": [
+    {
+      "id": "asset-worker-handoff-observation",
+      "section": "practice",
+      "title": "C++でワーカーの結果を描画側へ渡し、古い世代を捨てる",
+      "description": "容量のあるキューで結果を回収し、シーン切り替え後に古い要求の結果を捨てる。",
+      "start": "/practice/threads/asset-worker-handoff-observation.html"
+    },
     {
       "id": "glb-mesh-observation",
       "section": "practice",
@@ -1387,6 +1394,37 @@
       ]
     },
     {
+      "title": "C++でワーカーの結果を描画側へ渡し、古い世代を捨てる",
+      "url": "/practice/threads/asset-worker-handoff-observation.html",
+      "file": "practice/threads/asset-worker-handoff-observation.md",
+      "domain": "runtime",
+      "section": "practice",
+      "format": "sample",
+      "status": "published",
+      "summary": "2つのワーカーが境界を計算し、容量1の完了キューへ返す。フレーム側は現在の世代だけを採用し、完了を回収してからスレッドを終了する。",
+      "source": "新規執筆",
+      "aliases": [
+        "ワーカー",
+        "producer consumer",
+        "bounded queue",
+        "condition_variable",
+        "backpressure",
+        "世代",
+        "drain",
+        "join"
+      ],
+      "collection": "asset-worker-handoff-observation",
+      "order": 1,
+      "verification": "Windows x64のMSVCでビルド。40回実行し、現在の3件、破棄1件、完了キューの最大1件と終了を確認（2026-11-06）",
+      "links": [
+        "/runtime/bounded-worker-queues.html",
+        "/game/asset-worker-handoff.html",
+        "/runtime/thread-synchronization.html",
+        "/graphics/optimization/gpu-resource-lifetime.html",
+        "/graphics/optimization/parallel-command-recording.html"
+      ]
+    },
+    {
       "title": "C++とC#でETag・304・保存本文の再利用を観察する",
       "url": "/practice/network/http-cache-observation.html",
       "file": "practice/network/http-cache-observation.md",
@@ -2086,6 +2124,38 @@
       ]
     },
     {
+      "title": "C++の有界キューと条件変数",
+      "url": "/runtime/bounded-worker-queues.html",
+      "file": "runtime/bounded-worker-queues.md",
+      "domain": "runtime",
+      "section": "reference",
+      "format": "article",
+      "status": "published",
+      "summary": "要求と結果の待ち行列に上限を設ける。条件変数で空きとデータを待ち、フレーム側で結果を回収してからワーカーを終了する。",
+      "source": "新規執筆",
+      "aliases": [
+        "有界キュー",
+        "bounded queue",
+        "producer consumer",
+        "condition variable",
+        "std::condition_variable",
+        "std::unique_lock",
+        "notify_one",
+        "notify_all",
+        "backpressure",
+        "バックプレッシャー",
+        "close",
+        "drain"
+      ],
+      "verification": "C++20草案N4861の条件変数・mutex・joinに照合（2026-11-06）",
+      "links": [
+        "/runtime/thread-synchronization.html",
+        "/game/asset-worker-handoff.html",
+        "/game/asset-loading.html",
+        "/practice/threads/asset-worker-handoff-observation.html"
+      ]
+    },
+    {
       "title": "C++例外と C#例外",
       "url": "/languages/csharp/exceptions-comparison.html",
       "file": "languages/csharp/exceptions-comparison.md",
@@ -2468,6 +2538,33 @@
         "/graphics/api/directx12.html",
         "/practice/graphics/dds-upload-observation.html",
         "/game/directstorage.html"
+      ]
+    },
+    {
+      "title": "D3D12のコマンドリストを複数スレッドで記録する",
+      "url": "/graphics/optimization/parallel-command-recording.html",
+      "file": "graphics/optimization/parallel-command-recording.md",
+      "domain": "graphics",
+      "section": "reference",
+      "format": "article",
+      "status": "published",
+      "summary": "描画コマンドを複数のCPUスレッドで記録し、パスの依存順に提出する。アロケータとリストの所有、フェンスで再利用するフレームスロット、計測の見方を扱う。",
+      "source": "新規執筆",
+      "aliases": [
+        "並列コマンド記録",
+        "command list",
+        "command allocator",
+        "D3D12",
+        "ExecuteCommandLists",
+        "フレームスロット",
+        "frame in flight"
+      ],
+      "verification": "MicrosoftのD3D12 APIリファレンスと公式マルチスレッドサンプルに照合（2026-11-06）",
+      "links": [
+        "/graphics/api/directx12.html",
+        "/graphics/optimization/gpu-resource-lifetime.html",
+        "/graphics/optimization/gpu-timestamp-queries.html",
+        "/game/asset-worker-handoff.html"
       ]
     },
     {
@@ -3276,7 +3373,8 @@
         "/game/asset-loading.html",
         "/graphics/optimization/swap-chain-and-vsync.html",
         "/graphics/optimization/gpu-timestamp-queries.html",
-        "/graphics/api/directx12.html"
+        "/graphics/api/directx12.html",
+        "/graphics/optimization/parallel-command-recording.html"
       ]
     },
     {
@@ -7412,6 +7510,8 @@
         "/runtime/thread-synchronization.html",
         "/tools/windows/file-io-tracing.html",
         "/game/directstorage.html",
+        "/game/asset-worker-handoff.html",
+        "/practice/threads/asset-worker-handoff-observation.html",
         "/practice/assets/asset-lifecycle-model.html",
         "/practice/io/file-read-observation.html",
         "/practice/io/async-file-read-observation.html"
@@ -7923,6 +8023,8 @@
         "/os/process-startup.html",
         "/runtime/memory/concurrency-bugs.html",
         "/practice/threads/inventory-synchronization.html",
+        "/runtime/bounded-worker-queues.html",
+        "/practice/threads/asset-worker-handoff-observation.html",
         "/browser/shared-memory-atomics.html"
       ]
     },
@@ -9346,6 +9448,39 @@
       ]
     },
     {
+      "title": "ワーカーが準備したアセットを描画側へ渡す",
+      "url": "/game/asset-worker-handoff.html",
+      "file": "game/asset-worker-handoff.md",
+      "domain": "game",
+      "section": "reference",
+      "format": "article",
+      "status": "published",
+      "summary": "アセット要求と準備結果を別々のキューで渡す。世代照合、キューとメモリの予算、登録とGPU転送、終了時の回収を扱う。",
+      "source": "新規執筆",
+      "aliases": [
+        "asset worker",
+        "アセットワーカー",
+        "asset handoff",
+        "結果キュー",
+        "generation token",
+        "世代照合",
+        "CPU Ready",
+        "backpressure",
+        "登録予算"
+      ],
+      "verification": "MicrosoftのWindows I/O・D3D12資料とUnityのスレッド切り替え仕様に照合（2026-11-06）",
+      "links": [
+        "/game/asset-loading.html",
+        "/graphics/mesh/gltf-mesh-buffers.html",
+        "/runtime/bounded-worker-queues.html",
+        "/graphics/optimization/parallel-command-recording.html",
+        "/graphics/optimization/gpu-resource-lifetime.html",
+        "/graphics/texture/texture-streaming-and-mip-residency.html",
+        "/os/cancelling-overlapped-io.html",
+        "/practice/threads/asset-worker-handoff-observation.html"
+      ]
+    },
+    {
       "title": "依存関係と依存の方向",
       "url": "/design/foundations/dependency.html",
       "file": "design/foundations/dependency.md",
@@ -9642,6 +9777,10 @@
         "/runtime/thread-synchronization.html",
         "/practice/threads/inventory-synchronization.html",
         "/runtime/memory/concurrency-bugs.html",
+        "/runtime/bounded-worker-queues.html",
+        "/game/asset-worker-handoff.html",
+        "/practice/threads/asset-worker-handoff-observation.html",
+        "/graphics/optimization/parallel-command-recording.html",
         "/os/file-read-journey.html",
         "/practice/io/file-read-observation.html",
         "/os/windows-file-cache.html",
@@ -12381,6 +12520,7 @@
         "/graphics/optimization/input-to-display-latency.html",
         "/graphics/optimization/gpu-timestamp-queries.html",
         "/graphics/optimization/gpu-resource-lifetime.html",
+        "/graphics/optimization/parallel-command-recording.html",
         "/graphics/texture/dds-and-subresources.html",
         "/graphics/texture/d3d12-texture-upload.html",
         "/graphics/texture/texture-streaming-and-mip-residency.html",
@@ -12436,6 +12576,8 @@
         "/os/windows-file-cache.html",
         "/tools/windows/file-io-tracing.html",
         "/runtime/thread-synchronization.html",
+        "/runtime/bounded-worker-queues.html",
+        "/game/asset-worker-handoff.html",
         "/math/floating-point-comparison.html",
         "/data/unicode-and-encoding.html",
         "/data/floating-point-spacing.html",
