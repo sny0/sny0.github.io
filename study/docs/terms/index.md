@@ -46,6 +46,9 @@
 | [D3D12 / リソースバリア / transition barrier / UAV barrier / aliasing barrier / COMMON](/graphics/optimization/d3d12-resource-barriers.html) | リソースへのアクセスやメモリの使い回しに必要なバリアを調べる |
 | [D3D12 / キュー間同期 / Signal / Wait / COPY queue / async compute](/graphics/optimization/gpu-queue-synchronization.html) | 別キューへ結果を渡す順序と、CPUがフェンスを待つ場合の違いを調べる |
 | [D3D12 / ディスクリプターヒープ / descriptor heap / CBV / SRV / UAV / RTV / DSV](/graphics/optimization/d3d12-descriptor-heaps.html) | リソースへの参照を格納・設定し、GPUの使用が終わるまで保持する |
+| [オフスクリーン描画 / render to texture / フルスクリーントライアングル / Texture2D.Load](/graphics/postprocess/render-to-texture.html) | 中間画像への描画と、その画像を読む後処理をつなぐ |
+| [ピンポンバッファ / ping-pong / フレーム履歴 / history texture / TAA](/graphics/postprocess/ping-pong-and-history.html) | 複数の後処理で画像を交互に使い、前フレームの結果を管理する |
+| [アタッチメント / render pass / clear / preserve / discard / resolve / transient](/graphics/optimization/render-pass-attachments.html) | 描画先の内容を残す範囲と、パスをまたぐ依存関係を調べる |
 | [DDS / DDS_HEADER / DXGI_FORMAT / mip / subresource / BC7 / cubemap](/graphics/texture/dds-and-subresources.html) | ファイルのヘッダー、テクスチャの形、mipや圧縮ブロックの位置を調べる |
 | [テクスチャ転送 / RowPitch / GetCopyableFootprints / CopyTextureRegion / readback](/graphics/texture/d3d12-texture-upload.html) | CPU側の行をバッファに並べ、コピー、状態遷移、完了の順序を調べる |
 | [テクスチャストリーミング / mip residency / SRV / reserved resource / タイル](/graphics/texture/texture-streaming-and-mip-residency.html) | 先に使うmip、シェーダーに公開する範囲、GPUメモリの予算を調べる |

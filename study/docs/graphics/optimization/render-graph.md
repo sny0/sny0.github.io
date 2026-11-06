@@ -167,6 +167,7 @@ FComputeShaderUtils::AddPass(GraphBuilder,
 
 ## 次に読むべきページ
 
+- [描画パスのアタッチメント](/graphics/optimization/render-pass-attachments.html) — 中間画像を残す条件と、最後の読み取りを終えたあとの再利用
 - [GPU Driven Rendering](/graphics/optimization/gpu-driven.html)
 - [URP](/graphics/engine/urp.html) / [Unreal Engineのレンダラー](/graphics/engine/unreal-renderer.html) — 実装の現物
 

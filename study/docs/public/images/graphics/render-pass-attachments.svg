@@ -1,0 +1,45 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="760" height="425" viewBox="0 0 760 425" role="img" aria-labelledby="title desc">
+  <title id="title">シーン描画から表示までのアタッチメントの寿命</title>
+  <desc id="desc">Aでシーン色と深度を描く。Bがシーン色を読み、表示用画像を描く。Cがその画像を表示に渡す。シーン色はBの最後まで、深度はAの最後まで、表示用画像はCまで内容が必要。</desc>
+  <defs>
+    <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse">
+      <path d="M0 0 10 5 0 10z" fill="#476278"/>
+    </marker>
+  </defs>
+  <rect width="760" height="425" rx="18" fill="#edf3f7"/>
+  <g font-family="system-ui, 'Yu Gothic', Meiryo, sans-serif" fill="#153147">
+    <text x="24" y="42" font-size="23" font-weight="700">描画先の内容を、最後に使う処理まで残す</text>
+    <text x="24" y="70" font-size="15" fill="#476278">AとBは描画パス。Cで表示へ引き渡す例。</text>
+
+    <rect x="171" y="91" width="165" height="76" rx="9" fill="#fff" stroke="#a9bdcc"/>
+    <rect x="369" y="91" width="165" height="76" rx="9" fill="#fff" stroke="#a9bdcc"/>
+    <rect x="567" y="91" width="165" height="76" rx="9" fill="#fff" stroke="#a9bdcc"/>
+    <path d="M340 129h23" fill="none" stroke="#476278" stroke-width="2" marker-end="url(#arrow)"/>
+    <path d="M538 129h23" fill="none" stroke="#476278" stroke-width="2" marker-end="url(#arrow)"/>
+    <g text-anchor="middle">
+      <text x="253" y="121" font-size="17" font-weight="700">A シーン描画</text>
+      <text x="253" y="146" font-size="14">色と深度を書く</text>
+      <text x="451" y="121" font-size="17" font-weight="700">B 後処理</text>
+      <text x="451" y="146" font-size="14">色を読み、結果を書く</text>
+      <text x="649" y="121" font-size="17" font-weight="700">C 表示</text>
+      <text x="649" y="146" font-size="14">画像を表示へ渡す</text>
+    </g>
+
+    <rect x="22" y="186" width="710" height="214" rx="10" fill="#fff" stroke="#a9bdcc"/>
+    <text x="39" y="215" font-size="15" font-weight="700">内容が必要な区間</text>
+    <path d="M351 224v154m198-154v154" stroke="#bac8d2" stroke-dasharray="4 4"/>
+    <g font-size="15" font-weight="700">
+      <text x="39" y="250">シーン色</text>
+      <text x="39" y="307">深度</text>
+      <text x="39" y="364">表示用画像</text>
+    </g>
+    <rect x="171" y="227" width="363" height="36" rx="6" fill="#deedf5" stroke="#9db9c9"/>
+    <rect x="171" y="284" width="165" height="36" rx="6" fill="#fff1d8" stroke="#cfb484"/>
+    <rect x="369" y="341" width="353" height="36" rx="6" fill="#dceee8" stroke="#97b7aa"/>
+    <g text-anchor="middle" font-size="14">
+      <text x="352" y="250">Aで書く → Bの最後の読み取りまで保持</text>
+      <text x="253" y="307">Aの終了で破棄可能</text>
+      <text x="545" y="364">Bで書く → Cの表示への引き渡しまで保持</text>
+    </g>
+  </g>
+</svg>

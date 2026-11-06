@@ -1,0 +1,70 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="760" height="480" viewBox="0 0 760 480" role="img" aria-labelledby="title desc">
+  <title id="title">同じフレームの中間画像と、次のフレームへ渡す履歴</title>
+  <desc id="desc">上段では横ブラーがAを読みBに書き、縦ブラーがBを読みAに書く。下段ではフレームnが履歴H0を読みH1を更新し、フレームn+1がH1を読みH0を更新する。H1の参照はフレーム境界を越える。</desc>
+  <defs>
+    <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto">
+      <path d="M0 0 10 5 0 10z" fill="#455e6d"/>
+    </marker>
+  </defs>
+  <rect width="760" height="480" rx="18" fill="#edf2f5"/>
+  <g font-family="system-ui, 'Yu Gothic', 'Meiryo', sans-serif" fill="#163347">
+    <text x="24" y="42" font-size="24" font-weight="700">中間画像とフレーム履歴の入れ替え</text>
+    <text x="24" y="68" font-size="14" fill="#385466">2枚を交互に使い、書いた結果を次のパスで読む。</text>
+
+    <rect x="24" y="88" width="712" height="152" rx="12" fill="#fff" stroke="#a6bdca"/>
+    <text x="42" y="114" font-size="16" font-weight="700">同じフレーム内のピンポン</text>
+    <rect x="42" y="135" width="104" height="56" rx="8" fill="#dfeef3" stroke="#88aebb"/>
+    <rect x="182" y="135" width="104" height="56" rx="8" fill="#edf2f5" stroke="#a6bdca"/>
+    <rect x="322" y="135" width="116" height="56" rx="8" fill="#e0efe9" stroke="#86b2a2"/>
+    <rect x="474" y="135" width="104" height="56" rx="8" fill="#edf2f5" stroke="#a6bdca"/>
+    <rect x="614" y="135" width="104" height="56" rx="8" fill="#dfeef3" stroke="#88aebb"/>
+    <g stroke="#455e6d" stroke-width="2" marker-end="url(#arrow)">
+      <path d="M147 163h30"/>
+      <path d="M287 163h30"/>
+      <path d="M439 163h30"/>
+      <path d="M579 163h30"/>
+    </g>
+    <g text-anchor="middle" font-size="15" font-weight="700">
+      <text x="94" y="158">A</text>
+      <text x="234" y="169">横ブラー</text>
+      <text x="380" y="158">B</text>
+      <text x="526" y="169">縦ブラー</text>
+      <text x="666" y="158">A</text>
+    </g>
+    <g text-anchor="middle" font-size="13" fill="#385466">
+      <text x="94" y="179">シーン画像</text>
+      <text x="380" y="179">中間結果</text>
+      <text x="666" y="179">完成画像</text>
+    </g>
+    <text x="42" y="218" font-size="14" fill="#385466">パスの間で、Bを書き込み先から読み取り元に切り替える。</text>
+
+    <rect x="24" y="255" width="712" height="199" rx="12" fill="#fff" stroke="#a6bdca"/>
+    <text x="42" y="282" font-size="16" font-weight="700">フレームをまたぐ履歴</text>
+    <line x1="380" y1="298" x2="380" y2="429" stroke="#9cb0bc" stroke-width="2" stroke-dasharray="4 4"/>
+    <g text-anchor="middle" font-size="14" font-weight="700">
+      <text x="203" y="318">フレーム n</text>
+      <text x="557" y="318">フレーム n+1</text>
+    </g>
+    <rect x="42" y="335" width="116" height="50" rx="8" fill="#dfeef3" stroke="#88aebb"/>
+    <rect x="222" y="335" width="116" height="50" rx="8" fill="#e0efe9" stroke="#86b2a2"/>
+    <rect x="422" y="335" width="116" height="50" rx="8" fill="#e0efe9" stroke="#86b2a2"/>
+    <rect x="602" y="335" width="116" height="50" rx="8" fill="#dfeef3" stroke="#88aebb"/>
+    <g stroke="#455e6d" stroke-width="2" marker-end="url(#arrow)">
+      <path d="M159 361h58"/>
+      <path d="M339 361h78"/>
+      <path d="M539 361h58"/>
+    </g>
+    <g text-anchor="middle" font-size="14" font-weight="700">
+      <text x="100" y="366">H0 を読む</text>
+      <text x="280" y="366">H1 に書く</text>
+      <text x="480" y="366">H1 を読む</text>
+      <text x="660" y="366">H0 に書く</text>
+    </g>
+    <g text-anchor="middle" font-size="13" fill="#385466">
+      <text x="190" y="352">更新</text>
+      <text x="570" y="352">更新</text>
+    </g>
+    <rect x="297" y="404" width="166" height="31" rx="7" fill="#f7ecd4" stroke="#d1b984"/>
+    <text x="380" y="425" font-size="13" font-weight="700" text-anchor="middle">H1 を次まで保持する</text>
+  </g>
+</svg>
