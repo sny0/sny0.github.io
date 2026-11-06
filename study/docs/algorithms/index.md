@@ -25,6 +25,7 @@
 - [ハッシュテーブル — 同じ場所に来たキーをどう探すか](/algorithms/hash-tables.html)
 - [均等グリッドと空間ハッシュ — 近くの候補をセルで絞る](/algorithms/uniform-grid-and-spatial-hash.html)
 - [四分木と八分木 — 必要な場所だけ細かく分ける](/algorithms/quadtrees-and-octrees.html)
+- [世代付きハンドル — 再利用したIDを区別する](/algorithms/generational-handles.html)
 - [二分ヒープと優先度付きキュー](/algorithms/binary-heaps.html)
 - [二分探索木と順序付き連想コンテナ](/algorithms/search-trees.html)
 - [配列と動的配列 — 添字、容量、再確保](/algorithms/arrays-and-dynamic-arrays.html)
@@ -37,6 +38,7 @@
 ## 作って試す
 
 - [スパースセットでIDの追加と削除を試す](/practice/algorithms/sparse-set-observation.html)
+- [世代付きハンドルでスロットの再利用を追う](/practice/algorithms/generational-handle-observation.html)
 - [総当たり・グリッド・BVHで範囲検索を比べる](/practice/algorithms/spatial-query-observation.html)
 
 ## 扱う範囲・増補する項目

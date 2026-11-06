@@ -3,7 +3,7 @@ title: 第7章 コンパイラ・リンカ・実行ファイル・ABI
 study:
   source: IT教本
   status: outline
-  summary: コンパイル・リンク・ロードを学ぶ計画。C++のビルドとABI、Windowsでの起動処理の辞典本文につなぐ。構文解析やIRの詳解は準備中。
+  summary: コンパイル・リンク・ロードを学ぶ計画。字句・構文解析からLLVM IR、COFFの再配置、Windowsでの起動処理までを辞典本文と実践で追う。
   section: learning
   format: path
   domain: compilers
@@ -17,10 +17,12 @@ study:
 
 ## このページで案内すること
 
-ソースから実行ファイルまでの段階を分け、コンパイル・リンク・ロードを観察するための**学習計画・概要**です。既存本文はC++のビルドとABIを中心に扱います。字句解析・構文解析・IRなど、コンパイラ内部の専用詳解は未整備です。
+ソースから実行ファイルまでの段階を分け、コンパイル・リンク・ロードを観察するための**学習計画・概要**です。辞典本文で各段階を読み、実践でOBJとEXEを作って確認できます。
 
 ## 関連する辞典本文・実践
 
+- [トークン・AST・型検査](/compilers/tokens-ast-and-type-checking.html)と[LLVM IRとSSA](/compilers/llvm-ir-and-ssa.html)で、コンパイラ内部の表現を追えます。
+- [COFFの再配置](/compilers/coff-relocations.html)、[WindowsのPEローダー](/os/pe-loading-and-imports.html)、[OBJ・EXE・PDBを作って読む実践](/practice/compilers/build-artifact-observation.html)で、ファイルに残る情報と読み込み時に決まる値を比べられます。
 - [実行ファイルを起動してmainへ到達するまで](/os/process-startup.html)と[Windows/C++の観察サンプル](/practice/process/windows-process-observation.html)で、ビルド後の起動と実行を確かめられます。
 
 - [main.cppからCPU命令まで](/runtime/cpp-internals/build-pipeline-journey.html)と[翻訳単位・ヘッダー・ODR](/runtime/cpp-internals/translation-units-and-headers.html)で、処理の段階を追えます。

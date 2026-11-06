@@ -3,12 +3,7 @@ title: 第18章 デバッグとプロファイリング
 study:
   source: IT教本
   status: outline
-  summary: |-
-    クラッシュ解析、CPU・GPU・メモリの計測を、目的に合う道具で試すための学習計画・概要です。一度に全機能を覚えるより、再現する問題を一つ選び、仮説と観測結果を対応させます。
-
-    ## 関連する辞典本文・実践
-
-    - [静的解析・サニタイザ・警告](/tools/build/debugging-
+  summary: ブレークポイント、クラッシュ解析、CPU・GPU・メモリの計測を、目的に合う道具で試すための学習計画。
   section: learning
   format: path
   domain: tools
@@ -26,6 +21,7 @@ study:
 
 ## 関連する辞典本文・実践
 
+- [ブレークポイントとデータブレークポイント](/tools/windows/debugger-breakpoints-and-watchpoints.html)で動作中の書き込みを追い、[クラッシュダンプとPDB](/tools/windows/crash-dumps-and-symbols.html)で停止時の記録を調べられます。
 - [静的解析・サニタイザ・警告](/tools/build/debugging-and-analysis.html)と[ビルド構成・シンボル・デバッガ](/tools/build/build-configurations.html)で、コードの調査機能を整理できます。
 - [RenderDoc・PIX・Nsight・Frame Debugger](/graphics/optimization/tools.html)では、GPU側の観察対象を調べられます。
 

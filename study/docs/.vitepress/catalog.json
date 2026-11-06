@@ -41,14 +41,14 @@
       "id": "os",
       "title": "OS",
       "description": "プロセス、メモリ、スレッド、入出力の仕組みを調べる。",
-      "count": 5,
+      "count": 6,
       "status": "辞典本文あり"
     },
     {
       "id": "compilers",
       "title": "コンパイラとツールチェーン",
       "description": "ソースコードが実行可能になるまでを追う。",
-      "count": 7,
+      "count": 10,
       "status": "辞典本文あり"
     },
     {
@@ -90,7 +90,7 @@
       "id": "algorithms",
       "title": "データ構造・アルゴリズム",
       "description": "操作手順、計算量、不変条件から道具を選ぶ。",
-      "count": 10,
+      "count": 11,
       "status": "辞典本文あり"
     },
     {
@@ -125,11 +125,25 @@
       "id": "tools",
       "title": "開発ツールと調査機能",
       "description": "どの機能で何を観察し、どう確かめるかを調べる。",
-      "count": 6,
+      "count": 8,
       "status": "辞典本文あり"
     }
   ],
   "collections": [
+    {
+      "id": "generational-handle-observation",
+      "section": "practice",
+      "title": "世代付きハンドルでスロットの再利用を追う",
+      "description": "同じ枠を使い回し、古いハンドルの照合、世代の周回、退役を試す。",
+      "start": "/practice/algorithms/generational-handle-observation.html"
+    },
+    {
+      "id": "build-artifact-observation",
+      "section": "practice",
+      "title": "2つのC++ファイルからOBJ・EXE・PDBを作って読む",
+      "description": "別々のOBJの関数参照を、再配置情報、リンク後のEXE、PDBまで追う。",
+      "start": "/practice/compilers/build-artifact-observation.html"
+    },
     {
       "id": "spatial-query-observation",
       "section": "practice",
@@ -594,6 +608,36 @@
       ],
       "previous": "/graphics/capstone/01-design.html",
       "next": "/graphics/capstone/03-resources.html"
+    },
+    {
+      "title": "2つのC++ファイルからOBJ・EXE・PDBを作って読む",
+      "url": "/practice/compilers/build-artifact-observation.html",
+      "file": "practice/compilers/build-artifact-observation.md",
+      "domain": "compilers",
+      "section": "practice",
+      "format": "sample",
+      "status": "published",
+      "summary": "呼び出し元と呼び出し先を別のOBJにコンパイルし、DUMPBINで再配置、実行ファイルのインポート、デバッグ情報をたどる。",
+      "source": "新規執筆",
+      "aliases": [
+        "MSVC",
+        "DUMPBIN",
+        "OBJ",
+        "COFF",
+        "PE",
+        "EXE",
+        "PDB",
+        "relocation",
+        "再配置"
+      ],
+      "collection": "build-artifact-observation",
+      "order": 1,
+      "verification": "x64 MSVCでビルド・実行し、REL32とadjustの定義、リンク時のPDBの生成を確認（2026-11-06）",
+      "links": [
+        "/compilers/coff-relocations.html",
+        "/os/pe-loading-and-imports.html",
+        "/tools/windows/crash-dumps-and-symbols.html"
+      ]
     },
     {
       "title": "3. リソースとパイプライン構築",
@@ -1919,6 +1963,34 @@
         "/design/case-studies/damage-calculation.html",
         "/design/patterns/proxy.html",
         "/design/patterns/"
+      ]
+    },
+    {
+      "title": "COFFのシンボルと再配置 — リンカーがcallの距離を埋めるまで",
+      "url": "/compilers/coff-relocations.html",
+      "file": "compilers/coff-relocations.md",
+      "domain": "compilers",
+      "section": "reference",
+      "format": "article",
+      "status": "published",
+      "summary": "Windows x64の.objを読み、シンボル表の未定義参照、再配置レコード、リンク後のcall命令を対応付ける。REL32の変位を実測したバイト列から計算する。",
+      "source": "新規執筆",
+      "aliases": [
+        "COFF",
+        "PE/COFF",
+        "relocation",
+        "再配置",
+        "REL32",
+        "IMAGE_REL_AMD64_REL32",
+        "ADDR32NB",
+        "DUMPBIN",
+        "シンボル表",
+        "リンカー"
+      ],
+      "verification": "Visual Studio 2022のMSVC x64でコンパイル、DUMPBINとMAPでオフセット・変位を確認、実行終了コード0（2026-11-06）",
+      "links": [
+        "/runtime/cpp-internals/object-files-and-libraries.html",
+        "/os/pe-loading-and-imports.html"
       ]
     },
     {
@@ -3287,6 +3359,37 @@
       ]
     },
     {
+      "title": "LLVM IRとSSA — 分岐で選ばれる値を追う",
+      "url": "/compilers/llvm-ir-and-ssa.html",
+      "file": "compilers/llvm-ir-and-ssa.md",
+      "domain": "compilers",
+      "section": "reference",
+      "format": "article",
+      "status": "published",
+      "summary": "LLVM IRの基本ブロックと制御フローを読み、SSAの値が分岐とphiを通じてどうつながるかを調べる。",
+      "source": "新規執筆",
+      "aliases": [
+        "LLVM",
+        "LLVM IR",
+        "中間表現",
+        "IR",
+        "SSA",
+        "静的単一代入",
+        "phi",
+        "φ",
+        "CFG",
+        "制御フローグラフ",
+        "基本ブロック",
+        "mem2reg"
+      ],
+      "verification": "LLVM 14.0.6でIRのアセンブル・検証・実行とClangのIR出力を確認し、LLVMの言語仕様に照合（2026-11-06）",
+      "links": [
+        "/compilers/tokens-ast-and-type-checking.html",
+        "/runtime/cpp-internals/optimization-and-ub.html",
+        "/compilers/coff-relocations.html"
+      ]
+    },
+    {
       "title": "localStorage・IndexedDB・Cache APIの保存と完了を観察する",
       "url": "/practice/browser/storage-observation.html",
       "file": "practice/browser/storage-observation.md",
@@ -3586,6 +3689,7 @@
         "/runtime/memory/allocators-and-pools.html",
         "/languages/csharp/memory-management-vs-gc.html",
         "/game/patterns/optimization-patterns.html",
+        "/algorithms/generational-handles.html",
         "/runtime/memory/memory-bugs.html",
         "/game/unreal/gc-and-object-pointers.html",
         "/design/foundations/yagni-kiss-dry.html",
@@ -3689,6 +3793,38 @@
         "/graphics/lighting/ibl.html",
         "/graphics/lighting/shadow.html",
         "/graphics/lighting/gi.html"
+      ]
+    },
+    {
+      "title": "PEローダーがEXEとDLLを配置する仕組み — RVA・再配置・IAT",
+      "url": "/os/pe-loading-and-imports.html",
+      "file": "os/pe-loading-and-imports.md",
+      "domain": "os",
+      "section": "reference",
+      "format": "article",
+      "status": "published",
+      "summary": "Windows x64のPEでファイルオフセット、RVA、実行時VAを対応付ける。セクションのゼロ埋め、ASLR時のベース再配置、通常インポートと遅延インポートをDUMPBINの結果から読み解く。",
+      "source": "新規執筆",
+      "aliases": [
+        "PE",
+        "PE32+",
+        "Windowsローダー",
+        "RVA",
+        "VA",
+        "ASLR",
+        "ベース再配置",
+        "DIR64",
+        "IAT",
+        "インポートアドレステーブル",
+        "遅延ロード",
+        "delay load",
+        "DUMPBIN"
+      ],
+      "verification": "Visual Studio 2022のMSVC x64でビルドし、DUMPBINのHEADERS・IMPORTS・RELOCATIONSと実行終了コードを確認（2026-11-06）",
+      "links": [
+        "/os/process-startup.html",
+        "/os/virtual-memory.html",
+        "/compilers/coff-relocations.html"
       ]
     },
     {
@@ -6503,6 +6639,35 @@
       ]
     },
     {
+      "title": "クラッシュダンプとPDBで停止位置をたどる",
+      "url": "/tools/windows/crash-dumps-and-symbols.html",
+      "file": "tools/windows/crash-dumps-and-symbols.md",
+      "domain": "tools",
+      "section": "reference",
+      "format": "article",
+      "status": "published",
+      "summary": "Windowsのユーザーモードダンプから例外、レジスター、モジュールを読み、同じビルドのPDBで関数とソース行を調べる。",
+      "source": "新規執筆",
+      "aliases": [
+        "クラッシュダンプ",
+        "ミニダンプ",
+        "minidump",
+        "PDB",
+        "シンボル",
+        "WinDbg",
+        "ASLR",
+        "RVA",
+        "例外コンテキスト"
+      ],
+      "verification": "Microsoftのユーザーモードダンプ形式、PDB照合とWinDbgのコマンド資料に照合（2026-11-06）",
+      "links": [
+        "/os/pe-loading-and-imports.html",
+        "/tools/build/build-configurations.html",
+        "/tools/windows/debugger-breakpoints-and-watchpoints.html",
+        "/tools/build/debugging-and-analysis.html"
+      ]
+    },
+    {
       "title": "グラフィックスAPIの歴史",
       "url": "/graphics/api/history.html",
       "file": "graphics/api/history.md",
@@ -7024,6 +7189,7 @@
       ],
       "links": [
         "/algorithms/hash-tables.html",
+        "/algorithms/generational-handles.html",
         "/game/patterns/component-and-ecs.html",
         "/algorithms/arrays-and-dynamic-arrays.html",
         "/practice/algorithms/sparse-set-observation.html"
@@ -7343,6 +7509,37 @@
       ]
     },
     {
+      "title": "トークン・AST・型検査 — C++のソースを読み解く",
+      "url": "/compilers/tokens-ast-and-type-checking.html",
+      "file": "compilers/tokens-ast-and-type-checking.md",
+      "domain": "compilers",
+      "section": "reference",
+      "format": "article",
+      "status": "published",
+      "summary": "字句解析で得たトークンを構文木に組み立て、名前の参照先、式の型、暗黙の型変換を確かめる。",
+      "source": "新規執筆",
+      "aliases": [
+        "コンパイラフロントエンド",
+        "字句解析",
+        "lexer",
+        "トークン",
+        "token",
+        "構文解析",
+        "parser",
+        "抽象構文木",
+        "AST",
+        "型検査",
+        "意味解析",
+        "Sema",
+        "Clang"
+      ],
+      "verification": "Clang 14.0.6でASTと二つの診断を確認し、Clang公式資料に照合（2026-11-06）",
+      "links": [
+        "/runtime/cpp-internals/build-pipeline-journey.html",
+        "/compilers/llvm-ir-and-ssa.html"
+      ]
+    },
+    {
       "title": "ネイティブビルドと IL2CPP",
       "url": "/languages/csharp/il2cpp.html",
       "file": "languages/csharp/il2cpp.md",
@@ -7582,6 +7779,7 @@
       "aliases": [],
       "links": [
         "/runtime/cpp-internals/optimization-and-ub.html",
+        "/tools/windows/crash-dumps-and-symbols.html",
         "/runtime/memory/memory-bugs.html",
         "/languages/cpp/exceptions.html",
         "/tools/build/build-tools-cmake.html",
@@ -7840,6 +8038,34 @@
         "/design/foundations/yagni-kiss-dry.html",
         "/design/case-studies/",
         "/design/case-studies/weapon-switching.html"
+      ]
+    },
+    {
+      "title": "ブレークポイントとデータブレークポイント",
+      "url": "/tools/windows/debugger-breakpoints-and-watchpoints.html",
+      "file": "tools/windows/debugger-breakpoints-and-watchpoints.md",
+      "domain": "tools",
+      "section": "reference",
+      "format": "article",
+      "status": "published",
+      "summary": "ソース行・命令・データのどれを観測するかで停止条件を選ぶ。Windows x64の停止の仕組みと、書き込んだコードを追う手順を扱う。",
+      "source": "新規執筆",
+      "aliases": [
+        "デバッガ",
+        "ブレークポイント",
+        "データブレークポイント",
+        "ウォッチポイント",
+        "breakpoint",
+        "watchpoint",
+        "INT3",
+        "WinDbg",
+        "Visual Studio"
+      ],
+      "verification": "Microsoftの資料とIntelのデバッグ仕様に照合し、MSVCでC++例をビルド・実行して、逆アセンブルで2箇所の書き込みを確認（2026-11-06）",
+      "links": [
+        "/runtime/memory/storage-duration-and-lifetime.html",
+        "/tools/build/debugging-and-analysis.html",
+        "/tools/build/build-configurations.html"
       ]
     },
     {
@@ -8747,10 +8973,19 @@
         "/algorithms/search-trees.html",
         "/algorithms/sparse-sets.html",
         "/practice/algorithms/sparse-set-observation.html",
+        "/algorithms/generational-handles.html",
+        "/practice/algorithms/generational-handle-observation.html",
         "/algorithms/uniform-grid-and-spatial-hash.html",
         "/algorithms/quadtrees-and-octrees.html",
         "/algorithms/bounding-volume-hierarchies.html",
         "/practice/algorithms/spatial-query-observation.html",
+        "/compilers/tokens-ast-and-type-checking.html",
+        "/compilers/llvm-ir-and-ssa.html",
+        "/compilers/coff-relocations.html",
+        "/os/pe-loading-and-imports.html",
+        "/practice/compilers/build-artifact-observation.html",
+        "/tools/windows/debugger-breakpoints-and-watchpoints.html",
+        "/tools/windows/crash-dumps-and-symbols.html",
         "/history/video-games.html",
         "/guide/rendering/timeline.html"
       ]
@@ -9083,6 +9318,7 @@
         "/runtime/cpp-internals/build-pipeline-journey.html",
         "/os/virtual-memory.html",
         "/runtime/cpp-internals/object-files-and-libraries.html",
+        "/os/pe-loading-and-imports.html",
         "/runtime/memory/concurrency-bugs.html",
         "/languages/csharp/il2cpp.html",
         "/practice/process/windows-process-observation.html"
@@ -9283,6 +9519,58 @@
         "/design/naming.html",
         "/design/pattern-index.html",
         "/design/notebook-references.html"
+      ]
+    },
+    {
+      "title": "世代付きハンドル — 再利用したIDを区別する",
+      "url": "/algorithms/generational-handles.html",
+      "file": "algorithms/generational-handles.md",
+      "domain": "algorithms",
+      "section": "reference",
+      "format": "article",
+      "status": "published",
+      "summary": "スロット番号と世代番号で対象の入れ替わりを検出し、世代番号が周回する場合や別スレッドで使う場合の条件を調べる。",
+      "source": "新規執筆",
+      "aliases": [
+        "世代付きハンドル",
+        "世代付きID",
+        "generational handle",
+        "generation counter",
+        "slot map",
+        "entity aliasing",
+        "スロット再利用"
+      ],
+      "links": [
+        "/algorithms/sparse-sets.html",
+        "/game/patterns/object-pool.html",
+        "/practice/algorithms/generational-handle-observation.html",
+        "/runtime/thread-synchronization.html",
+        "/game/asset-loading.html"
+      ]
+    },
+    {
+      "title": "世代付きハンドルでスロットの再利用を追う",
+      "url": "/practice/algorithms/generational-handle-observation.html",
+      "file": "practice/algorithms/generational-handle-observation.md",
+      "domain": "algorithms",
+      "section": "practice",
+      "format": "sample",
+      "status": "published",
+      "summary": "スロットを解放して別の対象に割り当て、古いハンドルの検査と、世代の周回・退役の違いを観察する。",
+      "source": "新規執筆",
+      "aliases": [
+        "世代付きハンドル",
+        "世代付きID",
+        "generation",
+        "slot",
+        "wraparound",
+        "オブジェクトプール"
+      ],
+      "collection": "generational-handle-observation",
+      "order": 1,
+      "verification": "Nodeで世代の周回・退役・無効な操作を確認し、Chromium系ブラウザで解放と再割り当てを検証（2026-11-06）",
+      "links": [
+        "/algorithms/generational-handles.html"
       ]
     },
     {
@@ -10036,12 +10324,14 @@
       "section": "learning",
       "format": "path",
       "status": "outline",
-      "summary": "クラッシュ解析、CPU・GPU・メモリの計測を、目的に合う道具で試すための学習計画・概要です。一度に全機能を覚えるより、再現する問題を一つ選び、仮説と観測結果を対応させます。\n\n## 関連する辞典本文・実践\n\n- [静的解析・サニタイザ・警告](/tools/build/debugging-",
+      "summary": "ブレークポイント、クラッシュ解析、CPU・GPU・メモリの計測を、目的に合う道具で試すための学習計画。",
       "source": "IT教本",
       "aliases": [],
       "collection": "low-level",
       "order": 19,
       "links": [
+        "/tools/windows/debugger-breakpoints-and-watchpoints.html",
+        "/tools/windows/crash-dumps-and-symbols.html",
         "/tools/build/debugging-and-analysis.html",
         "/tools/build/build-configurations.html",
         "/graphics/optimization/tools.html"
@@ -10192,12 +10482,17 @@
       "section": "learning",
       "format": "path",
       "status": "outline",
-      "summary": "コンパイル・リンク・ロードを学ぶ計画。C++のビルドとABI、Windowsでの起動処理の辞典本文につなぐ。構文解析やIRの詳解は準備中。",
+      "summary": "コンパイル・リンク・ロードを学ぶ計画。字句・構文解析からLLVM IR、COFFの再配置、Windowsでの起動処理までを辞典本文と実践で追う。",
       "source": "IT教本",
       "aliases": [],
       "collection": "low-level",
       "order": 8,
       "links": [
+        "/compilers/tokens-ast-and-type-checking.html",
+        "/compilers/llvm-ir-and-ssa.html",
+        "/compilers/coff-relocations.html",
+        "/os/pe-loading-and-imports.html",
+        "/practice/compilers/build-artifact-observation.html",
         "/os/process-startup.html",
         "/practice/process/windows-process-observation.html",
         "/runtime/cpp-internals/build-pipeline-journey.html",
@@ -11194,6 +11489,13 @@
       "source": "統合ガイド",
       "aliases": [],
       "links": [
+        "/algorithms/generational-handles.html",
+        "/compilers/tokens-ast-and-type-checking.html",
+        "/compilers/llvm-ir-and-ssa.html",
+        "/compilers/coff-relocations.html",
+        "/os/pe-loading-and-imports.html",
+        "/tools/windows/debugger-breakpoints-and-watchpoints.html",
+        "/tools/windows/crash-dumps-and-symbols.html",
         "/algorithms/uniform-grid-and-spatial-hash.html",
         "/algorithms/quadtrees-and-octrees.html",
         "/algorithms/bounding-volume-hierarchies.html",

@@ -1,0 +1,44 @@
+<!doctype html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>同じ枠を再利用して古い参照を調べる | Sny0 Study</title>
+  <link rel="stylesheet" href="styles.css">
+  <script type="module" src="main.js"></script>
+</head>
+<body>
+  <main>
+    <header>
+      <a href="https://sny0.com/study/practice/algorithms/generational-handle-observation.html">実践手順とコードを読む</a>
+      <h1>同じ枠を再利用して古い参照を調べる</h1>
+      <p>最初のオブジェクトへの参照を保存したまま、スロット0を別のオブジェクトに割り当てます。</p>
+    </header>
+
+    <section aria-labelledby="controls-title">
+      <h2 id="controls-title">スロット0を操作する</h2>
+      <div class="controls">
+        <label for="policy">世代3から先の扱い</label>
+        <select id="policy"><option value="wrap">2ビットで周回する</option><option value="retire">上限で退役する</option></select>
+        <button type="button" id="release">解放</button>
+        <button type="button" id="allocate">割り当て</button>
+        <button type="button" id="replace">入れ替える</button>
+        <button type="button" id="reset">初期状態に戻す</button>
+      </div>
+      <p>「入れ替える」は解放と次の割り当てを続けて行います。扱いを変えると初期状態に戻ります。</p>
+      <div class="slot" id="slot" aria-live="polite"></div>
+    </section>
+
+    <section aria-labelledby="results-title">
+      <h2 id="results-title">最初に保存した参照で照合する</h2>
+      <div class="results" aria-live="polite">
+        <article id="by-index"><h3>位置だけ</h3><p class="key">スロット 0</p><p class="result"></p></article>
+        <article id="by-handle"><h3>世代付きハンドル</h3><p class="key">スロット 0・世代 0</p><p class="result"></p></article>
+      </div>
+      <p>世代を2ビットにして、周回を観察しやすくしています。オブジェクトの番号は入れ替わりを示すための表示です。</p>
+      <a href="https://sny0.com/study/practice/algorithms/generational-handle-observation.html#run-locally">手元で動かす手順</a>
+      <noscript><p>スロットを操作するにはJavaScriptを有効にします。</p></noscript>
+    </section>
+  </main>
+</body>
+</html>

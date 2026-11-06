@@ -62,7 +62,8 @@ export default withMermaid(defineConfig({
       { url: '/study/samples/graphics/swap-chain-observation/index.html' },
       { url: '/study/samples/graphics/input-latency-observation/index.html' },
       { url: '/study/samples/algorithms/sparse-set-observation/index.html' },
-      { url: '/study/samples/algorithms/spatial-query-observation/index.html' }
+      { url: '/study/samples/algorithms/spatial-query-observation/index.html' },
+      { url: '/study/samples/algorithms/generational-handle-observation/index.html' }
     ]
   },
   head: [

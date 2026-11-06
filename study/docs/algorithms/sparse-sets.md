@@ -36,6 +36,6 @@ study:
 
 単純な `sparse` 配列の要素数は、格納している件数よりもIDの範囲に依存します。上限が大きく、使うIDが飛び飛びなら、必要なページだけに表を作る方法や、IDから位置を引く部分にハッシュ表を使う方法があります。EnTTにはページ分割されたスパース配列と複数の削除方式があり、ここで使った古い添字を残すモデルとは実装上の細部が異なります。[EnTTのスパース配列の実装](https://skypjack.github.io/entt/sparse__set_8hpp_source.html) · [ハッシュ表](/algorithms/hash-tables.html)
 
-ECSでIDを再発行する場合、同じ数値のスロットが別のエンティティに使われます。古いハンドルを識別するには、位置やIDに加えて世代の一致を確認します。密に並べて走査すること、削除時の順序、参照の安定性はそれぞれ独立した設計条件です。[ECSのコンポーネント管理](/game/patterns/component-and-ecs.html) · [動的配列の再確保と参照](/algorithms/arrays-and-dynamic-arrays.html)
+ECSでIDを再発行する場合、同じ数値のスロットが別のエンティティに使われます。古いハンドルを識別するには、スロットに加えて世代の一致を確認します。密に並べて走査すること、削除時の順序、参照の安定性はそれぞれ独立した設計条件です。[世代付きハンドル](/algorithms/generational-handles.html) · [ECSのコンポーネント管理](/game/patterns/component-and-ecs.html) · [動的配列の再確保と参照](/algorithms/arrays-and-dynamic-arrays.html)
 
 [IDを追加・削除して二つの配列を観察する](/practice/algorithms/sparse-set-observation.html)

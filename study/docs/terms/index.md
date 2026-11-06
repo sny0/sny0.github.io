@@ -18,6 +18,13 @@
 
 | 用語・別名 | 説明への入口 |
 | --- | --- |
+| [世代付きハンドル / generational handle / slot map / 世代番号 / entity aliasing](/algorithms/generational-handles.html) | スロット再利用と世代の周回で、古い参照がいつ一致するか調べる |
+| [字句解析 / token / 構文解析 / AST / 型検査 / semantic analysis](/compilers/tokens-ast-and-type-checking.html) | ソースをトークンから構文木へ変え、型と名前を解決する |
+| [LLVM IR / 中間表現 / SSA / φ / phi / 基本ブロック / CFG](/compilers/llvm-ir-and-ssa.html) | 分岐の経路と、合流点で使われる値を追う |
+| [COFF / OBJ / 再配置 / relocation / REL32 / 未定義シンボル](/compilers/coff-relocations.html) | 別のOBJを参照する命令をリンク時にどう埋めるか調べる |
+| [PE / ローダー / RVA / VA / ASLR / ベース再配置 / DLLインポート / IAT](/os/pe-loading-and-imports.html) | EXEやDLLを仮想メモリに置き、外部関数への参照を解決する |
+| [ブレークポイント / データブレークポイント / watchpoint / 条件付きブレークポイント](/tools/windows/debugger-breakpoints-and-watchpoints.html) | 実行や書き込みを観察するためにプログラムを止める |
+| [クラッシュダンプ / minidump / PDB / WinDbg / シンボル / スタック](/tools/windows/crash-dumps-and-symbols.html) | 停止時の記録を開き、ビルドに対応するシンボルで停止位置を調べる |
 | [均等グリッド / uniform grid / 空間ハッシュ / spatial hash / セル / 候補の重複](/algorithms/uniform-grid-and-spatial-hash.html) | 座標をセルに割り当て、検索範囲に近い物体を集める |
 | [四分木 / クアッドツリー / quadtree / 八分木 / オクツリー / octree / loose tree](/algorithms/quadtrees-and-octrees.html) | 空間の分割を深くする条件と、境界をまたぐ物体の置き場所を調べる |
 | [BVH / bounding volume hierarchy / AABB / ブロードフェーズ / リフィット / refit](/algorithms/bounding-volume-hierarchies.html) | 箱で物体をまとめ、検索範囲と重ならない枝を省く |
