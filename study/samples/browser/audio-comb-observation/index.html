@@ -1,0 +1,107 @@
+<!doctype html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="referrer" content="no-referrer">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'self'; style-src 'self'; base-uri 'none'; form-action 'none'">
+  <title>Web Audioでコムフィルターを観察する | Sny0 Study</title>
+  <link rel="canonical" href="https://sny0.com/study/samples/browser/audio-comb-observation/index.html">
+  <link rel="stylesheet" href="styles.css">
+  <script type="module" src="main.js"></script>
+</head>
+<body>
+  <main>
+    <header class="card">
+      <a href="https://sny0.com/study/practice/browser/audio-comb-observation.html">実践手順とコードを読む</a>
+      <h1>同じ音を少し遅らせて重ねる</h1>
+      <p>遅延時間とコピーのゲインを変え、どの周波数が弱まるかを調べます。遅延したコピーのゲインを0にすると、元の信号だけを通した結果と比べられます。</p>
+    </header>
+
+    <section class="card" aria-labelledby="controls-heading">
+      <h2 id="controls-heading">遅延とゲインを選ぶ</h2>
+      <div class="actions">
+        <label for="delay-ms">遅延時間
+          <select id="delay-ms" disabled>
+            <option value="1">1 ms</option>
+            <option value="2" selected>2 ms</option>
+            <option value="5">5 ms</option>
+            <option value="10">10 ms</option>
+          </select>
+        </label>
+        <label for="relative-gain">コピーの相対ゲイン
+          <select id="relative-gain" disabled>
+            <option value="0">0（コピーなし）</option>
+            <option value="0.5">0.5（半分）</option>
+            <option value="1" selected>1（同じ大きさ）</option>
+          </select>
+        </label>
+        <button id="render-comb" type="button" disabled>グラフを計算</button>
+      </div>
+      <p id="comb-status" class="status" data-state="ready" role="status">「グラフを計算」で結果を表示します。</p>
+      <p class="hint"><a href="https://sny0.com/study/practice/browser/audio-comb-observation.html#run-locally">手元で動かす手順</a></p>
+      <noscript><p>このサンプルを操作するにはJavaScriptを有効にしてください。</p></noscript>
+    </section>
+
+    <section class="card" aria-labelledby="results-heading">
+      <h2 id="results-heading">インパルス応答と周波数応答</h2>
+      <p id="rendered-settings">計算に使った設定をここに表示します。</p>
+      <p>振幅1のサンプルを1個だけ入力して出力を測り、周波数ごとの出力振幅を計算します。0 dBは入力と同じ振幅です。表示範囲の下限は−60 dBです。</p>
+      <div class="comparison">
+        <figure>
+          <figcaption>インパルス応答（横軸は時間）</figcaption>
+          <svg id="impulse-chart" class="chart" viewBox="0 0 420 174" role="img" aria-label="インパルス応答。計算前。">
+            <path class="grid" d="M46 22H401 M46 77H401 M46 22V132H401 M117 22V132 M223.5 22V132 M401 22V132"/>
+            <text x="39" y="26" text-anchor="end">1</text>
+            <text x="39" y="81" text-anchor="end">0.5</text>
+            <text x="39" y="136" text-anchor="end">0</text>
+            <text x="46" y="155" text-anchor="middle">0</text>
+            <text x="117" y="155" text-anchor="middle">2</text>
+            <text x="223.5" y="155" text-anchor="middle">5</text>
+            <text x="401" y="155" text-anchor="end">10 ms</text>
+            <path id="impulse-taps" class="curve taps"/>
+          </svg>
+          <dl class="metrics">
+            <div><dt>元の音の振幅</dt><dd id="dry-tap">—</dd></div>
+            <div><dt>コピーの振幅</dt><dd id="delayed-tap">—</dd></div>
+            <div><dt>遅延のフレーム数</dt><dd id="delay-frames">—</dd></div>
+          </dl>
+        </figure>
+        <figure>
+          <figcaption>周波数応答（横軸は周波数）</figcaption>
+          <svg id="response-chart" class="chart" viewBox="0 0 420 174" role="img" aria-label="周波数応答。計算前。">
+            <path class="grid" d="M46 22H401 M46 58.67H401 M46 95.33H401 M46 22V132H401 M134.75 22V132 M223.5 22V132 M312.25 22V132 M401 22V132"/>
+            <text x="39" y="26" text-anchor="end">0 dB</text>
+            <text x="39" y="62.67" text-anchor="end">−20</text>
+            <text x="39" y="99.33" text-anchor="end">−40</text>
+            <text x="39" y="136" text-anchor="end">−60</text>
+            <text x="46" y="155" text-anchor="middle">0</text>
+            <text x="134.75" y="155" text-anchor="middle">500</text>
+            <text x="223.5" y="155" text-anchor="middle">1,000</text>
+            <text x="312.25" y="155" text-anchor="middle">1,500</text>
+            <text x="401" y="155" text-anchor="end">2,000 Hz</text>
+            <path id="first-dip-marker" class="dip-marker"/>
+            <path id="response-curve" class="curve"/>
+          </svg>
+          <dl class="metrics">
+            <div><dt>最初の谷の予測位置</dt><dd id="first-dip-frequency">—</dd></div>
+            <div><dt>その周波数での実測値</dt><dd id="first-dip-level">—</dd></div>
+          </dl>
+          <p id="dip-note" class="hint">破線は遅延時間から求めた最初の谷の位置です。</p>
+        </figure>
+      </div>
+    </section>
+
+    <section class="card" aria-labelledby="playback-heading">
+      <h2 id="playback-heading">元の音と重ねた音を聞き比べる</h2>
+      <p>同じノイズを使います。再生するときは音量を抑えています。</p>
+      <div class="actions">
+        <button id="play-dry" type="button" class="secondary" disabled>元の音を聞く</button>
+        <button id="play-mixed" type="button" class="secondary" disabled>重ねた音を聞く</button>
+        <button id="stop-playback" type="button" class="secondary" disabled>再生を停止</button>
+      </div>
+      <p id="playback-status" class="status" data-state="ready" role="status">計算すると試聴できます。</p>
+    </section>
+  </main>
+</body>
+</html>
