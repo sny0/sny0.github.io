@@ -18,7 +18,7 @@ function matter(text) {
 
 const domains = [
   ['data','情報表現とバイナリ','数値・文字・バイト列を、メモリやファイルの表現へつなぐ。','ビットとバイト、整数・浮動小数点、Unicode、エンディアン、ファイル形式、圧縮'],
-  ['hardware','ハードウェア','CPU・GPU・キャッシュから、命令とデータが動く仕組みを調べる。','論理回路、ISA・レジスタ、命令実行、分岐予測、キャッシュ・TLB、SIMD、割り込み・DMA'],
+  ['hardware','ハードウェア','CPU・GPU・メモリ・デバイスの間で、命令とデータがどう動くかを調べる。','論理回路、ISA・レジスタ、命令実行、分岐予測、キャッシュ・TLB、SIMD、PCIe、割り込み・DMA・IOMMU'],
   ['os','OS','プロセス、メモリ、スレッド、入出力の仕組みを調べる。','カーネル、プロセス・スレッド、仮想メモリ、システムコール、ファイル・非同期I/O、IPC、権限'],
   ['compilers','コンパイラとツールチェーン','ソースコードが実行可能になるまでを追う。','字句・構文・型検査、AST・IR・SSA、最適化、コード生成、リンク・再配置、ABI、ローダー、デバッグ情報'],
   ['languages','言語','言語の構文を、型・所有・寿命・実行の違いから調べる。','アセンブリ、C、C++、C#、Rust、Zig、PowerShell、POSIX sh/Bash、Python、HLSL・GLSL'],
@@ -309,6 +309,20 @@ writePage('guide/learning-paths.md', '疑問から選ぶ読み順', {
 1. [ソケットとTCP通信](/network/tcp-sockets.html)で、IP・ポート、送受信バッファ、バイト列とメッセージ、半閉鎖を分ける。
 2. [C++・C#のローカル通信](/practice/network/tcp-loopback-observation.html)で、長さ付きメッセージを復元し、送信停止後の応答と受信EOFを確かめる。
 3. 待機と非同期処理の基本は[非同期I/O](/os/asynchronous-file-io.html)へ進む。今回の通信例は、非ブロッキング操作とreadiness待ちを使う。
+
+## UDPでメッセージを送り、通信の遅れを調べるには
+
+1. [IPの経路選択とEthernet](/network/ip-routing-and-ethernet.html)で、送信先IPから次の経由先を選び、同じリンク上でフレームを届ける流れを追う。
+2. [UDPとデータグラム](/network/udp-datagrams.html)で、送受信の区切り、順序や再送、パケットの大きさを調べる。
+3. [C++のUDPループバック実践](/practice/network/udp-loopback-observation.html)で、受信バッファが足りない場合と空データグラムの戻り値を確かめる。
+4. [通信の遅延と帯域](/network/latency-throughput-and-queues.html)で、RTT、転送量、混雑時のキューを分けて観測する。
+
+## SSDやNICがメモリとデータをやり取りするには
+
+1. [PCIeのリンク](/hardware/io/pcie-links.html)で、CPU側とデバイスをつなぐ経路、レーン数、リンク速度を調べる。
+2. [DMAとIOMMU](/hardware/io/dma-and-iommu.html)で、デバイスから見たアドレス、読み書き、完了通知を追う。
+3. [DRAMのチャネルと帯域](/hardware/memory/dram-channels-and-bandwidth.html)で、メモリ側の転送速度、バンクと行、アクセスの待ち時間を調べる。
+4. アプリが見る操作とOSのディスク要求の違いは[WindowsのファイルI/O計測](/tools/windows/file-io-tracing.html)で確かめる。
 
 ## TCPのバイト列が、Webの要求と応答になるまで
 
@@ -631,6 +645,12 @@ const termRows = [
   ['DNS / 名前解決 / リゾルバー / 権威DNS / A / AAAA / CNAME / TTL / NXDOMAIN / NODATA', '/network/dns-resolution.html', '名前解決API、委任をたどる問い合わせ、レコードとキャッシュ、失敗の違いを調べる'],
   ['HTTP / HTTP/1.1 / GET / Host / 状態コード / ヘッダー / Content-Length / Content-Type / CRLF', '/network/http-messages.html', '要求と応答の形式、本文のバイト数、メッセージの完成と接続終了を調べる'],
   ['ソケット / socket / TCP / IPアドレス / ポート / send / recv / フレーミング / 半閉鎖 / loopback', '/network/tcp-sockets.html', '送受信バッファ、バイト列の境界、EOFとエラー、接続の終了を調べる'],
+  ['UDP / データグラム / sendto / recvfrom / WSAEMSGSIZE / MTU / QUIC', '/network/udp-datagrams.html', 'メッセージの区切りと受信失敗、送信サイズや期限を調べる'],
+  ['IPルーティング / デフォルトゲートウェイ / Ethernet / MACアドレス / ARP / Neighbor Discovery / TTL', '/network/ip-routing-and-ethernet.html', 'IPの行き先から次の経由先を選び、各リンクでフレームを渡す'],
+  ['通信遅延 / RTT / 帯域 / goodput / ジッター / 輻輳 / BDP / バッファブロート', '/network/latency-throughput-and-queues.html', '回線の転送量と、混雑による待ち時間を分ける'],
+  ['PCI Express / PCIe / root complex / レーン / リンク速度 / GT/s', '/hardware/io/pcie-links.html', 'デバイスまでの経路とリンクの転送上限を調べる'],
+  ['DMA / IOMMU / DMAアドレス / バスマスター / MSI-X / 割り込み', '/hardware/io/dma-and-iommu.html', 'デバイスが使うメモリ範囲、転送の向き、完了通知を調べる'],
+  ['DRAM / DDR / メモリチャネル / ランク / バンク / 行バッファ / MT/s', '/hardware/memory/dram-channels-and-bandwidth.html', 'メモリ側の並行性、帯域の計算、アクセス時の待ち時間を調べる'],
   ['メモリマップドファイル / file mapping / mmap / MapViewOfFile / MemoryMappedFile / ビュー', '/os/memory-mapped-files.html', 'ファイルの範囲と仮想アドレスを対応付け、ページとビューの寿命を調べる'],
   ['アセットロード / asset loading / リソース管理 / cook / 読み込み完了 / 利用可能 / 世代トークン', '/game/asset-loading.html', 'byte取得から登録・利用可能化・解放までの状態と所有権を整理する'],
   ['DirectStorage / GDeflate / GPU展開 / GPU decompression / DSTORAGE_REQUEST', '/game/directstorage.html', 'Windows PCで読み取りと展開をまとめて要求し、結果をGPUで使うまでの条件を調べる'],

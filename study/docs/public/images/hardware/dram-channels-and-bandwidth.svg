@@ -1,0 +1,42 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="760" height="414" viewBox="0 0 760 414" role="img" aria-labelledby="title desc">
+  <title id="title">DRAMへデータを運ぶチャネルと、バンク内の行</title>
+  <desc id="desc">CPUがDRAMを必要とするとメモリコントローラーがチャネルを選ぶ。データ幅64ビットのDDR4-3200は1チャネル25.6 GB/s、独立した2本で51.2 GB/sが理論上限。バンク内では、開いている行を読む場合はREAD、別の行へ切り替える場合はPRECHARGE、ACTIVATE、READを順に使う。</desc>
+  <style>
+    text { font-family: "BIZ UDPGothic", "Yu Gothic", Meiryo, sans-serif; fill: #203749; }
+    .label { font-size: 17px; font-weight: 700; }
+    .note { font-size: 16px; fill: #435b6c; }
+    .center { text-anchor: middle; }
+    .arrow { fill: none; stroke: #496a7c; stroke-width: 2.4; marker-end: url(#arrow); }
+  </style>
+  <defs><marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto"><path d="M0 0L10 5 0 10Z" fill="#496a7c"/></marker></defs>
+  <rect width="760" height="414" rx="18" fill="#eef4f8"/>
+  <text x="26" y="43" font-size="27" font-weight="700">DRAMへデータを運ぶチャネルと、バンク内の行</text>
+  <text x="26" y="74" class="note">DDR4-3200、64ビットのチャネルを2本使う構成例</text>
+  <rect x="24" y="94" width="712" height="144" rx="12" fill="#fff" stroke="#b4c8d4"/>
+  <rect x="46" y="125" width="125" height="72" rx="8" fill="#dfebf2" stroke="#789aad"/>
+  <text x="108.5" y="157" class="label center">CPU</text>
+  <text x="108.5" y="179" class="note center">DRAMが必要</text>
+  <path d="M172 161H218" class="arrow"/>
+  <rect x="220" y="125" width="185" height="72" rx="8" fill="#dfebf2" stroke="#789aad"/>
+  <text x="312.5" y="154" class="label center">メモリ</text>
+  <text x="312.5" y="178" class="label center">コントローラー</text>
+  <path d="M406 142H462M406 181H462" class="arrow"/>
+  <rect x="464" y="111" width="248" height="43" rx="8" fill="#cce7da" stroke="#6b9e86"/>
+  <rect x="464" y="166" width="248" height="43" rx="8" fill="#cce7da" stroke="#6b9e86"/>
+  <text x="588" y="137" class="label center">チャネルA　25.6 GB/s</text>
+  <text x="588" y="193" class="label center">チャネルB　25.6 GB/s</text>
+  <text x="588" y="228" class="note center">2本の理論合計　51.2 GB/s</text>
+  <rect x="24" y="252" width="712" height="138" rx="12" fill="#fff" stroke="#b4c8d4"/>
+  <text x="45" y="282" font-size="20" font-weight="700">選ばれたランクの同じバンクで、次のデータを読む</text>
+  <text x="46" y="322" class="label">今と同じ行</text>
+  <rect x="217" y="299" width="125" height="34" rx="7" fill="#cce7da" stroke="#6b9e86"/>
+  <text x="279.5" y="322" class="label center">READ</text>
+  <text x="46" y="366" class="label">今とは別の行</text>
+  <rect x="217" y="343" width="125" height="34" rx="7" fill="#f6e5b6" stroke="#987b41"/>
+  <rect x="393" y="343" width="125" height="34" rx="7" fill="#dfebf2" stroke="#789aad"/>
+  <rect x="569" y="343" width="125" height="34" rx="7" fill="#cce7da" stroke="#6b9e86"/>
+  <path d="M343 360H391M519 360H567" class="arrow"/>
+  <text x="279.5" y="366" class="label center">PRECHARGE</text>
+  <text x="455.5" y="366" class="label center">ACTIVATE</text>
+  <text x="631.5" y="366" class="label center">READ</text>
+</svg>

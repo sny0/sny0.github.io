@@ -15,13 +15,16 @@
 
 # ハードウェア
 
-CPU・GPU・キャッシュから、命令とデータが動く仕組みを調べる。
+CPU・GPU・メモリ・デバイスの間で、命令とデータがどう動くかを調べる。
 
 ## 辞典の本文
 
 - [CPUとGPUの役割分担](/hardware/gpu/cpu-vs-gpu.html)
+- [DMAとIOMMUでデバイスがメモリにアクセスする仕組み](/hardware/io/dma-and-iommu.html)
+- [DRAMのチャネルと帯域 — データをどこから、どの速さで読むか](/hardware/memory/dram-channels-and-bandwidth.html)
 - [GPUアーキテクチャ詳解](/hardware/gpu/architecture.html)
 - [GPUとは何か](/hardware/gpu/what-is-gpu.html)
+- [PCI Expressのリンクとレーン](/hardware/io/pcie-links.html)
 
 ## この分野の学習ガイド
 
@@ -41,4 +44,5 @@ CPU・GPU・キャッシュから、命令とデータが動く仕組みを調�
 - 分岐予測
 - キャッシュ・TLB
 - SIMD
-- 割り込み・DMA
+- PCIe
+- 割り込み・DMA・IOMMU
