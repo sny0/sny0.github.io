@@ -1,0 +1,45 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="760" height="416" viewBox="0 0 760 416" role="img" aria-labelledby="title desc">
+  <title id="title">聞き手から音源までの線分と壁</title>
+  <desc id="desc">上から見た聞き手と壁と二つの音源。聞き手から真っすぐ先の音源への線分は壁に当たり、右前の音源への線分は壁の右を通る。どちらの音源も聞き手からの距離は6。</desc>
+  <defs>
+    <style>
+      text { font-family: "Noto Sans JP", "Yu Gothic", Meiryo, sans-serif; fill: #1e293b; }
+      .title { font-size: 26px; font-weight: 700; }
+      .label { font-size: 18px; font-weight: 700; }
+      .note { font-size: 16px; fill: #475569; }
+      .blocked { fill: #9a3412; }
+      .clear { fill: #0f766e; }
+    </style>
+  </defs>
+  <rect x="1" y="1" width="758" height="414" rx="18" fill="#f8fafc" stroke="#cbd5e1"/>
+  <text x="36" y="48" class="title">音源までの線分が壁を横切るか調べる</text>
+  <text x="36" y="76" class="note">上から見た XZ 平面。聞き手は原点 (0, 0)</text>
+  <path d="M 102 360 H 456 M 246 360 V 114" fill="none" stroke="#94a3b8" stroke-width="1.5"/>
+  <path d="M 450 356 L 457 360 L 450 364 M 242 121 L 246 114 L 250 121" fill="none" stroke="#94a3b8" stroke-width="1.5"/>
+  <text x="457" y="383" class="note" text-anchor="end">+X</text>
+  <text x="227" y="117" class="note" text-anchor="end">−Z</text>
+  <path d="M 246 360 L 414 234" fill="none" stroke="#0f766e" stroke-width="3"/>
+  <path d="M 246 360 V 272.5" fill="none" stroke="#9a3412" stroke-width="3"/>
+  <path d="M 246 272.5 V 150" fill="none" stroke="#9a3412" stroke-width="3" stroke-dasharray="6 5"/>
+  <rect x="176" y="264.5" width="140" height="16" rx="3" fill="#475569"/>
+  <circle cx="246" cy="272.5" r="10" fill="#fff" stroke="#9a3412" stroke-width="2"/>
+  <path d="M 242 268.5 L 250 276.5 M 250 268.5 L 242 276.5" fill="none" stroke="#9a3412" stroke-width="2"/>
+  <text x="165" y="278" class="label" text-anchor="end">壁</text>
+  <circle cx="246" cy="150" r="8" fill="#9a3412"/>
+  <text x="264" y="153" class="label blocked">壁の向こうの音源</text>
+  <text x="264" y="176" class="note">(0, −6)</text>
+  <circle cx="414" cy="234" r="8" fill="#0f766e"/>
+  <text x="414" y="198" class="label clear" text-anchor="middle">壁の横の音源</text>
+  <text x="414" y="219" class="note" text-anchor="middle">(4.8, −3.6)</text>
+  <circle cx="246" cy="360" r="8" fill="#fff" stroke="#334155" stroke-width="3"/>
+  <text x="246" y="390" class="label" text-anchor="middle">聞き手</text>
+  <rect x="497" y="119" width="227" height="240" rx="13" fill="#fff" stroke="#cbd5e1"/>
+  <text x="517" y="150" class="label">壁の範囲</text>
+  <text x="517" y="176" class="note">x = −2〜2、z = −2.5</text>
+  <path d="M 517 194 H 704" stroke="#cbd5e1"/>
+  <text x="517" y="225" class="label blocked">壁に当たる</text>
+  <text x="517" y="248" class="note">z = −2.5 で x = 0</text>
+  <text x="517" y="282" class="label clear">壁の右を通る</text>
+  <text x="517" y="305" class="note">z = −2.5 で x ≈ 3.33</text>
+  <text x="517" y="337" class="note">どちらも音源までの距離は6</text>
+</svg>

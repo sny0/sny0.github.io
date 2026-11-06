@@ -1,0 +1,51 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="760" height="416" viewBox="0 0 760 416" role="img" aria-labelledby="title desc">
+  <title id="title">ゲインとローパスフィルターによる振幅の変化</title>
+  <desc id="desc">遮蔽なしは全周波数で0 dB。ゲイン0.5は全周波数で約マイナス6.02 dB。ゲイン0.5にカットオフ1,000 Hzのローパスを重ねると、250 Hzで約マイナス6.04 dB、4,000 Hzで約マイナス30.50 dBになる。</desc>
+  <defs>
+    <style>
+      text { font-family: "Noto Sans JP", "Yu Gothic", Meiryo, sans-serif; fill: #1e293b; }
+      .title { font-size: 26px; font-weight: 700; }
+      .label { font-size: 16px; font-weight: 700; }
+      .note { font-size: 16px; fill: #475569; }
+      .tick { font-size: 14px; fill: #475569; }
+      .grid { stroke: #cbd5e1; stroke-width: 1; fill: none; }
+      .clear { stroke: #475569; stroke-width: 2; fill: none; }
+      .gain { stroke: #1d4ed8; stroke-width: 2.5; fill: none; stroke-dasharray: 9 5; }
+      .lowpass { stroke: #9a3412; stroke-width: 3; fill: none; }
+    </style>
+  </defs>
+  <rect x="1" y="1" width="758" height="414" rx="18" fill="#f8fafc" stroke="#cbd5e1"/>
+  <text x="36" y="48" class="title">ローパスを加えると高音がさらに弱まる</text>
+  <text x="36" y="75" class="note">入力に対する振幅比。カットオフ 1,000 Hz、サンプルレート 48,000 Hz</text>
+  <path d="M 83 105 H 108" class="clear"/>
+  <text x="117" y="110" class="label">遮蔽なし</text>
+  <path d="M 222 105 H 247" class="gain"/>
+  <text x="256" y="110" class="label">ゲイン 0.5</text>
+  <path d="M 382 105 H 407" class="lowpass"/>
+  <text x="416" y="110" class="label">ゲイン 0.5 ＋ ローパス</text>
+  <rect x="82" y="135" width="636" height="201.6" fill="#fff" stroke="#cbd5e1"/>
+  <path d="M 82 185.4 H 718 M 82 235.8 H 718 M 82 286.2 H 718 M 215 135 V 336.6 M 416.19 135 V 336.6 M 617.4 135 V 336.6" class="grid"/>
+  <path d="M 82 135 V 336.6 H 718" stroke="#64748b" stroke-width="1.5" fill="none"/>
+  <text x="71" y="140" text-anchor="end" class="tick">0 dB</text>
+  <text x="71" y="190" text-anchor="end" class="tick">−12</text>
+  <text x="71" y="241" text-anchor="end" class="tick">−24</text>
+  <text x="71" y="291" text-anchor="end" class="tick">−36</text>
+  <text x="71" y="342" text-anchor="end" class="tick">−48</text>
+  <path d="M 82 135 H 718" class="clear"/>
+  <path d="M 82.00 160.29 L 88.36 160.29 L 94.72 160.29 L 101.08 160.29 L 107.44 160.29 L 113.80 160.29 L 120.16 160.29 L 126.52 160.29 L 132.88 160.29 L 139.24 160.30 L 145.60 160.30 L 151.96 160.30 L 158.32 160.30 L 164.68 160.30 L 171.04 160.31 L 177.40 160.31 L 183.76 160.32 L 190.12 160.32 L 196.48 160.33 L 202.84 160.34 L 209.20 160.35 L 215.56 160.36 L 221.92 160.37 L 228.28 160.39 L 234.64 160.41 L 241.00 160.43 L 247.36 160.46 L 253.72 160.49 L 260.08 160.53 L 266.44 160.58 L 272.80 160.63 L 279.16 160.70 L 285.52 160.78 L 291.88 160.87 L 298.24 160.98 L 304.60 161.11 L 310.96 161.26 L 317.32 161.44 L 323.68 161.65 L 330.04 161.90 L 336.40 162.20 L 342.76 162.54 L 349.12 162.95 L 355.48 163.41 L 361.84 163.96 L 368.20 164.58 L 374.56 165.30 L 380.92 166.13 L 387.28 167.06 L 393.64 168.12 L 400.00 169.30 L 406.36 170.62 L 412.72 172.08 L 419.08 173.67 L 425.44 175.41 L 431.80 177.29 L 438.16 179.30 L 444.52 181.44 L 450.88 183.70 L 457.24 186.08 L 463.60 188.56 L 469.96 191.14 L 476.32 193.81 L 482.68 196.55 L 489.04 199.36 L 495.40 202.24 L 501.76 205.17 L 508.12 208.14 L 514.48 211.15 L 520.84 214.21 L 527.20 217.29 L 533.56 220.40 L 539.92 223.53 L 546.28 226.69 L 552.64 229.87 L 559.00 233.06 L 565.36 236.27 L 571.72 239.50 L 578.08 242.74 L 584.44 246.00 L 590.80 249.27 L 597.16 252.55 L 603.52 255.84 L 609.88 259.15 L 616.24 262.48 L 622.60 265.82 L 628.96 269.18 L 635.32 272.56 L 641.68 275.95 L 648.04 279.37 L 654.40 282.80 L 660.76 286.27 L 667.12 289.76 L 673.48 293.27 L 679.84 296.83 L 686.20 300.41 L 692.56 304.04 L 698.92 307.71 L 705.28 311.43 L 711.64 315.20 L 718.00 319.03" class="lowpass"/>
+  <path d="M 82 160.29 H 718" class="gain"/>
+  <circle cx="215" cy="160.36" r="5" fill="#fff" stroke="#9a3412" stroke-width="2.5"/>
+  <path d="M 215 166 V 189" stroke="#9a3412" stroke-width="1.5"/>
+  <rect x="149" y="189" width="132" height="28" rx="6" fill="#fff" stroke="#fed7aa"/>
+  <text x="215" y="208" text-anchor="middle" class="label" fill="#9a3412">約 −6.04 dB</text>
+  <circle cx="617.4" cy="263.09" r="5" fill="#fff" stroke="#9a3412" stroke-width="2.5"/>
+  <path d="M 617.4 257 V 238" fill="none" stroke="#9a3412" stroke-width="1.5"/>
+  <rect x="553" y="210" width="150" height="28" rx="6" fill="#fff" stroke="#fed7aa"/>
+  <text x="628" y="229" text-anchor="middle" class="label" fill="#9a3412">約 −30.50 dB</text>
+  <text x="82" y="361" text-anchor="middle" class="tick">100</text>
+  <text x="215" y="361" text-anchor="middle" class="label">250</text>
+  <text x="416.19" y="361" text-anchor="middle" class="tick">1,000</text>
+  <text x="617.4" y="361" text-anchor="middle" class="label">4,000</text>
+  <text x="718" y="361" text-anchor="end" class="tick">8,000 Hz</text>
+  <text x="400" y="391" text-anchor="middle" class="note">周波数（対数目盛り）</text>
+</svg>

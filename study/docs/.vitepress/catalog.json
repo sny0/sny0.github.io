@@ -69,7 +69,7 @@
       "id": "browser",
       "title": "ブラウザ",
       "description": "URLを開いてから描画されるまでを、通信・実行・表示に分ける。",
-      "count": 24,
+      "count": 25,
       "status": "辞典本文あり"
     },
     {
@@ -130,6 +130,13 @@
     }
   ],
   "collections": [
+    {
+      "id": "audio-occlusion-observation",
+      "section": "practice",
+      "title": "Web Audioで壁越しの音量と音色を比べる",
+      "description": "音源と聞き手の間に壁があるとき、ゲインとローパスが音をどう変えるかを図と試聴で確かめる。",
+      "start": "/practice/browser/audio-occlusion-observation.html"
+    },
     {
       "id": "audio-spatial-observation",
       "section": "practice",
@@ -4915,6 +4922,34 @@
       ]
     },
     {
+      "title": "Web Audioで壁越しの音量と音色を比べる",
+      "url": "/practice/browser/audio-occlusion-observation.html",
+      "file": "practice/browser/audio-occlusion-observation.md",
+      "domain": "browser",
+      "section": "practice",
+      "format": "sample",
+      "status": "published",
+      "summary": "聞き手との距離をそろえて音源を壁の横と向こうに置き、周波数ごとの減衰と音色の変化を観察する。",
+      "source": "新規執筆",
+      "aliases": [
+        "Web Audio API",
+        "音の遮蔽",
+        "occlusion",
+        "レイキャスト",
+        "ローパス",
+        "lowpass",
+        "BiquadFilterNode",
+        "getFrequencyResponse",
+        "周波数応答"
+      ],
+      "collection": "audio-occlusion-observation",
+      "order": 1,
+      "verification": "WindowsのChromium系ブラウザで全4設定の遮蔽判定、生成音の周波数成分、処理前後の試聴を確認（2026-11-06）",
+      "links": [
+        "/browser/audio-occlusion.html"
+      ]
+    },
+    {
       "title": "Web Audioのクロスフェード — 等ゲイン・等電力・相関",
       "url": "/browser/audio-crossfade.html",
       "file": "browser/audio-crossfade.md",
@@ -5065,6 +5100,35 @@
       ]
     },
     {
+      "title": "Web Audioの音の遮蔽 — 壁越しの音量と音色",
+      "url": "/browser/audio-occlusion.html",
+      "file": "browser/audio-occlusion.md",
+      "domain": "browser",
+      "section": "reference",
+      "format": "article",
+      "status": "published",
+      "summary": "聞き手と音源の間に壁があるかを調べ、ゲインとローパスフィルターで直接音の弱まり方を変える。",
+      "source": "新規執筆",
+      "aliases": [
+        "Web Audio API",
+        "音の遮蔽",
+        "occlusion",
+        "レイキャスト",
+        "ローパスフィルター",
+        "lowpass",
+        "BiquadFilterNode",
+        "GainNode",
+        "カットオフ",
+        "周波数応答"
+      ],
+      "verification": "W3C Web Audio APIのフィルターとゲインの仕様、Unreal Engine公式ドキュメントの遮蔽機能に照合（2026-11-06）",
+      "links": [
+        "/browser/audio-spatial-panning.html",
+        "/browser/audio-convolution-reverb.html",
+        "/practice/browser/audio-occlusion-observation.html"
+      ]
+    },
+    {
       "title": "Web Audioの音の定位と距離減衰",
       "url": "/browser/audio-spatial-panning.html",
       "file": "browser/audio-spatial-panning.md",
@@ -5091,7 +5155,8 @@
       "verification": "W3C Web Audio APIのPannerNodeと空間化の計算手順に照合（2026-11-06）",
       "links": [
         "/browser/audio-convolution-reverb.html",
-        "/practice/browser/audio-spatial-observation.html"
+        "/practice/browser/audio-spatial-observation.html",
+        "/browser/audio-occlusion.html"
       ]
     },
     {
@@ -8135,6 +8200,8 @@
         "/practice/browser/audio-reverb-observation.html",
         "/browser/audio-spatial-panning.html",
         "/practice/browser/audio-spatial-observation.html",
+        "/browser/audio-occlusion.html",
+        "/practice/browser/audio-occlusion-observation.html",
         "/history/video-games.html",
         "/guide/rendering/timeline.html"
       ]
@@ -10284,6 +10351,7 @@
       "source": "統合ガイド",
       "aliases": [],
       "links": [
+        "/browser/audio-occlusion.html",
         "/browser/audio-spatial-panning.html",
         "/browser/audio-convolution-reverb.html",
         "/browser/audio-feedback-delay.html",
