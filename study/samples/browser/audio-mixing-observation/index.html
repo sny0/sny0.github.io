@@ -1,0 +1,101 @@
+<!doctype html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="referrer" content="no-referrer">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'self'; style-src 'self'; base-uri 'none'; form-action 'none'">
+  <title>Web Audioでミックスとクリッピングを観察する | Sny0 Study</title>
+  <link rel="canonical" href="https://sny0.com/study/samples/browser/audio-mixing-observation/index.html">
+  <link rel="stylesheet" href="styles.css">
+  <script type="module" src="main.js"></script>
+</head>
+<body>
+  <main>
+    <header class="card">
+      <a href="https://sny0.com/study/practice/browser/audio-mixing-observation.html">実践手順とコードを読む</a>
+      <h1>Web Audioでミックスとクリッピングを観察する</h1>
+      <p>ピークがそれぞれ0.65の400 Hzの正弦波を同じタイミングで重ねます。各音源とマスターのゲインを調整し、合成した波形を±1でクリップした結果と比べます。</p>
+    </header>
+
+    <section class="card" aria-labelledby="controls-heading">
+      <h2 id="controls-heading">ゲインを選ぶ</h2>
+      <p>1はそのまま、0.5は振幅を半分にします。</p>
+      <div class="sliders">
+        <div class="slider">
+          <label for="gain-a">音源Aのゲイン</label>
+          <output for="gain-a" id="gain-a-value" aria-live="off">1.00</output>
+          <input id="gain-a" type="range" min="0" max="1" step="0.01" value="1">
+        </div>
+        <div class="slider">
+          <label for="gain-b">音源Bのゲイン</label>
+          <output for="gain-b" id="gain-b-value" aria-live="off">1.00</output>
+          <input id="gain-b" type="range" min="0" max="1" step="0.01" value="1">
+        </div>
+        <div class="slider">
+          <label for="master-gain">マスターのゲイン</label>
+          <output for="master-gain" id="master-gain-value" aria-live="off">1.00</output>
+          <input id="master-gain" type="range" min="0" max="1" step="0.01" value="1">
+        </div>
+      </div>
+      <div class="actions">
+        <button id="preset-over" type="button" class="secondary" disabled>上限を超える設定</button>
+        <button id="preset-headroom" type="button" class="secondary" disabled>余裕を作る設定</button>
+        <button id="render-mix" type="button" disabled>ミックスを計算</button>
+      </div>
+      <p id="mix-status" class="status" data-state="ready" role="status">「ミックスを計算」で波形を表示します。</p>
+      <p class="hint"><a href="https://sny0.com/study/practice/browser/audio-mixing-observation.html#run-locally">手元で動かす手順</a></p>
+      <noscript><p>実験にはJavaScriptを使用します。</p></noscript>
+    </section>
+
+    <section class="card" aria-labelledby="results-heading">
+      <h2 id="results-heading">クリップ処理の前後を比べる</h2>
+      <p class="hint">波形は1秒間の出力から先頭の5 msを表示します。点線は振幅の+1と−1です。</p>
+      <p id="rendered-settings" class="rendered-settings">計算した設定はここに表示されます。</p>
+      <dl class="metrics">
+        <div><dt>処理前のピーク</dt><dd id="raw-peak">—</dd></div>
+        <div><dt>処理後のピーク</dt><dd id="clipped-peak">—</dd></div>
+        <div><dt>処理前に振幅の絶対値が1を超えたフレーム数</dt><dd id="over-range-count">—</dd></div>
+      </dl>
+
+      <div class="comparison">
+        <figure>
+          <figcaption>処理前のミックス</figcaption>
+          <svg id="raw-chart" class="chart" viewBox="0 0 400 170" role="img" aria-label="処理前の波形。計算前。">
+            <path class="grid" d="M36 15V145H386 M36 80H386 M123.5 15V145 M211 15V145 M298.5 15V145 M386 15V145"/>
+            <path class="limits" d="M36 34H386 M36 126H386"/>
+            <text x="26" y="38" text-anchor="end">+1</text>
+            <text x="26" y="84" text-anchor="end">0</text>
+            <text x="26" y="130" text-anchor="end">−1</text>
+            <text x="36" y="162">0</text>
+            <text x="211" y="162" text-anchor="middle">2.5</text>
+            <text x="386" y="162" text-anchor="end">5 ms</text>
+            <path id="raw-wave" class="wave" d=""/>
+          </svg>
+        </figure>
+        <figure>
+          <figcaption>±1でクリップした結果</figcaption>
+          <svg id="clipped-chart" class="chart" viewBox="0 0 400 170" role="img" aria-label="クリップ後の波形。計算前。">
+            <path class="grid" d="M36 15V145H386 M36 80H386 M123.5 15V145 M211 15V145 M298.5 15V145 M386 15V145"/>
+            <path class="limits" d="M36 34H386 M36 126H386"/>
+            <text x="26" y="38" text-anchor="end">+1</text>
+            <text x="26" y="84" text-anchor="end">0</text>
+            <text x="26" y="130" text-anchor="end">−1</text>
+            <text x="36" y="162">0</text>
+            <text x="211" y="162" text-anchor="middle">2.5</text>
+            <text x="386" y="162" text-anchor="end">5 ms</text>
+            <path id="clipped-wave" class="wave" d=""/>
+          </svg>
+        </figure>
+      </div>
+
+      <p class="hint">処理後の1秒間の音を、振幅を抑えて再生できます。</p>
+      <div class="actions">
+        <button id="play-mix" type="button" class="secondary" disabled>処理後の音を聞く</button>
+        <button id="stop-playback" type="button" class="secondary" disabled>再生を停止</button>
+      </div>
+      <p id="playback-status" class="status" data-state="ready" role="status">再生していません。</p>
+    </section>
+  </main>
+</body>
+</html>
