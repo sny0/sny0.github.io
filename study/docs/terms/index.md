@@ -18,6 +18,7 @@
 
 | 用語・別名 | 説明への入口 |
 | --- | --- |
+| [フレームタイム / frame time / フレームペーシング / frame pacing / フレーム予算 / p99 / スタッター](/graphics/optimization/frame-pacing.html) | CPU・GPUの処理時間と表示間隔を分け、カクつきが起きた時刻を調べる |
 | [通過音 / フライバイ / flyby / 最接近 / 視線方向の速度 / PannerNode / playbackRate](/browser/audio-flyby.html) | 横切る音源の軌道から、時間ごとの高さ、左右の配分、距離減衰を求める |
 | [ドップラー効果 / Doppler effect / ドップラーシフト / 視線方向の速度 / 音速 / playbackRate](/browser/audio-doppler.html) | 音源が近づくと音が高く、遠ざかると低く聞こえる関係を再生速度に反映する |
 | [遮蔽の切り替え / setTargetAtTime / 時定数 / time constant / パラメータの平滑化](/browser/audio-occlusion-transition.html) | 遮蔽が変わる時刻にゲインとカットオフを予約し、徐々に次の値へ近づける |

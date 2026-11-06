@@ -1,0 +1,63 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="760" height="358" viewBox="0 0 760 358" role="img" aria-labelledby="title desc" xml:lang="ja">
+  <title id="title">固定60 Hzで画面の切り替えが1更新遅れる例</title>
+  <desc id="desc">CPUはGPUがBを描画している間にCの準備を始める。Bの描画が16.67ミリ秒の更新に間に合わず、画面は33.33ミリ秒までAを表示し、次いでB、Cの順に表示する。</desc>
+  <defs>
+    <marker id="arrow" viewBox="0 0 8 8" refX="7" refY="4" markerWidth="7" markerHeight="7" orient="auto">
+      <path d="M0 0 8 4 0 8Z" fill="#4a5f78"/>
+    </marker>
+  </defs>
+  <rect width="760" height="358" rx="18" fill="#f8fafc"/>
+  <g font-family="'Noto Sans JP', 'Yu Gothic', 'Meiryo', sans-serif" fill="#162334">
+    <text x="25" y="40" font-size="23" font-weight="700">GPUの描画完了が更新に間に合わない</text>
+    <text x="25" y="67" font-size="16" fill="#475569">固定60 Hzで更新境界に切り替える例</text>
+
+    <g font-size="15" text-anchor="middle" fill="#475569">
+      <text x="140" y="104">0 ms</text>
+      <text x="280" y="104" fill="#922e18" font-weight="700">16.67 ms</text>
+      <text x="420" y="104">33.33 ms</text>
+      <text x="560" y="104">50.00 ms</text>
+      <text x="700" y="104">66.67 ms</text>
+    </g>
+    <path d="M140 118H728" stroke="#4a5f78" stroke-width="1.5" marker-end="url(#arrow)"/>
+    <path d="M140 118V294 M420 118V294 M560 118V294 M700 118V294" stroke="#9aa8bb" stroke-dasharray="5 4"/>
+    <path d="M280 118V294" stroke="#a43a22" stroke-width="2" stroke-dasharray="5 4"/>
+    <g font-size="17" font-weight="700">
+      <text x="25" y="159">CPU</text>
+      <text x="25" y="220">GPU</text>
+      <text x="25" y="281">画面</text>
+    </g>
+
+    <g fill="#e4f1ff" stroke="#5680ac" stroke-width="1.5">
+      <rect x="153" y="135" width="100" height="40" rx="5"/>
+      <rect x="301" y="135" width="94" height="40" rx="5"/>
+    </g>
+    <g fill="#dff3ec" stroke="#478576" stroke-width="1.5">
+      <rect x="253" y="196" width="120" height="40" rx="5"/>
+      <rect x="395" y="196" width="120" height="40" rx="5"/>
+    </g>
+    <path d="M253 175V193 M395 175V193" stroke="#4a5f78" stroke-width="1.5" marker-end="url(#arrow)"/>
+    <path d="M373 236v10h43v8 M515 236v10h41v8" fill="none" stroke="#4a5f78" stroke-width="1.5" marker-end="url(#arrow)"/>
+    <g text-anchor="middle" font-size="15" font-weight="700">
+      <text x="203" y="160">B の準備</text>
+      <text x="348" y="160">C の準備</text>
+      <text x="313" y="221">B の描画</text>
+      <text x="455" y="221">C の描画</text>
+    </g>
+
+    <rect x="140" y="257" width="140" height="40" rx="5" fill="#ffefdf" stroke="#a6633b" stroke-width="1.5"/>
+    <rect x="280" y="257" width="140" height="40" rx="5" fill="#ffefdf" stroke="#a43a22" stroke-width="2" stroke-dasharray="5 3"/>
+    <g fill="#dff3ec" stroke="#478576" stroke-width="1.5">
+      <rect x="420" y="257" width="140" height="40" rx="5"/>
+      <rect x="560" y="257" width="140" height="40" rx="5"/>
+    </g>
+    <g text-anchor="middle" font-size="15" font-weight="700">
+      <text x="210" y="282">A を表示</text>
+      <text x="350" y="282" fill="#792b16">A のまま</text>
+      <text x="490" y="282">B を表示</text>
+      <text x="630" y="282">C を表示</text>
+    </g>
+    <path d="M280 299v15" stroke="#a43a22" stroke-width="1.5"/>
+    <text x="280" y="336" text-anchor="middle" font-size="15" fill="#792b16">B はまだ描画中</text>
+    <text x="489" y="336" font-size="15" fill="#475569">縦線は画面の更新境界</text>
+  </g>
+</svg>

@@ -104,7 +104,7 @@
       "id": "graphics",
       "title": "3DCGとグラフィックス",
       "description": "制作データからGPUの処理、最終表示までをつなぐ。",
-      "count": 52,
+      "count": 53,
       "status": "辞典本文あり"
     },
     {
@@ -130,6 +130,13 @@
     }
   ],
   "collections": [
+    {
+      "id": "frame-pacing-observation",
+      "section": "practice",
+      "title": "同じ60 FPSで表示間隔を比べる",
+      "description": "一定間隔とばらつきのある表示を、動く目印と共通の時間軸で比べる。",
+      "start": "/practice/graphics/frame-pacing-observation.html"
+    },
     {
       "id": "audio-flyby-observation",
       "section": "practice",
@@ -2828,7 +2835,8 @@
         "/graphics/optimization/gpu-driven.html",
         "/graphics/compute/execution-model.html",
         "/hardware/gpu/architecture.html",
-        "/graphics/optimization/render-graph.html"
+        "/graphics/optimization/render-graph.html",
+        "/graphics/optimization/frame-pacing.html"
       ]
     },
     {
@@ -8397,6 +8405,9 @@
         "/practice/browser/audio-doppler-observation.html",
         "/browser/audio-flyby.html",
         "/practice/browser/audio-flyby-observation.html",
+        "/graphics/optimization/frame-pacing.html",
+        "/practice/graphics/frame-pacing-observation.html",
+        "/graphics/optimization/tools.html",
         "/history/video-games.html",
         "/guide/rendering/timeline.html"
       ]
@@ -9955,6 +9966,31 @@
       ]
     },
     {
+      "title": "同じ60 FPSで表示間隔を比べる",
+      "url": "/practice/graphics/frame-pacing-observation.html",
+      "file": "practice/graphics/frame-pacing-observation.md",
+      "domain": "graphics",
+      "section": "practice",
+      "format": "sample",
+      "status": "published",
+      "summary": "平均60 FPSで表示する二つの動きを再生し、表示間隔が長くなる時刻を共通のグラフで調べる。",
+      "source": "新規執筆",
+      "aliases": [
+        "フレームタイム",
+        "フレームペーシング",
+        "frame pacing",
+        "表示間隔",
+        "p99",
+        "スタッター"
+      ],
+      "collection": "frame-pacing-observation",
+      "order": 1,
+      "verification": "Nodeで全フレームの切り替え境界と3パターンの集計を検証し、Chromium系ブラウザで再生と比較画面を確認（2026-11-06）",
+      "links": [
+        "/graphics/optimization/frame-pacing.html"
+      ]
+    },
+    {
       "title": "同一オリジンポリシーとCORS — 送信と応答の公開",
       "url": "/browser/same-origin-cors.html",
       "file": "browser/same-origin-cors.md",
@@ -10428,6 +10464,36 @@
       ]
     },
     {
+      "title": "平均60 FPSでもカクつくのはなぜか — フレームタイムとフレームペーシング",
+      "url": "/graphics/optimization/frame-pacing.html",
+      "file": "graphics/optimization/frame-pacing.md",
+      "domain": "graphics",
+      "section": "reference",
+      "format": "article",
+      "status": "published",
+      "summary": "同じ平均FPSでも画面が切り替わる間隔で見え方が変わる。CPUの処理、GPUの描画、画面への提示をタイムラインで分け、カクつきが起きた区間を調べる。",
+      "source": "新規執筆",
+      "aliases": [
+        "フレームタイム",
+        "frame time",
+        "フレームペーシング",
+        "frame pacing",
+        "スタッター",
+        "stutter",
+        "Present",
+        "VSync",
+        "p99",
+        "PresentMon"
+      ],
+      "verification": "Android Frame Pacing、DXGI Present、PresentMon 2.6.0のCSV列、PIX Timing Capturesの公式資料に照合（2026-11-06）",
+      "links": [
+        "/practice/graphics/frame-pacing-observation.html",
+        "/graphics/optimization/basics.html",
+        "/guide/low-level/input-and-game-loop.html",
+        "/graphics/optimization/tools.html"
+      ]
+    },
+    {
       "title": "並行処理のバグ — data race・race condition・false sharing",
       "url": "/runtime/memory/concurrency-bugs.html",
       "file": "runtime/memory/concurrency-bugs.md",
@@ -10546,6 +10612,7 @@
       "source": "統合ガイド",
       "aliases": [],
       "links": [
+        "/graphics/optimization/frame-pacing.html",
         "/browser/audio-flyby.html",
         "/browser/audio-doppler.html",
         "/browser/audio-occlusion-transition.html",

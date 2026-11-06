@@ -1,0 +1,100 @@
+<!doctype html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="referrer" content="no-referrer">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'self'; style-src 'self'; base-uri 'none'; form-action 'none'">
+  <title>平均60 FPSの動きを比べる | Sny0 Study</title>
+  <link rel="canonical" href="https://sny0.com/study/samples/graphics/frame-pacing-observation/index.html">
+  <link rel="stylesheet" href="styles.css">
+  <script type="module" src="main.js"></script>
+</head>
+<body>
+  <main>
+    <header class="intro">
+      <a href="https://sny0.com/study/practice/graphics/frame-pacing-observation.html">実践手順とコードを読む</a>
+      <h1>平均60 FPSの動きを比べる</h1>
+      <p>仮想の120 Hz画面で、どちらも2秒間に120フレームを表示します。同じ速さで進む二つの点を見比べ、同じ絵が残る時間の違いを確かめます。</p>
+    </header>
+
+    <section class="card controls" aria-labelledby="controls-heading">
+      <h2 id="controls-heading">二つの表示を操作する</h2>
+      <div class="actions">
+        <button id="playback" type="button" disabled>再生する</button>
+        <button id="reset" class="secondary" type="button" disabled>先頭に戻す</button>
+        <button id="inspect" class="secondary" type="button" disabled>最長のフレームを見る</button>
+        <label>比較する表示間隔
+          <select id="pattern" disabled>
+            <option value="spike">ときどき長く止まる</option>
+            <option value="alternating">短い間隔と長い間隔が交互</option>
+          </select>
+        </label>
+        <label>再生速度
+          <select id="speed" disabled>
+            <option value="1">等速</option>
+            <option value="0.25">1/4の速さ</option>
+          </select>
+        </label>
+      </div>
+      <div class="scrubber">
+        <div class="scrubber-heading">
+          <label for="playhead">両方の表示時刻</label>
+          <span id="time">0.0 ms</span>
+        </div>
+        <input id="playhead" type="range" min="0" max="2000" step="1" value="0" aria-describedby="scrub-hint" disabled>
+        <div class="range-labels" aria-hidden="true"><span>0 ms</span><span>1,000 ms</span><span>2,000 ms</span></div>
+        <p class="hint" id="scrub-hint">つまみを動かすと再生が止まり、その時刻のフレームを確認できます。1/4の速さにしても、グラフと集計値は仮想画面の時刻を使います。</p>
+      </div>
+      <p id="status" class="status" role="status"></p>
+      <noscript><p>このサンプルを操作するにはJavaScriptを有効にしてください。</p></noscript>
+    </section>
+
+    <div id="tracks" class="comparison"></div>
+
+    <aside class="card notes" aria-labelledby="notes-heading">
+      <h2 id="notes-heading">グラフの見方</h2>
+      <p>横軸は仮想の表示時刻、縦軸はその時刻のフレームを表示し続ける長さです。横長で背の高い部分ほど、点が長く同じ位置に残ります。破線は60 FPSの目安（16.67 ms）、縦線はつまみの時刻です。</p>
+      <p>平均FPSはフレーム数を表示時間で割った値です。p99は表示間隔を短い順に並べた99パーセンタイルです。「目安超過」は厳密に1/60秒を超えた回数です。</p>
+      <p>グラフと数値は仮想画面の計算結果です。実際に見える動きは、お使いのブラウザや画面の更新頻度に左右されます。</p>
+      <p><a href="https://sny0.com/study/practice/graphics/frame-pacing-observation.html#run-locally">手元で動かす手順</a></p>
+    </aside>
+  </main>
+
+  <template id="track-template">
+    <section class="card track">
+      <h2><span class="badge"></span><span class="track-title"></span></h2>
+      <svg class="motion" viewBox="0 0 480 42" preserveAspectRatio="none" aria-hidden="true">
+        <path class="rail" d="M12 21H468 M12 15V27 M126 17V25 M240 15V27 M354 17V25 M468 15V27"/>
+        <path class="position"/>
+      </svg>
+      <p class="frame"><span class="frame-info"></span> <span class="frame-range"></span></p>
+      <figure>
+        <figcaption>フレームを表示し続ける長さ (ms)</figcaption>
+        <div class="plot">
+          <div class="y-axis" aria-hidden="true"><span>50</span><span>16.67</span><span>0</span></div>
+          <div class="plot-body">
+            <svg class="intervals" viewBox="0 0 480 100" preserveAspectRatio="none" role="img">
+              <path class="grid" d="M0 0H480 M0 100H480 M0 0V100 M120 0V100 M240 0V100 M360 0V100 M480 0V100"/>
+              <rect class="selection" y="0" height="100"/>
+              <path class="area"/>
+              <path class="trace"/>
+              <path class="target" d="M0 66.6667H480"/>
+              <path class="cursor"/>
+            </svg>
+            <div class="x-axis" aria-hidden="true"><span>0</span><span>500</span><span>1,000</span><span>1,500</span><span>2,000</span></div>
+          </div>
+        </div>
+        <p class="axis-title" aria-hidden="true">表示時刻 (ms)</p>
+      </figure>
+      <dl class="metrics">
+        <div><dt>平均 FPS</dt><dd data-metric="fps"></dd></div>
+        <div><dt>平均間隔</dt><dd data-metric="meanMs"></dd></div>
+        <div><dt>p99</dt><dd data-metric="p99Ms"></dd></div>
+        <div><dt>最長間隔</dt><dd data-metric="maxMs"></dd></div>
+        <div><dt>目安超過</dt><dd data-metric="overBudget"></dd></div>
+      </dl>
+    </section>
+  </template>
+</body>
+</html>

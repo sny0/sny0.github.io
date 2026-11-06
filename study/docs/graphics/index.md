@@ -70,6 +70,7 @@
 - [リアルタイム3D技術全史](/guide/rendering/timeline.html)
 - [レンダリングパイプライン全体像](/graphics/pipeline/overview.html)
 - [出力結合 (Depth / Stencil / Blend)](/graphics/pipeline/output-merger.html)
+- [平均60 FPSでもカクつくのはなぜか — フレームタイムとフレームペーシング](/graphics/optimization/frame-pacing.html)
 - [並列アルゴリズム — Reduction / Prefix Sum (Scan)](/graphics/compute/parallel-algorithms.html)
 
 ## この分野の学習ガイド
@@ -83,6 +84,7 @@
 ## 作って試す
 
 - [1. 全体設計 — 1フレームの旅](/graphics/capstone/01-design.html)
+- [同じ60 FPSで表示間隔を比べる](/practice/graphics/frame-pacing-observation.html)
 - [2. デバイス初期化とスワップチェイン](/graphics/capstone/02-device.html)
 - [3. リソースとパイプライン構築](/graphics/capstone/03-resources.html)
 - [4. 最初の三角形からメッシュ描画へ](/graphics/capstone/04-triangle.html)
