@@ -104,7 +104,7 @@
       "id": "graphics",
       "title": "3DCGとグラフィックス",
       "description": "制作データからGPUの処理、最終表示までをつなぐ。",
-      "count": 61,
+      "count": 64,
       "status": "辞典本文あり"
     },
     {
@@ -130,6 +130,13 @@
     }
   ],
   "collections": [
+    {
+      "id": "glb-mesh-observation",
+      "section": "practice",
+      "title": "C++でGLBの頂点とインデックスを読み、三角形を描く",
+      "description": "GLBの頂点とインデックスをD3D12へ渡し、描画したピクセルを読み戻して確認する。",
+      "start": "/practice/graphics/glb-mesh-observation.html"
+    },
     {
       "id": "dds-upload-observation",
       "section": "practice",
@@ -695,6 +702,8 @@
         "/graphics/postprocess/overview.html",
         "/graphics/pipeline/overview.html",
         "/graphics/shader/spirv.html",
+        "/graphics/mesh/gltf-mesh-buffers.html",
+        "/graphics/mesh/mesh-import-and-cooking.html",
         "/graphics/lighting/ibl.html",
         "/math/rendering/transform.html",
         "/graphics/capstone/04-triangle.html"
@@ -1314,6 +1323,38 @@
         "/graphics/texture/d3d12-texture-upload.html",
         "/graphics/optimization/gpu-resource-lifetime.html",
         "/graphics/texture/texture-streaming-and-mip-residency.html"
+      ]
+    },
+    {
+      "title": "C++でGLBの頂点とインデックスを読み、三角形を描く",
+      "url": "/practice/graphics/glb-mesh-observation.html",
+      "file": "practice/graphics/glb-mesh-observation.md",
+      "domain": "graphics",
+      "section": "practice",
+      "format": "sample",
+      "status": "published",
+      "summary": "3頂点と16ビットインデックスを含むGLBを作る。バイト列から頂点と法線を読み、D3D12 WARPで描いた画像の2画素を照合する。",
+      "source": "新規執筆",
+      "aliases": [
+        "glTF",
+        "GLB",
+        "POSITION",
+        "NORMAL",
+        "byteStride",
+        "vertex buffer",
+        "index buffer",
+        "DrawIndexedInstanced",
+        "WARP"
+      ],
+      "collection": "glb-mesh-observation",
+      "order": 1,
+      "verification": "Windows x64のMSVCでビルドし、WARPの読み戻しで中央と隅の画素を照合。範囲外インデックスと短いGLBの拒否も確認（2026-11-06）",
+      "links": [
+        "/graphics/mesh/gltf-mesh-buffers.html",
+        "/graphics/mesh/vertex-and-index-input.html",
+        "/data/binary-file-validation.html",
+        "/graphics/texture/d3d12-texture-upload.html",
+        "/graphics/mesh/mesh-import-and-cooking.html"
       ]
     },
     {
@@ -3054,6 +3095,38 @@
         "/graphics/shader/overview.html",
         "/graphics/api/opengl.html",
         "/graphics/shader/wgsl.html"
+      ]
+    },
+    {
+      "title": "glTFのバッファから頂点とインデックスを読む",
+      "url": "/graphics/mesh/gltf-mesh-buffers.html",
+      "file": "graphics/mesh/gltf-mesh-buffers.md",
+      "domain": "graphics",
+      "section": "reference",
+      "format": "article",
+      "status": "published",
+      "summary": "GLBのJSONとBINを分け、buffer、bufferView、accessorから頂点属性とインデックスの型、位置、間隔を求める。範囲の検査とsparse accessorの読み方も扱う。",
+      "source": "新規執筆",
+      "aliases": [
+        "glTF",
+        "GLB",
+        "bufferView",
+        "accessor",
+        "byteStride",
+        "componentType",
+        "POSITION",
+        "NORMAL",
+        "indices",
+        "interleaved",
+        "sparse accessor"
+      ],
+      "verification": "KhronosのglTF 2.0仕様のバイナリ格納、メッシュ、GLB形式と照合",
+      "links": [
+        "/game/asset-pack-files.html",
+        "/data/integer-bits-and-bytes.html",
+        "/graphics/mesh/vertex-and-index-input.html",
+        "/data/binary-file-validation.html",
+        "/practice/graphics/glb-mesh-observation.html"
       ]
     },
     {
@@ -5178,6 +5251,8 @@
       "aliases": [],
       "links": [
         "/graphics/pipeline/mesh-shader.html",
+        "/graphics/mesh/vertex-and-index-input.html",
+        "/practice/graphics/glb-mesh-observation.html",
         "/graphics/compute/compute-shader.html",
         "/math/rendering/transform.html",
         "/math/rendering/matrix.html",
@@ -8851,6 +8926,38 @@
       ]
     },
     {
+      "title": "メッシュをインポートして描画用データに変える",
+      "url": "/graphics/mesh/mesh-import-and-cooking.html",
+      "file": "graphics/mesh/mesh-import-and-cooking.md",
+      "domain": "graphics",
+      "section": "reference",
+      "format": "article",
+      "status": "published",
+      "summary": "glTFのprimitiveから描画に使う頂点・インデックス・マテリアル・境界を作る。座標変換、表裏、属性の継ぎ目、頂点の配置を扱う。",
+      "source": "新規執筆",
+      "aliases": [
+        "mesh import",
+        "mesh cooking",
+        "メッシュインポート",
+        "頂点の重複除去",
+        "primitive",
+        "winding",
+        "UV seam",
+        "逆転置行列",
+        "AABB",
+        "vertex layout"
+      ],
+      "verification": "KhronosのglTF 2.0仕様とMicrosoftのDirect3D資料に照合（2026-11-06）",
+      "links": [
+        "/game/asset-build-and-patches.html",
+        "/graphics/mesh/gltf-mesh-buffers.html",
+        "/graphics/mesh/vertex-and-index-input.html",
+        "/math/rendering/transform.html",
+        "/graphics/pipeline/vertex-shader.html",
+        "/game/asset-loading.html"
+      ]
+    },
+    {
       "title": "メモリと実行時の演習",
       "url": "/runtime/memory/exercises.html",
       "file": "runtime/memory/exercises.md",
@@ -9559,6 +9666,10 @@
         "/graphics/texture/d3d12-texture-upload.html",
         "/practice/graphics/dds-upload-observation.html",
         "/graphics/texture/texture-streaming-and-mip-residency.html",
+        "/graphics/mesh/gltf-mesh-buffers.html",
+        "/graphics/mesh/vertex-and-index-input.html",
+        "/practice/graphics/glb-mesh-observation.html",
+        "/graphics/mesh/mesh-import-and-cooking.html",
         "/game/patterns/game-loop-and-update.html",
         "/game/ecs.html",
         "/graphics/pipeline/overview.html",
@@ -11335,6 +11446,36 @@
       ]
     },
     {
+      "title": "頂点バッファとインデックスバッファから三角形を組み立てる",
+      "url": "/graphics/mesh/vertex-and-index-input.html",
+      "file": "graphics/mesh/vertex-and-index-input.md",
+      "domain": "graphics",
+      "section": "reference",
+      "format": "article",
+      "status": "published",
+      "summary": "D3D12がインデックスから頂点を選び、ストライドと属性のオフセットで入力を取り出す手順を扱う。glTFの読み取り、描画範囲の検査、バッファの寿命までつなげる。",
+      "source": "新規執筆",
+      "aliases": [
+        "頂点バッファ",
+        "vertex buffer",
+        "インデックスバッファ",
+        "index buffer",
+        "input assembler",
+        "input layout",
+        "stride",
+        "DrawIndexedInstanced",
+        "BaseVertexLocation"
+      ],
+      "verification": "KhronosのglTF 2.0仕様とMicrosoftのD3D12 API資料に照合（2026-11-06）",
+      "links": [
+        "/graphics/pipeline/vertex-shader.html",
+        "/graphics/mesh/gltf-mesh-buffers.html",
+        "/data/binary-file-validation.html",
+        "/graphics/optimization/gpu-resource-lifetime.html",
+        "/practice/graphics/glb-mesh-observation.html"
+      ]
+    },
+    {
       "title": "通知と疎結合 — Observer・Event・Mediator",
       "url": "/design/notebook/events.html",
       "file": "design/notebook/events.md",
@@ -12243,6 +12384,9 @@
         "/graphics/texture/dds-and-subresources.html",
         "/graphics/texture/d3d12-texture-upload.html",
         "/graphics/texture/texture-streaming-and-mip-residency.html",
+        "/graphics/mesh/gltf-mesh-buffers.html",
+        "/graphics/mesh/vertex-and-index-input.html",
+        "/graphics/mesh/mesh-import-and-cooking.html",
         "/graphics/optimization/pipeline-compilation-stutter.html",
         "/graphics/optimization/swap-chain-and-vsync.html",
         "/graphics/optimization/frame-pacing.html",
