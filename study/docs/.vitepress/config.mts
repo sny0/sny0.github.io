@@ -51,7 +51,8 @@ export default withMermaid(defineConfig({
       { url: '/study/samples/browser/audio-fade-observation/index.html' },
       { url: '/study/samples/browser/audio-crossfade-observation/index.html' },
       { url: '/study/samples/browser/audio-comb-observation/index.html' },
-      { url: '/study/samples/browser/audio-feedback-observation/index.html' }
+      { url: '/study/samples/browser/audio-feedback-observation/index.html' },
+      { url: '/study/samples/browser/audio-reverb-observation/index.html' }
     ]
   },
   head: [

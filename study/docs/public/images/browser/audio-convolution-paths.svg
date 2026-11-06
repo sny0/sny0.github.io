@@ -1,0 +1,50 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="760" height="404" viewBox="0 0 760 404" role="img" aria-labelledby="title desc">
+  <title id="title">畳み込みリバーブのドライとウェット経路</title>
+  <desc id="desc">入力を二つに分ける。ドライ経路は入力をそのまま、ウェット経路はインパルス応答との畳み込みにゲインを掛け、最後に二つを足す。</desc>
+  <defs>
+    <marker id="dry-arrow" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto">
+      <path d="M 0 0 L 10 5 L 0 10 Z" fill="#334155"/>
+    </marker>
+    <marker id="wet-arrow" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto">
+      <path d="M 0 0 L 10 5 L 0 10 Z" fill="#0f766e"/>
+    </marker>
+    <style>
+      text { font-family: "Noto Sans JP", "Yu Gothic", Meiryo, sans-serif; fill: #1f2937; }
+      .title { font-size: 26px; font-weight: 700; }
+      .label { font-size: 20px; font-weight: 700; }
+      .note { font-size: 17px; fill: #475569; }
+      .wet { fill: #115e59; }
+      .wire { fill: none; stroke: #334155; stroke-width: 2.5; }
+      .effect { fill: none; stroke: #0f766e; stroke-width: 2.5; }
+    </style>
+  </defs>
+  <rect x="1" y="1" width="758" height="402" rx="18" fill="#f8fafc" stroke="#cbd5e1"/>
+  <text x="36" y="49" class="title">元の音に残響を足す</text>
+  <text x="36" y="76" class="note">インパルス応答を使うドライ／ウェットの経路</text>
+
+  <rect x="38" y="112" width="112" height="52" rx="10" fill="#fff" stroke="#94a3b8"/>
+  <text x="94" y="145" text-anchor="middle" class="label">入力 x[n]</text>
+  <path d="M 150 138 H 565" class="wire" marker-end="url(#dry-arrow)"/>
+  <text x="352" y="124" text-anchor="middle" class="note">ドライ（元の音、ゲイン1）</text>
+  <circle cx="591" cy="138" r="22" fill="#fff" stroke="#64748b" stroke-width="1.5"/>
+  <text x="591" y="145" text-anchor="middle" class="label">+</text>
+  <path d="M 613 138 H 635" class="wire" marker-end="url(#dry-arrow)"/>
+  <rect x="640" y="112" width="82" height="52" rx="10" fill="#fff" stroke="#94a3b8"/>
+  <text x="681" y="145" text-anchor="middle" class="label">出力</text>
+
+  <path d="M 177 138 V 248 H 207" class="effect" marker-end="url(#wet-arrow)"/>
+  <circle cx="177" cy="138" r="5" fill="#0f766e"/>
+  <rect x="212" y="213" width="166" height="70" rx="10" fill="#ccfbf1" stroke="#5eead4"/>
+  <text x="295" y="242" text-anchor="middle" class="label wet">ConvolverNode</text>
+  <text x="295" y="267" text-anchor="middle" class="note wet">IRと畳み込む</text>
+  <path d="M 378 248 H 418" class="effect" marker-end="url(#wet-arrow)"/>
+  <rect x="423" y="213" width="135" height="70" rx="10" fill="#ccfbf1" stroke="#5eead4"/>
+  <text x="490" y="242" text-anchor="middle" class="label wet">ウェット</text>
+  <text x="490" y="267" text-anchor="middle" class="note wet">響きのゲイン</text>
+  <path d="M 558 248 H 591 V 164" class="effect" marker-end="url(#wet-arrow)"/>
+  <text x="295" y="193" text-anchor="middle" class="note wet">h[k] をバッファに渡す</text>
+
+  <path d="M 36 312 H 724" stroke="#cbd5e1"/>
+  <text x="36" y="345" class="note">実践では反射と減衰する尾をIRに入れ、直接音はドライ経路を通す。</text>
+  <text x="36" y="374" class="note">ウェットのゲインで響きだけの量を調整する。</text>
+</svg>
