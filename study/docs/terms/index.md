@@ -18,6 +18,7 @@
 
 | 用語・別名 | 説明への入口 |
 | --- | --- |
+| [音の定位 / パンニング / spatial audio / 距離減衰 / PannerNode / AudioListener / StereoPannerNode / 等電力 / HRTF / 方位角](/browser/audio-spatial-panning.html) | 音源と聞き手の位置から左右への配分と距離によるゲインを求める |
 | [畳み込みリバーブ / convolution reverb / ConvolverNode / インパルス応答 / IR / 初期反射 / 残響 / dry / wet](/browser/audio-convolution-reverb.html) | インパルス応答から音の響きを作り、直接音と残響を別の経路で調整する |
 | [フィードバックディレイ / feedback delay / フィードバックゲイン / 反響 / エコー / 減衰 / IIR / DelayNode](/browser/audio-feedback-delay.html) | 出力を遅延経路に戻し、反響の間隔と一周ごとの振幅の変化を調べる |
 | [コムフィルター / comb filter / DelayNode / 遅延 / 位相差 / 干渉 / 周波数応答 / インパルス応答 / ノッチ](/browser/audio-comb-filter.html) | 同じ音を少し遅らせて足し、強め合う周波数と打ち消される周波数を調べる |

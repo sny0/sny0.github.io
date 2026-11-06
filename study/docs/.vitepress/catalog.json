@@ -69,7 +69,7 @@
       "id": "browser",
       "title": "ブラウザ",
       "description": "URLを開いてから描画されるまでを、通信・実行・表示に分ける。",
-      "count": 23,
+      "count": 24,
       "status": "辞典本文あり"
     },
     {
@@ -130,6 +130,13 @@
     }
   ],
   "collections": [
+    {
+      "id": "audio-spatial-observation",
+      "section": "practice",
+      "title": "Web Audioで音の方向と距離を変えて聴く",
+      "description": "音源の方向と距離を変え、左右の出力と距離による減衰を図と試聴で比べる。",
+      "start": "/practice/browser/audio-spatial-observation.html"
+    },
     {
       "id": "audio-reverb-observation",
       "section": "practice",
@@ -4743,6 +4750,34 @@
       ]
     },
     {
+      "title": "Web Audioで音の方向と距離を変えて聴く",
+      "url": "/practice/browser/audio-spatial-observation.html",
+      "file": "practice/browser/audio-spatial-observation.md",
+      "domain": "browser",
+      "section": "practice",
+      "format": "sample",
+      "status": "published",
+      "summary": "音源の角度と距離を変え、PannerNodeが処理した左右の出力を図と試聴で比べる。",
+      "source": "新規執筆",
+      "aliases": [
+        "Web Audio API",
+        "音の定位",
+        "パンニング",
+        "距離減衰",
+        "PannerNode",
+        "AudioListener",
+        "等電力",
+        "方位角",
+        "spatial audio"
+      ],
+      "collection": "audio-spatial-observation",
+      "order": 1,
+      "verification": "WindowsのChromium系ブラウザで方位角と距離の全25設定、測定した音の試聴を確認（2026-11-06）",
+      "links": [
+        "/browser/audio-spatial-panning.html"
+      ]
+    },
+    {
       "title": "Web Audioで急な消音とフェードを観察する",
       "url": "/practice/browser/audio-fade-observation.html",
       "file": "practice/browser/audio-fade-observation.md",
@@ -5030,6 +5065,36 @@
       ]
     },
     {
+      "title": "Web Audioの音の定位と距離減衰",
+      "url": "/browser/audio-spatial-panning.html",
+      "file": "browser/audio-spatial-panning.md",
+      "domain": "browser",
+      "section": "reference",
+      "format": "article",
+      "status": "published",
+      "summary": "音源と聞き手の相対位置から方位角と距離を求め、左右の振幅と距離による音量の変化を計算する。",
+      "source": "新規執筆",
+      "aliases": [
+        "Web Audio API",
+        "PannerNode",
+        "AudioListener",
+        "StereoPannerNode",
+        "音の定位",
+        "立体音響",
+        "距離減衰",
+        "方位角",
+        "equalpower",
+        "等電力パンニング",
+        "HRTF",
+        "HRIR"
+      ],
+      "verification": "W3C Web Audio APIのPannerNodeと空間化の計算手順に照合（2026-11-06）",
+      "links": [
+        "/browser/audio-convolution-reverb.html",
+        "/practice/browser/audio-spatial-observation.html"
+      ]
+    },
+    {
       "title": "Web Audioの畳み込みリバーブ — インパルス応答から響きを作る",
       "url": "/browser/audio-convolution-reverb.html",
       "file": "browser/audio-convolution-reverb.md",
@@ -5058,7 +5123,8 @@
         "/browser/audio-feedback-delay.html",
         "/browser/audio-mixing-and-headroom.html",
         "/browser/audio-crossfade.html",
-        "/practice/browser/audio-reverb-observation.html"
+        "/practice/browser/audio-reverb-observation.html",
+        "/browser/audio-spatial-panning.html"
       ]
     },
     {
@@ -8067,6 +8133,8 @@
         "/practice/browser/audio-feedback-observation.html",
         "/browser/audio-convolution-reverb.html",
         "/practice/browser/audio-reverb-observation.html",
+        "/browser/audio-spatial-panning.html",
+        "/practice/browser/audio-spatial-observation.html",
         "/history/video-games.html",
         "/guide/rendering/timeline.html"
       ]
@@ -10216,6 +10284,7 @@
       "source": "統合ガイド",
       "aliases": [],
       "links": [
+        "/browser/audio-spatial-panning.html",
         "/browser/audio-convolution-reverb.html",
         "/browser/audio-feedback-delay.html",
         "/browser/audio-comb-filter.html",

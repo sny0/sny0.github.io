@@ -412,11 +412,18 @@ writePage('guide/learning-paths.md', '疑問から選ぶ読み順', {
 2. [Web Audioで畳み込みリバーブを聴き比べる](/practice/browser/audio-reverb-observation.html)で、小部屋とホールを模した応答を切り替え、打音のあとに残る響きを比べる。
 3. 出力を遅延経路に戻して反響を作る方法は[Web Audioのフィードバックディレイ](/browser/audio-feedback-delay.html)で確認する。
 
+## 音源が動くと左右の出力はどう変わるか
+
+1. [Web Audioの音の定位と距離減衰](/browser/audio-spatial-panning.html)で、聞き手から見た方向と距離が、左右の出力にどう反映されるかを確認する。
+2. [Web Audioで音の方向と距離を変えて聴く](/practice/browser/audio-spatial-observation.html)で、角度と距離を別々に変え、左右のゲインと聞こえ方を比べる。
+3. 部屋から返ってくる音を別の経路で加える仕組みは[Web Audioの畳み込みリバーブ](/browser/audio-convolution-reverb.html)で確認する。
+
 ## 作り方の変化を歴史から見る
 
 [ビデオゲーム史](/history/video-games.html)の作品・ハード・媒体・流通と、[リアルタイム3D技術史](/guide/rendering/timeline.html)の技術の変化から、気になった仕組みへ進みます。`)
 
 const termRows = [
+  ['音の定位 / パンニング / spatial audio / 距離減衰 / PannerNode / AudioListener / StereoPannerNode / 等電力 / HRTF / 方位角', '/browser/audio-spatial-panning.html', '音源と聞き手の位置から左右への配分と距離によるゲインを求める'],
   ['畳み込みリバーブ / convolution reverb / ConvolverNode / インパルス応答 / IR / 初期反射 / 残響 / dry / wet', '/browser/audio-convolution-reverb.html', 'インパルス応答から音の響きを作り、直接音と残響を別の経路で調整する'],
   ['フィードバックディレイ / feedback delay / フィードバックゲイン / 反響 / エコー / 減衰 / IIR / DelayNode', '/browser/audio-feedback-delay.html', '出力を遅延経路に戻し、反響の間隔と一周ごとの振幅の変化を調べる'],
   ['コムフィルター / comb filter / DelayNode / 遅延 / 位相差 / 干渉 / 周波数応答 / インパルス応答 / ノッチ', '/browser/audio-comb-filter.html', '同じ音を少し遅らせて足し、強め合う周波数と打ち消される周波数を調べる'],
