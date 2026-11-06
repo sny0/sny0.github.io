@@ -104,7 +104,7 @@
       "id": "graphics",
       "title": "3DCGとグラフィックス",
       "description": "制作データからGPUの処理、最終表示までをつなぐ。",
-      "count": 54,
+      "count": 58,
       "status": "辞典本文あり"
     },
     {
@@ -130,6 +130,13 @@
     }
   ],
   "collections": [
+    {
+      "id": "input-latency-observation",
+      "section": "practice",
+      "title": "入力遅延を待ち時間と描画時間に分けてみる",
+      "description": "入力を読む周期、GPUの待ち、画面の更新周期と走査位置を変えて比べる。",
+      "start": "/practice/graphics/input-latency-observation.html"
+    },
     {
       "id": "swap-chain-observation",
       "section": "practice",
@@ -2831,6 +2838,62 @@
       ]
     },
     {
+      "title": "GPUが使うメモリはいつ再利用できるか — フェンスとリソースの寿命",
+      "url": "/graphics/optimization/gpu-resource-lifetime.html",
+      "file": "graphics/optimization/gpu-resource-lifetime.md",
+      "domain": "graphics",
+      "section": "reference",
+      "format": "article",
+      "status": "published",
+      "summary": "アップロード領域をGPUに渡してからCPUが再利用するまでを図で追い、複数キューやPresentが絡むときの完了条件を区別する。",
+      "source": "新規執筆",
+      "aliases": [
+        "GPUフェンス",
+        "GPU fence",
+        "アップロードヒープ",
+        "upload heap",
+        "ステージングバッファ",
+        "フレームスロット",
+        "リソースの寿命",
+        "遅延解放",
+        "deferred destruction"
+      ],
+      "verification": "D3D12のキューとフェンス、Vulkanの同期仕様とPresent待ちセマフォ再利用の公式資料に照合（2026-11-06）",
+      "links": [
+        "/game/asset-loading.html",
+        "/graphics/optimization/swap-chain-and-vsync.html",
+        "/graphics/optimization/gpu-timestamp-queries.html",
+        "/graphics/api/directx12.html"
+      ]
+    },
+    {
+      "title": "GPUタイムスタンプクエリ — 描画パスの時間をGPUの時計で測る",
+      "url": "/graphics/optimization/gpu-timestamp-queries.html",
+      "file": "graphics/optimization/gpu-timestamp-queries.md",
+      "domain": "graphics",
+      "section": "reference",
+      "format": "article",
+      "status": "published",
+      "summary": "GPU上の二つの時点を記録し、描画パスの経過時間を求める。VulkanとDirect3D 12での単位変換、完了の確認、クエリの再利用を扱う。",
+      "source": "新規執筆",
+      "aliases": [
+        "GPU timestamp",
+        "タイムスタンプクエリ",
+        "timestampPeriod",
+        "timestampValidBits",
+        "vkCmdWriteTimestamp2",
+        "ResolveQueryData",
+        "GetTimestampFrequency"
+      ],
+      "verification": "VulkanとDirect3D 12の公式仕様に照合し、C++の単位換算と折り返しをMSVCで検証（2026-11-06）",
+      "links": [
+        "/graphics/optimization/frame-pacing.html",
+        "/graphics/optimization/tools.html",
+        "/graphics/optimization/gpu-resource-lifetime.html",
+        "/graphics/optimization/basics.html"
+      ]
+    },
+    {
       "title": "GPUとは何か",
       "url": "/hardware/gpu/what-is-gpu.html",
       "file": "hardware/gpu/what-is-gpu.md",
@@ -2867,6 +2930,7 @@
         "/hardware/gpu/cpu-vs-gpu.html",
         "/graphics/optimization/gpu-driven.html",
         "/graphics/compute/execution-model.html",
+        "/graphics/optimization/gpu-timestamp-queries.html",
         "/hardware/gpu/architecture.html",
         "/graphics/optimization/render-graph.html",
         "/graphics/optimization/frame-pacing.html"
@@ -3966,6 +4030,7 @@
       "source": "RenderingWiki",
       "aliases": [],
       "links": [
+        "/graphics/optimization/pipeline-compilation-stutter.html",
         "/graphics/shader/overview.html",
         "/graphics/api/vulkan.html",
         "/graphics/api/directx12.html",
@@ -6666,6 +6731,37 @@
       ]
     },
     {
+      "title": "シェーダーコンパイルのカクつきとパイプラインキャッシュ",
+      "url": "/graphics/optimization/pipeline-compilation-stutter.html",
+      "file": "graphics/optimization/pipeline-compilation-stutter.md",
+      "domain": "graphics",
+      "section": "reference",
+      "format": "article",
+      "status": "published",
+      "summary": "描画時にパイプラインを初めて作ると処理が止まる理由と、事前作成やキャッシュで減らせる作業を調べる。",
+      "source": "新規執筆",
+      "aliases": [
+        "shader compilation stutter",
+        "シェーダーコンパイルスタッター",
+        "PSO",
+        "Pipeline State Object",
+        "パイプラインキャッシュ",
+        "PSOキャッシュ",
+        "事前作成",
+        "プリウォーム",
+        "VkPipelineCache",
+        "ID3D12PipelineLibrary"
+      ],
+      "verification": "Vulkanのパイプライン作成・キャッシュ仕様と、Direct3D 12のPSO・Pipeline Library・PIX Timing Captureの公式資料に照合（2026-11-06）",
+      "links": [
+        "/graphics/shader/spirv.html",
+        "/graphics/optimization/frame-pacing.html",
+        "/graphics/optimization/gpu-timestamp-queries.html",
+        "/graphics/optimization/tools.html",
+        "/game/asset-loading.html"
+      ]
+    },
+    {
       "title": "シェーダ言語総論と比較",
       "url": "/graphics/shader/overview.html",
       "file": "graphics/shader/overview.md",
@@ -8475,6 +8571,11 @@
         "/graphics/optimization/swap-chain-and-vsync.html",
         "/practice/graphics/swap-chain-observation.html",
         "/graphics/capstone/02-device.html",
+        "/graphics/optimization/input-to-display-latency.html",
+        "/practice/graphics/input-latency-observation.html",
+        "/graphics/optimization/gpu-timestamp-queries.html",
+        "/graphics/optimization/gpu-resource-lifetime.html",
+        "/graphics/optimization/pipeline-compilation-stutter.html",
         "/history/video-games.html",
         "/guide/rendering/timeline.html"
       ]
@@ -10096,6 +10197,57 @@
       ]
     },
     {
+      "title": "入力から画面に出るまでの遅延",
+      "url": "/graphics/optimization/input-to-display-latency.html",
+      "file": "graphics/optimization/input-to-display-latency.md",
+      "domain": "graphics",
+      "section": "reference",
+      "format": "article",
+      "status": "published",
+      "summary": "入力を読んだ時点から画面の対象位置が更新されるまでを追い、入力待ち、CPU・GPUの処理と待ち、表示待ちを分けて調べる。",
+      "source": "新規執筆",
+      "aliases": [
+        "入力遅延",
+        "input latency",
+        "input-to-photon",
+        "click-to-photon",
+        "ポーリング",
+        "レンダーキュー",
+        "scanout",
+        "入力マーカー"
+      ],
+      "links": [
+        "/graphics/optimization/gpu-timestamp-queries.html",
+        "/graphics/optimization/swap-chain-and-vsync.html",
+        "/practice/graphics/input-latency-observation.html",
+        "/graphics/optimization/frame-pacing.html"
+      ]
+    },
+    {
+      "title": "入力遅延を待ち時間と描画時間に分けてみる",
+      "url": "/practice/graphics/input-latency-observation.html",
+      "file": "practice/graphics/input-latency-observation.md",
+      "domain": "graphics",
+      "section": "practice",
+      "format": "sample",
+      "status": "published",
+      "summary": "入力を読む周期、GPUの待ち、画面の更新周期や表示位置を変え、入力から対象の行が更新されるまでをタイムラインで比べる。",
+      "source": "新規執筆",
+      "aliases": [
+        "入力遅延",
+        "input-to-photon",
+        "ポーリング周期",
+        "走査",
+        "GPU待ち"
+      ],
+      "collection": "input-latency-observation",
+      "order": 1,
+      "verification": "Nodeで全1500通りの設定を検証し、Chromium系ブラウザで走査の境界・設定変更・初期値への復帰を確認（2026-11-06）",
+      "links": [
+        "/graphics/optimization/input-to-display-latency.html"
+      ]
+    },
+    {
       "title": "配列と文字列",
       "url": "/languages/cpp/arrays-and-strings.html",
       "file": "languages/cpp/arrays-and-strings.md",
@@ -10680,6 +10832,10 @@
       "source": "統合ガイド",
       "aliases": [],
       "links": [
+        "/graphics/optimization/input-to-display-latency.html",
+        "/graphics/optimization/gpu-timestamp-queries.html",
+        "/graphics/optimization/gpu-resource-lifetime.html",
+        "/graphics/optimization/pipeline-compilation-stutter.html",
         "/graphics/optimization/swap-chain-and-vsync.html",
         "/graphics/optimization/frame-pacing.html",
         "/browser/audio-flyby.html",
