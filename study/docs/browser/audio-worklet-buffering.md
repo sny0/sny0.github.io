@@ -50,3 +50,5 @@ study:
 この実験の**アンダーラン**は、`process()` が要求されたフレームを出力する時点で、アプリのキューに値がなかったことを指します。不足フレーム数は、キューが空で0を補った回数です。元のPCMにも振幅が0のサンプルはあり得るので、波形の値だけでは区別できません。無音で埋めた部分も含め、結果はブラウザが実際にレンダリングした `AudioBuffer` です。 `OfflineAudioContext` で計算するため、供給時刻はフレーム番号で制御できます。実際の再生で、処理時間が音声デバイスへの供給に追いつかない場合のアンダーランは、別の計測で調べます。[W3C Web Audio APIのOfflineAudioContext](https://www.w3.org/TR/webaudio-1.1/#OfflineAudioContext)、[システム側のアンダーラン](https://www.w3.org/TR/webaudio-1.1/#audio-buffer-underrun)
 
 [実践サンプル](/practice/browser/audio-buffer-observation.html)では、二つの条件でレンダリングし、出力波形と不足フレーム数を比べられます。完成した音は再生ボタンで確認できます。
+
+用意したPCMを複数の音源から同時に出すときは、足し合わせた振幅も確認します。信号経路のどこでゲインをかけるかと、クリップで波形が変わる様子は[Web Audioのミキシング](/browser/audio-mixing-and-headroom.html)で扱います。
