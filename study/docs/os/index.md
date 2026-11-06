@@ -20,9 +20,12 @@
 ## 辞典の本文
 
 - [PEローダーがEXEとDLLを配置する仕組み — RVA・再配置・IAT](/os/pe-loading-and-imports.html)
+- [WindowsのI/O完了ポート（IOCP） — 要求の発行と完了の回収](/os/io-completion-ports.html)
 - [Windowsのスレッドスケジューリング — 実行・待機・実行可能](/os/thread-scheduling.html)
 - [Windowsのパイプと子プロセスの標準入出力](/os/pipes-and-process-io.html)
 - [Windowsのハンドルとカーネルオブジェクト](/os/windows-handles.html)
+- [Windowsのファイル書き込みと永続化](/os/file-write-and-durability.html)
+- [Windowsの非同期I/Oをキャンセルする — 要求・完了・解放](/os/cancelling-overlapped-io.html)
 - [システムコールでユーザーモードからカーネルモードへ](/os/system-calls-and-privilege.html)
 - [ファイルを読むと内部で何が起きるか](/os/file-read-journey.html)
 - [メモリマップドファイル — ファイルの範囲をアドレスへ対応させる](/os/memory-mapped-files.html)
@@ -36,6 +39,7 @@
 
 ## 作って試す
 
+- [C++で2件のファイル読み取りをIOCPから回収する](/practice/io/iocp-observation.html)
 - [C++とC#でファイルのbytes・位置・EOFを観察する](/practice/io/file-read-observation.html)
 - [C++とC#で読取り専用ファイルマッピングを観察する](/practice/io/mapped-file-observation.html)
 - [C++とC#で非同期readの開始・完了・寿命を観察する](/practice/io/async-file-read-observation.html)
