@@ -1,0 +1,51 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="760" height="410" viewBox="0 0 760 410" role="img" aria-labelledby="title description">
+  <title id="title">同じファイルを2回読むときの三つの観測位置</title>
+  <desc id="description">アプリから読み取りAとBを発行する。ProcmonとWPAのFile I/Oでは二つのファイル操作が見える。Aでディスク読み取りが発生し、BはOSのファイルキャッシュで完了するため、その区間には追加のディスク読み取りがないという概念例。</desc>
+  <defs>
+    <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto">
+      <path d="M0 0 10 5 0 10Z" fill="#476476"/>
+    </marker>
+  </defs>
+  <rect width="760" height="410" rx="16" fill="#f3f7fa"/>
+  <g font-family="system-ui, sans-serif" fill="#183246">
+    <text x="24" y="42" font-size="25" font-weight="700">同じファイルを2回読むときの観測位置</text>
+    <text x="24" y="70" font-size="16" fill="#476476">Aで得たデータがOSに残り、Bで再利用された例</text>
+    <g fill="#fff" stroke="#a5bac7">
+      <rect x="24" y="96" width="712" height="69" rx="8"/>
+      <rect x="24" y="177" width="712" height="69" rx="8"/>
+      <rect x="24" y="258" width="712" height="69" rx="8"/>
+    </g>
+    <g stroke="#c6d3dc" stroke-dasharray="4 4">
+      <path d="M238 96V327"/>
+      <path d="M500 96V327"/>
+    </g>
+    <g font-size="18" font-weight="700">
+      <text x="42" y="124">アプリのログ</text>
+      <text x="42" y="205">ファイル操作</text>
+      <text x="42" y="286">ディスク要求</text>
+    </g>
+    <g font-size="13" fill="#476476">
+      <text x="42" y="145">発行と結果の受け取り</text>
+      <text x="42" y="226">Procmon / WPA File I/O</text>
+      <text x="42" y="307">WPA Disk Usage</text>
+    </g>
+    <g stroke="#8eacbc" fill="#dcebf4">
+      <rect x="238" y="109" width="220" height="43" rx="6"/>
+      <rect x="500" y="109" width="191" height="43" rx="6"/>
+      <rect x="249" y="190" width="192" height="43" rx="6"/>
+    </g>
+    <rect x="509" y="190" width="173" height="43" rx="6" fill="#d9ede5" stroke="#86ab9e"/>
+    <rect x="274" y="271" width="140" height="43" rx="6" fill="#ffebcd" stroke="#c3a776"/>
+    <g text-anchor="middle" font-size="16">
+      <text x="348" y="136">読み取り A</text>
+      <text x="595" y="136">読み取り B</text>
+      <text x="345" y="217">ファイルの範囲を取得</text>
+      <text x="595" y="217">OSキャッシュから取得</text>
+      <text x="344" y="298">ディスク読み取り</text>
+      <text x="595" y="298" fill="#476476">追加の読み取りなし</text>
+    </g>
+    <path d="M223 348H732" stroke="#476476" stroke-width="2" marker-end="url(#arrow)"/>
+    <text x="736" y="376" text-anchor="end" font-size="15" fill="#476476">時間 →</text>
+    <text x="24" y="376" font-size="14" fill="#476476">帯の長さと位置は概念例。所要時間は測定して比較する。</text>
+  </g>
+</svg>

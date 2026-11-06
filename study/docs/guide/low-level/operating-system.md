@@ -32,6 +32,7 @@ study:
 - [スレッド間の安全なデータ共有](/runtime/thread-synchronization.html)でmutex・C#のlock・共有状態の寿命を調べ、[在庫の観察例](/practice/threads/inventory-synchronization.html)で守る範囲と完了待ちを確かめられます。
 - [並行処理のバグ](/runtime/memory/concurrency-bugs.html)では、共有データを扱う際のデータ競合や、性能に影響するフォールスシェアリングを調べられます。
 - [ファイルを開いて読むまでの流れ](/os/file-read-journey.html)でハンドル・ストリーム・読取り位置・実際の読取り量・EOFを調べ、[ファイル読取りの観察例](/practice/io/file-read-observation.html)で確かめられます。
+- [Windowsのファイルキャッシュと先読み](/os/windows-file-cache.html)で読み取りの経路を押さえ、[I/O計測の解説](/tools/windows/file-io-tracing.html)と[ファイル読み取りをトレースする実践](/practice/io/file-io-trace-observation.html)で、アプリのファイル操作とディスクへの要求を照合します。
 - [非同期ファイルI/O](/os/asynchronous-file-io.html)で要求の開始と完了、バッファや要求情報の寿命を調べ、[同期・非同期の観察例](/practice/io/async-file-read-observation.html)で同じ内容を読み比べられます。
 - [I/O完了ポート](/os/io-completion-ports.html)と[非同期I/Oのキャンセル](/os/cancelling-overlapped-io.html)で、複数の完了を受け取る方法と、処理を止めるときの寿命管理を追います。[C++のIOCP観察例](/practice/io/iocp-observation.html)で実際の完了通知を照合できます。
 - [ファイルの書き込みと永続化](/os/file-write-and-durability.html)で、キャッシュに受理された時点と、障害後に復元できる条件を分けて考えます。

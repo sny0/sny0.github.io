@@ -89,6 +89,8 @@ Windowsの`CancelIoEx`は取消完了を待たず、通常完了・取消完了�
 
 進捗率だけでなく、各段階の待ち時間・処理時間、保持bytes、同時要求数、失敗理由、古い完了の破棄数を記録すると詰まりの場所を探せます。API呼出数からSSDの物理I/O回数や性能を推定せず、必要な層を別途測定します。
 
+Windowsでは、読み取りの要求とストレージ側の処理をトレースで照合できます。読み取りの一括発行やGPUでの展開を使う場合は、DirectStorageの通知からアセットが使えるまでの区間も分けて測ります。[WindowsのファイルI/O計測](/tools/windows/file-io-tracing.html) · [DirectStorage](/game/directstorage.html)
+
 ## エンジンhandleへ接続するとき
 
 Unity Addressables 1.21.21の説明では、`LoadAssetAsync`の戻り値はassetそのものではなくoperation handleで、完了後に`Status`を確認します。利用中は保持責任を持ち、成功/失敗の経路と最終解放を対応付けます。`Release`は参照を減らしてhandleを無効化しますが、bundle等の寿命も関係し、即座に全メモリが返るとは限りません。[Addressables：operation handles](https://docs.unity3d.com/Packages/com.unity.addressables@1.21/manual/AddressableAssetsAsyncOperationHandle.html)、[Memory management](https://docs.unity3d.com/Packages/com.unity.addressables@1.21/manual/MemoryManagement.html)

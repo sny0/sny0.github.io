@@ -41,7 +41,7 @@
       "id": "os",
       "title": "OS",
       "description": "プロセス、メモリ、スレッド、入出力の仕組みを調べる。",
-      "count": 13,
+      "count": 14,
       "status": "辞典本文あり"
     },
     {
@@ -111,7 +111,7 @@
       "id": "game",
       "title": "ゲームとエンジン",
       "description": "入力、時間、ECSと各サブシステムの関係を調べる。",
-      "count": 21,
+      "count": 22,
       "status": "辞典本文あり"
     },
     {
@@ -125,11 +125,18 @@
       "id": "tools",
       "title": "開発ツールと調査機能",
       "description": "どの機能で何を観察し、どう確かめるかを調べる。",
-      "count": 8,
+      "count": 9,
       "status": "辞典本文あり"
     }
   ],
   "collections": [
+    {
+      "id": "file-io-trace-observation",
+      "section": "practice",
+      "title": "Windowsで2回のファイル読み取りをトレースする",
+      "description": "同じファイルを2周読み、C++の出力、ファイル操作、ディスク要求の記録を照合する。",
+      "start": "/practice/io/file-io-trace-observation.html"
+    },
     {
       "id": "iocp-observation",
       "section": "practice",
@@ -1259,7 +1266,8 @@
       "links": [
         "/os/io-completion-ports.html",
         "/practice/io/async-file-read-observation.html",
-        "/os/cancelling-overlapped-io.html"
+        "/os/cancelling-overlapped-io.html",
+        "/practice/io/file-io-trace-observation.html"
       ]
     },
     {
@@ -2419,6 +2427,35 @@
       ]
     },
     {
+      "title": "DirectStorageでゲームの読み取りと展開をまとめる",
+      "url": "/game/directstorage.html",
+      "file": "game/directstorage.md",
+      "domain": "game",
+      "section": "reference",
+      "format": "article",
+      "status": "published",
+      "summary": "Windows PCのDirectStorageで読み取りをキューへ積み、バッチの結果を受け取る。GDeflateのCPU・GPU展開、ステージング、描画までの同期を扱う。",
+      "source": "新規執筆",
+      "aliases": [
+        "DirectStorage",
+        "GDeflate",
+        "BypassIO",
+        "IDStorageQueue",
+        "EnqueueRequest",
+        "EnqueueStatus",
+        "EnqueueSignal",
+        "GetCompressionSupport",
+        "GPU decompression",
+        "GPU展開"
+      ],
+      "verification": "MicrosoftのWin32 API仕様、DirectStorage SDK資料と公式サンプルに照合（2026-11-06）",
+      "links": [
+        "/game/asset-loading.html",
+        "/graphics/api/directx12.html",
+        "/tools/windows/file-io-tracing.html"
+      ]
+    },
+    {
       "title": "DirectX 11",
       "url": "/graphics/api/directx11.html",
       "file": "graphics/api/directx11.md",
@@ -2464,6 +2501,7 @@
         "/hardware/gpu/cpu-vs-gpu.html",
         "/graphics/capstone/02-device.html",
         "/graphics/pipeline/overview.html",
+        "/game/directstorage.html",
         "/graphics/api/vulkan.html",
         "/graphics/shader/hlsl.html"
       ]
@@ -5983,6 +6021,36 @@
       ]
     },
     {
+      "title": "Windowsで2回のファイル読み取りをトレースする",
+      "url": "/practice/io/file-io-trace-observation.html",
+      "file": "practice/io/file-io-trace-observation.md",
+      "domain": "os",
+      "section": "practice",
+      "format": "sample",
+      "status": "published",
+      "summary": "64 MiBのファイルを2回読み、ProcmonとWPR・WPAでファイル操作とディスクI/Oの記録を読み分ける。",
+      "source": "新規執筆",
+      "aliases": [
+        "Procmon",
+        "Process Monitor",
+        "WPR",
+        "WPA",
+        "ETW",
+        "File I/O",
+        "Disk Usage",
+        "ファイルI/O計測"
+      ],
+      "collection": "file-io-trace-observation",
+      "order": 1,
+      "verification": "Windows x64のMSVCで通常・非バッファーの両モードを実行。WPRのプロファイル名と構文、WPAとProcmonの操作をMicrosoft資料に照合（2026-11-06）",
+      "links": [
+        "/os/windows-file-cache.html",
+        "/tools/windows/file-io-tracing.html",
+        "/os/file-write-and-durability.html",
+        "/practice/io/iocp-observation.html"
+      ]
+    },
+    {
       "title": "WindowsでPID・TID・子プロセスとmain前の初期化を観察する",
       "url": "/practice/process/windows-process-observation.html",
       "file": "practice/process/windows-process-observation.md",
@@ -6162,6 +6230,71 @@
         "/algorithms/generational-handles.html",
         "/os/process-startup.html",
         "/os/pipes-and-process-io.html"
+      ]
+    },
+    {
+      "title": "WindowsのファイルI/OをProcmonとWPRで追う",
+      "url": "/tools/windows/file-io-tracing.html",
+      "file": "tools/windows/file-io-tracing.md",
+      "domain": "tools",
+      "section": "reference",
+      "format": "article",
+      "status": "published",
+      "summary": "Procmonのファイル操作と、WPAのFile I/O・Disk Usageを使い分ける。時刻・パス・プロセスを手掛かりに、アプリの読み取りと下位のディスク要求の関係を調べる。",
+      "source": "新規執筆",
+      "aliases": [
+        "Process Monitor",
+        "Procmon",
+        "WPR",
+        "WPA",
+        "ETW",
+        "ETL",
+        "File I/O",
+        "Disk Usage",
+        "Disk Service Time",
+        "I/Oトレース"
+      ],
+      "verification": "MicrosoftのSysinternals、Windows Performance Toolkit、ETWイベント仕様に照合（2026-11-06）",
+      "links": [
+        "/os/file-read-journey.html",
+        "/os/windows-file-cache.html",
+        "/os/io-completion-ports.html",
+        "/game/asset-loading.html",
+        "/practice/io/file-io-trace-observation.html"
+      ]
+    },
+    {
+      "title": "Windowsのファイルキャッシュと先読み",
+      "url": "/os/windows-file-cache.html",
+      "file": "os/windows-file-cache.md",
+      "domain": "os",
+      "section": "reference",
+      "format": "article",
+      "status": "published",
+      "summary": "同じ範囲の読み取りがRAMで満たされる条件、キャッシュマネージャーの先読み、アクセスヒントと非バッファーI/O、ゲームのロードを測る手順を扱う。",
+      "source": "新規執筆",
+      "aliases": [
+        "ファイルキャッシュ",
+        "system file cache",
+        "Cache Manager",
+        "read-ahead",
+        "先読み",
+        "warm cache",
+        "cold cache",
+        "FILE_FLAG_SEQUENTIAL_SCAN",
+        "FILE_FLAG_RANDOM_ACCESS",
+        "FILE_FLAG_NO_BUFFERING",
+        "noncached I/O"
+      ],
+      "verification": "MicrosoftのWindows APIとドライバー資料に照合（2026-11-06）",
+      "links": [
+        "/os/file-read-journey.html",
+        "/os/memory-mapped-files.html",
+        "/tools/windows/file-io-tracing.html",
+        "/practice/io/file-io-trace-observation.html",
+        "/os/asynchronous-file-io.html",
+        "/game/asset-loading.html",
+        "/os/file-write-and-durability.html"
       ]
     },
     {
@@ -7024,6 +7157,8 @@
         "/os/asynchronous-file-io.html",
         "/os/memory-mapped-files.html",
         "/runtime/thread-synchronization.html",
+        "/tools/windows/file-io-tracing.html",
+        "/game/directstorage.html",
         "/practice/assets/asset-lifecycle-model.html",
         "/practice/io/file-read-observation.html",
         "/practice/io/async-file-read-observation.html"
@@ -8101,6 +8236,8 @@
         "/practice/io/mapped-file-observation.html",
         "/game/asset-loading.html",
         "/practice/assets/asset-lifecycle-model.html",
+        "/os/windows-file-cache.html",
+        "/practice/io/file-io-trace-observation.html",
         "/practice/io/file-read-observation.html"
       ]
     },
@@ -9127,6 +9264,9 @@
         "/runtime/memory/concurrency-bugs.html",
         "/os/file-read-journey.html",
         "/practice/io/file-read-observation.html",
+        "/os/windows-file-cache.html",
+        "/tools/windows/file-io-tracing.html",
+        "/practice/io/file-io-trace-observation.html",
         "/os/asynchronous-file-io.html",
         "/practice/io/async-file-read-observation.html",
         "/os/io-completion-ports.html",
@@ -9137,6 +9277,7 @@
         "/practice/io/mapped-file-observation.html",
         "/game/asset-loading.html",
         "/practice/assets/asset-lifecycle-model.html",
+        "/game/directstorage.html",
         "/game/patterns/game-loop-and-update.html",
         "/game/ecs.html",
         "/graphics/pipeline/overview.html",
@@ -10821,6 +10962,9 @@
         "/runtime/memory/concurrency-bugs.html",
         "/os/file-read-journey.html",
         "/practice/io/file-read-observation.html",
+        "/os/windows-file-cache.html",
+        "/tools/windows/file-io-tracing.html",
+        "/practice/io/file-io-trace-observation.html",
         "/os/asynchronous-file-io.html",
         "/practice/io/async-file-read-observation.html",
         "/os/io-completion-ports.html",
@@ -11851,11 +11995,14 @@
         "/network/tcp-sockets.html",
         "/os/memory-mapped-files.html",
         "/game/asset-loading.html",
+        "/game/directstorage.html",
         "/os/io-completion-ports.html",
         "/os/cancelling-overlapped-io.html",
         "/os/file-write-and-durability.html",
         "/os/asynchronous-file-io.html",
         "/os/file-read-journey.html",
+        "/os/windows-file-cache.html",
+        "/tools/windows/file-io-tracing.html",
         "/runtime/thread-synchronization.html",
         "/math/floating-point-comparison.html",
         "/data/unicode-and-encoding.html",

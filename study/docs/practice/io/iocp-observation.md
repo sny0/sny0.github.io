@@ -43,6 +43,8 @@ complete 1: key=42, bytes=2, signature=MZ
 
 この例は、一つのスレッドから発行と回収を行う構成です。物理ストレージへのアクセスや複数スレッドでの処理、キャンセルの成立を観察する例ではありません。イベントを主に使う例は[同期・非同期の読み取り比較](/practice/io/async-file-read-observation.html)、停止時の寿命管理は[Windowsの非同期I/Oをキャンセルする](/os/cancelling-overlapped-io.html)へ進んでください。
 
+この実行ファイルが発行するファイル操作は、Procmonでも調べられます。[ファイル読み取りをトレースする実践](/practice/io/file-io-trace-observation.html)
+
 ## ソース
 
 <<< @/public/samples/io/iocp-observation/iocp_observation.cpp{cpp}

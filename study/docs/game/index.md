@@ -22,6 +22,7 @@
 - [Behavior Tree と Blackboard](/game/patterns/behavior-tree-and-blackboard.html)
 - [Command Buffer と入力処理(Commandパターンとの関係)](/game/patterns/command-buffer-and-input.html)
 - [Component と Entity Component System(比較つき)](/game/patterns/component-and-ecs.html)
+- [DirectStorageでゲームの読み取りと展開をまとめる](/game/directstorage.html)
 - [ECS — Entity Component System](/game/ecs.html) — 草稿
 - [Event Queue・Message Bus・Publish/Subscribe(Observerとの比較)](/game/patterns/event-queue-and-pubsub.html)
 - [Game Loop と Update Method](/game/patterns/game-loop-and-update.html)
