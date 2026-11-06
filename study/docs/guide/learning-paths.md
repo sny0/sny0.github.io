@@ -261,6 +261,12 @@
 2. [Web Audioで反響の間隔と減衰を観察する](/practice/browser/audio-feedback-observation.html)で、遅延時間と戻すゲインを変え、反響の時刻と振幅を比べる。
 3. 遅延した入力を一度だけ重ねたときの周波数応答は[Web Audioのコムフィルター](/browser/audio-comb-filter.html)で確認する。
 
+## インパルス応答から部屋の響きを加えるには
+
+1. [Web Audioの畳み込みリバーブ](/browser/audio-convolution-reverb.html)で、インパルス応答をずらして重ねる計算と、直接音と残響を合流させる経路を確認する。
+2. [Web Audioで畳み込みリバーブを聴き比べる](/practice/browser/audio-reverb-observation.html)で、小部屋とホールを模した応答を切り替え、打音のあとに残る響きを比べる。
+3. 出力を遅延経路に戻して反響を作る方法は[Web Audioのフィードバックディレイ](/browser/audio-feedback-delay.html)で確認する。
+
 ## 作り方の変化を歴史から見る
 
 [ビデオゲーム史](/history/video-games.html)の作品・ハード・媒体・流通と、[リアルタイム3D技術史](/guide/rendering/timeline.html)の技術の変化から、気になった仕組みへ進みます。

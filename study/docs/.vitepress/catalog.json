@@ -69,7 +69,7 @@
       "id": "browser",
       "title": "ブラウザ",
       "description": "URLを開いてから描画されるまでを、通信・実行・表示に分ける。",
-      "count": 22,
+      "count": 23,
       "status": "辞典本文あり"
     },
     {
@@ -130,6 +130,13 @@
     }
   ],
   "collections": [
+    {
+      "id": "audio-reverb-observation",
+      "section": "practice",
+      "title": "Web Audioで畳み込みリバーブを聴き比べる",
+      "description": "インパルス応答と残響側のゲインを変え、打音のあとに残る響きを波形と試聴で確かめる。",
+      "start": "/practice/browser/audio-reverb-observation.html"
+    },
     {
       "id": "audio-feedback-observation",
       "section": "practice",
@@ -4762,6 +4769,35 @@
       ]
     },
     {
+      "title": "Web Audioで畳み込みリバーブを聴き比べる",
+      "url": "/practice/browser/audio-reverb-observation.html",
+      "file": "practice/browser/audio-reverb-observation.md",
+      "domain": "browser",
+      "section": "practice",
+      "format": "sample",
+      "status": "published",
+      "summary": "同じ短い打音に小部屋とホールを模したインパルス応答を適用し、音が途切れたあとの波形と響きを比べる。",
+      "source": "新規執筆",
+      "aliases": [
+        "Web Audio API",
+        "畳み込みリバーブ",
+        "convolution reverb",
+        "ConvolverNode",
+        "インパルス応答",
+        "IR",
+        "初期反射",
+        "残響",
+        "dry",
+        "wet"
+      ],
+      "collection": "audio-reverb-observation",
+      "order": 1,
+      "verification": "WindowsのChromium系ブラウザで全6設定の波形と実効値、元の打音と響きを加えた音の試聴を確認（2026-11-06）",
+      "links": [
+        "/browser/audio-convolution-reverb.html"
+      ]
+    },
+    {
       "title": "Web Audioで線形と等電力のクロスフェードを比べる",
       "url": "/practice/browser/audio-crossfade-observation.html",
       "file": "practice/browser/audio-crossfade-observation.md",
@@ -4958,7 +4994,8 @@
       "links": [
         "/browser/audio-comb-filter.html",
         "/browser/audio-mixing-and-headroom.html",
-        "/practice/browser/audio-feedback-observation.html"
+        "/practice/browser/audio-feedback-observation.html",
+        "/browser/audio-convolution-reverb.html"
       ]
     },
     {
@@ -4990,6 +5027,38 @@
         "/practice/browser/audio-mixing-observation.html",
         "/browser/audio-worklet-buffering.html",
         "/browser/audio-gain-automation.html"
+      ]
+    },
+    {
+      "title": "Web Audioの畳み込みリバーブ — インパルス応答から響きを作る",
+      "url": "/browser/audio-convolution-reverb.html",
+      "file": "browser/audio-convolution-reverb.md",
+      "domain": "browser",
+      "section": "reference",
+      "format": "article",
+      "status": "published",
+      "summary": "音に対する部屋の応答をサンプル列で表し、入力に合わせてずらして足すと残響を作れる。ConvolverNodeで処理し、元の音と響きを別々に調整する仕組みを解説する。",
+      "source": "新規執筆",
+      "aliases": [
+        "Web Audio API",
+        "畳み込み",
+        "畳み込みリバーブ",
+        "convolution reverb",
+        "インパルス応答",
+        "impulse response",
+        "IR",
+        "ConvolverNode",
+        "残響",
+        "初期反射",
+        "ドライ",
+        "ウェット"
+      ],
+      "verification": "W3C Web Audio APIのConvolverNodeとJulius O. SmithのIntroduction to Digital Filtersに照合（2026-11-06）",
+      "links": [
+        "/browser/audio-feedback-delay.html",
+        "/browser/audio-mixing-and-headroom.html",
+        "/browser/audio-crossfade.html",
+        "/practice/browser/audio-reverb-observation.html"
       ]
     },
     {
@@ -7996,6 +8065,8 @@
         "/practice/browser/audio-comb-observation.html",
         "/browser/audio-feedback-delay.html",
         "/practice/browser/audio-feedback-observation.html",
+        "/browser/audio-convolution-reverb.html",
+        "/practice/browser/audio-reverb-observation.html",
         "/history/video-games.html",
         "/guide/rendering/timeline.html"
       ]
@@ -10145,6 +10216,7 @@
       "source": "統合ガイド",
       "aliases": [],
       "links": [
+        "/browser/audio-convolution-reverb.html",
         "/browser/audio-feedback-delay.html",
         "/browser/audio-comb-filter.html",
         "/browser/audio-crossfade.html",

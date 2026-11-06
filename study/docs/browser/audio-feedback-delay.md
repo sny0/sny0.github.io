@@ -64,3 +64,5 @@ Chromiumのソースでは、入力を取りに行く前に、ノードの処理
 ## ブラウザで測って聴く
 
 実践サンプルは `OfflineAudioContext` で実際にノードを循環させ、直接音と5回目までの反響を測ります。設定時間を200 msから400 msに変え、波形から測った間隔を比べます。帰還ゲインを0.7から0.4に下げると、同じ回数でも反響の振幅が小さくなります。短い効果音でも間隔と減衰を聴き比べられます。[フィードバックディレイの実践](/practice/browser/audio-feedback-observation.html)、[W3C Web Audio APIのOfflineAudioContext](https://www.w3.org/TR/webaudio/#OfflineAudioContext)
+
+反射が届く時刻と振幅を波形として用意し、その響きを別の音に加える方法もあります。[Web Audioの畳み込みリバーブ](/browser/audio-convolution-reverb.html)
