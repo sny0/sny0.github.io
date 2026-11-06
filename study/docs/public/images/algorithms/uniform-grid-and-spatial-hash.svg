@@ -1,0 +1,37 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="760" height="408" viewBox="0 0 760 408" role="img" aria-labelledby="title desc">
+  <title id="title">円のセル登録と矩形の範囲検索</title>
+  <desc id="desc">円Aの境界箱は4セルに登録される。検索矩形が読む2セルからA、A、Bを集め、重複除去後に円と矩形の交差を調べるとAだけが残る。</desc>
+  <rect width="760" height="408" rx="14" fill="#f5f8fa"/>
+  <g font-family="system-ui, sans-serif" fill="#183046" font-size="16">
+    <text x="25" y="42" font-size="24" font-weight="700">セルから候補を集め、形を確かめる</text>
+    <text x="25" y="70" fill="#465e71">セルの一辺は10。座標は右と下が正方向。</text>
+    <rect x="71" y="119" width="330" height="220" fill="#fff" stroke="#8da6b6"/>
+    <rect x="181" y="119" width="110" height="220" fill="#dfeff7"/>
+    <path d="M181 119V339 M291 119V339 M71 229H401" stroke="#8da6b6" fill="none"/>
+    <g text-anchor="middle" font-size="14" fill="#465e71">
+      <text x="71" y="107">−10</text><text x="181" y="107">0</text><text x="291" y="107">10</text><text x="401" y="107">20</text>
+      <text x="52" y="123">0</text><text x="52" y="234">10</text><text x="52" y="344">20</text>
+      <text x="110" y="142">(−1, 0)</text><text x="224" y="142">(0, 0)</text><text x="333" y="142">(1, 0)</text>
+      <text x="110" y="326">(−1, 1)</text><text x="332" y="326">(1, 1)</text>
+    </g>
+    <rect x="148" y="185" width="66" height="66" fill="#fce9d8" fill-opacity=".65" stroke="#925722" stroke-width="2" stroke-dasharray="5 3"/>
+    <circle cx="181" cy="218" r="33" fill="#ffd9af" stroke="#925722" stroke-width="2"/>
+    <circle cx="258" cy="317" r="8.25" fill="#ffd9af" stroke="#925722" stroke-width="2"/>
+    <rect x="192" y="163" width="88" height="132" fill="#4b9eb8" fill-opacity=".11" stroke="#176783" stroke-width="2.5"/>
+    <text x="235" y="182" text-anchor="middle" font-size="14" font-weight="700" fill="#14556b">検索範囲</text>
+    <text x="169" y="224" font-weight="700" fill="#5f3817">A</text>
+    <text x="271" y="323" font-weight="700" fill="#5f3817">B</text>
+    <text x="191" y="328" font-size="14" fill="#465e71">(0, 1)</text>
+    <path d="M410 217H439m-8-6 8 6-8 6" stroke="#527486" stroke-width="2" fill="none"/>
+    <rect x="448" y="120" width="285" height="219" rx="9" fill="#fff" stroke="#a1b8c7"/>
+    <text x="468" y="149" font-weight="700">青い2セルを読む</text>
+    <text x="468" y="179">(0, 0) で見つかるID</text><text x="704" y="179" text-anchor="end" font-weight="700">A</text>
+    <text x="468" y="207">(0, 1) で見つかるID</text><text x="704" y="207" text-anchor="end" font-weight="700">A・B</text>
+    <path d="M468 225H712" stroke="#c6d4dd"/>
+    <text x="468" y="254">重複を除いた候補</text><text x="704" y="254" text-anchor="end" font-weight="700">A・B</text>
+    <text x="468" y="287">矩形と重なる円</text><text x="704" y="287" text-anchor="end" font-weight="700" fill="#155d53">A</text>
+    <text x="468" y="316" font-size="14" fill="#465e71">Bはセルを共有するが範囲外</text>
+    <path d="M72 369H110" stroke="#925722" stroke-width="2" stroke-dasharray="5 3"/>
+    <text x="120" y="374" font-size="14" fill="#465e71">円Aを包む境界箱。4セルに登録する。</text>
+  </g>
+</svg>

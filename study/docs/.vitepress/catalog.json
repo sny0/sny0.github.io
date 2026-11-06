@@ -90,7 +90,7 @@
       "id": "algorithms",
       "title": "データ構造・アルゴリズム",
       "description": "操作手順、計算量、不変条件から道具を選ぶ。",
-      "count": 7,
+      "count": 10,
       "status": "辞典本文あり"
     },
     {
@@ -130,6 +130,13 @@
     }
   ],
   "collections": [
+    {
+      "id": "spatial-query-observation",
+      "section": "practice",
+      "title": "総当たり・グリッド・BVHで範囲検索を比べる",
+      "description": "円の分布と検索範囲を変え、候補と命中を同じ場面で比べる。",
+      "start": "/practice/algorithms/spatial-query-observation.html"
+    },
     {
       "id": "sparse-set-observation",
       "section": "practice",
@@ -895,6 +902,37 @@
         "/design/patterns/abstract-factory.html",
         "/languages/cpp/structs-and-classes.html",
         "/design/patterns/"
+      ]
+    },
+    {
+      "title": "BVHとAABB — 箱でまとめて衝突候補を絞る",
+      "url": "/algorithms/bounding-volume-hierarchies.html",
+      "file": "algorithms/bounding-volume-hierarchies.md",
+      "domain": "algorithms",
+      "section": "reference",
+      "format": "article",
+      "status": "published",
+      "summary": "物体を囲む箱を階層にして候補を絞り、箱の重なりと物体の移動が問い合わせに及ぼす影響を調べる。",
+      "source": "新規執筆",
+      "aliases": [
+        "BVH",
+        "Bounding Volume Hierarchy",
+        "境界ボリューム階層",
+        "AABB",
+        "軸平行境界ボックス",
+        "動的AABB木",
+        "broad phase",
+        "ブロードフェーズ",
+        "レイキャスト",
+        "refit",
+        "リフィット"
+      ],
+      "verification": "pbrtのBVH実装、Box2DのDynamic Tree API、KoptaらのBVH更新論文に照合（2026-11-06）",
+      "links": [
+        "/algorithms/uniform-grid-and-spatial-hash.html",
+        "/algorithms/quadtrees-and-octrees.html",
+        "/practice/algorithms/spatial-query-observation.html",
+        "/graphics/lighting/raytracing.html"
       ]
     },
     {
@@ -7347,6 +7385,7 @@
         "/graphics/lighting/ssr.html",
         "/graphics/lighting/ssao.html",
         "/graphics/lighting/path-tracing.html",
+        "/algorithms/bounding-volume-hierarchies.html",
         "/graphics/lighting/gi.html",
         "/graphics/lighting/shadow.html",
         "/graphics/api/directx12.html",
@@ -8708,6 +8747,10 @@
         "/algorithms/search-trees.html",
         "/algorithms/sparse-sets.html",
         "/practice/algorithms/sparse-set-observation.html",
+        "/algorithms/uniform-grid-and-spatial-hash.html",
+        "/algorithms/quadtrees-and-octrees.html",
+        "/algorithms/bounding-volume-hierarchies.html",
+        "/practice/algorithms/spatial-query-observation.html",
         "/history/video-games.html",
         "/guide/rendering/timeline.html"
       ]
@@ -8733,6 +8776,34 @@
         "/design/foundations/responsibility-and-separation.html",
         "/design/foundations/dependency.html",
         "/design/foundations/"
+      ]
+    },
+    {
+      "title": "均等グリッドと空間ハッシュ — 近くの候補をセルで絞る",
+      "url": "/algorithms/uniform-grid-and-spatial-hash.html",
+      "file": "algorithms/uniform-grid-and-spatial-hash.md",
+      "domain": "algorithms",
+      "section": "reference",
+      "format": "article",
+      "status": "published",
+      "summary": "座標をセル番号へ変換し、物体の境界箱を複数のセルに登録する。範囲検索で候補を絞る仕組みと、疎な空間をハッシュ表に格納する方法を調べる。",
+      "source": "新規執筆",
+      "aliases": [
+        "均等グリッド",
+        "uniform grid",
+        "空間ハッシュ",
+        "spatial hash",
+        "空間分割",
+        "セル",
+        "AABB",
+        "ブロードフェーズ",
+        "broad phase"
+      ],
+      "links": [
+        "/algorithms/hash-tables.html",
+        "/practice/algorithms/spatial-query-observation.html",
+        "/algorithms/quadtrees-and-octrees.html",
+        "/algorithms/bounding-volume-hierarchies.html"
       ]
     },
     {
@@ -8915,6 +8986,10 @@
       "aliases": [],
       "links": [
         "/design/foundations/yagni-kiss-dry.html",
+        "/algorithms/uniform-grid-and-spatial-hash.html",
+        "/practice/algorithms/spatial-query-observation.html",
+        "/algorithms/quadtrees-and-octrees.html",
+        "/algorithms/bounding-volume-hierarchies.html",
         "/runtime/cpp-internals/cache-branch-simd.html",
         "/runtime/memory/cache-locality-aos-soa.html",
         "/game/patterns/component-and-ecs.html",
@@ -8943,6 +9018,36 @@
         "/tools/build/what-is-build.html",
         "/tools/build/",
         "/tools/build/build-tools-cmake.html"
+      ]
+    },
+    {
+      "title": "四分木と八分木 — 必要な場所だけ細かく分ける",
+      "url": "/algorithms/quadtrees-and-octrees.html",
+      "file": "algorithms/quadtrees-and-octrees.md",
+      "domain": "algorithms",
+      "section": "reference",
+      "format": "article",
+      "status": "published",
+      "summary": "二次元の領域を4分割、三次元の領域を8分割して木にし、境界をまたぐ物体の登録と範囲検索を追う。",
+      "source": "新規執筆",
+      "aliases": [
+        "四分木",
+        "クアッドツリー",
+        "quadtree",
+        "八分木",
+        "オクツリー",
+        "octree",
+        "領域四分木",
+        "loose quadtree",
+        "loose octree",
+        "空間分割",
+        "AABB"
+      ],
+      "verification": "Sametの領域分割の解説と移動物体の論文、OctoMapの公式資料、OGC 3D Tiles仕様に照合（2026-11-06）",
+      "links": [
+        "/algorithms/uniform-grid-and-spatial-hash.html",
+        "/algorithms/bounding-volume-hierarchies.html",
+        "/algorithms/search-trees.html"
       ]
     },
     {
@@ -9691,6 +9796,34 @@
       ]
     },
     {
+      "title": "総当たり・グリッド・BVHで範囲検索を比べる",
+      "url": "/practice/algorithms/spatial-query-observation.html",
+      "file": "practice/algorithms/spatial-query-observation.md",
+      "domain": "algorithms",
+      "section": "practice",
+      "format": "sample",
+      "status": "published",
+      "summary": "同じ48個の円に対し、総当たり・均等グリッド・BVHで検索範囲に触れる円を探し、詳細判定まで残る候補を比べる。",
+      "source": "新規執筆",
+      "aliases": [
+        "範囲検索",
+        "空間インデックス",
+        "broad phase",
+        "均等グリッド",
+        "BVH",
+        "AABB",
+        "候補の絞り込み"
+      ],
+      "collection": "spatial-query-observation",
+      "order": 1,
+      "verification": "Nodeで5148通りの検索範囲と接触境界を照合し、Chromium系ブラウザで配置・セルサイズ・検索範囲の変更を確認（2026-11-06）",
+      "links": [
+        "/algorithms/uniform-grid-and-spatial-hash.html",
+        "/algorithms/bounding-volume-hierarchies.html",
+        "/algorithms/quadtrees-and-octrees.html"
+      ]
+    },
+    {
       "title": "第0章 学習全体マップ",
       "url": "/guide/low-level/learning-map.html",
       "file": "guide/low-level/learning-map.md",
@@ -9727,6 +9860,10 @@
       "order": 11,
       "links": [
         "/practice/algorithms/sparse-set-observation.html",
+        "/algorithms/uniform-grid-and-spatial-hash.html",
+        "/algorithms/quadtrees-and-octrees.html",
+        "/algorithms/bounding-volume-hierarchies.html",
+        "/practice/algorithms/spatial-query-observation.html",
         "/languages/cpp/stl.html",
         "/game/patterns/optimization-patterns.html",
         "/math/rendering/vector.html",
@@ -11057,6 +11194,9 @@
       "source": "統合ガイド",
       "aliases": [],
       "links": [
+        "/algorithms/uniform-grid-and-spatial-hash.html",
+        "/algorithms/quadtrees-and-octrees.html",
+        "/algorithms/bounding-volume-hierarchies.html",
         "/algorithms/arrays-and-dynamic-arrays.html",
         "/algorithms/linked-lists.html",
         "/algorithms/queues-and-deques.html",

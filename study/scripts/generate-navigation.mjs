@@ -468,11 +468,20 @@ writePage('guide/learning-paths.md', '疑問から選ぶ読み順', {
 3. [ハッシュ表](/algorithms/hash-tables.html)と[探索木](/algorithms/search-trees.html)で、キーの一致を調べたいときと、キーの順序や範囲が必要なときの違いを確認する。
 4. [スパースセット](/algorithms/sparse-sets.html)と[IDを出し入れする実験](/practice/algorithms/sparse-set-observation.html)で、IDからの直接参照と、コンポーネントを詰めた走査を両立する仕組みを試す。
 
+## 近くの物体だけを調べるには
+
+1. [均等グリッドと空間ハッシュ](/algorithms/uniform-grid-and-spatial-hash.html)で、座標からセルを引き、複数セルに登録された物体を一度だけ検査する仕組みを読む。
+2. [四分木と八分木](/algorithms/quadtrees-and-octrees.html)と[BVHとAABB](/algorithms/bounding-volume-hierarchies.html)で、場所を分ける方法と、物体をグループに分けて箱で包む方法を比べる。
+3. [範囲検索の実験](/practice/algorithms/spatial-query-observation.html)で、物体の配置や検索範囲を動かし、命中と詳細判定の件数を確かめる。
+
 ## 作り方の変化を歴史から見る
 
 [ビデオゲーム史](/history/video-games.html)の作品・ハード・媒体・流通と、[リアルタイム3D技術史](/guide/rendering/timeline.html)の技術の変化から、気になった仕組みへ進みます。`)
 
 const termRows = [
+  ['均等グリッド / uniform grid / 空間ハッシュ / spatial hash / セル / 候補の重複', '/algorithms/uniform-grid-and-spatial-hash.html', '座標をセルに割り当て、検索範囲に近い物体を集める'],
+  ['四分木 / クアッドツリー / quadtree / 八分木 / オクツリー / octree / loose tree', '/algorithms/quadtrees-and-octrees.html', '空間の分割を深くする条件と、境界をまたぐ物体の置き場所を調べる'],
+  ['BVH / bounding volume hierarchy / AABB / ブロードフェーズ / リフィット / refit', '/algorithms/bounding-volume-hierarchies.html', '箱で物体をまとめ、検索範囲と重ならない枝を省く'],
   ['配列 / 動的配列 / vector / List / size / capacity / 償却計算量', '/algorithms/arrays-and-dynamic-arrays.html', '添字とメモリ配置、容量の拡張、位置や参照が変わる条件を調べる'],
   ['連結リスト / linked list / 単方向リスト / 双方向リスト / intrusive list', '/algorithms/linked-lists.html', 'ノード間のリンクと、位置を探す費用・つなぎ直す費用を分ける'],
   ['スタック / キュー / デック / LIFO / FIFO / deque / リングバッファ', '/algorithms/queues-and-deques.html', 'データを追加・取り出す端と、読み書き位置が折り返す仕組みを調べる'],

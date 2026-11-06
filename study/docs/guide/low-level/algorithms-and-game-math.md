@@ -23,6 +23,7 @@ study:
 
 - [データ構造の目次](/algorithms/)から、配列、連結リスト、キュー、ハッシュ表、ヒープ、探索木、スパースセットの解説へ進めます。
 - [スパースセットでIDの追加と削除を試す](/practice/algorithms/sparse-set-observation.html)で、ECSで使うことのあるIDと配列位置の対応を観察できます。
+- [均等グリッドと空間ハッシュ](/algorithms/uniform-grid-and-spatial-hash.html)、[四分木・八分木](/algorithms/quadtrees-and-octrees.html)、[BVH](/algorithms/bounding-volume-hierarchies.html)で、近くの候補を集める仕組みを比べられます。[範囲検索の実験](/practice/algorithms/spatial-query-observation.html)
 - [STLコンテナ](/languages/cpp/stl.html)と[空間分割・Data Locality](/game/patterns/optimization-patterns.html)では、道具の選び方を調べられます。
 - [ベクトル](/math/rendering/vector.html)、[行列](/math/rendering/matrix.html)から、座標と変換の本文へ進めます。
 
@@ -105,7 +106,7 @@ study:
 | 現場の事象 | この章の知識 |
 |---|---|
 | 「視界内の敵だけ処理」 | 内積・フラスタム・空間分割 |
-| 数千体の衝突判定が間に合う | グリッド/BVHでO(n²)回避 |
+| 多数の物体から衝突候補を絞る | 分布と検索範囲に応じてグリッドやBVHを使う |
 | キャラの向き補間がおかしい | オイラー角→クォータニオンslerp |
 | 描画順ソート(マテリアル・深度) | 基数ソート・ソートキー設計 |
 | エフェクトの「気持ちよさ」 | イージング・補間 |

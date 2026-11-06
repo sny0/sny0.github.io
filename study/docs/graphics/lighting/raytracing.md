@@ -62,9 +62,11 @@ flowchart TB
     TLAS --> B3["BLAS<br/>メッシュC (スキニング済み頂点)"]
 ```
 
-- **BLAS**: メッシュ単位。構築は重い (ビルド/リフィット)。変形メッシュは毎フレーム**リフィット**
-- **TLAS**: シーン単位。毎フレーム再構築が普通
+- **BLAS**: 三角形や手続き形状の境界箱をまとめます。形状が変わった場合は、APIの更新条件と、更新後の走査効率を見て、更新か再構築を選びます。
+- **TLAS**: BLASを参照するインスタンスをまとめます。インスタンスの変換や構成が変わったら、反映に必要な更新や再構築を行います。[Direct3D 12の更新フラグ](https://learn.microsoft.com/en-us/windows/win32/api/d3d12/ne-d3d12-d3d12_raytracing_acceleration_structure_build_flags) · [Vulkanの更新条件](https://docs.vulkan.org/refpages/latest/refpages/source/vkCmdBuildAccelerationStructuresKHR.html)
 - RTコアが行うのは**ボックス交差とレイ-三角形交差**。シェーディングは通常のシェーダコアで実行
+
+境界箱がどのように枝を省くかは、[BVHとAABB](/algorithms/bounding-volume-hierarchies.html)で図を使って説明しています。
 
 ### シェーダパイプライン (DXR)
 

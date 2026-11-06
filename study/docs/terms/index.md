@@ -18,6 +18,9 @@
 
 | 用語・別名 | 説明への入口 |
 | --- | --- |
+| [均等グリッド / uniform grid / 空間ハッシュ / spatial hash / セル / 候補の重複](/algorithms/uniform-grid-and-spatial-hash.html) | 座標をセルに割り当て、検索範囲に近い物体を集める |
+| [四分木 / クアッドツリー / quadtree / 八分木 / オクツリー / octree / loose tree](/algorithms/quadtrees-and-octrees.html) | 空間の分割を深くする条件と、境界をまたぐ物体の置き場所を調べる |
+| [BVH / bounding volume hierarchy / AABB / ブロードフェーズ / リフィット / refit](/algorithms/bounding-volume-hierarchies.html) | 箱で物体をまとめ、検索範囲と重ならない枝を省く |
 | [配列 / 動的配列 / vector / List / size / capacity / 償却計算量](/algorithms/arrays-and-dynamic-arrays.html) | 添字とメモリ配置、容量の拡張、位置や参照が変わる条件を調べる |
 | [連結リスト / linked list / 単方向リスト / 双方向リスト / intrusive list](/algorithms/linked-lists.html) | ノード間のリンクと、位置を探す費用・つなぎ直す費用を分ける |
 | [スタック / キュー / デック / LIFO / FIFO / deque / リングバッファ](/algorithms/queues-and-deques.html) | データを追加・取り出す端と、読み書き位置が折り返す仕組みを調べる |
