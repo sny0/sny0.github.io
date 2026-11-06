@@ -303,6 +303,12 @@
 2. [同じ60 FPSで表示間隔を比べる](/practice/graphics/frame-pacing-observation.html)で、平均が同じ二つの動きと、時間ごとの長い表示間隔を比べる。
 3. [デバッグ・プロファイリングツール](/graphics/optimization/tools.html)で、処理が長引いた箇所を調べるための道具を確認する。
 
+## GPUが描き終えた絵はいつ画面に出るか
+
+1. [スワップチェーンとVSync](/graphics/optimization/swap-chain-and-vsync.html)で、描画用の画像を受け取ってから表示側が使い終えるまでを追う。
+2. [FIFO・MAILBOX・IMMEDIATEで画面の切り替わりを比べる](/practice/graphics/swap-chain-observation.html)で、表示待ち、表示されずに置き換わる絵、ティアリングを観察する。
+3. [デバイス初期化と画面クリア](/graphics/capstone/02-device.html)で、Vulkanで画像を取得し、描画の完了に合わせてPresentするコードを読む。
+
 ## 作り方の変化を歴史から見る
 
 [ビデオゲーム史](/history/video-games.html)の作品・ハード・媒体・流通と、[リアルタイム3D技術史](/guide/rendering/timeline.html)の技術の変化から、気になった仕組みへ進みます。

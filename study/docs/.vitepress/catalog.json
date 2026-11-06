@@ -104,7 +104,7 @@
       "id": "graphics",
       "title": "3DCGとグラフィックス",
       "description": "制作データからGPUの処理、最終表示までをつなぐ。",
-      "count": 53,
+      "count": 54,
       "status": "辞典本文あり"
     },
     {
@@ -130,6 +130,13 @@
     }
   ],
   "collections": [
+    {
+      "id": "swap-chain-observation",
+      "section": "practice",
+      "title": "FIFO・MAILBOX・IMMEDIATEで画面の切り替わりを比べる",
+      "description": "同じ描画完了時刻から、表示待ち、絵の置き換え、走査中の切り替わりを比べる。",
+      "start": "/practice/graphics/swap-chain-observation.html"
+    },
     {
       "id": "frame-pacing-observation",
       "section": "practice",
@@ -2457,6 +2464,32 @@
         "/design/patterns/template-method.html",
         "/design/case-studies/object-spawning.html",
         "/design/patterns/"
+      ]
+    },
+    {
+      "title": "FIFO・MAILBOX・IMMEDIATEで画面の切り替わりを比べる",
+      "url": "/practice/graphics/swap-chain-observation.html",
+      "file": "practice/graphics/swap-chain-observation.md",
+      "domain": "graphics",
+      "section": "practice",
+      "format": "sample",
+      "status": "published",
+      "summary": "同じ描画完了時刻を3つの提示方式に与え、画面に出た絵、表示待ち、ティアリング、入力から最初に見えるまでの時間を比べる。",
+      "source": "新規執筆",
+      "aliases": [
+        "スワップチェーン",
+        "VSync",
+        "scanout",
+        "FIFO",
+        "MAILBOX",
+        "IMMEDIATE",
+        "ティアリング"
+      ],
+      "collection": "swap-chain-observation",
+      "order": 1,
+      "verification": "Nodeで全7走査の表示順と切り替え位置を検証し、Chromium系ブラウザで走査の切り替えと再生を確認（2026-11-06）",
+      "links": [
+        "/graphics/optimization/swap-chain-and-vsync.html"
       ]
     },
     {
@@ -6832,6 +6865,37 @@
       ]
     },
     {
+      "title": "スワップチェーンとVSync — 描画した絵が画面に出るまで",
+      "url": "/graphics/optimization/swap-chain-and-vsync.html",
+      "file": "graphics/optimization/swap-chain-and-vsync.md",
+      "domain": "graphics",
+      "section": "reference",
+      "format": "article",
+      "status": "published",
+      "summary": "描画に使う画像を取得してから再取得できるまでを追い、FIFO・MAILBOX・IMMEDIATEで画面に出る絵と待ち時間を比べる。",
+      "source": "新規執筆",
+      "aliases": [
+        "スワップチェーン",
+        "スワップチェイン",
+        "swap chain",
+        "swapchain",
+        "VSync",
+        "垂直同期",
+        "ティアリング",
+        "scanout",
+        "FIFO",
+        "MAILBOX",
+        "IMMEDIATE",
+        "VRR"
+      ],
+      "verification": "VulkanのVkPresentModeKHR・画像取得・Presentの仕様と、DXGIのPresent・VRRの公式資料に照合（2026-11-06）",
+      "links": [
+        "/graphics/capstone/02-device.html",
+        "/practice/graphics/swap-chain-observation.html",
+        "/graphics/optimization/frame-pacing.html"
+      ]
+    },
+    {
       "title": "セーブデータの設計",
       "url": "/design/case-studies/save-data.html",
       "file": "design/case-studies/save-data.md",
@@ -8408,6 +8472,9 @@
         "/graphics/optimization/frame-pacing.html",
         "/practice/graphics/frame-pacing-observation.html",
         "/graphics/optimization/tools.html",
+        "/graphics/optimization/swap-chain-and-vsync.html",
+        "/practice/graphics/swap-chain-observation.html",
+        "/graphics/capstone/02-device.html",
         "/history/video-games.html",
         "/guide/rendering/timeline.html"
       ]
@@ -10489,6 +10556,7 @@
       "links": [
         "/practice/graphics/frame-pacing-observation.html",
         "/graphics/optimization/basics.html",
+        "/graphics/optimization/swap-chain-and-vsync.html",
         "/guide/low-level/input-and-game-loop.html",
         "/graphics/optimization/tools.html"
       ]
@@ -10612,6 +10680,7 @@
       "source": "統合ガイド",
       "aliases": [],
       "links": [
+        "/graphics/optimization/swap-chain-and-vsync.html",
         "/graphics/optimization/frame-pacing.html",
         "/browser/audio-flyby.html",
         "/browser/audio-doppler.html",

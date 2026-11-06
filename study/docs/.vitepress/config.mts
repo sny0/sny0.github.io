@@ -58,7 +58,8 @@ export default withMermaid(defineConfig({
       { url: '/study/samples/browser/audio-occlusion-transition-observation/index.html' },
       { url: '/study/samples/browser/audio-doppler-observation/index.html' },
       { url: '/study/samples/browser/audio-flyby-observation/index.html' },
-      { url: '/study/samples/graphics/frame-pacing-observation/index.html' }
+      { url: '/study/samples/graphics/frame-pacing-observation/index.html' },
+      { url: '/study/samples/graphics/swap-chain-observation/index.html' }
     ]
   },
   head: [

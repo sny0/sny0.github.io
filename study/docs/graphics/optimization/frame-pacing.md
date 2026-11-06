@@ -65,4 +65,6 @@ study:
 3. **前後の普通のフレームと比較する。** Direct3D 12なら、PIXのTiming CaptureでCPUスレッドとGPUキューを同じ時刻軸に並べます。CPU側で長いイベントや待ちがないか、GPU側で描画・コピーの区間が延びていないか、送信からGPUの実行開始までの待ちが増えていないかを順に見ます。CPUとGPUは並行して進むため、両方の実行時間を足しても表示間隔にはなりません。[PIX Timing Captures](https://learn.microsoft.com/en-us/windows/pix/timing-captures/timing-captures-overview)
 4. **原因候補を一つ変え、同じ条件で計り直す。** 例えばマップの境目でだけCPUの待ちが増えるなら、ファイル読み込みのマーカーと待ち始めの時刻を照らし合わせます。CPUとGPUの仕事量が普段通りなら、表示キューの待ちや提示方式の変化を確認します。修正前後は平均FPSに加え、同じ場面で表示間隔のスパイクが短くなったか、回数が減ったかを比べます。[GPU最適化の基礎](/graphics/optimization/basics.html)
 
+描画が終わった絵をどの順番で出すか、表示の途中で絵を替えると何が見えるかは、[スワップチェーンとVSync](/graphics/optimization/swap-chain-and-vsync.html)で扱います。
+
 関連項目は[入力とゲームループ](/guide/low-level/input-and-game-loop.html)と[デバッグ・プロファイリングツール](/graphics/optimization/tools.html)です。
