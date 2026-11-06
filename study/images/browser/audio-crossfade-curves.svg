@@ -1,0 +1,60 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="760" height="870" viewBox="0 0 760 870" role="img" aria-labelledby="title desc">
+  <title id="title">クロスフェードのゲイン曲線</title>
+  <desc id="desc">Aのゲインは1から0、Bのゲインは0から1へ変化する。等ゲインでは両方が中点で0.50になり、ゲインの和が1に保たれる。等電力では両方が中点で約0.707になり、ゲインの二乗和が1に保たれる。</desc>
+  <style>
+    text { font-family: "Noto Sans CJK JP", "Yu Gothic UI", Meiryo, sans-serif; fill: #183446; }
+    .title { font-size: 32px; font-weight: 700; }
+    .subtitle { font-size: 21px; fill: #385462; }
+    .heading { font-size: 25px; font-weight: 700; }
+    .body { font-size: 20px; }
+    .tick { font-size: 17px; fill: #385462; }
+    .panel { fill: #fff; stroke: #a6b8c2; stroke-width: 2; }
+    .axis { fill: none; stroke: #8da5b2; stroke-width: 1.5; }
+    .guide { fill: none; stroke: #7893a3; stroke-width: 1.5; stroke-dasharray: 5 4; }
+    .teal, .rust { fill: none; stroke-width: 4; stroke-linecap: round; stroke-linejoin: round; }
+    .teal { stroke: #17616d; }
+    .rust { stroke: #994735; stroke-dasharray: 10 5; }
+  </style>
+  <defs>
+    <g id="axes">
+      <rect x="104" y="0" width="600" height="150" rx="5" fill="#f4f8fa"/>
+      <path class="axis" d="M104 0V150H704 M104 0H704"/>
+      <path class="guide" d="M404 0V150"/>
+      <text class="tick" x="90" y="6" text-anchor="end">1</text>
+      <text class="tick" x="90" y="155" text-anchor="end">0</text>
+      <text class="tick" x="104" y="177" text-anchor="middle">0</text>
+      <text class="tick" x="404" y="177" text-anchor="middle">0.5</text>
+      <text class="tick" x="704" y="177" text-anchor="end">1</text>
+    </g>
+  </defs>
+  <rect width="760" height="870" rx="24" fill="#eaf2f4"/>
+  <text class="title" x="36" y="61">二つのゲイン曲線を比べる</text>
+  <text class="subtitle" x="36" y="100">横軸はAからBへ切り替える進行度です。</text>
+
+  <rect class="panel" x="36" y="126" width="688" height="322" rx="18"/>
+  <text class="heading" x="57" y="167">等ゲイン（線形）</text>
+  <text class="body" x="57" y="198">ゲインの和が1</text>
+  <g transform="translate(0 219)">
+    <use href="#axes"/>
+    <path class="teal" d="M104 0L704 150"/>
+    <path class="rust" d="M104 150L704 0"/>
+    <circle cx="404" cy="75" r="5" fill="#183446"/>
+  </g>
+  <text class="body" x="57" y="427">中点ではAもBも 0.50</text>
+
+  <rect class="panel" x="36" y="470" width="688" height="322" rx="18"/>
+  <text class="heading" x="57" y="511">等電力</text>
+  <text class="body" x="57" y="542">ゲインの二乗和が1</text>
+  <g transform="translate(0 563)">
+    <use href="#axes"/>
+    <path class="teal" d="M104.00 0.00 L122.75 0.18 L141.50 0.72 L160.25 1.62 L179.00 2.88 L197.75 4.50 L216.50 6.46 L235.25 8.77 L254.00 11.42 L272.75 14.40 L291.50 17.71 L310.25 21.34 L329.00 25.28 L347.75 29.52 L366.50 34.05 L385.25 38.86 L404.00 43.93 L422.75 49.27 L441.50 54.84 L460.25 60.65 L479.00 66.66 L497.75 72.88 L516.50 79.29 L535.25 85.87 L554.00 92.60 L572.75 99.47 L591.50 106.46 L610.25 113.55 L629.00 120.74 L647.75 127.99 L666.50 135.30 L685.25 142.64 L704.00 150.00"/>
+    <path class="rust" d="M104.00 150.00 L122.75 142.64 L141.50 135.30 L160.25 127.99 L179.00 120.74 L197.75 113.55 L216.50 106.46 L235.25 99.47 L254.00 92.60 L272.75 85.87 L291.50 79.29 L310.25 72.88 L329.00 66.66 L347.75 60.65 L366.50 54.84 L385.25 49.27 L404.00 43.93 L422.75 38.86 L441.50 34.05 L460.25 29.52 L479.00 25.28 L497.75 21.34 L516.50 17.71 L535.25 14.40 L554.00 11.42 L572.75 8.77 L591.50 6.46 L610.25 4.50 L629.00 2.88 L647.75 1.62 L666.50 0.72 L685.25 0.18 L704.00 0.00"/>
+    <circle cx="404" cy="43.93" r="5" fill="#183446"/>
+  </g>
+  <text class="body" x="57" y="771">中点ではAもBも 約0.707</text>
+
+  <path class="teal" d="M57 832H94"/>
+  <text class="body" x="105" y="839">音源Aのゲイン</text>
+  <path class="rust" d="M354 832H391"/>
+  <text class="body" x="402" y="839">音源Bのゲイン</text>
+</svg>

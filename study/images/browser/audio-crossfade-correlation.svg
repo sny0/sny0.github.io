@@ -1,0 +1,59 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="760" height="870" viewBox="0 0 760 870" role="img" aria-labelledby="title desc">
+  <title id="title">二つの音の相関によるレベルの違い</title>
+  <desc id="desc">強さの等しい二つの音の理論値を比較する。相関が0の場合、等ゲインでは中点で約マイナス3.01デシベル、等電力では0デシベルになる。同位相で同じ波形の場合、等ゲインでは0デシベル、等電力では約プラス3.01デシベルになる。横軸は切り替えの進行度、縦軸は片方だけが鳴るときに対するRMSのレベル差。</desc>
+  <style>
+    text { font-family: "Noto Sans CJK JP", "Yu Gothic UI", Meiryo, sans-serif; fill: #183446; }
+    .title { font-size: 32px; font-weight: 700; }
+    .subtitle { font-size: 21px; fill: #385462; }
+    .heading { font-size: 25px; font-weight: 700; }
+    .body { font-size: 20px; }
+    .tick { font-size: 17px; fill: #385462; }
+    .panel { fill: #fff; stroke: #a6b8c2; stroke-width: 2; }
+    .axis { fill: none; stroke: #8da5b2; stroke-width: 1.5; }
+    .guide { fill: none; stroke: #7893a3; stroke-width: 1.5; stroke-dasharray: 5 4; }
+    .teal, .rust { fill: none; stroke-width: 4; stroke-linecap: round; stroke-linejoin: round; }
+    .teal { stroke: #17616d; }
+    .rust { stroke: #994735; stroke-dasharray: 10 5; }
+  </style>
+  <defs>
+    <g id="axes">
+      <rect x="104" y="0" width="600" height="150" rx="5" fill="#f4f8fa"/>
+      <path class="axis" d="M104 0V150H704 M104 75H704"/>
+      <path class="guide" d="M404 0V150"/>
+      <text class="tick" x="91" y="6" text-anchor="end">+4</text>
+      <text class="tick" x="91" y="81" text-anchor="end">0</text>
+      <text class="tick" x="91" y="155" text-anchor="end">−4</text>
+      <text class="tick" x="104" y="177" text-anchor="middle">0</text>
+      <text class="tick" x="404" y="177" text-anchor="middle">0.5</text>
+      <text class="tick" x="704" y="177" text-anchor="end">1</text>
+    </g>
+  </defs>
+  <rect width="760" height="870" rx="24" fill="#eaf2f4"/>
+  <text class="title" x="36" y="61">重なり方で合成後のRMSが変わる</text>
+  <text class="subtitle" x="36" y="100">片方だけが鳴るときのRMSを 0 dB とした理論値です。</text>
+
+  <rect class="panel" x="36" y="126" width="688" height="322" rx="18"/>
+  <text class="heading" x="57" y="167">二つの音の相関が0</text>
+  <text class="body" x="57" y="198">等ゲインでは重なる区間で下がる</text>
+  <g transform="translate(0 219)">
+    <use href="#axes"/>
+    <path class="teal" d="M104.00 75.00 L122.75 80.09 L141.50 85.15 L160.25 90.17 L179.00 95.10 L197.75 99.92 L216.50 104.59 L235.25 109.06 L254.00 113.27 L272.75 117.18 L291.50 120.73 L310.25 123.86 L329.00 126.51 L347.75 128.63 L366.50 130.18 L385.25 131.13 L404.00 131.44 L422.75 131.13 L441.50 130.18 L460.25 128.63 L479.00 126.51 L497.75 123.86 L516.50 120.73 L535.25 117.18 L554.00 113.27 L572.75 109.06 L591.50 104.59 L610.25 99.92 L629.00 95.10 L647.75 90.17 L666.50 85.15 L685.25 80.09 L704.00 75.00"/>
+    <path class="rust" d="M104 75H704"/>
+  </g>
+  <text class="body" x="57" y="427">中点は等ゲイン −3.01 dB、等電力 0 dB</text>
+
+  <rect class="panel" x="36" y="470" width="688" height="322" rx="18"/>
+  <text class="heading" x="57" y="511">同じ波形が同位相で重なる</text>
+  <text class="body" x="57" y="542">等電力では重なる区間で上がる</text>
+  <g transform="translate(0 563)">
+    <use href="#axes"/>
+    <path class="teal" d="M104 75H704"/>
+    <path class="rust" d="M104.00 75.00 L122.75 67.39 L141.50 60.49 L160.25 54.25 L179.00 48.61 L197.75 43.55 L216.50 39.02 L235.25 35.00 L254.00 31.45 L272.75 28.37 L291.50 25.73 L310.25 23.51 L329.00 21.72 L347.75 20.33 L366.50 19.34 L385.25 18.75 L404.00 18.56 L422.75 18.75 L441.50 19.34 L460.25 20.33 L479.00 21.72 L497.75 23.51 L516.50 25.73 L535.25 28.37 L554.00 31.45 L572.75 35.00 L591.50 39.02 L610.25 43.55 L629.00 48.61 L647.75 54.25 L666.50 60.49 L685.25 67.39 L704.00 75.00"/>
+  </g>
+  <text class="body" x="57" y="771">中点は等ゲイン 0 dB、等電力 +3.01 dB</text>
+
+  <path class="teal" d="M57 832H94"/>
+  <text class="body" x="105" y="839">等ゲイン（線形）</text>
+  <path class="rust" d="M354 832H391"/>
+  <text class="body" x="402" y="839">等電力</text>
+</svg>
