@@ -1,0 +1,51 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="760" height="454" viewBox="0 0 760 454" role="img" aria-labelledby="title desc">
+  <title id="title">COPYが準備したデータをDIRECTで使う</title>
+  <desc id="desc">COPYキューはテクスチャを転送し、処理を終えるとフェンスcopyDoneに11を通知する。DIRECTキューはコピーに依存しない描画を先に行い、11に到達してから転送したテクスチャを読み、描画完了をdrawDoneの24で通知する。転送元と描画で使う資源にはそれぞれ別の回収時点がある。</desc>
+  <defs>
+    <marker id="arrow" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto">
+      <path d="M0 0L10 5L0 10Z" fill="#455e6d"/>
+    </marker>
+    <marker id="dependency" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto">
+      <path d="M0 0L10 5L0 10Z" fill="#906724"/>
+    </marker>
+  </defs>
+  <rect width="760" height="454" rx="18" fill="#edf2f5"/>
+  <g font-family="system-ui, 'Yu Gothic', 'Meiryo', sans-serif" fill="#163347">
+    <text x="24" y="42" font-size="24" font-weight="700">COPYが準備したデータをDIRECTで使う</text>
+    <text x="24" y="67" font-size="14" fill="#385466">コピー結果を読む位置で、DIRECTがフェンスを待つ。</text>
+
+    <rect x="24" y="87" width="712" height="111" rx="12" fill="#fff" stroke="#a6bdca"/>
+    <text x="43" y="115" font-size="17" font-weight="700">COPYキュー</text>
+    <text x="659" y="115" font-size="13" fill="#385466">処理順 →</text>
+    <rect x="173" y="126" width="223" height="43" rx="8" fill="#dfeef3" stroke="#88aebb"/>
+    <rect x="428" y="126" width="166" height="43" rx="8" fill="#f7ecd4" stroke="#d1b984"/>
+    <path d="M396 148h26" stroke="#455e6d" stroke-width="2" marker-end="url(#arrow)"/>
+    <text x="285" y="153" text-anchor="middle" font-size="15">テクスチャをコピー</text>
+    <text x="511" y="153" text-anchor="middle" font-size="15">Signal(copyDone, 11)</text>
+    <text x="173" y="187" font-size="13" fill="#385466">COPYの提出単位が完了すると、転送先は COMMON に復帰</text>
+
+    <rect x="24" y="215" width="712" height="108" rx="12" fill="#fff" stroke="#a6bdca"/>
+    <text x="43" y="242" font-size="17" font-weight="700">DIRECTキュー</text>
+    <rect x="132" y="259" width="170" height="46" rx="8" fill="#dfeef3" stroke="#88aebb"/>
+    <rect x="328" y="259" width="135" height="46" rx="8" fill="#f7ecd4" stroke="#d1b984"/>
+    <rect x="490" y="259" width="112" height="46" rx="8" fill="#e0efe9" stroke="#86b2a2"/>
+    <rect x="629" y="259" width="91" height="46" rx="8" fill="#ebf0f4" stroke="#a6bdca"/>
+    <g stroke="#455e6d" stroke-width="2" marker-end="url(#arrow)">
+      <path d="M302 282h20"/>
+      <path d="M463 282h21"/>
+      <path d="M602 282h21"/>
+    </g>
+    <path d="M594 148h35v58H395v47" fill="none" stroke="#906724" stroke-width="2" marker-end="url(#dependency)"/>
+    <text x="463" y="238" font-size="13" fill="#694810">11に達したら次へ進む</text>
+    <text x="217" y="287" text-anchor="middle" font-size="14">独立した描画</text>
+    <text x="395" y="287" text-anchor="middle" font-size="14">Wait(copyDone, 11)</text>
+    <text x="546" y="287" text-anchor="middle" font-size="14">描画で読む</text>
+    <text x="674" y="279" text-anchor="middle" font-size="12">drawDone</text>
+    <text x="674" y="295" text-anchor="middle" font-size="12">に24を通知</text>
+
+    <rect x="24" y="339" width="712" height="90" rx="12" fill="#dce9ef" stroke="#a6bdca"/>
+    <text x="43" y="365" font-size="16" font-weight="700">各資源は最後の参照が終わってから回収</text>
+    <text x="43" y="391" font-size="14">copyDone = 11 で、COPYだけが読んだ転送元を再利用できる。</text>
+    <text x="43" y="412" font-size="14">drawDone = 24 で、この描画が最後に使った資源を回収できる。</text>
+  </g>
+</svg>

@@ -43,6 +43,9 @@
 | [GPUタイムスタンプ / timestamp query / ResolveQueryData / timestampPeriod / timestampValidBits](/graphics/optimization/gpu-timestamp-queries.html) | GPUコマンドの時刻を読み戻して区間の時間を測る |
 | [GPUフェンス / リソースの寿命 / upload heap / ステージング / descriptor](/graphics/optimization/gpu-resource-lifetime.html) | GPUが使う領域やコマンド格納場所を再利用できる条件を調べる |
 | [並列コマンド記録 / D3D12 / command allocator / command list / フレームスロット](/graphics/optimization/parallel-command-recording.html) | CPUで記録を分担し、GPUへの提出順と記録用メモリの再利用を管理する |
+| [D3D12 / リソースバリア / transition barrier / UAV barrier / aliasing barrier / COMMON](/graphics/optimization/d3d12-resource-barriers.html) | リソースへのアクセスやメモリの使い回しに必要なバリアを調べる |
+| [D3D12 / キュー間同期 / Signal / Wait / COPY queue / async compute](/graphics/optimization/gpu-queue-synchronization.html) | 別キューへ結果を渡す順序と、CPUがフェンスを待つ場合の違いを調べる |
+| [D3D12 / ディスクリプターヒープ / descriptor heap / CBV / SRV / UAV / RTV / DSV](/graphics/optimization/d3d12-descriptor-heaps.html) | リソースへの参照を格納・設定し、GPUの使用が終わるまで保持する |
 | [DDS / DDS_HEADER / DXGI_FORMAT / mip / subresource / BC7 / cubemap](/graphics/texture/dds-and-subresources.html) | ファイルのヘッダー、テクスチャの形、mipや圧縮ブロックの位置を調べる |
 | [テクスチャ転送 / RowPitch / GetCopyableFootprints / CopyTextureRegion / readback](/graphics/texture/d3d12-texture-upload.html) | CPU側の行をバッファに並べ、コピー、状態遷移、完了の順序を調べる |
 | [テクスチャストリーミング / mip residency / SRV / reserved resource / タイル](/graphics/texture/texture-streaming-and-mip-residency.html) | 先に使うmip、シェーダーに公開する範囲、GPUメモリの予算を調べる |

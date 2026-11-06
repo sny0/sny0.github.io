@@ -53,3 +53,5 @@ CPUが次のフレームを記録する間、GPUが前のフレームを実行�
 同じシーンで、フレームの記録開始から提出までの経過時間、ワーカー別の記録時間、提出側が最後のワーカーを待つ時間、リスト数と提出回数を比べます。例えば一つの大きなパスに仕事が集中する場合は、同じパス内で描画の範囲を分けられるかを調べます。リストを細かく分けるほど、初期状態の設定、ジョブの配布、記録結果の回収も増えます。GPU時間とキューに仕事が来ていない区間も併せて見ると、CPU側の変更がフレーム全体にどう効いたかを確かめられます。[Microsoft PIXのTiming Captures](https://devblogs.microsoft.com/pix/timing-captures-new/) · [GPUタイムスタンプクエリ](/graphics/optimization/gpu-timestamp-queries.html)
 
 アセットを準備するワーカーは、例えばメッシュを読み、頂点とインデックスをCPU側に用意し、描画側へ渡します。記録ワーカーは、その描画で参照できるリソースを使ってコマンドリストを組み立てます。二つの段階をつなぐときは、データを受け取る時点と、アップロードが済んで描画で使える時点をそれぞれ追います。[アセットワーカーから描画側へ渡す設計](/game/asset-worker-handoff.html)
+
+実践では二つのCPUスレッドでコピーを記録し、閉じた順番と逆の依存順で提出します。フェンスを待ってデータを読み戻し、処理がつながったことを確認できます。[C++で並列コマンド記録を試す](/practice/graphics/parallel-command-recording-observation.html) · [リソースバリア](/graphics/optimization/d3d12-resource-barriers.html)

@@ -75,6 +75,13 @@
 3. [C++のワーカー受け渡し実践](/practice/threads/asset-worker-handoff-observation.html)で、結果キューを回収し、古い世代を捨てて終了する。
 4. [D3D12の並列コマンド記録](/graphics/optimization/parallel-command-recording.html)で、描画コマンド自体を複数スレッドで記録するときの提出順と寿命を調べる。
 
+## D3D12でコマンドを記録し、依存する処理を実行するには
+
+1. [D3D12のリソースバリア](/graphics/optimization/d3d12-resource-barriers.html)で、コピーから読み取りへの遷移やUAV・エイリアシングの依存関係を調べる。
+2. [C++の並列コマンド記録実践](/practice/graphics/parallel-command-recording-observation.html)で、CPUがリストを閉じた順番と、一つのキューへの提出順を変えて確かめる。
+3. [D3D12のキュー間同期](/graphics/optimization/gpu-queue-synchronization.html)で、コピーと描画を別のキューに分けるときのフェンスと状態を追う。
+4. [D3D12のディスクリプターヒープ](/graphics/optimization/d3d12-descriptor-heaps.html)で、シェーダーへ渡す参照と、その参照を再利用する条件を調べる。
+
 ## ファイルを読むと内部で何が起きるか
 
 1. [ファイルを読む仕組み](/os/file-read-journey.html)で、アプリのバッファ、OSのファイルキャッシュ、ストレージへの要求を分ける。
