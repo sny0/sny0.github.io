@@ -1,0 +1,44 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="760" height="416" viewBox="0 0 760 416" role="img" aria-labelledby="title desc">
+  <title id="title">聞き手を基準とする音源の方向と距離</title>
+  <desc id="desc">聞き手を上から見た図。前はマイナスZ、右はプラスX。右前の音源への線の長さが距離d、前からその線までの角度が方位角a。</desc>
+  <defs>
+    <marker id="axis-arrow" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto">
+      <path d="M 0 0 L 10 5 L 0 10 Z" fill="#475569"/>
+    </marker>
+    <style>
+      text { font-family: "Noto Sans JP", "Yu Gothic", Meiryo, sans-serif; fill: #1e293b; }
+      .title { font-size: 26px; font-weight: 700; }
+      .label { font-size: 18px; font-weight: 700; }
+      .note { font-size: 17px; fill: #475569; }
+      .value { fill: #0f766e; }
+      .angle { font-size: 18px; fill: #7e22ce; }
+      .axis { fill: none; stroke: #475569; stroke-width: 2; }
+      .guide { fill: none; stroke: #94a3b8; stroke-width: 1.5; stroke-dasharray: 6 5; }
+    </style>
+  </defs>
+  <rect x="1" y="1" width="758" height="414" rx="18" fill="#f8fafc" stroke="#cbd5e1"/>
+  <text x="36" y="49" class="title">聞き手の前から方位角を測る</text>
+  <text x="36" y="78" class="note">聞き手と音源を上から見た XZ 平面</text>
+  <path d="M 64 328 H 437" class="axis" marker-end="url(#axis-arrow)"/>
+  <path d="M 240 352 V 131" class="axis" marker-end="url(#axis-arrow)"/>
+  <text x="240" y="119" text-anchor="middle" class="label">前（−Z）</text>
+  <text x="85" y="354" text-anchor="middle" class="note">左（−X）</text>
+  <text x="419" y="354" text-anchor="middle" class="label">右（+X）</text>
+  <path d="M 240 216 H 352 V 328" class="guide"/>
+  <path d="M 240 328 L 352 216" fill="none" stroke="#0f766e" stroke-width="3"/>
+  <path d="M 240 266 A 62 62 0 0 1 283.84 284.16" fill="none" stroke="#7e22ce" stroke-width="3"/>
+  <text x="258" y="255" class="angle">a</text>
+  <text x="316" y="268" class="label value">d</text>
+  <circle cx="240" cy="328" r="9" fill="#fff" stroke="#334155" stroke-width="3"/>
+  <circle cx="352" cy="216" r="8" fill="#0f766e"/>
+  <text x="362" y="201" class="label value">音源</text>
+  <text x="240" y="379" text-anchor="middle" class="label">聞き手（原点）</text>
+  <rect x="482" y="120" width="242" height="243" rx="13" fill="#fff" stroke="#cbd5e1"/>
+  <text x="502" y="155" class="label">方位角 a</text>
+  <text x="502" y="184" class="note">正面が 0°</text>
+  <text x="502" y="210" class="note">右が +90°、左が −90°</text>
+  <path d="M 502 229 H 703" stroke="#cbd5e1"/>
+  <text x="502" y="264" class="label">距離 d</text>
+  <text x="502" y="293" class="note">聞き手から音源までの長さ</text>
+  <text x="502" y="329" class="note">+Y は画面の手前</text>
+</svg>
