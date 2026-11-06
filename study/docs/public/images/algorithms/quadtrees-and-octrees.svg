@@ -1,0 +1,53 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="760" height="390" viewBox="0 0 760 390" role="img" aria-labelledby="title desc" xml:lang="ja">
+  <title id="title">境界をまたぐAを根に置いた四分木の範囲検索</title>
+  <desc id="desc">マップの右上に検索枠を置く。箱Aは左上と右上をまたぐので根に格納し、箱Cは右上の子に格納する。検索では根のAと右上のCを検査する。ほかの子は範囲外で、右下のBは検査しない。</desc>
+  <rect width="760" height="390" rx="18" fill="#f8fafc"/>
+  <g font-family="'Noto Sans JP', 'Yu Gothic', 'Meiryo', sans-serif" fill="#162334">
+    <text x="25" y="40" font-size="23" font-weight="700">境界をまたぐ箱は祖先に残す</text>
+    <text x="25" y="66" font-size="15" fill="#475569">右上だけを検索しても、根に登録されたAを調べる</text>
+
+    <text x="34" y="99" font-size="16" font-weight="700">領域と物体の配置</text>
+    <rect x="34" y="112" width="222" height="222" fill="#fff" stroke="#60758a" stroke-width="1.7"/>
+    <rect x="145" y="112" width="111" height="111" fill="#e6f4ec"/>
+    <path d="M145 112v222M34 223h222" fill="none" stroke="#60758a" stroke-width="1.7"/>
+    <rect x="34" y="112" width="222" height="222" fill="none" stroke="#60758a" stroke-width="1.7"/>
+    <path d="M89.5 112v111M34 167.5h111" stroke="#b9c5d0" stroke-width="1"/>
+    <rect x="52" y="130" width="22" height="20" rx="2" fill="#d9e2ea" stroke="#637789" stroke-width="1.3"/>
+    <rect x="127" y="153" width="37" height="29" rx="3" fill="#ffddac" stroke="#974a0b" stroke-width="2"/>
+    <rect x="190" y="159" width="26" height="23" rx="3" fill="#d5f0e3" stroke="#235f4c" stroke-width="2"/>
+    <rect x="199" y="278" width="32" height="32" rx="3" fill="#d9e2ea" stroke="#637789" stroke-width="1.3"/>
+    <rect x="156" y="147" width="72" height="48" rx="3" fill="none" stroke="#205d90" stroke-width="2.4" stroke-dasharray="6 3"/>
+    <g text-anchor="middle" font-size="15" font-weight="700">
+      <text x="63" y="145">D</text>
+      <text x="143" y="173">A</text>
+      <text x="203" y="176">C</text>
+      <text x="215" y="299">B</text>
+    </g>
+    <path d="M184 133l12 12" fill="none" stroke="#205d90" stroke-width="1.4"/>
+    <text x="164" y="130" fill="#205d90" font-size="13" font-weight="700">検索枠</text>
+    <text x="34" y="360" fill="#475569" font-size="15">Aの右端とCが検索枠に重なる</text>
+
+    <text x="326" y="99" font-size="16" font-weight="700">木のノードと検索順</text>
+    <path d="M530 161v24M368 185h324M368 185v21M476 185v21M584 185v21M692 185v21M368 266v21" fill="none" stroke="#93a2b1" stroke-width="1.6"/>
+    <path d="M530 161v24h54v21" fill="none" stroke="#235f4c" stroke-width="2.4"/>
+    <rect x="443" y="113" width="174" height="49" rx="7" fill="#ffedcf" stroke="#974a0b" stroke-width="2"/>
+    <rect x="319" y="206" width="98" height="60" rx="7" fill="#eef3f6" stroke="#a7b3bf"/>
+    <rect x="427" y="206" width="98" height="60" rx="7" fill="#eef3f6" stroke="#a7b3bf"/>
+    <rect x="535" y="206" width="98" height="60" rx="7" fill="#ddf2e8" stroke="#235f4c" stroke-width="2"/>
+    <rect x="643" y="206" width="98" height="60" rx="7" fill="#eef3f6" stroke="#a7b3bf"/>
+    <rect x="319" y="286" width="98" height="43" rx="7" fill="#eef3f6" stroke="#a7b3bf"/>
+    <g text-anchor="middle">
+      <text x="530" y="144" font-size="16" font-weight="700">根でAを検査</text>
+      <g font-size="15" font-weight="700">
+        <text x="368" y="231">左上</text><text x="476" y="231">左下</text>
+        <text x="584" y="231">右上</text><text x="692" y="231">右下</text>
+      </g>
+      <g font-size="13" fill="#475569">
+        <text x="368" y="251">範囲外</text><text x="476" y="251">範囲外</text>
+        <text x="584" y="251" fill="#235f4c" font-weight="700">Cを検査</text><text x="692" y="251">Bを省く</text>
+        <text x="368" y="313">Dを省く</text>
+      </g>
+    </g>
+    <text x="326" y="360" fill="#475569" font-size="15">訪ねるのは根と右上。ほかの枝は省く</text>
+  </g>
+</svg>

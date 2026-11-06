@@ -64,40 +64,27 @@ Unity/UEでは Transform・UIレイアウト(`SetDirty`, `MarkRenderStateDirty`)
 
 ### 一言で言うと
 
-「近くのオブジェクトだけ調べたい」ために、空間をグリッドやツリーに分割してオブジェクトを登録しておく。全件総当たり O(N²) を近傍のみ O(N) 前後へ。
+「近くのオブジェクトだけ調べたい」ために、グリッドやツリーで位置から候補を引けるようにします。候補が少なければ詳しく調べる組を減らせます。多数の対象が同じセルに集まり、その全組を調べる場合は、二次の組み合わせが残ります。
 
 ### 問題 → 適用
 
-```cpp
-// 問題: 全弾×全敵の当たり判定 = 10,000発 × 1,000体 = 10,000,000判定/フレーム
+点を1セルずつ登録する例では、検索距離がセルの一辺以下なら、自分のセルと周囲の3×3セルから候補を集めて距離を測れます。大きさのある物体を探す場合は、形を包む箱が触れるセルに登録する方法もあります。[均等グリッドと空間ハッシュ](/algorithms/uniform-grid-and-spatial-hash.html)
 
-// C++20 — 均等グリッド(最も簡単な空間分割)
-class Grid {
-public:
-    void Insert(int id, float x, float y) { cells_[CellOf(x, y)].push_back(id); }
-    // 近傍セル(3×3)の中身だけ返す → 判定対象が数百分の一になる
-    std::vector<int> QueryNearby(float x, float y) const;
-private:
-    int CellOf(float x, float y) const;   // 座標→セル番号(実装略)
-    std::unordered_map<int, std::vector<int>> cells_;
-};
-```
-
-検証済みサンプル: <a href="/study/samples/cpp/spatial_grid.cpp">samples/spatial_grid.cpp</a>
+C++の点検索例は総当たりと命中数を照合します。ブラウザの実験では円の配置や検索範囲も変えられます。<a href="/study/samples/cpp/spatial_grid.cpp">C++サンプル</a> · [空間インデックスの実験](/practice/algorithms/spatial-query-observation.html)
 
 ### 構造の選択
 
 | 構造 | 向く状況 |
 |---|---|
-| 均等グリッド | オブジェクトが空間に一様に分布(弾幕、タイル)。実装が簡単で速い。**まずこれ** |
-| 四分木/八分木 | 分布が偏る(空っぽの荒野+密集した街) |
-| BVH | 動くものの物理・レイキャスト(エンジン物理の内部) |
+| [均等グリッド](/algorithms/uniform-grid-and-spatial-hash.html) | 同程度の大きさの物体を一定の粒度で調べる |
+| [四分木・八分木](/algorithms/quadtrees-and-octrees.html) | 場所によって領域を分ける細かさを変える |
+| [BVH](/algorithms/bounding-volume-hierarchies.html) | 大きさの異なる対象を境界箱でまとめ、衝突候補やレイの交差を調べる |
 
 ### トレードオフ
 
-- 得: 判定量の激減(当たり判定、索敵、範囲攻撃、カリング)
-- 失: **移動のたびに登録更新**が必要(更新コストと整合性バグ)。分割粒度のチューニング
-- 使わない: オブジェクト数百以下(総当たりで十分速い。単純さが勝つ)
+- 検索では、対象の分布と範囲に応じて、当たり判定や索敵の候補を減らせます。
+- 移動でセルや境界箱が変わったときは、登録や境界を更新します。
+- 小規模な場面では総当たりを基準にして、検索と更新にかかる時間を比べます。
 
 Unity/UEの物理エンジンは内部でこれを実装済み(ブロードフェーズ)。`Physics.OverlapSphere` で済むなら自作は不要。自作するのは物理エンジンを通さない自前ロジック(弾幕、RTSの索敵)のとき。
 

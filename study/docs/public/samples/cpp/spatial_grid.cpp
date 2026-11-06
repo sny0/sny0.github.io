@@ -1,5 +1,7 @@
-// C++20 — 均等グリッドの空間分割と総当たり比較(docs/04_game_patterns/optimization_patterns.md)
+// C++20 — 一辺16のセルで、距離16未満にある点を検索する。
 #include <chrono>
+#include <cmath>
+#include <cstdint>
 #include <cstdio>
 #include <random>
 #include <unordered_map>
@@ -11,10 +13,10 @@ class Grid {
 public:
     explicit Grid(float cellSize) : cell_(cellSize) {}
     void Insert(int id, const Point& p) { cells_[Key(p)].push_back(id); }
-    // 近傍3x3セルの候補だけ返す
+    // この点検索では距離の上限がセルの一辺と同じなので、周囲3×3で足りる。
     std::vector<int> QueryNearby(const Point& p) const {
         std::vector<int> out;
-        int cx = static_cast<int>(p.x / cell_), cy = static_cast<int>(p.y / cell_);
+        const int cx = CellOf(p.x), cy = CellOf(p.y);
         for (int dy = -1; dy <= 1; ++dy)
             for (int dx = -1; dx <= 1; ++dx) {
                 auto it = cells_.find(Pack(cx + dx, cy + dy));
@@ -24,20 +26,23 @@ public:
         return out;
     }
 private:
-    long long Key(const Point& p) const {
-        return Pack(static_cast<int>(p.x / cell_), static_cast<int>(p.y / cell_));
+    int CellOf(float position) const {
+        return static_cast<int>(std::floor(position / cell_));
     }
-    static long long Pack(int x, int y) {
-        return (static_cast<long long>(x) << 32) ^ static_cast<unsigned>(y);
+    std::uint64_t Key(const Point& p) const {
+        return Pack(CellOf(p.x), CellOf(p.y));
+    }
+    static std::uint64_t Pack(int x, int y) {
+        return (std::uint64_t{static_cast<std::uint32_t>(x)} << 32) | static_cast<std::uint32_t>(y);
     }
     float cell_;
-    std::unordered_map<long long, std::vector<int>> cells_;
+    std::unordered_map<std::uint64_t, std::vector<int>> cells_;
 };
 
 int main() {
     const int N = 20000;
     std::mt19937 rng(7);
-    std::uniform_real_distribution<float> dist(0.f, 1000.f);
+    std::uniform_real_distribution<float> dist(-500.f, 500.f);
     std::vector<Point> pts;
     for (int i = 0; i < N; ++i) pts.push_back({dist(rng), dist(rng)});
 
@@ -65,7 +70,7 @@ int main() {
     };
     std::printf("brute: %d near, %ldus (checked %d)\n", bruteNear,
                 static_cast<long>(us(t0, t1)), N);
-    std::printf("grid : %d near, %ldus (checked %u candidates)\n", gridNear,
+    std::printf("grid : %d near, %ldus (checked %zu candidates)\n", gridNear,
                 static_cast<long>(us(t1, t2)), candidates.size());
-    return 0;
+    return bruteNear == gridNear ? 0 : 1;
 }
