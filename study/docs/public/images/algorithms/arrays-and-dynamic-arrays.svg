@@ -1,0 +1,46 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="760" height="320" viewBox="0 0 760 320" role="img" aria-labelledby="title desc" xml:lang="ja">
+  <title id="title">満杯の動的配列に1個追加すると容量が増える例</title>
+  <desc id="desc">容量4の領域にA、B、C、Dの4要素が入っている。容量8の別の領域に元の4要素を移し、続けてEを追加する。3枠は空いている。</desc>
+  <defs>
+    <marker id="arrow" viewBox="0 0 8 8" refX="7" refY="4" markerWidth="7" markerHeight="7" orient="auto">
+      <path d="M0 0 8 4 0 8Z" fill="#526881"/>
+    </marker>
+  </defs>
+  <rect width="760" height="320" rx="18" fill="#f8fafc"/>
+  <g font-family="'Noto Sans JP', 'Yu Gothic', 'Meiryo', sans-serif" fill="#162334">
+    <text x="25" y="40" font-size="23" font-weight="700">満杯の動的配列にEを追加する</text>
+    <text x="25" y="67" font-size="16" fill="#475569">容量を4枠から8枠に増やす例</text>
+
+    <g font-size="16" font-weight="700">
+      <text x="25" y="122">元の領域</text>
+      <text x="25" y="235">新しい領域</text>
+    </g>
+    <g fill="#e4f1ff" stroke="#5680ac" stroke-width="1.5">
+      <rect x="152" y="99" width="272" height="43" rx="5"/>
+      <path d="M220 99V142 M288 99V142 M356 99V142"/>
+    </g>
+    <text x="450" y="126" font-size="16" fill="#475569">要素数 4 ／ 容量 4</text>
+    <g stroke="#526881" stroke-width="1.5" marker-end="url(#arrow)">
+      <path d="M186 149V203"/><path d="M254 149V203"/><path d="M322 149V203"/><path d="M390 149V203"/>
+    </g>
+    <text x="450" y="180" font-size="15" fill="#475569">既存の4要素を順に移す</text>
+
+    <g fill="#dff3ec" stroke="#478576" stroke-width="1.5">
+      <rect x="152" y="211" width="272" height="43" rx="5"/>
+      <path d="M220 211V254 M288 211V254 M356 211V254"/>
+    </g>
+    <rect x="424" y="211" width="68" height="43" rx="5" fill="#fdf1df" stroke="#b57938" stroke-width="1.5"/>
+    <g fill="#f8fafc" stroke="#899aaf" stroke-width="1.5" stroke-dasharray="4 3">
+      <rect x="492" y="211" width="204" height="43" rx="5"/>
+      <path d="M560 211V254 M628 211V254"/>
+    </g>
+    <g font-size="17" font-weight="700" text-anchor="middle">
+      <text x="186" y="127">A</text><text x="254" y="127">B</text><text x="322" y="127">C</text><text x="390" y="127">D</text>
+      <text x="186" y="239">A</text><text x="254" y="239">B</text><text x="322" y="239">C</text><text x="390" y="239">D</text>
+      <text x="458" y="239" fill="#8f4616">E</text>
+      <text x="526" y="238" font-size="14" fill="#475569">空き</text><text x="594" y="238" font-size="14" fill="#475569">空き</text><text x="662" y="238" font-size="14" fill="#475569">空き</text>
+    </g>
+    <text x="152" y="284" font-size="16" font-weight="700">要素数 5 ／ 容量 8</text>
+    <text x="424" y="284" font-size="15" fill="#8f4616">追加した要素</text>
+  </g>
+</svg>

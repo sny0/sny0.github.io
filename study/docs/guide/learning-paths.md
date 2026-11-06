@@ -316,6 +316,13 @@
 3. [GPUリソースの寿命とフェンス](/graphics/optimization/gpu-resource-lifetime.html)で、GPUが使用中の領域をCPU側で再利用できる時点を調べる。
 4. [シェーダーコンパイルのカクつきとパイプラインキャッシュ](/graphics/optimization/pipeline-compilation-stutter.html)で、初回だけ起きる処理を記録し、先に準備する仕組みを読む。
 
+## ゲームのデータをどの構造に入れるか
+
+1. [配列と動的配列](/algorithms/arrays-and-dynamic-arrays.html)と[連結リスト](/algorithms/linked-lists.html)で、並び方、挿入・削除、再確保が参照に及ぼす影響を比べる。
+2. [スタック・キュー・デック](/algorithms/queues-and-deques.html)と[二分ヒープ](/algorithms/binary-heaps.html)で、追加した順や優先度から次に処理するデータを選ぶ。
+3. [ハッシュ表](/algorithms/hash-tables.html)と[探索木](/algorithms/search-trees.html)で、キーの一致を調べたいときと、キーの順序や範囲が必要なときの違いを確認する。
+4. [スパースセット](/algorithms/sparse-sets.html)と[IDを出し入れする実験](/practice/algorithms/sparse-set-observation.html)で、IDからの直接参照と、コンポーネントを詰めた走査を両立する仕組みを試す。
+
 ## 作り方の変化を歴史から見る
 
 [ビデオゲーム史](/history/video-games.html)の作品・ハード・媒体・流通と、[リアルタイム3D技術史](/guide/rendering/timeline.html)の技術の変化から、気になった仕組みへ進みます。

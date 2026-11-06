@@ -1,0 +1,72 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="760" height="390" viewBox="0 0 760 390" role="img" aria-labelledby="title desc" xml:lang="ja">
+  <title id="title">同じ開始位置から、候補を順に探す</title>
+  <desc id="desc">キー10、17、24は7で割った余りが3。チェイン法ではバケット3から三つのキーを順にたどる。線形プローブで17を消すと4番の枠に削除済み印が残る。24を探すときは3、4、5番の順に見るため、5番で一致する。</desc>
+  <defs>
+    <marker id="arrow" viewBox="0 0 8 8" refX="7" refY="4" markerWidth="7" markerHeight="7" orient="auto">
+      <path d="M0 0 8 4 0 8Z" fill="#486078"/>
+    </marker>
+  </defs>
+  <rect width="760" height="390" rx="18" fill="#f8fafc"/>
+  <g font-family="'Noto Sans JP', 'Yu Gothic', 'Meiryo', sans-serif" fill="#162334">
+    <text x="25" y="39" font-size="23" font-weight="700">10・17・24は同じ場所から探す</text>
+    <text x="25" y="65" font-size="16" fill="#475569">7で割った余りを開始位置にする例。三つとも3になる</text>
+
+    <text x="25" y="110" font-size="16" font-weight="700">チェイン法</text>
+    <g stroke-width="1.5">
+      <rect x="155" y="124" width="118" height="43" rx="6" fill="#e1f4ef" stroke="#4f8678"/>
+      <rect x="315" y="124" width="90" height="43" rx="6" fill="#e7f2fe" stroke="#587ba5"/>
+      <rect x="447" y="124" width="90" height="43" rx="6" fill="#e7f2fe" stroke="#587ba5"/>
+      <rect x="579" y="124" width="90" height="43" rx="6" fill="#e7f2fe" stroke="#587ba5"/>
+    </g>
+    <g fill="none" stroke="#486078" stroke-width="1.6" marker-end="url(#arrow)">
+      <path d="M278 145H309"/>
+      <path d="M410 145H441"/>
+      <path d="M542 145H573"/>
+    </g>
+    <g font-size="16" text-anchor="middle" font-weight="700">
+      <text x="214" y="151">バケット3</text>
+      <text x="360" y="151">10</text>
+      <text x="492" y="151">17</text>
+      <text x="624" y="151">24</text>
+    </g>
+
+    <path d="M25 188H735" fill="none" stroke="#c7d2dc"/>
+    <text x="25" y="217" font-size="16" font-weight="700">線形プローブ（17を削除したあと）</text>
+    <g text-anchor="middle" font-size="14" fill="#475569">
+      <text x="78" y="250">0</text>
+      <text x="178" y="250">1</text>
+      <text x="278" y="250">2</text>
+      <text x="378" y="250">3</text>
+      <text x="478" y="250">4</text>
+      <text x="578" y="250">5</text>
+      <text x="678" y="250">6</text>
+    </g>
+    <g stroke-width="1.5">
+      <g fill="#f1f5f9" stroke="#a2b0bc">
+        <rect x="31" y="261" width="94" height="47" rx="6"/>
+        <rect x="131" y="261" width="94" height="47" rx="6"/>
+        <rect x="231" y="261" width="94" height="47" rx="6"/>
+        <rect x="631" y="261" width="94" height="47" rx="6"/>
+      </g>
+      <rect x="331" y="261" width="94" height="47" rx="6" fill="#e7f2fe" stroke="#587ba5"/>
+      <rect x="431" y="261" width="94" height="47" rx="6" fill="#fff1df" stroke="#a56836" stroke-dasharray="4 3"/>
+      <rect x="531" y="261" width="94" height="47" rx="6" fill="#e1f4ef" stroke="#4f8678"/>
+    </g>
+    <g text-anchor="middle" font-size="14" fill="#475569">
+      <text x="78" y="289">未使用</text>
+      <text x="178" y="289">未使用</text>
+      <text x="278" y="289">未使用</text>
+      <text x="678" y="289">未使用</text>
+    </g>
+    <g text-anchor="middle" font-size="15" font-weight="700">
+      <text x="378" y="289">10</text>
+      <text x="478" y="289">削除済み</text>
+      <text x="578" y="289">24</text>
+    </g>
+    <g fill="none" stroke="#486078" stroke-width="1.6" marker-end="url(#arrow)">
+      <path d="M378 316V324H478V313"/>
+      <path d="M478 327V334H578V313"/>
+    </g>
+    <text x="25" y="366" font-size="15" font-weight="700">24を探すとき、削除済みの印を通過して5番の枠で一致する</text>
+  </g>
+</svg>

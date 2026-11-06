@@ -461,11 +461,25 @@ writePage('guide/learning-paths.md', '疑問から選ぶ読み順', {
 3. [GPUリソースの寿命とフェンス](/graphics/optimization/gpu-resource-lifetime.html)で、GPUが使用中の領域をCPU側で再利用できる時点を調べる。
 4. [シェーダーコンパイルのカクつきとパイプラインキャッシュ](/graphics/optimization/pipeline-compilation-stutter.html)で、初回だけ起きる処理を記録し、先に準備する仕組みを読む。
 
+## ゲームのデータをどの構造に入れるか
+
+1. [配列と動的配列](/algorithms/arrays-and-dynamic-arrays.html)と[連結リスト](/algorithms/linked-lists.html)で、並び方、挿入・削除、再確保が参照に及ぼす影響を比べる。
+2. [スタック・キュー・デック](/algorithms/queues-and-deques.html)と[二分ヒープ](/algorithms/binary-heaps.html)で、追加した順や優先度から次に処理するデータを選ぶ。
+3. [ハッシュ表](/algorithms/hash-tables.html)と[探索木](/algorithms/search-trees.html)で、キーの一致を調べたいときと、キーの順序や範囲が必要なときの違いを確認する。
+4. [スパースセット](/algorithms/sparse-sets.html)と[IDを出し入れする実験](/practice/algorithms/sparse-set-observation.html)で、IDからの直接参照と、コンポーネントを詰めた走査を両立する仕組みを試す。
+
 ## 作り方の変化を歴史から見る
 
 [ビデオゲーム史](/history/video-games.html)の作品・ハード・媒体・流通と、[リアルタイム3D技術史](/guide/rendering/timeline.html)の技術の変化から、気になった仕組みへ進みます。`)
 
 const termRows = [
+  ['配列 / 動的配列 / vector / List / size / capacity / 償却計算量', '/algorithms/arrays-and-dynamic-arrays.html', '添字とメモリ配置、容量の拡張、位置や参照が変わる条件を調べる'],
+  ['連結リスト / linked list / 単方向リスト / 双方向リスト / intrusive list', '/algorithms/linked-lists.html', 'ノード間のリンクと、位置を探す費用・つなぎ直す費用を分ける'],
+  ['スタック / キュー / デック / LIFO / FIFO / deque / リングバッファ', '/algorithms/queues-and-deques.html', 'データを追加・取り出す端と、読み書き位置が折り返す仕組みを調べる'],
+  ['ハッシュ表 / hash table / Dictionary / 衝突 / 負荷率 / rehash / tombstone', '/algorithms/hash-tables.html', '同じ位置に来たキーを区別し、探索を続ける条件や拡張の影響を調べる'],
+  ['二分ヒープ / binary heap / 優先度付きキュー / priority_queue / PriorityQueue', '/algorithms/binary-heaps.html', '配列で親子を表し、次に処理する要素を優先度で選ぶ'],
+  ['探索木 / binary search tree / 平衡木 / 順序付きマップ / lower_bound / B木', '/algorithms/search-trees.html', 'キーの大小関係で枝を選び、キー範囲の要素を列挙する'],
+  ['スパースセット / sparse set / dense / sparse / swap-and-pop / 世代付きID', '/algorithms/sparse-sets.html', 'IDからの所属判定と、要素を詰めた配列の列挙を両立する'],
   ['入力遅延 / input latency / input-to-photon / ポーリング / 入力マーカー', '/graphics/optimization/input-to-display-latency.html', '入力から対象の行が更新されるまでの処理と待ちを分ける'],
   ['GPUタイムスタンプ / timestamp query / ResolveQueryData / timestampPeriod / timestampValidBits', '/graphics/optimization/gpu-timestamp-queries.html', 'GPUコマンドの時刻を読み戻して区間の時間を測る'],
   ['GPUフェンス / リソースの寿命 / upload heap / ステージング / descriptor', '/graphics/optimization/gpu-resource-lifetime.html', 'GPUが使う領域やコマンド格納場所を再利用できる条件を調べる'],

@@ -1,0 +1,39 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="760" height="346" viewBox="0 0 760 346" role="img" aria-labelledby="title desc">
+  <title id="title">スパースセットからID 7を消す</title>
+  <desc id="desc">末尾のID 4が位置2から1に移り、sparse[4]が1になる。残ったsparse[7]は逆引きが一致しない。</desc>
+  <rect width="760" height="346" rx="14" fill="#f5f8fa"/>
+  <g font-family="system-ui, sans-serif" fill="#183046" font-size="16">
+    <text x="24" y="40" font-size="24" font-weight="700">ID 7を削除して、末尾のID 4を移す</text>
+    <text x="24" y="82" font-weight="700">削除前</text>
+    <text x="111" y="82" fill="#465e71">dense の位置</text>
+    <text x="394" y="82" fill="#465e71">sparse の参照先</text>
+    <text x="24" y="194" font-weight="700">削除後</text>
+    <text x="111" y="194" fill="#465e71">dense の位置</text>
+    <text x="394" y="194" fill="#465e71">sparse の参照先</text>
+    <g text-anchor="middle" font-size="14" fill="#40566b">
+      <text x="145" y="107">0</text><text x="214" y="107">1</text><text x="283" y="107">2</text>
+      <text x="454" y="107">ID 4</text><text x="574" y="107">ID 7</text>
+      <text x="145" y="219">0</text><text x="214" y="219">1</text><text x="283" y="219">2</text>
+      <text x="454" y="219">ID 4</text><text x="574" y="219">ID 7</text>
+    </g>
+    <g stroke="#9aafbf">
+      <rect x="111" y="116" width="68" height="44" rx="5" fill="#e1ebf3"/>
+      <rect x="180" y="116" width="68" height="44" rx="5" fill="#fee6d7"/>
+      <rect x="249" y="116" width="68" height="44" rx="5" fill="#d7efe7"/>
+      <rect x="394" y="116" width="120" height="44" rx="5" fill="#d7efe7"/>
+      <rect x="514" y="116" width="120" height="44" rx="5" fill="#fee6d7"/>
+      <rect x="111" y="228" width="68" height="44" rx="5" fill="#e1ebf3"/>
+      <rect x="180" y="228" width="68" height="44" rx="5" fill="#d7efe7"/>
+      <rect x="249" y="228" width="68" height="44" rx="5" fill="none" stroke-dasharray="4 4"/>
+      <rect x="394" y="228" width="120" height="44" rx="5" fill="#d7efe7"/>
+      <rect x="514" y="228" width="120" height="44" rx="5" fill="#f1f3f5" stroke-dasharray="4 4"/>
+    </g>
+    <g text-anchor="middle" font-weight="700">
+      <text x="145" y="144">2</text><text x="214" y="144">7</text><text x="283" y="144">4</text>
+      <text x="454" y="144">2</text><text x="574" y="144">1</text>
+      <text x="145" y="256">2</text><text x="214" y="256">4</text><text x="283" y="256">—</text>
+      <text x="454" y="256">1</text><text x="574" y="256" fill="#5b6770">1（古い値）</text>
+    </g>
+    <text x="24" y="312" font-size="16">ID 7 → 位置 1 → ID 4。IDが一致しないので、ID 7は含まれない。</text>
+  </g>
+</svg>

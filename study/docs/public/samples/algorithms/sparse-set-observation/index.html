@@ -1,0 +1,50 @@
+<!doctype html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>スパースセットでIDを出し入れする | Sny0 Study</title>
+  <link rel="stylesheet" href="styles.css">
+  <script type="module" src="main.js"></script>
+</head>
+<body>
+  <main>
+    <header>
+      <a href="https://sny0.com/study/practice/algorithms/sparse-set-observation.html">実践手順とコードを読む</a>
+      <h1>スパースセットでIDを出し入れする</h1>
+      <p>IDを選び、二つの配列がどう変わるかを見ます。最初はID 2・7・4の順に入っています。</p>
+    </header>
+    <section aria-labelledby="controls-title">
+      <h2 id="controls-title">IDを選ぶ</h2>
+      <div class="controls">
+        <label for="entity-id">対象ID</label>
+        <select id="entity-id">
+          <option>0</option><option>1</option><option>2</option><option>3</option>
+          <option>4</option><option>5</option><option>6</option><option selected>7</option>
+        </select>
+        <button type="button" id="insert-id">選んだIDを追加</button>
+        <button type="button" id="remove-id">選んだIDを削除</button>
+        <button type="button" id="reset-set">初期状態に戻す</button>
+      </div>
+      <div aria-live="polite">
+        <p id="operation">ID 7を削除すると、末尾のID 4が空いた場所へ移ります。</p>
+        <p id="lookup"></p>
+      </div>
+    </section>
+    <section aria-labelledby="arrays-title">
+      <h2 id="arrays-title">二つの配列</h2>
+      <div>
+        <h3>dense <span>現在入っているIDを詰める</span></h3>
+        <ul class="slots" id="dense" aria-label="dense配列"></ul>
+      </div>
+      <div>
+        <h3>sparse <span>IDからdenseの位置を引く</span></h3>
+        <ul class="slots" id="sparse" aria-label="sparse配列"></ul>
+      </div>
+      <p>枠が太いのは、選んだIDの判定で見る場所です。削除後に古い位置が残ったときは、その位置のIDを照合します。</p>
+      <a href="https://sny0.com/study/practice/algorithms/sparse-set-observation.html#run-locally">手元で動かす手順</a>
+      <noscript><p>IDを操作するにはJavaScriptを有効にします。</p></noscript>
+    </section>
+  </main>
+</body>
+</html>
