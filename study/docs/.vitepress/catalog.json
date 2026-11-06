@@ -69,7 +69,7 @@
       "id": "browser",
       "title": "ブラウザ",
       "description": "URLを開いてから描画されるまでを、通信・実行・表示に分ける。",
-      "count": 19,
+      "count": 20,
       "status": "辞典本文あり"
     },
     {
@@ -130,6 +130,13 @@
     }
   ],
   "collections": [
+    {
+      "id": "audio-crossfade-observation",
+      "section": "practice",
+      "title": "Web Audioで線形と等電力のクロスフェードを比べる",
+      "description": "二つの音を入れ替え、フェードの形と音源の組み合わせで途中の実効値がどう変わるかを観察する。",
+      "start": "/practice/browser/audio-crossfade-observation.html"
+    },
     {
       "id": "audio-fade-observation",
       "section": "practice",
@@ -4741,6 +4748,63 @@
       ]
     },
     {
+      "title": "Web Audioで線形と等電力のクロスフェードを比べる",
+      "url": "/practice/browser/audio-crossfade-observation.html",
+      "file": "practice/browser/audio-crossfade-observation.md",
+      "domain": "browser",
+      "section": "practice",
+      "format": "sample",
+      "status": "published",
+      "summary": "周波数の異なる二つの音と、位相をそろえた同じ音を入れ替え、線形と等電力で実効値とピークがどう変わるかを確認する。",
+      "source": "新規執筆",
+      "aliases": [
+        "Web Audio API",
+        "AudioParam",
+        "setValueCurveAtTime",
+        "crossfade",
+        "クロスフェード",
+        "等電力",
+        "RMS",
+        "相関"
+      ],
+      "collection": "audio-crossfade-observation",
+      "order": 1,
+      "verification": "Windowsのブラウザで二つの音源条件の実効値とピーク、両方の試聴の終了を確認（2026-11-06）",
+      "links": [
+        "/browser/audio-crossfade.html"
+      ]
+    },
+    {
+      "title": "Web Audioのクロスフェード — 等ゲイン・等電力・相関",
+      "url": "/browser/audio-crossfade.html",
+      "file": "browser/audio-crossfade.md",
+      "domain": "browser",
+      "section": "reference",
+      "format": "article",
+      "status": "published",
+      "summary": "二つの音源を重ねて切り替え、ゲインの和を一定にする方法と、二乗和を一定にする方法を比較する。音源同士の相関によって中点のRMSが変わる仕組みを確かめる。",
+      "source": "新規執筆",
+      "aliases": [
+        "Web Audio API",
+        "クロスフェード",
+        "crossfade",
+        "等ゲイン",
+        "等電力",
+        "equal gain",
+        "equal power",
+        "AudioParam",
+        "setValueCurveAtTime",
+        "RMS",
+        "相関"
+      ],
+      "verification": "W3C Web Audio APIのAudioParamとDAFxのクロスフェード論文に照合（2026-11-06）",
+      "links": [
+        "/browser/audio-gain-automation.html",
+        "/browser/audio-mixing-and-headroom.html",
+        "/practice/browser/audio-crossfade-observation.html"
+      ]
+    },
+    {
       "title": "Web Audioのゲインオートメーション — フェードとクリックノイズ",
       "url": "/browser/audio-gain-automation.html",
       "file": "browser/audio-gain-automation.md",
@@ -4764,7 +4828,8 @@
       "verification": "W3C Web Audio APIのAudioParam・GainNode・BaseAudioContext・OfflineAudioContextに照合（2026-11-06）",
       "links": [
         "/browser/audio-mixing-and-headroom.html",
-        "/practice/browser/audio-fade-observation.html"
+        "/practice/browser/audio-fade-observation.html",
+        "/browser/audio-crossfade.html"
       ]
     },
     {
@@ -7796,6 +7861,8 @@
         "/practice/browser/audio-mixing-observation.html",
         "/browser/audio-gain-automation.html",
         "/practice/browser/audio-fade-observation.html",
+        "/browser/audio-crossfade.html",
+        "/practice/browser/audio-crossfade-observation.html",
         "/history/video-games.html",
         "/guide/rendering/timeline.html"
       ]
@@ -9945,6 +10012,7 @@
       "source": "統合ガイド",
       "aliases": [],
       "links": [
+        "/browser/audio-crossfade.html",
         "/browser/audio-gain-automation.html",
         "/browser/audio-mixing-and-headroom.html",
         "/browser/audio-worklet-buffering.html",

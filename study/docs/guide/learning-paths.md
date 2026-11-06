@@ -243,6 +243,12 @@
 2. [Web Audioで急な消音とフェードを観察する](/practice/browser/audio-fade-observation.html)で、フェードの長さを変え、切り替え前後のサンプル値と波形を比べる。
 3. 複数の音を足し合わせる場合のゲインは[Web Audioのミキシング](/browser/audio-mixing-and-headroom.html)で確認する。
 
+## 二つの音を入れ替える途中で音量はどう変わるか
+
+1. [Web Audioのクロスフェード](/browser/audio-crossfade.html)で、二つのゲインの形と、音源の相関が加算結果にどう関わるかを確認する。
+2. [Web Audioで線形と等電力のクロスフェードを比べる](/practice/browser/audio-crossfade-observation.html)で、音源の組み合わせを変え、切り替え前と中点付近の実効値を比べる。
+3. ゲインを音声の時刻で変える仕組みは[Web Audioのゲインオートメーション](/browser/audio-gain-automation.html)で確認する。
+
 ## 作り方の変化を歴史から見る
 
 [ビデオゲーム史](/history/video-games.html)の作品・ハード・媒体・流通と、[リアルタイム3D技術史](/guide/rendering/timeline.html)の技術の変化から、気になった仕組みへ進みます。
