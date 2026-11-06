@@ -1,0 +1,108 @@
+<!doctype html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="referrer" content="no-referrer">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'self'; style-src 'self'; base-uri 'none'; form-action 'none'">
+  <title>Web Audioで畳み込みリバーブを観察する | Sny0 Study</title>
+  <link rel="canonical" href="https://sny0.com/study/samples/browser/audio-reverb-observation/index.html">
+  <link rel="stylesheet" href="styles.css">
+  <script type="module" src="main.js"></script>
+</head>
+<body>
+  <main>
+    <header class="card">
+      <a href="https://sny0.com/study/practice/browser/audio-reverb-observation.html">実践手順とコードを読む</a>
+      <h1>短い打音に部屋の響きを足す</h1>
+      <p>同じ打音に「小部屋」と「ホール」の響きを足し、最初の反射が来る時刻と、音が残る長さを比べます。部屋のインパルス応答は実験用に合成したものです。</p>
+    </header>
+
+    <section class="card" aria-labelledby="controls-heading">
+      <h2 id="controls-heading">部屋と響きの量を選ぶ</h2>
+      <div class="actions">
+        <label for="reverb-preset">部屋のインパルス応答
+          <select id="reverb-preset" disabled>
+            <option value="room" selected>小部屋</option>
+            <option value="hall">ホール</option>
+          </select>
+        </label>
+        <label for="wet-gain">響きに掛けるゲイン
+          <select id="wet-gain" disabled>
+            <option value="0">0（響きなし）</option>
+            <option value="0.35" selected>0.35</option>
+            <option value="0.7">0.7</option>
+          </select>
+        </label>
+        <button id="render-reverb" type="button" disabled>波形を計算</button>
+      </div>
+      <p id="reverb-status" class="status" data-state="ready" role="status">「波形を計算」で結果を表示します。</p>
+      <p class="hint"><a href="https://sny0.com/study/practice/browser/audio-reverb-observation.html#run-locally">手元で動かす手順</a></p>
+      <noscript><p>このサンプルを操作するにはJavaScriptを有効にしてください。</p></noscript>
+    </section>
+
+    <section class="card" aria-labelledby="results-heading">
+      <h2 id="results-heading">部屋の応答と出力を比べる</h2>
+      <p id="rendered-settings">計算に使った設定をここに表示します。</p>
+      <dl class="metrics">
+        <div><dt>インパルス応答の長さ</dt><dd id="impulse-duration">—</dd></div>
+        <div><dt>最初の反射</dt><dd id="first-reflection">—</dd></div>
+        <div><dt>計算した出力の長さ</dt><dd id="output-duration">—</dd></div>
+        <div><dt>打音終了後の実効値</dt><dd id="tail-rms">—</dd></div>
+      </dl>
+      <p class="hint">グラフの横軸は同じです。縦の細い線は、その時間帯に含まれるサンプルの最小値と最大値をつないでいます。出力の破線は元の打音が終わる60 msを示します。</p>
+      <div class="comparison">
+        <figure>
+          <figcaption>インパルス応答（響きの元になる波形）</figcaption>
+          <svg id="impulse-chart" class="chart" viewBox="0 0 520 214" role="img" aria-label="インパルス応答。計算前。">
+            <path class="grid" d="M40 25H486 M40 100H486 M40 175H486 M40 25V175 M146.2 25V175 M252.4 25V175 M358.6 25V175 M486 25V175"/>
+            <text id="impulse-max" class="y-label" x="31" y="30" text-anchor="end"></text>
+            <text class="y-label" x="31" y="105" text-anchor="end">0</text>
+            <text id="impulse-min" class="y-label" x="31" y="180" text-anchor="end"></text>
+            <text x="40" y="198" text-anchor="middle">0</text>
+            <text x="146.2" y="198" text-anchor="middle">300</text>
+            <text x="252.4" y="198" text-anchor="middle">600</text>
+            <text x="358.6" y="198" text-anchor="middle">900</text>
+            <text x="510" y="198" text-anchor="end">1,260 ms</text>
+            <path id="impulse-wave" class="wave impulse-wave"/>
+          </svg>
+        </figure>
+        <figure>
+          <figcaption>出力（元の音と響きを足した音）</figcaption>
+          <svg id="output-chart" class="chart" viewBox="0 0 520 214" role="img" aria-label="出力の波形。計算前。">
+            <path class="grid" d="M40 25H486 M40 55H486 M40 85H486 M40 115H486 M40 145H486 M40 175H486 M40 25V85 M40 115V175 M146.2 25V85 M146.2 115V175 M252.4 25V85 M252.4 115V175 M358.6 25V85 M358.6 115V175 M486 25V85 M486 115V175"/>
+            <path id="dry-end" class="dry-end"/>
+            <text x="42" y="19">元の音</text>
+            <text x="42" y="109">響きを足した音</text>
+            <text class="output-max y-label" x="31" y="30" text-anchor="end"></text>
+            <text class="y-label" x="31" y="60" text-anchor="end">0</text>
+            <text class="output-min y-label" x="31" y="90" text-anchor="end"></text>
+            <text class="output-max y-label" x="31" y="120" text-anchor="end"></text>
+            <text class="y-label" x="31" y="150" text-anchor="end">0</text>
+            <text class="output-min y-label" x="31" y="180" text-anchor="end"></text>
+            <text x="40" y="198" text-anchor="middle">0</text>
+            <text x="146.2" y="198" text-anchor="middle">300</text>
+            <text x="252.4" y="198" text-anchor="middle">600</text>
+            <text x="358.6" y="198" text-anchor="middle">900</text>
+            <text x="510" y="198" text-anchor="end">1,260 ms</text>
+            <path id="dry-wave" class="wave dry-wave"/>
+            <path id="mixed-wave" class="wave mixed-wave"/>
+          </svg>
+        </figure>
+      </div>
+      <p id="tail-summary" class="hint">実効値は、元の打音が終わった後の出力から計算します。</p>
+    </section>
+
+    <section class="card" aria-labelledby="playback-heading">
+      <h2 id="playback-heading">元の音と響きを足した音を聞く</h2>
+      <p>どちらも同じ60 msの打音を使い、再生時に同じ割合で音量を抑えます。</p>
+      <div class="actions">
+        <button id="play-dry" type="button" class="secondary" disabled>元の音を聞く</button>
+        <button id="play-mixed" type="button" class="secondary" disabled>響きを足した音を聞く</button>
+        <button id="stop-playback" type="button" class="secondary" disabled>再生を停止</button>
+      </div>
+      <p id="playback-status" class="status" data-state="ready" role="status">計算すると試聴できます。</p>
+    </section>
+  </main>
+</body>
+</html>
