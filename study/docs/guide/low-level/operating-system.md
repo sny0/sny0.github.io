@@ -3,7 +3,7 @@ title: 第8章 OSの仕組み
 study:
   source: IT教本
   status: outline
-  summary: プロセス、スレッド、仮想メモリ、システムコール、I/Oを学ぶ計画。起動・メモリ・データ共有・ファイル読取り・TCPソケットの辞典本文と観察例へつなぐ。
+  summary: 起動からシステムコール、スレッドの実行、ハンドル、パイプ、仮想メモリとI/Oを学ぶ計画。各段階の解説と観察例へ進む。
   verification: 同期・I/O項目の一次資料照合（2026-11-04）
   section: learning
   format: path
@@ -18,17 +18,19 @@ study:
 
 ## このページで案内すること
 
-プロセス・スレッド・仮想メモリ・システムコール・I/Oを学ぶ順序と観察課題をまとめた**学習計画・概要**です。起動処理とプロセス・スレッドの基本、仮想メモリ、スレッド間のデータ共有、同期・非同期のファイル読取り、ファイルマッピングは専用の本文へ進めます。スケジューラ内部やIOCPの実践的な詳解など、まだ揃っていないテーマもあります。このページの概説と章末の資料を足場に、手元のOSで挙動を確かめます。
+プロセス・スレッド・仮想メモリ・システムコール・I/Oを学ぶ順序と観察課題をまとめた**学習計画・概要**です。実行ファイルの起動を入口に、スレッドがCPU時間を受け取り、OSのサービスを呼び出し、別プロセスやファイルとデータをやり取りする流れを追います。
 
 ## 関連する辞典本文・実践
 
 - [実行ファイルを起動してmainへ到達するまで](/os/process-startup.html)でプロセス・スレッド・ローダー・CRTを分け、[Windowsのプロセス観察](/practice/process/windows-process-observation.html)でPID・TIDや親子プロセスを確かめられます。
+- [システムコールとCPUの権限](/os/system-calls-and-privilege.html)と[Windowsのスレッドスケジューリング](/os/thread-scheduling.html)で、カーネルへの移行、実行可能になった後の待ち、CPU上の実行を分けて追えます。
+- [Windowsのハンドル](/os/windows-handles.html)と[子プロセスの標準入出力](/os/pipes-and-process-io.html)で、親子が持つパイプの端を調べます。[パイプの終端を調べる実践](/practice/process/windows-pipe-observation.html)
 
 - [仮想メモリ](/os/virtual-memory.html)で予約・コミット・常駐、ページ表・TLB・ページフォルトを調べ、[Windows/C++の観察サンプル](/practice/memory/windows-memory-observation.html)で確かめられます。
 
 - [アロケータ](/runtime/memory/allocators-and-pools.html)で、アプリ側の領域管理とOSへの要求を区別できます。
 - [スレッド間の安全なデータ共有](/runtime/thread-synchronization.html)でmutex・C#のlock・共有状態の寿命を調べ、[在庫の観察例](/practice/threads/inventory-synchronization.html)で守る範囲と完了待ちを確かめられます。
-- [並行処理のバグ](/runtime/memory/concurrency-bugs.html)は、共有データを扱う際の問題を調べる入口です。仮想メモリやスケジューラ全体の説明を代替する記事ではありません。
+- [並行処理のバグ](/runtime/memory/concurrency-bugs.html)では、共有データを扱う際のデータ競合や、性能に影響するフォールスシェアリングを調べられます。
 - [ファイルを開いて読むまでの流れ](/os/file-read-journey.html)でハンドル・ストリーム・読取り位置・実際の読取り量・EOFを調べ、[ファイル読取りの観察例](/practice/io/file-read-observation.html)で確かめられます。
 - [非同期ファイルI/O](/os/asynchronous-file-io.html)で要求の開始と完了、バッファや要求情報の寿命を調べ、[同期・非同期の観察例](/practice/io/async-file-read-observation.html)で同じ内容を読み比べられます。
 - [メモリマップドファイル](/os/memory-mapped-files.html)でファイル・仮想アドレス・ページの関係を調べ、[マッピングの観察例](/practice/io/mapped-file-observation.html)でビューの範囲と寿命を確かめられます。

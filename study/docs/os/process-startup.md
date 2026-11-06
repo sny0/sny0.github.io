@@ -125,6 +125,8 @@ int& CachedConfig() {
 
 **スケジューラ**は、実行可能なスレッドへCPU時間を割り当てます。待機中のスレッドは、待つ条件が満たされて実行可能になるまで、その実行にCPU時間をもらいません。**コンテキストスイッチ**では、実行していたスレッドの状態を保存し、次のスレッドの状態を復元して処理を再開します。時間枠の終了、高い優先度のスレッドが実行可能になったこと、待機に入ることなどが契機になります。[Microsoft: Context Switches](https://learn.microsoft.com/en-us/windows/win32/procthread/context-switches)
 
+実行可能になってからCPUへ戻るまでの時間は[Windowsのスレッドスケジューリング](/os/thread-scheduling.html)で扱います。CPUの権限が切り替わる過程は[システムコール](/os/system-calls-and-privilege.html)で追えます。
+
 同じプロセス内のスレッド間でも切替は起きます。「プロセスを切り替えるときだけ状態を保存する」という仕組みではありません。
 
 一つの論理プロセッサ上で切り替えて進める場合も、複数の論理プロセッサ上で同時に進む場合もあります。複数の処理が進行中である**並行実行（concurrency）**と、同時刻に複数を実行する**並列実行（parallelism）**は区別します。スレッド数を増やしても、常に同時実行されたり速くなったりする保証はありません。[Microsoft: Multitasking](https://learn.microsoft.com/en-us/windows/win32/procthread/multitasking)
