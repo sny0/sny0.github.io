@@ -424,11 +424,18 @@ writePage('guide/learning-paths.md', '疑問から選ぶ読み順', {
 2. [Web Audioで壁越しの音量と音色を比べる](/practice/browser/audio-occlusion-observation.html)で、距離をそろえた二つの位置を切り替え、音量だけを下げたときと高音も弱めたときを比べる。
 3. 聞き手から見た方向と距離による処理は[Web Audioの音の定位と距離減衰](/browser/audio-spatial-panning.html)で確認する。
 
+## 扉が開いたときの音をなめらかに戻すには
+
+1. [Web Audioで遮蔽をなめらかに切り替える](/browser/audio-occlusion-transition.html)で、ゲインとカットオフを同じ時刻から徐々に変える仕組みを確認する。
+2. [Web Audioで扉が開くときの音の切り替えを比べる](/practice/browser/audio-occlusion-transition-observation.html)で、時定数を変え、出力波形とゲインの実測値を比べる。
+3. 遮蔽時にゲインとローパスが音へ与える影響は[Web Audioの音の遮蔽](/browser/audio-occlusion.html)で確認する。
+
 ## 作り方の変化を歴史から見る
 
 [ビデオゲーム史](/history/video-games.html)の作品・ハード・媒体・流通と、[リアルタイム3D技術史](/guide/rendering/timeline.html)の技術の変化から、気になった仕組みへ進みます。`)
 
 const termRows = [
+  ['遮蔽の切り替え / setTargetAtTime / 時定数 / time constant / パラメータの平滑化', '/browser/audio-occlusion-transition.html', '遮蔽が変わる時刻にゲインとカットオフを予約し、徐々に次の値へ近づける'],
   ['音の遮蔽 / occlusion / 遮蔽判定 / レイキャスト / ローパス / lowpass / カットオフ周波数 / BiquadFilterNode / 周波数応答', '/browser/audio-occlusion.html', '直接経路を壁が遮るかを調べ、音量と高音の減衰を別々に設定する'],
   ['音の定位 / パンニング / spatial audio / 距離減衰 / PannerNode / AudioListener / StereoPannerNode / 等電力 / HRTF / 方位角', '/browser/audio-spatial-panning.html', '音源と聞き手の位置から左右への配分と距離によるゲインを求める'],
   ['畳み込みリバーブ / convolution reverb / ConvolverNode / インパルス応答 / IR / 初期反射 / 残響 / dry / wet', '/browser/audio-convolution-reverb.html', 'インパルス応答から音の響きを作り、直接音と残響を別の経路で調整する'],

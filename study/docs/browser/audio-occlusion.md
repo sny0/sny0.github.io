@@ -52,3 +52,5 @@ study:
 ## ブラウザで同じ音を聴き比べる
 
 実践では、同じ距離の二つの位置を切り替え、壁の判定とフィルターの効果を比べます。`getFrequencyResponse()` でローパスの振幅比を求め、ゲインと合わせた結果をグラフにします。壁に当たる位置を選び、同じ音を「ゲインのみ」と「ゲイン＋ローパス」で聴き比べると、音量の変化と高音の弱まりを確認できます。[音の遮蔽の実践](/practice/browser/audio-occlusion-observation.html) · [W3C Web Audio APIの周波数応答](https://www.w3.org/TR/webaudio/#BiquadFilterNode-methods)
+
+扉が開いたときのように、再生中に遮蔽が切り替わる場合は、ゲインとカットオフを短い時間で新しい値へ近づけられます。[Web Audioで遮蔽をなめらかに切り替える](/browser/audio-occlusion-transition.html)

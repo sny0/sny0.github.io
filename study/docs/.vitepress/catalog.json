@@ -69,7 +69,7 @@
       "id": "browser",
       "title": "ブラウザ",
       "description": "URLを開いてから描画されるまでを、通信・実行・表示に分ける。",
-      "count": 25,
+      "count": 26,
       "status": "辞典本文あり"
     },
     {
@@ -130,6 +130,13 @@
     }
   ],
   "collections": [
+    {
+      "id": "audio-occlusion-transition-observation",
+      "section": "practice",
+      "title": "Web Audioで扉が開くときの音の切り替えを比べる",
+      "description": "遮蔽が解ける瞬間にゲインとカットオフを変え、急な切り替えと徐々に戻す処理を波形と試聴で比べる。",
+      "start": "/practice/browser/audio-occlusion-transition-observation.html"
+    },
     {
       "id": "audio-occlusion-observation",
       "section": "practice",
@@ -4811,6 +4818,34 @@
       ]
     },
     {
+      "title": "Web Audioで遮蔽をなめらかに切り替える",
+      "url": "/browser/audio-occlusion-transition.html",
+      "file": "browser/audio-occlusion-transition.md",
+      "domain": "browser",
+      "section": "reference",
+      "format": "article",
+      "status": "published",
+      "summary": "扉が開いて直接音の遮蔽が外れるとき、ゲインとローパスのカットオフを音声の時刻に合わせて変える。時定数で切り替えの速さを調整する。",
+      "source": "新規執筆",
+      "aliases": [
+        "Web Audio API",
+        "音の遮蔽",
+        "AudioParam",
+        "setTargetAtTime",
+        "時定数",
+        "スムージング",
+        "ゲイン",
+        "ローパスフィルター",
+        "カットオフ"
+      ],
+      "verification": "W3C Web Audio APIのAudioParamとBiquadFilterNodeの仕様に照合（2026-11-06）",
+      "links": [
+        "/browser/audio-occlusion.html",
+        "/browser/audio-gain-automation.html",
+        "/practice/browser/audio-occlusion-transition-observation.html"
+      ]
+    },
+    {
       "title": "Web Audioで畳み込みリバーブを聴き比べる",
       "url": "/practice/browser/audio-reverb-observation.html",
       "file": "practice/browser/audio-reverb-observation.md",
@@ -4919,6 +4954,33 @@
       "verification": "WindowsのChromium系ブラウザで全9設定の反響時刻と振幅、元の音と反響付きの音の試聴を確認（2026-11-06）",
       "links": [
         "/browser/audio-feedback-delay.html"
+      ]
+    },
+    {
+      "title": "Web Audioで扉が開くときの音の切り替えを比べる",
+      "url": "/practice/browser/audio-occlusion-transition-observation.html",
+      "file": "practice/browser/audio-occlusion-transition-observation.md",
+      "domain": "browser",
+      "section": "practice",
+      "format": "sample",
+      "status": "published",
+      "summary": "再生中にゲインとローパスのカットオフを変え、瞬時に切り替えた音と徐々に変えた音を聴き比べる。",
+      "source": "新規執筆",
+      "aliases": [
+        "Web Audio API",
+        "遮蔽",
+        "occlusion",
+        "setTargetAtTime",
+        "setValueAtTime",
+        "時定数",
+        "time constant",
+        "AudioParam"
+      ],
+      "collection": "audio-occlusion-transition-observation",
+      "order": 1,
+      "verification": "WindowsのChromium系ブラウザで時定数20 msと60 msの実測ゲインと出力波形、二つの試聴を確認（2026-11-06）",
+      "links": [
+        "/browser/audio-occlusion-transition.html"
       ]
     },
     {
@@ -5125,7 +5187,8 @@
       "links": [
         "/browser/audio-spatial-panning.html",
         "/browser/audio-convolution-reverb.html",
-        "/practice/browser/audio-occlusion-observation.html"
+        "/practice/browser/audio-occlusion-observation.html",
+        "/browser/audio-occlusion-transition.html"
       ]
     },
     {
@@ -8202,6 +8265,8 @@
         "/practice/browser/audio-spatial-observation.html",
         "/browser/audio-occlusion.html",
         "/practice/browser/audio-occlusion-observation.html",
+        "/browser/audio-occlusion-transition.html",
+        "/practice/browser/audio-occlusion-transition-observation.html",
         "/history/video-games.html",
         "/guide/rendering/timeline.html"
       ]
@@ -10351,6 +10416,7 @@
       "source": "統合ガイド",
       "aliases": [],
       "links": [
+        "/browser/audio-occlusion-transition.html",
         "/browser/audio-occlusion.html",
         "/browser/audio-spatial-panning.html",
         "/browser/audio-convolution-reverb.html",
