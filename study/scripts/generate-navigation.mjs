@@ -315,20 +315,27 @@ writePage('guide/learning-paths.md', '疑問から選ぶ読み順', {
 1. [IPの経路選択とEthernet](/network/ip-routing-and-ethernet.html)で、送信先IPから次の経由先を選び、同じリンク上でフレームを届ける流れを追う。
 2. [UDPとデータグラム](/network/udp-datagrams.html)で、送受信の区切り、順序や再送、パケットの大きさを調べる。
 3. [C++のUDPループバック実践](/practice/network/udp-loopback-observation.html)で、受信バッファが足りない場合と空データグラムの戻り値を確かめる。
-4. [通信の遅延と帯域](/network/latency-throughput-and-queues.html)で、RTT、転送量、混雑時のキューを分けて観測する。
+4. [NATとポート変換](/network/nat-and-port-mapping.html)で、ルーターの変換表、UDPの応答、外部からの接続を追う。
+5. [通信の遅延と帯域](/network/latency-throughput-and-queues.html)で、RTT、転送量、混雑時のキューを分けて観測する。
 
 ## SSDやNICがメモリとデータをやり取りするには
 
 1. [PCIeのリンク](/hardware/io/pcie-links.html)で、CPU側とデバイスをつなぐ経路、レーン数、リンク速度を調べる。
 2. [DMAとIOMMU](/hardware/io/dma-and-iommu.html)で、デバイスから見たアドレス、読み書き、完了通知を追う。
-3. [DRAMのチャネルと帯域](/hardware/memory/dram-channels-and-bandwidth.html)で、メモリ側の転送速度、バンクと行、アクセスの待ち時間を調べる。
-4. アプリが見る操作とOSのディスク要求の違いは[WindowsのファイルI/O計測](/tools/windows/file-io-tracing.html)で確かめる。
+3. [NICの受信キューとRSS](/hardware/io/nic-receive-queues.html)で、NICがフレームを書き込んだ後、ドライバーが結果を回収してソケットへ渡すまでを追う。
+4. [DRAMのチャネルと帯域](/hardware/memory/dram-channels-and-bandwidth.html)で、メモリ側の転送速度、バンクと行、アクセスの待ち時間を調べる。
+5. アプリが見る操作とOSのディスク要求の違いは[WindowsのファイルI/O計測](/tools/windows/file-io-tracing.html)で確かめる。
 
 ## TCPのバイト列が、Webの要求と応答になるまで
 
 1. [HTTP通信](/network/http-messages.html)で、要求行、状態コード、ヘッダー、本文の形式と長さを分ける。
 2. [C++・C#のHTTP観察](/practice/network/http-message-observation.html)で、ローカルのGETと応答を照合し、本文のバイト数と文字数、メッセージ完成とEOFを確かめる。
 3. 下の層から調べる場合は[TCPとソケット](/network/tcp-sockets.html)、文字の表現は[Unicodeと文字コード](/data/unicode-and-encoding.html)へ戻る。
+
+## パケットが欠けたとき、どのHTTP応答が待つか
+
+1. [QUICとHTTP/3](/network/quic-and-http3.html)で、QUICのパケット番号とストリームのオフセット、HTTP/2とHTTP/3の違いを調べる。
+2. [TCPとQUICの配送の比較](/practice/network/stream-loss-observation.html)で、欠けるパケットを切り替え、届いていても待つデータと先に使えるデータを確かめる。
 
 ## 保存したHTTP応答を、いつ再利用できるか
 
@@ -645,11 +652,14 @@ const termRows = [
   ['DNS / 名前解決 / リゾルバー / 権威DNS / A / AAAA / CNAME / TTL / NXDOMAIN / NODATA', '/network/dns-resolution.html', '名前解決API、委任をたどる問い合わせ、レコードとキャッシュ、失敗の違いを調べる'],
   ['HTTP / HTTP/1.1 / GET / Host / 状態コード / ヘッダー / Content-Length / Content-Type / CRLF', '/network/http-messages.html', '要求と応答の形式、本文のバイト数、メッセージの完成と接続終了を調べる'],
   ['ソケット / socket / TCP / IPアドレス / ポート / send / recv / フレーミング / 半閉鎖 / loopback', '/network/tcp-sockets.html', '送受信バッファ、バイト列の境界、EOFとエラー、接続の終了を調べる'],
-  ['UDP / データグラム / sendto / recvfrom / WSAEMSGSIZE / MTU / QUIC', '/network/udp-datagrams.html', 'メッセージの区切りと受信失敗、送信サイズや期限を調べる'],
+  ['UDP / データグラム / sendto / recvfrom / WSAEMSGSIZE / MTU', '/network/udp-datagrams.html', 'メッセージの区切りと受信失敗、送信サイズや期限を調べる'],
+  ['QUIC / HTTP/3 / HTTP/2 / 0-RTT / 接続ID / HOLブロッキング / QUIC DATAGRAM', '/network/quic-and-http3.html', 'UDP上で接続を保ち、欠けたデータをストリームごとに組み立てる仕組みを調べる'],
+  ['NAT / NAPT / ポート転送 / CGNAT / STUN / ICE / TURN', '/network/nat-and-port-mapping.html', '内外のIPとポートの対応、外部からの到達性、P2Pの接続手段を調べる'],
   ['IPルーティング / デフォルトゲートウェイ / Ethernet / MACアドレス / ARP / Neighbor Discovery / TTL', '/network/ip-routing-and-ethernet.html', 'IPの行き先から次の経由先を選び、各リンクでフレームを渡す'],
   ['通信遅延 / RTT / 帯域 / goodput / ジッター / 輻輳 / BDP / バッファブロート', '/network/latency-throughput-and-queues.html', '回線の転送量と、混雑による待ち時間を分ける'],
   ['PCI Express / PCIe / root complex / レーン / リンク速度 / GT/s', '/hardware/io/pcie-links.html', 'デバイスまでの経路とリンクの転送上限を調べる'],
   ['DMA / IOMMU / DMAアドレス / バスマスター / MSI-X / 割り込み', '/hardware/io/dma-and-iommu.html', 'デバイスが使うメモリ範囲、転送の向き、完了通知を調べる'],
+  ['NIC / RXリング / 受信記述子 / RSS / NAPI / 割り込み集約', '/hardware/io/nic-receive-queues.html', 'フレームのDMA、CPUへの処理の分配、ドロップ箇所の違いを調べる'],
   ['DRAM / DDR / メモリチャネル / ランク / バンク / 行バッファ / MT/s', '/hardware/memory/dram-channels-and-bandwidth.html', 'メモリ側の並行性、帯域の計算、アクセス時の待ち時間を調べる'],
   ['メモリマップドファイル / file mapping / mmap / MapViewOfFile / MemoryMappedFile / ビュー', '/os/memory-mapped-files.html', 'ファイルの範囲と仮想アドレスを対応付け、ページとビューの寿命を調べる'],
   ['アセットロード / asset loading / リソース管理 / cook / 読み込み完了 / 利用可能 / 世代トークン', '/game/asset-loading.html', 'byte取得から登録・利用可能化・解放までの状態と所有権を整理する'],

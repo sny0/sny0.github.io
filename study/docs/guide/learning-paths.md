@@ -170,20 +170,27 @@
 1. [IPの経路選択とEthernet](/network/ip-routing-and-ethernet.html)で、送信先IPから次の経由先を選び、同じリンク上でフレームを届ける流れを追う。
 2. [UDPとデータグラム](/network/udp-datagrams.html)で、送受信の区切り、順序や再送、パケットの大きさを調べる。
 3. [C++のUDPループバック実践](/practice/network/udp-loopback-observation.html)で、受信バッファが足りない場合と空データグラムの戻り値を確かめる。
-4. [通信の遅延と帯域](/network/latency-throughput-and-queues.html)で、RTT、転送量、混雑時のキューを分けて観測する。
+4. [NATとポート変換](/network/nat-and-port-mapping.html)で、ルーターの変換表、UDPの応答、外部からの接続を追う。
+5. [通信の遅延と帯域](/network/latency-throughput-and-queues.html)で、RTT、転送量、混雑時のキューを分けて観測する。
 
 ## SSDやNICがメモリとデータをやり取りするには
 
 1. [PCIeのリンク](/hardware/io/pcie-links.html)で、CPU側とデバイスをつなぐ経路、レーン数、リンク速度を調べる。
 2. [DMAとIOMMU](/hardware/io/dma-and-iommu.html)で、デバイスから見たアドレス、読み書き、完了通知を追う。
-3. [DRAMのチャネルと帯域](/hardware/memory/dram-channels-and-bandwidth.html)で、メモリ側の転送速度、バンクと行、アクセスの待ち時間を調べる。
-4. アプリが見る操作とOSのディスク要求の違いは[WindowsのファイルI/O計測](/tools/windows/file-io-tracing.html)で確かめる。
+3. [NICの受信キューとRSS](/hardware/io/nic-receive-queues.html)で、NICがフレームを書き込んだ後、ドライバーが結果を回収してソケットへ渡すまでを追う。
+4. [DRAMのチャネルと帯域](/hardware/memory/dram-channels-and-bandwidth.html)で、メモリ側の転送速度、バンクと行、アクセスの待ち時間を調べる。
+5. アプリが見る操作とOSのディスク要求の違いは[WindowsのファイルI/O計測](/tools/windows/file-io-tracing.html)で確かめる。
 
 ## TCPのバイト列が、Webの要求と応答になるまで
 
 1. [HTTP通信](/network/http-messages.html)で、要求行、状態コード、ヘッダー、本文の形式と長さを分ける。
 2. [C++・C#のHTTP観察](/practice/network/http-message-observation.html)で、ローカルのGETと応答を照合し、本文のバイト数と文字数、メッセージ完成とEOFを確かめる。
 3. 下の層から調べる場合は[TCPとソケット](/network/tcp-sockets.html)、文字の表現は[Unicodeと文字コード](/data/unicode-and-encoding.html)へ戻る。
+
+## パケットが欠けたとき、どのHTTP応答が待つか
+
+1. [QUICとHTTP/3](/network/quic-and-http3.html)で、QUICのパケット番号とストリームのオフセット、HTTP/2とHTTP/3の違いを調べる。
+2. [TCPとQUICの配送の比較](/practice/network/stream-loss-observation.html)で、欠けるパケットを切り替え、届いていても待つデータと先に使えるデータを確かめる。
 
 ## 保存したHTTP応答を、いつ再利用できるか
 

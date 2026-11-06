@@ -34,7 +34,7 @@
       "id": "hardware",
       "title": "ハードウェア",
       "description": "CPU・GPU・メモリ・デバイスの間で、命令とデータがどう動くかを調べる。",
-      "count": 6,
+      "count": 7,
       "status": "辞典本文あり"
     },
     {
@@ -76,7 +76,7 @@
       "id": "network",
       "title": "ネットワーク",
       "description": "通信の層と失敗を、Webとゲームの両方から調べる。",
-      "count": 8,
+      "count": 10,
       "status": "辞典本文あり"
     },
     {
@@ -130,6 +130,13 @@
     }
   ],
   "collections": [
+    {
+      "id": "stream-loss-observation",
+      "section": "practice",
+      "title": "パケットが欠けたときのTCPとQUICの配送を比べる",
+      "description": "失うパケットを変え、接続全体で順序を保つ場合とストリームごとに順序を保つ場合を比べる。",
+      "start": "/practice/network/stream-loss-observation.html"
+    },
     {
       "id": "udp-loopback-observation",
       "section": "practice",
@@ -3051,6 +3058,7 @@
       "verification": "NVM Expressの仕様、LinuxカーネルのDMA・MMIO資料、Microsoftのドライバー資料に照合（2026-11-07）",
       "links": [
         "/os/file-read-journey.html",
+        "/hardware/io/nic-receive-queues.html",
         "/hardware/io/pcie-links.html",
         "/os/io-completion-ports.html",
         "/game/directstorage.html"
@@ -3929,6 +3937,7 @@
         "/network/http-caching.html",
         "/data/unicode-and-encoding.html",
         "/network/tls-https.html",
+        "/network/quic-and-http3.html",
         "/network/dns-resolution.html",
         "/practice/network/http-message-observation.html"
       ]
@@ -4399,6 +4408,69 @@
       ]
     },
     {
+      "title": "NATとポート変換",
+      "url": "/network/nat-and-port-mapping.html",
+      "file": "network/nat-and-port-mapping.md",
+      "domain": "network",
+      "section": "reference",
+      "format": "article",
+      "status": "published",
+      "summary": "IPv4のNATで送信元IPとポートが変わり、変換表から応答の転送先を決める流れを追う。UDPの期限、CGNAT、STUN・ICE・TURNも扱う。",
+      "source": "新規執筆",
+      "aliases": [
+        "NAT",
+        "NAT44",
+        "NAPT",
+        "PAT",
+        "CGNAT",
+        "ポート変換",
+        "ポート転送",
+        "STUN",
+        "ICE",
+        "TURN",
+        "UDP hole punching",
+        "NAT rebinding"
+      ],
+      "verification": "IETFのNAT動作要件、CGN、STUN・ICE・TURNのRFCに照合（2026-11-07）",
+      "links": [
+        "/network/ip-routing-and-ethernet.html",
+        "/network/udp-datagrams.html",
+        "/network/quic-and-http3.html",
+        "/network/latency-throughput-and-queues.html"
+      ]
+    },
+    {
+      "title": "NICの受信キューとRSS — フレームがアプリへ届くまで",
+      "url": "/hardware/io/nic-receive-queues.html",
+      "file": "hardware/io/nic-receive-queues.md",
+      "domain": "hardware",
+      "section": "reference",
+      "format": "article",
+      "status": "published",
+      "summary": "PCIe接続のNICが受信バッファをDMAで埋め、CPUが割り込みやポーリングで回収する経路を追う。RSSと、NIC側・UDPソケット側の取りこぼしを区別する。",
+      "source": "新規執筆",
+      "aliases": [
+        "NIC",
+        "RX ring",
+        "受信リング",
+        "受信記述子",
+        "receive queue",
+        "RSS",
+        "Receive Side Scaling",
+        "NAPI",
+        "interrupt moderation",
+        "RcvbufErrors"
+      ],
+      "verification": "LinuxカーネルとMicrosoftのドライバー資料、IETFのホスト要件、Wiresharkの公式ガイドに照合（2026-11-07）",
+      "links": [
+        "/network/udp-datagrams.html",
+        "/hardware/io/dma-and-iommu.html",
+        "/hardware/io/pcie-links.html",
+        "/network/latency-throughput-and-queues.html",
+        "/practice/network/udp-loopback-observation.html"
+      ]
+    },
+    {
       "title": "Object Pool(通常のnew/deleteとの比較)",
       "url": "/game/patterns/object-pool.html",
       "file": "game/patterns/object-pool.md",
@@ -4654,6 +4726,38 @@
         "/design/patterns/flyweight.html",
         "/design/patterns/",
         "/design/patterns/chain-of-responsibility.html"
+      ]
+    },
+    {
+      "title": "QUICとHTTP/3",
+      "url": "/network/quic-and-http3.html",
+      "file": "network/quic-and-http3.md",
+      "domain": "network",
+      "section": "reference",
+      "format": "article",
+      "status": "published",
+      "summary": "UDP上のQUICがTLS 1.3、損失検出、ストリームをどう組み合わせるか。HTTP/2とHTTP/3で欠落がどこまで影響するか、経路の切り替えやDATAGRAM、0-RTTまでたどる。",
+      "source": "新規執筆",
+      "aliases": [
+        "QUIC",
+        "HTTP/3",
+        "HTTP/2",
+        "Head-of-Line Blocking",
+        "HOL",
+        "ストリーム",
+        "コネクションID",
+        "QPACK",
+        "QUIC DATAGRAM",
+        "0-RTT"
+      ],
+      "verification": "IETF RFC 9000・9001・9002・9114・9221・9204・8470に照合（2026-11-07）",
+      "links": [
+        "/network/udp-datagrams.html",
+        "/network/tls-https.html",
+        "/network/tcp-sockets.html",
+        "/network/latency-throughput-and-queues.html",
+        "/practice/network/stream-loss-observation.html",
+        "/network/nat-and-port-mapping.html"
       ]
     },
     {
@@ -5391,6 +5495,8 @@
       "links": [
         "/network/tcp-sockets.html",
         "/network/latency-throughput-and-queues.html",
+        "/network/quic-and-http3.html",
+        "/network/nat-and-port-mapping.html",
         "/practice/network/udp-loopback-observation.html"
       ]
     },
@@ -8851,6 +8957,35 @@
       ]
     },
     {
+      "title": "パケットが欠けたときのTCPとQUICの配送を比べる",
+      "url": "/practice/network/stream-loss-observation.html",
+      "file": "practice/network/stream-loss-observation.md",
+      "domain": "network",
+      "section": "practice",
+      "format": "sample",
+      "status": "published",
+      "summary": "パケットが一つ欠ける場面を動かし、受信済みのデータをアプリへ渡せる範囲がTCPとQUICでどう違うかを確認する。",
+      "source": "新規執筆",
+      "aliases": [
+        "TCP",
+        "QUIC",
+        "HTTP/2",
+        "HTTP/3",
+        "HOL blocking",
+        "head-of-line blocking",
+        "ストリーム",
+        "パケット欠落"
+      ],
+      "collection": "stream-loss-observation",
+      "order": 1,
+      "verification": "IETFのTCP・QUIC・HTTP/3仕様と照合。ブラウザーで教材の操作を確認（2026-11-07）",
+      "links": [
+        "/network/quic-and-http3.html",
+        "/network/tcp-sockets.html",
+        "/network/udp-datagrams.html"
+      ]
+    },
+    {
       "title": "パストレーシング",
       "url": "/graphics/lighting/path-tracing.html",
       "file": "graphics/lighting/path-tracing.md",
@@ -10293,12 +10428,16 @@
         "/network/ip-routing-and-ethernet.html",
         "/network/udp-datagrams.html",
         "/practice/network/udp-loopback-observation.html",
+        "/network/nat-and-port-mapping.html",
         "/network/latency-throughput-and-queues.html",
         "/hardware/io/pcie-links.html",
         "/hardware/io/dma-and-iommu.html",
+        "/hardware/io/nic-receive-queues.html",
         "/hardware/memory/dram-channels-and-bandwidth.html",
         "/network/http-messages.html",
         "/practice/network/http-message-observation.html",
+        "/network/quic-and-http3.html",
+        "/practice/network/stream-loss-observation.html",
         "/network/http-caching.html",
         "/practice/network/http-cache-observation.html",
         "/browser/streams-backpressure.html",
@@ -13089,10 +13228,13 @@
         "/network/http-messages.html",
         "/network/tcp-sockets.html",
         "/network/udp-datagrams.html",
+        "/network/quic-and-http3.html",
+        "/network/nat-and-port-mapping.html",
         "/network/ip-routing-and-ethernet.html",
         "/network/latency-throughput-and-queues.html",
         "/hardware/io/pcie-links.html",
         "/hardware/io/dma-and-iommu.html",
+        "/hardware/io/nic-receive-queues.html",
         "/hardware/memory/dram-channels-and-bandwidth.html",
         "/os/memory-mapped-files.html",
         "/game/asset-loading.html",

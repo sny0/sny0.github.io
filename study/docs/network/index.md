@@ -23,6 +23,8 @@
 - [HTTPキャッシュ — 保存・鮮度・再検証と304応答](/network/http-caching.html)
 - [HTTP通信 — 要求・応答と本文の区切り](/network/http-messages.html)
 - [IPルーティングとEthernetフレーム](/network/ip-routing-and-ethernet.html)
+- [NATとポート変換](/network/nat-and-port-mapping.html)
+- [QUICとHTTP/3](/network/quic-and-http3.html)
 - [TLS・証明書・HTTPS — 暗号化と相手の確認](/network/tls-https.html)
 - [UDPデータグラムの境界と送受信](/network/udp-datagrams.html)
 - [ソケットとTCP通信 — send/recvの内部とメッセージ境界](/network/tcp-sockets.html)
@@ -40,6 +42,7 @@
 - [C++とC#でOSの名前解決結果と取消しの境界を観察する](/practice/network/name-resolution-observation.html)
 - [C++とC#でTCPのフレーム復元と半閉鎖を観察する](/practice/network/tcp-loopback-observation.html)
 - [C++とWinsockでUDPの受信境界を確かめる](/practice/network/udp-loopback-observation.html)
+- [パケットが欠けたときのTCPとQUICの配送を比べる](/practice/network/stream-loss-observation.html)
 
 ## 扱う範囲・増補する項目
 

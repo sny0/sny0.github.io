@@ -42,7 +42,7 @@ CPUがバッファを参照するときの**仮想アドレス**は、CPUのペ�
 | 書き込みの順序 | バッファのアドレスや長さがデバイスに見える順序で書き、記述子の有効フラグやドアベルを更新する。キャッシュコヒーレントなメモリでも、公開順を作るためにDMA用バリアや規定されたMMIOアクセスを使う。 |
 | バッファの寿命 | 転送先と記述子をデバイスが参照している間は、マッピングを維持する。完了を確認した後に、CPUへ所有権を戻して再利用・解放する。 |
 
-例えば受信側のNICでは、ドライバーが書き込み先をキューへ補充し、NICが受信データを書いて完了を知らせます。ドライバーが完了を確認してから、ネットワークスタックがそのデータを扱います。送信側ではNICがメモリからパケットを読み出します。[LinuxのDMAマッピングとキャッシュ同期](https://docs.kernel.org/core-api/dma-api-howto.html) · [LinuxのDMAバリアとドアベルの例](https://docs.kernel.org/core-api/wrappers/memory-barriers.html) · [MicrosoftのNICの送受信](https://learn.microsoft.com/en-us/windows-hardware/drivers/network/network-interface-card-support)
+例えば受信側のNICでは、ドライバーが書き込み先をキューへ補充し、NICが受信データを書いて完了を知らせます。ドライバーが完了を確認してから、ネットワークスタックがそのデータを扱います。送信側ではNICがメモリからパケットを読み出します。[NICの受信キューとRSS](/hardware/io/nic-receive-queues.html) · [LinuxのDMAマッピングとキャッシュ同期](https://docs.kernel.org/core-api/dma-api-howto.html) · [LinuxのDMAバリアとドアベルの例](https://docs.kernel.org/core-api/wrappers/memory-barriers.html) · [MicrosoftのNICの送受信](https://learn.microsoft.com/en-us/windows-hardware/drivers/network/network-interface-card-support)
 
 ## 完了の通知と、完了を確認する処理
 

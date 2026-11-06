@@ -12,6 +12,7 @@ export const formatLabels = {
 export const statusLabels = { published: '公開中', outline: '学習計画・概要', draft: '草稿', planned: '執筆予定' }
 
 export const collections = [
+  { id: 'stream-loss-observation', section: 'practice', title: 'パケットが欠けたときのTCPとQUICの配送を比べる', description: '失うパケットを変え、接続全体で順序を保つ場合とストリームごとに順序を保つ場合を比べる。', start: '/practice/network/stream-loss-observation.html' },
   { id: 'udp-loopback-observation', section: 'practice', title: 'C++とWinsockでUDPの受信境界を確かめる', description: 'UDPの区切りと、短い受信バッファや空のデータグラムの戻り値を調べる。', start: '/practice/network/udp-loopback-observation.html' },
   { id: 'render-to-texture-observation', section: 'practice', title: 'C++でテクスチャに描き、次のパスで色を変える', description: '中間画像を次のパスで読み、色を入れ替えた結果をWARPから読み戻す。', start: '/practice/graphics/render-to-texture-observation.html' },
   { id: 'parallel-command-recording-observation', section: 'practice', title: 'C++でD3D12のコマンドを別スレッドで記録する', description: '記録完了と提出の順番を変え、WARPで実行したコピーを読み戻して照合する。', start: '/practice/graphics/parallel-command-recording-observation.html' },

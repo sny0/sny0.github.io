@@ -146,7 +146,7 @@ GETは**idempotent**（冪等）でもあります。同じ要求を繰り返し
 
 HTTPSは、HTTPの通信をTLSで保護する仕組みとして捉えます。ここで扱うHTTP/1.1とTCPの会話に、暗号化、改ざん検出、相手の確認などを担う層が加わる場合も、HTTP本文の長さと意味を判断する仕事は残ります。今回のraw Socket実践はTLSを使いません。鍵共有や証明書、相手名の検証は[TLS・証明書・HTTPS](/network/tls-https.html)で詳しく説明します。[RFC 9110 §4.2.2](https://www.rfc-editor.org/rfc/rfc9110.html#section-4.2.2)
 
-HTTP全般が常にTCP上にあるわけでもありません。HTTP/3はQUIC上でHTTPの意味を運ぶ方式です。接続先を名前から調べる処理は[DNSと名前解決](/network/dns-resolution.html)へ進んでください。HTTP/2・HTTP/3のフレーム、接続再利用の設計、chunked、圧縮は、それぞれ後続の範囲とします。[IETF RFC 9114 §1.2](https://www.rfc-editor.org/rfc/rfc9114.html#section-1.2)
+HTTP/2は一つのTCP接続で複数のやり取りを並行して進めます。HTTP/3はQUICのストリームを使います。パケットが欠けたときの違いは[QUICとHTTP/3](/network/quic-and-http3.html)で扱います。接続先を名前から調べる処理は[DNSと名前解決](/network/dns-resolution.html)へ進んでください。[IETF RFC 9114 §1.1–1.2](https://www.rfc-editor.org/rfc/rfc9114.html#section-1.1)
 
 ## 実践記事
 
