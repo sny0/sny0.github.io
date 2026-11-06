@@ -1,0 +1,61 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="760" height="600" viewBox="0 0 760 600" role="img" aria-labelledby="title desc">
+  <title id="title">帰還ゲインを変えたフィードバックディレイのインパルス応答</title>
+  <desc id="desc">理想モデルで遅延200ミリ秒のインパルス応答。直接音から5回目の反響までを表示。反響は200ミリ秒間隔で、帰還ゲイン0.7より0.4の方が振幅が速く小さくなる。</desc>
+  <defs>
+    <style>
+      text { font-family: "Noto Sans JP", "Yu Gothic", Meiryo, sans-serif; fill: #1f2937; }
+      .title { font-size: 26px; font-weight: 700; }
+      .heading { font-size: 20px; font-weight: 700; }
+      .note { font-size: 17px; fill: #475569; }
+      .grid { fill: none; stroke: #dbe3ee; stroke-width: 1; }
+      .axis { fill: none; stroke: #64748b; stroke-width: 1.5; }
+      .high-stem { stroke: #1d4ed8; stroke-width: 3; }
+      .low-stem { stroke: #9a3412; stroke-width: 3; }
+      .high { fill: #1d4ed8; }
+      .low { fill: #9a3412; }
+    </style>
+    <g id="axes">
+      <path d="M 108 0 H 706 M 108 77.5 H 706 M 222 0 V 155 M 336 0 V 155 M 450 0 V 155 M 564 0 V 155 M 678 0 V 155" class="grid"/>
+      <path d="M 108 0 V 155 H 706" class="axis"/>
+      <text x="96" y="6" class="note" text-anchor="end">1</text>
+      <text x="96" y="83" class="note" text-anchor="end">0.5</text>
+      <text x="96" y="161" class="note" text-anchor="end">0</text>
+    </g>
+    <g id="times" class="note" text-anchor="middle">
+      <text x="108" y="0">0</text><text x="222" y="0">200</text><text x="336" y="0">400</text>
+      <text x="450" y="0">600</text><text x="564" y="0">800</text><text x="678" y="0">1,000</text>
+    </g>
+    <path id="diamond" d="M 0 -5 L 5 0 L 0 5 L -5 0 Z"/>
+  </defs>
+  <rect x="1" y="1" width="758" height="598" rx="18" fill="#f8fafc" stroke="#cbd5e1"/>
+  <text x="36" y="49" class="title">帰還ゲインで反響の減衰が変わる</text>
+  <text x="36" y="80" class="note">理想モデル · 遅延 200 ms · 直接音と最初の5回の反響</text>
+
+  <text x="36" y="119" class="heading high">g = 0.7</text>
+  <text x="706" y="119" text-anchor="end" class="note">1周ごとに 約 −3.10 dB</text>
+  <text x="36" y="145" class="note">振幅</text>
+  <use href="#axes" x="0" y="149"/>
+  <path d="M 108 304 V 149 M 222 304 V 195.5 M 336 304 V 228.05 M 450 304 V 250.835 M 564 304 V 266.7845 M 678 304 V 277.94915" class="high-stem"/>
+  <g class="high">
+    <circle cx="108" cy="149" r="5"/><circle cx="222" cy="195.5" r="5"/><circle cx="336" cy="228.05" r="5"/>
+    <circle cx="450" cy="250.835" r="5"/><circle cx="564" cy="266.7845" r="5"/><circle cx="678" cy="277.94915" r="5"/>
+  </g>
+  <text x="222" y="181" class="note high" text-anchor="middle">0.7</text>
+  <text x="336" y="214" class="note high" text-anchor="middle">0.49</text>
+  <use href="#times" x="0" y="329"/>
+
+  <text x="36" y="354" class="heading low">g = 0.4</text>
+  <text x="706" y="354" text-anchor="end" class="note">1周ごとに 約 −7.96 dB</text>
+  <text x="36" y="380" class="note">振幅</text>
+  <use href="#axes" x="0" y="384"/>
+  <path d="M 108 539 V 384 M 222 539 V 477 M 336 539 V 514.2 M 450 539 V 529.08 M 564 539 V 535.032 M 678 539 V 537.4128" class="low-stem"/>
+  <g class="low">
+    <use href="#diamond" x="108" y="384"/><use href="#diamond" x="222" y="477"/><use href="#diamond" x="336" y="514.2"/>
+    <use href="#diamond" x="450" y="529.08"/><use href="#diamond" x="564" y="535.032"/><use href="#diamond" x="678" y="537.4128"/>
+  </g>
+  <text x="222" y="462" class="note low" text-anchor="middle">0.4</text>
+  <text x="336" y="499" class="note low" text-anchor="middle">0.16</text>
+
+  <use href="#times" x="0" y="565"/>
+  <text x="706" y="588" text-anchor="end" class="note">時間（ms）</text>
+</svg>

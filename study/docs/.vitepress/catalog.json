@@ -69,7 +69,7 @@
       "id": "browser",
       "title": "ブラウザ",
       "description": "URLを開いてから描画されるまでを、通信・実行・表示に分ける。",
-      "count": 21,
+      "count": 22,
       "status": "辞典本文あり"
     },
     {
@@ -130,6 +130,13 @@
     }
   ],
   "collections": [
+    {
+      "id": "audio-feedback-observation",
+      "section": "practice",
+      "title": "Web Audioで反響の間隔と減衰を観察する",
+      "description": "遅延時間とフィードバックゲインを変え、反響の時刻と振幅をグラフと試聴で確かめる。",
+      "start": "/practice/browser/audio-feedback-observation.html"
+    },
     {
       "id": "audio-comb-observation",
       "section": "practice",
@@ -4809,6 +4816,34 @@
       ]
     },
     {
+      "title": "Web Audioで反響の間隔と減衰を観察する",
+      "url": "/practice/browser/audio-feedback-observation.html",
+      "file": "practice/browser/audio-feedback-observation.md",
+      "domain": "browser",
+      "section": "practice",
+      "format": "sample",
+      "status": "published",
+      "summary": "遅延時間とフィードバックゲインを変え、反響の時刻と振幅をグラフと試聴で比べる。",
+      "source": "新規執筆",
+      "aliases": [
+        "Web Audio API",
+        "フィードバックディレイ",
+        "feedback delay",
+        "フィードバックゲイン",
+        "DelayNode",
+        "反響",
+        "エコー",
+        "減衰",
+        "インパルス応答"
+      ],
+      "collection": "audio-feedback-observation",
+      "order": 1,
+      "verification": "WindowsのChromium系ブラウザで全9設定の反響時刻と振幅、元の音と反響付きの音の試聴を確認（2026-11-06）",
+      "links": [
+        "/browser/audio-feedback-delay.html"
+      ]
+    },
+    {
       "title": "Web Audioのクロスフェード — 等ゲイン・等電力・相関",
       "url": "/browser/audio-crossfade.html",
       "file": "browser/audio-crossfade.md",
@@ -4893,7 +4928,37 @@
       "links": [
         "/browser/audio-mixing-and-headroom.html",
         "/browser/audio-crossfade.html",
-        "/practice/browser/audio-comb-observation.html"
+        "/practice/browser/audio-comb-observation.html",
+        "/browser/audio-feedback-delay.html"
+      ]
+    },
+    {
+      "title": "Web Audioのフィードバックディレイ — 反響の間隔と減衰",
+      "url": "/browser/audio-feedback-delay.html",
+      "file": "browser/audio-feedback-delay.md",
+      "domain": "browser",
+      "section": "reference",
+      "format": "article",
+      "status": "published",
+      "summary": "遅延させた出力を入力側に戻すと、短い音が一定間隔で繰り返される。反響の間隔と減衰を決める遅延時間と帰還ゲイン、Web Audioが循環を処理する仕組みを解説する。",
+      "source": "新規執筆",
+      "aliases": [
+        "Web Audio API",
+        "フィードバックディレイ",
+        "feedback delay",
+        "帰還ゲイン",
+        "DelayNode",
+        "エコー",
+        "反響",
+        "フィードバックコムフィルター",
+        "インパルス応答",
+        "IIR"
+      ],
+      "verification": "W3C Web Audio APIのDelayNodeと音声グラフのレンダリング、Julius O. SmithのPhysical Audio Signal Processingに照合（2026-11-06）",
+      "links": [
+        "/browser/audio-comb-filter.html",
+        "/browser/audio-mixing-and-headroom.html",
+        "/practice/browser/audio-feedback-observation.html"
       ]
     },
     {
@@ -7929,6 +7994,8 @@
         "/practice/browser/audio-crossfade-observation.html",
         "/browser/audio-comb-filter.html",
         "/practice/browser/audio-comb-observation.html",
+        "/browser/audio-feedback-delay.html",
+        "/practice/browser/audio-feedback-observation.html",
         "/history/video-games.html",
         "/guide/rendering/timeline.html"
       ]
@@ -10078,6 +10145,7 @@
       "source": "統合ガイド",
       "aliases": [],
       "links": [
+        "/browser/audio-feedback-delay.html",
         "/browser/audio-comb-filter.html",
         "/browser/audio-crossfade.html",
         "/browser/audio-gain-automation.html",

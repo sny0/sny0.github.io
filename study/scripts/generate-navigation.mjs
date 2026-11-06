@@ -400,11 +400,18 @@ writePage('guide/learning-paths.md', '疑問から選ぶ読み順', {
 2. [Web Audioで遅延とコムフィルターを観察する](/practice/browser/audio-comb-observation.html)で、遅延時間とゲインを変え、最初にへこむ周波数を比べる。
 3. 二つの音を切り替える途中の実効値は[Web Audioのクロスフェード](/browser/audio-crossfade.html)で確認する。
 
+## 一つの音から反響を繰り返すには
+
+1. [Web Audioのフィードバックディレイ](/browser/audio-feedback-delay.html)で、出力を遅延経路に戻す接続と、繰り返すたびに振幅が小さくなる仕組みを確認する。
+2. [Web Audioで反響の間隔と減衰を観察する](/practice/browser/audio-feedback-observation.html)で、遅延時間と戻すゲインを変え、反響の時刻と振幅を比べる。
+3. 遅延した入力を一度だけ重ねたときの周波数応答は[Web Audioのコムフィルター](/browser/audio-comb-filter.html)で確認する。
+
 ## 作り方の変化を歴史から見る
 
 [ビデオゲーム史](/history/video-games.html)の作品・ハード・媒体・流通と、[リアルタイム3D技術史](/guide/rendering/timeline.html)の技術の変化から、気になった仕組みへ進みます。`)
 
 const termRows = [
+  ['フィードバックディレイ / feedback delay / フィードバックゲイン / 反響 / エコー / 減衰 / IIR / DelayNode', '/browser/audio-feedback-delay.html', '出力を遅延経路に戻し、反響の間隔と一周ごとの振幅の変化を調べる'],
   ['コムフィルター / comb filter / DelayNode / 遅延 / 位相差 / 干渉 / 周波数応答 / インパルス応答 / ノッチ', '/browser/audio-comb-filter.html', '同じ音を少し遅らせて足し、強め合う周波数と打ち消される周波数を調べる'],
   ['クロスフェード / crossfade / 等電力 / equal power / 線形フェード / RMS / 相関 / setValueCurveAtTime', '/browser/audio-crossfade.html', '二つの音源を重ねて入れ替え、ゲインの形と相関による実効値の変化を調べる'],
   ['ゲインオートメーション / AudioParam / setValueAtTime / linearRampToValueAtTime / フェード / クリックノイズ / a-rate', '/browser/audio-gain-automation.html', '音声の時刻でゲインを予約し、急な消音とフェードで波形が変わる様子を調べる'],
