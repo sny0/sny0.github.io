@@ -1,0 +1,53 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="760" height="431" viewBox="0 0 760 431" role="img" aria-labelledby="title description">
+  <title id="title">モードの移行とスレッドの交代を分ける</title>
+  <desc id="description">上の例はスレッドAがユーザーモード、カーネルモード、ユーザーモードと続けて実行する。下の例はAがカーネルで待機し、Bが実行される。完了を受けて選ばれたAはカーネル側の続きから実行してユーザーに戻る。</desc>
+  <rect width="760" height="431" rx="16" fill="#f3f7fa"/>
+  <g font-family="system-ui, sans-serif" fill="#183246">
+    <text x="26" y="42" font-size="25" font-weight="700">モードの移行とスレッドの交代を分ける</text>
+    <text x="26" y="69" font-size="15" fill="#455b6b">1個の論理CPUで実行する処理を、時間順に左から右へ並べた例</text>
+
+    <rect x="26" y="86" width="708" height="124" rx="10" fill="#fff" stroke="#aec4cf"/>
+    <text x="46" y="113" font-size="17" font-weight="700">すぐ終わる要求</text>
+    <g stroke="#8299aa" stroke-width="1">
+      <rect x="46" y="128" width="162" height="40" rx="4" fill="#e6f2f7"/>
+      <rect x="208" y="128" width="334" height="40" rx="4" fill="#dcebe2"/>
+      <rect x="542" y="128" width="172" height="40" rx="4" fill="#e6f2f7"/>
+    </g>
+    <g font-size="15" text-anchor="middle">
+      <text x="127" y="153">A　ユーザー</text>
+      <text x="375" y="153">A　カーネルで要求を処理</text>
+      <text x="628" y="153">A　ユーザー</text>
+    </g>
+    <path d="M208 170v8m334-8v8" stroke="#315b6d" stroke-width="1.5"/>
+    <g font-size="14" text-anchor="middle" fill="#455b6b">
+      <text x="208" y="195">SYSCALL</text>
+      <text x="542" y="195">ユーザーへ復帰</text>
+    </g>
+
+    <rect x="26" y="227" width="708" height="176" rx="10" fill="#fff" stroke="#aec4cf"/>
+    <text x="46" y="254" font-size="17" font-weight="700">途中で結果を待つ要求</text>
+    <g stroke="#8299aa" stroke-width="1">
+      <rect x="46" y="269" width="122" height="40" rx="4" fill="#e6f2f7"/>
+      <rect x="168" y="269" width="116" height="40" rx="4" fill="#dcebe2"/>
+      <rect x="284" y="269" width="192" height="40" rx="4" fill="#f4e9d9"/>
+      <rect x="476" y="269" width="116" height="40" rx="4" fill="#dcebe2"/>
+      <rect x="592" y="269" width="122" height="40" rx="4" fill="#e6f2f7"/>
+    </g>
+    <g font-size="14" text-anchor="middle">
+      <text x="107" y="294">A　ユーザー</text>
+      <text x="226" y="294">A　カーネル</text>
+      <text x="380" y="294">Bを実行</text>
+      <text x="534" y="294">A　カーネル</text>
+      <text x="653" y="294">A　ユーザー</text>
+    </g>
+    <path d="M168 311v7m116-7v7m192-7v7m116-7v7" stroke="#315b6d" stroke-width="1.5"/>
+    <g font-size="13" text-anchor="middle" fill="#455b6b">
+      <text x="168" y="335">SYSCALL</text>
+      <text x="284" y="335">Aが待機</text>
+      <text x="476" y="335">Aを再び選択</text>
+      <text x="592" y="335">ユーザーへ復帰</text>
+    </g>
+    <path d="M284 348v10h192v-10" fill="none" stroke="#315b6d" stroke-width="1.5" stroke-dasharray="5 3"/>
+    <text x="380" y="381" font-size="14" text-anchor="middle" fill="#455b6b">Aの要求が完了すると、Aは実行可能になる</text>
+  </g>
+</svg>

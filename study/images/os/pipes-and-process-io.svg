@@ -1,0 +1,25 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="760" height="320" viewBox="0 0 760 320" role="img" aria-labelledby="title desc">
+  <title id="title">親が子の標準出力を受け取る</title>
+  <desc id="desc">子の標準出力からパイプを通って親へバイトが流れる。親が書き込み端も持っている場合は、子の終了後もその端が残る。</desc>
+  <defs><marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path d="M0 0 10 5 0 10Z" fill="#3b6579"/></marker></defs>
+  <rect width="760" height="320" rx="14" fill="#f4f8fa"/>
+  <g font-family="system-ui, sans-serif" fill="#183046">
+    <text x="24" y="42" font-size="24" font-weight="700">親が子の標準出力を受け取る</text>
+    <rect x="24" y="75" width="196" height="100" rx="8" fill="#dcebf4" stroke="#85a7be"/>
+    <rect x="280" y="75" width="200" height="100" rx="8" fill="#e8eff4" stroke="#9aafbf"/>
+    <rect x="540" y="75" width="196" height="100" rx="8" fill="#def0e9" stroke="#85b5a5"/>
+    <path d="M222 125H272m210 0h50" fill="none" stroke="#3b6579" stroke-width="2.5" marker-end="url(#arrow)"/>
+    <g text-anchor="middle">
+      <g font-size="17" font-weight="700">
+        <text x="122" y="106">子プロセス</text><text x="380" y="106">パイプのバッファ</text><text x="638" y="106">親プロセス</text>
+      </g>
+      <g font-size="15">
+        <text x="122" y="144">標準出力 → 書き込み端</text><text x="380" y="144">出力のバイトを保持</text><text x="638" y="144">読み取り端から受信</text>
+      </g>
+    </g>
+    <rect x="24" y="200" width="712" height="87" rx="8" fill="#fff0dc" stroke="#cba572"/>
+    <text x="42" y="230" font-size="16" font-weight="700">親にも書き込み端が残っている場合</text>
+    <text x="42" y="256" font-size="15">子が終了しても、親の書き込み端が開いている間は終端にならない。</text>
+    <text x="42" y="277" font-size="15">最後の書き込み端を閉じ、バッファが空になれば終端を検出できる。</text>
+  </g>
+</svg>

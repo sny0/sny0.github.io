@@ -1,0 +1,28 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="760" height="338" viewBox="0 0 760 338" role="img" aria-labelledby="title description">
+  <title id="title">プロセスごとのハンドルで同じイベントを参照する</title>
+  <desc id="description">プロセスAの項目0x54にはイベントを通知する権限と待つ権限、プロセスBの項目0x68には待つ権限があり、同じイベントを指す。Aが自分の項目を閉じても、Bは自分のハンドルを使い続けられる。</desc>
+  <defs>
+    <marker id="arrow" viewBox="0 0 8 8" refX="7" refY="4" markerWidth="7" markerHeight="7" orient="auto">
+      <path d="M0 0L8 4L0 8Z" fill="#365f72"/>
+    </marker>
+  </defs>
+  <rect width="760" height="338" rx="16" fill="#f3f7fa"/>
+  <g font-family="system-ui, sans-serif" fill="#193548">
+    <text x="26" y="41" font-size="24" font-weight="700">同じイベントを別々のハンドルから参照する</text>
+    <text x="26" y="69" font-size="15" fill="#445d6e">DuplicateHandle で、プロセスBに待機専用のハンドルを作った例</text>
+    <rect x="26" y="90" width="342" height="81" rx="10" fill="#e5eef4" stroke="#96afbf"/>
+    <text x="44" y="119" font-size="17" font-weight="700">プロセスAのハンドルテーブル</text>
+    <text x="44" y="147" font-size="16">0x54　通知する・待つ</text>
+    <rect x="26" y="186" width="342" height="81" rx="10" fill="#e5eef4" stroke="#96afbf"/>
+    <text x="44" y="215" font-size="17" font-weight="700">プロセスBのハンドルテーブル</text>
+    <text x="44" y="243" font-size="16">0x68　待つ</text>
+    <rect x="481" y="117" width="253" height="122" rx="10" fill="#e2efe7" stroke="#88afa0"/>
+    <text x="504" y="154" font-size="18" font-weight="700">一つのイベント</text>
+    <text x="504" y="182" font-size="15">通知状態をここで管理する</text>
+    <text x="504" y="210" font-size="15">双方が同じ状態を見る</text>
+    <path d="M369 131H413V157H473" fill="none" stroke="#365f72" stroke-width="2" marker-end="url(#arrow)"/>
+    <path d="M369 227H413V199H473" fill="none" stroke="#365f72" stroke-width="2" marker-end="url(#arrow)"/>
+    <rect x="26" y="283" width="708" height="34" rx="6" fill="#dfeef4"/>
+    <text x="42" y="305" font-size="15">Aが0x54を閉じたあとも、Bは0x68で同じイベントを待てる。</text>
+  </g>
+</svg>
