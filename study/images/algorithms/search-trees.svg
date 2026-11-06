@@ -1,0 +1,45 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="760" height="354" viewBox="0 0 760 354" role="img" aria-labelledby="title desc" xml:lang="ja">
+  <title id="title">二分探索木とキーの範囲</title>
+  <desc id="desc">根40の左は20、右は60。20の子は10と30、60の子は50と70。順に読むと10、20、30、40、50、60、70。25以上65未満に含まれる30、40、50、60を太枠で示す。</desc>
+  <rect width="760" height="354" rx="18" fill="#f8fafc"/>
+  <g font-family="'Noto Sans JP', 'Yu Gothic', 'Meiryo', sans-serif" fill="#162334">
+    <text x="25" y="40" font-size="23" font-weight="700">左は小さいキー、右は大きいキー</text>
+    <text x="25" y="67" font-size="16" fill="#475569">太枠のキーは25以上65未満</text>
+
+    <path d="M380 115 225 171M380 115 535 171M225 171 140 227M225 171 305 227M535 171 450 227M535 171 620 227" fill="none" stroke="#5a6c80" stroke-width="2"/>
+    <g fill="#e7f2fe" stroke="#587ba5" stroke-width="1.5">
+      <circle cx="225" cy="171" r="23"/>
+      <circle cx="140" cy="227" r="23"/>
+      <circle cx="620" cy="227" r="23"/>
+    </g>
+    <g fill="#dff3eb" stroke="#367061" stroke-width="2.8">
+      <circle cx="380" cy="115" r="23"/>
+      <circle cx="535" cy="171" r="23"/>
+      <circle cx="305" cy="227" r="23"/>
+      <circle cx="450" cy="227" r="23"/>
+    </g>
+    <g text-anchor="middle" font-size="19" font-weight="700">
+      <text x="380" y="122">40</text>
+      <text x="225" y="178">20</text>
+      <text x="535" y="178">60</text>
+      <text x="140" y="234">10</text>
+      <text x="305" y="234">30</text>
+      <text x="450" y="234">50</text>
+      <text x="620" y="234">70</text>
+    </g>
+
+    <text x="45" y="312" font-size="16" font-weight="700">小さい順</text>
+    <rect x="157" y="288" width="476" height="36" rx="7" fill="#e7f2fe" stroke="#587ba5" stroke-width="1.5"/>
+    <rect x="293" y="288" width="272" height="36" fill="#dff3eb" stroke="#367061" stroke-width="2.6"/>
+    <path d="M225 288v36m136-36v36m68-36v36m68-36v36" fill="none" stroke="#587ba5" stroke-width="1.5"/>
+    <g text-anchor="middle" font-size="18" font-weight="700">
+      <text x="191" y="312">10</text>
+      <text x="259" y="312">20</text>
+      <text x="327" y="312">30</text>
+      <text x="395" y="312">40</text>
+      <text x="463" y="312">50</text>
+      <text x="531" y="312">60</text>
+      <text x="599" y="312">70</text>
+    </g>
+  </g>
+</svg>

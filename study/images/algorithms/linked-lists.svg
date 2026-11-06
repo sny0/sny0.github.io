@@ -1,0 +1,49 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="760" height="348" viewBox="0 0 760 348" role="img" aria-labelledby="title desc" xml:lang="ja">
+  <title id="title">単方向リストと双方向リストで参照するリンク</title>
+  <desc id="desc">単方向リストではAからB、BからCへのnextだけを持つ。双方向リストでBを外すと、AのnextがCへ、CのprevがAへ向かう。</desc>
+  <defs>
+    <marker id="next-arrow" viewBox="0 0 8 8" refX="7" refY="4" markerWidth="7" markerHeight="7" orient="auto">
+      <path d="M0 0 8 4 0 8Z" fill="#3e718f"/>
+    </marker>
+    <marker id="prev-arrow" viewBox="0 0 8 8" refX="7" refY="4" markerWidth="7" markerHeight="7" orient="auto">
+      <path d="M0 0 8 4 0 8Z" fill="#9a5928"/>
+    </marker>
+  </defs>
+  <rect width="760" height="348" rx="18" fill="#f8fafc"/>
+  <g font-family="'Noto Sans JP', 'Yu Gothic', 'Meiryo', sans-serif" fill="#162334">
+    <text x="25" y="40" font-size="23" font-weight="700">ノードのリンクをたどり、つなぎ替える</text>
+    <text x="25" y="69" font-size="16" fill="#475569">A・B・Cのノードを持つリストの例</text>
+
+    <text x="25" y="123" font-size="16" font-weight="700">単方向</text>
+    <g fill="#e4f1ff" stroke="#5680ac" stroke-width="1.5">
+      <rect x="155" y="100" width="110" height="39" rx="5"/>
+      <rect x="325" y="100" width="110" height="39" rx="5"/>
+      <rect x="495" y="100" width="110" height="39" rx="5"/>
+    </g>
+    <g stroke="#3e718f" stroke-width="1.7" marker-end="url(#next-arrow)">
+      <path d="M266 119.5H323"/><path d="M436 119.5H493"/><path d="M606 119.5H656"/>
+    </g>
+    <g text-anchor="middle" font-size="14" fill="#3e718f">
+      <text x="295" y="109">next</text><text x="465" y="109">next</text><text x="632" y="109">next</text>
+    </g>
+    <text x="665" y="125" font-size="15" fill="#475569">なし</text>
+    <text x="155" y="163" font-size="15" fill="#475569">Bを外すには、直前のAのリンクを書き換える</text>
+    <path d="M25 181H731" stroke="#c0cbd9" stroke-dasharray="5 5"/>
+
+    <text x="25" y="253" font-size="16" font-weight="700">双方向</text>
+    <text x="25" y="276" font-size="14" fill="#475569">Bを外したあと</text>
+    <g fill="#dff3ec" stroke="#478576" stroke-width="1.5">
+      <rect x="155" y="229" width="110" height="43" rx="5"/>
+      <rect x="495" y="229" width="110" height="43" rx="5"/>
+    </g>
+    <rect x="325" y="229" width="110" height="43" rx="5" fill="#edf2f7" stroke="#899aaf" stroke-width="1.5" stroke-dasharray="4 4"/>
+    <path d="M210 228V208H550V227" fill="none" stroke="#3e718f" stroke-width="1.7" marker-end="url(#next-arrow)"/>
+    <path d="M550 273V299H210V274" fill="none" stroke="#9a5928" stroke-width="1.7" marker-end="url(#prev-arrow)"/>
+    <g text-anchor="middle" font-size="16" font-weight="700">
+      <text x="210" y="126">A</text><text x="380" y="126">B</text><text x="550" y="126">C</text>
+      <text x="210" y="257">A</text><text x="380" y="257" fill="#475569">B（外れた）</text><text x="550" y="257">C</text>
+      <text x="380" y="201" fill="#3e718f">A.next が C を指す</text>
+      <text x="380" y="322" fill="#9a5928">C.prev が A を指す</text>
+    </g>
+  </g>
+</svg>

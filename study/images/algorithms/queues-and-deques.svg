@@ -1,0 +1,63 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="760" height="359" viewBox="0 0 760 359" role="img" aria-labelledby="title desc" xml:lang="ja">
+  <title id="title">4枠のリングキューで書き込み位置が折り返す</title>
+  <desc id="desc">最初は添字0から3までA、B、C、Dで満杯。AとBを取り出すと先頭は添字2のC。添字0にEを書いたあとの取り出し順はC、D、Eで、次の挿入候補は添字1。</desc>
+  <rect width="760" height="359" rx="18" fill="#f8fafc"/>
+  <g font-family="'Noto Sans JP', 'Yu Gothic', 'Meiryo', sans-serif" fill="#162334">
+    <text x="25" y="39" font-size="23" font-weight="700">配列の末尾から先頭へ折り返す</text>
+    <text x="25" y="65" font-size="16" fill="#475569">容量4のリングキュー。添字と、取り出す順番を分ける</text>
+
+    <g font-size="14" text-anchor="middle" fill="#475569">
+      <text x="227" y="104">添字0</text>
+      <text x="319" y="104">1</text>
+      <text x="411" y="104">2</text>
+      <text x="503" y="104">3</text>
+    </g>
+
+    <g stroke-width="1.5">
+      <g fill="#e7f2fe" stroke="#587ba5">
+        <rect x="185" y="115" width="84" height="44" rx="6"/>
+        <rect x="277" y="115" width="84" height="44" rx="6"/>
+        <rect x="369" y="115" width="84" height="44" rx="6"/>
+        <rect x="461" y="115" width="84" height="44" rx="6"/>
+        <rect x="369" y="175" width="84" height="44" rx="6"/>
+        <rect x="461" y="175" width="84" height="44" rx="6"/>
+        <rect x="369" y="235" width="84" height="44" rx="6"/>
+        <rect x="461" y="235" width="84" height="44" rx="6"/>
+      </g>
+      <g fill="#f1f5f9" stroke="#a2b0bc" stroke-dasharray="4 3">
+        <rect x="185" y="175" width="84" height="44" rx="6"/>
+        <rect x="277" y="175" width="84" height="44" rx="6"/>
+        <rect x="277" y="235" width="84" height="44" rx="6"/>
+      </g>
+      <rect x="185" y="235" width="84" height="44" rx="6" fill="#e1f4ef" stroke="#4f8678"/>
+    </g>
+
+    <g font-size="15" font-weight="700">
+      <text x="25" y="142">1. 満杯</text>
+      <text x="25" y="202">2. AとBを取り出す</text>
+      <text x="25" y="262">3. Eを添字0に入れる</text>
+    </g>
+    <g font-size="18" font-weight="700" text-anchor="middle">
+      <text x="227" y="143">A</text>
+      <text x="319" y="143">B</text>
+      <text x="411" y="143">C</text>
+      <text x="503" y="143">D</text>
+      <text x="411" y="203">C</text>
+      <text x="503" y="203">D</text>
+      <text x="227" y="263">E</text>
+      <text x="411" y="263">C</text>
+      <text x="503" y="263">D</text>
+    </g>
+    <g font-size="14" fill="#475569">
+      <text x="570" y="134">head = 0、size = 4</text>
+      <text x="570" y="153">新しく書けない</text>
+      <text x="570" y="194">head = 2、size = 2</text>
+      <text x="570" y="213">次に書く候補は0</text>
+      <text x="570" y="254">head = 2、size = 3</text>
+      <text x="570" y="273">次に書く候補は1</text>
+    </g>
+
+    <rect x="25" y="303" width="710" height="35" rx="6" fill="#e1f4ef"/>
+    <text x="42" y="325" font-size="15" font-weight="700">取り出し順は C → D → E。配列の添字は 2 → 3 → 0 と進む</text>
+  </g>
+</svg>
