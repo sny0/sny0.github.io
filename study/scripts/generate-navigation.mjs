@@ -430,11 +430,18 @@ writePage('guide/learning-paths.md', '疑問から選ぶ読み順', {
 2. [Web Audioで扉が開くときの音の切り替えを比べる](/practice/browser/audio-occlusion-transition-observation.html)で、時定数を変え、出力波形とゲインの実測値を比べる。
 3. 遮蔽時にゲインとローパスが音へ与える影響は[Web Audioの音の遮蔽](/browser/audio-occlusion.html)で確認する。
 
+## 近づく音源と遠ざかる音源で高さが変わるのはなぜか
+
+1. [Web Audioでドップラー効果を再現する](/browser/audio-doppler.html)で、音源が動くと波の山が届く間隔が変わる仕組みを確認する。
+2. [Web Audioでドップラー効果を聴き比べる](/practice/browser/audio-doppler-observation.html)で、速さと進行方向を変えて、基準の440 Hzと変化後の波形を比べる。
+3. 音源の位置を左右の配分と音量に反映する方法は[Web Audioの音の定位と距離減衰](/browser/audio-spatial-panning.html)で確認する。
+
 ## 作り方の変化を歴史から見る
 
 [ビデオゲーム史](/history/video-games.html)の作品・ハード・媒体・流通と、[リアルタイム3D技術史](/guide/rendering/timeline.html)の技術の変化から、気になった仕組みへ進みます。`)
 
 const termRows = [
+  ['ドップラー効果 / Doppler effect / ドップラーシフト / 視線方向の速度 / 音速 / playbackRate', '/browser/audio-doppler.html', '音源が近づくと音が高く、遠ざかると低く聞こえる関係を再生速度に反映する'],
   ['遮蔽の切り替え / setTargetAtTime / 時定数 / time constant / パラメータの平滑化', '/browser/audio-occlusion-transition.html', '遮蔽が変わる時刻にゲインとカットオフを予約し、徐々に次の値へ近づける'],
   ['音の遮蔽 / occlusion / 遮蔽判定 / レイキャスト / ローパス / lowpass / カットオフ周波数 / BiquadFilterNode / 周波数応答', '/browser/audio-occlusion.html', '直接経路を壁が遮るかを調べ、音量と高音の減衰を別々に設定する'],
   ['音の定位 / パンニング / spatial audio / 距離減衰 / PannerNode / AudioListener / StereoPannerNode / 等電力 / HRTF / 方位角', '/browser/audio-spatial-panning.html', '音源と聞き手の位置から左右への配分と距離によるゲインを求める'],

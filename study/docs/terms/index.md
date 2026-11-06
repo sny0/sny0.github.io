@@ -18,6 +18,7 @@
 
 | 用語・別名 | 説明への入口 |
 | --- | --- |
+| [ドップラー効果 / Doppler effect / ドップラーシフト / 視線方向の速度 / 音速 / playbackRate](/browser/audio-doppler.html) | 音源が近づくと音が高く、遠ざかると低く聞こえる関係を再生速度に反映する |
 | [遮蔽の切り替え / setTargetAtTime / 時定数 / time constant / パラメータの平滑化](/browser/audio-occlusion-transition.html) | 遮蔽が変わる時刻にゲインとカットオフを予約し、徐々に次の値へ近づける |
 | [音の遮蔽 / occlusion / 遮蔽判定 / レイキャスト / ローパス / lowpass / カットオフ周波数 / BiquadFilterNode / 周波数応答](/browser/audio-occlusion.html) | 直接経路を壁が遮るかを調べ、音量と高音の減衰を別々に設定する |
 | [音の定位 / パンニング / spatial audio / 距離減衰 / PannerNode / AudioListener / StereoPannerNode / 等電力 / HRTF / 方位角](/browser/audio-spatial-panning.html) | 音源と聞き手の位置から左右への配分と距離によるゲインを求める |

@@ -1,0 +1,107 @@
+<!doctype html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="referrer" content="no-referrer">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'self'; style-src 'self'; base-uri 'none'; form-action 'none'">
+  <title>Web Audioでドップラー効果を観察する | Sny0 Study</title>
+  <link rel="canonical" href="https://sny0.com/study/samples/browser/audio-doppler-observation/index.html">
+  <link rel="stylesheet" href="styles.css">
+  <script type="module" src="main.js"></script>
+</head>
+<body>
+  <main>
+    <header class="card">
+      <a href="https://sny0.com/study/practice/browser/audio-doppler-observation.html">実践手順とコードを読む</a>
+      <h1>近づく音源と遠ざかる音源の高さを比べる</h1>
+      <p>聞き手はその場に止まり、440 Hzの音を出す音源が直線上を一定の速さで動く場面を考えます。音速を343 m/sとし、音源の動きに応じて再生速度を変えた音を測ります。</p>
+    </header>
+
+    <section class="card" aria-labelledby="controls-heading">
+      <h2 id="controls-heading">音源の動きを選ぶ</h2>
+      <div class="actions">
+        <label for="direction">聞き手に対する向き
+          <select id="direction" disabled>
+            <option value="approach" selected>近づく</option>
+            <option value="recede">遠ざかる</option>
+          </select>
+        </label>
+        <label for="speed">音源の速さ
+          <select id="speed" disabled>
+            <option value="0">0 m/s（静止）</option>
+            <option value="20">20 m/s</option>
+            <option value="40" selected>40 m/s</option>
+            <option value="60">60 m/s</option>
+          </select>
+        </label>
+        <button id="render-doppler" type="button" disabled>測定する</button>
+      </div>
+      <p id="doppler-status" class="status" data-state="ready" role="status">「測定する」で波形と数値を表示します。</p>
+      <p class="hint"><a href="https://sny0.com/study/practice/browser/audio-doppler-observation.html#run-locally">手元で動かす手順</a></p>
+      <noscript><p>このサンプルを操作するにはJavaScriptを有効にしてください。</p></noscript>
+    </section>
+
+    <section class="card" aria-labelledby="results-heading">
+      <h2 id="results-heading">音源の動きと、聞こえる波形</h2>
+      <p id="rendered-settings">測定に使った設定をここに表示します。</p>
+      <div class="comparison">
+        <figure>
+          <figcaption>音源と聞き手を結ぶ直線</figcaption>
+          <svg id="motion-chart" class="chart" viewBox="0 0 380 188" role="img" aria-label="音源は左、止まっている聞き手は右。音源の動きは未測定です。">
+            <path class="grid motion-guide" d="M75 117H305"/>
+            <path id="motion-arrow" class="motion-arrow" d="" visibility="hidden"/>
+            <circle class="source" cx="75" cy="117" r="8"/>
+            <circle class="listener" cx="305" cy="117" r="8"/>
+            <text id="motion-label" x="190" y="53" text-anchor="middle">動きを測定</text>
+            <text x="75" y="148" text-anchor="middle">音源</text>
+            <text x="305" y="148" text-anchor="middle">聞き手（静止）</text>
+          </svg>
+          <p class="hint">矢印は音源が動く向きを表します。</p>
+        </figure>
+        <figure>
+          <figcaption>基準の音と移動時の音の波形</figcaption>
+          <svg id="waveform-chart" class="chart" viewBox="0 0 460 260" role="img" aria-label="基準と移動時の波形。未測定です。">
+            <path class="grid" d="M52 50H428 M52 82H428 M52 114H428 M52 147H428 M52 179H428 M52 211H428 M146 50V211 M240 50V211 M334 50V211 M428 50V211"/>
+            <path class="axes" d="M52 50V114H428 M52 147V211H428"/>
+            <text x="52" y="37">基準（音源が静止）</text>
+            <text x="52" y="135">設定した動き</text>
+            <text x="45" y="55" text-anchor="end">+0.15</text>
+            <text x="45" y="87" text-anchor="end">0</text>
+            <text x="45" y="119" text-anchor="end">−0.15</text>
+            <text x="45" y="152" text-anchor="end">+0.15</text>
+            <text x="45" y="184" text-anchor="end">0</text>
+            <text x="45" y="216" text-anchor="end">−0.15</text>
+            <text x="52" y="232" text-anchor="middle">0</text>
+            <text x="146" y="232" text-anchor="middle">4</text>
+            <text x="240" y="232" text-anchor="middle">8</text>
+            <text x="334" y="232" text-anchor="middle">12</text>
+            <text x="428" y="232" text-anchor="middle">16</text>
+            <text x="240" y="252" text-anchor="middle">表示区間内の時間 (ms)</text>
+            <path id="reference-waveform" class="trace reference-trace" d=""/>
+            <path id="shifted-waveform" class="trace shifted-trace" d=""/>
+          </svg>
+          <p class="hint">上下とも再生開始から100〜116 msを同じ時間と振幅の目盛りで表示しています。</p>
+        </figure>
+      </div>
+      <dl class="metrics">
+        <div><dt>基準の周波数（実測）</dt><dd id="reference-hz">—</dd></div>
+        <div><dt>再生速度</dt><dd id="playback-rate">—</dd></div>
+        <div><dt>設定した動きでの周波数（予測）</dt><dd id="predicted-hz">—</dd></div>
+        <div><dt>設定した動きでの周波数（実測）</dt><dd id="measured-hz">—</dd></div>
+      </dl>
+    </section>
+
+    <section class="card" aria-labelledby="playback-heading">
+      <h2 id="playback-heading">基準と移動時の音を聞き比べる</h2>
+      <p>どちらも同じ440 Hzの音をもとにした0.8秒の出力です。試聴時は両方の音量を同じ割合で抑えます。</p>
+      <div class="actions">
+        <button id="play-reference" type="button" class="secondary" disabled>基準の音を聞く</button>
+        <button id="play-shifted" type="button" class="secondary" disabled>設定した動きの音を聞く</button>
+        <button id="stop-playback" type="button" class="secondary" disabled>再生を停止</button>
+      </div>
+      <p id="playback-status" class="status" data-state="ready" role="status">測定すると試聴できます。</p>
+    </section>
+  </main>
+</body>
+</html>

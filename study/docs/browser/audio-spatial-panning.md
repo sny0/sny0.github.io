@@ -61,4 +61,6 @@ z = −d × cos(a × π / 180)
 
 実践では同じモノラル音を `OfflineAudioContext` の `PannerNode` に通し、左右の出力の実効値を測ります。距離を固定して角度を変え、次に角度を固定して距離を変えると、左右への配分と距離減衰を一つずつ確かめられます。[音の定位と距離減衰の実践](/practice/browser/audio-spatial-observation.html)
 
+音源が近づいたり遠ざかったりすると、聞こえる音の高さも変わります。聞き手に向かう速度から、どれだけ音が高くなるかを計算できます。[Web Audioでドップラー効果を再現する](/browser/audio-doppler.html)
+
 同じ距離でも、音源との間に壁があると音量と音色が変わります。直接経路に壁があるかを調べ、その結果をゲインとローパスに反映する例もあります。[Web Audioの音の遮蔽](/browser/audio-occlusion.html)

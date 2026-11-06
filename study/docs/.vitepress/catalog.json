@@ -69,7 +69,7 @@
       "id": "browser",
       "title": "ブラウザ",
       "description": "URLを開いてから描画されるまでを、通信・実行・表示に分ける。",
-      "count": 26,
+      "count": 27,
       "status": "辞典本文あり"
     },
     {
@@ -130,6 +130,13 @@
     }
   ],
   "collections": [
+    {
+      "id": "audio-doppler-observation",
+      "section": "practice",
+      "title": "Web Audioでドップラー効果を聴き比べる",
+      "description": "音源の速さと進行方向を変え、聞き手に届く音の周波数を波形と試聴で確かめる。",
+      "start": "/practice/browser/audio-doppler-observation.html"
+    },
     {
       "id": "audio-occlusion-transition-observation",
       "section": "practice",
@@ -4764,6 +4771,58 @@
       ]
     },
     {
+      "title": "Web Audioでドップラー効果を再現する",
+      "url": "/browser/audio-doppler.html",
+      "file": "browser/audio-doppler.md",
+      "domain": "browser",
+      "section": "reference",
+      "format": "article",
+      "status": "published",
+      "summary": "動く音源から波の山が届く間隔を求め、近づくと音が高く、遠ざかると低く聞こえる変化をWeb Audioの再生速度で再現する。",
+      "source": "新規執筆",
+      "aliases": [
+        "Web Audio API",
+        "ドップラー効果",
+        "Doppler effect",
+        "視線方向の速度",
+        "音速",
+        "周波数",
+        "AudioBufferSourceNode",
+        "playbackRate"
+      ],
+      "verification": "OpenStax University Physicsの移動音源の式とW3C Web Audio APIのAudioBufferSourceNodeおよびPannerNodeの仕様に照合（2026-11-06）",
+      "links": [
+        "/browser/audio-spatial-panning.html",
+        "/practice/browser/audio-doppler-observation.html"
+      ]
+    },
+    {
+      "title": "Web Audioでドップラー効果を聴き比べる",
+      "url": "/practice/browser/audio-doppler-observation.html",
+      "file": "practice/browser/audio-doppler-observation.md",
+      "domain": "browser",
+      "section": "practice",
+      "format": "sample",
+      "status": "published",
+      "summary": "音源の速さと進行方向を変え、基準の440 Hzと、聞き手に届く音の周波数を波形と試聴で比べる。",
+      "source": "新規執筆",
+      "aliases": [
+        "Web Audio API",
+        "ドップラー効果",
+        "Doppler effect",
+        "ドップラーシフト",
+        "playbackRate",
+        "AudioBufferSourceNode",
+        "ゼロ交差"
+      ],
+      "collection": "audio-doppler-observation",
+      "order": 1,
+      "verification": "WindowsのChromium系ブラウザで全8設定の周波数と波形、基準音と移動時の音の試聴を確認（2026-11-06）",
+      "links": [
+        "/browser/audio-doppler.html"
+      ]
+    },
+    {
       "title": "Web Audioで音の方向と距離を変えて聴く",
       "url": "/practice/browser/audio-spatial-observation.html",
       "file": "practice/browser/audio-spatial-observation.md",
@@ -5219,6 +5278,7 @@
       "links": [
         "/browser/audio-convolution-reverb.html",
         "/practice/browser/audio-spatial-observation.html",
+        "/browser/audio-doppler.html",
         "/browser/audio-occlusion.html"
       ]
     },
@@ -8267,6 +8327,8 @@
         "/practice/browser/audio-occlusion-observation.html",
         "/browser/audio-occlusion-transition.html",
         "/practice/browser/audio-occlusion-transition-observation.html",
+        "/browser/audio-doppler.html",
+        "/practice/browser/audio-doppler-observation.html",
         "/history/video-games.html",
         "/guide/rendering/timeline.html"
       ]
@@ -10416,6 +10478,7 @@
       "source": "統合ガイド",
       "aliases": [],
       "links": [
+        "/browser/audio-doppler.html",
         "/browser/audio-occlusion-transition.html",
         "/browser/audio-occlusion.html",
         "/browser/audio-spatial-panning.html",
