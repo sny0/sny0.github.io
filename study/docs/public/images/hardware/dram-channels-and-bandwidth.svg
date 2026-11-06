@@ -20,7 +20,8 @@
   <rect x="220" y="125" width="185" height="72" rx="8" fill="#dfebf2" stroke="#789aad"/>
   <text x="312.5" y="154" class="label center">メモリ</text>
   <text x="312.5" y="178" class="label center">コントローラー</text>
-  <path d="M406 142H462M406 181H462" class="arrow"/>
+  <path d="M406 132.5H462" class="arrow"/>
+  <path d="M406 187.5H462" class="arrow"/>
   <rect x="464" y="111" width="248" height="43" rx="8" fill="#cce7da" stroke="#6b9e86"/>
   <rect x="464" y="166" width="248" height="43" rx="8" fill="#cce7da" stroke="#6b9e86"/>
   <text x="588" y="137" class="label center">チャネルA　25.6 GB/s</text>
@@ -29,13 +30,14 @@
   <rect x="24" y="252" width="712" height="138" rx="12" fill="#fff" stroke="#b4c8d4"/>
   <text x="45" y="282" font-size="20" font-weight="700">選ばれたランクの同じバンクで、次のデータを読む</text>
   <text x="46" y="322" class="label">今と同じ行</text>
-  <rect x="217" y="299" width="125" height="34" rx="7" fill="#cce7da" stroke="#6b9e86"/>
+  <rect x="213" y="299" width="133" height="34" rx="7" fill="#cce7da" stroke="#6b9e86"/>
   <text x="279.5" y="322" class="label center">READ</text>
   <text x="46" y="366" class="label">今とは別の行</text>
-  <rect x="217" y="343" width="125" height="34" rx="7" fill="#f6e5b6" stroke="#987b41"/>
+  <rect x="213" y="343" width="133" height="34" rx="7" fill="#f6e5b6" stroke="#987b41"/>
   <rect x="393" y="343" width="125" height="34" rx="7" fill="#dfebf2" stroke="#789aad"/>
   <rect x="569" y="343" width="125" height="34" rx="7" fill="#cce7da" stroke="#6b9e86"/>
-  <path d="M343 360H391M519 360H567" class="arrow"/>
+  <path d="M347 360H391" class="arrow"/>
+  <path d="M519 360H567" class="arrow"/>
   <text x="279.5" y="366" class="label center">PRECHARGE</text>
   <text x="455.5" y="366" class="label center">ACTIVATE</text>
   <text x="631.5" y="366" class="label center">READ</text>
