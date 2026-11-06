@@ -1,0 +1,44 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 760 322" width="760" height="322" role="img" aria-labelledby="title desc">
+  <title id="title">トークンから演算の木と型を決める</title>
+  <desc id="desc">return value + step * 2u; の7トークンから、加算と乗算の木を作る。乗算の結果はunsigned intで、加算の前にdoubleに変換される。</desc>
+  <rect width="760" height="322" rx="16" fill="#f1f6f9"/>
+  <g font-family="system-ui,sans-serif" fill="#172f45">
+    <text x="26" y="41" font-size="24" font-weight="700">トークンから演算の木と型を決める</text>
+    <text x="28" y="79" font-size="15" font-weight="700">字句解析</text>
+    <text x="28" y="112" font-size="14" fill="#40586b">7個の単位</text>
+    <g fill="#fff" stroke="#8ea7b8">
+      <rect x="140" y="84" width="83" height="33" rx="7"/>
+      <rect x="231" y="84" width="76" height="33" rx="7"/>
+      <rect x="315" y="84" width="40" height="33" rx="7"/>
+      <rect x="363" y="84" width="72" height="33" rx="7"/>
+      <rect x="443" y="84" width="40" height="33" rx="7"/>
+      <rect x="491" y="84" width="46" height="33" rx="7"/>
+      <rect x="545" y="84" width="33" height="33" rx="7"/>
+    </g>
+    <g font-family="Consolas,monospace" font-size="16" text-anchor="middle">
+      <text x="181" y="106">return</text><text x="269" y="106">value</text>
+      <text x="335" y="106">+</text><text x="399" y="106">step</text>
+      <text x="463" y="106">*</text><text x="514" y="106">2u</text><text x="561" y="106">;</text>
+    </g>
+    <line x1="28" x2="732" y1="139" y2="139" stroke="#bdcbd4"/>
+    <text x="28" y="173" font-size="15" font-weight="700">構文解析</text>
+    <text x="28" y="194" font-size="14" fill="#40586b">演算の入れ子</text>
+    <path d="M282 194 L223 225 M304 194 L382 225 M382 254 L348 274 M415 254 L450 274" fill="none" stroke="#58758a" stroke-width="2"/>
+    <g fill="#e7f5fa" stroke="#6f99aa">
+      <rect x="273" y="162" width="44" height="33" rx="8"/>
+      <rect x="179" y="222" width="87" height="33" rx="8"/>
+      <rect x="376" y="222" width="44" height="33" rx="8"/>
+      <rect x="319" y="271" width="65" height="31" rx="7"/>
+      <rect x="431" y="271" width="40" height="31" rx="7"/>
+    </g>
+    <g font-family="Consolas,monospace" font-size="16" text-anchor="middle">
+      <text x="295" y="185">+</text><text x="222" y="244">value</text><text x="398" y="244">*</text>
+      <text x="351" y="292">step</text><text x="451" y="292">2u</text>
+    </g>
+    <rect x="493" y="163" width="238" height="126" rx="11" fill="#dff1e9" stroke="#83b7a5"/>
+    <text x="512" y="191" font-size="15" font-weight="700">型検査で付く情報</text>
+    <text x="512" y="217" font-size="14">乗算の結果は unsigned int</text>
+    <text x="512" y="241" font-size="14">結果を double に変換</text>
+    <text x="512" y="265" font-size="14">加算は double で行う</text>
+  </g>
+</svg>

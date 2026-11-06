@@ -1,0 +1,32 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="760" height="420" viewBox="0 0 760 420" role="img" aria-labelledby="title description">
+  <title id="title">REL32でcall命令の変位を埋める</title>
+  <desc id="description">call.objの.text内オフセット5にある4バイトを、helperの位置と次の命令の位置の差0x47で置き換える。E8はcallのオペコードで、変位のバイト列は47 00 00 00。</desc>
+  <defs>
+    <marker id="arrow" viewBox="0 0 8 8" refX="7" refY="4" markerWidth="7" markerHeight="7" orient="auto">
+      <path d="M0 0L8 4L0 8Z" fill="#315b6d"/>
+    </marker>
+  </defs>
+  <rect width="760" height="420" rx="16" fill="#f3f7fa"/>
+  <g font-family="system-ui, sans-serif" fill="#183246">
+    <text x="26" y="43" font-size="25" font-weight="700">REL32でcall命令の変位を埋める</text>
+    <text x="26" y="71" font-size="15" fill="#455b6b">Windows x64でビルドした2つの翻訳単位</text>
+    <rect x="26" y="94" width="386" height="150" rx="10" fill="#fff" stroke="#a3bdca"/>
+    <rect x="456" y="94" width="278" height="150" rx="10" fill="#fff" stroke="#a3bdca"/>
+    <text x="45" y="124" font-size="19" font-weight="700">call.obj の .text</text>
+    <text x="474" y="124" font-size="19" font-weight="700">helper.obj の .text</text>
+    <text x="474" y="157" font-size="16">helper の定義を持つ</text>
+    <text x="474" y="188" font-size="16">リンク時の想定VA  0x140001050</text>
+    <rect x="45" y="140" width="57" height="40" rx="5" fill="#d9e8ef"/>
+    <rect x="110" y="140" width="172" height="40" rx="5" fill="#f6e5c5" stroke="#9c7435"/>
+    <text x="73" y="167" text-anchor="middle" font-family="monospace" font-size="20">E8</text>
+    <text x="196" y="167" text-anchor="middle" font-family="monospace" font-size="20">00 00 00 00</text>
+    <text x="45" y="206" font-size="15">オフセット 0x05 に REL32</text>
+    <text x="45" y="227" font-size="15">参照先 helper は未定義</text>
+    <path d="M289 160H445" fill="none" stroke="#315b6d" stroke-width="2" marker-end="url(#arrow)"/>
+    <path d="M380 253V279" fill="none" stroke="#315b6d" stroke-width="2" marker-end="url(#arrow)"/>
+    <rect x="26" y="288" width="708" height="105" rx="10" fill="#e6f3ed" stroke="#8bb5a5"/>
+    <text x="45" y="320" font-size="19" font-weight="700">リンカーが次の命令からの距離を計算</text>
+    <text x="45" y="352" font-family="monospace" font-size="17">0x140001050 − 0x140001009 = 0x47</text>
+    <text x="45" y="378" font-family="monospace" font-size="18" font-weight="700">E8 47 00 00 00</text>
+  </g>
+</svg>

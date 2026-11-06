@@ -1,0 +1,34 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="760" height="320" viewBox="0 0 760 320" role="img" aria-labelledby="title desc" xml:lang="ja">
+  <title id="title">ダンプの命令アドレスをソース行に対応づける</title>
+  <desc id="desc">RIP 0x00007ff740001234からgame.exeのロードベース0x00007ff740000000を引くとRVAは0x1234。GUIDとAgeが一致するPDBでUpdateActorの先頭から0x34、Actor.cppの87行目に対応づける。</desc>
+  <defs>
+    <marker id="arrow" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto">
+      <path d="M0 0L8 4L0 8Z" fill="#475569"/>
+    </marker>
+  </defs>
+  <rect width="760" height="320" rx="18" fill="#f8fafc"/>
+  <g font-family="'Noto Sans JP', 'Yu Gothic', 'Meiryo', sans-serif" fill="#172b3c">
+    <text x="24" y="40" font-size="24" font-weight="700">命令の住所から、関数名とソース行へ</text>
+    <text x="24" y="67" font-size="16" fill="#475569">Windows x64のダンプに含まれる値を使った例</text>
+
+    <rect x="24" y="92" width="313" height="106" rx="12" fill="#eef4fb" stroke="#567b9f"/>
+    <text x="42" y="119" font-size="16" font-weight="700" fill="#385b7c">ダンプ内のアドレス</text>
+    <g font-size="15" font-family="Consolas, monospace">
+      <text x="42" y="148">RIP　0x00007ff740001234</text>
+      <text x="42" y="174">Base 0x00007ff740000000</text>
+    </g>
+    <path d="M344 145H378" fill="none" stroke="#475569" stroke-width="2" marker-end="url(#arrow)"/>
+    <rect x="386" y="92" width="350" height="106" rx="12" fill="#ebf6f0" stroke="#47826b"/>
+    <text x="405" y="119" font-size="16" font-weight="700" fill="#28654c">モジュール先頭からの位置</text>
+    <text x="405" y="150" font-size="18" font-family="Consolas, monospace">RIP − Base = RVA 0x1234</text>
+    <text x="405" y="176" font-size="15" fill="#334155">game.exe の先頭から 0x1234 バイト</text>
+
+    <rect x="24" y="225" width="313" height="70" rx="12" fill="#fff2e3" stroke="#b46d2d"/>
+    <text x="42" y="253" font-size="16" font-weight="700" fill="#8a4b1a">同じビルドのPDB</text>
+    <text x="42" y="277" font-size="15" fill="#334155">モジュールとGUID・Ageが一致</text>
+    <path d="M344 258H378 M562 202V220" fill="none" stroke="#475569" stroke-width="2" marker-end="url(#arrow)"/>
+    <rect x="386" y="225" width="350" height="70" rx="12" fill="#e8eef4" stroke="#66788a"/>
+    <text x="405" y="253" font-size="16" font-family="Consolas, monospace" font-weight="700">game!UpdateActor+0x34</text>
+    <text x="405" y="277" font-size="15" fill="#334155">Actor.cpp の87行目</text>
+  </g>
+</svg>
