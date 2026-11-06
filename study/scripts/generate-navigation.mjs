@@ -448,11 +448,18 @@ writePage('guide/learning-paths.md', '疑問から選ぶ読み順', {
 2. [同じ60 FPSで表示間隔を比べる](/practice/graphics/frame-pacing-observation.html)で、平均が同じ二つの動きと、時間ごとの長い表示間隔を比べる。
 3. [デバッグ・プロファイリングツール](/graphics/optimization/tools.html)で、処理が長引いた箇所を調べるための道具を確認する。
 
+## GPUが描き終えた絵はいつ画面に出るか
+
+1. [スワップチェーンとVSync](/graphics/optimization/swap-chain-and-vsync.html)で、描画用の画像を受け取ってから表示側が使い終えるまでを追う。
+2. [FIFO・MAILBOX・IMMEDIATEで画面の切り替わりを比べる](/practice/graphics/swap-chain-observation.html)で、表示待ち、表示されずに置き換わる絵、ティアリングを観察する。
+3. [デバイス初期化と画面クリア](/graphics/capstone/02-device.html)で、Vulkanで画像を取得し、描画の完了に合わせてPresentするコードを読む。
+
 ## 作り方の変化を歴史から見る
 
 [ビデオゲーム史](/history/video-games.html)の作品・ハード・媒体・流通と、[リアルタイム3D技術史](/guide/rendering/timeline.html)の技術の変化から、気になった仕組みへ進みます。`)
 
 const termRows = [
+  ['スワップチェーン / swapchain / VSync / 垂直同期 / Present / scanout / 走査 / ティアリング / FIFO / MAILBOX / IMMEDIATE', '/graphics/optimization/swap-chain-and-vsync.html', '描画済みの絵が画面へ出る順序と時刻、次の描画に画像を使い回せる条件を調べる'],
   ['フレームタイム / frame time / フレームペーシング / frame pacing / フレーム予算 / p99 / スタッター', '/graphics/optimization/frame-pacing.html', 'CPU・GPUの処理時間と表示間隔を分け、カクつきが起きた時刻を調べる'],
   ['通過音 / フライバイ / flyby / 最接近 / 視線方向の速度 / PannerNode / playbackRate', '/browser/audio-flyby.html', '横切る音源の軌道から、時間ごとの高さ、左右の配分、距離減衰を求める'],
   ['ドップラー効果 / Doppler effect / ドップラーシフト / 視線方向の速度 / 音速 / playbackRate', '/browser/audio-doppler.html', '音源が近づくと音が高く、遠ざかると低く聞こえる関係を再生速度に反映する'],

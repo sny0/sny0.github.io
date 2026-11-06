@@ -12,6 +12,7 @@ export const formatLabels = {
 export const statusLabels = { published: '公開中', outline: '学習計画・概要', draft: '草稿', planned: '執筆予定' }
 
 export const collections = [
+  { id: 'swap-chain-observation', section: 'practice', title: 'FIFO・MAILBOX・IMMEDIATEで画面の切り替わりを比べる', description: '同じ描画完了時刻から、表示待ち、絵の置き換え、走査中の切り替わりを比べる。', start: '/practice/graphics/swap-chain-observation.html' },
   { id: 'frame-pacing-observation', section: 'practice', title: '同じ60 FPSで表示間隔を比べる', description: '一定間隔とばらつきのある表示を、動く目印と共通の時間軸で比べる。', start: '/practice/graphics/frame-pacing-observation.html' },
   { id: 'audio-flyby-observation', section: 'practice', title: 'Web Audioで音源が通過する前後の音を比べる', description: '音源の速さと進路を変え、通過前後の高さ、左右の出力、距離による音量の変化を観察する。', start: '/practice/browser/audio-flyby-observation.html' },
   { id: 'audio-doppler-observation', section: 'practice', title: 'Web Audioでドップラー効果を聴き比べる', description: '音源の速さと進行方向を変え、聞き手に届く音の周波数を波形と試聴で確かめる。', start: '/practice/browser/audio-doppler-observation.html' },

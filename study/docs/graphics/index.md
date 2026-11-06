@@ -62,6 +62,7 @@
 - [グローバルイルミネーション総論](/graphics/lighting/gi.html)
 - [シェーダ言語総論と比較](/graphics/shader/overview.html)
 - [シャドウ](/graphics/lighting/shadow.html)
+- [スワップチェーンとVSync — 描画した絵が画面に出るまで](/graphics/optimization/swap-chain-and-vsync.html)
 - [デバッグ・プロファイリングツール — RenderDoc / PIX / Nsight / Frame Debugger](/graphics/optimization/tools.html)
 - [ハードウェアレイトレーシング (DXR / Vulkan Ray Tracing)](/graphics/lighting/raytracing.html)
 - [パストレーシング](/graphics/lighting/path-tracing.html)
@@ -84,6 +85,7 @@
 ## 作って試す
 
 - [1. 全体設計 — 1フレームの旅](/graphics/capstone/01-design.html)
+- [FIFO・MAILBOX・IMMEDIATEで画面の切り替わりを比べる](/practice/graphics/swap-chain-observation.html)
 - [同じ60 FPSで表示間隔を比べる](/practice/graphics/frame-pacing-observation.html)
 - [2. デバイス初期化とスワップチェイン](/graphics/capstone/02-device.html)
 - [3. リソースとパイプライン構築](/graphics/capstone/03-resources.html)
