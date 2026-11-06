@@ -59,3 +59,5 @@ RMS  = √Pout
 実践では、48,000 Hzで1秒の音を用意します。ピーク振幅はどちらも `0.35` です。Aは400 Hzで、Bは600 HzまたはAと同じ波形です。200〜800 msでAからBへ切り替えます。ゲインの値を並べた配列を `AudioParam.setValueCurveAtTime()` に渡すと、ブラウザが指定区間で隣り合う値を線形に補間します。[W3C Web Audio APIのAudioParam](https://www.w3.org/TR/webaudio-1.1/#AudioParam)、[OfflineAudioContext](https://www.w3.org/TR/webaudio-1.1/#OfflineAudioContext)
 
 レンダリングした出力から、100 msを中心とする10 msのRMSを基準に、500 msを中心とする10 msのRMSを比べます。400 Hzと600 Hzはこの窓にそれぞれ4周期と6周期が収まるため、ゲインを固定した計算では二つの波形の積の平均が0になります。実践の窓内ではゲインも時間とともに動くので、表示する値は中点にゲインを固定した表の値に近い実測値です。[クロスフェードの実践](/practice/browser/audio-crossfade-observation.html)
+
+同じ音を少し遅らせて重ねると、周波数ごとに足し合わさり方が変わります。[Web Audioのコムフィルター](/browser/audio-comb-filter.html)で、遅延時間と打ち消しの関係を確認できます。

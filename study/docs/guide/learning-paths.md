@@ -249,6 +249,12 @@
 2. [Web Audioで線形と等電力のクロスフェードを比べる](/practice/browser/audio-crossfade-observation.html)で、音源の組み合わせを変え、切り替え前と中点付近の実効値を比べる。
 3. ゲインを音声の時刻で変える仕組みは[Web Audioのゲインオートメーション](/browser/audio-gain-automation.html)で確認する。
 
+## 同じ音を少し遅らせて重ねると何が起きるか
+
+1. [Web Audioのコムフィルター](/browser/audio-comb-filter.html)で、遅延した音を足すと周波数によって強め合ったり弱め合ったりする理由を確認する。
+2. [Web Audioで遅延とコムフィルターを観察する](/practice/browser/audio-comb-observation.html)で、遅延時間とゲインを変え、最初にへこむ周波数を比べる。
+3. 二つの音を切り替える途中の実効値は[Web Audioのクロスフェード](/browser/audio-crossfade.html)で確認する。
+
 ## 作り方の変化を歴史から見る
 
 [ビデオゲーム史](/history/video-games.html)の作品・ハード・媒体・流通と、[リアルタイム3D技術史](/guide/rendering/timeline.html)の技術の変化から、気になった仕組みへ進みます。
