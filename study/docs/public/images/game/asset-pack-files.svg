@@ -1,0 +1,55 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="760" height="438" viewBox="0 0 760 438" role="img" aria-labelledby="title desc">
+  <title id="title">パックファイルの目次からアセットの範囲を引く</title>
+  <desc id="desc">ファイル内にヘッダー、目次、メッシュ、テクスチャ、衝突データが順に並ぶ。テクスチャを目次で探すと、ファイル先頭から数えたオフセットと長さが得られ、その範囲を読み取れる。</desc>
+  <defs>
+    <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto">
+      <path d="M0 0 10 5 0 10z" fill="#416478"/>
+    </marker>
+  </defs>
+  <rect width="760" height="438" rx="16" fill="#f3f7fa"/>
+  <g font-family="system-ui, sans-serif" fill="#183246">
+    <text x="24" y="43" font-size="25" font-weight="700">パックファイルの目次からアセットの範囲を引く</text>
+    <text x="24" y="73" font-size="17" fill="#455b6b">テクスチャのデータを読み取る例</text>
+    <rect x="24" y="110" width="126" height="64" rx="8" fill="#e4ecf1" stroke="#8ca6b7"/>
+    <rect x="156" y="110" width="123" height="64" rx="8" fill="#dcebf4" stroke="#82a6bb"/>
+    <rect x="285" y="110" width="125" height="64" rx="8" fill="#e4ecf1" stroke="#8ca6b7"/>
+    <rect x="416" y="110" width="167" height="64" rx="8" fill="#d8eee6" stroke="#78a696"/>
+    <rect x="589" y="110" width="147" height="64" rx="8" fill="#e4ecf1" stroke="#8ca6b7"/>
+    <g text-anchor="middle" font-size="17" font-weight="700">
+      <text x="87" y="148">ヘッダー</text>
+      <text x="218" y="148">目次</text>
+      <text x="348" y="148">メッシュ</text>
+      <text x="499" y="148">テクスチャ</text>
+      <text x="663" y="148">衝突データ</text>
+    </g>
+    <path d="M285 101v-9h451v9" fill="none" stroke="#718998" stroke-width="1.5"/>
+    <rect x="476" y="81" width="88" height="23" fill="#f3f7fa"/>
+    <text x="520" y="98" text-anchor="middle" font-size="15" fill="#455b6b">データ本体</text>
+    <path d="M24 187v12h392v-12" fill="none" stroke="#416478" stroke-width="1.8"/>
+    <path d="M416 187v12h167v-12" fill="none" stroke="#51836f" stroke-width="1.8"/>
+    <text x="24" y="220" font-size="15">ファイル先頭</text>
+    <text x="248" y="220" text-anchor="middle" font-size="15">オフセット</text>
+    <text x="499" y="220" text-anchor="middle" font-size="15">長さ</text>
+    <path d="M24 241h712" stroke="#c4d3dc"/>
+    <rect x="24" y="269" width="205" height="86" rx="9" fill="#fff" stroke="#8ca6b7"/>
+    <rect x="266" y="269" width="218" height="86" rx="9" fill="#dcebf4" stroke="#82a6bb"/>
+    <rect x="521" y="269" width="215" height="86" rx="9" fill="#d8eee6" stroke="#78a696"/>
+    <g stroke="#416478" stroke-width="2.3" marker-end="url(#arrow)">
+      <path d="M232 312h29"/>
+      <path d="M487 312h29"/>
+    </g>
+    <g text-anchor="middle">
+      <g font-weight="700" font-size="17">
+        <text x="126" y="304">1. IDを指定する</text>
+        <text x="375" y="304">2. 目次から引く</text>
+        <text x="628" y="304">3. 範囲を読み取る</text>
+      </g>
+      <g font-size="14" fill="#455b6b">
+        <text x="126" y="330">必要なのはテクスチャ</text>
+        <text x="375" y="330">オフセットと長さを得る</text>
+        <text x="628" y="330">データ本体の該当部分へ</text>
+      </g>
+    </g>
+    <text x="24" y="403" font-size="16" fill="#455b6b">オフセットはファイルの先頭を0として数えます。</text>
+  </g>
+</svg>

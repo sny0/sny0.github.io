@@ -110,6 +110,13 @@
 3. 実I/Oの完了待ちは[非同期I/O](/os/asynchronous-file-io.html)、共有するキューや状態の保護は[スレッドと同期](/runtime/thread-synchronization.html)も確認する。
 4. Windows PCの[DirectStorage](/game/directstorage.html)で、読み取りの一括発行、展開、GPUが結果を使えるまでの条件を確認する。
 
+## ゲームの素材をまとめて配布し、必要な範囲だけ読むには
+
+1. [アセットパック](/game/asset-pack-files.html)で、名前、目次、格納位置、圧縮の単位を分ける。
+2. [バイナリファイルの範囲検査](/data/binary-file-validation.html)で、件数や長さを読み取り・確保に使う前の検査を確かめる。
+3. [C++でアセットパックを作る実践](/practice/io/asset-pack-observation.html)で、1件の素材を取り出し、壊れた索引が拒否されるところを試す。
+4. [アセットビルドと差分配信](/game/asset-build-and-patches.html)で、読み込みやすい配置と更新で再利用できる配信単位を考える。
+
 ## 入力からゲーム画面まで
 
 1. [ゲームループ](/game/patterns/game-loop-and-update.html)で入力・更新・描画の時間を分ける。

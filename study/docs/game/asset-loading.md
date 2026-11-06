@@ -29,6 +29,8 @@ study:
 
 実行時の入力にはasset ID、format version、対象platform、依存一覧、展開後サイズなどを持たせると、古い配布物や組合せ違いを検出しやすくなります。パスだけで同一性を決めると、更新前後の内容や別platformのdataを混ぜるおそれがあります。
 
+配布物にまとめる段階では、読み込み時に使う目次と、更新時に置き換える単位を決めます。読み取り側は、目次が示す範囲を検査してからデータを取得します。[パックファイルの配置](/game/asset-pack-files.html) · [アセットビルドと差分配信](/game/asset-build-and-patches.html) · [C++でパックを作る実践](/practice/io/asset-pack-observation.html)
+
 ## 要求からReadyまでを段階に分ける
 
 <figure class="study-figure">

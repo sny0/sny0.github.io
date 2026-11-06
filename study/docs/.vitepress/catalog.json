@@ -27,7 +27,7 @@
       "id": "data",
       "title": "情報表現とバイナリ",
       "description": "数値・文字・バイト列を、メモリやファイルの表現へつなぐ。",
-      "count": 3,
+      "count": 4,
       "status": "辞典本文あり"
     },
     {
@@ -111,7 +111,7 @@
       "id": "game",
       "title": "ゲームとエンジン",
       "description": "入力、時間、ECSと各サブシステムの関係を調べる。",
-      "count": 22,
+      "count": 24,
       "status": "辞典本文あり"
     },
     {
@@ -130,6 +130,13 @@
     }
   ],
   "collections": [
+    {
+      "id": "asset-pack-observation",
+      "section": "practice",
+      "title": "C++でアセットパックを作って必要な範囲を読む",
+      "description": "パックを作り、名前と目次から素材を読み、壊れた範囲を読み取り前に拒否する。",
+      "start": "/practice/io/asset-pack-observation.html"
+    },
     {
       "id": "file-io-trace-observation",
       "section": "practice",
@@ -1268,6 +1275,35 @@
         "/practice/io/async-file-read-observation.html",
         "/os/cancelling-overlapped-io.html",
         "/practice/io/file-io-trace-observation.html"
+      ]
+    },
+    {
+      "title": "C++でアセットパックを作って必要な範囲を読む",
+      "url": "/practice/io/asset-pack-observation.html",
+      "file": "practice/io/asset-pack-observation.md",
+      "domain": "game",
+      "section": "practice",
+      "format": "sample",
+      "status": "published",
+      "summary": "3件の素材をまとめたパックを作り、名前から位置を引いて1件を読む。壊れた索引が範囲検査で拒否されることも試す。",
+      "source": "新規執筆",
+      "aliases": [
+        "SPAK",
+        "アセットパック",
+        "TOC",
+        "目次",
+        "offset",
+        "bounds check"
+      ],
+      "collection": "asset-pack-observation",
+      "order": 1,
+      "verification": "Windows x64のMSVCでビルド・実行。正常な読み取り、範囲外・重複・切れた索引の拒否、既存ファイルの上書き防止を確認（2026-11-06）",
+      "links": [
+        "/game/asset-pack-files.html",
+        "/data/binary-file-validation.html",
+        "/os/file-read-journey.html",
+        "/data/integer-bits-and-bytes.html",
+        "/game/asset-build-and-patches.html"
       ]
     },
     {
@@ -2452,6 +2488,7 @@
       "links": [
         "/game/asset-loading.html",
         "/graphics/api/directx12.html",
+        "/game/asset-pack-files.html",
         "/tools/windows/file-io-tracing.html"
       ]
     },
@@ -7127,6 +7164,37 @@
       ]
     },
     {
+      "title": "ゲームのアセットビルドと差分配信",
+      "url": "/game/asset-build-and-patches.html",
+      "file": "game/asset-build-and-patches.md",
+      "domain": "game",
+      "section": "reference",
+      "format": "article",
+      "status": "published",
+      "summary": "制作元データを対象機種向けに変換し、依存と更新頻度に合わせて配信単位を組む。内容ハッシュによる再利用、マニフェスト、更新時の検証と切り替えを扱う。",
+      "source": "新規執筆",
+      "aliases": [
+        "asset build",
+        "cook",
+        "アセットビルド",
+        "差分配信",
+        "差分パッチ",
+        "コンテンツ更新",
+        "content hash",
+        "manifest",
+        "チャンク",
+        "patch amplification"
+      ],
+      "verification": "Epic GamesとUnityのコンテンツビルド・更新資料に照合（2026-11-06）",
+      "links": [
+        "/game/asset-loading.html",
+        "/game/asset-pack-files.html",
+        "/game/directstorage.html",
+        "/data/binary-file-validation.html",
+        "/os/file-write-and-durability.html"
+      ]
+    },
+    {
       "title": "ゲームのアセットロード設計 — 状態・世代・所有権",
       "url": "/game/asset-loading.html",
       "file": "game/asset-loading.md",
@@ -7153,6 +7221,9 @@
       ],
       "verification": "一次資料照合（2026-11-04）",
       "links": [
+        "/game/asset-pack-files.html",
+        "/game/asset-build-and-patches.html",
+        "/practice/io/asset-pack-observation.html",
         "/os/file-read-journey.html",
         "/os/asynchronous-file-io.html",
         "/os/memory-mapped-files.html",
@@ -7162,6 +7233,39 @@
         "/practice/assets/asset-lifecycle-model.html",
         "/practice/io/file-read-observation.html",
         "/practice/io/async-file-read-observation.html"
+      ]
+    },
+    {
+      "title": "ゲームのアセットをパックファイルにまとめる",
+      "url": "/game/asset-pack-files.html",
+      "file": "game/asset-pack-files.md",
+      "domain": "game",
+      "section": "reference",
+      "format": "article",
+      "status": "published",
+      "summary": "ヘッダー、目次、データ本体でアセットの範囲を特定する。配置と読み取りの単位、チャンク圧縮、ファイルを開いたときの検査を扱う。",
+      "source": "新規執筆",
+      "aliases": [
+        "パックファイル",
+        "アセットパック",
+        "archive",
+        "目次",
+        "TOC",
+        "asset ID",
+        "offset",
+        "payload",
+        "チャンク圧縮",
+        "パディング"
+      ],
+      "verification": "MicrosoftのDirectStorageとファイルバッファリングの資料、UnityのAssetBundle資料に照合（2026-11-06）",
+      "links": [
+        "/game/asset-loading.html",
+        "/data/integer-bits-and-bytes.html",
+        "/practice/io/asset-pack-observation.html",
+        "/os/windows-file-cache.html",
+        "/tools/windows/file-io-tracing.html",
+        "/game/directstorage.html",
+        "/data/binary-file-validation.html"
       ]
     },
     {
@@ -7974,6 +8078,37 @@
         "/graphics/api/vulkan.html",
         "/graphics/lighting/lumen.html",
         "/graphics/postprocess/upscaling.html"
+      ]
+    },
+    {
+      "title": "バイナリファイルの読み取り前に範囲を検査する",
+      "url": "/data/binary-file-validation.html",
+      "file": "data/binary-file-validation.md",
+      "domain": "data",
+      "section": "reference",
+      "format": "article",
+      "status": "published",
+      "summary": "バイナリファイルの識別子・版・件数・オフセット・長さを検査する順序を追う。整数の折り返し、展開時の上限、内容の検証を扱う。",
+      "source": "新規執筆",
+      "aliases": [
+        "バイナリファイル",
+        "範囲検査",
+        "バイナリパーサー",
+        "binary validation",
+        "magic number",
+        "オフセット",
+        "bounds check",
+        "integer overflow",
+        "整数オーバーフロー"
+      ],
+      "verification": "C++草案、MicrosoftのPE仕様、IETFの圧縮・認証仕様に照合",
+      "links": [
+        "/game/asset-pack-files.html",
+        "/os/file-read-journey.html",
+        "/data/integer-bits-and-bytes.html",
+        "/runtime/cpp-internals/memory-layout.html",
+        "/game/asset-loading.html",
+        "/practice/io/asset-pack-observation.html"
       ]
     },
     {
@@ -9278,6 +9413,10 @@
         "/game/asset-loading.html",
         "/practice/assets/asset-lifecycle-model.html",
         "/game/directstorage.html",
+        "/game/asset-pack-files.html",
+        "/data/binary-file-validation.html",
+        "/practice/io/asset-pack-observation.html",
+        "/game/asset-build-and-patches.html",
         "/game/patterns/game-loop-and-update.html",
         "/game/ecs.html",
         "/graphics/pipeline/overview.html",
@@ -10040,7 +10179,9 @@
       "links": [
         "/runtime/cpp-internals/memory-layout.html",
         "/practice/data/integer-byte-observation.html",
-        "/guide/low-level/computer-and-data.html"
+        "/guide/low-level/computer-and-data.html",
+        "/data/binary-file-validation.html",
+        "/practice/io/asset-pack-observation.html"
       ]
     },
     {
@@ -11996,6 +12137,8 @@
         "/os/memory-mapped-files.html",
         "/game/asset-loading.html",
         "/game/directstorage.html",
+        "/game/asset-pack-files.html",
+        "/game/asset-build-and-patches.html",
         "/os/io-completion-ports.html",
         "/os/cancelling-overlapped-io.html",
         "/os/file-write-and-durability.html",
@@ -12008,6 +12151,7 @@
         "/data/unicode-and-encoding.html",
         "/data/floating-point-spacing.html",
         "/data/integer-bits-and-bytes.html",
+        "/data/binary-file-validation.html",
         "/os/process-startup.html",
         "/runtime/memory/allocation-journey.html",
         "/os/virtual-memory.html",
