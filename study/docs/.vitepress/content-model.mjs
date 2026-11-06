@@ -12,6 +12,7 @@ export const formatLabels = {
 export const statusLabels = { published: '公開中', outline: '学習計画・概要', draft: '草稿', planned: '執筆予定' }
 
 export const collections = [
+  { id: 'parallel-command-recording-observation', section: 'practice', title: 'C++でD3D12のコマンドを別スレッドで記録する', description: '記録完了と提出の順番を変え、WARPで実行したコピーを読み戻して照合する。', start: '/practice/graphics/parallel-command-recording-observation.html' },
   { id: 'asset-worker-handoff-observation', section: 'practice', title: 'C++でワーカーの結果を描画側へ渡し、古い世代を捨てる', description: '容量のあるキューで結果を回収し、シーン切り替え後に古い要求の結果を捨てる。', start: '/practice/threads/asset-worker-handoff-observation.html' },
   { id: 'glb-mesh-observation', section: 'practice', title: 'C++でGLBの頂点とインデックスを読み、三角形を描く', description: 'GLBの頂点とインデックスをD3D12へ渡し、描画したピクセルを読み戻して確認する。', start: '/practice/graphics/glb-mesh-observation.html' },
   { id: 'dds-upload-observation', section: 'practice', title: 'C++でDDSの2つのmipをD3D12へ転送して読み戻す', description: 'DDSの行をコピー用バッファに配置し、D3D12 WARPで読み戻したデータを照合する。', start: '/practice/graphics/dds-upload-observation.html' },

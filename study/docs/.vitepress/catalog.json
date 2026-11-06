@@ -104,7 +104,7 @@
       "id": "graphics",
       "title": "3DCGとグラフィックス",
       "description": "制作データからGPUの処理、最終表示までをつなぐ。",
-      "count": 65,
+      "count": 68,
       "status": "辞典本文あり"
     },
     {
@@ -130,6 +130,13 @@
     }
   ],
   "collections": [
+    {
+      "id": "parallel-command-recording-observation",
+      "section": "practice",
+      "title": "C++でD3D12のコマンドを別スレッドで記録する",
+      "description": "記録完了と提出の順番を変え、WARPで実行したコピーを読み戻して照合する。",
+      "start": "/practice/graphics/parallel-command-recording-observation.html"
+    },
     {
       "id": "asset-worker-handoff-observation",
       "section": "practice",
@@ -1300,6 +1307,34 @@
         "/practice/io/async-file-read-observation.html",
         "/os/cancelling-overlapped-io.html",
         "/practice/io/file-io-trace-observation.html"
+      ]
+    },
+    {
+      "title": "C++でD3D12のコマンドを別スレッドで記録する",
+      "url": "/practice/graphics/parallel-command-recording-observation.html",
+      "file": "practice/graphics/parallel-command-recording-observation.md",
+      "domain": "graphics",
+      "section": "practice",
+      "format": "sample",
+      "status": "published",
+      "summary": "2つのスレッドが別々のコマンドリストを記録する。閉じた順と依存関係に沿った提出順を変え、WARPで読み戻した16バイトを照合する。",
+      "source": "新規執筆",
+      "aliases": [
+        "D3D12",
+        "WARP",
+        "command allocator",
+        "command list",
+        "ExecuteCommandLists",
+        "ResourceBarrier",
+        "フェンス"
+      ],
+      "collection": "parallel-command-recording-observation",
+      "order": 1,
+      "verification": "Windows x64のMSVCでビルドし、WARPで10回実行。B→Aの記録完了、A→Bの提出、読み戻した全16バイトの一致を確認（2026-11-06）",
+      "links": [
+        "/graphics/optimization/parallel-command-recording.html",
+        "/graphics/optimization/d3d12-resource-barriers.html",
+        "/graphics/optimization/gpu-queue-synchronization.html"
       ]
     },
     {
@@ -2541,6 +2576,35 @@
       ]
     },
     {
+      "title": "D3D12のキューをフェンスでつなぐ",
+      "url": "/graphics/optimization/gpu-queue-synchronization.html",
+      "file": "graphics/optimization/gpu-queue-synchronization.md",
+      "domain": "graphics",
+      "section": "reference",
+      "format": "article",
+      "status": "published",
+      "summary": "COPY・DIRECT・COMPUTE間で処理結果を渡す。キュー側のSignalとWait、CPU側のフェンス操作、COMMON状態、最後の参照までの寿命を扱う。",
+      "source": "新規執筆",
+      "aliases": [
+        "D3D12キュー間同期",
+        "GPU queue synchronization",
+        "queue fence",
+        "Signal",
+        "Wait",
+        "SetEventOnCompletion",
+        "COPY queue",
+        "async compute",
+        "非同期コンピュート"
+      ],
+      "verification": "MicrosoftのD3D12 APIリファレンスとマルチエンジン同期ガイドに照合（2026-11-06）",
+      "links": [
+        "/graphics/optimization/parallel-command-recording.html",
+        "/graphics/optimization/d3d12-resource-barriers.html",
+        "/graphics/optimization/gpu-resource-lifetime.html",
+        "/practice/graphics/parallel-command-recording-observation.html"
+      ]
+    },
+    {
       "title": "D3D12のコマンドリストを複数スレッドで記録する",
       "url": "/graphics/optimization/parallel-command-recording.html",
       "file": "graphics/optimization/parallel-command-recording.md",
@@ -2564,7 +2628,69 @@
         "/graphics/api/directx12.html",
         "/graphics/optimization/gpu-resource-lifetime.html",
         "/graphics/optimization/gpu-timestamp-queries.html",
-        "/game/asset-worker-handoff.html"
+        "/game/asset-worker-handoff.html",
+        "/practice/graphics/parallel-command-recording-observation.html",
+        "/graphics/optimization/d3d12-resource-barriers.html"
+      ]
+    },
+    {
+      "title": "D3D12のディスクリプタヒープとテーブルを使う",
+      "url": "/graphics/optimization/d3d12-descriptor-heaps.html",
+      "file": "graphics/optimization/d3d12-descriptor-heaps.md",
+      "domain": "graphics",
+      "section": "reference",
+      "format": "article",
+      "status": "published",
+      "summary": "リソースをビューとして参照し、ディスクリプタテーブルをシェーダへ渡す。CPUとGPUのハンドル、スロットの再利用、Root Signature 1.1の更新条件を扱う。",
+      "source": "新規執筆",
+      "aliases": [
+        "D3D12",
+        "descriptor heap",
+        "descriptor table",
+        "CPU descriptor handle",
+        "GPU descriptor handle",
+        "SetDescriptorHeaps",
+        "Root Signature 1.1"
+      ],
+      "verification": "MicrosoftのD3D12 APIリファレンスとルートシグネチャの仕様に照合",
+      "links": [
+        "/graphics/texture/dds-and-subresources.html",
+        "/graphics/texture/d3d12-texture-upload.html",
+        "/graphics/optimization/gpu-resource-lifetime.html",
+        "/graphics/optimization/parallel-command-recording.html"
+      ]
+    },
+    {
+      "title": "D3D12のリソースバリアと状態遷移",
+      "url": "/graphics/optimization/d3d12-resource-barriers.html",
+      "file": "graphics/optimization/d3d12-resource-barriers.md",
+      "domain": "graphics",
+      "section": "reference",
+      "format": "article",
+      "status": "published",
+      "summary": "Transition、UAV、Aliasingの3種類を、コピーの前後やヒープの再利用から使い分ける。サブリソース、COMMONの暗黙遷移、キュー間の同期も扱う。",
+      "source": "新規執筆",
+      "aliases": [
+        "D3D12",
+        "ResourceBarrier",
+        "リソースバリア",
+        "状態遷移",
+        "transition barrier",
+        "UAV barrier",
+        "aliasing barrier",
+        "サブリソース",
+        "COMMON",
+        "promotion",
+        "decay",
+        "COPY_DEST",
+        "COPY_SOURCE"
+      ],
+      "verification": "MicrosoftのD3D12 APIリファレンスとリソースバリアの解説に照合（2026-11-06）",
+      "links": [
+        "/graphics/optimization/parallel-command-recording.html",
+        "/graphics/optimization/gpu-queue-synchronization.html",
+        "/graphics/optimization/gpu-resource-lifetime.html",
+        "/practice/graphics/parallel-command-recording-observation.html"
       ]
     },
     {
@@ -2782,6 +2908,8 @@
         "/hardware/gpu/cpu-vs-gpu.html",
         "/graphics/capstone/02-device.html",
         "/graphics/pipeline/overview.html",
+        "/graphics/optimization/d3d12-resource-barriers.html",
+        "/graphics/optimization/d3d12-descriptor-heaps.html",
         "/graphics/texture/d3d12-texture-upload.html",
         "/game/directstorage.html",
         "/graphics/api/vulkan.html",
@@ -9781,6 +9909,10 @@
         "/game/asset-worker-handoff.html",
         "/practice/threads/asset-worker-handoff-observation.html",
         "/graphics/optimization/parallel-command-recording.html",
+        "/graphics/optimization/d3d12-resource-barriers.html",
+        "/practice/graphics/parallel-command-recording-observation.html",
+        "/graphics/optimization/gpu-queue-synchronization.html",
+        "/graphics/optimization/d3d12-descriptor-heaps.html",
         "/os/file-read-journey.html",
         "/practice/io/file-read-observation.html",
         "/os/windows-file-cache.html",
@@ -12521,6 +12653,9 @@
         "/graphics/optimization/gpu-timestamp-queries.html",
         "/graphics/optimization/gpu-resource-lifetime.html",
         "/graphics/optimization/parallel-command-recording.html",
+        "/graphics/optimization/d3d12-resource-barriers.html",
+        "/graphics/optimization/gpu-queue-synchronization.html",
+        "/graphics/optimization/d3d12-descriptor-heaps.html",
         "/graphics/texture/dds-and-subresources.html",
         "/graphics/texture/d3d12-texture-upload.html",
         "/graphics/texture/texture-streaming-and-mip-residency.html",

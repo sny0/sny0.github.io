@@ -23,7 +23,10 @@
 - [Compute Shader](/graphics/compute/compute-shader.html)
 - [CUDA と OpenCL](/graphics/compute/cuda-opencl.html)
 - [D3D12でテクスチャをアップロードする](/graphics/texture/d3d12-texture-upload.html)
+- [D3D12のキューをフェンスでつなぐ](/graphics/optimization/gpu-queue-synchronization.html)
 - [D3D12のコマンドリストを複数スレッドで記録する](/graphics/optimization/parallel-command-recording.html)
+- [D3D12のディスクリプタヒープとテーブルを使う](/graphics/optimization/d3d12-descriptor-heaps.html)
+- [D3D12のリソースバリアと状態遷移](/graphics/optimization/d3d12-resource-barriers.html)
 - [DDSの中身とテクスチャのサブリソース](/graphics/texture/dds-and-subresources.html)
 - [Deferred Rendering](/graphics/path/deferred.html)
 - [DirectX 11](/graphics/api/directx11.html)
@@ -96,6 +99,7 @@
 ## 作って試す
 
 - [1. 全体設計 — 1フレームの旅](/graphics/capstone/01-design.html)
+- [C++でD3D12のコマンドを別スレッドで記録する](/practice/graphics/parallel-command-recording-observation.html)
 - [C++でDDSの2つのmipをD3D12へ転送して読み戻す](/practice/graphics/dds-upload-observation.html)
 - [C++でGLBの頂点とインデックスを読み、三角形を描く](/practice/graphics/glb-mesh-observation.html)
 - [FIFO・MAILBOX・IMMEDIATEで画面の切り替わりを比べる](/practice/graphics/swap-chain-observation.html)
