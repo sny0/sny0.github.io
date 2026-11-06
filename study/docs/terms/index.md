@@ -18,6 +18,7 @@
 
 | 用語・別名 | 説明への入口 |
 | --- | --- |
+| [クロスフェード / crossfade / 等電力 / equal power / 線形フェード / RMS / 相関 / setValueCurveAtTime](/browser/audio-crossfade.html) | 二つの音源を重ねて入れ替え、ゲインの形と相関による実効値の変化を調べる |
 | [ゲインオートメーション / AudioParam / setValueAtTime / linearRampToValueAtTime / フェード / クリックノイズ / a-rate](/browser/audio-gain-automation.html) | 音声の時刻でゲインを予約し、急な消音とフェードで波形が変わる様子を調べる |
 | [音声ミキシング / audio mixing / GainNode / gain / ヘッドルーム / headroom / dBFS / クリッピング / WaveShaperNode](/browser/audio-mixing-and-headroom.html) | 音声を加算したときのピークと振幅の余裕、クリップ前にゲインを調整する効果を調べる |
 | [AudioWorklet / AudioWorkletProcessor / Web Audio API / PCM / サンプルフレーム / レンダークォンタム / 先読み / アンダーラン / underrun](/browser/audio-worklet-buffering.html) | ブラウザの音声処理単位、出力に対する供給不足、先読み用バッファを調べる |
