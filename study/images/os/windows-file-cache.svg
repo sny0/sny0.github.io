@@ -1,0 +1,58 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="760" height="524" viewBox="0 0 760 524" role="img" aria-labelledby="title description">
+  <title id="title">ファイルの同じ範囲を二度読む</title>
+  <desc id="description">最初の読み取りで範囲AがRAMにない場合はストレージから取得する。後続のBを先読みすることもある。二度目にAがRAMに残っていればキャッシュからアプリへ返す。</desc>
+  <defs>
+    <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto">
+      <path d="M0 0 10 5 0 10z" fill="#45677d"/>
+    </marker>
+  </defs>
+  <rect width="760" height="524" rx="16" fill="#f3f7fa"/>
+  <g font-family="system-ui, sans-serif" fill="#183246">
+    <text x="24" y="43" font-size="26" font-weight="700">ファイルの同じ範囲を二度読む</text>
+    <text x="24" y="72" font-size="17" fill="#455b6b">範囲 A を取得した後、RAM に残っている場合の例</text>
+    <rect x="24" y="94" width="712" height="194" rx="12" fill="#fff" stroke="#a7bac8"/>
+    <rect x="24" y="307" width="712" height="174" rx="12" fill="#fff" stroke="#a7bac8"/>
+    <g font-size="20" font-weight="700">
+      <text x="44" y="127">最初の読み取り</text>
+      <text x="44" y="340">再読み取り</text>
+    </g>
+    <g stroke-width="1.5">
+      <rect x="44" y="145" width="190" height="75" rx="9" fill="#e4eef5" stroke="#90acbe"/>
+      <rect x="272" y="145" width="196" height="75" rx="9" fill="#fff0d6" stroke="#c5a36f"/>
+      <rect x="506" y="145" width="210" height="75" rx="9" fill="#e4eef5" stroke="#90acbe"/>
+      <rect x="44" y="358" width="190" height="75" rx="9" fill="#e4eef5" stroke="#90acbe"/>
+      <rect x="272" y="358" width="196" height="75" rx="9" fill="#daf0e6" stroke="#84ad9d"/>
+      <rect x="506" y="358" width="210" height="75" rx="9" fill="#e4eef5" stroke="#90acbe"/>
+    </g>
+    <g fill="none" stroke="#45677d" stroke-width="2.5" marker-end="url(#arrow)">
+      <path d="M235 182H268"/>
+      <path d="M469 182H502"/>
+      <path d="M235 395H268"/>
+      <path d="M469 395H502"/>
+    </g>
+    <g text-anchor="middle">
+      <g font-size="17" font-weight="700">
+        <text x="139" y="174">アプリ</text>
+        <text x="370" y="174">キャッシュミス</text>
+        <text x="611" y="174">ストレージ</text>
+        <text x="139" y="387">アプリ</text>
+        <text x="370" y="387">キャッシュヒット</text>
+        <text x="611" y="387">アプリのバッファ</text>
+      </g>
+      <g font-size="16">
+        <text x="139" y="200">範囲 A を要求</text>
+        <text x="370" y="200">RAM に A がない</text>
+        <text x="611" y="200">A を取得する</text>
+        <text x="139" y="413">範囲 A を再び要求</text>
+        <text x="370" y="413">RAM に A が残る</text>
+        <text x="611" y="413">キャッシュから A を返す</text>
+      </g>
+    </g>
+    <g font-size="16" fill="#455b6b">
+      <text x="44" y="248">取得した A をアプリへ返す。</text>
+      <text x="44" y="271">読み方に応じて、後続の範囲 B を先読みする場合もある。</text>
+      <text x="44" y="462">A のデータは RAM から渡る。</text>
+      <text x="24" y="507">RAM に残る範囲は、アクセス履歴やメモリの状況で変わる。</text>
+    </g>
+  </g>
+</svg>
