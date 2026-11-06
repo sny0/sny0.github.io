@@ -418,11 +418,18 @@ writePage('guide/learning-paths.md', '疑問から選ぶ読み順', {
 2. [Web Audioで音の方向と距離を変えて聴く](/practice/browser/audio-spatial-observation.html)で、角度と距離を別々に変え、左右のゲインと聞こえ方を比べる。
 3. 部屋から返ってくる音を別の経路で加える仕組みは[Web Audioの畳み込みリバーブ](/browser/audio-convolution-reverb.html)で確認する。
 
+## 壁越しに聞こえる音は何が変わるか
+
+1. [Web Audioの音の遮蔽](/browser/audio-occlusion.html)で、聞き手と音源の間を判定し、ゲインとローパスで壁越しの音を表す仕組みを確認する。
+2. [Web Audioで壁越しの音量と音色を比べる](/practice/browser/audio-occlusion-observation.html)で、距離をそろえた二つの位置を切り替え、音量だけを下げたときと高音も弱めたときを比べる。
+3. 聞き手から見た方向と距離による処理は[Web Audioの音の定位と距離減衰](/browser/audio-spatial-panning.html)で確認する。
+
 ## 作り方の変化を歴史から見る
 
 [ビデオゲーム史](/history/video-games.html)の作品・ハード・媒体・流通と、[リアルタイム3D技術史](/guide/rendering/timeline.html)の技術の変化から、気になった仕組みへ進みます。`)
 
 const termRows = [
+  ['音の遮蔽 / occlusion / 遮蔽判定 / レイキャスト / ローパス / lowpass / カットオフ周波数 / BiquadFilterNode / 周波数応答', '/browser/audio-occlusion.html', '直接経路を壁が遮るかを調べ、音量と高音の減衰を別々に設定する'],
   ['音の定位 / パンニング / spatial audio / 距離減衰 / PannerNode / AudioListener / StereoPannerNode / 等電力 / HRTF / 方位角', '/browser/audio-spatial-panning.html', '音源と聞き手の位置から左右への配分と距離によるゲインを求める'],
   ['畳み込みリバーブ / convolution reverb / ConvolverNode / インパルス応答 / IR / 初期反射 / 残響 / dry / wet', '/browser/audio-convolution-reverb.html', 'インパルス応答から音の響きを作り、直接音と残響を別の経路で調整する'],
   ['フィードバックディレイ / feedback delay / フィードバックゲイン / 反響 / エコー / 減衰 / IIR / DelayNode', '/browser/audio-feedback-delay.html', '出力を遅延経路に戻し、反響の間隔と一周ごとの振幅の変化を調べる'],

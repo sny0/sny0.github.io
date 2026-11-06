@@ -1,0 +1,107 @@
+<!doctype html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="referrer" content="no-referrer">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'self'; style-src 'self'; base-uri 'none'; form-action 'none'">
+  <title>Web Audioで壁越しの音を観察する | Sny0 Study</title>
+  <link rel="canonical" href="https://sny0.com/study/samples/browser/audio-occlusion-observation/index.html">
+  <link rel="stylesheet" href="styles.css">
+  <script type="module" src="main.js"></script>
+</head>
+<body>
+  <main>
+    <header class="card">
+      <a href="https://sny0.com/study/practice/browser/audio-occlusion-observation.html">実践手順とコードを読む</a>
+      <h1>壁を挟むと音量と音色はどう変わるか</h1>
+      <p>聞き手から同じ距離にある音源を、壁の横と向こう側に置きます。直接の経路が壁と交わるとき、ゲインとローパスフィルターが音にどう効くかを比べます。</p>
+    </header>
+
+    <section class="card" aria-labelledby="controls-heading">
+      <h2 id="controls-heading">音源の位置と遮蔽の処理を選ぶ</h2>
+      <div class="actions">
+        <label for="source-location">音源の位置
+          <select id="source-location" disabled>
+            <option value="blocked" selected>壁の向こう</option>
+            <option value="open">壁の横</option>
+          </select>
+        </label>
+        <label for="processing-mode">壁と交わるときの処理
+          <select id="processing-mode" disabled>
+            <option value="gain-lowpass" selected>ゲイン＋ローパス</option>
+            <option value="gain">ゲインのみ</option>
+          </select>
+        </label>
+        <button id="render-occlusion" type="button" disabled>測定する</button>
+      </div>
+      <p id="occlusion-status" class="status" data-state="ready" role="status">「測定する」で図と数値を表示します。</p>
+      <p class="hint"><a href="https://sny0.com/study/practice/browser/audio-occlusion-observation.html#run-locally">手元で動かす手順</a></p>
+      <noscript><p>このサンプルを操作するにはJavaScriptを有効にしてください。</p></noscript>
+    </section>
+
+    <section class="card" aria-labelledby="results-heading">
+      <h2 id="results-heading">直接の経路と周波数ごとの減衰</h2>
+      <p id="rendered-settings">測定に使った設定をここに表示します。</p>
+      <div class="comparison">
+        <figure>
+          <figcaption>聞き手と音源（上から見た図）</figcaption>
+          <svg id="path-chart" class="chart" viewBox="0 0 460 276" role="img" aria-label="聞き手と壁を上から見た図。音源は未測定です。">
+            <path class="axis-guide" d="M217 35V224 M52 224H400"/>
+            <text x="217" y="24" text-anchor="middle">前方 −Z</text>
+            <rect class="wall" x="159" y="146.5" width="116" height="10" rx="2"/>
+            <text x="147" y="156" text-anchor="end">壁</text>
+            <path id="source-line" class="source-line" d=""/>
+            <circle id="wall-hit" class="wall-hit" cx="217" cy="151.5" r="4" visibility="hidden"/>
+            <circle class="listener" cx="217" cy="224" r="7"/>
+            <text x="217" y="251" text-anchor="middle">聞き手</text>
+            <circle id="source-point" class="source" cx="217" cy="224" r="7" visibility="hidden"/>
+            <text id="source-label" class="source-label" x="217" y="224" visibility="hidden">音源</text>
+          </svg>
+          <p id="path-state" class="hint">経路が壁と交わるかを表示します。</p>
+        </figure>
+
+        <figure>
+          <figcaption>周波数応答（処理前に対する振幅の変化）</figcaption>
+          <svg id="response-chart" class="chart" viewBox="0 0 460 276" role="img" aria-label="周波数ごとの振幅の変化。未測定です。">
+            <path class="grid" d="M58 32H438 M58 80H438 M58 128H438 M58 176H438 M58 224H438 M58 32V224 M137.46 32V224 M257.68 32V224 M377.89 32V224 M438 32V224"/>
+            <path class="axes" d="M58 32V224H438"/>
+            <text x="48" y="37" text-anchor="end">0 dB</text>
+            <text x="48" y="85" text-anchor="end">−15</text>
+            <text x="48" y="133" text-anchor="end">−30</text>
+            <text x="48" y="181" text-anchor="end">−45</text>
+            <text x="48" y="229" text-anchor="end">−60</text>
+            <text x="58" y="245" text-anchor="middle">100</text>
+            <text x="137.46" y="245" text-anchor="middle">250</text>
+            <text x="257.68" y="245" text-anchor="middle">1,000</text>
+            <text x="377.89" y="245" text-anchor="middle">4,000</text>
+            <text x="438" y="245" text-anchor="middle">8,000</text>
+            <text x="248" y="266" text-anchor="middle">周波数 (Hz)</text>
+            <path id="response-curve" class="response-curve" d=""/>
+            <circle id="low-marker" class="response-marker" cx="137.46" cy="32" r="4" visibility="hidden"/>
+            <circle id="high-marker" class="response-marker" cx="377.89" cy="32" r="4" visibility="hidden"/>
+          </svg>
+          <dl class="metrics">
+            <div><dt>全帯域に掛けるゲイン</dt><dd id="path-gain">—</dd></div>
+            <div><dt>ローパスのカットオフ</dt><dd id="cutoff-frequency">—</dd></div>
+            <div><dt>250 Hzの変化</dt><dd id="low-db">—</dd></div>
+            <div><dt>4,000 Hzの変化</dt><dd id="high-db">—</dd></div>
+          </dl>
+        </figure>
+      </div>
+      <p class="hint">0 dBは振幅が元のままです。ゲインは全周波数に同じ割合で掛かり、ローパスを加えると高い周波数ほど弱まります。</p>
+    </section>
+
+    <section class="card" aria-labelledby="playback-heading">
+      <h2 id="playback-heading">処理前と処理後を聞き比べる</h2>
+      <p>同じ音源を使い、試聴時はどちらの音量も同じ割合で抑えます。</p>
+      <div class="actions">
+        <button id="play-dry" type="button" class="secondary" disabled>処理前の音を聞く</button>
+        <button id="play-processed" type="button" class="secondary" disabled>処理後の音を聞く</button>
+        <button id="stop-playback" type="button" class="secondary" disabled>再生を停止</button>
+      </div>
+      <p id="playback-status" class="status" data-state="ready" role="status">測定すると試聴できます。</p>
+    </section>
+  </main>
+</body>
+</html>
