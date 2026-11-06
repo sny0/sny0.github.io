@@ -12,6 +12,7 @@ export const formatLabels = {
 export const statusLabels = { published: '公開中', outline: '学習計画・概要', draft: '草稿', planned: '執筆予定' }
 
 export const collections = [
+  { id: 'audio-doppler-observation', section: 'practice', title: 'Web Audioでドップラー効果を聴き比べる', description: '音源の速さと進行方向を変え、聞き手に届く音の周波数を波形と試聴で確かめる。', start: '/practice/browser/audio-doppler-observation.html' },
   { id: 'audio-occlusion-transition-observation', section: 'practice', title: 'Web Audioで扉が開くときの音の切り替えを比べる', description: '遮蔽が解ける瞬間にゲインとカットオフを変え、急な切り替えと徐々に戻す処理を波形と試聴で比べる。', start: '/practice/browser/audio-occlusion-transition-observation.html' },
   { id: 'audio-occlusion-observation', section: 'practice', title: 'Web Audioで壁越しの音量と音色を比べる', description: '音源と聞き手の間に壁があるとき、ゲインとローパスが音をどう変えるかを図と試聴で確かめる。', start: '/practice/browser/audio-occlusion-observation.html' },
   { id: 'audio-spatial-observation', section: 'practice', title: 'Web Audioで音の方向と距離を変えて聴く', description: '音源の方向と距離を変え、左右の出力と距離による減衰を図と試聴で比べる。', start: '/practice/browser/audio-spatial-observation.html' },
