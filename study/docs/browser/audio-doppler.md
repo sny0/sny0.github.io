@@ -49,3 +49,5 @@ Web Audioでは、`AudioBufferSourceNode.playbackRate` に周波数の比 `f' / 
 ## 波形と音の高さを比べる
 
 実践では、440 Hzの音に対して音源の進む向きと速さを選び、一定の再生速度を使って波形を作ります。近づく場合と遠ざかる場合を同じ時間幅で表示すると、波の山の間隔が短くなるほど周波数が高いことを確かめられます。[ドップラー効果の実践](/practice/browser/audio-doppler-observation.html)
+
+音源が目の前を横切る間は、聞き手に向かう速度の成分が連続して変わります。位置と距離も同じ時刻から計算すると、音の高さと左右の移動を合わせられます。[Web Audioで音源の通過音を作る](/browser/audio-flyby.html)

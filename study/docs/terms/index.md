@@ -18,6 +18,7 @@
 
 | 用語・別名 | 説明への入口 |
 | --- | --- |
+| [通過音 / フライバイ / flyby / 最接近 / 視線方向の速度 / PannerNode / playbackRate](/browser/audio-flyby.html) | 横切る音源の軌道から、時間ごとの高さ、左右の配分、距離減衰を求める |
 | [ドップラー効果 / Doppler effect / ドップラーシフト / 視線方向の速度 / 音速 / playbackRate](/browser/audio-doppler.html) | 音源が近づくと音が高く、遠ざかると低く聞こえる関係を再生速度に反映する |
 | [遮蔽の切り替え / setTargetAtTime / 時定数 / time constant / パラメータの平滑化](/browser/audio-occlusion-transition.html) | 遮蔽が変わる時刻にゲインとカットオフを予約し、徐々に次の値へ近づける |
 | [音の遮蔽 / occlusion / 遮蔽判定 / レイキャスト / ローパス / lowpass / カットオフ周波数 / BiquadFilterNode / 周波数応答](/browser/audio-occlusion.html) | 直接経路を壁が遮るかを調べ、音量と高音の減衰を別々に設定する |

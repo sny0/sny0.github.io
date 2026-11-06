@@ -436,11 +436,18 @@ writePage('guide/learning-paths.md', '疑問から選ぶ読み順', {
 2. [Web Audioでドップラー効果を聴き比べる](/practice/browser/audio-doppler-observation.html)で、速さと進行方向を変えて、基準の440 Hzと変化後の波形を比べる。
 3. 音源の位置を左右の配分と音量に反映する方法は[Web Audioの音の定位と距離減衰](/browser/audio-spatial-panning.html)で確認する。
 
+## 目の前を通過する音を作るには
+
+1. [Web Audioで音源の通過音を作る](/browser/audio-flyby.html)で、一つの軌道から高さ、左右の配分、距離減衰を求める。
+2. [Web Audioで音源が通過する前後の音を比べる](/practice/browser/audio-flyby-observation.html)で、通過の前後をたどりながら、音源の位置と試聴音を比べる。
+3. 音源がまっすぐ近づく場合の周波数は[ドップラー効果](/browser/audio-doppler.html)、左右の配分と距離によるゲインは[音の定位と距離減衰](/browser/audio-spatial-panning.html)で確認する。
+
 ## 作り方の変化を歴史から見る
 
 [ビデオゲーム史](/history/video-games.html)の作品・ハード・媒体・流通と、[リアルタイム3D技術史](/guide/rendering/timeline.html)の技術の変化から、気になった仕組みへ進みます。`)
 
 const termRows = [
+  ['通過音 / フライバイ / flyby / 最接近 / 視線方向の速度 / PannerNode / playbackRate', '/browser/audio-flyby.html', '横切る音源の軌道から、時間ごとの高さ、左右の配分、距離減衰を求める'],
   ['ドップラー効果 / Doppler effect / ドップラーシフト / 視線方向の速度 / 音速 / playbackRate', '/browser/audio-doppler.html', '音源が近づくと音が高く、遠ざかると低く聞こえる関係を再生速度に反映する'],
   ['遮蔽の切り替え / setTargetAtTime / 時定数 / time constant / パラメータの平滑化', '/browser/audio-occlusion-transition.html', '遮蔽が変わる時刻にゲインとカットオフを予約し、徐々に次の値へ近づける'],
   ['音の遮蔽 / occlusion / 遮蔽判定 / レイキャスト / ローパス / lowpass / カットオフ周波数 / BiquadFilterNode / 周波数応答', '/browser/audio-occlusion.html', '直接経路を壁が遮るかを調べ、音量と高音の減衰を別々に設定する'],
