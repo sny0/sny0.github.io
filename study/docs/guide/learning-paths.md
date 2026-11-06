@@ -297,6 +297,12 @@
 2. [Web Audioで音源が通過する前後の音を比べる](/practice/browser/audio-flyby-observation.html)で、通過の前後をたどりながら、音源の位置と試聴音を比べる。
 3. 音源がまっすぐ近づく場合の周波数は[ドップラー効果](/browser/audio-doppler.html)、左右の配分と距離によるゲインは[音の定位と距離減衰](/browser/audio-spatial-panning.html)で確認する。
 
+## 平均60 FPSなのにカクつくとき
+
+1. [フレームタイムとフレームペーシング](/graphics/optimization/frame-pacing.html)で、CPU・GPUの処理時間と画面の表示間隔を区別する。
+2. [同じ60 FPSで表示間隔を比べる](/practice/graphics/frame-pacing-observation.html)で、平均が同じ二つの動きと、時間ごとの長い表示間隔を比べる。
+3. [デバッグ・プロファイリングツール](/graphics/optimization/tools.html)で、処理が長引いた箇所を調べるための道具を確認する。
+
 ## 作り方の変化を歴史から見る
 
 [ビデオゲーム史](/history/video-games.html)の作品・ハード・媒体・流通と、[リアルタイム3D技術史](/guide/rendering/timeline.html)の技術の変化から、気になった仕組みへ進みます。

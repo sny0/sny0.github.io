@@ -1,0 +1,62 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="760" height="302" viewBox="0 0 760 302" role="img" aria-labelledby="title desc" xml:lang="ja">
+  <title id="title">同じ60 FPSで、異なる表示間隔</title>
+  <desc id="desc">仮想120 Hzの10更新。等間隔の列ではフレーム31から35を2更新ずつ表示する。スパイクありの列では31を6更新、32から35を1更新ずつ表示する。</desc>
+  <rect width="760" height="302" rx="18" fill="#f8fafc"/>
+  <g font-family="'Noto Sans JP', 'Yu Gothic', 'Meiryo', sans-serif" fill="#162334">
+    <text x="25" y="41" font-size="23" font-weight="700">同じ時間に5枚、切り替わる時刻は異なる</text>
+    <text x="25" y="69" font-size="16" fill="#475569">仮想120 Hzの10更新分を拡大</text>
+
+    <path d="M160 105V241 M216 105V241 M272 105V241 M328 105V241 M384 105V241 M440 105V241 M496 105V241 M552 105V241 M608 105V241 M664 105V241 M720 105V241" stroke="#9aa8bb" stroke-dasharray="4 4"/>
+    <g font-size="15" fill="#475569">
+      <text x="160" y="101">500 ms</text>
+      <text x="496" y="101" text-anchor="middle">550 ms</text>
+      <text x="720" y="101" text-anchor="end">583.33 ms</text>
+    </g>
+
+    <g font-size="17" font-weight="700">
+      <text x="25" y="153">等間隔</text>
+      <text x="25" y="215">スパイクあり</text>
+    </g>
+    <g stroke="#5680ac" stroke-width="1.5" fill="#e4f1ff">
+      <rect x="160" y="119" width="112" height="54" rx="5"/>
+      <rect x="272" y="119" width="112" height="54" rx="5"/>
+      <rect x="384" y="119" width="112" height="54" rx="5"/>
+      <rect x="496" y="119" width="112" height="54" rx="5"/>
+      <rect x="608" y="119" width="112" height="54" rx="5"/>
+    </g>
+    <g text-anchor="middle">
+      <g font-size="17" font-weight="700">
+        <text x="216" y="141">31</text>
+        <text x="328" y="141">32</text>
+        <text x="440" y="141">33</text>
+        <text x="552" y="141">34</text>
+        <text x="664" y="141">35</text>
+      </g>
+      <g font-size="14" fill="#294c74">
+        <text x="216" y="160">16.67 ms</text>
+        <text x="328" y="160">16.67 ms</text>
+        <text x="440" y="160">16.67 ms</text>
+        <text x="552" y="160">16.67 ms</text>
+        <text x="664" y="160">16.67 ms</text>
+      </g>
+    </g>
+
+    <rect x="160" y="181" width="336" height="54" rx="5" stroke="#a24424" stroke-width="2" fill="#ffe2d2"/>
+    <g stroke="#a77936" stroke-width="1.5" fill="#fff0d4">
+      <rect x="496" y="181" width="56" height="54" rx="5"/>
+      <rect x="552" y="181" width="56" height="54" rx="5"/>
+      <rect x="608" y="181" width="56" height="54" rx="5"/>
+      <rect x="664" y="181" width="56" height="54" rx="5"/>
+    </g>
+    <g text-anchor="middle" font-size="17" font-weight="700">
+      <text x="328" y="214" fill="#792b16">31 を50 ms表示</text>
+      <text x="524" y="214">32</text>
+      <text x="580" y="214">33</text>
+      <text x="636" y="214">34</text>
+      <text x="692" y="214">35</text>
+    </g>
+    <path d="M496 247v7h224v-7" fill="none" stroke="#7e5a27" stroke-width="1.5"/>
+    <text x="608" y="278" text-anchor="middle" font-size="15" fill="#69471d">32〜35 は各8.33 ms</text>
+    <text x="25" y="278" font-size="15" fill="#475569">枠の数字はフレーム番号</text>
+  </g>
+</svg>
