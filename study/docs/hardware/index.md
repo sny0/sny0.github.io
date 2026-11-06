@@ -24,6 +24,7 @@ CPU・GPU・メモリ・デバイスの間で、命令とデータがどう動�
 - [DRAMのチャネルと帯域 — データをどこから、どの速さで読むか](/hardware/memory/dram-channels-and-bandwidth.html)
 - [GPUアーキテクチャ詳解](/hardware/gpu/architecture.html)
 - [GPUとは何か](/hardware/gpu/what-is-gpu.html)
+- [NICの受信キューとRSS — フレームがアプリへ届くまで](/hardware/io/nic-receive-queues.html)
 - [PCI Expressのリンクとレーン](/hardware/io/pcie-links.html)
 
 ## この分野の学習ガイド

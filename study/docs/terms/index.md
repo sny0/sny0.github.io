@@ -91,11 +91,14 @@
 | [DNS / 名前解決 / リゾルバー / 権威DNS / A / AAAA / CNAME / TTL / NXDOMAIN / NODATA](/network/dns-resolution.html) | 名前解決API、委任をたどる問い合わせ、レコードとキャッシュ、失敗の違いを調べる |
 | [HTTP / HTTP/1.1 / GET / Host / 状態コード / ヘッダー / Content-Length / Content-Type / CRLF](/network/http-messages.html) | 要求と応答の形式、本文のバイト数、メッセージの完成と接続終了を調べる |
 | [ソケット / socket / TCP / IPアドレス / ポート / send / recv / フレーミング / 半閉鎖 / loopback](/network/tcp-sockets.html) | 送受信バッファ、バイト列の境界、EOFとエラー、接続の終了を調べる |
-| [UDP / データグラム / sendto / recvfrom / WSAEMSGSIZE / MTU / QUIC](/network/udp-datagrams.html) | メッセージの区切りと受信失敗、送信サイズや期限を調べる |
+| [UDP / データグラム / sendto / recvfrom / WSAEMSGSIZE / MTU](/network/udp-datagrams.html) | メッセージの区切りと受信失敗、送信サイズや期限を調べる |
+| [QUIC / HTTP/3 / HTTP/2 / 0-RTT / 接続ID / HOLブロッキング / QUIC DATAGRAM](/network/quic-and-http3.html) | UDP上で接続を保ち、欠けたデータをストリームごとに組み立てる仕組みを調べる |
+| [NAT / NAPT / ポート転送 / CGNAT / STUN / ICE / TURN](/network/nat-and-port-mapping.html) | 内外のIPとポートの対応、外部からの到達性、P2Pの接続手段を調べる |
 | [IPルーティング / デフォルトゲートウェイ / Ethernet / MACアドレス / ARP / Neighbor Discovery / TTL](/network/ip-routing-and-ethernet.html) | IPの行き先から次の経由先を選び、各リンクでフレームを渡す |
 | [通信遅延 / RTT / 帯域 / goodput / ジッター / 輻輳 / BDP / バッファブロート](/network/latency-throughput-and-queues.html) | 回線の転送量と、混雑による待ち時間を分ける |
 | [PCI Express / PCIe / root complex / レーン / リンク速度 / GT/s](/hardware/io/pcie-links.html) | デバイスまでの経路とリンクの転送上限を調べる |
 | [DMA / IOMMU / DMAアドレス / バスマスター / MSI-X / 割り込み](/hardware/io/dma-and-iommu.html) | デバイスが使うメモリ範囲、転送の向き、完了通知を調べる |
+| [NIC / RXリング / 受信記述子 / RSS / NAPI / 割り込み集約](/hardware/io/nic-receive-queues.html) | フレームのDMA、CPUへの処理の分配、ドロップ箇所の違いを調べる |
 | [DRAM / DDR / メモリチャネル / ランク / バンク / 行バッファ / MT/s](/hardware/memory/dram-channels-and-bandwidth.html) | メモリ側の並行性、帯域の計算、アクセス時の待ち時間を調べる |
 | [メモリマップドファイル / file mapping / mmap / MapViewOfFile / MemoryMappedFile / ビュー](/os/memory-mapped-files.html) | ファイルの範囲と仮想アドレスを対応付け、ページとビューの寿命を調べる |
 | [アセットロード / asset loading / リソース管理 / cook / 読み込み完了 / 利用可能 / 世代トークン](/game/asset-loading.html) | byte取得から登録・利用可能化・解放までの状態と所有権を整理する |
