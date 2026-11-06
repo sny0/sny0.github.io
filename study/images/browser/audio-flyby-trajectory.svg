@@ -1,0 +1,45 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="760" height="416" viewBox="0 0 760 416" role="img" aria-labelledby="title desc">
+  <title id="title">音源が聞き手の前を左から右へ進む</title>
+  <desc id="desc">聞き手を原点に置き、音源が前方10 mの直線を左から右へ進む。40 m/sの例では、時刻マイナス0.5秒で左20 m、0秒で正面、プラス0.5秒で右20 mにあり、正面が最も近い。</desc>
+  <defs>
+    <style>
+      text { font-family: "Noto Sans JP", "Yu Gothic", Meiryo, sans-serif; fill: #1e293b; }
+      .title { font-size: 26px; font-weight: 700; }
+      .label { font-size: 17px; font-weight: 700; }
+      .note { font-size: 15px; fill: #475569; }
+    </style>
+    <marker id="forward" markerWidth="9" markerHeight="9" refX="8" refY="4.5" orient="auto">
+      <path d="M0 0 L9 4.5 L0 9 Z" fill="#475569"/>
+    </marker>
+    <marker id="travel" markerWidth="9" markerHeight="9" refX="8" refY="4.5" orient="auto">
+      <path d="M0 0 L9 4.5 L0 9 Z" fill="#0f766e"/>
+    </marker>
+  </defs>
+  <rect x="1" y="1" width="758" height="414" rx="18" fill="#f8fafc" stroke="#cbd5e1"/>
+  <text x="36" y="48" class="title">音源が聞き手の前を左から右へ進む</text>
+  <text x="36" y="76" class="note">上から見た図。音源は前方10 mの直線を40 m/sで進む。</text>
+  <path d="M380 315 H676" fill="none" stroke="#94a3b8" stroke-width="1.5" marker-end="url(#forward)"/>
+  <path d="M380 315 V154" fill="none" stroke="#94a3b8" stroke-width="1.5" stroke-dasharray="5 4" marker-end="url(#forward)"/>
+  <path d="M180 215 L380 315 L580 215" fill="none" stroke="#94a3b8" stroke-width="1.7" stroke-dasharray="5 4"/>
+  <path d="M88 215 H672" fill="none" stroke="#0f766e" stroke-width="3" marker-end="url(#travel)"/>
+  <text x="637" y="192" text-anchor="middle" class="note">進行方向</text>
+  <text x="396" y="252" class="note">最短距離 10 m</text>
+  <text x="687" y="321" class="note">+X</text>
+  <text x="380" y="143" text-anchor="middle" class="note">前方 −Z</text>
+  <g text-anchor="middle">
+    <text x="180" y="156" class="label">接近中</text>
+    <text x="180" y="184" class="note">−0.5 秒</text>
+    <text x="380" y="184" class="label" paint-order="stroke" stroke="#f8fafc" stroke-width="5" stroke-linejoin="round">正面 0 秒</text>
+    <text x="580" y="156" class="label">遠ざかる</text>
+    <text x="580" y="184" class="note">+0.5 秒</text>
+    <text x="180" y="245" class="note">x = −20 m</text>
+    <text x="580" y="245" class="note">x = +20 m</text>
+    <text x="380" y="350" class="label">聞き手（原点）</text>
+  </g>
+  <g fill="#ccfbf1" stroke="#0f766e" stroke-width="2.5">
+    <circle cx="180" cy="215" r="8"/>
+    <circle cx="380" cy="215" r="8"/>
+    <circle cx="580" cy="215" r="8"/>
+  </g>
+  <circle cx="380" cy="315" r="8" fill="#475569"/>
+</svg>
