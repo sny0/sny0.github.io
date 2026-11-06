@@ -12,6 +12,7 @@ export const formatLabels = {
 export const statusLabels = { published: '公開中', outline: '学習計画・概要', draft: '草稿', planned: '執筆予定' }
 
 export const collections = [
+  { id: 'dds-upload-observation', section: 'practice', title: 'C++でDDSの2つのmipをD3D12へ転送して読み戻す', description: 'DDSの行をコピー用バッファに配置し、D3D12 WARPで読み戻したデータを照合する。', start: '/practice/graphics/dds-upload-observation.html' },
   { id: 'asset-pack-observation', section: 'practice', title: 'C++でアセットパックを作って必要な範囲を読む', description: 'パックを作り、名前と目次から素材を読み、壊れた範囲を読み取り前に拒否する。', start: '/practice/io/asset-pack-observation.html' },
   { id: 'file-io-trace-observation', section: 'practice', title: 'Windowsで2回のファイル読み取りをトレースする', description: '同じファイルを2周読み、C++の出力、ファイル操作、ディスク要求の記録を照合する。', start: '/practice/io/file-io-trace-observation.html' },
   { id: 'iocp-observation', section: 'practice', title: 'C++で2件のファイル読み取りをIOCPから回収する', description: '同じ完了キーと異なるOVERLAPPEDポインターを照合して、要求ごとの結果を確かめる。', start: '/practice/io/iocp-observation.html' },

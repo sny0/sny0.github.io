@@ -117,6 +117,13 @@
 3. [C++でアセットパックを作る実践](/practice/io/asset-pack-observation.html)で、1件の素材を取り出し、壊れた索引が拒否されるところを試す。
 4. [アセットビルドと差分配信](/game/asset-build-and-patches.html)で、読み込みやすい配置と更新で再利用できる配信単位を考える。
 
+## テクスチャのファイルを読み、GPUで使えるようにするには
+
+1. [DDSとサブリソース](/graphics/texture/dds-and-subresources.html)で、テクスチャの形式、mip、配列スライスからファイル内の位置を求める。
+2. [D3D12でテクスチャを転送する流れ](/graphics/texture/d3d12-texture-upload.html)で、行の再配置、コピー、リソースの状態とフェンスを追う。
+3. [C++のDDS転送実践](/practice/graphics/dds-upload-observation.html)で、2つのmipをD3D12へコピーし、読み戻したバイトを照合する。
+4. [テクスチャストリーミング](/graphics/texture/texture-streaming-and-mip-residency.html)で、先に使える解像度と、メモリに置く範囲を決める。
+
 ## 入力からゲーム画面まで
 
 1. [ゲームループ](/game/patterns/game-loop-and-update.html)で入力・更新・描画の時間を分ける。

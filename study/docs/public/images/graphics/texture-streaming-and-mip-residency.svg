@@ -1,0 +1,61 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="760" height="426" viewBox="0 0 760 426" role="img" aria-labelledby="title description">
+  <title id="title">粗いmipを使いながら細かいmipを追加する</title>
+  <desc id="description">1024角のテクスチャの例。物体が遠い間はmip 2から10を描画に使う。近づくとmip 1を転送するが、描画にはmip 2から10を使い続ける。コピーと描画の順序が整うと、新しいビューがmip 1から10を公開する。mip 0は3段階とも描画に渡さない。</desc>
+  <defs>
+    <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto">
+      <path d="M0 0 10 5 0 10Z" fill="#49677b"/>
+    </marker>
+  </defs>
+  <rect width="760" height="426" rx="16" fill="#f3f7fa"/>
+  <g font-family="system-ui, sans-serif" fill="#183246">
+    <text x="24" y="41" font-size="24" font-weight="700">粗いmipで描きながら、細部を追加する</text>
+    <text x="24" y="68" font-size="16" fill="#476476">1024 × 1024のテクスチャで、mip 1を後から使う例</text>
+    <g fill="#fff" stroke="#b9cbd7">
+      <rect x="24" y="89" width="214" height="271" rx="9"/>
+      <rect x="273" y="89" width="214" height="271" rx="9"/>
+      <rect x="522" y="89" width="214" height="271" rx="9"/>
+    </g>
+    <g stroke="#49677b" stroke-width="2.5" fill="none" marker-end="url(#arrow)">
+      <path d="M242 121H268"/>
+      <path d="M491 121H517"/>
+    </g>
+    <g font-size="17" font-weight="700" text-anchor="middle">
+      <text x="131" y="119">1. 物体が遠くにある</text>
+      <text x="380" y="119">2. 近づいて転送する</text>
+      <text x="629" y="119">3. 描画の参照先を更新</text>
+    </g>
+    <g fill="#edf2f5" stroke="#b9cbd7">
+      <rect x="38" y="140" width="186" height="43" rx="6"/>
+      <rect x="287" y="140" width="186" height="43" rx="6"/>
+      <rect x="536" y="140" width="186" height="43" rx="6"/>
+      <rect x="38" y="193" width="186" height="43" rx="6"/>
+    </g>
+    <rect x="287" y="193" width="186" height="43" rx="6" fill="#fff0d5" stroke="#caad6b"/>
+    <g fill="#dbefe8" stroke="#8eb4a7">
+      <rect x="536" y="193" width="186" height="43" rx="6"/>
+      <rect x="38" y="246" width="186" height="43" rx="6"/>
+      <rect x="287" y="246" width="186" height="43" rx="6"/>
+      <rect x="536" y="246" width="186" height="43" rx="6"/>
+    </g>
+    <g font-size="16" text-anchor="middle">
+      <text x="131" y="167">mip 0　使用しない</text>
+      <text x="380" y="167">mip 0　使用しない</text>
+      <text x="629" y="167">mip 0　使用しない</text>
+      <text x="131" y="220">mip 1　使用しない</text>
+      <text x="380" y="220">mip 1　コピー中</text>
+      <text x="629" y="220">mip 1　描画できる</text>
+      <text x="131" y="273">mip 2〜10　描画できる</text>
+      <text x="380" y="273">mip 2〜10　描画できる</text>
+      <text x="629" y="273">mip 2〜10　描画できる</text>
+    </g>
+    <g font-size="15" text-anchor="middle" fill="#476476">
+      <text x="131" y="322">描画のビューは</text>
+      <text x="131" y="343">mip 2〜10を公開</text>
+      <text x="380" y="322">コピー中も</text>
+      <text x="380" y="343">同じビューで描画</text>
+      <text x="629" y="322">コピーと描画の同期後</text>
+      <text x="629" y="343">mip 1〜10を公開</text>
+    </g>
+    <text x="24" y="397" font-size="15" fill="#476476">図の範囲は描画に渡すmipを示す。GPUの割り当て量はリソースの作り方で変わる。</text>
+  </g>
+</svg>

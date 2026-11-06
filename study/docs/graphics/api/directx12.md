@@ -192,6 +192,7 @@ void Renderer::RenderFrame() {
 
 ## 次に読むべきページ
 
+- [D3D12のテクスチャ転送](/graphics/texture/d3d12-texture-upload.html) — DDSの行を転送用バッファに配置し、コピーと状態遷移を行う
 - [DirectStorage](/game/directstorage.html) — Windows PCでアセットの読み取りと展開を要求する仕組み
 - [Vulkan](/graphics/api/vulkan.html) — 概念対応で二刀流に
 - [HLSL](/graphics/shader/hlsl.html) — SM6.xの言語側
