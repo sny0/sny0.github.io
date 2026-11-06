@@ -1,0 +1,68 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 760 414" width="760" height="414" role="img" aria-labelledby="gltf-buffers-title gltf-buffers-desc">
+  <title id="gltf-buffers-title">GLBのバッファにある座標、法線、インデックス</title>
+  <desc id="gltf-buffers-desc">GLBのJSONからbuffer、bufferView、accessorをたどる。BINの先頭72バイトに3頂点の座標と法線が交互に並び、72から78バイトの範囲にインデックス2、0、1が並ぶ。BINには整列用のゼロが2バイト続く。</desc>
+  <rect width="760" height="414" rx="14" fill="#eef4f7"/>
+  <g font-family="system-ui, 'Yu Gothic', sans-serif" fill="#183549">
+    <text x="24" y="44" font-size="25" font-weight="700">GLBのJSONからBIN内の位置をたどる</text>
+    <g stroke="#9db6c6" stroke-width="1.25">
+      <rect x="24" y="70" width="140" height="67" rx="9" fill="#ddebf2"/>
+      <rect x="174" y="70" width="276" height="67" rx="9" fill="#ddebf2"/>
+      <rect x="460" y="70" width="276" height="67" rx="9" fill="#d9ede4"/>
+    </g>
+    <g text-anchor="middle">
+      <g font-size="17" font-weight="700">
+        <text x="94" y="96">GLBヘッダー</text>
+        <text x="312" y="96">JSONチャンク</text>
+        <text x="598" y="96">BINチャンク</text>
+      </g>
+      <g font-size="14">
+        <text x="94" y="120">12バイト</text>
+        <text x="312" y="120">primitive → accessor → bufferView</text>
+        <text x="598" y="120">buffers[0] の実データ</text>
+      </g>
+    </g>
+    <path d="M598 138 V161 l-5 -7 M598 161 l5 -7" fill="none" stroke="#35586d" stroke-width="2"/>
+    <text x="24" y="182" font-size="17" font-weight="700">バッファの論理長は78バイト</text>
+    <g stroke="#9db6c6" stroke-width="1.25">
+      <rect x="24" y="200" width="516" height="59" rx="9" fill="#dceef3"/>
+      <rect x="550" y="200" width="186" height="59" rx="9" fill="#f7edd1"/>
+    </g>
+    <g text-anchor="middle">
+      <g font-size="16" font-weight="700">
+        <text x="282" y="224">頂点のbufferView</text>
+        <text x="643" y="224">インデックスのbufferView</text>
+      </g>
+      <g font-size="14">
+        <text x="282" y="246">位置0から72バイト</text>
+        <text x="643" y="246">位置72から6バイト</text>
+      </g>
+    </g>
+    <g stroke="#9db6c6" stroke-width="1.25">
+      <g fill="#dceef3">
+        <rect x="24" y="280" width="82" height="59" rx="7"/><rect x="198" y="280" width="82" height="59" rx="7"/><rect x="372" y="280" width="82" height="59" rx="7"/>
+      </g>
+      <g fill="#e0efe8">
+        <rect x="106" y="280" width="82" height="59" rx="7"/><rect x="280" y="280" width="82" height="59" rx="7"/><rect x="454" y="280" width="82" height="59" rx="7"/>
+      </g>
+      <g fill="#f7edd1">
+        <rect x="550" y="280" width="60" height="59" rx="7"/><rect x="613" y="280" width="60" height="59" rx="7"/><rect x="676" y="280" width="60" height="59" rx="7"/>
+      </g>
+    </g>
+    <g text-anchor="middle">
+      <g font-size="16" font-weight="700">
+        <text x="65" y="305">座標 0</text><text x="147" y="305">法線 0</text>
+        <text x="239" y="305">座標 1</text><text x="321" y="305">法線 1</text>
+        <text x="413" y="305">座標 2</text><text x="495" y="305">法線 2</text>
+        <text x="580" y="305">値 2</text><text x="643" y="305">値 0</text><text x="706" y="305">値 1</text>
+      </g>
+      <g font-size="14">
+        <text x="65" y="326">位置 0</text><text x="147" y="326">位置 12</text>
+        <text x="239" y="326">位置 24</text><text x="321" y="326">位置 36</text>
+        <text x="413" y="326">位置 48</text><text x="495" y="326">位置 60</text>
+        <text x="580" y="326">位置 72</text><text x="643" y="326">位置 74</text><text x="706" y="326">位置 76</text>
+      </g>
+    </g>
+    <text x="24" y="370" font-size="15">同じ属性の次の要素まで24バイト</text>
+    <text x="24" y="393" font-size="15">BINの末尾に整列用のゼロを2バイト足す</text>
+  </g>
+</svg>
