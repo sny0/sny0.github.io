@@ -12,6 +12,7 @@ export const formatLabels = {
 export const statusLabels = { published: '公開中', outline: '学習計画・概要', draft: '草稿', planned: '執筆予定' }
 
 export const collections = [
+  { id: 'audio-occlusion-transition-observation', section: 'practice', title: 'Web Audioで扉が開くときの音の切り替えを比べる', description: '遮蔽が解ける瞬間にゲインとカットオフを変え、急な切り替えと徐々に戻す処理を波形と試聴で比べる。', start: '/practice/browser/audio-occlusion-transition-observation.html' },
   { id: 'audio-occlusion-observation', section: 'practice', title: 'Web Audioで壁越しの音量と音色を比べる', description: '音源と聞き手の間に壁があるとき、ゲインとローパスが音をどう変えるかを図と試聴で確かめる。', start: '/practice/browser/audio-occlusion-observation.html' },
   { id: 'audio-spatial-observation', section: 'practice', title: 'Web Audioで音の方向と距離を変えて聴く', description: '音源の方向と距離を変え、左右の出力と距離による減衰を図と試聴で比べる。', start: '/practice/browser/audio-spatial-observation.html' },
   { id: 'audio-reverb-observation', section: 'practice', title: 'Web Audioで畳み込みリバーブを聴き比べる', description: 'インパルス応答と残響側のゲインを変え、打音のあとに残る響きを波形と試聴で確かめる。', start: '/practice/browser/audio-reverb-observation.html' },

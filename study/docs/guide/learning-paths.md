@@ -279,6 +279,12 @@
 2. [Web Audioで壁越しの音量と音色を比べる](/practice/browser/audio-occlusion-observation.html)で、距離をそろえた二つの位置を切り替え、音量だけを下げたときと高音も弱めたときを比べる。
 3. 聞き手から見た方向と距離による処理は[Web Audioの音の定位と距離減衰](/browser/audio-spatial-panning.html)で確認する。
 
+## 扉が開いたときの音をなめらかに戻すには
+
+1. [Web Audioで遮蔽をなめらかに切り替える](/browser/audio-occlusion-transition.html)で、ゲインとカットオフを同じ時刻から徐々に変える仕組みを確認する。
+2. [Web Audioで扉が開くときの音の切り替えを比べる](/practice/browser/audio-occlusion-transition-observation.html)で、時定数を変え、出力波形とゲインの実測値を比べる。
+3. 遮蔽時にゲインとローパスが音へ与える影響は[Web Audioの音の遮蔽](/browser/audio-occlusion.html)で確認する。
+
 ## 作り方の変化を歴史から見る
 
 [ビデオゲーム史](/history/video-games.html)の作品・ハード・媒体・流通と、[リアルタイム3D技術史](/guide/rendering/timeline.html)の技術の変化から、気になった仕組みへ進みます。
