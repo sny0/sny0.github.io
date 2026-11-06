@@ -41,7 +41,7 @@
       "id": "os",
       "title": "OS",
       "description": "プロセス、メモリ、スレッド、入出力の仕組みを調べる。",
-      "count": 6,
+      "count": 10,
       "status": "辞典本文あり"
     },
     {
@@ -130,6 +130,13 @@
     }
   ],
   "collections": [
+    {
+      "id": "windows-pipe-observation",
+      "section": "practice",
+      "title": "親子プロセスでパイプの終端を調べる",
+      "description": "子の標準出力を受け取り、最後の書き込み端を閉じてから終端を確認する。",
+      "start": "/practice/process/windows-pipe-observation.html"
+    },
     {
       "id": "generational-handle-observation",
       "section": "practice",
@@ -6007,6 +6014,94 @@
       ]
     },
     {
+      "title": "Windowsのスレッドスケジューリング — 実行・待機・実行可能",
+      "url": "/os/thread-scheduling.html",
+      "file": "os/thread-scheduling.md",
+      "domain": "os",
+      "section": "reference",
+      "format": "article",
+      "status": "published",
+      "summary": "Windowsが次に動かすスレッドを選ぶ仕組みを、優先度とタイムスライスから追う。待機が終わってから実行を再開するまでの時間を区別し、WPAで調べる手順を示す。",
+      "source": "新規執筆",
+      "aliases": [
+        "スレッドスケジューリング",
+        "スケジューラ",
+        "dispatcher",
+        "Ready",
+        "Running",
+        "Waiting",
+        "タイムスライス",
+        "quantum",
+        "プリエンプション",
+        "コンテキストスイッチ",
+        "アフィニティ",
+        "WPA",
+        "CPU Usage Precise",
+        "CPU Usage Sampled"
+      ],
+      "verification": "Microsoft LearnのWindowsスケジューリングとWPAの資料に照合（2026-11-06）",
+      "links": [
+        "/os/process-startup.html",
+        "/os/system-calls-and-privilege.html",
+        "/runtime/thread-synchronization.html",
+        "/graphics/optimization/frame-pacing.html"
+      ]
+    },
+    {
+      "title": "Windowsのパイプと子プロセスの標準入出力",
+      "url": "/os/pipes-and-process-io.html",
+      "file": "os/pipes-and-process-io.md",
+      "domain": "os",
+      "section": "reference",
+      "format": "article",
+      "status": "published",
+      "summary": "子プロセスの標準出力が親へ届くまでを、パイプのバッファ、ハンドルの継承、読み書きの待ち、終端に分けて追う。",
+      "source": "新規執筆",
+      "aliases": [
+        "匿名パイプ",
+        "anonymous pipe",
+        "IPC",
+        "stdin",
+        "stdout",
+        "stderr",
+        "CreatePipe",
+        "PeekNamedPipe",
+        "ERROR_BROKEN_PIPE"
+      ],
+      "links": [
+        "/os/windows-handles.html",
+        "/practice/process/windows-pipe-observation.html"
+      ]
+    },
+    {
+      "title": "Windowsのハンドルとカーネルオブジェクト",
+      "url": "/os/windows-handles.html",
+      "file": "os/windows-handles.md",
+      "domain": "os",
+      "section": "reference",
+      "format": "article",
+      "status": "published",
+      "summary": "プロセスごとのハンドルからカーネルオブジェクトを参照する仕組みと、アクセス権・複製・継承・クローズを整理する。",
+      "source": "新規執筆",
+      "aliases": [
+        "HANDLE",
+        "ハンドルテーブル",
+        "カーネルオブジェクト",
+        "アクセスマスク",
+        "DuplicateHandle",
+        "CloseHandle",
+        "ハンドル継承",
+        "擬似ハンドル"
+      ],
+      "verification": "Microsoft LearnのWin32仕様に照合。C++例をWindows x64のMSVCでビルドし、待機専用ハンドルの権限と複製後の待機結果を確認。",
+      "links": [
+        "/os/system-calls-and-privilege.html",
+        "/algorithms/generational-handles.html",
+        "/os/process-startup.html",
+        "/os/pipes-and-process-io.html"
+      ]
+    },
+    {
       "title": "Worker poolで受付上限・待機取消し・結果破棄を観察する",
       "url": "/practice/browser/worker-pool-observation.html",
       "file": "practice/browser/worker-pool-observation.md",
@@ -6990,6 +7085,43 @@
         "/graphics/shader/hlsl.html",
         "/graphics/shader/glsl.html",
         "/graphics/shader/msl.html"
+      ]
+    },
+    {
+      "title": "システムコールでユーザーモードからカーネルモードへ",
+      "url": "/os/system-calls-and-privilege.html",
+      "file": "os/system-calls-and-privilege.md",
+      "domain": "os",
+      "section": "reference",
+      "format": "article",
+      "status": "published",
+      "summary": "Windows x64でWin32 APIからカーネルへ処理が移る経路を追い、CPUの権限移行、引数の検査、待機によるスレッドの切り替えを区別する。",
+      "source": "新規執筆",
+      "aliases": [
+        "システムコール",
+        "syscall",
+        "system call",
+        "ユーザーモード",
+        "カーネルモード",
+        "user mode",
+        "kernel mode",
+        "特権レベル",
+        "ntdll",
+        "NtCreateFile",
+        "PreviousMode",
+        "SYSRET",
+        "トラップ",
+        "割り込み",
+        "ページフォルト"
+      ],
+      "verification": "Microsoft LearnとIntel SDMに照合し、Windows x64のntdll.dll 10.0.26100.9949でNtCreateFileをLLVM 14.0.6により逆アセンブル（2026-11-06）",
+      "links": [
+        "/os/virtual-memory.html",
+        "/os/windows-handles.html",
+        "/os/thread-scheduling.html",
+        "/os/file-read-journey.html",
+        "/os/asynchronous-file-io.html",
+        "/tools/windows/debugger-breakpoints-and-watchpoints.html"
       ]
     },
     {
@@ -8986,6 +9118,11 @@
         "/practice/compilers/build-artifact-observation.html",
         "/tools/windows/debugger-breakpoints-and-watchpoints.html",
         "/tools/windows/crash-dumps-and-symbols.html",
+        "/os/system-calls-and-privilege.html",
+        "/os/thread-scheduling.html",
+        "/os/windows-handles.html",
+        "/os/pipes-and-process-io.html",
+        "/practice/process/windows-pipe-observation.html",
         "/history/video-games.html",
         "/guide/rendering/timeline.html"
       ]
@@ -9319,6 +9456,8 @@
         "/os/virtual-memory.html",
         "/runtime/cpp-internals/object-files-and-libraries.html",
         "/os/pe-loading-and-imports.html",
+        "/os/thread-scheduling.html",
+        "/os/system-calls-and-privilege.html",
         "/runtime/memory/concurrency-bugs.html",
         "/languages/csharp/il2cpp.html",
         "/practice/process/windows-process-observation.html"
@@ -9519,6 +9658,32 @@
         "/design/naming.html",
         "/design/pattern-index.html",
         "/design/notebook-references.html"
+      ]
+    },
+    {
+      "title": "親子プロセスでパイプの終端を調べる",
+      "url": "/practice/process/windows-pipe-observation.html",
+      "file": "practice/process/windows-pipe-observation.md",
+      "domain": "os",
+      "section": "practice",
+      "format": "sample",
+      "status": "published",
+      "summary": "子プロセスの標準出力を親で受け取り、最後の書き込み端を閉じた後にパイプの終端を確認する。",
+      "source": "新規執筆",
+      "aliases": [
+        "CreatePipe",
+        "CreateProcessW",
+        "STARTUPINFOEX",
+        "PeekNamedPipe",
+        "ERROR_BROKEN_PIPE",
+        "親子プロセス",
+        "標準出力"
+      ],
+      "collection": "windows-pipe-observation",
+      "order": 1,
+      "verification": "Windows x64のMSVCでビルド・実行し、子の出力と最後の書き込み端を閉じた後のERROR_BROKEN_PIPEを確認（2026-11-06）",
+      "links": [
+        "/os/pipes-and-process-io.html"
       ]
     },
     {
@@ -10511,7 +10676,7 @@
       "section": "learning",
       "format": "path",
       "status": "outline",
-      "summary": "プロセス、スレッド、仮想メモリ、システムコール、I/Oを学ぶ計画。起動・メモリ・データ共有・ファイル読取り・TCPソケットの辞典本文と観察例へつなぐ。",
+      "summary": "起動からシステムコール、スレッドの実行、ハンドル、パイプ、仮想メモリとI/Oを学ぶ計画。各段階の解説と観察例へ進む。",
       "source": "IT教本",
       "aliases": [],
       "collection": "low-level",
@@ -10520,6 +10685,11 @@
       "links": [
         "/os/process-startup.html",
         "/practice/process/windows-process-observation.html",
+        "/os/system-calls-and-privilege.html",
+        "/os/thread-scheduling.html",
+        "/os/windows-handles.html",
+        "/os/pipes-and-process-io.html",
+        "/practice/process/windows-pipe-observation.html",
         "/os/virtual-memory.html",
         "/practice/memory/windows-memory-observation.html",
         "/runtime/memory/allocators-and-pools.html",
@@ -11489,6 +11659,10 @@
       "source": "統合ガイド",
       "aliases": [],
       "links": [
+        "/os/system-calls-and-privilege.html",
+        "/os/thread-scheduling.html",
+        "/os/windows-handles.html",
+        "/os/pipes-and-process-io.html",
         "/algorithms/generational-handles.html",
         "/compilers/tokens-ast-and-type-checking.html",
         "/compilers/llvm-ir-and-ssa.html",

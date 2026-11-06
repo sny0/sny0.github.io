@@ -486,11 +486,22 @@ writePage('guide/learning-paths.md', '疑問から選ぶ読み順', {
 1. [ブレークポイントとデータブレークポイント](/tools/windows/debugger-breakpoints-and-watchpoints.html)で、指定した命令や、特定アドレスへの書き込みで止める。
 2. [クラッシュダンプとシンボル](/tools/windows/crash-dumps-and-symbols.html)で、停止時の例外、スレッド、モジュールを確認し、対応するPDBから関数や行を調べる。
 
+## 起動したプロセスはOSとどうやり取りするか
+
+1. [システムコールとCPUの権限](/os/system-calls-and-privilege.html)で、同じスレッドがカーネルの処理へ入る流れを追う。
+2. [Windowsのスレッドスケジューリング](/os/thread-scheduling.html)で、実行中・実行可能・待機中の違いと、CPU時間を割り当てる条件を調べる。
+3. [Windowsのハンドルとカーネルオブジェクト](/os/windows-handles.html)で、操作できる対象と、別プロセスにハンドルを渡す方法を読む。
+4. [パイプと子プロセスの標準入出力](/os/pipes-and-process-io.html)と[パイプの終端を調べる実践](/practice/process/windows-pipe-observation.html)で、出力と終端を確認する。
+
 ## 作り方の変化を歴史から見る
 
 [ビデオゲーム史](/history/video-games.html)の作品・ハード・媒体・流通と、[リアルタイム3D技術史](/guide/rendering/timeline.html)の技術の変化から、気になった仕組みへ進みます。`)
 
 const termRows = [
+  ['システムコール / syscall / ユーザーモード / カーネルモード / 特権 / NTSTATUS', '/os/system-calls-and-privilege.html', 'OSに処理を要求してCPUの権限が切り替わる過程を追う'],
+  ['スケジューラ / スレッドスケジューリング / context switch / プリエンプション / Ready / 待機', '/os/thread-scheduling.html', 'スレッドの状態とCPU時間・実行可能になってからの待ちを分けて調べる'],
+  ['Windowsハンドル / HANDLE / オブジェクトマネージャー / DuplicateHandle / CloseHandle / ハンドル継承', '/os/windows-handles.html', 'プロセスが対象を操作する権利と、ハンドルを渡す・閉じる条件を調べる'],
+  ['パイプ / IPC / 標準入出力 / CreatePipe / PeekNamedPipe / ERROR_BROKEN_PIPE', '/os/pipes-and-process-io.html', '子の出力が親に届く経路と、最後の書き込み端を閉じた後の終端を追う'],
   ['世代付きハンドル / generational handle / slot map / 世代番号 / entity aliasing', '/algorithms/generational-handles.html', 'スロット再利用と世代の周回で、古い参照がいつ一致するか調べる'],
   ['字句解析 / token / 構文解析 / AST / 型検査 / semantic analysis', '/compilers/tokens-ast-and-type-checking.html', 'ソースをトークンから構文木へ変え、型と名前を解決する'],
   ['LLVM IR / 中間表現 / SSA / φ / phi / 基本ブロック / CFG', '/compilers/llvm-ir-and-ssa.html', '分岐の経路と、合流点で使われる値を追う'],

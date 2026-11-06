@@ -1,0 +1,34 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="760" height="324" viewBox="0 0 760 324" role="img" aria-labelledby="title description">
+  <title id="title">条件を満たしてから、CPUで実行を再開するまで</title>
+  <desc id="description">対象は0〜2ミリ秒と9〜12ミリ秒に実行。2〜6ミリ秒は条件待ちで、6ミリ秒の完了通知から9ミリ秒の実行再開までは実行可能。CPU上では2〜9ミリ秒に別のスレッドが動く。</desc>
+  <rect width="760" height="324" rx="16" fill="#f3f7fa"/>
+  <g font-family="system-ui, sans-serif" fill="#183246">
+    <text x="24" y="43" font-size="25" font-weight="700">条件を満たしてから、CPUで実行を再開するまで</text>
+    <text x="24" y="72" font-size="15" fill="#455b6b">論理CPUが1つの場合の説明用タイムライン</text>
+    <g stroke="#849cac" stroke-dasharray="4 4">
+      <path d="M144 119v137M240 119v137M432 119v137M576 119v137M720 119v137"/>
+    </g>
+    <g text-anchor="middle" font-size="14" font-weight="700">
+      <text x="240" y="101">待機に入る</text><text x="432" y="101">条件を満たす</text><text x="576" y="101">実行を再開</text>
+    </g>
+    <text x="24" y="162" font-size="16" font-weight="700">対象の状態</text>
+    <text x="24" y="226" font-size="16" font-weight="700">CPUの使用者</text>
+    <g stroke="#a3bdca">
+      <rect x="144" y="134" width="96" height="44" rx="4" fill="#c8e9de"/>
+      <rect x="240" y="134" width="192" height="44" rx="4" fill="#e8edf1"/>
+      <rect x="432" y="134" width="144" height="44" rx="4" fill="#ffedc7"/>
+      <rect x="576" y="134" width="144" height="44" rx="4" fill="#c8e9de"/>
+      <rect x="144" y="198" width="96" height="44" rx="4" fill="#c8e9de"/>
+      <rect x="240" y="198" width="336" height="44" rx="4" fill="#dcebf4"/>
+      <rect x="576" y="198" width="144" height="44" rx="4" fill="#c8e9de"/>
+    </g>
+    <g text-anchor="middle" font-size="15" font-weight="700">
+      <text x="192" y="162">実行中</text><text x="336" y="162">条件待ち</text><text x="504" y="162">実行可能</text><text x="648" y="162">実行中</text>
+      <text x="192" y="226">対象</text><text x="408" y="226">ほかのスレッド</text><text x="648" y="226">対象</text>
+    </g>
+    <g text-anchor="middle" font-size="14" fill="#455b6b">
+      <text x="144" y="274">0 ms</text><text x="240" y="274">2 ms</text><text x="432" y="274">6 ms</text><text x="576" y="274">9 ms</text><text x="720" y="274">12 ms</text>
+    </g>
+    <text x="144" y="303" font-size="15" font-weight="700">対象の内訳　実行 5 ms・条件待ち 4 ms・実行可能状態 3 ms</text>
+  </g>
+</svg>

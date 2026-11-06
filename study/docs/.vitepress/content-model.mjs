@@ -12,6 +12,7 @@ export const formatLabels = {
 export const statusLabels = { published: '公開中', outline: '学習計画・概要', draft: '草稿', planned: '執筆予定' }
 
 export const collections = [
+  { id: 'windows-pipe-observation', section: 'practice', title: '親子プロセスでパイプの終端を調べる', description: '子の標準出力を受け取り、最後の書き込み端を閉じてから終端を確認する。', start: '/practice/process/windows-pipe-observation.html' },
   { id: 'generational-handle-observation', section: 'practice', title: '世代付きハンドルでスロットの再利用を追う', description: '同じ枠を使い回し、古いハンドルの照合、世代の周回、退役を試す。', start: '/practice/algorithms/generational-handle-observation.html' },
   { id: 'build-artifact-observation', section: 'practice', title: '2つのC++ファイルからOBJ・EXE・PDBを作って読む', description: '別々のOBJの関数参照を、再配置情報、リンク後のEXE、PDBまで追う。', start: '/practice/compilers/build-artifact-observation.html' },
   { id: 'spatial-query-observation', section: 'practice', title: '総当たり・グリッド・BVHで範囲検索を比べる', description: '円の分布と検索範囲を変え、候補と命中を同じ場面で比べる。', start: '/practice/algorithms/spatial-query-observation.html' },

@@ -18,6 +18,10 @@
 
 | 用語・別名 | 説明への入口 |
 | --- | --- |
+| [システムコール / syscall / ユーザーモード / カーネルモード / 特権 / NTSTATUS](/os/system-calls-and-privilege.html) | OSに処理を要求してCPUの権限が切り替わる過程を追う |
+| [スケジューラ / スレッドスケジューリング / context switch / プリエンプション / Ready / 待機](/os/thread-scheduling.html) | スレッドの状態とCPU時間・実行可能になってからの待ちを分けて調べる |
+| [Windowsハンドル / HANDLE / オブジェクトマネージャー / DuplicateHandle / CloseHandle / ハンドル継承](/os/windows-handles.html) | プロセスが対象を操作する権利と、ハンドルを渡す・閉じる条件を調べる |
+| [パイプ / IPC / 標準入出力 / CreatePipe / PeekNamedPipe / ERROR_BROKEN_PIPE](/os/pipes-and-process-io.html) | 子の出力が親に届く経路と、最後の書き込み端を閉じた後の終端を追う |
 | [世代付きハンドル / generational handle / slot map / 世代番号 / entity aliasing](/algorithms/generational-handles.html) | スロット再利用と世代の周回で、古い参照がいつ一致するか調べる |
 | [字句解析 / token / 構文解析 / AST / 型検査 / semantic analysis](/compilers/tokens-ast-and-type-checking.html) | ソースをトークンから構文木へ変え、型と名前を解決する |
 | [LLVM IR / 中間表現 / SSA / φ / phi / 基本ブロック / CFG](/compilers/llvm-ir-and-ssa.html) | 分岐の経路と、合流点で使われる値を追う |
