@@ -1,0 +1,55 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="760" height="478" viewBox="0 0 760 478" role="img" aria-labelledby="title desc">
+  <title id="title">HTTP/2とHTTP/3で一つの損失が及ぼす範囲</title>
+  <desc id="desc">画像Aの先頭だけが届かない例。HTTP/2では、スタイルシートBとAの後続は到着していても同じTCPバイト列の穴より後ろなので待つ。HTTP/3では、別のQUICストリームで先頭からそろったBは先に渡せる。Aの後続は新しいパケットでAの先頭を受け取るまで待つ。</desc>
+  <style>
+    text { font-family: "BIZ UDPGothic", "Yu Gothic", Meiryo, sans-serif; fill: #1a2d45; }
+    .heading { font-size: 22px; font-weight: 700; }
+    .tag { font-size: 15px; fill: #3e536e; }
+    .block { font-size: 18px; font-weight: 700; text-anchor: middle; }
+    .status { font-size: 15px; text-anchor: middle; }
+    .note { font-size: 17px; fill: #304861; }
+    .lost { fill: #8a2932; }
+    .available { fill: #235647; }
+  </style>
+  <rect width="760" height="478" rx="18" fill="#edf2f8"/>
+  <text x="27" y="43" font-size="27" font-weight="700">画像 A の先頭を失うと、B はどうなるか</text>
+  <text x="27" y="73" class="note">受信側の状態。B の先頭と A の後続は到着済み。</text>
+
+  <rect x="26" y="94" width="708" height="139" rx="12" fill="#fff" stroke="#b0c1d2"/>
+  <text x="45" y="128" class="heading">HTTP/2</text>
+  <text x="45" y="157" class="tag">1 本の TCP</text>
+  <text x="45" y="179" class="tag">バイト列</text>
+  <text x="202" y="128" class="tag">TCP が上の層に渡す順序</text>
+  <path d="M421 123H706m-6-5 6 5-6 5" fill="none" stroke="#58718b" stroke-width="1.7"/>
+  <rect x="202" y="142" width="160" height="72" rx="7" fill="#fae9eb" stroke="#a65059" stroke-width="1.5" stroke-dasharray="5 3"/>
+  <rect x="375" y="142" width="160" height="72" rx="7" fill="#fbf1d7" stroke="#9e7d3b"/>
+  <rect x="548" y="142" width="160" height="72" rx="7" fill="#fbf1d7" stroke="#9e7d3b"/>
+  <text x="282" y="168" class="block">A の先頭</text>
+  <text x="455" y="168" class="block">B の先頭</text>
+  <text x="628" y="168" class="block">A の後続</text>
+  <text x="282" y="195" class="status lost">欠落</text>
+  <text x="455" y="195" class="status">TCP の穴を待つ</text>
+  <text x="628" y="195" class="status">TCP の穴を待つ</text>
+
+  <rect x="26" y="249" width="708" height="161" rx="12" fill="#fff" stroke="#b0c1d2"/>
+  <text x="45" y="282" class="heading">HTTP/3</text>
+  <text x="45" y="312" class="tag">別々の QUIC</text>
+  <text x="45" y="334" class="tag">ストリーム</text>
+  <text x="202" y="282" class="tag">QUIC のパケット番号</text>
+  <path d="M388 277H706m-6-5 6 5-6 5" fill="none" stroke="#58718b" stroke-width="1.7"/>
+  <rect x="202" y="298" width="160" height="94" rx="7" fill="#fae9eb" stroke="#a65059" stroke-width="1.5" stroke-dasharray="5 3"/>
+  <rect x="375" y="298" width="160" height="94" rx="7" fill="#dcf1e8" stroke="#538a77"/>
+  <rect x="548" y="298" width="160" height="94" rx="7" fill="#fbf1d7" stroke="#9e7d3b"/>
+  <text x="282" y="323" class="status">100</text>
+  <text x="455" y="323" class="status">101</text>
+  <text x="628" y="323" class="status">102</text>
+  <text x="282" y="349" class="block">A の位置 0</text>
+  <text x="455" y="349" class="block">B の位置 0</text>
+  <text x="628" y="349" class="block">A の位置 4</text>
+  <text x="282" y="376" class="status lost">欠落</text>
+  <text x="455" y="376" class="status available">先に渡せる</text>
+  <text x="628" y="376" class="status">A の穴を待つ</text>
+
+  <text x="27" y="440" class="note">新しいパケット 103 で A の位置 0 のデータを受け取ると、</text>
+  <text x="27" y="463" class="note">QUIC は A の位置 0 から後続までを順に渡せる。</text>
+</svg>

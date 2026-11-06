@@ -1,0 +1,49 @@
+:root {
+  color-scheme: light;
+  color: #192535;
+  background: #f4f7fa;
+  font: 16px/1.65 system-ui, sans-serif;
+}
+
+* { box-sizing: border-box; }
+body { margin: 0; }
+main { width: min(100% - 2rem, 57rem); margin: 0 auto; padding: 2rem 0; }
+h1, h2, h3, p { margin: 0; }
+h1 { font-size: clamp(1.65rem, 4vw, 2.4rem); line-height: 1.3; margin: .2rem 0 .65rem; }
+h2 { font-size: 1.22rem; }
+h3 { font-size: 1rem; }
+h3 span { font-weight: 500; color: #455568; margin-left: .4rem; }
+a { color: #14518f; }
+.eyebrow { color: #375a76; font-size: .9rem; font-weight: 700; }
+.controls, .lane { border: 1px solid #c7d4df; background: white; border-radius: .65rem; padding: .85rem 1rem; }
+.controls { margin: 1.25rem 0; }
+.controls h2 { margin-bottom: .45rem; }
+label { display: block; font-weight: 600; }
+select, button { font: inherit; border: 1px solid #8ba0b4; border-radius: .35rem; padding: .35rem .65rem; }
+select { color: #192535; background: white; max-width: 100%; }
+button { color: #174573; background: #f1f6fb; cursor: pointer; }
+button:first-child { color: white; background: #17538b; border-color: #17538b; }
+button:hover, select:hover { border-color: #235e9a; box-shadow: inset 0 0 0 1px #235e9a; }
+:focus-visible { outline: 3px solid #a74709; outline-offset: 2px; }
+.buttons { display: flex; flex-wrap: wrap; gap: .45rem; margin: .75rem 0 .55rem; }
+.position { font-weight: 700; }
+.hint, footer { color: #455568; }
+.lanes { display: grid; gap: .6rem; margin-top: .55rem; }
+.cells { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: .45rem; list-style: none; margin: .35rem 0 0; padding: 0; }
+.cells li { padding: .3rem .45rem; border: 1px solid #c7d4df; border-radius: .35rem; background: #f3f5f7; color: #465668; }
+.cells strong, .cells span { display: block; }
+.cells strong { font-family: ui-monospace, monospace; }
+.cells span { font-size: .88rem; }
+.cells [data-state="arrived"] { background: #edf5ff; border-color: #83add7; color: #194775; }
+.cells [data-state="missing"] { background: #fceff1; border-color: #cc8e9a; color: #842740; }
+.cells [data-state="waiting"] { background: #fff5dd; border-color: #c6a351; color: #684b06; }
+.cells [data-state="delivered"] { background: #e8f8ee; border-color: #83ba99; color: #1e5b39; }
+footer { margin-top: 1.2rem; font-size: .94rem; }
+
+@media (max-width: 34rem) {
+  main { width: calc(100% - 1.25rem); padding-top: 1.15rem; }
+  .controls, .lane { padding: .65rem; }
+  .cells { gap: .24rem; }
+  .cells li { padding: .28rem; }
+  .cells span { font-size: .8rem; }
+}
