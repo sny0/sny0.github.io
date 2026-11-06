@@ -269,6 +269,13 @@ writePage('guide/learning-paths.md', '疑問から選ぶ読み順', {
 3. [C++のDDS転送実践](/practice/graphics/dds-upload-observation.html)で、2つのmipをD3D12へコピーし、読み戻したバイトを照合する。
 4. [テクスチャストリーミング](/graphics/texture/texture-streaming-and-mip-residency.html)で、先に使える解像度と、メモリに置く範囲を決める。
 
+## 3Dモデルのファイルから三角形を描くには
+
+1. [glTFのメッシュデータ](/graphics/mesh/gltf-mesh-buffers.html)で、buffer、bufferView、accessorをたどって頂点とインデックスの位置を求める。
+2. [頂点入力とインデックス描画](/graphics/mesh/vertex-and-index-input.html)で、バッファの配置と頂点シェーダーの入力をつなぐ。
+3. [GLBから三角形を描くC++実践](/practice/graphics/glb-mesh-observation.html)で、ファイルを作り、WARPで描いた色を読み戻す。
+4. [メッシュのインポートとクック](/graphics/mesh/mesh-import-and-cooking.html)で、座標系、マテリアル、描画範囲、実行時のバッファ配置を決める。
+
 ## 入力からゲーム画面まで
 
 1. [ゲームループ](/game/patterns/game-loop-and-update.html)で入力・更新・描画の時間を分ける。
@@ -557,6 +564,9 @@ const termRows = [
   ['DDS / DDS_HEADER / DXGI_FORMAT / mip / subresource / BC7 / cubemap', '/graphics/texture/dds-and-subresources.html', 'ファイルのヘッダー、テクスチャの形、mipや圧縮ブロックの位置を調べる'],
   ['テクスチャ転送 / RowPitch / GetCopyableFootprints / CopyTextureRegion / readback', '/graphics/texture/d3d12-texture-upload.html', 'CPU側の行をバッファに並べ、コピー、状態遷移、完了の順序を調べる'],
   ['テクスチャストリーミング / mip residency / SRV / reserved resource / タイル', '/graphics/texture/texture-streaming-and-mip-residency.html', '先に使うmip、シェーダーに公開する範囲、GPUメモリの予算を調べる'],
+  ['glTF / GLB / bufferView / accessor / byteStride / POSITION / NORMAL', '/graphics/mesh/gltf-mesh-buffers.html', 'メッシュの参照をたどり、頂点とインデックスの範囲や型を調べる'],
+  ['頂点入力 / インデックスバッファ / Input Assembler / DrawIndexedInstanced / BaseVertexLocation', '/graphics/mesh/vertex-and-index-input.html', 'インデックスを頂点へ対応付け、属性を頂点シェーダーへ渡す'],
+  ['メッシュインポート / クック / 座標系 / winding / UVシーム / AABB', '/graphics/mesh/mesh-import-and-cooking.html', '制作した形状を実行時のバッファと描画単位へ変換する'],
   ['PSO / パイプラインキャッシュ / シェーダーコンパイル / pipeline cache / warm-up', '/graphics/optimization/pipeline-compilation-stutter.html', '初回使用までに必要なパイプライン作成とキャッシュの役割を調べる'],
   ['スワップチェーン / swapchain / VSync / 垂直同期 / Present / scanout / 走査 / ティアリング / FIFO / MAILBOX / IMMEDIATE', '/graphics/optimization/swap-chain-and-vsync.html', '描画済みの絵が画面へ出る順序と時刻、次の描画に画像を使い回せる条件を調べる'],
   ['フレームタイム / frame time / フレームペーシング / frame pacing / フレーム予算 / p99 / スタッター', '/graphics/optimization/frame-pacing.html', 'CPU・GPUの処理時間と表示間隔を分け、カクつきが起きた時刻を調べる'],

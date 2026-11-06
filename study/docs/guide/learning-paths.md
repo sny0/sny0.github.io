@@ -124,6 +124,13 @@
 3. [C++のDDS転送実践](/practice/graphics/dds-upload-observation.html)で、2つのmipをD3D12へコピーし、読み戻したバイトを照合する。
 4. [テクスチャストリーミング](/graphics/texture/texture-streaming-and-mip-residency.html)で、先に使える解像度と、メモリに置く範囲を決める。
 
+## 3Dモデルのファイルから三角形を描くには
+
+1. [glTFのメッシュデータ](/graphics/mesh/gltf-mesh-buffers.html)で、buffer、bufferView、accessorをたどって頂点とインデックスの位置を求める。
+2. [頂点入力とインデックス描画](/graphics/mesh/vertex-and-index-input.html)で、バッファの配置と頂点シェーダーの入力をつなぐ。
+3. [GLBから三角形を描くC++実践](/practice/graphics/glb-mesh-observation.html)で、ファイルを作り、WARPで描いた色を読み戻す。
+4. [メッシュのインポートとクック](/graphics/mesh/mesh-import-and-cooking.html)で、座標系、マテリアル、描画範囲、実行時のバッファ配置を決める。
+
 ## 入力からゲーム画面まで
 
 1. [ゲームループ](/game/patterns/game-loop-and-update.html)で入力・更新・描画の時間を分ける。

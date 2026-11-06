@@ -1,0 +1,53 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="760" height="440" viewBox="0 0 760 440" role="img" aria-labelledby="title desc" xml:lang="ja">
+  <title id="title">glTFのprimitiveを描画用に組み立てる</title>
+  <desc id="desc">glTFから頂点属性、インデックス、マテリアルを読み、座標と表裏を変換して頂点を組み立て、バッファと描画範囲を書き出す。円筒のUVの継ぎ目では、同じ位置PにUが1の頂点AとUが0の頂点Bを割り当てる。</desc>
+  <defs>
+    <marker id="arrow" viewBox="0 0 8 8" refX="7" refY="4" markerWidth="7" markerHeight="7" orient="auto">
+      <path d="M0 0 8 4 0 8Z" fill="#486078"/>
+    </marker>
+  </defs>
+  <rect width="760" height="440" rx="16" fill="#f3f7fa"/>
+  <g font-family="'Noto Sans JP', 'Yu Gothic', 'Meiryo', sans-serif" fill="#183246">
+    <text x="24" y="42" font-size="24" font-weight="700">glTFのprimitiveを描画用に組み立てる</text>
+    <g stroke="#9db4c3">
+      <rect x="24" y="64" width="215" height="135" rx="10" fill="#fff"/>
+      <rect x="273" y="64" width="214" height="135" rx="10" fill="#e3eef4"/>
+      <rect x="521" y="64" width="215" height="135" rx="10" fill="#d9ede5"/>
+    </g>
+    <g stroke="#486078" stroke-width="2.4" marker-end="url(#arrow)">
+      <path d="M244 132H268"/>
+      <path d="M492 132H516"/>
+    </g>
+    <g font-size="18" font-weight="700">
+      <text x="42" y="95">glTFから読む</text>
+      <text x="291" y="95">変換する</text>
+      <text x="539" y="95">描画用に保存する</text>
+    </g>
+    <g font-size="15">
+      <text x="42" y="126">位置・法線・UVなど</text>
+      <text x="42" y="150">インデックスとトポロジー</text>
+      <text x="42" y="174">マテリアル</text>
+      <text x="291" y="126">座標と単位を揃える</text>
+      <text x="291" y="150">面の表裏を合わせる</text>
+      <text x="291" y="174">属性の組から頂点を作る</text>
+      <text x="539" y="126">頂点とインデックス</text>
+      <text x="539" y="150">描画範囲とマテリアルID</text>
+      <text x="539" y="174">メッシュを囲む境界</text>
+    </g>
+
+    <rect x="24" y="221" width="712" height="193" rx="10" fill="#fff" stroke="#9db4c3"/>
+    <text x="42" y="252" font-size="18" font-weight="700">UVの継ぎ目で頂点を分ける例</text>
+    <path d="M78 337 178 285 178 379Z" fill="#e3eef4" stroke="#62829a" stroke-width="1.5"/>
+    <path d="M178 285 282 337 178 379Z" fill="#d9ede5" stroke="#558a79" stroke-width="1.5"/>
+    <path d="M178 285V379" stroke="#486078" stroke-width="2" stroke-dasharray="5 4"/>
+    <circle cx="178" cy="285" r="5" fill="#23455a"/>
+    <text x="194" y="286" font-size="15" font-weight="700">位置P</text>
+    <path d="M283 337H361" stroke="#486078" stroke-width="2.4" marker-end="url(#arrow)"/>
+    <rect x="373" y="276" width="340" height="43" rx="7" fill="#e3eef4" stroke="#9db4c3"/>
+    <rect x="373" y="329" width="340" height="43" rx="7" fill="#d9ede5" stroke="#8eb0a3"/>
+    <text x="391" y="303" font-size="16">左の面が使う頂点A　位置P、U = 1</text>
+    <text x="391" y="356" font-size="16">右の面が使う頂点B　位置P、U = 0</text>
+    <text x="42" y="397" font-size="14" fill="#475569">破線は円筒の継ぎ目</text>
+    <text x="373" y="397" font-size="14" fill="#475569">各面のインデックスは対応する頂点番号を指す</text>
+  </g>
+</svg>

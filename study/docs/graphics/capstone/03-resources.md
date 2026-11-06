@@ -146,6 +146,8 @@ struct MeshAsset { Buffer vb, ib; std::vector<Primitive> primitives; };
 
 cgltf等でパースし、プリミティブごとにマテリアルインデックスを保持。タンジェントが無いモデルはMikkTSpaceで生成するのが正道です。
 
+glTFの参照から頂点バッファを組み立てる手順と、取り込み時の座標系や属性の変換は別の記事で追えます。[glTFのメッシュデータ](/graphics/mesh/gltf-mesh-buffers.html) · [メッシュのインポートとクック](/graphics/mesh/mesh-import-and-cooking.html)
+
 ## 3.6 IBLアセットの事前計算
 
 [IBLページ](/graphics/lighting/ibl.html) の理論を起動時Computeで実行します:

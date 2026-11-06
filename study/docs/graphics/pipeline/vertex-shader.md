@@ -61,6 +61,8 @@ flowchart LR
 - 入力: 頂点属性 + 定数バッファ + テクスチャ/構造化バッファ + システム値 (`SV_VertexID`, `SV_InstanceID`)
 - 出力: `SV_Position` (クリップ空間座標、**必須**) + 任意の補間属性
 
+頂点バッファの各バイトがどの属性になるかは、入力レイアウトとストライドで決まります。インデックスをたどって描画する例で、その対応を確認できます。[頂点入力とインデックス描画](/graphics/mesh/vertex-and-index-input.html) · [GLBから三角形を描くC++実践](/practice/graphics/glb-mesh-observation.html)
+
 ### 頂点フェッチの2方式
 
 | 方式 | 仕組み | 用途 |

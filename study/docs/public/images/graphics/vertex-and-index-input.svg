@@ -1,0 +1,50 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="760" height="410" viewBox="0 0 760 410" role="img" aria-labelledby="title desc" xml:lang="ja">
+  <title id="title">インデックスの値から頂点属性を取り出す</title>
+  <desc id="desc">インデックスバッファの先頭の値2で頂点2を選ぶ。頂点バッファのストライドが24バイトなので頂点2は48バイト目にあり、位置は48バイト目、法線はそこから12バイト進んだ60バイト目から始まる。2、0、1の順で三角形を組み立てる。</desc>
+  <defs>
+    <marker id="arrow" viewBox="0 0 8 8" refX="7" refY="4" markerWidth="7" markerHeight="7" orient="auto">
+      <path d="M0 0 8 4 0 8Z" fill="#486078"/>
+    </marker>
+  </defs>
+  <rect width="760" height="410" rx="16" fill="#f3f7fa"/>
+  <g font-family="'Noto Sans JP', 'Yu Gothic', 'Meiryo', sans-serif" fill="#183246">
+    <text x="24" y="40" font-size="24" font-weight="700">インデックスの値から頂点属性を取り出す</text>
+    <text x="24" y="67" font-size="15" fill="#475569">位置と法線を1頂点にまとめた三角形リストの例</text>
+
+    <rect x="24" y="88" width="222" height="239" rx="10" fill="#fff" stroke="#a5bac7"/>
+    <rect x="316" y="88" width="420" height="239" rx="10" fill="#fff" stroke="#a5bac7"/>
+    <text x="42" y="118" font-size="18" font-weight="700">インデックスバッファ</text>
+    <text x="334" y="118" font-size="18" font-weight="700">頂点バッファ</text>
+    <text x="42" y="141" font-size="14" fill="#475569">1個につき2バイト</text>
+    <text x="334" y="141" font-size="14" fill="#475569">次の頂点まで24バイト（ストライド）</text>
+
+    <g stroke="#9cb0c3">
+      <rect x="42" y="160" width="186" height="40" rx="5" fill="#d6eee6" stroke="#669a88"/>
+      <rect x="42" y="211" width="186" height="40" rx="5" fill="#e9eff5"/>
+      <rect x="42" y="262" width="186" height="40" rx="5" fill="#e9eff5"/>
+      <rect x="334" y="160" width="384" height="40" rx="5" fill="#e9eff5"/>
+      <rect x="334" y="211" width="384" height="40" rx="5" fill="#e9eff5"/>
+      <rect x="334" y="262" width="384" height="40" rx="5" fill="#d6eee6" stroke="#669a88"/>
+      <path d="M443 160v40m137-40v40M443 211v40m137-40v40M443 262v40m137-40v40" fill="none"/>
+    </g>
+
+    <g font-size="14" dominant-baseline="middle" text-anchor="middle">
+      <text x="135" y="181" font-weight="700">0バイト目　値 2</text>
+      <text x="135" y="232">2バイト目　値 0</text>
+      <text x="135" y="283">4バイト目　値 1</text>
+      <text x="389" y="181">頂点 0</text>
+      <text x="389" y="232">頂点 1</text>
+      <text x="389" y="283" font-weight="700">頂点 2</text>
+      <text x="511" y="181">位置　0バイト目</text>
+      <text x="649" y="181">法線　12バイト目</text>
+      <text x="511" y="232">位置　24バイト目</text>
+      <text x="649" y="232">法線　36バイト目</text>
+      <text x="511" y="283" font-weight="700">位置　48バイト目</text>
+      <text x="649" y="283" font-weight="700">法線　60バイト目</text>
+    </g>
+    <path d="M229 180H278V282H329" fill="none" stroke="#486078" stroke-width="2" marker-end="url(#arrow)"/>
+
+    <rect x="24" y="349" width="712" height="39" rx="7" fill="#fff" stroke="#a5bac7"/>
+    <text x="42" y="374" font-size="15">参照順は頂点 2 → 0 → 1。3つの頂点で1個の三角形を作る。</text>
+  </g>
+</svg>
