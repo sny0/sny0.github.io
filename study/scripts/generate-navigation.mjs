@@ -219,6 +219,12 @@ writePage('guide/learning-paths.md', '疑問から選ぶ読み順', {
 2. [C++・C#の読み取り観察](/practice/io/file-read-observation.html)で、要求数と実読取数、ファイル位置、EOF、seek、失敗を確かめる。
 3. テキストとして解釈するときは[Unicodeと文字コード](/data/unicode-and-encoding.html)へ進む。
 
+## ファイルを読む処理と、ディスクへの要求を計測で分けるには
+
+1. [Windowsのファイルキャッシュと先読み](/os/windows-file-cache.html)で、同じ範囲の再読み取りと先読みでI/Oの量が変わる理由を調べる。
+2. [ProcmonとWPRでファイルI/Oを追う](/tools/windows/file-io-tracing.html)で、ファイル操作とディスク要求をどのツールで見るか決める。
+3. [ファイル読み取りをトレースするC++実践](/practice/io/file-io-trace-observation.html)で、同じファイルを2回読み、バイト数と記録を照合する。
+
 ## I/Oの完了を待ちながら、別の処理を進めるには
 
 1. [非同期I/O](/os/asynchronous-file-io.html)で、要求の発行と完了、即時完了、待機と継続、バッファの寿命を分ける。
@@ -247,6 +253,7 @@ writePage('guide/learning-paths.md', '疑問から選ぶ読み順', {
 1. [アセットロード設計](/game/asset-loading.html)で、読み取り、展開・検証、登録、利用可能化、解放を分ける。
 2. [C++・C#の状態と寿命のモデル](/practice/assets/asset-lifecycle-model.html)で、古い要求の完了、キャンセル、失敗を含む所有権の移動を確かめる。
 3. 実I/Oの完了待ちは[非同期I/O](/os/asynchronous-file-io.html)、共有するキューや状態の保護は[スレッドと同期](/runtime/thread-synchronization.html)も確認する。
+4. Windows PCの[DirectStorage](/game/directstorage.html)で、読み取りの一括発行、展開、GPUが結果を使えるまでの条件を確認する。
 
 ## 入力からゲーム画面まで
 
@@ -571,11 +578,14 @@ const termRows = [
   ['ソケット / socket / TCP / IPアドレス / ポート / send / recv / フレーミング / 半閉鎖 / loopback', '/network/tcp-sockets.html', '送受信バッファ、バイト列の境界、EOFとエラー、接続の終了を調べる'],
   ['メモリマップドファイル / file mapping / mmap / MapViewOfFile / MemoryMappedFile / ビュー', '/os/memory-mapped-files.html', 'ファイルの範囲と仮想アドレスを対応付け、ページとビューの寿命を調べる'],
   ['アセットロード / asset loading / リソース管理 / cook / 読み込み完了 / 利用可能 / 世代トークン', '/game/asset-loading.html', 'byte取得から登録・利用可能化・解放までの状態と所有権を整理する'],
+  ['DirectStorage / GDeflate / GPU展開 / GPU decompression / DSTORAGE_REQUEST', '/game/directstorage.html', 'Windows PCで読み取りと展開をまとめて要求し、結果をGPUで使うまでの条件を調べる'],
   ['I/O完了ポート / IOCP / CreateIoCompletionPort / GetQueuedCompletionStatus / completion key', '/os/io-completion-ports.html', '同じポートに集まる完了を、ハンドルと要求ごとに見分ける'],
   ['I/Oキャンセル / CancelIoEx / CancelIo / ERROR_NOT_FOUND / ERROR_OPERATION_ABORTED', '/os/cancelling-overlapped-io.html', 'キャンセル要求と完了を区別して、バッファを解放できる時点を調べる'],
   ['書き込み / 永続化 / durability / WriteFile / FlushFileBuffers / FILE_FLAG_WRITE_THROUGH / ReplaceFile', '/os/file-write-and-durability.html', '書き込み結果、名前の切り替え、障害後にデータが残る条件を調べる'],
   ['非同期I/O / asynchronous I/O / Overlapped I/O / ERROR_IO_PENDING / ReadAsync / await', '/os/asynchronous-file-io.html', '要求の発行、完了結果、待機と継続、バッファを再利用できる時点を調べる'],
-  ['ファイルI/O / read / FileStream / ReadFile / EOF / seek / ファイルキャッシュ / ページキャッシュ', '/os/file-read-journey.html', '読み取り要求と実読取数、ファイル位置、OSキャッシュと保存装置の違いを調べる'],
+  ['ファイルI/O / read / FileStream / ReadFile / EOF / seek', '/os/file-read-journey.html', '読み取り要求と実読取数、ファイル位置、OSキャッシュと保存装置の違いを調べる'],
+  ['ファイルキャッシュ / ページキャッシュ / Cache Manager / read-ahead / 先読み / FILE_FLAG_NO_BUFFERING', '/os/windows-file-cache.html', 'ファイルデータの再利用、アクセスのヒント、キャッシュを迂回する際の条件を調べる'],
+  ['Procmon / Process Monitor / WPR / WPA / ETW / File I/O / Disk Usage', '/tools/windows/file-io-tracing.html', 'ファイル操作とストレージ側の要求を、時刻、パス、プロセスから調べる'],
   ['スレッド同期 / mutex / lock / lock_guard / 排他制御 / critical section / happens-before / join', '/runtime/thread-synchronization.html', '共有する状態、ロックの排他と同期、終了待ちとオブジェクトの寿命を結び付ける'],
   ['近似一致 / 絶対許容差 / 相対許容差 / 浮動小数点の比較 / NaN / Inf', '/math/floating-point-comparison.html', '厳密な等値、用途に応じた近似判定、特殊値と非推移性を区別する'],
   ['Unicode / 文字コード / UTF-8 / UTF-16 / コードポイント / サロゲートペア / BOM / 文字化け', '/data/unicode-and-encoding.html', '文字の番号、コード単位、バイト列と、長さの数え方を区別する'],

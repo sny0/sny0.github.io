@@ -192,6 +192,7 @@ void Renderer::RenderFrame() {
 
 ## 次に読むべきページ
 
+- [DirectStorage](/game/directstorage.html) — Windows PCでアセットの読み取りと展開を要求する仕組み
 - [Vulkan](/graphics/api/vulkan.html) — 概念対応で二刀流に
 - [HLSL](/graphics/shader/hlsl.html) — SM6.xの言語側
 - [RenderGraph / FrameGraph](/graphics/optimization/render-graph.html) — バリア地獄の解法

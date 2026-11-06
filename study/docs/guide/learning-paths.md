@@ -74,6 +74,12 @@
 2. [C++・C#の読み取り観察](/practice/io/file-read-observation.html)で、要求数と実読取数、ファイル位置、EOF、seek、失敗を確かめる。
 3. テキストとして解釈するときは[Unicodeと文字コード](/data/unicode-and-encoding.html)へ進む。
 
+## ファイルを読む処理と、ディスクへの要求を計測で分けるには
+
+1. [Windowsのファイルキャッシュと先読み](/os/windows-file-cache.html)で、同じ範囲の再読み取りと先読みでI/Oの量が変わる理由を調べる。
+2. [ProcmonとWPRでファイルI/Oを追う](/tools/windows/file-io-tracing.html)で、ファイル操作とディスク要求をどのツールで見るか決める。
+3. [ファイル読み取りをトレースするC++実践](/practice/io/file-io-trace-observation.html)で、同じファイルを2回読み、バイト数と記録を照合する。
+
 ## I/Oの完了を待ちながら、別の処理を進めるには
 
 1. [非同期I/O](/os/asynchronous-file-io.html)で、要求の発行と完了、即時完了、待機と継続、バッファの寿命を分ける。
@@ -102,6 +108,7 @@
 1. [アセットロード設計](/game/asset-loading.html)で、読み取り、展開・検証、登録、利用可能化、解放を分ける。
 2. [C++・C#の状態と寿命のモデル](/practice/assets/asset-lifecycle-model.html)で、古い要求の完了、キャンセル、失敗を含む所有権の移動を確かめる。
 3. 実I/Oの完了待ちは[非同期I/O](/os/asynchronous-file-io.html)、共有するキューや状態の保護は[スレッドと同期](/runtime/thread-synchronization.html)も確認する。
+4. Windows PCの[DirectStorage](/game/directstorage.html)で、読み取りの一括発行、展開、GPUが結果を使えるまでの条件を確認する。
 
 ## 入力からゲーム画面まで
 

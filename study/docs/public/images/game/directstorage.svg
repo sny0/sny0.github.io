@@ -1,0 +1,50 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="760" height="440" viewBox="0 0 760 440" role="img" aria-labelledby="title description">
+  <title id="title">DirectStorageで読み取りを提出し、展開結果を使う</title>
+  <desc id="description">ゲームがファイルの範囲を指定した要求をキューに積んで提出する。圧縮データは、出力先や環境によってCPUで展開してメモリなどへ渡すか、GPUで展開してD3D12リソースへ渡す。完了と結果を確認し、ゲーム側で利用の準備を行う。</desc>
+  <defs>
+    <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto">
+      <path d="M0 0 10 5 0 10Z" fill="#49677b"/>
+    </marker>
+  </defs>
+  <rect width="760" height="440" rx="16" fill="#f3f7fa"/>
+  <g font-family="system-ui, sans-serif" fill="#183246">
+    <text x="24" y="42" font-size="24" font-weight="700">DirectStorageで圧縮アセットを読む</text>
+    <text x="24" y="69" font-size="16" fill="#476476">提出、読み取りと展開、ゲーム側での準備を分ける</text>
+    <g stroke="#8faaba" fill="#e3eef4">
+      <rect x="24" y="93" width="214" height="60" rx="8"/>
+      <rect x="274" y="93" width="214" height="60" rx="8"/>
+      <rect x="524" y="93" width="212" height="60" rx="8"/>
+    </g>
+    <g stroke="#49677b" stroke-width="2.5" fill="none" marker-end="url(#arrow)">
+      <path d="M240 123H271"/>
+      <path d="M490 123H521"/>
+      <path d="M631 155V171H197V187"/>
+      <path d="M631 155V171H563V187"/>
+      <path d="M197 264V278H320V292"/>
+      <path d="M563 264V278H440V292"/>
+      <path d="M380 348V365"/>
+    </g>
+    <rect x="24" y="190" width="346" height="72" rx="8" fill="#d9ede5" stroke="#83ad9d"/>
+    <rect x="390" y="190" width="346" height="72" rx="8" fill="#dcebf4" stroke="#83a5b9"/>
+    <rect x="211" y="294" width="338" height="52" rx="8" fill="#fff0cd" stroke="#c7a97a"/>
+    <rect x="176" y="368" width="408" height="48" rx="8" fill="#fff" stroke="#a5bac7"/>
+    <g text-anchor="middle">
+      <g font-size="17" font-weight="700">
+        <text x="131" y="118">ファイルの範囲を選ぶ</text>
+        <text x="381" y="118">要求をキューに積む</text>
+        <text x="630" y="118">まとめて提出する</text>
+        <text x="197" y="219">CPUで展開</text>
+        <text x="563" y="219">GPUで展開</text>
+        <text x="380" y="326">完了を待ち、成功かエラーかを確認</text>
+        <text x="380" y="398">ゲーム側で準備を終え、アセットを使う</text>
+      </g>
+      <g font-size="14" fill="#476476">
+        <text x="131" y="140">オフセットとサイズ</text>
+        <text x="381" y="140">EnqueueRequest</text>
+        <text x="630" y="140">Submit</text>
+        <text x="197" y="244">システムメモリなどへ</text>
+        <text x="563" y="244">対応環境でD3D12リソースへ</text>
+      </g>
+    </g>
+  </g>
+</svg>
