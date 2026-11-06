@@ -102,23 +102,7 @@ PIXのタイムライン+カウンタ分析。Enhanced Barriersでバリアを�
 
 ## コード例
 
-GPUタイムスタンプによるパス別計測 (DX12):
-
-```cpp
-// クエリヒープ作成 (初期化時)
-D3D12_QUERY_HEAP_DESC qd = { D3D12_QUERY_HEAP_TYPE_TIMESTAMP, kMaxQueries };
-device->CreateQueryHeap(&qd, IID_PPV_ARGS(&queryHeap));
-
-// 各パスの前後で記録
-cmd->EndQuery(queryHeap.Get(), D3D12_QUERY_TYPE_TIMESTAMP, idx0); // パス開始
-DrawShadowPass(cmd);
-cmd->EndQuery(queryHeap.Get(), D3D12_QUERY_TYPE_TIMESTAMP, idx1); // パス終了
-
-// フレーム末尾で読み戻しバッファへ解決 (数フレーム遅れて読む)
-cmd->ResolveQueryData(queryHeap.Get(), D3D12_QUERY_TYPE_TIMESTAMP,
-                      0, queryCount, readbackBuf.Get(), 0);
-// CPU側: (t1 - t0) / timestampFrequency * 1000.0 = パスのms
-```
+GPUタイムスタンプでパスを計測するときは、書き込み済みのクエリだけを解決し、GPUでの解決完了をフェンスで確認してからCPUで読みます。キューの周波数を使う浮動小数点への換算と、Direct3D 12・Vulkanの計測手順は[GPU時間をタイムスタンプで測る](/graphics/optimization/gpu-timestamp-queries.html)にまとめています。
 
 オーバードロー可視化 (デバッグシェーダの定石):
 

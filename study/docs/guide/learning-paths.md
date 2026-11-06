@@ -309,6 +309,13 @@
 2. [FIFO・MAILBOX・IMMEDIATEで画面の切り替わりを比べる](/practice/graphics/swap-chain-observation.html)で、表示待ち、表示されずに置き換わる絵、ティアリングを観察する。
 3. [デバイス初期化と画面クリア](/graphics/capstone/02-device.html)で、Vulkanで画像を取得し、描画の完了に合わせてPresentするコードを読む。
 
+## 入力への反応が遅いときに、どこで待ったかを調べる
+
+1. [入力から画面に出るまでの遅延](/graphics/optimization/input-to-display-latency.html)で、入力の取得から走査までを追い、[入力遅延の実験](/practice/graphics/input-latency-observation.html)で一つ前の走査に間に合う条件を試す。
+2. [GPU時間をタイムスタンプで測る](/graphics/optimization/gpu-timestamp-queries.html)で、GPUキューのどの区間を測っているかを確かめる。
+3. [GPUリソースの寿命とフェンス](/graphics/optimization/gpu-resource-lifetime.html)で、GPUが使用中の領域をCPU側で再利用できる時点を調べる。
+4. [シェーダーコンパイルのカクつきとパイプラインキャッシュ](/graphics/optimization/pipeline-compilation-stutter.html)で、初回だけ起きる処理を記録し、先に準備する仕組みを読む。
+
 ## 作り方の変化を歴史から見る
 
 [ビデオゲーム史](/history/video-games.html)の作品・ハード・媒体・流通と、[リアルタイム3D技術史](/guide/rendering/timeline.html)の技術の変化から、気になった仕組みへ進みます。

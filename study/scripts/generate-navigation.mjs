@@ -454,11 +454,22 @@ writePage('guide/learning-paths.md', '疑問から選ぶ読み順', {
 2. [FIFO・MAILBOX・IMMEDIATEで画面の切り替わりを比べる](/practice/graphics/swap-chain-observation.html)で、表示待ち、表示されずに置き換わる絵、ティアリングを観察する。
 3. [デバイス初期化と画面クリア](/graphics/capstone/02-device.html)で、Vulkanで画像を取得し、描画の完了に合わせてPresentするコードを読む。
 
+## 入力への反応が遅いときに、どこで待ったかを調べる
+
+1. [入力から画面に出るまでの遅延](/graphics/optimization/input-to-display-latency.html)で、入力の取得から走査までを追い、[入力遅延の実験](/practice/graphics/input-latency-observation.html)で一つ前の走査に間に合う条件を試す。
+2. [GPU時間をタイムスタンプで測る](/graphics/optimization/gpu-timestamp-queries.html)で、GPUキューのどの区間を測っているかを確かめる。
+3. [GPUリソースの寿命とフェンス](/graphics/optimization/gpu-resource-lifetime.html)で、GPUが使用中の領域をCPU側で再利用できる時点を調べる。
+4. [シェーダーコンパイルのカクつきとパイプラインキャッシュ](/graphics/optimization/pipeline-compilation-stutter.html)で、初回だけ起きる処理を記録し、先に準備する仕組みを読む。
+
 ## 作り方の変化を歴史から見る
 
 [ビデオゲーム史](/history/video-games.html)の作品・ハード・媒体・流通と、[リアルタイム3D技術史](/guide/rendering/timeline.html)の技術の変化から、気になった仕組みへ進みます。`)
 
 const termRows = [
+  ['入力遅延 / input latency / input-to-photon / ポーリング / 入力マーカー', '/graphics/optimization/input-to-display-latency.html', '入力から対象の行が更新されるまでの処理と待ちを分ける'],
+  ['GPUタイムスタンプ / timestamp query / ResolveQueryData / timestampPeriod / timestampValidBits', '/graphics/optimization/gpu-timestamp-queries.html', 'GPUコマンドの時刻を読み戻して区間の時間を測る'],
+  ['GPUフェンス / リソースの寿命 / upload heap / ステージング / descriptor', '/graphics/optimization/gpu-resource-lifetime.html', 'GPUが使う領域やコマンド格納場所を再利用できる条件を調べる'],
+  ['PSO / パイプラインキャッシュ / シェーダーコンパイル / pipeline cache / warm-up', '/graphics/optimization/pipeline-compilation-stutter.html', '初回使用までに必要なパイプライン作成とキャッシュの役割を調べる'],
   ['スワップチェーン / swapchain / VSync / 垂直同期 / Present / scanout / 走査 / ティアリング / FIFO / MAILBOX / IMMEDIATE', '/graphics/optimization/swap-chain-and-vsync.html', '描画済みの絵が画面へ出る順序と時刻、次の描画に画像を使い回せる条件を調べる'],
   ['フレームタイム / frame time / フレームペーシング / frame pacing / フレーム予算 / p99 / スタッター', '/graphics/optimization/frame-pacing.html', 'CPU・GPUの処理時間と表示間隔を分け、カクつきが起きた時刻を調べる'],
   ['通過音 / フライバイ / flyby / 最接近 / 視線方向の速度 / PannerNode / playbackRate', '/browser/audio-flyby.html', '横切る音源の軌道から、時間ごとの高さ、左右の配分、距離減衰を求める'],

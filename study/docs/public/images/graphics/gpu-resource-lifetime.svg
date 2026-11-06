@@ -1,0 +1,52 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="760" height="322" viewBox="0 0 760 322" role="img" aria-labelledby="title desc" xml:lang="ja">
+  <title id="title">GPUが使うアップロード領域を再利用するまで</title>
+  <desc id="desc">CPUが領域Aに書き、コピーとフェンス値42の通知をキューに積む。GPUが領域Aを読んでから値42を通知し、CPUがそれを確認するとAを再利用できる。提出から確認まで、Aの内容を保つ。</desc>
+  <defs>
+    <marker id="arrow" viewBox="0 0 8 8" refX="7" refY="4" markerWidth="7" markerHeight="7" orient="auto">
+      <path d="M0 0 8 4 0 8Z" fill="#486078"/>
+    </marker>
+  </defs>
+  <rect width="760" height="322" rx="18" fill="#f8fafc"/>
+  <g font-family="'Noto Sans JP', 'Yu Gothic', 'Meiryo', sans-serif" fill="#162334">
+    <text x="25" y="39" font-size="23" font-weight="700">アップロード領域Aをいつ空きに戻せるか</text>
+    <text x="25" y="65" font-size="16" fill="#475569">同じキューに、コピーと完了通知をこの順で積む</text>
+
+    <path d="M108 100H720" fill="none" stroke="#63788d" stroke-width="1.5" marker-end="url(#arrow)"/>
+    <text x="718" y="91" font-size="13" fill="#475569" text-anchor="end">時間</text>
+    <path d="M411 100V239M604 100V239" fill="none" stroke="#9aabba" stroke-dasharray="4 4"/>
+
+    <g font-size="16" font-weight="700">
+      <text x="25" y="138">CPU</text>
+      <text x="25" y="209">GPU</text>
+      <text x="25" y="272">領域A</text>
+    </g>
+
+    <g stroke-width="1.5">
+      <rect x="108" y="114" width="118" height="39" rx="6" fill="#e1f4ef" stroke="#4f8678"/>
+      <rect x="238" y="114" width="173" height="39" rx="6" fill="#e1f4ef" stroke="#4f8678"/>
+      <rect x="604" y="114" width="116" height="39" rx="6" fill="#e1f4ef" stroke="#4f8678"/>
+      <rect x="411" y="185" width="112" height="39" rx="6" fill="#e7f2fe" stroke="#587ba5"/>
+      <rect x="532" y="185" width="72" height="39" rx="6" fill="#e7f2fe" stroke="#587ba5"/>
+      <rect x="226" y="248" width="378" height="39" rx="6" fill="#fff1df" stroke="#a56836"/>
+      <rect x="604" y="248" width="116" height="39" rx="6" fill="#e1f4ef" stroke="#4f8678"/>
+    </g>
+
+    <g font-size="14" text-anchor="middle">
+      <text x="167" y="139">Aに書き込む</text>
+      <text x="324.5" y="139">コピーとSignalを提出</text>
+      <text x="662" y="139">完了値42を確認</text>
+      <text x="467" y="210">Aからコピー</text>
+      <text x="568" y="210">42を通知</text>
+      <text x="415" y="272">上書きできない。別の空き範囲は使える</text>
+      <text x="662" y="272" font-weight="700">再利用できる</text>
+    </g>
+
+    <g fill="none" stroke="#486078" stroke-width="1.5" marker-end="url(#arrow)">
+      <path d="M226 134h9"/>
+      <path d="M411 153v28"/>
+      <path d="M523 204h6"/>
+      <path d="M604 185v-28"/>
+    </g>
+    <text x="25" y="307" font-size="13" fill="#475569">この例で領域Aを使うのはコピー命令だけ</text>
+  </g>
+</svg>
