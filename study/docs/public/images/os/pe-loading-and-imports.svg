@@ -1,0 +1,34 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="760" height="480" viewBox="0 0 760 480" role="img" aria-labelledby="title description">
+  <title id="title">PEのファイルから実行時アドレスへ</title>
+  <desc id="description">ファイル内の.dataの初期値をRVA 0x1B000へ対応付け、ファイルにない末尾をゼロで埋める。ベース再配置はイメージ内の絶対ポインターを補正し、インポートの解決はIATに外部関数の実行時アドレスを入れる。</desc>
+  <defs>
+    <marker id="arrow" viewBox="0 0 8 8" refX="7" refY="4" markerWidth="7" markerHeight="7" orient="auto">
+      <path d="M0 0L8 4L0 8Z" fill="#315b6d"/>
+    </marker>
+  </defs>
+  <rect width="760" height="480" rx="16" fill="#f3f7fa"/>
+  <g font-family="system-ui, sans-serif" fill="#183246">
+    <text x="26" y="43" font-size="25" font-weight="700">PEのファイルから実行時アドレスへ</text>
+    <text x="26" y="72" font-size="15" fill="#455b6b">Windows x64のEXEで観察した .data と、ロード後のアドレス</text>
+    <rect x="26" y="96" width="293" height="169" rx="10" fill="#fff" stroke="#a3bdca"/>
+    <rect x="395" y="96" width="339" height="169" rx="10" fill="#fff" stroke="#a3bdca"/>
+    <text x="45" y="126" font-size="18" font-weight="700">ファイル内の .data</text>
+    <text x="414" y="126" font-size="18" font-weight="700">イメージ内の .data</text>
+    <text x="45" y="153" font-size="15">ファイルオフセット  0x18E00</text>
+    <text x="414" y="153" font-size="15">RVA  0x1B000</text>
+    <rect x="45" y="168" width="254" height="41" rx="5" fill="#d9e8ef"/>
+    <rect x="414" y="168" width="137" height="41" rx="5" fill="#d9e8ef"/>
+    <rect x="555" y="168" width="160" height="41" rx="5" fill="#e7f3eb" stroke="#8bb5a5"/>
+    <text x="172" y="194" text-anchor="middle" font-size="15">ファイルの内容  0xC00バイト</text>
+    <text x="482" y="194" text-anchor="middle" font-size="15">ファイルの内容</text>
+    <text x="635" y="194" text-anchor="middle" font-size="15">残りはゼロ埋め</text>
+    <text x="414" y="236" font-size="15">仮想サイズ  0x2C78バイト</text>
+    <path d="M326 187H385" fill="none" stroke="#315b6d" stroke-width="2" marker-end="url(#arrow)"/>
+    <rect x="26" y="287" width="708" height="73" rx="10" fill="#f7e9d3" stroke="#b49968"/>
+    <text x="45" y="316" font-size="18" font-weight="700">ベース再配置</text>
+    <text x="45" y="343" font-size="16">イメージ内の絶対ポインターに、ロードベースの差分を加える。</text>
+    <rect x="26" y="379" width="708" height="73" rx="10" fill="#e6f3ed" stroke="#8bb5a5"/>
+    <text x="45" y="408" font-size="18" font-weight="700">インポートの解決</text>
+    <text x="45" y="435" font-size="16">DLLから関数の実行時アドレスを引き、IATのスロットへ入れる。</text>
+  </g>
+</svg>

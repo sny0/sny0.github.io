@@ -1,0 +1,36 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="760" height="306" viewBox="0 0 760 306" role="img" aria-labelledby="title desc" xml:lang="ja">
+  <title id="title">同じアドレスへの二つの書き込みで停止する</title>
+  <desc id="desc">mainの呼び出し前にソース行で停止してg_scoreの4バイトを監視する。ApplyBonusで60、ResetRoundで0を書いたあとにそれぞれ停止する。</desc>
+  <defs>
+    <marker id="arrow" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto">
+      <path d="M0 0L8 4L0 8Z" fill="#475569"/>
+    </marker>
+  </defs>
+  <rect width="760" height="306" rx="18" fill="#f8fafc"/>
+  <g font-family="'Noto Sans JP', 'Yu Gothic', 'Meiryo', sans-serif" fill="#172b3c">
+    <text x="24" y="40" font-size="24" font-weight="700">同じ4バイトへの書き込みを追う</text>
+    <text x="24" y="67" font-size="16" fill="#475569">監視するアドレスは &amp;g_score。関数が変わっても監視先は同じ。</text>
+
+    <rect x="24" y="94" width="220" height="129" rx="12" fill="#eef4fb" stroke="#567b9f"/>
+    <rect x="270" y="94" width="220" height="129" rx="12" fill="#ebf6f0" stroke="#47826b"/>
+    <rect x="516" y="94" width="220" height="129" rx="12" fill="#fff2e3" stroke="#b46d2d"/>
+    <path d="M249 159H264 M495 159H510" fill="none" stroke="#475569" stroke-width="2" marker-end="url(#arrow)"/>
+
+    <g font-weight="700">
+      <text x="41" y="126" font-size="15" fill="#385b7c">1　ソース行で停止</text>
+      <text x="287" y="126" font-size="15" fill="#28654c">2　書き込み後に停止</text>
+      <text x="533" y="126" font-size="15" fill="#8a4b1a">3　書き込み後に停止</text>
+      <text x="41" y="162" font-size="20">main</text>
+      <text x="287" y="162" font-size="20">ApplyBonus</text>
+      <text x="533" y="162" font-size="20">ResetRound</text>
+    </g>
+    <g font-size="15" fill="#334155">
+      <text x="41" y="195">値は10。ここで監視を設定</text>
+      <text x="287" y="195">値が10から60へ変わる</text>
+      <text x="533" y="195">値が60から0へ変わる</text>
+    </g>
+    <path d="M380 228V243H626V228" fill="none" stroke="#66788a" stroke-width="1.8"/>
+    <rect x="24" y="253" width="712" height="32" rx="8" fill="#e8eef4"/>
+    <text x="380" y="275" text-anchor="middle" font-size="15">停止したスレッドのコールスタックで、書き込み元への経路を見る</text>
+  </g>
+</svg>

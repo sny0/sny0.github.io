@@ -19,6 +19,7 @@
 
 ## 辞典の本文
 
+- [PEローダーがEXEとDLLを配置する仕組み — RVA・再配置・IAT](/os/pe-loading-and-imports.html)
 - [ファイルを読むと内部で何が起きるか](/os/file-read-journey.html)
 - [メモリマップドファイル — ファイルの範囲をアドレスへ対応させる](/os/memory-mapped-files.html)
 - [仮想メモリ — アドレス変換・ページ・予約とコミット](/os/virtual-memory.html)

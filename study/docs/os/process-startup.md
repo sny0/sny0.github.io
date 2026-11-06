@@ -61,6 +61,8 @@ Windowsの通常のEXEやDLLはPE形式です。**イメージ**は、実行用�
 
 起動後に`LoadLibrary`で追加するDLLや、遅延ロードするDLLもあります。「プログラムがいつか使うDLLはすべて`main`前にロード済み」とは限りません。静的ライブラリをリンクすることとDLLをロードすることの違いは、[オブジェクトファイルとライブラリ](/runtime/cpp-internals/object-files-and-libraries.html)へつながります。[Microsoft: Linker support for delay-loaded DLLs](https://learn.microsoft.com/en-us/cpp/build/reference/linker-support-for-delay-loaded-dlls?view=msvc-170)
 
+ファイル内のオフセットから実行時のアドレスを引く方法と、IATが埋まる流れは[WindowsのPEローダー](/os/pe-loading-and-imports.html)で扱います。
+
 ### 3. ローダー側の初期化を進める
 
 実行開始の準備には、DLLの初期化通知やTLS関連の処理も関わります。PEのTLS情報にはスレッド用データの初期値やコールバックが含まれ、EXEのPEエントリポイントに入る前に実行される処理があります。ただし、OSがTLSの保存場所を準備することと、C++のあらゆる`thread_local`変数のコンストラクタが実行済みになることは別です。[Microsoft: PE Format — The .tls Section](https://learn.microsoft.com/en-us/windows/win32/debug/pe-format#the-tls-section)

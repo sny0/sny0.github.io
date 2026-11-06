@@ -12,6 +12,8 @@ export const formatLabels = {
 export const statusLabels = { published: '公開中', outline: '学習計画・概要', draft: '草稿', planned: '執筆予定' }
 
 export const collections = [
+  { id: 'generational-handle-observation', section: 'practice', title: '世代付きハンドルでスロットの再利用を追う', description: '同じ枠を使い回し、古いハンドルの照合、世代の周回、退役を試す。', start: '/practice/algorithms/generational-handle-observation.html' },
+  { id: 'build-artifact-observation', section: 'practice', title: '2つのC++ファイルからOBJ・EXE・PDBを作って読む', description: '別々のOBJの関数参照を、再配置情報、リンク後のEXE、PDBまで追う。', start: '/practice/compilers/build-artifact-observation.html' },
   { id: 'spatial-query-observation', section: 'practice', title: '総当たり・グリッド・BVHで範囲検索を比べる', description: '円の分布と検索範囲を変え、候補と命中を同じ場面で比べる。', start: '/practice/algorithms/spatial-query-observation.html' },
   { id: 'sparse-set-observation', section: 'practice', title: 'スパースセットでIDの追加と削除を試す', description: 'IDから位置を引く配列と、IDを詰めた配列の変化を比べる。', start: '/practice/algorithms/sparse-set-observation.html' },
   { id: 'input-latency-observation', section: 'practice', title: '入力遅延を待ち時間と描画時間に分けてみる', description: '入力を読む周期、GPUの待ち、画面の更新周期と走査位置を変えて比べる。', start: '/practice/graphics/input-latency-observation.html' },

@@ -1,0 +1,25 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="760" height="280" viewBox="0 0 760 280" role="img" aria-labelledby="title desc">
+  <title id="title">同じスロットを再利用すると世代が変わる</title>
+  <desc id="desc">敵Aはスロット2の世代5。解放したスロット2の世代を6にし、敵Bを割り当てる。古いハンドルは世代の違いを検出する。</desc>
+  <rect width="760" height="280" rx="14" fill="#f4f8fa"/>
+  <g font-family="system-ui, sans-serif" fill="#183046">
+    <text x="24" y="42" font-size="24" font-weight="700">同じスロットを再利用すると世代が変わる</text>
+    <g fill="#dcebf4" stroke="#85a7be"><rect x="24" y="70" width="200" height="106" rx="8"/></g>
+    <g fill="#f0f3f6" stroke="#a6b4bf"><rect x="280" y="70" width="200" height="106" rx="8"/></g>
+    <g fill="#dff0e9" stroke="#85b5a5"><rect x="536" y="70" width="200" height="106" rx="8"/></g>
+    <path d="M233 125h36m-8-6 8 6-8 6m228-6h36m-8-6 8 6-8 6" fill="none" stroke="#557185" stroke-width="2"/>
+    <g text-anchor="middle">
+      <g font-size="16" font-weight="700">
+        <text x="124" y="98">敵Aが使用中</text><text x="380" y="98">解放した空き枠</text><text x="636" y="98">敵Bを割り当て</text>
+      </g>
+      <g font-size="17">
+        <text x="124" y="128">スロット 2・世代 5</text><text x="380" y="128">スロット 2・世代 6</text><text x="636" y="128">スロット 2・世代 6</text>
+      </g>
+      <g font-size="14" fill="#455f70">
+        <text x="124" y="153">ハンドル (2, 5) を保存</text><text x="380" y="153">世代を進める</text><text x="636" y="153">新しいハンドル (2, 6)</text>
+      </g>
+    </g>
+    <text x="24" y="216" font-size="16">位置 2 だけで照合すると、敵Bが返る。</text>
+    <text x="24" y="249" font-size="16" font-weight="700" fill="#19543e">古い (2, 5) で照合すると、世代が違うので無効。</text>
+  </g>
+</svg>

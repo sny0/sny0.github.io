@@ -19,11 +19,14 @@
 
 ## 辞典の本文
 
+- [COFFのシンボルと再配置 — リンカーがcallの距離を埋めるまで](/compilers/coff-relocations.html)
+- [LLVM IRとSSA — 分岐で選ばれる値を追う](/compilers/llvm-ir-and-ssa.html)
 - [main.cpp から CPU命令までの旅](/runtime/cpp-internals/build-pipeline-journey.html)
 - [オブジェクトファイル・実行ファイル・静的ライブラリ・動的ライブラリ・DLL](/runtime/cpp-internals/object-files-and-libraries.html)
 - [コンパイラ最適化・未定義動作の影響・Debug/Release・ゼロコスト抽象化](/runtime/cpp-internals/optimization-and-ub.html)
 - [シンボル・名前修飾・リンケージ・ABI](/runtime/cpp-internals/symbols-and-linkage.html)
 - [テンプレートの実体化と inline の実際](/runtime/cpp-internals/template-instantiation-and-inline.html)
+- [トークン・AST・型検査 — C++のソースを読み解く](/compilers/tokens-ast-and-type-checking.html)
 - [三大コンパイラ: MSVC・Clang・GCC](/tools/build/compilers.html)
 - [翻訳単位・ヘッダー・include・前方宣言・ODR](/runtime/cpp-internals/translation-units-and-headers.html)
 
@@ -33,7 +36,7 @@
 
 ## 作って試す
 
-この分野専用の実践教材は準備中です。[実践・サンプル一覧](/practice/)に公開中の題材をまとめています。
+- [2つのC++ファイルからOBJ・EXE・PDBを作って読む](/practice/compilers/build-artifact-observation.html)
 
 ## 扱う範囲・増補する項目
 

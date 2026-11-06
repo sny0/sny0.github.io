@@ -467,6 +467,7 @@ writePage('guide/learning-paths.md', '疑問から選ぶ読み順', {
 2. [スタック・キュー・デック](/algorithms/queues-and-deques.html)と[二分ヒープ](/algorithms/binary-heaps.html)で、追加した順や優先度から次に処理するデータを選ぶ。
 3. [ハッシュ表](/algorithms/hash-tables.html)と[探索木](/algorithms/search-trees.html)で、キーの一致を調べたいときと、キーの順序や範囲が必要なときの違いを確認する。
 4. [スパースセット](/algorithms/sparse-sets.html)と[IDを出し入れする実験](/practice/algorithms/sparse-set-observation.html)で、IDからの直接参照と、コンポーネントを詰めた走査を両立する仕組みを試す。
+5. [世代付きハンドル](/algorithms/generational-handles.html)と[スロット再利用の実験](/practice/algorithms/generational-handle-observation.html)で、同じIDを再利用したときに古い参照を識別する条件を確かめる。
 
 ## 近くの物体だけを調べるには
 
@@ -474,11 +475,29 @@ writePage('guide/learning-paths.md', '疑問から選ぶ読み順', {
 2. [四分木と八分木](/algorithms/quadtrees-and-octrees.html)と[BVHとAABB](/algorithms/bounding-volume-hierarchies.html)で、場所を分ける方法と、物体をグループに分けて箱で包む方法を比べる。
 3. [範囲検索の実験](/practice/algorithms/spatial-query-observation.html)で、物体の配置や検索範囲を動かし、命中と詳細判定の件数を確かめる。
 
+## ソースコードの呼び出しを、実行時のアドレスまで追う
+
+1. [トークン・AST・型検査](/compilers/tokens-ast-and-type-checking.html)と[LLVM IRとSSA](/compilers/llvm-ir-and-ssa.html)で、ソースを解釈して中間表現にするまでを追う。
+2. [COFFの再配置](/compilers/coff-relocations.html)と[WindowsのPEローダー](/os/pe-loading-and-imports.html)で、リンクで埋める参照と、ロード時に決まるアドレスを調べる。
+3. [OBJ・EXE・PDBを作って読む実践](/practice/compilers/build-artifact-observation.html)で、同じ関数呼び出しをOBJとEXEから確認する。
+
+## ゲームが止まった箇所や値を書き換えた箇所を探す
+
+1. [ブレークポイントとデータブレークポイント](/tools/windows/debugger-breakpoints-and-watchpoints.html)で、指定した命令や、特定アドレスへの書き込みで止める。
+2. [クラッシュダンプとシンボル](/tools/windows/crash-dumps-and-symbols.html)で、停止時の例外、スレッド、モジュールを確認し、対応するPDBから関数や行を調べる。
+
 ## 作り方の変化を歴史から見る
 
 [ビデオゲーム史](/history/video-games.html)の作品・ハード・媒体・流通と、[リアルタイム3D技術史](/guide/rendering/timeline.html)の技術の変化から、気になった仕組みへ進みます。`)
 
 const termRows = [
+  ['世代付きハンドル / generational handle / slot map / 世代番号 / entity aliasing', '/algorithms/generational-handles.html', 'スロット再利用と世代の周回で、古い参照がいつ一致するか調べる'],
+  ['字句解析 / token / 構文解析 / AST / 型検査 / semantic analysis', '/compilers/tokens-ast-and-type-checking.html', 'ソースをトークンから構文木へ変え、型と名前を解決する'],
+  ['LLVM IR / 中間表現 / SSA / φ / phi / 基本ブロック / CFG', '/compilers/llvm-ir-and-ssa.html', '分岐の経路と、合流点で使われる値を追う'],
+  ['COFF / OBJ / 再配置 / relocation / REL32 / 未定義シンボル', '/compilers/coff-relocations.html', '別のOBJを参照する命令をリンク時にどう埋めるか調べる'],
+  ['PE / ローダー / RVA / VA / ASLR / ベース再配置 / DLLインポート / IAT', '/os/pe-loading-and-imports.html', 'EXEやDLLを仮想メモリに置き、外部関数への参照を解決する'],
+  ['ブレークポイント / データブレークポイント / watchpoint / 条件付きブレークポイント', '/tools/windows/debugger-breakpoints-and-watchpoints.html', '実行や書き込みを観察するためにプログラムを止める'],
+  ['クラッシュダンプ / minidump / PDB / WinDbg / シンボル / スタック', '/tools/windows/crash-dumps-and-symbols.html', '停止時の記録を開き、ビルドに対応するシンボルで停止位置を調べる'],
   ['均等グリッド / uniform grid / 空間ハッシュ / spatial hash / セル / 候補の重複', '/algorithms/uniform-grid-and-spatial-hash.html', '座標をセルに割り当て、検索範囲に近い物体を集める'],
   ['四分木 / クアッドツリー / quadtree / 八分木 / オクツリー / octree / loose tree', '/algorithms/quadtrees-and-octrees.html', '空間の分割を深くする条件と、境界をまたぐ物体の置き場所を調べる'],
   ['BVH / bounding volume hierarchy / AABB / ブロードフェーズ / リフィット / refit', '/algorithms/bounding-volume-hierarchies.html', '箱で物体をまとめ、検索範囲と重ならない枝を省く'],
