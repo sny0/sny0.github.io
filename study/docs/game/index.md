@@ -41,6 +41,7 @@
 - [ゲームのアセットロード設計 — 状態・世代・所有権](/game/asset-loading.html)
 - [ゲームのアセットをパックファイルにまとめる](/game/asset-pack-files.html)
 - [リフレクション — UCLASS・UFUNCTION・UPROPERTY・Unreal Header Tool](/game/unreal/reflection-and-uht.html)
+- [ワーカーが準備したアセットを描画側へ渡す](/game/asset-worker-handoff.html)
 - [最適化系パターン: Dirty Flag・Spatial Partition・Data Locality・Double Buffer](/game/patterns/optimization-patterns.html)
 - [有限ステートマシンと階層型ステートマシン(State と Strategy の比較つき)](/game/patterns/state-machines.html)
 
