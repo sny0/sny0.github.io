@@ -1,0 +1,60 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="760" height="358" viewBox="0 0 760 358" role="img" aria-labelledby="title desc" xml:lang="ja">
+  <title id="title">GPUのタイムスタンプを記録してからCPUで読むまで</title>
+  <desc id="desc">CPUがフレームFを提出したあとに、GPUは先行する仕事を終え、計測対象のパスの前後でt0とt1を記録する。結果の書き出し完了を確認してからCPUが読む。画面への表示は別の時点にある。</desc>
+  <defs>
+    <marker id="arrow" viewBox="0 0 8 8" refX="7" refY="4" markerWidth="7" markerHeight="7" orient="auto">
+      <path d="M0 0 8 4 0 8Z" fill="#4a5f78"/>
+    </marker>
+  </defs>
+  <rect width="760" height="358" rx="18" fill="#f8fafc"/>
+  <g font-family="'Noto Sans JP', 'Yu Gothic', 'Meiryo', sans-serif" fill="#162334">
+    <text x="25" y="40" font-size="23" font-weight="700">GPUが値を記録し、CPUはあとで読む</text>
+    <text x="25" y="67" font-size="16" fill="#475569">フレームFのある描画パスを測る例</text>
+    <path d="M133 99H729" stroke="#4a5f78" stroke-width="1.5" marker-end="url(#arrow)"/>
+    <text x="690" y="88" font-size="14" fill="#475569">時間</text>
+
+    <g font-size="17" font-weight="700">
+      <text x="25" y="142">CPU</text>
+      <text x="25" y="226">GPU</text>
+      <text x="25" y="311">画面</text>
+    </g>
+
+    <g fill="#e4f1ff" stroke="#5680ac" stroke-width="1.5">
+      <rect x="136" y="117" width="125" height="37" rx="5"/>
+      <rect x="286" y="117" width="162" height="37" rx="5"/>
+      <rect x="613" y="117" width="115" height="37" rx="5"/>
+    </g>
+    <g text-anchor="middle" font-size="15" font-weight="700">
+      <text x="198.5" y="141">Fを提出</text>
+      <text x="367" y="141">次のフレームを準備</text>
+      <text x="670.5" y="141">Fの結果を読む</text>
+    </g>
+    <path d="M261 155V195" stroke="#5680ac" stroke-width="1.5" stroke-dasharray="4 4"/>
+    <path d="M604 209V135H612" fill="none" stroke="#4a5f78" stroke-width="1.5" marker-end="url(#arrow)"/>
+    <text x="594" y="184" text-anchor="end" font-size="14" fill="#475569">フェンスで完了を確認</text>
+
+    <rect x="136" y="202" width="161" height="37" rx="5" fill="#edf2f7" stroke="#899aaf" stroke-width="1.5"/>
+    <rect x="318" y="202" width="151" height="37" rx="5" fill="#dff3ec" stroke="#478576" stroke-width="1.5"/>
+    <rect x="491" y="202" width="105" height="37" rx="5" fill="#dff3ec" stroke="#478576" stroke-width="1.5"/>
+    <g text-anchor="middle" font-size="15" font-weight="700">
+      <text x="216.5" y="226">先行する仕事</text>
+      <text x="393.5" y="226">計測対象のパス</text>
+      <text x="543.5" y="226">結果を書き出す</text>
+    </g>
+    <circle cx="604" cy="220.5" r="5" fill="#4a5f78"/>
+
+    <path d="M307 198V255H480V198" fill="none" stroke="#b66022" stroke-width="2"/>
+    <g text-anchor="middle" font-size="15" font-weight="700" fill="#8f4616">
+      <text x="307" y="189">t₀</text>
+      <text x="480" y="189">t₁</text>
+      <text x="393.5" y="277">t₁ − t₀ がGPU上の経過時間</text>
+    </g>
+
+    <rect x="136" y="289" width="492" height="37" rx="5" fill="#edf2f7" stroke="#899aaf" stroke-width="1.5"/>
+    <rect x="628" y="289" width="100" height="37" rx="5" fill="#fdf1df" stroke="#b57938" stroke-width="1.5"/>
+    <g text-anchor="middle" font-size="15" font-weight="700">
+      <text x="382" y="313">前の絵を表示</text>
+      <text x="678" y="313">Fを表示</text>
+    </g>
+  </g>
+</svg>

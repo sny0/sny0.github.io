@@ -1,0 +1,50 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="760" height="325" viewBox="0 0 760 325" role="img" aria-labelledby="title desc" xml:lang="ja">
+  <title id="title">描画の直前でパイプラインを作る場合と、ロード中に作る場合</title>
+  <desc id="desc">初回使用時はCPUの描画準備に4ミリ秒、パイプライン作成に24ミリ秒、取得と投入に1ミリ秒かかり、29ミリ秒で投入する。ロード中に作成済みなら、そのフレームの作業は5ミリ秒。破線は60 FPSの目安である約16.67ミリ秒を示す。</desc>
+  <defs>
+    <marker id="arrow" viewBox="0 0 8 8" refX="7" refY="4" markerWidth="7" markerHeight="7" orient="auto">
+      <path d="M0 0 8 4 0 8Z" fill="#486078"/>
+    </marker>
+  </defs>
+  <rect width="760" height="325" rx="18" fill="#f8fafc"/>
+  <g font-family="'Noto Sans JP', 'Yu Gothic', 'Meiryo', sans-serif" fill="#162334">
+    <text x="25" y="40" font-size="23" font-weight="700">パイプラインをいつ作るか</text>
+    <text x="25" y="67" font-size="16" fill="#475569">CPUの描画準備開始からGPUへ投入するまでの例</text>
+
+    <path d="M180 119H724" fill="none" stroke="#486078" stroke-width="1.6" marker-end="url(#arrow)"/>
+    <g stroke="#486078" stroke-width="1.5">
+      <path d="M180 113v13M260 113v13M340 113v13M420 113v13M500 113v13M580 113v13M660 113v13"/>
+    </g>
+    <g text-anchor="middle" font-size="14" fill="#475569">
+      <text x="180" y="107">0 ms</text>
+      <text x="340" y="107">10 ms</text>
+      <text x="500" y="107">20 ms</text>
+      <text x="660" y="107">30 ms</text>
+    </g>
+    <g font-size="17" font-weight="700">
+      <text x="25" y="165">初回使用時に作る</text>
+      <text x="25" y="225">ロード中に作成</text>
+    </g>
+    <g stroke-width="1.4">
+      <rect x="180" y="145" width="64" height="32" rx="4" fill="#e7f2fe" stroke="#587ba5"/>
+      <rect x="244" y="145" width="384" height="32" rx="4" fill="#fff1df" stroke="#a56836"/>
+      <rect x="628" y="145" width="16" height="32" rx="4" fill="#ddf2e8" stroke="#4f8678"/>
+      <rect x="180" y="205" width="64" height="32" rx="4" fill="#e7f2fe" stroke="#587ba5"/>
+      <rect x="244" y="205" width="16" height="32" rx="4" fill="#ddf2e8" stroke="#4f8678"/>
+    </g>
+    <path d="M447 115V249" stroke="#9a441d" stroke-width="2" stroke-dasharray="5 4"/>
+    <g font-size="15" font-weight="700">
+      <text x="537" y="167" text-anchor="middle">パイプライン作成 24 ms</text>
+      <text x="655" y="167">29 ms</text>
+      <text x="270" y="227">5 ms</text>
+    </g>
+
+    <g font-size="14">
+      <text x="447" y="267" fill="#8a3919" text-anchor="middle">約16.67 ms（60 FPSの目安）</text>
+      <rect x="180" y="285" width="16" height="16" rx="3" fill="#e7f2fe" stroke="#587ba5"/>
+      <text x="205" y="298">描画準備 4 ms</text>
+      <rect x="360" y="285" width="16" height="16" rx="3" fill="#ddf2e8" stroke="#4f8678"/>
+      <text x="385" y="298">取得と投入 1 ms</text>
+    </g>
+  </g>
+</svg>

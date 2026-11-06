@@ -1,0 +1,51 @@
+<!doctype html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>入力遅延の内訳を変えてみる | Sny0 Study</title>
+  <link rel="stylesheet" href="styles.css">
+  <script type="module" src="main.js"></script>
+</head>
+<body>
+  <main>
+    <header>
+      <a href="https://sny0.com/study/practice/graphics/input-latency-observation.html">実践手順とコードを読む</a>
+      <h1>入力遅延の内訳を変えてみる</h1>
+      <p>時刻7 msに届いた入力が、CPUで処理され、GPUで描かれ、画面の対象行に出るまでを追います。</p>
+    </header>
+    <section aria-labelledby="settings-title">
+      <h2 id="settings-title">待ち時間と画面の設定</h2>
+      <form id="settings">
+        <label>入力を読む周期
+          <select id="polling"><option value="4">4 ms</option><option value="8" selected>8 ms</option><option value="16">16 ms</option></select>
+        </label>
+        <div class="range-setting"><label for="queue">GPUの待ち</label><output id="queue-value" for="queue">3 ms</output>
+          <input id="queue" type="range" min="0" max="24" value="3">
+        </div>
+        <label>画面の更新頻度
+          <select id="refresh"><option value="60" selected>60 Hz</option><option value="120">120 Hz</option></select>
+        </label>
+        <div class="range-setting"><label for="row">対象行の位置</label><output id="row-value" for="row">上から50%</output>
+          <input id="row" type="range" min="0" max="90" step="10" value="50">
+        </div>
+        <button id="reset-settings" type="button">初期値に戻す</button>
+      </form>
+    </section>
+    <section aria-labelledby="timeline-title">
+      <h2 id="timeline-title">入力から対象行までのタイムライン</h2>
+      <div class="markers" aria-live="polite">
+        <p>描画完了 <strong id="ready-at"></strong></p>
+        <p>走査開始 <strong id="scan-at"></strong></p>
+        <p>対象行の更新 <strong id="row-at"></strong></p>
+        <p class="result">入力からの遅延 <strong id="latency"></strong></p>
+      </div>
+      <div class="axis" aria-hidden="true"><span>0</span><span>10</span><span>20</span><span>30</span><span>40</span><span>50</span><span>60</span><span>70 ms</span></div>
+      <ol id="timeline"></ol>
+      <p>CPU処理は2 ms、GPU描画は4 msに固定しています。仮想の固定周期で走査するモデルで、OSの合成、入力機器、パネル応答は省いています。</p>
+      <a href="https://sny0.com/study/practice/graphics/input-latency-observation.html#run-locally">手元で動かす手順</a>
+      <noscript><p>設定を変えて比較するにはJavaScriptを有効にします。</p></noscript>
+    </section>
+  </main>
+</body>
+</html>
