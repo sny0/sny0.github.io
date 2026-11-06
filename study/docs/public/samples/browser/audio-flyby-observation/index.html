@@ -1,0 +1,128 @@
+<!doctype html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="referrer" content="no-referrer">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'self'; style-src 'self'; base-uri 'none'; form-action 'none'">
+  <title>Web Audioで音源の通過音を観察する | Sny0 Study</title>
+  <link rel="canonical" href="https://sny0.com/study/samples/browser/audio-flyby-observation/index.html">
+  <link rel="stylesheet" href="styles.css">
+  <script type="module" src="main.js"></script>
+</head>
+<body>
+  <main>
+    <header class="card">
+      <a href="https://sny0.com/study/practice/browser/audio-flyby-observation.html">実践手順とコードを読む</a>
+      <h1>音源が通過するときの音を聞く</h1>
+      <p>聞き手の前を、440 Hzの音を出す音源が左から右へ通過します。速度と最短距離を変え、高さ、左右の位置、距離による音量の変化を比べます。</p>
+    </header>
+
+    <section class="card" aria-labelledby="controls-heading">
+      <h2 id="controls-heading">音源の動きを選ぶ</h2>
+      <div class="actions">
+        <label for="speed">音源の速さ
+          <select id="speed" disabled>
+            <option value="20">20 m/s</option>
+            <option value="40" selected>40 m/s</option>
+          </select>
+        </label>
+        <label for="clearance">聞き手までの最短距離
+          <select id="clearance" disabled>
+            <option value="5">5 m</option>
+            <option value="10" selected>10 m</option>
+            <option value="20">20 m</option>
+          </select>
+        </label>
+        <button id="render-flyby" type="button" disabled>計算する</button>
+      </div>
+      <p id="flyby-status" class="status" data-state="ready" role="status">「計算する」で図と測定値を表示します。</p>
+      <p class="hint"><a href="https://sny0.com/study/practice/browser/audio-flyby-observation.html#run-locally">手元で動かす手順</a></p>
+      <noscript><p>このサンプルを操作するにはJavaScriptを有効にしてください。</p></noscript>
+    </section>
+
+    <section class="card" aria-labelledby="results-heading">
+      <h2 id="results-heading">通過前後の位置と音の変化</h2>
+      <p id="rendered-settings">計算に使った設定をここに表示します。</p>
+      <div class="actions">
+        <button id="play-flyby" type="button" class="secondary" disabled>通過音を聞く</button>
+        <button id="stop-playback" type="button" class="secondary" disabled>再生を停止</button>
+      </div>
+      <p id="playback-status" class="status" data-state="ready" role="status">計算すると試聴できます。ヘッドホンなどで左右の違いを聞けます。</p>
+      <div class="scrubber">
+        <label for="playhead">通過前後の時刻</label>
+        <input id="playhead" type="range" min="0" max="2" step="0.01" value="0" aria-describedby="scrub-hint" disabled>
+        <div class="range-labels" aria-hidden="true"><span>−1 s</span><span>最接近 0 s</span><span>+1 s</span></div>
+        <p class="hint" id="scrub-hint">つまみを動かすと、その時刻の位置と予測値を確認できます。再生は毎回−1 sから始まります。</p>
+      </div>
+
+      <div class="comparison">
+        <figure>
+          <figcaption>上から見た音源の経路</figcaption>
+          <svg id="motion-chart" class="chart" viewBox="0 0 460 228" role="img" aria-label="音源の位置は未計算です。聞き手は中央で前を向いています。">
+            <path class="grid" d="M25 160H435 M230 26V160"/>
+            <path class="axes" d="M230 160V133 M225 139L230 133L235 139"/>
+            <path id="trajectory" class="trajectory" d=""/>
+            <path id="distance-line" class="distance-line" d=""/>
+            <circle id="source-dot" class="source" cx="50" cy="90" r="8" visibility="hidden"/>
+            <circle class="listener" cx="230" cy="160" r="8"/>
+            <text x="230" y="191" text-anchor="middle">聞き手（静止）</text>
+            <text x="25" y="191">左</text>
+            <text x="435" y="191" text-anchor="end">右</text>
+            <text x="246" y="146">前</text>
+            <circle class="source" cx="204" cy="214" r="5"/>
+            <text x="216" y="219">音源</text>
+          </svg>
+          <p class="hint">最も近い位置では音源は正面にあり、左右に同じ強さで聞こえます。</p>
+        </figure>
+        <figure>
+          <figcaption>周波数と距離ゲインの予測</figcaption>
+          <svg id="time-chart" class="chart" viewBox="0 0 460 260" role="img" aria-label="周波数と距離ゲインの予測曲線は未計算です。">
+            <path class="grid" d="M52 34H428 M52 74H428 M52 104H428 M52 140H428 M52 177H428 M52 214H428 M146 34V104 M146 140V214 M334 34V104 M334 140V214 M428 34V104 M428 140V214"/>
+            <path class="closest-guide" d="M240 34V104 M240 140V214"/>
+            <path class="axes" d="M52 34V104H428 M52 140V214H428"/>
+            <text x="52" y="23">周波数 (Hz)</text>
+            <text x="45" y="39" text-anchor="end">520</text>
+            <text x="45" y="79" text-anchor="end">440</text>
+            <text x="45" y="109" text-anchor="end">380</text>
+            <text x="52" y="129">距離ゲイン (倍)</text>
+            <text x="45" y="145" text-anchor="end">1</text>
+            <text x="45" y="182" text-anchor="end">0.5</text>
+            <text x="45" y="219" text-anchor="end">0</text>
+            <text x="52" y="233" text-anchor="middle">−1</text>
+            <text x="146" y="233" text-anchor="middle">−0.5</text>
+            <text x="240" y="233" text-anchor="middle">0</text>
+            <text x="334" y="233" text-anchor="middle">+0.5</text>
+            <text x="428" y="233" text-anchor="middle">+1</text>
+            <text x="240" y="253" text-anchor="middle">最接近からの時間 (s)</text>
+            <path id="pitch-curve" class="trace pitch-curve" d=""/>
+            <path id="gain-curve" class="trace gain-curve" d=""/>
+            <path id="time-cursor" class="time-cursor" d=""/>
+          </svg>
+        </figure>
+      </div>
+
+      <dl class="metrics">
+        <div><dt>最接近からの時間</dt><dd id="point-time">—</dd></div>
+        <div><dt>聞き手までの距離</dt><dd id="point-distance">—</dd></div>
+        <div><dt>聞き手に向かう速度</dt><dd id="point-radial">—</dd></div>
+        <div><dt>周波数（予測）</dt><dd id="point-hz">—</dd></div>
+        <div><dt>距離ゲイン（予測）</dt><dd id="point-gain">—</dd></div>
+      </dl>
+    </section>
+
+    <section class="card" aria-labelledby="measurements-heading">
+      <h2 id="measurements-heading">生成した音で確かめる</h2>
+      <p>各時刻を中心とする20 msから測定します。周波数は左右へ振り分ける前の音から求め、左右のゲインはそれぞれの出力の実効値を元の音の実効値で割った値です。</p>
+      <div class="table-scroll" role="region" aria-label="生成した音の測定値" tabindex="0">
+        <table>
+          <thead>
+            <tr><th scope="col">最接近からの時間</th><th scope="col">周波数 (Hz)</th><th scope="col">左 (倍)</th><th scope="col">右 (倍)</th><th scope="col">合成 (倍)</th></tr>
+          </thead>
+          <tbody id="measurements"><tr><td colspan="5">計算すると測定値を表示します。</td></tr></tbody>
+        </table>
+      </div>
+    </section>
+  </main>
+</body>
+</html>

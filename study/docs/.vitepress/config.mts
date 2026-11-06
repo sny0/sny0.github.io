@@ -56,7 +56,8 @@ export default withMermaid(defineConfig({
       { url: '/study/samples/browser/audio-spatial-observation/index.html' },
       { url: '/study/samples/browser/audio-occlusion-observation/index.html' },
       { url: '/study/samples/browser/audio-occlusion-transition-observation/index.html' },
-      { url: '/study/samples/browser/audio-doppler-observation/index.html' }
+      { url: '/study/samples/browser/audio-doppler-observation/index.html' },
+      { url: '/study/samples/browser/audio-flyby-observation/index.html' }
     ]
   },
   head: [

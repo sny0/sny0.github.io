@@ -69,7 +69,7 @@
       "id": "browser",
       "title": "ブラウザ",
       "description": "URLを開いてから描画されるまでを、通信・実行・表示に分ける。",
-      "count": 27,
+      "count": 28,
       "status": "辞典本文あり"
     },
     {
@@ -130,6 +130,13 @@
     }
   ],
   "collections": [
+    {
+      "id": "audio-flyby-observation",
+      "section": "practice",
+      "title": "Web Audioで音源が通過する前後の音を比べる",
+      "description": "音源の速さと進路を変え、通過前後の高さ、左右の出力、距離による音量の変化を観察する。",
+      "start": "/practice/browser/audio-flyby-observation.html"
+    },
     {
       "id": "audio-doppler-observation",
       "section": "practice",
@@ -4793,7 +4800,8 @@
       "verification": "OpenStax University Physicsの移動音源の式とW3C Web Audio APIのAudioBufferSourceNodeおよびPannerNodeの仕様に照合（2026-11-06）",
       "links": [
         "/browser/audio-spatial-panning.html",
-        "/practice/browser/audio-doppler-observation.html"
+        "/practice/browser/audio-doppler-observation.html",
+        "/browser/audio-flyby.html"
       ]
     },
     {
@@ -4848,6 +4856,64 @@
       "verification": "WindowsのChromium系ブラウザで方位角と距離の全25設定、測定した音の試聴を確認（2026-11-06）",
       "links": [
         "/browser/audio-spatial-panning.html"
+      ]
+    },
+    {
+      "title": "Web Audioで音源が通過する前後の音を比べる",
+      "url": "/practice/browser/audio-flyby-observation.html",
+      "file": "practice/browser/audio-flyby-observation.md",
+      "domain": "browser",
+      "section": "practice",
+      "format": "sample",
+      "status": "published",
+      "summary": "左から右へ通過する音源の位置をたどり、周波数、左右の出力、距離減衰を図とステレオ試聴で比べる。",
+      "source": "新規執筆",
+      "aliases": [
+        "Web Audio API",
+        "通過音",
+        "フライバイ",
+        "flyby",
+        "ドップラー効果",
+        "最接近",
+        "PannerNode",
+        "playbackRate",
+        "距離減衰"
+      ],
+      "collection": "audio-flyby-observation",
+      "order": 1,
+      "verification": "WindowsのChromium系ブラウザで全6設定の周波数と左右の出力、試聴に連動する位置図とグラフを確認（2026-11-06）",
+      "links": [
+        "/browser/audio-flyby.html"
+      ]
+    },
+    {
+      "title": "Web Audioで音源の通過音を作る",
+      "url": "/browser/audio-flyby.html",
+      "file": "browser/audio-flyby.md",
+      "domain": "browser",
+      "section": "reference",
+      "format": "article",
+      "status": "published",
+      "summary": "聞き手の前を音源が通過するとき、軌道から位置、距離、聞き手に向かう速度を求め、音の左右の位置と大きさ、高さを変える。",
+      "source": "新規執筆",
+      "aliases": [
+        "Web Audio API",
+        "通過音",
+        "フライバイ",
+        "flyby",
+        "ドップラー効果",
+        "視線方向の速度",
+        "距離減衰",
+        "PannerNode",
+        "AudioBufferSourceNode",
+        "playbackRate",
+        "setValueCurveAtTime"
+      ],
+      "verification": "OpenStaxの移動音源の式とW3C Web Audio APIの再生速度、パンニング、距離モデルの仕様に照合（2026-11-06）",
+      "links": [
+        "/browser/audio-spatial-panning.html",
+        "/browser/audio-doppler.html",
+        "/practice/browser/audio-flyby-observation.html"
       ]
     },
     {
@@ -8329,6 +8395,8 @@
         "/practice/browser/audio-occlusion-transition-observation.html",
         "/browser/audio-doppler.html",
         "/practice/browser/audio-doppler-observation.html",
+        "/browser/audio-flyby.html",
+        "/practice/browser/audio-flyby-observation.html",
         "/history/video-games.html",
         "/guide/rendering/timeline.html"
       ]
@@ -10478,6 +10546,7 @@
       "source": "統合ガイド",
       "aliases": [],
       "links": [
+        "/browser/audio-flyby.html",
         "/browser/audio-doppler.html",
         "/browser/audio-occlusion-transition.html",
         "/browser/audio-occlusion.html",
