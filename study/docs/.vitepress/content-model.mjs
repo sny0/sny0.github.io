@@ -12,6 +12,7 @@ export const formatLabels = {
 export const statusLabels = { published: '公開中', outline: '学習計画・概要', draft: '草稿', planned: '執筆予定' }
 
 export const collections = [
+  { id: 'audio-spatial-observation', section: 'practice', title: 'Web Audioで音の方向と距離を変えて聴く', description: '音源の方向と距離を変え、左右の出力と距離による減衰を図と試聴で比べる。', start: '/practice/browser/audio-spatial-observation.html' },
   { id: 'audio-reverb-observation', section: 'practice', title: 'Web Audioで畳み込みリバーブを聴き比べる', description: 'インパルス応答と残響側のゲインを変え、打音のあとに残る響きを波形と試聴で確かめる。', start: '/practice/browser/audio-reverb-observation.html' },
   { id: 'audio-feedback-observation', section: 'practice', title: 'Web Audioで反響の間隔と減衰を観察する', description: '遅延時間とフィードバックゲインを変え、反響の時刻と振幅をグラフと試聴で確かめる。', start: '/practice/browser/audio-feedback-observation.html' },
   { id: 'audio-comb-observation', section: 'practice', title: 'Web Audioで遅延とコムフィルターを観察する', description: '同じ音の遅延時間とゲインを変え、打ち消される周波数をグラフと試聴で確かめる。', start: '/practice/browser/audio-comb-observation.html' },

@@ -267,6 +267,12 @@
 2. [Web Audioで畳み込みリバーブを聴き比べる](/practice/browser/audio-reverb-observation.html)で、小部屋とホールを模した応答を切り替え、打音のあとに残る響きを比べる。
 3. 出力を遅延経路に戻して反響を作る方法は[Web Audioのフィードバックディレイ](/browser/audio-feedback-delay.html)で確認する。
 
+## 音源が動くと左右の出力はどう変わるか
+
+1. [Web Audioの音の定位と距離減衰](/browser/audio-spatial-panning.html)で、聞き手から見た方向と距離が、左右の出力にどう反映されるかを確認する。
+2. [Web Audioで音の方向と距離を変えて聴く](/practice/browser/audio-spatial-observation.html)で、角度と距離を別々に変え、左右のゲインと聞こえ方を比べる。
+3. 部屋から返ってくる音を別の経路で加える仕組みは[Web Audioの畳み込みリバーブ](/browser/audio-convolution-reverb.html)で確認する。
+
 ## 作り方の変化を歴史から見る
 
 [ビデオゲーム史](/history/video-games.html)の作品・ハード・媒体・流通と、[リアルタイム3D技術史](/guide/rendering/timeline.html)の技術の変化から、気になった仕組みへ進みます。

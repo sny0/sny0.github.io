@@ -56,3 +56,5 @@ y[n] = Σ (h[k] × x[n − k])    k = 0 … M − 1
 ## ブラウザで残響の始まりと尾を比べる
 
 実践では `OfflineAudioContext` と `ConvolverNode` でウェット信号を生成し、サンプル値にゲインを掛けてドライ信号に加えます。小部屋を想定したIRでは12 ms、ホールを想定したIRでは40 msで最初の反射が始まります。同じ打音を使い、IRを切り替えたときの波形と聴こえ方を比べます。[畳み込みリバーブの実践](/practice/browser/audio-reverb-observation.html)、[W3C Web Audio APIのOfflineAudioContext](https://www.w3.org/TR/webaudio/#OfflineAudioContext)
+
+ゲーム内で音源や聞き手が動くときは、直接音の方向と距離も変わります。位置に応じて左右の出力を決める仕組みと、耳に届く音の変化を畳み込みで表すHRTFを扱います。[Web Audioの音の定位と距離減衰](/browser/audio-spatial-panning.html)

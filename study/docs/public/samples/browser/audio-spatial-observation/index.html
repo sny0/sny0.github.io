@@ -1,0 +1,108 @@
+<!doctype html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="referrer" content="no-referrer">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'self'; style-src 'self'; base-uri 'none'; form-action 'none'">
+  <title>Web Audioで音の定位と距離減衰を観察する | Sny0 Study</title>
+  <link rel="canonical" href="https://sny0.com/study/samples/browser/audio-spatial-observation/index.html">
+  <link rel="stylesheet" href="styles.css">
+  <script type="module" src="main.js"></script>
+</head>
+<body>
+  <main>
+    <header class="card">
+      <a href="https://sny0.com/study/practice/browser/audio-spatial-observation.html">実践手順とコードを読む</a>
+      <h1>音源の方向と距離を変える</h1>
+      <p>同じ音を異なる位置から鳴らし、左右への振り分けと、距離による音の弱まり方を測ります。</p>
+    </header>
+
+    <section class="card" aria-labelledby="controls-heading">
+      <h2 id="controls-heading">音源の位置を選ぶ</h2>
+      <div class="actions">
+        <label for="source-angle">方位角
+          <select id="source-angle" disabled>
+            <option value="-90">−90°（左）</option>
+            <option value="-45">−45°（左前）</option>
+            <option value="0" selected>0°（正面）</option>
+            <option value="45">+45°（右前）</option>
+            <option value="90">+90°（右）</option>
+          </select>
+        </label>
+        <label for="source-distance">聞き手からの距離
+          <select id="source-distance" disabled>
+            <option value="0.5">0.5</option>
+            <option value="1" selected>1</option>
+            <option value="2">2</option>
+            <option value="4">4</option>
+            <option value="8">8</option>
+          </select>
+        </label>
+        <button id="render-spatial" type="button" disabled>測定する</button>
+      </div>
+      <p id="spatial-status" class="status" data-state="ready" role="status">「測定する」で図と数値を表示します。</p>
+      <p class="hint"><a href="https://sny0.com/study/practice/browser/audio-spatial-observation.html#run-locally">手元で動かす手順</a></p>
+      <noscript><p>このサンプルを操作するにはJavaScriptを有効にしてください。</p></noscript>
+    </section>
+
+    <section class="card" aria-labelledby="results-heading">
+      <h2 id="results-heading">音源の位置と左右の出力を比べる</h2>
+      <p id="rendered-settings">測定に使った設定をここに表示します。</p>
+      <div class="comparison">
+        <figure>
+          <figcaption>聞き手と音源（上から見た図）</figcaption>
+          <svg id="position-chart" class="chart" viewBox="0 0 440 270" role="img" aria-label="上から見た聞き手。音源の位置は未測定です。">
+            <path class="rings" d="M200 214a20 20 0 0 1 40 0 M180 214a40 40 0 0 1 80 0 M140 214a80 80 0 0 1 160 0 M60 214a160 160 0 0 1 320 0"/>
+            <path class="axes" d="M60 214H380 M220 214V43 M215 49l5-6 5 6"/>
+            <text x="220" y="29" text-anchor="middle">−Z 正面</text>
+            <text x="28" y="219">−X</text>
+            <text x="386" y="219">+X</text>
+            <text x="28" y="240">左</text>
+            <text x="386" y="240">右</text>
+            <circle class="listener" cx="220" cy="214" r="6"/>
+            <text x="220" y="244" text-anchor="middle">聞き手</text>
+            <path id="source-line" class="source-line" d=""/>
+            <circle id="source-point" class="source" cx="220" cy="214" r="6" visibility="hidden"/>
+            <circle class="source" cx="342" cy="28" r="5"/>
+            <text x="353" y="33">音源</text>
+          </svg>
+          <p id="source-position" class="hint">音源の座標は測定後に表示します。</p>
+        </figure>
+        <figure>
+          <figcaption>左右の出力（入力の実効値を1とした比）</figcaption>
+          <svg id="gain-chart" class="chart" viewBox="0 0 440 208" role="img" aria-label="左右の出力の実効値。未測定です。">
+            <path class="rings" d="M86 33V160 M238 33V160 M390 33V160"/>
+            <text x="34" y="70">左</text>
+            <text x="34" y="126">右</text>
+            <rect class="bar-track" x="86" y="51" width="304" height="28" rx="4"/>
+            <rect class="bar-track" x="86" y="107" width="304" height="28" rx="4"/>
+            <rect id="left-bar" class="left-bar" x="86" y="51" width="0" height="28" rx="4"/>
+            <rect id="right-bar" class="right-bar" x="86" y="107" width="0" height="28" rx="4"/>
+            <text x="86" y="184" text-anchor="middle">0</text>
+            <text x="238" y="184" text-anchor="middle">0.5</text>
+            <text x="390" y="184" text-anchor="middle">1</text>
+          </svg>
+          <dl class="metrics">
+            <div><dt>左の出力</dt><dd id="left-gain">—</dd></div>
+            <div><dt>右の出力</dt><dd id="right-gain">—</dd></div>
+            <div><dt>左右を合わせた比</dt><dd id="total-gain">—</dd></div>
+            <div><dt>入力に対する増減</dt><dd id="total-db">—</dd></div>
+          </dl>
+        </figure>
+      </div>
+      <p class="hint">左右を合わせた比は、左右それぞれの実効値の比を二乗して足し、平方根を取った値です。dBはその比を対数で表しています。</p>
+    </section>
+
+    <section class="card" aria-labelledby="playback-heading">
+      <h2 id="playback-heading">測定した音を聞く</h2>
+      <p>ヘッドホンで左右の違いを聞き比べられます。再生時はどの位置でも同じ割合で音量を抑えます。</p>
+      <div class="actions">
+        <button id="play-spatial" type="button" class="secondary" disabled>試聴する</button>
+        <button id="stop-playback" type="button" class="secondary" disabled>再生を停止</button>
+      </div>
+      <p id="playback-status" class="status" data-state="ready" role="status">測定すると試聴できます。</p>
+    </section>
+  </main>
+</body>
+</html>
