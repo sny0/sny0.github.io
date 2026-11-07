@@ -15,7 +15,7 @@ study:
 
 HPからダメージを引く処理を、条件に応じて変え、繰り返し呼ぶ場面を考えます。[値・変数・型・式](/languages/variables-types-and-expressions.html)の続きを、C++とC#のコンソールプログラムで確かめます。
 
-コードを保存して実行する手順は、[読む順ガイドの実行方法](/guide/software-development-basics.html#コード例を手元で動かす)で確認できます。
+コードを保存して実行する手順は、[読む順ガイドの実行方法](/guide/software-development-basics.html#run-code)で確認できます。
 
 ## 条件分岐で実行する道を選ぶ
 

@@ -29,7 +29,7 @@ study:
 
 どちらにも短いC++・C#のコンソールプログラムと出力例があります。すでに言語を使っている場合も、値の変化を手で追うと、代入や関数の引数を確認できます。
 
-### コード例を手元で動かす
+### コード例を手元で動かす {#run-code}
 
 C++は、Visual StudioのC++開発ツールを用意し、**x64 Native Tools Command Prompt**を開きます。記事の完全なコードを`main.cpp`に保存し、そのフォルダーで次を実行します。[MicrosoftのC++コマンドライン環境](https://learn.microsoft.com/en-us/cpp/build/building-on-the-command-line)
 
