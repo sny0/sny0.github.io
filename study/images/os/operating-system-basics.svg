@@ -1,0 +1,27 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="760" height="460" viewBox="0 0 760 460" role="img" aria-labelledby="title desc">
+  <title id="title">アプリとハードウェアをつなぐOSの役割</title>
+  <desc id="desc">ゲームとブラウザーは別のプロセスとして動き、それぞれにメモリのアドレス空間を持つ。アプリが利用するOSはCPU時間、メモリ、ファイル、機器を管理する。下にCPU、RAM、SSD、NICなどのハードウェアがある。</desc>
+  <defs><marker id="arrow" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto-start-reverse"><path d="M0 0 L8 4 L0 8 Z" fill="#46637b"/></marker></defs>
+  <rect width="760" height="460" rx="18" fill="#edf3f9"/>
+  <g font-family="Yu Gothic, Meiryo, sans-serif" fill="#173b56">
+    <text x="26" y="40" font-size="24" font-weight="700">複数のアプリが使う資源を、OSが管理する</text>
+    <rect x="26" y="68" width="340" height="108" rx="10" fill="#fff" stroke="#9bbbd2"/>
+    <rect x="394" y="68" width="340" height="108" rx="10" fill="#fff" stroke="#9bbbd2"/>
+    <text x="196" y="98" font-size="19" font-weight="700" text-anchor="middle">ゲームのプロセス</text>
+    <text x="196" y="128" font-size="16" text-anchor="middle">スレッドが命令を実行する</text>
+    <text x="196" y="154" font-size="15" text-anchor="middle">自分のアドレス空間を持つ</text>
+    <text x="564" y="98" font-size="19" font-weight="700" text-anchor="middle">ブラウザーのプロセス</text>
+    <text x="564" y="128" font-size="16" text-anchor="middle">スレッドが命令を実行する</text>
+    <text x="564" y="154" font-size="15" text-anchor="middle">自分のアドレス空間を持つ</text>
+    <path d="M196 182 V220" fill="none" stroke="#46637b" stroke-width="2" marker-end="url(#arrow)"/>
+    <path d="M564 182 V220" fill="none" stroke="#46637b" stroke-width="2" marker-end="url(#arrow)"/>
+    <text x="380" y="204" font-size="15" text-anchor="middle">アプリがOSの機能を利用する</text>
+    <rect x="26" y="228" width="708" height="104" rx="10" fill="#dcebf7" stroke="#9bbbd2"/>
+    <text x="380" y="258" font-size="21" font-weight="700" text-anchor="middle">OS</text>
+    <text x="380" y="288" font-size="17" text-anchor="middle">CPU時間 ・ メモリ ・ ファイル ・ 機器</text>
+    <text x="380" y="314" font-size="15" text-anchor="middle">カーネルやドライバーなどが処理を担当</text>
+    <path d="M380 338 V373" fill="none" stroke="#46637b" stroke-width="2" marker-end="url(#arrow)"/>
+    <rect x="26" y="381" width="708" height="53" rx="10" fill="#fff1d8" stroke="#bf9d59"/>
+    <text x="380" y="414" font-size="18" font-weight="700" text-anchor="middle">ハードウェア　CPU ・ RAM ・ SSD ・ NIC など</text>
+  </g>
+</svg>

@@ -1,0 +1,27 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="760" height="442" viewBox="0 0 760 442" role="img" aria-labelledby="title desc">
+  <title id="title">ターミナルとシェルがコマンドを扱う流れ</title>
+  <desc id="desc">ターミナルは文字を入力・表示する画面。PowerShellが入力を解釈し、Get-ChildItemのコマンドレットを動かすか、dotnet buildなどの外部プログラムを起動する。結果はターミナルへ表示される。</desc>
+  <defs><marker id="arrow" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto"><path d="M0 0 8 4 0 8z" fill="#44647b"/></marker></defs>
+  <rect width="760" height="442" rx="18" fill="#edf4f9"/>
+  <g font-family="'Yu Gothic',Meiryo,sans-serif" fill="#143d59">
+    <text x="26" y="39" font-size="23" font-weight="700">入力した文字を、シェルがコマンドとして扱う</text>
+    <rect x="26" y="64" width="708" height="77" rx="11" fill="#fff" stroke="#a4bfd4"/>
+    <text x="47" y="93" font-size="18" font-weight="700">ターミナル</text>
+    <text x="47" y="120" font-size="15">文字を入力する・結果を表示する画面</text>
+    <text x="444" y="109" font-size="15">Windows Terminal など</text>
+    <path d="M380 144V174" stroke="#44647b" stroke-width="2" marker-end="url(#arrow)"/>
+    <text x="397" y="164" font-size="14">コマンド文字列</text>
+    <rect x="127" y="179" width="506" height="76" rx="11" fill="#fff3d9" stroke="#c4a261"/>
+    <text x="380" y="207" text-anchor="middle" font-size="18" font-weight="700">シェルの例　PowerShell</text>
+    <text x="380" y="234" text-anchor="middle" font-size="15">コマンド名・引数・パイプなどを解釈する</text>
+    <path d="M380 258V278H203V302" fill="none" stroke="#44647b" stroke-width="2" marker-end="url(#arrow)"/>
+    <path d="M380 278H557V302" fill="none" stroke="#44647b" stroke-width="2" marker-end="url(#arrow)"/>
+    <rect x="38" y="307" width="330" height="78" rx="11" fill="#fff" stroke="#a4bfd4"/>
+    <text x="203" y="337" text-anchor="middle" font-size="17" font-weight="700">コマンドレット</text>
+    <text x="203" y="363" text-anchor="middle" font-size="15">Get-ChildItem でファイルを表示</text>
+    <rect x="392" y="307" width="330" height="78" rx="11" fill="#e1f2ea" stroke="#8fb8a5"/>
+    <text x="557" y="337" text-anchor="middle" font-size="17" font-weight="700">外部プログラム</text>
+    <text x="557" y="363" text-anchor="middle" font-size="15">dotnet build でビルドを依頼</text>
+    <text x="26" y="416" font-size="15">処理の出力は、ターミナルや次のコマンドへ渡せる。</text>
+  </g>
+</svg>

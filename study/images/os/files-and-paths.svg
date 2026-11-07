@@ -1,0 +1,31 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="760" height="450" viewBox="0 0 760 450" role="img" aria-labelledby="title desc">
+  <title id="title">ファイルの配置と絶対パス・相対パス</title>
+  <desc id="desc">DドライブのGameディレクトリにgame.exe、assets内のplayer.png、saves内のslot1.jsonがある。カレントがD:\Gameのとき、相対パスassets\player.pngは絶対パスD:\Game\assets\player.pngを指す。</desc>
+  <defs><marker id="arrow" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto"><path d="M0 0 L8 4 L0 8 Z" fill="#46637b"/></marker></defs>
+  <rect width="760" height="450" rx="18" fill="#edf3f9"/>
+  <g font-family="Yu Gothic, Meiryo, sans-serif" fill="#173b56">
+    <text x="26" y="40" font-size="24" font-weight="700">ファイルの場所を、パスで指定する</text>
+    <rect x="26" y="72" width="290" height="280" rx="10" fill="#fff" stroke="#9bbbd2"/>
+    <text x="46" y="105" font-size="17" font-weight="700">説明用のディレクトリ</text>
+    <g font-family="Consolas, monospace" font-size="18" xml:space="preserve">
+      <text x="48" y="147">D:\Game</text>
+      <text x="48" y="182">├─ game.exe</text>
+      <text x="48" y="217">├─ assets</text>
+      <text x="48" y="252">│  └─ player.png</text>
+      <text x="48" y="287">└─ saves</text>
+      <text x="78" y="322">└─ slot1.json</text>
+    </g>
+    <rect x="348" y="72" width="386" height="72" rx="10" fill="#dcebf7" stroke="#9bbbd2"/>
+    <text x="368" y="100" font-size="16">カレントディレクトリ</text>
+    <text x="368" y="127" font-size="19" font-family="Consolas, monospace" font-weight="700">D:\Game</text>
+    <rect x="348" y="166" width="386" height="72" rx="10" fill="#fff1d8" stroke="#bf9d59"/>
+    <text x="368" y="194" font-size="16">相対パス</text>
+    <text x="368" y="221" font-size="19" font-family="Consolas, monospace">assets\player.png</text>
+    <path d="M541 244 V272" fill="none" stroke="#46637b" stroke-width="2" marker-end="url(#arrow)"/>
+    <rect x="348" y="280" width="386" height="72" rx="10" fill="#dff1e8" stroke="#8ab9a2"/>
+    <text x="368" y="308" font-size="16">指している絶対パス</text>
+    <text x="368" y="335" font-size="17" font-family="Consolas, monospace">D:\Game\assets\player.png</text>
+    <text x="26" y="390" font-size="16">相対パスは、基準のディレクトリと組み合わせて読む。</text>
+    <text x="26" y="419" font-size="16">EXEの置き場所と、カレントディレクトリは別に確認する。</text>
+  </g>
+</svg>
