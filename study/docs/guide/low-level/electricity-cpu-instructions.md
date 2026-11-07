@@ -3,12 +3,7 @@ title: 第2章 論理回路・CPU・命令
 study:
   source: IT教本
   status: outline
-  summary: |-
-    論理回路からレジスタ、命令の実行へ進むための学習計画・概要です。回路や命令セットの概説を足場に、実際のコードとの対応を観察します。論理回路・CPU設計を順に説明する専用本文は未整備です。
-
-    ## 関連する辞典本文・実践
-
-    - [関数呼び出し・レジスタ・呼出規約](/runtime/cpp-i
+  summary: 論理回路からレジスタ、命令の実行へ進むための学習計画・概要。CPUが命令を実行する基礎から、実際のコードとの対応と性能を調べる。
   section: learning
   format: path
   domain: hardware
@@ -22,10 +17,11 @@ study:
 
 ## このページで案内すること
 
-論理回路からレジスタ、命令の実行へ進むための**学習計画・概要**です。回路や命令セットの概説を足場に、実際のコードとの対応を観察します。論理回路・CPU設計を順に説明する専用本文は未整備です。
+論理回路からレジスタ、命令の実行へ進むための**学習計画・概要**です。CPUが命令を実行する基礎を足場に、実際のコードとの対応を観察します。論理回路を順に説明する専用本文は未整備です。
 
 ## 関連する辞典本文・実践
 
+- [コンピュータを構成する部品](/hardware/computer-components.html)と[CPUが命令を実行する仕組み](/hardware/cpu/instruction-execution.html)で、部品の役割と命令の流れを確認できます。
 - [関数呼び出し・レジスタ・呼出規約](/runtime/cpp-internals/function-calls-and-cpu.html)で、命令を読む際の具体例を確認できます。
 - [キャッシュ・分岐予測・SIMD](/runtime/cpp-internals/cache-branch-simd.html)では、命令実行と性能の関係を扱います。
 

@@ -89,6 +89,12 @@
 | [DOM / CSSOM / スタイル計算 / layout / paint / raster / composite / rAF / requestAnimationFrame](/browser/rendering-journey.html) | HTMLからピクセルまでの段階と、変更後の更新、寸法取得、描画前のcallbackを調べる |
 | [TLS / HTTPS / 証明書 / SAN / CA / 信頼アンカー / SNI / ALPN / 鍵共有 / CertificateVerify / AEAD](/network/tls-https.html) | 暗号化と相手の検証、鍵共有、証明書の信頼、TLSとHTTPの境界を調べる |
 | [DNS / 名前解決 / リゾルバー / 権威DNS / A / AAAA / CNAME / TTL / NXDOMAIN / NODATA](/network/dns-resolution.html) | 名前解決API、委任をたどる問い合わせ、レコードとキャッシュ、失敗の違いを調べる |
+| [ネットワーク / プロトコル / パケット / クライアント / サーバー](/network/network-basics.html) | コンピュータ同士がデータを送る約束と、Webページが届く流れをつかむ |
+| [IPアドレス / IPv4 / IPv6 / ポート番号 / ホスト名 / URL / ループバック](/network/ip-addresses-and-ports.html) | 通信の行き先を表す値と、名前やURLとの関係を調べる |
+| [LAN / WAN / スイッチ / ルーター / アクセスポイント / Wi-Fi / ONU / モデム](/network/home-network-devices.html) | 家庭内でデータが通る機器と、その役割の違いを調べる |
+| [CPU / RAM / SSD / ストレージ / 入出力 / ハードウェア](/hardware/computer-components.html) | ゲームを起動する場面からコンピュータの部品の担当をつかむ |
+| [命令 / ISA / レジスタ / プログラムカウンター / クロック / コア / SMT](/hardware/cpu/instruction-execution.html) | 命令を取り出して計算し、結果を保存する流れを追う |
+| [メインメモリ / キャッシュ / メモリ階層 / RAMとストレージ / 揮発性](/hardware/memory/ram-cache-and-storage.html) | 実行中に使うデータと保存するデータ、容量と待ち時間を調べる |
 | [HTTP / HTTP/1.1 / GET / Host / 状態コード / ヘッダー / Content-Length / Content-Type / CRLF](/network/http-messages.html) | 要求と応答の形式、本文のバイト数、メッセージの完成と接続終了を調べる |
 | [ソケット / socket / TCP / IPアドレス / ポート / send / recv / フレーミング / 半閉鎖 / loopback](/network/tcp-sockets.html) | 送受信バッファ、バイト列の境界、EOFとエラー、接続の終了を調べる |
 | [UDP / データグラム / sendto / recvfrom / WSAEMSGSIZE / MTU](/network/udp-datagrams.html) | メッセージの区切りと受信失敗、送信サイズや期限を調べる |

@@ -22,17 +22,20 @@
 - [DNSと名前解決 — 名前から接続先が決まるまで](/network/dns-resolution.html)
 - [HTTPキャッシュ — 保存・鮮度・再検証と304応答](/network/http-caching.html)
 - [HTTP通信 — 要求・応答と本文の区切り](/network/http-messages.html)
+- [IPアドレス・ポート・ホスト名 — 接続先をどう指定するか](/network/ip-addresses-and-ports.html)
 - [IPルーティングとEthernetフレーム](/network/ip-routing-and-ethernet.html)
 - [NATとポート変換](/network/nat-and-port-mapping.html)
 - [QUICとHTTP/3](/network/quic-and-http3.html)
 - [TLS・証明書・HTTPS — 暗号化と相手の確認](/network/tls-https.html)
 - [UDPデータグラムの境界と送受信](/network/udp-datagrams.html)
 - [ソケットとTCP通信 — send/recvの内部とメッセージ境界](/network/tcp-sockets.html)
+- [ネットワークの基本 — アプリのデータが相手へ届くまで](/network/network-basics.html)
 - [ネットワークの遅延・帯域・待ち行列](/network/latency-throughput-and-queues.html)
+- [家庭のネットワーク機器 — LAN・ルーター・Wi-Fiの役割](/network/home-network-devices.html)
 
 ## この分野の学習ガイド
 
-この分野専用の学習経路は準備中です。[学習ガイド一覧](/learn/)から、公開中のコースを選べます。
+- [ネットワークの基本から読む](/guide/network-basics.html)
 
 ## 作って試す
 
