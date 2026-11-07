@@ -1,0 +1,43 @@
+:root {
+  color-scheme: light;
+  color: #192c3d;
+  background: #f2f6fa;
+  font: 16px/1.65 system-ui, sans-serif;
+}
+
+* { box-sizing: border-box; }
+body { margin: 0; }
+main { width: min(100% - 2rem, 55rem); margin: auto; padding: 1.5rem 0; }
+h1, h2, p { margin: 0; }
+h1 { font-size: clamp(1.55rem, 4vw, 2.2rem); line-height: 1.35; margin: .3rem 0 .65rem; }
+h2 { font-size: 1.15rem; margin-bottom: .5rem; }
+.eyebrow { color: #3c5f7b; font-size: .9rem; font-weight: 700; }
+canvas { display: block; width: 100%; height: auto; margin: 1rem 0; border: 1px solid #839db3; border-radius: .5rem; background: #102131; }
+.panel { padding: 1rem; background: white; border: 1px solid #bfd0de; border-radius: .6rem; }
+fieldset { border: 0; margin: 0; padding: 0; }
+.fields { display: flex; flex-wrap: wrap; gap: .75rem 1.5rem; align-items: start; }
+label { display: flex; flex-direction: column; gap: .25rem; font-weight: 600; }
+select, button { font: inherit; border: 1px solid #8ca4b9; border-radius: .3rem; padding: .35rem .5rem; }
+select { color: #192c3d; background: white; }
+input[type="color"] { height: 2.5rem; width: 5rem; padding: .15rem; border: 1px solid #8ca4b9; background: white; }
+.offset { flex: 1; min-width: 12rem; display: grid; grid-template-columns: 1fr auto; }
+.offset input { grid-column: 1 / -1; width: 100%; min-height: 2rem; }
+output { font-family: ui-monospace, monospace; }
+button { margin: .7rem 0; color: white; background: #205a8e; cursor: pointer; }
+button:disabled { cursor: default; opacity: .6; }
+:focus-visible { outline: 3px solid #aa510c; outline-offset: 3px; }
+pre { margin: .4rem 0 0; white-space: pre-wrap; overflow-wrap: anywhere; font: .9rem/1.7 ui-monospace, monospace; }
+#uniforms { padding: .5rem; border-radius: .3rem; background: #f2f6fa; }
+#status[data-error="true"] { color: #942d38; }
+.notes, footer { margin-top: 1rem; }
+ul { margin: .2rem 0 .7rem; padding-left: 1.5rem; }
+summary { cursor: pointer; font-weight: 600; }
+footer { color: #455c6f; font-size: .93rem; }
+a { color: #15558c; }
+.visually-hidden { position: absolute; width: 1px; height: 1px; padding: 0; overflow: hidden; clip-path: inset(50%); white-space: nowrap; }
+
+@media (max-width: 34rem) {
+  main { width: calc(100% - 1.25rem); padding-top: 1rem; }
+  .panel { padding: .75rem; }
+  .fields { gap: .75rem; }
+}

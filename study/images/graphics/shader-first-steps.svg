@@ -1,0 +1,36 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="760" height="492" viewBox="0 0 760 492" role="img" aria-labelledby="title desc">
+  <title id="title">頂点の位置から、三角形の色を作る</title>
+  <desc id="desc">CPUが頂点データと共通設定を用意する。GPUの頂点シェーダーが位置とUVを出力し、三角形の組み立てとラスタライゼーションでUVを補間する。フラグメントシェーダーはUVや色の設定から色を計算し、深度やブレンドなどの処理を経て描画先を更新する。</desc>
+  <defs><marker id="arrow" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto"><path d="M0 0 8 4 0 8z" fill="#45677c"/></marker></defs>
+  <rect width="760" height="492" rx="18" fill="#edf4f9"/>
+  <g font-family="'Yu Gothic',Meiryo,sans-serif" fill="#143d59">
+    <text x="26" y="39" font-size="23" font-weight="700">頂点の位置から、三角形の色を作る</text>
+    <rect x="26" y="65" width="708" height="64" rx="10" fill="#fff" stroke="#a2bed2"/>
+    <text x="46" y="92" font-size="18" font-weight="700">CPU側　データと描画の指示を用意する</text>
+    <text x="46" y="116" font-size="15">三つの頂点の位置・UV、横移動量、色の設定など</text>
+    <path d="M131 132V156" stroke="#45677c" stroke-width="2" marker-end="url(#arrow)"/>
+    <rect x="26" y="163" width="210" height="127" rx="11" fill="#dfeefa" stroke="#a2bed2"/>
+    <text x="131" y="193" text-anchor="middle" font-size="18" font-weight="700">頂点シェーダー</text>
+    <text x="131" y="224" text-anchor="middle" font-size="15">頂点の出力位置を計算</text>
+    <text x="131" y="251" text-anchor="middle" font-size="15">UVなども後ろへ渡す</text>
+    <text x="131" y="276" text-anchor="middle" font-size="14">VS</text>
+    <rect x="276" y="163" width="210" height="127" rx="11" fill="#fff3d9" stroke="#c2a16a"/>
+    <text x="381" y="193" text-anchor="middle" font-size="17" font-weight="700">三角形を画面へ写す</text>
+    <text x="381" y="224" text-anchor="middle" font-size="15">組み立て・ラスタライズ</text>
+    <text x="381" y="251" text-anchor="middle" font-size="15">途中のUVなどを補間</text>
+    <text x="381" y="276" text-anchor="middle" font-size="14">描画候補ができる</text>
+    <rect x="526" y="163" width="208" height="127" rx="11" fill="#e1f2ea" stroke="#8fb8a5"/>
+    <text x="630" y="193" text-anchor="middle" font-size="17" font-weight="700">フラグメントシェーダー</text>
+    <text x="630" y="224" text-anchor="middle" font-size="15">UVと設定から色を計算</text>
+    <text x="630" y="251" text-anchor="middle" font-size="15">この例では赤＝U、緑＝V</text>
+    <text x="630" y="276" text-anchor="middle" font-size="14">FS / Pixel Shader</text>
+    <path d="M239 226H271" stroke="#45677c" stroke-width="2" marker-end="url(#arrow)"/>
+    <path d="M489 226H521" stroke="#45677c" stroke-width="2" marker-end="url(#arrow)"/>
+    <path d="M630 294V320" stroke="#45677c" stroke-width="2" marker-end="url(#arrow)"/>
+    <rect x="26" y="327" width="708" height="66" rx="10" fill="#fff" stroke="#a2bed2"/>
+    <text x="46" y="355" font-size="18" font-weight="700">深度・ブレンドなどで、描画先の画像を更新する</text>
+    <text x="46" y="379" font-size="15">FSが計算した色が、そのまま最終画面に残るとは限らない</text>
+    <text x="26" y="429" font-size="15">VSの出力位置はクリップ座標。画面上のピクセル位置へ変換される。</text>
+    <text x="26" y="459" font-size="15">この例のUVは、三角形の中でなめらかに変わり、色の変化として見える。</text>
+  </g>
+</svg>
