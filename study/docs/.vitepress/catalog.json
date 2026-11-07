@@ -104,14 +104,14 @@
       "id": "graphics",
       "title": "3DCGとグラフィックス",
       "description": "制作データからGPUの処理、最終表示までをつなぐ。",
-      "count": 71,
+      "count": 75,
       "status": "辞典本文あり"
     },
     {
       "id": "game",
       "title": "ゲームとエンジン",
       "description": "入力、時間、ECSと各サブシステムの関係を調べる。",
-      "count": 25,
+      "count": 29,
       "status": "辞典本文あり"
     },
     {
@@ -134,7 +134,7 @@
       "id": "foundations",
       "section": "learning",
       "title": "コンピュータと開発の基礎",
-      "description": "部品、通信、OS、言語、コンパイルと開発ツールの役割から詳しい解説へ進む。",
+      "description": "部品、通信、OS、言語、開発ツール、3DCGとゲームの役割から詳しい解説へ進む。",
       "start": "/guide/hardware-basics.html"
     },
     {
@@ -752,6 +752,32 @@
       ],
       "previous": "/graphics/capstone/02-device.html",
       "next": "/graphics/capstone/04-triangle.html"
+    },
+    {
+      "title": "3DCGの形と見た目から読む",
+      "url": "/guide/graphics-basics.html",
+      "file": "guide/graphics-basics.md",
+      "domain": "graphics",
+      "section": "learning",
+      "format": "path",
+      "status": "published",
+      "summary": "メッシュ、座標とカメラ、材質とテクスチャ、光と画像生成の順に、3DCGの基本用語と役割を図で確かめる読み順。",
+      "source": "新規執筆",
+      "aliases": [],
+      "collection": "foundations",
+      "order": 4,
+      "links": [
+        "/graphics/basics/models-and-meshes.html",
+        "/graphics/basics/transforms-and-cameras.html",
+        "/graphics/basics/materials-textures-and-shaders.html",
+        "/graphics/basics/light-and-rendered-images.html",
+        "/math/rendering/vector.html",
+        "/math/rendering/transform.html",
+        "/math/rendering/camera.html",
+        "/graphics/pipeline/overview.html",
+        "/graphics/mesh/mesh-import-and-cooking.html",
+        "/guide/game-development-basics.html"
+      ]
     },
     {
       "title": "4. 最初の三角形からメッシュ描画へ",
@@ -4693,17 +4719,17 @@
       "section": "reference",
       "format": "article",
       "status": "published",
-      "summary": "PBR (Physically Based Rendering) は、光と物質の相互作用を物理法則に基づいてモデル化するシェーディングの枠組みです。エネルギー保存・フレネル反射・マイクロファセット理論を柱とし、「アルベド・メタリック・ラフネス」という直感的なパラメータで、あらゆる照明環境で破綻しない",
+      "summary": "光と表面の関係を物理的なモデルに基づいて扱うPBRの考え方と、反射、金属度、粗さ、エネルギー保存を調べる。",
       "source": "RenderingWiki",
       "aliases": [],
       "links": [
+        "/graphics/lighting/ibl.html",
+        "/graphics/lighting/gi.html",
         "/graphics/lighting/path-tracing.html",
         "/graphics/postprocess/overview.html",
         "/math/rendering/vector.html",
         "/graphics/pipeline/fragment-shader.html",
-        "/graphics/lighting/ibl.html",
-        "/graphics/lighting/shadow.html",
-        "/graphics/lighting/gi.html"
+        "/graphics/lighting/shadow.html"
       ]
     },
     {
@@ -8094,6 +8120,41 @@
       ]
     },
     {
+      "title": "ゲームエンジンの役割 — 素材とルールからゲームを動かす",
+      "url": "/game/basics/game-engine-basics.html",
+      "file": "game/basics/game-engine-basics.md",
+      "domain": "game",
+      "section": "reference",
+      "format": "article",
+      "status": "published",
+      "summary": "プレイヤーを表示して動かす場面から、ゲームエンジン、エディター、実行時の機能、アセット、プロジェクト、ビルドの役割を説明する。",
+      "source": "新規執筆",
+      "aliases": [
+        "ゲームエンジン",
+        "game engine",
+        "Unity",
+        "Unreal Engine",
+        "エディター",
+        "editor",
+        "ランタイム",
+        "プロジェクト",
+        "アセット",
+        "ビルド",
+        "ゲームロジック"
+      ],
+      "verification": "Unity 6.0のアセット・シーン・ビルドとEpicのGameplay Frameworkの公式資料に照合（2026-11-07）",
+      "links": [
+        "/game/basics/scenes-and-components.html",
+        "/game/asset-loading.html",
+        "/os/files-and-paths.html",
+        "/game/asset-build-and-patches.html",
+        "/game/basics/game-loop-and-time.html",
+        "/graphics/basics/models-and-meshes.html",
+        "/graphics/basics/transforms-and-cameras.html",
+        "/game/shooter-design.html"
+      ]
+    },
+    {
       "title": "ゲームのアセットビルドと差分配信",
       "url": "/game/asset-build-and-patches.html",
       "file": "game/asset-build-and-patches.md",
@@ -8201,6 +8262,31 @@
       ]
     },
     {
+      "title": "ゲームの動きと構成から読む",
+      "url": "/guide/game-development-basics.html",
+      "file": "guide/game-development-basics.md",
+      "domain": "game",
+      "section": "learning",
+      "format": "path",
+      "status": "published",
+      "summary": "ゲームエンジンの役割、入力と時間、シーンと部品、衝突と物理を図で確かめ、小さなシューティングの実装へ進む読み順。",
+      "source": "新規執筆",
+      "aliases": [],
+      "collection": "foundations",
+      "order": 5,
+      "links": [
+        "/game/basics/game-engine-basics.html",
+        "/game/basics/game-loop-and-time.html",
+        "/game/basics/scenes-and-components.html",
+        "/game/basics/collisions-and-physics.html",
+        "/game/shooter-design.html",
+        "/game/shooter-cpp.html",
+        "/game/shooter-unity.html",
+        "/guide/graphics-basics.html",
+        "/guide/software-development-basics.html"
+      ]
+    },
+    {
       "title": "ゲームプログラミングパターンの演習",
       "url": "/game/patterns/exercises.html",
       "file": "game/patterns/exercises.md",
@@ -8258,6 +8344,45 @@
         "/game/patterns/exercises.html",
         "/design/foundations/yagni-kiss-dry.html",
         "/guide/cpp-index.html"
+      ]
+    },
+    {
+      "title": "ゲームループと時間 — 入力・更新・描画を繰り返す",
+      "url": "/game/basics/game-loop-and-time.html",
+      "file": "game/basics/game-loop-and-time.md",
+      "domain": "game",
+      "section": "reference",
+      "format": "article",
+      "status": "published",
+      "summary": "プレイヤーの移動を例に、入力、状態の更新、描画、フレームとFPS、経過時間、可変更新と固定更新の役割を説明する。",
+      "source": "新規執筆",
+      "aliases": [
+        "ゲームループ",
+        "game loop",
+        "フレーム",
+        "FPS",
+        "フレームタイム",
+        "delta time",
+        "deltaTime",
+        "dt",
+        "Update",
+        "FixedUpdate",
+        "固定更新",
+        "可変更新",
+        "入力",
+        "押し始め"
+      ],
+      "verification": "Unity 6.0のUpdate・FixedUpdate・Time.deltaTimeと、ゲームループの既存詳解に照合（2026-11-07）",
+      "links": [
+        "/game/basics/game-engine-basics.html",
+        "/graphics/basics/light-and-rendered-images.html",
+        "/graphics/optimization/swap-chain-and-vsync.html",
+        "/graphics/optimization/frame-pacing.html",
+        "/graphics/optimization/input-to-display-latency.html",
+        "/game/patterns/game-loop-and-update.html",
+        "/game/basics/collisions-and-physics.html",
+        "/game/patterns/command-buffer-and-input.html",
+        "/game/shooter-design.html"
       ]
     },
     {
@@ -8383,6 +8508,43 @@
         "/design/case-studies/screen-transition.html",
         "/design/case-studies/",
         "/design/case-studies/item-effects.html"
+      ]
+    },
+    {
+      "title": "シーン・オブジェクト・コンポーネントの基本",
+      "url": "/game/basics/scenes-and-components.html",
+      "file": "game/basics/scenes-and-components.md",
+      "domain": "game",
+      "section": "reference",
+      "format": "article",
+      "status": "published",
+      "summary": "ゲーム内の物をシーンに配置し、位置や描画、当たり判定の部品を組み合わせる考え方を説明する。親子関係と、Unity・Unreal Engineの用語もつなげる。",
+      "source": "新規執筆",
+      "aliases": [
+        "シーン",
+        "scene",
+        "ゲームオブジェクト",
+        "GameObject",
+        "コンポーネント",
+        "Component",
+        "Transform",
+        "親子関係",
+        "ヒエラルキー",
+        "Actor",
+        "ActorComponent",
+        "SceneComponent"
+      ],
+      "verification": "Unity 6.0のシーン・GameObject・TransformとUnreal EngineのActor・Componentの公式資料に照合（2026-11-07）",
+      "links": [
+        "/game/basics/game-engine-basics.html",
+        "/graphics/basics/models-and-meshes.html",
+        "/game/basics/collisions-and-physics.html",
+        "/graphics/basics/transforms-and-cameras.html",
+        "/game/unreal/uobject-actor-component.html",
+        "/game/shooter-design.html",
+        "/os/files-and-paths.html",
+        "/game/patterns/component-and-ecs.html",
+        "/game/basics/game-loop-and-time.html"
       ]
     },
     {
@@ -10009,6 +10171,41 @@
       ]
     },
     {
+      "title": "マテリアル・テクスチャ・シェーダーの基本",
+      "url": "/graphics/basics/materials-textures-and-shaders.html",
+      "file": "graphics/basics/materials-textures-and-shaders.md",
+      "domain": "graphics",
+      "section": "reference",
+      "format": "article",
+      "status": "published",
+      "summary": "同じ形の箱に木目や金属の見た目を付ける例から、マテリアル、テクスチャ、UV、シェーダー、サンプラーの役割を説明する。",
+      "source": "新規執筆",
+      "aliases": [
+        "マテリアル",
+        "material",
+        "テクスチャ",
+        "texture",
+        "UV",
+        "テクセル",
+        "シェーダー",
+        "shader",
+        "サンプラー",
+        "sampler",
+        "フィルタリング",
+        "metallic",
+        "roughness"
+      ],
+      "verification": "Unityのマテリアル・テクスチャ資料、KhronosのglTF仕様、Microsoftの描画パイプライン資料に照合（2026-11-07）",
+      "links": [
+        "/graphics/basics/models-and-meshes.html",
+        "/graphics/mesh/vertex-and-index-input.html",
+        "/graphics/texture/texture-streaming-and-mip-residency.html",
+        "/graphics/basics/light-and-rendered-images.html",
+        "/graphics/shader/overview.html",
+        "/graphics/lighting/pbr.html"
+      ]
+    },
+    {
       "title": "メッシュをインポートして描画用データに変える",
       "url": "/graphics/mesh/mesh-import-and-cooking.html",
       "file": "graphics/mesh/mesh-import-and-cooking.md",
@@ -10186,6 +10383,43 @@
       ]
     },
     {
+      "title": "モデルとメッシュの基本 — 頂点から形を作る",
+      "url": "/graphics/basics/models-and-meshes.html",
+      "file": "graphics/basics/models-and-meshes.md",
+      "domain": "graphics",
+      "section": "reference",
+      "format": "article",
+      "status": "published",
+      "summary": "キャラクターや箱の形を例に、モデル、メッシュ、頂点、辺、面、三角形、インデックス、法線の役割を説明する。",
+      "source": "新規執筆",
+      "aliases": [
+        "3Dモデル",
+        "モデル",
+        "メッシュ",
+        "mesh",
+        "頂点",
+        "vertex",
+        "辺",
+        "edge",
+        "面",
+        "face",
+        "ポリゴン",
+        "三角形",
+        "インデックス",
+        "法線",
+        "normal"
+      ],
+      "verification": "Unityのメッシュデータ資料、Blenderのメッシュ構造の説明とKhronosのglTF 2.0仕様に照合（2026-11-07）",
+      "links": [
+        "/graphics/pipeline/rasterization.html",
+        "/graphics/mesh/vertex-and-index-input.html",
+        "/game/basics/scenes-and-components.html",
+        "/graphics/basics/transforms-and-cameras.html",
+        "/graphics/basics/materials-textures-and-shaders.html",
+        "/graphics/mesh/gltf-mesh-buffers.html"
+      ]
+    },
+    {
       "title": "ライブラリ・API・SDK — 用意された機能を使う",
       "url": "/compilers/libraries-apis-and-sdks.html",
       "file": "compilers/libraries-apis-and-sdks.md",
@@ -10308,6 +10542,7 @@
       "collection": "rendering",
       "order": -1,
       "links": [
+        "/guide/graphics-basics.html",
         "/guide/rendering/roadmap.html",
         "/guide/rendering/about.html",
         "/guide/rendering/timeline.html",
@@ -10486,6 +10721,7 @@
       "source": "RenderingWiki",
       "aliases": [],
       "links": [
+        "/guide/graphics-basics.html",
         "/graphics/optimization/basics.html",
         "/graphics/pipeline/mesh-shader.html",
         "/graphics/optimization/gpu-driven.html",
@@ -10875,6 +11111,8 @@
         "/guide/hardware-basics.html",
         "/guide/network-basics.html",
         "/guide/software-development-basics.html",
+        "/guide/graphics-basics.html",
+        "/guide/game-development-basics.html",
         "/data/integer-bits-and-bytes.html",
         "/practice/data/integer-byte-observation.html",
         "/runtime/cpp-internals/memory-layout.html",
@@ -11234,6 +11472,46 @@
       ]
     },
     {
+      "title": "光とレンダリングの基本 — シーンから画像を作る",
+      "url": "/graphics/basics/light-and-rendered-images.html",
+      "file": "graphics/basics/light-and-rendered-images.md",
+      "domain": "graphics",
+      "section": "reference",
+      "format": "article",
+      "status": "published",
+      "summary": "形、表面、光、カメラから画像を作る流れを説明する。ラスタライゼーション、深度、影、直射光と間接光を、CPU・GPUと画面表示につなげる。",
+      "source": "新規執筆",
+      "aliases": [
+        "レンダリング",
+        "rendering",
+        "ライティング",
+        "lighting",
+        "直射光",
+        "間接光",
+        "陰影",
+        "影",
+        "深度バッファ",
+        "ラスタライゼーション",
+        "リアルタイム",
+        "オフラインレンダリング"
+      ],
+      "verification": "Microsoftの描画パイプライン・深度テスト、Unityの照明・影、KhronosのPBR資料に照合（2026-11-07）",
+      "links": [
+        "/graphics/basics/transforms-and-cameras.html",
+        "/graphics/basics/materials-textures-and-shaders.html",
+        "/graphics/pipeline/rasterization.html",
+        "/graphics/lighting/gi.html",
+        "/graphics/lighting/shadow.html",
+        "/graphics/lighting/path-tracing.html",
+        "/graphics/optimization/frame-pacing.html",
+        "/graphics/lighting/pbr.html",
+        "/graphics/pipeline/overview.html",
+        "/graphics/optimization/swap-chain-and-vsync.html",
+        "/game/basics/game-loop-and-time.html",
+        "/graphics/basics/models-and-meshes.html"
+      ]
+    },
+    {
       "title": "構造体・クラス・アクセス指定子",
       "url": "/languages/cpp/structs-and-classes.html",
       "file": "languages/cpp/structs-and-classes.md",
@@ -11295,6 +11573,41 @@
         "/math/rendering/matrix.html",
         "/graphics/pipeline/overview.html",
         "/graphics/pipeline/vertex-shader.html"
+      ]
+    },
+    {
+      "title": "座標変換とカメラの基本 — モデルの位置が画面に映るまで",
+      "url": "/graphics/basics/transforms-and-cameras.html",
+      "file": "graphics/basics/transforms-and-cameras.md",
+      "domain": "graphics",
+      "section": "reference",
+      "format": "article",
+      "status": "published",
+      "summary": "物体を移動・回転・拡縮する操作から、ローカル、ワールド、ビュー、投影、画面座標の意味を説明する。透視投影と正投影、座標規約の違いも比べる。",
+      "source": "新規執筆",
+      "aliases": [
+        "座標変換",
+        "transform",
+        "ローカル座標",
+        "モデル座標",
+        "ワールド座標",
+        "ビュー座標",
+        "カメラ座標",
+        "投影",
+        "透視投影",
+        "正投影",
+        "FOV",
+        "視野角",
+        "クリッピング"
+      ],
+      "verification": "Microsoftの座標変換、UnityのTransformとCamera、KhronosのglTFの座標・カメラ仕様に照合（2026-11-07）",
+      "links": [
+        "/graphics/basics/models-and-meshes.html",
+        "/math/rendering/transform.html",
+        "/game/basics/scenes-and-components.html",
+        "/math/rendering/camera.html",
+        "/graphics/basics/light-and-rendered-images.html",
+        "/graphics/pipeline/overview.html"
       ]
     },
     {
@@ -11551,6 +11864,7 @@
       "collection": "shooter",
       "order": 1,
       "links": [
+        "/guide/game-development-basics.html",
         "/game/shooter-cpp.html",
         "/game/shooter-unity.html",
         "/game/patterns/game-loop-and-update.html",
@@ -11609,6 +11923,42 @@
         "/design/case-studies/event-notification.html",
         "/design/case-studies/",
         "/design/case-studies/exercises.html"
+      ]
+    },
+    {
+      "title": "衝突と物理の基本 — コライダー・Rigidbody・トリガー",
+      "url": "/game/basics/collisions-and-physics.html",
+      "file": "game/basics/collisions-and-physics.md",
+      "domain": "game",
+      "section": "reference",
+      "format": "article",
+      "status": "published",
+      "summary": "描画用の形と当たり判定の形を分け、接触の検出、物理の応答、ゲームのルールへつなぐ。Unityの3D物理を例に、Rigidbody、トリガー、すり抜け、レイの検査を説明する。",
+      "source": "新規執筆",
+      "aliases": [
+        "衝突",
+        "当たり判定",
+        "collision",
+        "Collider",
+        "コライダー",
+        "Rigidbody",
+        "剛体",
+        "静的",
+        "動的",
+        "kinematic",
+        "キネマティック",
+        "trigger",
+        "トリガー",
+        "CCD",
+        "レイキャスト"
+      ],
+      "verification": "Unity 6.0の3D Collider・Rigidbody・イベント・CCD・Raycastの公式資料に照合（2026-11-07）",
+      "links": [
+        "/graphics/basics/models-and-meshes.html",
+        "/game/shooter-design.html",
+        "/game/basics/game-loop-and-time.html",
+        "/game/basics/scenes-and-components.html",
+        "/graphics/basics/transforms-and-cameras.html"
       ]
     },
     {
@@ -12365,12 +12715,13 @@
       "section": "learning",
       "format": "path",
       "status": "outline",
-      "summary": "頂点から画像までの処理段階と、各段階を記述するシェーダを学ぶための学習計画・概要です。概説で工程を整理した後、本文と小さなシェーダ実験を往復します。\n\n## 関連する辞典本文・実践\n\n- [レンダリングパイプライン全体像](/graphics/pipeline/overview.html)か",
+      "summary": "頂点から画像までの処理段階とシェーダを学ぶための計画。形・材質・光の基礎から、パイプラインとシェーダの詳解へ進む。",
       "source": "IT教本",
       "aliases": [],
       "collection": "low-level",
       "order": 13,
       "links": [
+        "/guide/graphics-basics.html",
         "/graphics/pipeline/overview.html",
         "/graphics/shader/hlsl.html",
         "/graphics/shader/glsl.html"
@@ -12408,12 +12759,13 @@
       "section": "learning",
       "format": "path",
       "status": "outline",
-      "summary": "入力の状態と押し始め、実時間と更新時間、描画と表示を分けて学ぶための学習計画・概要です。短いループを作って挙動を観察し、遅延や時間刻みの方針を言葉にします。\n\n## 関連する辞典本文・実践\n\n- [Game LoopとUpdate](/game/patterns/game-loop-and-",
+      "summary": "入力の状態と押し始め、実時間と更新時間、描画と表示を学ぶための計画。基礎から時間刻みと入力処理の設計へ進む。",
       "source": "IT教本",
       "aliases": [],
       "collection": "low-level",
       "order": 15,
       "links": [
+        "/game/basics/game-loop-and-time.html",
         "/game/patterns/game-loop-and-update.html",
         "/game/patterns/command-buffer-and-input.html",
         "/game/shooter-design.html"
@@ -12435,6 +12787,8 @@
       "collection": "low-level",
       "order": 16,
       "links": [
+        "/game/basics/game-engine-basics.html",
+        "/game/basics/scenes-and-components.html",
         "/design/foundations/responsibility-and-separation.html",
         "/game/ecs.html",
         "/game/patterns/component-and-ecs.html",
@@ -13471,6 +13825,7 @@
       "collection": "rendering",
       "order": 1,
       "links": [
+        "/guide/graphics-basics.html",
         "/hardware/gpu/what-is-gpu.html",
         "/hardware/gpu/cpu-vs-gpu.html",
         "/hardware/gpu/architecture.html",
@@ -13876,6 +14231,14 @@
         "/os/process-startup.html",
         "/runtime/memory/allocation-journey.html",
         "/os/virtual-memory.html",
+        "/graphics/basics/models-and-meshes.html",
+        "/graphics/basics/transforms-and-cameras.html",
+        "/graphics/basics/materials-textures-and-shaders.html",
+        "/graphics/basics/light-and-rendered-images.html",
+        "/game/basics/game-engine-basics.html",
+        "/game/basics/game-loop-and-time.html",
+        "/game/basics/scenes-and-components.html",
+        "/game/basics/collisions-and-physics.html",
         "/game/ecs.html",
         "/runtime/memory/storage-duration-and-lifetime.html",
         "/graphics/shader/hlsl.html",

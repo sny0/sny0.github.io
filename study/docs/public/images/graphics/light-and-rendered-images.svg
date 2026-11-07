@@ -1,0 +1,38 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="760" height="476" viewBox="0 0 760 476" role="img" aria-labelledby="title desc">
+  <title id="title">シーンの入力から画像を作る流れと光の届き方</title>
+  <desc id="desc">形、表面、光、カメラを入力として、CPUが描画の仕事を用意し、GPUが色と深度などを計算し、できた画像を表示へ渡す。下では光源から直接届く光と、別の面で反射して届く間接光を示す。</desc>
+  <defs><marker id="arrow" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto"><path d="M0 0 8 4 0 8z" fill="#44647b"/></marker><marker id="light" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto"><path d="M0 0 8 4 0 8z" fill="#b17a23"/></marker></defs>
+  <rect width="760" height="476" rx="18" fill="#edf4f9"/>
+  <g font-family="'Yu Gothic',Meiryo,sans-serif" fill="#143d59">
+    <text x="26" y="39" font-size="23" font-weight="700">形・表面・光・カメラから、画像を作る</text>
+    <rect x="26" y="69" width="708" height="46" rx="10" fill="#fff" stroke="#a4bfd4"/>
+    <text x="380" y="98" text-anchor="middle" font-size="17">シーンの入力　メッシュ ・ マテリアル ・ 光 ・ カメラ</text>
+    <path d="M131 120V143" stroke="#44647b" stroke-width="2" marker-end="url(#arrow)"/>
+    <rect x="26" y="150" width="210" height="94" rx="11" fill="#fff3d9" stroke="#c4a261"/>
+    <text x="131" y="179" text-anchor="middle" font-size="18" font-weight="700">CPU側</text>
+    <text x="131" y="207" text-anchor="middle" font-size="15">描く対象と仕事を用意</text>
+    <text x="131" y="231" text-anchor="middle" font-size="15">コマンドを渡す</text>
+    <path d="M240 197H270" stroke="#44647b" stroke-width="2" marker-end="url(#arrow)"/>
+    <rect x="276" y="150" width="210" height="94" rx="11" fill="#dcecf8" stroke="#a4bfd4"/>
+    <text x="381" y="179" text-anchor="middle" font-size="18" font-weight="700">GPU側</text>
+    <text x="381" y="207" text-anchor="middle" font-size="15">画面を覆う範囲を調べる</text>
+    <text x="381" y="231" text-anchor="middle" font-size="15">色・深度などを計算</text>
+    <path d="M490 197H520" stroke="#44647b" stroke-width="2" marker-end="url(#arrow)"/>
+    <rect x="526" y="150" width="208" height="94" rx="11" fill="#e1f2ea" stroke="#8fb8a5"/>
+    <text x="630" y="179" text-anchor="middle" font-size="18" font-weight="700">画像を表示へ</text>
+    <text x="630" y="207" text-anchor="middle" font-size="15">表示する画像を渡す</text>
+    <text x="630" y="231" text-anchor="middle" font-size="15">画面の更新に合わせる</text>
+    <text x="26" y="281" font-size="18" font-weight="700">光が表面へ届く、二つの経路</text>
+    <circle cx="78" cy="329" r="22" fill="#ffe2a0" stroke="#b17a23"/>
+    <text x="78" y="374" text-anchor="middle" font-size="15">光源</text>
+    <path d="M105 325L294 325" fill="none" stroke="#b17a23" stroke-width="2" marker-end="url(#light)"/>
+    <text x="190" y="310" text-anchor="middle" font-size="15">直接届く光</text>
+    <rect x="302" y="309" width="115" height="39" rx="6" fill="#fff" stroke="#a4bfd4"/>
+    <text x="359" y="334" text-anchor="middle" font-size="16">表面 A</text>
+    <path d="M359 354L359 397L526 397" fill="none" stroke="#b17a23" stroke-width="2" marker-end="url(#light)"/>
+    <text x="400" y="427" text-anchor="middle" font-size="15">Aで反射してBへ届く光</text>
+    <rect x="534" y="376" width="115" height="41" rx="6" fill="#fff" stroke="#a4bfd4"/>
+    <text x="591" y="402" text-anchor="middle" font-size="16">表面 B</text>
+    <text x="26" y="456" font-size="15">影・間接光などは、それぞれの計算方式や保存済みのデータを使う。</text>
+  </g>
+</svg>

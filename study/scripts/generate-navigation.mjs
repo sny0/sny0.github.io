@@ -172,6 +172,8 @@ writePage('guide/learning-paths.md', '疑問から選ぶ読み順', {
 - [コンピュータの部品から読む](/guide/hardware-basics.html)で、CPU・RAM・SSDの役割から、命令の実行とメモリの使い分けへ進む。
 - [ネットワークの基本から読む](/guide/network-basics.html)で、パケットとプロトコル、IPとポート、家庭内の機器を調べる。
 - [プログラムを書く・動かす基礎](/guide/software-development-basics.html)で、OSとファイル、変数と関数、コンパイルと開発ツールの関係を追う。
+- [3DCGの形と見た目から読む](/guide/graphics-basics.html)で、メッシュ、座標、材質、光から画像が作られる流れを調べる。
+- [ゲームの動きと構成から読む](/guide/game-development-basics.html)で、エンジン、時間、シーン、衝突判定をつなげる。
 
 ## 整数はメモリにどう並ぶか
 
@@ -704,6 +706,14 @@ const termRows = [
   ['プロセス / スレッド / PID / TID / ローダー / エントリポイント / CRT', '/os/process-startup.html', '実行環境と実行単位、EXEの開始点からmainまでの違い'],
   ['alloc / allocate / malloc / アロック / メモリ確保', '/runtime/memory/allocation-journey.html', '確保・初期化・解放、再利用とOSへの要求の関係'],
   ['仮想メモリ / reserve / commit / resident / ページフォルト', '/os/virtual-memory.html', 'アドレス変換と、予約・コミット・常駐の違い'],
+  ['モデル / メッシュ / 頂点 / 辺 / 面 / ポリゴン / 三角形 / 法線', '/graphics/basics/models-and-meshes.html', '形をデータで表し、頂点から面を組み立てる基本を調べる'],
+  ['ローカル座標 / ワールド座標 / ビュー座標 / 座標変換 / カメラ / 透視投影 / 正投影', '/graphics/basics/transforms-and-cameras.html', '形の位置を決め、カメラからの見え方へ変換する流れを追う'],
+  ['マテリアル / 材質 / テクスチャ / UV / シェーダー / サンプラー', '/graphics/basics/materials-textures-and-shaders.html', '表面の見た目を決めるデータ、値、計算の役割を調べる'],
+  ['レンダリング / 光源 / ライティング / 深度 / リアルタイム描画 / オフライン描画', '/graphics/basics/light-and-rendered-images.html', 'シーンとカメラ、光から画像を作る流れをつかむ'],
+  ['ゲームエンジン / Unity / Unreal Engine / エディター / アセット / ゲームロジック', '/game/basics/game-engine-basics.html', '素材とルールをエンジンの機能で動かす構成を調べる'],
+  ['ゲームループ / フレーム / FPS / デルタタイム / dt / Update / FixedUpdate', '/game/basics/game-loop-and-time.html', '入力、状態の更新、描画と時間の関係を調べる'],
+  ['シーン / ゲームオブジェクト / コンポーネント / Transform / 親子関係', '/game/basics/scenes-and-components.html', '配置した物体と、その機能や座標のつながりを調べる'],
+  ['衝突判定 / コライダー / Rigidbody / 剛体 / トリガー / CCD / レイキャスト', '/game/basics/collisions-and-physics.html', '判定の形、接触、物理で動かす処理の違いを調べる'],
   ['ECS / Entity Component System', '/game/ecs.html', 'ID、Component、System、Query、格納方式'],
   ['RAII / 所有 / 寿命', '/runtime/memory/storage-duration-and-lifetime.html', '記憶域、寿命、後片付けの区別'],
   ['HLSL', '/graphics/shader/hlsl.html', 'Direct3Dやエンジンで使うシェーダ言語'],

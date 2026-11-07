@@ -1,0 +1,31 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="760" height="446" viewBox="0 0 760 446" role="img" aria-labelledby="title desc">
+  <title id="title">素材とルールを、エンジンの機能で動かす</title>
+  <desc id="desc">ゲーム側のモデルや設定、ルールを、エンジンの入力、シーン、描画、物理などの機能と組み合わせる。実行時はOSや機器の機能を使う。制作中はエディターで素材や配置、設定を編集する。</desc>
+  <defs><marker id="arrow" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto"><path d="M0 0 8 4 0 8z" fill="#45677c"/></marker></defs>
+  <rect width="760" height="446" rx="18" fill="#edf4f9"/>
+  <g font-family="'Yu Gothic',Meiryo,sans-serif" fill="#143d59">
+    <text x="26" y="38" font-size="23" font-weight="700">素材とルールを、エンジンの機能で動かす</text>
+    <rect x="26" y="65" width="708" height="64" rx="10" fill="#fff" stroke="#a2bed2"/>
+    <text x="46" y="92" font-size="18" font-weight="700">ゲーム側の素材・コード・設定</text>
+    <text x="46" y="116" font-size="15">モデル、材質、配置、移動速度、HP、勝敗のルールなど</text>
+    <path d="M380 132V156" stroke="#45677c" stroke-width="2" marker-end="url(#arrow)"/>
+    <rect x="26" y="163" width="708" height="139" rx="10" fill="#dfeefa" stroke="#a2bed2"/>
+    <text x="46" y="191" font-size="18" font-weight="700">エンジンの機能を使う</text>
+    <rect x="45" y="207" width="151" height="69" rx="8" fill="#fff" stroke="#a2bed2"/>
+    <rect x="218" y="207" width="151" height="69" rx="8" fill="#fff" stroke="#a2bed2"/>
+    <rect x="391" y="207" width="151" height="69" rx="8" fill="#fff" stroke="#a2bed2"/>
+    <rect x="564" y="207" width="151" height="69" rx="8" fill="#fff" stroke="#a2bed2"/>
+    <text x="120" y="233" text-anchor="middle" font-size="17" font-weight="700">入力</text>
+    <text x="120" y="258" text-anchor="middle" font-size="14">操作を受け取る</text>
+    <text x="293" y="233" text-anchor="middle" font-size="17" font-weight="700">シーン</text>
+    <text x="293" y="258" text-anchor="middle" font-size="14">配置と状態を持つ</text>
+    <text x="466" y="233" text-anchor="middle" font-size="17" font-weight="700">描画</text>
+    <text x="466" y="258" text-anchor="middle" font-size="14">画像を作る</text>
+    <text x="639" y="233" text-anchor="middle" font-size="17" font-weight="700">物理など</text>
+    <text x="639" y="258" text-anchor="middle" font-size="14">接触や動きを計算</text>
+    <path d="M380 305V329" stroke="#45677c" stroke-width="2" marker-end="url(#arrow)"/>
+    <rect x="26" y="336" width="708" height="47" rx="10" fill="#fff3d9" stroke="#c2a16a"/>
+    <text x="380" y="366" text-anchor="middle" font-size="17" font-weight="700">実行時には、OS・グラフィックスAPI・機器も使う</text>
+    <text x="26" y="417" font-size="15">制作中のエディターで、素材・配置・設定を編集して動作を確かめる。</text>
+  </g>
+</svg>

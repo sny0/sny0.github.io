@@ -19,6 +19,8 @@ GPUとレンダリングを順番に学ぶための入口です。各項目の�
 
 まず全体の読み順を選び、必要な本文を読み、実践教材で確かめます。既に知っている内容は飛ばし、疑問のある項目へ戻って使えます。
 
+- [形・座標・見た目から3DCGの基礎を読む](/guide/graphics-basics.html)
+
 - [学習を始める](/guide/rendering/roadmap.html)
 - [描画の学習ガイドについて](/guide/rendering/about.html)
 - [技術全史年表](/guide/rendering/timeline.html)
