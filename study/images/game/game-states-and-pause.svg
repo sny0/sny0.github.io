@@ -1,0 +1,32 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="760" height="446" viewBox="0 0 760 446" role="img" aria-labelledby="title desc">
+  <title id="title">ゲームの状態によって入力と更新を切り替える</title>
+  <desc id="desc">タイトルで開始するとプレイ中へ進む。プレイ中は結果またはポーズへ進める。ポーズから再開し、結果からタイトルへ戻る。図は一つの主状態を選ぶ説明用の例。</desc>
+  <defs><marker id="arrow" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto"><path d="M0 0 8 4 0 8z" fill="#45677c"/></marker></defs>
+  <rect width="760" height="446" rx="18" fill="#edf4f9"/>
+  <g font-family="'Yu Gothic',Meiryo,sans-serif" fill="#143d59">
+    <text x="26" y="39" font-size="23" font-weight="700">今の状態で、することと操作を決める</text>
+    <text x="26" y="68" font-size="15">小さな一人用ゲームの説明用の例</text>
+    <rect x="26" y="109" width="188" height="84" rx="11" fill="#fff" stroke="#a2bed2"/>
+    <rect x="286" y="109" width="188" height="84" rx="11" fill="#e1f2ea" stroke="#8fb8a5"/>
+    <rect x="546" y="109" width="188" height="84" rx="11" fill="#fff" stroke="#a2bed2"/>
+    <text x="120" y="140" text-anchor="middle" font-size="18" font-weight="700">タイトル</text>
+    <text x="120" y="169" text-anchor="middle" font-size="15">開始や設定を選ぶ</text>
+    <text x="380" y="140" text-anchor="middle" font-size="18" font-weight="700">プレイ中</text>
+    <text x="380" y="169" text-anchor="middle" font-size="15">移動・攻撃を進める</text>
+    <text x="640" y="140" text-anchor="middle" font-size="18" font-weight="700">結果</text>
+    <text x="640" y="169" text-anchor="middle" font-size="15">スコアなどを表示</text>
+    <path d="M217 151H281" stroke="#45677c" stroke-width="2" marker-end="url(#arrow)"/>
+    <text x="249" y="130" text-anchor="middle" font-size="14">開始</text>
+    <path d="M477 151H541" stroke="#45677c" stroke-width="2" marker-end="url(#arrow)"/>
+    <text x="510" y="130" text-anchor="middle" font-size="14">終了</text>
+    <rect x="286" y="285" width="188" height="84" rx="11" fill="#fff3d9" stroke="#c2a16a"/>
+    <text x="380" y="316" text-anchor="middle" font-size="18" font-weight="700">ポーズ中</text>
+    <text x="380" y="345" text-anchor="middle" font-size="15">メニューを操作</text>
+    <path d="M430 197V280" stroke="#45677c" stroke-width="2" marker-end="url(#arrow)"/>
+    <text x="446" y="244" font-size="14">ポーズ</text>
+    <path d="M330 281V198" stroke="#45677c" stroke-width="2" marker-end="url(#arrow)"/>
+    <text x="280" y="244" font-size="14">再開</text>
+    <path d="M640 197V399H120V198" fill="none" stroke="#45677c" stroke-width="2" marker-end="url(#arrow)"/>
+    <text x="380" y="429" text-anchor="middle" font-size="15">結果を確認したら、タイトルへ戻る</text>
+  </g>
+</svg>

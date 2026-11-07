@@ -1,0 +1,33 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="760" height="470" viewBox="0 0 760 470" role="img" aria-labelledby="title desc">
+  <title id="title">画面の基準にUIを置き、データと操作をつなぐ</title>
+  <desc id="desc">幅の違う画面でも、HP表示は左上、ポーズボタンは右上を基準にする。下の図ではゲームのHPからUI表示を更新し、再開ボタンを決定するとゲームへ再開要求を渡す。</desc>
+  <defs><marker id="arrow" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto"><path d="M0 0 8 4 0 8z" fill="#44647b"/></marker></defs>
+  <rect width="760" height="470" rx="18" fill="#edf4f9"/>
+  <g font-family="'Yu Gothic',Meiryo,sans-serif" fill="#143d59">
+    <text x="26" y="39" font-size="23" font-weight="700">基準を決めて配置し、表示と操作をつなぐ</text>
+    <text x="26" y="68" font-size="14">左上と右上を基準に置く、説明用のUI配置</text>
+    <rect x="26" y="87" width="300" height="159" rx="11" fill="#fff" stroke="#a4bfd4"/>
+    <rect x="352" y="87" width="382" height="159" rx="11" fill="#fff" stroke="#a4bfd4"/>
+    <rect x="42" y="103" width="116" height="37" rx="7" fill="#dfeefa" stroke="#a4bfd4"/>
+    <text x="100" y="127" text-anchor="middle" font-size="15">HP 70 / 100</text>
+    <rect x="236" y="103" width="74" height="37" rx="7" fill="#fff3d9" stroke="#c4a261"/>
+    <text x="273" y="127" text-anchor="middle" font-size="15">ポーズ</text>
+    <rect x="368" y="103" width="116" height="37" rx="7" fill="#dfeefa" stroke="#a4bfd4"/>
+    <text x="426" y="127" text-anchor="middle" font-size="15">HP 70 / 100</text>
+    <rect x="644" y="103" width="74" height="37" rx="7" fill="#fff3d9" stroke="#c4a261"/>
+    <text x="681" y="127" text-anchor="middle" font-size="15">ポーズ</text>
+    <text x="176" y="202" text-anchor="middle" font-size="16">狭い画面</text>
+    <text x="543" y="202" text-anchor="middle" font-size="16">広い画面</text>
+    <text x="26" y="275" font-size="15">アンカーは親の基準。ピボットはUI自身の基準点。</text>
+    <rect x="26" y="299" width="233" height="56" rx="9" fill="#dfeefa" stroke="#a4bfd4"/>
+    <text x="142" y="333" text-anchor="middle" font-size="16">ゲームのHP = 70</text>
+    <path d="M266 327H382" stroke="#44647b" stroke-width="2" marker-end="url(#arrow)"/>
+    <rect x="390" y="299" width="344" height="56" rx="9" fill="#fff" stroke="#a4bfd4"/>
+    <text x="562" y="333" text-anchor="middle" font-size="16">文字・ゲージを更新する</text>
+    <rect x="26" y="380" width="233" height="56" rx="9" fill="#fff3d9" stroke="#c4a261"/>
+    <text x="142" y="414" text-anchor="middle" font-size="16">再開ボタンを決定</text>
+    <path d="M266 408H382" stroke="#44647b" stroke-width="2" marker-end="url(#arrow)"/>
+    <rect x="390" y="380" width="344" height="56" rx="9" fill="#e1f2ea" stroke="#8fb8a5"/>
+    <text x="562" y="414" text-anchor="middle" font-size="16">ゲームへ再開を要求する</text>
+  </g>
+</svg>
