@@ -104,7 +104,7 @@
       "id": "graphics",
       "title": "3DCGとグラフィックス",
       "description": "制作データからGPUの処理、最終表示までをつなぐ。",
-      "count": 77,
+      "count": 79,
       "status": "辞典本文あり"
     },
     {
@@ -130,6 +130,13 @@
     }
   ],
   "collections": [
+    {
+      "id": "shader-first-steps",
+      "section": "practice",
+      "title": "シェーダーで三角形の位置と色を変える",
+      "description": "WebGL 2で頂点属性とuniformを渡し、UVの補間、位置と色の計算を描画で確かめる。",
+      "start": "/practice/graphics/shader-first-steps.html"
+    },
     {
       "id": "foundations",
       "section": "learning",
@@ -773,6 +780,9 @@
         "/graphics/basics/light-and-rendered-images.html",
         "/graphics/basics/keyframes-and-animation.html",
         "/graphics/basics/rigs-and-skinning.html",
+        "/graphics/shader/shader-first-steps.html",
+        "/graphics/shader/shader-inputs-and-uniforms.html",
+        "/practice/graphics/shader-first-steps.html",
         "/math/rendering/vector.html",
         "/math/rendering/transform.html",
         "/math/rendering/camera.html",
@@ -3473,10 +3483,12 @@
       "section": "reference",
       "format": "article",
       "status": "published",
-      "summary": "Fragment Shader (FS、DirectX用語ではPixel Shader/PS) は、ラスタライザが列挙した各フラグメントに対して色を計算するプログラムです。ライティング・テクスチャリング・マテリアル表現という「絵作りの本体」はここに集中しており、GPU時間の大半を消費するステージでも",
+      "summary": "補間された属性やテクスチャから色などを計算するFS・PSの役割と、深度、サンプリング、重なりによる処理量を調べる。",
       "source": "RenderingWiki",
       "aliases": [],
       "links": [
+        "/graphics/shader/shader-first-steps.html",
+        "/practice/graphics/shader-first-steps.html",
         "/graphics/postprocess/overview.html",
         "/graphics/lighting/pbr.html",
         "/graphics/pipeline/rasterization.html",
@@ -3567,6 +3579,8 @@
         "シェーダ言語"
       ],
       "links": [
+        "/graphics/shader/shader-first-steps.html",
+        "/practice/graphics/shader-first-steps.html",
         "/graphics/shader/spirv.html",
         "/graphics/api/vulkan.html",
         "/math/rendering/transform.html",
@@ -3890,6 +3904,8 @@
         "シェーダ言語"
       ],
       "links": [
+        "/graphics/shader/shader-first-steps.html",
+        "/practice/graphics/shader-first-steps.html",
         "/graphics/api/directx12.html",
         "/graphics/compute/execution-model.html",
         "/graphics/lighting/raytracing.html",
@@ -6023,10 +6039,11 @@
       "section": "reference",
       "format": "article",
       "status": "published",
-      "summary": "Vertex Shader (VS) は頂点1つごとに1回実行されるプログラムで、主な仕事は頂点座標をモデル空間からクリップ空間へ変換することです。加えて法線・UV・色などの属性を後段へ受け渡し、スキニングやモーフィング、頂点アニメーションもここで行います。最初に登場したプログラマブルステージであり",
+      "summary": "頂点の位置や属性を入力し、クリップ座標や後段で使う値を計算するVSの役割と、結果の再利用、実行の仕組みを調べる。",
       "source": "RenderingWiki",
       "aliases": [],
       "links": [
+        "/graphics/shader/shader-first-steps.html",
         "/graphics/pipeline/mesh-shader.html",
         "/graphics/mesh/vertex-and-index-input.html",
         "/practice/graphics/glb-mesh-observation.html",
@@ -8724,6 +8741,104 @@
       ]
     },
     {
+      "title": "シェーダーで三角形の位置と色を変える",
+      "url": "/practice/graphics/shader-first-steps.html",
+      "file": "practice/graphics/shader-first-steps.md",
+      "domain": "graphics",
+      "section": "practice",
+      "format": "sample",
+      "status": "published",
+      "summary": "WebGL 2で頂点シェーダーとフラグメントシェーダーを実行し、横位置、色、UV表示を変えて、属性とuniformの働きを確かめる。対応するHLSLのコードも読む。",
+      "source": "新規執筆",
+      "aliases": [
+        "シェーダー実践",
+        "shader",
+        "WebGL 2",
+        "GLSL ES",
+        "HLSL",
+        "UV",
+        "uniform",
+        "頂点シェーダー",
+        "ピクセルシェーダー"
+      ],
+      "collection": "shader-first-steps",
+      "order": 1,
+      "verification": "ChromeのANGLE・SwiftShaderで描画画素、操作、失敗時の表示を確認。HLSLのVS・PSをDXCでShader Model 6.0へコンパイル確認（2026-11-07）",
+      "links": [
+        "/graphics/shader/shader-first-steps.html",
+        "/graphics/shader/shader-inputs-and-uniforms.html"
+      ]
+    },
+    {
+      "title": "シェーダーの第一歩 — 頂点から三角形の色を作る",
+      "url": "/graphics/shader/shader-first-steps.html",
+      "file": "graphics/shader/shader-first-steps.md",
+      "domain": "graphics",
+      "section": "reference",
+      "format": "article",
+      "status": "published",
+      "summary": "三角形を描く例から、頂点シェーダー、ラスタライゼーション、補間、フラグメントシェーダーを追う。GLSLとHLSLの型や演算を読み、値を変えて見た目を変える。",
+      "source": "新規執筆",
+      "aliases": [
+        "シェーダー",
+        "シェーダ",
+        "shader",
+        "頂点シェーダー",
+        "Vertex Shader",
+        "ピクセルシェーダー",
+        "Fragment Shader",
+        "GLSL",
+        "HLSL",
+        "UV",
+        "補間",
+        "mix",
+        "lerp"
+      ],
+      "verification": "KhronosのGLSL ES 3.00仕様とMicrosoftの描画パイプライン・HLSL資料に照合（2026-11-07）",
+      "links": [
+        "/graphics/basics/transforms-and-cameras.html",
+        "/graphics/shader/shader-inputs-and-uniforms.html",
+        "/practice/graphics/shader-first-steps.html",
+        "/graphics/basics/materials-textures-and-shaders.html",
+        "/graphics/shader/hlsl.html",
+        "/graphics/shader/glsl.html"
+      ]
+    },
+    {
+      "title": "シェーダーへ渡すデータ — 頂点属性・uniform・テクスチャ",
+      "url": "/graphics/shader/shader-inputs-and-uniforms.html",
+      "file": "graphics/shader/shader-inputs-and-uniforms.md",
+      "domain": "graphics",
+      "section": "reference",
+      "format": "article",
+      "status": "published",
+      "summary": "三角形の位置とUV、共通の色を例に、頂点属性、ステージ間の補間、uniformと定数バッファ、テクスチャとサンプラーの渡し方を説明する。",
+      "source": "新規執筆",
+      "aliases": [
+        "シェーダー入力",
+        "頂点属性",
+        "attribute",
+        "varying",
+        "uniform",
+        "定数バッファ",
+        "cbuffer",
+        "セマンティクス",
+        "binding",
+        "バインディング",
+        "テクスチャ",
+        "サンプラー"
+      ],
+      "verification": "KhronosのGLSL ES 3.00仕様、MDNのWebGL API、MicrosoftのHLSL定数・配置とD3D12バインディング資料に照合（2026-11-07）",
+      "links": [
+        "/graphics/shader/shader-first-steps.html",
+        "/graphics/mesh/vertex-and-index-input.html",
+        "/graphics/basics/transforms-and-cameras.html",
+        "/graphics/basics/materials-textures-and-shaders.html",
+        "/practice/graphics/shader-first-steps.html",
+        "/graphics/optimization/gpu-resource-lifetime.html"
+      ]
+    },
+    {
       "title": "シェーダ言語総論と比較",
       "url": "/graphics/shader/overview.html",
       "file": "graphics/shader/overview.md",
@@ -8731,10 +8846,12 @@
       "section": "reference",
       "format": "article",
       "status": "published",
-      "summary": "シェーダ言語はGPU上で実行されるプログラムを書くための言語です。現在の主要言語は HLSL (DirectX/Unity/UE)、GLSL (OpenGL/Vulkan)、WGSL (WebGPU)、MSL (Metal) の4つで、いずれもC系構文のデータ並列言語です。このページでは4言語+中間",
+      "summary": "HLSL、GLSL、WGSL、MSLの型、入出力、リソースの対応と、DXIL・SPIR-Vなどへの変換経路を調べる。",
       "source": "RenderingWiki",
       "aliases": [],
       "links": [
+        "/graphics/shader/shader-first-steps.html",
+        "/practice/graphics/shader-first-steps.html",
         "/graphics/shader/spirv.html",
         "/graphics/shader/wgsl.html",
         "/graphics/pipeline/overview.html",
@@ -10413,6 +10530,7 @@
       "verification": "Unityのマテリアル・テクスチャ資料、KhronosのglTF仕様、Microsoftの描画パイプライン資料に照合（2026-11-07）",
       "links": [
         "/graphics/basics/models-and-meshes.html",
+        "/graphics/shader/shader-first-steps.html",
         "/graphics/mesh/vertex-and-index-input.html",
         "/graphics/texture/texture-streaming-and-mip-residency.html",
         "/graphics/basics/light-and-rendered-images.html",
@@ -14533,6 +14651,8 @@
         "/game/basics/save-data-and-serialization.html",
         "/game/basics/game-states-and-pause.html",
         "/game/basics/game-events-and-notifications.html",
+        "/graphics/shader/shader-first-steps.html",
+        "/graphics/shader/shader-inputs-and-uniforms.html",
         "/game/ecs.html",
         "/runtime/memory/storage-duration-and-lifetime.html",
         "/graphics/shader/hlsl.html",

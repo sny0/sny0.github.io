@@ -1,0 +1,43 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="760" height="490" viewBox="0 0 760 490" role="img" aria-labelledby="title desc">
+  <title id="title">シェーダーが読むデータと、その接続</title>
+  <desc id="desc">CPUが位置とUVを頂点入力へ接続する。共通の色と移動量をuniformや定数バッファに設定する。頂点シェーダーが渡すUVを補間して、ピクセル側のシェーダーが共通値やテクスチャと合わせて色を求める。</desc>
+  <defs><marker id="arrow" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto"><path d="M0 0 8 4 0 8z" fill="#45677c"/></marker></defs>
+  <rect width="760" height="490" rx="18" fill="#edf4f9"/>
+  <g font-family="'Yu Gothic',Meiryo,sans-serif" fill="#143d59">
+    <text x="26" y="39" font-size="23" font-weight="700">値の出所と、使う入力を対応させる</text>
+    <text x="26" y="68" font-size="15">CPU側でデータを用意し、描画に使うものを接続する</text>
+    <rect x="26" y="94" width="210" height="100" rx="11" fill="#fff" stroke="#a2bed2"/>
+    <text x="131" y="123" text-anchor="middle" font-size="18" font-weight="700">頂点バッファ</text>
+    <text x="131" y="151" text-anchor="middle" font-size="15">頂点ごとの位置・UV</text>
+    <text x="131" y="176" text-anchor="middle" font-size="14">型・間隔・開始位置を指定</text>
+    <rect x="276" y="94" width="210" height="100" rx="11" fill="#fff3d9" stroke="#c2a16a"/>
+    <text x="381" y="123" text-anchor="middle" font-size="18" font-weight="700">共通の値</text>
+    <text x="381" y="151" text-anchor="middle" font-size="15">色・移動量など</text>
+    <text x="381" y="176" text-anchor="middle" font-size="14">uniform・定数バッファ</text>
+    <rect x="526" y="94" width="208" height="100" rx="11" fill="#fff" stroke="#a2bed2"/>
+    <text x="630" y="123" text-anchor="middle" font-size="18" font-weight="700">参照するデータ</text>
+    <text x="630" y="151" text-anchor="middle" font-size="15">テクスチャなど</text>
+    <text x="630" y="176" text-anchor="middle" font-size="14">サンプラーで読む方法を指定</text>
+    <rect x="26" y="263" width="210" height="105" rx="11" fill="#dfeefa" stroke="#a2bed2"/>
+    <text x="131" y="294" text-anchor="middle" font-size="18" font-weight="700">頂点シェーダー</text>
+    <text x="131" y="324" text-anchor="middle" font-size="15">位置を計算する</text>
+    <text x="131" y="349" text-anchor="middle" font-size="15">UVを後段へ渡す</text>
+    <rect x="276" y="263" width="210" height="105" rx="11" fill="#fff" stroke="#a2bed2"/>
+    <text x="381" y="294" text-anchor="middle" font-size="18" font-weight="700">補間</text>
+    <text x="381" y="324" text-anchor="middle" font-size="15">頂点のUVから</text>
+    <text x="381" y="349" text-anchor="middle" font-size="15">三角形の途中のUVへ</text>
+    <rect x="526" y="263" width="208" height="105" rx="11" fill="#e1f2ea" stroke="#8fb8a5"/>
+    <text x="630" y="294" text-anchor="middle" font-size="18" font-weight="700">ピクセル側</text>
+    <text x="630" y="324" text-anchor="middle" font-size="15">入力を使って色を計算</text>
+    <text x="630" y="349" text-anchor="middle" font-size="15">UV・共通値・参照データ</text>
+    <path d="M131 198V258" fill="none" stroke="#45677c" stroke-width="2" marker-end="url(#arrow)"/>
+    <path d="M381 198V224H182V258" fill="none" stroke="#45677c" stroke-width="2" marker-end="url(#arrow)"/>
+    <path d="M381 224H580V258" fill="none" stroke="#45677c" stroke-width="2" marker-end="url(#arrow)"/>
+    <path d="M630 198V258" fill="none" stroke="#45677c" stroke-width="2" marker-end="url(#arrow)"/>
+    <path d="M239 316H271" fill="none" stroke="#45677c" stroke-width="2" marker-end="url(#arrow)"/>
+    <path d="M489 316H521" fill="none" stroke="#45677c" stroke-width="2" marker-end="url(#arrow)"/>
+    <text x="26" y="410" font-size="16">実践では、位置とUVのデータを保ち、共通の色や移動量を変える。</text>
+    <text x="26" y="442" font-size="15">入力の値を変える操作と、シェーダーをコンパイルする操作を分けて追う。</text>
+    <text x="26" y="470" font-size="14">テクスチャは発展用。今回の三角形は、UVそのものを色にして表示する。</text>
+  </g>
+</svg>

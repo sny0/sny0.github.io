@@ -27,6 +27,12 @@ study:
 1. [キーフレームとアニメーション](/graphics/basics/keyframes-and-animation.html)で、時間に沿って位置や値を変える仕組みを見ます。
 2. [リグとスキニング](/graphics/basics/rigs-and-skinning.html)で、骨の配置とメッシュの変形をつなげます。
 
+## シェーダーのコードから描く
+
+1. [シェーダーの第一歩](/graphics/shader/shader-first-steps.html)で、頂点の処理、補間、色の計算を追います。
+2. [シェーダーへ渡すデータ](/graphics/shader/shader-inputs-and-uniforms.html)で、属性やuniform、バッファと参照の役割を見ます。
+3. [三角形のシェーダー実践](/practice/graphics/shader-first-steps.html)で、色と位置を操作し、GLSLとHLSLの対応を読みます。
+
 ## 図から確かめること
 
 - 同じ形でも、位置、カメラ、材質、光が変わると見え方が変わる理由を説明できる。

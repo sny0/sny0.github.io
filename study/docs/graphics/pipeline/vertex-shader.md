@@ -3,7 +3,7 @@ title: Vertex Shader
 study:
   source: RenderingWiki
   status: published
-  summary: Vertex Shader (VS) は頂点1つごとに1回実行されるプログラムで、主な仕事は頂点座標をモデル空間からクリップ空間へ変換することです。加えて法線・UV・色などの属性を後段へ受け渡し、スキニングやモーフィング、頂点アニメーションもここで行います。最初に登場したプログラマブルステージであり
+  summary: 頂点の位置や属性を入力し、クリップ座標や後段で使う値を計算するVSの役割と、結果の再利用、実行の仕組みを調べる。
   section: reference
   format: article
   domain: graphics
@@ -11,9 +11,11 @@ study:
 
 # Vertex Shader
 
+短いコードから処理を追う場合は、[シェーダーの第一歩](/graphics/shader/shader-first-steps.html)へ進みます。
+
 ## 概要
 
-Vertex Shader (VS) は**頂点1つごとに1回実行されるプログラム**で、主な仕事は頂点座標をモデル空間からクリップ空間へ変換することです。加えて法線・UV・色などの属性を後段へ受け渡し、スキニングやモーフィング、頂点アニメーションもここで行います。**最初に登場したプログラマブルステージ**であり、シェーダプログラミングの原点です。
+Vertex Shader (VS) の一回の呼び出しは、一つの入力頂点を処理します。主な仕事は位置をクリップ座標へ変換し、UVや法線などを後段へ渡すことです。同じ頂点を繰り返し指定したときには、実装が結果を再利用する場合があります。実際の起動回数は、描画と実装に応じて計測します。[Microsoftの頂点シェーダーステージ](https://learn.microsoft.com/en-us/windows/win32/direct3d11/vertex-shader-stage) · [Vulkanの頂点処理](https://docs.vulkan.org/spec/latest/chapters/shaders.html#shaders-vertex-execution)
 
 ## なぜ必要なのか
 
@@ -51,13 +53,13 @@ Vertex Shader (VS) は**頂点1つごとに1回実行されるプログラム**�
 flowchart LR
     VB[(頂点バッファ)] --> IA[Input Assembler<br/>頂点レイアウトに従いフェッチ]
     IB[(インデックスバッファ)] --> IA
-    IA -->|32/64頂点ずつWarpに束ねる| VS[VS実行<br/>SM上でSIMT並列]
+    IA -->|頂点の入力| VS[VS実行<br/>GPU上で並列処理]
     VS --> PA[プリミティブ組立て<br/>+ 頂点キャッシュ]
     PA --> CLIP[クリッピングへ]
 ```
 
 - 頂点は**互いに独立**に処理される (他の頂点の結果は見えない)
-- 同じインデックスの頂点は**ポストトランスフォームキャッシュ**で再利用される — インデックスバッファが重要な理由。キャッシュ効率を上げる頂点並び替え (Forsythアルゴリズム、meshoptimizer) は今も有効な最適化
+- 同じインデックスの頂点では、**ポストトランスフォームキャッシュ**などで処理結果を再利用する実装がある。頂点の指定順と実際の再利用を調べると、入力データの配置を検討できる。
 - 入力: 頂点属性 + 定数バッファ + テクスチャ/構造化バッファ + システム値 (`SV_VertexID`, `SV_InstanceID`)
 - 出力: `SV_Position` (クリップ空間座標、**必須**) + 任意の補間属性
 
