@@ -22,6 +22,7 @@ study:
 
 ## 関連する辞典本文・実践
 
+- [OSの役割](/os/operating-system-basics.html)と[ファイルとパス](/os/files-and-paths.html)で、アプリから見た基本の仕事と用語を確認できます。
 - [実行ファイルを起動してmainへ到達するまで](/os/process-startup.html)でプロセス・スレッド・ローダー・CRTを分け、[Windowsのプロセス観察](/practice/process/windows-process-observation.html)でPID・TIDや親子プロセスを確かめられます。
 - [システムコールとCPUの権限](/os/system-calls-and-privilege.html)と[Windowsのスレッドスケジューリング](/os/thread-scheduling.html)で、カーネルへの移行、実行可能になった後の待ち、CPU上の実行を分けて追えます。
 - [Windowsのハンドル](/os/windows-handles.html)と[子プロセスの標準入出力](/os/pipes-and-process-io.html)で、親子が持つパイプの端を調べます。[パイプの終端を調べる実践](/practice/process/windows-pipe-observation.html)

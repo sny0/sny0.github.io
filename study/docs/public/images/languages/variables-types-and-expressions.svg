@@ -1,0 +1,31 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="760" height="394" viewBox="0 0 760 394" role="img" aria-labelledby="variables-title variables-desc">
+  <title id="variables-title">整数値をコピーしてからHPを更新する</title>
+  <desc id="variables-desc">hpとcopyの初期値は100。hpからdamageの30を引いて代入するとhpは70となり、copyは100を保つ。二つの値の等価比較はfalseになる。</desc>
+  <defs><marker id="variables-arrow" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto"><path d="M0 0L8 4L0 8Z" fill="#45647d"/></marker></defs>
+  <rect width="760" height="394" rx="18" fill="#edf4f9"/>
+  <g font-family="'Yu Gothic','Meiryo',sans-serif" fill="#153d5a">
+    <text x="26" y="39" font-size="23" font-weight="700">コピーと代入で、どの値が変わるか</text>
+    <text x="26" y="67" font-size="15">int の変数を使う例。矢印は処理の順番を表す。</text>
+    <rect x="26" y="92" width="212" height="196" rx="11" fill="white" stroke="#9ebbd2"/>
+    <text x="43" y="122" font-size="18" font-weight="700">1  初期化とコピー</text>
+    <text x="43" y="156" font-size="16">int hp = 100;</text>
+    <text x="43" y="184" font-size="16">int copy = hp;</text>
+    <text x="43" y="226" font-size="20" font-weight="700">hp = 100</text>
+    <text x="43" y="257" font-size="20" font-weight="700">copy = 100</text>
+    <path d="M244 190H266" stroke="#45647d" stroke-width="2" marker-end="url(#variables-arrow)"/>
+    <rect x="276" y="92" width="212" height="196" rx="11" fill="#fff2d8" stroke="#c8ad73"/>
+    <text x="293" y="122" font-size="18" font-weight="700">2  計算して代入</text>
+    <text x="293" y="156" font-size="16">hp = hp - damage;</text>
+    <text x="293" y="184" font-size="16">100 - 30 を求める</text>
+    <text x="293" y="226" font-size="20" font-weight="700">hp = 70</text>
+    <text x="293" y="257" font-size="20" font-weight="700">copy = 100</text>
+    <path d="M494 190H516" stroke="#45647d" stroke-width="2" marker-end="url(#variables-arrow)"/>
+    <rect x="526" y="92" width="208" height="196" rx="11" fill="#e1f3ea" stroke="#8fbaa9"/>
+    <text x="543" y="122" font-size="18" font-weight="700">3  等しいか調べる</text>
+    <text x="543" y="156" font-size="16">hp == copy</text>
+    <text x="543" y="184" font-size="16">70 と 100 を比べる</text>
+    <text x="543" y="236" font-size="22" font-weight="700">結果は false</text>
+    <text x="26" y="326" font-size="17">= は右側の計算結果を左側へ代入する。</text>
+    <text x="26" y="355" font-size="17">== は等しいか調べる。この比較では hp や copy を書き換えない。</text>
+  </g>
+</svg>

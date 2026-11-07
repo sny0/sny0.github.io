@@ -25,8 +25,10 @@
 - [オブジェクトファイル・実行ファイル・静的ライブラリ・動的ライブラリ・DLL](/runtime/cpp-internals/object-files-and-libraries.html)
 - [コンパイラ最適化・未定義動作の影響・Debug/Release・ゼロコスト抽象化](/runtime/cpp-internals/optimization-and-ub.html)
 - [シンボル・名前修飾・リンケージ・ABI](/runtime/cpp-internals/symbols-and-linkage.html)
+- [ソースコードから実行まで — コンパイラ・リンカー・ランタイム](/compilers/source-code-and-execution.html)
 - [テンプレートの実体化と inline の実際](/runtime/cpp-internals/template-instantiation-and-inline.html)
 - [トークン・AST・型検査 — C++のソースを読み解く](/compilers/tokens-ast-and-type-checking.html)
+- [ライブラリ・API・SDK — 用意された機能を使う](/compilers/libraries-apis-and-sdks.html)
 - [三大コンパイラ: MSVC・Clang・GCC](/tools/build/compilers.html)
 - [翻訳単位・ヘッダー・include・前方宣言・ODR](/runtime/cpp-internals/translation-units-and-headers.html)
 

@@ -1,0 +1,35 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="760" height="442" viewBox="0 0 760 442" role="img" aria-labelledby="title desc">
+  <title id="title">コードの編集・ビルド・実行と、調べるための道具</title>
+  <desc id="desc">ソースコードを編集してビルドすると、プログラムを実行できる。デバッガは実行中の値と呼び出し、プロファイラーは時間とメモリを調べる。調査結果をコードの編集に生かす。</desc>
+  <defs><marker id="arrow" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto"><path d="M0 0 8 4 0 8z" fill="#44647b"/></marker></defs>
+  <rect width="760" height="442" rx="18" fill="#edf4f9"/>
+  <g font-family="'Yu Gothic',Meiryo,sans-serif" fill="#143d59">
+    <text x="26" y="39" font-size="23" font-weight="700">書く・作る・動かす・調べる</text>
+    <text x="26" y="67" font-size="14">IDEは、これらの作業を一つの環境から扱えるようにする</text>
+    <rect x="26" y="100" width="210" height="108" rx="11" fill="#fff" stroke="#a4bfd4"/>
+    <text x="131" y="128" text-anchor="middle" font-size="18" font-weight="700">編集</text>
+    <text x="131" y="157" text-anchor="middle" font-size="15">コードを書く・探す</text>
+    <text x="131" y="184" text-anchor="middle" font-size="15">エディター・補完</text>
+    <rect x="276" y="100" width="210" height="108" rx="11" fill="#fff3d9" stroke="#c4a261"/>
+    <text x="381" y="128" text-anchor="middle" font-size="18" font-weight="700">ビルド</text>
+    <text x="381" y="157" text-anchor="middle" font-size="15">変換・リンクなど</text>
+    <text x="381" y="184" text-anchor="middle" font-size="15">コンパイラ・ビルドツール</text>
+    <rect x="526" y="100" width="208" height="108" rx="11" fill="#e1f2ea" stroke="#8fb8a5"/>
+    <text x="630" y="128" text-anchor="middle" font-size="18" font-weight="700">実行</text>
+    <text x="630" y="157" text-anchor="middle" font-size="15">動くプログラム</text>
+    <text x="630" y="184" text-anchor="middle" font-size="15">値の変化・時間・メモリ</text>
+    <path d="M239 154H272" fill="none" stroke="#44647b" stroke-width="2" marker-end="url(#arrow)"/>
+    <path d="M489 154H522" fill="none" stroke="#44647b" stroke-width="2" marker-end="url(#arrow)"/>
+    <path d="M630 211V236H203V266" fill="none" stroke="#44647b" stroke-width="2" marker-end="url(#arrow)"/>
+    <path d="M630 236H557V266" fill="none" stroke="#44647b" stroke-width="2" marker-end="url(#arrow)"/>
+    <rect x="38" y="270" width="330" height="103" rx="11" fill="#fff" stroke="#a4bfd4"/>
+    <text x="203" y="299" text-anchor="middle" font-size="18" font-weight="700">デバッガ</text>
+    <text x="203" y="328" text-anchor="middle" font-size="15">止める・一段ずつ進める</text>
+    <text x="203" y="353" text-anchor="middle" font-size="15">変数・関数の呼び出しを見る</text>
+    <rect x="392" y="270" width="330" height="103" rx="11" fill="#fff" stroke="#a4bfd4"/>
+    <text x="557" y="299" text-anchor="middle" font-size="18" font-weight="700">プロファイラー</text>
+    <text x="557" y="328" text-anchor="middle" font-size="15">動作中の時間や量を測る</text>
+    <text x="557" y="353" text-anchor="middle" font-size="15">重い区間・資源の使い方を見る</text>
+    <text x="26" y="412" font-size="15">調べた結果をもとにコードを編集し、もう一度動かして確かめる。</text>
+  </g>
+</svg>

@@ -21,6 +21,7 @@ study:
 
 ## 関連する辞典本文・実践
 
+- [ソースコードから実行まで](/compilers/source-code-and-execution.html)と[ライブラリ・API・SDK](/compilers/libraries-apis-and-sdks.html)で、各段階の道具と成果物の意味を確認できます。
 - [トークン・AST・型検査](/compilers/tokens-ast-and-type-checking.html)と[LLVM IRとSSA](/compilers/llvm-ir-and-ssa.html)で、コンパイラ内部の表現を追えます。
 - [COFFの再配置](/compilers/coff-relocations.html)、[WindowsのPEローダー](/os/pe-loading-and-imports.html)、[OBJ・EXE・PDBを作って読む実践](/practice/compilers/build-artifact-observation.html)で、ファイルに残る情報と読み込み時に決まる値を比べられます。
 - [実行ファイルを起動してmainへ到達するまで](/os/process-startup.html)と[Windows/C++の観察サンプル](/practice/process/windows-process-observation.html)で、ビルド後の起動と実行を確かめられます。

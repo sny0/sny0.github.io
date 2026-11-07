@@ -89,6 +89,14 @@
 | [DOM / CSSOM / スタイル計算 / layout / paint / raster / composite / rAF / requestAnimationFrame](/browser/rendering-journey.html) | HTMLからピクセルまでの段階と、変更後の更新、寸法取得、描画前のcallbackを調べる |
 | [TLS / HTTPS / 証明書 / SAN / CA / 信頼アンカー / SNI / ALPN / 鍵共有 / CertificateVerify / AEAD](/network/tls-https.html) | 暗号化と相手の検証、鍵共有、証明書の信頼、TLSとHTTPの境界を調べる |
 | [DNS / 名前解決 / リゾルバー / 権威DNS / A / AAAA / CNAME / TTL / NXDOMAIN / NODATA](/network/dns-resolution.html) | 名前解決API、委任をたどる問い合わせ、レコードとキャッシュ、失敗の違いを調べる |
+| [OS / オペレーティングシステム / カーネル / アプリ / 資源管理](/os/operating-system-basics.html) | 複数のアプリがCPU・メモリ・機器を使うときのOSの仕事を調べる |
+| [ファイル / ディレクトリ / パス / 拡張子 / 絶対パス / 相対パス / テキストファイル](/os/files-and-paths.html) | 保存したバイト列と、その場所を指定する方法を調べる |
+| [変数 / 型 / 初期化 / 代入 / 式 / 文 / スコープ](/languages/variables-types-and-expressions.html) | 値を保存して計算し、変数を更新する流れを追う |
+| [条件分岐 / if / else / 繰り返し / for / while / 関数 / 引数 / 戻り値](/languages/control-flow-and-functions.html) | 処理の進む道と、関数へ渡す値・返る値を調べる |
+| [ソースコード / コンパイル / リンク / 実行 / ランタイム / IL / JIT / AOT](/compilers/source-code-and-execution.html) | コードを変換してプログラムを動かすまでの段階をつかむ |
+| [ライブラリ / API / SDK / ヘッダー / パッケージ / 依存関係](/compilers/libraries-apis-and-sdks.html) | 自分のコードから既存の機能を使うときの部品と約束を調べる |
+| [IDE / エディター / デバッガ / プロファイラー / 補完 / ステップ実行 / ウォッチ / コールスタック](/tools/development-tools-basics.html) | 書く・作る・動きを追う・測るための機能を比べる |
+| [ターミナル / シェル / CLI / コマンド / PowerShell / Bash / カレントディレクトリ / PATH / パイプ](/tools/terminal-shell-and-commands.html) | 文字の入力がコマンドになり、処理の出力が渡されるまでを調べる |
 | [ネットワーク / プロトコル / パケット / クライアント / サーバー](/network/network-basics.html) | コンピュータ同士がデータを送る約束と、Webページが届く流れをつかむ |
 | [IPアドレス / IPv4 / IPv6 / ポート番号 / ホスト名 / URL / ループバック](/network/ip-addresses-and-ports.html) | 通信の行き先を表す値と、名前やURLとの関係を調べる |
 | [LAN / WAN / スイッチ / ルーター / アクセスポイント / Wi-Fi / ONU / モデム](/network/home-network-devices.html) | 家庭内でデータが通る機器と、その役割の違いを調べる |

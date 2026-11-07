@@ -34,3 +34,5 @@ CPU、メモリ、ストレージという名前を見かけても、それぞ�
 起動時にOSがする準備は[実行ファイルの起動](/os/process-startup.html)、アプリが扱うアドレスは[仮想メモリ](/os/virtual-memory.html)へ進みます。描画を調べたい場合は[GPUとは何か](/hardware/gpu/what-is-gpu.html)、部品同士の接続を調べたい場合は[PCI Express](/hardware/io/pcie-links.html)が次の入口です。
 
 通信の基礎は[ネットワークの基本から読む](/guide/network-basics.html)へ進んでください。
+
+OSや言語、開発ツールの関係を調べるときは、[プログラムを書く・動かす基礎](/guide/software-development-basics.html)へ進めます。

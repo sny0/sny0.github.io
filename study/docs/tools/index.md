@@ -21,16 +21,19 @@
 
 - [WindowsのファイルI/OをProcmonとWPRで追う](/tools/windows/file-io-tracing.html)
 - [クラッシュダンプとPDBで停止位置をたどる](/tools/windows/crash-dumps-and-symbols.html)
+- [ターミナル・シェル・コマンドの基本](/tools/terminal-shell-and-commands.html)
 - [ビルドツール: CMake・Visual Studioプロジェクト・Make・Ninja](/tools/build/build-tools-cmake.html)
 - [ビルドとは何か — コンパイラとビルドシステムの違い](/tools/build/what-is-build.html)
 - [ビルド構成 — Debug/Development/Release/Shipping・シンボルファイル・PDB・デバッガ](/tools/build/build-configurations.html)
 - [ビルド時間 — incremental build・PCH・Unity Build・C++でビルドが遅くなる理由](/tools/build/build-speed.html)
 - [ブレークポイントとデータブレークポイント](/tools/windows/debugger-breakpoints-and-watchpoints.html)
 - [リンクエラー — 未解決外部シンボル・多重定義・ABI互換性](/tools/build/link-errors.html)
+- [開発ツールの基本 — エディター・IDE・デバッガ・プロファイラー](/tools/development-tools-basics.html)
 - [品質のための道具 — 静的解析・サニタイザ・警告レベル・CI](/tools/build/debugging-and-analysis.html)
 
 ## この分野の学習ガイド
 
+- [プログラムを書く・動かす基礎から読む](/guide/software-development-basics.html)
 - [ビルドとライブラリを学ぶ](/tools/build/)
 - [第18章 デバッグとプロファイリング](/guide/low-level/debugging-and-profiling.html) — 学習計画・概要
 

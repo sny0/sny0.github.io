@@ -93,6 +93,10 @@
           "link": "/os/"
         },
         {
+          "text": "OSの役割 — アプリとハードウェアをつなぐ",
+          "link": "/os/operating-system-basics.html"
+        },
+        {
           "text": "PEローダーがEXEとDLLを配置する仕組み — RVA・再配置・IAT",
           "link": "/os/pe-loading-and-imports.html"
         },
@@ -127,6 +131,10 @@
         {
           "text": "システムコールでユーザーモードからカーネルモードへ",
           "link": "/os/system-calls-and-privilege.html"
+        },
+        {
+          "text": "ファイルとパス — 名前からデータを開くまで",
+          "link": "/os/files-and-paths.html"
         },
         {
           "text": "ファイルを読むと内部で何が起きるか",
@@ -183,12 +191,20 @@
           "link": "/runtime/cpp-internals/symbols-and-linkage.html"
         },
         {
+          "text": "ソースコードから実行まで — コンパイラ・リンカー・ランタイム",
+          "link": "/compilers/source-code-and-execution.html"
+        },
+        {
           "text": "テンプレートの実体化と inline の実際",
           "link": "/runtime/cpp-internals/template-instantiation-and-inline.html"
         },
         {
           "text": "トークン・AST・型検査 — C++のソースを読み解く",
           "link": "/compilers/tokens-ast-and-type-checking.html"
+        },
+        {
+          "text": "ライブラリ・API・SDK — 用意された機能を使う",
+          "link": "/compilers/libraries-apis-and-sdks.html"
         },
         {
           "text": "三大コンパイラ: MSVC・Clang・GCC",
@@ -303,6 +319,14 @@
         {
           "text": "手動メモリ管理と GC",
           "link": "/languages/csharp/memory-management-vs-gc.html"
+        },
+        {
+          "text": "条件分岐・繰り返し・関数 — 処理の順番を作る",
+          "link": "/languages/control-flow-and-functions.html"
+        },
+        {
+          "text": "値・変数・型・式 — HPを書き換える",
+          "link": "/languages/variables-types-and-expressions.html"
         },
         {
           "text": "値型と参照・ポインタ・参照",
@@ -1425,6 +1449,10 @@
           "link": "/tools/windows/crash-dumps-and-symbols.html"
         },
         {
+          "text": "ターミナル・シェル・コマンドの基本",
+          "link": "/tools/terminal-shell-and-commands.html"
+        },
+        {
           "text": "ビルドツール: CMake・Visual Studioプロジェクト・Make・Ninja",
           "link": "/tools/build/build-tools-cmake.html"
         },
@@ -1449,6 +1477,10 @@
           "link": "/tools/build/link-errors.html"
         },
         {
+          "text": "開発ツールの基本 — エディター・IDE・デバッガ・プロファイラー",
+          "link": "/tools/development-tools-basics.html"
+        },
+        {
           "text": "品質のための道具 — 静的解析・サニタイザ・警告レベル・CI",
           "link": "/tools/build/debugging-and-analysis.html"
         }
@@ -1465,7 +1497,7 @@
       "collapsed": false,
       "items": [
         {
-          "text": "コンピュータとネットワークの基礎",
+          "text": "コンピュータと開発の基礎",
           "link": "/guide/hardware-basics.html"
         },
         {
@@ -10484,7 +10516,7 @@
       "collapsed": true,
       "items": [
         {
-          "text": "コンピュータとネットワークの基礎",
+          "text": "コンピュータと開発の基礎",
           "link": "/guide/hardware-basics.html"
         },
         {
@@ -10858,7 +10890,7 @@
       "collapsed": true,
       "items": [
         {
-          "text": "コンピュータとネットワークの基礎",
+          "text": "コンピュータと開発の基礎",
           "link": "/guide/hardware-basics.html"
         },
         {
@@ -12251,7 +12283,7 @@
       "collapsed": true,
       "items": [
         {
-          "text": "コンピュータとネットワークの基礎",
+          "text": "コンピュータと開発の基礎",
           "link": "/guide/hardware-basics.html"
         },
         {
@@ -12677,7 +12709,7 @@
       "collapsed": true,
       "items": [
         {
-          "text": "コンピュータとネットワークの基礎",
+          "text": "コンピュータと開発の基礎",
           "link": "/guide/hardware-basics.html"
         },
         {
@@ -13673,7 +13705,7 @@
       "collapsed": true,
       "items": [
         {
-          "text": "コンピュータとネットワークの基礎",
+          "text": "コンピュータと開発の基礎",
           "link": "/guide/hardware-basics.html"
         },
         {
@@ -14954,7 +14986,7 @@
       "collapsed": true,
       "items": [
         {
-          "text": "コンピュータとネットワークの基礎",
+          "text": "コンピュータと開発の基礎",
           "link": "/guide/hardware-basics.html"
         },
         {
@@ -16287,7 +16319,7 @@
       "collapsed": true,
       "items": [
         {
-          "text": "コンピュータとネットワークの基礎",
+          "text": "コンピュータと開発の基礎",
           "link": "/guide/hardware-basics.html"
         },
         {
@@ -22750,7 +22782,7 @@
       "collapsed": true,
       "items": [
         {
-          "text": "コンピュータとネットワークの基礎",
+          "text": "コンピュータと開発の基礎",
           "link": "/guide/hardware-basics.html"
         },
         {
@@ -22774,7 +22806,7 @@
       "link": "/learn/"
     },
     {
-      "text": "コンピュータとネットワークの基礎",
+      "text": "コンピュータと開発の基礎",
       "items": [
         {
           "text": "コンピュータの部品から読む",
@@ -22783,6 +22815,10 @@
         {
           "text": "ネットワークの基本から読む",
           "link": "/guide/network-basics.html"
+        },
+        {
+          "text": "プログラムを書く・動かす基礎から読む",
+          "link": "/guide/software-development-basics.html"
         }
       ]
     },
@@ -23686,7 +23722,7 @@
       "link": "/learn/"
     },
     {
-      "text": "コンピュータとネットワークの基礎",
+      "text": "コンピュータと開発の基礎",
       "items": [
         {
           "text": "コンピュータの部品から読む",
@@ -23695,6 +23731,10 @@
         {
           "text": "ネットワークの基本から読む",
           "link": "/guide/network-basics.html"
+        },
+        {
+          "text": "プログラムを書く・動かす基礎から読む",
+          "link": "/guide/software-development-basics.html"
         }
       ]
     },
@@ -24414,7 +24454,7 @@
       "collapsed": true,
       "items": [
         {
-          "text": "コンピュータとネットワークの基礎",
+          "text": "コンピュータと開発の基礎",
           "link": "/guide/hardware-basics.html"
         },
         {
@@ -25287,6 +25327,51 @@
       ]
     }
   ],
+  "/guide/software-development-basics.md": [
+    {
+      "text": "学習ガイド一覧",
+      "link": "/learn/"
+    },
+    {
+      "text": "コンピュータと開発の基礎",
+      "items": [
+        {
+          "text": "コンピュータの部品から読む",
+          "link": "/guide/hardware-basics.html"
+        },
+        {
+          "text": "ネットワークの基本から読む",
+          "link": "/guide/network-basics.html"
+        },
+        {
+          "text": "プログラムを書く・動かす基礎から読む",
+          "link": "/guide/software-development-basics.html"
+        }
+      ]
+    },
+    {
+      "text": "ほかの学習ガイド",
+      "collapsed": true,
+      "items": [
+        {
+          "text": "疑問から選ぶ読み順",
+          "link": "/guide/learning-paths.html"
+        },
+        {
+          "text": "C++とゲーム設計を学ぶ",
+          "link": "/guide/cpp-roadmap.html"
+        },
+        {
+          "text": "リアルタイム描画を学ぶ",
+          "link": "/guide/rendering/roadmap.html"
+        },
+        {
+          "text": "低レイヤからゲームの仕組みを学ぶ",
+          "link": "/guide/low-level/"
+        }
+      ]
+    }
+  ],
   "/runtime/memory/exercises.md": [
     {
       "text": "実践・サンプル一覧",
@@ -25695,7 +25780,7 @@
       "collapsed": true,
       "items": [
         {
-          "text": "コンピュータとネットワークの基礎",
+          "text": "コンピュータと開発の基礎",
           "link": "/guide/hardware-basics.html"
         },
         {
@@ -25740,7 +25825,7 @@
       "collapsed": true,
       "items": [
         {
-          "text": "コンピュータとネットワークの基礎",
+          "text": "コンピュータと開発の基礎",
           "link": "/guide/hardware-basics.html"
         },
         {
@@ -26062,7 +26147,7 @@
       "collapsed": true,
       "items": [
         {
-          "text": "コンピュータとネットワークの基礎",
+          "text": "コンピュータと開発の基礎",
           "link": "/guide/hardware-basics.html"
         },
         {
@@ -26183,7 +26268,7 @@
       "collapsed": true,
       "items": [
         {
-          "text": "コンピュータとネットワークの基礎",
+          "text": "コンピュータと開発の基礎",
           "link": "/guide/hardware-basics.html"
         },
         {
@@ -27420,7 +27505,7 @@
       "collapsed": true,
       "items": [
         {
-          "text": "コンピュータとネットワークの基礎",
+          "text": "コンピュータと開発の基礎",
           "link": "/guide/hardware-basics.html"
         },
         {
@@ -27509,7 +27594,7 @@
       "collapsed": true,
       "items": [
         {
-          "text": "コンピュータとネットワークの基礎",
+          "text": "コンピュータと開発の基礎",
           "link": "/guide/hardware-basics.html"
         },
         {
@@ -27935,7 +28020,7 @@
       "collapsed": true,
       "items": [
         {
-          "text": "コンピュータとネットワークの基礎",
+          "text": "コンピュータと開発の基礎",
           "link": "/guide/hardware-basics.html"
         },
         {
@@ -28024,7 +28109,7 @@
       "collapsed": true,
       "items": [
         {
-          "text": "コンピュータとネットワークの基礎",
+          "text": "コンピュータと開発の基礎",
           "link": "/guide/hardware-basics.html"
         },
         {
@@ -28430,7 +28515,7 @@
       "collapsed": true,
       "items": [
         {
-          "text": "コンピュータとネットワークの基礎",
+          "text": "コンピュータと開発の基礎",
           "link": "/guide/hardware-basics.html"
         },
         {
@@ -28551,7 +28636,7 @@
       "collapsed": true,
       "items": [
         {
-          "text": "コンピュータとネットワークの基礎",
+          "text": "コンピュータと開発の基礎",
           "link": "/guide/hardware-basics.html"
         },
         {
@@ -28672,7 +28757,7 @@
       "collapsed": true,
       "items": [
         {
-          "text": "コンピュータとネットワークの基礎",
+          "text": "コンピュータと開発の基礎",
           "link": "/guide/hardware-basics.html"
         },
         {
@@ -28793,7 +28878,7 @@
       "collapsed": true,
       "items": [
         {
-          "text": "コンピュータとネットワークの基礎",
+          "text": "コンピュータと開発の基礎",
           "link": "/guide/hardware-basics.html"
         },
         {
@@ -28914,7 +28999,7 @@
       "collapsed": true,
       "items": [
         {
-          "text": "コンピュータとネットワークの基礎",
+          "text": "コンピュータと開発の基礎",
           "link": "/guide/hardware-basics.html"
         },
         {
@@ -29035,7 +29120,7 @@
       "collapsed": true,
       "items": [
         {
-          "text": "コンピュータとネットワークの基礎",
+          "text": "コンピュータと開発の基礎",
           "link": "/guide/hardware-basics.html"
         },
         {
@@ -29156,7 +29241,7 @@
       "collapsed": true,
       "items": [
         {
-          "text": "コンピュータとネットワークの基礎",
+          "text": "コンピュータと開発の基礎",
           "link": "/guide/hardware-basics.html"
         },
         {
@@ -29277,7 +29362,7 @@
       "collapsed": true,
       "items": [
         {
-          "text": "コンピュータとネットワークの基礎",
+          "text": "コンピュータと開発の基礎",
           "link": "/guide/hardware-basics.html"
         },
         {
@@ -29398,7 +29483,7 @@
       "collapsed": true,
       "items": [
         {
-          "text": "コンピュータとネットワークの基礎",
+          "text": "コンピュータと開発の基礎",
           "link": "/guide/hardware-basics.html"
         },
         {
@@ -29519,7 +29604,7 @@
       "collapsed": true,
       "items": [
         {
-          "text": "コンピュータとネットワークの基礎",
+          "text": "コンピュータと開発の基礎",
           "link": "/guide/hardware-basics.html"
         },
         {
@@ -29640,7 +29725,7 @@
       "collapsed": true,
       "items": [
         {
-          "text": "コンピュータとネットワークの基礎",
+          "text": "コンピュータと開発の基礎",
           "link": "/guide/hardware-basics.html"
         },
         {
@@ -29761,7 +29846,7 @@
       "collapsed": true,
       "items": [
         {
-          "text": "コンピュータとネットワークの基礎",
+          "text": "コンピュータと開発の基礎",
           "link": "/guide/hardware-basics.html"
         },
         {
@@ -29882,7 +29967,7 @@
       "collapsed": true,
       "items": [
         {
-          "text": "コンピュータとネットワークの基礎",
+          "text": "コンピュータと開発の基礎",
           "link": "/guide/hardware-basics.html"
         },
         {
@@ -30003,7 +30088,7 @@
       "collapsed": true,
       "items": [
         {
-          "text": "コンピュータとネットワークの基礎",
+          "text": "コンピュータと開発の基礎",
           "link": "/guide/hardware-basics.html"
         },
         {
@@ -30124,7 +30209,7 @@
       "collapsed": true,
       "items": [
         {
-          "text": "コンピュータとネットワークの基礎",
+          "text": "コンピュータと開発の基礎",
           "link": "/guide/hardware-basics.html"
         },
         {
@@ -30245,7 +30330,7 @@
       "collapsed": true,
       "items": [
         {
-          "text": "コンピュータとネットワークの基礎",
+          "text": "コンピュータと開発の基礎",
           "link": "/guide/hardware-basics.html"
         },
         {
@@ -30366,7 +30451,7 @@
       "collapsed": true,
       "items": [
         {
-          "text": "コンピュータとネットワークの基礎",
+          "text": "コンピュータと開発の基礎",
           "link": "/guide/hardware-basics.html"
         },
         {
@@ -30487,7 +30572,7 @@
       "collapsed": true,
       "items": [
         {
-          "text": "コンピュータとネットワークの基礎",
+          "text": "コンピュータと開発の基礎",
           "link": "/guide/hardware-basics.html"
         },
         {
@@ -30608,7 +30693,7 @@
       "collapsed": true,
       "items": [
         {
-          "text": "コンピュータとネットワークの基礎",
+          "text": "コンピュータと開発の基礎",
           "link": "/guide/hardware-basics.html"
         },
         {
@@ -30729,7 +30814,7 @@
       "collapsed": true,
       "items": [
         {
-          "text": "コンピュータとネットワークの基礎",
+          "text": "コンピュータと開発の基礎",
           "link": "/guide/hardware-basics.html"
         },
         {
@@ -31420,7 +31505,7 @@
       "collapsed": true,
       "items": [
         {
-          "text": "コンピュータとネットワークの基礎",
+          "text": "コンピュータと開発の基礎",
           "link": "/guide/hardware-basics.html"
         },
         {
@@ -31802,7 +31887,7 @@
       "collapsed": true,
       "items": [
         {
-          "text": "コンピュータとネットワークの基礎",
+          "text": "コンピュータと開発の基礎",
           "link": "/guide/hardware-basics.html"
         },
         {
@@ -31847,7 +31932,7 @@
       "collapsed": true,
       "items": [
         {
-          "text": "コンピュータとネットワークの基礎",
+          "text": "コンピュータと開発の基礎",
           "link": "/guide/hardware-basics.html"
         },
         {
@@ -31875,7 +31960,7 @@
       "collapsed": false,
       "items": [
         {
-          "text": "コンピュータとネットワークの基礎",
+          "text": "コンピュータと開発の基礎",
           "link": "/guide/hardware-basics.html"
         },
         {

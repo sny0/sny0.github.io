@@ -41,21 +41,21 @@
       "id": "os",
       "title": "OS",
       "description": "プロセス、メモリ、スレッド、入出力の仕組みを調べる。",
-      "count": 14,
+      "count": 16,
       "status": "辞典本文あり"
     },
     {
       "id": "compilers",
       "title": "コンパイラとツールチェーン",
       "description": "ソースコードが実行可能になるまでを追う。",
-      "count": 10,
+      "count": 12,
       "status": "辞典本文あり"
     },
     {
       "id": "languages",
       "title": "言語",
       "description": "言語の構文を、型・所有・寿命・実行の違いから調べる。",
-      "count": 28,
+      "count": 30,
       "status": "辞典本文あり"
     },
     {
@@ -125,7 +125,7 @@
       "id": "tools",
       "title": "開発ツールと調査機能",
       "description": "どの機能で何を観察し、どう確かめるかを調べる。",
-      "count": 9,
+      "count": 11,
       "status": "辞典本文あり"
     }
   ],
@@ -133,8 +133,8 @@
     {
       "id": "foundations",
       "section": "learning",
-      "title": "コンピュータとネットワークの基礎",
-      "description": "部品の役割、命令とデータ、IP・ポート、家庭内の機器から詳しい解説へ進む。",
+      "title": "コンピュータと開発の基礎",
+      "description": "部品、通信、OS、言語、コンパイルと開発ツールの役割から詳しい解説へ進む。",
       "start": "/guide/hardware-basics.html"
     },
     {
@@ -4653,6 +4653,39 @@
       ]
     },
     {
+      "title": "OSの役割 — アプリとハードウェアをつなぐ",
+      "url": "/os/operating-system-basics.html",
+      "file": "os/operating-system-basics.md",
+      "domain": "os",
+      "section": "reference",
+      "format": "article",
+      "status": "published",
+      "summary": "ゲームとブラウザーを同時に動かす場面から、OSがCPU時間、メモリ、ファイル、機器を管理する仕事を説明する。カーネル、プロセス、スレッドの意味もつなげる。",
+      "source": "新規執筆",
+      "aliases": [
+        "OS",
+        "operating system",
+        "オペレーティングシステム",
+        "基本ソフトウェア",
+        "カーネル",
+        "プロセス",
+        "スレッド",
+        "ドライバー",
+        "マルチタスク"
+      ],
+      "verification": "Microsoftのプロセス・メモリ・ユーザーモードとカーネルモード・ドライバーの資料に照合（2026-11-07）",
+      "links": [
+        "/hardware/computer-components.html",
+        "/os/thread-scheduling.html",
+        "/os/virtual-memory.html",
+        "/os/system-calls-and-privilege.html",
+        "/hardware/io/nic-receive-queues.html",
+        "/os/process-startup.html",
+        "/os/files-and-paths.html",
+        "/tools/terminal-shell-and-commands.html"
+      ]
+    },
+    {
       "title": "PBR (物理ベースレンダリング)",
       "url": "/graphics/lighting/pbr.html",
       "file": "graphics/lighting/pbr.md",
@@ -8292,7 +8325,8 @@
         "/os/virtual-memory.html",
         "/hardware/gpu/what-is-gpu.html",
         "/hardware/io/pcie-links.html",
-        "/guide/network-basics.html"
+        "/guide/network-basics.html",
+        "/guide/software-development-basics.html"
       ]
     },
     {
@@ -8758,6 +8792,46 @@
       ]
     },
     {
+      "title": "ソースコードから実行まで — コンパイラ・リンカー・ランタイム",
+      "url": "/compilers/source-code-and-execution.html",
+      "file": "compilers/source-code-and-execution.md",
+      "domain": "compilers",
+      "section": "reference",
+      "format": "article",
+      "status": "published",
+      "summary": "書いたプログラムが動くまでを、ソースコード、コンパイル、リンク、起動、ランタイムに分けて説明する。C++とC#の例から、JITとAOT、エラーが起きる段階も調べる。",
+      "source": "新規執筆",
+      "aliases": [
+        "ソースコード",
+        "コンパイラ",
+        "コンパイル",
+        "リンカー",
+        "リンク",
+        "オブジェクトファイル",
+        "実行ファイル",
+        "ランタイム",
+        "ビルド",
+        "JIT",
+        "AOT",
+        "IL",
+        "機械語"
+      ],
+      "verification": "ClangとMicrosoftのC++・.NETの公式資料に照合（2026-11-07）",
+      "links": [
+        "/tools/build/what-is-build.html",
+        "/hardware/cpu/instruction-execution.html",
+        "/compilers/tokens-ast-and-type-checking.html",
+        "/os/process-startup.html",
+        "/languages/csharp/il2cpp.html",
+        "/tools/build/link-errors.html",
+        "/tools/development-tools-basics.html",
+        "/runtime/cpp-internals/build-pipeline-journey.html",
+        "/runtime/cpp-internals/object-files-and-libraries.html",
+        "/compilers/libraries-apis-and-sdks.html",
+        "/tools/terminal-shell-and-commands.html"
+      ]
+    },
+    {
       "title": "ソケットとTCP通信 — send/recvの内部とメッセージ境界",
       "url": "/network/tcp-sockets.html",
       "file": "network/tcp-sockets.md",
@@ -8806,6 +8880,42 @@
         "/network/tls-https.html",
         "/network/ip-routing-and-ethernet.html",
         "/practice/network/tcp-loopback-observation.html"
+      ]
+    },
+    {
+      "title": "ターミナル・シェル・コマンドの基本",
+      "url": "/tools/terminal-shell-and-commands.html",
+      "file": "tools/terminal-shell-and-commands.md",
+      "domain": "tools",
+      "section": "reference",
+      "format": "article",
+      "status": "published",
+      "summary": "文字でコマンドを操作する画面から、ターミナルとシェル、引数、カレントディレクトリ、PATH、標準入出力、パイプをPowerShellの小さな例で説明する。",
+      "source": "新規執筆",
+      "aliases": [
+        "ターミナル",
+        "terminal",
+        "シェル",
+        "shell",
+        "CLI",
+        "コマンド",
+        "PowerShell",
+        "Bash",
+        "sh",
+        "cmd",
+        "引数",
+        "カレントディレクトリ",
+        "PATH",
+        "標準入力",
+        "標準出力",
+        "パイプ"
+      ],
+      "verification": "Microsoftの公式資料に照合。掲載した表示用コマンド5種をPowerShellで実行確認（2026-11-07）",
+      "links": [
+        "/os/files-and-paths.html",
+        "/os/pipes-and-process-io.html",
+        "/tools/development-tools-basics.html",
+        "/compilers/source-code-and-execution.html"
       ]
     },
     {
@@ -9335,10 +9445,12 @@
       "section": "reference",
       "format": "article",
       "status": "published",
-      "summary": "コンパイラ(g++, cl.exe): 1つの翻訳単位を機械語にする「職人」 ビルドシステム(CMake+Make/Ninja, MSBuild): 「何を・どの順で・どの設定で職人に依頼し、リンクまで完走させるか」を管理する「現場監督」",
+      "summary": "C++のソースの変換とリンクを進めるコンパイラ・リンカーと、設定や依存関係から処理を実行するビルドシステムの関係を説明する。",
       "source": "C++ Wiki",
       "aliases": [],
       "links": [
+        "/compilers/source-code-and-execution.html",
+        "/tools/development-tools-basics.html",
         "/tools/build/build-speed.html",
         "/game/unreal/build-system-ubt.html",
         "/tools/build/debugging-and-analysis.html",
@@ -9445,6 +9557,42 @@
         "/tools/build/build-configurations.html",
         "/tools/build/",
         "/tools/build/debugging-and-analysis.html"
+      ]
+    },
+    {
+      "title": "ファイルとパス — 名前からデータを開くまで",
+      "url": "/os/files-and-paths.html",
+      "file": "os/files-and-paths.md",
+      "domain": "os",
+      "section": "reference",
+      "format": "article",
+      "status": "published",
+      "summary": "ファイルのバイト列、ディレクトリ、絶対パスと相対パスを、ゲームの素材とセーブデータで説明する。拡張子、文字コード、開いて読み書きして閉じる流れにもつなげる。",
+      "source": "新規執筆",
+      "aliases": [
+        "ファイル",
+        "ディレクトリ",
+        "フォルダー",
+        "パス",
+        "絶対パス",
+        "相対パス",
+        "カレントディレクトリ",
+        "拡張子",
+        "テキストファイル",
+        "バイナリファイル",
+        "文字コード",
+        "open",
+        "close"
+      ],
+      "verification": "MicrosoftのWindowsファイル命名・パス形式・ファイル操作・文字エンコードの資料に照合（2026-11-07）",
+      "links": [
+        "/data/integer-bits-and-bytes.html",
+        "/tools/terminal-shell-and-commands.html",
+        "/data/binary-file-validation.html",
+        "/data/unicode-and-encoding.html",
+        "/os/file-read-journey.html",
+        "/os/file-write-and-durability.html",
+        "/os/windows-handles.html"
       ]
     },
     {
@@ -9705,6 +9853,35 @@
         "/runtime/memory/storage-duration-and-lifetime.html",
         "/tools/build/debugging-and-analysis.html",
         "/tools/build/build-configurations.html"
+      ]
+    },
+    {
+      "title": "プログラムを書く・動かす基礎から読む",
+      "url": "/guide/software-development-basics.html",
+      "file": "guide/software-development-basics.md",
+      "domain": "tools",
+      "section": "learning",
+      "format": "path",
+      "status": "published",
+      "summary": "OSとファイル、変数と関数、コンパイルとライブラリ、IDEとシェルの役割を確認し、小さなプログラムから内部の詳解へ進む読み順。",
+      "source": "新規執筆",
+      "aliases": [],
+      "collection": "foundations",
+      "order": 3,
+      "links": [
+        "/os/operating-system-basics.html",
+        "/os/files-and-paths.html",
+        "/guide/hardware-basics.html",
+        "/languages/variables-types-and-expressions.html",
+        "/languages/control-flow-and-functions.html",
+        "/compilers/source-code-and-execution.html",
+        "/compilers/libraries-apis-and-sdks.html",
+        "/tools/development-tools-basics.html",
+        "/tools/terminal-shell-and-commands.html",
+        "/os/process-startup.html",
+        "/practice/compilers/build-artifact-observation.html",
+        "/tools/windows/debugger-breakpoints-and-watchpoints.html",
+        "/languages/cpp/"
       ]
     },
     {
@@ -10006,6 +10183,40 @@
         "/runtime/cpp-internals/exceptions-and-rtti-impl.html",
         "/runtime/cpp-internals/",
         "/runtime/cpp-internals/function-calls-and-cpu.html"
+      ]
+    },
+    {
+      "title": "ライブラリ・API・SDK — 用意された機能を使う",
+      "url": "/compilers/libraries-apis-and-sdks.html",
+      "file": "compilers/libraries-apis-and-sdks.md",
+      "domain": "compilers",
+      "section": "reference",
+      "format": "article",
+      "status": "published",
+      "summary": "ゲームからウィンドウや画像の機能を呼ぶ場面で、ライブラリ、API、SDK、ヘッダー、パッケージ、依存関係の意味を説明する。",
+      "source": "新規執筆",
+      "aliases": [
+        "ライブラリ",
+        "library",
+        "API",
+        "SDK",
+        "ヘッダー",
+        "header",
+        "パッケージ",
+        "package",
+        "依存関係",
+        "dependency",
+        "静的ライブラリ",
+        "DLL",
+        "動的ライブラリ"
+      ],
+      "verification": "MicrosoftのWindows SDK・Win32 API・C++ライブラリ・NuGetの資料に照合（2026-11-07）",
+      "links": [
+        "/network/http-messages.html",
+        "/compilers/source-code-and-execution.html",
+        "/runtime/cpp-internals/object-files-and-libraries.html",
+        "/tools/build/build-tools-cmake.html",
+        "/tools/development-tools-basics.html"
       ]
     },
     {
@@ -10473,6 +10684,41 @@
       ]
     },
     {
+      "title": "開発ツールの基本 — エディター・IDE・デバッガ・プロファイラー",
+      "url": "/tools/development-tools-basics.html",
+      "file": "tools/development-tools-basics.md",
+      "domain": "tools",
+      "section": "reference",
+      "format": "article",
+      "status": "published",
+      "summary": "コードを書く、ビルドする、動作を追う、性能を測る場面から、エディター、IDE、コンパイラ、デバッガ、プロファイラーの機能を説明する。",
+      "source": "新規執筆",
+      "aliases": [
+        "IDE",
+        "統合開発環境",
+        "エディター",
+        "エディタ",
+        "debugger",
+        "デバッガ",
+        "profiler",
+        "プロファイラ",
+        "コード補完",
+        "ステップ実行",
+        "ウォッチ",
+        "コールスタック"
+      ],
+      "verification": "MicrosoftのVisual Studio・Visual Studio Code・デバッグ・性能計測の公式資料に照合（2026-11-07）",
+      "links": [
+        "/compilers/source-code-and-execution.html",
+        "/tools/build/what-is-build.html",
+        "/tools/windows/debugger-breakpoints-and-watchpoints.html",
+        "/tools/build/build-configurations.html",
+        "/graphics/optimization/tools.html",
+        "/graphics/optimization/frame-pacing.html",
+        "/tools/terminal-shell-and-commands.html"
+      ]
+    },
+    {
       "title": "関数オーバーロードと演算子オーバーロード",
       "url": "/languages/cpp/overloading.html",
       "file": "languages/cpp/overloading.md",
@@ -10628,6 +10874,7 @@
       "links": [
         "/guide/hardware-basics.html",
         "/guide/network-basics.html",
+        "/guide/software-development-basics.html",
         "/data/integer-bits-and-bytes.html",
         "/practice/data/integer-byte-observation.html",
         "/runtime/cpp-internals/memory-layout.html",
@@ -11362,6 +11609,41 @@
         "/design/case-studies/event-notification.html",
         "/design/case-studies/",
         "/design/case-studies/exercises.html"
+      ]
+    },
+    {
+      "title": "条件分岐・繰り返し・関数 — 処理の順番を作る",
+      "url": "/languages/control-flow-and-functions.html",
+      "file": "languages/control-flow-and-functions.md",
+      "domain": "languages",
+      "section": "reference",
+      "format": "article",
+      "status": "published",
+      "summary": "HPの更新を例にif・else、for・while、関数の引数と戻り値を説明する。C++とC#で同じ処理を実行する小さなプログラムを読む。",
+      "source": "新規執筆",
+      "aliases": [
+        "条件分岐",
+        "if",
+        "else",
+        "繰り返し",
+        "ループ",
+        "for",
+        "while",
+        "関数",
+        "メソッド",
+        "引数",
+        "仮引数",
+        "戻り値",
+        "return",
+        "値渡し"
+      ],
+      "verification": "Microsoftの仕様に照合。Windows x64のMSVC（C++17）と.NET SDK 10.0.403でビルドし、掲載した出力と一致することを確認（2026-11-07）",
+      "links": [
+        "/languages/variables-types-and-expressions.html",
+        "/guide/software-development-basics.html",
+        "/languages/cpp/values-pointers-references.html",
+        "/game/shooter-design.html",
+        "/runtime/cpp-internals/function-calls-and-cpu.html"
       ]
     },
     {
@@ -12224,6 +12506,8 @@
       "collection": "low-level",
       "order": 19,
       "links": [
+        "/tools/development-tools-basics.html",
+        "/tools/terminal-shell-and-commands.html",
         "/tools/windows/debugger-breakpoints-and-watchpoints.html",
         "/tools/windows/crash-dumps-and-symbols.html",
         "/tools/build/debugging-and-analysis.html",
@@ -12386,6 +12670,8 @@
       "collection": "low-level",
       "order": 8,
       "links": [
+        "/compilers/source-code-and-execution.html",
+        "/compilers/libraries-apis-and-sdks.html",
         "/compilers/tokens-ast-and-type-checking.html",
         "/compilers/llvm-ir-and-ssa.html",
         "/compilers/coff-relocations.html",
@@ -12416,6 +12702,8 @@
       "order": 9,
       "verification": "同期・I/O項目の一次資料照合（2026-11-04）",
       "links": [
+        "/os/operating-system-basics.html",
+        "/os/files-and-paths.html",
         "/os/process-startup.html",
         "/practice/process/windows-process-observation.html",
         "/os/system-calls-and-privilege.html",
@@ -12475,6 +12763,39 @@
       ],
       "previous": "/guide/low-level/operating-system.html",
       "next": "/guide/low-level/algorithms-and-game-math.html"
+    },
+    {
+      "title": "値・変数・型・式 — HPを書き換える",
+      "url": "/languages/variables-types-and-expressions.html",
+      "file": "languages/variables-types-and-expressions.md",
+      "domain": "languages",
+      "section": "reference",
+      "format": "article",
+      "status": "published",
+      "summary": "HPとダメージを例に、値、変数、型、初期化、代入、式と文を説明する。C++とC#で値をコピーしてから更新する小さなプログラムを読む。",
+      "source": "新規執筆",
+      "aliases": [
+        "値",
+        "変数",
+        "型",
+        "宣言",
+        "初期化",
+        "代入",
+        "式",
+        "文",
+        "スコープ",
+        "int",
+        "bool",
+        "等価比較"
+      ],
+      "verification": "Microsoftの仕様に照合。Windows x64のMSVC（C++17）と.NET SDK 10.0.403でビルドし、掲載した出力と一致することを確認（2026-11-07）",
+      "links": [
+        "/guide/software-development-basics.html",
+        "/languages/cpp/values-pointers-references.html",
+        "/languages/control-flow-and-functions.html",
+        "/data/integer-bits-and-bytes.html",
+        "/runtime/memory/storage-duration-and-lifetime.html"
+      ]
     },
     {
       "title": "値型と参照・ポインタ・参照",
@@ -13507,6 +13828,14 @@
         "/browser/rendering-journey.html",
         "/network/tls-https.html",
         "/network/dns-resolution.html",
+        "/os/operating-system-basics.html",
+        "/os/files-and-paths.html",
+        "/languages/variables-types-and-expressions.html",
+        "/languages/control-flow-and-functions.html",
+        "/compilers/source-code-and-execution.html",
+        "/compilers/libraries-apis-and-sdks.html",
+        "/tools/development-tools-basics.html",
+        "/tools/terminal-shell-and-commands.html",
         "/network/network-basics.html",
         "/network/ip-addresses-and-ports.html",
         "/network/home-network-devices.html",
