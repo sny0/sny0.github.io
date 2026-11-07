@@ -3,7 +3,7 @@ title: ビルドとは何か — コンパイラとビルドシステムの違�
 study:
   source: C++ Wiki
   status: published
-  summary: "コンパイラ(g++, cl.exe): 1つの翻訳単位を機械語にする「職人」 ビルドシステム(CMake+Make/Ninja, MSBuild): 「何を・どの順で・どの設定で職人に依頼し、リンクまで完走させるか」を管理する「現場監督」"
+  summary: C++のソースの変換とリンクを進めるコンパイラ・リンカーと、設定や依存関係から処理を実行するビルドシステムの関係を説明する。
   section: reference
   format: article
   domain: tools
@@ -11,12 +11,14 @@ study:
 
 # ビルドとは何か — コンパイラとビルドシステムの違い
 
+用語から確認したいときは、[ソースコードから実行まで](/compilers/source-code-and-execution.html)と[開発ツールの基本](/tools/development-tools-basics.html)から読めます。
+
 ## 一言で言うと
 
 - **コンパイラ**(g++, cl.exe): 1つの翻訳単位を機械語にする「職人」
 - **ビルドシステム**(CMake+Make/Ninja, MSBuild): 「**何を・どの順で・どの設定で**職人に依頼し、リンクまで完走させるか」を管理する「現場監督」
 
-`g++ main.cpp` で済むのは1ファイルの時だけ。実際のゲームは数百〜数万ファイル+ライブラリ+プラットフォーム別設定であり、その管理が「ビルド」という仕事です。
+`g++ main.cpp enemy.cpp -o game`のように、複数のソースを一回の呼び出しでコンパイル・リンクすることもできます。ファイルや設定が増えると、依存関係と作り直す範囲を管理するビルドシステムが役立ちます。[GCCのコンパイルとリンクの指定](https://gcc.gnu.org/onlinedocs/gcc/Overall-Options.html)
 
 ## ビルドの全体像(監督の仕事)
 
@@ -38,7 +40,7 @@ study:
 g++ -std=c++2a -c enemy.cpp -o enemy.o      # ①翻訳単位ごとにコンパイル
 g++ -std=c++2a -c main.cpp -o main.o
 g++ main.o enemy.o -o game.exe               # ②リンク
-# ファイルが増えるたび・依存が増えるたび、手動管理は破綻する → ビルドシステムへ
+# これらの呼び出しと依存関係をビルドシステムに管理させられる
 ```
 
 ## 道具の階層(混乱しやすいので整理)
@@ -51,7 +53,7 @@ g++ main.o enemy.o -o game.exe               # ②リンク
 [コンパイラ/リンカ]  g++, clang++, cl.exe / ld, link.exe
 ```
 
-- CMakeは**ビルドしない**(NinjaやVSプロジェクトを生成する)。この区別が分かるとエラーの切り分け(CMakeの設定ミスか、コンパイルエラーか)ができる
+- CMakeはNinjaなどが使うビルド設定やVisual Studioプロジェクトを生成する。`cmake --build`では、生成済みの設定に対応するビルドツールを呼び出す。設定・生成と、実際のコンパイル・リンクのどの段階で失敗したかを読む。[CMakeの生成とビルド](https://cmake.org/cmake/help/latest/manual/cmake.1.html#build-a-project)
 - UEのUBT(Unreal Build Tool)はこの階層を自前で持つ独自の監督(→ [Unreal Build Tool・Module・Build.cs・Target.cs](/game/unreal/build-system-ubt.html))
 
 ## C#/Unityとの対応

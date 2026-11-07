@@ -21,6 +21,7 @@ study:
 
 ## 関連する辞典本文・実践
 
+- [開発ツールの基本](/tools/development-tools-basics.html)と[ターミナル・シェル・コマンド](/tools/terminal-shell-and-commands.html)で、各ツールの役割と呼び出し方を確認できます。
 - [ブレークポイントとデータブレークポイント](/tools/windows/debugger-breakpoints-and-watchpoints.html)で動作中の書き込みを追い、[クラッシュダンプとPDB](/tools/windows/crash-dumps-and-symbols.html)で停止時の記録を調べられます。
 - [静的解析・サニタイザ・警告](/tools/build/debugging-and-analysis.html)と[ビルド構成・シンボル・デバッガ](/tools/build/build-configurations.html)で、コードの調査機能を整理できます。
 - [RenderDoc・PIX・Nsight・Frame Debugger](/graphics/optimization/tools.html)では、GPU側の観察対象を調べられます。

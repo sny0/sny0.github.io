@@ -1,0 +1,42 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="760" height="430" viewBox="0 0 760 430" role="img" aria-labelledby="title description">
+  <title id="title">APIを通して機能を使い、SDKで開発用の部品をそろえる</title>
+  <desc id="description">ゲームが架空のload_imageへplayer.pngのパスを渡す。APIは呼び出しと結果の規則を示し、ライブラリの実装が画像を読む。画像または失敗がゲームに返る。SDKにはヘッダー、ライブラリ、ツールなどが含まれる。</desc>
+  <defs>
+    <marker id="arrow" viewBox="0 0 8 8" refX="7" refY="4" markerWidth="7" markerHeight="7" orient="auto"><path d="M0 0L8 4L0 8Z" fill="#3f6278"/></marker>
+  </defs>
+  <rect width="760" height="430" rx="16" fill="#eef5fa"/>
+  <g font-family="system-ui, sans-serif" fill="#183b51">
+    <text x="26" y="42" font-size="24" font-weight="700">APIの規則を通じて、用意された機能を使う</text>
+    <text x="26" y="70" font-size="15">画像の読み込みを頼む、説明用の架空のAPI</text>
+    <g stroke="#a6bed1">
+      <rect x="26" y="103" width="178" height="112" rx="10" fill="#fff"/>
+      <rect x="278" y="103" width="204" height="112" rx="10" fill="#dfedf8"/>
+      <rect x="556" y="103" width="178" height="112" rx="10" fill="#e2f2e9"/>
+    </g>
+    <g text-anchor="middle">
+      <text x="115" y="133" font-size="18" font-weight="700">ゲーム</text>
+      <text x="115" y="163" font-size="16">画像がほしい</text><text x="115" y="190" font-size="15">player.pngを指定</text>
+      <text x="380" y="133" font-size="18" font-weight="700">API</text>
+      <text x="380" y="163" font-size="16">load_image</text><text x="380" y="190" font-size="15">入力・結果・失敗の規則</text>
+      <text x="645" y="133" font-size="18" font-weight="700">ライブラリの実装</text>
+      <text x="645" y="163" font-size="16">ファイルを読む</text><text x="645" y="190" font-size="15">画像として解釈する</text>
+    </g>
+    <g stroke="#3f6278" stroke-width="2" fill="none" marker-end="url(#arrow)">
+      <path d="M211 157H269"/><path d="M489 157H547"/>
+      <path d="M645 222V250H115V222"/>
+    </g>
+    <text x="380" y="242" text-anchor="middle" font-size="15">画像、または失敗の情報を返す</text>
+    <rect x="26" y="282" width="708" height="122" rx="10" fill="#fff" stroke="#a6bed1"/>
+    <text x="46" y="311" font-size="18" font-weight="700">SDK — 開発に使う一式の例</text>
+    <g stroke="#a6bed1">
+      <rect x="46" y="328" width="190" height="52" rx="8" fill="#dfedf8"/>
+      <rect x="276" y="328" width="190" height="52" rx="8" fill="#e2f2e9"/>
+      <rect x="506" y="328" width="208" height="52" rx="8" fill="#fff3d9"/>
+    </g>
+    <g font-size="16" text-anchor="middle">
+      <text x="141" y="360">ヘッダーなどの宣言</text>
+      <text x="371" y="360">ライブラリ</text>
+      <text x="610" y="360">開発ツール</text>
+    </g>
+  </g>
+</svg>

@@ -19,6 +19,7 @@
 
 ## 辞典の本文
 
+- [OSの役割 — アプリとハードウェアをつなぐ](/os/operating-system-basics.html)
 - [PEローダーがEXEとDLLを配置する仕組み — RVA・再配置・IAT](/os/pe-loading-and-imports.html)
 - [WindowsのI/O完了ポート（IOCP） — 要求の発行と完了の回収](/os/io-completion-ports.html)
 - [Windowsのスレッドスケジューリング — 実行・待機・実行可能](/os/thread-scheduling.html)
@@ -28,6 +29,7 @@
 - [Windowsのファイル書き込みと永続化](/os/file-write-and-durability.html)
 - [Windowsの非同期I/Oをキャンセルする — 要求・完了・解放](/os/cancelling-overlapped-io.html)
 - [システムコールでユーザーモードからカーネルモードへ](/os/system-calls-and-privilege.html)
+- [ファイルとパス — 名前からデータを開くまで](/os/files-and-paths.html)
 - [ファイルを読むと内部で何が起きるか](/os/file-read-journey.html)
 - [メモリマップドファイル — ファイルの範囲をアドレスへ対応させる](/os/memory-mapped-files.html)
 - [仮想メモリ — アドレス変換・ページ・予約とコミット](/os/virtual-memory.html)

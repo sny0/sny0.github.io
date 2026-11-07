@@ -1,0 +1,41 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="760" height="444" viewBox="0 0 760 444" role="img" aria-labelledby="control-title control-desc">
+  <title id="control-title">関数の入力と結果、forの繰り返し</title>
+  <desc id="control-desc">呼び出し元のHP100とダメージ30をApplyDamageに渡すと70を返し、hpへ代入する。forは初期化の後に条件を調べ、真なら本体を実行し、更新して再び条件へ戻る。偽なら終了へ進む。</desc>
+  <defs><marker id="control-arrow" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto"><path d="M0 0L8 4L0 8Z" fill="#45647d"/></marker></defs>
+  <rect width="760" height="444" rx="18" fill="#edf4f9"/>
+  <g font-family="'Yu Gothic','Meiryo',sans-serif" fill="#153d5a">
+    <text x="26" y="38" font-size="23" font-weight="700">関数で計算し、条件を調べて繰り返す</text>
+    <rect x="26" y="60" width="708" height="157" rx="11" fill="white" stroke="#9ebbd2"/>
+    <text x="43" y="88" font-size="18" font-weight="700">ApplyDamage(hp, 30) を呼ぶ</text>
+    <rect x="44" y="107" width="164" height="66" rx="8" fill="#e3eff9"/>
+    <text x="61" y="133" font-size="17">入力を値で渡す</text>
+    <text x="61" y="158" font-size="17">100 と 30</text>
+    <path d="M214 140H249" stroke="#45647d" stroke-width="2" marker-end="url(#control-arrow)"/>
+    <rect x="259" y="107" width="211" height="66" rx="8" fill="#fff2d8"/>
+    <text x="276" y="133" font-size="17">条件で結果を選ぶ</text>
+    <text x="276" y="158" font-size="17">この場合は 100 - 30</text>
+    <path d="M476 140H511" stroke="#45647d" stroke-width="2" marker-end="url(#control-arrow)"/>
+    <rect x="521" y="107" width="193" height="66" rx="8" fill="#e1f3ea"/>
+    <text x="538" y="133" font-size="17">70 を返す</text>
+    <text x="538" y="158" font-size="15">呼び出し元が hp へ代入</text>
+    <text x="44" y="197" font-size="15">仮引数 currentHp・damage は、呼び出しごとに渡された値を受け取る。</text>
+    <text x="26" y="251" font-size="18" font-weight="700">for の流れ</text>
+    <rect x="26" y="279" width="127" height="52" rx="8" fill="white" stroke="#9ebbd2"/>
+    <text x="43" y="311" font-size="17">初期化 hit=0</text>
+    <path d="M159 305H188" stroke="#45647d" stroke-width="2" marker-end="url(#control-arrow)"/>
+    <path d="M256 266L321 305L256 344L191 305Z" fill="#fff2d8" stroke="#c8ad73"/>
+    <text x="219" y="311" font-size="17">hit &lt; 3</text>
+    <path d="M327 305H397" stroke="#45647d" stroke-width="2" marker-end="url(#control-arrow)"/>
+    <text x="349" y="291" font-size="15">真</text>
+    <rect x="407" y="279" width="143" height="52" rx="8" fill="#e3eff9" stroke="#9ebbd2"/>
+    <text x="424" y="311" font-size="17">本体を実行</text>
+    <path d="M556 305H594" stroke="#45647d" stroke-width="2" marker-end="url(#control-arrow)"/>
+    <rect x="604" y="279" width="130" height="52" rx="8" fill="#e1f3ea" stroke="#8fbaa9"/>
+    <text x="622" y="311" font-size="17">更新 ++hit</text>
+    <path d="M669 273V250H256V260" fill="none" stroke="#45647d" stroke-width="2" marker-end="url(#control-arrow)"/>
+    <text x="390" y="239" font-size="15">次の一回の前に条件へ戻る</text>
+    <path d="M256 350V399H325" fill="none" stroke="#45647d" stroke-width="2" marker-end="url(#control-arrow)"/>
+    <text x="270" y="376" font-size="15">偽</text>
+    <text x="343" y="406" font-size="17">繰り返しを抜ける</text>
+  </g>
+</svg>

@@ -43,6 +43,8 @@
 - [継承・仮想関数・純粋仮想関数・抽象クラス・多重継承・override/final](/languages/cpp/inheritance-and-virtual.html)
 - [構造体・クラス・アクセス指定子](/languages/cpp/structs-and-classes.html)
 - [手動メモリ管理と GC](/languages/csharp/memory-management-vs-gc.html)
+- [条件分岐・繰り返し・関数 — 処理の順番を作る](/languages/control-flow-and-functions.html)
+- [値・変数・型・式 — HPを書き換える](/languages/variables-types-and-expressions.html)
 - [値型と参照・ポインタ・参照](/languages/cpp/values-pointers-references.html)
 - [配列と文字列](/languages/cpp/arrays-and-strings.html)
 - [未定義動作・実装定義・未規定動作](/languages/cpp/undefined-behavior.html)

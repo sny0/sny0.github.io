@@ -26,6 +26,7 @@
 
 - [コンピュータの部品から読む](/guide/hardware-basics.html)で、CPU・RAM・SSDの役割から、命令の実行とメモリの使い分けへ進む。
 - [ネットワークの基本から読む](/guide/network-basics.html)で、パケットとプロトコル、IPとポート、家庭内の機器を調べる。
+- [プログラムを書く・動かす基礎](/guide/software-development-basics.html)で、OSとファイル、変数と関数、コンパイルと開発ツールの関係を追う。
 
 ## 整数はメモリにどう並ぶか
 
