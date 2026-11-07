@@ -1,0 +1,44 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="760" height="436" viewBox="0 0 760 436" role="img" aria-labelledby="title desc">
+  <title id="title">アプリのデータを通信の層で運ぶ</title>
+  <desc id="desc">HTTP/1.1をTCPで送る例。送信側はHTTPデータにTCP、IP、リンクの情報を付けて送る。受信側ではリンク、IP、TCPの順に処理し、アプリがHTTPのデータを読む。</desc>
+  <defs>
+    <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10Z" fill="#49677c"/></marker>
+  </defs>
+  <rect width="760" height="436" rx="18" fill="#edf3f8"/>
+  <g font-family="'Yu Gothic', 'Meiryo', sans-serif" fill="#17394f">
+    <text x="26" y="37" font-size="24" font-weight="700">アプリのデータを、いくつかの層で運ぶ</text>
+    <text x="160" y="70" text-anchor="middle" font-size="17" font-weight="700">送信する側</text>
+    <text x="600" y="70" text-anchor="middle" font-size="17" font-weight="700">受信する側</text>
+
+    <g fill="#fff" stroke="#a9c2d5">
+      <rect x="30" y="84" width="260" height="44" rx="8"/>
+      <rect x="30" y="156" width="260" height="44" rx="8"/>
+      <rect x="30" y="228" width="260" height="44" rx="8"/>
+      <rect x="30" y="300" width="260" height="44" rx="8"/>
+      <rect x="470" y="84" width="260" height="44" rx="8"/>
+      <rect x="470" y="156" width="260" height="44" rx="8"/>
+      <rect x="470" y="228" width="260" height="44" rx="8"/>
+      <rect x="470" y="300" width="260" height="44" rx="8"/>
+    </g>
+    <g font-size="18" text-anchor="middle">
+      <text x="160" y="112">HTTPの要求を作る</text>
+      <text x="160" y="184">TCPで順序を扱う</text>
+      <text x="160" y="256">IPで宛先を示す</text>
+      <text x="160" y="328">リンク上へ送る</text>
+      <text x="600" y="112">HTTPの要求を読む</text>
+      <text x="600" y="184">TCPで順序をそろえる</text>
+      <text x="600" y="256">IPの情報を処理する</text>
+      <text x="600" y="328">リンク上で受け取る</text>
+    </g>
+    <g stroke="#49677c" stroke-width="2" fill="none" marker-end="url(#arrow)">
+      <path d="M160 133V151"/><path d="M160 205V223"/><path d="M160 277V295"/>
+      <path d="M600 295V277"/><path d="M600 223V205"/><path d="M600 151V133"/>
+      <path d="M298 322H330"/><path d="M430 322H462"/>
+    </g>
+    <rect x="332" y="295" width="96" height="54" rx="8" fill="#dce9f2"/>
+    <text x="380" y="318" text-anchor="middle" font-size="14">ネット</text>
+    <text x="380" y="337" text-anchor="middle" font-size="14">ワーク</text>
+    <text x="26" y="384" font-size="17">上の層は、下の層の機能を使う。</text>
+    <text x="26" y="410" font-size="16">受け取る側は各層の情報を読み、上の層へデータを渡す。</text>
+  </g>
+</svg>

@@ -1,0 +1,46 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="760" height="420" viewBox="0 0 760 420" role="img" aria-labelledby="title desc">
+  <title id="title">家庭のLANから回線へ出る経路</title>
+  <desc id="desc">有線のPCはスイッチからルーター、ONU、回線事業者側へ進む。無線のPCはWi-Fiアクセスポイントからスイッチへつながる。家庭用Wi-Fiルーターはスイッチ・AP・ルーターをまとめた製品が多い。</desc>
+  <defs><marker id="arrow" markerWidth="8" markerHeight="8" refX="6" refY="4" orient="auto"><path d="M0 0 L8 4 L0 8Z" fill="#45647c"/></marker></defs>
+  <rect width="760" height="420" rx="18" fill="#edf3f8"/>
+  <g font-family="'Yu Gothic','Meiryo',sans-serif" fill="#173b55">
+    <text x="26" y="38" font-size="23" font-weight="700">機能ごとに分けた、家庭のネットワーク</text>
+    <text x="26" y="65" font-size="15">光回線の例。矢印はPCから家の外へ向かう向きを示す。</text>
+    <rect x="196" y="91" width="303" height="252" rx="12" fill="#fff" stroke="#7d9cb5" stroke-dasharray="6 5"/>
+    <text x="212" y="117" font-size="15">家庭用Wi-Fiルーターの機能例</text>
+    <rect x="25" y="145" width="115" height="72" rx="9" fill="#dceef9" stroke="#a0c4dc"/>
+    <text x="82" y="173" text-anchor="middle" font-size="17" font-weight="700">有線のPC</text>
+    <text x="82" y="198" text-anchor="middle" font-size="14">LANアダプター</text>
+    <path d="M140 181 H209" fill="none" stroke="#45647c" stroke-width="2" marker-end="url(#arrow)"/>
+    <text x="148" y="165" font-size="13">Ethernet</text>
+    <rect x="214" y="145" width="118" height="72" rx="9" fill="#dff0e8" stroke="#9bc5b3"/>
+    <text x="273" y="174" text-anchor="middle" font-size="17" font-weight="700">スイッチ</text>
+    <text x="273" y="198" text-anchor="middle" font-size="14">LAN内を結ぶ</text>
+    <path d="M332 181 H361" fill="none" stroke="#45647c" stroke-width="2" marker-end="url(#arrow)"/>
+    <rect x="366" y="145" width="115" height="72" rx="9" fill="#fff1d8" stroke="#c8ad73"/>
+    <text x="423" y="174" text-anchor="middle" font-size="17" font-weight="700">ルーター</text>
+    <text x="423" y="198" text-anchor="middle" font-size="14">別の網へ転送</text>
+    <path d="M481 181 H517" fill="none" stroke="#45647c" stroke-width="2" marker-end="url(#arrow)"/>
+    <rect x="522" y="145" width="89" height="72" rx="9" fill="#e9e4f5" stroke="#b2a2ca"/>
+    <text x="566" y="174" text-anchor="middle" font-size="18" font-weight="700">ONU</text>
+    <text x="566" y="198" text-anchor="middle" font-size="14">光回線終端</text>
+    <path d="M611 181 H653" fill="none" stroke="#45647c" stroke-width="2" marker-end="url(#arrow)"/>
+    <text x="619" y="164" font-size="13">光回線</text>
+    <rect x="658" y="145" width="80" height="72" rx="9" fill="#fff" stroke="#afc3d2"/>
+    <text x="698" y="173" text-anchor="middle" font-size="14">回線事業者</text>
+    <text x="698" y="197" text-anchor="middle" font-size="14">側の網</text>
+    <rect x="25" y="263" width="115" height="64" rx="9" fill="#dceef9" stroke="#a0c4dc"/>
+    <text x="82" y="290" text-anchor="middle" font-size="17" font-weight="700">無線のPC</text>
+    <text x="82" y="313" text-anchor="middle" font-size="14">Wi-Fiアダプター</text>
+    <path d="M140 295 H209" fill="none" stroke="#45647c" stroke-width="2" stroke-dasharray="4 3" marker-end="url(#arrow)"/>
+    <text x="153" y="280" font-size="14">Wi-Fi</text>
+    <rect x="214" y="263" width="118" height="64" rx="9" fill="#dff0e8" stroke="#9bc5b3"/>
+    <text x="273" y="290" text-anchor="middle" font-size="17" font-weight="700">AP</text>
+    <text x="273" y="313" text-anchor="middle" font-size="13">アクセスポイント</text>
+    <path d="M273 263 V222" fill="none" stroke="#45647c" stroke-width="2" marker-end="url(#arrow)"/>
+    <text x="367" y="271" font-size="15">家の外へ送るときは</text>
+    <text x="367" y="295" font-size="15">ルーターを経由する</text>
+    <text x="26" y="375" font-size="15">LANは有線と無線を含む。三つの機能を一台にまとめた製品もある。</text>
+    <text x="26" y="400" font-size="15">ONUとルーターが一体の製品もあり、契約した回線で構成は変わる。</text>
+  </g>
+</svg>

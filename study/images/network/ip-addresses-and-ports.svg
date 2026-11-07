@@ -1,0 +1,40 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="760" height="408" viewBox="0 0 760 408" role="img" aria-labelledby="title desc">
+  <title id="title">IPアドレスとポートでTCP接続の両端を指定する</title>
+  <desc id="desc">クライアントの192.0.2.10、ポート55000から、サーバー203.0.113.20のTCPポート443へ要求を送る。応答は逆向きに戻る。同じサーバーのTCPポート8443とUDPポート443は別の受け口。</desc>
+  <defs>
+    <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0 0L10 5L0 10Z" fill="#315d75"/></marker>
+  </defs>
+  <rect width="760" height="408" rx="18" fill="#edf3f8"/>
+  <g font-family="'Yu Gothic', 'Meiryo', sans-serif" fill="#17394f">
+    <text x="26" y="38" font-size="24" font-weight="700">IPアドレスとポートで、接続の両端を示す</text>
+    <text x="26" y="66" font-size="16">TCPの接続を新しく作るときの、説明用の例</text>
+    <g stroke="#adc6d8" fill="#fff">
+      <rect x="26" y="90" width="270" height="244" rx="10"/>
+      <rect x="464" y="90" width="270" height="264" rx="10"/>
+    </g>
+    <text x="46" y="122" font-size="19" font-weight="700">クライアント</text>
+    <text x="46" y="151" font-size="18" font-family="ui-monospace, monospace">192.0.2.10</text>
+    <rect x="44" y="168" width="234" height="65" rx="8" fill="#e6f1fc" stroke="#8eb5d5"/>
+    <text x="62" y="195" font-size="18" font-weight="700">TCP 55000</text>
+    <text x="62" y="220" font-size="16">OSが選ぶ一時ポートの例</text>
+    <text x="46" y="274" font-size="16">要求を送る端と、</text>
+    <text x="46" y="301" font-size="16">応答を受け取る端になる。</text>
+
+    <text x="484" y="122" font-size="19" font-weight="700">サーバー</text>
+    <text x="484" y="151" font-size="18" font-family="ui-monospace, monospace">203.0.113.20</text>
+    <rect x="482" y="168" width="234" height="49" rx="8" fill="#e1f3eb" stroke="#91bba9"/>
+    <text x="500" y="199" font-size="18" font-weight="700">TCP 443</text>
+    <rect x="482" y="230" width="234" height="49" rx="8" fill="#f4f5f7" stroke="#b5c0c9"/>
+    <text x="500" y="261" font-size="18">TCP 8443</text>
+    <rect x="482" y="292" width="234" height="49" rx="8" fill="#fff3dc" stroke="#c8b07d"/>
+    <text x="500" y="323" font-size="18">UDP 443</text>
+
+    <g stroke="#315d75" stroke-width="2.5" fill="none" marker-end="url(#arrow)">
+      <path d="M304 180H454"/>
+      <path d="M454 211H304"/>
+    </g>
+    <text x="380" y="166" text-anchor="middle" font-size="17">要求</text>
+    <text x="380" y="238" text-anchor="middle" font-size="17">応答</text>
+    <text x="26" y="384" font-size="17">同じIPでも、ポートやTCP・UDPが変われば受け口が変わる。</text>
+  </g>
+</svg>
