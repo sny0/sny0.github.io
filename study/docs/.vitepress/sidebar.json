@@ -1219,6 +1219,10 @@
           "link": "/graphics/postprocess/antialiasing.html"
         },
         {
+          "text": "キーフレームとアニメーションの基本 — 時間から値を決める",
+          "link": "/graphics/basics/keyframes-and-animation.html"
+        },
+        {
           "text": "グラフィックスAPIの歴史",
           "link": "/graphics/api/history.html"
         },
@@ -1281,6 +1285,10 @@
         {
           "text": "リアルタイム3D技術全史",
           "link": "/guide/rendering/timeline.html"
+        },
+        {
+          "text": "リグとスキニングの基本 — 骨の姿勢でメッシュを動かす",
+          "link": "/graphics/basics/rigs-and-skinning.html"
         },
         {
           "text": "レンダーパスのアタッチメントを読み込み、保持し、引き渡す",
@@ -1405,6 +1413,10 @@
           "link": "/game/unreal/uobject-actor-component.html"
         },
         {
+          "text": "ゲームUIの基本 — 表示・配置・操作をつなぐ",
+          "link": "/game/basics/ui-layout-and-interaction.html"
+        },
+        {
           "text": "ゲームエンジンの役割 — 素材とルールからゲームを動かす",
           "link": "/game/basics/game-engine-basics.html"
         },
@@ -1421,12 +1433,28 @@
           "link": "/game/asset-pack-files.html"
         },
         {
+          "text": "ゲームの状態とポーズ — タイトル・プレイ・結果を切り替える",
+          "link": "/game/basics/game-states-and-pause.html"
+        },
+        {
           "text": "ゲームループと時間 — 入力・更新・描画を繰り返す",
           "link": "/game/basics/game-loop-and-time.html"
         },
         {
+          "text": "ゲーム内イベントと通知 — HPの変化をUIへ伝える",
+          "link": "/game/basics/game-events-and-notifications.html"
+        },
+        {
           "text": "シーン・オブジェクト・コンポーネントの基本",
           "link": "/game/basics/scenes-and-components.html"
+        },
+        {
+          "text": "セーブとシリアライズの基本 — 実行中の状態を保存する",
+          "link": "/game/basics/save-data-and-serialization.html"
+        },
+        {
+          "text": "プレハブと生成・破棄の基本 — 同じ部品から複数の物を作る",
+          "link": "/game/basics/prefabs-and-object-lifetimes.html"
         },
         {
           "text": "リフレクション — UCLASS・UFUNCTION・UPROPERTY・Unreal Header Tool",
@@ -1443,6 +1471,10 @@
         {
           "text": "衝突と物理の基本 — コライダー・Rigidbody・トリガー",
           "link": "/game/basics/collisions-and-physics.html"
+        },
+        {
+          "text": "入力の基本 — デバイスからゲームのアクションへ",
+          "link": "/game/basics/input-actions-and-devices.html"
         },
         {
           "text": "有限ステートマシンと階層型ステートマシン(State と Strategy の比較つき)",

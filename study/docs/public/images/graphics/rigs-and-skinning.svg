@@ -1,0 +1,30 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="760" height="490" viewBox="0 0 760 490" role="img" aria-labelledby="title desc">
+  <title id="title">骨格の姿勢とウェイトで、腕の表面を変形する</title>
+  <desc id="desc">左は伸ばした腕の基準姿勢、右は前腕を曲げた姿勢。青い輪郭がメッシュ、太い線と丸が骨格の概念表示。肘の近くの頂点では、上腕Aと前腕Bの変換を重み付きで混ぜる。</desc>
+  <defs><marker id="arrow" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto"><path d="M0 0 8 4 0 8z" fill="#46677e"/></marker></defs>
+  <rect width="760" height="490" rx="18" fill="#edf4f9"/>
+  <g font-family="'Yu Gothic',Meiryo,sans-serif" fill="#173e59">
+    <text x="26" y="39" font-size="23" font-weight="700">骨格を動かし、表面の頂点を変形する</text>
+    <text x="26" y="68" font-size="15">腕を伸ばした姿勢から、前腕を曲げる概念図</text>
+    <rect x="26" y="91" width="330" height="231" rx="11" fill="#fff" stroke="#a2bed2"/>
+    <rect x="404" y="91" width="330" height="231" rx="11" fill="#fff" stroke="#a2bed2"/>
+    <text x="46" y="119" font-size="17" font-weight="700">基準の姿勢</text>
+    <text x="424" y="119" font-size="17" font-weight="700">動かした姿勢</text>
+    <path d="M66 185H312V225H66Z" fill="#dcecf8" stroke="#6b91aa" stroke-width="2"/>
+    <path d="M428 185H542L628 121L652 153L558 225H428Z" fill="#dcecf8" stroke="#6b91aa" stroke-width="2"/>
+    <path d="M88 205H195H294" stroke="#395f78" stroke-width="7" fill="none"/>
+    <path d="M446 205H550L640 137" stroke="#395f78" stroke-width="7" fill="none"/>
+    <g fill="#fff" stroke="#395f78" stroke-width="3"><circle cx="88" cy="205" r="7"/><circle cx="195" cy="205" r="7"/><circle cx="294" cy="205" r="7"/><circle cx="446" cy="205" r="7"/><circle cx="550" cy="205" r="7"/><circle cx="640" cy="137" r="7"/></g>
+    <circle cx="195" cy="185" r="6" fill="#edb958" stroke="#966a22" stroke-width="2"/>
+    <circle cx="542" cy="185" r="6" fill="#edb958" stroke="#966a22" stroke-width="2"/>
+    <text x="104" y="264" font-size="15">上腕 A</text><text x="226" y="264" font-size="15">前腕 B</text>
+    <text x="468" y="264" font-size="15">上腕 A</text><text x="613" y="193" font-size="15">前腕 B</text>
+    <text x="46" y="299" font-size="14">輪郭はメッシュ、太線と丸は骨格</text>
+    <text x="424" y="299" font-size="14">関節付近の表面もつないで動かす</text>
+    <path d="M362 206H398" stroke="#46677e" stroke-width="2" marker-end="url(#arrow)"/>
+    <rect x="26" y="344" width="708" height="113" rx="11" fill="#fff3d9" stroke="#c2a16a"/>
+    <text x="46" y="374" font-size="17" font-weight="700">黄色の頂点のウェイトの例</text>
+    <text x="46" y="403" font-size="16">上腕 A の影響 0.4　＋　前腕 B の影響 0.6</text>
+    <text x="46" y="432" font-size="15">二つの変換による頂点の位置を、重み付きで混ぜる。</text>
+  </g>
+</svg>

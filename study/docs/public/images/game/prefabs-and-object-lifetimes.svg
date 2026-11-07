@@ -1,0 +1,29 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="760" height="470" viewBox="0 0 760 470" role="img" aria-labelledby="title desc">
+  <title id="title">ひな形から作った敵が、個別の状態と共有する素材を持つ</title>
+  <desc id="desc">敵のプレハブには部品と初期設定がある。生成した敵Aと敵Bはそれぞれの位置と現在HPを持つ。二体から同じメッシュとマテリアルを参照する構成にできる。有効・無効の切り替えでは状態が残り、破棄とは異なる。</desc>
+  <defs><marker id="arrow" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto"><path d="M0 0 8 4 0 8z" fill="#45677c"/></marker></defs>
+  <rect width="760" height="470" rx="18" fill="#edf4f9"/>
+  <g font-family="'Yu Gothic',Meiryo,sans-serif" fill="#143d59">
+    <text x="26" y="39" font-size="23" font-weight="700">同じひな形から、個別に動く敵を作る</text>
+    <rect x="214" y="65" width="332" height="70" rx="10" fill="#fff3d9" stroke="#c2a16a"/>
+    <text x="380" y="94" text-anchor="middle" font-size="18" font-weight="700">敵のプレハブアセット</text>
+    <text x="380" y="119" text-anchor="middle" font-size="15">部品と初期HPなどの設定</text>
+    <path d="M300 138V153H195V174" fill="none" stroke="#45677c" stroke-width="2" marker-end="url(#arrow)"/>
+    <path d="M460 138V153H565V174" fill="none" stroke="#45677c" stroke-width="2" marker-end="url(#arrow)"/>
+    <text x="380" y="167" text-anchor="middle" font-size="14">生成する</text>
+    <rect x="36" y="180" width="318" height="109" rx="10" fill="#fff" stroke="#a2bed2"/>
+    <rect x="406" y="180" width="318" height="109" rx="10" fill="#fff" stroke="#a2bed2"/>
+    <text x="195" y="209" text-anchor="middle" font-size="18" font-weight="700">敵Aのインスタンス</text>
+    <text x="195" y="238" text-anchor="middle" font-size="15">現在HP 70</text>
+    <text x="195" y="264" text-anchor="middle" font-size="15">Aの位置・攻撃状態</text>
+    <text x="565" y="209" text-anchor="middle" font-size="18" font-weight="700">敵Bのインスタンス</text>
+    <text x="565" y="238" text-anchor="middle" font-size="15">現在HP 100</text>
+    <text x="565" y="264" text-anchor="middle" font-size="15">Bの位置・攻撃状態</text>
+    <path d="M195 292V315H300V329" fill="none" stroke="#45677c" stroke-width="2" marker-end="url(#arrow)"/>
+    <path d="M565 292V315H460V329" fill="none" stroke="#45677c" stroke-width="2" marker-end="url(#arrow)"/>
+    <rect x="174" y="335" width="412" height="62" rx="10" fill="#e1f2ea" stroke="#8fb8a5"/>
+    <text x="380" y="361" text-anchor="middle" font-size="17" font-weight="700">参照を共有できるアセット</text>
+    <text x="380" y="385" text-anchor="middle" font-size="15">同じメッシュ・同じマテリアル</text>
+    <text x="26" y="439" font-size="15">有効・無効の切り替えではインスタンスの値が残る。破棄は別の操作。</text>
+  </g>
+</svg>

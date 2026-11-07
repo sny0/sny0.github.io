@@ -104,14 +104,14 @@
       "id": "graphics",
       "title": "3DCGとグラフィックス",
       "description": "制作データからGPUの処理、最終表示までをつなぐ。",
-      "count": 75,
+      "count": 77,
       "status": "辞典本文あり"
     },
     {
       "id": "game",
       "title": "ゲームとエンジン",
       "description": "入力、時間、ECSと各サブシステムの関係を調べる。",
-      "count": 29,
+      "count": 35,
       "status": "辞典本文あり"
     },
     {
@@ -761,7 +761,7 @@
       "section": "learning",
       "format": "path",
       "status": "published",
-      "summary": "メッシュ、座標とカメラ、材質とテクスチャ、光と画像生成の順に、3DCGの基本用語と役割を図で確かめる読み順。",
+      "summary": "メッシュ、座標とカメラ、材質と光、アニメーション、リグとスキニングを図で確かめる読み順。",
       "source": "新規執筆",
       "aliases": [],
       "collection": "foundations",
@@ -771,6 +771,8 @@
         "/graphics/basics/transforms-and-cameras.html",
         "/graphics/basics/materials-textures-and-shaders.html",
         "/graphics/basics/light-and-rendered-images.html",
+        "/graphics/basics/keyframes-and-animation.html",
+        "/graphics/basics/rigs-and-skinning.html",
         "/math/rendering/vector.html",
         "/math/rendering/transform.html",
         "/math/rendering/camera.html",
@@ -5764,6 +5766,7 @@
       "source": "C++ Wiki",
       "aliases": [],
       "links": [
+        "/game/basics/game-events-and-notifications.html",
         "/design/foundations/dependency.html",
         "/design/patterns/observer.html",
         "/game/patterns/event-queue-and-pubsub.html",
@@ -7767,6 +7770,38 @@
       ]
     },
     {
+      "title": "キーフレームとアニメーションの基本 — 時間から値を決める",
+      "url": "/graphics/basics/keyframes-and-animation.html",
+      "file": "graphics/basics/keyframes-and-animation.md",
+      "domain": "graphics",
+      "section": "reference",
+      "format": "article",
+      "status": "published",
+      "summary": "箱を動かす例から、時刻と値を記録するキーフレーム、補間、カーブ、クリップ、ループを説明する。描画のFPSや回転の補間との関係も調べる。",
+      "source": "新規執筆",
+      "aliases": [
+        "アニメーション",
+        "animation",
+        "キーフレーム",
+        "keyframe",
+        "トラック",
+        "チャンネル",
+        "補間",
+        "animation curve",
+        "カーブ",
+        "クリップ",
+        "ループ",
+        "slerp"
+      ],
+      "verification": "Unity 6.0のアニメーションクリップ・カーブとKhronosのglTF 2.0アニメーション仕様に照合（2026-11-07）",
+      "links": [
+        "/game/basics/game-loop-and-time.html",
+        "/math/rendering/quaternion.html",
+        "/graphics/basics/rigs-and-skinning.html",
+        "/graphics/basics/transforms-and-cameras.html"
+      ]
+    },
+    {
       "title": "キャスト",
       "url": "/languages/cpp/casts.html",
       "file": "languages/cpp/casts.md",
@@ -8120,6 +8155,40 @@
       ]
     },
     {
+      "title": "ゲームUIの基本 — 表示・配置・操作をつなぐ",
+      "url": "/game/basics/ui-layout-and-interaction.html",
+      "file": "game/basics/ui-layout-and-interaction.md",
+      "domain": "game",
+      "section": "reference",
+      "format": "article",
+      "status": "published",
+      "summary": "HP表示とポーズメニューを例に、UI、HUD、Canvas、アンカー、ピボット、画面サイズへの対応、選択と決定の役割を説明する。",
+      "source": "新規執筆",
+      "aliases": [
+        "UI",
+        "HUD",
+        "ユーザーインターフェース",
+        "Canvas",
+        "RectTransform",
+        "アンカー",
+        "ピボット",
+        "レイアウト",
+        "フォーカス",
+        "ナビゲーション",
+        "ボタン",
+        "uGUI"
+      ],
+      "verification": "Unity 6.0向けuGUI 2.0とInput System 1.11の公式資料に照合（2026-11-07）",
+      "links": [
+        "/game/basics/game-events-and-notifications.html",
+        "/design/case-studies/ui-notification.html",
+        "/game/basics/input-actions-and-devices.html",
+        "/game/basics/game-states-and-pause.html",
+        "/game/basics/scenes-and-components.html",
+        "/graphics/basics/transforms-and-cameras.html"
+      ]
+    },
+    {
       "title": "ゲームエンジンの役割 — 素材とルールからゲームを動かす",
       "url": "/game/basics/game-engine-basics.html",
       "file": "game/basics/game-engine-basics.md",
@@ -8262,6 +8331,39 @@
       ]
     },
     {
+      "title": "ゲームの状態とポーズ — タイトル・プレイ・結果を切り替える",
+      "url": "/game/basics/game-states-and-pause.html",
+      "file": "game/basics/game-states-and-pause.md",
+      "domain": "game",
+      "section": "reference",
+      "format": "article",
+      "status": "published",
+      "summary": "タイトル、プレイ中、ポーズ、結果画面を例に、状態、遷移、受け付ける入力、止める更新と動かすUIを説明する。",
+      "source": "新規執筆",
+      "aliases": [
+        "ゲーム状態",
+        "game state",
+        "状態遷移",
+        "ポーズ",
+        "pause",
+        "タイトル画面",
+        "結果画面",
+        "timeScale",
+        "unscaledDeltaTime",
+        "ステートマシン"
+      ],
+      "verification": "Unity 6.0のTime.timeScale・unscaledDeltaTimeと、状態管理・入力の既存詳解に照合（2026-11-07）",
+      "links": [
+        "/game/basics/game-loop-and-time.html",
+        "/game/patterns/state-machines.html",
+        "/game/basics/scenes-and-components.html",
+        "/game/basics/input-actions-and-devices.html",
+        "/game/basics/ui-layout-and-interaction.html",
+        "/game/basics/prefabs-and-object-lifetimes.html",
+        "/game/basics/game-events-and-notifications.html"
+      ]
+    },
+    {
       "title": "ゲームの動きと構成から読む",
       "url": "/guide/game-development-basics.html",
       "file": "guide/game-development-basics.md",
@@ -8269,7 +8371,7 @@
       "section": "learning",
       "format": "path",
       "status": "published",
-      "summary": "ゲームエンジンの役割、入力と時間、シーンと部品、衝突と物理を図で確かめ、小さなシューティングの実装へ進む読み順。",
+      "summary": "エンジン、時間、シーンと衝突から、入力、UI、プレハブ、ポーズ、イベント、セーブへ進む読み順。",
       "source": "新規執筆",
       "aliases": [],
       "collection": "foundations",
@@ -8279,6 +8381,12 @@
         "/game/basics/game-loop-and-time.html",
         "/game/basics/scenes-and-components.html",
         "/game/basics/collisions-and-physics.html",
+        "/game/basics/input-actions-and-devices.html",
+        "/game/basics/ui-layout-and-interaction.html",
+        "/game/basics/prefabs-and-object-lifetimes.html",
+        "/game/basics/game-states-and-pause.html",
+        "/game/basics/game-events-and-notifications.html",
+        "/game/basics/save-data-and-serialization.html",
         "/game/shooter-design.html",
         "/game/shooter-cpp.html",
         "/game/shooter-unity.html",
@@ -8381,8 +8489,44 @@
         "/graphics/optimization/input-to-display-latency.html",
         "/game/patterns/game-loop-and-update.html",
         "/game/basics/collisions-and-physics.html",
+        "/game/basics/input-actions-and-devices.html",
         "/game/patterns/command-buffer-and-input.html",
         "/game/shooter-design.html"
+      ]
+    },
+    {
+      "title": "ゲーム内イベントと通知 — HPの変化をUIへ伝える",
+      "url": "/game/basics/game-events-and-notifications.html",
+      "file": "game/basics/game-events-and-notifications.md",
+      "domain": "game",
+      "section": "reference",
+      "format": "article",
+      "status": "published",
+      "summary": "HPが変わる場面から、イベント、発行、購読、ハンドラー、通知する値、同期呼び出しとキュー、購読解除の役割を説明する。",
+      "source": "新規執筆",
+      "aliases": [
+        "ゲームイベント",
+        "イベント",
+        "通知",
+        "event",
+        "publisher",
+        "subscriber",
+        "発行",
+        "購読",
+        "コールバック",
+        "ハンドラー",
+        "HPバー",
+        "Observer",
+        "イベントキュー"
+      ],
+      "verification": "MicrosoftのC#イベント・.NETイベント処理・購読解除とUnity 6.0のUnityEvent公式資料に照合（2026-11-07）",
+      "links": [
+        "/game/basics/ui-layout-and-interaction.html",
+        "/design/case-studies/ui-notification.html",
+        "/game/patterns/event-queue-and-pubsub.html",
+        "/languages/csharp/delegates-events-function-pointers.html",
+        "/game/basics/prefabs-and-object-lifetimes.html",
+        "/game/basics/game-states-and-pause.html"
       ]
     },
     {
@@ -8541,6 +8685,7 @@
         "/game/basics/collisions-and-physics.html",
         "/graphics/basics/transforms-and-cameras.html",
         "/game/unreal/uobject-actor-component.html",
+        "/game/basics/prefabs-and-object-lifetimes.html",
         "/game/shooter-design.html",
         "/os/files-and-paths.html",
         "/game/patterns/component-and-ecs.html",
@@ -8943,6 +9088,7 @@
       "source": "C++ Wiki",
       "aliases": [],
       "links": [
+        "/game/basics/save-data-and-serialization.html",
         "/runtime/cpp-internals/memory-layout.html",
         "/design/foundations/responsibility-and-separation.html",
         "/game/unreal/reflection-and-uht.html",
@@ -8951,6 +9097,40 @@
         "/design/case-studies/achievements.html",
         "/design/case-studies/",
         "/design/case-studies/damage-calculation.html"
+      ]
+    },
+    {
+      "title": "セーブとシリアライズの基本 — 実行中の状態を保存する",
+      "url": "/game/basics/save-data-and-serialization.html",
+      "file": "game/basics/save-data-and-serialization.md",
+      "domain": "game",
+      "section": "reference",
+      "format": "article",
+      "status": "published",
+      "summary": "実行中のHPや進行状況から保存用のデータを選び、形式へ変換してファイルに保存し、読み戻して検証・復元する流れを説明する。",
+      "source": "新規執筆",
+      "aliases": [
+        "セーブ",
+        "save",
+        "ロード",
+        "保存データ",
+        "シリアライズ",
+        "serialize",
+        "デシリアライズ",
+        "JSON",
+        "バージョン",
+        "マイグレーション",
+        "スナップショット"
+      ],
+      "verification": "MicrosoftのJSONシリアライズ、Unityの保存先とWindowsのファイル書き込みの公式資料に照合（2026-11-07）",
+      "links": [
+        "/game/basics/game-engine-basics.html",
+        "/game/asset-loading.html",
+        "/design/case-studies/save-data.html",
+        "/os/files-and-paths.html",
+        "/game/basics/scenes-and-components.html",
+        "/os/file-write-and-durability.html",
+        "/game/basics/game-states-and-pause.html"
       ]
     },
     {
@@ -10018,6 +10198,41 @@
       ]
     },
     {
+      "title": "プレハブと生成・破棄の基本 — 同じ部品から複数の物を作る",
+      "url": "/game/basics/prefabs-and-object-lifetimes.html",
+      "file": "game/basics/prefabs-and-object-lifetimes.md",
+      "domain": "game",
+      "section": "reference",
+      "format": "article",
+      "status": "published",
+      "summary": "Unityのプレハブから敵や弾を作る場面で、ひな形とインスタンス、個別の状態と共有アセット、生成・有効化・無効化・破棄の違いを説明する。",
+      "source": "新規執筆",
+      "aliases": [
+        "プレハブ",
+        "Prefab",
+        "インスタンス",
+        "instance",
+        "Instantiate",
+        "生成",
+        "破棄",
+        "Destroy",
+        "ライフサイクル",
+        "Awake",
+        "Start",
+        "OnEnable",
+        "OnDisable",
+        "オブジェクトプール"
+      ],
+      "verification": "Unity 6.0のプレハブ・Instantiate・イベント関数・SetActive・Destroyの公式資料に照合（2026-11-07）",
+      "links": [
+        "/game/basics/scenes-and-components.html",
+        "/game/patterns/object-pool.html",
+        "/game/basics/game-events-and-notifications.html",
+        "/game/asset-loading.html",
+        "/game/basics/game-loop-and-time.html"
+      ]
+    },
+    {
       "title": "プログラムを書く・動かす基礎から読む",
       "url": "/guide/software-development-basics.html",
       "file": "guide/software-development-basics.md",
@@ -10557,6 +10772,43 @@
         "/graphics/optimization/basics.html",
         "/graphics/engine/unity-renderer.html",
         "/graphics/capstone/01-design.html"
+      ]
+    },
+    {
+      "title": "リグとスキニングの基本 — 骨の姿勢でメッシュを動かす",
+      "url": "/graphics/basics/rigs-and-skinning.html",
+      "file": "graphics/basics/rigs-and-skinning.md",
+      "domain": "graphics",
+      "section": "reference",
+      "format": "article",
+      "status": "published",
+      "summary": "腕を曲げる例から、ボーンとジョイントの階層、リグ、バインド姿勢、頂点ウェイト、スキニングを説明する。FK・IKと、剛体の動きとの役割も比べる。",
+      "source": "新規執筆",
+      "aliases": [
+        "リグ",
+        "rig",
+        "ボーン",
+        "bone",
+        "ジョイント",
+        "joint",
+        "スケルトン",
+        "skeleton",
+        "バインドポーズ",
+        "bind pose",
+        "スキニング",
+        "skinning",
+        "ウェイト",
+        "FK",
+        "IK",
+        "逆運動学"
+      ],
+      "verification": "Unity 6.0のSkinned Mesh Renderer・IKとKhronosのglTF 2.0スキン仕様に照合（2026-11-07）",
+      "links": [
+        "/graphics/basics/models-and-meshes.html",
+        "/graphics/basics/transforms-and-cameras.html",
+        "/game/basics/scenes-and-components.html",
+        "/game/basics/collisions-and-physics.html",
+        "/graphics/basics/keyframes-and-animation.html"
       ]
     },
     {
@@ -13467,6 +13719,39 @@
       ]
     },
     {
+      "title": "入力の基本 — デバイスからゲームのアクションへ",
+      "url": "/game/basics/input-actions-and-devices.html",
+      "file": "game/basics/input-actions-and-devices.md",
+      "domain": "game",
+      "section": "reference",
+      "format": "article",
+      "status": "published",
+      "summary": "キーボードとゲームパッドから移動や攻撃を受け取る流れを、デバイス、コントロール、バインディング、アクション、更新時刻に分けて説明する。",
+      "source": "新規執筆",
+      "aliases": [
+        "入力",
+        "input",
+        "デバイス",
+        "コントロール",
+        "バインディング",
+        "アクション",
+        "Action Map",
+        "押下",
+        "押し始め",
+        "ポーリング",
+        "デッドゾーン",
+        "リマップ",
+        "Input System"
+      ],
+      "verification": "Unity Input System 1.11のActions・Bindings・Processors・Update Mode・UI入力の公式資料に照合（2026-11-07）",
+      "links": [
+        "/game/basics/game-loop-and-time.html",
+        "/game/basics/ui-layout-and-interaction.html",
+        "/game/basics/game-states-and-pause.html",
+        "/game/basics/game-events-and-notifications.html"
+      ]
+    },
+    {
       "title": "入力遅延を待ち時間と描画時間に分けてみる",
       "url": "/practice/graphics/input-latency-observation.html",
       "file": "practice/graphics/input-latency-observation.md",
@@ -14089,6 +14374,7 @@
       "source": "C++ Wiki",
       "aliases": [],
       "links": [
+        "/game/basics/game-states-and-pause.html",
         "/design/patterns/state.html",
         "/design/patterns/chain-of-responsibility.html",
         "/design/patterns/strategy.html",
@@ -14239,6 +14525,14 @@
         "/game/basics/game-loop-and-time.html",
         "/game/basics/scenes-and-components.html",
         "/game/basics/collisions-and-physics.html",
+        "/graphics/basics/keyframes-and-animation.html",
+        "/graphics/basics/rigs-and-skinning.html",
+        "/game/basics/ui-layout-and-interaction.html",
+        "/game/basics/input-actions-and-devices.html",
+        "/game/basics/prefabs-and-object-lifetimes.html",
+        "/game/basics/save-data-and-serialization.html",
+        "/game/basics/game-states-and-pause.html",
+        "/game/basics/game-events-and-notifications.html",
         "/game/ecs.html",
         "/runtime/memory/storage-duration-and-lifetime.html",
         "/graphics/shader/hlsl.html",

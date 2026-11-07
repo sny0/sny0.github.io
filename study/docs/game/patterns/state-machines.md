@@ -11,6 +11,8 @@ study:
 
 # 有限ステートマシンと階層型ステートマシン(State と Strategy の比較つき)
 
+状態と遷移を、タイトルやポーズの場面で確認したい場合は、[ゲームの状態とポーズ](/game/basics/game-states-and-pause.html)から読めます。
+
 ## 一言で言うと
 
 - **有限ステートマシン(FSM: Finite State Machine)**: 「有限個の状態+遷移ルール」でオブジェクトの振る舞いを整理する、[Stateパターン](/design/patterns/state.html)の一般形。実装はクラスでもenum+switchでもテーブルでもよい

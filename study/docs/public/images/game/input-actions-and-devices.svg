@@ -1,0 +1,43 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="760" height="470" viewBox="0 0 760 470" role="img" aria-labelledby="title desc">
+  <title id="title">異なる機器を同じアクションへ対応付ける</title>
+  <desc id="desc">キーボードのWASDとゲームパッドの左スティックは、それぞれのバインディングからMoveアクションへつながり、移動の値をゲームへ渡す。ボタンの状態は未押下、押し始め、押下中、離した後へ変わる。</desc>
+  <defs><marker id="arrow" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto"><path d="M0 0 8 4 0 8z" fill="#44647b"/></marker></defs>
+  <rect width="760" height="470" rx="18" fill="#edf4f9"/>
+  <g font-family="'Yu Gothic',Meiryo,sans-serif" fill="#143d59">
+    <text x="26" y="39" font-size="23" font-weight="700">機器の操作を、ゲームで使う意味へつなぐ</text>
+    <rect x="26" y="78" width="219" height="66" rx="10" fill="#fff" stroke="#a4bfd4"/>
+    <text x="135" y="105" text-anchor="middle" font-size="17" font-weight="700">キーボード</text>
+    <text x="135" y="130" text-anchor="middle" font-size="15">WASDキー</text>
+    <rect x="26" y="166" width="219" height="66" rx="10" fill="#fff" stroke="#a4bfd4"/>
+    <text x="135" y="193" text-anchor="middle" font-size="17" font-weight="700">ゲームパッド</text>
+    <text x="135" y="218" text-anchor="middle" font-size="15">左スティック</text>
+    <text x="264" y="97" font-size="13">バインディング</text>
+    <path d="M251 111H365V143H383" fill="none" stroke="#44647b" stroke-width="2" marker-end="url(#arrow)"/>
+    <path d="M251 199H365V174H383" fill="none" stroke="#44647b" stroke-width="2" marker-end="url(#arrow)"/>
+    <rect x="390" y="112" width="151" height="90" rx="10" fill="#fff3d9" stroke="#c4a261"/>
+    <text x="465" y="141" text-anchor="middle" font-size="18" font-weight="700">Move</text>
+    <text x="465" y="166" text-anchor="middle" font-size="14">移動アクション</text>
+    <text x="465" y="189" text-anchor="middle" font-size="14">値の例 (x, y)</text>
+    <path d="M548 157H578" stroke="#44647b" stroke-width="2" marker-end="url(#arrow)"/>
+    <rect x="586" y="112" width="148" height="90" rx="10" fill="#e1f2ea" stroke="#8fb8a5"/>
+    <text x="660" y="144" text-anchor="middle" font-size="17" font-weight="700">ゲーム</text>
+    <text x="660" y="175" text-anchor="middle" font-size="14">状態と速度で移動</text>
+    <text x="26" y="274" font-size="18" font-weight="700">ボタンは、現在の状態と変化を区別する</text>
+    <rect x="26" y="303" width="160" height="91" rx="9" fill="#fff" stroke="#a4bfd4"/>
+    <text x="106" y="333" text-anchor="middle" font-size="16">未押下</text>
+    <text x="106" y="363" text-anchor="middle" font-size="16">押されていない</text>
+    <rect x="207" y="303" width="160" height="91" rx="9" fill="#fff3d9" stroke="#c4a261"/>
+    <text x="287" y="333" text-anchor="middle" font-size="16">押し始め</text>
+    <text x="287" y="363" text-anchor="middle" font-size="16">押下へ変化</text>
+    <rect x="389" y="303" width="160" height="91" rx="9" fill="#e1f2ea" stroke="#8fb8a5"/>
+    <text x="469" y="333" text-anchor="middle" font-size="16">押下中</text>
+    <text x="469" y="363" text-anchor="middle" font-size="16">押されている</text>
+    <rect x="571" y="303" width="163" height="91" rx="9" fill="#fff" stroke="#a4bfd4"/>
+    <text x="652" y="333" text-anchor="middle" font-size="16">離した</text>
+    <text x="652" y="363" text-anchor="middle" font-size="16">未押下へ変化</text>
+    <path d="M189 348H203" stroke="#44647b" stroke-width="1.5" marker-end="url(#arrow)"/>
+    <path d="M370 348H385" stroke="#44647b" stroke-width="1.5" marker-end="url(#arrow)"/>
+    <path d="M552 348H567" stroke="#44647b" stroke-width="1.5" marker-end="url(#arrow)"/>
+    <text x="26" y="435" font-size="15">いつ入力を処理し、どの更新でゲームへ適用するかも決める。</text>
+  </g>
+</svg>
