@@ -3,12 +3,7 @@ title: 第14章 入力とゲームループ
 study:
   source: IT教本
   status: outline
-  summary: |-
-    入力の状態と押し始め、実時間と更新時間、描画と表示を分けて学ぶための学習計画・概要です。短いループを作って挙動を観察し、遅延や時間刻みの方針を言葉にします。
-
-    ## 関連する辞典本文・実践
-
-    - [Game LoopとUpdate](/game/patterns/game-loop-and-
+  summary: 入力の状態と押し始め、実時間と更新時間、描画と表示を学ぶための計画。基礎から時間刻みと入力処理の設計へ進む。
   section: learning
   format: path
   domain: game
@@ -26,6 +21,7 @@ study:
 
 ## 関連する辞典本文・実践
 
+- [ゲームループと時間](/game/basics/game-loop-and-time.html)で、入力・状態・描画と経過時間の基本を確認できます。
 - [Game LoopとUpdate](/game/patterns/game-loop-and-update.html)、[Command Bufferと入力](/game/patterns/command-buffer-and-input.html)で、更新と入力の扱いを調べられます。
 - [小さなシューティング](/game/shooter-design.html)には、固定tickと入力保持を使ったC++・Unityの実装があります。
 

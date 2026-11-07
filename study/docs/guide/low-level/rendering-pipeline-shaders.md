@@ -3,12 +3,7 @@ title: 第12章 レンダリングパイプラインとシェーダ
 study:
   source: IT教本
   status: outline
-  summary: |-
-    頂点から画像までの処理段階と、各段階を記述するシェーダを学ぶための学習計画・概要です。概説で工程を整理した後、本文と小さなシェーダ実験を往復します。
-
-    ## 関連する辞典本文・実践
-
-    - [レンダリングパイプライン全体像](/graphics/pipeline/overview.html)か
+  summary: 頂点から画像までの処理段階とシェーダを学ぶための計画。形・材質・光の基礎から、パイプラインとシェーダの詳解へ進む。
   section: learning
   format: path
   domain: graphics
@@ -26,6 +21,7 @@ study:
 
 ## 関連する辞典本文・実践
 
+- [3DCGの基礎ガイド](/guide/graphics-basics.html)で、メッシュ、カメラ、材質、光から画像を作る関係を確認できます。
 - [レンダリングパイプライン全体像](/graphics/pipeline/overview.html)から、各段階の本文へ進めます。
 - [HLSL](/graphics/shader/hlsl.html)と[GLSL](/graphics/shader/glsl.html)では、言語とコンパイル経路を調べられます。
 

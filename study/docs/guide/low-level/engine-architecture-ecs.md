@@ -21,6 +21,7 @@ study:
 
 ## 関連する辞典本文・実践
 
+- [ゲームエンジンの役割](/game/basics/game-engine-basics.html)と[シーンとコンポーネント](/game/basics/scenes-and-components.html)で、機能と配置の基本を確認できます。
 - [責務と関心の分離](/design/foundations/responsibility-and-separation.html)で、構成を分ける根拠を確認できます。
 - [ECS](/game/ecs.html)と[Componentとの比較](/game/patterns/component-and-ecs.html)で、データ配置・Query・構成変更を調べられます。
 - [実行時のアセットロード](/game/asset-loading.html)で読取り完了とReady、登録・所有権・解放を分け、[状態と寿命の実践](/practice/assets/asset-lifecycle-model.html)で世代を含むモデルを確かめられます。実践は単一スレッドの決定的なコンソール例で、実ファイルI/O、ワーカー、GPU、Unityは扱いません。

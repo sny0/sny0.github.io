@@ -79,12 +79,16 @@
 - [ハードウェアレイトレーシング (DXR / Vulkan Ray Tracing)](/graphics/lighting/raytracing.html)
 - [パストレーシング](/graphics/lighting/path-tracing.html)
 - [ポストプロセスパイプライン](/graphics/postprocess/overview.html)
+- [マテリアル・テクスチャ・シェーダーの基本](/graphics/basics/materials-textures-and-shaders.html)
 - [メッシュをインポートして描画用データに変える](/graphics/mesh/mesh-import-and-cooking.html)
+- [モデルとメッシュの基本 — 頂点から形を作る](/graphics/basics/models-and-meshes.html)
 - [ラスタライゼーション](/graphics/pipeline/rasterization.html)
 - [リアルタイム3D技術全史](/guide/rendering/timeline.html)
 - [レンダーパスのアタッチメントを読み込み、保持し、引き渡す](/graphics/optimization/render-pass-attachments.html)
 - [レンダリングパイプライン全体像](/graphics/pipeline/overview.html)
 - [後処理のピンポンバッファとフレーム履歴](/graphics/postprocess/ping-pong-and-history.html)
+- [光とレンダリングの基本 — シーンから画像を作る](/graphics/basics/light-and-rendered-images.html)
+- [座標変換とカメラの基本 — モデルの位置が画面に映るまで](/graphics/basics/transforms-and-cameras.html)
 - [出力結合 (Depth / Stencil / Blend)](/graphics/pipeline/output-merger.html)
 - [頂点バッファとインデックスバッファから三角形を組み立てる](/graphics/mesh/vertex-and-index-input.html)
 - [入力から画面に出るまでの遅延](/graphics/optimization/input-to-display-latency.html)
@@ -96,6 +100,7 @@
 - [リアルタイムグラフィックスを学ぶ](/graphics/rendering-intro.html)
 - [描画の学習ガイドについて](/guide/rendering/about.html)
 - [描画の学習ロードマップ](/guide/rendering/roadmap.html)
+- [3DCGの形と見た目から読む](/guide/graphics-basics.html)
 - [第12章 レンダリングパイプラインとシェーダ](/guide/low-level/rendering-pipeline-shaders.html) — 学習計画・概要
 - [第13章 グラフィックスAPI](/guide/low-level/graphics-apis.html) — 学習計画・概要
 

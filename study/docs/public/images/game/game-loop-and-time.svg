@@ -1,0 +1,30 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="760" height="442" viewBox="0 0 760 442" role="img" aria-labelledby="title desc">
+  <title id="title">入力と時間から状態を更新し、画像を作る</title>
+  <desc id="desc">右方向の入力を読み、速度6m毎秒に0.02秒を掛けて位置を0.12m進め、カメラから描画する。これを繰り返す。固定更新は時間の刻みをそろえ、描画フレームとは別の回数になる場合がある。</desc>
+  <defs><marker id="arrow" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto"><path d="M0 0 8 4 0 8z" fill="#45677c"/></marker></defs>
+  <rect width="760" height="442" rx="18" fill="#edf4f9"/>
+  <g font-family="'Yu Gothic',Meiryo,sans-serif" fill="#143d59">
+    <text x="26" y="39" font-size="23" font-weight="700">入力を読み、時間に応じて動かし、描く</text>
+    <text x="26" y="68" font-size="15">一定速度で移動する説明用の例</text>
+    <rect x="26" y="101" width="210" height="119" rx="11" fill="#fff" stroke="#a2bed2"/>
+    <text x="131" y="130" text-anchor="middle" font-size="18" font-weight="700">入力</text>
+    <text x="131" y="161" text-anchor="middle" font-size="15">右方向が押されている</text>
+    <text x="131" y="192" text-anchor="middle" font-size="15">移動したい方向を得る</text>
+    <rect x="276" y="101" width="210" height="119" rx="11" fill="#fff3d9" stroke="#c2a16a"/>
+    <text x="381" y="130" text-anchor="middle" font-size="18" font-weight="700">更新</text>
+    <text x="381" y="161" text-anchor="middle" font-size="15">6m/s × 0.02秒</text>
+    <text x="381" y="192" text-anchor="middle" font-size="15">位置を0.12m進める</text>
+    <rect x="526" y="101" width="208" height="119" rx="11" fill="#e1f2ea" stroke="#8fb8a5"/>
+    <text x="630" y="130" text-anchor="middle" font-size="18" font-weight="700">描画</text>
+    <text x="630" y="161" text-anchor="middle" font-size="15">状態とカメラから</text>
+    <text x="630" y="192" text-anchor="middle" font-size="15">画像を作る</text>
+    <path d="M239 160H272" stroke="#45677c" stroke-width="2" marker-end="url(#arrow)"/>
+    <path d="M489 160H522" stroke="#45677c" stroke-width="2" marker-end="url(#arrow)"/>
+    <path d="M630 223V254H131V226" fill="none" stroke="#45677c" stroke-width="2" marker-end="url(#arrow)"/>
+    <text x="380" y="283" text-anchor="middle" font-size="15">次の入力と更新へ繰り返す</text>
+    <rect x="26" y="307" width="708" height="106" rx="11" fill="#fff" stroke="#a2bed2"/>
+    <text x="46" y="337" font-size="17" font-weight="700">固定更新と、描画のフレームを分けて数える</text>
+    <text x="46" y="367" font-size="15">固定更新は、設定した時間刻みで状態を進める。</text>
+    <text x="46" y="392" font-size="15">一つの描画フレームの間に、更新が0回・1回・複数回になる場合がある。</text>
+  </g>
+</svg>
