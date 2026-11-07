@@ -1,0 +1,44 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="760" height="500" viewBox="0 0 760 500" role="img" aria-labelledby="title desc">
+  <title id="title">モデルの位置を画面へ変換し、投影方法で見え方を決める</title>
+  <desc id="desc">ローカルの形からワールドでの配置、カメラ基準の位置へ進み、投影と画面への配置を行う。透視投影は遠い同じ大きさの箱を小さく映し、正投影は距離による大きさの変化を付けない。</desc>
+  <defs><marker id="arrow" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto"><path d="M0 0 8 4 0 8z" fill="#486980"/></marker></defs>
+  <rect width="760" height="500" rx="18" fill="#edf4f9"/>
+  <g font-family="'Yu Gothic',Meiryo,sans-serif" fill="#173e59">
+    <text x="26" y="40" font-size="23" font-weight="700">形の位置を、カメラから見た画面の位置へ</text>
+    <rect x="26" y="68" width="156" height="97" rx="10" fill="#fff" stroke="#a1bdd3"/>
+    <text x="104" y="96" text-anchor="middle" font-size="18" font-weight="700">ローカル</text>
+    <text x="104" y="123" text-anchor="middle" font-size="15">モデル内の形</text>
+    <text x="104" y="148" text-anchor="middle" font-size="15">例　(1, 0, 0)</text>
+    <rect x="210" y="68" width="156" height="97" rx="10" fill="#fff2d6" stroke="#c4a466"/>
+    <text x="288" y="96" text-anchor="middle" font-size="18" font-weight="700">ワールド</text>
+    <text x="288" y="123" text-anchor="middle" font-size="15">世界への配置</text>
+    <text x="288" y="148" text-anchor="middle" font-size="15">Xに3移動 → 4</text>
+    <rect x="394" y="68" width="156" height="97" rx="10" fill="#fff" stroke="#a1bdd3"/>
+    <text x="472" y="96" text-anchor="middle" font-size="18" font-weight="700">ビュー</text>
+    <text x="472" y="123" text-anchor="middle" font-size="15">カメラが基準</text>
+    <text x="472" y="148" text-anchor="middle" font-size="15">方向と距離</text>
+    <rect x="578" y="68" width="156" height="97" rx="10" fill="#e1f2e9" stroke="#8fb9a6"/>
+    <text x="656" y="96" text-anchor="middle" font-size="18" font-weight="700">画面</text>
+    <text x="656" y="123" text-anchor="middle" font-size="15">投影して配置</text>
+    <text x="656" y="148" text-anchor="middle" font-size="15">描画先の位置</text>
+    <path d="M186 116H205" stroke="#486980" stroke-width="2" marker-end="url(#arrow)"/>
+    <path d="M370 116H389" stroke="#486980" stroke-width="2" marker-end="url(#arrow)"/>
+    <path d="M554 116H573" stroke="#486980" stroke-width="2" marker-end="url(#arrow)"/>
+    <text x="26" y="201" font-size="16">同じ大きさの箱が、画面でどう見えるかの概念比較</text>
+    <rect x="26" y="222" width="344" height="224" rx="11" fill="#fff" stroke="#a1bdd3"/>
+    <text x="47" y="253" font-size="19" font-weight="700">透視投影</text>
+    <text x="47" y="280" font-size="15">遠い物体ほど小さく映る</text>
+    <rect x="70" y="313" width="80" height="80" fill="#cfe6f6" stroke="#5d8bab" stroke-width="2"/>
+    <rect x="246" y="333" width="40" height="40" fill="#cfe6f6" stroke="#5d8bab" stroke-width="2"/>
+    <text x="110" y="422" text-anchor="middle" font-size="16">近い箱</text>
+    <text x="266" y="422" text-anchor="middle" font-size="16">遠い箱</text>
+    <rect x="390" y="222" width="344" height="224" rx="11" fill="#fff" stroke="#a1bdd3"/>
+    <text x="411" y="253" font-size="19" font-weight="700">正投影</text>
+    <text x="411" y="280" font-size="15">距離による大きさの変化を付けない</text>
+    <rect x="432" y="313" width="80" height="80" fill="#d9eee4" stroke="#6e9e87" stroke-width="2"/>
+    <rect x="608" y="313" width="80" height="80" fill="#d9eee4" stroke="#6e9e87" stroke-width="2"/>
+    <text x="472" y="422" text-anchor="middle" font-size="16">近い箱</text>
+    <text x="648" y="422" text-anchor="middle" font-size="16">遠い箱</text>
+    <text x="26" y="477" font-size="15">投影して見える範囲や大きさは、カメラの設定で決まる。</text>
+  </g>
+</svg>

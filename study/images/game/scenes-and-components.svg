@@ -1,0 +1,33 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="760" height="470" viewBox="0 0 760 470" role="img" aria-labelledby="title desc">
+  <title id="title">シーンの親子関係と、オブジェクトが持つ部品</title>
+  <desc id="desc">Unityのシーンの例で、PlayerとGroundが配置され、CameraがPlayerの子になる。PlayerにはTransform、描画、当たり判定、操作処理の部品が付く。配置の階層と機能の部品を分けて読む。</desc>
+  <defs><marker id="arrow" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto"><path d="M0 0 8 4 0 8z" fill="#44647b"/></marker></defs>
+  <rect width="760" height="470" rx="18" fill="#edf4f9"/>
+  <g font-family="'Yu Gothic',Meiryo,sans-serif" fill="#143d59">
+    <text x="26" y="39" font-size="23" font-weight="700">配置のまとまりに、機能の部品を付ける</text>
+    <text x="26" y="68" font-size="14">UnityのシーンとGameObjectを使う例</text>
+    <rect x="26" y="87" width="303" height="292" rx="11" fill="#fff" stroke="#a4bfd4"/>
+    <text x="46" y="116" font-size="18" font-weight="700">シーン内の配置</text>
+    <rect x="56" y="143" width="179" height="47" rx="8" fill="#fff3d9" stroke="#c4a261"/>
+    <text x="145" y="173" text-anchor="middle" font-size="18" font-weight="700">Player</text>
+    <path d="M78 193V240H105" fill="none" stroke="#44647b" stroke-width="2" marker-end="url(#arrow)"/>
+    <rect x="111" y="216" width="174" height="48" rx="8" fill="#e1f2ea" stroke="#8fb8a5"/>
+    <text x="198" y="246" text-anchor="middle" font-size="17">子のCamera</text>
+    <rect x="56" y="300" width="179" height="47" rx="8" fill="#edf4f9" stroke="#a4bfd4"/>
+    <text x="145" y="330" text-anchor="middle" font-size="18">Ground</text>
+    <path d="M239 166H371" fill="none" stroke="#44647b" stroke-width="2" marker-end="url(#arrow)"/>
+    <text x="281" y="153" font-size="13">中を見る</text>
+    <rect x="378" y="87" width="356" height="292" rx="11" fill="#fff" stroke="#a4bfd4"/>
+    <text x="400" y="117" font-size="18" font-weight="700">Playerのコンポーネント</text>
+    <rect x="400" y="137" width="312" height="42" rx="7" fill="#dcebf7"/>
+    <text x="416" y="164" font-size="16">Transform　位置・回転・大きさ</text>
+    <rect x="400" y="189" width="312" height="42" rx="7" fill="#e1f2ea"/>
+    <text x="416" y="216" font-size="16">描画　メッシュとマテリアル</text>
+    <rect x="400" y="241" width="312" height="42" rx="7" fill="#fff3d9"/>
+    <text x="416" y="268" font-size="16">Collider　当たり判定の形</text>
+    <rect x="400" y="293" width="312" height="42" rx="7" fill="#edf4f9"/>
+    <text x="416" y="320" font-size="16">独自スクリプト　入力やHP</text>
+    <text x="26" y="415" font-size="15">親の変換を受けて、子も配置される。</text>
+    <text x="26" y="442" font-size="15">一つのオブジェクトに、必要な機能の部品を組み合わせる。</text>
+  </g>
+</svg>

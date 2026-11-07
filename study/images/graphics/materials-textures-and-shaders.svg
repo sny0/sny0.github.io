@@ -1,0 +1,38 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="760" height="476" viewBox="0 0 760 476" role="img" aria-labelledby="title desc">
+  <title id="title">マテリアルの設定、シェーダーの計算、UVで読むテクスチャ</title>
+  <desc id="desc">マテリアルが色、粗さ、テクスチャを指定し、シェーダーがUVや光の情報と合わせて色を計算する。UVの0.5、0.5は例のテクスチャの中央。サンプラーがフィルタリングや繰り返しの読み方を決める。</desc>
+  <defs><marker id="arrow" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto"><path d="M0 0 8 4 0 8z" fill="#44647b"/></marker></defs>
+  <rect width="760" height="476" rx="18" fill="#edf4f9"/>
+  <g font-family="'Yu Gothic',Meiryo,sans-serif" fill="#143d59">
+    <text x="26" y="39" font-size="23" font-weight="700">表面の設定とデータを、プログラムで使う</text>
+    <rect x="26" y="77" width="210" height="141" rx="11" fill="#fff3d9" stroke="#c4a261"/>
+    <text x="131" y="108" text-anchor="middle" font-size="18" font-weight="700">マテリアル</text>
+    <text x="131" y="139" text-anchor="middle" font-size="15">色・粗さなどの値</text>
+    <text x="131" y="166" text-anchor="middle" font-size="15">テクスチャへの参照</text>
+    <text x="131" y="193" text-anchor="middle" font-size="15">使うシェーダー</text>
+    <path d="M240 148H270" fill="none" stroke="#44647b" stroke-width="2" marker-end="url(#arrow)"/>
+    <rect x="276" y="77" width="210" height="141" rx="11" fill="#dcecf8" stroke="#a4bfd4"/>
+    <text x="381" y="108" text-anchor="middle" font-size="18" font-weight="700">シェーダー</text>
+    <text x="381" y="139" text-anchor="middle" font-size="15">表面の色などを計算</text>
+    <text x="381" y="166" text-anchor="middle" font-size="15">UV・法線・光も使う</text>
+    <text x="381" y="193" text-anchor="middle" font-size="15">GPUで動くプログラム</text>
+    <path d="M490 148H520" fill="none" stroke="#44647b" stroke-width="2" marker-end="url(#arrow)"/>
+    <rect x="526" y="77" width="208" height="141" rx="11" fill="#e1f2ea" stroke="#8fb8a5"/>
+    <text x="630" y="108" text-anchor="middle" font-size="18" font-weight="700">計算した色</text>
+    <circle cx="630" cy="163" r="33" fill="#b78d55" stroke="#755633"/>
+    <ellipse cx="617" cy="151" rx="15" ry="20" fill="#d7b47a"/>
+    <text x="26" y="255" font-size="18" font-weight="700">UVと、テクスチャの読み方</text>
+    <rect x="40" y="277" width="132" height="132" fill="#c39455" stroke="#755633"/>
+    <rect x="40" y="277" width="66" height="66" fill="#e4c48b"/>
+    <rect x="106" y="343" width="66" height="66" fill="#e4c48b"/>
+    <circle cx="106" cy="343" r="5" fill="#173b56"/>
+    <text x="106" y="435" text-anchor="middle" font-size="15">テクセルが並ぶデータ</text>
+    <path d="M179 343H217" fill="none" stroke="#44647b" stroke-width="2" marker-end="url(#arrow)"/>
+    <rect x="225" y="277" width="509" height="132" rx="11" fill="#fff" stroke="#a4bfd4"/>
+    <text x="245" y="307" font-size="16">頂点のUVを、三角形の内部へ補間する</text>
+    <text x="245" y="337" font-size="16">この例の (0.5, 0.5) は、テクスチャの中央</text>
+    <text x="245" y="367" font-size="16">サンプラーで、周辺の値の混ぜ方や</text>
+    <text x="245" y="391" font-size="16">範囲外を繰り返すかなどを指定する</text>
+    <text x="225" y="445" font-size="15">読み取るデータは、色・粗さ・向きなどに使える。</text>
+  </g>
+</svg>
