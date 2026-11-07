@@ -13,6 +13,8 @@ study:
 
 # PCI Expressのリンクとレーン
 
+PCの部品の役割は、[コンピュータを構成する部品](/hardware/computer-components.html)で図から確認できます。
+
 GPUへのアップロード、NVMe SSDからの読み取り、ネットワークカードでのパケット受信では、データがCPU・メモリ側とデバイスの間を移動します。**PCI Express（PCIe）**は、こうした機器を、両端にポートを持つ点対点の**リンク**で結びます。どのリンクを通り、各リンクが何レーン・何GT/sで動くかを調べると、転送経路のどこで帯域を使い合うかが分かります。[Intel公開のPCIeトポロジー資料 §1.3](https://www.intel.com/content/dam/support/us/en/programmable/support-resources/fpga-wiki/asset03/pci-express-base-r2.1.pdf#page=39)
 
 ## CPU側からデバイスまでの経路

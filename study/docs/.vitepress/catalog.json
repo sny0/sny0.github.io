@@ -34,7 +34,7 @@
       "id": "hardware",
       "title": "ハードウェア",
       "description": "CPU・GPU・メモリ・デバイスの間で、命令とデータがどう動くかを調べる。",
-      "count": 7,
+      "count": 10,
       "status": "辞典本文あり"
     },
     {
@@ -76,7 +76,7 @@
       "id": "network",
       "title": "ネットワーク",
       "description": "通信の層と失敗を、Webとゲームの両方から調べる。",
-      "count": 10,
+      "count": 13,
       "status": "辞典本文あり"
     },
     {
@@ -130,6 +130,13 @@
     }
   ],
   "collections": [
+    {
+      "id": "foundations",
+      "section": "learning",
+      "title": "コンピュータとネットワークの基礎",
+      "description": "部品の役割、命令とデータ、IP・ポート、家庭内の機器から詳しい解説へ進む。",
+      "start": "/guide/hardware-basics.html"
+    },
     {
       "id": "stream-loss-observation",
       "section": "practice",
@@ -2549,6 +2556,43 @@
       ]
     },
     {
+      "title": "CPUの命令実行 — レジスタとプログラムカウンター",
+      "url": "/hardware/cpu/instruction-execution.html",
+      "file": "hardware/cpu/instruction-execution.md",
+      "domain": "hardware",
+      "section": "reference",
+      "format": "article",
+      "status": "published",
+      "summary": "CPUが命令を取得して意味を解釈し、レジスタやメモリの値を更新する流れを追う。命令セット、クロック、コア、論理プロセッサーも説明する。",
+      "source": "新規執筆",
+      "aliases": [
+        "CPU",
+        "命令",
+        "機械語",
+        "ISA",
+        "命令セット",
+        "レジスタ",
+        "プログラムカウンター",
+        "PC",
+        "ロード",
+        "ストア",
+        "クロック",
+        "GHz",
+        "コア",
+        "SMT",
+        "論理プロセッサー"
+      ],
+      "verification": "RISC-Vの命令セット仕様とIntelのクロック・SMT・命令完了の資料に照合（2026-11-07）",
+      "links": [
+        "/hardware/computer-components.html",
+        "/runtime/cpp-internals/build-pipeline-journey.html",
+        "/runtime/cpp-internals/function-calls-and-cpu.html",
+        "/hardware/memory/ram-cache-and-storage.html",
+        "/runtime/cpp-internals/cache-branch-simd.html",
+        "/runtime/thread-synchronization.html"
+      ]
+    },
+    {
       "title": "CSRFでCookie付きの要求が届く条件を観察する",
       "url": "/practice/browser/csrf-observation.html",
       "file": "practice/browser/csrf-observation.md",
@@ -3105,6 +3149,7 @@
       ],
       "verification": "一次資料照合（2026-11-04）",
       "links": [
+        "/network/ip-addresses-and-ports.html",
         "/network/http-messages.html",
         "/network/tcp-sockets.html",
         "/network/tls-https.html",
@@ -3136,6 +3181,7 @@
       ],
       "verification": "Intel・Micron・ISSIのメモリ仕様とIntelのメモリ計測資料に照合（2026-11-07）",
       "links": [
+        "/hardware/memory/ram-cache-and-storage.html",
         "/guide/low-level/memory-and-cache.html",
         "/runtime/memory/cache-locality-aos-soa.html",
         "/hardware/gpu/cpu-vs-gpu.html",
@@ -3989,6 +4035,41 @@
       ]
     },
     {
+      "title": "IPアドレス・ポート・ホスト名 — 接続先をどう指定するか",
+      "url": "/network/ip-addresses-and-ports.html",
+      "file": "network/ip-addresses-and-ports.md",
+      "domain": "network",
+      "section": "reference",
+      "format": "article",
+      "status": "published",
+      "summary": "URLから接続先を読むために、ホスト名、IPv4・IPv6、ポート、TCP・UDPの違いを説明する。ローカルのアドレスと接続をPowerShellで確認する。",
+      "source": "新規執筆",
+      "aliases": [
+        "IPアドレス",
+        "IPv4",
+        "IPv6",
+        "ホスト名",
+        "ポート",
+        "endpoint",
+        "エンドポイント",
+        "localhost",
+        "loopback",
+        "プライベートIP",
+        "グローバルIP",
+        "一時ポート"
+      ],
+      "verification": "IETF・IANA・Microsoftの仕様に照合。掲載した3種のPowerShellコマンドをWindowsで実行確認（2026-11-07）",
+      "links": [
+        "/network/nat-and-port-mapping.html",
+        "/practice/network/tcp-loopback-observation.html",
+        "/practice/network/udp-loopback-observation.html",
+        "/network/network-basics.html",
+        "/network/home-network-devices.html",
+        "/network/dns-resolution.html",
+        "/network/ip-routing-and-ethernet.html"
+      ]
+    },
+    {
       "title": "IPルーティングとEthernetフレーム",
       "url": "/network/ip-routing-and-ethernet.html",
       "file": "network/ip-routing-and-ethernet.md",
@@ -4616,6 +4697,7 @@
       ],
       "verification": "PCI-SIGの公開技術資料、MicrosoftのPCIeレジスター資料、LinuxカーネルのPCI API資料に照合（2026-11-07）",
       "links": [
+        "/hardware/computer-components.html",
         "/tools/windows/file-io-tracing.html",
         "/game/directstorage.html",
         "/hardware/io/dma-and-iommu.html"
@@ -4785,6 +4867,44 @@
         "/languages/cpp/ctor-dtor-copy-move.html",
         "/languages/cpp/",
         "/languages/cpp/inheritance-and-virtual.html"
+      ]
+    },
+    {
+      "title": "RAM・キャッシュ・ストレージの違い",
+      "url": "/hardware/memory/ram-cache-and-storage.html",
+      "file": "hardware/memory/ram-cache-and-storage.md",
+      "domain": "hardware",
+      "section": "reference",
+      "format": "article",
+      "status": "published",
+      "summary": "ゲームを読み込み、計算し、セーブする場面から、RAM、CPUキャッシュ、レジスタ、SSDの役割を説明する。容量、遅延、帯域、仮想メモリとの関係も整理する。",
+      "source": "新規執筆",
+      "aliases": [
+        "RAM",
+        "DRAM",
+        "主記憶",
+        "メインメモリ",
+        "CPUキャッシュ",
+        "L1",
+        "L2",
+        "L3",
+        "レジスタ",
+        "SSD",
+        "ストレージ",
+        "メモリ階層",
+        "VRAM"
+      ],
+      "verification": "OpenStax・Armのメモリ階層、Intelの計測資料、Microsoftのメモリ管理・ファイルキャッシュ・D3D12資料と照合（2026-11-07）",
+      "links": [
+        "/hardware/computer-components.html",
+        "/runtime/memory/cache-locality-aos-soa.html",
+        "/hardware/memory/dram-channels-and-bandwidth.html",
+        "/os/memory-mapped-files.html",
+        "/os/file-read-journey.html",
+        "/os/windows-file-cache.html",
+        "/hardware/gpu/cpu-vs-gpu.html",
+        "/hardware/cpu/instruction-execution.html",
+        "/os/virtual-memory.html"
       ]
     },
     {
@@ -8151,6 +8271,65 @@
       ]
     },
     {
+      "title": "コンピュータの部品から読む",
+      "url": "/guide/hardware-basics.html",
+      "file": "guide/hardware-basics.md",
+      "domain": "hardware",
+      "section": "learning",
+      "format": "path",
+      "status": "published",
+      "summary": "CPU・RAM・SSDの役割を知り、命令の実行とデータの置き場所へ進む読み順。身近なゲームの起動から内部を調べる。",
+      "source": "新規執筆",
+      "aliases": [],
+      "collection": "foundations",
+      "order": 1,
+      "links": [
+        "/hardware/computer-components.html",
+        "/hardware/cpu/instruction-execution.html",
+        "/hardware/memory/ram-cache-and-storage.html",
+        "/data/integer-bits-and-bytes.html",
+        "/os/process-startup.html",
+        "/os/virtual-memory.html",
+        "/hardware/gpu/what-is-gpu.html",
+        "/hardware/io/pcie-links.html",
+        "/guide/network-basics.html"
+      ]
+    },
+    {
+      "title": "コンピュータの部品と役割 — ゲームが動くまで",
+      "url": "/hardware/computer-components.html",
+      "file": "hardware/computer-components.md",
+      "domain": "hardware",
+      "section": "reference",
+      "format": "article",
+      "status": "published",
+      "summary": "CPU、RAM、SSD、GPU、入出力機器の役割を、ゲームを起動して操作する流れから説明する。OSとドライバー、保存と実行中の状態も結び付ける。",
+      "source": "新規執筆",
+      "aliases": [
+        "コンピュータ",
+        "ハードウェア",
+        "CPU",
+        "RAM",
+        "メインメモリ",
+        "SSD",
+        "ストレージ",
+        "GPU",
+        "OS",
+        "ドライバー",
+        "入出力"
+      ],
+      "verification": "Microsoftのプロセス・ファイルキャッシュ・Direct3D資料とIntelのCPU資料に照合（2026-11-07）",
+      "links": [
+        "/hardware/cpu/instruction-execution.html",
+        "/os/process-startup.html",
+        "/hardware/memory/ram-cache-and-storage.html",
+        "/game/asset-loading.html",
+        "/hardware/io/nic-receive-queues.html",
+        "/os/file-read-journey.html",
+        "/hardware/gpu/what-is-gpu.html"
+      ]
+    },
+    {
       "title": "サウンド管理の設計",
       "url": "/design/case-studies/sound-manager.html",
       "file": "design/case-studies/sound-manager.md",
@@ -8614,6 +8793,8 @@
       ],
       "verification": "一次資料照合（2026-11-04）",
       "links": [
+        "/network/network-basics.html",
+        "/network/ip-addresses-and-ports.html",
         "/os/file-read-journey.html",
         "/data/integer-bits-and-bytes.html",
         "/runtime/thread-synchronization.html",
@@ -8866,6 +9047,67 @@
         "/languages/csharp/headers-vs-asmdef.html",
         "/languages/csharp/",
         "/languages/csharp/memory-management-vs-gc.html"
+      ]
+    },
+    {
+      "title": "ネットワークの基本 — アプリのデータが相手へ届くまで",
+      "url": "/network/network-basics.html",
+      "file": "network/network-basics.md",
+      "domain": "network",
+      "section": "reference",
+      "format": "article",
+      "status": "published",
+      "summary": "ネットワーク、クライアントとサーバー、パケット、プロトコルを定義し、Webページを開く操作から通信の層と往復をたどる。",
+      "source": "新規執筆",
+      "aliases": [
+        "ネットワーク",
+        "インターネット",
+        "クライアント",
+        "サーバー",
+        "プロトコル",
+        "パケット",
+        "通信の層",
+        "Ethernet",
+        "Wi-Fi"
+      ],
+      "verification": "MDNのWeb基礎とIETFのIP・TCP・UDP・HTTP仕様に照合（2026-11-07）",
+      "links": [
+        "/network/quic-and-http3.html",
+        "/network/ip-routing-and-ethernet.html",
+        "/network/http-caching.html",
+        "/network/tls-https.html",
+        "/network/latency-throughput-and-queues.html",
+        "/network/ip-addresses-and-ports.html",
+        "/network/home-network-devices.html",
+        "/network/dns-resolution.html",
+        "/network/tcp-sockets.html",
+        "/network/http-messages.html"
+      ]
+    },
+    {
+      "title": "ネットワークの基本から読む",
+      "url": "/guide/network-basics.html",
+      "file": "guide/network-basics.md",
+      "domain": "network",
+      "section": "learning",
+      "format": "path",
+      "status": "published",
+      "summary": "PCから別のコンピュータへデータを送る場面を起点に、プロトコル、IPとポート、家庭内の接続機器を調べる読み順。",
+      "source": "新規執筆",
+      "aliases": [],
+      "collection": "foundations",
+      "order": 2,
+      "links": [
+        "/network/network-basics.html",
+        "/network/ip-addresses-and-ports.html",
+        "/network/home-network-devices.html",
+        "/network/dns-resolution.html",
+        "/network/tcp-sockets.html",
+        "/network/udp-datagrams.html",
+        "/network/http-messages.html",
+        "/network/ip-routing-and-ethernet.html",
+        "/network/nat-and-port-mapping.html",
+        "/guide/hardware-basics.html"
       ]
     },
     {
@@ -10174,6 +10416,41 @@
       ]
     },
     {
+      "title": "家庭のネットワーク機器 — LAN・ルーター・Wi-Fiの役割",
+      "url": "/network/home-network-devices.html",
+      "file": "network/home-network-devices.md",
+      "domain": "network",
+      "section": "reference",
+      "format": "article",
+      "status": "published",
+      "summary": "PCからインターネットへ届く経路を、NIC、スイッチ、Wi-Fiアクセスポイント、ルーター、ONUに分けて説明する。LANとWAN、DHCPとDNSの役割も整理する。",
+      "source": "新規執筆",
+      "aliases": [
+        "LAN",
+        "WAN",
+        "NIC",
+        "Ethernet",
+        "Wi-Fi",
+        "スイッチ",
+        "ルーター",
+        "アクセスポイント",
+        "AP",
+        "ONU",
+        "モデム",
+        "DHCP",
+        "デフォルトゲートウェイ"
+      ],
+      "verification": "Cisco・NTT・バッファローの機器解説と、IETFのDHCP・DNS・IPルーティング関連仕様に照合（2026-11-07）",
+      "links": [
+        "/network/network-basics.html",
+        "/network/ip-routing-and-ethernet.html",
+        "/network/nat-and-port-mapping.html",
+        "/network/dns-resolution.html",
+        "/network/ip-addresses-and-ports.html",
+        "/hardware/io/nic-receive-queues.html"
+      ]
+    },
+    {
       "title": "画面遷移の設計",
       "url": "/design/case-studies/screen-transition.html",
       "file": "design/case-studies/screen-transition.md",
@@ -10343,12 +10620,14 @@
       "section": "learning",
       "format": "path",
       "status": "published",
-      "summary": "整数・浮動小数点、文字コード、メモリ確保、起動、同期、ファイルI/Oとマッピング、アセットロード、DNS・TCP・HTTP・TLS通信、入力と描画、Webの疑問から本文をたどる。",
+      "summary": "コンピュータの部品と通信の基礎から、整数・文字コード、メモリ確保、起動、同期、ファイルI/O、アセットロード、DNS・TCP・HTTP・TLS、入力と描画、Webの疑問から本文をたどる。",
       "source": "統合ガイド",
       "aliases": [],
       "collection": "questions",
       "order": 0,
       "links": [
+        "/guide/hardware-basics.html",
+        "/guide/network-basics.html",
         "/data/integer-bits-and-bytes.html",
         "/practice/data/integer-byte-observation.html",
         "/runtime/cpp-internals/memory-layout.html",
@@ -11991,12 +12270,14 @@
       "section": "learning",
       "format": "path",
       "status": "outline",
-      "summary": "論理回路からレジスタ、命令の実行へ進むための学習計画・概要です。回路や命令セットの概説を足場に、実際のコードとの対応を観察します。論理回路・CPU設計を順に説明する専用本文は未整備です。\n\n## 関連する辞典本文・実践\n\n- [関数呼び出し・レジスタ・呼出規約](/runtime/cpp-i",
+      "summary": "論理回路からレジスタ、命令の実行へ進むための学習計画・概要。CPUが命令を実行する基礎から、実際のコードとの対応と性能を調べる。",
       "source": "IT教本",
       "aliases": [],
       "collection": "low-level",
       "order": 3,
       "links": [
+        "/hardware/computer-components.html",
+        "/hardware/cpu/instruction-execution.html",
         "/runtime/cpp-internals/function-calls-and-cpu.html",
         "/runtime/cpp-internals/cache-branch-simd.html"
       ],
@@ -12011,12 +12292,13 @@
       "section": "learning",
       "format": "path",
       "status": "outline",
-      "summary": "メモリ階層、局所性、データ配置を学び、計測で確かめるための学習計画・概要です。配置を変えた小さな実験を通じて、計算とメモリアクセスのどちらが制約になっているかを調べます。\n\n## 関連する辞典本文・実践\n\n- [キャッシュ局所性とAoS / SoA](/runtime/memory/cach",
+      "summary": "RAM・キャッシュ・ストレージの役割から、局所性、データ配置、計測へ進むための学習計画・概要。",
       "source": "IT教本",
       "aliases": [],
       "collection": "low-level",
       "order": 4,
       "links": [
+        "/hardware/memory/ram-cache-and-storage.html",
         "/runtime/memory/cache-locality-aos-soa.html",
         "/runtime/cpp-internals/cache-branch-simd.html",
         "/runtime/memory/concurrency-bugs.html",
@@ -13225,6 +13507,12 @@
         "/browser/rendering-journey.html",
         "/network/tls-https.html",
         "/network/dns-resolution.html",
+        "/network/network-basics.html",
+        "/network/ip-addresses-and-ports.html",
+        "/network/home-network-devices.html",
+        "/hardware/computer-components.html",
+        "/hardware/cpu/instruction-execution.html",
+        "/hardware/memory/ram-cache-and-storage.html",
         "/network/http-messages.html",
         "/network/tcp-sockets.html",
         "/network/udp-datagrams.html",

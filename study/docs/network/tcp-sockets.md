@@ -13,6 +13,8 @@ study:
 
 # ソケットとTCP通信 — send/recvの内部とメッセージ境界
 
+通信の用語から確認したい場合は、[ネットワークの基本](/network/network-basics.html)と[IPアドレスとポート](/network/ip-addresses-and-ports.html)が入口です。
+
 TCPは、接続した相手との間で**順序のあるバイト列**をやり取りする通信方式です。送信側の`send`一回が、受信側の`recv`一回や、アプリのメッセージ一件に対応するわけではありません。byteを届けるTCPと、byteの意味や区切りを決めるアプリの規約を分けます。[IETF RFC 9293 §2.2: Key TCP Concepts](https://www.rfc-editor.org/rfc/rfc9293.html#section-2.2)
 
 ここではTCPの基本と、WindowsのWinsock／.NET 10のソケットAPIを説明します。実践は同一プロセス内のIPv4ループバック通信です。外部ネットワーク、Unity、他OSでの実行結果を含みません。

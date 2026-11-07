@@ -13,6 +13,8 @@ study:
 
 # DRAMのチャネルと帯域 — データをどこから、どの速さで読むか
 
+メモリと保存装置の役割から確認したいときは、[RAM・キャッシュ・ストレージ](/hardware/memory/ram-cache-and-storage.html)から読めます。
+
 CPUが通常のメモリを読み、キャッシュ階層で要求を満たせずDRAMのデータが必要になると、メモリコントローラーが転送を進めます。例えばCPUが大きな配列を読むとき、複数のチャネルを使って同時に運べる量を増やせます。一方、次に読むアドレスが前の読み取り結果で決まる場合は、個々の要求を待つ時間が効きます。[Intelのメモリコントローラー資料](https://edc.intel.com/content/www/us/en/design/ipla/software-development-platforms/client/platforms/alder-lake-desktop/12th-generation-intel-core-processors-datasheet-volume-1-of-2/001/memory-controller-mc/) · [Intelの遅延測定の仕組み](https://www.intel.com/content/www/us/en/developer/articles/tool/intelr-memory-latency-checker.html) · [メモリとキャッシュの学習ガイド](/guide/low-level/memory-and-cache.html)
 
 ## チャネル、ランク、バンク、行

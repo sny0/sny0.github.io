@@ -3,12 +3,7 @@ title: 第3章 メモリ階層とキャッシュ
 study:
   source: IT教本
   status: outline
-  summary: |-
-    メモリ階層、局所性、データ配置を学び、計測で確かめるための学習計画・概要です。配置を変えた小さな実験を通じて、計算とメモリアクセスのどちらが制約になっているかを調べます。
-
-    ## 関連する辞典本文・実践
-
-    - [キャッシュ局所性とAoS / SoA](/runtime/memory/cach
+  summary: RAM・キャッシュ・ストレージの役割から、局所性、データ配置、計測へ進むための学習計画・概要。
   section: learning
   format: path
   domain: hardware
@@ -26,6 +21,7 @@ study:
 
 ## 関連する辞典本文・実践
 
+- [RAM・キャッシュ・ストレージ](/hardware/memory/ram-cache-and-storage.html)で、データの置き場所と役割を確認できます。
 - [キャッシュ局所性とAoS / SoA](/runtime/memory/cache-locality-aos-soa.html)から、配列の配置とアクセス順を調べられます。
 - [キャッシュ・分岐予測・SIMD](/runtime/cpp-internals/cache-branch-simd.html)と[並行処理のバグ・false sharing](/runtime/memory/concurrency-bugs.html)で、CPU側の挙動と計測上の注意を確認できます。
 - [DRAMのチャネルと帯域](/hardware/memory/dram-channels-and-bandwidth.html)で、キャッシュにないデータを取りにいく先の構成と、転送速度の見積もりを確認できます。

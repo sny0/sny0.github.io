@@ -1,0 +1,41 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="760" height="470" viewBox="0 0 760 470" role="img" aria-labelledby="title desc">
+  <title id="title">ゲームの実行を支えるコンピュータの部品</title>
+  <desc id="desc">SSDの必要部分をRAMへ読み、CPUが命令を実行する。描画に使うデータとコマンドを用意してGPUが画像を作り、ディスプレイに表示する。OSとドライバーが部品の利用を支える。</desc>
+  <defs><marker id="arrow" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto-start-reverse"><path d="M0 0 L8 4 L0 8 Z" fill="#46637b"/></marker></defs>
+  <rect width="760" height="470" rx="18" fill="#edf3f9"/>
+  <g font-family="Yu Gothic, Meiryo, sans-serif" fill="#173b56">
+    <text x="26" y="40" font-size="25" font-weight="700">ゲームを起動して、画面が出るまで</text>
+    <text x="26" y="69" font-size="15">部品の役割と、処理のつながりを示す概念図</text>
+    <rect x="26" y="88" width="708" height="51" rx="10" fill="#dcebf7" stroke="#9bbbd2"/>
+    <text x="380" y="111" font-size="17" text-anchor="middle" font-weight="700">OSとドライバー</text>
+    <text x="380" y="131" font-size="14" text-anchor="middle">アプリがCPU・メモリ・機器を使う仕組みを支える</text>
+    <rect x="26" y="190" width="192" height="102" rx="10" fill="#fff1d8" stroke="#bf9d59"/>
+    <rect x="284" y="190" width="192" height="102" rx="10" fill="#fff" stroke="#9bbbd2"/>
+    <rect x="542" y="190" width="192" height="102" rx="10" fill="#e0edf7" stroke="#9bbbd2"/>
+    <text x="122" y="219" font-size="19" text-anchor="middle" font-weight="700">SSD</text>
+    <text x="122" y="247" font-size="16" text-anchor="middle">ゲーム本体・画像</text>
+    <text x="122" y="272" font-size="16" text-anchor="middle">セーブファイル</text>
+    <text x="380" y="219" font-size="19" text-anchor="middle" font-weight="700">RAM</text>
+    <text x="380" y="247" font-size="16" text-anchor="middle">使っている命令</text>
+    <text x="380" y="272" font-size="16" text-anchor="middle">現在の位置・作業データ</text>
+    <text x="638" y="219" font-size="19" text-anchor="middle" font-weight="700">CPU</text>
+    <text x="638" y="247" font-size="16" text-anchor="middle">命令を実行する</text>
+    <text x="638" y="272" font-size="16" text-anchor="middle">入力に応じて値を更新</text>
+    <path d="M222 239 H278" fill="none" stroke="#46637b" stroke-width="2" marker-end="url(#arrow)"/>
+    <text x="251" y="164" font-size="14" text-anchor="middle">必要部分を読む</text>
+    <path d="M482 239 H536" fill="none" stroke="#46637b" stroke-width="2" marker-start="url(#arrow)" marker-end="url(#arrow)"/>
+    <text x="510" y="164" font-size="14" text-anchor="middle">読み書き</text>
+    <rect x="26" y="354" width="192" height="90" rx="10" fill="#fff" stroke="#9bbbd2"/>
+    <rect x="542" y="354" width="192" height="90" rx="10" fill="#dff1e8" stroke="#8ab9a2"/>
+    <text x="122" y="385" font-size="19" text-anchor="middle" font-weight="700">ディスプレイ</text>
+    <text x="122" y="414" font-size="16" text-anchor="middle">画像を表示する</text>
+    <text x="638" y="385" font-size="19" text-anchor="middle" font-weight="700">GPU</text>
+    <text x="638" y="414" font-size="16" text-anchor="middle">描画の計算を進める</text>
+    <path d="M638 298 V348" fill="none" stroke="#46637b" stroke-width="2" marker-end="url(#arrow)"/>
+    <text x="625" y="323" font-size="14" text-anchor="end">描画のコマンド</text>
+    <path d="M380 298 V370 H536" fill="none" stroke="#46637b" stroke-width="2" marker-end="url(#arrow)"/>
+    <text x="373" y="325" font-size="14" text-anchor="end">描画データを用意</text>
+    <path d="M536 418 H224" fill="none" stroke="#46637b" stroke-width="2" marker-end="url(#arrow)"/>
+    <text x="380" y="409" font-size="15" text-anchor="middle">生成した画像を表示へ</text>
+  </g>
+</svg>

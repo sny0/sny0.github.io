@@ -47,6 +47,10 @@
           "link": "/hardware/gpu/cpu-vs-gpu.html"
         },
         {
+          "text": "CPUの命令実行 — レジスタとプログラムカウンター",
+          "link": "/hardware/cpu/instruction-execution.html"
+        },
+        {
           "text": "DMAとIOMMUでデバイスがメモリにアクセスする仕組み",
           "link": "/hardware/io/dma-and-iommu.html"
         },
@@ -69,6 +73,14 @@
         {
           "text": "PCI Expressのリンクとレーン",
           "link": "/hardware/io/pcie-links.html"
+        },
+        {
+          "text": "RAM・キャッシュ・ストレージの違い",
+          "link": "/hardware/memory/ram-cache-and-storage.html"
+        },
+        {
+          "text": "コンピュータの部品と役割 — ゲームが動くまで",
+          "link": "/hardware/computer-components.html"
         }
       ]
     },
@@ -523,6 +535,10 @@
           "link": "/network/http-messages.html"
         },
         {
+          "text": "IPアドレス・ポート・ホスト名 — 接続先をどう指定するか",
+          "link": "/network/ip-addresses-and-ports.html"
+        },
+        {
           "text": "IPルーティングとEthernetフレーム",
           "link": "/network/ip-routing-and-ethernet.html"
         },
@@ -547,8 +563,16 @@
           "link": "/network/tcp-sockets.html"
         },
         {
+          "text": "ネットワークの基本 — アプリのデータが相手へ届くまで",
+          "link": "/network/network-basics.html"
+        },
+        {
           "text": "ネットワークの遅延・帯域・待ち行列",
           "link": "/network/latency-throughput-and-queues.html"
+        },
+        {
+          "text": "家庭のネットワーク機器 — LAN・ルーター・Wi-Fiの役割",
+          "link": "/network/home-network-devices.html"
         }
       ]
     },
@@ -1440,6 +1464,10 @@
       "text": "学習ガイド",
       "collapsed": false,
       "items": [
+        {
+          "text": "コンピュータとネットワークの基礎",
+          "link": "/guide/hardware-basics.html"
+        },
         {
           "text": "疑問から選ぶ読み順",
           "link": "/guide/learning-paths.html"
@@ -10456,6 +10484,10 @@
       "collapsed": true,
       "items": [
         {
+          "text": "コンピュータとネットワークの基礎",
+          "link": "/guide/hardware-basics.html"
+        },
+        {
           "text": "疑問から選ぶ読み順",
           "link": "/guide/learning-paths.html"
         },
@@ -10825,6 +10857,10 @@
       "text": "ほかの学習ガイド",
       "collapsed": true,
       "items": [
+        {
+          "text": "コンピュータとネットワークの基礎",
+          "link": "/guide/hardware-basics.html"
+        },
         {
           "text": "疑問から選ぶ読み順",
           "link": "/guide/learning-paths.html"
@@ -12215,6 +12251,10 @@
       "collapsed": true,
       "items": [
         {
+          "text": "コンピュータとネットワークの基礎",
+          "link": "/guide/hardware-basics.html"
+        },
+        {
           "text": "疑問から選ぶ読み順",
           "link": "/guide/learning-paths.html"
         },
@@ -12636,6 +12676,10 @@
       "text": "ほかの学習ガイド",
       "collapsed": true,
       "items": [
+        {
+          "text": "コンピュータとネットワークの基礎",
+          "link": "/guide/hardware-basics.html"
+        },
         {
           "text": "疑問から選ぶ読み順",
           "link": "/guide/learning-paths.html"
@@ -13628,6 +13672,10 @@
       "text": "ほかの学習ガイド",
       "collapsed": true,
       "items": [
+        {
+          "text": "コンピュータとネットワークの基礎",
+          "link": "/guide/hardware-basics.html"
+        },
         {
           "text": "疑問から選ぶ読み順",
           "link": "/guide/learning-paths.html"
@@ -14905,6 +14953,10 @@
       "text": "ほかの学習ガイド",
       "collapsed": true,
       "items": [
+        {
+          "text": "コンピュータとネットワークの基礎",
+          "link": "/guide/hardware-basics.html"
+        },
         {
           "text": "疑問から選ぶ読み順",
           "link": "/guide/learning-paths.html"
@@ -16234,6 +16286,10 @@
       "text": "ほかの学習ガイド",
       "collapsed": true,
       "items": [
+        {
+          "text": "コンピュータとネットワークの基礎",
+          "link": "/guide/hardware-basics.html"
+        },
         {
           "text": "疑問から選ぶ読み順",
           "link": "/guide/learning-paths.html"
@@ -22694,8 +22750,53 @@
       "collapsed": true,
       "items": [
         {
+          "text": "コンピュータとネットワークの基礎",
+          "link": "/guide/hardware-basics.html"
+        },
+        {
           "text": "疑問から選ぶ読み順",
           "link": "/guide/learning-paths.html"
+        },
+        {
+          "text": "リアルタイム描画を学ぶ",
+          "link": "/guide/rendering/roadmap.html"
+        },
+        {
+          "text": "低レイヤからゲームの仕組みを学ぶ",
+          "link": "/guide/low-level/"
+        }
+      ]
+    }
+  ],
+  "/guide/hardware-basics.md": [
+    {
+      "text": "学習ガイド一覧",
+      "link": "/learn/"
+    },
+    {
+      "text": "コンピュータとネットワークの基礎",
+      "items": [
+        {
+          "text": "コンピュータの部品から読む",
+          "link": "/guide/hardware-basics.html"
+        },
+        {
+          "text": "ネットワークの基本から読む",
+          "link": "/guide/network-basics.html"
+        }
+      ]
+    },
+    {
+      "text": "ほかの学習ガイド",
+      "collapsed": true,
+      "items": [
+        {
+          "text": "疑問から選ぶ読み順",
+          "link": "/guide/learning-paths.html"
+        },
+        {
+          "text": "C++とゲーム設計を学ぶ",
+          "link": "/guide/cpp-roadmap.html"
         },
         {
           "text": "リアルタイム描画を学ぶ",
@@ -23579,6 +23680,47 @@
       ]
     }
   ],
+  "/guide/network-basics.md": [
+    {
+      "text": "学習ガイド一覧",
+      "link": "/learn/"
+    },
+    {
+      "text": "コンピュータとネットワークの基礎",
+      "items": [
+        {
+          "text": "コンピュータの部品から読む",
+          "link": "/guide/hardware-basics.html"
+        },
+        {
+          "text": "ネットワークの基本から読む",
+          "link": "/guide/network-basics.html"
+        }
+      ]
+    },
+    {
+      "text": "ほかの学習ガイド",
+      "collapsed": true,
+      "items": [
+        {
+          "text": "疑問から選ぶ読み順",
+          "link": "/guide/learning-paths.html"
+        },
+        {
+          "text": "C++とゲーム設計を学ぶ",
+          "link": "/guide/cpp-roadmap.html"
+        },
+        {
+          "text": "リアルタイム描画を学ぶ",
+          "link": "/guide/rendering/roadmap.html"
+        },
+        {
+          "text": "低レイヤからゲームの仕組みを学ぶ",
+          "link": "/guide/low-level/"
+        }
+      ]
+    }
+  ],
   "/practice/network/stream-loss-observation.md": [
     {
       "text": "実践・サンプル一覧",
@@ -24271,6 +24413,10 @@
       "text": "ほかの学習ガイド",
       "collapsed": true,
       "items": [
+        {
+          "text": "コンピュータとネットワークの基礎",
+          "link": "/guide/hardware-basics.html"
+        },
         {
           "text": "疑問から選ぶ読み順",
           "link": "/guide/learning-paths.html"
@@ -25549,6 +25695,10 @@
       "collapsed": true,
       "items": [
         {
+          "text": "コンピュータとネットワークの基礎",
+          "link": "/guide/hardware-basics.html"
+        },
+        {
           "text": "疑問から選ぶ読み順",
           "link": "/guide/learning-paths.html"
         },
@@ -25589,6 +25739,10 @@
       "text": "ほかの学習ガイド",
       "collapsed": true,
       "items": [
+        {
+          "text": "コンピュータとネットワークの基礎",
+          "link": "/guide/hardware-basics.html"
+        },
         {
           "text": "疑問から選ぶ読み順",
           "link": "/guide/learning-paths.html"
@@ -25908,6 +26062,10 @@
       "collapsed": true,
       "items": [
         {
+          "text": "コンピュータとネットワークの基礎",
+          "link": "/guide/hardware-basics.html"
+        },
+        {
           "text": "C++とゲーム設計を学ぶ",
           "link": "/guide/cpp-roadmap.html"
         },
@@ -26024,6 +26182,10 @@
       "text": "ほかの学習ガイド",
       "collapsed": true,
       "items": [
+        {
+          "text": "コンピュータとネットワークの基礎",
+          "link": "/guide/hardware-basics.html"
+        },
         {
           "text": "疑問から選ぶ読み順",
           "link": "/guide/learning-paths.html"
@@ -27258,6 +27420,10 @@
       "collapsed": true,
       "items": [
         {
+          "text": "コンピュータとネットワークの基礎",
+          "link": "/guide/hardware-basics.html"
+        },
+        {
           "text": "疑問から選ぶ読み順",
           "link": "/guide/learning-paths.html"
         },
@@ -27342,6 +27508,10 @@
       "text": "ほかの学習ガイド",
       "collapsed": true,
       "items": [
+        {
+          "text": "コンピュータとネットワークの基礎",
+          "link": "/guide/hardware-basics.html"
+        },
         {
           "text": "疑問から選ぶ読み順",
           "link": "/guide/learning-paths.html"
@@ -27765,6 +27935,10 @@
       "collapsed": true,
       "items": [
         {
+          "text": "コンピュータとネットワークの基礎",
+          "link": "/guide/hardware-basics.html"
+        },
+        {
           "text": "疑問から選ぶ読み順",
           "link": "/guide/learning-paths.html"
         },
@@ -27849,6 +28023,10 @@
       "text": "ほかの学習ガイド",
       "collapsed": true,
       "items": [
+        {
+          "text": "コンピュータとネットワークの基礎",
+          "link": "/guide/hardware-basics.html"
+        },
         {
           "text": "疑問から選ぶ読み順",
           "link": "/guide/learning-paths.html"
@@ -28252,6 +28430,10 @@
       "collapsed": true,
       "items": [
         {
+          "text": "コンピュータとネットワークの基礎",
+          "link": "/guide/hardware-basics.html"
+        },
+        {
           "text": "疑問から選ぶ読み順",
           "link": "/guide/learning-paths.html"
         },
@@ -28368,6 +28550,10 @@
       "text": "ほかの学習ガイド",
       "collapsed": true,
       "items": [
+        {
+          "text": "コンピュータとネットワークの基礎",
+          "link": "/guide/hardware-basics.html"
+        },
         {
           "text": "疑問から選ぶ読み順",
           "link": "/guide/learning-paths.html"
@@ -28486,6 +28672,10 @@
       "collapsed": true,
       "items": [
         {
+          "text": "コンピュータとネットワークの基礎",
+          "link": "/guide/hardware-basics.html"
+        },
+        {
           "text": "疑問から選ぶ読み順",
           "link": "/guide/learning-paths.html"
         },
@@ -28602,6 +28792,10 @@
       "text": "ほかの学習ガイド",
       "collapsed": true,
       "items": [
+        {
+          "text": "コンピュータとネットワークの基礎",
+          "link": "/guide/hardware-basics.html"
+        },
         {
           "text": "疑問から選ぶ読み順",
           "link": "/guide/learning-paths.html"
@@ -28720,6 +28914,10 @@
       "collapsed": true,
       "items": [
         {
+          "text": "コンピュータとネットワークの基礎",
+          "link": "/guide/hardware-basics.html"
+        },
+        {
           "text": "疑問から選ぶ読み順",
           "link": "/guide/learning-paths.html"
         },
@@ -28836,6 +29034,10 @@
       "text": "ほかの学習ガイド",
       "collapsed": true,
       "items": [
+        {
+          "text": "コンピュータとネットワークの基礎",
+          "link": "/guide/hardware-basics.html"
+        },
         {
           "text": "疑問から選ぶ読み順",
           "link": "/guide/learning-paths.html"
@@ -28954,6 +29156,10 @@
       "collapsed": true,
       "items": [
         {
+          "text": "コンピュータとネットワークの基礎",
+          "link": "/guide/hardware-basics.html"
+        },
+        {
           "text": "疑問から選ぶ読み順",
           "link": "/guide/learning-paths.html"
         },
@@ -29070,6 +29276,10 @@
       "text": "ほかの学習ガイド",
       "collapsed": true,
       "items": [
+        {
+          "text": "コンピュータとネットワークの基礎",
+          "link": "/guide/hardware-basics.html"
+        },
         {
           "text": "疑問から選ぶ読み順",
           "link": "/guide/learning-paths.html"
@@ -29188,6 +29398,10 @@
       "collapsed": true,
       "items": [
         {
+          "text": "コンピュータとネットワークの基礎",
+          "link": "/guide/hardware-basics.html"
+        },
+        {
           "text": "疑問から選ぶ読み順",
           "link": "/guide/learning-paths.html"
         },
@@ -29304,6 +29518,10 @@
       "text": "ほかの学習ガイド",
       "collapsed": true,
       "items": [
+        {
+          "text": "コンピュータとネットワークの基礎",
+          "link": "/guide/hardware-basics.html"
+        },
         {
           "text": "疑問から選ぶ読み順",
           "link": "/guide/learning-paths.html"
@@ -29422,6 +29640,10 @@
       "collapsed": true,
       "items": [
         {
+          "text": "コンピュータとネットワークの基礎",
+          "link": "/guide/hardware-basics.html"
+        },
+        {
           "text": "疑問から選ぶ読み順",
           "link": "/guide/learning-paths.html"
         },
@@ -29538,6 +29760,10 @@
       "text": "ほかの学習ガイド",
       "collapsed": true,
       "items": [
+        {
+          "text": "コンピュータとネットワークの基礎",
+          "link": "/guide/hardware-basics.html"
+        },
         {
           "text": "疑問から選ぶ読み順",
           "link": "/guide/learning-paths.html"
@@ -29656,6 +29882,10 @@
       "collapsed": true,
       "items": [
         {
+          "text": "コンピュータとネットワークの基礎",
+          "link": "/guide/hardware-basics.html"
+        },
+        {
           "text": "疑問から選ぶ読み順",
           "link": "/guide/learning-paths.html"
         },
@@ -29772,6 +30002,10 @@
       "text": "ほかの学習ガイド",
       "collapsed": true,
       "items": [
+        {
+          "text": "コンピュータとネットワークの基礎",
+          "link": "/guide/hardware-basics.html"
+        },
         {
           "text": "疑問から選ぶ読み順",
           "link": "/guide/learning-paths.html"
@@ -29890,6 +30124,10 @@
       "collapsed": true,
       "items": [
         {
+          "text": "コンピュータとネットワークの基礎",
+          "link": "/guide/hardware-basics.html"
+        },
+        {
           "text": "疑問から選ぶ読み順",
           "link": "/guide/learning-paths.html"
         },
@@ -30006,6 +30244,10 @@
       "text": "ほかの学習ガイド",
       "collapsed": true,
       "items": [
+        {
+          "text": "コンピュータとネットワークの基礎",
+          "link": "/guide/hardware-basics.html"
+        },
         {
           "text": "疑問から選ぶ読み順",
           "link": "/guide/learning-paths.html"
@@ -30124,6 +30366,10 @@
       "collapsed": true,
       "items": [
         {
+          "text": "コンピュータとネットワークの基礎",
+          "link": "/guide/hardware-basics.html"
+        },
+        {
           "text": "疑問から選ぶ読み順",
           "link": "/guide/learning-paths.html"
         },
@@ -30240,6 +30486,10 @@
       "text": "ほかの学習ガイド",
       "collapsed": true,
       "items": [
+        {
+          "text": "コンピュータとネットワークの基礎",
+          "link": "/guide/hardware-basics.html"
+        },
         {
           "text": "疑問から選ぶ読み順",
           "link": "/guide/learning-paths.html"
@@ -30358,6 +30608,10 @@
       "collapsed": true,
       "items": [
         {
+          "text": "コンピュータとネットワークの基礎",
+          "link": "/guide/hardware-basics.html"
+        },
+        {
           "text": "疑問から選ぶ読み順",
           "link": "/guide/learning-paths.html"
         },
@@ -30474,6 +30728,10 @@
       "text": "ほかの学習ガイド",
       "collapsed": true,
       "items": [
+        {
+          "text": "コンピュータとネットワークの基礎",
+          "link": "/guide/hardware-basics.html"
+        },
         {
           "text": "疑問から選ぶ読み順",
           "link": "/guide/learning-paths.html"
@@ -31162,6 +31420,10 @@
       "collapsed": true,
       "items": [
         {
+          "text": "コンピュータとネットワークの基礎",
+          "link": "/guide/hardware-basics.html"
+        },
+        {
           "text": "疑問から選ぶ読み順",
           "link": "/guide/learning-paths.html"
         },
@@ -31540,6 +31802,10 @@
       "collapsed": true,
       "items": [
         {
+          "text": "コンピュータとネットワークの基礎",
+          "link": "/guide/hardware-basics.html"
+        },
+        {
           "text": "疑問から選ぶ読み順",
           "link": "/guide/learning-paths.html"
         },
@@ -31581,6 +31847,10 @@
       "collapsed": true,
       "items": [
         {
+          "text": "コンピュータとネットワークの基礎",
+          "link": "/guide/hardware-basics.html"
+        },
+        {
           "text": "疑問から選ぶ読み順",
           "link": "/guide/learning-paths.html"
         },
@@ -31604,6 +31874,10 @@
       "text": "学習ガイド",
       "collapsed": false,
       "items": [
+        {
+          "text": "コンピュータとネットワークの基礎",
+          "link": "/guide/hardware-basics.html"
+        },
         {
           "text": "疑問から選ぶ読み順",
           "link": "/guide/learning-paths.html"
