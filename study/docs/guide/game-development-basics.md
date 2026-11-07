@@ -8,7 +8,7 @@ study:
   domain: game
   collection: foundations
   order: 5
-  summary: ゲームエンジンの役割、入力と時間、シーンと部品、衝突と物理を図で確かめ、小さなシューティングの実装へ進む読み順。
+  summary: エンジン、時間、シーンと衝突から、入力、UI、プレハブ、ポーズ、イベント、セーブへ進む読み順。
 ---
 
 # ゲームの動きと構成から読む
@@ -21,6 +21,15 @@ study:
 2. [ゲームループと時間](/game/basics/game-loop-and-time.html)で、入力、状態の更新、描画を繰り返す流れを追います。
 3. [シーンとコンポーネント](/game/basics/scenes-and-components.html)で、配置した物体に機能を組み合わせる方法を見ます。
 4. [衝突判定と物理](/game/basics/collisions-and-physics.html)で、見た目の形、判定の形、接触後の動作を確かめます。
+
+## 操作・表示・進行を組み立てる
+
+1. [入力アクションと機器](/game/basics/input-actions-and-devices.html)で、キーやパッドの操作をゲームの意味へ対応させます。
+2. [UIの配置と操作](/game/basics/ui-layout-and-interaction.html)で、HPやメニューを画面に置き、操作を受け付ける方法を見ます。
+3. [プレハブとオブジェクトの寿命](/game/basics/prefabs-and-object-lifetimes.html)で、同じ設定から物体を作り、有効化・無効化・破棄を扱います。
+4. [ゲームの状態とポーズ](/game/basics/game-states-and-pause.html)で、今の場面に応じて入力と更新を切り替えます。
+5. [ゲーム内イベントと通知](/game/basics/game-events-and-notifications.html)で、HPなどの変化を必要な表示へ伝えます。
+6. [セーブデータとシリアライズ](/game/basics/save-data-and-serialization.html)で、次の起動へ引き継ぐ情報を保存し、読み戻す流れを見ます。
 
 ## 確かめること
 

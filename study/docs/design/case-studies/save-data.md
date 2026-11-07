@@ -13,6 +13,8 @@ study:
 
 # セーブデータの設計
 
+保存する情報の選び方と、読み戻しの流れから確認したい場合は、[セーブデータとシリアライズの基礎](/game/basics/save-data-and-serialization.html)から読めます。
+
 ## 素朴な実装
 
 ```cpp

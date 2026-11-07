@@ -1,0 +1,36 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="760" height="470" viewBox="0 0 760 470" role="img" aria-labelledby="title desc">
+  <title id="title">二つのキーの間を、時刻から補間する</title>
+  <desc id="desc">0秒でX位置0、1秒でX位置2のキーを記録する。線形補間では0.5秒でX位置1になる。下のグラフは、横軸が秒、縦軸がX位置で、両端のキーの間に評価した値を示す。</desc>
+  <defs><marker id="arrow" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto"><path d="M0 0 8 4 0 8z" fill="#46677e"/></marker></defs>
+  <rect width="760" height="470" rx="18" fill="#edf4f9"/>
+  <g font-family="'Yu Gothic',Meiryo,sans-serif" fill="#173e59">
+    <text x="26" y="39" font-size="23" font-weight="700">記録したキーから、途中の時刻の値を求める</text>
+    <text x="26" y="68" font-size="15">X位置だけを変える、線形補間の例</text>
+    <rect x="26" y="91" width="210" height="104" rx="11" fill="#fff3d9" stroke="#c2a16a"/>
+    <text x="131" y="121" text-anchor="middle" font-size="18" font-weight="700">0秒　X = 0</text>
+    <text x="131" y="148" text-anchor="middle" font-size="15">記録したキー</text>
+    <text x="131" y="175" text-anchor="middle" font-size="15">区間の始まり</text>
+    <rect x="276" y="91" width="210" height="104" rx="11" fill="#e0f1e9" stroke="#8eb8a5"/>
+    <text x="381" y="121" text-anchor="middle" font-size="18" font-weight="700">0.5秒　X = 1</text>
+    <text x="381" y="148" text-anchor="middle" font-size="15">補間して求めた値</text>
+    <text x="381" y="175" text-anchor="middle" font-size="15">区間の半分</text>
+    <rect x="526" y="91" width="208" height="104" rx="11" fill="#fff3d9" stroke="#c2a16a"/>
+    <text x="630" y="121" text-anchor="middle" font-size="18" font-weight="700">1秒　X = 2</text>
+    <text x="630" y="148" text-anchor="middle" font-size="15">記録したキー</text>
+    <text x="630" y="175" text-anchor="middle" font-size="15">区間の終わり</text>
+    <path d="M240 144H272" stroke="#46677e" stroke-width="2" marker-end="url(#arrow)"/>
+    <path d="M490 144H522" stroke="#46677e" stroke-width="2" marker-end="url(#arrow)"/>
+    <text x="30" y="242" font-size="16" font-weight="700">X位置</text>
+    <path d="M104 393H682" stroke="#46677e" stroke-width="2" marker-end="url(#arrow)"/>
+    <path d="M104 393V229" stroke="#46677e" stroke-width="2" marker-end="url(#arrow)"/>
+    <path d="M104 320H640M104 247H640" stroke="#b5c9d8" stroke-dasharray="4 4"/>
+    <path d="M372 393V320M640 393V247" stroke="#b5c9d8" stroke-dasharray="4 4"/>
+    <path d="M104 393L640 247" stroke="#335f7d" stroke-width="3"/>
+    <circle cx="104" cy="393" r="6" fill="#b98735"/><circle cx="640" cy="247" r="6" fill="#b98735"/>
+    <circle cx="372" cy="320" r="7" fill="#fff" stroke="#3c8966" stroke-width="3"/>
+    <text x="81" y="399" font-size="15">0</text><text x="81" y="325" font-size="15">1</text><text x="81" y="253" font-size="15">2</text>
+    <text x="100" y="420" font-size="15">0</text><text x="358" y="420" font-size="15">0.5</text><text x="635" y="420" font-size="15">1</text>
+    <text x="645" y="451" font-size="15">時間（秒）</text>
+    <text x="406" y="360" font-size="15">途中の時刻で評価する</text>
+  </g>
+</svg>

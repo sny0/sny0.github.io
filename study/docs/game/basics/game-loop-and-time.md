@@ -59,6 +59,8 @@ CPU側で描画を準備する回数、GPUが画像を作る時刻、ディス�
 
 ## 押し続ける入力と、押し始める入力
 
+キーやパッドの操作をゲームの動作へ割り当てる方法は、[入力アクションと機器](/game/basics/input-actions-and-devices.html)で説明します。
+
 移動では「いま押されているか」を使い、弾を一発だけ撃つ操作では「押し始めたか」を使うなど、必要な情報を選びます。固定更新が同じ描画フレーム内に複数回あるなら、一度受けた発射要求をどの更新で使い切るかも決めます。入力の取得時点と、状態へ適用した時点を追うと、意図した回数だけ動かせるかを確認できます。[Unity Input Systemのアクション](https://docs.unity3d.com/Packages/com.unity.inputsystem@1.11/manual/Actions.html) · [入力とCommand Buffer](/game/patterns/command-buffer-and-input.html)
 
 具体的なゲーム全体への組み込みは、[小さなシューティングの設計](/game/shooter-design.html)へ進みます。

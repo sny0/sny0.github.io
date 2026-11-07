@@ -1,0 +1,40 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="760" height="460" viewBox="0 0 760 460" role="img" aria-labelledby="title desc">
+  <title id="title">ゲームの状態を選び、保存してから検証して復元する</title>
+  <desc id="desc">保存時は実行中の状態から必要な値を集め、保存用データをJSONなどへ変換してファイルに書く。再開時はファイルを読み、形式と版、値を検証し、確認済みの候補からゲームの状態を復元する。</desc>
+  <defs><marker id="arrow" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto"><path d="M0 0 8 4 0 8z" fill="#45677c"/></marker></defs>
+  <rect width="760" height="460" rx="18" fill="#edf4f9"/>
+  <g font-family="'Yu Gothic',Meiryo,sans-serif" fill="#143d59">
+    <text x="26" y="39" font-size="23" font-weight="700">必要な状態を保存し、確かめてから復元する</text>
+    <text x="26" y="76" font-size="17" font-weight="700">保存する</text>
+    <rect x="26" y="96" width="210" height="103" rx="10" fill="#fff" stroke="#a2bed2"/>
+    <text x="131" y="125" text-anchor="middle" font-size="17" font-weight="700">実行中の状態</text>
+    <text x="131" y="153" text-anchor="middle" font-size="15">HP・所持品・進行</text>
+    <text x="131" y="178" text-anchor="middle" font-size="15">保存する値を選ぶ</text>
+    <rect x="276" y="96" width="210" height="103" rx="10" fill="#fff3d9" stroke="#c2a16a"/>
+    <text x="381" y="125" text-anchor="middle" font-size="17" font-weight="700">保存用データ</text>
+    <text x="381" y="153" text-anchor="middle" font-size="15">形式の版・ID・値</text>
+    <text x="381" y="178" text-anchor="middle" font-size="15">JSONなどへ変換する</text>
+    <rect x="526" y="96" width="208" height="103" rx="10" fill="#e1f2ea" stroke="#8fb8a5"/>
+    <text x="630" y="125" text-anchor="middle" font-size="17" font-weight="700">ファイル</text>
+    <text x="630" y="153" text-anchor="middle" font-size="15">バイト列を書き込む</text>
+    <text x="630" y="178" text-anchor="middle" font-size="15">保存先・完了を扱う</text>
+    <path d="M239 147H272" stroke="#45677c" stroke-width="2" marker-end="url(#arrow)"/>
+    <path d="M489 147H522" stroke="#45677c" stroke-width="2" marker-end="url(#arrow)"/>
+    <text x="26" y="244" font-size="17" font-weight="700">再開する</text>
+    <rect x="26" y="264" width="210" height="110" rx="10" fill="#fff" stroke="#a2bed2"/>
+    <text x="131" y="293" text-anchor="middle" font-size="17" font-weight="700">ファイルを読む</text>
+    <text x="131" y="322" text-anchor="middle" font-size="15">形式を解釈して</text>
+    <text x="131" y="348" text-anchor="middle" font-size="15">復元候補を作る</text>
+    <rect x="276" y="264" width="210" height="110" rx="10" fill="#fff3d9" stroke="#c2a16a"/>
+    <text x="381" y="293" text-anchor="middle" font-size="17" font-weight="700">検証・必要な変換</text>
+    <text x="381" y="322" text-anchor="middle" font-size="15">対応する版・IDか</text>
+    <text x="381" y="348" text-anchor="middle" font-size="15">HPなどが使える値か</text>
+    <rect x="526" y="264" width="208" height="110" rx="10" fill="#e1f2ea" stroke="#8fb8a5"/>
+    <text x="630" y="293" text-anchor="middle" font-size="17" font-weight="700">ゲームへ復元</text>
+    <text x="630" y="322" text-anchor="middle" font-size="15">必要な物を用意し</text>
+    <text x="630" y="348" text-anchor="middle" font-size="15">確認した値を適用</text>
+    <path d="M239 319H272" stroke="#45677c" stroke-width="2" marker-end="url(#arrow)"/>
+    <path d="M489 319H522" stroke="#45677c" stroke-width="2" marker-end="url(#arrow)"/>
+    <text x="26" y="418" font-size="15">形式を読めることと、ゲームの状態へ適用できることを順に確認する。</text>
+  </g>
+</svg>
