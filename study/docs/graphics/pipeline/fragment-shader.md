@@ -3,7 +3,7 @@ title: Fragment Shader (Pixel Shader)
 study:
   source: RenderingWiki
   status: published
-  summary: Fragment Shader (FS、DirectX用語ではPixel Shader/PS) は、ラスタライザが列挙した各フラグメントに対して色を計算するプログラムです。ライティング・テクスチャリング・マテリアル表現という「絵作りの本体」はここに集中しており、GPU時間の大半を消費するステージでも
+  summary: 補間された属性やテクスチャから色などを計算するFS・PSの役割と、深度、サンプリング、重なりによる処理量を調べる。
   section: reference
   format: article
   domain: graphics
@@ -11,9 +11,11 @@ study:
 
 # Fragment Shader (Pixel Shader)
 
+UVから色を作る短い例は、[シェーダーの第一歩](/graphics/shader/shader-first-steps.html)と[三角形を描く実践](/practice/graphics/shader-first-steps.html)で確認できます。
+
 ## 概要
 
-Fragment Shader (FS、DirectX用語ではPixel Shader/PS) は、**ラスタライザが列挙した各フラグメントに対して色を計算するプログラム**です。ライティング・テクスチャリング・マテリアル表現という「絵作りの本体」はここに集中しており、GPU時間の大半を消費するステージでもあります。
+Fragment Shader (FS、Direct3DではPixel Shader/PS) は、ラスタライズで得た描画候補について、色などを計算するプログラムです。補間された属性、テクスチャ、光の情報などを入力に使えます。処理の負荷は、描画範囲、重なり、サンプル数、シェーダーの内容などで変わります。
 
 ## なぜ必要なのか
 
@@ -76,7 +78,7 @@ flowchart TB
 
 ### テクスチャサンプリングと微分
 
-`Sample()` はクワッド内の暗黙微分からミップレベルを決めます。**動的分岐の中で Sample を呼ぶと微分が未定義**になるため、コンパイラが分岐を平坦化するか、`SampleLevel` (明示LOD) を使う必要があります。
+`Sample()`は暗黙微分を使い、ミップレベルの選択などを行います。隣接する呼び出しが異なる経路へ進む**非一様な制御フロー**内では、必要な微分が規定されない場合があります。用途に応じて、分岐前に求めた勾配を`SampleGrad`へ渡す方法や、`SampleLevel`で明示的にLODを選ぶ方法を使います。[GLSLの微分関数](https://registry.khronos.org/OpenGL/specs/gl/GLSLangSpec.4.60.html#derivative-functions) · [HLSLのSampleGrad](https://learn.microsoft.com/en-us/windows/win32/direct3dhlsl/dx-graphics-hlsl-to-samplegrad)
 
 ### オーバードローとオーバーシェーディング
 

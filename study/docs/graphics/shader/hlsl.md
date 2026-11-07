@@ -11,6 +11,8 @@ study:
 
 # HLSL
 
+短いVS・PSのコードは、[シェーダーの第一歩](/graphics/shader/shader-first-steps.html)と[GLSL・HLSLの対応例](/practice/graphics/shader-first-steps.html)で確認できます。
+
 ## 概要
 
 HLSL (High-Level Shading Language) はMicrosoftのシェーダ言語で、**DirectX・Unity・Unreal Engine・(DXC経由で)Vulkanまでカバーする、実務上最も重要なシェーダ言語**です。Shader Model (SM) というバージョン体系で機能が拡張され、現在はSM 6.x (DXILコンパイラDXC) が現行世代です。

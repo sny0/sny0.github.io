@@ -153,6 +153,8 @@
 | [セーブ / シリアライズ / デシリアライズ / JSON / 保存形式 / バージョン](/game/basics/save-data-and-serialization.html) | 実行中のデータから保存する情報を選び、検証して復元する流れを調べる |
 | [ゲーム状態 / ポーズ / タイトル / 結果画面 / timeScale / 状態遷移](/game/basics/game-states-and-pause.html) | 今の状態に応じて入力と更新を切り替える |
 | [ゲームイベント / イベント通知 / 発行 / 購読 / ハンドラー / 購読解除](/game/basics/game-events-and-notifications.html) | HPの変化などをUIへ伝え、利用期間に合わせて通知を受ける |
+| [シェーダー / 頂点シェーダー / フラグメントシェーダー / ピクセルシェーダー / mix / lerp](/graphics/shader/shader-first-steps.html) | 頂点から三角形の色を作る処理を、GLSLとHLSLの短いコードで追う |
+| [頂点属性 / attribute / varying / uniform / 定数バッファ / cbuffer / binding](/graphics/shader/shader-inputs-and-uniforms.html) | 描画に使うデータを、シェーダーのどの入力へ渡すかを調べる |
 | [ECS / Entity Component System](/game/ecs.html) | ID、Component、System、Query、格納方式 |
 | [RAII / 所有 / 寿命](/runtime/memory/storage-duration-and-lifetime.html) | 記憶域、寿命、後片付けの区別 |
 | [HLSL](/graphics/shader/hlsl.html) | Direct3Dやエンジンで使うシェーダ言語 |

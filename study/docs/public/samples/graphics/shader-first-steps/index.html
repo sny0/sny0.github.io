@@ -1,0 +1,63 @@
+<!doctype html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="WebGL 2で三角形の位置と色を変え、頂点シェーダー、補間、uniformの働きを確かめる教材。">
+  <title>シェーダーで三角形の位置と色を変える | sny0 study</title>
+  <link rel="stylesheet" href="./styles.css">
+  <script type="module" src="./main.js"></script>
+</head>
+<body>
+  <main>
+    <header>
+      <p class="eyebrow">sny0 study · シェーダー実践</p>
+      <h1>シェーダーで三角形の位置と色を変える</h1>
+      <p>三つの頂点を渡して描画します。横位置は頂点シェーダー、色はフラグメントシェーダーで計算します。UV表示の赤はU、緑はV、青は0.25です。</p>
+    </header>
+
+    <canvas id="view" width="800" height="480" role="img" aria-label="シェーダーで描いた三角形。下の操作で、色と横位置を変えられます。">この教材ではcanvasを使います。</canvas>
+
+    <section class="panel" aria-labelledby="controls-heading">
+      <h2 id="controls-heading">シェーダーへ渡す値</h2>
+      <fieldset id="controls" disabled>
+        <legend class="visually-hidden">表示と位置の設定</legend>
+        <div class="fields">
+          <label>表示方法
+            <select id="mode">
+              <option value="1" selected>UVを色で表示する</option>
+              <option value="0">全体を同じ色にする</option>
+            </select>
+          </label>
+          <label>色を掛ける <input id="tint" type="color" value="#ffffff"></label>
+          <label class="offset">横位置 <output id="offset-value" for="offset">0.00</output>
+            <input id="offset" type="range" min="-0.35" max="0.35" step="0.05" value="0">
+          </label>
+        </div>
+        <button id="reset" type="button">初期状態に戻す</button>
+      </fieldset>
+      <p id="status" role="status" aria-live="polite">シェーダーを読み込んでいます。</p>
+      <pre id="uniforms" aria-label="描画へ渡したuniform値"></pre>
+    </section>
+
+    <section class="notes" aria-labelledby="observe-heading">
+      <h2 id="observe-heading">見比べるところ</h2>
+      <ul>
+        <li>横位置を変えると、三角形は動き、UVの色は形についていきます。</li>
+        <li>同じ色の表示に変えると、全体が同じuniform値から作った色になります。</li>
+        <li>色を掛けると、赤・緑・青の各成分が変わります。</li>
+      </ul>
+      <details>
+        <summary>コンパイルとリンクの記録</summary>
+        <pre id="log"></pre>
+      </details>
+    </section>
+
+    <footer>
+      <p>WebGL 2とGLSL ES 3.00を使います。UVの数値をそのまま色へ変換する、照明計算前の描画例です。</p>
+      <a href="https://sny0.com/study/practice/graphics/shader-first-steps.html#run-locally">解説・HLSLの対応例・手元での動かし方</a>
+    </footer>
+    <noscript><p>この教材を動かすにはJavaScriptを有効にしてください。</p></noscript>
+  </main>
+</body>
+</html>

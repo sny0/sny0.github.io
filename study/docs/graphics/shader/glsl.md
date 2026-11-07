@@ -11,6 +11,8 @@ study:
 
 # GLSL
 
+WebGL 2とGLSL ES 3.00で実際に描く例は、[シェーダーの第一歩](/graphics/shader/shader-first-steps.html)と[三角形の実践](/practice/graphics/shader-first-steps.html)へ進みます。
+
 ## 概要
 
 GLSL (OpenGL Shading Language) は**KhronosのOpenGL/Vulkan向けシェーダ言語**です。2004年にOpenGL 2.0で標準化され、20年にわたりクロスプラットフォームシェーダの共通語として使われてきました。現在は「OpenGL用の実行時コンパイル言語」と「Vulkan用のSPIR-V生成ソース言語」という2つの顔を持ちます。
@@ -80,7 +82,7 @@ layout(push_constant) uniform Push { vec4 tint; } pc;
 ```
 
 - `set` / `binding` はVulkanのDescriptor Setに直結 → [Vulkan](/graphics/api/vulkan.html)
-- **std140 / std430 レイアウト規則**: `vec3` が16バイトに切り上げられる等、CPU構造体とのミスマッチがGLSL最大の罠
+- **std140 / std430の配置規則**では、型の大きさ、ベースアラインメント、配列・行列のストライドを確認し、CPU側の構造体と対応させる。
 - OpenGL版では `set` がなく `binding` のみ、UBOは `glUniformBlockBinding` で接続
 
 ### OpenGL版とVulkan版の差分
@@ -88,10 +90,10 @@ layout(push_constant) uniform Push { vec4 tint; } pc;
 | | OpenGL GLSL | Vulkan GLSL |
 |---|---|---|
 | コンパイル | ドライバが実行時に | glslang等で事前にSPIR-Vへ |
-| 頂点ID | `gl_VertexID` (ベース頂点含まず) | `gl_VertexIndex` (含む) |
+| 頂点ID | `gl_VertexID`。BaseVertex付きの描画では、その値を含む | `gl_VertexIndex`。開始値・頂点オフセットを含む |
 | uniform単体宣言 | 可 (`uniform float x;`) | 不可 (ブロック必須、push constant除く) |
 | descriptor set | なし | `layout(set=N)` |
-| Y座標系 | NDC Y上向き | Y下向き → [座標変換](/math/rendering/transform.html) |
+| 画面上のY方向 | ビューポートまで含めて確認する | ビューポートの高さを負にして反転できる → [座標変換](/math/rendering/transform.html) |
 
 ## 各環境での扱い
 
@@ -150,19 +152,19 @@ void main() {
 }
 ```
 
-std140の罠の実例:
+std140の配置を確認する例です。
 
 ```glsl
-layout(std140, binding = 0) uniform BadLayout {
-    vec3 a;   // offset 0  (16バイト消費! 12ではない)
-    float b;  // offset 12 (aのパディングに入る — これは運が良いケース)
+layout(std140, binding = 0) uniform LayoutExample {
+    vec3 a;   // offset 0  (ベースアラインメント16、成分は12バイト)
+    float b;  // offset 12
     vec3 c;   // offset 16
     float d;  // offset 28
     vec2 e;   // offset 32
-};  // C++側で float3+float を素朴に並べるとズレる
+};
 ```
 
-**対策**: CPU側構造体は `alignas(16)` を使うか、すべて `vec4` 単位で設計するのが安全です。
+CPU側では、各メンバーのオフセット、配列・行列のストライド、構造体全体のサイズを照合します。構造体の先頭に`alignas(16)`を指定するだけでは、各メンバーの配置まで一致するとは限りません。上の例の`vec3`直後の`float`は、オフセット12に置けます。[OpenGL 4.6仕様のuniformブロック配置 §7.6.2.2](https://registry.khronos.org/OpenGL/specs/gl/glspec46.core.pdf) · [Vulkanのバッファ配置](https://docs.vulkan.org/spec/latest/chapters/interfaces.html#interfaces-resources-layout)
 
 ## 前提知識
 
@@ -181,14 +183,14 @@ layout(std140, binding = 0) uniform BadLayout {
    各ベンダーのドライバが独自のコンパイラフロントエンドを持つため、方言の許容度・バグ・エラーメッセージ・最適化品質がバラバラになり、同じソースの互換性が保証されなかった。また実行時コンパイルのコスト(ロード時間・ヒッチ)も問題だった。SPIR-V事前コンパイルはこの両方への解答。
    :::
 
-2. **std140レイアウトで `vec3` を避けるべき理由を説明せよ。**
+2. **std140レイアウトをCPUの構造体へ対応させるとき、何を確認するか。**
    ::: details 解答
-   std140ではvec3のベースアラインメントが16バイトと規定されており、C/C++の素朴な12バイトのfloat3配置とずれる。直後のスカラがパディング位置に入るかどうかも並び順依存で、CPU-GPU間の構造体不一致による読み違えバグの典型的発生源になる。vec4単位の設計かalignas指定で回避する。
+   各メンバーのオフセット、配列・行列のストライド、全体のサイズを確認する。`vec3`のベースアラインメント16と、三つの成分の12バイトを分けて扱う。構造体の先頭だけをそろえても、内部の配置までそろうとは限らない。
    :::
 
 3. **`gl_VertexID` (GL) と `gl_VertexIndex` (Vulkan) の違いは。**
    ::: details 解答
-   どちらも頂点シェーダでの頂点識別子だが、Vulkanのgl_VertexIndexはfirstVertex/vertexOffsetを含んだ値である一方、GLのgl_VertexIDはgl_BaseVertexを含まない(別変数)。移植時にオフセットのずれとして顕在化する。
+   どちらも頂点シェーダーへの頂点識別子。OpenGLでも、対応するインデックス描画の`basevertex`は`gl_VertexID`へ加わる。非インデックス描画では`first`を含む。移植時は、使う描画命令と開始値を対応させる。[Khronosの頂点入力の定義](https://wikis.khronos.org/opengl/Vertex_Shader/Defined_Inputs)
    :::
 
 ## 参考資料

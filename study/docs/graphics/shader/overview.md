@@ -3,7 +3,7 @@ title: シェーダ言語総論と比較
 study:
   source: RenderingWiki
   status: published
-  summary: シェーダ言語はGPU上で実行されるプログラムを書くための言語です。現在の主要言語は HLSL (DirectX/Unity/UE)、GLSL (OpenGL/Vulkan)、WGSL (WebGPU)、MSL (Metal) の4つで、いずれもC系構文のデータ並列言語です。このページでは4言語+中間
+  summary: HLSL、GLSL、WGSL、MSLの型、入出力、リソースの対応と、DXIL・SPIR-Vなどへの変換経路を調べる。
   section: reference
   format: article
   domain: graphics
@@ -11,13 +11,15 @@ study:
 
 # シェーダ言語総論と比較
 
+位置や色を計算するコードから確認したい場合は、[シェーダーの第一歩](/graphics/shader/shader-first-steps.html)と[三角形を描く実践](/practice/graphics/shader-first-steps.html)から読めます。
+
 ## 概要
 
 シェーダ言語は**GPU上で実行されるプログラムを書くための言語**です。現在の主要言語は **HLSL** (DirectX/Unity/UE)、**GLSL** (OpenGL/Vulkan)、**WGSL** (WebGPU)、**MSL** (Metal) の4つで、いずれもC系構文の**データ並列言語**です。このページでは4言語+中間表現 (SPIR-V/DXIL) の全体地図と、言語間対応表を提供します。
 
 ## なぜ必要なのか
 
-- C++等の汎用言語はSIMT実行・ベクトル型・テクスチャという GPU の実行モデルを表現できない
+- シェーダー言語は、描画ステージの入出力、組み込み値、ベクトル、リソースなどを扱う機能を提供する。CUDA C++など、GPU向けのC++系実装もある。[CUDAの公式ガイド](https://docs.nvidia.com/cuda/cuda-programming-guide/index.html)
 - クロスプラットフォーム開発では**1つのソースから複数言語/中間表現へ変換**するのが常識であり、言語間の対応関係の理解が必須
 - エンジンのシェーダシステム (Unityのマルチコンパイル、UEのUSF) は全てこの変換パイプラインの上に構築されている
 
@@ -106,7 +108,7 @@ flowchart LR
 | エントリポイント | 任意名を指定 | `main` 固定 (ステージごとに1ファイル的) | `@vertex` 等の属性 | `[[vertex]]` 等 + 任意名 |
 | テクスチャとサンプラ | 分離 | **結合** (Vulkan版は分離も可) | 分離 | 分離 |
 | ポインタ | なし (SM6.6でRWバッファ経由) | なし | 制限付き参照 | **あり** (C++14ベース) |
-| 未定義動作 | あり | あり | **排除 (Web安全性)** | あり |
+| エラーの扱い | 対象仕様を確認 | 対象仕様を確認 | 検証と動的エラー、未確定値の規則を持つ | 対象仕様を確認 |
 | テンプレート/ジェネリクス | 限定的 | なし | なし | **C++テンプレート** |
 
 ## 各環境での扱い
@@ -190,7 +192,7 @@ fragment float4 fsMain(VSOut in [[stage_in]],
 
 3. **WGSLが既存言語の採用ではなく新設計になった主因は何か。**
    ::: details 解答
-   Webというサンドボックス環境では、未定義動作の排除・メモリ安全性・仕様の厳密性が必須要件であり、既存言語(GLSL/HLSL)は未定義動作や実装依存の挙動を大量に含むため。またSPIR-Vバイナリの直接採用はブラウザ側の検証・可読性・知財の観点で合意に至らなかった。
+   WGSLはWebGPUのために設計されたシェーダー言語で、プログラムの検証と実行時のエラーの規則を定めている。実行時に検出できない動的エラーや未確定値も仕様で扱うため、それぞれの規則を確認する。[W3CのWGSL仕様](https://www.w3.org/TR/WGSL/#errors)
    :::
 
 ## 参考資料
