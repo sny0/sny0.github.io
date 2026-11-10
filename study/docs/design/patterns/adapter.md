@@ -32,10 +32,12 @@ study:
 ```cpp
 // C++20(問題例)— 外部SDKの流儀がゲーム全体に漏れる
 void OnExplosion() {
-    FMOD::Studio::EventInstance* ev = fmodSystem->createEventInstance("event:/explosion");
-    ev->setVolume(0.8f);
-    ev->start();
-    ev->release();   // SDK固有の作法(release必須)を全呼び出し箇所が知る必要がある
+    FMOD::Studio::EventDescription* description = nullptr;
+    if (fmodSystem->getEvent("event:/explosion", &description) != FMOD_OK) return;
+    FMOD::Studio::EventInstance* ev = nullptr;
+    if (description->createInstance(&ev) != FMOD_OK) return;
+    if (ev->setVolume(0.8f) == FMOD_OK) ev->start();
+    ev->release();   // SDK固有の作法が全呼び出し箇所へ漏れる(エラー報告も省略)
 }
 ```
 
@@ -50,7 +52,9 @@ void OnExplosion() {
 ```cpp
 // C++20
 #include <memory>
+#include <stdexcept>
 #include <string>
+#include <fmod_studio.hpp>
 
 // Target: ゲーム側の語彙で定義した欲しい形
 class IAudioPlayer {
@@ -62,38 +66,78 @@ public:
 // Adapter: SDKの作法をここに閉じ込める
 class FmodAudioAdapter : public IAudioPlayer {
 public:
-    explicit FmodAudioAdapter(FmodSystem& system) : system_(system) {}
+    explicit FmodAudioAdapter(FMOD::Studio::System& system) : system_(system) {}
     void PlayOneShot(const std::string& soundId, float volume) override {
-        auto* ev = system_.createEventInstance(("event:/" + soundId).c_str());
-        ev->setVolume(volume);
-        ev->start();
-        ev->release();   // SDKの作法はこの1か所だけが知っている
+        FMOD::Studio::EventDescription* description = nullptr;
+        Check(system_.getEvent(("event:/" + soundId).c_str(), &description));
+        FMOD::Studio::EventInstance* instance = nullptr;
+        Check(description->createInstance(&instance));
+        // 途中でCheckが例外を投げても、作成済みインスタンスをreleaseする。
+        auto release = [](FMOD::Studio::EventInstance* p) { p->release(); };
+        std::unique_ptr<FMOD::Studio::EventInstance, decltype(release)> ev(instance, release);
+        Check(ev->setVolume(volume));
+        Check(ev->start());
     }
 private:
-    FmodSystem& system_;   // 参照: SDK本体の所有・初期化は起動コードが担う
+    static void Check(FMOD_RESULT result) {
+        if (result != FMOD_OK) throw std::runtime_error("FMOD operation failed");
+    }
+    FMOD::Studio::System& system_; // 所有・初期化、Bankのロードは起動コードが担う
 };
 
 // ゲームコードはTargetしか知らない
 // audio->PlayOneShot("explosion", 0.8f);
 ```
 
+FMOD Studio APIは、`System::getEvent`で説明オブジェクトを取得し、`EventDescription::createInstance`でインスタンスを出力引数へ受け取ります。ここでは終了が決まるone-shotイベントを想定します。実装では失敗した`FMOD_RESULT`の記録や、`release`のエラー報告もAdapter側へ集約します。[FMODのcreateInstance](https://www.fmod.com/docs/2.03/api/studio-api-eventdescription.html#studio_eventdescription_createinstance)
+
 構造検証用サンプル(SDKをスタブ化): <a href="/study/samples/cpp/pattern_adapter.cpp">samples/pattern_adapter.cpp</a>
 
 ## C#またはUnityでの実装
 
 ```csharp
-// アセットストアのSDKを自分のインターフェースに合わせる
+using System;
+using UnityEngine.Advertisements;
+
+// Unity Ads SDK 4.xのリスナー方式。SDK初期化は起動コードで完了させておく。
 public interface IAdsService { void ShowRewarded(Action<bool> onFinished); }
 
 public class UnityAdsAdapter : IAdsService {
+    private readonly string adUnitId; // プラットフォームごとに設定したAd Unit ID
+    public UnityAdsAdapter(string adUnitId) => this.adUnitId = adUnitId;
     public void ShowRewarded(Action<bool> onFinished) {
-        // Unity Ads SDKのコールバック形式・列挙型を、自分の形式(bool成功)へ変換
-        Advertisement.Show("rewardedVideo", new ShowOptions {
-            resultCallback = r => onFinished(r == ShowResult.Finished)
-        });
+        new RewardRequest(adUnitId, onFinished).Start();
+    }
+
+    private sealed class RewardRequest : IUnityAdsLoadListener, IUnityAdsShowListener {
+        private readonly string id;
+        private Action<bool> finished;
+        public RewardRequest(string id, Action<bool> finished) {
+            this.id = id;
+            this.finished = finished;
+        }
+        public void Start() => Advertisement.Load(id, this);
+        public void OnUnityAdsAdLoaded(string adUnitId) => Advertisement.Show(id, this);
+        public void OnUnityAdsFailedToLoad(string id, UnityAdsLoadError error, string message)
+            => Complete(false);
+        public void OnUnityAdsShowFailure(string id, UnityAdsShowError error, string message)
+            => Complete(false);
+        public void OnUnityAdsShowStart(string id) { }
+        public void OnUnityAdsShowClick(string id) { }
+        public void OnUnityAdsShowComplete(string id, UnityAdsShowCompletionState state)
+            => Complete(state == UnityAdsShowCompletionState.COMPLETED);
+        private void Complete(bool rewarded) {
+            var callback = finished;
+            finished = null; // 終了通知は1回だけ
+            callback?.Invoke(rewarded);
+        }
     }
 }
 ```
+
+表示リクエストは同時に一つとし、呼び出し側でボタンを無効化するなどの制御を行います。報酬は`COMPLETED`のときだけ付与し、スキップやロード失敗では付与しません。[Unityのリワード広告実装](https://docs.unity.com/en-us/grow/ads/unity-sdk/rewarded-ads)
+
+これは既存のUnity Ads直接統合をAdapterで包む例です。Unityは新たな統合ではLevelPlayのAds Mediationパッケージを推奨しています。採用時には利用するSDK版と統合方式を確認します。[Unity AdsからLevelPlayへの移行](https://docs.unity.com/en-us/grow/levelplay/sdk/unity/migrate-from-unity-ads-to-levelplay)
 
 ## ゲームでの具体例
 

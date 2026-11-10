@@ -83,10 +83,11 @@ C++には「同じ呼び出しで違う振る舞い」を実現する仕組み�
 | 種類 | 仕組み | 相手が決まる時 | コスト |
 |---|---|---|---|
 | 実行時多態 | 仮想関数(上の例) | 実行時 | vtable経由の間接呼び出し(→ [仕組み](/runtime/cpp-internals/vtable-and-virtual-calls.html)) |
+| 閉じた型集合の実行時選択 | `std::variant` + `std::visit` | 候補の型はコンパイル時、保持する型は実行時 | 型の判定・分岐など。候補を増やすとvariantと処理側の確認が必要 |
 | コンパイル時多態 | [テンプレート](/languages/cpp/templates-and-concepts.html) | コンパイル時 | 実行時ゼロ、コンパイル時間とコードサイズ増 |
 | アドホック多態 | [関数オーバーロード](/languages/cpp/overloading.html) | コンパイル時 | なし |
 
-「実行中に武器を持ち替える」なら実行時多態、「固定の型ごとに最速のコードが欲しい」ならコンパイル時多態が向きます(→ [判断ガイド: テンプレートか仮想関数か](/design/decisions/cpp-choices.html))。
+実行中に武器を持ち替える場合でも、候補が固定なら`std::variant<Sword, Bow>`と`std::visit`で処理できます。型を後から追加できる開いた集合には仮想関数が向き、型ごとの処理をコンパイル時に生成したい場合にはテンプレートを使います。[C++標準草案のvariantとvisit](https://eel.is/c++draft/variant.visit) · [判断ガイド: テンプレートか仮想関数か](/design/decisions/cpp-choices.html)
 
 ## 代わりに何を失ったか
 
@@ -107,7 +108,7 @@ C++には「同じ呼び出しで違う振る舞い」を実現する仕組み�
 ## Unity/C# との対応
 
 - C#の `interface` がそのまま対応。`GetComponent<IDamageable>()` のようにインターフェースでコンポーネントを取れるのは強力な定石です。
-- C#では全メソッドが既定で非virtualなのはC++と同じですが、C#のinterface実装は暗黙、C++のoverrideは明示という違いがあります(→ [仮想関数と virtual/override / コンパイル時多態と実行時多態](/languages/csharp/virtual-and-polymorphism.html))。
+- C++の`override`指定子は任意ですが、付けるとシグネチャの間違いをコンパイラで検出できます。省略しても条件が合えばオーバーライドします。C#では基底クラスのvirtualメンバーを上書きするときに`override`が必要です。C#のinterfaceの実装には暗黙の実装と明示的な実装があります。[C++の仮想関数規則](https://eel.is/c++draft/class.virtual) · [C#のoverride](https://learn.microsoft.com/en-us/dotnet/csharp/language-reference/keywords/override) · [明示的なinterface実装](https://learn.microsoft.com/en-us/dotnet/csharp/programming-guide/interfaces/explicit-interface-implementation)
 
 ## Unreal Engine との対応
 

@@ -81,7 +81,7 @@ std::uint32_t x = 0x12345678; の表現（各欄は16進数2桁）
 
 ## C#との対応
 
-- C#にも構造体レイアウトとパディングは存在する(`[StructLayout]`, `Marshal.SizeOf`)が、通常は意識しない(ランタイムが管理し、フィールド順の再配置すらする)。C++は**書いた順に並ぶ**(標準レイアウト型なら保証)ことが逆に道具になる
+- C#のstructは既定でSequential、classは既定でAutoレイアウト。Autoではランタイムがフィールドを再配置できる。Sequentialでも整列・パディングがあり、非blittable型では管理表現とマーシャリング後の表現を同一視しない。相互運用では`StructLayout`と実際の型を確認する。C++でも順序の保証と固定オフセット・パディングなしの保証は別である。[Microsoft: StructLayoutAttribute](https://learn.microsoft.com/en-us/dotnet/api/system.runtime.interopservices.structlayoutattribute)
 - Unityで意識する瞬間: ComputeShaderへの構造体転送、NativeArray、P/Invokeの構造体マーシャリング——このページの知識がそのまま必要になる場面
 
 ## Unity開発者が誤解しやすい点

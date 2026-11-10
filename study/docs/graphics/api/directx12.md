@@ -17,7 +17,7 @@ DirectX 12 (2015) はMicrosoftの**明示的 (explicit) グラフィックスAPI
 
 ## なぜ必要なのか
 
-- Windows AAAゲーム開発の標準。UE5/UnityのWindows既定
+- Windows AAAゲーム開発の標準。UE5のWindows既定RHIや、Unity 6.1以降の新規Windowsプロジェクトで採用
 - DXR・Mesh Shader・DirectStorage等、新世代機能の入口
 - Xbox Series X|S のAPIとほぼ共通 (コンソール開発への足がかり)
 - 明示的APIの概念 (PSO/バリア/ディスクリプタ/フェンス) はVulkan/Metal/WebGPUと相互に翻訳可能 — **1つ深く学べば全部に効く**
@@ -120,7 +120,7 @@ cmdList->ResourceBarrier(1, &barrier);
 ## 各環境での扱い
 
 ### Unity
-Windows/Xboxの既定API (Unity 6以降)。SRPのCommandBufferがDX12コマンドリストへ変換されます。`SystemInfo.graphicsDeviceType == Direct3D12` で判定。非同期コンピュートは `CommandBuffer.SetExecutionFlags` 系APIで限定的に利用可能。
+Unity 6.1以降の新規WindowsプロジェクトではDX12が既定です。Xboxの対応APIや機能要件は対象の開発環境で確認します。SRPのCommandBufferがDX12コマンドリストへ変換されます。`SystemInfo.graphicsDeviceType == Direct3D12` で判定。非同期コンピュートは `CommandBuffer.SetExecutionFlags` 系APIで限定的に利用可能。
 
 ### Unreal Engine
 UE5の既定RHI。`D3D12RHI` モジュールがフレームグラフ (RDG) の下でバリア・ディスクリプタを自動管理します。エンジン開発者はRHI抽象越しにDX12概念 (トランジション、PSOキャッシュ) と日常的に付き合います。
@@ -147,7 +147,8 @@ UE5の既定RHI。`D3D12RHI` モジュールがフレームグラフ (RDG) の�
 
 ```cpp
 void Renderer::RenderFrame() {
-    UINT fi = frameIndex;  // 0..kFramesInFlight-1
+    UINT fi = frameIndex;  // CPU側のフレームスロット: 0..kFramesInFlight-1
+    UINT bi = swapChain->GetCurrentBackBufferIndex(); // 今回の描画先
 
     // 1. このスロットのGPU完了を待つ (フェンス)
     WaitForFence(frameFence[fi]);
@@ -155,12 +156,12 @@ void Renderer::RenderFrame() {
     cmd->Reset(allocator[fi].Get(), nullptr);
 
     // 2. バックバッファを描画可能状態へ遷移
-    Transition(cmd, backBuffer[fi],
+    Transition(cmd, backBuffer[bi],
         D3D12_RESOURCE_STATE_PRESENT, D3D12_RESOURCE_STATE_RENDER_TARGET);
 
     // 3. 描画
-    cmd->OMSetRenderTargets(1, &rtvHandle[fi], FALSE, &dsvHandle);
-    cmd->ClearRenderTargetView(rtvHandle[fi], clear, 0, nullptr);
+    cmd->OMSetRenderTargets(1, &rtvHandle[bi], FALSE, &dsvHandle);
+    cmd->ClearRenderTargetView(rtvHandle[bi], clear, 0, nullptr);
     cmd->SetGraphicsRootSignature(rootSig.Get());
     cmd->SetPipelineState(opaquePSO.Get());
     cmd->SetDescriptorHeaps(1, srvHeap.GetAddressOf());
@@ -173,15 +174,18 @@ void Renderer::RenderFrame() {
     }
 
     // 4. Present可能状態へ戻して提出
-    Transition(cmd, backBuffer[fi],
+    Transition(cmd, backBuffer[bi],
         D3D12_RESOURCE_STATE_RENDER_TARGET, D3D12_RESOURCE_STATE_PRESENT);
     cmd->Close();
     ID3D12CommandList* lists[] = { cmd.Get() };
     queue->ExecuteCommandLists(1, lists);
     swapChain->Present(1, 0);
     SignalFence(frameFence[fi]);
+    frameIndex = (fi + 1) % kFramesInFlight;
 }
 ```
+
+`fi`はallocatorやフレーム用一時資源の再利用を管理し、`bi`はスワップチェイン画像を選びます。両者の数や進み方が一致するとは限りません。`WaitForFence` / `SignalFence`はスロットに保存した完了値を待機・更新するhelperです。共有する深度バッファなどにも、同じキューで必要なバリアを設定する前提です。
 
 完全な初期化手順は [最終章](/graphics/capstone/02-device.html) で実装します。
 
@@ -225,3 +229,5 @@ void Renderer::RenderFrame() {
 - AMD GPUOpen, *D3D12 Memory Allocator* / 性能ガイド
 - MJP (Matt Pettineo) のブログ — バインドレス・バリア解説の良記事群
 - [Microsoft: Multi-engine synchronization](https://learn.microsoft.com/en-us/windows/win32/direct3d12/user-mode-heap-synchronization)
+- [Unity: DirectX 12 improvements in Unity 6](https://unity.com/blog/directx-12-improvements-in-unity-6)
+- [Microsoft: GetCurrentBackBufferIndex](https://learn.microsoft.com/en-us/windows/win32/api/dxgi1_4/nf-dxgi1_4-idxgiswapchain3-getcurrentbackbufferindex)

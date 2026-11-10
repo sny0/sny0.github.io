@@ -73,7 +73,7 @@ flowchart TB
 ```
 
 - **Hi-Z (階層Zバッファ)**: タイルごとの最遠/最近深度を保持し、タイル単位で深度棄却。遮蔽された三角形はFSに到達すらしない
-- **Early-Z**: FS実行前のピクセル単位深度テスト。FSで深度を書き換えたり `discard` すると無効化される → [出力結合](/graphics/pipeline/output-merger.html)
+- **Early-Z**: FS実行前のピクセル単位深度テスト。FSが深度を書き換えたり`discard`したりすると制限され得る。深度を書かない場合やconservative depthを使う場合などは、条件に応じて早期テストを残せる。早期の比較と深度更新も分けて考える → [出力結合](/graphics/pipeline/output-merger.html)
 
 ### 透視補正補間
 
@@ -179,6 +179,7 @@ float4 PSMain(Varyings i) : SV_Target {
 ## 参考資料
 
 - Juan Pineda, *"A Parallel Algorithm for Polygon Rasterization"* (SIGGRAPH 1988) — 原典
-- Fabien Giesen, *"A trip through the Graphics Pipeline"* — Part 5, 6, 8
+- Fabian Giesen, *"A trip through the Graphics Pipeline"* — Part 5, 6, 8
 - Kayvon Fatahalian, *CMU 15-869 講義資料* (ラスタライズと補間)
 - Brian Karis, *"Nanite: A Deep Dive"* (SIGGRAPH 2021) — SWラスタライズの動機
+- [Khronos: Vulkanの早期フラグメントテスト](https://docs.vulkan.org/spec/latest/chapters/fragops.html#fragops-early)

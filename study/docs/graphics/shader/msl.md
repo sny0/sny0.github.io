@@ -3,7 +3,7 @@ title: MSL (Metal Shading Language)
 study:
   source: RenderingWiki
   status: published
-  summary: MSL (Metal Shading Language) はAppleのMetal API専用シェーダ言語で、C++14ベースという他言語にない特徴を持ちます。テンプレート・ポインタ・名前空間が使え、シェーダ言語の中で最も「普通のプログラミング言語」に近い設計です。iOS/macOS/visionO
+  summary: AppleのMetal用シェーダー言語。C++由来の構文、アドレス空間、タイル処理、コンパイルの仕組みを扱い、Metal 1〜3とMetal 4以降の言語基盤を区別する。
   section: reference
   format: article
   domain: graphics
@@ -13,7 +13,7 @@ study:
 
 ## 概要
 
-MSL (Metal Shading Language) は**AppleのMetal API専用シェーダ言語**で、**C++14ベース**という他言語にない特徴を持ちます。テンプレート・ポインタ・名前空間が使え、シェーダ言語の中で最も「普通のプログラミング言語」に近い設計です。iOS/macOS/visionOSのGPUプログラミングはすべてMSLで書きます。
+MSL (Metal Shading Language) は**AppleのMetal API専用シェーダ言語**で、Metal 1〜3では**C++14**、Metal 4以降では**C++17**を基盤に拡張と制限を加えた言語です。テンプレート・ポインタ・名前空間が使え、シェーダ言語の中で最も「普通のプログラミング言語」に近い設計です。iOS/macOS/visionOSのGPUプログラミングはすべてMSLで書きます。
 
 ## なぜ必要なのか
 
@@ -24,11 +24,12 @@ MSL (Metal Shading Language) は**AppleのMetal API専用シェーダ言語**で
 ## 歴史・誕生した背景
 
 - 2014: **Metal発表** (iOS 8) と同時にMSL登場。A7チップの性能をOpenGL ESのオーバーヘッドなしに引き出す目的
-- 設計判断: 新言語を作らず**C++14のサブセット+属性拡張**とした。LLVM/Clangをそのまま流用できる合理的選択
+- 設計判断: **C++由来の構文にGPU向けの拡張と制限**を加えた。LLVM/Clangをそのまま流用できる合理的選択
 - 2017: Metal 2 — Argument Buffers (バインドレス)、タイルシェーダ (A11)
-- 2019: macOSでOpenGL/OpenCLが非推奨に — Appleプラットフォームの唯一の選択肢へ
+- 2018: macOS Mojave 10.14でOpenGL/OpenCLが非推奨に。既存APIの即時削除とは区別する
 - 2022: Metal 3 — メッシュシェーダ、レイトレーシング強化、MetalFX (アップスケーリング)
 - 2023-: visionOS、Apple Silicon Macの普及でゲーム移植 (Game Porting Toolkit) の文脈でも注目
+- 2025: **Metal 4**。MSLの基盤がC++17へ移り、テンソルなどのML向け機能も拡張
 
 ## それ以前の技術
 
@@ -46,7 +47,7 @@ Appleエコシステム内で完結する言語です。クロスプラットフ
 
 ## 内部動作 — 言語の要点
 
-### C++14ベースの構文
+### C++由来の構文（基盤の規格はMetalの版で異なる）
 
 ```cpp
 #include <metal_stdlib>
@@ -156,9 +157,9 @@ encoder.endEncoding()
 
 ## 理解度チェック
 
-1. **MSLがC++14ベースで設計されたことの利点を2つ挙げよ。**
+1. **MSLがC++を基盤にする利点と、基盤の規格がMetalの版によって異なる点を説明せよ。**
    ::: details 解答
-   (1) LLVM/Clangという成熟したコンパイラ基盤をそのまま使え、言語仕様策定・実装コストを大幅に削減できた。(2) テンプレート・ポインタ・演算子オーバーロード等により、ジェネリックなシェーダライブラリやCPUコードとの共有ヘッダが書け、大規模シェーダ開発の生産性が高い。
+   Metal 1〜3はC++14、Metal 4以降はC++17を基盤にする。(1) LLVM/Clangという成熟したコンパイラ基盤を利用でき、言語仕様策定・実装コストを大幅に削減できた。(2) テンプレート・ポインタ・演算子オーバーロード等により、ジェネリックなシェーダライブラリやCPUコードとの共有ヘッダが書け、大規模シェーダ開発の生産性が高い。
    :::
 
 2. **タイルシェーダ(imageblock)がDeferred Renderingにもたらす利点は。**
@@ -176,3 +177,6 @@ encoder.endEncoding()
 - Apple, *Metal Shading Language Specification*
 - Apple, *Metal Best Practices Guide* / WWDCセッション各年
 - KhronosGroup/MoltenVK, KhronosGroup/SPIRV-Cross
+- [Apple: Metal Shading Language Specification §1.5](https://developer.apple.com/metal/Metal-Shading-Language-Specification.pdf)
+- [Apple: macOS Mojave 10.14 Release Notes](https://developer.apple.com/documentation/macos-release-notes/macos-mojave-10_14-release-notes)
+- [Apple: Discover Metal 4（WWDC25）](https://developer.apple.com/videos/play/wwdc2025/205/)

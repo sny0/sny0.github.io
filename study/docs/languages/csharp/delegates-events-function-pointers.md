@@ -35,18 +35,29 @@ Damaged?.Invoke(10);
 ```
 
 ```cpp
-// C++20: 分業した道具を組み合わせる(検証済み: samples/pattern_observer.cpp)
+// C++20: 分業した道具を組み合わせる（単一スレッドの説明用）
+#include <algorithm>
+#include <functional>
+#include <utility>
+#include <vector>
+
 class Health {
 public:
     using Handler = std::function<void(int)>;
     int Subscribe(Handler h) { handlers_.emplace_back(nextId_, std::move(h)); return nextId_++; }
     void Unsubscribe(int id) { std::erase_if(handlers_, [id](auto& p){ return p.first == id; }); }
-    void Notify(int dmg) { for (auto& [id, h] : handlers_) h(dmg); }
+    void TakeDamage(int dmg) { Notify(dmg); } // 公開するドメイン操作の例
 private:
+    void Notify(int dmg) {
+        const auto current = handlers_; // 呼び出し前にリストをコピー
+        for (const auto& entry : current) entry.second(dmg);
+    }
     std::vector<std::pair<int, Handler>> handlers_;
     int nextId_ = 0;
 };
 ```
+
+直接`handlers_`を走査すると、コールバック内の登録・解除によって`vector`のイテレーターが無効になります。この例は通知開始時のスナップショットを走査し、追加・解除を次の通知から反映します。解除済みでも今回のコピーに残る関数は呼ばれ得るため、対象をその場で破棄する設計では`weak_ptr`で生存を確認するなどの対策が必要です。コピーによる確保の可能性があり、スレッド間の同期も提供しません。[C++草案: vectorの無効化](https://eel.is/c++draft/vector.modifiers)
 
 ## eventキーワードに相当するもの
 
@@ -59,17 +70,37 @@ C#の `event` は「クラス外からは += / -= しかできない」(Invoke�
 - 対策の定石: **購読トークンのRAII化**(トークン破棄=自動Unsubscribe。メンバに持てば寿命と購読が連動)/ weak_ptr捕捉+lock確認
 
 ```cpp
-// RAII購読トークンの骨子
-class Subscription {   // デストラクタでUnsubscribeを呼ぶだけの小さなRAII
+// Healthは、対応する全トークンより長生きするという前提
+class Subscription {
 public:
     Subscription(Health& h, int id) : h_(&h), id_(id) {}
-    ~Subscription() { if (h_) h_->Unsubscribe(id_); }
-    // ムーブ可・コピー不可(所有権1つ)— 実装は samples を参照
+    ~Subscription() { Reset(); }
+    Subscription(const Subscription&) = delete;
+    Subscription& operator=(const Subscription&) = delete;
+    Subscription(Subscription&& other) noexcept
+        : h_(std::exchange(other.h_, nullptr)), id_(other.id_) {}
+    Subscription& operator=(Subscription&& other) noexcept {
+        if (this != &other) {
+            Reset();
+            h_ = std::exchange(other.h_, nullptr);
+            id_ = other.id_;
+        }
+        return *this;
+    }
+    void Reset() noexcept {
+        if (auto* h = std::exchange(h_, nullptr)) h->Unsubscribe(id_);
+    }
 private:
     Health* h_; int id_;
 };
 // UI部品がメンバに Subscription を持てば、部品の破棄と同時に購読も消える
 ```
+
+このトークンが保証するのは、発行元が生存している間の自動解除です。発行元が先に消える場合は、購読状態を共有しトークン側から弱参照で調べる設計などが必要です。すでに始まった通知やスナップショット内の呼び出しを取り消す保証とも区別します。
+
+## C#の関数ポインタはdelegateと別の機能
+
+C# 9以降は`unsafe`なコードで`delegate*<int, void>`などの関数ポインタも使えます。delegateのような対象インスタンスの保持やマルチキャストはなく、相互運用の呼出規約・対象の寿命を自分で管理する低水準の機能です。通常のイベントにはdelegate/eventを使い、ネイティブ境界など必要な場面で区別します。[Microsoft: 関数ポインタ](https://learn.microsoft.com/en-us/dotnet/csharp/language-reference/unsafe-code#function-pointers)
 
 ## UnityEventとの対応
 

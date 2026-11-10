@@ -3,7 +3,7 @@ title: ハードウェアレイトレーシング (DXR / Vulkan Ray Tracing)
 study:
   source: RenderingWiki
   status: published
-  summary: ハードウェアレイトレーシングは、BVH (境界ボリューム階層) の走査と三角形交差判定を専用回路 (RTコア) で加速し、シーンに対して任意のレイを飛ばせる機能です。2018年のNVIDIA Turing + DXRで幕を開け、影・反射・GI・パストレーシングという「ラスタライズが苦手な問題」への直
+  summary: ハードウェアレイトレーシングは、BVH（境界ボリューム階層）の処理のうち、ボックス・三角形の交差判定などを専用回路で加速（走査制御まで専用化する範囲はベンダー・世代による）し、シーンに対して任意のレイを飛ばせる機能です。2018年のNVIDIA Turing + DXRで幕を開け、影・反射・GI・パストレーシングという「ラスタライズが苦手な問題」への直
   section: reference
   format: article
   domain: graphics
@@ -13,7 +13,7 @@ study:
 
 ## 概要
 
-ハードウェアレイトレーシングは、**BVH (境界ボリューム階層) の走査と三角形交差判定を専用回路 (RTコア) で加速し、シーンに対して任意のレイを飛ばせる**機能です。2018年のNVIDIA Turing + DXRで幕を開け、影・反射・GI・パストレーシングという「ラスタライズが苦手な問題」への直接解を提供します。ラスタライズを置き換えるのではなく、**共存するもう一つの可視性クエリ**です。
+ハードウェアレイトレーシングは、**BVH（境界ボリューム階層）の処理のうち、ボックス・三角形の交差判定などを専用回路で加速（走査制御まで専用化する範囲はベンダー・世代による）し、シーンに対して任意のレイを飛ばせる**機能です。2018年のNVIDIA Turing + DXRで幕を開け、影・反射・GI・パストレーシングという「ラスタライズが苦手な問題」への直接解を提供します。ラスタライズを置き換えるのではなく、**共存するもう一つの可視性クエリ**です。
 
 ## なぜ必要なのか
 
@@ -159,7 +159,7 @@ void RayGen() {
 
 1. **RTコアがハードウェア化したのは何で、していないのは何か。この分担の理由は。**
    ::: details 解答
-   ハードウェア化: BVHノード(AABB)との交差判定とレイ-三角形交差判定、およびトラバーサルの制御。していない: ヒット後のシェーディング、レイの生成、BVHの構築(ドライバ/Computeで実行)。交差判定は演算パターンが固定的で頻度が桁違いに高く専用回路の効果が大きい一方、シェーディングは任意コードなので汎用コアに残すのが合理的なため。
+   ハードウェア化の代表例はBVHノード(AABB)との交差判定とレイ-三角形交差判定。NVIDIAのRTコアは走査制御も担当する一方、AMD RDNA 2/3はシェーダー側の走査と交差判定用の専用回路を組み合わせるなど、分担はベンダー・世代による。通常のシェーダー等が行うのは: ヒット後のシェーディング、レイの生成、BVHの構築(ドライバ/Computeで実行)。交差判定は演算パターンが固定的で頻度が桁違いに高く専用回路の効果が大きい一方、シェーディングは任意コードなので汎用コアに残すのが合理的なため。
    :::
 
 2. **影レイが「最初のヒットで打ち切れる」のはなぜか。Closest Hitが不要な理由と合わせて述べよ。**
@@ -178,3 +178,5 @@ void RayGen() {
 - NVIDIA, *"Introduction to NVIDIA RTX and DirectX Ray Tracing"* / *Ray Tracing Gems I & II* (無料公開)
 - Khronos, *Vulkan Ray Tracing Best Practices*
 - *Physically Based Rendering* (pbrt) — 理論の標準教科書
+- [AMD: RDNA performance guide — ray traversal](https://gpuopen.com/learn/rdna-performance-guide/)
+- [NVIDIA: Turing GPU architecture](https://images.nvidia.com/aem-dam/en-zz/Solutions/design-visualization/technologies/turing-architecture/NVIDIA-Turing-Architecture-Whitepaper.pdf)

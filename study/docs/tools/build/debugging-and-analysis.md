@@ -25,7 +25,7 @@ MSVC:      /W4                    # /Wallはシステムヘッダーまで鳴る
 ```
 
 - 検出例: 未初期化の可能性、符号比較、到達しないコード、enum switchの網羅漏れ(→ [enum](/languages/cpp/enums-and-namespaces.html))、[UB](/languages/cpp/undefined-behavior.html)の前兆多数
-- **プロジェクト開始時に最大化して-Werror**が鉄則。途中から上げると数千件のノイズで詰む。サードパーティのヘッダーは警告抑制の対象外にする(SYSTEMインクルード扱い)
+- **プロジェクト開始時に最大化して-Werror**が鉄則。途中から上げると数千件のノイズで詰む。サードパーティのヘッダーを警告の対象外にするには、CMakeの`target_include_directories(... SYSTEM ...)`などでsystem headerとして扱う。実際に抑制される警告はコンパイラとオプションによる
 
 ## 2. 静的解析(コンパイル時+α)
 
@@ -102,3 +102,4 @@ samples/ の任意のサンプルに意図的な範囲外アクセスを仕込�
 ---
 
 関連項目：[ビルド時間](/tools/build/build-speed.html) / [学習ガイド](/tools/build/) / [リンクエラー](/tools/build/link-errors.html)
+- [CMake: target_include_directoriesのSYSTEM指定](https://cmake.org/cmake/help/latest/command/target_include_directories.html)

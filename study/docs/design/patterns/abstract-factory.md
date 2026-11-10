@@ -94,7 +94,7 @@ public:
     std::unique_ptr<IDialog> CreateDialog() override { return std::make_unique<PadDialog>(); }
 };
 
-// 画面構築コードはプラットフォームを知らない。混在はConcreteFactory内に閉じるので起きない
+// 画面構築コードはプラットフォームを知らない。組み合わせの決定をConcreteFactoryへ集める
 void BuildSettingsScreen(IUiFactory& factory) {
     auto button = factory.CreateButton();
     auto dialog = factory.CreateDialog();
@@ -118,7 +118,7 @@ public class UiTheme : ScriptableObject {          // これがConcreteFactory�
 // PC用ThemeアセットとPad用Themeアセットを作り、起動時にどちらかを差す
 ```
 
-「一族の整合性をアセット1個にまとめて保証する」— Unityではクラス階層よりデータで表現します。
+一族の組み合わせをアセット1個へまとめて確認します。Unityではクラス階層よりデータで表現できますが、誤ったPrefabの組み合わせを割り当てないよう、アセットの検証は必要です。
 
 ## ゲームでの具体例
 
@@ -128,7 +128,7 @@ public class UiTheme : ScriptableObject {          // これがConcreteFactory�
 
 ## 利点
 
-- 一族の組み合わせ整合性が**構造で保証**される(混在バグがコンパイル時に消える)
+- 一族の組み合わせをConcreteFactoryへ局所化できる。ただし`PadUiFactory`が`PcDialog`を返しても型としては正しいので、この例だけで混在をコンパイル時に防ぐ保証はない。各ファクトリのテストやアセット検証で確認する
 - 一族の切り替えがファクトリ1個の差し替えで済む
 - クライアントが具象から完全に独立
 

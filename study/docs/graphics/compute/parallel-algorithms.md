@@ -27,7 +27,7 @@ study:
 - 回路的起源: 桁上げ先読み加算器 (carry-lookahead adder) は本質的にScan
 - 2007: Mark Harris の *"Optimizing Parallel Reduction in CUDA"* がGPU実装の教科書に
 - 2010年代: CUB/Thrust (CUDA) がライブラリ化。グラフィックス側でもDX11世代からライトカリング・パーティクルで常用
-- 現在: **Wave命令によりWave幅の部分はハードウェア1命令** (`WavePrefixSum`) になり、実装は簡潔化。single-pass scan (decoupled look-back) などの発展形も定着
+- 現在: **Wave命令（`WavePrefixSum`等）でWave内の集団演算を表現**でき、実装を簡潔にできる。対応する機械命令数はGPU・コンパイラーによる。single-pass scan（decoupled look-back）等の発展形もある
 
 ## それ以前の技術
 
@@ -85,7 +85,7 @@ flowchart TB
 2. グループ合計の配列を (別ディスパッチで) Scan
 3. 各グループの要素に「自グループより前の総和」を加算
 
-3ディスパッチ構成が基本形。1パスで済ませる **decoupled look-back** (Merrill & Garland 2016) が高速実装の現在形です。
+3ディスパッチ構成が基本形です。各段の書き込みを次段から読めるよう、APIで必要なメモリ依存・バリアも指定します。1パスで済ませる **decoupled look-back**（Merrill & Garland 2016）は、グループ間でatomicと状態フラグを使って通信する発展形です。ただし、メモリ可視性と実行の前進を成立させる設計が必要で、任意のグループ間スピン待ちが安全になるわけではありません。
 
 ## 各環境での扱い
 
@@ -103,38 +103,48 @@ Niagaraのパーティクルコンパクション、Naniteのクラスタカリ�
 
 ## コード例
 
-Wave命令を使ったモダンなグループ内Exclusive Scan (HLSL SM6.0):
+まず、Wave幅やWaveと`SV_GroupIndex`の対応に依存しない、256スレッド固定のBlelloch Exclusive Scanを示します。説明用の断片で、全スレッドが同じ回数バリアへ到達する必要があります。Wave命令による高速化を加える場合も、単に`gi / WaveGetLaneCount()`をWave IDとして使えると決めつけず、対象の実行モデルを確認します。
 
 ```hlsl
-// 256要素のグループ内exclusive scan (Wave幅非依存)
-groupshared uint sWaveSums[8];   // 256/32 = 最大8 Wave
+// 256要素のグループ内exclusive scan。uintの加算は32bit範囲内で使う
+groupshared uint sScan[256];
 
 uint GroupExclusiveScan(uint value, uint gi) {
-    uint laneScan  = WavePrefixSum(value);            // Wave内scan (1命令)
-    uint waveId    = gi / WaveGetLaneCount();
-    uint waveTotal = WaveActiveSum(value);
-
-    if (WaveGetLaneIndex() == WaveGetLaneCount() - 1) // 各Waveの合計を記録
-        sWaveSums[waveId] = laneScan + value;
+    sScan[gi] = value;
     GroupMemoryBarrierWithGroupSync();
 
-    // 先頭WaveがWave合計たちをscan (Wave数 <= Wave幅 前提)
-    if (waveId == 0) {
-        uint ws = (gi < 8) ? sWaveSums[gi] : 0;
-        sWaveSums[gi] = WavePrefixSum(ws);
+    // Up-sweep: 各部分木の和
+    for (uint upStride = 1; upStride < 256; upStride <<= 1) {
+        uint upIndex = (gi + 1) * (2 * upStride) - 1;
+        if (upIndex < 256) sScan[upIndex] += sScan[upIndex - upStride];
+        GroupMemoryBarrierWithGroupSync();
     }
+    if (gi == 0) sScan[255] = 0; // Exclusive Scanの根
     GroupMemoryBarrierWithGroupSync();
 
-    return laneScan + sWaveSums[waveId];              // Wave内 + 前Wave分
+    // Down-sweep: 左の和を保存し、親からprefixを配る
+    for (uint downStride = 128; downStride > 0; downStride >>= 1) {
+        uint downIndex = (gi + 1) * (2 * downStride) - 1;
+        if (downIndex < 256) {
+            uint leftSum = sScan[downIndex - downStride];
+            sScan[downIndex - downStride] = sScan[downIndex];
+            sScan[downIndex] += leftSum;
+        }
+        GroupMemoryBarrierWithGroupSync();
+    }
+    return sScan[gi];
 }
 
-// 利用例: 視錐台カリング済みインスタンスのコンパクション
+// 利用例。gGroupBase[gid.x]は、各グループの総数を別段でscanした開始位置
 [numthreads(256, 1, 1)]
-void CompactCS(uint3 dtid : SV_DispatchThreadID, uint gi : SV_GroupIndex) {
-    bool visible = TestVisible(dtid.x);
+void CompactCS(uint3 dtid : SV_DispatchThreadID, uint gi : SV_GroupIndex,
+               uint3 gid : SV_GroupID) {
+    bool visible = false;
+    if (dtid.x < gInputCount) visible = TestVisible(dtid.x);
+    // 範囲外スレッドも0を入力して、全員がバリアへ到達する
     uint offset  = GroupExclusiveScan(visible ? 1u : 0u, gi);
     if (visible)
-        gVisible[gGroupBase + offset] = dtid.x;
+        gVisible[gGroupBase[gid.x] + offset] = dtid.x;
 }
 ```
 
@@ -146,14 +156,13 @@ groupshared float sLum[64];
 [numthreads(64, 1, 1)]
 void LumReduceCS(uint gi : SV_GroupIndex, uint3 gid : SV_GroupID) {
     float lum = ComputeLuminance(LoadTile(gid, gi));  // 各自の担当分
-    lum = WaveActiveSum(lum);                          // Wave内は1命令
-    if (WaveIsFirstLane()) sLum[gi / WaveGetLaneCount()] = lum;
+    sLum[gi] = lum;
     GroupMemoryBarrierWithGroupSync();
-    if (gi == 0) {
-        float total = 0;
-        for (uint i = 0; i < 64 / WaveGetLaneCount(); ++i) total += sLum[i];
-        gPartialSums[gid.x] = total;                   // 次段のディスパッチへ
+    for (uint stride = 32; stride > 0; stride >>= 1) {
+        if (gi < stride) sLum[gi] += sLum[gi + stride];
+        GroupMemoryBarrierWithGroupSync();
     }
+    if (gi == 0) gPartialSums[gid.x] = sLum[0]; // 次段へ。要素数は別に管理する
 }
 ```
 
@@ -176,7 +185,7 @@ void LumReduceCS(uint gi : SV_GroupIndex, uint3 gid : SV_GroupID) {
 
 2. **Reductionで「グループ内はShared/Wave、グループ間は複数ディスパッチ」とする理由は。**
    ::: details 解答
-   同期の可能な範囲が異なるため。グループ内はバリアとShared/Wave命令で協調できるが、グループ間には同期手段がない(実行順序も並行性も保証されない)。よってグループ間の集約はディスパッチ境界(すべてのグループの完了が保証される点)を挟んで次段に渡す。
+   同期の可能な範囲が異なるため。グループ内はバリアとShared/Wave命令で協調できるが、通常のdispatchに全グループのバリアや任意の前進保証はない。グループ間のatomic通信自体は可能でも、単純な相互待ちはデッドロックしうる。移植しやすい基本形はdispatchを分割し、必要なAPIのメモリ依存・バリアで前段の書き込みを次段へ渡す。decoupled look-backのような単一dispatch手法には、別途可視性と前進を成立させる設計が要る。
    :::
 
 3. **Atomicカウンタ (`InterlockedAdd`) によるコンパクションとScanベースのコンパクションの違いは何か。**
@@ -190,3 +199,7 @@ void LumReduceCS(uint gi : SV_GroupIndex, uint3 gid : SV_GroupID) {
 - Mark Harris, *"Optimizing Parallel Reduction in CUDA"* (2007)
 - Merrill & Garland, *"Single-pass Parallel Prefix Scan with Decoupled Look-back"* (2016)
 - NVIDIA CUB / Thrust ライブラリのソース
+- [Blelloch: Prefix Sums and Their Applications](https://www.cs.cmu.edu/~guyb/papers/Ble93.pdf)
+- [Merrill & Garland: Single-pass Parallel Prefix Scan with Decoupled Look-back](https://research.nvidia.com/publication/2016-03_single-pass-parallel-prefix-scan-decoupled-look-back)
+- [Microsoft: HLSL Wave Intrinsics](https://github.com/microsoft/DirectXShaderCompiler/wiki/Wave-Intrinsics)
+- [Microsoft: Waveとgroup indexの対応を仮定しない (SM6.10の解説)](https://devblogs.microsoft.com/directx/shader-model-6-10-agilitysdk-720-preview/)

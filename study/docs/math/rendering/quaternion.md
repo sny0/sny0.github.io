@@ -115,10 +115,10 @@ glm::quat Interpolate(glm::quat a, glm::quat b, float t) {
     return glm::normalize(glm::slerp(a, b, t));
 }
 
-// 軸回転の合成: ヨー(Y軸)→ピッチ(X軸)の順で適用されるカメラ回転
+// 固定したワールド軸で読むとX軸ピッチ→Y軸ヨーの順に適用する
 glm::quat yaw   = glm::angleAxis(yawRad,   glm::vec3(0, 1, 0));
 glm::quat pitch = glm::angleAxis(pitchRad, glm::vec3(1, 0, 0));
-glm::quat camRot = yaw * pitch;          // 右側が先に適用される
+glm::quat camRot = yaw * pitch;          // 右側が先。ローカル軸で読めばヨー→回転後のX軸ピッチ
 glm::vec3 forward = camRot * glm::vec3(0, 0, -1);
 ```
 

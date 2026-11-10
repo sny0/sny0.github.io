@@ -67,7 +67,7 @@ inline float Clamp01(float v) { return v < 0 ? 0 : (v > 1 ? 1 : v); }
 
 現代の `inline` の実質的な意味は「**この定義が複数の翻訳単位に現れてもリンクエラーにしない**([ODR](/runtime/cpp-internals/translation-units-and-headers.html)の例外)」です。
 
-- ヘッダーに関数の**定義**を書くなら inline が必要(クラス定義内に書いたメンバ関数は暗黙にinline)
+- 通常の外部リンケージの非テンプレート関数を、複数の翻訳単位で読み込むヘッダーに定義するなら`inline`などでODRを守る。クラス定義内のメンバー関数は、名前付きモジュールに属さない場合は暗黙にinline。C++20の名前付きモジュール内ではこの暗黙指定はない。[C++草案: inline](https://eel.is/c++draft/dcl.inline)
 - **インライン展開されるかどうかは最適化器が決める**。inlineキーワードはほぼ影響しない(→ [inlineの実際](/runtime/cpp-internals/template-instantiation-and-inline.html))
 - C++17から変数にも使える(`inline static` メンバ、ヘッダー内グローバル定数)
 
@@ -99,7 +99,7 @@ private:
 
 - `inline static` メンバ: 全インスタンス共有のカウンタ、設定
 - 関数内static: 遅延初期化(ただしマルチスレッドの破棄順に注意 → [Singleton](/design/patterns/singleton.html))
-- ヘッダーのinline関数: 数学ユーティリティ(Clamp, Lerp)— 展開されて高速
+- ヘッダーのinline関数: 数学ユーティリティ(Clamp, Lerp)。定義が見えることで展開の機会があるが、展開と高速化を保証するキーワードではない。
 - friend: エンジンの内部連携(SceneがNodeの内部を直接組み替える等)
 
 ## メモリ・ビルド上で起きること

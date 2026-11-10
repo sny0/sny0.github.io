@@ -1021,7 +1021,7 @@
       "section": "reference",
       "format": "article",
       "status": "published",
-      "summary": "Behavior Tree(BT、行動ツリー): AIの行動選択を「毎フレーム、木の根から評価し直す」ツリーで表す。優先度と条件分岐の構造化に強く、FSMの「遷移の絡まり」を解消する",
+      "summary": "Behavior TreeはAIの行動選択を条件と優先度の木で表す。毎Tick評価する単純な実装と、UEのようなイベント駆動の再評価を区別し、Blackboardで知識を受け渡す。",
       "source": "C++ Wiki",
       "aliases": [],
       "links": [
@@ -2442,7 +2442,7 @@
       "section": "reference",
       "format": "article",
       "status": "published",
-      "summary": "Component パターン: ゲームオブジェクトを「機能の部品(コンポーネント)の入れ物」にする。継承ツリーの爆発を防ぐ、Unityの基本構造。 ECS (Entity Component System): さらに進めて、データ(Component)とロジック(System)を完全に分離し、データ",
+      "summary": "オブジェクトに機能の部品を付けるComponentパターンと、ID・データ・処理を分けるECSを比較する。組み合わせの柔軟性、データ配置、更新方式を見て、採用の条件と代償を考える。",
       "source": "C++ Wiki",
       "aliases": [
         "ECS",
@@ -2450,6 +2450,7 @@
         "エンティティ・コンポーネント・システム"
       ],
       "links": [
+        "/game/ecs.html",
         "/design/foundations/inheritance-delegation-composition.html",
         "/design/patterns/observer.html",
         "/runtime/cpp-internals/cache-branch-simd.html",
@@ -2698,7 +2699,7 @@
       "section": "reference",
       "format": "article",
       "status": "published",
-      "summary": "CUDA (NVIDIA, 2007) と OpenCL (Khronos, 2009) は、グラフィックスAPIから独立した汎用GPU計算 (GPGPU) のためのプラットフォームです。ゲーム開発では Compute Shader が主役ですが、CUDAは機械学習・オフラインレンダリング・ツール開",
+      "summary": "CUDA (NVIDIA, 2007) と OpenCL (Khronos, 2008年仕様公開) は、グラフィックスAPIから独立した汎用GPU計算 (GPGPU) のためのプラットフォームです。ゲーム開発では Compute Shader が主役ですが、CUDAは機械学習・オフラインレンダリング・ツール開",
       "source": "RenderingWiki",
       "aliases": [],
       "links": [
@@ -4457,7 +4458,7 @@
       "section": "reference",
       "format": "article",
       "status": "published",
-      "summary": "MetalはAppleの明示的グラフィックス/コンピュートAPIです (2014)。明示的API世代で最初に出荷されたにもかかわらず、DX12/Vulkanより大幅に書きやすいのが特徴で、「明示性と人間工学のバランス」の成功例とされます。iOS/macOS/visionOSの唯一の第一級APIであり",
+      "summary": "MetalはAppleの明示的グラフィックス/コンピュートAPIです (2014)。DX12/Vulkanより先に出荷され、DX12/Vulkanより大幅に書きやすいのが特徴で、「明示性と人間工学のバランス」の成功例とされます。iOS/macOS/visionOSの唯一の第一級APIであり",
       "source": "RenderingWiki",
       "aliases": [],
       "links": [
@@ -4476,7 +4477,7 @@
       "section": "reference",
       "format": "article",
       "status": "published",
-      "summary": "MSL (Metal Shading Language) はAppleのMetal API専用シェーダ言語で、C++14ベースという他言語にない特徴を持ちます。テンプレート・ポインタ・名前空間が使え、シェーダ言語の中で最も「普通のプログラミング言語」に近い設計です。iOS/macOS/visionO",
+      "summary": "AppleのMetal用シェーダー言語。C++由来の構文、アドレス空間、タイル処理、コンパイルの仕組みを扱い、Metal 1〜3とMetal 4以降の言語基盤を区別する。",
       "source": "RenderingWiki",
       "aliases": [],
       "links": [
@@ -5283,7 +5284,7 @@
       "section": "reference",
       "format": "article",
       "status": "published",
-      "summary": "> モジュール(クラス・関数・ファイル)を変更する理由は、ただ1つであるべきである。 原文のニュアンスは「A module should be responsible to one, and only one, actor(モジュールはただ1つのアクター=変更を要求する人々に対して責任を負うべき)」",
+      "summary": "SRPは変更理由を分ける原則。クラスの変更理由を一つにするという初期の説明と、後年のアクターに対する責任という説明を区別し、凝集したモジュールを設計する。",
       "source": "C++ Wiki",
       "aliases": [],
       "links": [
@@ -6342,7 +6343,7 @@
         "ローパスフィルター",
         "カットオフ"
       ],
-      "verification": "W3C Web Audio APIのAudioParamとBiquadFilterNodeの仕様に照合（2026-11-06）",
+      "verification": "W3C Web Audio APIのAudioParam・BiquadFilterNodeの仕様、cancelAndHoldAtTimeの対応状況と代替時の制約を確認（2026-11-11）",
       "links": [
         "/browser/audio-occlusion.html",
         "/browser/audio-gain-automation.html",
@@ -7022,7 +7023,7 @@
       "section": "reference",
       "format": "article",
       "status": "published",
-      "summary": "WGSL (WebGPU Shading Language) はWebGPUのために新規設計されたシェーダ言語です (2023年、W3C)。Web実行の安全性要求から、未定義動作の排除・厳密な型システム・仕様の完全な形式化を特徴とします。Rustに似た構文を持ち、ブラウザ内で各ネイティブAPI (D",
+      "summary": "WebGPUで使うシェーダー言語。型・バインディング・アドレス空間を読み、検証、実行時エラー、uniformity解析と、各APIへの変換を調べる。",
       "source": "RenderingWiki",
       "aliases": [],
       "links": [
@@ -8561,7 +8562,6 @@
         "/languages/cpp/raii.html",
         "/languages/cpp/smart-pointers.html",
         "/languages/csharp/destructor-dispose-raii-using.html",
-        "/languages/cpp/exceptions.html",
         "/runtime/memory/ownership-and-borrowing.html",
         "/languages/cpp/structs-and-classes.html",
         "/languages/cpp/"
@@ -9717,7 +9717,7 @@
       "section": "reference",
       "format": "article",
       "status": "published",
-      "summary": "ハードウェアレイトレーシングは、BVH (境界ボリューム階層) の走査と三角形交差判定を専用回路 (RTコア) で加速し、シーンに対して任意のレイを飛ばせる機能です。2018年のNVIDIA Turing + DXRで幕を開け、影・反射・GI・パストレーシングという「ラスタライズが苦手な問題」への直",
+      "summary": "ハードウェアレイトレーシングは、BVH（境界ボリューム階層）の処理のうち、ボックス・三角形の交差判定などを専用回路で加速（走査制御まで専用化する範囲はベンダー・世代による）し、シーンに対して任意のレイを飛ばせる機能です。2018年のNVIDIA Turing + DXRで幕を開け、影・反射・GI・パストレーシングという「ラスタライズが苦手な問題」への直",
       "source": "RenderingWiki",
       "aliases": [
         "Vulkan",
@@ -10493,7 +10493,6 @@
         "/design/solid/isp.html",
         "/languages/cpp/inheritance-and-virtual.html",
         "/design/case-studies/player-input.html",
-        "/languages/csharp/virtual-and-polymorphism.html",
         "/game/unreal/delegates-and-interfaces.html",
         "/design/decisions/create-interface.html",
         "/design/foundations/inheritance-delegation-composition.html",
@@ -10937,11 +10936,10 @@
       "section": "reference",
       "format": "article",
       "status": "published",
-      "summary": "リフレクション=「実行時に型の情報(クラス名・プロパティ一覧・関数一覧)を調べ、操作できる仕組み」。C#では言語標準(GetType()、属性)ですが、C++にはほぼ存在しない(RTTIは型の同定のみ)。UEはこれをコード生成で自作しました——UCLASS()等のマクロとUnreal Header",
+      "summary": "UEの実行時リフレクションをUCLASS・UPROPERTYとUHTのコード生成から説明する。C#の実行時メタデータ、C++26の静的リフレクション、UE独自の登録・GC・エディタ連携を区別する。",
       "source": "C++ Wiki",
       "aliases": [],
       "links": [
-        "/runtime/cpp-internals/exceptions-and-rtti-impl.html",
         "/game/unreal/build-system-ubt.html",
         "/runtime/cpp-internals/symbols-and-linkage.html",
         "/game/unreal/gc-and-object-pointers.html",
@@ -12204,6 +12202,7 @@
       "links": [
         "/languages/cpp/smart-pointers.html",
         "/game/patterns/object-pool.html",
+        "/runtime/memory/gc-and-csharp-comparison.html",
         "/runtime/memory/storage-duration-and-lifetime.html",
         "/runtime/memory/",
         "/runtime/memory/memory-bugs.html"
@@ -14096,6 +14095,7 @@
       "aliases": [],
       "links": [
         "/runtime/cpp-internals/optimization-and-ub.html",
+        "/design/foundations/tech-debt-and-refactoring.html",
         "/design/foundations/quality-attributes.html",
         "/design/decisions/cpp-choices.html",
         "/design/decisions/",
@@ -14467,7 +14467,7 @@
       "section": "reference",
       "format": "article",
       "status": "published",
-      "summary": "C++標準は、すべてのコードの動作を定義していません。「定義されていない度合い」に3段階あります。 未定義動作 (UB: Undefined Behavior): 標準が一切の要求をしない。何が起きてもよい(クラッシュ、黙って壊れる、たまたま動く)。プログラムに含めてはいけない",
+      "summary": "未定義動作・実装定義・未規定動作を区別し、C++26草案のerroneous behaviorと未初期化値の扱いも確認する。",
       "source": "C++ Wiki",
       "aliases": [],
       "links": [

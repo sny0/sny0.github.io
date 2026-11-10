@@ -17,7 +17,8 @@ public:
     void Publish(const E& e) {
         auto it = handlers_.find(typeid(E));
         if (it == handlers_.end()) return;
-        for (auto& h : it->second) h(&e);
+        auto snapshot = it->second; // 単一スレッドで、通知中の新規購読は次回から反映
+        for (auto& h : snapshot) h(&e);
     }
 private:
     std::unordered_map<std::type_index, std::vector<std::function<void(const void*)>>> handlers_;

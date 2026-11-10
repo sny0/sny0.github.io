@@ -30,7 +30,8 @@ study:
 node->Accept(visitor)
    │ 仮想呼び出し1回目: nodeの実際の型が判明
    └─> SpriteNode::Accept { visitor.Visit(*this); }
-          │ オーバーロード解決2回目: visitorの実際の型で処理が決まる
+          │ ここで静的にVisit(SpriteNode&)を選ぶ(オーバーロード解決)
+          │ 仮想呼び出し2回目: visitorの動的型で実装を選ぶ
           └─> SaveVisitor::Visit(SpriteNode&) が実行される
 「実行時の型」×「操作」の2軸で処理が選ばれる = double dispatch
 ```
@@ -111,10 +112,21 @@ private:
 閉じた型集合なら、継承なしで同じ問題を解けます。
 
 ```cpp
-// using Node = std::variant<SpriteNode, MeshNode>;
-// std::visit([](auto& n) { /* 型ごとの処理(overloadedイディオム) */ }, node);
-// 型の追加漏れはコンパイルエラーで検出される。現代C++ではこちらが第一候補になりつつある
+#include <variant>
+
+template<class... F> struct Overloaded : F... { using F::operator()...; };
+template<class... F> Overloaded(F...) -> Overloaded<F...>;
+
+using Node = std::variant<SpriteNode, MeshNode>;
+int CountPolygons(Node& node) {
+    return std::visit(Overloaded{
+        [](SpriteNode&) { return 2; },
+        [](MeshNode&) { return 1000; } // 実際はメッシュのデータを読む
+    }, node);
+}
 ```
+
+このように各型を明示し、未知の型を受ける汎用ラムダや暗黙変換の受け皿を置かなければ、未対応の型をvariantへ追加したときにコンパイルで検出できます。`[](auto& n) { ... }`だけなら新しい型も受け取れるので、追加漏れを自動検出する保証にはなりません。[std::visitの適格性要件](https://eel.is/c++draft/variant.visit)
 
 (→ [STL/型の道具](/languages/cpp/stl.html)。variantは値セマンティクスなので、ポインタ階層で運用する既存構造には従来Visitorが残ります)
 
@@ -123,7 +135,7 @@ private:
 C#ではパターンマッチングが同じ問題の主要解です。
 
 ```csharp
-// C# 8+ のswitch式: dynamic_cast連鎖より安全で読める(ただし型追加の漏れ検出は既定では警告どまり)
+// C# 8+ のswitch式。この例は未知の型を実行時の例外で検出する。
 int CountPolygons(SceneNode node) => node switch {
     SpriteNode s => 2,
     MeshNode m   => m.PolyCount,
@@ -131,7 +143,9 @@ int CountPolygons(SceneNode node) => node switch {
 };
 ```
 
-フルVisitor(Accept/Visit)をC#で組む価値があるのは、型追加漏れを**コンパイルエラーで**強制検出したい大規模な階層に限られます。
+`_ => throw`が全入力を受けるので、型を追加しても網羅性の警告は出ません。また、開いたクラス階層の全サブクラスをC#コンパイラが列挙して、型追加の漏れを検出するわけではありません。[C#のswitch式と網羅性](https://learn.microsoft.com/en-us/dotnet/csharp/language-reference/operators/switch-expression)
+
+従来Visitorなら、新しい型に対応する抽象`Visit`メンバーをインターフェースへ追加することで、実装していないConcreteVisitorをコンパイルで検出できます。新しいElementを作るだけで自動検出されるわけではなく、Visitor側の型一覧も更新する規律が必要です。
 
 ## ゲームでの具体例
 

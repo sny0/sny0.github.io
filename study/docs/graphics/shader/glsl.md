@@ -98,7 +98,7 @@ layout(push_constant) uniform Push { vec4 tint; } pc;
 ## 各環境での扱い
 
 ### Unity
-開発者が直接書くことは通常ありません。HLSLからの変換ターゲット (GLES/GL Core向け) として内部的に生成されます。生成結果はFrame Debuggerのシェーダ逆コンパイルで確認可能。
+開発者が直接書くことは通常ありません。HLSLからの変換ターゲット (GLES/GL Core向け) として内部的に生成されます。生成結果はShaderアセットを選んだInspectorの**Compile and show code**から対象APIを選んで確認します。表示できる内容はUnityの版・シェーダー・対象APIによります。Frame Debuggerは描画イベントや状態の確認に使い、シェーダーの逆コンパイル表示とは区別します。
 
 ### Unreal Engine
 同様にHLSL (USF) からのクロスコンパイルターゲット。Android (Vulkan/GLES) 向けにSPIR-V経由で生成されます。
@@ -199,3 +199,4 @@ CPU側では、各メンバーのオフセット、配列・行列のストラ�
 - LearnOpenGL (Joey de Vries) — GLSL実践の定番教材
 - KhronosGroup/glslang — リファレンスコンパイラ
 - Shadertoy — GLSLフラグメントシェーダの実験場
+- [Unity: Shader assets（Shader Inspector）](https://docs.unity3d.com/2022.3/Documentation/Manual/class-Shader.html)

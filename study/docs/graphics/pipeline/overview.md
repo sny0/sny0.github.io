@@ -75,11 +75,11 @@ flowchart TB
 | ステージ | 入力 | 出力 | 実行回数 |
 |---|---|---|---|
 | Input Assembler | バッファ+頂点レイアウト | 頂点列 | — |
-| [Vertex Shader](/graphics/pipeline/vertex-shader.html) | 1頂点 | クリップ空間座標+属性 | 頂点数 |
+| [Vertex Shader](/graphics/pipeline/vertex-shader.html) | 1頂点 | クリップ空間座標+属性 | 頂点入力に応じて実行。結果を再利用する場合あり |
 | [Tessellation](/graphics/pipeline/tessellation.html) | パッチ | 細分化された頂点群 | パッチ数 |
 | [Geometry Shader](/graphics/pipeline/geometry-shader.html) | 1プリミティブ | 0〜N個のプリミティブ | プリミティブ数 |
 | [ラスタライザ](/graphics/pipeline/rasterization.html) | 三角形 | フラグメント+補間属性 | — |
-| [Fragment Shader](/graphics/pipeline/fragment-shader.html) | 1フラグメント | 色 (+深度) | カバーされたピクセル数 |
+| [Fragment Shader](/graphics/pipeline/fragment-shader.html) | 1フラグメント | 色 (+深度) | 重なり・サンプル・補助実行等で変わる |
 | [Output Merger](/graphics/pipeline/output-merger.html) | 色+深度 | 合成済みピクセル | — |
 
 ### 物理的な実行のされ方 — 重要な誤解の訂正
@@ -127,7 +127,7 @@ Nanite (UE5) は第3のパターンの代表で、小さい三角形はCompute S
 「パイプライン1周」を最小のシェーダペアで (HLSL):
 
 ```hlsl
-// ---- Vertex Shader: 頂点ごとに1回 ----
+// ---- Vertex Shader: 一つの頂点入力を処理 ----
 struct VSIn  { float3 pos : POSITION; float3 color : COLOR; };
 struct VSOut { float4 pos : SV_Position; float3 color : COLOR; };
 
@@ -138,7 +138,7 @@ VSOut VSMain(VSIn i) {
     return o;
 }
 
-// ---- Fragment Shader: カバーされたピクセルごとに1回 ----
+// ---- Fragment Shader: 補間された入力から色を計算 ----
 float4 PSMain(VSOut i) : SV_Target {
     return float4(i.color, 1.0);  // 補間済みの色が届く
 }
@@ -162,14 +162,14 @@ float4 PSMain(VSOut i) : SV_Target {
 
 ## 理解度チェック
 
-1. **論理パイプラインの各ステージのうち、今日でも固定機能ハードウェアで実行されるものを3つ挙げ、なぜシェーダ化されないのか考察せよ。**
+1. **論理パイプラインの固定機能段階を3つ挙げ、物理回路との対応で注意する点を説明せよ。**
    ::: details 解答
-   Input Assembler、ラスタライザ、Output Merger (ROP)。いずれも(1)全描画で必ず実行される頻出処理であり、(2)処理内容の自由度要求が低く、(3)専用回路の方が電力・面積効率が桁違いに良いため。特にラスタライザのエッジ判定とROPの順序保証付きブレンドは並列化との相性が特殊で、汎用コアで代替すると大幅に遅くなる。
+   論理的な固定機能段階の例はInput Assembler、ラスタライザ、Output Merger。三角形のカバレッジ判定や順序付きブレンドなどは専用回路で効率よく処理するGPUが多い。ただしAPIの論理段階と物理回路は一対一ではなく、頂点フェッチをシェーダーで実装するGPUや、Computeでラスタライズする経路もある。IAとVertex Pullingの性能差も実装と負荷によって計測する。
    :::
 
 2. **「Vertex ShaderとFragment Shaderは同じハードウェアで動く」— これはいつから、なぜ可能になったか。**
    ::: details 解答
-   2006年の統合シェーダアーキテクチャ (NVIDIA G80、Xbox 360 Xenos) 以降。シェーダ処理を汎用のSIMTプロセッサ上のプログラムとして実行する設計になり、負荷に応じて頂点/ピクセルに同じ演算資源を動的配分できるようになった。
+   コンソールではXbox 360のXenos（2005年）、PCではNVIDIA G80（2006年）などの統合シェーダアーキテクチャ以降。シェーダ処理を汎用のSIMTプロセッサ上のプログラムとして実行する設計になり、負荷に応じて頂点/ピクセルに同じ演算資源を動的配分できるようになった。
    :::
 
 3. **PSO (Pipeline State Object) は、パイプラインのどの範囲を1つに固めたものか。**
@@ -179,7 +179,9 @@ float4 PSMain(VSOut i) : SV_Target {
 
 ## 参考資料
 
-- Fabien Giesen, *"A trip through the Graphics Pipeline 2011"* — 本章全体の最良の副読本
+- Fabian Giesen, *"A trip through the Graphics Pipeline 2011"* — 本章全体の最良の副読本
 - Real-Time Rendering 4th ed., Chapter 2 "The Graphics Rendering Pipeline"
 - Microsoft Learn, *Direct3D 12 graphics pipeline*
 - Vulkan Specification, Chapter 9 "Pipelines"
+- [Fabian Giesen: Graphics Pipeline 2011](https://fgiesen.wordpress.com/2011/07/09/a-trip-through-the-graphics-pipeline-2011-index/)
+- [Michael Doggett（ATI）: Xenos（2005年）](https://fileadmin.cs.lth.se/cs/Personal/Michael_Doggett/talks/x05-xenos-doggett.pdf)

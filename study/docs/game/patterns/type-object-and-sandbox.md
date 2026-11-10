@@ -161,7 +161,7 @@ int Execute(const std::vector<std::uint8_t>& code, const std::vector<int>& stats
 - 失: **デバッガが効かない**(自作VMの中はブレークポイントを張れない。デバッグ表示・逆アセンブラを自作する羽目に)。命令セットの設計・保守という言語処理系の仕事を抱え込む
 - 使わない: 定義したい振る舞いが少ない・単純(Type Objectのデータ+数個の分岐で足りる)。既存スクリプト言語(Lua)で済む——**自作VMはLua導入すら重い制約(実行環境・審査・超軽量要件)があるときの手段**
 
-実例: ポケモンの技エフェクト(原典の例)、MOD対応ゲームのスクリプト、シェーダ(GPUに送るバイトコード)、そして**UnityのIL2CPPが変換するIL自体**もバイトコードです(→ [IL2CPP](/languages/csharp/il2cpp.html))。
+原典の例は、魔法使い同士が戦うゲームで呪文を命令列として表すものです。[Game Programming PatternsのBytecode章](https://gameprogrammingpatterns.com/bytecode.html)。MOD対応ゲームのスクリプトやシェーダの中間コードなどにも命令列を解釈・コンパイルする考え方が現れ、**UnityのIL2CPPが変換するIL自体**もバイトコードです(→ [IL2CPP](/languages/csharp/il2cpp.html))。
 
 ---
 

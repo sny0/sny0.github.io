@@ -22,7 +22,7 @@ timeline
     1990年代前半-1996 : PCソフトウェアレンダリング (DOOM, Quake)
     1996-1999 : 固定機能GPU時代 (Voodoo, TNT, DirectX 7)
     2000-2005 : プログラマブルシェーダ誕生 (GeForce 3, HLSL, Cg)
-    2006-2012 : 統合シェーダとDeferred全盛 (G80, DX10/11, PS3/X360)
+    2005-2012 : 統合シェーダとDeferredの普及 (Xenos, G80, DX10/11)
     2013-2016 : 明示的APIへの転換 (Mantle, DX12, Vulkan, Metal)
     2018-2020 : ハードウェアレイトレーシング (RTX, DXR, DLSS)
     2020-現在 : GPU Driven・仮想化ジオメトリ・SW/HW混合GI (Nanite, Lumen, WebGPU, Mesh Shader)
@@ -34,7 +34,8 @@ timeline
 
 - 1992: id Software **Wolfenstein 3D** — レイキャスティングによる疑似3D
 - 1993: **DOOM** — BSPツリーによる可視面判定。ジョン・カーマックの名を世界に知らしめた
-- 1996: **Quake** — 完全な3Dポリゴン + ライトマップ(事前計算GI の原点)。マイケル・アブラッシュの最適化本はこの時代の聖典
+- 1996: **Quake** — 完全な3Dポリゴン + ライトマップ（事前計算ライティングの普及例）。マイケル・アブラッシュの最適化本はこの時代の聖典
+- Quakeの初期ライトマップは主に直接光を記録し、Quake IIではradiosityによる間接光も事前計算した。事前計算GIの研究そのものは、それ以前から存在する
 - CPUのピクセル塗りつぶし能力が限界 → **専用ハードウェアの必要性**が明確に
 
 → 詳細: [GPUとは何か](/hardware/gpu/what-is-gpu.html)
@@ -56,17 +57,18 @@ timeline
 
 - 2001: **GeForce 3** + DirectX 8 — Vertex/Pixel Shader (アセンブリ言語)
 - 2002: ATI Radeon 9700 + **DirectX 9** — Shader Model 2.0、浮動小数点レンダーターゲット
-- 2003: **HLSL** / **Cg** — 高級シェーダ言語の登場。GLSLもOpenGL 2.0で標準化 (2004)
+- 2002年末: DirectX 9の**HLSL**や**Cg**で高級シェーダ言語が普及へ。GLSLはOpenGL 2.0で標準化（2004）
 - 代表作: Half-Life 2 (2004), F.E.A.R. (2005) — 動的ライティングとシャドウの時代へ
 - 論文: この頃 GPGPU研究が始まる (BrookGPU など) → 後のCUDAへ
 
 → 詳細: [シェーダ言語総論](/graphics/shader/overview.html), [Vertex Shader](/graphics/pipeline/vertex-shader.html)
 
-## 4. 統合シェーダと Deferred 全盛 (2006〜2012)
+## 4. 統合シェーダとDeferredの普及 (2005〜2012)
 
 **当時の課題**: 頂点/ピクセルで別々のハードウェアユニットは非効率。多数の動的ライトを扱いたい。
 
-- 2006: NVIDIA **G80 (GeForce 8800)** — 統合シェーダアーキテクチャ + **CUDA** 発表
+- 2005: **Xbox 360のATI Xenos** — 統合シェーダをコンソールに採用
+- 2006: NVIDIA **G80 (GeForce 8800)** — PC向け統合シェーダアーキテクチャ + **CUDA** 発表
 - 2006-07: PS3 / Xbox 360 世代 — **Deferred Rendering** が主流化 (Killzone 2 の発表資料が有名)
 - 2009: **DirectX 11** — Compute Shader、Tessellation
 - 2007: Crysis — 当時の技術の集大成。「Can it run Crysis?」
@@ -80,8 +82,9 @@ timeline
 
 - 2012-13: **PBR標準化** — Disney原則BRDF (Burley, SIGGRAPH 2012)、UE4のPBR採用 (Karis, 2013)
 - 2013: AMD **Mantle** — 明示的APIの先駆け (Battlefield 4)
-- 2014: Apple **Metal** / 2015: **DirectX 12** / 2016: **Vulkan** (MantleがKhronosに寄贈されて誕生)
-- 2014: UE4 / Unity 5 リリース — 商用エンジンの民主化
+- 2014: Apple **Metal** / 2015: **DirectX 12** / 2016: **Vulkan**（Mantleの設計を出発点の一つとしてKhronosで策定）
+- 2014: **Unreal Engine 4**リリース
+- 2015年3月3日: **Unity 5**正式リリース（発表は2014年）
 - Forward+ / Clustered Shading の論文と実装が普及 (Harada 2012, Olsson 2012)
 
 → 詳細: [PBR](/graphics/lighting/pbr.html), [DirectX 12](/graphics/api/directx12.html), [Vulkan](/graphics/api/vulkan.html)
@@ -104,7 +107,10 @@ timeline
 - 2021: UE5 **Nanite** (仮想化マイクロポリゴンジオメトリ) + **Lumen** (SW/HWハイブリッドGI)
 - 2022: **FSR 2** (時間的アップスケーリング) / **XeSS** — アップスケーラの三つ巴時代
 - 2023: **WebGPU** 正式リリース (Chrome 113) / DLSS 3.5 Ray Reconstruction
-- 2024-25: Work Graphs (GPU自律実行)、ニューラルレンダリング(Neural Radiance Cache, 3D Gaussian Splatting)の実用化研究
+- 2024: **Work Graphs / SM 6.8**。GPU上のノード間で仕事を生成する仕組み
+- 2025: **GeForce RTX 50 / DLSS 4**。Transformer再構成とMulti Frame Generation。DirectXのCooperative Vectorはプレビューとして発表
+- 2026: **DLSS 4.5**の第2世代TransformerとRTX 50向け最大6倍・動的MFG。**SM 6.9正式版**はLong VectorやDXR 1.2向けHLSL機能を提供。Cooperative Vectorは非推奨となり、**SM 6.10プレビュー**の線形代数機能へ設計を移行
+- Neural Radiance Cacheや3D Gaussian Splatting等も、手法ごとの用途・品質・実行コストを検証する研究と実装が進む
 - ReSTIR系サンプリング (2020〜) がリアルタイムパストレーシングを現実に (Cyberpunk 2077 Overdrive)
 
 → 詳細: [Lumen](/graphics/lighting/lumen.html), [GPU Driven Rendering](/graphics/optimization/gpu-driven.html), [パストレーシング](/graphics/lighting/path-tracing.html), [WebGPU](/graphics/api/webgpu.html)
@@ -163,3 +169,9 @@ flowchart LR
 - [学習ロードマップ](/guide/rendering/roadmap.html)
 - [James H. Clark: The Geometry Engine (SIGGRAPH 1982)](https://stanford.edu/class/cs349g/p127-clark.pdf)
 - [NVIDIA: GeForce 256の回顧（メーカーのGPU定義）](https://blogs.nvidia.com/blog/first-gpu-gaming-ai/)
+- [Unity: Unity 5正式リリース（2015年3月3日）](https://unity.com/cn/news/unity-5-here)
+- [Michael Doggett（ATI）: Xenos（2005年）](https://fileadmin.cs.lth.se/cs/Personal/Michael_Doggett/talks/x05-xenos-doggett.pdf)
+- [id Software: Quake IIのradiosity実装](https://github.com/id-Software/Quake-2-Tools/blob/master/bsp/qrad3/qrad3.c)
+- [NVIDIA: DLSS 4.5の6X・動的MFG](https://www.nvidia.com/en-us/geforce/news/dlss-4-5-dynamic-multi-frame-generation-6x-mode-released/)
+- [Microsoft: SM 6.9正式版とCooperative Vectorの移行](https://devblogs.microsoft.com/directx/shader-model-6-9-retail-and-more/)
+- [Microsoft: SM 6.10プレビュー](https://devblogs.microsoft.com/directx/shader-model-6-10-agilitysdk-720-preview/)

@@ -60,7 +60,7 @@ private:
 検証済みサンプル: <a href="/study/samples/cpp/pattern_singleton.cpp">samples/pattern_singleton.cpp</a>
 
 - 関数ローカルstaticの初期化はC++11以降、**言語仕様でスレッドセーフ**(初回に1回だけ構築)が保証されています。
-- 破棄はプログラム終了時。**破棄順は他のstaticと相互依存すると未規定領域に踏み込む**ため、Singleton同士がデストラクタで参照し合う設計は避けます(→ [静的記憶域期間](/runtime/memory/storage-duration-and-lifetime.html))。
+- 通常のプログラム終了では、構築順に順序関係があるstaticオブジェクトは、その逆順に破棄されます。問題は初回使用や翻訳単位間の初期化によって構築順を見通しにくいことです。破棄済みの関数ローカルstaticへ再びアクセスすると未定義動作になり得るため、Singleton同士がデストラクタで参照し合う設計を避けます。[終了時の順序規則](https://eel.is/c++draft/basic.start.term) · [静的記憶域期間](/runtime/memory/storage-duration-and-lifetime.html)
 
 ## C#またはUnityでの実装
 

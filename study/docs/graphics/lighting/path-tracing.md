@@ -29,7 +29,7 @@ study:
 - 2010年代: 映画産業がレイトレ系 (Arnold, RenderMan RIS, Hyperion) へ全面移行
 - 2018: RTX/DXR → Quake II RTX (2019) が「古いゲームのフルパストレース化」を実証
 - **2020: ReSTIR (Bitterli et al.)** — 時空間リサンプリングによる桁違いのサンプル効率化
-- 2022-23: **Cyberpunk 2077 RT: Overdrive** — AAA初のリアルタイムパストレーシングモード。DLSS 3.5 Ray Reconstruction (AIデノイザ) が支える
+- 2023年4月: **Cyberpunk 2077 RT: Overdrive** 技術プレビューを公開。2023年9月のUpdate 2.0でDLSS 3.5 Ray Reconstructionを追加。公開当初からRRがあったわけではない
 - 現在: ニューラルデノイズ/Radiance Cachingと融合しつつ「最高画質設定」として普及開始
 
 ## それ以前の技術
@@ -54,7 +54,7 @@ Whitted式レイトレーシング (完全鏡面のみ再帰)、ラジオシテ�
 
 $$\int f(x)\,dx \approx \frac{1}{N}\sum_{i=1}^{N} \frac{f(x_i)}{p(x_i)}$$
 
-- **不偏**: 期待値は真値に一致。誤差は $O(1/\sqrt{N})$ で減る (4倍サンプルでノイズ半減)
+- **不偏な推定**: 適切なpdfと重みを使うと期待値は真値に一致。独立サンプルで有限分散なら、推定量の分散は$O(1/N)$、標準偏差（ノイズの目安）は$O(1/\sqrt{N})$で減る（4倍サンプルでノイズ半減）。個々の画像の誤差が単調に減る保証ではない
 - **重点サンプリング**: $p(x)$ を $f(x)$ に似せるほど分散 (ノイズ) が減る — BRDF形状に沿ったサンプリング、光源に向けたサンプリング (NEE)、その両立 (**MIS**)
 
 ### パスの構築
@@ -98,27 +98,39 @@ DXRの上に自前実装。NVIDIAの **Falcor** フレームワーク+ReSTIRサ�
 
 ## コード例
 
-パストレーサの核心ループ (HLSL風疑似コード、NEE+ロシアンルーレット):
+パストレーサの核心ループ（HLSL風疑似コード、NEE+MIS+ロシアンルーレット）です。`LightPdf`系のhelperは、**光源を選ぶ確率を含む立体角あたりのpdf**を返します。BRDFで偶然当たった発光面や環境光にも、直前の光源サンプリングと対応するMIS重みを掛けることが要点です。
 
 ```hlsl
 float3 TracePath(RayDesc ray, inout uint rngState) {
     float3 radiance = 0;
     float3 throughput = 1;                     // パスの累積減衰
+    float previousBsdfPdf = 0;
+    bool previousDelta = true;
+    float3 previousPosition = ray.Origin;
 
     for (int bounce = 0; bounce < MAX_BOUNCES; ++bounce) {
         HitInfo hit = TraceClosestHit(ray);
         if (!hit.valid) {
-            radiance += throughput * SampleSky(ray.Direction);
+            // 環境光もNEEで選ぶ場合は、BRDF側に対応するMIS重みを掛ける
+            float skyPdf = SkyLightPdf(previousPosition, ray.Direction);
+            float w = (bounce == 0 || previousDelta) ? 1.0
+                    : PowerHeuristic(previousBsdfPdf, skyPdf);
+            radiance += throughput * SampleSky(ray.Direction) * w;
             break;
         }
         Surface s = GetSurface(hit);
-        radiance += throughput * s.emissive;    // 発光面に到達
+        float lightPdf = EmissionLightPdf(hit, previousPosition, ray.Direction);
+        float emissionW = (bounce == 0 || previousDelta) ? 1.0
+                        : PowerHeuristic(previousBsdfPdf, lightPdf);
+        radiance += throughput * s.emissive * emissionW;
 
         // --- NEE: 光源を明示的にサンプルして影レイ ---
         LightSample ls = SampleOneLight(s.pos, rngState);
-        if (ls.pdf > 0 && TraceShadowRay(s.pos, ls.dir, ls.dist)) {
+        if (ls.pdf > 0 && IsUnoccluded(s.pos, ls.dir, ls.dist)) {
             float3 brdf = EvalBRDF(s, ls.dir, -ray.Direction);
-            float misW = PowerHeuristic(ls.pdf, BrdfPdf(s, ls.dir));
+            // 点光源等のdelta lightは通常のBRDFサンプルでは選べない
+            float misW = ls.isDelta ? 1.0
+                       : PowerHeuristic(ls.pdf, BrdfPdf(s, -ray.Direction, ls.dir));
             radiance += throughput * brdf * ls.radiance
                       * saturate(dot(s.normal, ls.dir)) * misW / ls.pdf;
         }
@@ -127,10 +139,13 @@ float3 TracePath(RayDesc ray, inout uint rngState) {
         BsdfSample bs = SampleBRDF(s, -ray.Direction, rngState);
         if (bs.pdf <= 0) break;
         throughput *= bs.value * saturate(dot(s.normal, bs.dir)) / bs.pdf;
+        previousBsdfPdf = bs.pdf;
+        previousDelta = bs.isDelta;
+        previousPosition = s.pos;
 
         // --- ロシアンルーレット (不偏な打ち切り) ---
-        float p = max(throughput.r, max(throughput.g, throughput.b));
-        if (Rand(rngState) > p) break;
+        float p = min(0.95, max(throughput.r, max(throughput.g, throughput.b)));
+        if (p <= 0 || Rand(rngState) >= p) break;
         throughput /= p;
 
         ray.Origin = s.pos + s.normal * 1e-4;
@@ -139,6 +154,8 @@ float3 TracePath(RayDesc ray, inout uint rngState) {
     return radiance;   // 1spp → 蓄積 or デノイザへ
 }
 ```
+
+NEEの対象外の発光面・環境光については、対応する`LightPdf`を`0`とし、BRDF側の重みを`1`にします。`PowerHeuristic(a, b)`は$a^2/(a^2+b^2)$です。両方の戦略のpdfの単位、光源の選択確率、deltaかどうかが一致しないと、MISを入れただけでは正しい推定になりません。理想鏡面のサンプル値・pdfの表現、自己交差を避けるレイ原点の生成はhelper側の契約です。この例の有限な`MAX_BOUNCES`による打ち切りにはバイアスがあり、ロシアンルーレット自体の不偏性とは区別します。
 
 ## 前提知識
 
@@ -161,7 +178,7 @@ float3 TracePath(RayDesc ray, inout uint rngState) {
 
 2. **NEE (Next Event Estimation) がないと何が起きるか。**
    ::: details 解答
-   光源への到達がBRDFサンプリングの偶然に頼ることになり、小さい光源にはほぼ当たらず、直接光ですら激しいノイズになる。NEEは各バウンスで光源上の点を明示的にサンプルすることで直接光の分散を劇的に下げる。ただし鏡面на表面ではBRDFサンプリングが有利なため、両者をMISで重み付けして結合するのが標準形。
+   光源への到達がBRDFサンプリングの偶然に頼ることになり、小さい光源にはほぼ当たらず、直接光ですら激しいノイズになる。NEEは各バウンスで光源上の点を明示的にサンプルすることで直接光の分散を劇的に下げる。ただし鏡面的な表面ではBRDFサンプリングが有利なため、両者をMISで重み付けして結合するのが標準形。
    :::
 
 3. **ReSTIRの中心的アイデアを一言で述べ、なぜ多光源シーンに強いのか説明せよ。**
@@ -176,3 +193,6 @@ float3 TracePath(RayDesc ray, inout uint rngState) {
 - Bitterli et al., *"Spatiotemporal reservoir resampling (ReSTIR)"* (SIGGRAPH 2020)
 - *Ray Tracing Gems II* / NVIDIA Falcor & RTXDI サンプル
 - CD PROJEKT RED & NVIDIA, Cyberpunk 2077 Overdrive 技術講演 (2023)
+- [pbrt v4: A Better Path Tracer — MISと発光面の扱い](https://pbr-book.org/4ed/Light_Transport_I_Surface_Reflection/A_Better_Path_Tracer)
+- [pbrt v4: Monte Carlo Basics](https://pbr-book.org/4ed/Monte_Carlo_Integration/Monte_Carlo_Basics)
+- [CD PROJEKT RED: Cyberpunk 2077 Update 2.0](https://www.cyberpunk.net/en/news/49060/update-2-0)

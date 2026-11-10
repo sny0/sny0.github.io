@@ -65,7 +65,7 @@ flowchart TB
 | `SV_GroupIndex` | グループ内の1次元通し番号 |
 
 - **グループサイズの選び方**: Wave幅の倍数 (32/64) が原則。64か128が無難な既定値。2Dアクセスなら8x8
-- グループ間の実行順序・並行性は**保証されない** — グループ間同期はディスパッチ分割でのみ可能
+- グループ間の実行順序・並行性は**保証されない**。移植しやすい基本形はディスパッチを分け、必要なAPIのメモリ依存・バリアで結果を渡すこと。atomicと状態フラグによるグループ間通信は可能だが、任意のスピン待ちに前進保証はなく、単一dispatchのscan等には専用の設計が必要 → [並列アルゴリズム](/graphics/compute/parallel-algorithms.html)
 
 ### リソースと典型パターン
 
@@ -172,9 +172,9 @@ void Update() {
    groups = ceil(1,000,000 / 64) = 15,625。最終グループには余分なスレッドが含まれるため、シェーダ冒頭で `if (id.x >= count) return;` の範囲外ガードが必要。
    :::
 
-2. **グループ間の同期がディスパッチ内でできない理由は。**
+2. **通常のdispatchにグループ全体のバリアを置けない理由は。atomic通信との違いは。**
    ::: details 解答
-   全グループが同時にGPUに常駐する保証がなく(グループ数がSM容量を超えれば順次実行される)、実行順序も未定義のため、グループ間で待ち合わせるとデッドロックしうる。グループ間の依存はディスパッチを分けてバリアを挟むことで表現する。
+   全グループが同時にGPUに常駐する保証がなく、実行順序も保証されないため、全グループの単純な待ち合わせはデッドロックしうる。グループ間のatomic通信はできるが、通信ができることと、待っている間に相手が実行される保証は別。基本形はdispatchを分け、必要なAPIのバリアで結果を渡す。単一dispatchの高度な手法ではメモリ可視性と前進を個別に成立させる。
    :::
 
 3. **FSによる旧GPGPUと比べ、Compute Shaderが可能にした3つの本質的機能を挙げよ。**
@@ -188,3 +188,4 @@ void Update() {
 - Unity Manual, *Compute shaders* / Catlike Coding のComputeチュートリアル
 - 「GPU並列図形処理入門」等の和書 / *GPU Gems 3* の GPGPU 章
 - SIGGRAPH各年の *"Compute for Graphics"* 系コース
+- [Merrill & Garland: グループ間通信を使う単一pass scan](https://research.nvidia.com/publication/2016-03_single-pass-parallel-prefix-scan-decoupled-look-back)

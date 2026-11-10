@@ -33,7 +33,7 @@ enum class ItemId : std::uint16_t { None = 0, Potion = 1 };   // 基底型の指
 
 1. **名前汚染**: `Red` がスコープに直接漏れ、他のenumや変数と衝突(`enum Fruit { Apple, Orange }` と `enum Company { Apple }` は共存不可)
 2. **暗黙のint変換**: `if (color == 2)` や `Color c = (Color)999;` 的な整数との混同がすり抜ける
-3. サイズ未指定(実装依存の基底型)
+3. **基底型を省略したときの規則**: `enum class`は`int`、旧式enumは実装定義。C++11以降は旧式でも`enum Color : std::uint8_t { ... };`のように基底型を指定できる。[C++草案: 列挙型](https://eel.is/c++draft/dcl.enum)
 
 ### switchとenumの実務パターン
 
@@ -58,13 +58,15 @@ switch (e) {
 
 ### メモリ上
 
-enumは実行時にはただの整数(既定はint、指定すればその型)。文字列変換テーブルは存在しない(C#の`ToString()`のようなリフレクションはない → 自分でテーブルを書くか、コード生成。UEはリフレクションで持っている → [リフレクション — UCLASS・UFUNCTION・UPROPERTY・Unreal Header Tool](/game/unreal/reflection-and-uht.html))。
+enumの値の表現は基底型に従います。`enum class`の基底型は省略時`int`、旧式enumは省略時に実装が選びます。列挙子名の文字列テーブルが実行時に自動で付くわけではありません。C++23までは、自前の変換表やコード生成などを使います。
+
+C++26草案の静的リフレクションでは、`^^Element`や`std::meta::enumerators_of`などから列挙子を調べ、名前への変換をコンパイル時に生成できます。使う処理系と標準ライブラリの対応を確認してください。C#の実行時`ToString()`や、UEのUHTによるコード生成とは仕組みが異なります。[C++草案: 列挙子のリフレクション](https://eel.is/c++draft/meta.reflection.member.queries)・[UEのリフレクション](/game/unreal/reflection-and-uht.html)
 
 ## namespace
 
 ### 一言で言うと
 
-名前の衝突を防ぐ「名字」。C#の`namespace`とほぼ同じ概念ですが、**C++はアセンブリ境界がない**ため、名前空間が唯一の論理的な区分けです。
+名前の衝突を防ぐ「名字」。C#の`namespace`と同様、論理的な名前の区分です。C++20のモジュールは`export`などで宣言の公開範囲を分け、ライブラリはリンクや配布の単位になります。名前空間とそれらの境界は一致させる必要はありません。[C++草案: モジュール](https://eel.is/c++draft/module)
 
 ```cpp
 // C++20

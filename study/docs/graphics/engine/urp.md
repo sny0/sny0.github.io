@@ -41,7 +41,7 @@ URPは**Unityの標準レンダーパイプライン**で、モバイルからPC
 
 ## 現在の位置づけ
 
-Unityの主流。HDRPとの関係は「別物の2本」から「共通コア (RenderGraph/Volume/シェーダライブラリ) の上の2実装」へ収斂しつつあり、将来的な統合が示唆されています (Unified Renderer構想)。
+Unityの2026年の公式方針では、URPの機能と対応範囲の拡充に開発を集中し、HDRPは安定性・回帰・重大問題を中心に保守します。Built-in RPはUnity 6.5から非推奨化する方針で、即時削除とは異なります。「将来すべてが同じレンダラーになる」と決めつけず、採用するUnity版と必要機能から選びます。
 
 ## 内部動作
 
@@ -179,3 +179,4 @@ public class TintFeature : ScriptableRendererFeature {
 - [Unity 6.0: Forward and Forward+ rendering paths](https://docs.unity.com/en-us/engine/6000.0/manual/render-pipelines/universal-render-pipeline/introduction/urp-concepts/rendering-paths/forward-rendering-paths)
 - [Unity 6.0: Forward+ limits](https://docs.unity.com/en-us/engine/6000.0/manual/render-pipelines/universal-render-pipeline/introduction/urp-concepts/rendering-paths/forward-plus-rendering-path-limitations)
 - [Unity 6.3: Deferred and Deferred+ rendering paths](https://docs.unity.com/en-us/engine/6000.3/manual/render-pipelines/universal-render-pipeline/introduction/urp-concepts/rendering-paths/deferred-rendering-path)
+- [Unity: Render Pipelines strategy for 2026](https://unity.com/topics/render-pipelines-strategy-for-2026)

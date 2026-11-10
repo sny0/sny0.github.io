@@ -23,11 +23,12 @@ WebGPUは**Web標準の明示的グラフィックス/コンピュートAPI**で
 
 ## 歴史・誕生した背景
 
-- 2016-17: AppleがWebGPU提案 (当初はMetal直訳に近い「WebMetal」)。GoogleはNXT (後のDawn)、MozillaはwgpuでVulkan風の提案
+- 2016-17: AppleがWebGPU提案 (当初はMetal直訳に近い「WebMetal」)。GoogleはNXT (後のDawn)、Mozillaは2017年にObsidianを提案。現在のwgpu実装と当時の提案は区別する
 - 2017: W3C GPU for the Web CG 発足。**シェーダ言語論争** (SPIR-V vs 新言語) → WGSL誕生 → [WGSL](/graphics/shader/wgsl.html)
 - 2021-22: 仕様安定化。wgpuがRustゲームエコシステム (Bevy) の基盤に
-- **2023: Chrome 113でWebGPU 1.0出荷**。Firefox/Safariも順次対応
-- 2024-: subgroups、bindless等の拡張議論が進行中
+- **2023: Chrome 113でWebGPUを出荷**（W3C仕様の標準化とブラウザーの出荷時点は別）
+- 2025: Firefox 141（まずWindows）、Safari 26でも出荷。Chrome 134ではoptional featureの`subgroups`を提供
+- 対応OS・GPU・ドライバー、limits、optional featuresは実装ごとに確認する。bindless等の追加機能は仕様・実装の採用状況を個別に調べる
 
 ## それ以前の技術
 
@@ -37,7 +38,7 @@ WebGPUは**Web標準の明示的グラフィックス/コンピュートAPI**で
 
 1. Compute Shaderと汎用GPU計算のWeb解禁
 2. PSO/コマンドエンコーダ/バインドグループというモダンな構造 (検証を作成時に前倒し)
-3. 3ネイティブAPI上での**単一の厳密仕様** — 「どのブラウザ・OSでも同一挙動」
+3. 3ネイティブAPI上での**共通仕様と検証** — 実装間の挙動の差を狭める。対応limits・optional features・フォーマットや浮動小数点の結果まで同一になる保証ではない
 4. WebGLに残っていたグローバル状態の排除
 
 ## 現在の位置づけ
@@ -78,7 +79,7 @@ flowchart TB
 ## 各環境での扱い
 
 ### Unity / Unreal Engine
-両エンジンともWebビルドのWebGPU対応を進行中 (UnityはWeb向けWebGPUバックエンドを提供開始)。成熟すればWebGLビルドを置き換えます。
+Unityは6.1で実験的対応を導入し、6.6ではWeb向けの本番用グラフィックスAPIとして提供しています。対応ブラウザーと機能要件はビルド対象で確認し、WebGLとの選択やフォールバックを設計します。Unreal Engineについては、Unityと同じ公式Web出力の対応状況を前提にせず、使用するエンジン版と移植実装を確認します。
 
 ### DirectX 12
 Windows上のChrome/EdgeはDawnがWebGPUを**DX12上に実装**します。
@@ -186,3 +187,8 @@ device.queue.submit([enc.finish()]);
 - webgpufundamentals.org — 実践教材の決定版
 - gfx-rs/wgpu, google/dawn — ネイティブ実装
 - Surma, *"WebGPU — All of the cores, none of the canvas"*
+- [W3C: WebGPU limits](https://www.w3.org/TR/webgpu/#limits)
+- [WebGPUの主要ブラウザーでの出荷](https://web.dev/blog/webgpu-supported-major-browsers)
+- [Chrome 134: subgroups](https://developer.chrome.com/blog/new-in-webgpu-134)
+- [Unity 6.6 release: WebGPU](https://discussions.unity.com/t/unity-6-6-is-now-available/1735357)
+- [Khronos: MozillaのObsidian提案 (2017)](https://www.khronos.org/news/permalink/mozilla-submits-draft-obsidian-webgl-next-proposal)

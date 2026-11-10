@@ -179,7 +179,7 @@ for (auto* b : bindings) {
 
 2. **SPIR-V導入後も「シェーダコンパイルスタッター」が残るのはなぜか。**
    ::: details 解答
-   SPIR-V/DXILは移植可能な中間表現であり、GPUが直接実行する機械語ではない。IR→GPU固有ISAへの最終コンパイルはPSO作成時にドライバ内で実行されるため、初出のパイプラインに対するコンパイルコストは残る。対策としてPSOの事前ウォーム・ディスクキャッシュ(Steam Shader Cache、VK_EXT_pipeline_cacheなど)が使われる。
+   SPIR-V/DXILは移植可能な中間表現であり、GPUが直接実行する機械語ではない。IRからGPU固有ISAへのコンパイル等がパイプライン作成時に発生するため、初出のパイプラインに対するコストは残る。対策はPSOの事前作成やディスクキャッシュなど。Vulkanの`VkPipelineCache`は1.0からのコア機能で、キャッシュを使う作成動作の制御には`VK_EXT_pipeline_creation_cache_control`等もある。
    :::
 
 3. **SPIRV-Crossの役割と代表的な利用例を述べよ。**
@@ -193,3 +193,4 @@ for (auto* b : bindings) {
 - KhronosGroup/SPIRV-Tools, SPIRV-Cross, SPIRV-Reflect
 - microsoft/DirectXShaderCompiler — DXIL docs
 - HansKristian-Work/dxil-spirv, vkd3d-proton — IR相互変換の実例
+- [Khronos: VkPipelineCache](https://docs.vulkan.org/refpages/latest/refpages/source/VkPipelineCache.html)

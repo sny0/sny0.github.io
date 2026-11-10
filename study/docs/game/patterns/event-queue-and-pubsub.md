@@ -44,16 +44,20 @@ class EventQueue {
 public:
     void Push(Event e) { queue_.push(std::move(e)); }   // 発行は積むだけ(軽い)
     template <class Handler>
-    void DrainAll(Handler&& handle) {                    // フレーム内の決まった場所で処理
-        while (!queue_.empty()) {
-            handle(queue_.front());
-            queue_.pop();
+    void DrainAll(Handler&& handle) { // 開始時点で積まれていた分だけを処理
+        std::queue<Event> batch;
+        batch.swap(queue_);
+        while (!batch.empty()) {
+            handle(batch.front());
+            batch.pop();
         }
     }
 private:
     std::queue<Event> queue_;
 };
 ```
+
+この例は単一スレッド用です。フレームごとに一度だけDrainし、ハンドラーからDrainを再帰呼び出ししません。処理中の`Push`は次回のDrainまで残るので、同じDrain内で通知連鎖が無限に続くことを避けられます。例外時の再試行・廃棄や、キュー容量の上限は別途方針を決めます。
 
 検証済みサンプル: <a href="/study/samples/cpp/event_queue.cpp">samples/event_queue.cpp</a>
 
@@ -62,7 +66,7 @@ private:
 | | Observer(即時) | Event Queue(遅延) |
 |---|---|---|
 | 処理タイミング | 発行の瞬間(コールスタック上) | 自分の決めた場所(例: Update後) |
-| 通知の連鎖 | 深く絡まりうる(A→B→C→A?) | 次フレームに平坦化される |
+| 通知の連鎖 | 深く絡まりうる(A→B→C→A?) | 上のスナップショット方式なら次回のDrainへ送る。毎フレーム一度Drainする構成では次フレームになる |
 | 発行側の負荷 | 購読者全員分の処理を背負う | Pushのみ(一定) |
 | 即時性 | その場で反映 | 1フレーム遅れうる(**UIなら大抵無害、当たり判定なら致命的**) |
 | 集約・間引き | 不可 | 可能(同種イベントをまとめる: 同フレームの被弾SE 10件→1件) |
@@ -92,7 +96,8 @@ public:
     void Publish(const E& e) {
         auto it = handlers_.find(typeid(E));
         if (it == handlers_.end()) return;
-        for (auto& h : it->second) h(&e);
+        auto snapshot = it->second; // 通知中のSubscribeでvectorが変わっても走査を壊さない
+        for (auto& h : snapshot) h(&e);
     }
 private:
     std::unordered_map<std::type_index, std::vector<std::function<void(const void*)>>> handlers_;
@@ -100,6 +105,8 @@ private:
 // 発行者: bus.Publish(EnemyDied{id, 100});  — 誰が聞いているか知らない
 // 購読者: bus.Subscribe<EnemyDied>([](auto& e){ ... });  — 誰が発行するか知らない
 ```
+
+この最小バスも単一スレッド用です。通知開始後の新規購読は次回から反映します。実用版では購読解除のトークンと、コールバックが参照する相手の寿命も管理します。スナップショットを取るだけでは、対象の破棄やデータ競合を防げません。
 
 検証済みサンプル: <a href="/study/samples/cpp/event_bus.cpp">samples/event_bus.cpp</a>
 
@@ -120,14 +127,14 @@ Pub/Subを**プロジェクト全域の1本のバス**として運用する形�
 ## Unity/C# との対応
 
 - Observer = C# `event` / `UnityEvent`
-- Event Queue = 自作が普通(UnityにはSendMessageがあるが低速で非推奨)。入力の`InputSystem`はイベントキュー内蔵
+- Event Queue = 自作キューなど。入力の`InputSystem`にもイベントキューがある。`SendMessage`は名前でメソッドを呼ぶ同期的なAPIで、遅延キューの代わりではない。また公式に廃止されたAPIという意味での「非推奨」とは区別する。[SendMessage](https://docs.unity3d.com/6000.0/Documentation/ScriptReference/GameObject.SendMessage.html)
 - Pub/Sub = MessagePipe等のライブラリ、ScriptableObjectイベントチャネル(アセットをバスにする定石)
 - UniRx/R3も購読の一形態(→ [Reactive](/game/patterns/reactive-and-message-bus.html))
 
 ## Unreal Engine との対応
 
 - Observer = Delegate / Multicast Delegate(→ [DelegateとInterface](/game/unreal/delegates-and-interfaces.html))
-- Pub/Sub = Gameplay Message Subsystem(UE5、チャネル文字列ベース)
+- Pub/Subの例は、Lyra同梱のGameplayMessageRouterプラグインにある`UGameplayMessageSubsystem`。チャネルは`FGameplayTag`を使う。エンジン本体の標準機能と区別し、[Lyraサンプル](https://dev.epicgames.com/documentation/en-us/unreal-engine/lyra-sample-game-in-unreal-engine)から必要な依存関係とともに導入する。発行は同期的であり、遅延キューは別に設計する
 - 入力・アニメ通知(AnimNotify)はイベントキュー的に配送される
 
 ## 使う場面 / 使わない場面

@@ -96,7 +96,7 @@ flowchart LR
 **RDG (Render Dependency Graph)**。`FRDGBuilder` に `GraphBuilder.AddPass(...)` で登録、リソースは `FRDGTextureRef` 等の仮想ハンドル。`RDG_EVENT_SCOPE` がプロファイラ表示に連動。UEのレンダラーコードはほぼ全てRDG上に書かれており、**UE改造の必須知識**です。
 
 ### DirectX 12
-自作する側のAPI。Placed Resources + `ResourceBarrier` (Enhanced Barriers) がグラフの出力先。O'Donnellの講演と各種オープンソース実装 (下記) が参考になります。
+自作する側のAPI。Placed Resourcesと、従来の`ID3D12GraphicsCommandList::ResourceBarrier`またはEnhanced Barriersの`ID3D12GraphicsCommandList7::Barrier` がグラフの出力先。O'Donnellの講演と各種オープンソース実装 (下記) が参考になります。
 
 ### Vulkan
 同様。`VkEvent`/`vkCmdPipelineBarrier2` へ落とし込み、モバイルではsubpassへの自動融合も研究対象。Granite (Themaister) などが実装例です。
@@ -194,3 +194,4 @@ FComputeShaderUtils::AddPass(GraphBuilder,
 - Epic, *Render Dependency Graph* 公式ドキュメント
 - Unity, *Render graph system* マニュアル (URP 17+)
 - Themaister, *"Render graphs and Vulkan — a deep dive"* (Granite実装解説)
+- [Microsoft: Enhanced Barriers](https://microsoft.github.io/DirectX-Specs/d3d/D3D12EnhancedBarriers.html)

@@ -3,7 +3,7 @@ title: CUDA と OpenCL
 study:
   source: RenderingWiki
   status: published
-  summary: CUDA (NVIDIA, 2007) と OpenCL (Khronos, 2009) は、グラフィックスAPIから独立した汎用GPU計算 (GPGPU) のためのプラットフォームです。ゲーム開発では Compute Shader が主役ですが、CUDAは機械学習・オフラインレンダリング・ツール開
+  summary: CUDA (NVIDIA, 2007) と OpenCL (Khronos, 2008年仕様公開) は、グラフィックスAPIから独立した汎用GPU計算 (GPGPU) のためのプラットフォームです。ゲーム開発では Compute Shader が主役ですが、CUDAは機械学習・オフラインレンダリング・ツール開
   section: reference
   format: article
   domain: graphics
@@ -13,7 +13,7 @@ study:
 
 ## 概要
 
-CUDA (NVIDIA, 2007) と OpenCL (Khronos, 2009) は、グラフィックスAPIから独立した**汎用GPU計算 (GPGPU) のためのプラットフォーム**です。ゲーム開発では [Compute Shader](/graphics/compute/compute-shader.html) が主役ですが、CUDAは機械学習・オフラインレンダリング・ツール開発で圧倒的な地位を持ち、その概念と用語 (カーネル、Warp、Shared Memory) はGPU計算全体の共通語になっています。
+CUDA (NVIDIA, 2007) と OpenCL (Khronos, 2008年仕様公開) は、グラフィックスAPIから独立した**汎用GPU計算 (GPGPU) のためのプラットフォーム**です。ゲーム開発では [Compute Shader](/graphics/compute/compute-shader.html) が主役ですが、CUDAは機械学習・オフラインレンダリング・ツール開発で圧倒的な地位を持ち、その概念と用語 (カーネル、Warp、Shared Memory) はGPU計算全体の共通語になっています。
 
 ## なぜ必要なのか
 
@@ -25,7 +25,7 @@ CUDA (NVIDIA, 2007) と OpenCL (Khronos, 2009) は、グラフィックスAPIか
 
 - 2003-06: FSを悪用したGPGPU研究 (BrookGPU — スタンフォードのIan Buck、後のCUDAの父)
 - **2007: CUDA 1.0** — G80と共に。C言語拡張・専用コンパイラ (nvcc)・ランタイムを揃えた垂直統合
-- **2009: OpenCL 1.0** — Apple主導でKhronos標準化。CPU/GPU/DSPを跨ぐ移植性を目標に
+- **2008: OpenCL 1.0仕様公開** — Appleの提案をもとにKhronosで標準化。CPU/GPU/DSPを跨ぐ移植性を目標に。2009年にはMac OS X Snow Leopardで出荷
 - 2010年代: CUDAはcuDNN (2014) を軸に深層学習を制覇。OpenCLはドライバ品質のばらつき・Appleの離脱 (Metal移行)・NVIDIAの消極対応で失速
 - 現在: CUDA一強。対抗はAMD **ROCm/HIP** (CUDA互換層)、Intel **oneAPI/SYCL**、そしてコンピュートに限れば **Vulkan Compute / WebGPU** も選択肢
 
@@ -76,7 +76,7 @@ CUDAの概念はCompute Shaderと1対1対応します:
 
 ### グラフィックスとの相互運用
 
-CUDA↔DX12/Vulkan/GLはリソース共有API (external memory / semaphore) で連携できます。DLSSがゲーム内で動くのは、この相互運用でTensorコアの推論をレンダリングと同期させているためです。
+CUDA↔DX12/Vulkan/GLはリソース共有API (external memory / semaphore) で連携できます。ただしゲームへのDLSS統合はNGX/Streamline等のSDKを通じてDirect3D/Vulkanのリソースを渡す形であり、アプリがCUDA相互運用を実装することを意味しません。CUDAとの共有とDLSSのSDK統合は別の経路です。
 
 ## 各環境での扱い
 
@@ -84,7 +84,7 @@ CUDA↔DX12/Vulkan/GLはリソース共有API (external memory / semaphore) で�
 直接の統合はありません (Compute Shaderを使う)。エディタ拡張・パイプラインツールでCUDA製ライブラリ (テクスチャ圧縮・ML) を使うことはあります。UEのML Deformer等はプラットフォームのML API経由。
 
 ### DirectX 12
-相互運用 (shared handle) でCUDAバッファと共有可能。DirectML がDX12ネイティブのML推論APIとして対応関係にあります。
+相互運用 (shared handle) でCUDAバッファと共有可能。DirectMLはDX12上のMLライブラリですが、2026年11月の公式リポジトリではmaintenance modeです。新規開発の案内はWindows ML（ONNX Runtimeを利用）へ移っており、学習時も現行の公式案内を確認します。
 
 ### Vulkan
 `VK_KHR_external_memory` / `VK_KHR_external_semaphore` でCUDAと共有。Vulkan Compute自体がOpenCLの後継的役割を担いつつあります (clspvによるOpenCL C→SPIR-V変換も存在)。
@@ -155,3 +155,6 @@ int main() {
 - NVIDIA, *CUDA C++ Programming Guide* / *Best Practices Guide*
 - *Programming Massively Parallel Processors* (Kirk & Hwu) — GPGPUの標準教科書
 - Khronos, *OpenCL Guide* / AMD *HIP documentation*
+- [Khronos: OpenCL 1.0仕様公開 (2008)](https://www.khronos.org/news/press/the_khronos_group_releases_opencl_1.0_specification)
+- [NVIDIA: DLSS SDK](https://developer.nvidia.com/rtx/dlss)
+- [Microsoft DirectML: maintenance mode](https://github.com/microsoft/DirectML)

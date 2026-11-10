@@ -101,7 +101,7 @@ void PrintName(std::string_view n);   // 読むだけの引数はstring_viewが�
 
 ## Unity開発者が誤解しやすい点
 
-1. 「配列は安全なもの」— C#の常識。C++の生配列と `v[i]` は範囲チェックしません。デバッグビルドでチェック付きの `at()` やアサートを活用する
+1. 「配列は安全なもの」— 生配列の範囲外アクセスはUB。`v[i]`にも`at()`のような例外による範囲検査を期待しない。標準ライブラリのデバッグ・hardening設定には違反を検出するものがあり、C++26草案では`vector::operator[]`などをhardened preconditionで規定している。検出・終了の仕方は実装と設定を確認する。`at()`は範囲外を`std::out_of_range`で報告する。[C++草案: vectorのアクセス](https://www.open-std.org/jtc1/sc22/wg21/docs/papers/2025/p3471r4.html)
 2. 「文字列連結は罪(GC Alloc)」— C++ではGCはないが、**再確保**というコストはある。ループ内連結は `reserve` で緩和
 3. Cの文字列APIは一般にNUL終端(`'\0'`)を前提にする。`char*`という型だけで終端や文字コードが保証されるわけではない。`c_str()`の返すポインタは元のstringの破棄や、再確保などを伴う変更で無効になり得る。`std::string`は途中にもNULを保持できるため、NUL終端APIへ渡すと長さの解釈も変わる（[C++20草案: string.require](https://timsong-cpp.github.io/cppwp/n4861/string.require)、[string.accessors](https://timsong-cpp.github.io/cppwp/n4861/string.accessors)）
 

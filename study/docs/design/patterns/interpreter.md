@@ -114,7 +114,7 @@ Unityで自前の式言語を組むより、既存の仕組みに乗るのが普
 
 - **条件データのツリー化**: ScriptableObjectで `AndCondition`/`OrCondition`/`StatCondition` を組む(エディタで文法を組み立てる = パーサ不要のInterpreter)
 - 数式が要るだけなら、既存の式評価ライブラリやC#の `Func` 合成
-- 本格スクリプトはLua(MoonSharp)や、UEなら[Blueprint](/game/unreal/reflection-and-uht.html)(ビジュアル言語のInterpreter/コンパイラ)
+- 本格スクリプトはLuaなど既存言語の組み込みを検討します。C#向けLua実装のMoonSharpを選ぶ場合は、[公開リリース履歴](https://github.com/moonsharp-devs/moonsharp/releases)と対象Unity/.NET環境への対応を確認してください。長期間正式リリースがないことと、個々の修正・フォークの保守状況は区別して判断します。UEなら[Blueprint](/game/unreal/reflection-and-uht.html)も候補です(ビジュアル言語のInterpreter/コンパイラ)
 
 ## ゲームでの具体例
 

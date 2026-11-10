@@ -42,7 +42,7 @@ study:
 
 - CMake 公式ドキュメント ( https://cmake.org/documentation/ )
 - 各コンパイラのドキュメント: MSVC ( https://learn.microsoft.com/cpp/ ) / Clang ( https://clang.llvm.org/docs/ ) / GCC ( https://gcc.gnu.org/onlinedocs/ )
-- Peter Smith『Linkers and Loaders』(John R. Levine著の同名書も定番) — リンクとローダーの古典。
+- John R. Levine『Linkers and Loaders』 — リンクとローダーの古典。
 
 ## Unity / C#
 
@@ -65,3 +65,4 @@ study:
 ---
 
 [目次に戻る](/guide/cpp-index.html)
+- [Elsevier: Linkers and Loaders（John R. Levine）](https://shop.elsevier.com/books/linkers-and-loaders/levine/978-0-08-051031-6)

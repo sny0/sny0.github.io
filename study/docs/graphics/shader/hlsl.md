@@ -26,11 +26,13 @@ HLSL (High-Level Shading Language) はMicrosoftのシェーダ言語で、**Dire
 ## 歴史・誕生した背景
 
 - 2001: DX8のアセンブリシェーダ — 保守不能な命令列
-- **2003: DirectX 9 で HLSL 登場**。NVIDIAのCgと共通の起源を持つ (後に分岐、Cgは2012年終了)
+- **2002年12月: DirectX 9 で HLSL 登場**。NVIDIAのCgと共通の起源を持つ (後に分岐、Cgは2012年終了)
 - 2009: DX11 / SM5.0 — Compute Shader、Tessellation対応
 - **2015-17: DXC (DirectX Shader Compiler)** — LLVMベースの新コンパイラ。出力はDXIL。旧FXCを置換
 - 2016以降: SM6.0 Wave命令 / SM6.3 DXR / SM6.5 Mesh Shader / SM6.6 Dynamic Resources / SM6.8 Work Graphs
 - 2024: HLSL 202x 仕様策定が公開プロセスに (constexpr等の近代化)
+- 2026年2月: **SM 6.9正式版**（Agility SDK 1.619）。Long Vector、DXR 1.2のSER・OMM向けHLSL機能など
+- 2026年: **SM 6.10プレビュー**（Agility SDK 1.720-preview）。新しい線形代数機能など。正式版とプレビューは区別する
 
 ## それ以前の技術
 
@@ -38,7 +40,7 @@ HLSL (High-Level Shading Language) はMicrosoftのシェーダ言語で、**Dire
 
 ## 解決した課題
 
-高級言語化 (2003) はシェーダ開発の生産性を桁で変えました。DXC世代 (SM6.x) は、旧コンパイラFXCの閉鎖性・最適化の限界・新機能追加の遅さを、LLVM採用とオープンソース化で解決しました。
+高級言語化 (DirectX 9、2002年末) はシェーダ開発の生産性を桁で変えました。DXC世代 (SM6.x) は、旧コンパイラFXCの閉鎖性・最適化の限界・新機能追加の遅さを、LLVM採用とオープンソース化で解決しました。
 
 ## 現在の位置づけ
 
@@ -92,6 +94,10 @@ struct VSOut {
 | 6.6 | Dynamic Resources, 64bit Atomic, ComputeのDerivative |
 | 6.7 | Advanced Texture Ops |
 | 6.8 | **Work Graphs** |
+| 6.9 | **Long Vector**（最大1024要素）、16bit浮動小数点の判定関数拡充、DXR 1.2のSER・OMM向けHLSL機能 |
+| 6.10（プレビュー） | 行列・ベクトル演算を統合する新しい線形代数機能など |
+
+SM 6.9の2025年プレビューにあったCooperative Vectorは非推奨となり、SM 6.10の新設計へ移行しています。SMの番号だけで全機能の実行可否は決まらないため、Agility SDK・DXC・ドライバと個別の機能サポートを確認します（2026年11月確認）。
 
 ## 各環境での扱い
 
@@ -182,3 +188,6 @@ dxc -T cs_6_6 -E CSMain -Zi -Qembed_debug histogram.hlsl -Fo histogram.dxil
 - Jasper's blog *"HLSL for Vulkan"* 系資料 / Khronos *HLSL in Vulkan* ガイド
 - [Microsoft: HLSL Operators](https://learn.microsoft.com/en-us/windows/win32/direct3dhlsl/dx-graphics-hlsl-operators)
 - [Microsoft: mul](https://learn.microsoft.com/en-us/windows/win32/direct3dhlsl/dx-graphics-hlsl-mul)
+- [Microsoft: Shader Model 6.9正式版](https://devblogs.microsoft.com/directx/shader-model-6-9-retail-and-more/)
+- [Microsoft: Shader Model 6.10プレビュー](https://devblogs.microsoft.com/directx/shader-model-6-10-agilitysdk-720-preview/)
+- [NVIDIA: CgとHLSLの初期史（SIGGRAPH 2006コース資料）](https://www.csee.umbc.edu/~olano/s2006c03/ch05.pdf)

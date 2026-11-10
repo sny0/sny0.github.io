@@ -3,7 +3,7 @@ title: Metal
 study:
   source: RenderingWiki
   status: published
-  summary: MetalはAppleの明示的グラフィックス/コンピュートAPIです (2014)。明示的API世代で最初に出荷されたにもかかわらず、DX12/Vulkanより大幅に書きやすいのが特徴で、「明示性と人間工学のバランス」の成功例とされます。iOS/macOS/visionOSの唯一の第一級APIであり
+  summary: MetalはAppleの明示的グラフィックス/コンピュートAPIです (2014)。DX12/Vulkanより先に出荷され、DX12/Vulkanより大幅に書きやすいのが特徴で、「明示性と人間工学のバランス」の成功例とされます。iOS/macOS/visionOSの唯一の第一級APIであり
   section: reference
   format: article
   domain: graphics
@@ -13,7 +13,7 @@ study:
 
 ## 概要
 
-MetalはAppleの明示的グラフィックス/コンピュートAPIです (2014)。**明示的API世代で最初に出荷された**にもかかわらず、DX12/Vulkanより**大幅に書きやすい**のが特徴で、「明示性と人間工学のバランス」の成功例とされます。iOS/macOS/visionOSの唯一の第一級APIであり、Apple Silicon (TBDR) の性能を引き出す鍵です。
+MetalはAppleの明示的グラフィックス/コンピュートAPIです (2014)。**DX12/Vulkanより先に出荷され**、DX12/Vulkanより**大幅に書きやすい**のが特徴で、「明示性と人間工学のバランス」の成功例とされます。iOS/macOS/visionOSの唯一の第一級APIであり、Apple Silicon (TBDR) の性能を引き出す鍵です。
 
 ## なぜ必要なのか
 
@@ -25,9 +25,9 @@ MetalはAppleの明示的グラフィックス/コンピュートAPIです (2014
 
 - 2013: A7 (世界初の64bitモバイルSoC) 登場。GLESのドライバオーバーヘッドがボトルネックに
 - **2014: WWDC でMetal発表** (iOS 8) — Mantle公開の翌年、DX12/Vulkanより先に出荷
-- 2016: macOS対応
+- 2015: OS X El CapitanでMacに対応
 - 2017: Metal 2 — Argument Buffers、タイルシェーダ (A11 Bionic)
-- 2019: macOS OpenGL非推奨化。Metal専用時代へ
+- 2018: macOS Mojave 10.14でOpenGL/OpenCLが非推奨化。互換性のためAPIは残るが、新規開発はMetalへの移行を推奨
 - 2022: **Metal 3** — MetalFX (アップスケーリング)、メッシュシェーダ、高速リソースロード
 - 2023-: Game Porting Toolkit (DX12→Metal変換) でWindowsゲーム移植を推進
 
@@ -157,3 +157,5 @@ let pso = try device.makeRenderPipelineState(descriptor: desc)
 - Apple, *Metal Programming Guide* / *Metal Feature Set Tables*
 - WWDCセッション: *"Metal 3"*, *"Optimize for Apple GPUs"* 各年
 - metalbyexample.com (Warren Moore)
+- [Apple: MetalをMacへ導入したEl Capitan (2015)](https://developer.apple.com/news/?id=060815b)
+- [Apple: macOS Mojave 10.14 Release Notes](https://developer.apple.com/documentation/macos-release-notes/macos-mojave-10_14-release-notes/)

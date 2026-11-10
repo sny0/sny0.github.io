@@ -63,8 +63,10 @@ auto* bytes = reinterpret_cast<const std::byte*>(&header);     // バイト列�
 ## C形式キャストを使わない理由
 
 ```cpp
-(TargetType)expr;   // static_cast → const_cast → reinterpret_cast の順で「通るもの」を勝手に選ぶ
+(TargetType)expr;   // 意図の異なる複数のキャストをまとめて表せてしまう
 ```
+
+規格が列挙する解釈の優先順は`const_cast`、`static_cast`、`static_cast`に続く`const_cast`、`reinterpret_cast`、`reinterpret_cast`に続く`const_cast`です。複数に解釈できるときは先の解釈を採用し、その解釈が不適格でも後の候補へ救済されるとは限りません。用途を明示できる名前付きキャストを使います。[C++草案: C形式キャスト](https://eel.is/c++draft/expr.cast)
 
 - 意図が読めない(数値変換のつもりがポインタ再解釈になっても通る)
 - `grep "_cast"` で危険箇所を検索できるのがC++流キャストの利点。C形式はそれを壊す

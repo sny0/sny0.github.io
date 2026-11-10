@@ -17,8 +17,10 @@ UEは**UObjectに限定した**マーク&スイープGCを自作しています�
 
 ## 仕組み(概要)
 
-- ルート(GameInstance、レベル等)から **UPROPERTYで宣言されたポインタ**を辿り、到達できないUObjectを回収(マーク&スイープ)。既定では一定間隔+レベル遷移などで実行
-- **C#のGCとの決定的な違い**: .NETは実行中のあらゆる参照(スタック・レジスタ含む)を追跡できるが、UEのGCは**リフレクションに登録された(=UPROPERTYの)参照しか見えない**
+- ルートから、GCへ登録された強参照を辿り、到達できないUObjectを回収します。UObjectのメンバーでは`UPROPERTY`で宣言した`TObjectPtr`が基本です
+- .NETのGCは管理対象の参照をスタック・レジスタなどから追跡しますが、UEでは通常のC++生ポインタをローカル変数へ入れただけでGCのルートになるわけではありません。ただし、GCに参照を伝える方法は`UPROPERTY`以外にもあります
+
+非UObjectの所有者からは`FGCObject::AddReferencedObjects`で列挙したり、`TStrongObjectPtr`で保持したりできます。UObject系の`AddReferencedObjects`による参照列挙もあります。`AddToRoot`でルートへ追加する場合は、不要になった時点の`RemoveFromRoot`と対にします。[UEのオブジェクト管理](https://dev.epicgames.com/documentation/en-us/unreal-engine/unreal-object-handling-in-unreal-engine) · [オブジェクトポインタとTStrongObjectPtr](https://dev.epicgames.com/documentation/en-us/unreal-engine/object-pointers-in-unreal-engine)
 
 ```cpp
 UCLASS()
@@ -26,22 +28,23 @@ class ATurret : public AActor {
     GENERATED_BODY()
 
     UPROPERTY()                        // GCに「この参照を辿って」と教える
-    TObjectPtr<AEnemy> Target;         // → Targetが生きている限りEnemyは回収されない
-                                       //   (=参照が対象を延命する。C#と同じ感覚)
+    TObjectPtr<AEnemy> Target;         // → 到達可能なTurretから辿れる強参照
+                                       //   ただしActorの明示的なDestroyは防がない
 
     AEnemy* RawTarget;                 // UPROPERTYなし: GCから不可視!
-                                       // (1) Enemyがこれ以外から参照されなければ回収される
-                                       // (2) 回収後もRawTargetは残る=dangling(C++の事故がそのまま)
+                                       // GCはこの参照を辿らず、回収後も値を自動更新しない
+                                       // (Actorはレベルからの参照やDestroyの規則も持つ)
 };
 ```
 
-**UPROPERTYを付け忘れた生ポインタは「延命もしない・無効化もされない」最悪の存在**——UE C++の事故原因第1位です。
+GCへ別途登録していない生ポインタを長期保存すると、その参照は対象を延命せず、回収後も自動的に無効化されません。保存する参照の登録方法と、対象の破棄時の扱いを決めます。
 
 ## ポインタ型の使い分け(UE5)
 
 | 型 | 意味 | 対応する標準C++の概念 |
 |---|---|---|
 | `UPROPERTY() TObjectPtr<T>` | 所有的・強参照(延命する)。UE5でのメンバ宣言の標準形 | shared_ptr的(ただし台帳方式) |
+| `TStrongObjectPtr<T>` | UPROPERTYを使えない所有者などからGCへ伝える強参照。スコープ終了・Resetで保持を解除する | スコープで管理する保持ハンドル |
 | `TWeakObjectPtr<T>` | 弱参照(延命しない+**生死を問える** `IsValid()`) | [weak_ptr](/languages/cpp/smart-pointers.html) |
 | `TSoftObjectPtr<T>` | アセットへの**パス参照**(ロードを強制しない) | [Proxy](/design/patterns/proxy.html)(遅延ロード) |
 | 生ポインタ `T*` | 関数引数・ローカルなど**一時的な借用のみ** | 非所有生ポインタ([借用](/runtime/memory/ownership-and-borrowing.html)) |
@@ -65,13 +68,13 @@ class ATurret : public AActor {
 
 ## Unity開発者が誤解しやすい点
 
-1. 「C#と同じで参照してれば生きてる」— **UPROPERTYの参照だけ**が延命する。ローカルのC++変数に持っただけでは(次のGCで)消えうる
+1. 「C#と同じで参照してれば生きてる」— UEのGCへ伝わる強参照が必要です。UPROPERTYのメンバー以外にも登録手段はありますが、通常のローカル生ポインタだけでは保持になりません。また、強参照はActorの明示的なDestroyを防ぐものではありません
 2. 「Destroyしたらnullになる」— Unityの`==null`偽装に慣れていると、UEの「IsValidで確認」を忘れる。生ポインタは**何も起きない**(dangling)
 3. UObjectに`std::shared_ptr`を使う——**禁止**(2つの管理系が衝突)。UObjectはUE式、非UObjectは標準式、と世界を分ける
 
 ## 理解度チェック
 
-1. UEのGCがC#のGCと違い「UPROPERTYしか見えない」ことの帰結を2つ(延命されない/danglingになる)説明できますか。
+1. UEのGCへ伝えていない生ポインタを保存すると何が起きますか。UPROPERTY以外の参照登録手段を二つ挙げてください。
 2. TObjectPtr / TWeakObjectPtr / TSoftObjectPtr / 生ポインタの使い分けは?
 3. UObjectと非UObjectでメモリ管理の流儀がどう分かれますか。
 

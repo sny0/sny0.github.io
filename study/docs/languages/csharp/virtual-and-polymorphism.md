@@ -24,7 +24,7 @@ study:
 | `interface IWeapon` | 純粋仮想のみの抽象クラス(慣習) | C++は言語構文なし([ISP](/design/solid/isp.html)参照) |
 | `sealed` | `final` | 対応 |
 | `base.F()` | `Base::F()` | 対応 |
-| `new` による隠蔽 | overrideなしの同名関数(警告なしで隠蔽!) | **C++の方が危険**(下記) |
+| `new` による隠蔽 | 非virtualな基底関数と同名の関数を派生側に宣言 | C++では基底がvirtualでシグネチャが一致すれば、`override`なしでも上書きされる |
 
 ## C#より危険な3ポイント
 
@@ -34,13 +34,15 @@ study:
 class Enemy { public: virtual void Attack(); };
 class Boss : public Enemy {
 public:
-    void Atack();      // タイポ。C#なら「overrideがない」でコンパイルエラー。
-                       // C++では「新しい別関数」として合法に通り、差し替わらない
+    void Atack();      // タイポ。C++でもC#でも、overrideなしなら別関数として通る
+                       // void Atack() override; と書けば上書き対象がなくエラーになる
     void Attack(int);  // 引数違いも同様に「隠蔽」— 基底のAttack()がBossから見えなくなる
 };
 ```
 
 **規約: 上書きには必ず `override` を書く**(C++11以降)。書けばC#と同等の検査が手に入ります。
+
+C++では`void Attack();`のように基底のvirtual関数とシグネチャが一致すれば、`override`を省略してもオーバーライドになります。C#は上書きに`override`が必要です。どちらも、名前を誤った普通の新規メソッドの宣言まで禁止するわけではありません。[C++の仮想関数](https://eel.is/c++draft/class.virtual)・[C#のoverride](https://learn.microsoft.com/en-us/dotnet/csharp/language-reference/keywords/override)
 
 ### 2. スライシング(C#に存在しない事故)
 
@@ -59,16 +61,16 @@ v.push_back(Boss{});    // BossのEnemy部分だけコピーされる(C#では�
 
 ## コンパイル時多態と実行時多態(C++の二刀流)
 
-C#の多態はほぼ実行時(virtual/interface。ジェネリックも制約はinterface経由)。C++は2系統を明確に使い分けます:
+C#にもstructとジェネリック制約による特殊化や、C# 11以降のstatic abstractインターフェースメンバーがあります。C++ではテンプレートと仮想関数を次のように使い分けます:
 
 | | 実行時多態(仮想関数) | コンパイル時多態(テンプレート/オーバーロード) |
 |---|---|---|
 | 相手が決まる | 実行時(vtable) | コンパイル時(実体化・オーバーロード解決) |
 | コスト | 間接呼び出し+インライン化阻害 | ゼロ(型ごとに最適コード) |
 | 異なる型を同じ容器に | できる | できない |
-| C#での近似 | virtual / interface | (ほぼ該当なし。structジェネリックのJIT特殊化が近い) |
+| C#での近似 | virtual / interface | structジェネリックの特殊化、static abstractインターフェースメンバーなど |
 
-**使い分けの直感**: 「実行中に相手が入れ替わる・混ざる」なら実行時多態、「コンパイル時に決まっている」ならテンプレート(→ [判断ガイド](/design/decisions/cpp-choices.html))。C#では選択肢がなかった場所に選択肢がある、というのがC++の姿です。
+**使い分けの直感**: 「実行中に相手が入れ替わる・混ざる」なら実行時多態、「コンパイル時に決まっている」ならテンプレート(→ [判断ガイド](/design/decisions/cpp-choices.html))。C#との違いは、ジェネリックの制約や実行環境の最適化も含めて比較します。[C#のstatic abstractメンバー](https://learn.microsoft.com/en-us/dotnet/csharp/programming-guide/generics/constraints-on-type-parameters#type-arguments-implement-declared-interface)
 
 ## Unity開発者が誤解しやすい点
 
@@ -80,11 +82,11 @@ C#の多態はほぼ実行時(virtual/interface。ジェネリックも制約は
 
 1. C++でoverrideを「必ず書く」べき理由を、C#との仕様差から説明できますか。
 2. スライシングがC#に存在しない理由は?
-3. コンパイル時多態に対応するC#の機能がほぼ無い、とはどういうことですか。
+3. C#のstructジェネリックやstatic abstractメンバーは、仮想関数による実行時多態と何が違いますか。
 
 ## 演習
 
-<a href="/study/samples/cpp/inheritance_virtual.cpp">samples/inheritance_virtual.cpp</a> に、C#の `new` キーワードによる隠蔽に相当するコード(overrideなしの同名関数)を書き、基底ポインタ経由の呼び出しがどうなるかを確認してください。その後overrideを付けてコンパイラが何を教えてくれるかを見てください。
+<a href="/study/samples/cpp/inheritance_virtual.cpp">samples/inheritance_virtual.cpp</a> で、(a) virtual関数を同じシグネチャで宣言し、`override`を省略しても基底ポインタ経由で派生側が呼ばれること、(b) 非virtualな基底関数と同名の関数を派生側に宣言すると、基底ポインタ経由では基底側が呼ばれることを比較してください。最後に名前や引数を誤った宣言へ`override`を付け、エラーを確認します。
 
 ---
 

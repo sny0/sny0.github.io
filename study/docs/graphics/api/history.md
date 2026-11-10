@@ -71,7 +71,7 @@ DX11/GL時代のドライバは:
 
 - 2014: Apple **Metal** (同思想をモバイルへ)
 - 2015: **DirectX 12** (Windows 10)
-- 2016: **Vulkan 1.0** — MantleがKhronosに寄贈され、そのまま土台に
+- 2016: **Vulkan 1.0** — AMDが提供したMantleの設計が土台の一つとなり、Khronosで標準APIとして再設計された
 
 ```mermaid
 flowchart TB
@@ -146,3 +146,4 @@ RHI層が全APIを抽象化。UE5はDX12/Vulkan/Metalが主要ターゲットで
 - GDC Vault: *Mantle* (2014), *DX12 & Vulkan: Lessons Learned* 系講演
 - Khronos, *Vulkan: The Origin Story* / Alex St. John らのDirectX創世記の回顧録
 - retro-computing系: OpenGL vs Direct3D 論争のアーカイブ (Carmack .plan files)
+- [Khronos: Vulkanの公開 (2015)](https://www.khronos.org/news/press/khronos-reveals-vulkan-api-for-high-efficiency-graphics-and-compute-on-gpus)

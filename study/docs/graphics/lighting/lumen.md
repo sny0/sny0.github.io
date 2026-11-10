@@ -41,7 +41,7 @@ Lumenは**UE5の完全動的グローバルイルミネーション&リフレク
 
 ## 現在の位置づけ
 
-UE5の既定GI/反射システムとしてAAAで広く出荷中 (Fortnite、Alan Wake 2ほか多数)。競合他エンジンにも同型の設計 (SDF/プローブ+RTハイブリッド) が波及しています。制約は半透明・高速移動物体・ミラー級の完全鏡面などで、そこはRT反射やパストレーシングが補完します。
+UE5の既定GI/反射システムとしてAAAで広く出荷中 （Fortniteなど。Alan Wake 2はRemedyのNorthlightによる別の実装）。競合他エンジンにも同型の設計 (SDF/プローブ+RTハイブリッド) が波及しています。制約は半透明・高速移動物体・ミラー級の完全鏡面などで、そこはRT反射やパストレーシングが補完します。
 
 ## 内部動作 — 部品の分解
 
@@ -170,3 +170,5 @@ Lumen調整の実務チートシート (UE5):
 - Epic, *Lumen Technical Details* 公式ドキュメント
 - SIGGRAPH 2021 Advances course の Lumen 講演
 - Daniel Wright, *"Radiance Caching for Real-Time Global Illumination"*
+- [Remedy: Northlight](https://www.remedygames.com/northlight)
+- [Epic: Lumen in Fortnite](https://www.unrealengine.com/tech-blog/lumen-brings-real-time-global-illumination-to-fortnite-battle-royale-chapter-4?lang=en-US)

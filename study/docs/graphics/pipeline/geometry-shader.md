@@ -27,11 +27,12 @@ Geometry Shader (GS) は、**プリミティブ (三角形・線・点) 単位�
 
 ## 歴史・誕生した背景
 
-- 2006: **DirectX 10 / OpenGL 3.2** でGS導入 (G80世代)。「ジオメトリをGPUで増幅できる」と大きな期待
+- 2006: **DirectX 10**でGS導入（G80世代）。OpenGLでもこの時期に`EXT_geometry_shader4`拡張が登場
+- 2009: **OpenGL 3.2**でGeometry Shaderをコア機能化
 - 2007-08: 各社が採用を試みるも、性能が出ないことが判明していく
 - 2010年代: 実用は「レイヤーターゲット振り分け」等の少数用途に縮小。「GSは使うな」が業界の共通見解に
 - 2018: NVIDIA Turing が **Mesh Shader** を発表 — GSが目指したものの正しい設計としてやり直し
-- 現在: Metalに至ってはGSを最初から実装せず。Vulkan/DX12では残るがモバイルでは非対応も多い
+- 現在: Metalに至ってはGSを最初から実装せず。Vulkan/DX12では残り、対応GPUでも性能と移植性を個別に確認する
 
 ## それ以前の技術
 
@@ -87,7 +88,7 @@ flowchart TB
 `gs_6_x` としてサポート継続。PSOに `GS` バイトコードを設定。ただしMesh Shaderパイプラインとは排他です。
 
 ### Vulkan
-`VkPhysicalDeviceFeatures::geometryShader` が必要 — **モバイルGPUの多くが非対応**。GLSLでは `layout(triangles) in; layout(triangle_strip, max_vertices=4) out;`。
+`VkPhysicalDeviceFeatures::geometryShader`のサポート確認と有効化が必要です。モバイルでも対応するGPUがあり、一律に非対応とはいえません。一方、Metalには対応するGS段階がなく、非対応・低速な環境への代替経路は必要です。GLSLでは `layout(triangles) in; layout(triangle_strip, max_vertices=4) out;`。
 
 ## コード例
 
@@ -143,7 +144,7 @@ void GSMain(point GSIn input[1], inout TriangleStream<GSOut> stream)
 
 3. **今日GSの採用を検討すべきでない実務的理由を3つ挙げよ。**
    ::: details 解答
-   (1)ほぼ全ハードウェアで代替手段(インスタンシング/Compute/Mesh Shader)より遅い。(2)Metalが非対応でモバイルVulkanも非対応が多く、移植性を損なう。(3)エンジン(UE/Unity)側も依存を排除する方向であり、将来性がない。
+   (1)出力増幅量やGPUによって性能上の制約があり、インスタンシング/Compute/Mesh Shaderと比較計測が必要。(2)MetalにGS段階がなく、VulkanでもgeometryShaderの機能確認が必要で、全対象に共通の実装にはできない。(3)エンジンの公開機能や保守方針も確認し、必要な処理を代替経路で実現できるか検討する。
    :::
 
 ## 参考資料
@@ -151,3 +152,5 @@ void GSMain(point GSIn input[1], inout TriangleStream<GSOut> stream)
 - Microsoft, *Direct3D 10 System* (Blythe, SIGGRAPH 2006) — GS導入の原典
 - 各所の "Geometry shader performance" 検証記事 (GCN世代の実測)
 - NVIDIA, *"Introduction to Turing Mesh Shaders"* (2018) — GSの反省が語られる
+- [Khronos: OpenGL 3.2発表（2009年8月）](https://www.khronos.org/news/press/khronos-releases-opengl-3.2-third-major-opengl-release-within-twelve-months)
+- [Khronos: VkPhysicalDeviceFeatures](https://docs.vulkan.org/refpages/latest/refpages/source/VkPhysicalDeviceFeatures.html)

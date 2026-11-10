@@ -67,20 +67,21 @@ struct Vec2 { float x = 0, y = 0; };
 class IMoveStrategy {
 public:
     virtual ~IMoveStrategy() = default;
+    // 戻り値は移動量ではなく、更新後の絶対位置。
     virtual Vec2 NextStep(const Vec2& self, const Vec2& target) = 0;
 };
 
 class DirectChase : public IMoveStrategy {
 public:
     Vec2 NextStep(const Vec2& self, const Vec2& target) override {
-        // targetへ向かう単位ベクトル×速度(実装略)
-        return {};
+        // 実際はselfからtargetへ、速度×dt以内だけ近づいた次の位置を返す。
+        return self; // ここでは経路計算を省略
     }
 };
 class KeepDistance : public IMoveStrategy {
 public:
     explicit KeepDistance(float distance) : distance_(distance) {}
-    Vec2 NextStep(const Vec2& self, const Vec2& target) override { return {}; }
+    Vec2 NextStep(const Vec2& self, const Vec2& target) override { return self; /* 次の位置の計算は省略 */ }
 private:
     float distance_;   // アルゴリズム固有のデータは自分で持つ(Enemyから消える)
 };
@@ -122,14 +123,16 @@ public abstract class MoveStrategySO : ScriptableObject, IMoveStrategy {
 [CreateAssetMenu(menuName = "AI/KeepDistance")]
 public class KeepDistanceSO : MoveStrategySO {
     [SerializeField] private float distance = 8f;   // 企画がインスペクタで調整できる
-    public override Vector2 NextStep(Vector2 self, Vector2 target) { /* 実装略 */ return default; }
+    public override Vector2 NextStep(Vector2 self, Vector2 target) { /* 次の位置の計算は省略 */ return self; }
 }
 
 public class Enemy : MonoBehaviour {
     [SerializeField] private MoveStrategySO moveStrategy;   // 敵Prefabごとに差す
-    private void Update() => transform.position += (Vector3)moveStrategy.NextStep(transform.position, PlayerPos());
+    private void Update() => transform.position = (Vector3)moveStrategy.NextStep(transform.position, PlayerPos());
 }
 ```
+
+両版の`NextStep`は、次の絶対位置を返す契約です。この例はXY平面を使い、経路計算を省略しています。実際の速度に基づく移動では`dt`も引数で渡し、移動量を返す設計にするならC++・C#の両方を加算にそろえます。
 
 ## ゲームでの具体例
 

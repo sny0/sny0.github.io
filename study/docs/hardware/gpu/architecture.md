@@ -22,7 +22,7 @@ study:
 ## 歴史・誕生した背景
 
 - **2001〜2005 (分離シェーダ)**: 頂点シェーダ用とピクセルシェーダ用に**別々の専用ユニット**を搭載。頂点重視のシーンではピクセルユニットが遊び、その逆も起きた
-- **2006 (統合シェーダ)**: NVIDIA **G80** が汎用の「ストリーミングマルチプロセッサ (SM)」に統一。負荷に応じて頂点/ピクセル/(後に)コンピュートを同じユニットに動的配分できるようになった。ATI/AMDも Xenos (Xbox 360) → TeraScale で追随
+- **2005〜 (統合シェーダ)**: コンソールではATIの**Xenos（Xbox 360、2005年）**が先行。PCではNVIDIA **G80（2006年）**やATI/AMDのR600/TeraScale（2007年）へ続く。頂点/ピクセル/コンピュート等の処理へ同じ演算資源を配分する設計が広がった
 - **2012〜 (GCN/Kepler以降)**: コンピュート性能重視の設計へ。AMD GCNの「Compute Unit (CU)」、明示的なWavefront実行
 - **2018〜 (Turing/RDNA)**: RTコア・Tensorコアという新たな固定機能の追加。RDNAはWave64からWave32へ移行
 - **現在**: NVIDIA (Ada/Blackwell)、AMD (RDNA3/4)、Intel (Xe)、Apple (Mシリーズ)、Qualcomm (Adreno) がそれぞれの方言を持つが、基本構造は共通
@@ -88,13 +88,13 @@ flowchart TB
 | 階層 | 容量の目安 | レイテンシ | 備考 |
 |---|---|---|---|
 | レジスタ | 256KB/SM | 即時 | スレッドごとに割当。使いすぎるとOccupancy低下 |
-| Shared Memory (LDS/groupshared) | 64〜128KB/SM | 数十cycle | スレッドグループ内共有。明示的に使う |
-| L1/テクスチャキャッシュ | 128KB級/SM | 数十cycle | |
+| Shared Memory (LDS/groupshared) | 世代依存（Adaは最大100KB/SM） | 数十cycleの例 | スレッドグループ内共有。NVIDIAの多くの世代ではL1等と同じSRAMから配分 |
+| L1/テクスチャキャッシュ | Shared Memoryと合計128KB/SM（Adaの例） | 数十cycleの例 | 上の行と足し算しない。容量・配分はGPU世代で異なる |
 | L2 | 4〜96MB | 数百cycle | 全SM共有 |
-| VRAM | 8〜24GB | 400〜800cycle | 帯域は数百GB/s〜1TB/s |
+| VRAM | 例: 8〜32GBの民生製品 | 数百cycle等、計測条件依存 | RTX 5090は32GB GDDR7・約1.8TB/s。HBM搭載の計算用GPUは別に比較 |
 | PCIe経由のシステムRAM | - | 極めて遅い | 転送は最小化する |
 
-**GPU最適化の大半はメモリ最適化**です。ALUは余っていることが多く、ボトルネックはほぼ常にメモリ帯域とレイテンシです → [GPU最適化の基礎](/graphics/optimization/basics.html)
+メモリアクセスは重要な最適化対象ですが、重いシェーダーでは演算、RT処理では交差・走査、描画によってはラスタライズ等も律速になります。メモリ帯域・待ち時間・演算器の利用状況をプロファイラーで測り、どこを改善するか決めます → [GPU最適化の基礎](/graphics/optimization/basics.html)
 
 ### 固定機能ユニット
 
@@ -132,20 +132,21 @@ RHIが差を吸収しますが、`r.Mobile.*` 系のCVarやモバイルレンダ
 アーキテクチャに最も近いAPIの一つ。`D3D12_FEATURE_DATA_D3D12_OPTIONS` 群でWaveサイズ・RT Tier・Mesh Shader Tierなどを問い合わせます。HLSL SM6.0以降のWave Intrinsicsでハードウェアの実行単位を直接操作できます。
 
 ### Vulkan
-`VkPhysicalDeviceSubgroupProperties` でsubgroup(=Warp/Wave)サイズを取得。`VK_KHR_fragment_shading_rate` や `renderpass` のsubpassはTBDRハードウェアを直接活かす設計です。
+`VkPhysicalDeviceSubgroupProperties` でsubgroup(=Warp/Wave)サイズを取得。render passのsubpass/input attachmentや`VK_KHR_dynamic_rendering_local_read`は、対応する実装でタイル内データの再利用を表現する手段です。`VK_KHR_fragment_shading_rate`はシェーディング密度を変えるVRSの機能で、TBDR専用ではありません。
 
 ## コード例
 
-Wave/Subgroupサイズをシェーダから利用する例 (HLSL SM6):
+Waveの集約を利用する例です（HLSL SM6、入力・出力の要素数と起動数を合わせる前提）。Wave幅はGPUと実行条件で変わり、64スレッドのグループが一つのWaveとは限りません。これは**グループ全体の合計ではなく、各Waveの合計**です。共有メモリを明示的に使いませんが、GPU命令一つに対応する保証もありません。
 
 ```hlsl
-// 32スレッド(1 Warp)の合計を、共有メモリなしで1命令で求める
+// 各レーンが、自分のWaveのアクティブレーンの合計を受け取る
+StructuredBuffer<float> Input : register(t0);
+RWStructuredBuffer<float> Output : register(u0);
+
 [numthreads(64, 1, 1)]
 void CSMain(uint3 id : SV_DispatchThreadID) {
-    float v = Input[id.x];
-    float waveSum = WaveActiveSum(v);   // ハードウェアのWave幅で水平加算
-    if (WaveIsFirstLane())
-        Output[id.x / WaveGetLaneCount()] = waveSum;
+    float waveSum = WaveActiveSum(Input[id.x]);
+    Output[id.x] = waveSum;  // 同じWave内では同じ合計を各入力位置へ出す
 }
 ```
 
@@ -181,7 +182,7 @@ for each light:
    頂点用・ピクセル用ユニットが固定比率で搭載されていたため、シーンの負荷特性(頂点重視/ピクセル重視)によってどちらかのユニット群が遊んでしまい、稼働率が上がらなかった。
    :::
 
-2. **GPUがCPUのような巨大キャッシュや分岐予測を持たない代わりに、メモリレイテンシをどう処理しているか。**
+2. **GPUがキャッシュと併せて多数の常駐スレッドを持ち、メモリレイテンシを隠す仕組みを説明せよ。**
    ::: details 解答
    1つのSMに多数のWarpを常駐させ、メモリ待ちが発生したWarpから実行可能な別のWarpへハードウェアが1サイクルで切り替えることで、演算器を遊ばせない(レイテンシ隠蔽)。これが可能なWarp数の余裕をOccupancyと呼ぶ。
    :::
@@ -198,8 +199,15 @@ for each light:
 
 ## 参考資料
 
-- Fabien Giesen, *"A trip through the Graphics Pipeline 2011"* — 全パート必読
+- Fabian Giesen, *"A trip through the Graphics Pipeline 2011"* — 全パート必読
 - NVIDIA, 各世代 Architecture Whitepaper (Turing / Ampere / Ada)
 - AMD, *RDNA Architecture* Whitepaper / GPUOpen の ISA ドキュメント
 - ARM, *Mali GPU Best Practices* (TBDR理解に)
 - Real-Time Rendering 4th ed., Chapter 23 "Graphics Hardware"
+- [NVIDIA: AdaのShared Memory/L1配分](https://docs.nvidia.com/cuda/ada-tuning-guide/index.html)
+- [NVIDIA: HopperのShared Memory/L1配分](https://docs.nvidia.com/cuda/hopper-tuning-guide/index.html)
+- [NVIDIA: RTX 5090の仕様](https://www.nvidia.com/en-us/geforce/graphics-cards/50-series/rtx-5090/)
+- [Microsoft: WaveActiveSum](https://learn.microsoft.com/en-us/windows/win32/direct3dhlsl/waveallsum)
+- [Khronos: Dynamic Rendering Local Read](https://docs.vulkan.org/features/latest/features/proposals/VK_KHR_dynamic_rendering_local_read.html)
+- [Michael Doggett（ATI）: Xenos（2005年）](https://fileadmin.cs.lth.se/cs/Personal/Michael_Doggett/talks/x05-xenos-doggett.pdf)
+- [Fabian Giesen: Graphics Pipeline 2011](https://fgiesen.wordpress.com/2011/07/09/a-trip-through-the-graphics-pipeline-2011-index/)

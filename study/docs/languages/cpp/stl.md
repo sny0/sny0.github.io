@@ -101,7 +101,7 @@ for (const auto& e : strongAlive) { /* 走査時に初めてfilterが動く */ }
 | | C# LINQ | C++ ranges/algorithm |
 |---|---|---|
 | 遅延評価 | あり | ビューはあり |
-| ヒープ確保 | **列挙子などでAllocが発生しがち**(Unityで嫌われる理由) | ビューはゼロAlloc。ToVector相当をしない限り確保なし |
+| ヒープ確保 | 列挙子やキャプチャなど、使う形により発生 | この例のfilter/takeは結果の配列を作らない。C++23の`std::ranges::to<std::vector>()`などで具体化すれば要素領域を確保する |
 | 実行速度 | デリゲート呼び出し(インライン化は限定的) | ラムダがインライン化(手書きループ相当まで最適化されうる) |
 | 辞書の既定 | Dictionary(挿入順は保証されない) | unordered_map(順序不定を明示した名前) |
 
@@ -111,7 +111,7 @@ for (const auto& e : strongAlive) { /* 走査時に初めてfilterが動く */ }
 
 1. `List<T>` はC++の `std::list` ではなく **`std::vector`** に対応(C++のlistは連結リスト)。名前の罠の代表
 2. `Dictionary<K,V>` ≒ `unordered_map`。ただしC++版は要素へのポインタ・参照が(リハッシュ後も)有効という違いがある
-3. `v[i]` は範囲チェックなし(C#は例外)。デバッグ時は `at()` や各実装のデバッグイテレータ(MSVCの `_ITERATOR_DEBUG_LEVEL` 等)を活用
+3. `v[i]`に範囲外例外を期待しない。デバッグ・hardening設定では違反を検出する実装があり、C++26草案にもhardened preconditionがある。`at()`は`std::out_of_range`で範囲外を報告する。[vectorのアクセス](https://www.open-std.org/jtc1/sc22/wg21/docs/papers/2025/p3471r4.html)・[ranges::to](https://eel.is/c++draft/range.utility.conv.to)
 4. foreachでの削除はC#では例外、C++では**未定義動作**(黙って壊れる)
 
 ## ゲーム開発での使用例

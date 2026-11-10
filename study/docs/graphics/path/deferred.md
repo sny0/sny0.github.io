@@ -25,7 +25,7 @@ Deferred Rendering (遅延レンダリング) は、**「何が見えるか」�
 
 - 1988: Deering らが概念を提案 (ハードウェア構想として)
 - 2004: **S.T.A.L.K.E.R.** が商用ゲームでの本格採用を発表 (GSC / Shishkovtsov, GPU Gems 2)
-- **2007-09: 黄金期の到来** — Killzone 2 (Guerrilla, 2007のGDC資料が伝説的)、Gears of War、Crysis 2 など。PS3/X360のメモリ帯域とMRT対応が方式を後押し
+- **2007年以降: 採用の拡大** — Killzone 2（Guerrilla、2007年のDevelop講演。製品は2009年）、Crysis 2（2011年）など。PS3/X360のメモリ帯域とMRT対応が方式を後押し
 - 2010年代: **Tiled Deferred** (Andersson 2009, Frostbite) — Computeでライトカリングし帯域を削減
 - 2013〜: PBR標準化でG-Bufferレイアウトも標準化 (BaseColor/Metallic/Roughness/Normal)
 - 現在: UE5・HDRPの既定は依然Deferred系。ただしForward+の復権とモバイルの制約で「唯一の正解」ではなくなった
@@ -174,3 +174,4 @@ void TiledLightingCS(uint3 dtid : SV_DispatchThreadID, uint gi : SV_GroupIndex) 
 - Valient, *"Deferred Rendering in Killzone 2"* (Develop 2007) — 伝説的資料
 - Andersson, *"Parallel Graphics in Frostbite - Current & Future"* (SIGGRAPH 2009) — Tiled Deferred
 - Unreal Engine ソース: `DeferredShadingRenderer.cpp`
+- [Guerrilla: Deferred Rendering in Killzone 2 (Develop 2007)](https://www.guerrilla-games.com/read/deferred-rendering-in-killzone-2)

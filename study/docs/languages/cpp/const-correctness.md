@@ -81,8 +81,8 @@ private:
 
 ## C#との違い
 
-- C#の `const` はコンパイル時定数のみ、`readonly` はフィールドの再代入禁止のみ。**「このメソッドはthisを変更しない」「この引数を変更しない」を表す手段がC#にはほぼない**(`in`引数、`readonly struct` が部分的に対応)
-- つまりC++のconstはC#より遥かに強力な契約システム。C#の感覚で「constは定数のことでしょ」と思っていると、C++のconstメンバ関数・const参照の意味を取り違えます
+- C#の`const`はコンパイル時定数。読み取り専用を表す別の手段として、`readonly`フィールド、`readonly struct`、`in`引数、C# 8のstructのreadonlyインスタンスメンバー、C# 12の`ref readonly`引数がある。参照型フィールドが指す先まで不変にするものではない。[C#のreadonlyメンバー](https://learn.microsoft.com/en-us/dotnet/csharp/language-reference/builtin-types/struct#readonly-instance-members)・[ref readonly引数](https://learn.microsoft.com/en-us/dotnet/csharp/language-reference/keywords/method-parameters#ref-readonly-modifier)
+- C++のconstメンバ関数・const参照とC#の各機能は、対象と制約が異なる。「constは定数のこと」とだけ覚えず、どの経路から何の変更を禁止するかを比べる。
 
 ## Unity開発者が誤解しやすい点
 

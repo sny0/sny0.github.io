@@ -26,7 +26,7 @@ HDRPは**ハイエンドPC・コンソール・映像制作向けのUnity公式�
 - 2018: SRPと同時に発表・プレビュー (Sébastien Lagarde ら — *Moving Frostbite to PBR* の著者がリード)。Frostbiteの物理ベースワークフローの思想が濃く流入
 - 2019-20: 正式化、RT機能 (DXR) 統合
 - 2021-23: 水系・雲 (Volumetric Clouds)・パストレーサ・APVなど大型機能の追加
-- 現在: URPとのコア共通化 (RenderGraph/Volume) が進み、将来的統合構想の中で「ハイエンド機能群」としての位置づけ
+- 2026年の公式方針: HDRPは安定性・回帰・広く使われる機能の重大問題を中心とした保守へ。URPの機能拡充に重点を置く（HDRPの即時廃止という意味ではない）
 
 ## それ以前の技術
 
@@ -80,7 +80,7 @@ flowchart TB
 ## 各環境での扱い
 
 ### Unity
-本体。要求スペックが高い (Compute必須、DX12/Vulkan/Metal/コンソール)。プロジェクト設定は HDRP Asset + HDRP Global Settings + Volume の3層。
+本体。要求スペックが高い（Compute必須。HDRP 17ではDX11/DX12/Vulkan/Metalおよび対応コンソール。RT機能は別要件）。プロジェクト設定は HDRP Asset + HDRP Global Settings + Volume の3層。
 
 ### Unreal Engine
 思想的な対応物はUE標準レンダラーそのもの (Deferred+物理単位+RT+シネマティック志向)。HDRPは「UnityにおけるUE型レンダラー」と要約できます。機能比較では Lumen/Nanite 相当が (現時点で) HDRPに無い点が最大の差です。
@@ -89,7 +89,7 @@ flowchart TB
 RT機能群 (RTGI/RTR/RTAO/PT) はDX12+DXR必須。非同期コンピュートもDX12/コンソールで有効化されます。
 
 ### Vulkan
-対応バックエンドの一つ (LinuxビルドやSteamDeck向け)。RT系はVK_KHR_ray_tracing対応GPUで動作します。
+ラスタライズ描画の対応バックエンドの一つ（Linux/Windows等）。HDRP 17の公式RT経路はWindowsのDX12+DXRであり、VulkanのRT拡張が存在するだけでHDRPのRT機能を利用できるわけではありません。採用パッケージ版の要件を確認します。
 
 ## コード例
 
@@ -158,3 +158,6 @@ class OutlinePass : CustomPass {
 - Unity, *HDRP ドキュメント* / HDRPパッケージソース
 - SIGGRAPH 2018-, Sébastien Lagarde らのHDRP講演 (*"The Road toward Unified Rendering"* 等)
 - Lagarde & de Rousiers, *"Moving Frostbite to PBR"* — HDRPの思想的源流
+- [Unity: Render Pipelines strategy for 2026](https://unity.com/topics/render-pipelines-strategy-for-2026)
+- [Unity HDRP 17: System requirements](https://docs.unity.cn/Packages/com.unity.render-pipelines.high-definition@17.0/manual/System-Requirements.html)
+- [Unity HDRP 17: Ray tracing setup](https://docs.unity.cn/Packages/com.unity.render-pipelines.high-definition@17.0/manual/Ray-Tracing-Getting-Started.html)

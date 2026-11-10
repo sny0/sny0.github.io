@@ -28,7 +28,7 @@ Mesh Shaderは「ジオメトリ処理はComputeのように書きたい。た�
 ## 歴史・誕生した背景
 
 - 2015頃〜: GPU Drivenレンダリングの隆盛 (Assassin's Creed Unity, Frostbiteなど) — ComputeでカリングしてExecuteIndirectする設計が普及し、「そもそもパイプライン前半が邪魔」という認識が広がる
-- 2016: AMD Vega の **Primitive Shader** (自動変換方式、ドライバ活用は頓挫)
+- 2017: AMD Vega の **Primitive Shader** (自動変換方式、ドライバ活用は頓挫)
 - **2018: NVIDIA Turing が Task/Mesh Shader を発表** (`VK_NV_mesh_shader`)
 - 2020: **DirectX 12 Ultimate** (Amplification/Mesh Shader)、RDNA2 (PS5/Xbox Series X世代) が対応
 - 2022: **`VK_EXT_mesh_shader`** でVulkanのベンダー中立拡張が成立
@@ -121,27 +121,32 @@ void MSMain(uint tid : SV_GroupThreadID,
 }
 ```
 
-Task Shaderによるmeshletカリングの骨格:
+Task Shaderによるmeshletカリングの骨格です。`gMeshlets`等のデータと判定関数はアプリ側で用意します。Wave幅に依存せず、64スレッドのグループ全体で可視数を数えます。詰める順序はアトミック処理の実行順によって変わりますが、可視meshletの集合は同じです。
 
 ```hlsl
 struct Payload { uint meshletIndices[64]; };
 groupshared Payload sPayload;
+groupshared uint sVisibleCount;
 
 [numthreads(64, 1, 1)]
-void ASMain(uint dtid : SV_DispatchThreadID) {
+void ASMain(uint dtid : SV_DispatchThreadID, uint gi : SV_GroupIndex) {
+    if (gi == 0) sVisibleCount = 0;
+    GroupMemoryBarrierWithGroupSync();
+
     bool visible = false;
     if (dtid < gMeshletCount) {
         Meshlet m = gMeshlets[dtid];
         visible = FrustumTest(m.boundingSphere)
                && NormalConeTest(m.coneApex, m.coneAxis, m.coneCutoff, gCameraPosWS);
     }
-    // 可視meshletだけを詰めて子グループに渡す (Wave圧縮)
     if (visible) {
-        uint slot = WavePrefixCountBits(visible);
+        uint slot;
+        InterlockedAdd(sVisibleCount, 1, slot);  // グループ全体で重複しない0〜63
         sPayload.meshletIndices[slot] = dtid;
     }
-    uint visibleCount = WaveActiveCountBits(visible);
-    DispatchMesh(visibleCount, 1, 1, sPayload);  // 可視数だけMeshグループ起動
+    // 全スレッドが到達。別Waveの書き込みも完了してから数を読む
+    GroupMemoryBarrierWithGroupSync();
+    DispatchMesh(sVisibleCount, 1, 1, sPayload);
 }
 ```
 
@@ -181,3 +186,5 @@ void ASMain(uint dtid : SV_DispatchThreadID) {
 - meshoptimizer — meshletビルドの実装
 - SIGGRAPH 2021, *"Nanite: A Deep Dive"* — 実戦での位置づけ
 - Vulkan Blog, *"Mesh Shading for Vulkan"* (VK_EXT_mesh_shader解説)
+- [Microsoft: Mesh Shader / DispatchMesh intrinsic](https://microsoft.github.io/DirectX-Specs/d3d/MeshShader.html)
+- [ACM SIGGRAPH: Mesh Shadersの歴史（AMD開発者による解説）](https://blog.siggraph.org/2021/04/mesh-shaders-release-the-intrinsic-power-of-a-gpu.html/)

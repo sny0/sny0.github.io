@@ -39,14 +39,19 @@ void Update() {
 ## Reactiveで書くと
 
 ```csharp
-// C#(R3/UniRx系のイメージ)— 「関係」を宣言する
-keyDownStream                       // Dキー押下のストリーム
-    .TimeInterval()                 // 前回からの間隔付きに変換
-    .Where(t => t.Interval < TimeSpan.FromSeconds(0.5))  // 0.5秒以内のみ通す
+// C# + UniRx。手続き版と同じTime.timeを使う。
+keyDownStream // Dキー押下のストリーム
+    .Select(_ => Time.time)
+    .Scan((Waiting: false, LastPress: 0f, Fire: false), (state, now) => {
+        bool fire = state.Waiting && now - state.LastPress < 0.5f;
+        // 発火したら待機を解除。3連打の3打目は次のペアの1打目になる。
+        return (Waiting: !fire, LastPress: now, Fire: fire);
+    })
+    .Where(state => state.Fire)
     .Subscribe(_ => StartDash());
 ```
 
-状態変数(lastPressTime, pressCount)が**消え**、仕様がコードの形にそのまま現れます。
+待機中か・最後にいつ押したかという状態は`Scan`の中にあります。発火したらリセットするため、素早い3連打では1回、4連打では2回ダッシュします。単に`TimeInterval().Where(...)`で直前との間隔だけを見ると、3連打の2打目と3打目の両方で発火し、手続き版とは異なります。採用する演算子と時間源を仕様に合わせて選びます。[UniRxの演算子と購読](https://github.com/neuecc/UniRx)
 
 ### ReactiveProperty(ゲームで一番使う形)
 
@@ -117,7 +122,7 @@ C++にはUniRx級の定番はなく(RxCppはあるがゲームでの採用は少
 
 ## 理解度チェック
 
-1. Reactiveが「消してくれる」ものは何ですか(ダブルタップの例で)。
+1. ダブルタップの例で、待機やリセットの状態はどこにありますか。直前との時間差だけで判定すると3連打で何が起きますか。
 2. ReactivePropertyとC#の通常のeventの違いは?(値の保持と初回通知の観点で)
 3. Reactiveを採用すべきでないチーム状況とは?
 

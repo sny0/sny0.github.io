@@ -50,14 +50,14 @@ LDR (8bit) レンダリング直書き。白飛びは即クリップされ、露
 
 ### 標準的なパス順序
 
-順序は品質に直結します (例: ブルームはトーンマップ前のHDR値で計算しないと「光の溢れ」にならない):
+順序は品質に直結します。次はFSRの統合ガイドに沿って、被写界深度・モーションブラー・ブルームを再構成後の解像度で実行する例です。DoFを再構成前に置くエンジンなどもあり、順序は使用するアップスケーラと実装の要件で決めます。単独のTAAと時間的アップスケーラを必ず重ねるわけでもありません。
 
 ```mermaid
 flowchart TB
-    A[("シーンHDRカラー<br/>(RGBA16F, リニア)")] --> MB[モーションブラー]
-    MB --> DOF[被写界深度]
-    DOF --> TAAUP["TAA / アップスケーラ<br/>(DLSS/FSR等はここ)"]
-    TAAUP --> BLOOM["ブルーム<br/>(輝度抽出→ダウンサンプル連鎖→合成)"]
+    A[("シーンHDRカラー<br/>(RGBA16F, リニア)")] --> TAAUP["時間的アップスケーラ<br/>(DLSS/FSR等)"]
+    TAAUP --> DOF[被写界深度]
+    DOF --> MB[モーションブラー]
+    MB --> BLOOM["ブルーム<br/>(輝度抽出→ダウンサンプル連鎖→合成)"]
     BLOOM --> EXP["自動露出適用<br/>(平均輝度はComputeで別途計測)"]
     EXP --> TM["トーンマッピング<br/>(ACES等: HDR→表示レンジ)"]
     TM --> CG["カラーグレーディング<br/>(3D LUT)"]
@@ -162,9 +162,9 @@ float3 DownsampleBox13(Texture2D src, float2 uv, float2 texel) {
    ガンマ空間の値(実際より明るく符号化された値)を線形計算に使うため、ライティング結果の加算・減衰がすべて歪む。中間調が明るく飛びやすく、陰影の変化が不自然に急峻になり、複数ライトの加算やブレンドが過剰に明るくなる。最終出力時のガンマも二重適用になりがちで、いわゆる「ガンマが崩れた眠い/飛んだ絵」になる。
    :::
 
-3. **アップスケーラの挿入位置が「モーションブラーの後・ブルームの前」あたりに置かれるのはなぜか。**
+3. **時間的アップスケーラと、DoF・モーションブラー・ブルームの順序をどう決めるか。**
    ::: details 解答
-   アップスケーラ(TAAU/DLSS/FSR2)はジッタとモーションベクタを使う時間的再構成で、シーンのジオメトリ的情報が保たれた段階で実行する必要がある。一方ブルームやグレイン、LUTなどの画作り系エフェクトは出力解像度で掛けた方が品質が良く(低解像度のブルームは粗が見える)、コスト増も軽微なため、再構成の後に置く。この境界で「内部解像度/出力解像度」が分かれる。
+   使用するアップスケーラの統合要件とエンジンの実装を確認する。FSRのガイドはDoF・モーションブラー・ブルームを再構成後へ置く例を示す一方、DoFを前に置く構成もある。時間的な対応付けを壊すエフェクトやUI、ノイズをどこへ入れるかが品質に影響する。再構成後は出力解像度の処理になるため、その品質とコストも計測して順序・解像度を選ぶ。
    :::
 
 ## 参考資料
@@ -177,3 +177,4 @@ float3 DownsampleBox13(Texture2D src, float2 uv, float2 texel) {
 - [Microsoft: DirectX with Advanced Color](https://learn.microsoft.com/en-us/windows/win32/direct3darticles/high-dynamic-range)
 - [Microsoft DXC: SPIR-V — Vulkan specific Image Formats](https://github.com/microsoft/DirectXShaderCompiler/blob/main/docs/SPIR-V.rst)
 - [OpenGL 4.6 Core Specification: §8.24 / §17.3.7](https://registry.khronos.org/OpenGL/specs/gl/glspec46.core.pdf)
+- [AMD: FSRのパイプライン統合位置](https://gpuopen.com/manuals/fsr_sdk/techniques/super-resolution-upscaler/)

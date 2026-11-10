@@ -28,19 +28,21 @@ C#ソース ──Roslyn──> IL(中間言語)+メタデータ
 ```
 
 - AOT (Ahead-Of-Time) = 事前コンパイル。JIT禁止のプラットフォーム(iOS等)で必須
-- 生成されたC++は `Library/Il2cppBuildCache` 等で実際に読める(C++を学んだ今なら!)
+- 生成C++の場所はUnityの版・対象・ビルド方法で異なる。旧版の`Library/Il2cppBuildCache`を固定パスとせず、2022系以降などのBeeによるビルドでは`Library/Bee/artifacts/.../il2cppOutput/cpp`などを、ビルドログや出力から探す。[Unityのビルド成果物の例](https://docs.unity.com/en-us/cloud/developer-data/upload-symbol-files-ci-troubleshooting)
 
 ## IL2CPPの制約をC++の知識で説明する
 
 | Unityでの経験則 | C++側の理由 |
 |---|---|
 | 実行時のコード生成(Emit)不可 | 機械語は事前に全部作る。実行時にコンパイラはいない([テンプレートとジェネリック](/languages/csharp/templates-vs-generics.html)と同じ構図) |
-| 値型ジェネリックの組み合わせがAOTで漏れる | ジェネリックがC++テンプレート的に**使用実績ベースで実体化**されるため、リフレクション経由でしか現れない組み合わせは生成されない |
+| ジェネリックとAOTの制約は版・コード生成設定に依存 | 旧版では未生成の値型の組み合わせが失敗する例があった。Unity 2022.1以降はFull Generic Sharingのフォールバックにより、専用コードがない組み合わせも共有実装で扱える場合がある。ストリッピングや実行時コード生成の制約とは別に調べる |
 | コードストリッピングでメソッドが消える(link.xml) | リンカのデッドコード除去([リンク](/runtime/cpp-internals/object-files-and-libraries.html))。リフレクション呼び出しは「使用」と見なされない |
 | iOSビルドが遅い | 生成された膨大なC++のコンパイル([ビルドが遅い理由](/tools/build/build-speed.html)がフル適用) |
 | IL2CPPの方が速いことが多い | C++コンパイラの最適化([コンパイラ最適化・未定義動作の影響・Debug/Release・ゼロコスト抽象化](/runtime/cpp-internals/optimization-and-ub.html))がフルに掛かる。ただしGCはBoehmのまま(→ [GC比較](/runtime/memory/gc-and-csharp-comparison.html)) |
 
 ## ネイティブプラグインとの境界(P/Invoke)
+
+Full Generic Sharingでは、特殊化された実装と共有実装で性能特性が異なる場合があります。「AOTでは未知のジェネリックの組み合わせはすべて実行できない」とはせず、使用するUnityの版・設定・保持されるメタデータを確認します。[Unity 2022.1の説明](https://unity.com/blog/engine-platform/il2cpp-full-generic-sharing-in-unity-2022-1-beta)
 
 ```csharp
 // C#側
@@ -75,7 +77,7 @@ Burst(HPC# → LLVMで機械語)は「C#の**サブセット**を、C++並みの
 
 ## 演習
 
-自分のUnityプロジェクト(またはサンプルプロジェクト)をIL2CPPでビルドし、生成されたC++(Il2cppBuildCache)から自作クラスに対応するファイルを探して眺めてください。「C#のクラスがC++でどう表現されているか」を3点メモしてください(メソッドテーブル、nullチェックの挿入、など)。
+自分のUnityプロジェクトをIL2CPPでビルドし、ビルドログから生成C++の場所を確認して、自作クラスに対応するファイルを探してください。Unityの版・対象・実際のパスと、「C#のクラスがC++でどう表現されているか」を3点メモします（メソッドテーブル、nullチェックの挿入など）。
 
 ---
 

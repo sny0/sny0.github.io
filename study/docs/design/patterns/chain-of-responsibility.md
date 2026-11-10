@@ -105,13 +105,13 @@ private:
 
 ## C#またはUnityでの実装
 
-Unity自身がこのパターンを内蔵しています: **UIイベントのバブリング**(uGUIの `ExecuteEvents.ExecuteHierarchy` は子→親へイベントを回し、処理した者で停止)、物理のレイヤーマトリクスの後段の当たり処理など。
+uGUIの`ExecuteEvents.ExecuteHierarchy`は、指定したオブジェクトから親へ辿り、対象のイベントを処理できる最初のオブジェクトで停止します。これは処理者を探すCoRの例です。物理のレイヤー衝突マトリクスはレイヤーの組ごとの静的なフィルタ表で、処理者へ順に回す鎖とは異なります。[UnityのExecuteHierarchy](https://docs.unity3d.com/Packages/com.unity.ugui@1.0/api/UnityEngine.EventSystems.ExecuteEvents.html)
 
 ```csharp
 // リスト方式(C#での実用形): 鎖のポインタ繋ぎよりリスト走査が扱いやすい
 public interface IDamageStep { bool Process(ref int damage); }  // trueで停止
 
-public class DamagePipeline {
+public class DamageHandlerChain {
     private readonly List<IDamageStep> steps = new();  // 順序 = リストの順
     public void Add(IDamageStep s) => steps.Add(s);
     public int Apply(int damage) {
