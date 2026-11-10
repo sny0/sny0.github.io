@@ -13,9 +13,11 @@ public:
     void Push(Event e) { queue_.push(std::move(e)); }
     template <class Handler>
     void DrainAll(Handler&& handle) {
-        while (!queue_.empty()) {
-            handle(queue_.front());
-            queue_.pop();
+        std::queue<Event> batch;
+        batch.swap(queue_); // 処理中のPushは次回のDrainへ送る
+        while (!batch.empty()) {
+            handle(batch.front());
+            batch.pop();
         }
     }
 private:
@@ -44,6 +46,6 @@ int main() {
             if (!dup) seToPlay.push_back(se->seId);   // 集約: 遅延配送だからできる
         }
     });
-    std::printf("score=%d, SE requests=3 -> played=%u(重複除去)\n", totalScore, seToPlay.size());
+    std::printf("score=%d, SE requests=3 -> played=%zu(重複除去)\n", totalScore, seToPlay.size());
     return 0;
 }
