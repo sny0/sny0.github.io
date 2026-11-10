@@ -50,9 +50,9 @@ IBL (Image-Based Lighting) は、**環境全体を撮影/描画した画像 (環
 
 ### 拡散IBL — Irradiance Map
 
-$$L_d = \frac{albedo}{\pi} \int_\Omega L_i(\mathbf{l})(\mathbf{n}\cdot\mathbf{l}) \, d\mathbf{l} = albedo \cdot E(\mathbf{n})$$
+$$L_d = \frac{albedo}{\pi} \int_\Omega L_i(\mathbf{l})(\mathbf{n}\cdot\mathbf{l}) \, d\mathbf{l} = \frac{albedo}{\pi} E(\mathbf{n})$$
 
-放射照度 $E$ は**法線方向だけの関数**なので、環境マップをコサイン畳み込みした「Irradiance Map」(低解像度キューブマップ、または **SH 9係数**) を事前計算し、実行時は法線で1回参照するだけです。
+ここでは$E(\mathbf{n}) = \int_\Omega L_i(\mathbf{l})\max(\mathbf{n}\cdot\mathbf{l},0)\,d\mathbf{l}$を放射照度と定義し、Lambert拡散の$1/\pi$は実行時に掛けます。$E/\pi$をあらかじめマップに格納する実装もありますが、その場合は実行時にもう一度$1/\pi$を掛けません。放射照度 $E$ は**法線方向だけの関数**なので、環境マップをコサイン畳み込みした「Irradiance Map」(低解像度キューブマップ、または **SH 9係数**) を事前計算し、実行時は法線で1回参照するだけです。
 
 ### スペキュラIBL — Split-Sum近似 (Karis 2013)
 
@@ -132,9 +132,9 @@ float3 EvaluateIBL(float3 N, float3 V, float3 baseColor,
     float NdotV = saturate(dot(N, V));
     float3 F0 = lerp(0.04, baseColor, metallic);
 
-    // 拡散: Irradiance map (or SH評価)
+    // 拡散: Eを保存したIrradiance map (or SH評価)。ここで1/piを掛ける
     float3 irradiance = gIrradianceMap.Sample(gLinear, N).rgb;
-    float3 diffuse = irradiance * baseColor * (1.0 - metallic);
+    float3 diffuse = (irradiance / 3.14159265) * baseColor * (1.0 - metallic);
 
     // 鏡面: Prefiltered + LUT
     float3 R = reflect(-V, N);
@@ -181,3 +181,4 @@ float3 EvaluateIBL(float3 N, float3 V, float3 baseColor,
 - Karis, *"Real Shading in UE4"* (2013) — split-sum
 - LearnOpenGL *PBR/IBL* 章 — 実装チュートリアルの定番
 - Google Filament ドキュメント — IBL数式の完全な導出
+- [pbrt v4: Diffuse Reflection — Lambertian BRDFの1/π](https://www.pbr-book.org/4ed/Reflection_Models/Diffuse_Reflection)

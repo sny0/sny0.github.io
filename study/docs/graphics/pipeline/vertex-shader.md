@@ -29,7 +29,8 @@ Vertex Shader (VS) の一回の呼び出しは、一つの入力頂点を処理�
 - **2001: GeForce 3 + DirectX 8** — T&Lをプログラム可能にした「Vertex Shader 1.1」誕生。アセンブリ風言語で128命令まで
 - 2003-04: HLSL/GLSLによる高級言語化。分岐・ループの追加 (SM2.0/3.0)
 - 2006: 統合シェーダ化により、VS専用ユニットは消滅 (汎用コアで実行)
-- 2008 (DX10.1/SM4): VSからテクスチャを読める (Vertex Texture Fetch) のが当たり前に — GPUパーティクル・地形変位が実用化
+- 2004: **Shader Model 3.0**でVertex Texture Fetchが登場（GeForce 6など。形式・対応能力に制約）
+- 2006〜07: **Direct3D 10 / SM4.0**で頂点側のテクスチャ読み取りが標準機能に。Direct3D 10.1はSM4.1
 
 ## それ以前の技術
 
@@ -72,7 +73,7 @@ flowchart LR
 | 固定機能IA | 頂点レイアウト宣言に従いハードウェアがフェッチ | 伝統的・最適化されている |
 | **Programmable Vertex Pulling** | VSが `SV_VertexID` を使い `StructuredBuffer`/`ByteAddressBuffer` から自分で読む | GPU Driven、Nanite系、柔軟なフォーマット |
 
-現代のGPUでは固定機能IAも内部的にはシェーダによるフェッチに近く、Vertex Pullingのペナルティはほぼありません。
+IAはAPI上の論理的な入力段階で、頂点フェッチを専用回路・シェーダー等のどこで実行するかはGPUの実装によります。Vertex Pullingの性能も、GPU世代、フォーマット、キャッシュやアクセスパターンで変わります。柔軟性が必要な理由を確認し、同じ描画内容で計測して選びます。
 
 ### スキニング (Linear Blend Skinning)
 
@@ -175,7 +176,10 @@ void main() {
 
 ## 参考資料
 
-- Fabien Giesen, *"A trip through the Graphics Pipeline"* — Part 3 (頂点処理)
+- Fabian Giesen, *"A trip through the Graphics Pipeline"* — Part 3 (頂点処理)
 - meshoptimizer (Arseny Kapoulkine) — 頂点キャッシュ最適化の実装
 - GDC/GPU Gems の GPU Skinning 各種資料
 - Microsoft Learn, *Vertex Shader Stage*
+- [NVIDIA: Vertex Textures（2004年、SM3.0）](https://download.nvidia.com/developer/Papers/2004/Vertex_Textures/Vertex_Textures.pdf)
+- [Microsoft: Shader Model 4](https://learn.microsoft.com/en-us/windows/win32/direct3dhlsl/dx-graphics-hlsl-sm4)
+- [Fabian Giesen: Graphics Pipeline 2011](https://fgiesen.wordpress.com/2011/07/09/a-trip-through-the-graphics-pipeline-2011-index/)

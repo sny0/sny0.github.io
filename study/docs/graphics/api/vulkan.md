@@ -24,7 +24,8 @@ Vulkanは**Khronosのクロスプラットフォーム明示的API**です (2016
 ## 歴史・誕生した背景
 
 - 2013: AMD **Mantle**。低オーバーヘッドAPIの設計が後のVulkanの基礎の一つとなった
-- 2015: 「glNext」として開発発表 → **2016: Vulkan 1.0**
+- 2014: SIGGRAPHで次世代OpenGL構想（glNext）への参加を呼びかけ
+- 2015: GDCで**Vulkan**として公開 → **2016: Vulkan 1.0**
 - 2018: Vulkan 1.1 (subgroup操作、マルチビュー)
 - 2020: Vulkan 1.2 (Timeline Semaphore、Buffer Device Address) / **Vulkan Ray Tracing** (KHR標準)
 - 2022: Vulkan 1.3 (**Dynamic Rendering** — RenderPass簡素化、Synchronization2)
@@ -115,7 +116,7 @@ acquire semaphore・submit fence・command bufferはフレームスロット単�
 Android既定API、Windows/Linuxでも選択可。エディタ起動オプション `-force-vulkan`。SRP/URPのRenderGraphはVulkanのTBDR活用 (subpass/tile memory) を意識した設計です。
 
 ### Unreal Engine
-Linux/Androidの主要RHI、Windowsでも `-vulkan` で選択可。SteamDeck対応はVulkan RHIで行われます。
+Linux/Androidの主要RHI、Windowsでも `-vulkan` で選択可。Steam Deck向けのネイティブLinuxビルドではVulkan RHIを使えます。一方、Windows版をProtonで動かす場合は、Direct3D呼び出しをDXVK/VKD3D-Proton等がVulkanへ変換する経路になります。
 
 ### DirectX 12
 概念対応は [DirectX 12ページの表](/graphics/api/directx12.html) 参照。両方を知ると相互の設計判断 (RenderPassの有無、バインディングモデルの違い) が立体的に見えます。
@@ -249,3 +250,6 @@ void DrawFrame() {
 - [Khronos Vulkan Guide: Synchronization Examples](https://docs.vulkan.org/guide/latest/synchronization_examples.html)
 - [Khronos Vulkan Samples: Swapchain Recreation](https://docs.vulkan.org/samples/latest/samples/api/swapchain_recreation/README.html)
 - [Khronos Vulkan Samples: Timeline Semaphore](https://docs.vulkan.org/samples/latest/samples/extensions/timeline_semaphore/README.html)
+- [Khronos: Next Generation OpenGL Initiative (2014)](https://www.khronos.org/news/press/khronos-group-announces-key-advances-in-opengl-ecosystem)
+- [Khronos: Vulkan発表 (2015)](https://www.khronos.org/news/press/khronos-reveals-vulkan-api-for-high-efficiency-graphics-and-compute-on-gpus)
+- [Valve: Proton](https://github.com/ValveSoftware/Proton)

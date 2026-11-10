@@ -82,7 +82,9 @@ void World::KillEnemy(Enemy& e) {                 // 死亡処理の手続きは
 | 中 | 上記3分類(直呼び+バス+キュー)。バスは型ベースの簡素なもので十分 |
 | 大 | 同上+イベントログ(全発行の記録=デバッグとリプレイの資産)+スレッド境界の設計 |
 | Unity | バス=C# event集約 or MessagePipe、キュー=自作。分類の考え方は同一 |
-| UE | 直呼び=GameMode内の手続き、バス=Gameplay Message Subsystem、演出=既存のキュー的機構(Niagara/サウンドの発火) |
+| UE | 直呼び=GameMode内の手続き、バス=DelegateやLyra同梱のGameplayMessageRouterプラグイン、演出=自作キューなど |
+
+GameplayMessageRouterを使う場合は、[Lyraサンプル](https://dev.epicgames.com/documentation/en-us/unreal-engine/lyra-sample-game-in-unreal-engine)から必要なプラグインと依存関係を導入します。エンジン本体の標準機能とは区別し、サンプルのライセンス条件も確認します。発行が同期的か、キューで遅延するかも別の設計判断です。
 
 ## この題材の教訓
 

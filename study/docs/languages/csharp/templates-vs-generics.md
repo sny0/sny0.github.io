@@ -63,7 +63,7 @@ const T& Strongest(const std::vector<T>& list) {
 | バイナリサイズ | 小 | 型数に比例して増える |
 | 実行速度 | 参照型Tは共有コード(間接) | 常に型特化の最速コード |
 
-**IL2CPPがこの2つの世界の橋**: C#ジェネリックをAOTでC++的に事前実体化するため、「実行時に初めて現れる値型のジェネリック組み合わせ」が失敗する(ExecutionEngineException系)——Unityで`AOT対応`と言われていた問題の正体はこの表にあります(→ [IL2CPP](/languages/csharp/il2cpp.html))。
+**IL2CPPでは、JITとAOTの区別に加えコード共有を確認します**。旧版には、専用コードが事前生成されていない値型ジェネリックで`ExecutionEngineException`となる例がありました。Unity 2022.1以降のFull Generic Sharingでは、共有実装へフォールバックして扱える場合があります。ストリッピングやメタデータ保持などの制約までなくなるわけではありません。[UnityのFull Generic Sharing](https://unity.com/blog/engine-platform/il2cpp-full-generic-sharing-in-unity-2022-1-beta)・[IL2CPP](/languages/csharp/il2cpp.html)
 
 ## Unity開発者が誤解しやすい点
 

@@ -28,7 +28,9 @@ study:
 - 2004: Doom 3 がステンシルシャドウボリューム (Carmack's Reverse) の頂点に — ピクセル精度だがジオメトリコストと柔らかい影の困難で衰退
 - 2001-06: ハードウェアPCF (NVIDIA)、**PSM/LiSPSM/CSM** — 透視エイリアシングとの戦い
 - 2005: Fernando の **PCSS** (コンタクトハードニング)
-- 2006: **VSM** (分散シャドウマップ)、2011: Moment SM 系
+- 2006: **VSM**（分散シャドウマップ）
+- 2008: **ESM**（Exponential Shadow Maps）
+- 2015: **MSM**（Moment Shadow Mapping、Peters & Klein）
 - 2007頃〜: **CSM (Cascaded Shadow Maps)** が屋外の平行光源の標準として定着
 - 2018〜: レイトレース影 (DXR) — 正確なソフトシャドウの新系譜 → [レイトレーシング](/graphics/lighting/raytracing.html)
 - 2021: UE5 **Virtual Shadow Maps** — 16K仮想解像度のページング式シャドウマップ (Nanite世代の解)
@@ -87,7 +89,7 @@ float ShadowFactor(float3 posWS) {
 
 ### ソフトシャドウ
 
-- **PCF**: 近傍を複数サンプルして平均 — 半影というより「柔らかい縁」。Poisson диスクサンプル+回転が定番
+- **PCF**: 近傍を複数サンプルして平均 — 半影というより「柔らかい縁」。Poisson ディスクサンプル+回転が定番
 - **PCSS**: 遮蔽物までの距離から半影サイズを推定して可変フィルタ — 光源サイズに応じた「コンタクトハードニング」(接地部はシャープ、離れるとボケる)
 - **VSM/ESM/MSM**: 深度の統計量 (分散等) を格納しハードウェアフィルタ・ミップを可能に。ライトリーク (light bleeding) が代償
 - **レイトレース影**: 面光源への複数レイ+デノイズ。物理的に正しい半影 → [レイトレーシング](/graphics/lighting/raytracing.html)
@@ -98,7 +100,7 @@ float ShadowFactor(float3 posWS) {
 Directional は CSM (最大4分割、`Shadow Cascades` 設定)。URPは `ShadowCaster` パスを持つシェーダが投影。ソフトシャドウはPCF。`Shadows.hlsl` の `MainLightRealtimeShadow()`。ポイントライトはキューブマップ6面 (URPは対応バージョン以降)。
 
 ### Unreal Engine
-既定はCSM+PCF。**Virtual Shadow Maps** (UE5, Nanite前提で16Kページング、`r.Shadow.Virtual.Enable`)、Distance Field Shadows (中距離のSDFレイマーチ影)、レイトレース影の4系統を距離と設定で使い分けます。
+UE5の新規プロジェクトでは**Virtual Shadow Maps**が既定です（16K仮想解像度をページ分割、`r.Shadow.Virtual.Enable`）。非Naniteメッシュにも使え、Naniteとの組み合わせでは特に効率よく動作します。VSMを無効にする構成や低いハードウェア要件では従来のShadow Maps/CSMを選べます。Distance Field Shadowsやレイトレース影の適用も、対象ライト・描画方式・プラットフォームの要件に従います。
 
 ### DirectX 12
 深度専用パス (PSOのRTV無し+DSVのみ、`SlopeScaledDepthBias` をラスタライザステートに設定) → 比較サンプラ (`D3D12_FILTER_COMPARISON_MIN_MAG_LINEAR_MIP_POINT`) で参照。
@@ -179,3 +181,5 @@ float ShadowCSM(float3 posWS, float viewZ, float NdotL) {
 - Eisemann et al., *Real-Time Shadows* (書籍) — 影技術の百科事典
 - MJP, *"Shadow Sample"* シリーズ / *"A Sampling of Shadow Techniques"*
 - SIGGRAPH 2021/2022, *"Virtual Shadow Maps in UE5"* 関連講演
+- [Epic: Virtual Shadow Maps](https://dev.epicgames.com/documentation/en-us/unreal-engine/virtual-shadow-maps-in-unreal-engine)
+- [Peters & Klein: Moment Shadow Mapping (2015)](https://www.momentsingraphics.de/I3D2015.html)

@@ -34,7 +34,7 @@ void Move(float dt) {
     for (auto& p : particles) { p.x += p.vx * dt; p.y += p.vy * dt; p.z += p.vz * dt; }
 }
 // キャッシュライン(64バイト)には位置・速度と一緒に「色・寿命・テクスチャID」も載ってくる。
-// 帯域の半分は使わないデータの運搬 = 実効速度が半分になる
+// この処理が使わないフィールドも同じラインに含まれ、転送の無駄になり得る
 ```
 
 ## SoA: 使うものだけを隙間なく
@@ -61,7 +61,7 @@ void Move(Particles& ps, float dt) {
 
 検証済みサンプル: <a href="/study/samples/cpp/aos_soa_bench.cpp">samples/aos_soa_bench.cpp</a>(同一処理のAoS/SoA時間比較)
 
-- 帯域の無駄がゼロ+[SIMD自動ベクトル化](/runtime/cpp-internals/cache-branch-simd.html)の理想形(連続同型データ)
+- 必要なフィールドを連続して読めるため、不要な転送を減らし、[SIMD自動ベクトル化](/runtime/cpp-internals/cache-branch-simd.html)を助ける場合がある。速度の倍率は処理・CPU・要素数を変えて測る。
 - [ECS](/game/patterns/component-and-ecs.html)のComponent配列は、この考えをアーキテクチャ化したもの
 
 ## トレードオフ(SoAは無料ではない)
@@ -73,7 +73,20 @@ void Move(Particles& ps, float dt) {
 | コードの書き味 | 自然(`p.x`) | 崩れる(`ps.x[i]`)。追加・削除がN配列の同期作業 |
 | 「1個のパーティクル」を関数に渡す | `Particle&` で済む | インデックス+コンテナ参照が要る |
 
-**中間形 (AoSoA)**: ホットなフィールド群だけ構造体にまとめて配列化(`PosVel{x,y,z,vx,vy,vz}` の配列+コールドデータは別配列)。実務ではこの「ホット/コールド分離」で十分なことが多いです。
+### AoSoAと、ホット/コールド分離は別の工夫
+
+**AoSoA（Array of Structures of Arrays）**は、固定長のSoAブロックを配列にする配置です。例えば8要素ずつをまとめるなら、次のようになります。ブロック幅はSIMD幅やアクセス方法に合わせて選びます。[CabanaのAoSoA実装](https://github.com/ECP-copa/Cabana/blob/master/core/src/Cabana_AoSoA.hpp)
+
+```cpp
+struct ParticleBlock {
+    float x[8], y[8], z[8];
+    float vx[8], vy[8], vz[8];
+};
+std::vector<ParticleBlock> blocks; // 各ブロック内はSoA、ブロック全体は配列
+// 個体iは、ブロックi/8の各配列の要素i%8。末尾の有効要素数も別に管理する。
+```
+
+一方、`PosVel{x,y,z,vx,vy,vz}`の配列と、色などの別配列へ分けるのは**ホット/コールド分離**です。使うフィールド群を分ける工夫であり、各群の内部をAoS・SoA・AoSoAのどれにするかとは別の軸です。
 
 ## 判断基準
 
@@ -103,7 +116,7 @@ void Move(Particles& ps, float dt) {
 
 1. AoSの「無駄な同乗者」問題をキャッシュラインの語彙で説明できますか。
 2. SoAが苦手な操作は何ですか。
-3. AoSoA(ホット/コールド分離)はどんな妥協ですか。
+3. 固定長SoAブロックの配列であるAoSoAと、ホット/コールド分離の違いは何ですか。
 
 ## 演習
 

@@ -30,7 +30,7 @@ error LNK2019: 未解決の外部シンボル "public: void __cdecl Enemy::TakeD
 4. **宣言と定義のシグネチャ不一致**(`void Foo(int)` を宣言、`void Foo(long)` を定義——別シンボルになる)
 5. **テンプレートの定義が.cppにある**(実体化できない → ヘッダーへ移す。→ [実体化](/runtime/cpp-internals/template-instantiation-and-inline.html))
 6. C++からCの関数を呼んでいて `extern "C"` がない(名前修飾の不一致)
-7. 仮想デストラクタやvtable絡み: `undefined reference to vtable for X` は**キー仮想関数(最初の非inline仮想関数)の定義漏れ**のサイン
+7. 仮想デストラクタやvtable絡み: `undefined reference to vtable for X` はItanium C++ ABIでは、**キー関数（クラス定義時点で非inlineである、最初の非純粋仮想関数）の定義漏れ**などを疑う。これはC++言語自体が全処理系へ定める規則ではなく、キー関数を持たないクラスやABIごとの相違も確認する
 
 ## パターン2: 多重定義 (multiple definition / LNK2005)
 
@@ -87,3 +87,4 @@ c++filt "_ZN5Enemy10TakeDamageEi"      # 修飾名の復元
 ---
 
 関連項目：[品質のための道具](/tools/build/debugging-and-analysis.html) / [学習ガイド](/tools/build/) / [演習](/tools/build/exercises.html)
+- [Itanium C++ ABI §5.2.3: Virtual Tablesとkey function](https://itanium-cxx-abi.github.io/cxx-abi/abi.html#vtable)

@@ -8,7 +8,7 @@ study:
   domain: browser
   summary: 扉が開いて直接音の遮蔽が外れるとき、ゲインとローパスのカットオフを音声の時刻に合わせて変える。時定数で切り替えの速さを調整する。
   aliases: [Web Audio API, 音の遮蔽, AudioParam, setTargetAtTime, 時定数, スムージング, ゲイン, ローパスフィルター, カットオフ]
-  verification: W3C Web Audio APIのAudioParamとBiquadFilterNodeの仕様に照合（2026-11-06）
+  verification: W3C Web Audio APIのAudioParam・BiquadFilterNodeの仕様、cancelAndHoldAtTimeの対応状況と代替時の制約を確認（2026-11-11）
 ---
 
 # Web Audioで遮蔽をなめらかに切り替える
@@ -46,7 +46,24 @@ occlusionGain.gain.setTargetAtTime(1, start, timeConstant);
 lowpass.frequency.setTargetAtTime(8_000, start, timeConstant);
 ```
 
-扉が途中で閉じるなど、切り替え中に次の状態へ移るときは、その時点の値から新しい目標へ向かわせます。上の例のように目標を時系列で追加する場合、前の `setTargetAtTime()` は次のイベント時刻まで有効です。将来のイベントを予約していて取り消す必要がある場合は、`cancelAndHoldAtTime()` でその時刻の値を保持してから新しい目標を予約できます。[W3C Web Audio APIのcancelAndHoldAtTime](https://www.w3.org/TR/webaudio/#dom-audioparam-cancelandholdattime)
+扉が途中で閉じるなど、切り替え中に次の状態へ移るときは、その時点の値から新しい目標へ向かわせます。上の例のように目標を時系列で追加する場合、前の`setTargetAtTime()`は次のイベント時刻まで有効です。将来の予約も取り消すなら、対応するブラウザーでは`cancelAndHoldAtTime()`でその時刻の値を保持してから、新しい目標を予約できます。ただし、このメソッドには未対応のブラウザーもあるため、機能検出が必要です。[W3CのcancelAndHoldAtTime](https://www.w3.org/TR/webaudio/#dom-audioparam-cancelandholdattime) · [対応状況](https://developer.mozilla.org/en-US/docs/Web/API/AudioParam/cancelAndHoldAtTime)
+
+未対応時は、アプリが管理する遷移の式から切り替え時刻の値を求め、将来の予約を消した**後で**その値を置き、新しい目標を予約します。例えば、開始値`from`から`target`へ時刻`startedAt`・時定数`tau`で近づけている、一つの`setTargetAtTime`区間なら次のように扱えます。
+
+```js
+const now = audioContext.currentTime;
+const held = target + (from - target) * Math.exp(-(now - startedAt) / tau);
+if (typeof param.cancelAndHoldAtTime === "function") {
+  param.cancelAndHoldAtTime(now);
+} else {
+  param.cancelScheduledValues(now);
+  param.setValueAtTime(held, now);
+}
+param.setTargetAtTime(nextTarget, now, nextTau);
+// 次回のため、from=held、target=nextTarget、startedAt=now、tau=nextTauを保存する。
+```
+
+この代替は`now >= startedAt`、`tau > 0`で、その区間をアプリが一貫して管理する場合の例です。任意のランプや音声入力による変調を含む全オートメーションの汎用代替ではありません。`AudioParam.value`を読むだけで任意の未来時刻の値を得られると考えず、管理するイベントの種類に応じて計算します。[W3Cの遷移式](https://www.w3.org/TR/webaudio/#audioparam-transitions) · [予約の取消し](https://www.w3.org/TR/webaudio/#dom-audioparam-cancelscheduledvalues)
 
 壁の端で判定が頻繁に反転する場合は、ゲーム側で新しい判定が一定時間続いてから採用する方法があります。状態を確定するまでの待ち時間と、確定後に音を変える時定数を別に決めると、判定が落ち着く速さと音の切り替わる速さを個別に調整できます。
 

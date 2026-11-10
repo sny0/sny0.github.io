@@ -46,8 +46,8 @@ GPU (Graphics Processing Unit) は、**大量のデータに対して同じ計�
 一般PCゲームでは**ソフトウェアレンダリング**が広く使われ、CPUが座標変換からpixelの塗りつぶしまで行う実装もありました。一方で、ワークステーション等ではそれ以前から専用ハードウェアによる3D処理が存在しました。
 
 - Quake (1996) はアセンブリで極限まで最適化されたCPUラスタライザを持っていた
-- 解像度320x240、テクスチャはニアレスト補間、ライティングは事前計算(ライトマップ)が限界
-- CPU時間のほぼ全てが描画に消え、ゲームロジックに使える時間がなかった
+- 例えばQuakeのDOS/VGA版には320×200の描画モードがあり、ソフトウェア描画でテクスチャと事前計算のライトマップ等を処理した。解像度・機能は版と設定で異なる
+- 描画がCPU時間の大きな部分を占め、ゲームロジック等と同じCPUの性能予算を分け合った
 
 ## 解決した課題
 
@@ -96,7 +96,7 @@ flowchart TB
 |---|---|---|
 | 目標 | レイテンシ最小化 | スループット最大化 |
 | コア数 | 8〜32 (大きく複雑) | 数千ALU (小さく単純) |
-| キャッシュ | 巨大 (数十MB) | 小さい (レイテンシは隠蔽で対処) |
+| キャッシュ | 少数スレッドの低遅延に多くの資源を配分 | 多数の実行スレッドで共有。スレッドあたりの容量と使い方が異なり、GPU全体のL2等は数十MB以上にもなる |
 | 分岐予測・アウトオブオーダー | あり | 基本なし |
 | スレッド切替 | 重い (OSが管理) | 1サイクル (ハードウェアが管理) |
 | 得意 | 逐次処理・分岐だらけのコード | 均質な大量データ処理 |
@@ -110,7 +110,7 @@ GPUは `Graphics API` 設定 (DX11/DX12/Vulkan/Metal) の背後に抽象化さ�
 RHI (Render Hardware Interface) がGPU/APIを抽象化します。`GRHISupportsMeshShadersTier0` のようなグローバル変数でハードウェア機能を判定します。統計は `stat gpu` コンソールコマンドで確認できます。
 
 ### DirectX 12
-`IDXGIAdapter` がGPUそのものを表し、`ID3D12Device` がGPUへの論理的な接続を表します。`CheckFeatureSupport` でRTコアの有無などを問い合わせます。
+`IDXGIAdapter` がGPUそのものを表し、`ID3D12Device` がGPUへの論理的な接続を表します。`CheckFeatureSupport`で、例えば`D3D12_FEATURE_DATA_D3D12_OPTIONS5::RaytracingTier`からDXRの対応Tierを問い合わせます。これはAPI機能のサポートであり、特定名称のRTコアの搭載有無を直接返すものではありません。
 
 ### Vulkan
 `VkPhysicalDevice` がGPUを表し、`vkGetPhysicalDeviceProperties` / `vkGetPhysicalDeviceFeatures` で能力を列挙します。複数GPU環境では明示的にどのGPUを使うか選択します。
@@ -176,10 +176,13 @@ Debug.Log($"RayTracing対応: {SystemInfo.supportsRayTracing}");
 
 ## 参考資料
 
-- Fabien Sanglard, *"A trip through the Graphics Pipeline"* (関連: Ryg blog series)
+- Fabian Giesen, *"A trip through the Graphics Pipeline 2011"*（The ryg blog）
 - NVIDIA, *GPU Gems* シリーズ (無料公開)
 - Hennessy & Patterson, *Computer Architecture: A Quantitative Approach* — GPU章
 - Real-Time Rendering, 4th Edition (Akenine-Möller他) — 第3章 "The Graphics Processing Unit"
 - Fabien Sanglard, *Game Engine Black Book: DOOM / Wolfenstein 3D* — ソフトウェアレンダリング時代の一次資料
 - [James H. Clark: The Geometry Engine (SIGGRAPH 1982)](https://stanford.edu/class/cs349g/p127-clark.pdf)
 - [NVIDIA: GeForce 256の回顧（メーカーのGPU定義）](https://blogs.nvidia.com/blog/first-gpu-gaming-ai/)
+- [Fabian Giesen: Graphics Pipeline 2011](https://fgiesen.wordpress.com/2011/07/09/a-trip-through-the-graphics-pipeline-2011-index/)
+- [id Software: QuakeのVGA描画モード](https://github.com/id-Software/Quake/blob/master/WinQuake/vid_vga.c)
+- [Microsoft: D3D12_RAYTRACING_TIER](https://learn.microsoft.com/en-us/windows/win32/api/d3d12/ne-d3d12-d3d12_raytracing_tier)

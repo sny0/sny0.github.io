@@ -96,7 +96,9 @@ struct AchievementDef {              // JSONやScriptableObjectから
 | 中(実績20〜50個) | 案A(イベント)+カウンタ集計。複雑条件だけ専用コード |
 | 大(運用追加・プラットフォーム複数) | 案A+案B(データ駆動)+[Adapter](/design/patterns/adapter.html)でプラットフォーム隔離 |
 | Unity | 案A(自作バス or MessagePipe)+ScriptableObject定義 |
-| UE | 案A(Gameplay Message Subsystem等)+DataTable定義+OnlineSubsystemがAdapter相当 |
+| UE | 案A(Delegateや、Lyra同梱のGameplayMessageRouterプラグイン)+DataTable定義+OnlineSubsystemがAdapter相当 |
+
+GameplayMessageRouterはエンジン本体の標準機能として前提にせず、[Lyraサンプル](https://dev.epicgames.com/documentation/en-us/unreal-engine/lyra-sample-game-in-unreal-engine)から必要なプラグインと依存関係を導入します。利用するサンプルのライセンス条件も確認します。
 
 ## この題材の教訓
 

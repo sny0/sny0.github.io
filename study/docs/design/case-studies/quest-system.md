@@ -101,7 +101,9 @@ class QuestSystem {
 | 中(〜50本、定型が多い) | 案A(データ+進捗分離+イベント購読)+案C(状態FSM) |
 | 大(数百本・章構造・運用) | 案A+前提グラフ+エディタツール。ORが多いなら案B |
 | Unity | 案AをScriptableObject+イベントチャネルで |
-| UE | DataTable+Gameplay Message。大規模ならクエストエディタ自作圏 |
+| UE | DataTable+Delegate、またはLyra同梱のGameplayMessageRouterプラグイン。大規模ならクエストエディタ自作圏 |
+
+GameplayMessageRouterは[Lyraサンプル](https://dev.epicgames.com/documentation/en-us/unreal-engine/lyra-sample-game-in-unreal-engine)から必要なプラグインと依存関係を導入します。エンジン本体の標準機能とは区別し、サンプルのライセンス条件も確認します。
 
 ## この題材の教訓
 

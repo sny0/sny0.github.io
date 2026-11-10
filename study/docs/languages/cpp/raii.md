@@ -60,9 +60,9 @@ private:
 void SaveGame(const GameState& state) {
     File f("save.dat", "wb");
     if (!f.IsOpen()) return;
-    if (!WriteHeader(f.Get())) return;   // どの出口でも
-    if (!WriteBody(f.Get())) return;     // 例外が飛んでも
-}                                        // ← 必ず ~File() が走り、closeされる
+    if (!WriteHeader(f.Get())) return;   // 通常のreturnでも
+    if (!WriteBody(f.Get())) return;     // 外側でcatchされる例外の巻き戻しでも
+}                                        // ← ~File() がcloseを呼ぶ
 ```
 
 実行できる所有・closeの例: <a href="/study/samples/cpp/raii_file.cpp">samples/raii_file.cpp</a>。2026-11-04更新版はOSのnullデバイスへ出力し、通常経路と早期returnでのcloseを検査します。固定名のファイルを作成・削除する処理はありません。MSVC 19.35、Windows x64で確認しています。
@@ -73,10 +73,12 @@ void SaveGame(const GameState& state) {
 
 C++の言語仕様が保証するもの:
 
-1. スコープを抜けるとき(正常・return・例外のスタック巻き戻し)、そのスコープの完全構築済みオブジェクトのデストラクタが**生成の逆順で必ず**呼ばれる
+1. 通常のスコープ終了・return・捕捉される例外による巻き戻しで、そのスコープの完全構築済みの自動オブジェクトを**構築の逆順**で破棄する
 2. メンバも同様(構築の逆順で破棄)
 
 つまり「後片付けの実行」を、プログラマの記憶力ではなく**言語仕様**に担わせるのがRAIIです。
+
+ただし、どこにも捕捉されない例外で`std::terminate`へ進む場合、先にスタックを巻き戻すかは実装定義です。強制終了、`std::abort`なども通常のスコープ終了ではありません。RAIIはプロセスがどんな形で終了しても保存や解放を完了する保証ではありません。[C++草案: 捕捉されない例外](https://eel.is/c++draft/except.handle)
 
 ## 「リソース」はメモリだけではない
 

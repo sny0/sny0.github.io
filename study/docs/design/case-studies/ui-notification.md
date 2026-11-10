@@ -87,7 +87,9 @@ HPバー・所持金など「特定の状態を常に映す」UIは、キュー�
 | 中 | 案B(単発系)+案C(常時系)の2本立て |
 | 大 | 同上+通知のプライオリティ・ローカライズ・演出キュー(表示順の演出制御)を通知システムとして製品化 |
 | Unity | 案C=event/R3購読、案B=自作キュー or MessagePipe |
-| UE | 案C=Delegate購読(UMG)、案B=Gameplay Message Subsystem |
+| UE | 案C=Delegate購読(UMG)、案B=自作の通知キュー。発行側の疎結合化にはLyra同梱のGameplayMessageRouterプラグインも候補 |
+
+GameplayMessageRouterは[Lyraサンプル](https://dev.epicgames.com/documentation/en-us/unreal-engine/lyra-sample-game-in-unreal-engine)から導入するプラグインで、エンジン本体の標準機能とは区別します。依存関係と利用条件を確認してください。Pub/Subのメッセージ発行だけでは遅延・集約キューにはならないため、案Bのキューは別に用意します。
 
 ## この題材の教訓
 

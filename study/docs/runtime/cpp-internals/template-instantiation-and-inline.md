@@ -35,7 +35,7 @@ b.cpp: Max(3, 4) を使用      → b.o にも Max<int> の実体が生成され
 1. **テンプレート定義はヘッダーに置く**: 実体化には雛形の全文が必要。b.cppをコンパイル中のコンパイラは、定義が見えなければ int 版を作れない(宣言だけだとリンクエラー `undefined reference to Max<int>`)
 2. **ビルド時間への影響**: 同じ実体化を全translation unitで繰り返し行い、リンカが捨てる——この「作っては捨てる」がC++のビルドを遅くする主犯の一つ(→ [ビルド速度](/tools/build/build-speed.html))
 3. **コードサイズ**: `vector<int>`, `vector<float>`, `vector<Enemy*>` はそれぞれ完全な別コード。型の数だけ増える(テンプレートブロート)。組み込み・モバイルでは意識する
-4. **明示的実体化**という緩和策: よく使う型を1つの.cppで `template class std::vector<int>;` と実体化し、他では宣言だけ(extern template)にしてビルドを速くできる
+4. **明示的実体化**という緩和策: 自作の`MyContainer<T>`について、定義が見える1つの.cppで`template class MyContainer<int>;`と実体化し、他では`extern template class MyContainer<int>;`で暗黙の実体化を抑える。標準ライブラリのクラステンプレートの明示的実体化には、宣言がプログラム定義型に依存するなどの条件があり、`std::vector<int>`をこの例には使わない。[C++草案: namespace stdへの制約](https://eel.is/c++draft/namespace.std)
 
 ### 実体化は「使った分だけ」
 
@@ -55,7 +55,7 @@ c.Print();            // Printだけ実体化される。SortはEnemyに<がな�
 
 ### キーワードの意味(再確認)
 
-`inline` = 「この定義が複数の翻訳単位に現れることを許す([ODR](/runtime/cpp-internals/translation-units-and-headers.html)の例外)」。テンプレートとクラス内定義のメンバ関数は暗黙にこの性質を持ちます。
+`inline`は、ODRの条件を満たす定義を複数の翻訳単位に置けるようにする指定です。名前付きモジュールに属さないクラス内定義のメンバー関数は暗黙にinlineですが、C++20の名前付きモジュール内では異なります。テンプレートにも別の多重定義の規則があり、すべてが自動的にinline関数になるわけではありません。[C++草案: inline](https://eel.is/c++draft/dcl.inline)・[ODR](/runtime/cpp-internals/translation-units-and-headers.html)
 
 ### インライン展開(最適化)は別の話
 
@@ -79,7 +79,7 @@ int y = Add(x, 1);
 
 - C#ジェネリックは実行時(JIT)に実体化(値型のみ特殊化)。C++はコンパイル時に全部(→ [テンプレートとジェネリック](/languages/csharp/templates-vs-generics.html))
 - C#のインライン展開はJITが行い、`[MethodImpl(MethodImplOptions.AggressiveInlining)]` がヒント。概念は同じで、タイミング(実行時vs事前)が違う
-- IL2CPPではC#ジェネリックがC++テンプレート的な実体化に落ち、「使った組み合わせだけ生成」の性質がAOTの制約(実行時に新しい組み合わせを作れない)として現れる
+- IL2CPPはAOTですが、Unity 2022.1以降のFull Generic Sharingでは、専用コードを生成していないジェネリックの組み合わせも共有実装で扱える場合があります。実行時コード生成、コード共有、ストリッピングを別々に確認します。[UnityのFull Generic Sharing](https://unity.com/blog/engine-platform/il2cpp-full-generic-sharing-in-unity-2022-1-beta)
 
 ## ゲーム開発での使用例
 

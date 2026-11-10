@@ -80,13 +80,13 @@ public:
         real_->Bind();
     }
     int Width() const override {
-        const_cast<LazyTextureProxy*>(this)->EnsureLoaded();  // constでも遅延ロードが必要な例。
-        return real_->Width();     // 実務ではmutableメンバにするのが素直(ここでは説明のため明示)
+        EnsureLoaded();
+        return real_->Width();
     }
 private:
-    void EnsureLoaded() { if (!real_) real_ = std::make_unique<RealTexture>(path_); }
+    void EnsureLoaded() const { if (!real_) real_ = std::make_unique<RealTexture>(path_); }
     std::string path_;
-    std::unique_ptr<RealTexture> real_;   // 本物の所有はプロキシ
+    mutable std::unique_ptr<RealTexture> real_; // 論理上の値を変えないロード用キャッシュ
 };
 // 利用側は ITexture としか付き合わない。ロード済みかを気にするコードが消える
 ```
@@ -96,16 +96,49 @@ private:
 ## C#またはUnityでの実装
 
 ```csharp
-// Unityの Addressables の AssetReference は事実上のプロキシ
+using System;
+using System.Collections.Generic;
+using UnityEngine;
+using UnityEngine.AddressableAssets;
+using UnityEngine.ResourceManagement.AsyncOperations;
+
+// UnityのAssetReferenceは実体でなく参照を持つ。
+// 生成を繰り返す例では、各InstantiateAsyncのハンドルを個別に所有する。
 public class EnemySpawner : MonoBehaviour {
-    [SerializeField] private AssetReferenceGameObject enemyRef;  // 実体ではなく参照(軽い)
+    [SerializeField] private AssetReferenceGameObject enemyRef;
+    private readonly List<AsyncOperationHandle<GameObject>> spawned = new();
     public async void Spawn() {
-        // 使う瞬間に初めてロード(仮想プロキシの動き)
-        GameObject prefab = await enemyRef.LoadAssetAsync<GameObject>().Task;
-        Instantiate(prefab);
+        // async voidはUIイベント用の入口に限定し、例外をここで処理する。
+        try {
+            var handle = Addressables.InstantiateAsync(enemyRef); // AssetReferenceをキーにする
+            spawned.Add(handle);
+            await handle.Task;
+            if (this && handle.Status != AsyncOperationStatus.Succeeded)
+                Debug.LogError("Enemyの生成に失敗しました。");
+        } catch (Exception e) {
+            Debug.LogException(e);
+        }
+    }
+    private static void Release(AsyncOperationHandle<GameObject> handle) {
+        if (handle.Status == AsyncOperationStatus.Succeeded)
+            Addressables.ReleaseInstance(handle); // インスタンスとその参照を解放
+        else
+            Addressables.Release(handle); // 失敗した操作も解放
+    }
+    private void OnDestroy() {
+        for (int i = 0; i < spawned.Count; ++i) {
+            var handle = spawned[i];
+            if (handle.IsDone) Release(handle);
+            else handle.Completed += Release; // ロード中に破棄されても完了後に回収
+        }
+        spawned.Clear();
     }
 }
 ```
+
+この例ではSpawnerが生成物の寿命も所有し、破棄時にまとめて解放します。個体を先に消す場合は、そのハンドルをリストから除いて`ReleaseInstance`し、二重解放を防ぎます。繰り返し生成には、上のように`Addressables.InstantiateAsync`へAssetReferenceをキーとして渡します。`AssetReference`自身の`InstantiateAsync`や`LoadAssetAsync`は、保持中の操作を解放する前に再度呼ぶ使い方には制約があります。[AssetReference.InstantiateAsyncの制約](https://docs.unity3d.com/Packages/com.unity.addressables@1.21/api/UnityEngine.AddressableAssets.AssetReference.InstantiateAsync.html) · [LoadAssetAsync](https://docs.unity3d.com/Packages/com.unity.addressables@1.21/api/UnityEngine.AddressableAssets.AssetReference.LoadAssetAsync.html)
+
+ロードしたPrefabから通常の`Instantiate`で複製する設計なら、初回のロードハンドルをキャッシュして再利用し、すべての複製が破棄された後で`ReleaseAsset`します。ロードハンドルを解放する時点と、生成物の寿命をセットで設計します。
 
 UEの `TSoftObjectPtr` も同じ役割(パスだけ保持し、要求時にロード)です(→ [UEのスマートポインタ — TSharedPtr・TUniquePtr・TWeakPtr・TSoftObjectPtr](/game/unreal/smart-pointers.html))。
 

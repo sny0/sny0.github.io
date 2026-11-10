@@ -13,11 +13,11 @@ study:
 
 ## 概要
 
-時間的アップスケーラは、**低解像度でレンダリングしたフレームを、ジッタ+モーションベクタ+過去フレームの蓄積から高解像度に再構成する**技術です。[TAA](/graphics/postprocess/taa.html) の直系進化であり、**「4Kをネイティブで描くのではなく、1080p〜1440pで描いて賢く拡大する」**ことでレイトレーシング世代のGPUコストを賄う、現代リアルタイムグラフィックスの中心的インフラです。三大実装が **DLSS** (NVIDIA, AI)、**FSR** (AMD, オープン)、**XeSS** (Intel, AI) です。
+時間的アップスケーラは、**低解像度でレンダリングしたフレームを、ジッタ+モーションベクタ+過去フレームの蓄積から高解像度に再構成する**技術です。[TAA](/graphics/postprocess/taa.html) の直系進化であり、**「4Kをネイティブで描くのではなく、1080p〜1440pで描いて賢く拡大する」**ことでレイトレーシング世代のGPUコストを賄う、現代リアルタイムグラフィックスの中心的インフラです。代表的な実装が **DLSS** (NVIDIA)、**FSR** (AMD)、**XeSS** (Intel) です。同じブランド内でも、世代ごとにアルゴリズムや対応GPUが異なります。
 
 ## なぜ必要なのか
 
-- 4K・120fps・レイトレーシングという要求の掛け算はネイティブ描画では物理的に不可能
+- 4K・120fps・レイトレーシングを同時に目指すと、設定とGPUによってはネイティブ描画の性能予算を超える
 - シェーディングコストは解像度に比例 — 内部解像度を半分 (面積1/4) にすればGPU時間は劇的に下がる
 - TAAで既に「時間的に情報を蓄積する」基盤があった → 「ならば出力解像度を入力より上げられるはず」という自然な発展
 
@@ -27,10 +27,13 @@ study:
 - **2018: DLSS 1.0** — ゲームごとの学習が必要で品質も不評 (失敗からのスタート)
 - **2020: DLSS 2.0** — 汎用の時間的AI再構成に転換して大成功。Tensorコアで汎用モデルを実行
 - 2021: **FSR 1.0** (空間的のみ、Lanczos+シャープ) — 過渡期の産物
-- **2022: FSR 2.0** — ハンドチューニングの時間的再構成 (AI不要・全GPU対応・オープンソース) / **XeSS** (Intel, DP4a版は他社GPUでも動作)
+- **2022: FSR 2.0** — 解析的な時間的再構成 (ML推論不要・幅広い対応GPU・オープンソース。APIとハードウェアの要件はある) / **XeSS** (Intel, DP4a版は他社GPUでも動作)
 - 2022: UE5 **TSR** (エンジン内蔵の高品質アップスケーラ)
-- 2023: **DLSS 3 Frame Generation** (フレーム補間) / **3.5 Ray Reconstruction** (RTデノイズ統合)
-- 2024-25: FSR 4がAIモデル化 (RDNA4)、PS5 Pro **PSSR** — 全社AI路線へ収斂
+- **2022: DLSS 3 Frame Generation** — RTX 40シリーズ向けに提供開始
+- **2023: DLSS 3.5 Ray Reconstruction** — RTデノイズのAI再構成
+- 2024: PS5 Pro **PSSR**、Intel **XeSS 2** のフレーム生成
+- **2025: DLSS 4** — TransformerモデルとRTX 50シリーズのMulti Frame Generation（最大4倍モード）。**FSR 4**はMLベースの再構成を導入（当初はRDNA 4向け）
+- **2026: DLSS 4.5** — 第2世代TransformerのSuper Resolution。3月にRTX 50シリーズ向けの最大6倍・動的Multi Frame Generationを提供。AMDは10月のFSR SDK 2.4でMLアップスケーリング4.1.2の対応をRX 6000/7000/9000シリーズと一部APUへ拡大
 
 ## それ以前の技術
 
@@ -71,21 +74,22 @@ flowchart LR
 
 原理: ジッタにより**毎フレーム異なるサブピクセル位置のサンプル**が得られるため、静止領域ではNフレームで実質N倍のサンプル密度=真のスーパーサンプリングに収束します。動く領域では再投影の妥当性判定 (深度・色域・信頼度) が品質の分かれ目で、ここが各社の腕の見せ所です。
 
-### 三者の比較
+### 世代を分けて比較する
 
-| | DLSS 2+ | FSR 2/3 | XeSS |
-|---|---|---|---|
-| 方式 | ニューラルネット (Tensorコア) | ハンドチューニングのヒューリスティック | ニューラルネット (XMX / DP4a) |
-| 対応GPU | RTX専用 | **全GPU** (コンソール含む) | Arc最良 / 他GPUはDP4a版 |
-| ソース | 非公開 | **オープンソース (MIT)** | 部分公開 |
-| 傾向 | 再構成品質・安定性で最良評価 | 実装が読める教材価値・可搬性 | 中間 |
-| 発展 | FG (フレーム生成) / Ray Reconstruction | FSR3 FG / FSR4でAI化 | XeSS 2 FG |
+| | DLSS Super Resolution | FSR 2 / 3.1の再構成 | FSR Upscaling 4系 | XeSS Super Resolution |
+|---|---|---|---|---|
+| 方式 | ニューラルネット（新世代はTransformer） | MLを使わない解析的手法 | MLモデル | ニューラルネット |
+| 対応GPU | GeForce RTX。FG/MFGの対応世代とは別に確認 | AMD以外も含む、各版の要件を満たすGPU | 4.1.2ではRX 6000/7000/9000と一部APU。SDK・ドライバ要件あり | XMX経路 / 他社GPU等のDP4a経路。版ごとの要件あり |
+| 公開範囲 | SDK/APIと実装・モデルの公開範囲を区別 | MITライセンスのソース実装 | SDKやモデルのライセンスを個別に確認 | SDK/APIとモデルの公開範囲を区別 |
+| 学習の観点 | 時間的入力と学習モデルの統合 | 再構成のソース実装を追える | ML再構成と対応ハードの関係 | 実行バックエンドの切り替え |
+
+**この表はアップスケーリングの比較です。フレーム生成・デノイズは別機能**で、同じブランドでも対応GPUが一致するとは限りません。対応状況は2026年11月確認。
 
 **FSR2のソースコードは「production品質の時間的再構成の完全な教科書」**であり、本Wikiの読者には精読を勧めます。
 
 ### Frame Generation (フレーム生成)
 
-DLSS 3 / FSR 3の追加機能。2フレーム間の中間フレームをオプティカルフロー+ゲーム側MVから**補間生成**し、表示フレームレートを倍増します。入力遅延は改善しない (むしろ増える) ため、Reflex等の遅延削減とセットで使う点が重要です。
+描画したフレームやモーションベクタなどから中間画像を**生成**し、表示の滑らかさを高める機能です。DLSS 3やFSR 3の1枚生成は2倍モードですが、DLSS 4のMFGは最大3枚生成する4倍モード、DLSS 4.5は最大5枚生成する6倍モードと動的な倍率選択を提供します（MFGはRTX 50シリーズ）。これは表示枚数の倍率であり、シミュレーションや入力処理が同じ倍率で高速化する意味ではありません。生成・提示のオーバーヘッドもあるため実測fpsは単純な掛け算になりません。入力遅延も別に計測し、Reflex等の遅延対策と合わせて評価します。
 
 ## 各環境での扱い
 
@@ -167,3 +171,7 @@ ffxFsr2ContextDispatch(&context, &d);
 - Intel, *XeSS* SDK ドキュメント
 - Epic, *Temporal Super Resolution* ドキュメント
 - Alex Battaglia (Digital Foundry) の各種アップスケーラ比較検証
+- [NVIDIA: DLSS 3発表（2022年）](https://www.nvidia.com/en-us/geforce/news/dlss3-ai-powered-neural-graphics-innovations/)
+- [NVIDIA: DLSS 4.5の6X・動的MFG提供開始](https://www.nvidia.com/en-us/geforce/news/dlss-4-5-dynamic-multi-frame-generation-6x-mode-released/)
+- [AMD: FSR SDK 2.4の対応GPU拡大](https://gpuopen.com/learn/amd-fsr-sdk-2-4-rx-6000-ryzen-apus/)
+- [AMD: FSR Upscaling 4の要件](https://gpuopen.com/manuals/fsr_sdk/techniques/super-resolution-ml/)

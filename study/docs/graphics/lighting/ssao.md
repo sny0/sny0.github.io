@@ -27,7 +27,8 @@ SSAOは**深度バッファ (と法線) だけを使って、近傍ジオメト�
 - 事前計算AO (テクスチャベイク) はゲームでも普及したが、動的シーンに追従できない
 - **2007: Crytek の Mittring が Crysis で SSAO を発表** ("Finding Next Gen") — 深度バッファを「シーンの近似」として使う発想の転換
 - 2008: NVIDIA **HBAO** (Horizon-Based AO) — 水平線走査による精度向上
-- 2012: **SSDO** (方向性を持つAO)、Alchemy AO
+- 2009: **SSDO**（方向性を持つAO、Ritschel et al.）
+- 2011: **Alchemy AO**（McGuire et al.）
 - **2016: GTAO** (Jimenez et al., Ground-Truth AO) — 現在の標準。コサイン重み付き可視性を正しく積分
 - 2020年代: レイトレースAO、そしてフルGI (Lumen/RTGI) への吸収が進行
 
@@ -166,3 +167,5 @@ float3 color = directLighting                       // 直接光には掛けな�
 - Bavoil et al., *"Image-Space Horizon-Based Ambient Occlusion"* (2008)
 - Jimenez et al., *"Practical Realtime Strategies for Accurate Indirect Occlusion"* (GTAO, 2016)
 - Intel, *XeGTAO* (GitHub) — 実装リファレンス
+- [Ritschel et al.: Approximating Dynamic Global Illumination in Image Space (I3D 2009)](https://doi.org/10.1145/1507149.1507161)
+- [McGuire et al.: The Alchemy Screen-Space Ambient Obscurance Algorithm (HPG 2011)](https://research.nvidia.com/publication/2011-08_alchemy-screen-space-ambient-obscurance-algorithm)

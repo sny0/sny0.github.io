@@ -67,7 +67,7 @@ flowchart LR
 
 - Vulkanでは射影行列のY成分に-1を掛ける、またはネガティブビューポートで対処するのが定番
 - 深度範囲の差は射影行列の作り分けで吸収 (glmの `GLM_FORCE_DEPTH_ZERO_TO_ONE`)
-- 現在は **Reverse-Z** (近=1, 遠=0) が浮動小数点精度の観点から標準的 → [カメラと射影](/math/rendering/camera.html)
+- **Reverse-Z** (近=1, 遠=0) は浮動小数点深度で精度を改善する有力な選択肢。深度形式とAPIの深度範囲、クリア値・比較関数を合わせて選ぶ → [カメラと射影](/math/rendering/camera.html)
 
 ### 空間の選び方 (実務指針)
 
@@ -90,7 +90,7 @@ $$\mathbf{n}_{world} = \begin{pmatrix} \mathbf{T} & \mathbf{B} & \mathbf{N} \end
 `Transform` コンポーネントが Local→World を保持。シェーダでは `TransformObjectToWorld()`, `TransformWorldToHClip()` (URP/HDRP, `SpaceTransforms.hlsl`)。UnityはGL系規約をベースに、プラットフォーム差を `UNITY_UV_STARTS_AT_TOP` などのマクロで吸収します。
 
 ### Unreal Engine
-`FTransform` が Local→World。シェーダ内では大ワールド精度対策として **TranslatedWorld** (カメラ位置を引いたワールド空間) を経由するのが独特です。`LWC` (Large World Coordinates, UE5) はdouble精度のワールド座標をタイル+オフセットで扱います。
+`FTransform` が Local→World。大ワールドの描画では **TranslatedWorld** (カメラ位置を引いたワールド空間) を使い、扱う数値を小さくします。UE5のLWCはCPU側でdouble精度を使い、現在のシェーダー側は主に二つのfloatで高精度を表す**DoubleFloat**を使います。タイル+オフセットのFLWC型も一部に残るため、UE5初期の方式と区別します。[EpicのLWC描画資料](https://dev.epicgames.com/documentation/en-us/unreal-engine/large-world-coordinates-rendering-in-unreal-engine-5)
 
 ### DirectX 12
 規約は「左手系・深度[0,1]・Y上向きNDC」。DirectXMathの `XMMatrixLookAtLH` / `XMMatrixPerspectiveFovLH` が対応。座標系はアプリの自由ですが、慣習的に左手系が多数派です。

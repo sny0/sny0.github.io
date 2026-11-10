@@ -183,7 +183,7 @@ cmd.DrawMesh(mesh, matrix, material, 0, 0);
 
 ## 参考資料
 
-- Fabien Giesen, *"A trip through the Graphics Pipeline 2011"* — Part 1, 2 (コマンド処理)
+- Fabian Giesen, *"A trip through the Graphics Pipeline 2011"* — Part 1, 2 (コマンド処理)
 - GDC 2014, AMD *"Mantle: Introducing a new API for Graphics"*
 - Unreal Engine ドキュメント *"Parallel Rendering Overview"*
 - Unity ドキュメント *"Graphics jobs"*

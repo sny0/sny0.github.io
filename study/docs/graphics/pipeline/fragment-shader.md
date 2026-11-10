@@ -98,7 +98,7 @@ flowchart TB
 `ps_6_x` プロファイル。MRT構成はPSOの `RTVFormats` と一致必須。`SV_DepthGreaterEqual`/`LessEqual` (conservative depth)、`SV_Coverage`、ROV (Rasterizer Ordered Views) など高度な機能もPS向け。
 
 ### Vulkan
-GLSLの `layout(location=N) out vec4`。`layout(early_fragment_tests) in;` でEarly-Zを強制 (discardとの併用不可)。Subpass入力 (`subpassInput`) はTBDRでのオンチップG-Buffer読み出しに対応する独自概念です。
+GLSLの `layout(location=N) out vec4`。`layout(early_fragment_tests) in;`は早期のフラグメントテストを指定します。`discard`との併用も可能ですが、テストに伴う深度・ステンシル更新を後から取り消すことはできません（書き込み設定やテスト結果に従う）。通常のアルファテストと同じ深度の意味になるとは限らないため注意します。Subpass入力 (`subpassInput`) はTBDRでのオンチップG-Buffer読み出しに対応する独自概念です。
 
 ## コード例
 
@@ -180,7 +180,9 @@ float4 PostPS(Varyings i) : SV_Target {
 
 ## 参考資料
 
-- Fabien Giesen, *"A trip through the Graphics Pipeline"* — Part 7 (クワッドとヘルパーレーン)
+- Fabian Giesen, *"A trip through the Graphics Pipeline"* — Part 7 (クワッドとヘルパーレーン)
 - Real-Time Rendering 4th ed., Chapter 3, 5
 - Microsoft Learn, *Pixel Shader Stage* / *Variable-Rate Shading*
 - Emil Persson, *"Depth In-Depth"* (Early-Z解説の古典)
+- [Khronos: GLSLのearly_fragment_tests](https://registry.khronos.org/OpenGL/specs/gl/GLSLangSpec.4.60.html#fragment-shader-inputs)
+- [Khronos: Vulkanの早期フラグメントテスト](https://docs.vulkan.org/spec/latest/chapters/fragops.html#fragops-early)

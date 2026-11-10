@@ -60,7 +60,7 @@ struct Enemy {
 };                 // sizeof(Enemy) == 12(パディング3バイトが末尾に入る — 典型的な実装)
 ```
 
-- メンバは**宣言順にメモリに並ぶ**(同一アクセス指定内での順序は標準保証)
+- 非ゼロサイズの非静的データメンバーの順序は、C++20までは同じアクセス制御を持つ範囲で保証され、C++23以降はアクセス指定をまたいでも宣言順が保証される。unionやゼロサイズになり得るメンバーなどは別の規則を確認する。[C++草案: メンバー配置](https://eel.is/c++draft/class.mem.general)
 - アラインメントのため**パディング(詰め物)**が入る(→ 詳細: [メモリレイアウト](/runtime/cpp-internals/memory-layout.html))。メンバの並び順でサイズが変わるため、大量に持つ構造体はサイズの大きい順に並べる最適化がある
 - メソッドは**インスタンスの中には存在しない**(コードは1か所、thisポインタが渡るだけ)。仮想関数を持つと**vptr(8バイト)が追加**される(→ [vtable](/runtime/cpp-internals/vtable-and-virtual-calls.html))
 
@@ -69,9 +69,11 @@ struct Enemy {
 | | C# | C++ |
 |---|---|---|
 | struct/class | 値型/参照型という**意味の違い** | 既定アクセスの違いのみ(両方値) |
-| 割り当て | classは必ずヒープ | どちらもスタック/ヒープ/静的領域を選べる |
+| 割り当て | classは参照型。通常はGCヒープ上で管理するが、JITが割り当てを除去・スタック化する場合もある | どちらも自動/動的/静的記憶域などを選べる |
 | 継承 | structは継承不可 | structも継承可(機能差なし) |
 | internal | アセンブリ内公開がある | 対応物なし(無名namespace等で代用 → [ヘッダー分割と Assembly Definition](/languages/csharp/headers-vs-asmdef.html)) |
+
+C#の値型・参照型の意味と、実際の格納先は別です。.NETのエスケープ解析による最適化はランタイムやコードの形に依存し、Unityのすべての実行環境で同じになるとは限りません。[.NET 10のスタック割り当て](https://learn.microsoft.com/en-us/dotnet/core/whats-new/dotnet-10/runtime)
 
 C#の「structは16バイト以下にすべき」的なガイドラインは、**値渡しコピーのコスト**の話であり、C++でも値渡しするなら同じ配慮をします(大きければconst参照 → [値渡しか参照渡しか](/design/decisions/cpp-choices.html))。
 

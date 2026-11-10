@@ -26,7 +26,7 @@ study:
 
 ```
 GameMode(基底)
-  RunMatch() {          ← 骨格: 順序はここで固定。finalにして子に触らせない
+  RunMatch() {          ← 骨格: 順序はここで固定。非virtualにする
       Setup();            ← フック(純粋仮想: 必ず実装)
       SpawnPlayers();     ← フック(デフォルトあり: 任意で上書き)
       while(!IsMatchOver()) Tick();   ← フック
@@ -80,7 +80,7 @@ public:
         ShowResult();
     }
 
-protected:
+private:
     virtual void Setup() = 0;                     // 必ず違う部分: 純粋仮想
     virtual void SpawnPlayers() { /* 標準の一斉スポーン */ }   // 大抵同じ部分: デフォルト実装
     virtual bool IsMatchOver() const = 0;
@@ -103,7 +103,7 @@ private:
 
 検証済みサンプル: <a href="/study/samples/cpp/pattern_template_method.cpp">samples/pattern_template_method.cpp</a>
 
-設計のコツ: **骨格は非virtual、フックはprotected virtual**(Non-Virtual Interfaceイディオム)。子が上書きできる範囲を意図的に絞ります。
+設計のコツは、publicな骨格を非virtualにし、上書き用のフックをvirtualにすることです(NVI: Non-Virtual Interface)。この例ではフックをまずprivateにし、派生クラスから基底の既定実装を呼ぶ必要があるものだけprotectedにします。privateのvirtualも派生クラスからオーバーライドできます。`final`はvirtualの再オーバーライドを禁止する指定子で、非virtual関数には付けられません。[C++の仮想関数とfinal](https://eel.is/c++draft/class.virtual)
 
 ## C#またはUnityでの実装
 
@@ -162,7 +162,7 @@ public abstract class ScreenBase : MonoBehaviour {   // 画面遷移の骨格
 
 ## 実務でよく見かける変形
 
-- NVI(Non-Virtual Interface)イディオム: public非virtual+private virtualフック(C++の推奨形)
+- NVI(Non-Virtual Interface)イディオム: public非virtual+原則private virtualフック。基底の実装を派生から呼ぶ必要があるフックはprotected
 - フックのdelegate化: 継承の代わりに `std::function`/eventをフックポイントに刺す(Strategyへの中間形)
 
 ## 過剰設計になる例

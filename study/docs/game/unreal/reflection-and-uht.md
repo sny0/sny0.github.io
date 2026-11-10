@@ -3,7 +3,7 @@ title: リフレクション — UCLASS・UFUNCTION・UPROPERTY・Unreal Header 
 study:
   source: C++ Wiki
   status: published
-  summary: リフレクション=「実行時に型の情報(クラス名・プロパティ一覧・関数一覧)を調べ、操作できる仕組み」。C#では言語標準(GetType()、属性)ですが、C++にはほぼ存在しない(RTTIは型の同定のみ)。UEはこれをコード生成で自作しました——UCLASS()等のマクロとUnreal Header
+  summary: UEの実行時リフレクションをUCLASS・UPROPERTYとUHTのコード生成から説明する。C#の実行時メタデータ、C++26の静的リフレクション、UE独自の登録・GC・エディタ連携を区別する。
   section: reference
   format: article
   domain: game
@@ -13,7 +13,7 @@ study:
 
 ## 一言で言うと
 
-**リフレクション**=「実行時に型の情報(クラス名・プロパティ一覧・関数一覧)を調べ、操作できる仕組み」。C#では言語標準(`GetType()`、属性)ですが、**C++にはほぼ存在しない**([RTTIは型の同定のみ](/runtime/cpp-internals/exceptions-and-rtti-impl.html))。UEはこれを**コード生成で自作**しました——`UCLASS()`等のマクロと**Unreal Header Tool (UHT)** がその仕組みです。
+このページで扱うUEの**リフレクション**は、実行時に型の情報(クラス名・プロパティ一覧・関数一覧)を調べ、操作する仕組みです。C#はランタイムのメタデータを利用できます。標準C++のRTTIは一般のメンバー一覧を提供せず、C++26に採択された静的リフレクションもコンパイル時の仕組みです。UEの実行時の登録機構は、`UCLASS()`などと**Unreal Header Tool (UHT)** のコード生成で実現します。[C++の静的リフレクション](https://eel.is/c++draft/meta.reflection)
 
 ## 仕組み: マクロは「印」、UHTが「生成」
 
@@ -66,7 +66,7 @@ class AEnemy : public AActor {
 ## 標準C++ではどう書くか
 
 - 型情報が要る場面を自作するなら: enumの型ID+switch、[Visitor](/design/patterns/visitor.html)、マクロ/テンプレートによる登録制、外部コード生成——どれも部分的な再発明になる
-- C++標準のリフレクション(静的リフレクション)は将来規格で議論中(C++26方向)だが、現時点のゲーム開発では「**必要ならUEのように生成で作る**」が現実解
+- 静的リフレクション(P2996など)は2025年6月にC++26へ採択されました。コンパイラ対応は別に確認します。例えばGCCの対応表はGCC 16で`-freflection`を必要とするとしています。コンパイル時の型情報を利用できても、UEの実行時オブジェクト登録、GC、Blueprint、シリアライズが自動的に置き換わるわけではありません。[採択報告](https://isocpp.org/blog/2025/06/reflection-voted-into-cpp26-whole-new-language-herb-sutter) · [GCCの規格対応表](https://gcc.gnu.org/projects/cxx-status.html)
 - Unityとの対比: C#は`[SerializeField]`や`GetType()`が**言語とランタイムの標準機能**——UEが大量の機械を回してやっと得ているものを、C#は無料で持っていた、という見方ができる
 
 ## Unity開発者が誤解しやすい点

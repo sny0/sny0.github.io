@@ -170,7 +170,7 @@ CBUFFER_END
 
 3. **シェーダバリアントがUnityで問題になる仕組みと対策を述べよ。**
    ::: details 解答
-   multi_compile/shader_featureの組み合わせ爆発でバリアント数が数万〜数百万になり、ビルド時間・ビルドサイズ・実行時の初回使用時コンパイル(PSO作成)によるヒッチを生む。対策: 不要キーワードのStripping(IPreprocessShadersやStrip設定)、shader_featureで未使用組み合わせをビルドから除外、Shader Variant Collection / Experimental.Rendering.PrewarmでのPSO事前ウォーム。
+   multi_compile/shader_featureの組み合わせ爆発でバリアント数が数万〜数百万になり、ビルド時間・ビルドサイズ・実行時の初回使用時コンパイル(PSO作成)によるヒッチを生む。対策: 不要キーワードのStripping(IPreprocessShadersやStrip設定)、shader_featureで未使用組み合わせをビルドから除外、不要なバリアントの除去に加え、Unity 6の`GraphicsStateCollection`で実際のシェーダーバリアントと描画状態を記録し、対応するPSOをウォームアップする。DX12/Vulkan/Metalでは`ShaderVariantCollection.WarmUp`だけで必要な全描画状態のPSOを用意できるとは限らない。APIの名前空間や対応範囲は使用するUnity版で確認する。
    :::
 
 ## 参考資料
@@ -180,3 +180,4 @@ CBUFFER_END
 - Unity Blog, *SRP Batcher* 解説記事
 - Unite/GDC の Unity グラフィックス講演各年
 - [Unity 6.0: Compatibility Mode in URP](https://docs.unity.com/en-us/engine/6000.0/manual/render-pipelines/universal-render-pipeline/customizing-urp/compatibility-mode)
+- [Unity: PSO tracing and warming](https://docs.unity.com/en-us/engine/6000.3/manual/materials-and-shaders/shaders/shader-troubleshooting/shader-reduce-stalling/shader-prevent-stutter/shader-pso-trace-warming)

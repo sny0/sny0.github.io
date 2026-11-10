@@ -22,9 +22,11 @@ study:
 | 基底型 | System.Exception(全例外が継承) | 任意の型をthrow可(慣習はstd::exception派生) |
 | 再throw | `throw;` | `throw;`(同じ。`throw e;`はコピー+スライシングの罠) |
 | ランタイム例外 | NullReference / IndexOutOfRange等が**自動で飛ぶ** | **飛ばない**(同じ状況は未定義動作) |
-| スタックトレース | 常時取得可能 | 標準では取れない(プラットフォーム機能で自前) |
+| スタックトレース | 例外に記録される（詳細は実行環境・最適化にも依存） | C++23の`std::stacktrace::current()`で現在位置を取得可能。例外への自動添付ではなく、処理系の対応も確認する |
 | 使わない選択肢 | 事実上ない(BCLが例外前提) | 現実に存在(-fno-exceptions文化) |
 | コスト | tryは安価、throwはやや重い | 投げなければほぼゼロ、throwは高い(実装依存) |
+
+C++23の`<stacktrace>`は、取得した位置を記録・表示するための標準機能です。例外が発生した場所を残したいなら、その時点で収集して保持する設計が必要です。[C++草案: stacktrace](https://eel.is/c++draft/stacktrace)
 
 ## 最大の差分1: 「安全網」の有無
 
@@ -54,7 +56,7 @@ finally { f?.Dispose(); }
 ```cpp
 // C++: 後片付けはローカルオブジェクトのデストラクタに任せる(finallyが不要な設計)
 {
-    std::ifstream f(path);   // 例外がどこで飛んでも、スタック巻き戻しで確実にclose
+    std::ifstream f(path);   // 捕捉される例外による巻き戻しでも、デストラクタでclose
     Parse(f);
 }
 ```

@@ -24,7 +24,8 @@ Unreal Engineのレンダラーは、**Deferred Shadingを基軸に、Nanite (�
 ## 歴史・誕生した背景
 
 - 1998: UE1 (Unreal) — ソフトウェアレンダラ+Glide。Tim Sweeneyの設計
-- 2002: UE2、2006: **UE3** — シェーダ世代。Gears of WarでDeferred系へ
+- 2002: UE2、2006: **UE3** — プログラマブルシェーダーを活用する世代
+- 2011: UE3の**Samaritan**デモで、DX11対応とMSAAを併用するDeferred Renderingを公開。UE3初期からこの構成だったという意味ではない
 - 2014: **UE4** — 物理ベースレンダリング標準化 (Karis 2013)、Blueprintとマーケットプレイスで民主化
 - 2020: **UE5発表デモ** (Nanite/Lumen on PS5) — 業界に衝撃
 - 2022: UE5.0正式版。以降 5.x で VSM/TSR/Nanite Tessellation/Substrate (次世代マテリアル) 等を継続追加
@@ -84,7 +85,7 @@ flowchart TB
 | 技術 | 依存関係 |
 |---|---|
 | **Nanite** | 高密度ジオメトリを可能に → VSMがその影を、Lumenがその簡略表現 (SDF/カード) を要求 |
-| **VSM** | 16K仮想ページの影 — Naniteの高速深度ラスタライズが前提 |
+| **VSM** | 16K仮想解像度をページ分割した影。非Naniteメッシュにも使えるが、Naniteと特に効率よく連携 |
 | **Lumen** | SDF/Surface Cache (SW) or BVH (HW) — Naniteとは別のシーン表現を併走 |
 | **TSR** | 全体の性能予算を成立させるアップスケーラ |
 
@@ -94,7 +95,7 @@ flowchart TB
 
 - `.usf/.ush` (HLSL)。マテリアルエディタのグラフ → HLSL生成 → **Vertex Factory** (メッシュ種別) × **Shading Model** の組み合わせでバリアント化
 - グローバルシェーダは `FGlobalShader` +C++登録。エンジン改造の入口
-- Substrate (実験的): マテリアルをスラブの積層として再定義する次世代システム
+- Substrate: マテリアルをスラブの積層として表すシステム。UE 5.7でproduction-readyとなり、新規プロジェクトでは既定で有効
 
 ## 各環境での扱い
 
@@ -108,7 +109,7 @@ flowchart TB
 既定RHI (Windows)。SM6必須化 (UE5.2+) はNanite/Lumenの要件。バインドレスやWork Graphs等の新機能もD3D12RHIから採用されます。
 
 ### Vulkan
-Linux/Android/SteamDeckのRHI。機能パリティはDX12にやや遅行しますが、Nanite/LumenはVulkanでも動作します (プラットフォーム要件あり)。
+Linux/Androidのネイティブビルド等で使うRHI。Steam DeckでWindows版をProton経由で動かす場合は、Windows版のDirect3D呼び出しをDXVK/VKD3D-Proton等がVulkanへ変換する経路と区別します。機能パリティはDX12にやや遅行しますが、Nanite/LumenはVulkanでも動作します (プラットフォーム要件あり)。
 
 ## コード例
 
@@ -191,3 +192,6 @@ freezerendering             … カリング結果を固定してカメラだけ
 - SIGGRAPH 2021-22, *Nanite / Lumen Deep Dive* 講演
 - 各所の *"UE5 Rendering Pipeline"* 解析記事 (毛星云のRendering解析等)
 - Unreal Fest / GDC の Epic 講演各年
+- [Epic: Substrate materials overview](https://dev.epicgames.com/documentation/en-us/unreal-engine/overview-of-substrate-materials-in-unreal-engine)
+- [Valve: Proton](https://github.com/ValveSoftware/Proton)
+- [Epic: Samaritan (GDC 2011)](https://www.unrealengine.com/blog/samaritan)

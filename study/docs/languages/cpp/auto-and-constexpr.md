@@ -57,7 +57,7 @@ decltype(x) y = 20;            // int(xと同じ型)
 
 ### 一言で言うと
 
-「**この計算はコンパイル時に実行できる**」と宣言する仕組み。実行ファイルには計算結果だけが埋め込まれ、実行時コストがゼロになります。
+「**この計算はコンパイル時に実行できる**」と宣言する仕組み。`constexpr`変数の初期化など、定数式が必要な文脈ではコンパイル時評価が要求されます。同じ関数でも実行時データから普通に呼べます。`constexpr`を付けただけで、すべての呼び出しの実行時コストがなくなるわけではありません。[C++草案: constexpr](https://eel.is/c++draft/dcl.constexpr)
 
 ```cpp
 // C++20
@@ -74,7 +74,8 @@ int runtime = ExpForLevel(playerLevel);          // 実行時にも普通に呼�
 ```
 
 ```cpp
-// 経験値テーブルをコンパイル時に生成する例(C++20: constexprでループ・配列OK)
+// 経験値テーブルをコンパイル時に生成する例(C++17以降)
+// constexpr関数のループはC++14、std::arrayの非const operator[]のconstexpr化はC++17
 constexpr auto MakeExpTable() {
     std::array<int, 100> t{};
     for (int i = 0; i < 100; ++i) t[i] = ExpForLevel(i);
@@ -94,13 +95,15 @@ constexpr auto kExpTable = MakeExpTable();   // 実行ファイルに完成済�
 ```cpp
 template <typename T>
 void Log(const T& v) {
-    if constexpr (std::is_floating_point_v<T>) {   // コンパイル時分岐: 選ばれない側はコンパイルすらされない
+    if constexpr (std::is_floating_point_v<T>) {   // 実体化時に、選ばれない側を実体化しない
         // 小数用フォーマット
     } else {
         // それ以外
     }
 }
 ```
+
+破棄される側も構文解析はされます。テンプレートに依存しない名前などの検査も残り、テンプレートの外では通常の型検査を回避する道具にはなりません。[C++草案: if constexpr](https://eel.is/c++draft/stmt.if)
 
 ## consteval(C++20)
 
@@ -138,7 +141,7 @@ constexpr auto kHash = Fnv1a("player_idle");   // 実行ファイルには数値
 ## 使う場面 / 使わない場面
 
 - **constexpr**: 定数はすべて。コンパイル時に決まる計算・テーブル
-- **使わない**: 実行時データに依存する計算(当然不可)。巨大な計算のコンパイル時実行はビルド時間を食う(テーブル生成が数秒かかり始めたら外部ツール生成へ)
+- **コンパイル時計算にできない**: 実行時にしか得られないデータへの依存。constexpr関数自体は実行時にも呼べる。巨大な定数計算はビルド時間と比較して、必要なら外部ツール生成を選ぶ。
 - **auto**: 冗長な型名の省略。型が情報になる場所では書かない
 
 ## 理解度チェック

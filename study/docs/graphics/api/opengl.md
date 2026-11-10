@@ -31,7 +31,7 @@ OpenGLは1992年にSGIが公開した**最古参のクロスプラットフォ�
 - 2010: GL 4.0 (Tessellation)、以降DX11機能を追随
 - 2014-17: **AZDO** (Approaching Zero Driver Overhead) — bindless、persistent mapping、`glMultiDrawIndirect` 等で明示的API的な使い方を模索
 - 2017: GL 4.6 (SPIR-V対応) — 事実上の最終メジャー更新
-- 2019: AppleがmacOSで非推奨化。Khronosの重心はVulkanへ
+- 2018: AppleがmacOS Mojave 10.14でOpenGLを非推奨化。互換性のため実装は残る。Khronosの新規API開発の重心はVulkanへ
 
 ## それ以前の技術
 
@@ -91,7 +91,7 @@ flowchart TB
 UE5ではOpenGLサポートは事実上撤廃 (モバイルの旧GLES経路も縮小)。UE4時代はAndroid GLES3が主要ターゲットでした。
 
 ### DirectX 12 / Vulkan
-対照物として。ANGLEプロジェクト (Google) はGLES→DX11/Vulkan/Metal変換層で、ブラウザのWebGLはこの上で動いています。「GLは今やレイヤとして生きている」のが現在です。
+対照物として。ANGLEプロジェクト (Google) はGLES→DX11/Vulkan/Metal変換層で、主要ブラウザーの多くはWebGLの実装にANGLEを利用します。利用する変換層やバックエンドはブラウザー・OS・設定によって異なります。「GLは今やレイヤとして生きている」のが現在です。
 
 ## コード例
 
@@ -158,3 +158,5 @@ SwapBuffers(hdc);
 - OpenGL SuperBible / OpenGL Programming Guide (赤本)
 - GDC 2014, *"Approaching Zero Driver Overhead"* (Cass Everitt et al.)
 - docs.gl — APIリファレンスの使いやすい鏡
+- [Apple: macOS Mojave 10.14 Release Notes](https://developer.apple.com/documentation/macos-release-notes/macos-mojave-10_14-release-notes/)
+- [Google ANGLE: supported backends and users](https://github.com/google/angle)

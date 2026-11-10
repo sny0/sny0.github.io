@@ -125,7 +125,7 @@ HTTP/3では、TLSのハンドシェイクと暗号技術をQUICへ組み込ん�
 
 TLSの版・暗号スイート・サーバー証明書のSHA-256と、HTTPステータス・本文byte数を別に観察します。証明書のハッシュ値は識別用で、それ自体が信頼の根拠ではありません。一部のTLS接続情報は、取得に対応しない場合に`unavailable`と表示します。証明書取得など他のAPI失敗は、処理の失敗として報告します。HTTPの版をTLSの版の代用にもせず、例えば`HttpResponseMessage.Version`はHTTPの版です。[Microsoft: HttpResponseMessage.Version](https://learn.microsoft.com/en-us/dotnet/api/system.net.http.httpresponsemessage.version?view=net-10.0)
 
-失効確認は追加で有効化せず既定を使います。今回のC#側は`NoCheck`で、WinHTTP側はOSの既定です。すべての証明書について最新の失効情報を確認した、という実験ではありません。[Microsoft: CertificateRevocationCheckMode](https://learn.microsoft.com/en-us/dotnet/api/system.net.security.sslclientauthenticationoptions.certificaterevocationcheckmode?view=net-10.0)
+失効確認は追加で有効化せず既定を使い、C#側は`revocation_policy`へ実際の設定値を表示します。2026-11-11に確認した.NET 10.0.14の`SocketsHttpHandler`では`NoCheck`でした。WinHTTP側はOSの既定です。API資料の既定値と、使用するランタイム・設定も確認してください。すべての証明書について最新の失効情報を確認した、という実験ではありません。[Microsoft: CertificateRevocationCheckMode](https://learn.microsoft.com/en-us/dotnet/api/system.net.security.sslclientauthenticationoptions.certificaterevocationcheckmode?view=net-10.0)
 
 リダイレクト・HTTPの自動認証・cookieは無効で、本文は64 KiBまでです。WinHTTPは各段階8秒以内の待機設定と30秒の経過時間予算、C#は要求と本文読取りに共通の30秒の取消しを使います。実時間の厳密な上限ではありません。正の数を要求した本文readの正常な結果が0なら、ここでは本文の終了であり、TLSの`close_notify`やTCPのEOFの直接観測ではありません。[Microsoft: WinHttpReadData](https://learn.microsoft.com/en-us/windows/win32/api/winhttp/nf-winhttp-winhttpreaddata)
 

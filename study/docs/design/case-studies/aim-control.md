@@ -20,12 +20,17 @@ TPS/アクションの「狙う」機能——エイムアシスト、ロック�
 ```cpp
 // C++20
 void Player::UpdateAim(const FrameInput& in, float dt) {
-    aimYaw_ += in.lookX * sensitivity_ * dt;
-    aimPitch_ = std::clamp(aimPitch_ + in.lookY * sensitivity_ * dt, -80.f, 80.f);
+    // mouseDeltaはこのフレームの変位、stickは角速度を決める入力として扱う。
+    const float yawDelta = in.mouseDeltaX * mouseSensitivity_
+                         + in.stickX * stickDegreesPerSecond_ * dt;
+    const float pitchDelta = in.mouseDeltaY * mouseSensitivity_
+                           + in.stickY * stickDegreesPerSecond_ * dt;
+    aimYaw_ += yawDelta;
+    aimPitch_ = std::clamp(aimPitch_ + pitchDelta, -80.f, 80.f);
 }
 ```
 
-素の視点操作。ここまでは全ゲーム共通です。
+入力の単位を先に決めます。マウスの移動量はすでにフレーム内の変位なので、さらに`dt`を掛けません。スティックのように角速度を決める入力には秒単位の`dt`を掛けます。Unity Input SystemのPointerのdeltaも、入力更新内で移動量を累積する値です。[Pointer.deltaの仕様](https://docs.unity3d.com/Packages/com.unity.inputsystem@1.4/api/UnityEngine.InputSystem.Pointer.html)
 
 ## 機能追加で破綻する過程
 

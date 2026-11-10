@@ -26,7 +26,8 @@ Tessellation (テッセレーション) は、**粗いパッチをGPU上で細�
 - 理論的源流: Catmull-Clark サブディビジョン曲面 (1978)、PN-Triangles (2001)
 - 2001: ATI TruForm (N-Patches) — ハードウェアテッセレーションの最初の試み。普及せず
 - 2005: Xbox 360 (Xenos) が独自テッセレータ搭載
-- **2009: DirectX 11 / OpenGL 4.0** で標準化。GeForce 400 (Fermi) vs Radeon 5000 のテッセレーション性能競争が勃発
+- **2009: DirectX 11**とRadeon HD 5000で標準のテッセレーション段階を提供
+- **2010: OpenGL 4.0**でコア機能化。GeForce 400（Fermi）も発売され、各GPUの分割・処理性能が比較される
 - 2010年代前半: Crysis 2、Batman等が採用するも「不必要に分割しすぎ」問題が議論に
 - 2010年代後半: 適応分割の難しさ・小三角形の非効率 ([ラスタライゼーション](/graphics/pipeline/rasterization.html)のクワッド問題) が明確になり、利用は限定的に
 - 2021: **Nanite (UE5) が「事前分割+クラスタLOD」で同じ問題をより上手く解決**。UE5.0はNaniteとテッセレーションが排他だったが、後にNanite Tessellationとして再統合 (5.4)
@@ -83,7 +84,7 @@ $$\mathbf{p} = \mathbf{p}_{patch}(u,v) + h(u,v) \cdot \mathbf{n}(u,v) \cdot scal
 ## 各環境での扱い
 
 ### Unity
-Surface Shaderの `tessellate:` 関数、URP/HDRPではLit Shaderの Tessellation オプション (HDRP)。`UnityDistanceBasedTess` 等のヘルパーが提供されます。Metal (Apple) ではComputeベースのエミュレーションになるため挙動差に注意。
+Surface Shaderの `tessellate:` 関数、URP/HDRPではLit Shaderの Tessellation オプション (HDRP)。`UnityDistanceBasedTess` 等のヘルパーが提供されます。Metalでは、分割係数や制御点をComputeカーネル等で用意し、**固定機能テッセレータ**がパッチを分割し、post-tessellation vertex functionが生成点を評価する構成です。全段階をComputeでエミュレーションする意味ではありません。
 
 ### Unreal Engine
 UE4ではマテリアルのTessellation設定 (Flat/PN Triangles) がありましたが、**UE5でハードウェアテッセレーションは一旦廃止**され、Naniteへ誘導されました。UE5.4で **Nanite Tessellation** (Naniteクラスタ上のディスプレースメント) として復活しています。この変遷自体が技術の世代交代を物語ります。
@@ -176,3 +177,5 @@ DSOut DSMain(PatchTess pt, float3 bary : SV_DomainLocation,
 - Microsoft, *Direct3D 11 Tessellation* ドキュメント
 - Matthijs De Smedt, *"GPU Tessellation: We still have a problem"* 系の検証記事
 - Epic Games, *"Nanite Tessellation"* (UE 5.4 リリースノート/講演)
+- [Khronos: OpenGL 4.0発表（2010年3月）](https://www.khronos.org/news/press/khronos-unleashes-cutting-edge-cross-platform-graphics-acceleration-opengl4)
+- [Apple: Metal Tessellation](https://developer.apple.com/library/archive/documentation/Miscellaneous/Conceptual/MetalProgrammingGuide/Tessellation/Tessellation.html)

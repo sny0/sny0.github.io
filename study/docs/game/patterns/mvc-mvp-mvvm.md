@@ -25,7 +25,7 @@ UIの設計で「**データとロジック(Model)**」と「**見た目(View)**
 // 問題例: 全部入りUI(Unityで最頻出)
 public class ShopItemCell : MonoBehaviour {
     void OnBuyButtonClicked() {
-        var player = FindObjectOfType<Player>();          // ViewがModelを直接触る
+        var player = FindFirstObjectByType<Player>();     // 問題はViewがModelを直接探して触ること
         if (player.gold >= price) {                        // 業務ロジックがViewに
             player.gold -= price;
             player.inventory.Add(itemId);
@@ -76,7 +76,9 @@ public class ShopPresenter {
 }
 ```
 
-依存の向き: View → Presenter ← Model(互いを知らない)。**ModelはUnity非依存になり単体テスト可能**、Viewは差し替え可能(モバイル版UI、デバッグ用CUI)。
+掲載例の参照・依存の向きは`View ← Presenter → Model`です。Presenterが両方を知り、ViewとModelは互いもPresenterの型も知りません。イベントの通知方向と、コードが参照する型の依存方向は区別します。**ModelはUnity非依存になり単体テスト可能**、Viewは差し替え可能です。
+
+Unity 2023.1以降では、旧`FindObjectOfType`の代わりに`FindFirstObjectByType`などを使います。上は問題例として検索を残していますが、改善例では必要な参照を明示的に渡します。[FindFirstObjectByType](https://docs.unity3d.com/6000.0/Documentation/ScriptReference/Object.FindFirstObjectByType.html)
 
 ## MVVM
 

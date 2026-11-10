@@ -3,7 +3,7 @@ title: Behavior Tree と Blackboard
 study:
   source: C++ Wiki
   status: published
-  summary: "Behavior Tree(BT、行動ツリー): AIの行動選択を「毎フレーム、木の根から評価し直す」ツリーで表す。優先度と条件分岐の構造化に強く、FSMの「遷移の絡まり」を解消する"
+  summary: Behavior TreeはAIの行動選択を条件と優先度の木で表す。毎Tick評価する単純な実装と、UEのようなイベント駆動の再評価を区別し、Blackboardで知識を受け渡す。
   section: reference
   format: article
   domain: game
@@ -13,7 +13,7 @@ study:
 
 ## 一言で言うと
 
-- **Behavior Tree(BT、行動ツリー)**: AIの行動選択を「**毎フレーム、木の根から評価し直す**」ツリーで表す。優先度と条件分岐の構造化に強く、FSMの「遷移の絡まり」を解消する
+- **Behavior Tree(BT、行動ツリー)**: AIの行動選択を条件と優先度の木で表す。以下の単純な実装では毎Tick根から評価し、UEのような実装では関連する変化を受けてイベント駆動で再評価する
 - **Blackboard(黒板)**: AIが使うデータ(標的、目的地、警戒度)を**1つの共有メモ帳**に集め、ノード間・システム間で受け渡すパターン。BTとセットで使われることが多い
 
 ## 解決したい問題(FSMの限界)
@@ -38,7 +38,7 @@ FSMは「今の状態」から書きますが、AIの仕様は大抵**優先度*
 - **Sequence(逐次)**: 子を順に全部実行。1つ失敗したら失敗 = **手順**
 - **Action/Condition(葉)**: 実際の行動・判定。戻り値は Success / Failure / **Running**(実行中: 複数フレームかかる行動の表現)
 
-**毎フレーム根から評価し直す**のが核心です。巡回中でも、次のフレームでHPが下がれば自動的に「逃げる」へ移る——**遷移を書かずに優先度の割り込みが手に入る**。
+以下の単純な実装は、毎Tick根から評価し直します。巡回中にHPが下がると、次のTickで優先度の高い「逃げる」を選べます。これはBTの一つの実行方式です。UEのBTは不要な全木走査を避けるイベント駆動型で、Blackboardの変化やDecoratorのObserver Aborts設定などを使って再評価・中断します。[UEのBTとイベント駆動](https://dev.epicgames.com/documentation/en-us/unreal-engine/behavior-tree-in-unreal-engine---overview)
 
 ```cpp
 // C++20 — 最小のBT
@@ -106,7 +106,7 @@ struct Blackboard {
 | | FSM | Behavior Tree |
 |---|---|---|
 | 得意 | 排他的な状態と明示的遷移(キャラの動作、画面) | 優先度つき行動選択(AIの意思決定) |
-| 割り込み | 遷移を書いた分だけ | 構造から自動(毎フレーム再評価) |
+| 割り込み | 遷移を書いた分だけ | 優先度と再評価・中断規則による(毎Tick評価やイベント駆動など) |
 | 状態の記憶 | 自然(今の状態が明確) | 苦手(Runningの管理・「さっき何してた」はBlackboardに置く) |
 | 規模の伸び | 遷移が絡まる | ツリーの深さで管理可能 |
 
@@ -114,12 +114,12 @@ struct Blackboard {
 
 ## Unity/C# との対応
 
-- 標準機能にはBTはない。アセット(Behavior Designer、NodeCanvas)、Unity Behavior(公式パッケージ)、または自作
+- GameObjectの基本機能とは別に、Unity Behavior(公式パッケージ)、外部アセット、または自作を使う。Unity Behaviorは2026年の公式方針で、新機能より保守・安定性を重視するとされています。採用時は必要機能とパッケージ版を確認します。[Behaviorのサポート方針](https://discussions.unity.com/t/update-on-behavior-package-support-and-team-presence/1718517)
 - ScriptableObjectでノードをアセット化すると、企画がツリーをエディタで組める
 
 ## Unreal Engine との対応
 
-- **Behavior Tree + Blackboard は標準搭載でUE AIの中核**(BTノードをBPで拡張、BlackboardアセットでキーをGUI定義、デバッガ付き)。UEのAI Perception(視界・聴覚)が黒板へ書き、BTが読む、という上の分業がそのまま製品化されている
+- **Behavior Tree + Blackboard は標準搭載**(BTノードをBPで拡張、BlackboardアセットでキーをGUI定義、デバッガ付き)。AI Perceptionの結果は自動でBlackboardへ入るわけではありません。`OnTargetPerceptionUpdated`などを受けたAIControllerやServiceでキーを更新し、BTがその値を使うように配線します。[AI Perceptionの更新イベント](https://dev.epicgames.com/documentation/en-us/unreal-engine/ai-perception-in-unreal-engine)
 - UE5では[StateTree](/game/patterns/state-machines.html)という代替も登場(FSM+BTのハイブリッド)
 
 ## 使う場面 / 使わない場面
@@ -139,7 +139,7 @@ struct Blackboard {
 
 ## 理解度チェック
 
-1. BTが「遷移を書かずに割り込みを実現する」仕組みは何ですか。
+1. 毎Tick評価するBTと、イベント駆動のBTでは、再評価と割り込みをいつ起こしますか。
 2. Runningステータスは何のためにありますか。
 3. Blackboardの利点と、それがもたらす危険は表裏一体です。説明してください。
 

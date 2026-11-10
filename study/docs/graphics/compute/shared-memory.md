@@ -49,9 +49,11 @@ Compute最適化の中心概念であり続けています。ただし近年は 
 | | レジスタ | Shared Memory | L2 | VRAM |
 |---|---|---|---|---|
 | レイテンシ | ~0 | ~20-30 cycle | ~200 | ~400-800 |
-| 帯域 | 最大 | 非常に高い | 高い | 数百GB/s |
+| 帯域 | 高い（命令とGPU次第） | 非常に高い | 高い | 製品により数百GB/s〜TB/s級 |
 | スコープ | スレッド | **グループ** | 全体 | 全体 |
 | 管理 | コンパイラ | **プログラマ** | HW | HW |
+
+数値は階層の差を示す概算です。実際のレイテンシ・帯域はGPU、アクセス方法、キャッシュヒット、同時実行数等で変わります。
 
 ### バリアの意味論
 
@@ -67,15 +69,15 @@ void CS(uint3 gtid : SV_GroupThreadID, uint3 dtid : SV_DispatchThreadID) {
 ```
 
 - `GroupMemoryBarrierWithGroupSync()`: グループ内の**実行同期 + Sharedメモリ可視化**。書いた後に読む前、必ず挟む
-- **分岐の中で呼んではならない** (全スレッドが到達する場所のみ) — WGSLはこれをコンパイル時に強制する → [WGSL](/graphics/shader/wgsl.html)
+- **グループ内で行き先が分かれる非一様な分岐の中で呼んではならない**（全スレッドが同じ回数到達する必要がある。一様な条件分岐は可能） — WGSLはこれをコンパイル時に強制する → [WGSL](/graphics/shader/wgsl.html)
 - `DeviceMemoryBarrier` 系はUAV (VRAM) の可視化用で別物
 
 ### バンクコンフリクト
 
-Shared Memoryは32個の**バンク**に4バイト単位でインターリーブされています。同一Warpの複数レーンが**同じバンクの異なるアドレス**を叩くとアクセスが直列化されます:
+NVIDIA CUDAの代表的な構成では、Shared Memoryは32個の**バンク**に4バイト単位でインターリーブされています（他のGPUではバンク構成等を個別に確認します）。同一Warpの複数レーンが**同じバンクの異なるアドレス**を叩くとアクセスが直列化されます:
 
 ```text
-float tile[32][32] の列アクセス tile[i][tid] → 全レーン同一バンク → 32-way conflict!
+float tile[32][32] の列アクセス tile[tid][i]（iは全レーン共通、tidがレーンごとに異なる） → 全レーン同一バンク → 32-way conflict!
 対策: float tile[32][33] とパディング → バンクがずれて衝突解消 (古典的定石)
 ```
 
@@ -92,7 +94,7 @@ float tile[32][32] の列アクセス tile[i][tid] → 全レーン同一バン�
 | `InterlockedCompareExchange` | CAS (これでスピンロック等も組めるが非推奨) |
 
 - 対象: `RWStructuredBuffer` 等のUAVと `groupshared` 変数
-- float版は標準にはない (CASループで自作、またはNV/AMD拡張、SM6.6のfloat atomic)
+- 浮動小数点の加算atomicはSM6.6の標準`InterlockedAdd`にはない。SM6.6で追加されたfloat atomicは交換やビット単位の比較交換で、加算の代わりにはならない。float加算が必要なら対応する拡張や、整数のビット表現を使ったCASループ等を別途設計する
 - **性能特性**: 同一アドレスへの競合が多いほど直列化で遅くなる。「Shared内で集約→グローバルへ1回」の2段構えが定石 → [Wave集約](/graphics/compute/execution-model.html) と併用
 
 ## 各環境での扱い
@@ -104,7 +106,7 @@ float tile[32][32] の列アクセス tile[i][tid] → 全レーン同一バン�
 USFで同様に `groupshared`。Lumen/Naniteのシェーダにタイル集約の実例が多数あります (`LumenScreenProbeGather.usf` 等)。
 
 ### DirectX 12
-`groupshared` 上限32KB/グループ (D3D12規定)。SM6.6でグローバルfloat atomic、64bit atomicが追加されました。
+`groupshared` 上限32KB/グループ (D3D12規定)。SM6.6で64bit整数atomicと、floatの交換・ビット比較交換が追加されました。64bit操作の必須範囲と、groupshared/typed resource等のoptionalな対応範囲は機能照会で確認します。floatのatomic加算が追加されたわけではありません。
 
 ### Vulkan
 GLSL `shared`。上限は `maxComputeSharedMemorySize` (実機は32〜64KB+)。Subgroup操作との併用で段階的集約を組みます。
@@ -172,9 +174,9 @@ void HistCS(uint gi : SV_GroupIndex, uint3 dtid : SV_DispatchThreadID)
 
 ## 理解度チェック
 
-1. **バリアを分岐内に書いてはいけない理由をハードウェアレベルで説明せよ。**
+1. **グループバリアを非一様な分岐内に置けない理由を説明せよ。一様な分岐との違いは。**
    ::: details 解答
-   バリアは「グループ内の全スレッドが到達する」ことを前提にした待ち合わせ機構であり、一部スレッドしか到達しない場所に置くと、到達したスレッドは永遠に他を待ちハング(または未定義動作)する。分岐がWarp単位でマスク実行されるため、コンパイラ・ハードウェアともに部分到達のバリアの意味を定義できない。
+   グループ内の全スレッドが同じバリアへ同じ回数到達する必要がある。一部だけが通る非一様な分岐や、一部が先にreturnするコードでこの条件を破ると未定義動作になる。全スレッドが同じ結果になる一様な条件分岐なら、条件を満たす全員が同じバリアへ到達できる。Wave内で一様なだけでは、複数Waveを含むグループ全体の条件を満たすとは限らない。
    :::
 
 2. **バンクコンフリクトはなぜ起きるか。`tile[32][33]` パディングが効く理由は。**
@@ -192,3 +194,6 @@ void HistCS(uint gi : SV_GroupIndex, uint3 dtid : SV_DispatchThreadID)
 - NVIDIA, *CUDA C++ Best Practices Guide* — Shared Memory章
 - Mark Harris, *"Optimizing Parallel Reduction in CUDA"* — 古典
 - Microsoft Learn, *Interlocked Functions (HLSL)*
+- [NVIDIA: CUDA shared-memory banks](https://docs.nvidia.com/cuda/cuda-c-best-practices-guide/#shared-memory-and-memory-banks)
+- [Microsoft: SM6.6 integer and float atomics](https://microsoft.github.io/DirectX-Specs/d3d/HLSL_SM_6_6_Int64_and_Float_Atomics.html)
+- [Microsoft: GroupMemoryBarrierWithGroupSync](https://learn.microsoft.com/en-us/windows/win32/direct3dhlsl/groupmemorybarrierwithgroupsync)

@@ -83,7 +83,7 @@ Forwardの定番補助パス。先に深度だけを描いておき、本描画�
 ## 各環境での扱い
 
 ### Unity
-ビルトインRPのForward (per-objectライト上限方式)、URPのForward/**Forward+** (クラスタ方式、Unity 2022〜)。VR推奨構成はForward+MSAA。
+ビルトインRPのForward (per-objectライト上限方式)、URPのForward/**Forward+** （画面タイルとZビンによるライトリスト、Unity 2022世代〜）。VR推奨構成はForward+MSAA。
 
 ### Unreal Engine
 既定はDeferredですが、`Forward Shading` オプション (主にVR向け) が存在。Forward時はMSAAが使用可能になり、一部機能 (SSR等) が制限されます。
@@ -153,3 +153,4 @@ float4 PSMain(Varyings IN) : SV_Target {
 - Real-Time Rendering 4th ed., Chapter 20 "Efficient Shading"
 - Unity Manual, *Forward+ rendering path*
 - Epic, *Forward Shading Renderer* ドキュメント
+- [Unity 6.0: Forward and Forward+ paths](https://docs.unity.com/en-us/engine/6000.0/manual/render-pipelines/universal-render-pipeline/introduction/urp-concepts/rendering-paths/forward-rendering-paths)

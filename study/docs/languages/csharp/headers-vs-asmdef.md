@@ -52,7 +52,7 @@ CMakeで core が ui にリンクしていたら設計違反 — レビューで
 ```
 
 - C++で注意: **includeだけなら循環がコンパイルできてしまう**場合がある(ヘッダーオンリー同士)。「参照を張らなければ物理的に見えない」.asmdefより自衛が必要
-- C++20モジュール(`import`)はこの状況をC#に近づける新機構だが、ツールチェーンの普及待ち(→ [翻訳単位](/runtime/cpp-internals/translation-units-and-headers.html))
+- C++20モジュールは`export`・`import`で宣言を公開・利用する仕組み。主要コンパイラに実装があり、CMakeも3.28からモジュールの依存解析を扱う。導入時はコンパイラ、標準ライブラリ、ビルドジェネレーター、IDEの対応を組み合わせて確認する。C++23の`import std;`も、言語としての提供と実際のツールチェーンの対応を分ける。[CMakeの対応表と制約](https://cmake.org/cmake/help/latest/manual/cmake-cxxmodules.7.html)・[翻訳単位](/runtime/cpp-internals/translation-units-and-headers.html)
 
 ## ビルド時間の観点
 

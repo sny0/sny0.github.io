@@ -31,7 +31,7 @@ GPUはスレッドをWarp/Wave等の単位にまとめ、同じ命令をactive�
 
 ## それ以前の技術
 
-明示的SIMD (SSE/AVX): プログラマが16バイト幅のレジスタを意識して書く。SIMTは「スカラーコードを書けばハードが束ねる」ことで生産性を確保した点が革新でした。
+明示的SIMD (SSE/AVX): プログラマがSSEの128bit（16バイト）、AVXの256bit（32バイト）、AVX-512の512bit（64バイト）等のレジスタ幅を意識して書く。SIMTは「スカラーコードを書けばハードが束ねる」ことで生産性を確保した点が革新でした。
 
 ## 解決した課題
 
@@ -181,3 +181,4 @@ else                               ShadeOpaque();  // → 両方直列実行
 - Microsoft, *HLSL Wave Intrinsics* 仕様 / Khronos, *Subgroup tutorial*
 - AMD GPUOpen, *RDNA Performance Guide*
 - [NVIDIA CUDA C++ Programming Guide 13.0: SIMT Architecture](https://docs.nvidia.com/cuda/archive/13.0.0/cuda-c-programming-guide/index.html#simt-architecture)
+- [Intel: Intrinsics Guide](https://www.intel.com/content/www/us/en/docs/intrinsics-guide/index.html)

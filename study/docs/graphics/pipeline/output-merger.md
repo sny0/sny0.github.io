@@ -96,7 +96,7 @@ $$C_{out} = C_{src} \cdot F_{src} \;\oplus\; C_{dst} \cdot F_{dst}$$
 ### ハードウェア実装 (ROP)
 
 - ROPユニットはメモリコントローラ近くに配置され、深度/カラーの**圧縮** (デルタ圧縮、クリア圧縮) を透過的に行い帯域を節約
-- ブレンドは読み出し-修正-書き込みであり、**帯域を2倍以上消費** — パーティクルの重なりすぎ (オーバードロー) がモバイルで致命的な理由
+- ブレンドは出力先の値を読むため、処理量とトラフィックが増える。ただし外部VRAMへのアクセス量は、キャッシュ・圧縮・タイルメモリによって異なり、常に2倍になるわけではない。TBDRでタイル内合成できる場合も、半透明の重なりによる**フラグメント実行数・演算量・テクスチャ取得**は増えるため、オーバードローを測る
 - 順序保証のためのスコアボードを持ち、同一ピクセルへの書き込みを投入順に直列化
 
 ## 各環境での扱い
@@ -108,7 +108,7 @@ ShaderLabで宣言的に記述: `ZTest LEqual`, `ZWrite Off`, `Blend SrcAlpha On
 マテリアルの Blend Mode (Opaque/Masked/Translucent/Additive/Modulate) が内部でブレンドステートに変換。Custom Depth / Custom Stencil という専用バッファがアウトライン等の標準手段として用意されています。
 
 ### DirectX 12
-`D3D12_DEPTH_STENCIL_DESC` と `D3D12_BLEND_DESC` をPSOに焼き込み。`OMSetStencilRef` / `OMSetBlendFactor` のみ動的。Dual-source blending、LogicOpも利用可能。
+`D3D12_DEPTH_STENCIL_DESC` と `D3D12_BLEND_DESC` をPSOに焼き込み。`OMSetStencilRef` / `OMSetBlendFactor`は動的に指定します。ほかにも、対応を確認したうえで`OMSetDepthBounds`を利用できます。新しいコマンドリスト・PSOフラグには動的Depth Bias等もあり、動的状態はこの二つだけではありません。Dual-source blending、LogicOpも利用可能。
 
 ### Vulkan
 `VkPipelineDepthStencilStateCreateInfo` / `VkPipelineColorBlendStateCreateInfo`。Dynamic Stateで比較関数等を動的化可能 (`VK_EXT_extended_dynamic_state`)。TBDRではブレンドがオンチップメモリ内で完結するため加算ブレンドが比較的安価です。
@@ -183,5 +183,7 @@ rt.BlendOp   = D3D12_BLEND_OP_ADD;
 
 - E. Catmull, *"A Subdivision Algorithm for Computer Display of Curved Surfaces"* (1974) — Zバッファの原典
 - Morgan McGuire & Louis Bavoil, *"Weighted Blended Order-Independent Transparency"* (2013)
-- Fabien Giesen, *"A trip through the Graphics Pipeline"* — Part 9 (ROP)
+- Fabian Giesen, *"A trip through the Graphics Pipeline"* — Part 9 (ROP)
 - Real-Time Rendering 4th ed., Chapter 5.5
+- [Microsoft: OMSetDepthBounds（動的な深度境界）](https://learn.microsoft.com/en-us/windows/win32/api/d3d12/nf-d3d12-id3d12graphicscommandlist1-omsetdepthbounds)
+- [Apple: Metalの描画パスとタイルメモリ](https://developer.apple.com/documentation/metal/render-passes)

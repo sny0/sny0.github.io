@@ -25,7 +25,8 @@ GPU Driven Renderingは、**「何を描くか」の決定 (カリング・LOD�
 
 - 2008-12: `DrawIndirect` / `MultiDrawIndirect` がAPIに登場 (GL4/DX11) — 種が撒かれる
 - **2015: "GPU-Driven Rendering Pipelines" (SIGGRAPH, Assassin's Creed Unity / Haar & Aaltonen)** — クラスタカリング+ExecuteIndirectによる大規模シーンの実証。記念碑的講演
-- 2016: `ExecuteIndirect` (DX12)、Vulkanの`vkCmdDrawIndexedIndirectCount` 系で開花
+- 2015: DX12の`ExecuteIndirect`でGPU生成の描画・dispatchを実行
+- 2018: Vulkanの`VK_KHR_draw_indirect_count`。2020年のVulkan 1.2でコア化
 - 2016-19: Frostbite、id Tech、Decima等が採用。**2パスオクルージョンカリング** (前フレーム深度のHi-Z利用) が定石化
 - **2021: Nanite (UE5)** — クラスタ階層LOD+SWラスタライザまで含む完成形 → 三角形単位までGPU Drivenに
 - 現在: Unityも **GPU Resident Drawer / GPU Occlusion Culling** (Unity 6) で追随。Work Graphs (2024) が次の進化 (GPUがパスの構成すら自律決定) を予告
@@ -69,7 +70,7 @@ flowchart LR
 「今フレームの遮蔽物」を知るには描く必要があり、描くにはカリングが必要 — この鶏卵を解く標準解:
 
 1. **Pass 1**: 前フレームの可視物 (十中八九今も見える) を描画 → 深度を得る
-2. 深度から **Hi-Zピラミッド** (min深度のミップチェーン) を構築
+2. 深度から **Hi-Zピラミッド**（領域内の最遠深度。以下のReverse-Zではmin、通常Zではmaxを保持するミップチェーン） を構築
 3. **Pass 2**: 前フレームで不可視だった物をHi-Zでテストし、新たに見えたものだけ追加描画
 4. 今フレームの可視リストを保存して次フレームへ
 
@@ -91,7 +92,7 @@ flowchart LR
 
 ### Nanite — 完成形のスケッチ
 
-- メッシュを**クラスタ (128тр) の階層DAG**へ事前変換 (LODを連続的に選べる)
+- メッシュを**クラスタ （最大128三角形程度の単位） の階層DAG**へ事前変換 (LODを連続的に選べる)
 - GPUで階層カリング+「スクリーンエッジ長」基準のLODカット選択
 - 小さい三角形は**Compute SWラスタライザ** (64bit Atomicで深度+ID書き込み)、大きい三角形はHWラスタライズ
 - 出力は Visibility Buffer (三角形ID) → マテリアルは後段で解決
@@ -99,7 +100,7 @@ flowchart LR
 ## 各環境での扱い
 
 ### Unity
-**GPU Resident Drawer** (Unity 6, BatchRendererGroup上に構築) がインスタンスデータのGPU常駐化と描画、**GPU Occlusion Culling** がHi-Z式カリングを提供。手動では `Graphics.RenderMeshIndirect` + ComputeBufferで自作できます。
+**GPU Resident Drawer** (Unity 6, BatchRendererGroup上に構築) がインスタンスデータのGPU常駐化と描画、**GPU Occlusion Culling** がHi-Z式カリングを提供。手動では `Graphics.RenderMeshIndirect` + `GraphicsBuffer`（`Target.IndirectArguments`）で自作できます。
 
 ### Unreal Engine
 **Naniteが本体** (対応ジオメトリ)。非Naniteでも `r.InstanceCulling.OcclusionCull` などGPUカリング基盤 (GPU Scene) が動いています。UE5のレンダラーは「シーンデータのGPU常駐化 (GPU Scene)」を前提に再設計されました。
@@ -136,8 +137,8 @@ void CullCS(uint3 dtid : SV_DispatchThreadID) {
     if (visible) {
         ScreenRect r = ProjectSphere(inst.boundsSphere, gViewProj);
         float mip = ceil(log2(max(r.width, r.height)));   // 数テクセルで覆うmip
-        float sceneMaxDepth = MaxDepthInRect(gHiZ, r, mip); // 4隅サンプル
-        visible = r.nearestDepth >= sceneMaxDepth;          // Reverse-Z: 手前=大
+        float sceneFarthestDepth = MinDepthInRect(gHiZ, r, mip); // Reverse-Zの最遠値
+        visible = r.nearestDepth >= sceneFarthestDepth;       // 手前=大、奥=小
     }
 
     // 3. Wave集約で可視リストへコンパクション
@@ -151,6 +152,8 @@ void CullCS(uint3 dtid : SV_DispatchThreadID) {
         gVisibleInstances[base + localIdx] = dtid.x;
 }
 ```
+
+`MinDepthInRect`は、選んだmipで投影矩形が覆う領域の最小値を保守的に取得するhelperです。通常の線形フィルターによる平均値では置き換えられません。矩形の画面端での丸め、mipの上限、near planeと交差して投影できない境界箱なども扱い、不確実な場合は不可視にせず描く側へ残します。`gVisibleInstances`には全インスタンスを格納できる容量を用意し、`instanceCount`はdispatch前に0へ初期化する前提です。
 
 CPU側 (DX12) は毎フレームこれだけ:
 
@@ -196,3 +199,6 @@ cmd->ExecuteIndirect(cmdSignature.Get(), 1, drawArgsBuf.Get(), 0, nullptr, 0);
 - Brian Karis et al., *"Nanite: A Deep Dive"* (SIGGRAPH 2021)
 - vkguide.dev *"GPU Driven Rendering"* 章 — 実装チュートリアル
 - Unity, *GPU Resident Drawer* ドキュメント
+- [Microsoft: Windows 10 and DirectX 12 released (2015)](https://devblogs.microsoft.com/directx/windows-10-and-directx-12-released/)
+- [Unity: Graphics.RenderMeshIndirect](https://docs.unity3d.com/6000.0/Documentation/ScriptReference/Graphics.RenderMeshIndirect.html)
+- [Khronos: VK_KHR_draw_indirect_count](https://docs.vulkan.org/refpages/latest/refpages/source/VK_KHR_draw_indirect_count.html)

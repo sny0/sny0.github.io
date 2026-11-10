@@ -110,7 +110,7 @@ public:
 
 ## Unreal Engine との対応
 
-- `AActor::Tick(float DeltaSeconds)` が可変ステップUpdate。`Substepping` 設定で物理は内部的に固定刻み化
+- `AActor::Tick(float DeltaSeconds)`は可変ステップUpdate。物理のSubsteppingはフレームの時間を上限時間・最大回数に従って分割するため、常に同じ刻み幅になるわけではありません。固定レートの物理を使う場合はAsync Physicsの`Tick Physics Async`や`Async Fixed Time Step Size`など、利用するUE版の設定と、ゲームスレッドとのデータ受け渡しを確認します。[Physics Sub-Stepping](https://dev.epicgames.com/documentation/en-us/unreal-engine/physics-sub-stepping-in-unreal-engine) · [UPhysicsSettings](https://dev.epicgames.com/documentation/en-us/unreal-engine/API/Runtime/Engine/UPhysicsSettings)
 - Tickの実行順は `TickGroup`(PrePhysics/DuringPhysics/PostPhysics)で制御——更新順序問題への明示的な回答
 
 ## 使う場面 / 使わない場面

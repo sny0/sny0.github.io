@@ -136,10 +136,12 @@ fn shade(N: vec3f, L: vec3f, albedo: vec3f) -> vec3f {
 |---|---|
 | 概念の学習・教育 | OpenGL (資料の厚み) → すぐWebGPUへ |
 | Windows AAA / Xbox | DX12 |
-| モバイル・Switch・Linux | Vulkan |
+| Android・Linux（対応デバイス） | Vulkan |
 | Apple専業 | Metal |
 | Web・ツール・クロスプラットフォーム個人開発 | WebGPU (wgpu/Dawn) |
 | エンジン開発者 | **DX12+Vulkanの両方** (RHI設計に必須) |
+
+コンソールのAPIは各プラットフォームの開発環境で確認します。Switch向け開発を一律にVulkanとみなすことはできません。
 
 エンジンのRHI (Render Hardware Interface) 設計とは、まさに「この対応表の共通部分を抽象化する」作業です → [Unreal Engineのレンダラー](/graphics/engine/unreal-renderer.html)
 

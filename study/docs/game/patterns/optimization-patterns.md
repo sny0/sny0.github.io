@@ -43,7 +43,8 @@ private:
         dirty_ = true;
         for (auto* c : children_) c->MarkDirty();   // 自分が汚れたら子も全部汚れる
     }
-    Matrix local_{}, mutable world_{};
+    Matrix local_{};
+    mutable Matrix world_{};
     mutable bool dirty_ = true;
     TransformNode* parent_ = nullptr;               // 非所有(親が子を所有)
     std::vector<TransformNode*> children_;
@@ -132,7 +133,9 @@ CPUはメモリを**キャッシュライン単位(通常64バイト)**で読む
 struct WorldState { std::vector<Vec2> positions; };
 class Simulation {
 public:
+    explicit Simulation(WorldState initial) : current_(std::move(initial)) {}
     void Step() {
+        next_.positions.resize(current_.positions.size()); // 添字で書く前に要素を用意
         // 全員が current(前フレーム確定値)だけを読み、next にだけ書く
         for (std::size_t i = 0; i < current_.positions.size(); ++i)
             next_.positions[i] = ComputeMove(i, current_);

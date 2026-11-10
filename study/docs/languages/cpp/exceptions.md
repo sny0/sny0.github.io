@@ -49,7 +49,7 @@ Boot() → LoadConfig() → ParseJson() で throw
 ```
 
 - この「途中の後片付けが自動で走る」仕組みが**[RAII](/languages/cpp/raii.html)とセットで初めて安全**になります。生ポインタ+手動deleteのコードに例外が飛ぶと即リーク——「例外を使うならRAIIは必須」
-- **デストラクタから例外を投げてはいけない**: 巻き戻し中に二重例外になると即 `std::terminate`(強制終了)
+- **デストラクタの外へ例外を出さない**: 通常の非送出（`noexcept`）デストラクタから例外が漏れれば、巻き戻し中でなくても`std::terminate`。暗黙の例外指定は基底・メンバーにも依存し、送出を許す指定でも巻き戻し中に例外が漏れれば終了する。[例外指定](https://eel.is/c++draft/except.spec)・[スタック巻き戻し](https://eel.is/c++draft/except.ctor)
 - 実装コスト: 現代の主流実装(ゼロコスト例外)は「**投げなければほぼタダ、投げたら非常に高い**」。例外は例外的な事態専用で、通常フロー(「アイテムが見つからない」程度)に使わない(→ [例外処理の内部](/runtime/cpp-internals/exceptions-and-rtti-impl.html))
 
 ## エラー処理の選択肢(C++の全体地図)
@@ -84,7 +84,7 @@ if (auto item = FindItem(id)) { Use(*item); }
 | コスト | try自体は安い、throwはそこそこ | 投げなければほぼゼロ、throwは高い(実装依存) |
 | 捕捉漏れ | スタックトレース付きで落ちる | `std::terminate`(トレースは処理系・設定依存) |
 
-**C#の感覚で「範囲外アクセスは例外で守られている」と思うのが最も危険**: C++の `v[i]` は範囲外で例外を投げず未定義動作です(`v.at(i)`だけが投げる)。
+**C++の`v[i]`には、C#の配列のような範囲外例外を期待しません**。標準ライブラリのデバッグ・hardening設定では違反を検出するものがあり、C++26草案でもhardened preconditionを規定しています。検出後の処理は実装・設定に従い、必ず回復可能な例外になるわけではありません。`v.at(i)`は`std::out_of_range`で報告します。[C++草案: vectorのアクセス](https://www.open-std.org/jtc1/sc22/wg21/docs/papers/2025/p3471r4.html)
 
 ## Unity開発者が誤解しやすい点
 

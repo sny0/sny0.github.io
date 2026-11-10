@@ -23,7 +23,7 @@ SSR (Screen-Space Reflections) は、**深度バッファとカラーバッフ�
 
 ## 歴史・誕生した背景
 
-- 2011-12: Crysis 2 / Killzone Shadow Fall 等で実用化が始まる (深度バッファレイマーチングというアイデア自体はリレーフマッピング等の延長)
+- 2011: Crysis 2、2013: Killzone Shadow Fallなどで採用 (深度バッファレイマーチングというアイデア自体はリレーフマッピング等の延長)
 - 2014: **Morgan McGuire & Mara の "Efficient GPU Screen-Space Ray Tracing"** — DDAベースの正確な行進の標準的定式化
 - 2015: Frostbite の **Stochastic Screen-Space Reflections** (Stachowiak) — ラフネス対応の確率的SSRとフィルタリング。現代実装の原型
 - 2018〜: レイトレース反射 (DXR) が上位互換として登場。ただしコスト差から**SSRでヒットしなければRT/プローブへフォールバック**というハイブリッドが定着
@@ -157,3 +157,4 @@ float3 TraceSSR(float3 posVS, float3 normalVS, float2 uv)
 - Stachowiak, *"Stochastic Screen-Space Reflections"* (SIGGRAPH 2015, Frostbite)
 - AMD FidelityFX SSSR (GPUOpen)
 - EA SEED / Frostbite の Hybrid RT Reflections 講演 (2018-)
+- [Guerrilla: Killzone Shadow Fall postmortem (2013)](https://www.guerrilla-games.com/read/killzone-shadow-fall-demo-postmortem)

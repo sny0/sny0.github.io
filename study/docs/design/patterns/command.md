@@ -87,17 +87,27 @@ private:
 
 ```cpp
 // C++20 — Undoは「実行前の状態を覚える」or「逆操作を実装する」
-class MoveUnitCommand : public ICommand {
+// Player用のICommandとは別の契約。引数型とUndoの有無をそろえる。
+class IUndoableCommand {
+public:
+    virtual ~IUndoableCommand() = default;
+    virtual void Execute(Board& board) = 0;
+    virtual void Undo(Board& board) = 0;
+};
+
+class MoveUnitCommand : public IUndoableCommand {
 public:
     MoveUnitCommand(UnitId id, GridPos to) : id_(id), to_(to) {}
-    void Execute(Board& board) { from_ = board.PosOf(id_); board.Move(id_, to_); }
-    void Undo(Board& board)    { board.Move(id_, from_); }   // 逆操作
+    void Execute(Board& board) override { from_ = board.PosOf(id_); board.Move(id_, to_); }
+    void Undo(Board& board) override    { board.Move(id_, from_); }   // 逆操作
 private:
     UnitId id_; GridPos to_; GridPos from_{};   // Undoに必要な文脈を自分で保持
 };
 // 履歴: std::vector<std::unique_ptr<MoveUnitCommand>> history;
 // Undo: history.back()->Undo(board); history.pop_back();
 ```
+
+仮想関数の引数型が違うとオーバーライドにはなりません。`override`を付けて、基底の契約と一致することを確認します。[C++の仮想関数規則](https://eel.is/c++draft/class.virtual)
 
 検証済みサンプル: <a href="/study/samples/cpp/pattern_command.cpp">samples/pattern_command.cpp</a>
 
