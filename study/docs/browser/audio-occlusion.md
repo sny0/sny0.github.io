@@ -13,7 +13,7 @@ study:
 
 # Web Audioの音の遮蔽 — 壁越しの音量と音色
 
-壁の向こうの足音は、同じ距離にある足音でも小さく、こもって聞こえることがあります。ゲームでこの違いを表すには、聞き手と音源の間に壁があるかを調べ、音量と周波数ごとの強さを変えます。Unreal Engineの遮蔽機能にも、障害物を調べる設定と、遮蔽時のゲインやローパスフィルターを決める設定があります。[Unreal Engineの音の減衰と遮蔽](https://dev.epicgames.com/documentation/en-us/unreal-engine/sound-attenuation-in-unreal-engine#attenuationocclusion)
+聞き手から足音までの距離が同じでも、間に壁があると足音が小さく、こもって聞こえることがあります。ゲームでこの違いを表すには、聞き手と音源の間に壁があるかを調べ、音量と周波数ごとの強さを変えます。Unreal Engineの遮蔽機能にも、障害物を調べる設定と、遮蔽時のゲインやローパスフィルターを決める設定があります。[Unreal Engineの音の減衰と遮蔽](https://dev.epicgames.com/documentation/en-us/unreal-engine/sound-attenuation-in-unreal-engine#attenuationocclusion)
 
 ## 直接届く経路に壁があるか調べる
 

@@ -19,7 +19,7 @@ study:
 - **ラムダ式** `[x](int y){ return x+y; }`: その場で作る無名の関数オブジェクト。**変数をキャプチャ(捕獲)できる**
 - **std::function** `std::function<void(int)>`: コピー可能な呼び出し対象を**統一的に入れられる箱**。柔軟だがコストあり
 
-C#のdelegateは、この3つの役割を1つでこなす言語機能です(→ 対比の詳細: [関数ポインタと delegate / Observer と event](/languages/csharp/delegates-events-function-pointers.html))。
+C#ではdelegateが1つの言語機能でこの3つの役割を担います(→ 対比の詳細: [関数ポインタと delegate / Observer と event](/languages/csharp/delegates-events-function-pointers.html))。
 
 ## 関数ポインタ
 
@@ -73,7 +73,7 @@ struct __Lambda_1 {
 ```
 
 - キャプチャなしのラムダは関数ポインタに変換可能
-- テンプレート(`find_if`等)に渡すと**インライン化される**——関数ポインタ渡しより速いことが多い(ポインタ経由は最適化しにくい)
+- テンプレート(`find_if`等)に渡したラムダはインライン化されます。ポインタ経由の呼び出しは最適化しにくいため、関数ポインタを渡すより速いことが多くなります。
 - サイズはキャプチャ量に比例。`sizeof`可能な普通のオブジェクト
 
 ## std::function
@@ -111,7 +111,7 @@ if (onDamage) onDamage(10);                      // 空チェック→呼び出�
 
 `std::function`の格納対象にはコピー可能性が必要です。C++26草案には、呼び出しのconst・参照・noexcept修飾も表せる`std::copyable_function`もあります。新しいラッパーは標準ライブラリの対応を確認して選びます。[C++草案: 関数ラッパー](https://eel.is/c++draft/func.wrap)
 
-- C#のラムダのキャプチャは**常に参照的**(クロージャクラスに変数が持ち上げられ、外の変更が見える)。C++は**値/参照を自分で選ぶ**——「C#の感覚で書いたら値キャプチャで古い値を見ていた」(またはその逆で参照キャプチャがdangling)が典型事故
+- C#のラムダは変数をクロージャクラスへ移すので、外側からの変更がラムダにも反映されます。C++では値キャプチャと参照キャプチャを選びます。値キャプチャでは元の変数を変更してもキャプチャ時の値を読み、参照キャプチャでは対象の寿命が切れると参照がdanglingになります。
 - C#のdelegateはGC管理で寿命の心配がない。C++の参照キャプチャは寿命を自分で保証する
 - `+=`によるマルチキャスト(複数登録)はdelegate組み込み。C++では`vector<std::function>`を自分で持つ(→ [Observer](/design/patterns/observer.html))
 

@@ -33,7 +33,7 @@ study:
 
 ## エディターで作り、実行時の機能で動かす
 
-**エディター**は、素材を取り込み、オブジェクトを配置し、値を設定して動きを確認する制作の道具です。**ランタイム**は、作ったゲームを動かす側の仕組みです。エンジンの機能、ゲームのコード、必要なデータを使って実行が進みます。制作画面から再生する場合も、対象プラットフォーム向けに作ったアプリを起動する場合もあります。[Unityのエディター](https://docs.unity.com/en-us/engine/6000.0/manual/unity-editor) · [Unityのビルド](https://docs.unity3d.com/6000.0/Documentation/Manual/BuildSettings.html)
+**エディター**では、素材を取り込み、オブジェクトを配置し、値を設定して動きを確認できます。**ランタイム**は、エンジンの機能、ゲームのコード、必要なデータを使ってゲームを動かす仕組みです。制作画面から再生する場合も、対象プラットフォーム向けに作ったアプリを起動する場合もあります。[Unityのエディター](https://docs.unity.com/en-us/engine/6000.0/manual/unity-editor) · [Unityのビルド](https://docs.unity3d.com/6000.0/Documentation/Manual/BuildSettings.html)
 
 例えばUnityの**Gameビュー**ではカメラからの表示を確認し、**Sceneビュー**では制作中の配置を編集できます。制作時に見ている視点と、ゲームで使うカメラを確認すると、表示される内容を追えます。[UnityのGameビュー](https://docs.unity3d.com/6000.0/Documentation/Manual/GameView.html) · [Sceneビュー](https://docs.unity3d.com/6000.0/Documentation/Manual/UsingTheSceneView.html)
 

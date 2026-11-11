@@ -17,7 +17,7 @@ study:
 
 ## 最小のヘッダーから読む
 
-実践用の`SPAK`形式は、4バイトの識別子`SPAK`、4バイトの版、4バイトの件数から始まります。その後に24バイトの索引項目が件数分並びます。項目はNULで埋めた16バイトのASCII名、4バイトのオフセット、4バイトの長さで、数値欄は符号なし32ビットのリトルエンディアンです。オフセットの基準はファイルの先頭です。[C++の固定幅整数型](https://eel.is/c++draft/cstdint.syn) · [整数とバイト列の読み方](/data/integer-bits-and-bytes.html)
+実践用の`SPAK`形式は4バイトの識別子`SPAK`、4バイトのバージョン、4バイトの件数から始まります。その後に24バイトの索引項目が件数分並びます。各項目はNULで埋めた16バイトのASCII名、4バイトのオフセット、4バイトの長さで構成します。数値欄は符号なし32ビットのリトルエンディアンで、オフセットはファイルの先頭から数えます。[C++の固定幅整数型](https://eel.is/c++draft/cstdint.syn) · [整数とバイト列の読み方](/data/integer-bits-and-bytes.html)
 
 まず12バイトが存在することを確かめ、識別子を照合します。次に版を確認し、その版が定める位置・幅・バイト順で以降の欄を読みます。C++の`struct`をそのままファイルに重ねると、処理系のパディングやエンディアンに読み方が依存します。保存形式が定めたバイト列から、一つずつ値を組み立てます。[構造体とメモリレイアウト](/runtime/cpp-internals/memory-layout.html) · [MicrosoftのPE仕様にあるヘッダーと索引の検査](https://learn.microsoft.com/en-us/windows/win32/debug/pe-format#optional-header-image-only)
 

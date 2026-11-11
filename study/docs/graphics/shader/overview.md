@@ -15,7 +15,7 @@ study:
 
 ## 概要
 
-シェーダ言語は**GPU上で実行されるプログラムを書くための言語**です。現在の主要言語は **HLSL** (DirectX/Unity/UE)、**GLSL** (OpenGL/Vulkan)、**WGSL** (WebGPU)、**MSL** (Metal) の4つで、いずれもC系構文の**データ並列言語**です。このページでは4言語+中間表現 (SPIR-V/DXIL) の全体地図と、言語間対応表を提供します。
+シェーダ言語は、GPU上で実行するプログラムを書くための言語です。主な4言語はHLSL (DirectX/Unity/UE)、GLSL (OpenGL/Vulkan)、WGSL (WebGPU)、MSL (Metal) で、いずれもC系の構文を使うデータ並列言語です。4つの言語と中間表現 (SPIR-V/DXIL) の関係を整理し、言語間の違いを表で比べます。
 
 ## なぜ必要なのか
 
@@ -29,8 +29,8 @@ study:
 timeline
     title シェーダ言語の系譜
     2001 : DX8 アセンブリシェーダ (vs_1_1, ps_1_1)
-    2002-03 : Cg (NVIDIA) / HLSL (Microsoft) — 共同開発から分岐
-    2004 : GLSL (OpenGL 2.0 で標準化)
+    2002 : Cg (NVIDIA) / HLSL (Microsoft) — 共同開発から分岐
+    2004 : GLSL (OpenGL 2.0 のコア仕様に採用)
     2014 : MSL (Metal と同時発表)
     2015 : SPIR-V (Vulkanの中間表現) / DXIL (DX12, LLVMベース)
     2017 : HLSL→SPIR-V (DXCのVulkanバックエンド)
@@ -39,8 +39,8 @@ timeline
 ```
 
 - **アセンブリ時代 (2001)**: `mov oPos, v0` のような命令列。128命令制限
-- **Cg/HLSL (2002-03)**: NVIDIAとMicrosoftがC風高級言語を共同設計し、その後分岐。Cgは2012年に開発終了
-- **GLSL (2004)**: OpenGL ARBが「ドライバが直接コンパイルする」設計で標準化 — これが後に断片化の元凶に
+- **Cg/HLSL (2002)**: NVIDIAとMicrosoftがC風高級言語を共同設計し、その後分岐。HLSLはDirectX 9で導入され、Cgは2012年に開発終了
+- **GLSL (2004)**: OpenGL 2.0で、ドライバがソースをコンパイルするシェーダ言語としてコア仕様に採用
 - **中間表現の時代 (2015〜)**: ドライバごとのコンパイラ差異をなくすため、SPIR-V/DXILを挟む設計へ → [SPIR-V](/graphics/shader/spirv.html)
 - **WGSL (2023)**: Web安全性の要求から新設計 → [WGSL](/graphics/shader/wgsl.html)
 
@@ -107,7 +107,7 @@ flowchart LR
 | 管轄 | Microsoft | Khronos | W3C | Apple |
 | エントリポイント | 任意名を指定 | `main` 固定 (ステージごとに1ファイル的) | `@vertex` 等の属性 | `[[vertex]]` 等 + 任意名 |
 | テクスチャとサンプラ | 分離 | **結合** (Vulkan版は分離も可) | 分離 | 分離 |
-| ポインタ | なし (SM6.6でRWバッファ経由) | なし | 制限付き参照 | **あり** (C++14ベース) |
+| ポインタ | なし (SM6.6でRWバッファ経由) | なし | 制限付き参照 | **あり** (Metal 1〜3はC++14、Metal 4以降はC++17が基盤) |
 | エラーの扱い | 対象仕様を確認 | 対象仕様を確認 | 検証と動的エラー、未確定値の規則を持つ | 対象仕様を確認 |
 | テンプレート/ジェネリクス | 限定的 | なし | なし | **C++テンプレート** |
 
@@ -200,5 +200,5 @@ fragment float4 fsMain(VSOut in [[stage_in]],
 - Microsoft, *HLSL Specifications* (GitHub: microsoft/hlsl-specs)
 - Khronos, *GLSL Specification* / *SPIR-V Specification*
 - W3C, *WGSL Specification*
-- Apple, *Metal Shading Language Specification*
+- [Apple: Metal Shading Language Specification (§1.5)](https://developer.apple.com/metal/Metal-Shading-Language-Specification.pdf)
 - shader-slang.org — Slang (次世代統一言語)

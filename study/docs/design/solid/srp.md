@@ -25,7 +25,7 @@ study:
 
 ## よくある誤解
 
-- **「1クラス1メソッドにする」** — 違います。変更理由が1つなら、50メソッドあってもSRPは満たします(例: 数学ベクトルクラス)。
+- 変更理由が1つなら、50メソッドあってもSRPを満たします。数学ベクトルクラスがその例です。
 - **「小さいクラスほど良い」** — 分割しすぎて1つの変更理由が10クラスに散る(ショットガン手術)のは、逆方向のSRP違反です。
 - **「責任=機能」** — 責任は機能の数ではなく、**変更を要求してくる都合の数**で数えます。
 
@@ -33,6 +33,8 @@ study:
 
 ```cpp
 // C++20(問題例)
+#include <algorithm>
+#include <cstddef>
 #include <fstream>
 #include <string>
 #include <vector>
@@ -66,6 +68,7 @@ private:
 ```cpp
 // C++20
 #include <algorithm>
+#include <cstddef>
 #include <fstream>
 #include <string>
 #include <vector>

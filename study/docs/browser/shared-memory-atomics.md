@@ -13,7 +13,7 @@ study:
 
 # Web Workerと共有メモリの同期 — Atomics・競合・待機
 
-二つのWorkerが同じ `SharedArrayBuffer` に `Int32Array` のビューを作ると、別々のJavaScript実行環境から同じバイト列を読み書きできます。カウンターを一つ増やす場合でも、どの処理をまとめるかで結果が変わります。値を渡す場合は、いつ受け取り側が読み始めてよいかも決めます。ここでは整数一つの加算と、準備完了を知らせるフラグを使って、この二つを観察します。[クロスオリジン分離と共有メモリ](/browser/cross-origin-isolation.html)、[Web Workerとメッセージ通信](/browser/web-workers-messages.html)
+二つのWorkerが同じ `SharedArrayBuffer` に `Int32Array` のビューを作ると、別々のJavaScript実行環境から同じバイト列を読み書きできます。カウンターを一つ増やす場合でも、どの処理をまとめるかで結果が変わります。値を渡す場合は、受け取り側が読み始めてよい時点も決めます。ここでは整数一つの加算と、準備完了を知らせるフラグを使って、この二つを観察します。[クロスオリジン分離と共有メモリ](/browser/cross-origin-isolation.html)、[Web Workerとメッセージ通信](/browser/web-workers-messages.html)
 
 ## 個々の読み書きが不可分でも更新を取りこぼす
 

@@ -15,7 +15,7 @@ study:
 
 # C++とC#で非同期readの開始・完了・寿命を観察する
 
-**要求を開始することと、結果を使える状態になることを分けます。** 自己所有の12bytesのfixtureを、別々のhandle / streamで同期・非同期に読み、全bytesとEOFが一致するか確認します。内部経路と図は[非同期ファイルI/O](/os/asynchronous-file-io.html)、bytes・位置の基礎は[同期readの観察](/practice/io/file-read-observation.html)を参照してください。
+要求を開始する時点と、結果を使える時点を分けて観察します。自分で用意した12バイトのテストファイルを、同期読み取りと非同期読み取りで別々のhandle / streamから開きます。読み取った全バイトとEOFが一致するか確認します。内部経路と図は[非同期ファイルI/O](/os/asynchronous-file-io.html)、読み取り量と位置の基礎は[同期readの観察](/practice/io/file-read-observation.html)を参照してください。
 
 fixtureは`41 42 00 0D 0A E3 81 82 10 20 FE FF`、read要求は5bytesです。文字列decodeはせず、短いreadも累積します。一度に出す要求は1件で、複数要求を並列に処理する例ではありません。
 

@@ -29,13 +29,34 @@ class NativeWrapper {
 ```
 
 ```cpp
-// C++のデストラクタ: スコープを抜けた「その行」で確実に実行
-{
-    File f("save.dat");
-}   // ← ここで必ず ~File()。例外でも、returnでも
+#include <cstdio>
+#include <fstream>
+#include <stdexcept>
+
+struct File {
+    std::ifstream stream{"save.dat"};
+    ~File() { std::puts("~File()"); }
+};
+
+void ReadSave(bool simulateError) {
+    File f;
+    if (simulateError) {
+        throw std::runtime_error("example failure");
+    }
+    return;  // 通常のreturnでも、外側のcatchへの巻き戻しでも~File()が呼ばれる
+}
+
+int main() {
+    ReadSave(false);
+    try {
+        ReadSave(true);
+    } catch (const std::runtime_error&) {
+        std::puts("caught");
+    }
+}
 ```
 
-**C#の`~`の感覚(いつか呼ばれるかも)をC++に持ち込むと、逆方向に驚く**ことになります: C++のデストラクタは決定的・同期的で、設計の主役です([RAII](/languages/cpp/raii.html))。
+**C#の`~`の感覚(いつか呼ばれるかも)をC++に持ち込むと、逆方向に驚く**ことになります。C++では、通常のスコープ終了や外側の`catch`へのスタック巻き戻しでデストラクタが呼ばれます。対応するハンドラがなく`std::terminate`が呼ばれる場合、その前に巻き戻すかどうかは処理系定義です。[RAII](/languages/cpp/raii.html)・[C++草案の例外処理規則](https://eel.is/c++draft/except.handle#8)
 
 ## using は「手動RAII」
 
@@ -50,13 +71,13 @@ std::ofstream file("save.dat");
 ```
 
 - C#: 型がIDisposableでも、usingを書くかは利用者次第(呼び忘れが**コンパイルは通る**)
-- C++: RAIIの型を使った時点で解放は保証。**「正しく使うのが簡単、間違って使うのが難しい」方向に倒れている**
-- C#の `using` はブロック/宣言スコープのみ。C++はメンバ変数・コンテナ要素としてもRAIIが機能する(vectorが破棄されれば全要素のデストラクタが走る)——**合成可能性**がC++の強み
+- C++: RAIIの所有オブジェクトが破棄されると、デストラクタが資源を解放。**「正しく使うのが簡単、間違って使うのが難しい」方向に倒れている**
+- C#の `using` はブロックや宣言のスコープに限られます。C++のRAIIはメンバ変数やコンテナ要素にも組み込めます。vectorが破棄されると全要素のデストラクタが呼ばれます。この合成可能性がC++の強みです。
 
 ## Dispose相当をC++で設計するとき
 
 - 基本はデストラクタのみでよい(Rule of Zero → [特殊メンバ関数](/languages/cpp/ctor-dtor-copy-move.html))
-- 「失敗を報告したい後始末」(ファイルclose失敗など)は、明示的 `Close()` を併設し、デストラクタは保険とする——C#の「DisposeとファイナライザのDisposeパターン」に構造が似る
+- ファイルを閉じる処理など、後始末の失敗を報告するには明示的な `Close()` を用意します。デストラクタは `Close()` が呼ばれなかった場合の後始末を担います。C#の `Dispose` とファイナライザを組み合わせるパターンに構造が似ています。
 - C#の `IAsyncDisposable` に相当する標準機構はC++にない(非同期の後始末は自前設計)
 
 ## Unity特有の注意
@@ -66,7 +87,7 @@ std::ofstream file("save.dat");
 
 ## 使い分けの理解チェック
 
-1. C#のファイナライザとC++のデストラクタの実行タイミングの違いは?
+1. C#のファイナライザとC++のデストラクタの実行タイミングの違いは? C++で例外を捕捉する場合と、対応するハンドラがない場合も比べてください。
 2. usingとRAIIの「責任の所在」の違いを説明できますか。
 3. C++で明示的Close()を併設するのはどんなときですか。
 

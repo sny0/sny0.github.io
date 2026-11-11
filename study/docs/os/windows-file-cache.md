@@ -30,7 +30,7 @@ Windowsで同じファイル範囲を二度読むと、二度目は**すでにRA
 
 ## 先読みとアクセスパターンのヒント
 
-**先読み（read-ahead）**は、後で要求されそうなファイル範囲をあらかじめ取得する処理です。例えばアプリが範囲Aを読んだ後に続くBを読むなら、その時点でBの取得が済んでいると待ち時間を短くできます。使われなかった先読みは帯域とキャッシュ領域を消費します。先読みの範囲やタイミングはWindowsやファイルシステムに任せる部分で、アプリから要求したバイト数と下位で取得したバイト数は異なり得ます。[Microsoft: CcScheduleReadAhead](https://learn.microsoft.com/en-us/windows-hardware/drivers/ddi/ntifs/nf-ntifs-ccschedulereadahead) · [Microsoft: CcSetReadAheadGranularity](https://learn.microsoft.com/en-us/windows-hardware/drivers/ddi/ntifs/nf-ntifs-ccsetreadaheadgranularity)
+先読み（read-ahead）は後で要求されそうなファイル範囲をあらかじめ取得する処理です。例えばアプリが範囲Aに続いてBを読むとき、その時点でBを取得済みなら待ち時間を短くできます。先読みした範囲を使わなくても、取得に使った帯域とキャッシュ領域は消費します。Windowsやファイルシステムが先読みの範囲やタイミングを決めるため、アプリが要求したバイト数と下位で取得したバイト数は異なり得ます。[Microsoft: CcScheduleReadAhead](https://learn.microsoft.com/en-us/windows-hardware/drivers/ddi/ntifs/nf-ntifs-ccschedulereadahead) · [Microsoft: CcSetReadAheadGranularity](https://learn.microsoft.com/en-us/windows-hardware/drivers/ddi/ntifs/nf-ntifs-ccsetreadaheadgranularity)
 
 | `CreateFileW` の指定 | 想定する使い方 |
 | --- | --- |

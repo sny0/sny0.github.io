@@ -139,7 +139,7 @@ public class Enemy : MonoBehaviour {
 - 移動・攻撃・照準のアルゴリズム差し替え(敵の個性 → [ケーススタディ: 敵AI](/design/case-studies/enemy-ai.html)、[照準制御](/design/case-studies/aim-control.html))
 - 難易度: EasyAI / NormalAI / HardAI を同じContextに注入
 - ダメージ計算式・ドロップ抽選方式の差し替え
-- ソート・フィルタ(インベントリの並び順)— C++の `std::sort` に比較関数を渡すのは標準ライブラリのStrategy
+- ソートやフィルタでインベントリの並び順を変える。たとえばC++の `std::sort` に比較関数を渡すのは、標準ライブラリでStrategyを使う例。
 
 ## 利点
 

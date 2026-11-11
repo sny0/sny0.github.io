@@ -13,7 +13,7 @@ study:
 
 # ターミナル・シェル・コマンドの基本
 
-開発手順には、`dotnet build`や`cmake --build build`のように文字で道具を呼ぶ操作が出てきます。このような操作方法を**CLI（コマンドラインインターフェース）**と呼びます。何を入力し、どのプログラムが受け取るのかを追うと、コマンドの読み方が分かります。[Windows Terminalの概要](https://learn.microsoft.com/en-us/windows/terminal/)
+開発手順には、`dotnet build`や`cmake --build build`のように文字でツールを呼び出す操作が出てきます。この操作方法をCLI（コマンドラインインターフェース）と呼びます。入力した文字列をどのプログラムがどう受け取るかを追うと、コマンドの読み方が分かります。[Windows Terminalの概要](https://learn.microsoft.com/en-us/windows/terminal/)
 
 ## 画面と、入力を解釈するプログラム
 

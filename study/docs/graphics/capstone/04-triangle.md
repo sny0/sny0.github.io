@@ -3,7 +3,7 @@ title: 4. 最初の三角形からメッシュ描画へ
 study:
   source: RenderingWiki
   status: published
-  summary: グラフィックスプログラミングの通過儀礼 — 三角形 — を経て、glTFメッシュをカメラ付きで描画するまで。 第2章の数学 と 第3章のパイプライン がコードとして結晶するステップです。
+  summary: 三角形から始めて、カメラを使ったglTFメッシュの描画まで進む。座標変換とパイプラインの設定をコードで確認する。
   section: practice
   format: tutorial
   domain: graphics
@@ -15,11 +15,11 @@ study:
 
 ## このステップの目標
 
-グラフィックスプログラミングの通過儀礼 — **三角形** — を経て、glTFメッシュをカメラ付きで描画するまで。 [座標変換](/math/rendering/transform.html) と [パイプライン全体像](/graphics/pipeline/overview.html) がコードとして結晶するステップです。
+まず三角形を描画し、次にカメラを使ってglTFメッシュを描画します。[座標変換](/math/rendering/transform.html)と[パイプライン全体像](/graphics/pipeline/overview.html)で扱った処理が、描画コードのどこに現れるかを確認します。
 
 ## 4.1 三角形 — 頂点バッファなしの最小構成
 
-まず「パイプラインが動く」ことだけを検証します。頂点データはシェーダ内に埋め込みます ([Vertex Pulling](/graphics/pipeline/vertex-shader.html) の最小例):
+最初に検証するのは、パイプラインが動くことだけです。頂点データはシェーダ内に埋め込みます（[Vertex Pulling](/graphics/pipeline/vertex-shader.html)の最小例）。
 
 ```hlsl
 // triangle.vert.hlsl — dxc -spirv -T vs_6_0 でコンパイル
@@ -54,7 +54,7 @@ vkCmdDraw(cmd, 3, 1, 0, 0);                    // 頂点3つ、バッファな�
 vkCmdEndRendering(cmd);
 ```
 
-**三角形が出たら祝杯を。** ここまでの数百行が、OpenGLの50行 ([比較ページ](/graphics/api/comparison.html)) の裏側でドライバがしていた仕事の全貌です。
+三角形が表示されれば描画の確認は完了です。[比較ページ](/graphics/api/comparison.html)のOpenGL例では50行の背後でドライバが担う仕事を、ここまでの数百行ではアプリ側で指定しています。
 
 ### 出ないときのデバッグ手順 ([tools章](/graphics/optimization/tools.html) の実践)
 

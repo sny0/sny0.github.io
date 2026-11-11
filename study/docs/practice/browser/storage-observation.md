@@ -15,7 +15,7 @@ study:
 
 # localStorage・IndexedDB・Cache APIの保存と完了を観察する
 
-同じ固定レコードを3種類の保存APIで扱い、保存した値と、どこで操作完了と判断するかを比べます。保存後にページを再読み込みし、もう一度読出しを操作する実験です。保存領域の寿命・origin・容量制限の仕組みと図は[ブラウザの保存領域と寿命](/browser/storage-lifetime.html)を参照してください。
+同じ固定レコードを3種類の保存APIで扱い、保存した値と、操作完了と判断する時点を比べます。保存後はページを再読み込みし、値をもう一度読み出します。保存領域の寿命・origin・容量制限の仕組みと図は[ブラウザの保存領域と寿命](/browser/storage-lifetime.html)を参照してください。
 
 <p><a href="/study/samples/browser/storage-observation/index.html" target="_blank" rel="noopener noreferrer">保存領域の実験ページを新しいタブで開く</a></p>
 

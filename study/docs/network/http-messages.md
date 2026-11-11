@@ -17,7 +17,7 @@ HTTPは、クライアントが**要求**（request）を送り、サーバー�
 
 [TCPソケット](/network/tcp-sockets.html)が扱うのは、順序のあるバイト列です。そのどこまでが一つのHTTPメッセージで、どのbyteが本文なのかは、HTTPの規則から決めます。HTTPの意味を定めるRFC 9110と、HTTP/1.1の構文・区切りを定めるRFC 9112を分けて参照します。[IETF RFC 9110 §3.4](https://www.rfc-editor.org/rfc/rfc9110.html#section-3.4)、[RFC 9112 §2](https://www.rfc-editor.org/rfc/rfc9112.html#section-2)
 
-実践は、WindowsのC++／WinsockとC#／.NET 10のraw Socketによる、同一プロセスのループバック通信です。HTTPクライアントライブラリが通常行う処理の一部を、既知の要求・応答だけに絞って見える形にします。
+実践ではWindowsのC++／WinsockとC#／.NET 10のraw Socketを使い、同一プロセス内でループバック通信を行います。既知の要求と応答だけをやり取りして、HTTPクライアントライブラリが通常行う処理の一部を確認します。
 
 以前の応答を保存して使う条件と、本文を再送しない304応答は、[HTTPキャッシュと再検証](/network/http-caching.html)で扱います。
 

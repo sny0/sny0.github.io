@@ -3,7 +3,7 @@ title: Tessellation
 study:
   source: RenderingWiki
   status: published
-  summary: Tessellation (テッセレーション) は、粗いパッチをGPU上で細かい三角形群に分割するためのステージ群です。DX11 (2009) で導入され、Hull Shader (制御) → Tessellator (固定機能分割) → Domain Shader (頂点配置) の3段で構成されま
+  summary: テッセレーションは、粗いパッチをGPUで細かい三角形に分割する処理です。DX11 (2009) で導入されたHull Shader、固定機能のTessellator、Domain Shaderの3段を説明します。
   section: reference
   format: article
   domain: graphics
@@ -13,7 +13,7 @@ study:
 
 ## 概要
 
-Tessellation (テッセレーション) は、**粗いパッチをGPU上で細かい三角形群に分割する**ためのステージ群です。DX11 (2009) で導入され、**Hull Shader (制御) → Tessellator (固定機能分割) → Domain Shader (頂点配置)** の3段で構成されます。地形・水面・ディスプレースメントマッピングで使われましたが、現在はMesh ShaderやNaniteに主役を譲りつつあります。
+Tessellation (テッセレーション) は、粗いパッチをGPU上で細かい三角形に分割するためのステージ群です。DX11 (2009) で導入されました。Hull Shaderで分割を制御し、固定機能のTessellatorで分割したあと、Domain Shaderで頂点を配置します。地形、水面、ディスプレースメントマッピングで使われてきましたが、現在はその用途をMesh ShaderやNaniteへ移す動きがあります。
 
 ## なぜ必要なのか
 
@@ -93,7 +93,7 @@ UE4ではマテリアルのTessellation設定 (Flat/PN Triangles) がありま�
 `hs_6_x` / `ds_6_x`。PSOのトポロジは `D3D12_PRIMITIVE_TOPOLOGY_TYPE_PATCH`、IAには `D3D_PRIMITIVE_TOPOLOGY_4_CONTROL_POINT_PATCHLIST` 等を指定。
 
 ### Vulkan
-`tessellationShader` フィーチャー必須。GLSLでは `layout(vertices=4) out` (TCS) / `layout(quads, equal_spacing, cw) in` (TES)。モバイルでは非対応・低速なことが多い点はGSと同様です。
+`tessellationShader` は任意のフィーチャーです。対象端末で `vkGetPhysicalDeviceFeatures2` などを使って対応を確認し、論理デバイス作成時に有効化します。モバイルでも対応する端末があり、実行コストは対象端末で計測します。GLSLでは `layout(vertices=4) out` (TCS) / `layout(quads, equal_spacing, cw) in` (TES)。[Khronos: VkPhysicalDeviceFeatures](https://docs.vulkan.org/refpages/latest/refpages/source/VkPhysicalDeviceFeatures.html)
 
 ## コード例
 

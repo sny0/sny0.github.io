@@ -3,7 +3,7 @@ title: URP (Universal Render Pipeline)
 study:
   source: RenderingWiki
   status: published
-  summary: URPはUnityの標準レンダーパイプラインで、モバイルからPC・コンソールまでを単一のスケーラブルな設計でカバーします。Unity 6.0 / URP 17.0ではForward / Forward+ / Deferredを選択でき、RenderGraphが標準です。Render Graphを無効
+  summary: URPはモバイル、PC、コンソールを対象とするUnityのレンダーパイプラインです。Unity 6.0 / URP 17.0で選べる描画方式と、標準で有効なRenderGraphの役割を説明します。
   section: reference
   format: article
   domain: graphics
@@ -13,7 +13,7 @@ study:
 
 ## 概要
 
-URPは**Unityの標準レンダーパイプライン**で、モバイルからPC・コンソールまでを単一のスケーラブルな設計でカバーします。Unity 6.0 / URP 17.0ではForward / **Forward+** / Deferredを選択でき、**RenderGraphが標準**です。Render Graphを無効にするCompatibility Modeもあります。Deferred+等の選択肢は後続バージョンで増えているため、使用するUnity/URPの版を確認してください。「読めるサイズの本格レンダラー」としてソースコードの教材価値も高い実装です。
+URPは、モバイルからPCやコンソールまでを一つの設計でカバーする、Unityの標準レンダーパイプラインです。Unity 6.0 / URP 17.0ではForward、Forward+、Deferredを選択でき、RenderGraphを標準で使います。Render Graphを無効にするCompatibility Modeもあります。後続バージョンではDeferred+などの選択肢が増えているため、使用するUnityとURPの版を確認してください。ソースコードを読み通しやすく、実際に使われるレンダラーの構成を学ぶ題材にもなります。
 
 ## なぜ必要なのか
 

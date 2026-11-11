@@ -38,7 +38,7 @@ study:
 
 Windowsは、実行可能な候補から優先度の高いスレッドを選びます。スレッドがCPUを使う持ち時間を**タイムスライス**（クォンタム）と呼びます。同じ優先度のスレッドが複数いれば順に実行するのが基本です。持ち時間が尽きたときに同等以上の優先度の候補があれば、ほかのスレッドに切り替わります。より高い優先度のスレッドが実行可能になると、持ち時間の途中でも実行中のスレッドからCPUを取り上げることがあります。これが**プリエンプション**です。実行中のスレッドが自ら待機に入った場合も、別のスレッドにCPUを割り当てられます。[Windowsのスケジューリング優先度](https://learn.microsoft.com/en-us/windows/win32/procthread/scheduling-priorities) · [コンテキストスイッチが発生する条件](https://learn.microsoft.com/en-us/windows/win32/procthread/context-switches)
 
-切り替えでは、直前のスレッドの実行位置やレジスターなどを保存し、次のスレッドの状態を復元します。これを**コンテキストスイッチ**と呼びます。切り替え処理そのものに加え、別の作業でキャッシュが入れ替わり、再開後にキャッシュミスが増える場合もあります。短い仕事を大量に分けて待機と起床を繰り返す場面では、CPU時間や完了までの時間と合わせて切り替え回数を読みます。[Microsoftのコンテキストスイッチ解説](https://learn.microsoft.com/en-us/windows/win32/procthread/context-switches) · [Intelのタイムスライス費用の解説](https://www.intel.com/content/www/us/en/docs/onetbb/developer-guide-api-reference/2022-1/appendix-a-costs-of-time-slicing.html)
+スレッドを切り替えるときは、直前のスレッドの実行位置やレジスターなどを保存し、次のスレッドの状態を復元します。これをコンテキストスイッチと呼びます。切り替え処理そのものに加え、別の作業でキャッシュが入れ替わり、再開後にキャッシュミスが増える場合もあります。短い仕事を大量に分けて待機と起床を繰り返す場面では、CPU時間や完了までの時間と合わせて切り替え回数を読みます。[Microsoftのコンテキストスイッチ解説](https://learn.microsoft.com/en-us/windows/win32/procthread/context-switches) · [Intelのタイムスライス費用の解説](https://www.intel.com/content/www/us/en/docs/onetbb/developer-guide-api-reference/2022-1/appendix-a-costs-of-time-slicing.html)
 
 同じスレッドがシステムコールでカーネルモードに入り、そのまま処理を続ける経路もあります。モードの切り替えはCPUの権限が変わることを指し、コンテキストスイッチはCPUを使うスレッドが交代することを指します。カーネルでの処理中に待機へ入れば、そのCPUで別のスレッドを実行できます。[システムコールと特権モード](/os/system-calls-and-privilege.html) · [スレッドと同期](/runtime/thread-synchronization.html)
 

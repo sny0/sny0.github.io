@@ -3,7 +3,7 @@ title: Compute Shader
 study:
   source: RenderingWiki
   status: published
-  summary: Compute Shaderはグラフィックスパイプラインから独立してGPUの演算能力を使うためのシェーダです。頂点もピクセルも関係なく、「N個のスレッドグループを起動し、各グループ内のスレッドが協調して任意の計算を行う」というシンプルな実行モデルを持ちます。現代レンダリングの最先端 (GPU Dri
+  summary: Compute Shaderは、グラフィックスパイプラインから独立してGPUで計算を実行するシェーダです。スレッドグループ内で協調して計算し、ライトのカリングやアップスケーリングなどに利用します。
   section: reference
   format: article
   domain: graphics
@@ -13,7 +13,7 @@ study:
 
 ## 概要
 
-Compute Shaderは**グラフィックスパイプラインから独立してGPUの演算能力を使うためのシェーダ**です。頂点もピクセルも関係なく、「N個のスレッドグループを起動し、各グループ内のスレッドが協調して任意の計算を行う」というシンプルな実行モデルを持ちます。現代レンダリングの最先端 (GPU Driven、Nanite、各種GI、アップスケーリング) は、ほぼすべてCompute Shaderの上に構築されています。
+Compute Shaderは、グラフィックスパイプラインから独立してGPUで計算を実行するシェーダです。頂点やピクセルに処理単位を限定せず、N個のスレッドグループを起動し、グループ内のスレッドが協力して計算します。GPU Drivenのカリング、Naniteの微小三角形のラスタライズ、各種GIやアップスケーリングの計算に使われます。
 
 ## なぜ必要なのか
 
@@ -98,7 +98,7 @@ AppendStructuredBuffer<uint> gVisibleList : register(u2); // 可変長出力
 `ComputeShader` アセット (.compute)。C#から `SetBuffer/SetTexture` → `Dispatch(kernel, x, y, z)`。`GraphicsBuffer` がバッファの現代的API。VFX GraphやGPU Resident DrawerはCompute実装です。
 
 ### Unreal Engine
-`FGlobalShader` 派生 + `IMPLEMENT_GLOBAL_SHADER` でUSFのComputeを登録し、RDG (`FRDGBuilder::AddPass`) でディスパッチ。Niagara・Lumen・Naniteの大部分がCompute。
+`FGlobalShader` 派生 + `IMPLEMENT_GLOBAL_SHADER` でUSFのComputeを登録し、RDG (`FRDGBuilder::AddPass`) でディスパッチ。NiagaraのGPUシミュレーションやLumenの各種計算、Naniteのカリングと微小三角形のラスタライズで使われます。
 
 ### DirectX 12
 `ID3D12PipelineState` (CS単体のPSO) + `Dispatch`。Computeキュー (`D3D12_COMMAND_LIST_TYPE_COMPUTE`) で非同期実行。UAVバリアで書き込み間の順序を制御。

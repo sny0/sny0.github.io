@@ -23,7 +23,7 @@ HPからダメージを引く処理を、条件に応じて変え、繰り返し
 
 ## 関数に値を渡し、結果を受け取る
 
-**関数**は、一まとまりの処理に名前を付けて呼び出せるようにしたものです。C#では、クラスなどの中で定義する関数を**メソッド**と呼びます。例の`ApplyDamage`は二つの整数を受け取り、結果の整数を返します。[C++の関数](https://learn.microsoft.com/en-us/cpp/cpp/functions-cpp?view=msvc-170) · [C#のメソッド](https://learn.microsoft.com/en-us/dotnet/csharp/programming-guide/classes-and-structs/methods)
+関数は一まとまりの処理に名前を付けて呼び出せるようにしたものです。C#ではクラスなどの中で定義する関数をメソッドと呼びます。例の`ApplyDamage`は二つの整数を受け取り、結果の整数を返します。[C++の関数](https://learn.microsoft.com/en-us/cpp/cpp/functions-cpp?view=msvc-170) · [C#のメソッド](https://learn.microsoft.com/en-us/dotnet/csharp/programming-guide/classes-and-structs/methods)
 
 `ApplyDamage(hp, 30)`で渡す値を**引数**、定義側の`currentHp`と`damage`を**仮引数**と呼びます。この例の`int`は値をコピーして渡します。関数の計算結果は**戻り値**として受け取り、`hp = ApplyDamage(hp, 30);`で呼び出し元の`hp`へ代入します。[C#の引数の渡し方](https://learn.microsoft.com/en-us/dotnet/csharp/language-reference/keywords/method-parameters) · [値・ポインタ・参照](/languages/cpp/values-pointers-references.html)
 

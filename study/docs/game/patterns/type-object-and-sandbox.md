@@ -114,7 +114,7 @@ protected:
 ### トレードオフ
 
 - 得: 外部システムとの結合が基底1か所に集約(サウンドAPI変更→基底のみ修正)。派生を書くのが簡単・安全になり、数十個量産できる
-- 失: **基底が肥大化**する宿命(道具箱は増える一方)。基底の変更が全派生に波及する継承の弱点はそのまま
+- 欠点: 派生クラスに提供する操作を追加するたびに、基底クラスが大きくなる。基底クラスの変更はすべての派生クラスに影響する。
 - 使わない: 派生が数個しかない/派生ごとに必要な道具がバラバラ(砂場が総合デパート化する)
 
 これは[Template Method](/design/patterns/template-method.html)+[Facade](/design/patterns/facade.html)の複合形です。Unityでは「MonoBehaviourを継承した自作基底クラス(GameBehaviour等)にプロジェクト共通の道具を生やす」形で現れます。
@@ -131,33 +131,15 @@ protected:
 
 [Interpreter](/design/patterns/interpreter.html)の式ツリーは、ノードのポインタ辿り+仮想関数で遅く、メモリも食う。命令を平坦なバイト列にコンパイルし、スタックマシンで実行すれば、高速・コンパクト・シリアライズ自由になります。
 
-```cpp
-// C++20 — 最小のスタックマシン
-#include <cstdint>
-#include <vector>
-
-enum class Op : std::uint8_t { PushConst, Add, Mul, ReadStat };
-
-int Execute(const std::vector<std::uint8_t>& code, const std::vector<int>& stats) {
-    std::vector<int> stack;
-    for (std::size_t pc = 0; pc < code.size(); ++pc) {
-        switch (static_cast<Op>(code[pc])) {
-            case Op::PushConst: stack.push_back(code[++pc]); break;
-            case Op::ReadStat:  stack.push_back(stats[code[++pc]]); break;
-            case Op::Add: { int b = stack.back(); stack.pop_back(); stack.back() += b; break; }
-            case Op::Mul: { int b = stack.back(); stack.pop_back(); stack.back() *= b; break; }
-        }
-    }
-    return stack.back();
-}
-// 「attack * 2 + 5」= [ReadStat 0, PushConst 2, Mul, PushConst 5, Add]
-```
+<<< @/public/samples/cpp/bytecode_vm.cpp{cpp}
 
 検証済みサンプル: <a href="/study/samples/cpp/bytecode_vm.cpp">samples/bytecode_vm.cpp</a>
 
+この例は、命令コード、オペランドの有無と範囲、スタックの深さ、演算結果の範囲を実行時に検査し、失敗時は `std::nullopt` を返します。ジャンプのない命令セットなので、256バイトの入力上限で命令数とスタック深さも抑えられます。ループやホスト側の処理を呼ぶ命令を追加する場合は、命令実行数などの予算と、VMへ公開する操作の範囲も設計します。
+
 ### トレードオフ
 
-- 得: 振る舞いが完全にデータ(配信・MOD・エディタ生成可能)。Interpreterより高速・省メモリ。サンドボックス化(VMができること以上の悪さはできない=安全)
+- 得: 振る舞いが完全にデータ(配信・MOD・エディタ生成可能)。Interpreterより高速・省メモリにしやすく、VMから呼べる操作を絞れる。外部の命令列を扱うには、命令の検証、実行予算、公開する操作の制御が要る。
 - 失: **デバッガが効かない**(自作VMの中はブレークポイントを張れない。デバッグ表示・逆アセンブラを自作する羽目に)。命令セットの設計・保守という言語処理系の仕事を抱え込む
 - 使わない: 定義したい振る舞いが少ない・単純(Type Objectのデータ+数個の分岐で足りる)。既存スクリプト言語(Lua)で済む——**自作VMはLua導入すら重い制約(実行環境・審査・超軽量要件)があるときの手段**
 

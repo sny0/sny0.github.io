@@ -15,7 +15,7 @@ study:
 
 # Web Audioで線形と等電力のクロスフェードを比べる
 
-音源Aを下げながらBを上げ、1秒の音を作ります。画面の「等ゲイン（直線）」は、二つのゲインの和を1に保つ線形クロスフェードです。「等電力」はゲインの二乗和を1に保ちます。グラフは、レンダリングした出力の実効値（RMS）を10 msの区間ごとに求めたものです。[Web Audioのクロスフェード](/browser/audio-crossfade.html)
+音源Aのゲインを下げながらBのゲインを上げ、1秒の音を作ります。画面の「等ゲイン（直線）」は、二つのゲインの和を1に保つ線形クロスフェードです。「等電力」はゲインの二乗和を1に保ちます。グラフには、レンダリングした出力の実効値（RMS）を10 msの区間ごとに求めた結果を表示します。[Web Audioのクロスフェード](/browser/audio-crossfade.html)
 
 <p><a href="/study/samples/browser/audio-crossfade-observation/index.html" target="_blank" rel="noopener noreferrer">クロスフェードの実験を新しいタブで開く</a></p>
 

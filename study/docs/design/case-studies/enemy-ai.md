@@ -3,7 +3,7 @@ title: 敵AIの設計
 study:
   source: C++ Wiki
   status: published
-  summary: 雑魚1種ならこれで完成です。 「見失ったら最後の位置を探す」→ 状態(探索中)の記憶が必要 → boolフラグ追加 「攻撃後は2秒クールダウン」「スタン中は動けない」→ フラグとタイマーが増殖し、if条件が !isStunned && !isSearching && cooldown <= 0 &&
+  summary: 敵AIに探索、攻撃後のクールダウン、スタンなどの条件を足すと、フラグやタイマーが増えます。単純な分岐で十分な場合と、有限ステートマシンやBehavior Treeが向く場合を比較します。
   section: reference
   format: article
   domain: design
@@ -65,7 +65,7 @@ Enemy = [MoveComponent(歩行/飛行)] + [PerceptionComponent(視界)] +
 
 ## 案E: パターンを使わない簡潔案
 
-素朴な実装+**関数分割と早期return**だけで整える:
+素朴な実装を、関数の分割と早期returnだけで整理します。
 
 ```cpp
 void Enemy::Update(float dt) {
@@ -76,7 +76,7 @@ void Enemy::Update(float dt) {
 }
 ```
 
-実はこれは「毎フレーム根から評価するSelector」——**BTの手書き版**です。敵1〜3種ならこれが最も読みやすい。
+このコードは、毎フレーム根から評価するSelectorを手書きしたBTです。敵が1〜3種なら、この形が最も読みやすくなります。
 
 ## 規模別の判断
 
@@ -86,7 +86,7 @@ void Enemy::Update(float dt) {
 | 中(敵5〜15種、状態記憶あり) | 案A(FSM)+数値は[Type Object](/game/patterns/type-object-and-sandbox.html) |
 | 大(多種+複雑なボス+企画調整) | 案D(部品+データ)+雑魚=共通FSM、ボス=BT |
 | Unity | 案A自作 or Unity Behavior/アセット。構成は案D |
-| UE | **BT+Blackboard+AIController(標準装備)**に乗るのが第一候補。StateTreeも選択肢 |
+| UE | 標準のBT、Blackboard、AIControllerを使うのが第一候補。StateTreeも選択肢 |
 
 ## この題材の教訓
 

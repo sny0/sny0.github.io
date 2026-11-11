@@ -25,34 +25,50 @@ study:
 
 ## よくある誤解
 
-- **「DIP = とにかくインターフェースを挟む」** — 挟むだけでは不十分。**抽象を誰が定義するか(所有するか)**が本体です。抽象が下位側の都合で書かれていたら、依存先が変わっただけで逆転していません。
-- **「DIP = DIコンテナを使う」** — コンテナは自動化ツールにすぎません。コンストラクタで手渡しするだけでもDIPは満たせます。
+- インターフェースを挟むときは、どちらの層がその抽象を定義し、所有するかを確認します。下位側の都合で定義すると、依存先は変わっても依存の方向は逆転しません。
+- DIコンテナは依存を渡す作業を自動化します。コンストラクタで手動で渡すだけでもDIPは満たせます。
 - **「全依存を逆転すべき」** — 標準ライブラリや安定したエンジンAPIへの依存を逆転するのは無駄です。逆転する価値があるのは**変わりやすい・テストで差し替えたい境界**だけ。
 
 ## 違反している小さなコード例(C++版)
 
 ```cpp
 // C++20(問題例)— 上位(クエスト進行)が下位(具体的な保存とサウンド)に直接依存
-#include "SteamCloudStorage.h"   // 詳細
-#include "FmodAudioPlayer.h"     // 詳細
+#include <map>
+#include <string>
+
+// 実際には別ヘッダーに置く、具体的なSDKアダプターの代役
+class SteamCloudStorage {
+public:
+    void Upload(const std::string&, const std::string&) {}
+};
+class FmodAudioPlayer {
+public:
+    static void Play(const char*) {}
+};
 
 class QuestSystem {
 public:
     void CompleteQuest(int questId) {
         progress_[questId] = true;
-        SteamCloudStorage storage;                  // 上位が詳細を生成until所有
+        SteamCloudStorage storage;                  // 上位が詳細を直接生成する
         storage.Upload("quest.dat", Serialize());
         FmodAudioPlayer::Play("quest_clear.wav");   // 上位が詳細を直接呼ぶ
     }
-    // ... Serialize等は省略
 private:
+    std::string Serialize() const {
+        std::string data;
+        for (const auto& [id, complete] : progress_) {
+            if (complete) data += std::to_string(id) + "\n";
+        }
+        return data;
+    }
     std::map<int, bool> progress_;
 };
 ```
 
 ## 何が問題になるか
 
-- クエストの進行ルール(方針)をテストするのに、SteamとFMODの実環境が必要。
+- 具体型が実際のSDKを呼ぶと、クエストの進行ルール(方針)のテストにもSteamとFMODの実環境が必要。
 - 保存先をコンシューマ機のセーブAPIに変えると、**クエストのコードを修正**することになる。方針が詳細の都合で書き換わる=依存の方向が悪い(→ [依存の方向](/design/foundations/dependency.html))。
 - `#include` 連鎖で、QuestSystemを使う全ファイルがSteam SDKのヘッダーに引きずられる(ビルド時間にも波及 → [翻訳単位・ヘッダー・include・前方宣言・ODR](/runtime/cpp-internals/translation-units-and-headers.html))。
 
@@ -60,8 +76,10 @@ private:
 
 ```cpp
 // C++20 — 抽象を「上位側の言葉」で定義し、詳細に実装させる
+#include <map>
 #include <memory>
 #include <string>
+#include <utility>
 
 // 上位が所有する抽象。「クエストが必要とすること」だけを、上位の語彙で書く
 class IQuestStorage {
@@ -86,8 +104,14 @@ public:
         storage_->SaveProgress(Serialize());
         notifier_->OnQuestCompleted(questId);
     }
-    // ... Serialize等は省略
 private:
+    std::string Serialize() const {
+        std::string data;
+        for (const auto& [id, complete] : progress_) {
+            if (complete) data += std::to_string(id) + "\n";
+        }
+        return data;
+    }
     std::unique_ptr<IQuestStorage> storage_;    // 所有はQuestSystem側(注入されたものを保持)
     std::unique_ptr<IQuestNotifier> notifier_;
     std::map<int, bool> progress_;
@@ -95,7 +119,7 @@ private:
 
 // 詳細側(別ファイル)が、上位の抽象に依存して実装する ← ここが「逆転」
 class SteamQuestStorage : public IQuestStorage {
-    void SaveProgress(const std::string& data) override { /* Steam SDK呼び出し */ }
+    void SaveProgress(const std::string& /* data */) override { /* Steam SDK呼び出し */ }
 };
 ```
 
@@ -104,6 +128,8 @@ class SteamQuestStorage : public IQuestStorage {
 ## C#版(Unityでの例)
 
 ```csharp
+using UnityEngine;
+
 // 上位: リザルト画面の進行(方針)
 public interface IScoreRepository { void Save(int score); int LoadBest(); }
 
@@ -125,7 +151,7 @@ public class PlayerPrefsScoreRepository : IScoreRepository {
 // テストでは Dictionary ベースのフェイクを注入 → Unityなしでテスト可能
 ```
 
-MonoBehaviourはコンストラクタを持てないため、Unityでは `[SerializeField]` での参照注入、初期化メソッド注入、VContainer等のDIコンテナがDIの実装手段になります(→ [Service LocatorとDI](/game/patterns/service-locator-and-di.html))。
+MonoBehaviourにもC#のコンストラクタは書けます。Unityがシーン読み込みや `AddComponent` で生成するコンポーネントには、呼び出し側からコンストラクタ引数を渡せません。シリアライズ済みの値を使う初期化には `Awake` を使い、依存は `[SerializeField]` による参照設定、初期化メソッド、VContainer等で渡します(→ [Service LocatorとDI](/game/patterns/service-locator-and-di.html))。[UnityのAwake](https://docs.unity3d.com/6000.0/Documentation/ScriptReference/MonoBehaviour.Awake.html) / [AddComponent](https://docs.unity3d.com/6000.0/Documentation/ScriptReference/GameObject.AddComponent.html)
 
 ## ゲーム開発での例
 

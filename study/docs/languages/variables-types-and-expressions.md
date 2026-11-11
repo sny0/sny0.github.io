@@ -100,6 +100,6 @@ same=False
 
 `hp - damage`や`hp == copy`は、演算などを組み合わせた**式**です。式の評価では、値を求めたり、代入のように状態を変えたりします。`hp = hp - damage;`のように処理として書いたものが**文**です。宣言も、例の関数内では宣言文として書きます。[C++の式](https://learn.microsoft.com/en-us/cpp/cpp/expressions-cpp?view=msvc-170)
 
-`main`や`Main`の中で宣言した`hp`は、その関数内の使える範囲で参照します。名前が有効な範囲を**スコープ**と呼びます。波括弧で囲むブロック内に宣言したローカル変数は、その範囲に属します。名前の範囲と、実際のデータの寿命は、参照やオブジェクトを学ぶときにさらに区別します。[C++のスコープ](https://learn.microsoft.com/en-us/cpp/cpp/scope-visual-cpp?view=msvc-170)
+`main`や`Main`で宣言した`hp`は、その関数の中で名前が有効な範囲から参照します。名前が有効な範囲をスコープと呼びます。波括弧で囲むブロック内で宣言したローカル変数は、そのブロックのスコープに属します。名前の範囲と実際のデータの寿命は、参照やオブジェクトを学ぶときに区別します。[C++のスコープ](https://learn.microsoft.com/en-us/cpp/cpp/scope-visual-cpp?view=msvc-170)
 
 条件によって処理を変えたり、同じ計算を何度も呼んだりする方法は、[条件分岐・繰り返し・関数](/languages/control-flow-and-functions.html)へ進んでください。数の表現は[整数・ビット・バイト](/data/integer-bits-and-bytes.html)、変数が保持するデータの寿命は[記憶域期間と寿命](/runtime/memory/storage-duration-and-lifetime.html)で扱います。

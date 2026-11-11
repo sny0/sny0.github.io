@@ -3,7 +3,7 @@ title: Unreal Engine のレンダラー
 study:
   source: RenderingWiki
   status: published
-  summary: Unreal Engineのレンダラーは、Deferred Shadingを基軸に、Nanite (仮想化ジオメトリ)・Lumen (動的GI)・Virtual Shadow Maps・TSRという「UE5四点セット」を統合した、現代最先端の商用レンダラーです。アーキテクチャは GameThread
+  summary: Unreal EngineのレンダラーはDeferred Shadingを中心に、Nanite、Lumen、Virtual Shadow Maps、TSRを組み合わせます。GameThread、RenderThread、RHIThreadの役割と、描画を組み立てる仕組みを説明します。
   section: reference
   format: article
   domain: graphics
@@ -13,7 +13,7 @@ study:
 
 ## 概要
 
-Unreal Engineのレンダラーは、**Deferred Shadingを基軸に、Nanite (仮想化ジオメトリ)・Lumen (動的GI)・Virtual Shadow Maps・TSRという「UE5四点セット」を統合した、現代最先端の商用レンダラー**です。アーキテクチャは GameThread → RenderThread → RHIThread の3段パイプラインと、RHI (API抽象) + RDG (レンダーグラフ) の階層で構成されます。ソースコードが読める商用AAAレンダラーとして、レンダリングエンジニアの最高の教材の一つです。
+Unreal EngineのレンダラーはDeferred Shadingを中心に、Nanite (仮想化ジオメトリ)、Lumen (動的GI)、Virtual Shadow Maps、TSRを統合した商用レンダラーです。処理はGameThread、RenderThread、RHIThreadの3段階で進み、RHI (API抽象) とRDG (レンダーグラフ) の階層を使います。ソースコードを読めるため、商用AAAレンダラーの設計を学ぶ代表的な題材です。
 
 ## なぜ必要なのか
 

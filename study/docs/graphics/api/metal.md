@@ -3,7 +3,7 @@ title: Metal
 study:
   source: RenderingWiki
   status: published
-  summary: MetalはAppleの明示的グラフィックス/コンピュートAPIです (2014)。DX12/Vulkanより先に出荷され、DX12/Vulkanより大幅に書きやすいのが特徴で、「明示性と人間工学のバランス」の成功例とされます。iOS/macOS/visionOSの唯一の第一級APIであり
+  summary: MetalはAppleの明示的グラフィックス/コンピュートAPIです (2014)。従来APIの自動ハザード追跡と、Metal 4の明示的な同期・リソース管理を解説します。
   section: reference
   format: article
   domain: graphics
@@ -13,12 +13,12 @@ study:
 
 ## 概要
 
-MetalはAppleの明示的グラフィックス/コンピュートAPIです (2014)。**DX12/Vulkanより先に出荷され**、DX12/Vulkanより**大幅に書きやすい**のが特徴で、「明示性と人間工学のバランス」の成功例とされます。iOS/macOS/visionOSの唯一の第一級APIであり、Apple Silicon (TBDR) の性能を引き出す鍵です。
+MetalはAppleの明示的グラフィックス/コンピュートAPIです (2014)。**DX12/Vulkanより先に出荷され**、従来APIでは対象リソースのハザード追跡をMetalに任せられます。2025年に登場したMetal 4のコアAPIでは、依存関係とリソースの寿命をアプリが明示的に管理します。iOS/macOS/visionOS向けにApple GPUのTBDR機能を使えます。
 
 ## なぜ必要なのか
 
 - iPhone/iPad/Mac向けの高性能グラフィックスはMetal一択 (GLは非推奨、Vulkanは変換層のみ)
-- モバイルゲーム市場の約半分はiOS — Unity/UE開発者もMetalの挙動理解が最適化に直結
+- モバイルゲーム市場の約半分を占めるiOSでは、UnityやUEで開発する場合にもMetalの挙動が最適化に関わる
 - TBDRアーキテクチャ最適化 (タイルメモリ、メモリレスRT) の代表的実装
 
 ## 歴史・誕生した背景
@@ -30,6 +30,7 @@ MetalはAppleの明示的グラフィックス/コンピュートAPIです (2014
 - 2018: macOS Mojave 10.14でOpenGL/OpenCLが非推奨化。互換性のためAPIは残るが、新規開発はMetalへの移行を推奨
 - 2022: **Metal 3** — MetalFX (アップスケーリング)、メッシュシェーダ、高速リソースロード
 - 2023-: Game Porting Toolkit (DX12→Metal変換) でWindowsゲーム移植を推進
+- 2025: **Metal 4** — 明示的な同期を使うコアAPI、テンソル・機械学習機能を追加
 
 ## それ以前の技術
 
@@ -44,17 +45,19 @@ iOS/macOSのOpenGL ES / OpenGL。
 
 ## 現在の位置づけ
 
-Appleプラットフォームの唯一解。設計面では「Vulkanほど冗長でなくDX11ほど暗黙でない」中間解として、WebGPUの設計に強い影響を与えました。
+従来のMetalは明示的なコマンド記録と対象リソースの自動ハザード追跡を組み合わせ、WebGPUの設計に影響を与えました。Metal 4に対応する環境でも従来APIを利用できます。
 
 ## 内部動作 — 主要概念
 
 ### オブジェクトモデル
 
+従来API (`MTLCommandQueue`) のコマンド記録モデルです。
+
 ```mermaid
 flowchart TB
     DEV["MTLDevice<br/>GPU (システムから取得)"]
     Q["MTLCommandQueue"]
-    CB["MTLCommandBuffer<br/>(使い捨て・自動管理)"]
+    CB["MTLCommandBuffer<br/>(1回の提出に使用)"]
     ENC["MTLRenderCommandEncoder /<br/>MTLComputeCommandEncoder /<br/>MTLBlitCommandEncoder"]
     PSO["MTLRenderPipelineState<br/>(事前コンパイル)"]
     RES["MTLBuffer / MTLTexture"]
@@ -64,8 +67,8 @@ flowchart TB
 ```
 
 - **エンコーダ**: 1つのレンダーパス/コンピュートパスに対応するコマンド記録器。`endEncoding` で閉じる。この構造がWebGPUにそのまま継承された
-- **自動リソース追跡が既定**: ハザード追跡はMetalが自動で行う (`hazardTrackingMode` で手動化も可能) — DX12/VKとの最大の違いで、書きやすさの源泉
-- 同期: `MTLCommandBuffer.addCompletedHandler` / `MTLEvent` / `MTLFence`。ただし自動追跡のおかげで日常的にはほぼ意識不要
+- **従来APIのハザード追跡**: `MTLCommandQueue` に提出した処理では、`.tracked` のリソースをエンコーダに直接バインドした場合にMetalがハザードを追跡します。既定値は `MTLDevice` から作成したリソースが `.tracked`、`MTLHeap` から作成したリソースが `.untracked` です。
+- **Metal 4の同期と寿命管理**: `MTL4CommandQueue` に提出した処理に `hazardTrackingMode` は適用されません。アプリは依存の範囲に応じてバリア・フェンス・イベントで同期します。再利用できる `MTL4CommandBuffer` はリソースへの強参照を持たないため、GPUの処理完了までアプリがリソースを保持します。
 
 ### TBDR特化機能
 
@@ -93,10 +96,20 @@ Apple向けRHI。Metal 3世代でNanite等の対応も進行。シェーダはUS
 
 ## コード例
 
-Swift での描画ループ (三角形):
+従来APIを使う Swift での描画ループ (三角形)。呼び出し元から初期化済みのビュー・キュー・PSO・頂点バッファ・変換行列を渡します。
 
 ```swift
-func draw(in view: MTKView) {
+import MetalKit
+import simd
+
+func draw(
+    in view: MTKView,
+    queue: MTLCommandQueue,
+    pso: MTLRenderPipelineState,
+    vertexBuffer: MTLBuffer,
+    viewProjection: simd_float4x4,
+    model: simd_float4x4
+) {
     guard let drawable = view.currentDrawable,
           let rpd = view.currentRenderPassDescriptor,
           let cmdBuf = queue.makeCommandBuffer(),
@@ -105,17 +118,18 @@ func draw(in view: MTKView) {
     // loadAction/storeActionはrpdに設定済み (TBDRの帯域制御点)
     enc.setRenderPipelineState(pso)
     enc.setVertexBuffer(vertexBuffer, offset: 0, index: 0)
-    var mvp = camera.viewProjection * model
-    enc.setVertexBytes(&mvp, length: MemoryLayout<float4x4>.size, index: 1)
+    var mvp = viewProjection * model
+    enc.setVertexBytes(&mvp, length: MemoryLayout<simd_float4x4>.size, index: 1)
     enc.drawPrimitives(type: .triangle, vertexStart: 0, vertexCount: 3)
     enc.endEncoding()
 
     cmdBuf.present(drawable)
-    cmdBuf.commit()   // フェンス管理なし — 自動追跡が面倒を見る
+    // 従来のキューでは、直接バインドした .tracked のリソースが自動追跡の対象。
+    cmdBuf.commit()
 }
 ```
 
-PSO作成:
+PSOは次のように作成します。
 
 ```swift
 let desc = MTLRenderPipelineDescriptor()
@@ -137,9 +151,9 @@ let pso = try device.makeRenderPipelineState(descriptor: desc)
 
 ## 理解度チェック
 
-1. **MetalがDX12/Vulkanより「書きやすい」とされる設計上の理由を2つ挙げよ。**
+1. **従来の `MTLCommandQueue` と `MTL4CommandQueue` では、ハザード追跡はどう異なるか。**
    ::: details 解答
-   (1) リソースのハザード追跡が既定で自動であり、バリアやレイアウト遷移を日常的に書く必要がない(必要な箇所だけ手動化できる)。(2) 対象がApple自社ハードのみであるため、多様なベンダー・アーキテクチャの最大公約数を取る必要がなく、APIの抽象がシンプルに保たれている。
+   従来のキューでは `.tracked` のリソースをエンコーダに直接バインドすると自動で追跡される。Metal 4のキューに提出した処理には `hazardTrackingMode` が効かず、依存する処理をアプリが明示的に同期する。`MTL4CommandBuffer` はリソースを保持しないため、GPUの処理が終わるまで寿命もアプリが管理する。
    :::
 
 2. **Memoryless Render Targetが成立する条件と利得を説明せよ。**
@@ -159,3 +173,5 @@ let pso = try device.makeRenderPipelineState(descriptor: desc)
 - metalbyexample.com (Warren Moore)
 - [Apple: MetalをMacへ導入したEl Capitan (2015)](https://developer.apple.com/news/?id=060815b)
 - [Apple: macOS Mojave 10.14 Release Notes](https://developer.apple.com/documentation/macos-release-notes/macos-mojave-10_14-release-notes/)
+- [Apple: Understanding the Metal 4 core API](https://developer.apple.com/documentation/metal/understanding-the-metal-4-core-api)
+- [Apple: Resource synchronization](https://developer.apple.com/documentation/metal/resource-synchronization)

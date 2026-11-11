@@ -15,7 +15,7 @@ study:
 
 # GoFデザインパターンを学ぶ
 
-デザインパターンは、繰り返し現れる設計問題への**定型解のカタログ**です。GoF(Gang of Four: Gamma, Helm, Johnson, Vlissides)の23パターンが古典として整理されています。
+デザインパターンは、繰り返し現れる設計上の問題への定型的な解法です。GoF（Gang of Four: Gamma, Helm, Johnson, Vlissides）の23パターンが古典として整理されています。
 
 ## パターンを学ぶ目的(重要)
 

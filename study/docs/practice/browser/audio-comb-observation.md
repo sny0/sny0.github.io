@@ -15,7 +15,7 @@ study:
 
 # Web Audioで遅延とコムフィルターを観察する
 
-同じ音を直接通す経路と、少し遅らせる経路に分けて足します。遅延時間を変えると谷の位置が変わり、遅延側のゲインを変えると谷の深さが変わります。[仕組みと計算式を読む](/browser/audio-comb-filter.html)
+同じ音を二つの経路に分け、一方を少し遅らせてから両方を足します。遅延時間を変えると谷の位置が変わり、遅延側のゲインを変えると谷の深さが変わります。[仕組みと計算式を読む](/browser/audio-comb-filter.html)
 
 <p><a href="/study/samples/browser/audio-comb-observation/index.html" target="_blank" rel="noopener noreferrer">コムフィルターの実験を新しいタブで開く</a></p>
 

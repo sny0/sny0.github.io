@@ -54,7 +54,7 @@
     {
       "id": "languages",
       "title": "言語",
-      "description": "言語の構文を、型・所有・寿命・実行の違いから調べる。",
+      "description": "型、所有、寿命、実行の違いから、各言語の構文を調べる。",
       "count": 30,
       "status": "辞典本文あり"
     },
@@ -117,7 +117,7 @@
     {
       "id": "history",
       "title": "ビデオゲーム史",
-      "description": "作品・ハード・作り方・遊ぶ場所の変化を技術へつなぐ。",
+      "description": "作品、ハード、作り方、遊ぶ場所の変化を、技術の変化とあわせて見る。",
       "count": 1,
       "status": "辞典本文あり"
     },
@@ -685,7 +685,7 @@
       "section": "practice",
       "format": "tutorial",
       "status": "published",
-      "summary": "「クリアカラーで塗った画面が毎フレーム表示される」まで。描画はまだしません。ここで作る Device 層はレンダラーの心臓であり、CPUとGPUの並走・同期の知識をコードに落とします。",
+      "summary": "描画に進む前に、毎フレーム、クリアカラーで塗った画面を表示するDevice層を作る。CPUとGPUが並行して動くときの同期をコードで確認する。",
       "source": "RenderingWiki",
       "aliases": [],
       "collection": "renderer-project",
@@ -738,7 +738,7 @@
       "section": "practice",
       "format": "tutorial",
       "status": "published",
-      "summary": "GPUにデータを送り込み、描画の設計図 (パイプライン) を組み立てます。バッファ・テクスチャ・ディスクリプタ・PSOという明示的APIの4大リソース概念 (DX12/Vulkan) を、実際に手を動かして体得するステップです。",
+      "summary": "GPUにデータを転送して、描画パイプラインを組み立てる。DX12やVulkanのバッファ、テクスチャ、ディスクリプタ、PSOの使い方をコードで確かめる。",
       "source": "RenderingWiki",
       "aliases": [],
       "collection": "renderer-project",
@@ -799,7 +799,7 @@
       "section": "practice",
       "format": "tutorial",
       "status": "published",
-      "summary": "グラフィックスプログラミングの通過儀礼 — 三角形 — を経て、glTFメッシュをカメラ付きで描画するまで。 第2章の数学 と 第3章のパイプライン がコードとして結晶するステップです。",
+      "summary": "三角形から始めて、カメラを使ったglTFメッシュの描画まで進む。座標変換とパイプラインの設定をコードで確認する。",
       "source": "RenderingWiki",
       "aliases": [],
       "collection": "renderer-project",
@@ -1003,7 +1003,7 @@
       "section": "reference",
       "format": "article",
       "status": "published",
-      "summary": "auto は「初期化子から型をコンパイラに推論させる」機能。動的型付けではありません——型はコンパイル時に完全に確定し、以後変わりません(C#の var と同じ)。 「auto = コピー、auto& = 参照、const auto& = 読み取り参照」と覚える。C#のvarは参照型なら常に参照なの",
+      "summary": "autoによる型推論と、constexprやconstevalによるコンパイル時の計算を解説します。型はコンパイル時に決まり、autoとauto&では値と参照の扱いが異なります。",
       "source": "C++ Wiki",
       "aliases": [],
       "links": [
@@ -2497,7 +2497,7 @@
       "section": "reference",
       "format": "article",
       "status": "published",
-      "summary": "Compute Shaderはグラフィックスパイプラインから独立してGPUの演算能力を使うためのシェーダです。頂点もピクセルも関係なく、「N個のスレッドグループを起動し、各グループ内のスレッドが協調して任意の計算を行う」というシンプルな実行モデルを持ちます。現代レンダリングの最先端 (GPU Dri",
+      "summary": "Compute Shaderは、グラフィックスパイプラインから独立してGPUで計算を実行するシェーダです。スレッドグループ内で協調して計算し、ライトのカリングやアップスケーリングなどに利用します。",
       "source": "RenderingWiki",
       "aliases": [],
       "links": [
@@ -2581,7 +2581,7 @@
       "section": "reference",
       "format": "article",
       "status": "published",
-      "summary": "リアルタイムレンダリングは CPUとGPUの分業 で成り立っています。CPUは「何を描くか」を決めてコマンドを組み立て、GPUは「実際に描く」を実行します。両者は非同期に並走するパイプラインであり、この関係を理解しないと、最適化もAPI設計 (DX12/Vulkanのコマンドバッファ) も理解できま",
+      "summary": "リアルタイム描画では、CPUが描く対象を決めてコマンドを組み立て、GPUがコマンドを実行します。CPUとGPUの非同期動作を、最適化やDX12・Vulkanのコマンドバッファと関連付けて説明します。",
       "source": "RenderingWiki",
       "aliases": [],
       "links": [
@@ -2700,7 +2700,7 @@
       "section": "reference",
       "format": "article",
       "status": "published",
-      "summary": "CUDA (NVIDIA, 2007) と OpenCL (Khronos, 2008年仕様公開) は、グラフィックスAPIから独立した汎用GPU計算 (GPGPU) のためのプラットフォームです。ゲーム開発では Compute Shader が主役ですが、CUDAは機械学習・オフラインレンダリング・ツール開",
+      "summary": "CUDAとOpenCLは、グラフィックスAPIから独立した汎用GPU計算のプラットフォームです。Compute Shaderとの関係や、機械学習・オフラインレンダリング・ツール開発でのCUDAの用途を扱います。",
       "source": "RenderingWiki",
       "aliases": [],
       "links": [
@@ -2983,7 +2983,7 @@
       "section": "reference",
       "format": "article",
       "status": "published",
-      "summary": "Deferred Rendering (遅延レンダリング) は、「何が見えるか」と「どう照らすか」を分離する方式です。第1パス (Geometry Pass) で全オブジェクトのマテリアル属性 (アルベド・法線・粗さ...) を G-Buffer と呼ばれる複数のテクスチャに書き出し、第2パス (L",
+      "summary": "Deferred Rendering (遅延レンダリング) は、見える面の決定と照明の計算を分ける方式です。Geometry Passでアルベド、法線、粗さなどをG-Bufferに書き出し、Lighting Passでピクセルごとに照明を計算します。",
       "source": "RenderingWiki",
       "aliases": [],
       "links": [
@@ -3070,7 +3070,7 @@
       "section": "reference",
       "format": "article",
       "status": "published",
-      "summary": "DirectX 11 (2009) は「ドライバが面倒を見てくれる」世代のAPIの完成形です。ステートオブジェクト・Compute Shader・Tessellationを備え、10年以上にわたりWindowsゲーム開発の標準であり続けました。DX12より遥かに書きやすく、今でも「とりあえずGPUを",
+      "summary": "DirectX 11は、描画状態やリソースの管理をドライバに任せるグラフィックスAPIです。ステートオブジェクト、Compute Shader、テッセレーション、コマンドの並列記録を扱います。",
       "source": "RenderingWiki",
       "aliases": [
         "DX11",
@@ -3441,7 +3441,7 @@
       "section": "reference",
       "format": "article",
       "status": "published",
-      "summary": "Forward Renderingは最も素直なレンダリング方式です: オブジェクトを1つずつ描画し、そのFragment Shader内でその場でライティングまで完結させます。歴史的に最初の方式であり、Deferredの隆盛を経て、Forward+/Clusteredという進化形で現代の主役に返り咲",
+      "summary": "Forward Renderingでは、オブジェクトを1つずつ描き、Fragment Shaderでライティングまで計算します。Deferredが普及したあと、Forward+やClusteredとして発展した経緯も扱います。",
       "source": "RenderingWiki",
       "aliases": [],
       "links": [
@@ -3463,7 +3463,7 @@
       "section": "reference",
       "format": "article",
       "status": "published",
-      "summary": "Forward+ (Tiled Forward) と Clustered Shading は、Compute ShaderによるライトカリングをForward Renderingに組み合わせた方式です。画面をタイル (2D) またはクラスタ (3D=タイル×深度スライス) に分割し、各領域に影響する",
+      "summary": "Forward+とClustered Shadingは、Compute Shaderでライトを絞り込む方式です。Forward+は2Dのタイル、Clusteredは深度スライスを加えた3Dのクラスタごとに、影響するライトのリストを作ります。",
       "source": "RenderingWiki",
       "aliases": [],
       "links": [
@@ -3529,7 +3529,7 @@
       "section": "reference",
       "format": "article",
       "status": "published",
-      "summary": "UEは「ゲームには大抵これがある」という役割クラス群を最初から提供します。Unityが白紙(全部自作)なのと対照的な設計思想です。 Controller と Pawn の分離が肝: 「乗り物に乗り換える」「観戦する」「AIに操作を渡す」が Possess の切り替えで表現できる——Strategy/",
+      "summary": "Unreal EngineのGameplay Frameworkが提供するクラスと、その役割を整理します。ControllerとPawnを分け、Possessを切り替えて乗り物への乗り換えや観戦、AIへの操作の引き継ぎを表現します。",
       "source": "C++ Wiki",
       "aliases": [],
       "links": [
@@ -3555,7 +3555,7 @@
       "section": "reference",
       "format": "article",
       "status": "published",
-      "summary": "Geometry Shader (GS) は、プリミティブ (三角形・線・点) 単位で実行され、プリミティブを増減・変形できるオプションのステージです。DX10 (2006) で鳴り物入りで登場しましたが、アーキテクチャ上の根本的な性能問題により「歴史に学ぶための技術」となり、現在はMesh Sha",
+      "summary": "Geometry Shaderは、三角形、線、点などのプリミティブを増減・変形できる任意のステージです。DX10 (2006) での導入、性能上の制約、Mesh Shaderに役割を譲りつつある経緯を扱います。",
       "source": "RenderingWiki",
       "aliases": [],
       "links": [
@@ -3574,7 +3574,7 @@
       "section": "reference",
       "format": "article",
       "status": "published",
-      "summary": "GLSL (OpenGL Shading Language) はKhronosのOpenGL/Vulkan向けシェーダ言語です。2004年にOpenGL 2.0で標準化され、20年にわたりクロスプラットフォームシェーダの共通語として使われてきました。現在は「OpenGL用の実行時コンパイル言語」と「",
+      "summary": "GLSLはOpenGLとVulkanで使うシェーダ言語です。2003年のARB拡張と2004年のOpenGL 2.0コア採用から、OpenGLの実行時コンパイルとVulkanのSPIR-Vへの変換までを扱います。",
       "source": "RenderingWiki",
       "aliases": [
         "GLSL",
@@ -3706,7 +3706,7 @@
       "section": "reference",
       "format": "article",
       "status": "published",
-      "summary": "GPU Driven Renderingは、「何を描くか」の決定 (カリング・LOD選択・描画リスト構築) をCPUからGPUへ移すアーキテクチャです。Compute Shaderでシーン全体の可視性を判定し、Indirect Draw (GPUが書いた引数でGPU自身が描画) で実行します。ドロー",
+      "summary": "GPU Driven Renderingでは、カリング、LOD選択、描画リスト構築をGPUへ移します。Compute Shaderで可視性を判定し、GPUが生成した引数を使ってIndirect Drawで描画します。",
       "source": "RenderingWiki",
       "aliases": [],
       "links": [
@@ -3728,7 +3728,7 @@
       "section": "reference",
       "format": "article",
       "status": "published",
-      "summary": "このページではGPUの内部構造を、シェーダコア (SM/CU)・SIMT実行・メモリ階層・固定機能ユニットの4つの軸で解説します。ここを理解すると、「なぜ分岐が遅いのか」「なぜメモリアクセスパターンが性能を支配するのか」「occupancyとは何か」といった、シェーダ最適化のすべての疑問に答えられる",
+      "summary": "GPUの内部構造を、シェーダコア (SM/CU)、SIMT実行、メモリ階層、固定機能ユニットの4つから説明します。分岐、メモリアクセス、occupancyが性能とどう関係するかを扱います。",
       "source": "RenderingWiki",
       "aliases": [],
       "links": [
@@ -3830,7 +3830,7 @@
       "section": "reference",
       "format": "article",
       "status": "published",
-      "summary": "GPU最適化とは、フレーム時間を計測し、ボトルネックを特定し、それを解消するという規律あるプロセスです。このページでは最適化の方法論 (計測→特定→仮説→検証)、GPUのボトルネックの分類 (ジオメトリ/シェーディング/帯域/CPU)、そして定番の最適化技法カタログを提供します。憶測での最適化は禁物",
+      "summary": "フレーム時間を測り、ジオメトリ、シェーディング、帯域、CPUのどこがボトルネックかを調べます。計測、原因の特定、仮説、検証の順に進める方法と、代表的なGPU最適化を扱います。",
       "source": "RenderingWiki",
       "aliases": [],
       "links": [
@@ -3852,7 +3852,7 @@
       "section": "reference",
       "format": "article",
       "status": "published",
-      "summary": "GPUはスレッドをWarp/Wave等の単位にまとめ、同じ命令をactiveなレーン群へ発行して高いスループットを得ます。NVIDIAのWarpは32本、AMDは世代・設定によりWave32/64等を使います。NVIDIAのプログラミングモデルではこれを SIMT (Single Instructi",
+      "summary": "GPUはスレッドをWarpやWaveなどにまとめ、アクティブなレーンに同じ命令を発行します。この実行モデルが分岐、メモリアクセス、Occupancy、Wave命令にどう関わるかを説明します。",
       "source": "RenderingWiki",
       "aliases": [],
       "links": [
@@ -3872,7 +3872,7 @@
       "section": "reference",
       "format": "article",
       "status": "published",
-      "summary": "HDRPはハイエンドPC・コンソール・映像制作向けのUnity公式レンダーパイプラインです。物理単位のライティング (lux/lumen/EV)、Tiled/Clusteredハイブリッドのライトループ、SSGI/RTGI・パストレーサ、水面・雲・ボリューメトリックフォグなど、AAA級の機能セットを",
+      "summary": "HDRPはハイエンドPC、コンソール、映像制作向けのUnity公式レンダーパイプラインです。物理単位でのライティング、TiledとClusteredを組み合わせたライトループ、レイトレーシングの対応環境を扱います。",
       "source": "RenderingWiki",
       "aliases": [],
       "links": [
@@ -3899,7 +3899,7 @@
       "section": "reference",
       "format": "article",
       "status": "published",
-      "summary": "HLSL (High-Level Shading Language) はMicrosoftのシェーダ言語で、DirectX・Unity・Unreal Engine・(DXC経由で)Vulkanまでカバーする、実務上最も重要なシェーダ言語です。Shader Model (SM) というバージョン体系で",
+      "summary": "HLSLはMicrosoftのシェーダ言語で、DirectX、Unity、Unreal Engineのほか、DXC経由でVulkanにも使えます。Shader Modelごとの機能と、DXIL・SPIR-Vへのコンパイルを扱います。",
       "source": "RenderingWiki",
       "aliases": [
         "HLSL",
@@ -4042,7 +4042,7 @@
       "section": "reference",
       "format": "article",
       "status": "published",
-      "summary": "IBL (Image-Based Lighting) は、環境全体を撮影/描画した画像 (環境マップ) を光源として使う技術です。PBRの反射率方程式のうち「環境光の積分」部分を、事前畳み込み済みキューブマップで近似します。「解析ライト+IBL」が現代のリアルタイムライティングの基本形であり、PBR",
+      "summary": "IBLは、環境全体を撮影または描画した画像を光源に使う技術です。PBRでは、環境光を積分する部分を、あらかじめ畳み込んだキューブマップで近似します。",
       "source": "RenderingWiki",
       "aliases": [],
       "links": [
@@ -4180,7 +4180,7 @@
       "section": "reference",
       "format": "article",
       "status": "published",
-      "summary": "コレクションの内部構造(配列か、リストか、ツリーか)を知らずに、要素を順に処理したい。走査のやり方をコレクション自身から分離する。 このパターンはC++/C#では言語とライブラリに完全に吸収済みです(C++のイテレータ・range-for、C#の IEnumerable/foreach)。学ぶ意義は",
+      "summary": "Iteratorを使うと、配列、リスト、ツリーといった内部構造に依存せず、要素を順に処理できます。C++とC#の走査機構で自作コンテナを扱う方法と、走査で保証される範囲を説明します。",
       "source": "C++ Wiki",
       "aliases": [],
       "links": [
@@ -4308,7 +4308,7 @@
       "section": "reference",
       "format": "article",
       "status": "published",
-      "summary": "LumenはUE5の完全動的グローバルイルミネーション&リフレクションシステムです (2021)。ライトマップベイクを不要にし、時刻変化・破壊・動的ジオメトリに追従するGIを、ハイエンドだけでなくコンソール(30/60fps)でも動かすことを目標に設計されました。技術的には単一の新技術ではなく、SD",
+      "summary": "LumenはUE5の動的なグローバルイルミネーションと反射の仕組みです。ライトマップを事前にベイクせず、SDFやSurface Cacheなどを組み合わせて、時刻や形状の変化に追従します。",
       "source": "RenderingWiki",
       "aliases": [],
       "links": [
@@ -4438,7 +4438,7 @@
       "section": "reference",
       "format": "article",
       "status": "published",
-      "summary": "Mesh Shader は、従来の IA→VS→(Tess)→(GS) というジオメトリパイプライン前半を、Compute Shader型の実行モデルで丸ごと置き換える新しいステージです。前段の Task Shader (DX12ではAmplification Shader) と組み合わせ、「スレッ",
+      "summary": "Mesh Shaderは、従来のジオメトリパイプラインの前半をCompute Shader型の実行モデルに置き換えるステージです。前段のTask Shader (DX12ではAmplification Shader) と組み合わせる構成も扱います。",
       "source": "RenderingWiki",
       "aliases": [],
       "links": [
@@ -4459,7 +4459,7 @@
       "section": "reference",
       "format": "article",
       "status": "published",
-      "summary": "MetalはAppleの明示的グラフィックス/コンピュートAPIです (2014)。DX12/Vulkanより先に出荷され、DX12/Vulkanより大幅に書きやすいのが特徴で、「明示性と人間工学のバランス」の成功例とされます。iOS/macOS/visionOSの唯一の第一級APIであり",
+      "summary": "MetalはAppleの明示的グラフィックス/コンピュートAPIです (2014)。従来APIの自動ハザード追跡と、Metal 4の明示的な同期・リソース管理を解説します。",
       "source": "RenderingWiki",
       "aliases": [],
       "links": [
@@ -4520,7 +4520,7 @@
       "section": "reference",
       "format": "article",
       "status": "published",
-      "summary": "UIの設計で「データとロジック(Model)」と「見た目(View)」を分離し、その間の仲介者の作り方で3流派に分かれます。 MVC (Model-View-Controller): 入力をControllerが受け、Modelを更新。ViewはModelを(多くの場合Observerで)監視して表",
+      "summary": "MVC、MVP、MVVMはいずれも、UIのデータとロジックを表示から分ける設計です。Controller、Presenter、ViewModelがそれぞれ入力、状態、表示をどうつなぐかを比較します。",
       "source": "C++ Wiki",
       "aliases": [],
       "links": [
@@ -4683,7 +4683,7 @@
       "section": "reference",
       "format": "article",
       "status": "published",
-      "summary": "OpenGLは1992年にSGIが公開した最古参のクロスプラットフォーム3D APIです。「グローバルなステートマシン」という設計を核とし、30年の後方互換を保ちながら拡張されてきました。現在は新規開発での採用は減りましたが、学習資料の豊富さ・WebGL/GLESとしての遍在・「旧世代APIの設計」",
+      "summary": "OpenGLはSGIが1992年に公開したクロスプラットフォーム3D APIです。グローバルなステートマシンを中心とする設計、30年の後方互換、WebGLやOpenGL ESとの関係を扱います。",
       "source": "RenderingWiki",
       "aliases": [
         "OpenGL",
@@ -5015,7 +5015,7 @@
       "section": "reference",
       "format": "article",
       "status": "published",
-      "summary": "RenderGraph (FrameGraph) は、フレームの全レンダーパスとリソースの依存関係を宣言的なグラフとして構築し、バリア挿入・リソース生存期間管理・パス順序を自動化するアーキテクチャです。DX12/Vulkanの「明示的な自由」がもたらした管理地獄への、エンジンレベルの回答であり、Fr",
+      "summary": "RenderGraph (FrameGraph) は、フレーム内の描画パスとリソースの依存関係をグラフで宣言する設計です。DX12やVulkanでアプリ側が担うバリア、リソースの寿命、パス順序の管理をエンジンで自動化します。",
       "source": "RenderingWiki",
       "aliases": [],
       "links": [
@@ -5149,7 +5149,7 @@
       "section": "reference",
       "format": "article",
       "status": "published",
-      "summary": "Shared Memory (HLSL: groupshared、CUDA: __shared__、GLSL: shared) は、スレッドグループ内の全スレッドが共有するSMオンチップの高速メモリです。Atomic操作は複数スレッドから同一アドレスへの競合書き込みを安全に行う命令群です。この2つと",
+      "summary": "Shared Memoryは、スレッドグループ内の全スレッドが共有する高速なオンチップメモリです。Atomic操作やバリアと組み合わせて、GPU上でスレッド同士がデータを受け渡す方法を説明します。",
       "source": "RenderingWiki",
       "aliases": [],
       "links": [
@@ -5168,7 +5168,7 @@
       "section": "reference",
       "format": "article",
       "status": "published",
-      "summary": "あるクラスのインスタンスがプログラム全体で1つだけであることを保証し、どこからでもアクセスできるようにしたい。 ただし先に言っておくと、この2つの要求(唯一性と全域アクセス)は別物で、問題を起こすのは主に後者です。Singletonは「最も有名で、最も乱用されるパターン」であり、このページの主目的は",
+      "summary": "Singletonは、プログラム全体でインスタンスが1つだけであることを保証し、どこからでもアクセスできるようにするパターンです。唯一性と全域アクセスを分けて考え、使う場面と避ける方法を整理します。",
       "source": "C++ Wiki",
       "aliases": [],
       "links": [
@@ -5266,7 +5266,7 @@
       "section": "reference",
       "format": "article",
       "status": "published",
-      "summary": "SPIR-V はVulkan / OpenCL / (OpenGL 4.6) の標準シェーダ中間表現 (IR) です。人間が書く言語 (GLSL/HLSL/WGSL) とGPUドライバの間に立つバイナリ形式で、SSA形式の型付き命令列として構成されます。DirectXにおける DXIL と対をなす存",
+      "summary": "SPIR-VはVulkan、OpenCL、OpenGL 4.6で使うバイナリ形式の中間表現です。SSA形式の型付き命令列で構成され、DirectXではDXILが同じ役割を担います。",
       "source": "RenderingWiki",
       "aliases": [],
       "links": [
@@ -5308,7 +5308,7 @@
       "section": "reference",
       "format": "article",
       "status": "published",
-      "summary": "SSAOは深度バッファ (と法線) だけを使って、近傍ジオメトリによる環境光の遮蔽 (Ambient Occlusion) を画面空間で近似する技術です。2007年のCrysisで登場し、「G-Bufferから安価にGI風の陰影を得る」画面空間技法時代の扉を開きました。原理・限界・進化 (HBAO→",
+      "summary": "SSAOは、深度バッファや法線を使って、近くの形状が環境光を遮る度合いを画面空間で近似する技術です。原理と限界、HBAOやGTAOへの発展を説明します。",
       "source": "RenderingWiki",
       "aliases": [],
       "links": [
@@ -5329,7 +5329,7 @@
       "section": "reference",
       "format": "article",
       "status": "published",
-      "summary": "SSR (Screen-Space Reflections) は、深度バッファとカラーバッファを使い、画面内に映っているものの反射をレイマーチングで求める技術です。濡れた床・水面・光沢のある机に映る像を、追加のシーン描画なしで実現します。リフレクションプローブ (IBL) の「動的でない・視差が粗い",
+      "summary": "SSRは、深度バッファとカラーバッファを使い、画面に映っているものの反射をレイマーチングで求める技術です。シーンを追加で描画せずに、濡れた床や水面などへの映り込みを表現します。",
       "source": "RenderingWiki",
       "aliases": [],
       "links": [
@@ -5516,7 +5516,7 @@
       "section": "reference",
       "format": "article",
       "status": "published",
-      "summary": "TAAは、サンプル位置を毎フレーム微小にずらし (ジッタ)、過去フレームの結果を再投影して蓄積することで、時間方向にスーパーサンプリングを実現するAAです。2010年代半ばからAAA開発の標準AAとなり、さらにあらゆる確率的手法 (SSAO/SSR/GI/影のノイズ) の共通の再構成基盤として、現代",
+      "summary": "TAAはサンプル位置を毎フレームわずかにずらし、過去のフレームを再投影して蓄積するアンチエイリアシングです。同じ考え方は、SSAO、SSR、GI、影などのノイズを減らす処理にも使われます。",
       "source": "RenderingWiki",
       "aliases": [],
       "links": [
@@ -5560,7 +5560,7 @@
       "section": "reference",
       "format": "article",
       "status": "published",
-      "summary": "Tessellation (テッセレーション) は、粗いパッチをGPU上で細かい三角形群に分割するためのステージ群です。DX11 (2009) で導入され、Hull Shader (制御) → Tessellator (固定機能分割) → Domain Shader (頂点配置) の3段で構成されま",
+      "summary": "テッセレーションは、粗いパッチをGPUで細かい三角形に分割する処理です。DX11 (2009) で導入されたHull Shader、固定機能のTessellator、Domain Shaderの3段を説明します。",
       "source": "RenderingWiki",
       "aliases": [],
       "links": [
@@ -5707,7 +5707,7 @@
       "section": "reference",
       "format": "article",
       "status": "published",
-      "summary": "C++にはdelegate/eventの言語機能がないため、UEはマクロで型を生成する独自Delegateシステムを持ちます。 C++内で完結する通知は非Dynamic(速い)、BPに公開する・保存する通知だけDynamic——Unityの「C# event vs UnityEvent」の使い分け(",
+      "summary": "Unreal Engineは、マクロで型を生成する独自のDelegateを提供します。C++内で使う非DynamicとBlueprintへの公開や保存に使うDynamicの違い、インターフェースとの使い分けを説明します。",
       "source": "C++ Wiki",
       "aliases": [],
       "links": [
@@ -5846,7 +5846,7 @@
       "section": "reference",
       "format": "article",
       "status": "published",
-      "summary": "Unityのレンダリングは、SRP (Scriptable Render Pipeline) — 「レンダーパイプラインの構成をC#で記述する」アーキテクチャ — を土台に、その上の2つの公式実装 URP (幅広い機種) と HDRP (ハイエンド) で構成されます。このページではSRPの仕組みと、",
+      "summary": "UnityのScriptable Render Pipeline（SRP）では、レンダーパイプラインの構成をC#で記述します。公式実装のURPとHDRPの違いと、カリングした結果を描画コマンドとしてGPUに渡すまでを説明します。",
       "source": "RenderingWiki",
       "aliases": [],
       "links": [
@@ -5923,7 +5923,7 @@
       "section": "reference",
       "format": "article",
       "status": "published",
-      "summary": "Unreal Engineのレンダラーは、Deferred Shadingを基軸に、Nanite (仮想化ジオメトリ)・Lumen (動的GI)・Virtual Shadow Maps・TSRという「UE5四点セット」を統合した、現代最先端の商用レンダラーです。アーキテクチャは GameThread",
+      "summary": "Unreal EngineのレンダラーはDeferred Shadingを中心に、Nanite、Lumen、Virtual Shadow Maps、TSRを組み合わせます。GameThread、RenderThread、RHIThreadの役割と、描画を組み立てる仕組みを説明します。",
       "source": "RenderingWiki",
       "aliases": [],
       "links": [
@@ -6021,7 +6021,7 @@
       "section": "reference",
       "format": "article",
       "status": "published",
-      "summary": "URPはUnityの標準レンダーパイプラインで、モバイルからPC・コンソールまでを単一のスケーラブルな設計でカバーします。Unity 6.0 / URP 17.0ではForward / Forward+ / Deferredを選択でき、RenderGraphが標準です。Render Graphを無効",
+      "summary": "URPはモバイル、PC、コンソールを対象とするUnityのレンダーパイプラインです。Unity 6.0 / URP 17.0で選べる描画方式と、標準で有効なRenderGraphの役割を説明します。",
       "source": "RenderingWiki",
       "aliases": [],
       "links": [
@@ -6089,7 +6089,7 @@
       "section": "reference",
       "format": "article",
       "status": "published",
-      "summary": "仮想関数の「実行時に実際の型のメソッドが呼ばれる」魔法の正体は、関数ポインタの表(vtable)を型ごとに1つ作り、各オブジェクトが自分の型の表へのポインタ(vptr)を持つという単純な仕組みです。",
+      "summary": "仮想関数の呼び出しで実際の型のメソッドを選ぶ仕組みを、型ごとの関数ポインタの表(vtable)と各オブジェクトが持つ表へのポインタ(vptr)から説明します。",
       "source": "C++ Wiki",
       "aliases": [],
       "links": [
@@ -7004,7 +7004,7 @@
       "section": "reference",
       "format": "article",
       "status": "published",
-      "summary": "WebGPUはWeb標準の明示的グラフィックス/コンピュートAPIです (2023, W3C)。DX12/Vulkan/Metalの設計を、Webサンドボックスの安全性要求の下で再蒸留した「第4の明示的API」であり、ブラウザ内で各ネイティブAPIの上に実装されます。JavaScriptだけでなく、",
+      "summary": "WebGPUは、Webサンドボックスの安全性要件に対応した明示的なグラフィックス・コンピュートAPIです。ブラウザのJavaScriptから使えるほか、wgpuやDawnを通じてネイティブアプリでも利用できます。",
       "source": "RenderingWiki",
       "aliases": [],
       "links": [
@@ -7583,7 +7583,7 @@
       "section": "reference",
       "format": "article",
       "status": "published",
-      "summary": "時間的アップスケーラは、低解像度でレンダリングしたフレームを、ジッタ+モーションベクタ+過去フレームの蓄積から高解像度に再構成する技術です。TAA の直系進化であり、「4Kをネイティブで描くのではなく、1080p〜1440pで描いて賢く拡大する」ことでレイトレーシング世代のGPUコストを賄う、現代リ",
+      "summary": "時間的アップスケーラは、ジッタ、モーションベクタ、過去のフレームを使い、低解像度の描画結果を高解像度に再構成します。1080p〜1440pから4Kに拡大する例では、4Kで直接描画する場合と比べてGPU負荷を抑えられます。",
       "source": "RenderingWiki",
       "aliases": [],
       "links": [
@@ -7601,7 +7601,7 @@
       "section": "reference",
       "format": "article",
       "status": "published",
-      "summary": "エイリアシングは、連続的な画像信号を離散的なピクセルでサンプリングすることによる折り返し歪みです。ジオメトリのエッジのギザギザ (ジャギー)、細部のちらつき (シマー) として現れます。このページではサンプリング理論の基礎と、空間的AA — SSAA / MSAA (ハードウェア系) と FXAA",
+      "summary": "エイリアシングは、連続的な画像を離散的なピクセルでサンプリングするときに生じる歪みです。輪郭のギザギザや細部のちらつきの原因と、SSAA、MSAA、FXAA、SMAAを説明します。",
       "source": "RenderingWiki",
       "aliases": [],
       "links": [
@@ -7772,7 +7772,7 @@
       "section": "reference",
       "format": "article",
       "status": "published",
-      "summary": "カメラは3Dシーンを2D画像に落とすための視点の定義です。数学的には2つの行列 — 世界をカメラ視点に組み替えるビュー行列と、視錐台を立方体に押し込める射影行列 — で表現されます。このページでは両行列を導出し、透視投影・深度精度 (Reverse-Z)・視錐台カリングまでを扱います。",
+      "summary": "3Dシーンを2D画像へ投影するときの視点を、ビュー行列と射影行列で表す。両行列を導出し、透視投影、Reverse-Zによる深度精度、視錐台カリングを扱う。",
       "source": "RenderingWiki",
       "aliases": [],
       "verification": "一次資料照合（2026-11-03）",
@@ -7828,7 +7828,7 @@
       "section": "reference",
       "format": "article",
       "status": "published",
-      "summary": "型変換を意図別の4種類のキャストで明示するのがC++流です。C形式キャスト (int)x は「4種類のどれか(最悪の組み合わせ)を黙って選ぶ」ため、検索もレビューもできない危険な省略記法として原則使いません。",
+      "summary": "型変換を意図別の名前付きキャストで明示するのがC++流です。C形式キャスト (int)x は const_cast、static_cast、reinterpret_cast と一部の組み合わせを規格の優先順で解釈し、変換の意図が読み取りにくくなります。",
       "source": "C++ Wiki",
       "aliases": [],
       "links": [
@@ -8089,7 +8089,7 @@
       "section": "reference",
       "format": "article",
       "status": "published",
-      "summary": "グローバルイルミネーション (GI) は、光が物体に反射して他の物体を照らす「間接光」まで含めた照明計算の総称です。直接光のみのレンダリングは硬く不自然になり、GIこそが「フォトリアル」の正体です。このページはGI技術の系譜全体の地図であり、各手法 (SSAO、SSR、レイトレーシング、パストレーシ",
+      "summary": "グローバルイルミネーション（GI）は、光が物体で反射してほかの物体を照らす間接光を含めた照明計算です。GIに関わる手法がどう発展し、リアルタイム描画で間接光をどう近似しているかを整理します。",
       "source": "RenderingWiki",
       "aliases": [],
       "links": [
@@ -8556,7 +8556,7 @@
       "section": "reference",
       "format": "article",
       "status": "published",
-      "summary": "C++のオブジェクトには誕生(コンストラクタ)・複製(コピー)・引っ越し(ムーブ)・死(デストラクタ)の儀式があり、6つの特殊メンバ関数がそれを担います。これらはコンパイラが自動生成しますが、リソース(メモリ・ファイル等)を生で持つクラスだけは自分で書く必要がある——それを整理した経験則が Rule",
+      "summary": "C++のオブジェクトの生成、コピー、ムーブ、破棄には、6つの特殊メンバ関数が関わります。Rule of Zero/Three/Fiveを使い、これらの関数をどのようなときに定義するかを解説します。",
       "source": "C++ Wiki",
       "aliases": [],
       "links": [
@@ -8906,7 +8906,7 @@
       "section": "reference",
       "format": "article",
       "status": "published",
-      "summary": "影は「光源から見えない場所」です。リアルタイムでの標準解はシャドウマッピング — 光源を仮想カメラとして深度マップを描き、シェーディング時に「その点は光源から見えるか」を深度比較で判定する手法です。単純な原理に対し、エイリアシング・アクネ・ピーターパニングという魔物が潜み、CSM・PCF・PCSSな",
+      "summary": "シャドウマッピングでは、光源から見た深度マップと描画点の深度を比べて影を求めます。エイリアシングやシャドウアクネなどの原因と、CSM、PCF、PCSSなどの対策を説明します。",
       "source": "RenderingWiki",
       "aliases": [],
       "links": [
@@ -9486,7 +9486,7 @@
       "section": "reference",
       "format": "article",
       "status": "published",
-      "summary": "GPUの中は見えません — ツールなしでは。このページでは4大ツール — RenderDoc (万能フレームデバッガ)、PIX (DX12公式)、Nsight Graphics (NVIDIA深掘り)、Unity Frame Debugger — の役割分担と使い方の型を解説します。「描画がおかしい",
+      "summary": "描画結果やGPUの処理時間を調べるために、RenderDoc、PIX、Nsight Graphics、Unity Frame Debuggerを使い分けます。各ツールの役割と調査の進め方を説明します。",
       "source": "RenderingWiki",
       "aliases": [],
       "links": [
@@ -9528,7 +9528,7 @@
       "section": "reference",
       "format": "article",
       "status": "published",
-      "summary": "構文は瓜二つ(List と std::vector )ですが、仕組みは正反対に近い: C#ジェネリック = 1つのコード+実行時の型情報(ランタイムが面倒を見る) C++テンプレート = コンパイル時のコード生成器(型ごとに完全な実物を作る)",
+      "summary": "C#のジェネリックは実行時にも型情報を持ち、コードの共有や特殊化は実行環境に依存します。C++テンプレートはコンパイル時に実体化します。",
       "source": "C++ Wiki",
       "aliases": [],
       "links": [
@@ -9608,10 +9608,10 @@
       "links": [
         "/runtime/cpp-internals/build-pipeline-journey.html",
         "/languages/csharp/templates-vs-generics.html",
-        "/runtime/cpp-internals/object-files-and-libraries.html",
         "/tools/build/build-speed.html",
         "/runtime/cpp-internals/optimization-and-ub.html",
         "/runtime/memory/gc-and-csharp-comparison.html",
+        "/runtime/cpp-internals/object-files-and-libraries.html",
         "/game/patterns/optimization-patterns.html",
         "/tools/build/build-configurations.html",
         "/languages/csharp/headers-vs-asmdef.html",
@@ -9718,7 +9718,7 @@
       "section": "reference",
       "format": "article",
       "status": "published",
-      "summary": "ハードウェアレイトレーシングは、BVH（境界ボリューム階層）の処理のうち、ボックス・三角形の交差判定などを専用回路で加速（走査制御まで専用化する範囲はベンダー・世代による）し、シーンに対して任意のレイを飛ばせる機能です。2018年のNVIDIA Turing + DXRで幕を開け、影・反射・GI・パストレーシングという「ラスタライズが苦手な問題」への直",
+      "summary": "ハードウェアレイトレーシングでは、BVHを使った処理のうち、レイとボックスや三角形の交差判定などを専用回路で加速します。加速する範囲はベンダーや世代によって異なり、影、反射、GIなどに利用できます。",
       "source": "RenderingWiki",
       "aliases": [
         "Vulkan",
@@ -9805,12 +9805,13 @@
       "section": "reference",
       "format": "article",
       "status": "published",
-      "summary": "パストレーシングは、レンダリング方程式をモンテカルロ積分で確率的に解く手法です。カメラからレイを飛ばし、表面で確率的に反射させながら光源に到達するまで追跡し、その平均として輝度を推定します。映画のレンダリングは2010年代に完全移行済みで、リアルタイムでも ReSTIR + デノイザ + アップスケ",
+      "summary": "パストレーシングは、カメラから光源までの光の経路を確率的にサンプリングし、モンテカルロ積分で輝度を推定する手法です。サンプル数とノイズの関係や、リアルタイム描画での高速化を説明します。",
       "source": "RenderingWiki",
       "aliases": [],
       "links": [
         "/graphics/lighting/gi.html",
         "/graphics/postprocess/upscaling.html",
+        "/graphics/engine/hdrp.html",
         "/graphics/lighting/raytracing.html",
         "/graphics/lighting/pbr.html",
         "/graphics/lighting/lumen.html",
@@ -10003,7 +10004,7 @@
       "section": "reference",
       "format": "article",
       "status": "published",
-      "summary": "#includeの爆発: #include だけで数万行が翻訳単位に貼り付く(プリプロセッサ)。100個の.cppが同じヘッダーを含めば、同じ数万行を100回パースする テンプレートの再実体化: vector を使う全翻訳単位で実体化→リンカが重複を捨てる。「作っては捨てる」の山(→ 実体化)",
+      "summary": "ヘッダーの解析とテンプレートの実体化は翻訳単位ごとに繰り返されます。差分ビルド、PCH、Unity Buildがどの作業を減らせるかを解説します。",
       "source": "C++ Wiki",
       "aliases": [],
       "links": [
@@ -10794,7 +10795,7 @@
       "section": "reference",
       "format": "article",
       "status": "published",
-      "summary": "ラスタライゼーションは三角形を「その三角形が覆うピクセル(フラグメント)の集合」へ変換する固定機能ステージです。同時に、頂点属性 (UV・法線・色) を三角形内部の各ピクセル位置へ透視補正付きで補間します。リアルタイムグラフィックスが「速い」理由の中核であり、レイトレーシングと対をなすもう一つの可視",
+      "summary": "ラスタライゼーションは、三角形が覆うピクセルの位置を調べてフラグメントを作る固定機能ステージです。UV、法線、色などの頂点属性は、透視補正を行って補間します。",
       "source": "RenderingWiki",
       "aliases": [],
       "links": [
@@ -10959,7 +10960,7 @@
       "section": "reference",
       "format": "article",
       "status": "published",
-      "summary": "リンクエラーはC++入門者を最も絶望させるエラーですが、原因はほぼ3パターンです。仕組み(シンボルとリンケージ)を前提に、症状→原因→処方の逆引きとしてまとめます。 意味: 「この関数を呼ぶコードはあるが、定義(実体)がどの.o/ライブラリにもない」。コンパイルは通っている(宣言はあった)ことに注意",
+      "summary": "未解決外部シンボル、多重定義、ABI互換性の問題を、エラーメッセージから調べます。シンボルとリンケージをもとに、原因ごとの確認手順と対処をまとめます。",
       "source": "C++ Wiki",
       "aliases": [],
       "links": [
@@ -11760,7 +11761,7 @@
       "section": "reference",
       "format": "article",
       "status": "published",
-      "summary": "C++の継承は「基底のメンバを引き継ぎ、基底として扱える」仕組み。ただしメンバ関数は既定で非virtual(上書きしても基底経由の呼び出しは切り替わらない)で、動的に振る舞いを切り替えたい関数だけ virtual を付けます。C#(全メソッドがvirtual可能・overrideが厳格)との差分が事",
+      "summary": "C++の継承は「基底のメンバを引き継ぎ、基底として扱える」仕組み。C++もC#も既定では非virtualですが、仮想関数の上書きで override を省略したときの挙動が異なります。",
       "source": "C++ Wiki",
       "aliases": [],
       "links": [
@@ -11888,7 +11889,7 @@
       "section": "reference",
       "format": "article",
       "status": "published",
-      "summary": "C++の struct と class はほぼ同一の機能で、違いは既定のアクセスだけ(struct=public、class=private)。C#のような「struct=値型、class=参照型」という意味の違いはありません(どちらも値です)。使い分けは慣習で表現します: 「structはただのデ",
+      "summary": "C++のstructとclassはほぼ同じ機能を持ち、既定のアクセスはstructがpublic、classがprivateです。C#での違いと、C++での慣習的な使い分けも扱います。",
       "source": "C++ Wiki",
       "aliases": [],
       "links": [
@@ -11932,7 +11933,7 @@
       "section": "reference",
       "format": "article",
       "status": "published",
-      "summary": "3D空間の頂点は、画面のピクセルになるまでに複数の座標空間を旅します。この「空間の地図」— モデル空間 → ワールド空間 → ビュー空間 → クリップ空間 → NDC → スクリーン空間 — を理解することが、レンダリングパイプライン理解の中核です。シェーダのバグの大半は「どの空間にいるかの取り違え",
+      "summary": "3Dの頂点を表示するまでに、座標をモデル空間、ワールド空間、ビュー空間、クリップ空間、NDC、スクリーン空間の順に変換します。各空間の基準と、取り違えによるシェーダのバグを扱います。",
       "source": "RenderingWiki",
       "aliases": [],
       "links": [
@@ -11987,7 +11988,7 @@
       "section": "learning",
       "format": "path",
       "status": "outline",
-      "summary": "これまでの層を一つの流れに結び付け、説明と観察をやり直すための学習計画・概要です。下の時系列は理解を助ける説明モデルで、すべての機器・OS・エンジンが同じ経路や時間で動くことを示すものではありません。\n\n## 関連する辞典本文・実践\n\n- [Game Loop](/game/patterns",
+      "summary": "各章で学んだ層をつなぎ、ボタンを押してから画面に結果が出るまでを説明モデルで追います。実際の経路や時間は機器・OS・エンジンによって異なります。",
       "source": "IT教本",
       "aliases": [],
       "collection": "low-level",
@@ -12178,7 +12179,7 @@
       "section": "reference",
       "format": "article",
       "status": "published",
-      "summary": "出力結合 (Output Merger / ROP) は、Fragment Shaderが計算した色をレンダーターゲットへ実際に書き込むかどうか・どう合成するかを決めるパイプライン最終段の固定機能ステージです。深度テスト・ステンシルテスト・ブレンディングの3つの機能からなり、隠面消去と半透明合成とい",
+      "summary": "出力結合 (Output Merger / ROP) は、Fragment Shaderの色をレンダーターゲットに書くかどうかと、書くときの合成方法を決めます。深度テスト、ステンシルテスト、ブレンディングを扱います。",
       "source": "RenderingWiki",
       "aliases": [],
       "links": [
@@ -12197,7 +12198,7 @@
       "section": "reference",
       "format": "article",
       "status": "published",
-      "summary": "所有権 (ownership): 「このオブジェクトを破棄する責任を誰が持つか」。C++設計の背骨で、スマートポインタは所有権を型で表す道具 借用 (borrowing): 所有せず「一時的に使わせてもらう」こと(参照・非所有ポインタ)。借用は所有者より長生きしてはいけない——この規律を、C++では",
+      "summary": "所有権はオブジェクトを破棄する責任、借用は所有せず一時的に使うことです。スマートポインタや参照でこの違いを表します。借用は所有者より長く続いてはいけません。",
       "source": "C++ Wiki",
       "aliases": [],
       "links": [
@@ -12798,7 +12799,7 @@
       "section": "reference",
       "format": "article",
       "status": "published",
-      "summary": "設計とは「変更が来たとき、どこを直せば済むようにしておくか」を決める行為です。動くコードを書く行為ではなく、コードの分け方と繋ぎ方を決める行為です。 ゲーム開発のコードは必ず変更されます。企画は仕様を変え、レベルデザイナーはパラメータを変え、プラットフォームは増え、パフォーマンス要件は途中で判明しま",
+      "summary": "設計では、変更が必要になったときにどこを直せば済むかを考えて、コードの分け方とつなぎ方を決めます。ゲーム開発の仕様や対象プラットフォームが変わる場面を例に説明します。",
       "source": "C++ Wiki",
       "aliases": [],
       "links": [
@@ -13015,7 +13016,7 @@
       "section": "learning",
       "format": "path",
       "status": "outline",
-      "summary": "各層の関係、学ぶ順序、調査に使う環境を選ぶための学習計画・概要です。全体像を見た後は、[コースの目次](/guide/low-level/)から必要な章へ進んでください。記載の期間や到達目標は目安で、習得を保証するものではありません。\n\n## 関連する辞典本文・実践\n\n- [ビルドツール](",
+      "summary": "ゲームを支える各層の関係を見渡し、学ぶ順序と調査に使う環境を選ぶための案内です。学習期間と到達目標の目安も示します。",
       "source": "IT教本",
       "aliases": [],
       "collection": "low-level",
@@ -13064,7 +13065,7 @@
       "section": "learning",
       "format": "path",
       "status": "outline",
-      "summary": "GPUの実行単位、メモリ階層、並列処理の制約を学び、プロファイラで観察するための学習計画・概要です。CPUとの比較から入り、対象GPUの資料と測定結果を対応させます。\n\n## 関連する辞典本文・実践\n\n- [GPUとは何か](/hardware/gpu/what-is-gpu.html)と[",
+      "summary": "GPUの実行単位、メモリ階層、並列処理の制約を学びます。CPUとの比較から始め、プロファイラの測定結果を対象GPUの資料と照らし合わせます。",
       "source": "IT教本",
       "aliases": [],
       "collection": "low-level",
@@ -13107,7 +13108,7 @@
       "section": "learning",
       "format": "path",
       "status": "outline",
-      "summary": "描画APIの共通概念を押さえ、資源管理・コマンド・同期を一つのAPIで試すための学習計画・概要です。全APIを同時に習得することを求めるものではありません。比較してから、使う環境に合う実験対象を選びます。\n\n## 関連する辞典本文・実践\n\n- [API横断比較](/graphics/api/",
+      "summary": "描画APIに共通する概念を学びます。APIを比較して利用環境に合う一つを選び、資源管理、コマンド、同期を試します。",
       "source": "IT教本",
       "aliases": [],
       "collection": "low-level",
@@ -13180,7 +13181,7 @@
       "section": "learning",
       "format": "path",
       "status": "outline",
-      "summary": "C#とネイティブ側の境界、GC、実行方式、描画を調べるための学習計画・概要です。非公開部分の内部像は説明モデルとして扱い、公開資料・参照ソース・計測で確認した事実と区別します。一般C#の基礎を網羅する本文ではありません。\n\n## 関連する辞典本文・実践\n\n- [IL2CPP](/langua",
+      "summary": "UnityでのC#とネイティブ側の境界、GC、実行方式、描画を調べます。公開資料、参照ソース、計測で確認できる事実と、非公開部分を理解するための説明モデルを区別します。",
       "source": "IT教本",
       "aliases": [],
       "collection": "low-level",
@@ -13202,7 +13203,7 @@
       "section": "learning",
       "format": "path",
       "status": "outline",
-      "summary": "UEのソースで追う入口を選び、一般的な仕組みとエンジン独自の実装を対応させる学習計画・概要です。参照するバージョンにより構成や名称が変わるため、手元のソースとデバッガで確かめながら読みます。\n\n## 関連する辞典本文・実践\n\n- [UObject・Actor・ActorComponent](",
+      "summary": "UEのソースをどこから読み始めるかを決め、一般的な仕組みとエンジン独自の実装を対応させる学習計画・概要です。構成や名称はバージョンによって変わるため、手元のソースとデバッガで確認します。",
       "source": "IT教本",
       "aliases": [],
       "collection": "low-level",
@@ -13323,7 +13324,7 @@
       "section": "learning",
       "format": "path",
       "status": "outline",
-      "summary": "x64のレジスタや基本命令を学び、デバッガでコンパイラ出力を読むための学習計画・概要です。アセンブリの構文や命令を網羅する専用本文ではありません。命令ごとの仕様は、章末の資料と対象CPUの資料で確認します。\n\n## 関連する辞典本文・実践\n\n- [関数呼び出し・コールスタック・呼出規約](/",
+      "summary": "x64のレジスタと基本命令を学び、コンパイラの出力をデバッガで読みます。各命令の仕様は章末と対象CPUの資料で確認します。",
       "source": "IT教本",
       "aliases": [],
       "collection": "low-level",
@@ -13343,7 +13344,7 @@
       "section": "learning",
       "format": "path",
       "status": "outline",
-      "summary": "Cの構文、ポインタ、構造体、動的確保を低レイヤの観察へ結び付ける学習計画・概要です。Cの構文・標準ライブラリの専用本文は未整備です。CとC++では規則が異なるため、下のC++記事は比較用として読み、Cの規則は章末の資料で確認します。\n\n## 関連する辞典本文・実践\n\n- [記憶域期間と寿命]",
+      "summary": "Cの構文、ポインタ、構造体、動的確保を低レイヤで観察するための学習計画です。C++の記事は比較用に使い、Cの規則は章末の資料で確認します。",
       "source": "IT教本",
       "aliases": [],
       "collection": "low-level",
@@ -13474,7 +13475,7 @@
       "section": "learning",
       "format": "path",
       "status": "outline",
-      "summary": "C++の型、オブジェクト寿命、多態性、テンプレートを、生成コードやメモリの観察へつなげる学習計画・概要です。構文を順に説明する入門本文ではないので、分からない規則は辞典の個別記事へ戻って確認します。\n\n## 関連する辞典本文・実践\n\n- [コンストラクタ・デストラクタ・コピー・ムーブ](/l",
+      "summary": "C++の型、オブジェクトの寿命、多態性、テンプレートを、生成コードとメモリから観察するための学習計画です。個別の規則は辞典本文で確認できます。",
       "source": "IT教本",
       "aliases": [],
       "collection": "low-level",
@@ -13672,7 +13673,7 @@
       "section": "reference",
       "format": "article",
       "status": "published",
-      "summary": "雑魚1種ならこれで完成です。 「見失ったら最後の位置を探す」→ 状態(探索中)の記憶が必要 → boolフラグ追加 「攻撃後は2秒クールダウン」「スタン中は動けない」→ フラグとタイマーが増殖し、if条件が !isStunned && !isSearching && cooldown <= 0 &&",
+      "summary": "敵AIに探索、攻撃後のクールダウン、スタンなどの条件を足すと、フラグやタイマーが増えます。単純な分岐で十分な場合と、有限ステートマシンやBehavior Treeが向く場合を比較します。",
       "source": "C++ Wiki",
       "aliases": [],
       "links": [
@@ -13959,7 +13960,7 @@
       "section": "learning",
       "format": "path",
       "status": "outline",
-      "summary": "本編から先に調べる専門テーマと、そのための教材・演習を選ぶ学習計画・概要です。すべてを必修にせず、実装したいものや観測した問題に合わせて選びます。Rust、Linuxカーネル、ゲーム通信、オーディオなどの専用本文は未整備です。\n\n## 関連する辞典本文・実践\n\n- [並行処理のバグ](/ru",
+      "summary": "本編の先で学ぶ専門テーマと、教材・演習の案内です。実装したいものや観測した問題に合わせて選びます。",
       "source": "IT教本",
       "aliases": [],
       "collection": "low-level",
@@ -14428,7 +14429,7 @@
       "section": "reference",
       "format": "article",
       "status": "published",
-      "summary": "逐次なら自明なループ (合計を取る、累積和を作る) は、数千スレッドのGPUでは専用の並列アルゴリズムになります。代表が Reduction (集約: 合計・最大値など) と Prefix Sum / Scan (累積和) です。特にScanは「並列プログラミングの万能部品」であり、コンパクション・",
+      "summary": "GPUで合計や最大値を求めるReductionと、累積和を求めるPrefix Sum / Scanを説明します。Scanを使うコンパクション、ソート、可視リスト構築なども扱います。",
       "source": "RenderingWiki",
       "aliases": [],
       "links": [

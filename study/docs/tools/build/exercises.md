@@ -37,7 +37,7 @@ error LNK2038: '_ITERATOR_DEBUG_LEVEL' の不一致が検出されました。
 
 <details><summary>解答</summary>
 
-physics.lib が**Release構成**(IDL=0)でビルドされ、main.objが**Debug構成**(IDL=2)——構成違いのバイナリ混在([ABI互換性](/tools/build/link-errors.html))。確認: physics.libの入手元がDebug/Release両方を提供しているか、自分のリンク設定がどちらの.libを指しているか。対処: 構成ごとに対応する.libをリンクする(CMakeなら `$<CONFIG>` で分岐)。
+physics.libはRelease構成(IDL=0)、main.objはDebug構成(IDL=2)で、異なる構成のバイナリが混在しています([ABI互換性](/tools/build/link-errors.html))。physics.libの入手元がDebug/Releaseの両方を提供しているかと、リンク設定がどちらの.libを指しているかを確認します。構成ごとに対応する.libをリンクします。CMakeでは `$<CONFIG>` で分岐します。
 </details>
 
 ## 問3. 問題のある構成の改善

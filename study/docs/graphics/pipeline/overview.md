@@ -15,7 +15,7 @@ study:
 
 ## 概要
 
-レンダリングパイプラインは、**頂点データが画面のピクセルになるまでの一連の工程**です。プログラム可能なステージ (Vertex/Fragment Shader等) と固定機能ステージ (ラスタライザ、出力結合等) が交互に並ぶ「工場の生産ライン」であり、関連する本文では、このラインを1工程ずつ調べられます。
+レンダリングパイプラインは、頂点データから画面のピクセルを作るまでの一連の処理です。Vertex ShaderやFragment Shaderなどのプログラム可能なステージと、ラスタライザや出力結合などの固定機能ステージが交互に並びます。各ステージの処理は、対応する記事で個別に確認できます。
 
 ## なぜ必要なのか
 
@@ -49,7 +49,7 @@ timeline
 
 ## 現在の位置づけ
 
-以下の「頂点パイプライン」が現在も主流ですが、ジオメトリ前半を Compute 的に置き換える [Mesh Shader](/graphics/pipeline/mesh-shader.html) パイプラインと、完全にComputeで描く [GPU Driven](/graphics/optimization/gpu-driven.html) / Nanite 型が台頭しています。
+以下の「頂点パイプライン」が現在も広く使われています。[Mesh Shader](/graphics/pipeline/mesh-shader.html) はジオメトリ処理の前半をスレッドグループで処理します。[GPU Driven](/graphics/optimization/gpu-driven.html) ではComputeでカリングや描画コマンドを生成し、間接描画からハードウェアラスタライザを使う構成もあります。Naniteでは、ラスタライズの一部にもComputeを使います。
 
 ## 内部動作
 
@@ -95,18 +95,19 @@ flowchart TB
 ```mermaid
 flowchart LR
     subgraph 従来型
-        A[IA→VS→(Tess)→(GS)] --> R1[Raster→FS→OM]
+        A["IA→VS→(Tess)→(GS)"] --> R1[Raster→FS→OM]
     end
     subgraph MeshShader型
         B[Task Shader→Mesh Shader] --> R2[Raster→FS→OM]
     end
-    subgraph GPUDriven/SW型
-        C[Compute: カリング・LOD選択] --> D[ExecuteIndirect/SWラスタライズ]
-        D --> R3[Raster or Compute→OM相当]
+    subgraph GPUDriven型
+        C[Compute: カリング・LOD選択] --> D[間接描画]
+        D --> R3[ハードウェアラスタライズ]
+        C --> S3[Computeラスタライズ<br/>Naniteの微小三角形など]
     end
 ```
 
-Nanite (UE5) は第3のパターンの代表で、小さい三角形はCompute Shaderによる**ソフトウェアラスタライズ**で描きます。
+Nanite (UE5) は三角形の画面上の大きさに応じて、小さい三角形をCompute Shaderによる**ソフトウェアラスタライズ**で、大きい三角形をハードウェアラスタライザで描きます。[Epic Games: *Nanite: A Deep Dive*](https://advances.realtimerendering.com/s2021/Karis_Nanite_SIGGRAPH_Advances_2021_final.pdf)
 
 ## 各環境での扱い
 
@@ -179,6 +180,7 @@ float4 PSMain(VSOut i) : SV_Target {
 
 ## 参考資料
 
+- [Microsoft: D3D12のIndirect Drawing](https://learn.microsoft.com/en-us/windows/win32/direct3d12/indirect-drawing)
 - Fabian Giesen, *"A trip through the Graphics Pipeline 2011"* — 本章全体の最良の副読本
 - Real-Time Rendering 4th ed., Chapter 2 "The Graphics Rendering Pipeline"
 - Microsoft Learn, *Direct3D 12 graphics pipeline*

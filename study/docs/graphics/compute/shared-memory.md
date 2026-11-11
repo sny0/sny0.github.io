@@ -3,7 +3,7 @@ title: Shared Memory と Atomic
 study:
   source: RenderingWiki
   status: published
-  summary: "Shared Memory (HLSL: groupshared、CUDA: __shared__、GLSL: shared) は、スレッドグループ内の全スレッドが共有するSMオンチップの高速メモリです。Atomic操作は複数スレッドから同一アドレスへの競合書き込みを安全に行う命令群です。この2つと"
+  summary: Shared Memoryは、スレッドグループ内の全スレッドが共有する高速なオンチップメモリです。Atomic操作やバリアと組み合わせて、GPU上でスレッド同士がデータを受け渡す方法を説明します。
   section: reference
   format: article
   domain: graphics
@@ -13,7 +13,7 @@ study:
 
 ## 概要
 
-**Shared Memory** (HLSL: `groupshared`、CUDA: `__shared__`、GLSL: `shared`) は、スレッドグループ内の全スレッドが共有する**SMオンチップの高速メモリ**です。**Atomic操作**は複数スレッドから同一アドレスへの競合書き込みを安全に行う命令群です。この2つとバリア (`GroupMemoryBarrierWithGroupSync`) が、GPU上で「協調するアルゴリズム」を書くための三種の神器です。
+Shared Memory (HLSL: `groupshared`、CUDA: `__shared__`、GLSL: `shared`) は、スレッドグループ内の全スレッドが共有する、SMオンチップの高速メモリです。Atomic操作は、複数のスレッドが同じアドレスへの書き込みで競合しても、安全に処理するための命令群です。GPU上でスレッド同士が協力して処理するには、Shared Memory、Atomic操作、バリア (`GroupMemoryBarrierWithGroupSync`) を組み合わせます。
 
 ## なぜ必要なのか
 
@@ -186,7 +186,7 @@ void HistCS(uint gi : SV_GroupIndex, uint3 dtid : SV_DispatchThreadID)
 
 3. **ヒストグラムをグローバルAtomicだけで実装した場合と、Shared 2段構えの場合の性能差の要因は。**
    ::: details 解答
-   グローバルのみだと全スレッド(数百万)のAtomicがL2/VRAM上の256アドレスに集中し、激しい直列化とメモリトラフィックが起きる。2段構えではグループ内(256スレッド)の競合が高速なShared内で処理され、グローバルへは「グループ数×256回」の整列した加算だけになり、競合と帯域が桁で減る。
+   グローバルメモリだけを使うと、数百万のスレッドによるAtomicがL2/VRAM上の256アドレスに集中し、処理が直列化してメモリトラフィックが増える。2段階に分けると、256スレッドからなる各グループ内の競合は高速なSharedメモリ内で処理できる。グローバルメモリへの処理は「グループ数×256回」の整列した加算に減り、競合と帯域消費を桁単位で抑えられる。
    :::
 
 ## 参考資料

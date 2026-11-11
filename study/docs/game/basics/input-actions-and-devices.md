@@ -13,7 +13,7 @@ study:
 
 # 入力の基本 — デバイスからゲームのアクションへ
 
-キーボードのキーとゲームパッドのスティックは、形も出す値も違います。ゲーム側では、どちらでも「移動する」という同じ操作として扱えます。機器の状態を、ゲームで使う意味へ対応付けてみます。具体的な用語は**Unity Input System 1.11**を主な例にします。[Input Systemのアクション](https://docs.unity3d.com/Packages/com.unity.inputsystem@1.11/manual/Actions.html)
+キーボードのキーとゲームパッドのスティックは、形も出す値も違います。ゲーム側では、どちらの入力も「移動する」という同じ操作に対応付けられます。機器から受け取る値とゲーム内の操作の対応を、主に**Unity Input System 1.11**の用語で説明します。[Input Systemのアクション](https://docs.unity3d.com/Packages/com.unity.inputsystem@1.11/manual/Actions.html)
 
 ## 機器、操作箇所、ゲームの意味
 

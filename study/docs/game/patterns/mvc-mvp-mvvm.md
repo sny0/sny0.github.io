@@ -3,7 +3,7 @@ title: MVC・MVP・MVVM(比較)
 study:
   source: C++ Wiki
   status: published
-  summary: "UIの設計で「データとロジック(Model)」と「見た目(View)」を分離し、その間の仲介者の作り方で3流派に分かれます。 MVC (Model-View-Controller): 入力をControllerが受け、Modelを更新。ViewはModelを(多くの場合Observerで)監視して表"
+  summary: MVC、MVP、MVVMはいずれも、UIのデータとロジックを表示から分ける設計です。Controller、Presenter、ViewModelがそれぞれ入力、状態、表示をどうつなぐかを比較します。
   section: reference
   format: article
   domain: game
@@ -108,7 +108,7 @@ Unity 2023.1以降では、旧`FindObjectOfType`の代わりに`FindFirstObjectB
 ## ゲームでの適用の現実
 
 - **全UIに適用しない**: HUDのHPバー程度なら[Observer](/design/patterns/observer.html)購読1本で十分。装備画面・ショップ・ガチャなど**状態とルールが濃い画面**にMVP/MVVMを使う
-- Model相当は既にいる(ゲームロジックそのもの)。「UI用に改めてModelを作る」のではなく、**ゲームロジックをViewから守る壁**としてPresenterを立てるのが実態
+- ゲームロジックそのものがModelに相当する。UI用のModelを別に作る必要はなく、Presenterを置いてViewからゲームロジックを切り離す。
 - 画面部品間の調整は[Mediator](/design/patterns/mediator.html)、画面遷移は[FSM/Stack](/design/case-studies/screen-transition.html)と組み合わせる
 
 ## Unity/C# との対応

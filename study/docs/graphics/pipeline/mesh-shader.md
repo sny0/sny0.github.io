@@ -3,7 +3,7 @@ title: Mesh Shader / Task Shader
 study:
   source: RenderingWiki
   status: published
-  summary: Mesh Shader は、従来の IA→VS→(Tess)→(GS) というジオメトリパイプライン前半を、Compute Shader型の実行モデルで丸ごと置き換える新しいステージです。前段の Task Shader (DX12ではAmplification Shader) と組み合わせ、「スレッ
+  summary: Mesh Shaderは、従来のジオメトリパイプラインの前半をCompute Shader型の実行モデルに置き換えるステージです。前段のTask Shader (DX12ではAmplification Shader) と組み合わせる構成も扱います。
   section: reference
   format: article
   domain: graphics
@@ -13,7 +13,7 @@ study:
 
 ## 概要
 
-Mesh Shader は、従来の **IA→VS→(Tess)→(GS)** というジオメトリパイプライン前半を、**Compute Shader型の実行モデルで丸ごと置き換える**新しいステージです。前段の **Task Shader (DX12ではAmplification Shader)** と組み合わせ、「スレッドグループが協調して小さなメッシュ片 (**meshlet**) を生成し、ラスタライザへ直接送る」という構造を取ります。2018年のNVIDIA Turingで登場し、DX12 Ultimate / Vulkan拡張として標準化されました。
+Mesh Shaderは、従来のIA、VS、Tess、GSからなるジオメトリパイプラインの前半全体を、Compute Shader型の実行モデルに置き換えるステージです。前段のTask Shader (DX12ではAmplification Shader) と組み合わせる構成では、スレッドグループが協力して小さなメッシュ片 (meshlet) を生成し、ラスタライザへ直接渡します。2018年のNVIDIA Turingで登場し、DX12 UltimateとVulkan拡張で標準化されました。
 
 ## なぜ必要なのか
 

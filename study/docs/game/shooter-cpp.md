@@ -64,7 +64,7 @@ ctest --test-dir build -C Release --output-on-failure
 
 実行ファイル名や、画面なしで検査する設定は下のCMakeとREADMEで確認できます。Visual Studioのような複数構成のGeneratorでは、実行ファイルが`build/Release/`等に置かれます。単一構成のGeneratorでは通常`build/`です。
 
-WindowsでVisual Studio 2022を使う場合は、最初の設定を次のように指定できます。今回の描画ライブラリ込みの確認も、この構成を使いました。
+WindowsでVisual Studio 2022を使う場合は、初回のCMake設定に次の指定を使えます。描画ライブラリを含む動作確認もこの構成で行いました。
 
 ```sh
 cmake -S . -B build-vs -G "Visual Studio 17 2022" -A x64

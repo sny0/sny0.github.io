@@ -95,7 +95,7 @@ private:
 ## Unity/C# との対応
 
 - `UnityEngine.Pool.ObjectPool<T>`(公式実装)、パーティクルやAudioSourceのプールは事実上必須の定石
-- `Instantiate/Destroy` の都度実行は、生成コスト+GC Allocの二重苦。プール化は「SetActive(false)で寝かせて使い回す」形が基本
+- `Instantiate/Destroy` を毎回実行すると、生成の処理時間とGC Allocがかかる。プールでは、使用後にSetActive(false)で無効にして、次に必要になったときに再利用するのが基本。
 - ただし**少数・低頻度のオブジェクトのプール化は無意味**(管理コードのバグリスクだけ増える)。プロファイラでGC Allocとスパイクを見てから
 
 ## Unreal Engine との対応

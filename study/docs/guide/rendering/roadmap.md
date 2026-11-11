@@ -70,7 +70,7 @@ GPU・数学・パイプラインの前提を確認します。不明な項目�
 
 ## フェーズ3: GPUコンピューティング
 
-レンダリングの最先端(GPU Driven、Nanite、各種GI)はすべてCompute Shaderの上に成り立っています。
+Compute ShaderはGPU DrivenのカリングやNaniteの微小三角形のラスタライズ、GIの各種計算に使われます。GPU Drivenの間接描画やNaniteの大きい三角形の描画では、ハードウェアラスタライザも使われます。
 
 1. [Compute Shader](/graphics/compute/compute-shader.html)
 2. [GPU並列実行モデル (Warp/Wave)](/graphics/compute/execution-model.html) — **最重要ページの一つ**

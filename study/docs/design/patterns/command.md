@@ -177,7 +177,7 @@ Unityの `InputAction`(操作の抽象)と `UnityEvent`/delegateの組み合わ�
 
 ## 過剰設計になる例
 
-アクションゲームで「ジャンプはJumpCommandクラス、攻撃はAttackCommand…」と全操作をクラス化したが、リプレイもリバインドも要件にない——`if (input.Pressed(...)) player.Jump();` に戻す方が読みやすい、はよくある実話です。
+アクションゲームでジャンプをJumpCommand、攻撃をAttackCommandと、すべての操作をクラスにしたとします。リプレイもリバインドも要件になければ、よくある例では `if (input.Pressed(...)) player.Jump();` のように直接呼び出す方が読みやすくなります。
 
 ## 関連項目
 

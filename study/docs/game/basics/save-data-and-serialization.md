@@ -27,7 +27,7 @@ study:
 
 ## 保存用の値を、ファイルにできる形へ変える
 
-**シリアライズ**は、データの状態を、保存や送信ができる表現へ変換する処理です。**デシリアライズ**は、その表現からデータを組み立てる処理です。JSONのようなテキスト形式も、用途に合わせたバイナリ形式も使えます。形式へ変換する処理と、ファイルへ書く処理をそれぞれ考えます。[Microsoftのシリアライズの説明](https://learn.microsoft.com/en-us/dotnet/standard/serialization/system-text-json/overview) · [ファイルとパス](/os/files-and-paths.html)
+**シリアライズ**は、データの状態を保存や送信ができる表現へ変換する処理です。**デシリアライズ**は、その表現からデータを組み立てる処理です。JSONのようなテキスト形式も、用途に合わせたバイナリ形式も使えます。データを形式に合わせて変換する処理と、変換したデータをファイルへ書く処理は分けて考えます。[Microsoftのシリアライズの説明](https://learn.microsoft.com/en-us/dotnet/standard/serialization/system-text-json/overview) · [ファイルとパス](/os/files-and-paths.html)
 
 <figure class="study-figure">
   <img src="/images/game/save-data-and-serialization.svg" alt="実行中の状態から保存用の値を集め、JSONなどへシリアライズしてファイルへ書く。再開時にはファイルを読み、データへ変換して版と値を検証し、確認した内容からゲーム状態を復元する。" width="760" height="460" loading="lazy">

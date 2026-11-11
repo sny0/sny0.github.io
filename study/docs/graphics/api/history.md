@@ -13,7 +13,7 @@ study:
 
 ## 概要
 
-グラフィックスAPIは**アプリケーションとGPUドライバの間の契約**です。30年の歴史は「抽象度を上げてきた前半」と「抽象を剥がして明示化した後半」に分かれます。この転換の物語を理解すると、DX12/Vulkanの一見不可解な複雑さが「すべて必然だった」と分かります。
+グラフィックスAPIは、アプリケーションがGPUドライバに処理を依頼するときの決まりです。30年の歴史は、抽象度を高めてきた前半と、アプリケーションが処理を明示するようになった後半に分かれます。この変化を追うと、DX12やVulkanでアプリケーションが指定する項目が増えた理由が分かります。
 
 ## なぜ必要なのか
 
@@ -34,7 +34,7 @@ timeline
     2013 : AMD Mantle (明示的APIの実証)
     2014 : Apple Metal (モバイル初の明示的API)
     2015 : DirectX 12 (Windows 10)
-    2016 : Vulkan 1.0 (Mantle直系・Khronos)
+    2016 : Vulkan 1.0 (Mantleを出発点の一つにKhronosで策定)
     2018 : DXR (レイトレーシング) / Turing
     2023 : WebGPU 1.0 (Web標準の明示的API)
 ```
@@ -57,17 +57,17 @@ timeline
 
 ### 当時の課題
 
-DX11/GL時代のドライバは:
+DX11やOpenGLの時代には、ドライバが次の処理を担っていました。
 1. **隠れた状態検証**: ドローごとに全ステートの整合性をチェック
 2. **隠れたリソース追跡**: ハザード (書き込み中のテクスチャを読む等) をドライバが推測して自動でバリア挿入
-3. **シングルスレッド前提**: コンテキストが1本で、マルチコアCPUを活かせない
+3. **コンテキスト単位の直列化**: OpenGLの同一コンテキストは一度に1スレッドで使用。D3D11では複数のDeferred Contextで並列記録できるが、再生は1つのImmediate Contextに集約
 4. **シェーダの遅延コンパイル**: ドロー時にステート組み合わせが確定してから最終コンパイル → ヒッチ
 
 結果、CPU1コアだけが忙殺され、ドローコールは数千/フレームで頭打ちでした。
 
 ### Mantle革命
 
-2013年、AMDとDICE (Battlefield 4) が **Mantle** を発表。「ドライバの仕事をアプリに移す」設計 — コマンドバッファの明示的記録、PSO、手動ハザード管理、明示的メモリ管理 — でドローコールコストを1桁削減しました。
+2013年にAMDとDICE (Battlefield 4) がMantleを発表しました。コマンドバッファの明示的な記録、PSO、手動のハザード管理、明示的なメモリ管理をアプリに任せる設計で、ドローコールのコストを1桁削減しました。
 
 - 2014: Apple **Metal** (同思想をモバイルへ)
 - 2015: **DirectX 12** (Windows 10)
@@ -132,7 +132,7 @@ RHI層が全APIを抽象化。UE5はDX12/Vulkan/Metalが主要ターゲットで
 
 2. **Mantleが歴史的に重要である理由を、単なる「速いAPI」以上の観点で説明せよ。**
    ::: details 解答
-   明示的API設計が実ゲーム(BF4)で劇的なCPU削減を実証し、業界全体の設計転換を引き起こした。さらに仕様自体がKhronosへ寄贈されVulkanの直接の土台となり、DX12/Metalの設計にも強い影響を与えた。「一社の実験が全APIの世代交代を駆動した」稀有な例。
+   Mantleは実ゲーム(BF4)で、アプリがコマンド記録やリソース管理を担う明示的API設計の有効性を示した。AMDが提供したMantleの設計はVulkanの出発点の一つとなり、Khronosの作業部会で標準APIとして再設計された。
    :::
 
 3. **WebGPUが「4番目の明示的API」として、DX12/VK/Metalと異なる制約下で設計された点は何か。**
@@ -147,3 +147,4 @@ RHI層が全APIを抽象化。UE5はDX12/Vulkan/Metalが主要ターゲットで
 - Khronos, *Vulkan: The Origin Story* / Alex St. John らのDirectX創世記の回顧録
 - retro-computing系: OpenGL vs Direct3D 論争のアーカイブ (Carmack .plan files)
 - [Khronos: Vulkanの公開 (2015)](https://www.khronos.org/news/press/khronos-reveals-vulkan-api-for-high-efficiency-graphics-and-compute-on-gpus)
+- [Khronos: Vulkan 10年の回顧 (Vulkanised 2026)](https://vulkan.org/user/pages/09.events/vulkanised-2026/0945-KarenGhavam-RalphPotter-10YearRetrospective.pptx.pdf)

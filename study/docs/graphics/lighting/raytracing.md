@@ -3,7 +3,7 @@ title: ハードウェアレイトレーシング (DXR / Vulkan Ray Tracing)
 study:
   source: RenderingWiki
   status: published
-  summary: ハードウェアレイトレーシングは、BVH（境界ボリューム階層）の処理のうち、ボックス・三角形の交差判定などを専用回路で加速（走査制御まで専用化する範囲はベンダー・世代による）し、シーンに対して任意のレイを飛ばせる機能です。2018年のNVIDIA Turing + DXRで幕を開け、影・反射・GI・パストレーシングという「ラスタライズが苦手な問題」への直
+  summary: ハードウェアレイトレーシングでは、BVHを使った処理のうち、レイとボックスや三角形の交差判定などを専用回路で加速します。加速する範囲はベンダーや世代によって異なり、影、反射、GIなどに利用できます。
   section: reference
   format: article
   domain: graphics
@@ -13,7 +13,7 @@ study:
 
 ## 概要
 
-ハードウェアレイトレーシングは、**BVH（境界ボリューム階層）の処理のうち、ボックス・三角形の交差判定などを専用回路で加速（走査制御まで専用化する範囲はベンダー・世代による）し、シーンに対して任意のレイを飛ばせる**機能です。2018年のNVIDIA Turing + DXRで幕を開け、影・反射・GI・パストレーシングという「ラスタライズが苦手な問題」への直接解を提供します。ラスタライズを置き換えるのではなく、**共存するもう一つの可視性クエリ**です。
+ハードウェアレイトレーシングでは、シーンに対して任意のレイを飛ばし、BVH（境界ボリューム階層）を使う処理のうち、ボックスや三角形との交差判定などを専用回路で加速します。走査制御まで専用化する範囲はベンダーや世代によります。2018年のNVIDIA TuringとDXRで実用化が始まり、ラスタライズでは扱いにくい影、反射、GI、パストレーシングを直接計算できるようになりました。ラスタライズと併用して、レイがシーンの何に当たるかを調べます。
 
 ## なぜ必要なのか
 
@@ -91,7 +91,7 @@ flowchart TB
 ## 各環境での扱い
 
 ### Unity
-HDRPでRT対応 (RT Shadows / Reflections / GI / AO、`Ray Tracing` 対応シェーダ)。`SystemInfo.supportsRayTracing`、C#では `RayTracingAccelerationStructure` / `RayTracingShader`。URPは非対応 (2025時点)。
+HDRPでRT対応 (RT Shadows / Reflections / GI / AO、`Ray Tracing` 対応シェーダ)。Unity 6.0の機能比較表では、WindowsのDirectX 12環境とPS5・Xbox Seriesが対応します。`SystemInfo.supportsRayTracing`、C#では `RayTracingAccelerationStructure` / `RayTracingShader`。URPは非対応 (2025時点)。[Unity 6.0の機能比較表](https://docs.unity.com/en-us/engine/6000.0/manual/render-pipelines/choose-a-render-pipeline/feature-comparison#raytracing)
 
 ### Unreal Engine
 UE4.22でRT機能導入 → UE5では **Lumen HW モード / Virtual Shadow Map補完 / Path Tracer** に整理。`r.Lumen.HardwareRayTracing 1`。スタンドアロンRT機能 (RT Reflections等の旧UI) は非推奨化しLumenへ統合されました。

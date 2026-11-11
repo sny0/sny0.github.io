@@ -49,7 +49,7 @@ async関数も呼出し直後に実行を始めるため、`async:before-await`�
 
 ## ケースB：処理中にmicrotaskを追加する
 
-「ケースBを実行」は、一つのmicrotaskから次を予約する処理です。3つで終わります。
+「ケースBを実行」を押すと、一つのmicrotaskが次のmicrotaskを予約します。3つ実行したところで終わります。
 
 ```text
 sync:start

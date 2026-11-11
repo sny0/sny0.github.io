@@ -53,7 +53,7 @@ Web Audioは一定数のフレームをまとめて処理します。この単�
 
 Chromium系ブラウザでこのサンプルを48,000 Hz、設定200 msで動かすと、反響間隔は9,728サンプル（約202.67 ms）でした。設定の200 msに当たる9,600サンプルとの差は128サンプルで、この実行での1レンダークォンタム分です。これはこの経路で観測した追加の時間です。上で説明した仕様の下限は、循環内の `DelayNode` に設定できる実効遅延の最小値を指します。
 
-Chromiumのソースでは、入力を取りに行く前に、ノードの処理を始めた時刻を記録します。循環で同じノードに戻ると再処理せず、バッファに残っている出力を使うので、今回の経路では1ブロックの差が生じたと考えられます。実践画面では設定時間と、そのブラウザの出力波形から測った実際の間隔を分けて表示します。[ChromiumのAudioHandler実装](https://chromium.googlesource.com/chromium/src/+/c3756773b1039618747068cee1080fd09f75f24e/third_party/blink/renderer/modules/webaudio/audio_handler.cc#292)
+Chromiumの実装は、ノードの入力を取得する前に処理の開始時刻を記録します。循環して同じノードに戻ると再処理せず、バッファに残っている出力を使うので、今回の経路では1ブロックの差が生じたと考えられます。実践画面では、設定した時間と、そのブラウザの出力波形から測った実際の間隔を別々に表示します。[ChromiumのAudioHandler実装](https://chromium.googlesource.com/chromium/src/+/c3756773b1039618747068cee1080fd09f75f24e/third_party/blink/renderer/modules/webaudio/audio_handler.cc#292)
 
 ## ゲームの効果音で間隔と音色を調整する
 

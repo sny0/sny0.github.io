@@ -29,7 +29,7 @@ Windowsの**I/O完了ポート**（IOCP）は、複数のハンドルで発行�
 
 ## 完了キーでハンドルを、ポインターで要求を見分ける
 
-**完了キー**（`CompletionKey`）は、関連付け時にアプリが渡す`ULONG_PTR`の値です。同じハンドルから生じたI/O完了パケットには同じキーが入ります。ハンドルごとの状態を区別したい場合は、アプリで別々のキーを割り当てます。**`OVERLAPPED*`**は、`ReadFile`などに渡した構造体のアドレスです。一つのハンドルに複数の要求を出しても、要求ごとに異なる`OVERLAPPED`を渡せば、どの要求が完了したかを識別できます。[Microsoft: CreateIoCompletionPort](https://learn.microsoft.com/en-us/windows/win32/api/ioapiset/nf-ioapiset-createiocompletionport) · [Microsoft: GetQueuedCompletionStatus](https://learn.microsoft.com/en-us/windows/win32/api/ioapiset/nf-ioapiset-getqueuedcompletionstatus)
+完了キー（`CompletionKey`）は関連付け時にアプリが渡す`ULONG_PTR`の値です。同じハンドルから生じたI/O完了パケットには同じキーが入ります。ハンドルごとの状態を区別したい場合は、アプリで別々のキーを割り当てます。`OVERLAPPED*`は`ReadFile`などに渡した構造体のアドレスです。一つのハンドルに複数の要求を出しても、要求ごとに異なる`OVERLAPPED`を渡せば、どの要求が完了したかを識別できます。[Microsoft: CreateIoCompletionPort](https://learn.microsoft.com/en-us/windows/win32/api/ioapiset/nf-ioapiset-createiocompletionport) · [Microsoft: GetQueuedCompletionStatus](https://learn.microsoft.com/en-us/windows/win32/api/ioapiset/nf-ioapiset-getqueuedcompletionstatus)
 
 <figure class="study-figure">
   <img src="/images/os/io-completion-ports.svg" alt="キー10のファイルAに要求A1とA2、キー20のファイルBに要求B1を発行する。三つの完了が同じポートに入り、例ではA2、B1、A1の順に並ぶ。A1とA2のキーは同じ10で、OVERLAPPEDのアドレスは異なる。ワーカーはポートから結果を取り出す。" width="760" height="512" loading="lazy">

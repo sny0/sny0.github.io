@@ -25,7 +25,7 @@ study:
 | `WritableStream` | データを書き込む入口を提供する。下に実際の処理先であるsinkがある |
 | `TransformStream` | writable側で入力を受け、変換結果をreadable側へ出す |
 
-**chunk**は、一回に渡すデータ片です。バイト列、文字列、オブジェクトなど、Streamの契約に合う値を扱い、一定byte数・文字数とは限りません。変換では一入力に対する出力が0個や複数個の場合もあります。[WHATWG Streams: Model](https://streams.spec.whatwg.org/#model)
+**chunk**は、一回に渡すデータのまとまりです。Streamの契約に合うバイト列、文字列、オブジェクトなどを扱い、大きさは一定のバイト数や文字数とは限りません。変換では、一つの入力に対する出力が0個や複数個の場合もあります。[WHATWG Streams: Model](https://streams.spec.whatwg.org/#model)
 
 **reader**と**writer**は読み書きの窓口です。**controller**はsourceや変換処理などからデータ・終了・失敗を知らせます。`controller.enqueue(chunk)`で供給した未消費データは、内部queueへ入る場合があります。
 

@@ -3,7 +3,7 @@ title: HDRP (High Definition Render Pipeline)
 study:
   source: RenderingWiki
   status: published
-  summary: HDRPはハイエンドPC・コンソール・映像制作向けのUnity公式レンダーパイプラインです。物理単位のライティング (lux/lumen/EV)、Tiled/Clusteredハイブリッドのライトループ、SSGI/RTGI・パストレーサ、水面・雲・ボリューメトリックフォグなど、AAA級の機能セットを
+  summary: HDRPはハイエンドPC、コンソール、映像制作向けのUnity公式レンダーパイプラインです。物理単位でのライティング、TiledとClusteredを組み合わせたライトループ、レイトレーシングの対応環境を扱います。
   section: reference
   format: article
   domain: graphics
@@ -13,7 +13,7 @@ study:
 
 ## 概要
 
-HDRPは**ハイエンドPC・コンソール・映像制作向けのUnity公式レンダーパイプライン**です。物理単位のライティング (lux/lumen/EV)、Tiled/Clusteredハイブリッドのライトループ、SSGI/RTGI・パストレーサ、水面・雲・ボリューメトリックフォグなど、AAA級の機能セットを持ちます。「Unityで到達できる最高画質」であると同時に、**現代のDeferred系AAAレンダラーの標準構成を学べる教材**でもあります。
+HDRPは、ハイエンドPC、コンソール、映像制作向けのUnity公式レンダーパイプラインです。物理単位のライティング (lux/lumen/EV)、TiledとClusteredを組み合わせたライトループ、SSGI/RTGI、パストレーサ、水面、雲、ボリューメトリックフォグなどを備えます。Unityで最も高い画質を得られる構成で、現代のDeferred系AAAレンダラーの標準構成を学ぶ題材にもなります。
 
 ## なぜ必要なのか
 
@@ -67,7 +67,7 @@ flowchart TB
 | ライトループ | FPTL (不透明) + Clustered (体積/半透明) | [Forward+/Clustered](/graphics/path/forward-plus.html) |
 | マテリアル | Lit/Layered/StackLit/SSS/Hair/Fabric/Eye | [PBR](/graphics/lighting/pbr.html) |
 | APV | プローブボリュームの自動配置GI | [IBL](/graphics/lighting/ibl.html) / [GI](/graphics/lighting/gi.html) |
-| SSGI / RTGI / RTAO / RTR | スクリーンスペース〜DXRのGI/反射群 | [SSR](/graphics/lighting/ssr.html), [レイトレーシング](/graphics/lighting/raytracing.html) |
+| SSGI / RTGI / RTAO / RTR | スクリーンスペースとレイトレーシングによるGI・AO・反射 | [SSR](/graphics/lighting/ssr.html), [レイトレーシング](/graphics/lighting/raytracing.html) |
 | Path Tracer | 参照品質のプログレッシブPT | [パストレーシング](/graphics/lighting/path-tracing.html) |
 | Volumetric Fog | froxelベースの散乱積分 | — |
 
@@ -86,10 +86,10 @@ flowchart TB
 思想的な対応物はUE標準レンダラーそのもの (Deferred+物理単位+RT+シネマティック志向)。HDRPは「UnityにおけるUE型レンダラー」と要約できます。機能比較では Lumen/Nanite 相当が (現時点で) HDRPに無い点が最大の差です。
 
 ### DirectX 12
-RT機能群 (RTGI/RTR/RTAO/PT) はDX12+DXR必須。非同期コンピュートもDX12/コンソールで有効化されます。
+WindowsでHDRP 17のレイトレーシングを使うにはDirectX 12とDXR対応環境が必要です。Unity 6.0の機能比較表ではPS5とXbox Seriesもレイトレーシング対応です。使える機能と設定は、対象コンソールと採用するHDRPの版ごとに確認します。非同期コンピュートもDX12/コンソールで有効化されます。[Unity 6.0の機能比較表](https://docs.unity.com/en-us/engine/6000.0/manual/render-pipelines/choose-a-render-pipeline/feature-comparison#raytracing) · [HDRP 17のRTハードウェア要件](https://docs.unity.cn/Packages/com.unity.render-pipelines.high-definition@17.0/manual/raytracing-requirements.html)
 
 ### Vulkan
-ラスタライズ描画の対応バックエンドの一つ（Linux/Windows等）。HDRP 17の公式RT経路はWindowsのDX12+DXRであり、VulkanのRT拡張が存在するだけでHDRPのRT機能を利用できるわけではありません。採用パッケージ版の要件を確認します。
+ラスタライズ描画の対応バックエンドの一つ（Linux/Windows等）。HDRP 17のレイトレーシングはWindowsのDirectX 12と対応コンソールで利用でき、VulkanやMetalのバックエンドは対象外です。
 
 ## コード例
 

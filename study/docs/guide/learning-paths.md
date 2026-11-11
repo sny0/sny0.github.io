@@ -151,7 +151,7 @@
 1. [DDSとサブリソース](/graphics/texture/dds-and-subresources.html)で、テクスチャの形式、mip、配列スライスからファイル内の位置を求める。
 2. [D3D12でテクスチャを転送する流れ](/graphics/texture/d3d12-texture-upload.html)で、行の再配置、コピー、リソースの状態とフェンスを追う。
 3. [C++のDDS転送実践](/practice/graphics/dds-upload-observation.html)で、2つのmipをD3D12へコピーし、読み戻したバイトを照合する。
-4. [テクスチャストリーミング](/graphics/texture/texture-streaming-and-mip-residency.html)で、先に使える解像度と、メモリに置く範囲を決める。
+4. [テクスチャストリーミング](/graphics/texture/texture-streaming-and-mip-residency.html)で、先に使える解像度とメモリに置く範囲を決める。
 
 ## 3Dモデルのファイルから三角形を描くには
 
@@ -171,7 +171,7 @@
 
 1. [ソケットとTCP通信](/network/tcp-sockets.html)で、IP・ポート、送受信バッファ、バイト列とメッセージ、半閉鎖を分ける。
 2. [C++・C#のローカル通信](/practice/network/tcp-loopback-observation.html)で、長さ付きメッセージを復元し、送信停止後の応答と受信EOFを確かめる。
-3. 待機と非同期処理の基本は[非同期I/O](/os/asynchronous-file-io.html)へ進む。今回の通信例は、非ブロッキング操作とreadiness待ちを使う。
+3. 待機と非同期処理の基本は[非同期I/O](/os/asynchronous-file-io.html)で学ぶ。この通信例では非ブロッキング操作とreadiness待ちを使う。
 
 ## UDPでメッセージを送り、通信の遅れを調べるには
 

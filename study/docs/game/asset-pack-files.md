@@ -44,7 +44,7 @@ IDは、ゲームが「どのアセットか」を指すための値です。フ
 
 全体を一つの圧縮ストリームにすると、途中のアセットにオフセットを付けるだけでは、そこから直ちに展開できるとは限りません。個別に読みたい範囲は**独立に展開できるチャンク**に分け、その格納オフセット、圧縮後のサイズ、展開後のサイズ、方式を目次から引けるようにします。例えば地形の区画を別々のチャンクにすると、現在地の近くにある区画の圧縮データだけを読み取れます。小さいチャンクを増やすと細かく読める一方で、目次や各チャンクの管理が増え、圧縮率にも影響します。[Unity 6のAssetBundle圧縮方式](https://docs.unity3d.com/ja/6000.0/ScriptReference/CompressionType.html)
 
-DirectStorageで圧縮データを読む場合も、各要求に渡す範囲がそれ自体で展開できる必要があります。Microsoftの `BulkLoadDemo` では、モデルとテクスチャをパックにまとめるツールで、ステージングバッファに収まるよう要求を分割します。データを読み取ったあと、必要に応じて展開し、GPUやエンジン側の準備を終えてからアセットを利用します。[MicrosoftのDirectStorage開発ガイド](https://github.com/microsoft/DirectStorage/blob/main/Docs/DeveloperGuidance.md#compressed-assets) · [公式BulkLoadDemo](https://github.com/microsoft/DirectStorage/blob/main/Samples/BulkLoadDemo/README.md#building-marc-files) · [DirectStorageの仕組み](/game/directstorage.html)
+DirectStorageで圧縮データを読む場合も、各要求に渡すデータをその範囲だけで展開できる必要があります。Microsoftの `BulkLoadDemo` では、モデルとテクスチャをパックにまとめるツールが、ステージングバッファに収まるよう要求を分割します。データを読み取ったあと、必要に応じて展開し、GPUやエンジン側の準備を終えてからアセットを利用します。[MicrosoftのDirectStorage開発ガイド](https://github.com/microsoft/DirectStorage/blob/main/Docs/DeveloperGuidance.md#compressed-assets) · [公式BulkLoadDemo](https://github.com/microsoft/DirectStorage/blob/main/Samples/BulkLoadDemo/README.md#building-marc-files) · [DirectStorageの仕組み](/game/directstorage.html)
 
 ## 目次を検査してから読み取る
 

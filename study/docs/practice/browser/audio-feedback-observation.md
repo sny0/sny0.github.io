@@ -15,7 +15,7 @@ study:
 
 # Web Audioで反響の間隔と減衰を観察する
 
-出力の一部を少し遅らせて入力に戻すと、短い音を一度鳴らすだけで反響が続きます。遅延時間で間隔を、フィードバックゲインで一周ごとに残る振幅を調整します。グラフと表には、元の音と最初の5回の反響が出る時刻の実測値が並びます。[仕組みと経路の図を読む](/browser/audio-feedback-delay.html)
+出力の一部を少し遅らせて入力に戻すと、短い音を一度鳴らすだけで反響が続きます。遅延時間で反響の間隔を、フィードバックゲインで一周ごとに残る振幅を調整します。元の音と最初の5回の反響が出た時刻を測り、グラフと表に表示します。[仕組みと経路の図を読む](/browser/audio-feedback-delay.html)
 
 <p><a href="/study/samples/browser/audio-feedback-observation/index.html" target="_blank" rel="noopener noreferrer">反響の実験を新しいタブで開く</a></p>
 

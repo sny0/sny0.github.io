@@ -55,7 +55,7 @@ CPU側で描画を準備する回数、GPUが画像を作る時刻、ディス�
 
 **可変更新**では、更新に渡す時間刻みが変わります。**固定更新**では、設定した時間刻みで状態を進めます。例えば物理を0.02秒ずつ進め、描画はそれとは別の頻度で行う構成があります。Unityでは`Update`と`FixedUpdate`がこうした処理の入口です。`FixedUpdate`は、一つの描画フレームの間に0回、1回、複数回呼ばれる場合があります。[UnityのFixedUpdate](https://docs.unity3d.com/6000.0/Documentation/ScriptReference/MonoBehaviour.FixedUpdate.html)
 
-固定更新を使うと、物理に渡す時間刻みをそろえられます。再現性をそろえるには、入力をどのステップへ適用するか、処理の順番や数値計算なども関係します。詳しい設計は、[Game LoopとUpdate Method](/game/patterns/game-loop-and-update.html)と[衝突判定と物理](/game/basics/collisions-and-physics.html)で扱います。
+固定更新を使うと、物理に渡す時間刻みをそろえられます。結果を再現できるかどうかには、入力を適用するステップ、処理の順番、数値計算なども関わります。詳しい設計は、[Game LoopとUpdate Method](/game/patterns/game-loop-and-update.html)と[衝突判定と物理](/game/basics/collisions-and-physics.html)で扱います。
 
 ## 押し続ける入力と、押し始める入力
 

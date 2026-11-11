@@ -32,7 +32,7 @@ private:
 // 所有: std::vector<std::unique_ptr<Enemy>>、参照: 生ポインタ/ハンドル(所有権と借用を参照)
 ```
 
-UEが独自の基底(UObject)を強制する理由:
+UEが独自の基底クラスUObjectを要求する理由は、次のとおりです。
 
 1. **エディタ統合**: プロパティをエディタに表示・編集・保存するには型情報(リフレクション)が要る。C++標準のRTTIでは全く足りない(→ [リフレクション](/game/unreal/reflection-and-uht.html))
 2. **GC**: レベル・Actor・アセットが複雑に参照し合う世界では、所有の木([所有権と借用](/runtime/memory/ownership-and-borrowing.html))を人手で管理するより到達可能性ベースのGCが現実的、という設計判断(→ [GC](/game/unreal/gc-and-object-pointers.html))

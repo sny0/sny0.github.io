@@ -15,7 +15,7 @@ study:
 
 # 入力遅延を待ち時間と描画時間に分けてみる
 
-時刻7 msでゲームに届いた入力が、CPUとGPUで処理され、画面の対象位置に出るまでを追います。初期設定ではCPU処理が2 ms、GPUでの描画が4 msです。その前後の待ち時間を操作して、絵が次の走査に間に合うかを比べます。[入力から画面に出るまでの仕組み](/graphics/optimization/input-to-display-latency.html)
+ゲームは時刻7 msに入力を受け取ります。CPUとGPUが処理し、入力を反映した絵が画面の対象位置に出るまでを追います。初期設定ではCPU処理が2 ms、GPUでの描画が4 msです。その前後の待ち時間を変え、絵が次の走査に間に合うかを比べます。[入力から画面に出るまでの仕組み](/graphics/optimization/input-to-display-latency.html)
 
 <p><a href="/study/samples/graphics/input-latency-observation/index.html" target="_blank" rel="noopener noreferrer">入力遅延の実験を開く</a></p>
 

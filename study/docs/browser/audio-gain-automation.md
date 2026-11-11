@@ -50,6 +50,6 @@ study:
 
 `GainNode.gain` の既定のオートメーションレートは `a-rate` です。この設定ではパラメーターをフレームごとに評価します。 `k-rate` ではレンダリングブロック先頭のフレームで評価し、その値をブロック全体に使います。[W3C Web Audio APIのAudioParam](https://www.w3.org/TR/webaudio-1.1/#AudioParam)、[GainNode](https://www.w3.org/TR/webaudio-1.1/#GainNode)
 
-実践は `OfflineAudioContext` で両方の結果を `AudioBuffer` に描き出します。境界の前後1フレームの振幅とその差は、描き出したデジタル信号の値です。試聴時に聞こえる大きさは、再生ゲインや使う装置でも変わります。[W3C Web Audio APIのOfflineAudioContext](https://www.w3.org/TR/webaudio-1.1/#OfflineAudioContext)、[ゲインとフェードの実践](/practice/browser/audio-fade-observation.html)
+実践では `OfflineAudioContext` を使い、両方の処理結果を `AudioBuffer` に出力します。境界の前後1フレームの振幅とその差は、このデジタル信号から求めた値です。試聴で聞こえる音の大きさは、再生ゲインや再生装置によっても変わります。[W3C Web Audio APIのOfflineAudioContext](https://www.w3.org/TR/webaudio-1.1/#OfflineAudioContext)、[ゲインとフェードの実践](/practice/browser/audio-fade-observation.html)
 
 一方の音を下げながら別の音を上げると、重なる区間の振幅は二つの波形とゲインで決まります。[Web Audioのクロスフェード](/browser/audio-crossfade.html)で、途中の実効値がへこむ場合と膨らむ場合を比べられます。

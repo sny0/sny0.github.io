@@ -14,7 +14,7 @@ study:
 ## 一言で言うと
 
 - C++の**生配列** `int a[10]` は「メモリ上に連続して並んだ10個のint」そのもの。サイズ情報も境界チェックも**付いていない**
-- 実務では**`std::array`(固定長)と`std::vector`(可変長)**を使う
+- 実務では固定長に `std::array`、可変長に `std::vector` を使う
 - 文字列も同様に、Cスタイルの `char*` ではなく **`std::string`**(所有)と **`std::string_view`**(参照)を使う
 
 ## 生配列とその問題
@@ -26,7 +26,7 @@ int scores[5] = {10, 20, 30, 40, 50};   // 5個のintが連続。総サイズは
 int x = scores[7];   // コンパイルも実行も「通ってしまう」— 未定義動作(隣のメモリを読む)
 ```
 
-- **境界チェックなし**: 範囲外アクセスはエラーにならず、隣のメモリを破壊(→ [buffer overflow](/runtime/memory/memory-bugs.html))
+- **生配列の範囲外アクセスは未定義動作**: 診断が出る場合もあり、書き込みでは隣接するデータを壊すおそれがある(→ [buffer overflow](/runtime/memory/memory-bugs.html))
 - **サイズを忘れる**: 関数に渡すと配列はポインタに退化(decay)し、要素数の情報が消える
 
 ```cpp
@@ -39,14 +39,23 @@ void Process(int arr[]) {          // 実際の型は int* — サイズは分�
 
 ```cpp
 #include <array>
+#include <cstdio>
+#include <stdexcept>
 #include <vector>
 
-std::array<int, 5> a{10, 20, 30, 40, 50};  // 固定長: 5要素をオブジェクト内に保持。要素数は型から分かる
-std::vector<int> v{10, 20, 30};            // 可変長: 要素領域をallocator経由で確保する
+int main() {
+    std::array<int, 5> a{10, 20, 30, 40, 50};  // 固定長: 5要素をオブジェクト内に保持。要素数は型から分かる
+    std::vector<int> v{10, 20, 30};            // 可変長: 要素領域をallocator経由で確保する
 
-a.size();      // サイズを持っている
-v.push_back(40);
-v.at(7);       // atは境界チェックあり(例外)。v[7]はチェックなし(速いが自己責任)
+    std::printf("array size=%zu\n", a.size());
+    v.push_back(40);
+    try {
+        (void)v.at(7);   // 範囲外ならstd::out_of_rangeを投げる
+    } catch (const std::out_of_range&) {
+        std::puts("out of range");
+    }
+    // v[7] は範囲内という事前条件に違反する。診断の有無はライブラリと設定による。
+}
 ```
 
 ### メモリ上で起きること
@@ -66,7 +75,7 @@ std::vector<int> v;    v本体は管理情報(典型実装では3ポインタ分
    └──────────┘  → 古い要素へのポインタ/イテレータは全部無効化(頻出事故)
 ```
 
-`std::array` / `std::vector` という型が、本体を必ずスタックに置くわけではありません。ローカル変数、静的変数、動的に確保したオブジェクト、そのメンバなど、**本体をどう生成したか**で記憶域が変わります。`std::array`は要素を自身の内部に持ち、`std::vector`は要素領域をallocator経由で管理します。本体のサイズ・管理情報・物理的な配置は実装と最適化にも依存します([C++草案: array](https://eel.is/c++draft/array.overview)、[記憶域期間](https://eel.is/c++draft/basic.stc))。
+`std::array` / `std::vector` という型だけでは、本体がスタックに置かれるかどうかは決まりません。本体をローカル変数、静的変数、動的に確保したオブジェクト、そのメンバなどのどの形で生成したかによって、記憶域が変わります。`std::array`は要素を自身の内部に持ち、`std::vector`は要素領域をallocator経由で管理します。本体のサイズ・管理情報・物理的な配置は実装と最適化にも依存します([C++草案: array](https://eel.is/c++draft/array.overview)、[記憶域期間](https://eel.is/c++draft/basic.stc))。
 
 `vector` の再確保(reallocation)は**要素のアドレスが変わる**ことを意味します。「vectorの要素へのポインタを保存しておいたら、push_backの後で壊れた」はC++頻出バグの代表です(→ [STL](/languages/cpp/stl.html)、[dangling](/runtime/memory/memory-bugs.html))。
 
@@ -82,7 +91,7 @@ std::string_view sv = name;        // 参照するだけ(所有しない・コ�
 void PrintName(std::string_view n);   // 読むだけの引数はstring_viewが現代の定石
 ```
 
-- `std::string` は`char`の連続した要素列を所有する文字列型。**SSO（小文字列最適化）**を採用する実装では、短い列をstring本体内に格納して別領域の確保を避ける。しきい値は実装依存で、見た目の文字数ではなく`char`の要素数で考える
+- `std::string` は`char`の連続した要素列を所有する文字列型。SSO（小文字列最適化）を採用する実装では、短い列をstring本体内に格納して別領域の確保を避ける。しきい値は実装依存で、見た目の文字数ではなく`char`の要素数で考える
 - `string_view` は「先頭ポインタ+長さ」だけの軽量ビュー。**参照先より長生きさせてはいけない**(danglingの新たな入口)
 - 文字列リテラル`"Slime"`の配列は静的記憶域期間を持ち、書き換えると未定義動作になる。実行ファイルのどの領域に置くかは実装による（→ [メモリレイアウト](/runtime/cpp-internals/memory-layout.html)、[C++20草案: lex.string](https://timsong-cpp.github.io/cppwp/n4861/lex.string)）
 
@@ -101,8 +110,8 @@ void PrintName(std::string_view n);   // 読むだけの引数はstring_viewが�
 
 ## Unity開発者が誤解しやすい点
 
-1. 「配列は安全なもの」— 生配列の範囲外アクセスはUB。`v[i]`にも`at()`のような例外による範囲検査を期待しない。標準ライブラリのデバッグ・hardening設定には違反を検出するものがあり、C++26草案では`vector::operator[]`などをhardened preconditionで規定している。検出・終了の仕方は実装と設定を確認する。`at()`は範囲外を`std::out_of_range`で報告する。[C++草案: vectorのアクセス](https://www.open-std.org/jtc1/sc22/wg21/docs/papers/2025/p3471r4.html)
-2. 「文字列連結は罪(GC Alloc)」— C++ではGCはないが、**再確保**というコストはある。ループ内連結は `reserve` で緩和
+1. 「配列は安全なもの」— 生配列の範囲外アクセスはUB。`v[i]`も範囲内が前提で、C++23までは範囲外での動作を標準は保証しない(デバッグ設定等で診断する実装もある)。C++26草案は`vector::operator[]`をhardened preconditionとして規定し、強化実装では範囲外が契約違反になる。`at()`は範囲外を`std::out_of_range`で報告する。[C++草案: コンテナ要件](https://eel.is/c++draft/sequence.reqmts)・[強化事前条件](https://eel.is/c++draft/structure.specifications)
+2. C++にはGCがありませんが、文字列連結では再確保のコストがかかります。ループ内で連結する場合は `reserve` でこのコストを抑えられます。
 3. Cの文字列APIは一般にNUL終端(`'\0'`)を前提にする。`char*`という型だけで終端や文字コードが保証されるわけではない。`c_str()`の返すポインタは元のstringの破棄や、再確保などを伴う変更で無効になり得る。`std::string`は途中にもNULを保持できるため、NUL終端APIへ渡すと長さの解釈も変わる（[C++20草案: string.require](https://timsong-cpp.github.io/cppwp/n4861/string.require)、[string.accessors](https://timsong-cpp.github.io/cppwp/n4861/string.accessors)）
 
 ## ゲーム開発での使用例
@@ -121,7 +130,7 @@ void PrintName(std::string_view n);   // 読むだけの引数はstring_viewが�
 
 ## よくある誤解
 
-- 「vectorは遅い」— `v[i]` は生配列と同じ機械語になる(最適化時)。遅いのは誤った使い方(ループ内再確保、値コピー渡し)
+- 「vectorは遅い」— `v[i]` は、生配列と同等のコードに最適化される場合がある。診断コードの有無はライブラリと設定による。ループ内再確保や値コピー渡しの費用も確認する
 - 「string_viewは常にstringの上位互換」— 所有しないので、元が消えたら即dangling。役割が違う
 
 ## 関連項目

@@ -13,7 +13,7 @@ study:
 
 ## 一言で言うと
 
-- **テンプレートの実体化**: `Max<int>` が使われた瞬間、その翻訳単位内に int 版の実物コードが生成されること。「テンプレートはヘッダーに書く」「ビルドが遅くなる」「同じコードが何度も作られる」——すべてこの仕組みから導かれる
+- `Max<int>` を使った翻訳単位でint版のコードを生成することを、テンプレートの実体化と呼びます。この仕組みが、定義をヘッダーに書くことや、同じコードが複数回生成されてビルドに時間がかかることにつながります。
 - **inlineの実際**: キーワードinlineの現代の意味は「多重定義の許可」で、**インライン展開するかは最適化器が決める**
 
 ## 実体化の仕組み
@@ -33,7 +33,7 @@ b.cpp: Max(3, 4) を使用      → b.o にも Max<int> の実体が生成され
 ここから導かれる実務知識:
 
 1. **テンプレート定義はヘッダーに置く**: 実体化には雛形の全文が必要。b.cppをコンパイル中のコンパイラは、定義が見えなければ int 版を作れない(宣言だけだとリンクエラー `undefined reference to Max<int>`)
-2. **ビルド時間への影響**: 同じ実体化を全translation unitで繰り返し行い、リンカが捨てる——この「作っては捨てる」がC++のビルドを遅くする主犯の一つ(→ [ビルド速度](/tools/build/build-speed.html))
+2. 同じテンプレートを各翻訳単位で繰り返し実体化し、リンカが重複したコードを除きます。この処理はC++のビルドに時間がかかる主な理由の一つです(→ [ビルド速度](/tools/build/build-speed.html))。
 3. **コードサイズ**: `vector<int>`, `vector<float>`, `vector<Enemy*>` はそれぞれ完全な別コード。型の数だけ増える(テンプレートブロート)。組み込み・モバイルでは意識する
 4. **明示的実体化**という緩和策: 自作の`MyContainer<T>`について、定義が見える1つの.cppで`template class MyContainer<int>;`と実体化し、他では`extern template class MyContainer<int>;`で暗黙の実体化を抑える。標準ライブラリのクラステンプレートの明示的実体化には、宣言がプログラム定義型に依存するなどの条件があり、`std::vector<int>`をこの例には使わない。[C++草案: namespace stdへの制約](https://eel.is/c++draft/namespace.std)
 
@@ -77,7 +77,7 @@ int y = Add(x, 1);
 
 ## C#との対応
 
-- C#ジェネリックは実行時(JIT)に実体化(値型のみ特殊化)。C++はコンパイル時に全部(→ [テンプレートとジェネリック](/languages/csharp/templates-vs-generics.html))
+- JIT実行ではC#ジェネリックのコードを実行時に生成し、値型では特殊化、参照型では共有します。C++ではコンパイル時に実体化します(→ [テンプレートとジェネリック](/languages/csharp/templates-vs-generics.html))
 - C#のインライン展開はJITが行い、`[MethodImpl(MethodImplOptions.AggressiveInlining)]` がヒント。概念は同じで、タイミング(実行時vs事前)が違う
 - IL2CPPはAOTですが、Unity 2022.1以降のFull Generic Sharingでは、専用コードを生成していないジェネリックの組み合わせも共有実装で扱える場合があります。実行時コード生成、コード共有、ストリッピングを別々に確認します。[UnityのFull Generic Sharing](https://unity.com/blog/engine-platform/il2cpp-full-generic-sharing-in-unity-2022-1-beta)
 

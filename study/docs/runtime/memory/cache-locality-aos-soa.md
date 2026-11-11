@@ -14,8 +14,8 @@ study:
 ## 一言で言うと
 
 - **キャッシュ局所性 (cache locality)**: 「次に使うデータが、既にキャッシュに載っている」度合い。**空間的局所性**(近くのデータを使う)と**時間的局所性**(同じデータを繰り返し使う)がある(ハードの仕組みは → [キャッシュ](/runtime/cpp-internals/cache-branch-simd.html))
-- **AoS (Array of Structures)**: 構造体の配列 `Particle particles[N]` — オブジェクト指向の自然な形
-- **SoA (Structure of Arrays)**: 配列の構造体 `float xs[N]; float ys[N];` — 処理単位でデータを揃える形
+- AoS (Array of Structures) は構造体の配列です。`Particle particles[N]` のようにオブジェクト単位でデータをまとめます。
+- SoA (Structure of Arrays) は配列をまとめた構造です。`float xs[N]; float ys[N];` のように処理単位でデータを揃えます。
 
 ## 問題: AoSの「無駄な同乗者」
 

@@ -67,7 +67,7 @@ public:
 
 ### 総合2. 仕組みの説明(C++内部)
 
-「`std::vector<std::unique_ptr<Enemy>> enemies;` に `push_back(std::make_unique<Boss>())` する」— この1行について、次を説明してください。
+`std::vector<std::unique_ptr<Enemy>> enemies;` に `push_back(std::make_unique<Boss>())` する場面を考えます。この1行について次の点を説明してください。
 
 1. コンパイル時に何が起きるか(テンプレートの実体化はどの型に対して起きるか)
 2. 実行時のメモリはどこに何が置かれるか(スタック/ヒープ、vectorの中身は何か)

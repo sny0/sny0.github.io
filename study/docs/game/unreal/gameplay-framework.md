@@ -3,7 +3,7 @@ title: Gameplay Framework・Subsystem・Slate/UMG・DataAsset/DataTable
 study:
   source: C++ Wiki
   status: published
-  summary: "UEは「ゲームには大抵これがある」という役割クラス群を最初から提供します。Unityが白紙(全部自作)なのと対照的な設計思想です。 Controller と Pawn の分離が肝: 「乗り物に乗り換える」「観戦する」「AIに操作を渡す」が Possess の切り替えで表現できる——Strategy/"
+  summary: Unreal EngineのGameplay Frameworkが提供するクラスと、その役割を整理します。ControllerとPawnを分け、Possessを切り替えて乗り物への乗り換えや観戦、AIへの操作の引き継ぎを表現します。
   section: reference
   format: article
   domain: game
@@ -19,7 +19,7 @@ UEは「ゲームには大抵これがある」という役割クラス群を最
 |---|---|---|
 | GameMode | ルールの審判(勝敗、スポーン管理)。サーバーにのみ存在 | GameManager(自作) |
 | GameState | 全員が知る試合状態(スコア、残り時間) | 自作+同期処理 |
-| PlayerController | プレイヤーの意志(入力→Pawnへの指示)。**憑依(Possess)**の主体 | 自作の入力ハンドラ |
+| PlayerController | プレイヤーの入力をPawnへの指示に変換し、**憑依**（Possess）を行う | 自作の入力ハンドラ |
 | Pawn / Character | 操作される身体(Characterは歩行機能つき) | Player Prefab+CharacterController |
 | PlayerState | プレイヤーごとの公開情報(名前、スコア) | 自作 |
 | HUD / Widget | 画面表示 | Canvas+自作UI管理 |

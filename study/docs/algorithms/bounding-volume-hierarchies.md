@@ -13,7 +13,7 @@ study:
 
 # BVHとAABB — 箱でまとめて衝突候補を絞る
 
-画面上の範囲にいる敵を探すとき、すべての敵の形状と範囲を照合する方法があります。遠くの敵をまとめて除外できれば、形状を調べる回数を減らせます。**BVH（Bounding Volume Hierarchy）**は、物体を囲む領域を階層にして、その内側の物体にまとめて当たりを付けるデータ構造です。[pbrtのBVH解説と実装](https://www.pbr-book.org/4ed/Primitives_and_Intersection_Acceleration/Bounding_Volume_Hierarchies)
+画面上の範囲にいる敵を探すには、すべての敵の形状を検索範囲と照合する方法があります。遠くの敵をまとめて除外できれば、形状を調べる回数を減らせます。**BVH（Bounding Volume Hierarchy）**は、物体を囲む領域を階層にまとめ、各領域を調べて内側の物体を検索候補に含めるか決めるデータ構造です。[pbrtのBVH解説と実装](https://www.pbr-book.org/4ed/Primitives_and_Intersection_Acceleration/Bounding_Volume_Hierarchies)
 
 ## 物体を分け、囲む箱を階層にする
 
@@ -55,4 +55,4 @@ query(node, area):
 
 pbrtはレイとプリミティブの交差を絞るためにBVHを構築します。Box2Dの動的AABB木では、物体の代理データを葉に持たせて範囲問い合わせやレイキャストを行います。例えば `b2DynamicTree_MoveProxy` は移動した代理データを木から外し、新しいAABBで挿入し直します。物理の**ブロードフェーズ**ではこのような木で衝突候補を集め、その後に実際の形状を照合します。レイキャストでも、箱との交差を通過した葉で形状との交差を調べます。[pbrtの構築と走査](https://www.pbr-book.org/4ed/Primitives_and_Intersection_Acceleration/Bounding_Volume_Hierarchies) · [Box2DのDynamic Tree API](https://box2d.org/documentation/group__tree.html) · [Koptaらのリフィットと局所更新の論文](https://hwrt.cs.utah.edu/papers/hwrt_rotations.pdf)
 
-[範囲問い合わせの実験](/practice/algorithms/spatial-query-observation.html)では、円の中心で物体をおおむね半分ずつに分け、葉に最大4個の円を置いた2DのBVHを使います。範囲を動かして、全件を調べる場合や均等グリッドと、候補数とヒット結果を比べられます。3D描画での使い方は[ハードウェアレイトレーシング](/graphics/lighting/raytracing.html)で扱います。
+[範囲問い合わせの実験](/practice/algorithms/spatial-query-observation.html)では、円の中心で物体をおおむね半分ずつに分け、葉に最大4個の円を置いた2DのBVHを使います。範囲を動かしながら、BVH、全件検索、均等グリッドで候補数とヒット結果を比べられます。3D描画での使い方は[ハードウェアレイトレーシング](/graphics/lighting/raytracing.html)で扱います。

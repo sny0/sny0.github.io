@@ -3,7 +3,7 @@ title: Iterator
 study:
   source: C++ Wiki
   status: published
-  summary: コレクションの内部構造(配列か、リストか、ツリーか)を知らずに、要素を順に処理したい。走査のやり方をコレクション自身から分離する。 このパターンはC++/C#では言語とライブラリに完全に吸収済みです(C++のイテレータ・range-for、C#の IEnumerable/foreach)。学ぶ意義は
+  summary: Iteratorを使うと、配列、リスト、ツリーといった内部構造に依存せず、要素を順に処理できます。C++とC#の走査機構で自作コンテナを扱う方法と、走査で保証される範囲を説明します。
   section: reference
   format: article
   domain: design
@@ -124,7 +124,7 @@ public class EnemyManager : IEnumerable<Enemy> {
 
 ## 実務でよく見かける変形
 
-- コールバック走査: `ForEach(std::function<void(Enemy&)>)` — 実装が楽で、内部ロックや分割構造に向く(breakしにくいのが弱点)
+- コールバック走査: `ForEach(std::function<void(Enemy&)>)` は実装しやすく、内部ロックや分割構造に向く。走査を途中で打ち切りにくい点が欠点。
 - インデックス+世代ハンドルの走査(→ [Object Pool](/game/patterns/object-pool.html))
 
 ## 過剰設計になる例

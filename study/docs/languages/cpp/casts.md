@@ -3,7 +3,7 @@ title: キャスト
 study:
   source: C++ Wiki
   status: published
-  summary: 型変換を意図別の4種類のキャストで明示するのがC++流です。C形式キャスト (int)x は「4種類のどれか(最悪の組み合わせ)を黙って選ぶ」ため、検索もレビューもできない危険な省略記法として原則使いません。
+  summary: 型変換を意図別の名前付きキャストで明示するのがC++流です。C形式キャスト (int)x は const_cast、static_cast、reinterpret_cast と一部の組み合わせを規格の優先順で解釈し、変換の意図が読み取りにくくなります。
   section: reference
   format: article
   domain: languages
@@ -13,7 +13,7 @@ study:
 
 ## 一言で言うと
 
-型変換を**意図別の4種類のキャスト**で明示するのがC++流です。C形式キャスト `(int)x` は「4種類のどれか(最悪の組み合わせ)を黙って選ぶ」ため、**検索もレビューもできない危険な省略記法**として原則使いません。
+型変換を**意図別の4種類のキャスト**で明示するのがC++流です。C形式キャスト `(int)x` は `const_cast`、`static_cast`、`reinterpret_cast` と一部の組み合わせを規格の優先順で解釈します。`dynamic_cast`は候補に含まれません。変換の意図を検索やレビューで追いやすくするため、原則として名前付きキャストを使います。
 
 ## 4種類のキャスト
 
@@ -66,7 +66,7 @@ auto* bytes = reinterpret_cast<const std::byte*>(&header);     // バイト列�
 (TargetType)expr;   // 意図の異なる複数のキャストをまとめて表せてしまう
 ```
 
-規格が列挙する解釈の優先順は`const_cast`、`static_cast`、`static_cast`に続く`const_cast`、`reinterpret_cast`、`reinterpret_cast`に続く`const_cast`です。複数に解釈できるときは先の解釈を採用し、その解釈が不適格でも後の候補へ救済されるとは限りません。用途を明示できる名前付きキャストを使います。[C++草案: C形式キャスト](https://eel.is/c++draft/expr.cast)
+規格が列挙する解釈の優先順は`const_cast`、`static_cast`、`static_cast`に続く`const_cast`、`reinterpret_cast`、`reinterpret_cast`に続く`const_cast`です。複数に解釈できるときは先の解釈を採用します。その解釈が不適格ならコンパイルエラーになり、後の候補には進みません。用途を明示できる名前付きキャストを使います。[C++草案: C形式キャスト](https://eel.is/c++draft/expr.cast#4)
 
 - 意図が読めない(数値変換のつもりがポインタ再解釈になっても通る)
 - `grep "_cast"` で危険箇所を検索できるのがC++流キャストの利点。C形式はそれを壊す
@@ -93,7 +93,7 @@ TakeDamage(3.7f);         // 3に切り捨てられて黙って通る(コンパ�
 | 数値変換 | 縮小変換はコンパイルエラー(明示要求) | intへのfloat代入は警告どまり(通ってしまう) |
 | ビット再解釈 | unsafe/BitConverter等に隔離 | reinterpret_cast(規則を知らないとUB) |
 
-**C#の `(Boss)e` の感覚でC++の static_cast ダウンキャストを使うのが最危険ポイント**: C#は間違えば例外で止まるが、C++は静かに壊れます。確信がなければ dynamic_cast(または設計の見直し)。
+C#の `(Boss)e` と同じ感覚で、C++の `static_cast` を使ってダウンキャストすると危険です。誤った型へのキャストはC#では例外になりますが、C++の `static_cast` は実行時に型を検査しません。型が確かでなければ `dynamic_cast` を使うか、設計を見直します。
 
 ## Unity開発者が誤解しやすい点
 
@@ -123,7 +123,7 @@ TakeDamage(3.7f);         // 3に切り捨てられて黙って通る(コンパ�
 
 ## 演習
 
-samples/casts_demo.cpp(検証済み)で、(a) int除算の罠、(b) dynamic_castの成功/失敗、(c) static_castダウンキャストの「検査されなさ」(誤った型でも通ること — 実行はしない)を確認してください。
+検証済みの `samples/casts_demo.cpp` で、(a) int除算の注意点、(b) dynamic_castの成功と失敗、(c) static_castで誤った型へのダウンキャストもコンパイルが通ることを確認してください。(c) の誤ったキャストは実行しないでください。
 
 ---
 

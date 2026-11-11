@@ -82,7 +82,7 @@ flowchart TB
 
 ### 同期 — Vulkan最大の難所
 
-Vulkanの同期は3層構造です:
+Vulkanの同期を3層に分けて説明します。
 
 1. **VkFence**: GPU→CPU (フレーム完了待ち)
 2. **VkSemaphore**: キュー操作等の依存 (スワップチェイン取得→描画→Present の連鎖など)。binaryとTimeline Semaphore (1.2) を区別する。timelineは単調カウンタを使いhostからも待てるが、ここで使う `vkAcquireNextImageKHR` / `vkQueuePresentKHR` のsemaphoreはbinaryである

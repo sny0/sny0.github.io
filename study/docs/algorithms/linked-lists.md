@@ -44,7 +44,7 @@ study:
 
 C++の `std::list<T>` は双方向、`std::forward_list<T>` は単方向です。`std::list` では、1ノードの挿入で既存要素へのイテレーター・参照が無効にならず、削除で無効になるのは削除された要素を指すものだけです。単方向の `erase_after` は、消したいノード自身ではなく、その直前を受け取ります。[C++のlist.modifiers](https://eel.is/c++draft/list.modifiers) · [C++のforward.list.modifiers](https://eel.is/c++draft/forward.list.modifiers)
 
-C#の `LinkedList<T>` は双方向で、ノードを `LinkedListNode<T>` として受け取れます。次の例は、待機している読み込み要求のうち、登録時に受け取ったノードを使って一件だけ取り消します。`Remove(node)` は定数時間で、`Remove(value)` は一致する値を先頭から探します。例では、登録・取り消し・列挙を同じスレッドで順に行います。[MicrosoftのLinkedListクラス](https://learn.microsoft.com/en-us/dotnet/api/system.collections.generic.linkedlist-1?view=net-10.0) · [MicrosoftのLinkedList.Remove](https://learn.microsoft.com/en-us/dotnet/api/system.collections.generic.linkedlist-1.remove?view=net-10.0)
+C#の `LinkedList<T>` は双方向で、ノードを `LinkedListNode<T>` として受け取れます。次の例では、登録時に受け取ったノードを使い、待機中の読み込み要求を一件だけ取り消します。`Remove(node)` は定数時間で、`Remove(value)` は一致する値を先頭から探します。例では、登録・取り消し・列挙を同じスレッドで順に行います。[MicrosoftのLinkedListクラス](https://learn.microsoft.com/en-us/dotnet/api/system.collections.generic.linkedlist-1?view=net-10.0) · [MicrosoftのLinkedList.Remove](https://learn.microsoft.com/en-us/dotnet/api/system.collections.generic.linkedlist-1.remove?view=net-10.0)
 
 ```csharp
 using System;

@@ -13,7 +13,7 @@ study:
 
 # WindowsのファイルI/OをProcmonとWPRで追う
 
-ゲームがアセットを読み込むとき、ファイルを開けたか、データがどのくらい届いたか、ストレージへの要求が発生したかは、それぞれ観測する場所が違います。**Process Monitor（Procmon）**では、ファイルシステムの操作をパス・結果・スレッドスタックと一緒に調べられます。**Windows Performance Recorder（WPR）**で記録し、**Windows Performance Analyzer（WPA）**で開くと、ファイル操作と下位のディスク要求を共通の時間軸で見比べられます。[MicrosoftのProcmon資料](https://learn.microsoft.com/en-us/sysinternals/downloads/procmon) · [WPRとWPAの概要](https://learn.microsoft.com/en-us/troubleshoot/windows-server/support-tools/support-tools-xperf-wpa-wpr)
+ゲームがアセットを読み込むとき、ファイルを開けたか、どれだけのデータが届いたか、ストレージへの要求が発生したかは、それぞれ別の箇所で確認します。Process Monitor（Procmon）では、ファイルシステムの操作をパス・結果・スレッドスタックと一緒に調べられます。Windows Performance Recorder（WPR）で記録してWindows Performance Analyzer（WPA）で開くと、ファイル操作と下位のディスク要求を同じ時間軸で見比べられます。[MicrosoftのProcmon資料](https://learn.microsoft.com/en-us/sysinternals/downloads/procmon) · [WPRとWPAの概要](https://learn.microsoft.com/en-us/troubleshoot/windows-server/support-tools/support-tools-xperf-wpa-wpr)
 
 <figure class="study-figure">
   <img src="/images/tools/file-io-tracing.svg" alt="同じファイル範囲を2回読む架空の時間軸。アプリの要求AとBに対応する2件のファイル操作がある。Aの間にはディスク読み取りが1件あり、BはOSに残ったデータで完了して下位の読み取りを発行しない。" width="760" height="410" loading="lazy">

@@ -3,7 +3,7 @@ title: GPUアーキテクチャ詳解
 study:
   source: RenderingWiki
   status: published
-  summary: このページではGPUの内部構造を、シェーダコア (SM/CU)・SIMT実行・メモリ階層・固定機能ユニットの4つの軸で解説します。ここを理解すると、「なぜ分岐が遅いのか」「なぜメモリアクセスパターンが性能を支配するのか」「occupancyとは何か」といった、シェーダ最適化のすべての疑問に答えられる
+  summary: GPUの内部構造を、シェーダコア (SM/CU)、SIMT実行、メモリ階層、固定機能ユニットの4つから説明します。分岐、メモリアクセス、occupancyが性能とどう関係するかを扱います。
   section: reference
   format: article
   domain: hardware
@@ -13,18 +13,18 @@ study:
 
 ## 概要
 
-このページではGPUの内部構造を、**シェーダコア (SM/CU)・SIMT実行・メモリ階層・固定機能ユニット**の4つの軸で解説します。ここを理解すると、「なぜ分岐が遅いのか」「なぜメモリアクセスパターンが性能を支配するのか」「occupancyとは何か」といった、シェーダ最適化のすべての疑問に答えられるようになります。
+GPUの内部構造を、シェーダコア (SM/CU)、SIMT実行、メモリ階層、固定機能ユニットの4つに分けて説明します。これらの構造から、分岐に時間がかかる理由、メモリアクセスのパターンが性能を左右する理由、occupancyの意味を理解できます。
 
 ## なぜ必要なのか
 
-シェーダは「気軽に書けるC風言語」に見えますが、その実行環境はCPUと根本的に異なります。アーキテクチャを知らずに書いたシェーダは、**演算器の大半を遊ばせたまま**動くことがあります。逆に構造を知っていれば、同じ結果を数分の一のコストで得られます。最適化・Compute Shader・GPU Drivenの全ての土台です。
+シェーダはCに似た言語で書けますが、実行環境はCPUと根本的に異なります。GPUの構造を考慮せずに書くと、演算器の大半が使われないまま処理が進むことがあります。構造に合わせて処理を組むと、同じ結果を数分の一のコストで得られます。GPUの構造は、最適化、Compute Shader、GPU Drivenを学ぶ前提です。
 
 ## 歴史・誕生した背景
 
 - **2001〜2005 (分離シェーダ)**: 頂点シェーダ用とピクセルシェーダ用に**別々の専用ユニット**を搭載。頂点重視のシーンではピクセルユニットが遊び、その逆も起きた
 - **2005〜 (統合シェーダ)**: コンソールではATIの**Xenos（Xbox 360、2005年）**が先行。PCではNVIDIA **G80（2006年）**やATI/AMDのR600/TeraScale（2007年）へ続く。頂点/ピクセル/コンピュート等の処理へ同じ演算資源を配分する設計が広がった
 - **2012〜 (GCN/Kepler以降)**: コンピュート性能重視の設計へ。AMD GCNの「Compute Unit (CU)」、明示的なWavefront実行
-- **2018〜 (Turing/RDNA)**: RTコア・Tensorコアという新たな固定機能の追加。RDNAはWave64からWave32へ移行
+- **2018〜 (Turing/RDNA)**: RTコア・Tensorコアという新たな固定機能の追加。RDNA (2019) はWave32をネイティブに追加し、Wave64にも対応
 - **現在**: NVIDIA (Ada/Blackwell)、AMD (RDNA3/4)、Intel (Xe)、Apple (Mシリーズ)、Qualcomm (Adreno) がそれぞれの方言を持つが、基本構造は共通
 
 ## それ以前の技術
@@ -98,7 +98,7 @@ flowchart TB
 
 ### 固定機能ユニット
 
-シェーダ化されず、今も専用回路であり続けるもの:
+次の処理は今も専用回路が担います。
 
 - **ラスタライザ**: 三角形→ピクセル変換 → [ラスタライゼーション](/graphics/pipeline/rasterization.html)
 - **テクスチャユニット**: アドレス計算・フィルタリング・フォーマット展開
@@ -150,18 +150,52 @@ void CSMain(uint3 id : SV_DispatchThreadID) {
 }
 ```
 
-Occupancyを意識したレジスタ削減の考え方 (擬似コード):
+Occupancyを意識したレジスタ削減の考え方 (HLSL SM6の比較例)。各入力に対して40個の特徴値を先に計算する版と、ライトが参照する値をその場で計算する版です。`Input`・`Output`には`ItemCount`要素、`LightFeature`には`LightCount`要素を用意します。
 
-```text
-// 悪い例: ループ外で大量の値を生かし続ける → レジスタ圧迫 → Occupancy低下
-big1..big40 = 事前計算した40個の値
-for each light: color += Shade(big1..big40, light)
+```hlsl
+StructuredBuffer<float> Input : register(t0);
+StructuredBuffer<uint> LightFeature : register(t1);
+RWStructuredBuffer<float> Output : register(u0);
+cbuffer Counts : register(b0) {
+    uint ItemCount;
+    uint LightCount;
+};
 
-// 良い例: ループ内で都度計算 (ALUは余っている)
-for each light:
-    a, b, c = 必要になった時点で再計算
-    color += Shade(a, b, c, light)
+float Feature(float value, uint index) {
+    return sin(value * float(index + 1u));
+}
+
+// 事前計算版。値を保持するコストと、同じ値を再利用できる利点がある。
+[numthreads(64, 1, 1)]
+void PrecomputeCS(uint3 id : SV_DispatchThreadID) {
+    if (id.x >= ItemCount) return;
+    float value = Input[id.x];
+    float features[40];
+    for (uint i = 0; i < 40u; ++i) {
+        features[i] = Feature(value, i);
+    }
+
+    float sum = 0.0f;
+    for (uint light = 0; light < LightCount; ++light) {
+        sum += features[LightFeature[light] % 40u];
+    }
+    Output[id.x] = sum;
+}
+
+// 都度計算版。演算に余裕があり、値の保持が律速なら改善することがある。
+[numthreads(64, 1, 1)]
+void RecomputeCS(uint3 id : SV_DispatchThreadID) {
+    if (id.x >= ItemCount) return;
+    float value = Input[id.x];
+    float sum = 0.0f;
+    for (uint light = 0; light < LightCount; ++light) {
+        sum += Feature(value, LightFeature[light] % 40u);
+    }
+    Output[id.x] = sum;
+}
 ```
+
+配列が実際に何本のレジスタを使うかはコンパイラとGPUによります。両方を同じ入力で測り、レジスタ数、メモリ待ち、演算の利用状況、処理時間を比較します。[NVIDIAのシェーダープロファイラー資料](https://docs.nvidia.com/nsight-graphics/UserGuide/shader-profiler.html)
 
 ## 前提知識
 

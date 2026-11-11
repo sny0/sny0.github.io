@@ -3,7 +3,7 @@ title: GLSL
 study:
   source: RenderingWiki
   status: published
-  summary: GLSL (OpenGL Shading Language) はKhronosのOpenGL/Vulkan向けシェーダ言語です。2004年にOpenGL 2.0で標準化され、20年にわたりクロスプラットフォームシェーダの共通語として使われてきました。現在は「OpenGL用の実行時コンパイル言語」と「
+  summary: GLSLはOpenGLとVulkanで使うシェーダ言語です。2003年のARB拡張と2004年のOpenGL 2.0コア採用から、OpenGLの実行時コンパイルとVulkanのSPIR-Vへの変換までを扱います。
   section: reference
   format: article
   domain: graphics
@@ -15,7 +15,7 @@ WebGL 2とGLSL ES 3.00で実際に描く例は、[シェーダーの第一歩](/
 
 ## 概要
 
-GLSL (OpenGL Shading Language) は**KhronosのOpenGL/Vulkan向けシェーダ言語**です。2004年にOpenGL 2.0で標準化され、20年にわたりクロスプラットフォームシェーダの共通語として使われてきました。現在は「OpenGL用の実行時コンパイル言語」と「Vulkan用のSPIR-V生成ソース言語」という2つの顔を持ちます。
+GLSL (OpenGL Shading Language) は、KhronosのOpenGLとVulkan向けのシェーダ言語です。2004年にOpenGL 2.0のコア仕様に入り、20年にわたって複数のプラットフォームで使われてきました。OpenGLでは実行時にコンパイルする言語として、VulkanではSPIR-Vを生成するためのソース言語として使います。
 
 ## なぜ必要なのか
 
@@ -26,7 +26,8 @@ GLSL (OpenGL Shading Language) は**KhronosのOpenGL/Vulkan向けシェーダ言
 ## 歴史・誕生した背景
 
 - 2002: ARB拡張としてのアセンブリシェーダ (`ARB_vertex_program`)
-- **2004: OpenGL 2.0でGLSL 1.10標準化**。3Dlabsが主導。「ドライバがソースを直接コンパイルする」設計を採用 — 当時は先進的、後に断片化の元凶に
+- 2003: [ARB拡張でGLSLを規定](https://registry.khronos.org/OpenGL/extensions/ARB/ARB_shading_language_100.txt)。3Dlabsが主導
+- **2004: OpenGL 2.0でGLSL 1.10をコア仕様に採用**。「ドライバがソースを直接コンパイルする」設計 — 当時は先進的、後に断片化の元凶に
 - 2008-10: GLSL 1.30〜4.00 (GL3/GL4対応、in/out構文へ刷新、Compute対応は4.30)
 - OpenGL ES系: **GLSL ES 1.00** (WebGL 1) / **3.00** (WebGL 2) が分岐して存在
 - 2016: Vulkan登場 — GLSLは `glslang` でSPIR-Vへ事前コンパイルするソース言語になり、`gl_VertexIndex` 等のVulkan方言 (`GL_KHR_vulkan_glsl`) が定義された
@@ -91,7 +92,7 @@ layout(push_constant) uniform Push { vec4 tint; } pc;
 |---|---|---|
 | コンパイル | ドライバが実行時に | glslang等で事前にSPIR-Vへ |
 | 頂点ID | `gl_VertexID`。BaseVertex付きの描画では、その値を含む | `gl_VertexIndex`。開始値・頂点オフセットを含む |
-| uniform単体宣言 | 可 (`uniform float x;`) | 不可 (ブロック必須、push constant除く) |
+| uniform単体宣言 | 可 (`uniform float x;`) | 非不透明型はUBOまたはpush constantのブロックに入れる。`sampler2D`、`sampler`、`texture2D` などの不透明型は単体宣言可 |
 | descriptor set | なし | `layout(set=N)` |
 | 画面上のY方向 | ビューポートまで含めて確認する | ビューポートの高さを負にして反転できる → [座標変換](/math/rendering/transform.html) |
 
@@ -195,7 +196,7 @@ CPU側では、各メンバーのオフセット、配列・行列のストラ�
 
 ## 参考資料
 
-- Khronos, *OpenGL Shading Language Specification* / *GL_KHR_vulkan_glsl*
+- Khronos, *OpenGL Shading Language Specification* / [*GL_KHR_vulkan_glsl*](https://github.khronos.org/Vulkan-Site/glslext/latest/glslext/khr/GL_KHR_vulkan_glsl.html)
 - LearnOpenGL (Joey de Vries) — GLSL実践の定番教材
 - KhronosGroup/glslang — リファレンスコンパイラ
 - Shadertoy — GLSLフラグメントシェーダの実験場

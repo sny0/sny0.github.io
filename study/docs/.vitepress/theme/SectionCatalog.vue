@@ -59,7 +59,7 @@ watch(() => props.section, resetFilters)
           </button>
         </li>
       </ul>
-      <p class="study-index-help">ここに数えるのは辞典の本文です。読む順番は「学習ガイド」、制作手順や演習は「実践・サンプル」にあります。</p>
+      <p class="study-index-help">ここに表示する件数は辞典本文の数です。読む順番は「学習ガイド」、制作手順や演習は「実践・サンプル」で確認できます。</p>
     </section>
 
     <section v-else class="study-collection-section" aria-labelledby="study-collections-heading">
@@ -73,7 +73,7 @@ watch(() => props.section, resetFilters)
 
     <section class="study-index-section" aria-labelledby="study-index-heading">
       <div class="study-section-heading"><h2 id="study-index-heading">{{ props.section === 'reference' ? '用語・記事の索引' : props.section === 'learning' ? 'ガイド内のページを探す' : '実践・演習の索引' }}</h2></div>
-      <p id="study-index-help" class="study-index-help">この入口のタイトル・別名を絞り込みます。画面上部の全文検索はサイト全体が対象です。</p>
+      <p id="study-index-help" class="study-index-help">この入口のページをタイトル・別名で絞り込めます。画面上部の全文検索はサイト全体が対象です。</p>
       <form class="study-index-filters" role="search" :aria-label="sectionInfo.title + 'の絞り込み'" @submit.prevent>
         <div class="study-query-control"><label for="study-index-query">タイトル・別名</label><input id="study-index-query" v-model="query" type="search" :placeholder="props.section === 'reference' ? '例：アロケータ、Vulkan、C++' : '例：GPU、シューティング、演習'" autocomplete="off" spellcheck="false" aria-describedby="study-index-help" aria-controls="study-index-results"></div>
         <div class="study-select-control"><label for="study-index-domain">分野</label><select id="study-index-domain" v-model="selectedDomain" aria-controls="study-index-results"><option value="">すべての分野</option><option v-for="domain in catalog.domains" :key="domain.id" :value="domain.id">{{ domain.title }}</option></select></div>

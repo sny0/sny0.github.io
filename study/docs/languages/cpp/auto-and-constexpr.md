@@ -3,7 +3,7 @@ title: auto・decltype・constexpr・consteval(型推論とコンパイル時計
 study:
   source: C++ Wiki
   status: published
-  summary: auto は「初期化子から型をコンパイラに推論させる」機能。動的型付けではありません——型はコンパイル時に完全に確定し、以後変わりません(C#の var と同じ)。 「auto = コピー、auto& = 参照、const auto& = 読み取り参照」と覚える。C#のvarは参照型なら常に参照なの
+  summary: autoによる型推論と、constexprやconstevalによるコンパイル時の計算を解説します。型はコンパイル時に決まり、autoとauto&では値と参照の扱いが異なります。
   section: reference
   format: article
   domain: languages
@@ -15,7 +15,7 @@ study:
 
 ### 一言で言うと
 
-`auto` は「**初期化子から型をコンパイラに推論させる**」機能。動的型付けではありません——型はコンパイル時に完全に確定し、以後変わりません(C#の `var` と同じ)。
+`auto` を使うとコンパイラが初期化子から型を推論します。C#の `var` と同じく、型はコンパイル時に確定し、以後変わりません。
 
 ```cpp
 // C++20
@@ -34,12 +34,12 @@ auto b = GetBoss();     // bは Enemy(コピー!)— 参照は推論で剥がれ
 auto& b2 = GetBoss();   // Enemy&(意図通り)
 ```
 
-**「auto = コピー、auto& = 参照、const auto& = 読み取り参照」**と覚える。C#のvarは参照型なら常に参照なので、この罠はC++特有です。
+この例では `auto` はコピー、`auto&` は参照、`const auto&` は読み取り用の参照です。C#の `var` は参照型なら常に参照なので、この違いはC++特有です。
 
 ### 使いどころの指針
 
 - 書く: イテレータ、ラムダの型(書けない)、明らかに冗長な型名、範囲for(`for (const auto& e : enemies)`)
-- 書かない: 型自体が情報であるとき(`auto damage = Calc();` — int? float? 単位は?)。数値型は明示が安全(意図しない整数/浮動小数の推論)
+- 型自体が情報になるときは `auto` を使わない。`auto damage = Calc();` の型はintかfloatか、単位は何か。意図と違う整数型や浮動小数点型に推論されるのを避けるには、数値型を明示する。
 
 ## decltype
 

@@ -13,7 +13,7 @@ study:
 
 # メモリマップドファイル — ファイルの範囲をアドレスへ対応させる
 
-**メモリマップドファイル**は、ファイルの内容と、プロセスの仮想アドレス空間の一部を対応付けて扱う仕組みです。対応する範囲を**ビュー**（view）と呼びます。通常の`ReadFile`ではアプリの受取バッファへ読み取りますが、マッピングではビューのアドレスを通じて内容へアクセスします。[Microsoft: File Mapping](https://learn.microsoft.com/en-us/windows/win32/memory/file-mapping)
+メモリマップドファイルは、ファイルの内容をプロセスの仮想アドレス空間の一部に対応付けて扱う仕組みです。対応する範囲をビュー（view）と呼びます。通常の`ReadFile`ではアプリの受取バッファへ読み取りますが、マッピングではビューのアドレスを通じて内容へアクセスします。[Microsoft: File Mapping](https://learn.microsoft.com/en-us/windows/win32/memory/file-mapping)
 
 ここではWindowsの通常ファイルと、Windows版.NET 10の読取り専用ビューを中心に説明します。POSIXの`mmap`と同じAPI契約として扱いません。アドレス変換とページの基本は[仮想メモリ](/os/virtual-memory.html)、通常のreadとキャッシュは[ファイルを読む仕組み](/os/file-read-journey.html)を参照してください。
 

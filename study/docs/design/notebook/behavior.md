@@ -11,7 +11,7 @@ study:
 
 # 振る舞いを変える — Strategy・State・Command
 
-条件分岐には意味があります。「何を選んでいる分岐なのか」によって、適した分け方が変わります。
+条件分岐の分け方は、その分岐で何を選んでいるかによって変わります。
 
 タグ: Strategy / State / Command / Template Method / Policy
 

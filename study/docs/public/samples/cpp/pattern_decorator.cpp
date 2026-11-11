@@ -2,6 +2,7 @@
 #include <cstdio>
 #include <functional>
 #include <memory>
+#include <utility>
 #include <vector>
 
 // ---- 入れ子版(GoF古典形)----

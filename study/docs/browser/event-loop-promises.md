@@ -19,7 +19,7 @@ study:
 
 ## 実行スタックとrun-to-completion
 
-**実行スタック**は、呼び出し中の関数などの実行状態を積み重ねて管理する仕組みです。関数AからBを呼べばBが実行され、Bが戻るとAの続きへ戻ります。普通の関数呼び出しをすべて「後で実行するキューに入れる」わけではありません。
+**実行スタック**は、呼び出し中の関数などの実行状態を積み重ねて管理する仕組みです。関数AがBを呼ぶと、その場でBを実行し、Bから戻るとAの続きを実行します。通常の関数呼び出しをすべて後で実行するためのキューに入れるわけではありません。
 
 同じ実行主体の通常の同期処理は、途中に別のタイマーコールバックやPromiseのハンドラーが勝手に割り込む形では進みません。この性質を**run-to-completion**と呼びます。ただし、呼び出した関数から別の関数を同期的に呼ぶことはあります。例えば`dispatchEvent()`は、対象のイベントリスナーを同期的に呼びます。「コールバックという名前なら必ず後で動く」とも限りません。[MDN: JavaScript execution model](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Execution_model#run-to-completion)、[MDN: dispatchEvent](https://developer.mozilla.org/en-US/docs/Web/API/EventTarget/dispatchEvent)
 

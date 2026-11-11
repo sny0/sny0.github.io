@@ -69,4 +69,4 @@ param.setTargetAtTime(nextTarget, now, nextTau);
 
 ## ブラウザで切り替わる瞬間を比べる
 
-実践では48,000 Hzの `OfflineAudioContext` で同じ音を二通りに処理し、瞬時切り替えとなめらかな切り替えの波形を描きます。ゲインの推移も、一定値1の信号に同じゲイン操作を適用して測ります。出力波形は元の音の位相やフィルターの状態にも左右されるので、ゲインのグラフと波形はそれぞれの変化に注目して比べます。[遮蔽を切り替える実践](/practice/browser/audio-occlusion-transition-observation.html) · [W3C Web Audio APIのOfflineAudioContext](https://www.w3.org/TR/webaudio/#OfflineAudioContext)
+実践では48,000 Hzの `OfflineAudioContext` で同じ音を二通りに処理し、瞬時に切り替えたときとなめらかに切り替えたときの波形を表示します。ゲインの推移も、一定値1の信号に同じゲイン操作を適用して測ります。出力波形には元の音の位相やフィルターの状態も影響するので、ゲインのグラフと波形はそれぞれの変化に注目して比べます。[遮蔽を切り替える実践](/practice/browser/audio-occlusion-transition-observation.html) · [W3C Web Audio APIのOfflineAudioContext](https://www.w3.org/TR/webaudio/#OfflineAudioContext)

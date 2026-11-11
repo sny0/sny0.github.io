@@ -17,7 +17,7 @@ study:
 
 ## 基本ブロックと分岐
 
-次のC++関数は、`keep` の値で異なる計算をして、その結果を2倍します。`unsigned` は32ビットの環境を想定します。
+次のC++関数は `keep` の値に応じて計算を切り替え、結果を2倍します。`unsigned` が32ビットの環境を想定します。
 
 ```cpp
 extern "C" unsigned choose_offset(bool keep, unsigned base) {

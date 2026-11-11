@@ -113,11 +113,11 @@ public:
 
 ## 結合の強さのおおまかな段階
 
-弱い(良い)→ 強い(悪い)の順:
+結合が弱いものから強いものへ、望ましい順に並べます。
 
-1. **メッセージ/イベント経由** — 相手が誰かも知らない(→ [Event Queue](/game/patterns/event-queue-and-pubsub.html))
-2. **抽象(インターフェース)経由** — 相手の役割だけ知る(→ [DIP](/design/solid/dip.html))
-3. **具象型のpublic関数呼び出し** — 相手のクラスを知る(普通。悪ではない)
+1. メッセージやイベントを使うと、発行側は受信相手を特定する必要がありません。[Event Queue](/game/patterns/event-queue-and-pubsub.html)
+2. 抽象（インターフェース）を使うと、呼び出し側は相手の役割だけを参照します。[DIP](/design/solid/dip.html)
+3. 具象型のpublic関数を呼ぶ場合は、相手のクラスを参照します。これは一般的な方法で、結合が強くなるだけで問題とは限りません。
 4. **相手のデータ構造への直接アクセス** — `player.velocity.y = 10` のような操作
 5. **グローバル変数・シングルトン共有** — 誰と誰が繋がっているか追跡不能になりやすい(→ [Singleton](/design/patterns/singleton.html))
 

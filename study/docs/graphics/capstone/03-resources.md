@@ -3,7 +3,7 @@ title: 3. リソースとパイプライン構築
 study:
   source: RenderingWiki
   status: published
-  summary: GPUにデータを送り込み、描画の設計図 (パイプライン) を組み立てます。バッファ・テクスチャ・ディスクリプタ・PSOという明示的APIの4大リソース概念 (DX12/Vulkan) を、実際に手を動かして体得するステップです。
+  summary: GPUにデータを転送して、描画パイプラインを組み立てる。DX12やVulkanのバッファ、テクスチャ、ディスクリプタ、PSOの使い方をコードで確かめる。
   section: practice
   format: tutorial
   domain: graphics
@@ -15,7 +15,7 @@ study:
 
 ## このステップの目標
 
-GPUにデータを送り込み、描画の設計図 (パイプライン) を組み立てます。**バッファ・テクスチャ・ディスクリプタ・PSO**という明示的APIの4大リソース概念 ([DX12](/graphics/api/directx12.html)/[Vulkan](/graphics/api/vulkan.html)) を、実際に手を動かして体得するステップです。
+GPUにデータを転送し、描画パイプラインを組み立てます。その手順を通して、[DX12](/graphics/api/directx12.html)や[Vulkan](/graphics/api/vulkan.html)で使うバッファ、テクスチャ、ディスクリプタ、PSOの扱い方を確かめます。
 
 ## 3.1 メモリとバッファ — VMAで作る
 
@@ -49,7 +49,7 @@ Buffer CreateVertexBuffer(const void* data, size_t size) {
 
 ## 3.2 テクスチャとミップマップ
 
-glTFのアルベド/法線/ORMテクスチャをロードし、ミップ付きでGPUへ:
+glTFのアルベド・法線・ORMテクスチャを読み込み、ミップを含めてGPUへ転送します。
 
 1. stb_imageでデコード → ステージングバッファ
 2. `VkImage` 作成 (`mipLevels = floor(log2(max(w,h))) + 1`)
@@ -117,7 +117,7 @@ VkShaderModule fs = LoadShader("pbr.frag.spv");
 vkCreateGraphicsPipelines(device, cache, 1, &info, nullptr, &pbrPSO);
 ```
 
-**PSOは起動時に全部作る** — 実行時作成はスタッターの元 ([SPIR-V](/graphics/shader/spirv.html) のPSO問題)。
+PSOはすべて起動時に作ります。実行中に作るとスタッターの原因になります。[SPIR-Vの記事](/graphics/shader/spirv.html)で、PSO作成に伴う問題を説明しています。
 
 第5ステップの中間画像とbindingの契約は次の通りです。作成前に各formatの対応featureとsurfaceのusageを照会します:
 

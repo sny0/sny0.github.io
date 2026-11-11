@@ -19,7 +19,7 @@ study:
 
 `CancelIoEx(file, &request.overlapped)`は、現在のプロセスがそのハンドルに出したI/Oから、指定した`OVERLAPPED`に対応する要求を探し、キャンセルを依頼します。`CancelIoEx(file, nullptr)`はそのハンドルに対する同じプロセスの未完了I/O全体を対象にします。どちらも、呼び出すスレッドとI/Oを発行したスレッドが異なっていても使えます。`CancelIo(file)`は、呼び出したスレッド自身がそのハンドルに出した未完了のI/Oを対象にします。[Microsoft: CancelIoEx](https://learn.microsoft.com/en-us/windows/win32/api/ioapiset/nf-ioapiset-cancelioex) · [Microsoft: CancelIo](https://learn.microsoft.com/en-us/windows/win32/api/ioapiset/nf-ioapiset-cancelio)
 
-`CancelIoEx`の成功は、対象のI/Oにキャンセルを**要求できた**ことを示します。キャンセルが実際に成立するかは、ドライバーの対応とI/Oの進み具合に依存します。`FALSE`で戻った場合は、直後の`GetLastError()`でキャンセル呼び出し自体のエラーを読みます。`ERROR_NOT_FOUND`は、依頼時にキャンセル対象を見つけられなかったという結果です。[Microsoft: Canceling Pending I/O Operations](https://learn.microsoft.com/en-us/windows/win32/fileio/canceling-pending-i-o-operations)
+`CancelIoEx`の成功は対象のI/Oにキャンセルを要求できたことを示します。実際にキャンセルできるかどうかは、ドライバーの対応とI/Oの進み具合に依存します。`FALSE`で戻った場合は、直後の`GetLastError()`でキャンセル呼び出し自体のエラーを読みます。`ERROR_NOT_FOUND`は、要求時にキャンセル対象が見つからなかったことを示します。[Microsoft: Canceling Pending I/O Operations](https://learn.microsoft.com/en-us/windows/win32/fileio/canceling-pending-i-o-operations)
 
 <figure class="study-figure">
   <img src="/images/os/cancelling-overlapped-io.svg" alt="読み取りを発行した後、キャンセルを要求できる。最終結果は通常完了、ERROR_OPERATION_ABORTED、別のI/Oエラーのいずれか。OVERLAPPEDとバッファは、発行からI/O完了通知の回収とアプリでの処理が終わるまで確保しておく。" width="760" height="565" loading="lazy">

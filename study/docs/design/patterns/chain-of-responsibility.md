@@ -33,6 +33,22 @@ Damage要求 ──> [シールド] ──> [鎧] ──> [バリアバフ] ─�
 
 ```cpp
 // C++20(問題例)— 処理の優先順位と条件が1関数に密集
+#include <algorithm>
+
+// 例で使うPlayerのインターフェース
+class Player {
+public:
+    bool HasShield() const;
+    int ShieldValue() const;
+    void SetShield(int value);
+    bool HasArmor() const;
+    int ArmorPercent() const;
+    bool HasBarrierBuff() const;
+    void ConsumeBarrier();
+    int Hp() const;
+    void SetHp(int value);
+};
+
 void ApplyDamage(Player& p, int damage) {
     if (p.HasShield()) {
         int absorbed = std::min(damage, p.ShieldValue());
@@ -56,7 +72,9 @@ void ApplyDamage(Player& p, int damage) {
 
 ```cpp
 // C++20
+#include <algorithm>
 #include <memory>
+#include <utility>
 
 struct DamageContext { int amount = 0; bool finished = false; };
 
@@ -97,7 +115,7 @@ protected:
 private:
     int hp_ = 100;
 };
-// 組み立て: shield->SetNext(armor); armor->SetNext(hp);
+// 組み立て: armor->SetNext(std::move(hp)); shield->SetNext(std::move(armor));
 // キャラごとに鎖の構成・順序を変えられる
 ```
 
@@ -164,7 +182,7 @@ public class DamageHandlerChain {
 
 ## 過剰設計になる例
 
-「将来軽減の種類が増えるかも」で最初から鎖を組む——2種類の軽減が固定なら関数2行です。**順序・構成が動く証拠が出てから**で間に合います。
+軽減処理が固定の2種類なら、関数に2行書けば済みます。将来増える可能性だけで最初から処理の鎖を作る必要はありません。順序や構成を変える必要が生じてから導入しても間に合います。
 
 ## 関連項目
 

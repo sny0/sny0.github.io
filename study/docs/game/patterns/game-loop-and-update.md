@@ -106,12 +106,12 @@ public:
 
 - `Update()` = 可変ステップ(`Time.deltaTime`)、`FixedUpdate()` = 固定ステップ(物理用)。**「物理はFixedUpdate、見た目はUpdate」の使い分けはこのページの2方式そのもの**
 - `Time.timeScale` はループの時間の進みを操作する仕組み(ポーズ・スロー演出)
-- MonoBehaviourのUpdateはリフレクションで収集され、C++側から一括呼び出しされる(1個あたりのオーバーヘッドがあるため、大量オブジェクトでは自前のManagerが束ねるテクニックがある)
+- Unityは有効な`MonoBehaviour`の更新対象を内部リストで管理し、ネイティブ側からC#の`Update`を呼び出す。対象が多い場合は1件ずつのコールバックのコストが積み重なるため、自前のManagerで更新を束ねる手法もある。[Unity 6.6の更新処理の最適化](https://docs.unity.com/en-us/engine/6000.6/manual/scripting/managing-update-order/events-per-frame-optimization)
 
 ## Unreal Engine との対応
 
 - `AActor::Tick(float DeltaSeconds)`は可変ステップUpdate。物理のSubsteppingはフレームの時間を上限時間・最大回数に従って分割するため、常に同じ刻み幅になるわけではありません。固定レートの物理を使う場合はAsync Physicsの`Tick Physics Async`や`Async Fixed Time Step Size`など、利用するUE版の設定と、ゲームスレッドとのデータ受け渡しを確認します。[Physics Sub-Stepping](https://dev.epicgames.com/documentation/en-us/unreal-engine/physics-sub-stepping-in-unreal-engine) · [UPhysicsSettings](https://dev.epicgames.com/documentation/en-us/unreal-engine/API/Runtime/Engine/UPhysicsSettings)
-- Tickの実行順は `TickGroup`(PrePhysics/DuringPhysics/PostPhysics)で制御——更新順序問題への明示的な回答
+- Tickの実行順は、`TickGroup`（PrePhysics、DuringPhysics、PostPhysics）で明示的に制御する。
 
 ## 使う場面 / 使わない場面
 

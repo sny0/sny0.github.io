@@ -15,7 +15,7 @@ study:
 
 # Web Audioで畳み込みリバーブを聴き比べる
 
-約60 msの打音に、小部屋またはホールを模したインパルス応答を使って残響を加えます。一方の図は処理に渡すインパルス応答で、もう一方の図は打音を処理して得た出力です。[経路と畳み込みの図を読む](/browser/audio-convolution-reverb.html)
+小部屋またはホールを模したインパルス応答を使い、約60 msの打音に残響を加えます。二つの図には、処理に渡すインパルス応答と、打音を処理したあとの出力をそれぞれ表示します。[経路と畳み込みの図を読む](/browser/audio-convolution-reverb.html)
 
 <p><a href="/study/samples/browser/audio-reverb-observation/index.html" target="_blank" rel="noopener noreferrer">リバーブの実験を新しいタブで開く</a></p>
 

@@ -32,9 +32,9 @@ g++ -std=c++2a -Wall -Wextra -o out.exe samples/<name>.cpp
 - `tu_demo/` はマルチファイル構成(ビルド手順は同ディレクトリのREADME)
 - `cmake_demo/` はCMakeサンプル(docs/08_build_system/03 参照)
 - GCC 9.2 は C++20 部分対応のため、concepts / ranges / std::format / std::span / std::erase_if は**サンプルでは使用していません**(本文中の該当コードは構文レビューのみ)
-- `ub_examples.cpp`と`memory_bugs_annotated.cpp`は、未定義動作を説明する**読む教材**です。実行結果を期待値と比較するテストにはしません
+- `ub_examples.cpp`と`memory_bugs_annotated.cpp`はコードを読んで未定義動作を学ぶ教材です。実行結果を期待値と比較するテストには使いません。
 
-一括コンパイル確認(PowerShell):
+PowerShellで一括コンパイルを確認します。
 
 ```powershell
 Get-ChildItem samples/*.cpp | Where-Object Name -notin @('atomic_counter.cpp', 'raii_file.cpp') | ForEach-Object { g++ -std=c++2a -Wall -Wextra -c $_.FullName -o NUL }

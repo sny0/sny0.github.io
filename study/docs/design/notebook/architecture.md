@@ -11,7 +11,7 @@ study:
 
 # Layered・Clean・Hexagonal — 境界と依存の向き
 
-パターンがクラスの連携を扱うなら、アーキテクチャはシステムの大きな境界を扱います。
+クラス同士の連携はデザインパターンで考えられます。アーキテクチャでは、システムを大きく分けてどこに境界を置くかを考えます。
 
 タグ: Layered / Clean Architecture / Hexagonal / Ports and Adapters / Vertical Slice
 

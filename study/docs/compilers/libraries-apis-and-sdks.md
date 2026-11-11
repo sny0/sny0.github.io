@@ -13,7 +13,7 @@ study:
 
 # ライブラリ・API・SDK — 用意された機能を使う
 
-ゲームを作るとき、画面のウィンドウを開く処理や画像ファイルを読む処理を、既存の機能に任せられます。その機能を呼ぶための約束、処理を実装した部品、開発に使う一式を表すのが、API・ライブラリ・SDKです。[MicrosoftのWindows SDK](https://learn.microsoft.com/en-us/windows/apps/windows-sdk/)
+ゲームを作るときは、ウィンドウを開いたり画像ファイルを読んだりする処理に、既存の機能を使えます。機能を呼び出すための約束がAPI、その処理を実装した部品がライブラリ、開発に使う一式がSDKです。[MicrosoftのWindows SDK](https://learn.microsoft.com/en-us/windows/apps/windows-sdk/)
 
 ## まず三つの役割を区別する
 

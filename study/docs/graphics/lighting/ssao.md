@@ -3,7 +3,7 @@ title: SSAO (Screen-Space Ambient Occlusion)
 study:
   source: RenderingWiki
   status: published
-  summary: SSAOは深度バッファ (と法線) だけを使って、近傍ジオメトリによる環境光の遮蔽 (Ambient Occlusion) を画面空間で近似する技術です。2007年のCrysisで登場し、「G-Bufferから安価にGI風の陰影を得る」画面空間技法時代の扉を開きました。原理・限界・進化 (HBAO→
+  summary: SSAOは、深度バッファや法線を使って、近くの形状が環境光を遮る度合いを画面空間で近似する技術です。原理と限界、HBAOやGTAOへの発展を説明します。
   section: reference
   format: article
   domain: graphics
@@ -13,7 +13,7 @@ study:
 
 ## 概要
 
-SSAOは**深度バッファ (と法線) だけを使って、近傍ジオメトリによる環境光の遮蔽 (Ambient Occlusion) を画面空間で近似する**技術です。2007年のCrysisで登場し、「G-Bufferから安価にGI風の陰影を得る」画面空間技法時代の扉を開きました。原理・限界・進化 (HBAO→GTAO) の全てが、スクリーンスペース技法の教科書です。
+SSAOは、深度バッファ (と法線) だけを使い、近傍ジオメトリによる環境光の遮蔽 (Ambient Occlusion) を画面空間で近似する技術です。2007年のCrysisで登場し、G-Bufferを利用して低コストでGIに似た陰影を表す画面空間技法の先例になりました。SSAOの原理と限界、HBAOからGTAOへの発展は、画面空間で処理する技法の特徴を理解する題材になります。
 
 ## なぜ必要なのか
 
@@ -29,7 +29,7 @@ SSAOは**深度バッファ (と法線) だけを使って、近傍ジオメト�
 - 2008: NVIDIA **HBAO** (Horizon-Based AO) — 水平線走査による精度向上
 - 2009: **SSDO**（方向性を持つAO、Ritschel et al.）
 - 2011: **Alchemy AO**（McGuire et al.）
-- **2016: GTAO** (Jimenez et al., Ground-Truth AO) — 現在の標準。コサイン重み付き可視性を正しく積分
+- **2016: GTAO** (Jimenez et al., Ground-Truth AO) — コサイン重み付き可視性を解析的に積分
 - 2020年代: レイトレースAO、そしてフルGI (Lumen/RTGI) への吸収が進行
 
 ## それ以前の技術
@@ -42,7 +42,7 @@ SSAOは**深度バッファ (と法線) だけを使って、近傍ジオメト�
 
 ## 現在の位置づけ
 
-依然ほぼ全タイトルに搭載されています (URPのSSAO、HDRP/UEのGTAO)。フルGI環境ではGIが広域遮蔽を担い、SSAOは「小規模ディテールの遮蔽 (micro-occlusion)」担当として共存します。限界 (画面外・厚み不明) は画面空間技法共通のものです → [GI総論](/graphics/lighting/gi.html)
+現行エンジンにも画面空間AOの実装があります (URPのSSAO、HDRPのGTAO、UEのSSAO/GTAO選択式)。フルGI環境ではGIが広域遮蔽を担い、SSAOは「小規模ディテールの遮蔽 (micro-occlusion)」担当として共存します。限界 (画面外・厚み不明) は画面空間技法共通のものです → [GI総論](/graphics/lighting/gi.html)
 
 ## 内部動作
 
@@ -67,7 +67,7 @@ flowchart LR
 | Crysis SSAO (2007) | 球状サンプル+深度比較 | 法線不使用。平面が灰色になる自己遮蔽アーティファクト |
 | Normal-oriented (2008-) | 法線半球内でサンプル | 自己遮蔽解消。ランダム回転+ブラーでノイズ処理 |
 | **HBAO** (2008) | 画面上を放射状に行進し「水平線角」を求める | 深度をハイトフィールドとみなす。高品質 |
-| **GTAO** (2016) | 水平線ベース+コサイン重みの解析的積分+時間的蓄積 | 参照解 (レイトレAO) に一致するよう設計。現行標準 |
+| **GTAO** (2016) | 水平線ベース+コサイン重みの解析的積分+時間的蓄積 | 同じ画面空間情報に基づく参照解に近づける設計 |
 
 ### 品質を支える周辺技術
 
@@ -81,7 +81,7 @@ flowchart LR
 URP: Renderer Feature の SSAO (Depth/Depth-Normals ソース選択可)。HDRP: **GTAO実装** (`Ambient Occlusion` ボリューム)。どちらも `ScreenSpaceAmbientOcclusion` パスとしてFrame Debuggerで確認できます。
 
 ### Unreal Engine
-既定でSSAO (旧) / **GTAO** (`r.AmbientOcclusion.Method 1`)。さらにDFAO (Distance Field AO、中距離)、RTAO (レイトレ)、Lumen有効時はLumenが遮蔽の大半を担当します。マテリアルのAOマップ (micro) とは乗算合成。
+画面空間AOの手法は `r.AmbientOcclusion.Method` で選択し、`0` が従来のSSAO (既定)、`1` が **GTAO** です。さらにDFAO (Distance Field AO、中距離)、RTAO (レイトレ)、Lumen有効時はLumenが遮蔽の大半を担当します。マテリアルのAOマップ (micro) とは乗算合成。[Epic: Unreal Engine Console Variables Reference](https://dev.epicgames.com/documentation/en-us/unreal-engine/unreal-engine-console-variables-reference)
 
 ### DirectX 12 / Vulkan
 Computeパスとして実装 (深度+法線SRV→AO UAV→ブラー→合成)。Intel の **XeGTAO** (オープンソース) が現代的リファレンス実装です。

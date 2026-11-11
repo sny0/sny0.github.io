@@ -25,7 +25,7 @@ study:
 | **デバッガ** | 実行を止めたり進めたりして、値や呼び出しの流れを調べる。 | ダメージ後のHPが想定外になる場所を追う。 |
 | **プロファイラー** | 実行中の時間、CPU使用、メモリなどを計測する。 | フレームが遅くなった区間と、時間を使った処理を探す。 |
 
-**IDE（統合開発環境）**は、編集、ビルド、デバッグなどを一つの作業環境にまとめます。Visual Studioはその一例です。Visual Studio Codeのようなエディターも、言語の拡張機能や外部ツールとの連携を組み合わせて、補完・ビルド・デバッグの機能を使えます。[Visual Studioの構成](https://learn.microsoft.com/en-us/visualstudio/get-started/visual-studio-ide) · [Visual Studio Codeの言語機能](https://code.visualstudio.com/docs/languages/overview)
+IDE（統合開発環境）は編集、ビルド、デバッグなどを一つの作業環境にまとめます。Visual Studioはその一例です。Visual Studio Codeのようなエディターでも、言語の拡張機能や外部ツールを組み合わせれば、補完・ビルド・デバッグの機能を使えます。[Visual Studioの構成](https://learn.microsoft.com/en-us/visualstudio/get-started/visual-studio-ide) · [Visual Studio Codeの言語機能](https://code.visualstudio.com/docs/languages/overview)
 
 <figure class="study-figure">
   <img src="/images/tools/development-tools-basics.svg" alt="編集したソースコードをビルドしてプログラムを実行する。実行中の値と呼び出しはデバッガで追い、CPU時間やメモリはプロファイラーで測る。結果をもとにコードを編集する。" width="760" height="442" loading="lazy">

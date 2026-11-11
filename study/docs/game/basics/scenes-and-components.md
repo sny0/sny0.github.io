@@ -13,7 +13,7 @@ study:
 
 # シーン・オブジェクト・コンポーネントの基本
 
-ゲームの中には、プレイヤー、地面、カメラ、照明などがあります。これらを配置し、役割を組み合わせると、遊べる場面を作れます。まずUnityを主な例に、物の配置と機能の持たせ方を見ます。[Unityのシーン](https://docs.unity3d.com/6000.0/Documentation/Manual/CreatingScenes.html) · [ゲームエンジンの基本](/game/basics/game-engine-basics.html)
+プレイヤー、地面、カメラ、照明などを配置し、それぞれの役割を組み合わせて遊べる場面を作ります。主にUnityを例に、オブジェクトを配置して機能を持たせる方法を扱います。[Unityのシーン](https://docs.unity3d.com/6000.0/Documentation/Manual/CreatingScenes.html) · [ゲームエンジンの基本](/game/basics/game-engine-basics.html)
 
 ## シーンは、配置する内容をまとめる
 

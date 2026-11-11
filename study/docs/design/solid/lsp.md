@@ -15,7 +15,7 @@ study:
 
 > 基底型のオブジェクトを使っている場所は、その派生型のオブジェクトに置き換えても、プログラムの正しさが保たれなければならない。
 
-ポイントは「コンパイルが通る」ではなく「**呼び出し側が基底型に対して持っている期待(契約)を裏切らない**」ことです。契約には次が含まれます。
+コンパイルが通るだけではLSPを満たしません。派生型は、呼び出し側が基底型に期待する契約を守る必要があります。契約には次が含まれます。
 
 - **事前条件を強めない**: 基底が受け付ける入力は派生も受け付ける
 - **事後条件を弱めない**: 基底が保証する結果は派生も保証する
@@ -35,7 +35,8 @@ is-a が日本語として自然でも、契約が破れていればLSP違反で
 
 ```cpp
 // C++20(問題例)
-#include <stdexcept>
+#include <memory>
+#include <vector>
 
 class Enemy {
 public:
@@ -89,11 +90,14 @@ protected:
 ```cpp
 // C++20 — 案2: 継承をやめ、無効化を部品にする(コンポジション)
 // 「ダメージへの反応」を差し替え可能な部品にすれば、Ghostは特別な派生型ではなくなる
+#include <functional>
+
 class Enemy {
 public:
     std::function<int(int)> damageFilter = [](int d) { return d; };  // 素通し
     void TakeDamage(int amount) { hp_ -= damageFilter(amount); }
-    // ... 省略
+private:
+    int hp_ = 100;
 };
 // Ghost: damageFilter = [this](int d) { return weakened_ ? d : 0; };
 ```
@@ -107,7 +111,22 @@ public:
 ## C#版(Unityでの例)
 
 ```csharp
-// 問題例: 基底のUpdate契約を派生が破る
+using System.Collections.Generic;
+using UnityEngine;
+
+public class PlayerHealth {
+    public int Hp { get; private set; } = 100;
+    public void TakeDamage(int amount) => Hp -= amount;
+}
+
+public class Inventory {
+    private readonly List<int> items = new List<int>();
+    public PlayerHealth Owner { get; } = new PlayerHealth();
+    public int Count => items.Count;
+    public void Add(int itemId) => items.Add(itemId);
+}
+
+// 問題例: 基底のOnPickedUp契約を派生が破る
 public class Pickup : MonoBehaviour {
     // 契約(暗黙): OnPickedUpは「拾えたら」呼ばれ、必ずインベントリに入る
     public virtual void OnPickedUp(Inventory inv) => inv.Add(itemId);

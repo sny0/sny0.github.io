@@ -3,7 +3,7 @@ title: Unity のレンダラーと SRP
 study:
   source: RenderingWiki
   status: published
-  summary: Unityのレンダリングは、SRP (Scriptable Render Pipeline) — 「レンダーパイプラインの構成をC#で記述する」アーキテクチャ — を土台に、その上の2つの公式実装 URP (幅広い機種) と HDRP (ハイエンド) で構成されます。このページではSRPの仕組みと、
+  summary: UnityのScriptable Render Pipeline（SRP）では、レンダーパイプラインの構成をC#で記述します。公式実装のURPとHDRPの違いと、カリングした結果を描画コマンドとしてGPUに渡すまでを説明します。
   section: reference
   format: article
   domain: graphics
@@ -13,7 +13,7 @@ study:
 
 ## 概要
 
-Unityのレンダリングは、**SRP (Scriptable Render Pipeline)** — 「レンダーパイプラインの構成をC#で記述する」アーキテクチャ — を土台に、その上の2つの公式実装 **[URP](/graphics/engine/urp.html)** (幅広い機種) と **[HDRP](/graphics/engine/hdrp.html)** (ハイエンド) で構成されます。このページではSRPの仕組みと、C#からGPUまでの道のり (カリング→描画リスト→CommandBuffer→グラフィックスAPI) を解説します。
+SRP (Scriptable Render Pipeline) では、Unityのレンダーパイプラインの構成をC#で記述します。Unityの公式実装には、幅広い機種を対象とする[URP](/graphics/engine/urp.html)と、ハイエンド向けの[HDRP](/graphics/engine/hdrp.html)があります。SRPでカリングした結果から描画リストを作り、CommandBufferを介してグラフィックスAPIからGPUへ処理を渡すまでを説明します。
 
 ## なぜ必要なのか
 

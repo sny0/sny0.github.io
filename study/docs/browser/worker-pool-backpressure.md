@@ -13,7 +13,7 @@ study:
 
 # Worker poolと待ち行列の制御 — 受付・実行・取消しを分ける
 
-**Worker pool**は、用意したWorkerを再利用し、仕事を割り当てるアプリ側の仕組みです。Web標準に、待ち行列の上限や取消しまで決めてくれる汎用のWorkerPool APIがあるわけではありません。**何件受け付けるか、何件を実行中として扱うか、不要になった結果をどう扱うか**を、自分の契約として決めます。
+**Worker pool**は、用意したWorkerを再利用し、仕事を割り当てるアプリ側の仕組みです。Web標準に、待ち行列の上限や取消しまで扱う汎用のWorkerPool APIはありません。何件を受け付け、何件を実行中として扱い、不要になった結果をどう処理するかは、アプリ側で決めます。
 
 [Web Workerとメッセージ通信](/browser/web-workers-messages.html)の、別の実行環境、ready通知、コピー・移譲、要求IDと世代が前提です。ここでの**job**は、入力を渡して結果を得るアプリの仕事一件を指します。[イベントループ](/browser/event-loop-promises.html)のHTML taskや、言語仕様のECMAScript Jobとは同じ単位ではありません。[ECMAScript: Jobs and Host Operations](https://tc39.es/ecma262/multipage/executable-code-and-execution-contexts.html#sec-jobs)
 

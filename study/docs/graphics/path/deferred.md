@@ -3,7 +3,7 @@ title: Deferred Rendering
 study:
   source: RenderingWiki
   status: published
-  summary: Deferred Rendering (遅延レンダリング) は、「何が見えるか」と「どう照らすか」を分離する方式です。第1パス (Geometry Pass) で全オブジェクトのマテリアル属性 (アルベド・法線・粗さ...) を G-Buffer と呼ばれる複数のテクスチャに書き出し、第2パス (L
+  summary: Deferred Rendering (遅延レンダリング) は、見える面の決定と照明の計算を分ける方式です。Geometry Passでアルベド、法線、粗さなどをG-Bufferに書き出し、Lighting Passでピクセルごとに照明を計算します。
   section: reference
   format: article
   domain: graphics
@@ -13,7 +13,7 @@ study:
 
 ## 概要
 
-Deferred Rendering (遅延レンダリング) は、**「何が見えるか」と「どう照らすか」を分離**する方式です。第1パス (Geometry Pass) で全オブジェクトのマテリアル属性 (アルベド・法線・粗さ...) を **G-Buffer** と呼ばれる複数のテクスチャに書き出し、第2パス (Lighting Pass) で画面のピクセルごとに一度だけライティングを計算します。PS3/X360世代 (2007〜) のAAA開発を支配した方式です。
+Deferred Rendering (遅延レンダリング) は、画面にどの面が見えるかを決める処理と、その面を照らす処理を分ける方式です。第1パス (Geometry Pass) で全オブジェクトのアルベド、法線、粗さなどのマテリアル属性を、G-Bufferと呼ばれる複数のテクスチャに書き出します。第2パス (Lighting Pass) では、画面のピクセルごとにライティングを一度だけ計算します。PS3/X360世代 (2007〜) のAAA開発で主流になりました。
 
 ## なぜ必要なのか
 
@@ -26,7 +26,8 @@ Deferred Rendering (遅延レンダリング) は、**「何が見えるか」�
 - 1988: Deering らが概念を提案 (ハードウェア構想として)
 - 2004: **S.T.A.L.K.E.R.** が商用ゲームでの本格採用を発表 (GSC / Shishkovtsov, GPU Gems 2)
 - **2007年以降: 採用の拡大** — Killzone 2（Guerrilla、2007年のDevelop講演。製品は2009年）、Crysis 2（2011年）など。PS3/X360のメモリ帯域とMRT対応が方式を後押し
-- 2010年代: **Tiled Deferred** (Andersson 2009, Frostbite) — Computeでライトカリングし帯域を削減
+- 2009: **Tiled Deferred** — Johan AnderssonがFrostbiteの手法をSIGGRAPHで発表。Computeでライトをタイル単位に絞り込む
+- 2011: *Battlefield 3* のFrostbite 2でタイル単位のDeferred Lightingを採用
 - 2013〜: PBR標準化でG-Bufferレイアウトも標準化 (BaseColor/Metallic/Roughness/Normal)
 - 現在: UE5・HDRPの既定は依然Deferred系。ただしForward+の復権とモバイルの制約で「唯一の正解」ではなくなった
 
@@ -172,6 +173,7 @@ void TiledLightingCS(uint3 dtid : SV_DispatchThreadID, uint gi : SV_GroupIndex) 
 
 - Shishkovtsov, *"Deferred Shading in S.T.A.L.K.E.R."* (GPU Gems 2, 2005)
 - Valient, *"Deferred Rendering in Killzone 2"* (Develop 2007) — 伝説的資料
-- Andersson, *"Parallel Graphics in Frostbite - Current & Future"* (SIGGRAPH 2009) — Tiled Deferred
+- [Andersson, *Parallel Graphics in Frostbite - Current & Future* (SIGGRAPH 2009)](https://www.slideshare.net/slideshow/parallel-graphics-in-frostbite-current-future-siggraph-2009-1860503/1860503) — Tiled Deferred
+- [DICE: *Rendering in Battlefield 3* (SIGGRAPH 2011)](https://www.gamedevs.org/uploads/rendering-in-battlefield3.pdf)
 - Unreal Engine ソース: `DeferredShadingRenderer.cpp`
 - [Guerrilla: Deferred Rendering in Killzone 2 (Develop 2007)](https://www.guerrilla-games.com/read/deferred-rendering-in-killzone-2)

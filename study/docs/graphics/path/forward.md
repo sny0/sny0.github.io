@@ -3,7 +3,7 @@ title: Forward Rendering
 study:
   source: RenderingWiki
   status: published
-  summary: "Forward Renderingは最も素直なレンダリング方式です: オブジェクトを1つずつ描画し、そのFragment Shader内でその場でライティングまで完結させます。歴史的に最初の方式であり、Deferredの隆盛を経て、Forward+/Clusteredという進化形で現代の主役に返り咲"
+  summary: Forward Renderingでは、オブジェクトを1つずつ描き、Fragment Shaderでライティングまで計算します。Deferredが普及したあと、Forward+やClusteredとして発展した経緯も扱います。
   section: reference
   format: article
   domain: graphics
@@ -13,7 +13,7 @@ study:
 
 ## 概要
 
-Forward Renderingは**最も素直なレンダリング方式**です: オブジェクトを1つずつ描画し、そのFragment Shader内で**その場でライティングまで完結**させます。歴史的に最初の方式であり、Deferredの隆盛を経て、Forward+/Clusteredという進化形で現代の主役に返り咲いています。半透明・MSAA・多様なマテリアルとの相性が良いのが本質的な強みです。
+Forward Renderingでは、オブジェクトを1つずつ描画し、各オブジェクトのFragment Shaderでライティングまで計算します。歴史的に最初の方式です。Deferredが広く使われた時期を経て、Forward+やClusteredの形で再び主流になっています。半透明、MSAA、多様なマテリアルを扱いやすいことが強みです。
 
 ## なぜ必要なのか
 

@@ -15,7 +15,7 @@ study:
 
 # C++とC#でOSの名前解決結果と取消しの境界を観察する
 
-**名前や数値IPをAPIへ渡し、返されたアドレスとAPIの終端状態を調べます。** DNSパケットを直接送受信する例ではありません。名前解決の経路と図は[DNSと名前解決](/network/dns-resolution.html)、その後の処理は[TCP](/network/tcp-sockets.html)・[HTTP](/network/http-messages.html)へつながります。
+名前や数値IPをAPIへ渡し、返されたアドレスと処理がどう終わったかを調べます。DNSパケットを直接送受信する例ではありません。名前解決の経路と図は[DNSと名前解決](/network/dns-resolution.html)、その後の処理は[TCP](/network/tcp-sockets.html)と[HTTP](/network/http-messages.html)で確認できます。
 
 名前解決に成功しても、接続・HTTP応答・TLS認証が成功したわけではありません。このコードはそれらを実行しません。
 

@@ -31,7 +31,7 @@ EXEを起動すると、OSがプロセスと実行の準備を整え、ローダ
 
 ### スレッドが共有するものと、個別に持つもの
 
-同一プロセスのスレッドは、仮想アドレス空間と、コード・グローバル変数・ヒープなどを共有します。一方、それぞれにユーザースタック、TLS、実行コンテキストがあります。**TLS（Thread Local Storage）**はスレッドごとの値を置く仕組みで、C++の`thread_local`もこの種の分離を言語として提供します。実行コンテキストには、次に実行する位置やスタック位置などのレジスタ状態が含まれます。[Microsoft: About Processes and Threads](https://learn.microsoft.com/en-us/windows/win32/procthread/about-processes-and-threads)
+同じプロセス内のスレッドは仮想アドレス空間を共有し、コード・グローバル変数・ヒープなどを共有します。一方、ユーザースタック、TLS、実行コンテキストはスレッドごとに持ちます。TLS（Thread Local Storage）はスレッドごとの値を置く仕組みで、C++にも`thread_local`で値を分ける仕組みがあります。実行コンテキストには、次に実行する位置やスタック位置などのレジスタ状態が含まれます。[Microsoft: About Processes and Threads](https://learn.microsoft.com/en-us/windows/win32/procthread/about-processes-and-threads)
 
 「スレッドごとのスタックやTLS」は、別スレッドから読み書きできない保護領域という意味ではありません。これらも同じ仮想アドレス空間内にあり、例えば有効な寿命のスタック変数へのポインタを他スレッドに渡せます。寿命と同期が必要であることは変わりません。別プロセスの同じ数値のアドレスは同じデータを指すとは限らず、連携にはIPC（プロセス間通信）や共有メモリなどを使います。[Microsoft: Virtual Address Space](https://learn.microsoft.com/en-us/windows/win32/memory/virtual-address-space)
 

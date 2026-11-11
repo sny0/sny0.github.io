@@ -35,7 +35,7 @@ study:
 | 範囲内の `k` 件を順に読む | `O(h + k)` | `O(log n + k)` |
 | 全件を順に読む | `O(n)` | `O(n)` |
 
-表の高さは、根から最も深い葉までのノード数です。範囲走査は、端を見つけたあとに探索経路を引き継いで順にたどる場合です。要素数 `n` が同じでも、単純な二分探索木に小さい順で追加し続けると、右の子だけが伸びて高さは `n` になります。平衡木は挿入や削除に合わせて形を整え、木が深くなり過ぎるのを防ぎます。[GuibasとSedgewickによる平衡木の論文](https://sedgewick.io/wp-content/themes/sedgewick/papers/1978Dichromatic.pdf)
+表でいう木の高さは、根から最も深い葉までのノード数です。範囲走査の計算量は、端を見つけたあと、探索経路を引き継いで順にたどる場合の値です。要素数 `n` が同じでも、単純な二分探索木に小さい順で追加し続けると、右の子だけが連なり、高さは `n` になります。平衡木は挿入や削除に合わせて形を整え、木が深くなり過ぎるのを防ぎます。[GuibasとSedgewickによる平衡木の論文](https://sedgewick.io/wp-content/themes/sedgewick/papers/1978Dichromatic.pdf)
 
 - **赤黒木**は二分探索木に各ノードの色を加え、色の条件を保つために色や親子のつなぎ方を変更します。キーの順序を保ちながら、根から葉までの経路の長さを抑えます。[赤黒木の色と平衡条件](https://sedgewick.io/wp-content/themes/sedgewick/papers/1978Dichromatic.pdf)
 - **B木**は1ノードに複数のキーと子を持てる平衡木です。多くの分岐先を1ページで判定できるので、ページ単位で読み書きする索引に向きます。PostgreSQLにも複数方向へ分岐するB-tree索引があります。[PostgreSQLのB-tree索引](https://www.postgresql.org/docs/current/btree.html)

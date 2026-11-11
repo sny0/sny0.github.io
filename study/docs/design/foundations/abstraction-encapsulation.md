@@ -97,13 +97,13 @@ private:
 
 ## ゲーム開発での例
 
-- 物理エンジンの `Raycast(origin, dir)` は、内部の空間分割構造(→ [Spatial Partition](/game/patterns/optimization-patterns.html))を完全に隠した抽象。
+- 物理エンジンの `Raycast(origin, dir)` は内部の[空間分割構造](/game/patterns/optimization-patterns.html)を完全に隠した抽象です。
 - 「HPを直接いじらせず `TakeDamage()` を通す」ことで、無敵判定・ダメージ軽減・死亡判定のルールを1か所に保てる。
 
 ## Unity/C# との対応
 
 - C#の `private` + プロパティが同じ役割。`public int hp;` をインスペクタに出したいがために全部publicにするのは情報隠蔽の放棄です(`[SerializeField] private` を使う)。
-- C# には `internal`(アセンブリ内公開)があり、C++にはこれに直接対応するものがない(→ [ヘッダー分割と Assembly Definition](/languages/csharp/headers-vs-asmdef.html))。
+- C# の `internal` はアセンブリ単位でアクセスを制御します。C++20以降は、名前付きモジュールのインターフェースで `export` する宣言を選び、モジュール内で使う非公開宣言を分けられます。C++20より前のヘッダー方式では、非公開ヘッダーや無名namespaceを使って公開範囲を絞ります(→ [ヘッダー分割と Assembly Definition](/languages/csharp/headers-vs-asmdef.html))。[C++のモジュールの公開宣言](https://eel.is/c++draft/module.interface)
 
 ## Unreal Engine との対応
 
@@ -112,7 +112,7 @@ private:
 ## よくある誤解
 
 - 「カプセル化 = privateにすること」— privateは手段の一つ。本質は**変わりそうな決定を外に約束しない**ことです。
-- 「抽象化 = 基底クラスを作ること」— 継承は抽象化の一手段にすぎません。関数を1つ切り出すのも立派な抽象化です。
+- 継承は抽象化の一手段です。基底クラスを作る場合のほか、関数を1つ切り出す場合も抽象化に当たります。
 
 ## 使う場面 / 使わない場面
 

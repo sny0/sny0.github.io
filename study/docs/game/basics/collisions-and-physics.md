@@ -28,7 +28,7 @@ study:
 
 ## Rigidbodyで動きを扱う
 
-**Rigidbody（剛体）**は、質量や速度などを持ち、物理計算で扱う物体のまとまりです。Unityの3D物理では、ColliderとRigidbodyの組み合わせによって、次のような使い方になります。[UnityのRigidbody](https://docs.unity3d.com/6000.0/Documentation/Manual/class-Rigidbody.html)
+**Rigidbody**（剛体）は、質量や速度などを持ち、物理計算で扱う物体のまとまりです。Unityの3D物理では、ColliderとRigidbodyの組み合わせによって使い方が変わります。[UnityのRigidbody](https://docs.unity3d.com/6000.0/Documentation/Manual/class-Rigidbody.html)
 
 | 種類 | Unityでの基本構成 | 使う場面 |
 | --- | --- | --- |

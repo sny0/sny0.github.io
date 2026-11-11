@@ -46,7 +46,7 @@ study:
 
 ## いつ呼ばれるかを確認する
 
-C#の通常のイベント呼び出しでは、登録したハンドラーを**同期的に**呼びます。発行した処理の流れの中で受け手が動くため、重いハンドラーがあれば、その呼び出しを待つ時間も長くなります。[Microsoftのイベントの呼び出し](https://learn.microsoft.com/en-us/dotnet/csharp/programming-guide/events/)
+C#の通常のイベント呼び出しでは、登録したハンドラーを**同期的に**呼びます。発行元の処理はハンドラーの終了を待つので、重いハンドラーがあると待ち時間が長くなります。[Microsoftのイベントの呼び出し](https://learn.microsoft.com/en-us/dotnet/csharp/programming-guide/events/)
 
 **イベントキュー**では、通知を一度ためて、ゲームループの決めた段階などで取り出します。後で処理するときには、対象がまだ存在するか、通知に入れた値はどの時点のものかを考えます。即座に呼ぶか、後へ渡すかは、採用する仕組みの規則で決まります。[Event Queue・Message Busの詳解](/game/patterns/event-queue-and-pubsub.html)
 

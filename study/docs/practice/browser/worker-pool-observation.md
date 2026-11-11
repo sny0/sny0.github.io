@@ -15,7 +15,7 @@ study:
 
 # Worker poolで受付上限・待機取消し・結果破棄を観察する
 
-2つのWorkerへ一件ずつ処理を送り、空きがなければ最大4件を待たせます。7件をまとめて依頼したとき、受付上限をどう扱うかを実際のブラウザで比べる実験です。設計と図は[Worker poolとバックプレッシャー](/browser/worker-pool-backpressure.html)、単一workerの基礎は[コピー・transfer・停止の実験](/practice/browser/worker-message-observation.html)を参照してください。
+2つのWorkerに一件ずつ処理を送り、空きがなければ最大4件を待たせます。実際のブラウザで7件をまとめて依頼し、受付上限を超えた要求がどう扱われるかを確認します。設計と図は[Worker poolとバックプレッシャー](/browser/worker-pool-backpressure.html)、単一workerの基礎は[コピー・transfer・停止の実験](/practice/browser/worker-message-observation.html)を参照してください。
 
 <p><a href="/study/samples/browser/worker-pool-observation/index.html" target="_blank" rel="noopener noreferrer">Worker poolの実験ページを新しいタブで開く</a></p>
 

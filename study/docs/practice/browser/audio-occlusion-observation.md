@@ -15,7 +15,7 @@ study:
 
 # Web Audioで壁越しの音量と音色を比べる
 
-聞き手から同じ距離にある二つの音源位置を切り替えます。位置図は、聞き手と音源を結んだ線が壁に当たるかを示します。周波数応答のグラフで、音量を下げるだけの場合と、高音も弱める場合を比べられます。[遮蔽判定とローパスの仕組みを読む](/browser/audio-occlusion.html)
+聞き手からの距離が同じ二つの位置で、音源を切り替えます。位置図では、聞き手と音源を結ぶ線が壁に当たるかを確認できます。周波数応答のグラフでは、音量だけを下げる場合と、高音も弱める場合を比べられます。[遮蔽判定とローパスの仕組みを読む](/browser/audio-occlusion.html)
 
 <p><a href="/study/samples/browser/audio-occlusion-observation/index.html" target="_blank" rel="noopener noreferrer">壁越しの音の実験を新しいタブで開く</a></p>
 

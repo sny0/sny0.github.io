@@ -17,7 +17,7 @@ study:
 
 親、worker、子を小さく作って、**同じプロセスで動くスレッドと、別のプロセス**をIDから見比べます。加えて、namespace-scopeのオブジェクトが初期化された目印を、ユーザーの関数に入ってから表示します。
 
-起動全体の流れは[プロセスはどう起動するか](/os/process-startup.html)、アドレス空間は[仮想メモリ](/os/virtual-memory.html)、実行ファイルができるまでは[main.cppからCPU命令までの旅](/runtime/cpp-internals/build-pipeline-journey.html)へつながります。
+起動の流れは[プロセスはどう起動するか](/os/process-startup.html)、アドレス空間は[仮想メモリ](/os/virtual-memory.html)、実行ファイルができるまでの工程は[main.cppからCPU命令までの旅](/runtime/cpp-internals/build-pipeline-journey.html)で確認できます。
 
 ## 何を見比べるか
 

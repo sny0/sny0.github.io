@@ -255,7 +255,7 @@ LoggingRepository / CompressingStream
 
 分類: 構造・生成
 
-複数の処理へ簡潔な入口を提供。
+複数の処理を少数の操作で呼び出せるようにする。
 
 ```text
 CheckoutFacade / MediaFacade

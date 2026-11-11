@@ -15,7 +15,7 @@ study:
 
 # C++でD3D12のコマンドを別スレッドで記録する
 
-二つのCPUスレッドが、それぞれ自分のアロケーターとコマンドリストを使います。Aは16バイトを中間バッファへ書くコピー、Bは中間バッファの状態を変えて読み戻すコピーを記録します。Bの記録を先に終えるよう調整し、提出では書き込みのAを先に渡します。[D3D12の並列コマンド記録](/graphics/optimization/parallel-command-recording.html) · [D3D12のリソースバリア](/graphics/optimization/d3d12-resource-barriers.html)
+二つのCPUスレッドは別々のアロケーターとコマンドリストを使います。Aは16バイトを中間バッファへ書くコピーを、Bは中間バッファの状態を変えて読み戻すコピーを記録します。Bの記録を先に終えるよう調整し、提出では書き込みのAを先に渡します。[D3D12の並列コマンド記録](/graphics/optimization/parallel-command-recording.html) · [D3D12のリソースバリア](/graphics/optimization/d3d12-resource-barriers.html)
 
 ## 手元で動かす {#run-locally}
 

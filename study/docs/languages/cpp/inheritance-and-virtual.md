@@ -3,7 +3,7 @@ title: 継承・仮想関数・純粋仮想関数・抽象クラス・多重継�
 study:
   source: C++ Wiki
   status: published
-  summary: C++の継承は「基底のメンバを引き継ぎ、基底として扱える」仕組み。ただしメンバ関数は既定で非virtual(上書きしても基底経由の呼び出しは切り替わらない)で、動的に振る舞いを切り替えたい関数だけ virtual を付けます。C#(全メソッドがvirtual可能・overrideが厳格)との差分が事
+  summary: C++の継承は「基底のメンバを引き継ぎ、基底として扱える」仕組み。C++もC#も既定では非virtualですが、仮想関数の上書きで override を省略したときの挙動が異なります。
   section: reference
   format: article
   domain: languages
@@ -13,7 +13,7 @@ study:
 
 ## 一言で言うと
 
-C++の継承は「基底のメンバを引き継ぎ、基底として扱える」仕組み。ただし**メンバ関数は既定で非virtual**(上書きしても基底経由の呼び出しは切り替わらない)で、**動的に振る舞いを切り替えたい関数だけ `virtual`** を付けます。C#(全メソッドがvirtual可能・overrideが厳格)との差分が事故の元です。
+C++の継承は「基底のメンバを引き継ぎ、基底として扱える」仕組み。ただし**メンバ関数は既定で非virtual**(同名の関数を派生側に宣言しても基底経由の呼び出しは切り替わらない)で、**動的に振る舞いを切り替えたい関数だけ `virtual`** を付けます。C#も既定では非virtualですが、仮想関数の上書きで`override`を省略したときの挙動が異なります。
 
 ## 基本形
 
@@ -46,7 +46,7 @@ void Battle(Enemy& e) {
 
 ## virtualの仕組み(概要)
 
-仮想関数を持つオブジェクトは**vptr(仮想関数テーブルへのポインタ、8バイト)**を持ち、呼び出しはテーブル経由の間接呼び出しになります(詳細: [vtable](/runtime/cpp-internals/vtable-and-virtual-calls.html))。コストは「間接参照+インライン化阻害」で、通常のゲームロジックでは誤差、超ホットループでは考慮対象です。
+仮想関数を持つオブジェクトはvptr(仮想関数テーブルへのポインタ、8バイト)を持ち、仮想関数をテーブル経由で間接的に呼び出します(詳細: [vtable](/runtime/cpp-internals/vtable-and-virtual-calls.html))。コストには間接参照とインライン化の制約があり、通常のゲームロジックでは差が小さいものの、頻繁に実行するループでは考慮します。
 
 ## 落とし穴と対策
 
@@ -68,17 +68,39 @@ class Dragon : public Enemy {
 };
 ```
 
-`override` はC++11から。**上書きのつもりの関数には全部書く**(C#では書かないと警告が出るが、C++では書かないと検査されない)。
+`override` はC++11から。**上書きのつもりの関数には全部書く**と、基底の仮想関数を実際に上書きしているか検査できます。C++では省略してもシグネチャが一致すれば上書きされます。C#では基底の通常の`virtual`メソッドと同じシグネチャに`override`も`new`も付けないと、隠蔽としてCS0114が出ます。[C++の仮想関数](https://eel.is/c++draft/class.virtual)・[CS0114](https://learn.microsoft.com/en-us/dotnet/csharp/misc/cs0114)
 
 ### 3. スライシング(C#にない事故)
 
+上の`Enemy`は純粋仮想関数を持つ抽象クラスなので、`std::vector<Enemy>`の要素として生成できません。ここでは、同じ名前の**具象クラス**を使う独立した例で、派生から基底への値コピーを観察します。[C++草案: 抽象クラス](https://eel.is/c++draft/class.abstract)・[コピーコンストラクタ](https://eel.is/c++draft/class.copy.ctor)
+
 ```cpp
-std::vector<Enemy> enemies;        // 値のvector
-enemies.push_back(Dragon{});       // Dragonの「Enemy部分だけ」がコピーされる!
-enemies[0].Attack();               // 通常攻撃(Dragonの情報は切り落とされた)
+#include <cstdio>
+#include <vector>
+
+class Enemy {
+public:
+    virtual ~Enemy() = default;
+    virtual void Attack() const { std::puts("Enemy: basic attack"); }
+};
+
+class Dragon : public Enemy {
+public:
+    void Attack() const override { std::puts("Dragon: breath!"); }
+};
+
+int main() {
+    Dragon dragon;
+    const Enemy& ref = dragon;
+    ref.Attack();                   // Dragonのブレス
+
+    std::vector<Enemy> enemies;     // 具象クラスEnemyの値を格納する
+    enemies.push_back(dragon);      // Dragonの「Enemy部分だけ」をコピー
+    enemies[0].Attack();            // Enemyの通常攻撃
+}
 ```
 
-**多態的に扱うオブジェクトは値でコピーしない**。`std::vector<std::unique_ptr<Enemy>>` のようにポインタで持つ。C#はclassが常に参照なのでこの問題自体が存在しない——Unity経験者が最も踏みやすいC++の罠の一つ。
+多態的に扱うオブジェクトは、基底型の値へコピーせず `std::vector<std::unique_ptr<Enemy>>` のようにポインタで持ちます。C#のclassは常に参照で扱うので、このスライシングは起きません。UnityからC++を学ぶときに特に見落としやすい違いです。
 
 ### 4. コンストラクタ・デストラクタ内の仮想呼び出し
 
@@ -94,7 +116,7 @@ class Enemy {
 ```
 
 - 設計意図の表明(この階層はここで打ち止め)
-- 最適化ヒント(finalな型・関数は仮想呼び出しを直接呼び出しに脱仮想化(devirtualization)できることがある — コンパイラ最適化に依存)
+- `final` な型や関数では、コンパイラの最適化によって仮想呼び出しを直接呼び出しにできることがあります。この変換を脱仮想化(devirtualization)と呼びます。
 
 ## 多重継承
 
@@ -107,8 +129,8 @@ C++は複数の基底を持てます(C#はclass1つ+interface複数)。
 
 | | C# | C++ |
 |---|---|---|
-| メソッドの既定 | 非virtual(ただしvirtual化は自由) | 非virtual(同じ)|
-| override | キーワード必須(コンパイラ検査) | 任意だが**書かないと検査されない** |
+| メソッドの既定 | 非virtual | 非virtual |
+| override | 上書きに必須。同じシグネチャで`override`も`new`も省略すると、通常のvirtualメソッドは隠蔽されCS0114が出る | 任意。省略しても一致すれば上書きされるが、上書きの意図を検査できない |
 | 基底の破棄 | GCが型を知っている | 仮想デストラクタを自分で書く |
 | interface | 専用構文 | 純粋仮想関数のみの抽象クラスで表現(慣習) |
 | スライシング | 存在しない(classは参照) | 値コピーで発生する |
@@ -140,12 +162,12 @@ C++は複数の基底を持てます(C#はclass1つ+interface複数)。
 ## 理解度チェック
 
 1. 仮想デストラクタが必要になる条件と、なければ何が起きるかを言えますか。
-2. スライシングはどんな操作で起き、どう防ぎますか。
+2. 具象基底へ値コピーすると何が切り落とされますか。抽象基底の値を作ろうとした場合はどうなりますか。
 3. C++の多重継承の「推奨される形」は?
 
 ## 演習
 
-samples/inheritance_virtual.cpp で、(a) overrideを外してタイポした場合に何が起きるか、(b) `std::vector<Enemy>` にDragonを入れた場合(スライシング)の出力を確認してください。
+samples/inheritance_virtual.cpp で、(a) overrideを外してタイポした場合に何が起きるか、(b) 具象基底`Enemy`の`std::vector<Enemy>`に`Dragon`を値コピーした場合に、出力がどう変わるかを確認してください。
 
 ---
 

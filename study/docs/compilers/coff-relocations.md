@@ -13,7 +13,7 @@ study:
 
 # COFFのシンボルと再配置 — リンカーがcallの距離を埋めるまで
 
-`call.cpp`を単独でコンパイルすると、別ファイルで定義した`helper`の呼び出しまで機械語になります。この時点では、二つの関数が最終的な実行ファイルのどこに並ぶかは決まっていません。Windows x64のCOFFオブジェクトは、呼び出し命令の一部と、リンカーがその部分を埋めるための記録を持ちます。[MicrosoftのPE/COFF仕様 — COFF再配置](https://learn.microsoft.com/en-us/windows/win32/debug/pe-format#coff-relocations-object-only)
+`call.cpp`を単独でコンパイルすると、別ファイルで定義した`helper`の呼び出しも機械語の命令になります。この時点では、二つの関数が最終的な実行ファイルのどこに配置されるかは決まっていません。Windows x64のCOFFオブジェクトには呼び出し命令があり、その一部をリンカーが埋めるための記録も入っています。[MicrosoftのPE/COFF仕様 — COFF再配置](https://learn.microsoft.com/en-us/windows/win32/debug/pe-format#coff-relocations-object-only)
 
 ## シンボル表で名前を引き、再配置レコードで書き込み箇所を引く
 

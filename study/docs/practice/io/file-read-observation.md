@@ -15,7 +15,7 @@ study:
 
 # C++とC#でファイルのbytes・位置・EOFを観察する
 
-**readの要求量と、実際に得られた量を分けて表示します。** 自分で作った12bytesの通常ファイルを5byte bufferで読み、EOF、offset5へのseek、3bytesの再読を確かめます。内部経路の概念と図は[ファイルを読むと内部で何が起きるか](/os/file-read-journey.html)を参照してください。
+readで要求した量と実際に読み取れた量を分けて表示します。自分で作った12バイトの通常ファイルを5バイトのバッファで読みます。EOFを確認し、オフセット5へseekして3バイトを読み直します。内部経路の概念と図は[ファイルを読むと内部で何が起きるか](/os/file-read-journey.html)を参照してください。
 
 fixtureは`41 42 00 0D 0A E3 81 82 10 20 FE FF`です。`AB`、NUL、CRLF、あのUTF-8 bytes、追加のraw bytesを含みます。全体をUTF-8文字列としてdecodeせず、NULや改行もbytesのまま比較します。[Unicodeの単位を観察する](/practice/data/unicode-observation.html)との違いにも注目してください。
 

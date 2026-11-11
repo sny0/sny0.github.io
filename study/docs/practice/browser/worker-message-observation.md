@@ -15,7 +15,7 @@ study:
 
 # Web Workerでコピー・transfer・停止を観察する
 
-ブラウザのmainと専用workerの間でメッセージを送り、元のデータと返信を比べます。16バイトの小さなfixtureを使い、コピーとtransferの違いを値で確認する実験です。仕組みと図は[Web Workerとメッセージ](/browser/web-workers-messages.html)を参照してください。
+ブラウザのmainと専用workerの間でメッセージを送り、元のデータと返信を比べます。16バイトのテストデータを使い、コピーとtransferの違いを値で確認します。仕組みと図は[Web Workerとメッセージ](/browser/web-workers-messages.html)を参照してください。
 
 <p><a href="/study/samples/browser/worker-message-observation/index.html" target="_blank" rel="noopener noreferrer">Workerの実験ページを新しいタブで開く</a></p>
 

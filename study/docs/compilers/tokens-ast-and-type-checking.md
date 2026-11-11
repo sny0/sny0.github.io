@@ -13,7 +13,7 @@ study:
 
 # トークン・AST・型検査 — C++のソースを読み解く
 
-`value + step * 2u` からコードを生成するには、`value` と `step` がどの宣言を指し、どちらの演算を先に組み立て、各演算をどの型で行うかを決める必要があります。**フロントエンド**は、言語の規則を使ってこの情報をそろえます。コンパイル全体の中では、前処理の結果を受け取り、後続の処理に渡す表現を作る部分です。[コンパイル全体の流れ](/runtime/cpp-internals/build-pipeline-journey.html) · [Clangフロントエンドの内部構成](https://clang.llvm.org/docs/InternalsManual.html#the-parser-library)
+`value + step * 2u` からコードを生成するには、`value` と `step` の参照先の宣言、演算を組み立てる順序、各演算で使う型を決める必要があります。**フロントエンド**は前処理の結果を受け取り、言語の規則に従ってこれらを決め、後続の処理に渡す表現を作ります。[コンパイル全体の流れ](/runtime/cpp-internals/build-pipeline-journey.html) · [Clangフロントエンドの内部構成](https://clang.llvm.org/docs/InternalsManual.html#the-parser-library)
 
 ```cpp
 double adjust(double value, unsigned step) {

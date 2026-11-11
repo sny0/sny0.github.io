@@ -30,7 +30,7 @@ study:
   <figcaption>公開サンプルの処理経路です。供給の時刻と出力の位置は、同じグラフのフレーム番号で数えます。<a href="/study/images/browser/audio-worklet-pipeline.svg" target="_blank" rel="noopener noreferrer">AudioWorkletの処理経路を拡大</a></figcaption>
 </figure>
 
-実時間の音声処理では、次のブロックを必要な時刻までに計算します。ネットワークの応答を同期的に待つ処理や、長い処理でレンダリングを止める設計は避けます。供給側が先に用意したフレームを受け取り側が使う設計には、FIFOのキューを使えます。固定サイズの領域を繰り返し使うときは、リングバッファが使えます。[リングバッファとSPSCキュー](/browser/spsc-ring-buffer.html)、[W3C Web Audio APIの音声グラフのレンダリング](https://www.w3.org/TR/webaudio-1.1/#rendering-loop)
+実時間の音声処理では、次のブロックを必要な時刻までに計算します。ネットワークの応答を同期的に待つ処理や、長い処理でレンダリングを止める設計は避けます。供給側が先に用意したフレームを受け取り側へ順に渡すには、FIFOのキューを使えます。固定サイズの領域を繰り返し使う構成にはリングバッファが使えます。[リングバッファとSPSCキュー](/browser/spsc-ring-buffer.html)、[W3C Web Audio APIの音声グラフのレンダリング](https://www.w3.org/TR/webaudio-1.1/#rendering-loop)
 
 ## 供給が遅れた分だけ出力に無音を入れる
 

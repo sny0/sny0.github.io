@@ -186,7 +186,7 @@ UnityのAnimator Controller(ステートマシン)やUEのStateTreeは、この�
 
 ## 過剰設計になる例
 
-ON/OFFの2状態のドアに State パターン一式(IDoorState, OpenState, ClosedState, 遷移管理)——`bool isOpen` で済みます。
+ON/OFFの2状態だけを持つドアなら `bool isOpen` で表現できます。StateパターンのためにIDoorState、OpenState、ClosedState、遷移管理を用意する必要はありません。
 
 ## 関連項目
 

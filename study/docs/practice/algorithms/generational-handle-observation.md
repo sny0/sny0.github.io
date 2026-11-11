@@ -15,7 +15,7 @@ study:
 
 # 世代付きハンドルでスロットの再利用を追う
 
-スロット0を最初のオブジェクトが使っています。位置だけを保存した参照と、世代を含む `(0, 0)` のハンドルを横に並べ、同じ枠を使い回したときの結果を見ます。[世代付きハンドルの解説](/algorithms/generational-handles.html)
+最初のオブジェクトはスロット0を使います。同じスロットを使い回したとき、位置だけを保存した参照と、世代を含む `(0, 0)` のハンドルがどう違うかを比べます。[世代付きハンドルの解説](/algorithms/generational-handles.html)
 
 <p><a href="/study/samples/algorithms/generational-handle-observation/index.html" target="_blank" rel="noopener noreferrer">スロット再利用の実験を開く</a></p>
 

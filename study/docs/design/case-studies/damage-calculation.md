@@ -54,7 +54,7 @@ int CalcDamage(DamageContext& ctx) {
 ```
 
 - **順序が構造として固定**され、「加算してから乗算」問題([Decoratorの適用順問題](/design/patterns/decorator.html))が消える
-- 修飾の列挙(フェーズ2,3)は効果リスト([ステート異常](/design/case-studies/status-effects.html))から集める——効果側は「自分は加算+10」と申告するだけ
+- フェーズ2と3では、[ステート異常](/design/case-studies/status-effects.html)の効果リストから補正を集める。各効果は「10を加算する」のように補正の内容だけを示す。
 - 純粋関数性を保てばUIの予測ダメージも**同じ関数**で出せる(乖離の根絶)。乱数(クリティカル)は「乱数値を引数で渡す」ことで純粋性を守る(→ リプレイ・テストも可能に)
 
 ## 案B: Chain of Responsibility / Decorator案
@@ -89,7 +89,7 @@ int CalcDamage(DamageContext& ctx) {
 
 ## この題材の教訓
 
-- **計算は純粋関数に、適用(HP減少・耐久減少)は分離**——テスト・UI予測・リプレイの全てがこれで手に入る([テスト容易性](/design/foundations/quality-attributes.html))
+- 計算は純粋関数にし、HPや耐久値を減らす処理は分ける。同じ計算をテスト、UIでの結果予測、リプレイに使える。[テスト容易性](/design/foundations/quality-attributes.html)
 - パターン(Chain/Decorator)より先に「**仕様書のフェーズ構造をそのまま写す**」。フェーズ内の規則は変更箇所を局所化しやすくなります。ただし、フェーズの追加や複数段階にまたがる規則、効果側の申告形式の変更では、複数箇所の修正が必要です
 
 ---

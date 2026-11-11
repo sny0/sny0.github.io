@@ -3,7 +3,7 @@ title: 構造体・クラス・アクセス指定子
 study:
   source: C++ Wiki
   status: published
-  summary: "C++の struct と class はほぼ同一の機能で、違いは既定のアクセスだけ(struct=public、class=private)。C#のような「struct=値型、class=参照型」という意味の違いはありません(どちらも値です)。使い分けは慣習で表現します: 「structはただのデ"
+  summary: C++のstructとclassはほぼ同じ機能を持ち、既定のアクセスはstructがpublic、classがprivateです。C#での違いと、C++での慣習的な使い分けも扱います。
   section: reference
   format: article
   domain: languages
@@ -61,7 +61,7 @@ struct Enemy {
 ```
 
 - 非ゼロサイズの非静的データメンバーの順序は、C++20までは同じアクセス制御を持つ範囲で保証され、C++23以降はアクセス指定をまたいでも宣言順が保証される。unionやゼロサイズになり得るメンバーなどは別の規則を確認する。[C++草案: メンバー配置](https://eel.is/c++draft/class.mem.general)
-- アラインメントのため**パディング(詰め物)**が入る(→ 詳細: [メモリレイアウト](/runtime/cpp-internals/memory-layout.html))。メンバの並び順でサイズが変わるため、大量に持つ構造体はサイズの大きい順に並べる最適化がある
+- アラインメントを満たすためにパディングが入る(→ 詳細: [メモリレイアウト](/runtime/cpp-internals/memory-layout.html))。メンバの並び順で構造体のサイズが変わるため、大量に保持する構造体ではメンバをサイズの大きい順に並べる最適化がある
 - メソッドは**インスタンスの中には存在しない**(コードは1か所、thisポインタが渡るだけ)。仮想関数を持つと**vptr(8バイト)が追加**される(→ [vtable](/runtime/cpp-internals/vtable-and-virtual-calls.html))
 
 ## C#との違い
@@ -95,7 +95,7 @@ C#の「structは16バイト以下にすべき」的なガイドラインは、*
 
 ## よくある誤解
 
-- 「structは軽くてclassは重い」— 生成されるコードは同一。重さの差はゼロ
+- structとclassでは、生成されるコードは同じです。どちらの構文を使うかで処理の重さは変わりません。
 - 「privateはセキュリティ機能」— コンパイル時の設計規律であり、メモリを覗けば読める。チート対策とは別の話
 
 ## 関連項目

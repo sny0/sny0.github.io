@@ -19,7 +19,7 @@ PCでオンラインゲームに接続すると、PC自身の通信機能に加�
 
 **LAN**（Local Area Network）は、自宅やオフィスなど、限られた範囲の機器を結ぶネットワークです。有線の**Ethernet**でも、無線の**Wi-Fi**でもLANを構成できます。家庭用ルーターのLAN側には、PC、ゲーム機、スマートフォンなどがつながります。[CiscoのLANの説明](https://www.cisco.com/site/us/en/learn/topics/networking/what-is-computer-networking.html#types-of-computer-networks)
 
-**WAN**（Wide Area Network）は、離れた場所のネットワークを広域に結びます。家庭用ルーターの「WAN」「Internet」と書かれた端子は、一般に回線事業者側につなぐための口です。インターネットでは、その先にも複数のネットワークとルーターがあり、宛先へ向けてデータを転送します。[CiscoのWANの説明](https://www.cisco.com/site/us/en/learn/topics/networking/what-is-computer-networking.html) · [IPルーティング](/network/ip-routing-and-ethernet.html)
+WAN（Wide Area Network）は離れた場所のネットワークを広域に結びます。家庭用ルーターの「WAN」「Internet」と書かれた端子は、一般に回線事業者側へ接続するために使います。その先のインターネットでは、複数のネットワークやルーターを経由してデータを宛先へ転送します。[CiscoのWANの説明](https://www.cisco.com/site/us/en/learn/topics/networking/what-is-computer-networking.html) · [IPルーティング](/network/ip-routing-and-ethernet.html)
 
 ## 家庭で出会う機器
 

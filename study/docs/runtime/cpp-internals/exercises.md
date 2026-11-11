@@ -17,7 +17,7 @@ study:
 
 ## 問1. 概念確認
 
-次のエラー・現象は、ビルドパイプラインのどの段階の問題ですか([旅の地図](/runtime/cpp-internals/build-pipeline-journey.html)の①〜⑦で答え、理由を一言)。
+次のエラーや現象はビルドパイプラインのどの段階で起こりますか([旅の地図](/runtime/cpp-internals/build-pipeline-journey.html)の①〜⑦で答え、理由を一言)。
 
 1. `error: 'Enemy' was not declared in this scope`
 2. `undefined reference to 'Enemy::TakeDamage(int)'`
@@ -49,7 +49,7 @@ private:
 
 <details><summary>解答</summary>
 
-(A)は前方宣言で「Rendererという型が存在する」ことだけ伝える。(B)(C)はポインタ・参照であり、**サイズが8バイト(ポインタ)と分かれば足りる**——中身を知る必要がない。(D)は実体をメンバに置くため、Widgetのサイズ計算にRendererの**完全な定義(サイズ・レイアウト)**が必要 → includeが要る([翻訳単位とヘッダー](/runtime/cpp-internals/translation-units-and-headers.html))。
+(A)の前方宣言はRendererという型が存在することだけを伝えます。(B)(C)はポインタと参照なので、ポインタのサイズが8バイトと分かれば足り、Rendererの中身を知る必要はありません。(D)はRendererの実体をメンバに置くため、Widgetのサイズ計算にRendererの完全な定義(サイズ・レイアウト)が必要で、その定義をincludeします([翻訳単位とヘッダー](/runtime/cpp-internals/translation-units-and-headers.html))。
 </details>
 
 ## 問3. 問題のあるコードの改善

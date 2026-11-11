@@ -31,7 +31,7 @@ study:
 | インスタンス化 | インポートを実際の関数やメモリなどに結び付け、モジュール内で定義したメモリなどを作る |
 | 呼び出し | `WebAssembly.Instance` の `exports` にある関数を呼び、必要に応じてメモリを読み書きする |
 
-インスタンス化の途中で、データセグメントを使った初期化や、宣言がある場合の開始関数の実行も起きます。同じ `Module` から複数の `Instance` を作れます。各インスタンスが独自に定義したメモリは別々に作られ、同じメモリをインポートさせた場合はそのメモリを使います。エンジンの内部では、呼び出し時に関数をコンパイルしたり、頻繁に使う関数を後から最適化したりする構成もあります。[WebAssembly Coreのインスタンス化](https://webassembly.github.io/spec/core/exec/modules.html)、[JavaScript InterfaceのModuleとInstance](https://webassembly.github.io/spec/js-api/)、[V8のコンパイル実装例](https://v8.dev/docs/wasm-compilation-pipeline)
+インスタンス化では、データセグメントを使って初期化し、開始関数の宣言があれば実行します。同じ `Module` から複数の `Instance` を作れます。メモリを独自に定義したインスタンスはそれぞれ別のメモリを使い、同じメモリをインポートしたインスタンスはそのメモリを使います。エンジンの内部では、呼び出し時に関数をコンパイルしたり、頻繁に使う関数を後から最適化したりする構成もあります。[WebAssembly Coreのインスタンス化](https://webassembly.github.io/spec/core/exec/modules.html)、[JavaScript InterfaceのModuleとInstance](https://webassembly.github.io/spec/js-api/)、[V8のコンパイル実装例](https://v8.dev/docs/wasm-compilation-pipeline)
 
 JavaScriptでは、`compile()` でモジュールを用意してから、`instantiate()` でインスタンスを作る段階を分けられます。次の `bytes` は取得済みのバイト列、`imports` はモジュールに渡す値を名前でまとめたオブジェクトです。[WebAssembly JavaScript Interfaceのコンパイルとインスタンス化](https://webassembly.github.io/spec/js-api/)
 

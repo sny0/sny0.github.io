@@ -29,7 +29,7 @@ std::vector<Enemy> v;             // 値の配列(連続メモリ)
 std::vector<Enemy*> vp;           // 参照の配列
 ```
 
-**C#の「class/structの選択」に相当する判断を、C++では変数を書くたびに行う**——これがC++習得の第一関門であり、同時に性能を制御できる自由の源です(→ [値と参照の基礎](/languages/cpp/values-pointers-references.html))。
+C#でclassとstructを選ぶのに相当する判断を、C++では変数を宣言するたびに行います。C++を学び始めるときにつまずきやすい点ですが、この選択を通じて性能を制御できます(→ [値と参照の基礎](/languages/cpp/values-pointers-references.html))。
 
 ## 対応表
 
@@ -55,11 +55,11 @@ C#では「基本class、パフォーマンスが要るときだけstruct」で�
 
 - 値は**エイリアシングがない**(誰かが勝手に書き換える心配がない)→ 推論もテストも楽([不変性に近い安全](/design/foundations/abstraction-encapsulation.html))
 - 値は**連続メモリに置ける**(→ [Data Locality](/game/patterns/optimization-patterns.html))
-- 共有が必要な場面: 同一実体の観測(HPバーがPlayerのHPを見る)、多態(→ [仮想関数はポインタ/参照経由でだけ働く](/languages/cpp/inheritance-and-virtual.html)、値だとスライシング)
+- 共有が必要な場面: 同一実体の観測(HPバーがPlayerのHPを見る)、多態(→ [基底参照・ポインタ経由の仮想呼び出し](/languages/cpp/inheritance-and-virtual.html)。派生を基底型の値にコピーするとスライシングが起きる)
 
 ## Unity開発者の躓きポイント(重要順)
 
-1. **「代入したのに反映されない」**: `Enemy target = enemies[0]; target.hp = 0;` — targetはコピー。`Enemy& target = enemies[0];` が意図(C#のstructで同じ罠を踏んだ経験があれば、その全面版と理解)
+1. `Enemy target = enemies[0]; target.hp = 0;` で変更するのはコピーのtargetです。元の要素を変更するには `Enemy& target = enemies[0];` と書きます。C#のstructで起きる問題と同じです。
 2. **「参照を保存したら壊れた」**: C#では参照保存は常に安全(GCが延命)。C++では[寿命](/runtime/memory/storage-duration-and-lifetime.html)・[イテレータ無効化](/languages/cpp/stl.html)を考える
 3. **「とりあえずnewでヒープに」**: C#の癖。C++では値・スタックが既定(速く、安全で、自動解放)
 4. Transformのような「エンジン内実体へのハンドル」感覚は、C++ではポインタ+所有権設計([所有権と借用](/runtime/memory/ownership-and-borrowing.html))で自作する側になる

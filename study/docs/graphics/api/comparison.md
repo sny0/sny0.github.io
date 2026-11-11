@@ -13,13 +13,13 @@ study:
 
 ## 概要
 
-このページはグラフィックスAPIの総まとめとして、**同じ仕事が各APIでどう表現されるか**を横断比較します。「初期化 → リソース → パイプライン → コマンド → 同期」の5段階で対応表を示し、最後に「三角形を出すまで」のコード量と構造を比べます。1つのAPIを知っていれば、この対応表で他の3つへ翻訳できます。
+同じ描画処理をOpenGL、Vulkan、Direct3D 12、WebGPUでどう書くかを、初期化、リソース、パイプライン、コマンド、同期の5段階で比べます。1つのAPIを知っていれば、対応表からほかの3つで使う機能を確認できます。最後に三角形を表示するまでのコード量と構造を比べます。
 
 ## 概念対応表 (全体)
 
 | 概念 | OpenGL | Vulkan | DirectX 12 | WebGPU |
 |---|---|---|---|---|
-| APIへの入口 | コンテキスト (wgl/glX/EGL) | VkInstance | IDXGIFactory | navigator.gpu |
+| APIを利用する起点 | コンテキスト (wgl/glX/EGL) | VkInstance | IDXGIFactory | navigator.gpu |
 | 物理GPU | (暗黙) | VkPhysicalDevice | IDXGIAdapter | GPUAdapter |
 | 論理デバイス | (コンテキストと一体) | VkDevice | ID3D12Device | GPUDevice |
 | 提出キュー | (暗黙) | VkQueue | ID3D12CommandQueue | GPUQueue |
@@ -54,7 +54,7 @@ quadrantChart
     WebGPU: [0.55, 0.9]
     Vulkan: [0.95, 0.8]
     DX12: [0.85, 0.3]
-    Metal: [0.6, 0.1]
+    従来のMetal: [0.6, 0.1]
     DX11: [0.25, 0.3]
 ```
 
@@ -69,7 +69,7 @@ quadrantChart
 
 ## 「三角形を出すまで」構造比較
 
-同じ仕事の各APIでの流れ:
+各APIで同じ処理を実行する流れを比べます。
 
 ```mermaid
 flowchart TB
@@ -91,7 +91,7 @@ flowchart TB
 
 ## シェーダ言語の横断比較 (GLSL → HLSL → WGSL)
 
-同一のライティング計算:
+各APIで同じライティング計算を記述します。
 
 ```glsl
 // GLSL

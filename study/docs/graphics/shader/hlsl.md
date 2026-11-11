@@ -3,7 +3,7 @@ title: HLSL
 study:
   source: RenderingWiki
   status: published
-  summary: HLSL (High-Level Shading Language) はMicrosoftのシェーダ言語で、DirectX・Unity・Unreal Engine・(DXC経由で)Vulkanまでカバーする、実務上最も重要なシェーダ言語です。Shader Model (SM) というバージョン体系で
+  summary: HLSLはMicrosoftのシェーダ言語で、DirectX、Unity、Unreal Engineのほか、DXC経由でVulkanにも使えます。Shader Modelごとの機能と、DXIL・SPIR-Vへのコンパイルを扱います。
   section: reference
   format: article
   domain: graphics
@@ -15,7 +15,7 @@ study:
 
 ## 概要
 
-HLSL (High-Level Shading Language) はMicrosoftのシェーダ言語で、**DirectX・Unity・Unreal Engine・(DXC経由で)Vulkanまでカバーする、実務上最も重要なシェーダ言語**です。Shader Model (SM) というバージョン体系で機能が拡張され、現在はSM 6.x (DXILコンパイラDXC) が現行世代です。
+HLSL (High-Level Shading Language) はMicrosoftのシェーダ言語です。DirectX、Unity、Unreal Engineで使われるほか、DXCを経由すればVulkanにも使えるため、実務で特に重要です。Shader Model (SM) のバージョンに応じて使える機能が増えます。現行世代はSM 6.xで、DXILを生成するコンパイラにはDXCを使います。
 
 ## なぜ必要なのか
 
@@ -115,18 +115,23 @@ SM 6.9の2025年プレビューにあったCooperative Vectorは非推奨とな�
 
 ## コード例
 
-Compute Shaderの典型形 (SM6.0 Wave命令活用):
+Compute Shaderの典型形 (SM6.0 Wave命令活用)。`gHistogram` は256要素を確保して0で初期化します。集約後のAtomicはWave内の異なるbinごとに1回です。幅32のWaveで全レーンが同じbinなら32回が1回になり、全レーンが別のbinなら回数は変わりません。
 
 ```hlsl
-// 輝度ヒストグラム: Wave集約でAtomic回数を1/32に削減
+// 輝度ヒストグラム: Wave内のbinごとに1回だけAtomicを発行
 RWStructuredBuffer<uint> gHistogram : register(u0);
 Texture2D<float4> gInput : register(t0);
 
 [numthreads(8, 8, 1)]
 void CSMain(uint3 dtid : SV_DispatchThreadID)
 {
+    uint width, height;
+    gInput.GetDimensions(width, height);
+    if (dtid.x >= width || dtid.y >= height)
+        return;
+
     float3 c = gInput[dtid.xy].rgb;
-    uint bin = (uint)(dot(c, float3(0.299, 0.587, 0.114)) * 255.0);
+    uint bin = (uint)(saturate(dot(c, float3(0.299, 0.587, 0.114))) * 255.0);
 
     // 同じbinのレーンをWave内でまとめてから1回だけAtomic
     for (;;) {
@@ -146,8 +151,8 @@ void CSMain(uint3 dtid : SV_DispatchThreadID)
 ```bash
 # DX12向け (DXIL)
 dxc -T cs_6_6 -E CSMain histogram.hlsl -Fo histogram.dxil
-# Vulkan向け (SPIR-V)
-dxc -T cs_6_6 -E CSMain -spirv histogram.hlsl -Fo histogram.spv
+# Vulkan 1.1向け (Wave命令)。u0をbinding 1へずらし、t0との重複を避ける
+dxc -T cs_6_6 -E CSMain -spirv "-fspv-target-env=vulkan1.1" -fvk-u-shift 1 0 histogram.hlsl -Fo histogram.spv
 # デバッグ情報つき (PIX/RenderDoc用)
 dxc -T cs_6_6 -E CSMain -Zi -Qembed_debug histogram.hlsl -Fo histogram.dxil
 ```
@@ -182,6 +187,7 @@ dxc -T cs_6_6 -E CSMain -Zi -Qembed_debug histogram.hlsl -Fo histogram.dxil
 
 ## 参考資料
 
+- [Microsoft: Shader Model 6.0のWave Intrinsics](https://learn.microsoft.com/en-us/windows/win32/direct3dhlsl/hlsl-shader-model-6-0-features-for-direct3d-12)
 - microsoft/DirectXShaderCompiler (GitHub) — DXC本体とWiki
 - microsoft/hlsl-specs — 言語仕様
 - Microsoft Learn, *HLSL リファレンス*

@@ -47,7 +47,7 @@ Render(accumulator / kFixedDt);
 
 ## 問3. 問題のあるコードの改善
 
-「被弾のたびに `Instantiate(damagePopupPrefab)`、表示終了で `Destroy`。連続ヒットするとフレーム落ちし、GCスパイクも出る」— 適用すべきパターンと実装上の注意点2つ(状態リセット/参照の無効化)を説明してください。
+被弾のたびに `Instantiate(damagePopupPrefab)` で生成し、表示終了時に `Destroy` で破棄します。連続ヒットするとフレーム落ちし、GCスパイクも出ます。適用すべきパターンと、実装上の注意点2つ（状態リセット・参照の無効化）を説明してください。
 
 <details><summary>解答の要点</summary>
 

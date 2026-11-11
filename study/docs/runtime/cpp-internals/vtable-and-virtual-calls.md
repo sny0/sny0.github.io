@@ -3,7 +3,7 @@ title: vtable・vptr・仮想関数呼び出し
 study:
   source: C++ Wiki
   status: published
-  summary: 仮想関数の「実行時に実際の型のメソッドが呼ばれる」魔法の正体は、関数ポインタの表(vtable)を型ごとに1つ作り、各オブジェクトが自分の型の表へのポインタ(vptr)を持つという単純な仕組みです。
+  summary: 仮想関数の呼び出しで実際の型のメソッドを選ぶ仕組みを、型ごとの関数ポインタの表(vtable)と各オブジェクトが持つ表へのポインタ(vptr)から説明します。
   section: reference
   format: article
   domain: runtime
@@ -13,9 +13,9 @@ study:
 
 ## 一言で言うと
 
-[仮想関数](/languages/cpp/inheritance-and-virtual.html)の「実行時に実際の型のメソッドが呼ばれる」魔法の正体は、**関数ポインタの表(vtable)を型ごとに1つ作り、各オブジェクトが自分の型の表へのポインタ(vptr)を持つ**という単純な仕組みです。
+[仮想関数](/languages/cpp/inheritance-and-virtual.html)を実行時に呼び出すときは、オブジェクトの実際の型に対応するメソッドを選びます。この実装では型ごとに関数ポインタの表(vtable)を1つ作り、各オブジェクトに自分の型の表を指すポインタ(vptr)を持たせます。
 
-※ これは標準の要求ではなく**主流実装(MSVC/GCC/Clang)の説明**です。標準は「仮想呼び出しの意味」だけを定め、実装方法は自由——ただし現実にはほぼ全処理系がこの方式です。
+これはMSVC/GCC/Clangなどの主流実装の説明です。標準が定めるのは仮想呼び出しの意味で、実装方法は処理系に任されています。実際にはほぼすべての処理系がこの方式を採ります。
 
 ## 仕組みの図解
 
@@ -87,7 +87,7 @@ final指定の型・関数    // 「これ以上派生しない」証明 → 脱
 
 1. 「virtualは遅いから禁止」— フレーム数千回の呼び出しでは測定誤差。**数十万回のループの内側**で初めて設計問題になる(そこは[ECS](/game/patterns/component-and-ecs.html)/データ指向の領域)
 2. 「C++のクラスは全部重い」— 仮想関数がなければヘッダすらないゼロコスト。C#の感覚より軽い
-3. MonoBehaviourのUpdateが「仮想関数だから遅い」— 実際はリフレクション由来の呼び出し機構で、これとは別の話
+3. `MonoBehaviour.Update`はUnityのイベント関数。Unityの2015年の実装解説では、型ごとにイベント関数の有無を調べてキャッシュし、実行時は登録リストをたどります。Unity 6.6のマニュアルでも内部リストとネイティブ側からC#側へのコールバックのコストを説明しています。[Unityの実装解説](https://unity.com/blog/engine-platform/10000-update-calls) · [Unity 6.6の更新処理の最適化](https://docs.unity.com/en-us/engine/6000.6/manual/scripting/managing-update-order/events-per-frame-optimization)
 
 ## ゲーム開発での使用例
 

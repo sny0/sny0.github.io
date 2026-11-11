@@ -27,10 +27,11 @@ study:
 ```
 GameMode(基底)
   RunMatch() {          ← 骨格: 順序はここで固定。非virtualにする
+      LoadStage();        ← 共通(非virtual)
       Setup();            ← フック(純粋仮想: 必ず実装)
       SpawnPlayers();     ← フック(デフォルトあり: 任意で上書き)
-      while(!IsMatchOver()) Tick();   ← フック
-      ShowResult();       ← フック
+      while(!IsMatchOver()) Tick();   ← IsMatchOverとTickは必須フック
+      ShowResult();       ← 共通(非virtual)
   }
 ├ DeathmatchMode: IsMatchOver = キル数到達
 └ RaceMode:       IsMatchOver = ゴール到達
@@ -167,7 +168,7 @@ public abstract class ScreenBase : MonoBehaviour {   // 画面遷移の骨格
 
 ## 過剰設計になる例
 
-2つのモードの共通部分が「LoadStage 1行」だけなのに骨格クラスを作る——共通部分が薄い骨格は、将来の手順分岐で必ず窮屈になります。共通化は手順が本当に同じだと確認できてから。
+2つのモードで共通するのがLoadStageの1行だけなら、骨格クラスを作っても、将来手順が分かれたときに必ず変更しにくくなります。手順が本当に同じだと確認してから共通化します。
 
 ## 関連項目
 

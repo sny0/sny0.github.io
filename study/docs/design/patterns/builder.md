@@ -167,7 +167,7 @@ public class DungeonBuilder {
 
 ## 過剰設計になる例
 
-`Vector3Builder{}.X(1).Y(2).Z(3).Build()` — 3個の必須引数にBuilderは何の価値も足しません。**「読めない引数リスト」問題は、まず名前付きの設定structで解決を試み、手順・検証が必要なときだけBuilderに進む**のが判断順です。
+`Vector3Builder{}.X(1).Y(2).Z(3).Build()` のように、3個の必須引数を渡すだけならBuilderを使う利点はありません。引数の意味が読み取りづらければ、まずメンバーに名前を付けた設定用structを試します。組み立ての手順や検証が必要なときだけBuilderを使います。
 
 ## 関連項目
 

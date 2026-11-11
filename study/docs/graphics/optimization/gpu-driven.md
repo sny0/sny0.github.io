@@ -3,7 +3,7 @@ title: GPU Driven Rendering
 study:
   source: RenderingWiki
   status: published
-  summary: GPU Driven Renderingは、「何を描くか」の決定 (カリング・LOD選択・描画リスト構築) をCPUからGPUへ移すアーキテクチャです。Compute Shaderでシーン全体の可視性を判定し、Indirect Draw (GPUが書いた引数でGPU自身が描画) で実行します。ドロー
+  summary: GPU Driven Renderingでは、カリング、LOD選択、描画リスト構築をGPUへ移します。Compute Shaderで可視性を判定し、GPUが生成した引数を使ってIndirect Drawで描画します。
   section: reference
   format: article
   domain: graphics
@@ -13,7 +13,7 @@ study:
 
 ## 概要
 
-GPU Driven Renderingは、**「何を描くか」の決定 (カリング・LOD選択・描画リスト構築) をCPUからGPUへ移す**アーキテクチャです。Compute Shaderでシーン全体の可視性を判定し、**Indirect Draw** (GPUが書いた引数でGPU自身が描画) で実行します。ドローコールボトルネックを根絶し、数十万オブジェクト・数億ポリゴンのシーンを可能にする、現代AAAレンダラーの中核設計です。UE5のNaniteはその極致です。
+GPU Driven Renderingでは、描画対象の決定にあたるカリング、LOD選択、描画リスト構築をCPUからGPUへ移します。Compute Shaderでシーン全体の可視性を判定し、GPUが生成した引数を使ってIndirect Drawで描画します。CPUから多数のドローコールを発行することによるボトルネックを解消し、数十万オブジェクトや数億ポリゴンからなるシーンを扱えるため、現代のAAAレンダラーで使われています。UE5のNaniteは、この設計を大規模なジオメトリ処理に使う例です。
 
 ## なぜ必要なのか
 
@@ -28,7 +28,7 @@ GPU Driven Renderingは、**「何を描くか」の決定 (カリング・LOD�
 - 2015: DX12の`ExecuteIndirect`でGPU生成の描画・dispatchを実行
 - 2018: Vulkanの`VK_KHR_draw_indirect_count`。2020年のVulkan 1.2でコア化
 - 2016-19: Frostbite、id Tech、Decima等が採用。**2パスオクルージョンカリング** (前フレーム深度のHi-Z利用) が定石化
-- **2021: Nanite (UE5)** — クラスタ階層LOD+SWラスタライザまで含む完成形 → 三角形単位までGPU Drivenに
+- **2021: Nanite (UE5)** — クラスタ階層LODと、三角形の大きさに応じたハードウェア/ソフトウェアラスタライズ
 - 現在: Unityも **GPU Resident Drawer / GPU Occlusion Culling** (Unity 6) で追随。Work Graphs (2024) が次の進化 (GPUがパスの構成すら自律決定) を予告
 
 ## それ以前の技術

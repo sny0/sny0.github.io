@@ -13,14 +13,14 @@ study:
 
 ## 概要
 
-DirectX 12 (2015) はMicrosoftの**明示的 (explicit) グラフィックスAPI**です。DX11でドライバが自動で行っていた仕事 — 状態検証・ハザード管理・メモリ管理・同期 — を**アプリケーションの責務**に移し、引き換えにマルチコアCPUの完全活用と予測可能な性能を得ました。Windows/Xboxの標準であり、レイトレーシング (DXR)・Mesh Shader・Work Graphsなど新機能の最速実装の場です。
+DirectX 12 (2015) はMicrosoftの明示的 (explicit) グラフィックスAPIです。DX11でドライバが自動で行っていた状態検証・ハザード管理・メモリ管理・同期をアプリケーションが引き受けることで、マルチコアCPUを全面的に活用でき、性能も予測できるようになりました。Windows/Xboxの標準APIで、レイトレーシング (DXR)・Mesh Shader・Work Graphsなどの新機能がいち早く実装されます。
 
 ## なぜ必要なのか
 
 - Windows AAAゲーム開発の標準。UE5のWindows既定RHIや、Unity 6.1以降の新規Windowsプロジェクトで採用
 - DXR・Mesh Shader・DirectStorage等、新世代機能の入口
 - Xbox Series X|S のAPIとほぼ共通 (コンソール開発への足がかり)
-- 明示的APIの概念 (PSO/バリア/ディスクリプタ/フェンス) はVulkan/Metal/WebGPUと相互に翻訳可能 — **1つ深く学べば全部に効く**
+- PSO、バリア、ディスクリプタ、フェンスといった明示的APIの概念はVulkan、Metal、WebGPUにも対応するものがあり、1つを詳しく学ぶとほかのAPIを理解しやすくなる
 
 ## 歴史・誕生した背景
 
@@ -34,7 +34,7 @@ DirectX 12 (2015) はMicrosoftの**明示的 (explicit) グラフィックスAPI
 
 ## それ以前の技術
 
-[DirectX 11](/graphics/api/directx11.html)。その「ドライバ任せ」設計が、マルチコア時代のCPUボトルネックの元凶でした。
+[DirectX 11](/graphics/api/directx11.html)でドライバに処理を任せる設計は、マルチコアCPUを使う描画でCPU側のボトルネックになりました。
 
 ## 解決した課題
 
@@ -143,7 +143,7 @@ UE5の既定RHI。`D3D12RHI` モジュールがフレームグラフ (RDG) の�
 
 ## コード例
 
-フレーム描画の骨格 (C++、詳細略):
+C++で1フレームを描画する大まかな流れを示します。
 
 ```cpp
 void Renderer::RenderFrame() {
@@ -202,7 +202,7 @@ void Renderer::RenderFrame() {
 - [DirectStorage](/game/directstorage.html) — Windows PCでアセットの読み取りと展開を要求する仕組み
 - [Vulkan](/graphics/api/vulkan.html) — 概念対応で二刀流に
 - [HLSL](/graphics/shader/hlsl.html) — SM6.xの言語側
-- [RenderGraph / FrameGraph](/graphics/optimization/render-graph.html) — バリア地獄の解法
+- [RenderGraph / FrameGraph](/graphics/optimization/render-graph.html)でバリアの管理を自動化する方法を確認できます。
 - [最終章: デバイス初期化](/graphics/capstone/02-device.html)
 
 ## 理解度チェック

@@ -22,7 +22,7 @@ study:
   <figcaption>Windowsでキャッシュを使ってローカルファイルに書くときの概念図です。ストレージ側にも揮発性のキャッシュがある構成を示しています。<a href="/study/images/os/file-write-and-durability.svg" target="_blank" rel="noopener noreferrer">書き込み経路の図を拡大</a></figcaption>
 </figure>
 
-1. **アプリとランタイム**。Cの`FILE*`やC#の`StreamWriter`などは、データをプロセス内のバッファにまとめてから、下のファイルAPIへ渡すことがあります。Cの`fflush`は通常、このストリームの書き込みバッファをOSへ渡します。MSVCには、ディスクへのコミットも求める拡張設定があります。[Microsoft: `fflush`の仕様](https://learn.microsoft.com/en-us/cpp/c-runtime-library/reference/fflush) · [コミットの設定](https://learn.microsoft.com/en-us/cpp/c-runtime-library/commit-to-disk-constants)
+1. **アプリとランタイム**。Cの`FILE*`やC#の`StreamWriter`などは、データをプロセス内のバッファにまとめてからファイルAPIへ渡すことがあります。Cの`fflush`は通常、このストリームの書き込みバッファをOSへ渡します。MSVCにはディスクへのコミットも求める拡張設定があります。[Microsoft: `fflush`の仕様](https://learn.microsoft.com/en-us/cpp/c-runtime-library/reference/fflush) · [コミットの設定](https://learn.microsoft.com/en-us/cpp/c-runtime-library/commit-to-disk-constants)
 2. **Windows**。通常のファイルハンドルに対する`WriteFile`は、キャッシュでデータを受け取り、保存先への書き出しを後に回せます。この間でも、アクセスが許可された読み手には、Windowsのキャッシュから更新後のバイトが見えることがあります。ハンドルを閉じた後も、キャッシュに残る変更の書き出し時期はOSが決めます。[Microsoft: File Caching](https://learn.microsoft.com/en-us/windows/win32/fileio/file-caching) · [システムバッファのフラッシュ](https://learn.microsoft.com/en-us/windows/win32/fileio/flushing-system-buffered-i-o-data-to-disk)
 3. **ストレージ**。下位層はファイルの変更を装置への書き込みに変換します。装置にも揮発性のキャッシュがある場合、そこに受け取った時点と、不揮発媒体に記録した時点が分かれます。保存先へのフラッシュがどこまで届くかには、ファイルシステム、ドライバー、装置の仕様が関わります。ネットワーク越しではサーバー側の動作も関わります。[Microsoft: CreateFileWのキャッシュ動作](https://learn.microsoft.com/en-us/windows/win32/api/fileapi/nf-fileapi-createfilew#caching-behavior) · [Microsoft: FlushViewOfFile](https://learn.microsoft.com/en-us/windows/win32/api/memoryapi/nf-memoryapi-flushviewoffile)
 

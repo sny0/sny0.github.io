@@ -30,7 +30,7 @@ study:
 
 「SharedArrayBuffer の共有を試す」は、分離状態と必要なAPIを確認できた場合に使えます。Workerは `Atomics.add()` で1を足し、Windowは完了通知を受けてから `Atomics.load()` で読みます。2つの側で使うJavaScriptオブジェクトは別ですが、読み書きするデータは共有されています。[ECMAScriptのAtomics.add](https://tc39.es/ecma262/multipage/structured-data.html#sec-atomics.add)、[Atomics.load](https://tc39.es/ecma262/multipage/structured-data.html#sec-atomics.load)
 
-画面の `isSecureContext`、Windowの `crossOriginIsolated`、APIの有無は、実際にブラウザから読んだ値です。Worker側の分離状態は、Workerを使う操作の結果として届きます。HTTPSでページを開けることと、クロスオリジン分離が成立していることは別々に確認します。
+画面には、ブラウザから読んだ `isSecureContext`、Windowの `crossOriginIsolated`、APIの有無を表示します。Worker側の分離状態は、Workerを使う操作の結果として届きます。HTTPSでページを開けるかと、クロスオリジン分離が成立しているかは別々に確認します。
 
 ## ローカル配信で4種類の応答を比べる
 

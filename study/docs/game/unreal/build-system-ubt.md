@@ -13,7 +13,7 @@ study:
 
 ## 一言で言うと
 
-UEは[CMake等の一般ツール](/tools/build/build-tools-cmake.html)を使わず、**C#で書かれた独自ビルドシステム UBT (Unreal Build Tool)** で全プラットフォームのビルドを指揮します。分割単位は**Module**で、依存は **Build.cs** に、成果物の種類は **Target.cs** に書きます——[ビルドの基本概念](/tools/build/what-is-build.html)のUE方言です。
+UEは全プラットフォームのビルドに、C#で書かれた独自の**UBT（Unreal Build Tool）**を使います。[CMakeなどの一般的なビルドツール](/tools/build/build-tools-cmake.html)と同様に、ビルドの単位、依存関係、成果物を指定します。UBTでの分割単位は**Module**で、依存関係は **Build.cs**、成果物の種類は **Target.cs** に書きます。[ビルドの基本概念](/tools/build/what-is-build.html)
 
 ## ビルド概念の対応表
 

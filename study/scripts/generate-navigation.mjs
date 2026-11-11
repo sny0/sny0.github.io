@@ -21,7 +21,7 @@ const domains = [
   ['hardware','ハードウェア','CPU・GPU・メモリ・デバイスの間で、命令とデータがどう動くかを調べる。','論理回路、ISA・レジスタ、命令実行、分岐予測、キャッシュ・TLB、SIMD、PCIe、割り込み・DMA・IOMMU'],
   ['os','OS','プロセス、メモリ、スレッド、入出力の仕組みを調べる。','カーネル、プロセス・スレッド、仮想メモリ、システムコール、ファイル・非同期I/O、IPC、権限'],
   ['compilers','コンパイラとツールチェーン','ソースコードが実行可能になるまでを追う。','字句・構文・型検査、AST・IR・SSA、最適化、コード生成、リンク・再配置、ABI、ローダー、デバッグ情報'],
-  ['languages','言語','言語の構文を、型・所有・寿命・実行の違いから調べる。','アセンブリ、C、C++、C#、Rust、Zig、PowerShell、POSIX sh/Bash、Python、HLSL・GLSL'],
+  ['languages','言語','型、所有、寿命、実行の違いから、各言語の構文を調べる。','アセンブリ、C、C++、C#、Rust、Zig、PowerShell、POSIX sh/Bash、Python、HLSL・GLSL'],
   ['runtime','実行時の仕組み','確保・所有・解放から、GC、非同期、言語境界へつなぐ。','alloc内部、スタック・ヒープ、RAII、仮想メモリ、GC、IL・JIT/AOT、例外、非同期、FFI'],
   ['browser','ブラウザ','URLを開いてから描画されるまでを、通信・実行・表示に分ける。','navigation、DOM・CSS、JavaScript実行、event loop、layout・paint・composite、プロセス隔離、キャッシュ・保存領域'],
   ['network','ネットワーク','通信の層と失敗を、Webとゲームの両方から調べる。','IP・DNS、TCP・UDP・QUIC、TLS・HTTP、socket、メッセージ境界、遅延・再送・流量制御'],
@@ -30,7 +30,7 @@ const domains = [
   ['design','設計','責務、依存、パターンと、その使いどころを調べる。','責務・凝集度・結合度、SOLID、GoF、データ指向、API、テスト、アーキテクチャ、命名'],
   ['graphics','3DCGとグラフィックス','制作データからGPUの処理、最終表示までをつなぐ。','メッシュ・UV・材質、リグ・アニメーション、シェーダ、OpenGL・Direct3D・Vulkan、光・色・最適化'],
   ['game','ゲームとエンジン','入力、時間、ECSと各サブシステムの関係を調べる。','入力・ループ、シーン、ECS、物理・衝突、AI、音、UI、アセット、通信、Unity・Unreal'],
-  ['history','ビデオゲーム史','作品・ハード・作り方・遊ぶ場所の変化を技術へつなぐ。','前史、アーケード・家庭用・PC・携帯、3D、配信、オンライン、文化、保存、年別ソフト・ハード'],
+  ['history','ビデオゲーム史','作品、ハード、作り方、遊ぶ場所の変化を、技術の変化とあわせて見る。','前史、アーケード・家庭用・PC・携帯、3D、配信、オンライン、文化、保存、年別ソフト・ハード'],
   ['tools','開発ツールと調査機能','どの機能で何を観察し、どう確かめるかを調べる。','IDE、デバッガ、CPU・GPU・メモリ計測、フレーム解析、バイナリ解析、ビルド・依存管理、テスト、Git・CI']
 ].map(([id,title,description,planned]) => ({ id,title,description,planned }))
 
@@ -126,7 +126,7 @@ writePage('practice/index.md', '実践・サンプル', { section: 'practice', f
 
 writePage('guide/about.md', 'この技術辞典について', { section: 'reference', format: 'index', domain: 'guide' }, `# この技術辞典について
 
-コンピュータの内部から、言語、開発ツール、3DCG、ゲーム開発までをつなぐ個人の技術ノートです。自分が調べ直すための辞典を、一般公開しています。
+コンピュータの内部、言語、開発ツール、3DCG、ゲーム開発を扱う個人の技術ノートです。自分で調べ直せるようにまとめた辞典を一般公開しています。
 
 ## 目的に応じた3つの入口
 
@@ -136,7 +136,7 @@ writePage('guide/about.md', 'この技術辞典について', { section: 'refere
 | [学習ガイド](/learn/) | 前提知識、到達目標、読む順番。詳しい説明は辞典の本文へつなぎます。 |
 | [実践・サンプル](/practice/) | 制作手順、コード例、演習。動かしたり考えたりして確かめます。 |
 
-分野は扱うテーマ、入口はページの役割です。同じテーマの学習ガイドと本文があっても、用途を分けて案内します。各本文にある「関連する学習ガイド・実践」から行き来できます。
+「分野」は扱うテーマを示し、「入口」はページの用途を示します。同じテーマの学習ガイドと本文は、それぞれの入口から探せます。各本文の「関連する学習ガイド・実践」からも行き来できます。
 
 ## 記事の状態と確認範囲
 
@@ -148,7 +148,7 @@ writePage('guide/about.md', 'この技術辞典について', { section: 'refere
 
 ## 探し方
 
-入口ごとの索引は、その入口に属するページのタイトル・別名を絞り込みます。画面上部の全文検索はサイト全体が対象です。[用語・別名](/terms/)からも説明へ進めます。
+各入口の索引では、その入口に属するページをタイトル・別名で絞り込めます。画面上部の全文検索はサイト全体が対象です。[用語・別名](/terms/)からも説明へ進めます。
 
 元の教本の章順は学習ガイドに残し、辞典では主題の名前を使います。再編前のURLからも、同じページを開けます。
 
@@ -296,7 +296,7 @@ writePage('guide/learning-paths.md', '疑問から選ぶ読み順', {
 1. [DDSとサブリソース](/graphics/texture/dds-and-subresources.html)で、テクスチャの形式、mip、配列スライスからファイル内の位置を求める。
 2. [D3D12でテクスチャを転送する流れ](/graphics/texture/d3d12-texture-upload.html)で、行の再配置、コピー、リソースの状態とフェンスを追う。
 3. [C++のDDS転送実践](/practice/graphics/dds-upload-observation.html)で、2つのmipをD3D12へコピーし、読み戻したバイトを照合する。
-4. [テクスチャストリーミング](/graphics/texture/texture-streaming-and-mip-residency.html)で、先に使える解像度と、メモリに置く範囲を決める。
+4. [テクスチャストリーミング](/graphics/texture/texture-streaming-and-mip-residency.html)で、先に使える解像度とメモリに置く範囲を決める。
 
 ## 3Dモデルのファイルから三角形を描くには
 
@@ -316,7 +316,7 @@ writePage('guide/learning-paths.md', '疑問から選ぶ読み順', {
 
 1. [ソケットとTCP通信](/network/tcp-sockets.html)で、IP・ポート、送受信バッファ、バイト列とメッセージ、半閉鎖を分ける。
 2. [C++・C#のローカル通信](/practice/network/tcp-loopback-observation.html)で、長さ付きメッセージを復元し、送信停止後の応答と受信EOFを確かめる。
-3. 待機と非同期処理の基本は[非同期I/O](/os/asynchronous-file-io.html)へ進む。今回の通信例は、非ブロッキング操作とreadiness待ちを使う。
+3. 待機と非同期処理の基本は[非同期I/O](/os/asynchronous-file-io.html)で学ぶ。この通信例では非ブロッキング操作とreadiness待ちを使う。
 
 ## UDPでメッセージを送り、通信の遅れを調べるには
 

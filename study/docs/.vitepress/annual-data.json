@@ -3,11 +3,11 @@
   "first_year": 1971,
   "last_year": 2026,
   "checked_at": "2026-10-30",
-  "year_basis": "日本発売年を基本。海外初出、業務用稼働、初公開等を採った記録は地域と注記を表示。",
-  "selection_policy": "本章の編集上の選定。遊びの特徴、歴史的・文化的影響、技術・制作上の意義を考える入口として選び、客観的な順位や全作品・全機種の網羅とはしない。",
-  "hardware_policy": "新発売・稼働の主なハードを選定。該当機種を選ばない年には、その年の選定ソフトの対応機種を併記する。",
-  "current_year_policy": "2026年は2026-10-30までに発売・公開済みとして確認した記録の暫定選定。",
-  "prehistory": "1958年等の研究・展示の前史は既存の出来事年表と本文で扱う。年別の製品表は1971年から。",
+  "year_basis": "原則として日本での発売年を採る。海外での初出、業務用機としての稼働、初公開などを基準にした記録には、地域と注記を添える。",
+  "selection_policy": "遊びの特徴、歴史や文化への影響、技術や制作の面での意義を考えるために、本章で取り上げる作品と機種を選んだ。客観的な順位は付けず、すべての作品と機種を網羅するものでもない。",
+  "hardware_policy": "その年に新しく発売された、または稼働を始めた主なハードを選ぶ。該当機種を選ばなかった年は、その年に取り上げたソフトの対応機種を併記する。",
+  "current_year_policy": "2026年分は、2026-10-30までに発売・公開済みと確認できた記録から暫定的に選んだ。",
+  "prehistory": "1958年などの研究や展示は、前史として本文と出来事年表で扱う。年別の製品表は1971年から掲載する。",
   "years": [
     {
       "year": 1971,
@@ -17,7 +17,7 @@
           "platform": "アーケード（専用筐体）",
           "region": "米国",
           "release_note": "商業用の業務用ゲームとして登場した年。",
-          "reason": "研究施設の遊びが、筐体・入力・支払いを備えた商業製品へつながる例。",
+          "reason": "研究施設で遊ばれていたゲームが、筐体と入力装置、支払いの仕組みを備えた商業製品へ展開した例。",
           "source_url": "https://www.computerhistory.org/timeline/graphics-games/",
           "source_title": "Computer History Museum：Computer Space is released"
         }
@@ -32,7 +32,7 @@
           "platform": "アーケード",
           "region": "米国",
           "release_note": "米国でのアーケード原作の登場年。家庭用PONGの発売年とは区別する。",
-          "reason": "短いルールと即時の応答だけで対戦が成立する、初期設計の入口として選定。",
+          "reason": "短いルールと即時の応答だけで対戦が成り立つ、初期のゲーム設計の例として選んだ。",
           "source_url": "https://americanhistory.si.edu/blog/2012/04/pong-atari-and-the-origins-of-the-home-video-game.html",
           "source_title": "Smithsonian：Pong, Atari, and the origins of the home video game"
         }
@@ -42,7 +42,7 @@
           "name": "Magnavox Odyssey",
           "region": "米国",
           "release_note": "1972年の米国向け家庭用機。日本発売年としては扱わない。",
-          "significance": "テレビを家庭のゲーム画面に使う初期の試みを追う入口。",
+          "significance": "家庭のテレビをゲーム画面に使った初期の例。",
           "source_url": "https://americanhistory.si.edu/collections/object/nmah_1302004",
           "source_title": "Smithsonian：Magnavox Odyssey Video Game Unit, 1972"
         }
@@ -144,7 +144,7 @@
           "name": "Atari VCS（後のAtari 2600）",
           "region": "米国",
           "release_note": "1977年の米国導入。日本向けATARI 2800の発売年とは区別する。",
-          "significance": "同じ本体で複数のカートリッジを遊ぶ市場の広がりを追う軸。",
+          "significance": "同じ本体でカートリッジを交換して遊ぶ市場が、どう広がったかを知る手がかり。",
           "source_url": "https://www.computerhistory.org/timeline/1977/",
           "source_title": "Computer History Museum：Timeline of Computer History — 1977"
         },
@@ -152,7 +152,7 @@
           "name": "カラーテレビゲーム15／カラーテレビゲーム6",
           "region": "日本",
           "release_note": "任天堂の公式沿革が両機を1977年発売として記録。",
-          "significance": "任天堂が家庭用テレビゲームに展開する過程を見る入口。",
+          "significance": "任天堂が家庭用テレビゲーム事業を展開した過程を知る手がかり。",
           "source_url": "https://www.nintendo.co.jp/corporate/history/index.html",
           "source_title": "任天堂公式：会社の沿革"
         }
@@ -206,7 +206,7 @@
           "name": "ゲーム＆ウオッチ",
           "region": "日本",
           "release_note": "任天堂の公式沿革に基づく1980年のシリーズ登場。",
-          "significance": "テレビ接続型とは異なる、液晶式携帯ゲームの系統を見る入口。",
+          "significance": "テレビ接続型とは異なる系統の、液晶式携帯ゲームを知る例。",
           "source_url": "https://www.nintendo.co.jp/corporate/history/index.html",
           "source_title": "任天堂公式：会社の沿革"
         }
@@ -262,7 +262,7 @@
           "name": "PC-9801（初代）",
           "region": "日本",
           "release_note": "NECの公式社史に基づく1982年10月発売。PC-9800シリーズ全機種の仕様・発売年を示すものではない。",
-          "significance": "日本のパソコン市場とソフト供給、16ビットCPUや描画機能の発展を追う軸。",
+          "significance": "日本のパソコン市場とソフト供給のほか、16ビットCPUや描画機能の発展をたどる手がかり。",
           "source_url": "https://jpn.nec.com/profile/corp/history/pdf/history-120.pdf",
           "source_title": "NEC公式：120年、その先のNECへ。（PC-9801の発売記録）"
         }
@@ -286,7 +286,7 @@
           "name": "ファミリーコンピュータ",
           "region": "日本",
           "release_note": "任天堂の公式沿革に基づく1983年発売。海外のNES発売年とは区別する。",
-          "significance": "国内のソフト供給、操作機器、開発環境の変化を追う中心軸。",
+          "significance": "国内のソフト供給、操作機器、開発環境がどう変わったかをたどるうえで重要な機種。",
           "source_url": "https://www.nintendo.co.jp/corporate/history/index.html",
           "source_title": "任天堂公式：会社の沿革"
         },
@@ -416,7 +416,7 @@
           "name": "PCエンジン",
           "region": "日本",
           "release_note": "1987年の国内発売。後の北米TurboGrafx-16やPCエンジン miniとは区別する。",
-          "significance": "任天堂・セガ以外の家庭用機とソフト市場をたどる軸。",
+          "significance": "任天堂やセガ以外の家庭用機と、そのソフト市場をたどる手がかり。",
           "source_url": "https://www.nintendo.com/jp/famicom/history/index.html",
           "source_title": "任天堂公式：ファミコン年表 — 1987年のその他のゲーム機"
         },
@@ -490,7 +490,7 @@
           "name": "ゲームボーイ",
           "region": "日本",
           "release_note": "1989年4月21日の国内発売。後のPocket・Color等の派生機とは区別する。",
-          "significance": "携帯性とカートリッジ式ソフト供給を組み合わせる系統を追う軸。",
+          "significance": "持ち運べる本体にカートリッジでソフトを供給する、携帯ゲーム機の系統をたどる手がかり。",
           "source_url": "https://www.nintendo.co.jp/kids/161019/family_computer/index.html",
           "source_title": "任天堂公式：ニンテンドーキッズスペース — 1989年のゲームボーイ発売"
         }
@@ -602,7 +602,7 @@
           "platform": "PC（MS-DOS）",
           "region": "海外初出",
           "release_note": "1993年12月10日公開・初代DOOM。日本向け移植や2016年版の発売年ではない。",
-          "reason": "一人称視点の高速な戦闘と立体的なレベルを組み合わせ、PCのFPS史を理解する入口になる。",
+          "reason": "一人称視点の高速な戦闘と立体的なレベルを組み合わせた、PCのFPS史を理解する手がかりになる作品。",
           "source_url": "https://bethesda.net/en-US/news/doom-turns-22",
           "source_title": "DOOM Turns 22! | Bethesda"
         },
@@ -635,7 +635,7 @@
           "platform": "アーケード",
           "region": "日本",
           "release_note": "1994年12月稼働・アーケード原作。PlayStation版は翌1995年。",
-          "reason": "四肢に対応したボタン操作を軸に、3D格闘の表現と操作方法の多様化を示す。",
+          "reason": "手足それぞれに対応するボタン操作から、3D格闘の表現と操作方法の多様化が分かる。",
           "source_url": "https://www.tekken-official.jp/titles/",
           "source_title": "TITLES | TEKKEN OFFICIAL | バンダイナムコエンターテインメント公式サイト"
         }
@@ -653,7 +653,7 @@
           "name": "PlayStation",
           "region": "日本",
           "release_note": "1994年12月3日発売。北米・欧州は1995年。",
-          "significance": "CD-ROMと3D描画を軸に、家庭用ゲームの表現と制作の幅を広げた。",
+          "significance": "CD-ROMと3D描画を用いて、家庭用ゲームの表現と制作の選択肢を広げた。",
           "source_url": "https://www.playstation.com/ja-jp/playstation-history/1994-ps-one/",
           "source_title": "PlayStation 1994 | PlayStationの歴史年表 (日本)"
         }
@@ -848,7 +848,7 @@
           "name": "ゲームボーイアドバンス",
           "region": "日本",
           "release_note": "2001年発売。",
-          "significance": "携帯機での2D表現を押し広げ、アクションからRPGまで幅広く展開した。",
+          "significance": "携帯機で可能な2D表現を増やし、アクションからRPGまで幅広い作品が出た。",
           "source_url": "https://www.nintendo.co.jp/corporate/en/history/index.html",
           "source_title": "Corporate Information : Company History | Nintendo"
         },
@@ -1094,7 +1094,7 @@
           "name": "ニンテンドーDSi",
           "region": "日本",
           "release_note": "2008年発売。任天堂の沿革の記載年を採用。",
-          "significance": "カメラとダウンロードソフトに対応したDS系の発展。",
+          "significance": "DSの系統で、カメラとダウンロードソフトに対応した機種。",
           "source_url": "https://www.nintendo.co.jp/corporate/history/index.html",
           "source_title": "会社情報：会社の沿革 | 任天堂"
         }
@@ -1216,7 +1216,7 @@
           "name": "Wii U",
           "region": "日本",
           "release_note": "2012年発売。任天堂の沿革の記載年を採用。",
-          "significance": "画面を備えたGamePadを使い、テレビとの二画面体験を作る。",
+          "significance": "画面付きのGamePadとテレビを組み合わせ、二つの画面で遊べるようにした。",
           "source_url": "https://www.nintendo.co.jp/corporate/history/index.html",
           "source_title": "会社情報：会社の沿革 | 任天堂"
         }
@@ -1239,7 +1239,7 @@
           "platform": "PC（Steam版）",
           "region": "国際配信（Steam表示日基準）",
           "release_note": "2013-08-08配信。",
-          "reason": "書類審査という操作を、時間制限・生活費・倫理的判断につなげる設計を学べる。",
+          "reason": "書類審査を、時間制限、生活費、倫理的な判断と結び付ける設計を学べる。",
           "source_url": "https://store.steampowered.com/app/239030/Papers_Please/",
           "source_title": "Papers, Please on Steam"
         }
@@ -1336,7 +1336,7 @@
           "platform": "iOS・Android",
           "region": "日本",
           "release_note": "2016-07-22発売・配信。",
-          "reason": "位置情報を現実の移動と収集の遊びへつなげる、モバイルゲームの構造を学べる。",
+          "reason": "位置情報を使い、現実での移動をゲーム内の収集に結び付けるモバイルゲームの構造を学べる。",
           "source_url": "https://pokemongo.com/ja/news/launch-jp",
           "source_title": "Pokémon GO、いよいよ日本で配信開始！"
         },
@@ -1560,7 +1560,7 @@
           "name": "Steam Deck（日本出荷開始）",
           "region": "日本・香港・韓国・台湾",
           "release_note": "2022-12-17から出荷開始。地域ごとの販売展開を記載。",
-          "significance": "PCゲームを携帯型の本体で遊ぶ構成と、互換レイヤーを考える入口。",
+          "significance": "PCゲームを携帯型の本体で遊ぶ構成と、互換レイヤーの役割を考える例。",
           "source_url": "https://komodo.jp/news/steamdeck-launch.html",
           "source_title": "Steam Deck Shipping in Japan, Hong Kong, South Korea and Taiwan begins Dec 17 | KOMODO"
         }

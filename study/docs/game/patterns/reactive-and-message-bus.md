@@ -19,7 +19,7 @@ study:
 
 ## 解決したい問題
 
-イベント絡みのロジックは、素朴に書くと**状態フラグと時間管理のスパゲッティ**になります。
+イベントを処理するコードをそのまま書き足すと、状態フラグと処理のタイミングが絡み合い、動作を追いにくくなります。
 
 ```csharp
 // 問題例: 「0.5秒以内に2回押したらダッシュ」を手続きで書く
@@ -89,7 +89,7 @@ C++にはUniRx級の定番はなく(RxCppはあるがゲームでの採用は少
 
 ## Unreal Engine との対応
 
-- 直接の対応物はない。Delegateの多播+BPが同ニッチを占める。「値の変更通知」はゲッター+OnRep(ネットワーク)や手書きDelegateで実現するのが普通
+- Rxのようにイベント列を演算子で合成する話と、UIに値の変更を通知する話は別です。UE5のUMG Viewmodel(MVVMプラグイン)では、`FieldNotify` でバインド先のWidgetに値の変更を通知できます。一般のイベント通知にはDelegateやBlueprintのEvent Dispatcher、ネットワークでレプリケートしたプロパティの受信時処理には `OnRep` を使います。[UE公式のUMG Viewmodel](https://dev.epicgames.com/documentation/en-us/unreal-engine/umg-viewmodel-for-unreal-engine)
 - つまり**UEに移るとReactive前提の設計は持ち込めない**ことに注意(エンジンの流儀に合わせる)
 
 ## 利点

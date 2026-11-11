@@ -22,14 +22,14 @@ C++のヘッダー/ライブラリ分割とUnityのAssembly Definition(.asmdef)�
 | .asmdefファイルでアセンブリ分割 | ライブラリ分割(add_library → [CMake](/tools/build/build-tools-cmake.html)) | 目的同一 |
 | Assembly Definition References(参照宣言) | target_link_libraries(依存宣言) | 目的同一 |
 | 参照がないと型が見えない | includeパス+リンクがないと使えない | C++は2段階(宣言と実体) |
-| internal(アセンブリ内公開) | 無名namespace(翻訳単位内)/ 非公開ヘッダー(ライブラリ内) | **C++に完全対応物なし** |
+| internal(アセンブリ内公開) | 無名namespace(翻訳単位内) / 非公開ヘッダー(ライブラリ内) / C++20以降の名前付きモジュールの非公開宣言 | C#ではアセンブリ単位、C++の名前付きモジュールではモジュールを境に公開範囲を設計 |
 | 循環参照はエラー | 循環リンクは(静的ライブラリでは)通ってしまうことがある | C++の方が緩い=自衛が必要 |
 | asmdef分割でスクリプトコンパイル高速化 | ヘッダー衛生・分割でビルド高速化([ビルド時間 — incremental build・PCH・Unity Build・C++でビルドが遅くなる理由](/tools/build/build-speed.html)) | 目的同一 |
 
 ## 決定的な違い: 「宣言の配布」という仕事の有無
 
 - C#: アセンブリ参照を張れば、**メタデータから型情報が自動で見える**。公開範囲はpublic/internalで制御
-- C++: 型を見せるには**ヘッダーを配る**という物理的な作業が要る(→ [翻訳単位](/runtime/cpp-internals/translation-units-and-headers.html))。そして「見せる範囲」はヘッダーの置き場所で設計する:
+- ヘッダー方式のC++では、型の宣言を利用側から参照できるようにヘッダーを配ります(→ [翻訳単位](/runtime/cpp-internals/translation-units-and-headers.html))。ヘッダーの置き場所で公開範囲を分けます。
 
 ```
 mylib/
@@ -40,7 +40,7 @@ mylib/
     └── enemy.cpp
 ```
 
-CMakeでは `target_include_directories(mylib PUBLIC include PRIVATE src)` がこの公開範囲の宣言になります。**「公開APIの設計=公開ヘッダーの設計」**がC++流です。
+CMakeでは `target_include_directories(mylib PUBLIC include PRIVATE src)` でこの公開範囲を宣言します。C++のヘッダー方式では、公開するヘッダーを選ぶことが公開APIの設計です。
 
 ## 依存方向の強制force
 
@@ -67,13 +67,13 @@ CMakeで core が ui にリンクしていたら設計違反 — レビューで
 ## Unity開発者が誤解しやすい点
 
 1. 「フォルダを分ければ分離される」— C++ではフォルダに意味はない。**ヘッダーの公開範囲とリンク宣言**が分離の実体
-2. 「internalがないから全公開しかない」— 非公開ヘッダー・無名namespace・pimplで実質的な内部化は可能(粒度は粗いが)
-3. .asmdefを切りすぎて管理が地獄になった経験があるなら、C++のライブラリ分割も同じ罠がある——**分割は依存の境界に沿って最小限**が両言語共通の答え
+2. 「internalがないから全公開しかない」— ヘッダー方式では非公開ヘッダー・無名namespace・pimplを使える。C++20以降は名前付きモジュールの `export` でも公開範囲を選べる。
+3. .asmdefと同様に、C++のライブラリも細かく分けすぎると管理が難しくなります。どちらも依存の境界に沿って必要な分だけ分割します。
 
 ## 理解度チェック
 
 1. .asmdefの参照宣言に対応するC++の仕組みは何ですか(2段階)。
-2. C#のinternalに完全対応するC++機能がない中で、近い効果を得る手段を2つ挙げてください。
+2. C#の `internal` に近い公開範囲を、ヘッダー方式とC++20の名前付きモジュールでそれぞれどう設計できますか。
 3. 「公開APIの設計=公開ヘッダーの設計」とはどういうことですか。
 
 ## 演習

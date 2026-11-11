@@ -13,7 +13,7 @@ study:
 
 ## 一言で言うと
 
-UEは**UObjectに限定した**マーク&スイープGCを自作しています。「C++なのにGC」——[RAIIとGCの二つの管理方式](/runtime/memory/gc-and-csharp-comparison.html)がUEでは**同居**しており、「このポインタはGCに見えているか?」が生死を分ける独自ルールになります。
+UEはUObjectだけを対象とするマーク&スイープGCを備えています。UEでは[RAIIとGCの両方](/runtime/memory/gc-and-csharp-comparison.html)を使います。UObjectの寿命を考えるときは、GCがそのポインタを参照として追跡できるかを確認します。
 
 ## 仕組み(概要)
 

@@ -34,7 +34,7 @@ class AEnemy : public AActor {
 };
 ```
 
-ビルドの流れ([UBT](/game/unreal/build-system-ubt.html)が指揮):
+[UBT](/game/unreal/build-system-ubt.html)は次の順序でビルドを進めます。
 
 ```
 1. UHTが全ヘッダーを走査し、UCLASS/UPROPERTY等の印を収集

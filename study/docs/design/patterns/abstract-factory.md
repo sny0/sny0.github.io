@@ -45,13 +45,20 @@ classDiagram
 
 ```cpp
 // C++20(問題例)
+#include <memory>
+
+enum class Platform { Pc, Pad };
+struct PcButton {};
+struct PcDialog {};
+struct PadButton {};
+
 void BuildSettingsScreen(Platform platform) {
     if (platform == Platform::Pc) {
         auto button = std::make_unique<PcButton>();     // マウス用
         auto dialog = std::make_unique<PcDialog>();
     } else {
         auto button = std::make_unique<PadButton>();    // パッド用
-        auto dialog = std::make_unique<PcDialog>();     // ← コピペミス!混在に誰も気づかない
+        auto dialog = std::make_unique<PcDialog>();     // ← パッド用の分岐でPC用を生成
     }
     // 画面組み立て...
 }
@@ -60,7 +67,7 @@ void BuildSettingsScreen(Platform platform) {
 ## 問題点
 
 - 生成分岐が**画面の数だけ**複製され、プラットフォーム追加で全画面を修正。
-- 一族の**組み合わせ整合性**(パッド用にはパッド用を)がコンパイラで守られず、上のようなコピペミスが実行時まで発覚しない。
+- ボタンとダイアログの**組み合わせ**を画面ごとの分岐で確認する必要があり、上の例のような混在が起きやすい。
 
 ## パターン適用後のC++コード
 
@@ -161,7 +168,7 @@ public class UiTheme : ScriptableObject {          // これがConcreteFactory�
 
 ## 過剰設計になる例
 
-「いつかSwitch版を出すかもしれない」だけの理由でPC版しかないゲームにIUiFactory階層を作る——[YAGNI](/design/foundations/yagni-kiss-dry.html)違反の典型。プラットフォーム対応が確定してから導入しても遅くありません。
+「いつかSwitch版を出すかもしれない」という理由だけで、PC版しかないゲームにIUiFactoryの階層を作るのは、典型的な[YAGNI](/design/foundations/yagni-kiss-dry.html)違反です。プラットフォーム対応が確定してから導入しても遅くありません。
 
 ## 関連項目
 

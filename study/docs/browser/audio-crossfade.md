@@ -33,7 +33,7 @@ study:
 
 ## 音源同士の相関で中点のレベルが変わる
 
-ゲインを固定して短い区間を測るとき、入力の平均二乗値を `PA = mean(a²)`、`PB = mean(b²)` とします。合成後の平均二乗値 `Pout` には、AとBを同じフレームで掛けた項も入ります。平均を除いた入力なら、`mean(a × b) = ρ × √(PA × PB)` と書けます。`ρ` は相関係数です。[Fink・Holters・Zölzerのクロスフェード論文](https://www.dafx.de/paper-archive/details/gUO-U6xEDk0Z_m4S-PivJQ)
+ゲインを固定して短い区間を測るとき、入力の平均二乗値を `PA = mean(a²)`、`PB = mean(b²)` とします。合成後の平均二乗値 `Pout` には、AとBの同じフレームの値を掛け合わせた項も入ります。平均を除いた入力なら、`mean(a × b) = ρ × √(PA × PB)` と書けます。`ρ` は相関係数です。[Fink・Holters・Zölzerのクロスフェード論文](https://www.dafx.de/paper-archive/details/gUO-U6xEDk0Z_m4S-PivJQ)
 
 ```text
 Pout = gA² × PA + gB² × PB + 2 × gA × gB × mean(a × b)

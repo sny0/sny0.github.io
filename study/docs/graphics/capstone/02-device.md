@@ -3,7 +3,7 @@ title: 2. デバイス初期化とスワップチェイン
 study:
   source: RenderingWiki
   status: published
-  summary: 「クリアカラーで塗った画面が毎フレーム表示される」まで。描画はまだしません。ここで作る Device 層はレンダラーの心臓であり、CPUとGPUの並走・同期の知識をコードに落とします。
+  summary: 描画に進む前に、毎フレーム、クリアカラーで塗った画面を表示するDevice層を作る。CPUとGPUが並行して動くときの同期をコードで確認する。
   section: practice
   format: tutorial
   domain: graphics
@@ -15,7 +15,7 @@ study:
 
 ## このステップの目標
 
-**「クリアカラーで塗った画面が毎フレーム表示される」**まで。描画はまだしません。ここで作る `Device` 層はレンダラーの心臓であり、[CPUとGPUの並走](/hardware/gpu/cpu-vs-gpu.html)・[同期](/graphics/api/vulkan.html)の知識をコードに落とします。
+このステップでは、クリアカラーで塗った画面を毎フレーム表示するところまで実装します。図形の描画は後の段階で扱います。ここで作る `Device` 層では、[CPUとGPUの並走](/hardware/gpu/cpu-vs-gpu.html)と、その間に必要な[同期](/graphics/api/vulkan.html)をコードで確認します。
 
 ```mermaid
 flowchart LR
@@ -95,7 +95,7 @@ vkGetDeviceQueue(device, graphicsFamily, 0, &graphicsQueue);
 
 ### 2.3 スワップチェイン
 
-表示用の画像リング (画像数はsurfaceの能力に合わせて決める)。**フォーマットとPresent Modeの選択**が要点です。以下はSDR/sRGB出力の例で、graphicsとPresentを同じキューで実行します。`Suitable()` はその両方を満たすqueue familyを選ぶ前提です:
+表示に使う画像の数はsurfaceの能力に合わせて決めます。フォーマットとPresent Modeの選択が要点です。以下はSDR/sRGB出力の例で、graphicsとPresentを同じキューで実行します。`Suitable()` はその両方を満たすqueue familyを選ぶ前提です。
 
 ```cpp
 VkSurfaceFormatKHR PickFormat(...) {
@@ -116,7 +116,7 @@ VkPresentModeKHR PickPresentMode(...) {
 
 ### 2.4 フレームインフライトの同期 — 本ステップの核心
 
-[CPUとGPUの役割分担](/hardware/gpu/cpu-vs-gpu.html) の理論をそのまま実装します:
+[CPUとGPUの役割分担](/hardware/gpu/cpu-vs-gpu.html)で説明した同期を、フレームインフライトのコードに組み込みます。
 
 ```cpp
 constexpr int kFramesInFlight = 2;
@@ -222,7 +222,7 @@ Present資源を厳密に退役させるには、対応環境で `VK_KHR_swapcha
 ## 動作確認
 
 - 起動して紺色の画面が出る。再作成・退役処理を実装したうえで、リサイズ・最小化/復帰・終了を確認する
-- **検証レイヤが無言であること** — 1件でも警告があれば直してから進む
+- 検証レイヤの出力を確認し、警告が1件でもあれば直してから進む
 - [RenderDoc](/graphics/optimization/tools.html) でキャプチャし、Clear→Presentの2コマンドとレイアウト遷移を確認してみる
 
 ## 前提知識

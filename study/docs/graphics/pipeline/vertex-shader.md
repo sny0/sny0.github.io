@@ -27,7 +27,7 @@ Vertex Shader (VS) の一回の呼び出しは、一つの入力頂点を処理�
 
 - 1999: GeForce 256 の固定機能T&Lユニット — 変換とライティングの回路化
 - **2001: GeForce 3 + DirectX 8** — T&Lをプログラム可能にした「Vertex Shader 1.1」誕生。アセンブリ風言語で128命令まで
-- 2003-04: HLSL/GLSLによる高級言語化。分岐・ループの追加 (SM2.0/3.0)
+- 2002-04: DirectX 9 (2002年12月の正式版) のHLSLと、OpenGL 2.0 (2004年) でコアに採用されたGLSLによる高級言語化。分岐・ループも拡張 (SM2.0/3.0)
 - 2006: 統合シェーダ化により、VS専用ユニットは消滅 (汎用コアで実行)
 - 2004: **Shader Model 3.0**でVertex Texture Fetchが登場（GeForce 6など。形式・対応能力に制約）
 - 2006〜07: **Direct3D 10 / SM4.0**で頂点側のテクスチャ読み取りが標準機能に。Direct3D 10.1はSM4.1
@@ -176,6 +176,8 @@ void main() {
 
 ## 参考資料
 
+- [Microsoft: DirectX 9.0 Beta 1でのHLSL発表 (2002年5月)](https://news.microsoft.com/source/2002/05/30/microsoft-releases-beta-version-1-of-directx-9-0-to-partners-beta-testers/)
+- [Khronos: OpenGL 2.0仕様](https://registry.khronos.org/OpenGL/specs/gl/glspec20.pdf)
 - Fabian Giesen, *"A trip through the Graphics Pipeline"* — Part 3 (頂点処理)
 - meshoptimizer (Arseny Kapoulkine) — 頂点キャッシュ最適化の実装
 - GDC/GPU Gems の GPU Skinning 各種資料

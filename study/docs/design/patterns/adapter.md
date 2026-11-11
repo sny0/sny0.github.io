@@ -154,7 +154,7 @@ public class UnityAdsAdapter : IAdsService {
 ## 欠点
 
 - 間接層が1枚増える(コードを追うときワンホップ増える)
-- Targetの設計を誤る(Adapteeの写しにする)と、隔離の意味がなくなる — **Targetは自分の語彙で**([DIP](/design/solid/dip.html)の「抽象の所有」と同じ注意)
+- TargetをAdapteeの写しにすると、依存を隔離できない。Targetは利用側の用語で定義する。[DIP](/design/solid/dip.html)で扱う抽象の所有と同じ考え方。
 - Adapteeの機能すべてをTargetに露出しようとすると、Targetが肥大化する(使う分だけ露出する)
 
 ## 適用条件

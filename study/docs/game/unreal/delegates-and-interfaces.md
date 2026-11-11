@@ -3,7 +3,7 @@ title: UEの Delegate と Interface
 study:
   source: C++ Wiki
   status: published
-  summary: C++にはdelegate/eventの言語機能がないため、UEはマクロで型を生成する独自Delegateシステムを持ちます。 C++内で完結する通知は非Dynamic(速い)、BPに公開する・保存する通知だけDynamic——Unityの「C# event vs UnityEvent」の使い分け(
+  summary: Unreal Engineは、マクロで型を生成する独自のDelegateを提供します。C++内で使う非DynamicとBlueprintへの公開や保存に使うDynamicの違い、インターフェースとの使い分けを説明します。
   section: reference
   format: article
   domain: game
@@ -44,7 +44,7 @@ public:
 | Delegate / Multicast | 速い | 不可 | 不可 | 関数ポインタ+オブジェクト直接 |
 | **Dynamic** Delegate / Multicast | 遅い(**名前で検索**して呼ぶ) | **可** | 可 | リフレクション([UFUNCTION必須](/game/unreal/reflection-and-uht.html)) |
 
-- **C++内で完結する通知は非Dynamic**(速い)、**BPに公開する・保存する通知だけDynamic**——Unityの「C# event vs UnityEvent」の使い分け(→ [Observer](/design/patterns/observer.html))と完全に同型の判断です
+- C++内で完結する通知には高速な非Dynamicを使い、BPに公開するか保存する通知だけをDynamicにします。UnityでC# eventとUnityEventを使い分けるときも、同じ考え方です。[Observer](/design/patterns/observer.html)
 - 寿命の安全: `AddUObject`系はUObjectの生死をチェックして死んだ購読を呼ばない(→ [通知のRAIIトークン](/languages/csharp/delegates-events-function-pointers.html)の役割をGC統合で実現)。それでも明示的な `Remove`(EndPlay等で)が行儀の良い作法
 
 ## Interface — UINTERFACEの独自形式

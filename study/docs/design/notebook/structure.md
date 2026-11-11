@@ -11,7 +11,7 @@ study:
 
 # つなぎ方を整える — Adapter・Decorator・Facade
 
-外部の API を合わせる、処理を包む、入口を簡単にする。どれも「ラッパー」ですが、目的が違います。
+外部 API の呼び出し方を合わせる、処理を包む、利用側が呼び出す操作を簡単にする。いずれも「ラッパー」ですが、使う目的が異なります。
 
 タグ: Adapter / Decorator / Facade / Proxy / Bridge / Composite
 

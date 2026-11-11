@@ -13,7 +13,7 @@ study:
 
 # 配列と動的配列 — 添字、容量、再確保
 
-ゲーム中の弾を毎フレーム更新するなら、弾の位置と速度を順に読み出せる形で持っておくと都合がよくなります。**配列**は同じ型の要素をメモリ上に連続して並べます。**動的配列**はこの配置を保ったまま、要素が増えると必要に応じて大きい領域へ移ります。
+ゲーム中の弾を毎フレーム更新するには、位置と速度を順に読み出せる形で持っておくと便利です。**配列**は同じ型の要素をメモリ上に連続して並べます。**動的配列**は要素が増えると、連続した配置を保ったまま必要に応じて大きい領域へ移ります。
 
 ## 添字から位置を計算する
 
@@ -53,7 +53,7 @@ C++の `T[N]` や `std::array<T, N>` は長さが固定です。`std::vector<T>`
 
 ## 弾の状態をまとめて更新する例
 
-次のC++20例では、更新フェーズで全要素を1回ずつ訪ね、そのあと画面外の弾をまとめて除きます。`reserve(128)` は容量を少なくとも128へ増やし、その時点の要素数は0のままです。`resize(128)` は要素数を128へ変えます。C#でも `new List<Bullet>(128)` の128は初期容量を表し、`Count` は0です。[C++のvector.capacity](https://eel.is/c++draft/vector.capacity) · [C++のvector向けerase_if](https://eel.is/c++draft/vector.erasure) · [MicrosoftのListコンストラクター](https://learn.microsoft.com/en-us/dotnet/api/system.collections.generic.list-1.-ctor?view=net-10.0)
+次のC++20例では、更新フェーズで全要素を1回ずつ処理したあと、画面外の弾をまとめて除きます。`reserve(128)` は容量を少なくとも128へ増やし、その時点の要素数は0のままです。`resize(128)` は要素数を128へ変えます。C#でも `new List<Bullet>(128)` の128は初期容量を表し、`Count` は0です。[C++のvector.capacity](https://eel.is/c++draft/vector.capacity) · [C++のvector向けerase_if](https://eel.is/c++draft/vector.erasure) · [MicrosoftのListコンストラクター](https://learn.microsoft.com/en-us/dotnet/api/system.collections.generic.list-1.-ctor?view=net-10.0)
 
 ```cpp
 #include <iostream>

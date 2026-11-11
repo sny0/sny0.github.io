@@ -13,7 +13,7 @@ study:
 
 # OSの役割 — アプリとハードウェアをつなぐ
 
-**OS（Operating System）**は、アプリがCPU、メモリ、ファイル、機器を使うための共通の仕組みを提供するソフトウェアです。Windows、macOS、Linuxなどがあります。ゲームとブラウザーを一緒に開くときも、それぞれのプログラムを動かし、必要な資源を管理する役割を担います。ここではWindowsを主な例にします。[MicrosoftのWindowsアーキテクチャー](https://learn.microsoft.com/en-us/windows-hardware/drivers/gettingstarted/windows-kernel-mode-process-and-thread-manager) · [コンピュータの部品と役割](/hardware/computer-components.html)
+OS（Operating System）は、アプリがCPU、メモリ、ファイル、機器を使うための共通の仕組みを提供するソフトウェアです。Windows、macOS、Linuxなどがあります。ゲームとブラウザーを一緒に開くときも、OSはそれぞれのプログラムを動かし、必要な資源を管理します。ここではWindowsを主な例にします。[MicrosoftのWindowsアーキテクチャー](https://learn.microsoft.com/en-us/windows-hardware/drivers/gettingstarted/windows-kernel-mode-process-and-thread-manager) · [コンピュータの部品と役割](/hardware/computer-components.html)
 
 ## アプリがする仕事と、OSが受け持つ仕事
 

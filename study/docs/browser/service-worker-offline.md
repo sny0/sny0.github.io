@@ -27,7 +27,7 @@ scopeは、主にどのページを担当するかを決めます。そのペー
 
 ## install、waiting、activate、ページの制御
 
-一つの登録には、新しい版を準備する`installing`、切り替えを待つ`waiting`、担当中または有効化中の`active`という枠があります。新しい版の準備中も、以前のactive workerが既存のページを担当できます。[Service Workersの登録モデル](https://w3c.github.io/ServiceWorker/#service-worker-registration-concept)
+一つの登録には、新しいバージョンを準備する`installing`、切り替えを待つ`waiting`、担当中または有効化中の`active`という枠があります。新しいバージョンの準備中も、以前のactive workerが既存のページを担当できます。[Service Workersの登録モデル](https://w3c.github.io/ServiceWorker/#service-worker-registration-concept)
 
 | 段階 | 起きること |
 | --- | --- |
@@ -35,7 +35,7 @@ scopeは、主にどのページを担当するかを決めます。そのペー
 | `waiting` | インストールを終え、新版をactiveにできる条件を待つ |
 | `activate` | 新版がactiveの枠へ移る。イベント内で移行や不要な保存物の整理を行える |
 
-`install`イベントでは、先に済ませる処理のPromiseを`event.waitUntil(...)`へ渡します。たとえば必須の画面資源を保存する処理を渡すと、ブラウザはその処理をインストールの一部として待ちます。Promiseが拒否された場合、その版のインストールは失敗します。途中で作ったCacheが残る場合もあるため、版ごとに保存先を分けます。[MDNのwaitUntil](https://developer.mozilla.org/en-US/docs/Web/API/ExtendableEvent/waitUntil)、[Service WorkersのInstall手順](https://w3c.github.io/ServiceWorker/#installation-algorithm)
+`install`イベントでは、先に済ませる処理のPromiseを`event.waitUntil(...)`へ渡します。たとえば必須の画面資源を保存する処理を渡すと、ブラウザはその処理をインストールの一部として待ちます。Promiseが拒否されると、そのバージョンのインストールは失敗します。途中で作ったCacheが残る場合もあるため、バージョンごとに保存先を分けます。[MDNのwaitUntil](https://developer.mozilla.org/en-US/docs/Web/API/ExtendableEvent/waitUntil)、[Service WorkersのInstall手順](https://w3c.github.io/ServiceWorker/#installation-algorithm)
 
 更新時は、旧版が担当するページが残っている間、新版はwaitingに留まることがあります。初回は旧版がいないため、待機が短く、その状態を観察しにくいこともあります。`activate`でも`waitUntil(...)`を使えます。そこで待つ処理がsettleして有効化が進むまで、通常の`fetch`などの処理は待たされます。[Service WorkersのActivate手順](https://w3c.github.io/ServiceWorker/#activation-algorithm)、[MDNのwaitUntil](https://developer.mozilla.org/en-US/docs/Web/API/ExtendableEvent/waitUntil)
 

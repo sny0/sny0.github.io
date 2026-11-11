@@ -13,7 +13,7 @@ study:
 
 # マテリアル・テクスチャ・シェーダーの基本
 
-同じ形の箱でも、木目のある箱や、光を反射する金属の箱として描けます。[メッシュ](/graphics/basics/models-and-meshes.html)が形を表すのに対し、表面の見え方を指定するために使うのが**マテリアル**です。形のデータと表面の設定を組み合わせて、一つの物体を描きます。[Unityのマテリアルの説明](https://docs.unity.com/en-us/engine/6000.0/manual/materials-and-shaders/materials/introduction)
+同じ形の箱を、木目のある箱や光を反射する金属の箱として描けます。[メッシュ](/graphics/basics/models-and-meshes.html)が形を表し、**マテリアル**が表面の見え方を指定します。両方のデータを組み合わせて一つの物体を描きます。[Unityのマテリアルの説明](https://docs.unity.com/en-us/engine/6000.0/manual/materials-and-shaders/materials/introduction)
 
 ## 表面の設定、参照するデータ、計算するプログラム
 

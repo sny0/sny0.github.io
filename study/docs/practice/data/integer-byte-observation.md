@@ -66,7 +66,7 @@ PASS: 38 checks; no signed overflow or out-of-range shift executed
 
 ## 保存する並びは明示して作る
 
-`encodeLittle()`と`encodeBig()`は、値から取り出した8bitずつを、決めた順序で配列へ置きます。native object bytesをそのまま保存形式に採用する操作とは分けています。
+`encodeLittle()`と`encodeBig()`は、値を8bitずつ取り出して決めた順序で配列に並べます。native object bytesをそのまま保存形式に使う操作とは区別します。
 
 | 値 | 指定したlittle-endian | 指定したbig-endian |
 | --- | --- | --- |

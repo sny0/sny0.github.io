@@ -3,7 +3,7 @@ title: テンプレートとジェネリック
 study:
   source: C++ Wiki
   status: published
-  summary: "構文は瓜二つ(List と std::vector )ですが、仕組みは正反対に近い: C#ジェネリック = 1つのコード+実行時の型情報(ランタイムが面倒を見る) C++テンプレート = コンパイル時のコード生成器(型ごとに完全な実物を作る)"
+  summary: "C#のジェネリックは実行時にも型情報を持ち、コードの共有や特殊化は実行環境に依存します。C++テンプレートはコンパイル時に実体化します。"
   section: reference
   format: article
   domain: languages
@@ -13,9 +13,9 @@ study:
 
 ## 一言で言うと
 
-構文は瓜二つ(`List<T>` と `std::vector<T>`)ですが、**仕組みは正反対に近い**:
+`List<T>` と `std::vector<T>` は構文がよく似ていますが、型引数を扱う仕組みは大きく異なります。
 
-- C#ジェネリック = **1つのコード+実行時の型情報**(ランタイムが面倒を見る)
+- C#ジェネリック = **実行時にも残る型情報**と、型引数や実行環境に応じたコード共有・特殊化。[Microsoft Learn: ランタイムのジェネリック](https://learn.microsoft.com/en-us/dotnet/csharp/programming-guide/generics/generics-in-the-run-time)
 - C++テンプレート = **コンパイル時のコード生成器**(型ごとに完全な実物を作る)
 
 詳細な言語仕様は[テンプレートとconcepts](/languages/cpp/templates-and-concepts.html)で説明済み。このページは対応と差分に集中します。
@@ -57,7 +57,7 @@ const T& Strongest(const std::vector<T>& list) {
 
 | | C# | C++ |
 |---|---|---|
-| コード生成 | JITが実行時に(値型は特殊化、参照型は共有) | コンパイル時に型ごと全部 |
+| コード生成 | JITでは実行時に生成(値型は特殊化、参照型は共有)。IL2CPPではビルド時に生成し、共有の範囲は版・設定に依存 | コンパイル時に型ごと全部 |
 | 新しい型引数を実行時に | 可能(リフレクション+MakeGenericType) | **不可能**(コンパイル済みのものだけ) |
 | ビルド時間 | 影響小 | 増える([実体化](/runtime/cpp-internals/template-instantiation-and-inline.html)) |
 | バイナリサイズ | 小 | 型数に比例して増える |
@@ -69,7 +69,7 @@ const T& Strongest(const std::vector<T>& list) {
 
 1. 「`List<T>`と`vector<T>`は同じもの」— 使用感は近いが、C++は使った型の数だけvectorのコードが生成されている(ビルド時間・サイズで払う)
 2. C#の感覚で「制約を書かないと何もできない」と思う——C++は逆に何でも書けてしまい、**契約が読めない**のが問題(conceptsを書く動機)
-3. 「テンプレートはライブラリ作者のもの」— 使う側としては毎日触れている(STL全部)。書く側に回るのは共通部品を作るときだけでよい
+3. STLを使う日常のコードでも、テンプレートを利用しています。テンプレートを自分で書くのは共通部品を作るときだけで十分です。
 
 ## ゲーム開発での使い分けの直感
 

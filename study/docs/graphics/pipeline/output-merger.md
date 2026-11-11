@@ -3,7 +3,7 @@ title: 出力結合 (Depth / Stencil / Blend)
 study:
   source: RenderingWiki
   status: published
-  summary: 出力結合 (Output Merger / ROP) は、Fragment Shaderが計算した色をレンダーターゲットへ実際に書き込むかどうか・どう合成するかを決めるパイプライン最終段の固定機能ステージです。深度テスト・ステンシルテスト・ブレンディングの3つの機能からなり、隠面消去と半透明合成とい
+  summary: 出力結合 (Output Merger / ROP) は、Fragment Shaderの色をレンダーターゲットに書くかどうかと、書くときの合成方法を決めます。深度テスト、ステンシルテスト、ブレンディングを扱います。
   section: reference
   format: article
   domain: graphics
@@ -13,7 +13,7 @@ study:
 
 ## 概要
 
-出力結合 (Output Merger / ROP) は、Fragment Shaderが計算した色を**レンダーターゲットへ実際に書き込むかどうか・どう合成するかを決める**パイプライン最終段の固定機能ステージです。**深度テスト・ステンシルテスト・ブレンディング**の3つの機能からなり、隠面消去と半透明合成という2大問題をここで解決します。
+出力結合 (Output Merger / ROP) は、パイプラインの最終段にある固定機能ステージです。Fragment Shaderが計算した色をレンダーターゲットに書くかどうか、書く場合はどう合成するかを決めます。深度テスト、ステンシルテスト、ブレンディングの3つの機能で、隠面消去と半透明の合成という2つの処理を行います。
 
 ## なぜ必要なのか
 

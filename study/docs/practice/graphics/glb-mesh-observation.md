@@ -15,7 +15,7 @@ study:
 
 # C++でGLBの頂点とインデックスを読み、三角形を描く
 
-3頂点の位置と法線、三角形のインデックスを一つのGLBにまとめます。C++でバイト列を読み、頂点バッファビューとインデックスバッファビューをD3D12に渡します。描いた先は32×32ピクセルのテクスチャです。CPUへ読み戻して、三角形の内側と背景の色を確認します。[glTFのファイル構造](/graphics/mesh/gltf-mesh-buffers.html) · [頂点入力とインデックス描画](/graphics/mesh/vertex-and-index-input.html)
+3頂点の位置と法線、三角形のインデックスを一つのGLBにまとめます。C++でバイト列を読み、頂点バッファビューとインデックスバッファビューをD3D12に渡します。32×32ピクセルのテクスチャに描画し、CPUへ読み戻して三角形の内側と背景の色を確認します。[glTFのファイル構造](/graphics/mesh/gltf-mesh-buffers.html) · [頂点入力とインデックス描画](/graphics/mesh/vertex-and-index-input.html)
 
 ## 手元で動かす {#run-locally}
 

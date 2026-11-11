@@ -13,7 +13,7 @@ study:
 
 # PEローダーがEXEとDLLを配置する仕組み — RVA・再配置・IAT
 
-Windows x64のネイティブなEXEやDLLを読み込むとき、WindowsはPEヘッダーを読み、コードやデータの仮想アドレスを決めます。デバッガーで見えるアドレスからファイル中のバイトを探すには、どこを起点にした数値かを区別します。ここではディスク上の配置から、外部DLLの関数を呼べる状態になるまでを追います。[プロセスを起動してmainへ到達するまで](/os/process-startup.html) · [MicrosoftのPE/COFF仕様](https://learn.microsoft.com/en-us/windows/win32/debug/pe-format)
+Windowsはx64のネイティブなEXEやDLLを読み込むときにPEヘッダーを読み、コードやデータの仮想アドレスを決めます。デバッガーに表示されたアドレスをもとにファイル中のバイトを探すには、その数値の起点を区別します。ここではディスク上の配置から、外部DLLの関数を呼べる状態になるまでを追います。[プロセスを起動してmainへ到達するまで](/os/process-startup.html) · [MicrosoftのPE/COFF仕様](https://learn.microsoft.com/en-us/windows/win32/debug/pe-format)
 
 ## セクションをファイルから仮想アドレスへ対応付ける
 

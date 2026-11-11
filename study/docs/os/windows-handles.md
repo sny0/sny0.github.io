@@ -24,7 +24,7 @@ Windowsでイベントやファイルを開くと、アプリは対象を操作�
 
 既存のイベントを `OpenEventW` で開くときは、要求する権限をビットの組み合わせで指定します。システムはオブジェクトのセキュリティ記述子に照らして要求を検査します。イベントの状態を変更する `SetEvent` には `EVENT_MODIFY_STATE` が、イベントを待つ `WaitForSingleObject` には `SYNCHRONIZE` が必要です。通知する側と待つ側は、それぞれの操作に必要な権限で同じイベントを扱えます。必要なビットはオブジェクトの種類と関数によって決まります。[同期オブジェクトのセキュリティとアクセス権](https://learn.microsoft.com/en-us/windows/win32/sync/synchronization-object-security-and-access-rights) · [SetEvent](https://learn.microsoft.com/en-us/windows/win32/api/synchapi/nf-synchapi-setevent) · [WaitForSingleObject](https://learn.microsoft.com/en-us/windows/win32/api/synchapi/nf-synchapi-waitforsingleobject)
 
-`CreateProcessW` が返す情報には、プロセスと初期スレッドのハンドル、およびPIDとTIDが含まれます。PIDはプロセスを識別するための番号です。PIDから操作に使うハンドルを得る場合は `OpenProcess` で権限を指定します。ゲームの[世代付きハンドル](/algorithms/generational-handles.html)は、アプリが自分のスロット表で対象を引くための仕組みです。ここで扱う `HANDLE` は、Windowsが管理する参照をWin32 APIに渡すための値です。[Microsoftのプロセスハンドルと識別子](https://learn.microsoft.com/en-us/windows/win32/procthread/process-handles-and-identifiers) · [プロセス起動](/os/process-startup.html)
+`CreateProcessW` が返す情報には、プロセスと初期スレッドのハンドル、およびPIDとTIDが含まれます。PIDはプロセスを識別するための番号です。PIDをもとにプロセスの操作に使うハンドルを取得するときは、`OpenProcess` で権限を指定します。ゲームの[世代付きハンドル](/algorithms/generational-handles.html)はアプリが自分のスロット表から対象を探すための仕組みです。ここで扱う `HANDLE` はWindowsが管理する参照をWin32 APIに渡すための値です。[Microsoftのプロセスハンドルと識別子](https://learn.microsoft.com/en-us/windows/win32/procthread/process-handles-and-identifiers) · [プロセス起動](/os/process-startup.html)
 
 ## コピー・複製・継承で増えるもの
 

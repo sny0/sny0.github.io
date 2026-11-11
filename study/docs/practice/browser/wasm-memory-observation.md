@@ -36,7 +36,7 @@ study:
 
 `16` は線形メモリの先頭から数えたバイト位置です。JavaScript側は `DataView` のリトルエンディアン指定を使います。範囲外アクセスは、教材の関数では最初のloadが失敗するため、その後のstoreまで進みません。[WebAssembly Coreのメモリ命令](https://webassembly.github.io/spec/core/exec/instructions.html#memory-instructions)
 
-拡張時には、`memory.buffer` から新しいビューを作り直します。教材のメモリは非共有で、固定長の `ArrayBuffer` を使います。新しいページの先頭4バイトが `00 00 00 00` であることも確認できます。このモジュールの最大サイズは2ページです。[WebAssembly JS InterfaceのMemory](https://webassembly.github.io/spec/js-api/#memories)
+メモリを拡張したら、`memory.buffer` からビューを作り直します。教材のメモリは非共有で、固定長の `ArrayBuffer` を使います。新しいページの先頭4バイトが `00 00 00 00` であることも確認できます。このモジュールの最大サイズは2ページです。[WebAssembly JS InterfaceのMemory](https://webassembly.github.io/spec/js-api/#memories)
 
 ## 手元で動かす
 

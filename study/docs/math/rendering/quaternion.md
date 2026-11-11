@@ -17,7 +17,7 @@ study:
 
 ## なぜ必要なのか
 
-回転表現には主に3つの選択肢があり、それぞれ致命的な欠点があります:
+回転を表す主な3つの方法と、それぞれの欠点を比べます。
 
 | 表現 | サイズ | 補間 | 合成 | 欠点 |
 |---|---|---|---|---|
@@ -49,7 +49,7 @@ Unity (`Quaternion`)、UE (`FQuat`)、glm (`glm::quat`)、物理エンジン (Ph
 
 ### 定義
 
-単位クォータニオンは、回転軸 $\hat{\mathbf{a}}$ (単位ベクトル) と回転角 $\theta$ から:
+回転軸 $\hat{\mathbf{a}}$ (単位ベクトル) と回転角 $\theta$ から、単位クォータニオンを求めます。
 
 $$q = \left(\hat{\mathbf{a}}\sin\frac{\theta}{2},\; \cos\frac{\theta}{2}\right) = (x, y, z, w), \qquad \|q\| = 1$$
 
@@ -106,7 +106,7 @@ glm: `glm::quat`, `glm::slerp`, `glm::mat4_cast(q)`。GLTFのアニメーショ�
 
 ## コード例
 
-C++ (glm) — アニメーション補間の基本形:
+C++とglmを使ったアニメーション補間の基本形です。
 
 ```cpp
 // キーフレーム間の回転補間 (最短経路の保証つき)
@@ -122,7 +122,7 @@ glm::quat camRot = yaw * pitch;          // 右側が先。ローカル軸で読
 glm::vec3 forward = camRot * glm::vec3(0, 0, -1);
 ```
 
-Unity (C#) — 滑らかな回転追従:
+UnityのC#で滑らかに回転を追従させます。
 
 ```csharp
 void Update() {

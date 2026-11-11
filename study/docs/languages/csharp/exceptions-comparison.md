@@ -26,7 +26,7 @@ study:
 | 使わない選択肢 | 事実上ない(BCLが例外前提) | 現実に存在(-fno-exceptions文化) |
 | コスト | tryは安価、throwはやや重い | 投げなければほぼゼロ、throwは高い(実装依存) |
 
-C++23の`<stacktrace>`は、取得した位置を記録・表示するための標準機能です。例外が発生した場所を残したいなら、その時点で収集して保持する設計が必要です。[C++草案: stacktrace](https://eel.is/c++draft/stacktrace)
+C++23の`<stacktrace>`は取得した位置を記録・表示するための標準機能です。例外が発生した場所を残したいなら、その時点で収集して保持する設計が必要です。[C++草案: stacktrace](https://eel.is/c++draft/stacktrace)
 
 <div id="最大の差分1-「安全網」の有無" class="study-legacy-anchor" aria-hidden="true"></div>
 
@@ -93,7 +93,7 @@ C++に finally がないのは欠落ではなく、[RAII](/languages/cpp/raii.ht
 ## Unity開発者が誤解しやすい点
 
 1. C++の`catch`が扱うのは投げられた例外です。生配列の範囲外アクセスの調査には、[サニタイザ](/tools/build/debugging-and-analysis.html)などを使います。
-2. `catch (Exception e)` の感覚で `catch (...)` を乱用しない——何が起きたか分からないまま握りつぶすのは、C++では特に危険(状態が壊れている可能性)
+2. `catch (Exception e)` と同じ感覚で `catch (...)` を多用しない。C++では何が起きたか分からないまま例外を無視するのは特に危険です(状態が壊れている可能性)。
 3. C++の例外は**値で投げてconst参照で受ける**(`catch (const std::exception& e)`)。C#の「例外は参照型」の感覚でいると、catchのスライシング(派生情報の消失)にハマる
 
 ## 理解度チェック

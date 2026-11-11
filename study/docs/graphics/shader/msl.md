@@ -13,7 +13,7 @@ study:
 
 ## 概要
 
-MSL (Metal Shading Language) は**AppleのMetal API専用シェーダ言語**で、Metal 1〜3では**C++14**、Metal 4以降では**C++17**を基盤に拡張と制限を加えた言語です。テンプレート・ポインタ・名前空間が使え、シェーダ言語の中で最も「普通のプログラミング言語」に近い設計です。iOS/macOS/visionOSのGPUプログラミングはすべてMSLで書きます。
+MSL (Metal Shading Language) はAppleのMetal API専用のシェーダ言語です。Metal 1〜3ではC++14、Metal 4以降ではC++17を基盤とし、拡張と制限を加えています。テンプレート、ポインタ、名前空間を使える点で、シェーダ言語の中でも汎用のプログラミング言語に近い設計です。iOS、macOS、visionOSのGPUプログラミングはすべてMSLで書きます。
 
 ## なぜ必要なのか
 

@@ -54,7 +54,7 @@ static void HelperFunc() {}           // 同上
 
 ### 4. (参考)staticではないもの
 
-C#の `static class` のような「インスタンス化禁止のクラス」構文はC++にない——namespaceと自由関数で書くのがC++流です。
+C++にはC#の `static class` のようにインスタンス化を禁止するクラス構文がなく、namespaceと自由関数を使って書きます。
 
 ## inline(名前と実態がズレた機能)
 
@@ -93,7 +93,7 @@ private:
 ### 正当な用途と乱用
 
 - **正当**: 対で動作する密結合な2クラス(コンテナとそのイテレータ)、演算子オーバーロードの非メンバ関数(`operator<<`)、テスト用アクセス(賛否あり)、[Memento](/design/patterns/memento.html)のように「特定クラスだけに中身を見せる」設計
-- **乱用**: 「アクセスしたいからfriend」— それはカプセル化の放棄。friendが増えるクラスは、そもそも責務分割が誤っているサイン([SRP](/design/solid/srp.html))
+- アクセスしたいという理由だけでfriendを増やすと、カプセル化が失われます。friendが増えるクラスでは、責務の分け方を見直す手がかりになります([SRP](/design/solid/srp.html))。
 
 ## ゲーム開発での使用例
 

@@ -184,7 +184,7 @@ Unityでは「生成の可変点」はサブクラスよりも**Prefab/Scriptabl
 
 ## 実務でよく見かける変形
 
-- static関数版: `Enemy::Create(EnemyType type)` — 分岐は残るが生成箇所が1か所に集約される。小規模ではこれで十分なことが多い
+- static関数版: `Enemy::Create(EnemyType type)` に生成箇所を1か所にまとめる。分岐は残るが、小規模ではこれで十分なことが多い。
 - 登録制ファクトリ: `map<string, function<unique_ptr<Enemy>()>>` にIDで登録。データ駆動([Type Object](/game/patterns/type-object-and-sandbox.html))と組み合わせる
 - DIコンテナのファクトリ注入(→ [DI](/game/patterns/service-locator-and-di.html))
 

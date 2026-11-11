@@ -3,7 +3,7 @@ title: SPIR-V と中間表現
 study:
   source: RenderingWiki
   status: published
-  summary: SPIR-V はVulkan / OpenCL / (OpenGL 4.6) の標準シェーダ中間表現 (IR) です。人間が書く言語 (GLSL/HLSL/WGSL) とGPUドライバの間に立つバイナリ形式で、SSA形式の型付き命令列として構成されます。DirectXにおける DXIL と対をなす存
+  summary: SPIR-VはVulkan、OpenCL、OpenGL 4.6で使うバイナリ形式の中間表現です。SSA形式の型付き命令列で構成され、DirectXではDXILが同じ役割を担います。
   section: reference
   format: article
   domain: graphics
@@ -13,7 +13,7 @@ study:
 
 ## 概要
 
-SPIR-V は**Vulkan / OpenCL / (OpenGL 4.6) の標準シェーダ中間表現 (IR)** です。人間が書く言語 (GLSL/HLSL/WGSL) とGPUドライバの間に立つバイナリ形式で、SSA形式の型付き命令列として構成されます。DirectXにおける **DXIL** と対をなす存在で、現代のシェーダエコシステム全体がこの「中間表現を軸としたハブ&スポーク構造」で成立しています。
+SPIR-Vは、Vulkan、OpenCL、OpenGL 4.6で使う標準のシェーダ中間表現 (IR) です。GLSL、HLSL、WGSLなどで書いたソースをGPUドライバへ渡すときに使うバイナリ形式で、SSA形式の型付き命令列で構成されます。DirectXではDXILが同じ役割を担います。このように、現代のシェーダ処理では複数のソース言語を共通の中間表現に変換し、それをGPUドライバに渡します。
 
 ## なぜ必要なのか
 

@@ -24,7 +24,7 @@ study:
 | `192.0.2.0/24` | 宛先の機器へ直接 | `192.0.2.20`は`/24`と`/0`の両方に一致するので`/24`を使う。 |
 | `0.0.0.0/0` | `192.0.2.1` | `198.51.100.8`はこの表では`/0`だけに一致する。 |
 
-**次ホップ**は、そのリンクで次にパケットを受け取る機器です。宛先へ直接送れる経路なら、次ホップは宛先自身です。ゲートウェイを使う経路なら、まずゲートウェイへ送り、そのルーターも自分の経路表で次の区間を決めます。名前で接続するアプリでは、DNSなどで得たアドレスを使って接続を試み、その宛先IPに対して経路が選ばれます。例のアドレスは文書用の範囲です。[IETF RFC 1812 §5.2.4.1](https://datatracker.ietf.org/doc/html/rfc1812#section-5.2.4.1) · [IETF RFC 5737 §3](https://datatracker.ietf.org/doc/html/rfc5737#section-3) · [DNSと名前解決](/network/dns-resolution.html)
+次ホップは、そのリンクで次にパケットを受け取る機器です。宛先へ直接送れる経路なら次ホップは宛先自身です。ゲートウェイを使う経路なら、まずゲートウェイへ送り、そのルーターも自分の経路表で次の区間を決めます。名前で接続するアプリはDNSなどで得たアドレスを使って接続を試みます。経路はその宛先IPに対して選ばれます。例のアドレスは文書用の範囲です。[IETF RFC 1812 §5.2.4.1](https://datatracker.ietf.org/doc/html/rfc1812#section-5.2.4.1) · [IETF RFC 5737 §3](https://datatracker.ietf.org/doc/html/rfc5737#section-3) · [DNSと名前解決](/network/dns-resolution.html)
 
 WindowsのPowerShellで`Find-NetRoute -RemoteIPAddress 198.51.100.8`を実行すると、この文書用アドレスに対して自分の端末が選ぶ経路を照会できます。`DestinationPrefix`と`NextHop`の結果は端末の経路表によって変わります。このコマンドはローカルの経路選択を調べるものです。[MicrosoftのFind-NetRoute](https://learn.microsoft.com/en-us/powershell/module/nettcpip/find-netroute)
 

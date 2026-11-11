@@ -88,7 +88,7 @@ UEは全プラットフォームで同一の挙動・メモリ管理・ABIを保
 
 ## 問7. 小規模実装問題(UE環境がなくても可)
 
-「HealthComponent」を2通りで設計してください:
+「HealthComponent」を次の2通りで設計してください。
 
 1. UE版の骨格(ヘッダーのみ): UActorComponent派生、UPROPERTYでMaxHp、OnDamagedのMulticastDelegate、BlueprintCallableなApplyDamage
 2. 標準C++版(<a href="/study/samples/cpp/component_entity.cpp">samples/component_entity.cpp</a>の流儀): 同じ機能をUEマクロなしで

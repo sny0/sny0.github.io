@@ -17,7 +17,7 @@ study:
 
 ## UDPの中でQUICが担当すること
 
-**QUIC**は、UDPデータグラムのペイロードにQUICパケットを載せるトランスポートです。一つのUDPデータグラムに複数のQUICパケットをまとめることがあり、QUICパケットの中にはさらに `STREAM`、`ACK`、`CRYPTO` などのフレームが入ります。送受信の端点でQUICが接続状態を持ち、損失の検出、必要なデータの再送、フロー制御、輻輳制御を担当します。例えば、ネットワークで並び順が変わっても、受信側のQUICがストリームごとにバイト列を組み立てます。[RFC 9000の概要](https://www.rfc-editor.org/rfc/rfc9000.html#section-1) · [パケットをまとめる仕組み](https://www.rfc-editor.org/rfc/rfc9000.html#section-12.2) · [フレーム](https://www.rfc-editor.org/rfc/rfc9000.html#section-12.4) · [UDPデータグラム](/network/udp-datagrams.html)
+QUICはUDPデータグラムのペイロードにQUICパケットを載せるトランスポートです。一つのUDPデータグラムに複数のQUICパケットをまとめることがあり、QUICパケットには `STREAM`、`ACK`、`CRYPTO` などのフレームが入ります。QUICは送受信の両端で接続状態を保持し、損失の検出、必要なデータの再送、フロー制御、輻輳制御を行います。例えばネットワークで並び順が変わっても、受信側のQUICがストリームごとにバイト列を組み立てます。[RFC 9000の概要](https://www.rfc-editor.org/rfc/rfc9000.html#section-1) · [パケットをまとめる仕組み](https://www.rfc-editor.org/rfc/rfc9000.html#section-12.2) · [フレーム](https://www.rfc-editor.org/rfc/rfc9000.html#section-12.4) · [UDPデータグラム](/network/udp-datagrams.html)
 
 QUICは接続時に**TLS 1.3のハンドシェイク**を使って相手を認証し、パケット保護用の鍵を導きます。TLSのハンドシェイクデータはQUICの `CRYPTO` フレームに入ります。HTTPSでTCPを使う場合は、TCPのバイト列にTLSレコードを流します。QUICではレコード層の役割をQUICのパケット保護が担い、アプリデータは `STREAM` などのQUICフレームに載ります。[RFC 9001の構成とTLSメッセージの運搬](https://www.rfc-editor.org/rfc/rfc9001.html#section-3) · [TLSとHTTPS](/network/tls-https.html)
 

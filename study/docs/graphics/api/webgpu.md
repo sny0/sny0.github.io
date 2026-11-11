@@ -3,7 +3,7 @@ title: WebGPU
 study:
   source: RenderingWiki
   status: published
-  summary: WebGPUはWeb標準の明示的グラフィックス/コンピュートAPIです (2023, W3C)。DX12/Vulkan/Metalの設計を、Webサンドボックスの安全性要求の下で再蒸留した「第4の明示的API」であり、ブラウザ内で各ネイティブAPIの上に実装されます。JavaScriptだけでなく、
+  summary: WebGPUは、Webサンドボックスの安全性要件に対応した明示的なグラフィックス・コンピュートAPIです。ブラウザのJavaScriptから使えるほか、wgpuやDawnを通じてネイティブアプリでも利用できます。
   section: reference
   format: article
   domain: graphics
@@ -13,7 +13,7 @@ study:
 
 ## 概要
 
-WebGPUは**Web標準の明示的グラフィックス/コンピュートAPI**です (2023, W3C)。DX12/Vulkan/Metalの設計を、Webサンドボックスの安全性要求の下で再蒸留した「第4の明示的API」であり、ブラウザ内で各ネイティブAPIの上に実装されます。JavaScriptだけでなく、**wgpu (Rust) / Dawn (C++) を通じてネイティブアプリのポータブルGPU層**としても使われる点が重要です。
+WebGPUはWeb標準の明示的グラフィックス/コンピュートAPIです (2023, W3C)。DX12、Vulkan、Metalに続く4つ目として、これらの設計を取り入れながらWebサンドボックスの安全性要件に対応し、ブラウザでは各ネイティブAPIの上に実装されます。JavaScriptから利用できるほか、wgpu (Rust) やDawn (C++) を通じて、ネイティブアプリから複数の環境で共通に使うGPU APIにもなります。
 
 ## なぜ必要なのか
 
@@ -92,7 +92,7 @@ macOS/iOS (Safari/Chrome) ではMetal上に実装。
 
 ## コード例
 
-JavaScript — 初期化からComputeディスパッチまで:
+JavaScriptで初期化からComputeディスパッチまでを実行します。
 
 ```javascript
 const adapter = await navigator.gpu.requestAdapter();
@@ -133,7 +133,7 @@ pass.end();
 device.queue.submit([enc.finish()]);
 ```
 
-描画パス (canvas表示):
+描画パスでcanvasへ表示します。
 
 ```javascript
 const ctx = canvas.getContext('webgpu');

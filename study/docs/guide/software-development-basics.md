@@ -31,7 +31,7 @@ study:
 
 ### コード例を手元で動かす {#run-code}
 
-C++は、Visual StudioのC++開発ツールを用意し、**x64 Native Tools Command Prompt**を開きます。記事の完全なコードを`main.cpp`に保存し、そのフォルダーで次を実行します。[MicrosoftのC++コマンドライン環境](https://learn.microsoft.com/en-us/cpp/build/building-on-the-command-line)
+C++の例を動かすには、Visual StudioのC++開発ツールを用意し、**x64 Native Tools Command Prompt**を開きます。記事の完全なコードを`main.cpp`に保存し、そのフォルダーで次を実行します。[MicrosoftのC++コマンドライン環境](https://learn.microsoft.com/en-us/cpp/build/building-on-the-command-line)
 
 ```bat
 cl /nologo /std:c++17 /EHsc /W4 main.cpp /Fe:basics.exe

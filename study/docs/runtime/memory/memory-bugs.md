@@ -31,7 +31,7 @@ Enemy& r = *GetTarget();     // (3) 敵が今フレーム死亡・削除され�
 r.TakeDamage(10);            // UAF
 ```
 
-- **症状**: たまにクラッシュ/**別のオブジェクトが化ける**(解放済み領域が再利用され、他人のデータを書き換える)——再現困難バグの筆頭
+- ときどきクラッシュしたり、解放済みの領域を再利用している別のオブジェクトのデータを書き換えたりします。再現が特に難しいバグです。
 - **予防**: 所有権設計([前ページ](/runtime/memory/ownership-and-borrowing.html))、weak_ptr/世代ハンドル、イテレータ無効化規則の理解([STL](/languages/cpp/stl.html))
 - **検出**: **AddressSanitizer (ASan)** がほぼ一撃で特定(解放箇所・使用箇所の両スタックトレース付き)
 
@@ -105,7 +105,7 @@ float heightmap[2048 * 2048];   // ローカルに16MBの配列(即死)
 - UAF/dangling: 通常の安全な管理参照を通じたアクセスでは、GCが追跡する到達可能な管理オブジェクトを任意のdeleteで先に破棄する問題を避けられる。ただしunsafe、解放済みのネイティブ領域、Unityのネイティブ実体の寿命まで保護するわけではない。[寿命とGC](/runtime/memory/storage-duration-and-lifetime.html)も参照
 - double free: 解放の概念自体がない
 - buffer overflow: 境界チェックで例外化(IndexOutOfRange)
-- leak: GCでも起きる(staticに溜める、イベント購読で延命)——形を変えて存在
+- GCがあっても、staticにデータを蓄積したり、イベント購読で参照が残り続けたりすると、メモリリークが起きます。
 - **つまりC#は「壊れ方が例外として定義された世界」、C++は「壊れ方が未定義の代わりにチェックコストを払わない世界」**([UB](/languages/cpp/undefined-behavior.html))
 
 ## Unity開発者が誤解しやすい点

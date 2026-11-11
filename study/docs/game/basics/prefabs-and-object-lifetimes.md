@@ -56,7 +56,7 @@ UnityのMonoBehaviourには、実行の段階に応じたイベント関数が�
 
 `SetActive(false)`はGameObjectを無効にします。表示や更新など、その有効状態に従う処理が止まっても、インスタンス自体や保持している値は残ります。再び有効にすれば再利用できます。[UnityのSetActive](https://docs.unity3d.com/6000.0/Documentation/ScriptReference/GameObject.SetActive.html)
 
-`Destroy`はインスタンスの破棄を依頼します。Unityでは通常、実際の破棄は現在のUpdateループの後、描画の前へ遅延されます。GameObjectの破棄では、そのコンポーネントと子も対象になります。終了時の処理には`OnDestroy`などの入口があります。[UnityのDestroy](https://docs.unity3d.com/6000.0/Documentation/ScriptReference/Object.Destroy.html) · [OnDestroy](https://docs.unity3d.com/6000.0/Documentation/ScriptReference/MonoBehaviour.OnDestroy.html)
+`Destroy`はインスタンスの破棄を依頼します。Unityは通常、現在のUpdateループが終わってから描画までの間に実際の破棄を行います。GameObjectを破棄すると、そのコンポーネントと子も対象になります。終了時の処理は`OnDestroy`などに書けます。[UnityのDestroy](https://docs.unity3d.com/6000.0/Documentation/ScriptReference/Object.Destroy.html) · [OnDestroy](https://docs.unity3d.com/6000.0/Documentation/ScriptReference/MonoBehaviour.OnDestroy.html)
 
 弾を使い回す**オブジェクトプール**では、弾を無効にして待機させ、次の発射で再び使う構成があります。その場合は位置、速度、残り時間、HPなどを再利用用に初期化し、前の状態を持ち越す項目を決めます。参照や通知の登録も、利用する期間に合わせて扱います。[Object Poolの詳解](/game/patterns/object-pool.html) · [ゲーム内イベントと通知](/game/basics/game-events-and-notifications.html)
 

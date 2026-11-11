@@ -3,7 +3,7 @@ title: SSR (Screen-Space Reflections)
 study:
   source: RenderingWiki
   status: published
-  summary: SSR (Screen-Space Reflections) は、深度バッファとカラーバッファを使い、画面内に映っているものの反射をレイマーチングで求める技術です。濡れた床・水面・光沢のある机に映る像を、追加のシーン描画なしで実現します。リフレクションプローブ (IBL) の「動的でない・視差が粗い
+  summary: SSRは、深度バッファとカラーバッファを使い、画面に映っているものの反射をレイマーチングで求める技術です。シーンを追加で描画せずに、濡れた床や水面などへの映り込みを表現します。
   section: reference
   format: article
   domain: graphics
@@ -13,7 +13,7 @@ study:
 
 ## 概要
 
-SSR (Screen-Space Reflections) は、**深度バッファとカラーバッファを使い、画面内に映っているものの反射をレイマーチングで求める**技術です。濡れた床・水面・光沢のある机に映る像を、追加のシーン描画なしで実現します。リフレクションプローブ ([IBL](/graphics/lighting/ibl.html)) の「動的でない・視差が粗い」という穴を埋める、現代の反射パイプラインの中核部品です。
+SSR (Screen-Space Reflections) は、深度バッファとカラーバッファを使い、画面に映っているものの反射をレイマーチングで求める技術です。濡れた床、水面、光沢のある机に映る像を、シーンの追加描画なしで表現します。[IBL](/graphics/lighting/ibl.html)のリフレクションプローブでは動的な変化を表しにくく、視差も粗いため、現代の反射処理ではSSRでその不足を補います。
 
 ## なぜ必要なのか
 

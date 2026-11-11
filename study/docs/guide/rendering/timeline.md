@@ -11,7 +11,7 @@ study:
 
 # リアルタイム3D技術全史
 
-技術は暗記するものではなく、**進化の必然**として理解するものです。このページはWiki全体の背骨となる年表です。各時代の「当時の課題」が、次の時代の技術を生み出しています。
+技術の名前や年号を覚えるだけでなく、各時代の課題から次の技術が生まれた経緯をたどります。この年表は、辞典にある描画技術の記事を時代順に参照するためのものです。
 
 ## 全体年表
 
@@ -34,7 +34,7 @@ timeline
 
 - 1992: id Software **Wolfenstein 3D** — レイキャスティングによる疑似3D
 - 1993: **DOOM** — BSPツリーによる可視面判定。ジョン・カーマックの名を世界に知らしめた
-- 1996: **Quake** — 完全な3Dポリゴン + ライトマップ（事前計算ライティングの普及例）。マイケル・アブラッシュの最適化本はこの時代の聖典
+- 1996: **Quake**は、完全な3Dポリゴンとライトマップを使った事前計算ライティングの普及例。マイケル・アブラッシュの最適化本はこの時代の代表的な資料
 - Quakeの初期ライトマップは主に直接光を記録し、Quake IIではradiosityによる間接光も事前計算した。事前計算GIの研究そのものは、それ以前から存在する
 - CPUのピクセル塗りつぶし能力が限界 → **専用ハードウェアの必要性**が明確に
 
@@ -137,7 +137,7 @@ flowchart LR
         GL[OpenGL 1992] --> DX11[DX11 2009]
         DX11 --> MANTLE[Mantle 2013]
         MANTLE --> DX12[DX12 2015]
-        MANTLE --> VK[Vulkan 2016]
+        MANTLE -->|設計の出発点の一つ| VK[Vulkan 2016]
         DX12 --> WG[WebGPU 2023]
         VK --> WG
     end
@@ -152,7 +152,7 @@ flowchart LR
 | Tim Sweeney | Unreal Engine 創始者。Nanite/Lumen 時代の技術ビジョン |
 | Brian Karis | UE4のPBR標準化 (2013)、Nanite の設計者 |
 | Brent Burley | Disney 原則BRDF (2012) — PBR標準化の理論的基盤 |
-| Natalya Tatarchuk | AMD→Bungie→Unity。Destiny のレンダラー、Unity のグラフィックス統括 |
+| Natalya Tatarchuk | AMD→Bungie→Unity→Activision。Destiny のレンダラー、Unity のグラフィックス統括を経て、Activision の SVP・CTO (2026年11月時点) |
 | Takahiro Harada | Forward+ (2012) の提案者 |
 | Turner Whitted | 再帰レイトレーシング (1980) |
 | James Kajiya | レンダリング方程式 (1986) — 全てのGI手法の理論的原点 |

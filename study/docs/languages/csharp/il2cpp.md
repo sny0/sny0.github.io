@@ -23,7 +23,7 @@ C#ソース ──Roslyn──> IL(中間言語)+メタデータ
     ├─ [Mono/JIT]     実行時にILを機械語へ(エディタ再生、一部プラットフォーム)
     │                  柔軟(実行時コード生成OK)だが、起動後の変換コスト・JIT不可の環境あり
     │
-    └─ [IL2CPP/AOT]   ビルド時にIL→C++→機械語(iOS・コンソールは事実上必須)
+    └─ [IL2CPP/AOT]   ビルド時にIL→UnityLinkerでストリッピング→C++→機械語(iOS・コンソールは事実上必須)
                        il2cpp.exe が .cpp を吐き、MSVC/Clang等が旅の②以降を実行
 ```
 
@@ -32,11 +32,11 @@ C#ソース ──Roslyn──> IL(中間言語)+メタデータ
 
 ## IL2CPPの制約をC++の知識で説明する
 
-| Unityでの経験則 | C++側の理由 |
+| Unityでの経験則 | ビルド・実行時の理由 |
 |---|---|
 | 実行時のコード生成(Emit)不可 | 機械語は事前に全部作る。実行時にコンパイラはいない([テンプレートとジェネリック](/languages/csharp/templates-vs-generics.html)と同じ構図) |
 | ジェネリックとAOTの制約は版・コード生成設定に依存 | 旧版では未生成の値型の組み合わせが失敗する例があった。Unity 2022.1以降はFull Generic Sharingのフォールバックにより、専用コードがない組み合わせも共有実装で扱える場合がある。ストリッピングや実行時コード生成の制約とは別に調べる |
-| コードストリッピングでメソッドが消える(link.xml) | リンカのデッドコード除去([リンク](/runtime/cpp-internals/object-files-and-libraries.html))。リフレクション呼び出しは「使用」と見なされない |
+| コードストリッピングでメソッドが消える(link.xml) | UnityLinkerがIL2CPP変換前にマネージドアセンブリから未使用と判定したILを取り除きます。リフレクションでの使用を静的に追えない場合は、`link.xml`などで必要な型やメソッドを保持します。[UnityのIL2CPPビルド手順](https://docs.unity3d.com/6000.0/Documentation/Manual/il2cpp-introduction.html)・[UnityLinkerの処理](https://docs.unity3d.com/6000.0/Documentation/Manual/unity-linker.html) |
 | iOSビルドが遅い | 生成された膨大なC++のコンパイル([ビルドが遅い理由](/tools/build/build-speed.html)がフル適用) |
 | IL2CPPの方が速いことが多い | C++コンパイラの最適化([コンパイラ最適化・未定義動作の影響・Debug/Release・ゼロコスト抽象化](/runtime/cpp-internals/optimization-and-ub.html))がフルに掛かる。ただしGCはBoehmのまま(→ [GC比較](/runtime/memory/gc-and-csharp-comparison.html)) |
 
@@ -57,7 +57,7 @@ extern "C" __declspec(dllexport) int Simulate(float dt) { /* ... */ return 0; }
 
 - 境界のルールは[DLLのページ](/runtime/cpp-internals/object-files-and-libraries.html)そのまま: **C ABI+プレーンなデータ**(構造体はblittableに=参照型・stringを含めない)
 - 呼び出しコストは1回あたり数十〜数百サイクル(マーシャリング)。**細かく何度も呼ばず、まとめて渡す**(配列でバッチ)が定石
-- 文字列・配列の受け渡しは所有権を明確に(「C#側のメモリをC++が覚えてはいけない」——GCが動かす/回収するため。pinningの概念)
+- 文字列・配列を受け渡すときは、所有権を明確にします。GCはC#側のメモリを移動・回収するため、C++側でそのアドレスを保持してはいけません。ここでpinningを考えます。
 
 ## Burstとの関係
 
@@ -65,14 +65,14 @@ Burst(HPC# → LLVMで機械語)は「C#の**サブセット**を、C++並みの
 
 ## Unity開発者が誤解しやすい点
 
-1. 「IL2CPPにすればC++の速さになる」— 変換されるのはコード。**GCと管理ヒープの構造はそのまま**なので、Allocのスパイクは消えない
+1. IL2CPPが変換するのはコードです。GCと管理ヒープの構造は変わらないため、Allocのスパイクは解消されません。
 2. 「エディタで動けば実機でも動く」— エディタはMono/JIT。AOT制約・ストリッピング・C++最適化の差でIL2CPP実機のみのバグは普通にある(→ [Debug/Release差](/tools/build/build-configurations.html)と同じ構図)
-3. 生成C++を「読めない魔法」と思わない——変数名は機械的だが、構造は本Wikiで学んだC++そのもの。実機クラッシュの解析で読む日が来る
+3. IL2CPPが生成したC++の変数名は機械的ですが、コードの構造はこの辞典で扱うC++と同じです。実機でクラッシュしたときの解析で読むコードです。
 
 ## 理解度チェック
 
 1. JITとAOTの違いと、iOSでAOTが必須な理由は?
-2. AOTジェネリック問題とコードストリッピング問題を、C++の語彙(実体化・デッドコード除去)で説明できますか。
+2. AOTのジェネリックコード生成とUnityLinkerのコードストリッピングは、それぞれビルドのどの段階で起きますか。リフレクション先の保持に`link.xml`を使うのはどちらですか。
 3. P/Invoke境界の設計ルールを2つ挙げてください。
 
 ## 演習

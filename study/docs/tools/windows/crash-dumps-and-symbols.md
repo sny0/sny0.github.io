@@ -17,7 +17,7 @@ Windowsのゲームがクラッシュし、現場で再現できないときで�
 
 ## モジュールの先頭から何バイトかを求める
 
-実行中の命令アドレスは、プロセスの仮想アドレス（VA）です。ロードされたモジュールのベースアドレスを引くと、そのモジュールの先頭からの位置を示すRVAになります。ASLRによって別の実行でベースが変わっても、同じバイナリの同じ命令は同じRVAで表せます。`game+0x1234` の `0x1234` はモジュールの先頭からの距離で、`game!UpdateActor+0x34` の `0x34` は関数の先頭からの距離です。[MicrosoftのPE形式とRVA](https://learn.microsoft.com/en-us/windows/win32/debug/pe-format) · [PEのロードとインポート](/os/pe-loading-and-imports.html)
+実行中の命令アドレスはプロセスの仮想アドレス（VA）です。その値からロード済みモジュールのベースアドレスを引くと、モジュールの先頭からの位置を示すRVAになります。ASLRによって別の実行でベースが変わっても、同じバイナリの同じ命令は同じRVAで表せます。`game+0x1234` の `0x1234` はモジュールの先頭からの距離で、`game!UpdateActor+0x34` の `0x34` は関数の先頭からの距離です。[MicrosoftのPE形式とRVA](https://learn.microsoft.com/en-us/windows/win32/debug/pe-format) · [PEのロードとインポート](/os/pe-loading-and-imports.html)
 
 <figure class="study-figure">
   <img src="/images/tools/crash-dumps-and-symbols.svg" alt="例外コンテキストのRIPが00007ff7 40001234、game.exeのロードベースが00007ff7 40000000なら、差はRVA 0x1234。ビルドの識別情報が一致するPDBを使うと、停止位置をUpdateActorの先頭から0x34、Actor.cppの87行目に対応づけられる。" width="760" height="320" loading="lazy">

@@ -52,6 +52,6 @@ Unityの`Time.timeScale`は、ゲーム内で時間が進む倍率です。`0`�
 3. 次の状態のデータ、入力、表示を用意する。
 4. 更新や通知が、次の状態の前提で動くことを確認する。
 
-例えばリトライでは、HPを戻す、前の弾を片付ける、スコアを初期化するといった準備が必要です。状態の名前を変える処理と、ゲームを次に使える状態へ整える処理を、両方追います。[プレハブとオブジェクトの寿命](/game/basics/prefabs-and-object-lifetimes.html) · [ゲーム内イベントと通知](/game/basics/game-events-and-notifications.html)
+例えばリトライでは、HPを戻す、前の弾を片付ける、スコアを初期化するといった準備が必要です。状態の名前を変える処理と、ゲームを再開できるように準備する処理を、両方追います。[プレハブとオブジェクトの寿命](/game/basics/prefabs-and-object-lifetimes.html) · [ゲーム内イベントと通知](/game/basics/game-events-and-notifications.html)
 
 より細かな状態の組み合わせや実装は、[有限ステートマシンと階層型ステートマシン](/game/patterns/state-machines.html)へ進みます。

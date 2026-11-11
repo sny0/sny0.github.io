@@ -3,7 +3,7 @@ title: リンクエラー — 未解決外部シンボル・多重定義・ABI�
 study:
   source: C++ Wiki
   status: published
-  summary: "リンクエラーはC++入門者を最も絶望させるエラーですが、原因はほぼ3パターンです。仕組み(シンボルとリンケージ)を前提に、症状→原因→処方の逆引きとしてまとめます。 意味: 「この関数を呼ぶコードはあるが、定義(実体)がどの.o/ライブラリにもない」。コンパイルは通っている(宣言はあった)ことに注意"
+  summary: 未解決外部シンボル、多重定義、ABI互換性の問題を、エラーメッセージから調べます。シンボルとリンケージをもとに、原因ごとの確認手順と対処をまとめます。
   section: reference
   format: article
   domain: tools
@@ -11,7 +11,7 @@ study:
 
 # リンクエラー — 未解決外部シンボル・多重定義・ABI互換性
 
-リンクエラーはC++入門者を最も絶望させるエラーですが、原因は**ほぼ3パターン**です。仕組み([シンボルとリンケージ](/runtime/cpp-internals/symbols-and-linkage.html))を前提に、症状→原因→処方の逆引きとしてまとめます。
+リンクエラーはC++を学び始めたときに対処しづらいエラーですが、原因はほぼ3パターンです。[シンボルとリンケージ](/runtime/cpp-internals/symbols-and-linkage.html)の仕組みをもとに、症状から原因と対処を調べます。
 
 ## パターン1: 未解決外部シンボル (undefined reference / LNK2019)
 
@@ -20,7 +20,7 @@ undefined reference to `Enemy::TakeDamage(int)'        (GCC/Clang)
 error LNK2019: 未解決の外部シンボル "public: void __cdecl Enemy::TakeDamage(int)"  (MSVC)
 ```
 
-**意味**: 「この関数を呼ぶコードはあるが、**定義(実体)がどの.o/ライブラリにもない**」。コンパイルは通っている(宣言はあった)ことに注意——[ビルドの旅](/runtime/cpp-internals/build-pipeline-journey.html)の④で起きる病気です。
+関数を呼ぶコードはあるものの、定義(実体)がどの.oやライブラリにもありません。宣言が見えているのでコンパイルは通りますが、[ビルドの旅](/runtime/cpp-internals/build-pipeline-journey.html)の④のリンクでエラーになります。
 
 チェックリスト(頻度順):
 

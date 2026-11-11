@@ -13,7 +13,7 @@ study:
 
 # ファイルを読むと内部で何が起きるか
 
-ファイルの読取りAPIは、指定した位置のbyte列を、アプリが使えるバッファへ渡します。その裏にはライブラリの緩衝、OSのファイルキャッシュ、ファイルシステム、デバイスなどの層があります。**読取りAPIを一回呼んだことと、SSDやHDDへ一回アクセスしたことは同じではありません。**
+ファイルの読取りAPIは指定した位置のbyte列をアプリが使えるバッファへ渡します。読取りにはライブラリの緩衝、OSのファイルキャッシュ、ファイルシステム、デバイスなどが関わります。読取りAPIの呼出し一回が、SSDやHDDへのアクセス一回に対応するわけではありません。
 
 ここではWindowsの通常のファイルを、キャッシュを利用する**同期読み取り**で扱います。具体例はC++からの`CreateFileW`／`ReadFile`と、C#の緩衝を使う`FileStream.Read`です。パイプやソケットまで同じEOF規則とせず、POSIXのAPIもWindows内部と同じ詳細実装だとは説明しません。
 
@@ -40,7 +40,7 @@ Windowsは通常、ファイルデータをOSのキャッシュに保持しま�
 
 ライブラリ内で満たせない読み取りは、OSが提供するI/Oサービスへ進みます。Windowsではカーネル側のI/Oマネージャーやファイルシステム・デバイスのドライバーが関わり、ドライバーへ処理を渡す仕組みの一つが**IRP**（I/O Request Packet、I/O要求パケット）です。読み取りにはFast I/Oの経路もあるので、「アプリのread一回につき、必ず一個のIRP」とは数えられません。[Microsoft: Windows I/O Model](https://learn.microsoft.com/en-us/windows-hardware/drivers/kernel/overview-of-the-windows-i-o-model)、[IRP-based readとFast I/O](https://learn.microsoft.com/en-us/windows-hardware/drivers/ifs/irp-based-i-o-operations-that-obey-device-object-flags)
 
-ファイル内の位置も、装置上の住所そのものではありません。例えばクラスタで管理するファイルシステムでは、ファイル内の範囲とボリューム上の配置を対応付けます。配置は一続きとは限らず、ファイル内のオフセット5からSSDの物理位置を計算できるわけではありません。Windowsにはこの対応を調べる`FSCTL_GET_RETRIEVAL_POINTERS`もありますが、今回のサンプルは配置の照会や変更を行いません。[Microsoft: VCNとLCNの対応](https://learn.microsoft.com/en-us/windows-hardware/drivers/ifs/fsctl-get-retrieval-pointers)
+ファイル内の位置と装置上の配置は別です。例えばクラスタで管理するファイルシステムでは、ファイル内の範囲とボリューム上の配置を対応付けます。配置は一続きとは限らず、ファイル内のオフセット5からSSDの物理位置を計算できるわけではありません。Windowsにはこの対応を調べる`FSCTL_GET_RETRIEVAL_POINTERS`もありますが、今回のサンプルは配置を照会したり変更したりしません。[Microsoft: VCNとLCNの対応](https://learn.microsoft.com/en-us/windows-hardware/drivers/ifs/fsctl-get-retrieval-pointers)
 
 必要な下位I/Oが終わると、結果は上位へ返されます。エラーやキャンセルで完了する場合もあります。同期readを待っているスレッドは、その完了後に結果を受け取って先へ進みます。待ち時間の間ずっとCPUで自作のループを回して待つ、という意味ではありません。[Microsoft: I/Oの完了](https://learn.microsoft.com/en-us/windows-hardware/drivers/kernel/when-to-complete-an-irp)、[同期・非同期I/O](https://learn.microsoft.com/en-us/windows/win32/fileio/synchronous-and-asynchronous-i-o)
 

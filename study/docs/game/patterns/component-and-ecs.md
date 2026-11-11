@@ -18,7 +18,9 @@ study:
 
 両者とも部品の組み合わせによる柔軟性を持ち、ECSは必要なデータを選んで一括処理する構成にも向いています。性能と柔軟性を二者択一で分ける定義ではありません。[ECSの定義と実装方式](/game/ecs.html)
 
-## 継承方式 → Component方式(設計の問題)
+<div id="継承方式-→-component方式-設計の問題" class="study-legacy-anchor" aria-hidden="true"></div>
+
+## 継承方式 → Component方式(機能の組み合わせ)
 
 ### 継承方式の破綻
 
@@ -71,24 +73,28 @@ private:
 
 **部品間通信**がComponent方式の設計難所です: 同一Entity内は `GetComponent<T>()`(結合は残る)、疎にしたければEntity経由のイベント(→ [Observer](/design/patterns/observer.html))。
 
-## ECS(性能の問題)
+<div id="ecs-性能の問題" class="study-legacy-anchor" aria-hidden="true"></div>
 
-### MonoBehaviour/Component方式の性能限界
+## ECS(データと処理の分け方)
 
-- 各Entityがヒープ上にバラバラに置かれ、Updateのたびにポインタを追ってメモリをランダムアクセス(**キャッシュミスの嵐** → [キャッシュ](/runtime/cpp-internals/cache-branch-simd.html))
-- 仮想関数呼び出しがオブジェクト数ぶん(インライン化不可、分岐予測に不利)
+### MonoBehaviour/Component方式で調べる性能コスト
+
+- 部品が個別に確保されている構成では、Updateでポインタを追うと、データ配置によってキャッシュミスが増えることがある(→ [キャッシュ](/runtime/cpp-internals/cache-branch-simd.html))
+- 部品ごとに呼び出す構成では、対象数が増えると呼び出しのコストも増える。UnityのMonoBehaviourと、上のC++の仮想関数による実装では、呼び出しの仕組みが異なる
 
 ### ECSの構造
 
 ```
-Entity   = ただのID(uint32など)。データもロジックも持たない
-Component = ただのデータ(Position{x,y}, Velocity{dx,dy})。ロジックなし
-System   = ロジックだけ。「PositionとVelocityを持つ全Entity」を一括処理
+Entity    = 対象を識別するIDやハンドル
+Component = 対象ごとの状態(Position{x,y}, Velocity{dx,dy})
+System    = 必要なComponentを選んで処理(例: PositionとVelocityで移動)
 
 メモリ: Position[] ■■■■■■■■(連続配列)
         Velocity[] ■■■■■■■■(連続配列)
 MoveSystem: for i in 0..n: pos[i] += vel[i] * dt   ← キャッシュに最高に優しいループ
 ```
+
+図は、対象ごとの状態と横断処理の役割を示しています。Componentに補助メソッドを置いたり、Systemが設定やキャッシュを持ったりする構成もあります。
 
 ```cpp
 // C++20 — 最小のECS風構造(教育用。実物はentt等のライブラリを参照)
@@ -114,9 +120,9 @@ void MoveSystem(World& w, float dt) {
 
 | | GameObject/MonoBehaviour | ECS |
 |---|---|---|
-| データとロジック | 同居(オブジェクト指向) | 完全分離(データ指向) |
+| データと処理 | オブジェクトや部品の単位でまとめる | 対象ごとの状態をComponentに置き、Systemで処理する |
 | メモリ配置 | オブジェクトごとに分散しやすい | 型ごとの配列・チャンクなど。配置と処理対象が合えば局所性を高めやすい |
-| 大量処理(1万〜) | 苦しい | 本領(SIMD・並列化も容易) |
+| 同種データの一括処理 | 部品の配置や呼び出し方式でコストが変わる | データ配置と処理が合えば局所性や並列化を活かしやすい |
 | 書きやすさ・直感性 | 高い(1体=1物) | 低い(処理が横断的、発想の転換が必要) |
 | 少数の複雑なオブジェクト | 自然 | 冗長 |
 | デバッグ | インスペクタで1体を見る | 「この弾がなぜ曲がった」を追いにくい |
@@ -139,9 +145,9 @@ void MoveSystem(World& w, float dt) {
 
 ## よくある誤解
 
-- 「ECSはComponentパターンの上位互換」— 分割単位と更新方式が異なり、どちらにも柔軟性と性能上のトレードオフがあります。少数の複雑なオブジェクトでは、オブジェクト単位のComponent方式が扱いやすい場合があります
+- ECSとComponentパターンでは、分割する単位と更新する方法が異なります。どちらにも柔軟性と性能上のトレードオフがあります。少数の複雑なオブジェクトでは、オブジェクト単位のComponent方式が扱いやすい場合があります。
 - 「UnityのGameObjectはECS」— 違います。Unityの従来方式はComponentパターンで、ECSはDOTS/Entities
-- 「オブジェクト指向は遅いから駄目」— 数に依ります。100体の敵ならMonoBehaviourで何の問題もありません
+- 採用の目安は固定の体数では決まりません。同じ仕事量で、更新時間・データ配置・構成変更のコストを比べます。
 
 ## 関連項目
 
@@ -152,7 +158,7 @@ void MoveSystem(World& w, float dt) {
 ## 理解度チェック
 
 1. ComponentパターンとECSでは、データと処理をどの単位で分けますか。性能や決定性は自動的に保証されますか。
-2. ECSでEntityが「ただのID」になる理由は?
+2. ECSで、対象の識別とComponentの格納位置を分けて扱う理由は?
 3. ECSを採用すべきでないプロジェクトの特徴を2つ挙げてください。
 
 ## 演習

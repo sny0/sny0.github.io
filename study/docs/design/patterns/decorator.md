@@ -41,7 +41,7 @@ class CriticalFireDamage : public Damage {};       // 組み合わせ爆発
 class CriticalFirePoisonDamage : public Damage {}; // バフが1種増えるたび倍々に…
 ```
 
-あるいはフラグ地獄:
+フラグで処理の有無を管理すると、次のように分岐が増えます。
 
 ```cpp
 int Calc(int base, bool crit, bool fire, bool poison, bool berserk /* 増え続ける */) {
@@ -60,6 +60,7 @@ int Calc(int base, bool crit, bool fire, bool poison, bool berserk /* 増え続�
 ```cpp
 // C++20
 #include <memory>
+#include <utility>
 
 class IDamageCalculator {
 public:
@@ -84,7 +85,7 @@ class CriticalBoost : public DamageDecorator {
 public:
     using DamageDecorator::DamageDecorator;
     int Calc(int baseAttack) const override {
-        return static_cast<int>(inner_->Calc(baseAttack) * 1.5f);   // 内側の結果に足す
+        return static_cast<int>(inner_->Calc(baseAttack) * 1.5f);   // 内側の結果を1.5倍する
     }
 };
 class FlatBuff : public DamageDecorator {
@@ -166,7 +167,7 @@ public class DamagePipeline {
 
 ## 過剰設計になる例
 
-「ログ出力を足すかもしれない」とすべてのマネージャをDecorator対応にする——実際に重ねる修飾が現れるまで、包む仕組みは不要です。
+ログ出力を足すかもしれないという理由だけで、すべてのマネージャをDecorator対応にする必要はありません。処理を重ねて適用する要件が出てから包む仕組みを導入します。
 
 ## 関連項目
 

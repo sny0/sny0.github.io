@@ -44,7 +44,7 @@ Requested -> Reading -> CpuReady -> Registering -> Ready -> Released
 
 Requestedの取消しはbytesを持たず、CpuReadyの取消しはCPU dataを即回収します。Reading/Registeringの取消しは**進行中slot/dataを保持**し、完了eventで回収します。新世代はRequestedになれますが、旧slotが予算を占めている間は`TryBeginRead`がfalseを返し、待機を続けます。
 
-古いread完了はslotを回収して破棄します。古い登録成功完了は、返ってきたMockSink tokenを即解放します。世代不一致で現在の要求をReadyへ戻しません。Windowsの実I/Oでも取消要求と完了は別で、領域の寿命を完了まで保つ必要があります。ただし、このモデルはそのOS動作を実行・検証してはいません。[Microsoft：CancelIoEx](https://learn.microsoft.com/en-us/windows/win32/api/ioapiset/nf-ioapiset-cancelioex)
+古いreadの完了通知が届いたら、slotを回収して結果を破棄します。古い登録の成功通知が届いたら、返されたMockSink tokenをすぐに解放します。世代が一致しないときは、現在の要求をReadyへ戻しません。Windowsの実I/Oでも取消要求と完了は別で、完了するまで領域を保持する必要があります。このモデルでは、そのOS動作を実行・検証していません。[Microsoft：CancelIoEx](https://learn.microsoft.com/en-us/windows/win32/api/ioapiset/nf-ioapiset-cancelioex)
 
 ## 入手して実行する
 

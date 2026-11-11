@@ -88,14 +88,14 @@ DIコンテナ(VContainer等)は、この組み立て(誰に何を渡すか)を�
 | 配線コスト | ほぼゼロ(Provide数回) | 組み立てコードが必要(規模に比例) |
 | テスト | Provideで差し替え(全域状態なのでテスト間の掃除が必要) | 引数に渡すだけ(テストごとに独立) |
 | 未登録時 | 実行時に発覚(Null Objectで緩和) | コンパイル時に発覚(引数が足りない) |
-| MonoBehaviourとの相性 | 良い(どこからでも呼べる) | 工夫が要る(コンストラクタが使えない) |
+| MonoBehaviourとの相性 | 良い(どこからでも呼べる) | 工夫が要る(Unityが生成するため、コンストラクタ引数で渡せない) |
 | 規模との相性 | 小〜中規模で快適 | 中〜大規模で効く(依存の見える化が効く) |
 
-**本質的な違いは「依存が型のシグネチャに現れるか」**です。DIでは `Explosion(IAudio&, IVfx&, ITime&)` と書いた瞬間に「このクラス依存多すぎでは?」が見える——設計の検査装置([テスト容易性](/design/foundations/quality-attributes.html))として機能します。Locatorはこの圧力がかからないため、依存が静かに増えます。
+DIとLocatorの違いは、依存先が型のシグネチャに現れるかどうかです。DIでは `Explosion(IAudio&, IVfx&, ITime&)` のように引数から依存先が分かるため、依存が多すぎないかを確認できます。Locatorではシグネチャから依存先を確認できず、気づかないうちに増えます。[テスト容易性](/design/foundations/quality-attributes.html)
 
 ## Unity/C# との対応
 
-- MonoBehaviourはコンストラクタ注入不可 → 代替: `[SerializeField]`参照(インスペクタ注入)、`Construct()`メソッド注入、VContainer/Zenject(リフレクションで注入)
+- Unityがシーン読み込みや `AddComponent` で生成するMonoBehaviourには、呼び出し側からコンストラクタ引数を渡せません。依存は `[SerializeField]`参照(インスペクタ注入)、`Construct()`メソッド注入、VContainer/Zenjectなどで渡します。[UnityのAddComponent](https://docs.unity3d.com/6000.0/Documentation/ScriptReference/GameObject.AddComponent.html)
 - ScriptableObjectを「差し替え可能なサービスの置き場」にするのはLocatorの変形
 - Unityの `Camera.main` や `Physics.Raycast` などstatic APIは事実上エンジン提供のLocator/Singleton——**エンジン境界はそういうもの**と割り切り、自分のゲームロジック側で線を引くのが現実解
 
@@ -124,9 +124,9 @@ DIコンテナ(VContainer等)は、この組み立て(誰に何を渡すか)を�
 
 ## 理解度チェック
 
-1. LocatorとDIの「本質的な違い」を一文で言えますか。
+1. LocatorとDIでは、型のシグネチャから分かる依存関係にどんな違いがありますか。一文で答えてください。
 2. Null Objectサービスは何を防いでいますか。
-3. MonoBehaviourでコンストラクタ注入ができない制約への対処を2つ挙げてください。
+3. Unityが生成するMonoBehaviourに依存を渡す方法を2つ挙げてください。
 
 ## 演習
 

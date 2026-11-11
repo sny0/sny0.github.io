@@ -27,7 +27,7 @@ HTTP(S)のオリジンは、**スキーム・ホスト・ポート**の組で決
 | `https://api.example.com/` | いいえ | ホストが違う |
 | `http://app.example.com/` | いいえ | スキームが違う |
 
-**同一サイト**（same-site）には別の比較規則があります。たとえば `https://app.example.com` と `https://api.example.com` は、同じスキームと登録可能ドメインを共有するので同一サイトですが、別オリジンです。Cookieの`SameSite`属性とCORSで判定の単位が違う理由です。[WHATWG HTMLのSites](https://html.spec.whatwg.org/multipage/browsers.html#sites)
+**同一サイト**（same-site）と同一オリジンでは、比較する項目が違います。たとえば `https://app.example.com` と `https://api.example.com` は、スキームと登録可能ドメインが同じなので同一サイトですが、別オリジンです。このため、Cookieの`SameSite`属性とCORSでは判定の単位が異なります。[WHATWG HTMLのSites](https://html.spec.whatwg.org/multipage/browsers.html#sites)
 
 `iframe sandbox="allow-scripts"` で読み込んだ文書には、同じホストのファイルを使っていても、ブラウザが個別の**不透明なオリジン**（opaque origin）を割り当てます。このオリジンがHTTPの`Origin`ヘッダーに現れるときの値は文字列の`null`です。別々の不透明なオリジンも同じ文字列に変換されるので、`null`だけでは発行元を識別できません。[WHATWG HTMLのSandboxing](https://html.spec.whatwg.org/multipage/browsers.html#sandboxing)、[WHATWG FetchのOriginヘッダー](https://fetch.spec.whatwg.org/#origin-header)
 

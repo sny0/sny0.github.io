@@ -39,7 +39,7 @@ UIの位置と大きさを表す部品が**RectTransform**です。**アンカ�
 
 ## 画面の大きさに合わせる
 
-画面の解像度や縦横比が変わると、置ける範囲も変わります。**Canvas Scaler**の設定では、UIの大きさを一定のピクセル数で扱ったり、基準解像度と画面サイズに応じて拡縮したりできます。アンカーによる配置と、全体の拡縮は別の設定として確認します。[Canvas Scaler](https://docs.unity3d.com/Packages/com.unity.ugui@2.0/manual/script-CanvasScaler.html)
+画面の解像度や縦横比が変わると、UIを置ける範囲も変わります。**Canvas Scaler**では、UIの大きさを一定のピクセル数にする設定や、基準解像度と画面サイズに応じて拡大・縮小する設定を選べます。アンカーによる配置と、全体の拡大・縮小は別の設定として確認します。[Canvas Scaler](https://docs.unity3d.com/Packages/com.unity.ugui@2.0/manual/script-CanvasScaler.html)
 
 ボタンや文章を並べるときは、**レイアウトグループ**などで間隔やサイズを管理できます。横長、縦長、長い翻訳文などの条件で、文字が切れず、押す場所を見分けられるかを確認します。ここでのCanvasやRectTransformはuGUIの仕組みです。Unityの別のUIシステムを使う場合は、その配置と入力の規則を確認します。[uGUIの自動レイアウト](https://docs.unity3d.com/Packages/com.unity.ugui@2.0/manual/UIAutoLayout.html)
 

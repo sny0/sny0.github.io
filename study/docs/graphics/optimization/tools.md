@@ -3,7 +3,7 @@ title: デバッグ・プロファイリングツール — RenderDoc / PIX / Ns
 study:
   source: RenderingWiki
   status: published
-  summary: GPUの中は見えません — ツールなしでは。このページでは4大ツール — RenderDoc (万能フレームデバッガ)、PIX (DX12公式)、Nsight Graphics (NVIDIA深掘り)、Unity Frame Debugger — の役割分担と使い方の型を解説します。「描画がおかしい
+  summary: 描画結果やGPUの処理時間を調べるために、RenderDoc、PIX、Nsight Graphics、Unity Frame Debuggerを使い分けます。各ツールの役割と調査の進め方を説明します。
   section: reference
   format: article
   domain: graphics
@@ -13,7 +13,7 @@ study:
 
 ## 概要
 
-GPUの中は見えません — ツールなしでは。このページでは4大ツール — **RenderDoc** (万能フレームデバッガ)、**PIX** (DX12公式)、**Nsight Graphics** (NVIDIA深掘り)、**Unity Frame Debugger** — の役割分担と使い方の型を解説します。「描画がおかしい→RenderDoc」「遅い→PIX/Nsightのプロファイラ」という**目的別の使い分け**が実務の第一歩です。
+GPUで何が起きているかを調べるには、描画や処理時間を観察するツールを使います。主な選択肢は、幅広い環境で使えるフレームデバッガのRenderDoc、DX12公式のPIX、NVIDIA GPUを詳しく調べるNsight Graphics、Unity Frame Debuggerです。描画結果の異常はRenderDoc、処理の遅さはPIXやNsightのプロファイラで調べる、というように目的に応じて使い分けます。
 
 ## なぜ必要なのか
 
@@ -161,7 +161,7 @@ if (rdoc && frameHasArtifact) {
 
 3. **リソース命名とデバッグマーカーを最初から整備すべき理由は。**
    ::: details 解答
-   キャプチャ内で「Texture 247」の羅列から目当てを探すのは苦行であり、パス区間のマーカーがなければイベントリストは平坦な数千コールになる。命名とマーカーはキャプチャの可読性を桁で変え、チーム全員のデバッグ効率に直結する。コストはほぼゼロで、リリースビルドでは無効化できる。
+   キャプチャでは「Texture 247」のような名前の一覧から目的のテクスチャを探しにくい。パスの区間をマーカーで示さないと、イベントリストには数千のコールが平坦に並ぶ。リソースに名前を付け、パスをマーカーで区切ると、キャプチャを大幅に読みやすくでき、チーム全員がデバッグしやすくなる。コストはほぼゼロで、リリースビルドでは無効にできる。
    :::
 
 ## 参考資料

@@ -15,7 +15,7 @@ study:
 
 # 2つのC++ファイルからOBJ・EXE・PDBを作って読む
 
-`caller.cpp` の `main` から、別ファイルにある `adjust` を呼び出します。呼び出し元のOBJに記録された参照がリンクでどうつながり、Windowsが読むEXEに何が入るかを確かめます。[COFFの再配置](/compilers/coff-relocations.html) · [WindowsのPEローダー](/os/pe-loading-and-imports.html)
+`caller.cpp` の `main` から、別ファイルの `adjust` を呼び出します。リンク時に呼び出し元のOBJにある参照がどう解決され、Windowsが読むEXEに何が入るかを確かめます。[COFFの再配置](/compilers/coff-relocations.html) · [WindowsのPEローダー](/os/pe-loading-and-imports.html)
 
 ## 手元で動かす {#run-locally}
 

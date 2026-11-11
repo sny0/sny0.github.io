@@ -52,14 +52,14 @@ g++ -fsanitize=address,undefined -g -O1 game.cpp    # ASan+UBSan併用が開発�
 MSVC: /fsanitize=address(VS2019 16.9+)
 ```
 
-- **「たまに落ちる」を数週間追う vs ASanで一発**——費用対効果はC++ツールで最大級。開発ビルドとCIテストに常設する
+- ときどき起こるクラッシュを数週間調べる場合でも、ASanなら一度の実行で原因を特定できることがあります。C++向けのツールの中でも費用対効果が高いため、開発ビルドとCIテストで常に使えるようにします。
 - 制約: Shippingには入れない(速度・メモリ)。プラットフォームにより対応差(本Wikiの検証環境MinGW GCC 9.2は非対応のため、記述はGCC/Clang/MSVCの公式ドキュメント準拠)
 
 ## 4. CI (Continuous Integration)
 
 push/PRのたびに機械がビルド+テスト+解析を回す仕組み(GitHub Actions、Jenkins等)。
 
-ゲームC++プロジェクトの典型パイプライン:
+ゲームのC++プロジェクトでは、一般に次の順で検査します。
 
 ```
 push → [ビルド: MSVC + Clang 両方 / Debug + Shipping 両方]   ← 構成差・処理系差の早期検出

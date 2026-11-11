@@ -19,7 +19,7 @@ study:
 
 ## ルート0: まず全員に勧める最短コース(約10ページ)
 
-「設計もC++もまだ自信がない」状態から、設計とC++の本文の見取り図を作るためのコースです。
+設計とC++の両方にまだ自信がない人が、辞典本文の全体像をつかむためのコースです。
 
 1. [設計とは何を決める行為なのか](/design/foundations/what-is-design.html)
 2. [凝集度と結合度](/design/foundations/cohesion-and-coupling.html)
@@ -65,16 +65,16 @@ study:
 「動くコードは書けるが、設計判断に自信がない」人向け。
 
 1. 第1部を通読([カテゴリ目次](/design/foundations/))
-2. 第2部 SOLID を通読([カテゴリ目次](/design/solid/))— 各ページの「適用しすぎた場合の弊害」を飛ばさないこと
+2. 第2部 SOLID を通読する（[カテゴリ目次](/design/solid/)）。各ページの「適用しすぎた場合の弊害」まで読む
 3. 第3部から: [Strategy](/design/patterns/strategy.html) / [State](/design/patterns/state.html) / [Observer](/design/patterns/observer.html) / [Command](/design/patterns/command.html) / [Factory Method](/design/patterns/factory-method.html) / [Decorator](/design/patterns/decorator.html) / [Facade](/design/patterns/facade.html) / [Adapter](/design/patterns/adapter.html)
 4. 第4部から: [Component と ECS](/game/patterns/component-and-ecs.html) / [Event Queue と Pub/Sub](/game/patterns/event-queue-and-pubsub.html) / [Service Locator と DI](/game/patterns/service-locator-and-di.html) / [ステートマシン](/game/patterns/state-machines.html)
-5. 第11部ケーススタディを全題([カテゴリ目次](/design/case-studies/))— 設計案の比較こそがこのルートの本体
+5. 第11部のケーススタディを全題読む（[カテゴリ目次](/design/case-studies/)）。このルートでは設計案の比較が中心になる
 6. 第12部 判断ガイドを通読([カテゴリ目次](/design/decisions/))
 7. [第3部演習](/design/patterns/exercises.html) / [第11部演習](/design/case-studies/exercises.html) / [第12部演習](/design/decisions/exercises.html)
 
 ## ルート4: Unreal Engine向けルート
 
-UnityからUEへ移る人、UE案件が始まる人向け。C++の土台 → UE独自仕様の順で進みます。
+UnityからUEへ移る人や、UE案件を始める人向けです。まずC++の基礎を学び、次にUE独自の仕様へ進みます。
 
 1. ルート2の 1〜6 をまず終える(UEのC++は標準C++の上に載っている)
 2. [static・inline・friend](/languages/cpp/static-inline-friend.html) と [キャスト](/languages/cpp/casts.html)
@@ -99,7 +99,7 @@ UnityからUEへ移る人、UE案件が始まる人向け。C++の土台 → UE�
 
 ## 進め方のコツ
 
-- 1ページ読んだら、そのページの「理解度チェック」に口頭で答えてみる。答えられなければ読み直すのではなく、**手を動かす**(演習をやる)。
+- 1ページ読んだら、そのページの「理解度チェック」に口頭で答えてみる。答えられなければ、読み直す前に演習を試す。
 - パターンのページは「使わない場面」を読むまでが1ページ。
 - C++のページで分からない用語が出たら、その場で[用語集](/guide/cpp-glossary.html)を引き、深追いは後回しにする。
 

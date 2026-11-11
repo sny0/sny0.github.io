@@ -3,7 +3,7 @@ title: 並列アルゴリズム — Reduction / Prefix Sum (Scan)
 study:
   source: RenderingWiki
   status: published
-  summary: "逐次なら自明なループ (合計を取る、累積和を作る) は、数千スレッドのGPUでは専用の並列アルゴリズムになります。代表が Reduction (集約: 合計・最大値など) と Prefix Sum / Scan (累積和) です。特にScanは「並列プログラミングの万能部品」であり、コンパクション・"
+  summary: GPUで合計や最大値を求めるReductionと、累積和を求めるPrefix Sum / Scanを説明します。Scanを使うコンパクション、ソート、可視リスト構築なども扱います。
   section: reference
   format: article
   domain: graphics
@@ -13,12 +13,12 @@ study:
 
 ## 概要
 
-逐次なら自明なループ (合計を取る、累積和を作る) は、数千スレッドのGPUでは**専用の並列アルゴリズム**になります。代表が **Reduction** (集約: 合計・最大値など) と **Prefix Sum / Scan** (累積和) です。特にScanは「並列プログラミングの万能部品」であり、コンパクション・ソート・パーティクル管理・GPU Drivenの可視リスト構築など、あらゆる場面の裏で動いています。
+順番に処理するなら単純なループで書ける合計や累積和も、数千スレッドのGPUで処理するには並列アルゴリズムを使います。代表例は、合計や最大値を求めるReduction (集約) と、累積和を求めるPrefix Sum / Scanです。Scanはコンパクション、ソート、パーティクル管理、GPU Drivenの可視リスト構築などに広く使われます。
 
 ## なぜ必要なのか
 
 - `for (i) sum += a[i]` は逐次依存の塊 — 並列化には**構造の変換**が必要
-- 「N個から可視なものだけ詰めた配列を作る」(コンパクション) はGPU Drivenレンダリングの心臓部で、その実装はScanそのもの
+- GPU Drivenレンダリングの主要処理であるコンパクションでは、N個の要素から可視なものだけを詰めた配列をScanで作る
 - 自動露出 (平均輝度)、ヒストグラム、Bloom縮小、SAT、Radixソート — レンダラーの至る所に登場する
 
 ## 歴史・誕生した背景

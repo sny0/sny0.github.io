@@ -47,7 +47,7 @@ TSoftObjectPtr<UStaticMesh> HeavyMesh;   // エディタではアセットを「
 UStaticMesh* Mesh = HeavyMesh.LoadSynchronous();            // または StreamableManagerで非同期
 ```
 
-- **ハード参照(TObjectPtr)の連鎖はロードの連鎖**: あるActorをロードすると、そのUPROPERTYが指すアセットも芋づるでロードされる。ソフト参照はこの連鎖を切る道具——[Proxy/遅延ロード](/design/patterns/proxy.html)と[アセット管理](/game/patterns/optimization-patterns.html)の実践形
+- ハード参照（TObjectPtr）: Actorをロードすると、そのUPROPERTYが指すアセットも続けてロードされる。ソフト参照を使うと、アセットをロードする時期を分けられる。[Proxy/遅延ロード](/design/patterns/proxy.html)、[アセット管理](/game/patterns/optimization-patterns.html)
 - Unity対応: `AssetReference`(Addressables)とほぼ同じ役割
 
 ## 使い分けフローチャート(UE版)

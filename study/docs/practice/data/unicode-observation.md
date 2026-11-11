@@ -15,7 +15,7 @@ study:
 
 # C++とC#でUnicodeのバイト列と文字列の長さを観察する
 
-「文字数」を一つの数で扱うと、絵文字や結合文字で困ります。同じ4例について、**UTF-8のバイト数、UTF-16のコード単位数、Unicodeスカラー値の個数、書記素クラスタ数**を並べます。概念は[Unicodeと文字コード](/data/unicode-and-encoding.html)、バイト順は[整数の保存形式を観察する](/practice/data/integer-byte-observation.html)へつながります。
+絵文字や結合文字では、何を単位にするかで数えた結果が変わります。同じ4例で、**UTF-8のバイト数、UTF-16のコード単位数、Unicodeスカラー値の個数、書記素クラスタ数**を比べます。各単位は[Unicodeと文字コード](/data/unicode-and-encoding.html)、バイト順は[整数の保存形式を観察する](/practice/data/integer-byte-observation.html)で確認できます。
 
 UTF-8は8bit、UTF-16は16bitのコード単位（code unit）を使います。スカラー値（scalar value）はサロゲート範囲を除くUnicodeコードポイントです。一つのスカラー値がUTF-16ではサロゲートペアの二単位になる場合があります。書記素クラスタ（grapheme cluster）は、利用者が一文字として扱うまとまりを近似します。[Unicode公式：用語集](https://www.unicode.org/glossary/)、[UTFのFAQ](https://www.unicode.org/faq/utf_bom.html)
 

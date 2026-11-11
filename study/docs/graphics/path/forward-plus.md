@@ -3,7 +3,7 @@ title: Forward+ / Tiled / Clustered Rendering
 study:
   source: RenderingWiki
   status: published
-  summary: Forward+ (Tiled Forward) と Clustered Shading は、Compute ShaderによるライトカリングをForward Renderingに組み合わせた方式です。画面をタイル (2D) またはクラスタ (3D=タイル×深度スライス) に分割し、各領域に影響する
+  summary: Forward+とClustered Shadingは、Compute Shaderでライトを絞り込む方式です。Forward+は2Dのタイル、Clusteredは深度スライスを加えた3Dのクラスタごとに、影響するライトのリストを作ります。
   section: reference
   format: article
   domain: graphics
@@ -13,7 +13,7 @@ study:
 
 ## 概要
 
-Forward+ (Tiled Forward) と Clustered Shading は、**Compute Shaderによるライトカリング**をForward Renderingに組み合わせた方式です。画面をタイル (2D) またはクラスタ (3D=タイル×深度スライス) に分割し、各領域に影響するライトのリストを事前計算してからシェーディングします。「Deferredのライトスケーラビリティ」と「Forwardの柔軟性 (半透明・MSAA・任意マテリアル)」の両立が本質です。
+Forward+ (Tiled Forward) とClustered Shadingは、Forward RenderingにCompute Shaderによるライトカリングを組み合わせた方式です。画面を2Dのタイルか、タイルと深度スライスを組み合わせた3Dのクラスタに分け、領域ごとに影響するライトのリストを作ってからシェーディングします。Deferredのように多数のライトを扱いつつ、Forwardの半透明、MSAA、任意のマテリアルを扱える柔軟性を保ちます。
 
 ## なぜ必要なのか
 
@@ -55,7 +55,7 @@ flowchart TB
         T1["画面を16x16pxタイルに分割"] --> T2["タイルごとに深度min/maxを計算<br/>→タイル錐台を構成"] --> T3["錐台 vs ライトの交差判定<br/>→タイルごとのライトリスト"]
     end
     subgraph Clustered["Clustered (3D分割)"]
-        C1["画面タイル × 深度方向スライス<br/>(対数分割で16-64スライス)"] --> C2["各クラスタ(3Dセル)ごとに<br/>ライトリストを構築"]
+        C1["画面タイル × ビュー空間の深度<br/>(対数分割で16-64スライス)"] --> C2["各クラスタ(3Dセル)ごとに<br/>ライトリストを構築"]
     end
     T3 -.深度不連続で破綻.-> C1
 ```
@@ -65,7 +65,7 @@ flowchart TB
 - 深度プリパスなしでもリストを作れる (ジオメトリと独立に構築可能)
 - **半透明にも同じリストが使える** (Tiledは不透明の深度に依存)
 
-深度スライスは目の感度に合わせ**対数分割**が定石です:
+透視投影では、同じ画面タイルが占めるビュー空間の幅と高さが遠方ほど大きくなります。深度を等間隔に分けると、近くのセルは奥行きが相対的に長く、遠くのセルは薄く平たくなります。深度を**対数分割**すると境界の深度が等比で増え、セルの奥行きも距離に比例して増えるため、距離が変わってもセルの縦横と奥行きの比を揃えやすくなります。
 
 $$slice = \left\lfloor \frac{\log(z / near)}{\log(far / near)} \cdot numSlices \right\rfloor$$
 
@@ -185,13 +185,13 @@ void CullLightsCS(uint3 gid : SV_GroupID, uint gi : SV_GroupIndex) {
 
 3. **深度スライスに対数分割を使う理由は。**
    ::: details 解答
-   透視投影では画面上の単位変化に対応するビュー空間深度の幅が遠方ほど広がる。線形分割では近距離のスライスが過剰に細かく遠方が粗くなりすぎる。対数分割はスライスの「画面上での見かけの厚み」を均等化し、クラスタのスクリーン空間サイズを距離に依らず揃えられる。
+   同じ画面タイルでも、ビュー空間の幅と高さは遠方ほど大きくなる。深度を等間隔に分けると、近くのセルは細長く、遠くのセルは薄く平たくなる。対数分割では奥行きも距離とともに増えるので、セルの縦横と奥行きの比を揃えやすい。
    :::
 
 ## 参考資料
 
 - Takahiro Harada et al., *"Forward+: Bringing Deferred Lighting to the Forward Pass"* (2012)
-- Ola Olsson et al., *"Clustered Deferred and Forward Shading"* (HPG 2012)
+- [Ola Olsson et al., *Clustered Deferred and Forward Shading* (§3.1, HPG 2012)](https://diglib.eg.org/items/6342d4d6-5220-4376-a5c6-a153058f4a3c)
 - Tiago Sousa, *"The Devil is in the Details: idTech 666"* (SIGGRAPH 2016) — DOOMの実装
 - Ángel Ortiz, *"A Primer On Efficient Rendering Algorithms & Clustered Shading"* (実装解説)
 - [Unity 6.0: Forward and Forward+ rendering paths](https://docs.unity.com/en-us/engine/6000.0/manual/render-pipelines/universal-render-pipeline/introduction/urp-concepts/rendering-paths/forward-rendering-paths)

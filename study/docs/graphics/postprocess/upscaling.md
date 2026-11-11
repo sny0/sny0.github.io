@@ -3,7 +3,7 @@ title: アップスケーリング — DLSS / FSR / XeSS
 study:
   source: RenderingWiki
   status: published
-  summary: 時間的アップスケーラは、低解像度でレンダリングしたフレームを、ジッタ+モーションベクタ+過去フレームの蓄積から高解像度に再構成する技術です。TAA の直系進化であり、「4Kをネイティブで描くのではなく、1080p〜1440pで描いて賢く拡大する」ことでレイトレーシング世代のGPUコストを賄う、現代リ
+  summary: 時間的アップスケーラは、ジッタ、モーションベクタ、過去のフレームを使い、低解像度の描画結果を高解像度に再構成します。1080p〜1440pから4Kに拡大する例では、4Kで直接描画する場合と比べてGPU負荷を抑えられます。
   section: reference
   format: article
   domain: graphics
@@ -13,7 +13,7 @@ study:
 
 ## 概要
 
-時間的アップスケーラは、**低解像度でレンダリングしたフレームを、ジッタ+モーションベクタ+過去フレームの蓄積から高解像度に再構成する**技術です。[TAA](/graphics/postprocess/taa.html) の直系進化であり、**「4Kをネイティブで描くのではなく、1080p〜1440pで描いて賢く拡大する」**ことでレイトレーシング世代のGPUコストを賄う、現代リアルタイムグラフィックスの中心的インフラです。代表的な実装が **DLSS** (NVIDIA)、**FSR** (AMD)、**XeSS** (Intel) です。同じブランド内でも、世代ごとにアルゴリズムや対応GPUが異なります。
+時間的アップスケーラは、低解像度で描いたフレームを、ジッタ、モーションベクタ、過去のフレームの蓄積を使って高解像度に再構成する技術です。[TAA](/graphics/postprocess/taa.html)を発展させた手法で、1080p〜1440pで描いて4Kへ拡大すれば、4Kで直接描く場合に比べて、レイトレーシングなどの描画に使うGPUの負荷を抑えられます。代表的な実装はDLSS (NVIDIA)、FSR (AMD)、XeSS (Intel) です。同じブランド内でも、世代ごとにアルゴリズムや対応GPUが異なります。
 
 ## なぜ必要なのか
 
@@ -33,7 +33,9 @@ study:
 - **2023: DLSS 3.5 Ray Reconstruction** — RTデノイズのAI再構成
 - 2024: PS5 Pro **PSSR**、Intel **XeSS 2** のフレーム生成
 - **2025: DLSS 4** — TransformerモデルとRTX 50シリーズのMulti Frame Generation（最大4倍モード）。**FSR 4**はMLベースの再構成を導入（当初はRDNA 4向け）
-- **2026: DLSS 4.5** — 第2世代TransformerのSuper Resolution。3月にRTX 50シリーズ向けの最大6倍・動的Multi Frame Generationを提供。AMDは10月のFSR SDK 2.4でMLアップスケーリング4.1.2の対応をRX 6000/7000/9000シリーズと一部APUへ拡大
+- **2026: DLSS 4.5** — 第2世代TransformerのSuper Resolution。3月にRTX 50シリーズ向けの最大6倍・動的Multi Frame Generationを提供
+- **2026年6月: FSR SDK 2.3** — MLアップスケーリング4.1の対応を、従来のRX 9000シリーズからRX 7000シリーズにも拡大
+- **2026年10月: FSR SDK 2.4** — MLアップスケーリング4.1.2をRX 6000シリーズと一部Ryzen APUにも拡大。アップスケーリングとフレーム生成はVulkanにも対応
 
 ## それ以前の技術
 
@@ -173,5 +175,6 @@ ffxFsr2ContextDispatch(&context, &d);
 - Alex Battaglia (Digital Foundry) の各種アップスケーラ比較検証
 - [NVIDIA: DLSS 3発表（2022年）](https://www.nvidia.com/en-us/geforce/news/dlss3-ai-powered-neural-graphics-innovations/)
 - [NVIDIA: DLSS 4.5の6X・動的MFG提供開始](https://www.nvidia.com/en-us/geforce/news/dlss-4-5-dynamic-multi-frame-generation-6x-mode-released/)
-- [AMD: FSR SDK 2.4の対応GPU拡大](https://gpuopen.com/learn/amd-fsr-sdk-2-4-rx-6000-ryzen-apus/)
+- [AMD: FSR SDK 2.3でのRDNA 3対応](https://gpuopen.com/learn/amd-fsr-sdk-2-3-blog/)
+- [AMD: FSR SDK 2.4の対応GPU拡大とVulkan対応](https://gpuopen.com/learn/amd-fsr-sdk-2-4-rx-6000-ryzen-apus/)
 - [AMD: FSR Upscaling 4の要件](https://gpuopen.com/manuals/fsr_sdk/techniques/super-resolution-ml/)

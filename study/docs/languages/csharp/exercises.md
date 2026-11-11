@@ -23,7 +23,7 @@ C#の各機能に対応するC++の道具を答え、「似ているが同じで
 
 <details><summary>解答</summary>
 
-1. RAII(スコープ+デストラクタ)。差分: C++は書き忘れ不能([RAIIとusing](/languages/csharp/destructor-dispose-raii-using.html))。2. `std::vector<std::function<...>>` の自作リスト+Subscribe/Unsubscribe。差分: マルチキャストと解除は言語サポートなし([delegate](/languages/csharp/delegates-events-function-pointers.html))。3. `std::vector<T>`(std::listではない!)。差分: 型ごとにコード生成([テンプレート](/languages/csharp/templates-vs-generics.html))。4. concepts。差分: C++は制約なしでも書ける(使用ベース検査)。5. `override`(同名)。差分: C#は必須、C++は任意なので**書く規律**が必要([仮想関数](/languages/csharp/virtual-and-polymorphism.html))。
+1. RAII(スコープ+デストラクタ)。差分: C++は所有オブジェクトの破棄に解放を任せる([RAIIとusing](/languages/csharp/destructor-dispose-raii-using.html))。2. `std::vector<std::function<...>>` の自作リスト+Subscribe/Unsubscribe。差分: マルチキャストと解除は言語サポートなし([delegate](/languages/csharp/delegates-events-function-pointers.html))。3. `std::vector<T>`(std::listではない!)。差分: C++はコンパイル時に型ごとに実体化し、C#のコード共有や特殊化は実行環境に依存([テンプレート](/languages/csharp/templates-vs-generics.html))。4. concepts。差分: C++は制約なしでも書ける(使用ベース検査)。5. `override`(同名)。差分: 上書きにはC#で必須。C++では省略しても一致すれば上書きされるので、上書きの意図を検査するために書く([仮想関数](/languages/csharp/virtual-and-polymorphism.html))。
 </details>
 
 ## 問2. コード読解(C#の感覚で読むと誤る)
@@ -78,16 +78,16 @@ void OnEnemyDied() {
 
 ## 問5. デバッグ問題
 
-「エディタでは動くのにIL2CPPの実機ビルドでだけ `ExecutionEngineException` が出る」。原因の候補と対策を、C++の語彙(実体化・デッドコード除去)で説明してください。
+「エディタでは動くのにIL2CPPの実機ビルドでだけ `ExecutionEngineException` が出る」。AOTのジェネリックコード生成とUnityLinkerのコードストリッピングを区別して、原因の候補と対策を説明してください。
 
 <details><summary>解答の要点</summary>
 
-まずUnityの版とコード生成設定を確認します。**旧版のAOTジェネリック実体化漏れ**では、リフレクション経由の組み合わせの専用コードが生成されず、明示的な使用箇所を設ける対策が使われました。Unity 2022.1以降にはFull Generic Sharingのフォールバックがあるため、同じ断定はできません。**コードストリッピング**で必要な型・メソッドやメタデータが失われていないかも別に確認し、必要な範囲を`link.xml`などで保持します。[IL2CPPの版と制約](/languages/csharp/il2cpp.html)
+まずUnityの版とコード生成設定を確認します。**旧版のAOTジェネリック実体化漏れ**では、リフレクション経由の組み合わせの専用コードが生成されず、明示的な使用箇所を設ける対策が使われました。Unity 2022.1以降にはFull Generic Sharingのフォールバックがあるため、同じ断定はできません。**コードストリッピング**はIL2CPP変換前にUnityLinkerがマネージドアセンブリに行います。必要な型・メソッドやメタデータが失われていないかを確認し、必要な範囲を`link.xml`などで保持します。[IL2CPPの版と制約](/languages/csharp/il2cpp.html)
 </details>
 
 ## 問6. 説明問題
 
-「C++ではnullチェックしてもクラッシュするときはする、と先輩に言われた。C#では防げたのに」— この発言の背景を、danglingとnullの違いから3〜4文で説明してください。
+「C++ではnullチェックしてもクラッシュするときはする、と先輩に言われた。C#では防げたのに」。この発言の背景をdanglingとnullの違いから3〜4文で説明してください。
 
 <details><summary>解答例</summary>
 

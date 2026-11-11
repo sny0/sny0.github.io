@@ -3,7 +3,7 @@ title: RenderGraph / FrameGraph
 study:
   source: RenderingWiki
   status: published
-  summary: RenderGraph (FrameGraph) は、フレームの全レンダーパスとリソースの依存関係を宣言的なグラフとして構築し、バリア挿入・リソース生存期間管理・パス順序を自動化するアーキテクチャです。DX12/Vulkanの「明示的な自由」がもたらした管理地獄への、エンジンレベルの回答であり、Fr
+  summary: RenderGraph (FrameGraph) は、フレーム内の描画パスとリソースの依存関係をグラフで宣言する設計です。DX12やVulkanでアプリ側が担うバリア、リソースの寿命、パス順序の管理をエンジンで自動化します。
   section: reference
   format: article
   domain: graphics
@@ -13,7 +13,7 @@ study:
 
 ## 概要
 
-RenderGraph (FrameGraph) は、**フレームの全レンダーパスとリソースの依存関係を宣言的なグラフとして構築し、バリア挿入・リソース生存期間管理・パス順序を自動化する**アーキテクチャです。DX12/Vulkanの「明示的な自由」がもたらした管理地獄への、エンジンレベルの回答であり、Frostbite (2017) の発表以降、UE (RDG)・Unity (RenderGraph)・ほぼ全ての現代エンジンが採用しています。
+RenderGraph (FrameGraph) は、フレーム内の全レンダーパスとリソースの依存関係をグラフで宣言し、バリアの挿入、リソースの生存期間の管理、パス順序の決定を自動化する設計です。DX12やVulkanでアプリ側に移った管理をエンジンで扱う方法で、Frostbite (2017) の発表以降、UE (RDG) やUnity (RenderGraph) を含む現代のほぼすべてのエンジンが採用しています。
 
 ## なぜ必要なのか
 
@@ -28,7 +28,7 @@ RenderGraphは「**各パスは自分の入出力だけ宣言する。全体の�
 ## 歴史・誕生した背景
 
 - 〜2015: DX11時代はドライバが自動管理していたため不要だった
-- 2015-16: DX12/Vulkan移行で各社がバリア管理の泥沼を経験
+- 2015-16: DX12やVulkanへの移行で、各社がバリア管理の複雑さに直面した
 - **2017: GDC "FrameGraph: Extensible Rendering Architecture in Frostbite"** (Yuriy O'Donnell) — 概念の命名と設計の公開。トランジェントリソースのメモリエイリアシングまで含む完成形を提示
 - 2017-19: UE4の **RDG (Render Dependency Graph)** 化が進行、UE5で全面採用
 - 2020〜: UnityがSRPに **RenderGraph API** を導入 (URP 17/Unity 6で標準化)
@@ -85,7 +85,7 @@ flowchart LR
 
 ### バリア導出
 
-「リソースAは パス3でRTV書き込み → パス5でSRV読み」がグラフから分かるので、パス3と5の間に1回だけ遷移を挿入します。人間が書くより正確で、**過剰同期 (とりあえず全部バリア) も過少同期 (書き忘れ) も構造的に防げます**。
+グラフから、パス3がリソースAにRTVで書き込み、パス5がSRVで読み取ることが分かります。そこで、パス3と5の間に遷移を1回だけ挿入します。手作業より正確に処理でき、不要なバリアの挿入も必要なバリアの書き忘れも防げます。
 
 ## 各環境での扱い
 

@@ -123,7 +123,7 @@ private:
 ## 使う場面 / 使わない場面
 
 - **FSM**: 状態が排他的(同時に1つ)で、遷移ルールが仕様として明確なもの全般(キャラ、AI、画面、接続状態)
-- **使わない場面**: 直交する属性(無敵・毒・速度アップが同時につく)を1つのマシンに入れない——組み合わせ爆発します。直交軸は別マシン/フラグ/[Decorator的な効果リスト](/design/case-studies/status-effects.html)で
+- 使わない場面: 無敵・毒・速度アップのように同時に成立する属性を1つのステートマシンに入れると、組み合わせの数が急増します。独立した属性は、別のステートマシン、フラグ、[Decoratorのように効果を重ねるリスト](/design/case-studies/status-effects.html)で扱います。
 - 複雑な優先度付き行動選択はFSMの遷移が絡まりやすい → [Behavior Tree](/game/patterns/behavior-tree-and-blackboard.html)へ
 
 ## よくある誤解

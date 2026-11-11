@@ -54,4 +54,4 @@ d = √(x² + b²)
 
 実践では正面を通る前後1秒ずつを、2秒の `OfflineAudioContext` に対応させます。音声の開始が `t = −1`、開始から1秒が `t = 0` です。位置は `PannerNode.positionX` に直線の動きとして予約し、再生速度は各時刻の軌道から計算した倍率の配列を `setValueCurveAtTime()` に渡します。配列内の値は指定した時間幅に配置され、間は補間されます。`playbackRate` は処理ブロックごとに値を読む k-rate のパラメーターです。[W3C Web Audio APIのsetValueCurveAtTime](https://www.w3.org/TR/webaudio/#dom-audioparam-setvaluecurveattime) · [AudioBufferSourceNode](https://www.w3.org/TR/webaudio/#AudioBufferSourceNode)
 
-実践では、速さと最短距離を選んで通過音を作ります。再生中の位置とグラフを見ながら、音が左から右へ移り、高さが変わる様子を聴けます。表示する予測値は各時刻の軌道から求めます。実測では時刻を中心とする20 msの区間を使い、パンニング前の波形から周波数を、パンニング後の波形から左右の振幅を求めます。[通過音の実践](/practice/browser/audio-flyby-observation.html)
+実践では音源の速さと最短距離を選んで通過音を作ります。再生中の位置とグラフを見ながら、音が左から右へ移り、高さが変わる様子を聴けます。表示する予測値は各時刻の軌道から求めます。実測では各時刻を中心とする20 msの区間を使い、パンニング前の波形から周波数を、パンニング後の波形から左右の振幅を求めます。[通過音の実践](/practice/browser/audio-flyby-observation.html)

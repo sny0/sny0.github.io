@@ -3,7 +3,7 @@ title: CUDA と OpenCL
 study:
   source: RenderingWiki
   status: published
-  summary: CUDA (NVIDIA, 2007) と OpenCL (Khronos, 2008年仕様公開) は、グラフィックスAPIから独立した汎用GPU計算 (GPGPU) のためのプラットフォームです。ゲーム開発では Compute Shader が主役ですが、CUDAは機械学習・オフラインレンダリング・ツール開
+  summary: CUDAとOpenCLは、グラフィックスAPIから独立した汎用GPU計算のプラットフォームです。Compute Shaderとの関係や、機械学習・オフラインレンダリング・ツール開発でのCUDAの用途を扱います。
   section: reference
   format: article
   domain: graphics
@@ -13,12 +13,12 @@ study:
 
 ## 概要
 
-CUDA (NVIDIA, 2007) と OpenCL (Khronos, 2008年仕様公開) は、グラフィックスAPIから独立した**汎用GPU計算 (GPGPU) のためのプラットフォーム**です。ゲーム開発では [Compute Shader](/graphics/compute/compute-shader.html) が主役ですが、CUDAは機械学習・オフラインレンダリング・ツール開発で圧倒的な地位を持ち、その概念と用語 (カーネル、Warp、Shared Memory) はGPU計算全体の共通語になっています。
+CUDA (NVIDIA, 2007) とOpenCL (Khronos, 2008年仕様公開) は、グラフィックスAPIから独立した汎用GPU計算 (GPGPU) のプラットフォームです。ゲーム開発では主に[Compute Shader](/graphics/compute/compute-shader.html)を使います。機械学習、オフラインレンダリング、ツール開発ではCUDAが広く使われ、カーネル、Warp、Shared Memoryなどの概念と用語はGPU計算全体で使われています。
 
 ## なぜ必要なのか
 
 - **概念の原点**: Compute Shaderのスレッドグループ・共有メモリ・アトミックはすべてCUDAが確立したモデルの輸入
-- DLSSのようなAI機能、PhysX、OptiX (RTレンダラー)、機械学習パイプラインとの連携 — ゲーム産業の周辺はCUDAだらけ
+- PhysX、OptiX (RTレンダラー)、機械学習パイプラインなど、ゲーム周辺でのCUDA活用を理解する
 - ツール (ライトマップベイカー、アセット処理) をGPU化する際の選択肢
 
 ## 歴史・誕生した背景
@@ -130,7 +130,7 @@ int main() {
 ## 次に読むべきページ
 
 - [並列アルゴリズム](/graphics/compute/parallel-algorithms.html) — CUB/Thrustが実装している中身
-- [アップスケーリング (DLSS/FSR/XeSS)](/graphics/postprocess/upscaling.html) — CUDA/Tensorコアの成果物
+- [アップスケーリング (DLSS/FSR/XeSS)](/graphics/postprocess/upscaling.html) — DLSSはTensorコアを利用し、ゲームにはNGX/Streamlineなどで統合する。FSRとXeSSには各社のSDKと実行経路がある
 - [レイトレーシング](/graphics/lighting/raytracing.html) — OptiXとの関係
 
 ## 理解度チェック

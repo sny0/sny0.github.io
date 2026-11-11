@@ -13,7 +13,7 @@ study:
 
 # Web Audioの畳み込みリバーブ — インパルス応答から響きを作る
 
-フィードバックディレイでは、音をループに戻して一定の間隔で繰り返します。部屋では壁や天井からの反射が異なる時刻に届き、いくつもの経路を通った音が重なります。短い刺激に対して届く音を**インパルス応答**（IR）として表すと、別の音にもその響きを加えられます。[フィードバックディレイ](/browser/audio-feedback-delay.html)、[W3C Web Audio APIのConvolverNode](https://www.w3.org/TR/webaudio/#ConvolverNode)
+フィードバックディレイは音をループに戻し、一定の間隔で繰り返します。部屋では壁や天井からの反射が異なる時刻に届き、いくつもの経路を通った音が重なります。短い刺激に対して届く音を**インパルス応答**（IR）として表すと、別の音にもその響きを加えられます。[フィードバックディレイ](/browser/audio-feedback-delay.html)、[W3C Web Audio APIのConvolverNode](https://www.w3.org/TR/webaudio/#ConvolverNode)
 
 ## 部屋の響きを波形にする
 

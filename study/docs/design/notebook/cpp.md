@@ -88,7 +88,7 @@ public static class NoteWriter
 
 ## 理解度チェック
 
-戻り値の string_view は、関数内のローカル文字列を参照していませんか？
+戻り値の string_view は関数内のローカル文字列を参照していませんか？
 
 ## この章の参考資料
 

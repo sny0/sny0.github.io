@@ -17,7 +17,7 @@ study:
 
 `0.1f`の表示、`float`の隣の値、`2^24`付近の加算を小さなプログラムで調べます。考え方は[浮動小数点と表現間隔](/data/floating-point-spacing.html)、整数とbyte順の違いは[整数・byteの観察サンプル](/practice/data/integer-byte-observation.html)へつながります。
 
-標準C++20のヘッダーと関数を使いますが、浮動小数点環境に対応するコンパイラ設定も必要です。このサンプルでは、`CHAR_BIT==8`、`uint32_t`の提供、`sizeof(float)==4`、`is_iec559`、基数2・精度24bit・指数範囲などをcompile時に確認します。
+標準C++20のヘッダーと関数に加えて、浮動小数点環境に対応するコンパイラ設定も必要です。このサンプルでは`CHAR_BIT==8`、`uint32_t`の提供、`sizeof(float)==4`、`is_iec559`、基数2・精度24bit・指数範囲などをコンパイル時に確認します。
 
 ## 入手して実行する
 

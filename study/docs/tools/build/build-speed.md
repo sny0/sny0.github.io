@@ -3,7 +3,7 @@ title: ビルド時間 — incremental build・PCH・Unity Build・C++でビル�
 study:
   source: C++ Wiki
   status: published
-  summary: "#includeの爆発: #include だけで数万行が翻訳単位に貼り付く(プリプロセッサ)。100個の.cppが同じヘッダーを含めば、同じ数万行を100回パースする テンプレートの再実体化: vector を使う全翻訳単位で実体化→リンカが重複を捨てる。「作っては捨てる」の山(→ 実体化)"
+  summary: ヘッダーの解析とテンプレートの実体化は翻訳単位ごとに繰り返されます。差分ビルド、PCH、Unity Buildがどの作業を減らせるかを解説します。
   section: reference
   format: article
   domain: tools
@@ -13,10 +13,10 @@ study:
 
 ## なぜC++のビルドは遅いのか(原因の理解が対策の半分)
 
-1. **#includeの爆発**: `#include <vector>` だけで数万行が翻訳単位に貼り付く([プリプロセッサ](/runtime/cpp-internals/build-pipeline-journey.html))。100個の.cppが同じヘッダーを含めば、**同じ数万行を100回パース**する
-2. **テンプレートの再実体化**: `vector<int>` を使う全翻訳単位で実体化→リンカが重複を捨てる。「作っては捨てる」の山(→ [実体化](/runtime/cpp-internals/template-instantiation-and-inline.html))
+1. `#include <vector>` だけで、[プリプロセッサ](/runtime/cpp-internals/build-pipeline-journey.html)が翻訳単位に数万行を取り込みます。100個の.cppが同じヘッダーを含めば、コンパイラは同じ数万行を100回解析します。
+2. `vector<int>` を使う翻訳単位ごとにテンプレートを実体化し、リンカが重複したコードを除きます(→ [実体化](/runtime/cpp-internals/template-instantiation-and-inline.html))。
 3. **最適化・LTO**: -O2の解析、リンク時最適化は全プログラム解析
-4. **ヘッダー依存の連鎖**: 1つのヘッダー変更が、それをincludeする全.cppの再コンパイルを誘発(**変更の波及範囲=ビルド時間**——[結合度](/design/foundations/cohesion-and-coupling.html)が物理現象になったもの)
+4. 1つのヘッダーを変更すると、それをincludeするすべての.cppを再コンパイルします。変更の影響が広いほどビルドに時間がかかります。[結合度](/design/foundations/cohesion-and-coupling.html)がビルド時間に表れる例です。
 
 ## 対策1: incremental build(差分ビルド)を機能させる
 

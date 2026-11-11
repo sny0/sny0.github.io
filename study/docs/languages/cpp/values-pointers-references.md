@@ -81,14 +81,14 @@ void Heal(const Enemy& e);   // const参照: コピーなしで読むだけ(大�
 ## Unity開発者が誤解しやすい点
 
 1. **「structは遅い/classが普通」という感覚の逆転**: C#ではclassが既定ですが、C++では値(struct的な使い方)が既定で、ヒープ+ポインタは選んだときだけ。「とりあえずnewしてポインタで持つ」はC++ではJava/C#の書き癖であり、大抵は値でよい
-2. **`Enemy b = a;` がコピーである**こと: C#の感覚で「同じ敵を指してるつもり」が、別の敵を作って片方だけ変更している——初学者バグの筆頭
+2. `Enemy b = a;` はコピーです。C#と同じつもりで書くと、同じ敵を参照していると思っていても、実際には別の敵を作って片方だけを変更します。C++を学び始めたときに特に起きやすいバグです。
 3. **参照はC#の`ref`より広く使う**: C#の`ref`は特殊な機能ですが、C++の`const T&`は引数の基本形
 4. **nullの怖さが桁違い**: C#のnull参照は例外(NullReferenceException)で止まるが、C++のnullptr参照外しは**未定義動作**(→ [18](/languages/cpp/undefined-behavior.html))。クラッシュすら保証されない
 
 ## ゲーム開発での使用例
 
 - 座標・ベクトル・色は**値**(コピーが安く、共有すると事故る): `Vec3 pos = enemy.pos;`
-- 「ターゲットの敵」は**ポインタ**(いない=nullptr、途中で切り替わる): `Enemy* target_;` — ただし相手が先に死ぬ問題(dangling)への対策が必要(→ [所有権と借用](/runtime/memory/ownership-and-borrowing.html))
+- ターゲットの敵には `Enemy* target_;` のようにポインタを使います。対象がいなければnullptrで表せ、途中で対象を切り替えられます。対象が先に破棄されるとdanglingになるため、対策が必要です(→ [所有権と借用](/runtime/memory/ownership-and-borrowing.html))。
 - 大きなデータの読み取りは**const参照**: `int CalcDamage(const AttackData& atk, const DefenseData& def);`
 
 ## よくある誤解

@@ -119,7 +119,7 @@ public class Player : MonoBehaviour {
 }
 ```
 
-セーブデータ化するなら `JsonUtility` 等でSnapshotを直列化——**Mementoはセーブシステムの中核構造**になります(→ [ケーススタディ: セーブデータ](/design/case-studies/save-data.html))。
+セーブデータにする場合は、`JsonUtility` などでSnapshotを直列化します。この構成ではMementoがセーブシステムの中核になります。[ケーススタディ: セーブデータ](/design/case-studies/save-data.html)
 
 ## 実装の急所: コピーの深さ
 

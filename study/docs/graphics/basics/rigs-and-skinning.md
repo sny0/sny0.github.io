@@ -13,7 +13,7 @@ study:
 
 # リグとスキニングの基本 — 骨の姿勢でメッシュを動かす
 
-キャラクターが肘を曲げると、腕の表面も曲がります。[メッシュ](/graphics/basics/models-and-meshes.html)の頂点を一つずつ手で動かす代わりに、骨格の姿勢と、各頂点がどの骨の影響を受けるかを用意して変形できます。ここでは腕の二つの部分を使って、その仕組みを見ます。[UnityのSkinned Mesh Renderer](https://docs.unity3d.com/6000.0/Documentation/Manual/class-SkinnedMeshRenderer.html)
+キャラクターが肘を曲げると、腕の表面も曲がります。[メッシュ](/graphics/basics/models-and-meshes.html)の頂点を一つずつ手で動かす代わりに、骨格の姿勢と、各頂点がどの骨の影響を受けるかを指定して、メッシュを変形できます。ここでは腕を二つの部分に分けた例を使います。[UnityのSkinned Mesh Renderer](https://docs.unity3d.com/6000.0/Documentation/Manual/class-SkinnedMeshRenderer.html)
 
 ## ボーンとジョイントを階層にする
 

@@ -56,7 +56,7 @@ flowchart TB
 
 ## 1フレームの旅 — 目標の構成を先に見る
 
-実装を考える前に、目標とするレンダラーの1フレームを**CPU側とGPU側の時系列**で追います。この図が本章の地図です:
+実装に入る前に、目標とするレンダラーが1フレームを処理する順序をCPU側とGPU側に分けて確認します。
 
 ```mermaid
 sequenceDiagram
@@ -82,12 +82,12 @@ sequenceDiagram
 
 ## 設計判断とその理由
 
-ゼロから作るとき、最初に決めるべきことと本章の選択:
+レンダラーをゼロから作るときに最初に決めるべき項目と、この実践での選択を示します。
 
 | 決定 | 選択 | 理由 |
 |---|---|---|
 | API | Vulkan 1.3 | 全OS対応・検証レイヤが強力・「明示的APIの学習」という目的に最適 |
-| RenderPass方式 | Dynamic Rendering | VkRenderPass地獄を回避 (モダン構成) → [Vulkan](/graphics/api/vulkan.html) |
+| RenderPass方式 | Dynamic Rendering | 複雑なVkRenderPassの設定を省ける（[Vulkan](/graphics/api/vulkan.html)） |
 | 同期 | フレームインフライト2 + Timeline Semaphore不使用の基本形 | まず古典形を理解する |
 | メモリ | VMA (Vulkan Memory Allocator) | 手動メモリ管理はまず道具を使ってから学ぶ |
 | バインディング | 更新頻度別Descriptor Set (0=フレーム, 1=マテリアル) | [定石](/graphics/api/vulkan.html) の体得 |
@@ -116,7 +116,7 @@ mini-renderer/
 
 ## 前提知識
 
-本章は総まとめです。最低限、以下を先に読んでください:
+本章では各記事で説明した技術を組み合わせます。少なくとも、以下の記事を先に読んでください。
 
 - [パイプライン全体像](/graphics/pipeline/overview.html)、[座標変換](/math/rendering/transform.html)
 - [Vulkan](/graphics/api/vulkan.html) または [DirectX 12](/graphics/api/directx12.html)

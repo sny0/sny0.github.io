@@ -53,7 +53,7 @@ JavaScriptのアトミックな読み書きは逐次一貫（sequentially consis
 
 ## 満杯や空を処理する方針を決める
 
-キューに空きがないとき、この実装は呼び出し元に満杯を返します。呼び出し元はその項目を保持し、読み手が進んだあとに再試行できます。例えば読み込み済みの結果を渡す処理なら、供給側を一時停止することで、受け取り側が処理できる量に合わせられます。どのデータを破棄してよいかは用途で変わります。音声出力でデータが間に合わない場合など、受け取り側が待てないときは、無音を出すなどの方針を別に決めます。[Workerプールのキューとバックプレッシャー](/browser/worker-pool-backpressure.html)、[Streams APIとバックプレッシャー](/browser/streams-backpressure.html)
+キューに空きがないとき、この実装はキューが満杯であることを呼び出し元に返します。呼び出し元はその項目を保持し、受け取り側が読み進めたあとに再試行できます。例えば読み込み済みの結果を渡す処理なら、供給側を一時停止することで、受け取り側が処理できる量に合わせられます。どのデータを破棄してよいかは用途で変わります。音声出力でデータが間に合わない場合など、受け取り側が待てないときは、無音を出すなどの方針を別に決めます。[Workerプールのキューとバックプレッシャー](/browser/worker-pool-backpressure.html)、[Streams APIとバックプレッシャー](/browser/streams-backpressure.html)
 
 公開ページでは `ArrayBuffer` 上で `tryEnqueue()` と `tryDequeue()` を一操作ずつ動かし、枠とカーソルを確認できます。付属のローカル配信を使うと、二つのDedicated Workerが同じ実装を `SharedArrayBuffer` 上で動かします。Workerは満杯や空が返ったら処理をいったん譲って再試行します。再試行の回数は実行順によって変わります。[実践サンプル](/practice/browser/ring-buffer-observation.html)
 

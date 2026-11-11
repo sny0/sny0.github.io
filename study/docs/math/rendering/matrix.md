@@ -13,7 +13,7 @@ study:
 
 ## 概要
 
-行列は**空間の変換 (移動・回転・拡縮・射影) を1つのデータで表現する道具**です。3Dグラフィックスでは4x4行列がすべての座標変換の共通言語であり、GPUのVertex Shaderは本質的に「毎頂点に行列を掛ける機械」です。
+行列は、移動・回転・拡縮・射影といった空間の変換を1つのデータで表します。3Dグラフィックスでは4x4行列がこれらの座標変換に共通して使われ、GPUのVertex Shaderでは各頂点の座標に行列を掛けて変換します。
 
 ## なぜ必要なのか
 
@@ -23,7 +23,7 @@ study:
 
 ## 歴史・誕生した背景
 
-行列による座標変換は Sutherland の Sketchpad (1963) やユタ大学のCG研究で導入され、**同次座標**は E. Roberts (1965) がCGに持ち込みました。SGIのハードウェア (Geometry Engine, 1982, Jim Clark) は「4x4行列積を行う専用チップ」であり、これが後のGPUのT&Lユニットの原型です。OpenGLの `glMatrixMode` (1992) を経て、プログラマブルシェーダ時代には行列はアプリが自前で管理するものになりました。
+行列による座標変換は Sutherland の Sketchpad (1963) やユタ大学のCG研究で使われました。Lawrence G. Roberts (L. G. Roberts) はMITの1963年の博士論文で**同次座標**と変換行列を使い、1965年には同次行列によるN次元形状の表現と操作を発表しました。SGIのハードウェア (Geometry Engine, 1982, Jim Clark) は「4x4行列積を行う専用チップ」であり、これが後のGPUのT&Lユニットの原型です。OpenGLの `glMatrixMode` (1992) を経て、プログラマブルシェーダ時代には行列はアプリが自前で管理するものになりました。[Robertsの博士論文 (MIT, 1963)](https://dspace.mit.edu/entities/publication/840d8056-9b54-4bd4-b16f-2f3d8296386e) · [Sutherlandの論文 (1968)、参考文献3](https://www.medien.ifi.lmu.de/lehre/ss09/ar/p757-sutherland.pdf)
 
 ## それ以前の技術
 
@@ -111,7 +111,7 @@ glmの `glm::mat4`。GLSLのstd140レイアウトで `mat4` は列優先。GLM�
 
 ## コード例
 
-MVP行列の構築と頂点変換 (C++ / glm):
+C++とglmを使ってMVP行列を作り、頂点を変換します。
 
 ```cpp
 glm::mat4 model = glm::translate(glm::mat4(1), pos)
@@ -122,7 +122,7 @@ glm::mat4 proj  = glm::perspective(glm::radians(60.f), aspect, 0.1f, 1000.f);
 glm::mat4 mvp   = proj * view * model;   // 列ベクトル規約: 右から適用
 ```
 
-Vertex Shader での使用 (HLSL):
+HLSLでVertex Shaderに行列を渡して使います。
 
 ```hlsl
 cbuffer PerObject : register(b0) {

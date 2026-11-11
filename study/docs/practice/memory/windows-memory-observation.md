@@ -30,7 +30,7 @@ study:
 | 4 | `VirtualFree`の`MEM_DECOMMIT` | `MEM_RESERVE` |
 | 5 | 予約の先頭とサイズ0で`MEM_RELEASE` | `MEM_FREE` |
 
-予約はアドレス範囲を取り置きます。コミットは、その範囲のページに対するコミットの負担を引き受ける操作で、実際のアクセスとは別の段階です。この例は両者を別の呼び出しにしています。[VirtualAllocの仕様](https://learn.microsoft.com/en-us/windows/win32/api/memoryapi/nf-memoryapi-virtualalloc)
+予約ではアドレス範囲を取り置きます。コミットでは、その範囲のページに対するコミットの負担が発生します。実際にアクセスするのは別の段階です。この例では予約とコミットを別の呼び出しにしています。[VirtualAllocの仕様](https://learn.microsoft.com/en-us/windows/win32/api/memoryapi/nf-memoryapi-virtualalloc)
 
 `MEM_DECOMMIT`後もアドレスの予約は残ります。`MEM_RELEASE`は、その予約全体を手放します。どちらの操作後も、対象データを読んだり書いたりしません。解放後に保存した数値アドレスを`VirtualQuery`へ渡すのは、状態を問い合わせるためです。そのアドレスは別の割当に再利用され得ます。[VirtualFreeの仕様](https://learn.microsoft.com/en-us/windows/win32/api/memoryapi/nf-memoryapi-virtualfree)
 

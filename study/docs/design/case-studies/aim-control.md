@@ -13,7 +13,7 @@ study:
 
 # 照準制御の設計
 
-TPS/アクションの「狙う」機能——エイムアシスト、ロックオン、カメラ追従の設計です。数学とゲームフィールの絡む題材で、**Update順序**([Game Loop](/game/patterns/game-loop-and-update.html))が品質を左右します。
+TPSやアクションゲームで狙いをつけるときには、エイムアシスト、ロックオン、カメラ追従が関わります。数学に加え、[Game Loop](/game/patterns/game-loop-and-update.html)で各処理を更新する順序も操作感を左右します。
 
 ## 素朴な実装
 
@@ -69,7 +69,7 @@ std::vector<AimModifier> pipeline_;                  // [Decoratorのリスト�
 ```
 
 - アシストの調整=パイプラインの係数(データ)。モード追加=クラス1つ
-- ロックオン対象は**弱参照/ハンドル**で保持し、毎フレーム有効性を確認(死亡・遮蔽・距離で解除)——[ロックオンカメラ問題](/runtime/memory/exercises.html)の本番
+- ロックオン対象は弱参照かハンドルで保持し、毎フレーム有効性を確認する。死亡・遮蔽・距離の条件でロックオンを解除する。[ロックオンカメラの演習](/runtime/memory/exercises.html)で扱う仕組みと同じ。
 
 ## 案B: 継承案(比較のため)
 
@@ -77,7 +77,7 @@ std::vector<AimModifier> pipeline_;                  // [Decoratorのリスト�
 
 ## 案C: パターンを使わない簡潔案
 
-モードが「通常/ロックオンの2つだけ」なら:
+モードが通常とロックオンの2つだけなら、次のように実装できます。
 
 ```cpp
 if (lockOnTarget_ && IsValid(lockOnTarget_)) UpdateLockOn(dt);

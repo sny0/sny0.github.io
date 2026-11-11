@@ -3,7 +3,7 @@ title: グローバルイルミネーション総論
 study:
   source: RenderingWiki
   status: published
-  summary: グローバルイルミネーション (GI) は、光が物体に反射して他の物体を照らす「間接光」まで含めた照明計算の総称です。直接光のみのレンダリングは硬く不自然になり、GIこそが「フォトリアル」の正体です。このページはGI技術の系譜全体の地図であり、各手法 (SSAO、SSR、レイトレーシング、パストレーシ
+  summary: グローバルイルミネーション（GI）は、光が物体で反射してほかの物体を照らす間接光を含めた照明計算です。GIに関わる手法がどう発展し、リアルタイム描画で間接光をどう近似しているかを整理します。
   section: reference
   format: article
   domain: graphics
@@ -13,7 +13,7 @@ study:
 
 ## 概要
 
-グローバルイルミネーション (GI) は、**光が物体に反射して他の物体を照らす「間接光」まで含めた照明計算**の総称です。直接光のみのレンダリングは硬く不自然になり、GIこそが「フォトリアル」の正体です。このページはGI技術の系譜全体の地図であり、各手法 ([SSAO](/graphics/lighting/ssao.html)、[SSR](/graphics/lighting/ssr.html)、[レイトレーシング](/graphics/lighting/raytracing.html)、[パストレーシング](/graphics/lighting/path-tracing.html)、[Lumen](/graphics/lighting/lumen.html)) への入口です。
+グローバルイルミネーション (GI) は、光が物体に反射してほかの物体を照らす間接光を含めた照明計算の総称です。直接光だけで描くと陰影が硬く不自然になります。GIは写実的な見た目を支える要素です。このページではGIの手法を発展の順に整理します。[SSAO](/graphics/lighting/ssao.html)、[SSR](/graphics/lighting/ssr.html)、[レイトレーシング](/graphics/lighting/raytracing.html)、[パストレーシング](/graphics/lighting/path-tracing.html)、[Lumen](/graphics/lighting/lumen.html)の各記事では、関連する個別の手法を説明しています。
 
 ## なぜ必要なのか
 

@@ -46,10 +46,10 @@ t.name();                                       // 修飾された型名(処理�
 
 ### 2大実装方式
 
-1. **テーブル方式(ゼロコスト例外)** — Linux/macOS等のItanium C++ ABIと、Windows x64の方式は、どちらもテーブルを使うが同じABIではない:
+1. **テーブル方式(ゼロコスト例外)**。Linux/macOS等のItanium C++ ABIとWindows x64の方式はどちらもテーブルを使いますが、ABIは異なります。
    - Itanium系では`.eh_frame`や言語固有データ、Windows x64では独自の`.pdata`・`.xdata`などの巻き戻し情報を利用する。Windows x64は初期からこの方式である。[Microsoftのx64例外処理](https://learn.microsoft.com/en-us/cpp/build/exception-handling-x64)
    - **投げなければ実行時コストほぼゼロ**(通常パスに命令が入らない)
-   - **投げたら高い**: 表を検索しながらスタックを1フレームずつ巻き戻し、各フレームのデストラクタを実行([スタック巻き戻し](/languages/cpp/exceptions.html))。数千〜数万サイクル
+   - **投げたら高い**: 例外を処理するハンドラを表から探し、見つかればスタックを巻き戻して各フレームのデストラクタを実行([スタック巻き戻し](/languages/cpp/exceptions.html))。数千〜数万サイクル
 2. **フレーム登録方式**(旧32bit Windowsなど): tryのたびに実行時登録=**投げなくてもコストがかかる**。「例外は遅い」という古い常識の出所の一つ
 
 ### コストの内訳(テーブル方式でも残るもの)
@@ -65,7 +65,7 @@ t.name();                                       // 修飾された型名(処理�
 ## C#との対応
 
 - C#の例外も内部はテーブル+巻き戻しで概念は近い。C++23には現在位置を取得する`std::stacktrace`もあるが、C#の例外のようにthrow地点のトレースを自動添付する機能ではない。処理系の対応と収集タイミングを確認する。[C++草案: stacktrace](https://eel.is/c++draft/stacktrace)
-- C#のリフレクション(`GetType()`)はRTTIの遥かに豊かな版(メンバ列挙・動的呼び出しまで)。C++のRTTIは「型の同定」しかできない最小限——UEがリフレクションを**自作**した理由(→ [リフレクション — UCLASS・UFUNCTION・UPROPERTY・Unreal Header Tool](/game/unreal/reflection-and-uht.html))
+- C#では `GetType()` からメンバの列挙や動的な呼び出しまで行えます。C++のRTTIの役割は型の同定に限られます。この違いが、UEが独自のリフレクションを実装した理由です(→ [リフレクション — UCLASS・UFUNCTION・UPROPERTY・Unreal Header Tool](/game/unreal/reflection-and-uht.html))。
 
 ## Unity開発者が誤解しやすい点
 

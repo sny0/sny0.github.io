@@ -19,7 +19,7 @@ study:
 
 通常のWindows x64アプリは**ユーザーモード**で動きます。x64では一般に現在の特権レベルが3です。Windowsカーネルなどのコードは特権レベル0の**カーネルモード**で動きます。CPUは特権命令を使える条件と、メモリのページにアクセスできる条件を検査します。カーネルに処理を渡したあとも、ファイルを開けるか、ハンドルを指定した操作に使えるかは、OSが要求元の権限をもとに判断します。[Microsoftのユーザーモードとカーネルモード](https://learn.microsoft.com/en-us/windows-hardware/drivers/gettingstarted/user-mode-and-kernel-mode) · [Windowsのオブジェクトハンドル](https://learn.microsoft.com/en-us/windows-hardware/drivers/kernel/object-handles)
 
-アプリが持つポインターは、通常、そのプロセス内の仮想アドレスです。ファイルハンドルは、OSに渡す参照用の値です。カーネルは受け取った値を、要求元のアドレス空間やハンドル表、許可されたアクセス権に沿って解釈します。[仮想メモリ](/os/virtual-memory.html) · [Windowsのハンドル](/os/windows-handles.html)
+アプリが持つポインターは通常、そのプロセス内の仮想アドレスです。ファイルハンドルはOSに渡す参照用の値です。カーネルは要求元のアドレス空間やハンドル表、許可されたアクセス権に沿って、受け取った値を解釈します。[仮想メモリ](/os/virtual-memory.html) · [Windowsのハンドル](/os/windows-handles.html)
 
 ## Win32 APIからx64のカーネル入口へ
 

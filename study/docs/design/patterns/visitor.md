@@ -50,7 +50,7 @@ public:
 };
 ```
 
-あるいはdynamic_castの連鎖:
+別の実装ではdynamic_castで順に型を判定します。
 
 ```cpp
 void SaveNode(SceneNode* n, SaveWriter& w) {

@@ -3,7 +3,7 @@ title: GPU並列実行モデル — Warp / Wave / SIMT
 study:
   source: RenderingWiki
   status: published
-  summary: GPUはスレッドをWarp/Wave等の単位にまとめ、同じ命令をactiveなレーン群へ発行して高いスループットを得ます。NVIDIAのWarpは32本、AMDは世代・設定によりWave32/64等を使います。NVIDIAのプログラミングモデルではこれを SIMT (Single Instructi
+  summary: GPUはスレッドをWarpやWaveなどにまとめ、アクティブなレーンに同じ命令を発行します。この実行モデルが分岐、メモリアクセス、Occupancy、Wave命令にどう関わるかを説明します。
   section: reference
   format: article
   domain: graphics
@@ -13,7 +13,7 @@ study:
 
 ## 概要
 
-GPUはスレッドをWarp/Wave等の単位にまとめ、同じ命令をactiveなレーン群へ発行して高いスループットを得ます。NVIDIAのWarpは32本、AMDは世代・設定によりWave32/64等を使います。NVIDIAのプログラミングモデルではこれを **SIMT (Single Instruction, Multiple Threads)** と呼びます。制御状態とスケジューリングの詳細はGPU世代ごとに異なります。このページはWikiの中でも最重要級です — 分岐コスト、メモリコアレッシング、Occupancy、Wave命令という**シェーダ性能のほぼ全ての謎**がここで解けます。
+GPUはスレッドをWarpやWaveなどの単位にまとめ、同じ命令をアクティブなレーンにまとめて発行することで、高いスループットを得ます。NVIDIAのWarpは32本、AMDは世代や設定に応じてWave32やWave64などを使います。NVIDIAのプログラミングモデルでは、この方式をSIMT (Single Instruction, Multiple Threads) と呼びます。制御状態とスケジューリングの詳細はGPU世代ごとに異なります。この実行モデルは、分岐コスト、メモリコアレッシング、Occupancy、Wave命令がシェーダの性能にどう関わるかを理解する前提です。
 
 ## なぜ必要なのか
 
@@ -25,7 +25,7 @@ GPUはスレッドをWarp/Wave等の単位にまとめ、同じ命令をactive�
 
 - 起源は1960-80年代のSIMDマシン (ILLIAC IV, Connection Machine) とベクトル計算機 (Cray)
 - 2006: G80で「スカラースレッドの束としてプログラムし、ハードウェアがSIMD実行する」**SIMTモデル**をNVIDIAが確立。CUDAと共に用語Warpが定着 (織機の「縦糸」から)
-- AMDはGCN (2012) でWave64、RDNA (2019) でWave32へ — Waveという用語はAMD/HLSL系
+- AMDはGCN (2012) でWave64を採用。RDNA (2019) はWave32をネイティブに追加し、Wave64にも対応 — Waveという用語はAMD/HLSL系
 - 2016-18: 明示的なWave/Subgroup命令がAPI標準化 (SM6.0, Vulkan 1.1) — それまで暗黙だった実行モデルがプログラマに公開された
 - NVIDIA Volta (2017) 以降: Independent Thread Scheduling — threadごとのPC・call stack等を保持し、active thread群をSIMT実行へまとめる。分岐のコストは残り、暗黙のwarp同期を前提にしたコードは見直しが必要
 
@@ -109,23 +109,44 @@ Subgroup操作 (Vulkan 1.1コア)。`VkPhysicalDeviceSubgroupProperties` でサ�
 
 ## コード例
 
-Wave命令によるストリームコンパクション (可視オブジェクトの詰め込み):
+Wave命令によるストリームコンパクション (可視オブジェクトの詰め込み)。`gObjects` は中心座標と半径、`gPlanes` は内向きの単位法線と平面定数を格納します。`gCounter[0]` は0に初期化し、出力は全オブジェクトが見える場合に足りる大きさを確保します。
 
 ```hlsl
+StructuredBuffer<float4> gObjects : register(t0);
+cbuffer Frustum : register(b0)
+{
+    float4 gPlanes[6];
+};
 RWStructuredBuffer<uint> gVisibleIndices : register(u0);
 RWStructuredBuffer<uint> gCounter : register(u1);
+
+bool FrustumTest(float4 sphere)
+{
+    for (uint i = 0; i < 6; ++i) {
+        float distance = dot(gPlanes[i].xyz, sphere.xyz) + gPlanes[i].w;
+        if (distance < -sphere.w)
+            return false;
+    }
+    return true;
+}
 
 [numthreads(64, 1, 1)]
 void CullCS(uint3 id : SV_DispatchThreadID)
 {
-    bool visible = (id.x < gCount) && FrustumTest(gObjects[id.x]);
+    uint objectCount, stride;
+    gObjects.GetDimensions(objectCount, stride);
+    bool visible = false;
+    if (id.x < objectCount)
+        visible = FrustumTest(gObjects[id.x]);
 
     // Wave内で「自分より前の可視レーン数」= 書き込みオフセット
     uint localOffset = WavePrefixCountBits(visible);
     uint waveTotal   = WaveActiveCountBits(visible);
+    if (waveTotal == 0)
+        return;
 
-    // Waveの先頭レーンだけがAtomicでグローバル位置を確保 (Atomic回数 1/32)
-    uint waveBase;
+    // 可視レーンがk個なら、k回のAtomicを代表レーンの1回にまとめる。
+    uint waveBase = 0;
     if (WaveIsFirstLane())
         InterlockedAdd(gCounter[0], waveTotal, waveBase);
     waveBase = WaveReadLaneFirst(waveBase);
@@ -171,14 +192,14 @@ else                               ShadeOpaque();  // → 両方直列実行
 
 3. **Wave集約つきAtomic (コード例) が素朴な全レーンAtomicより速い理由は。**
    ::: details 解答
-   同一アドレスへのAtomicは直列化されるため、64レーンが個別に発行すると64回の直列操作になる。Wave内でPrefixCountBits/CountBitsにより合計と各自のオフセットをレジスタ内で計算し、代表レーン1回のAtomicで領域を確保すれば、直列化コストがWave幅分の1になる。
+   各可視レーンが同じカウンタを個別に更新すると、Wave内に可視レーンがk個あるときにAtomicがk回発行される。Wave内で `WavePrefixCountBits` と `WaveActiveCountBits` により各自のオフセットと合計を計算すれば、代表レーンが1回のAtomicでまとめて領域を確保できる。可視レーンが0個なら発行せず、Wave幅分の削減になるのは全レーンが可視の場合。
    :::
 
 ## 参考資料
 
 - NVIDIA, *CUDA C++ Programming Guide* — SIMT Architecture章 (最良の一次資料)
 - Kayvon Fatahalian, *"How a GPU works"* 講義 (CMU/Stanford)
-- Microsoft, *HLSL Wave Intrinsics* 仕様 / Khronos, *Subgroup tutorial*
+- [Microsoft: Shader Model 6.0のWave Intrinsics](https://learn.microsoft.com/en-us/windows/win32/direct3dhlsl/hlsl-shader-model-6-0-features-for-direct3d-12) / Khronos, *Subgroup tutorial*
 - AMD GPUOpen, *RDNA Performance Guide*
 - [NVIDIA CUDA C++ Programming Guide 13.0: SIMT Architecture](https://docs.nvidia.com/cuda/archive/13.0.0/cuda-c-programming-guide/index.html#simt-architecture)
 - [Intel: Intrinsics Guide](https://www.intel.com/content/www/us/en/docs/intrinsics-guide/index.html)

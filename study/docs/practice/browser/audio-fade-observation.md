@@ -15,7 +15,7 @@ study:
 
 # Web Audioで急な消音とフェードを観察する
 
-同じ音に二通りのゲイン変更を予約し、波形を比べます。消音に入るのはどちらも250 msです。一方はそこでゲインを0にします。もう一方はゲインを1から0まで少しずつ下げます。[Web Audioのゲインオートメーション](/browser/audio-gain-automation.html)
+同じ音に二通りのゲイン変更を予約し、波形を比べます。どちらも250 msから消音の処理を始めます。一方はその時点でゲインを0にし、もう一方は1から0まで少しずつ下げます。[Web Audioのゲインオートメーション](/browser/audio-gain-automation.html)
 
 <p><a href="/study/samples/browser/audio-fade-observation/index.html" target="_blank" rel="noopener noreferrer">急な消音とフェードの実験を新しいタブで開く</a></p>
 

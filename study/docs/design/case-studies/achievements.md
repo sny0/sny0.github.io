@@ -33,7 +33,7 @@ void Player::Jump() {
 
 1. 実績が30個に → **ゲームロジックの至る所に実績チェックが寄生**(ジャンプ処理が実績を知っている=[依存の方向](/design/foundations/dependency.html)が最悪)
 2. 「ノーダメージでボス撃破」「10秒以内に5体」→ 複数イベントの組み合わせ・時間条件がその場しのぎのフラグに
-3. プラットフォーム対応(Steam/PS)→ Unlock呼び出しの差し替えが全箇所に波及
+3. SteamやPSに対応するたびに、すべての箇所でUnlockの呼び出しを差し替える。
 4. 実績追加のたび、無関係なゲームコードに触ってバグらせる(実績はゲームで最も「後から増える」機能)
 
 ## 案A: イベント購読方式(Observer/Pub-Sub — 定石)
@@ -58,7 +58,7 @@ private:
 };
 ```
 
-- 利点: ゲームロジックから実績が完全に消える([SRP](/design/solid/srp.html))。実績追加は実績システム内で完結。プラットフォーム差は[Adapter](/design/patterns/adapter.html)に隔離
+- 利点: ゲームロジックから実績の処理を切り離せる([SRP](/design/solid/srp.html))。実績を追加するときは実績システム内だけを変更し、プラットフォームごとの差は[Adapter](/design/patterns/adapter.html)で扱う。
 - 欠点: イベント型の整備が必要。「どのイベントが飛んでいるか」の一覧性([Pub/Subの追跡性問題](/game/patterns/event-queue-and-pubsub.html))
 
 ## 案B: 条件のデータ駆動化(案Aの発展)
@@ -102,8 +102,8 @@ GameplayMessageRouterはエンジン本体の標準機能として前提にせ�
 
 ## この題材の教訓
 
-- 実績は「**ゲーム全体を観測するが、ゲームに影響しない**」純粋な購読者——Observer/Pub-Subの最も筋の良い適用先(1フレームの遅延も順序も問題にならない)
-- 「発行側は事実(EnemyDied)を流す。判断(実績達成)は購読側」——イベント設計の原則([Event Queue](/game/patterns/event-queue-and-pubsub.html)の「事実を積む」)の実践例
+- 実績システムはゲーム全体を観測し、ゲームの進行には影響しない。1フレームの遅延や順序が問題にならないため、Observer/Pub-Subの適用先として特に適している。
+- 発行側はEnemyDiedで敵の死亡を通知し、実績の達成は購読側が判定する。[Event Queue](/game/patterns/event-queue-and-pubsub.html)で扱う、起きた事実をキューに積む設計の一例。
 
 ---
 
