@@ -3,7 +3,7 @@ title: C++例外と C#例外
 study:
   source: C++ Wiki
   status: published
-  summary: 言語機能の詳細と業界事情は例外のページ、内部実装は例外処理の仕組みで説明済み。ここでは対応と差分を整理します。 C#の例外の大半は「ランタイムの安全網」、C++の例外は「自分で投げたものだけ」。C++でtry-catchを書いてもメモリバグは捕まりません(→ 捕まえるのはサニタイザの仕事)。
+  summary: C#の配列の範囲外アクセスは例外、C++の生配列では未定義動作です。C++でもstd::vector::at()などのライブラリ関数が投げる例外は捕捉できます。RAIIとfinallyによる後片付けの違いも整理します。
   section: reference
   format: article
   domain: languages
@@ -21,28 +21,43 @@ study:
 | 後片付け | finally / using | **RAII**(デストラクタが自動で担う) |
 | 基底型 | System.Exception(全例外が継承) | 任意の型をthrow可(慣習はstd::exception派生) |
 | 再throw | `throw;` | `throw;`(同じ。`throw e;`はコピー+スライシングの罠) |
-| ランタイム例外 | NullReference / IndexOutOfRange等が**自動で飛ぶ** | **飛ばない**(同じ状況は未定義動作) |
+| 配列の範囲外アクセス | `IndexOutOfRangeException` | 生配列は未定義動作。`std::vector::at()`は`std::out_of_range`を投げる |
 | スタックトレース | 例外に記録される（詳細は実行環境・最適化にも依存） | C++23の`std::stacktrace::current()`で現在位置を取得可能。例外への自動添付ではなく、処理系の対応も確認する |
 | 使わない選択肢 | 事実上ない(BCLが例外前提) | 現実に存在(-fno-exceptions文化) |
 | コスト | tryは安価、throwはやや重い | 投げなければほぼゼロ、throwは高い(実装依存) |
 
 C++23の`<stacktrace>`は、取得した位置を記録・表示するための標準機能です。例外が発生した場所を残したいなら、その時点で収集して保持する設計が必要です。[C++草案: stacktrace](https://eel.is/c++draft/stacktrace)
 
-## 最大の差分1: 「安全網」の有無
+<div id="最大の差分1-「安全網」の有無" class="study-legacy-anchor" aria-hidden="true"></div>
+
+## 最大の差分1: 範囲外アクセスと例外
 
 ```csharp
-// C#: 間違いは例外という形で「定義された壊れ方」をする
-int x = arr[100];        // IndexOutOfRangeException — catchで拾える、トレースが出る
-obj.Method();            // NullReferenceException — 同上
+int[] arr = { 10, 20, 30 };
+int x = arr[3];          // IndexOutOfRangeException
 ```
+
+C#では配列の範囲外アクセスで`IndexOutOfRangeException`が発生します。C++の生配列で同じようにアクセスすると[未定義動作](/languages/cpp/undefined-behavior.html)になり、`try-catch`での回復を前提にできません。[Microsoft Learnの配列アクセス例外](https://learn.microsoft.com/en-us/dotnet/api/system.indexoutofrangeexception) · [C++草案の添字演算](https://eel.is/c++draft/expr.sub) · [C++草案の間接参照](https://eel.is/c++draft/expr.unary.op)
+
+C++では、標準ライブラリが投げる例外も捕捉できます。`std::vector::at()`は添字を検査し、範囲外なら`std::out_of_range`を投げます。`v[i]`の呼び出しでは`i < v.size()`を満たす必要があります。[C++草案のコンテナ要件](https://eel.is/c++draft/sequence.reqmts#127)
 
 ```cpp
-// C++: 同じ間違いは例外にならない
-int x = arr[100];        // 未定義動作。catchも通知もない([UB](../05_cpp_language/18_undefined_behavior.md))
-ptr->Method();           // 同上
-```
+#include <cstdio>
+#include <stdexcept>
+#include <vector>
 
-**C#の例外の大半は「ランタイムの安全網」、C++の例外は「自分で投げたものだけ」**。C++でtry-catchを書いてもメモリバグは捕まりません(→ 捕まえるのは[サニタイザ](/tools/build/debugging-and-analysis.html)の仕事)。
+int main() {
+    // int arr[] = { 10, 20, 30 };
+    // (void)arr[3]; // 生配列の範囲外アクセス。未定義動作なので実行しない
+
+    const std::vector<int> values{ 10, 20, 30 };
+    try {
+        (void)values.at(3);
+    } catch (const std::out_of_range&) {
+        std::puts("out of range");
+    }
+}
+```
 
 ## 最大の差分2: finallyの不在=RAIIの存在
 
@@ -77,13 +92,13 @@ C++に finally がないのは欠落ではなく、[RAII](/languages/cpp/raii.ht
 
 ## Unity開発者が誤解しやすい点
 
-1. 「try-catchで囲めばクラッシュしない」— C++では大半のクラッシュ(UB系)は例外でない。囲んでも無意味
+1. C++の`catch`が扱うのは投げられた例外です。生配列の範囲外アクセスの調査には、[サニタイザ](/tools/build/debugging-and-analysis.html)などを使います。
 2. `catch (Exception e)` の感覚で `catch (...)` を乱用しない——何が起きたか分からないまま握りつぶすのは、C++では特に危険(状態が壊れている可能性)
 3. C++の例外は**値で投げてconst参照で受ける**(`catch (const std::exception& e)`)。C#の「例外は参照型」の感覚でいると、catchのスライシング(派生情報の消失)にハマる
 
 ## 理解度チェック
 
-1. 「C#の例外は安全網、C++の例外は自分で投げたものだけ」の意味を説明できますか。
+1. 要素が3個あるとき、C#の配列の`arr[3]`、C++の生配列の`arr[3]`、`std::vector`の`v.at(3)`はそれぞれどうなりますか。どの例を`catch`で扱えますか。
 2. C++にfinallyがない理由は?
 3. C++で `catch (const std::exception&)` と参照で受ける理由は?
 

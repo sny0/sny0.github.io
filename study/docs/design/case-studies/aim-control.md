@@ -17,6 +17,8 @@ TPS/アクションの「狙う」機能——エイムアシスト、ロック�
 
 ## 素朴な実装
 
+> 同じ感度で、マウスを横に同じ距離だけ動かします。各フレームのマウス移動量にも `deltaTime` を掛けたら、30 FPS と 120 FPS のどちらで大きく振り向くでしょうか？
+
 ```cpp
 // C++20
 void Player::UpdateAim(const FrameInput& in, float dt) {
@@ -29,6 +31,8 @@ void Player::UpdateAim(const FrameInput& in, float dt) {
     aimPitch_ = std::clamp(aimPitch_ + pitchDelta, -80.f, 80.f);
 }
 ```
+
+**答えは30 FPSです。** フレームレートが一定で、入力として受け取った移動量の合計が同じなら、問いの計算ではその合計に感度と1フレームの秒数が掛かります。30 FPSの `1/30` 秒は120 FPSの `1/120` 秒の4倍なので、回転量も4倍になります。
 
 入力の単位を先に決めます。マウスの移動量はすでにフレーム内の変位なので、さらに`dt`を掛けません。スティックのように角速度を決める入力には秒単位の`dt`を掛けます。Unity Input SystemのPointerのdeltaも、入力更新内で移動量を累積する値です。[Pointer.deltaの仕様](https://docs.unity3d.com/Packages/com.unity.inputsystem@1.4/api/UnityEngine.InputSystem.Pointer.html)
 
