@@ -25,7 +25,7 @@ int main() {
     enemies.push_back(std::make_unique<Dragon>());
     for (const auto& e : enemies) e->Attack();   // 実行時の型で分岐
 
-    // スライシング: 値コピーはEnemy部分だけを写す
+    // この例のEnemyは具象クラス。値コピーはDragonのEnemy部分だけを写す。
     std::vector<Enemy> sliced;
     sliced.push_back(Dragon{});
     std::printf("sliced: ");
