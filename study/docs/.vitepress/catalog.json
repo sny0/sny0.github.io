@@ -624,8 +624,8 @@
     {
       "id": "unity-scene-health",
       "section": "practice",
-      "title": "Unityでキャラクターとダメージ床を配置する",
-      "description": "親子の座標とコンポーネントを組み合わせ、キャラクターの移動とHPの変化を確認する。",
+      "title": "Unityでキャラクターを配置して動かす",
+      "description": "ダメージ床を配置し、キーボードとゲームパッドでキャラクターを動かす。",
       "start": "/practice/unity/scene-health-demo.html"
     },
     {
@@ -6385,6 +6385,39 @@
       ]
     },
     {
+      "title": "Unity実践 — キーボードとゲームパッドでPlayerを動かす",
+      "url": "/practice/unity/input-health-demo.html",
+      "file": "practice/unity/input-health-demo.md",
+      "domain": "game",
+      "section": "practice",
+      "format": "tutorial",
+      "status": "published",
+      "summary": "ダメージ床のシーンで自動移動を入力に置き換え、Input SystemのMoveアクションをWASD、矢印キー、左スティック、十字キーから動かす。",
+      "source": "新規執筆",
+      "aliases": [
+        "Unity入門",
+        "Input System",
+        "Input Actions",
+        "InputActionReference",
+        "2D Vector Composite",
+        "WASD",
+        "矢印キー",
+        "ゲームパッド",
+        "左スティック",
+        "十字キー",
+        "Rigidbody2D",
+        "入力"
+      ],
+      "collection": "unity-scene-health",
+      "order": 2,
+      "verification": "Unity 6000.3.27f1とInput System 1.20.1のPlay Modeで、仮想のキーボードとゲームパッドによる移動・停止・HP変化を確認（2026-11-12）",
+      "links": [
+        "/practice/unity/scene-health-demo.html",
+        "/learn/roadmap.html",
+        "/game/basics/input-actions-and-devices.html"
+      ]
+    },
+    {
       "title": "Unity実践 — シーンにキャラクターとダメージ床を配置する",
       "url": "/practice/unity/scene-health-demo.html",
       "file": "practice/unity/scene-health-demo.md",
@@ -6415,7 +6448,8 @@
         "/languages/csharp/console-and-unity.html",
         "/learn/roadmap.html",
         "/game/basics/scenes-and-components.html",
-        "/game/basics/collisions-and-physics.html"
+        "/game/basics/collisions-and-physics.html",
+        "/practice/unity/input-health-demo.html"
       ]
     },
     {
@@ -15040,7 +15074,8 @@
         "/game/basics/game-loop-and-time.html",
         "/game/basics/ui-layout-and-interaction.html",
         "/game/basics/game-states-and-pause.html",
-        "/game/basics/game-events-and-notifications.html"
+        "/game/basics/game-events-and-notifications.html",
+        "/practice/unity/input-health-demo.html"
       ],
       "difficulty": "intro",
       "importance": "core"

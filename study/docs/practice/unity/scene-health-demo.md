@@ -163,6 +163,7 @@ Playを止め、Inspectorで `Player` を選びます。**Demo Mover** のメニ
 - [C#の基本](/languages/csharp/console-and-unity.html)で、共通の `Health.cs` の読み方とコンソールでの動作を確認する。
 - [シーン・オブジェクト・コンポーネントの基本](/game/basics/scenes-and-components.html)で、GameObjectと親子関係を整理する。
 - [衝突と物理の基本](/game/basics/collisions-and-physics.html)で、接触とトリガーの使い分けを確認する。
+- [Unity実践 キーボードとゲームパッドでPlayerを動かす](/practice/unity/input-health-demo.html)で、自動移動をInput Systemに置き換える。
 - [Unityでゲームを作る — 入力](/learn/roadmap.html?node=unity-input#unity-game)
 
 ## 参考資料

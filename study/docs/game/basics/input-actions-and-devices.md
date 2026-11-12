@@ -61,3 +61,5 @@ Unity Input Systemでは、入力イベントを描画フレームに対応し�
 同じ方向キーでも、プレイ中は移動、メニューでは選択先の変更へ使えます。Input Systemの**Action Map**は、関連するアクションをまとめて有効・無効にする単位です。プレイ用とUI用の入力をどの状態で使うか決めると、メニューを操作したときにキャラクターも動くといった干渉を扱えます。[Input Systemのアクションとマップ](https://docs.unity3d.com/Packages/com.unity.inputsystem@1.11/manual/Actions.html) · [UI用の入力](https://docs.unity3d.com/Packages/com.unity.inputsystem@1.11/manual/UISupport.html)
 
 画面側の選択や決定は[ゲームUI](/game/basics/ui-layout-and-interaction.html)、ポーズ時の切り替えは[ゲームの状態とポーズ](/game/basics/game-states-and-pause.html)、ゲーム内で決まった結果の通知は[ゲーム内イベント](/game/basics/game-events-and-notifications.html)へ進みます。
+
+[Unity実践 キーボードとゲームパッドでPlayerを動かす](/practice/unity/input-health-demo.html)では、同じ移動アクションに両方のデバイスを割り当て、ダメージ床のシーンを操作します。

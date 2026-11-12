@@ -152,6 +152,7 @@ export default {
         { id: 'trace-input', label: 'シューティングのUnity例で、キーを読み、その結果をModelへ渡す箇所を指せる。' },
       ],
       resources: [
+        { label: 'Unity実践 — キーボードとゲームパッドでPlayerを動かす', url: '/practice/unity/input-health-demo.html' },
         { label: '入力の基本', url: '/game/basics/input-actions-and-devices.html' },
         { label: 'Unityのシューティングで入力を読むコード', url: '/game/shooter-unity.html' },
       ],
