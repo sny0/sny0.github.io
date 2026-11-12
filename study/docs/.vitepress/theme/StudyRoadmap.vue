@@ -258,13 +258,21 @@ onUnmounted(() => {
         <label for="study-roadmap-goal">学習目標</label>
         <select id="study-roadmap-goal" v-model="goalId" @change="changeGoal">
           <option value="">この分野のすべてのノード</option>
-          <option v-for="node in trackNodes" :key="node.id" :value="node.id">{{ node.title }}</option>
+          <template v-if="currentTrack.goalGroups">
+            <optgroup v-for="group in currentTrack.goalGroups" :key="group.label" :label="group.label">
+              <option v-for="id in group.nodeIds" :key="id" :value="id">{{ nodeById.get(id)?.title }}</option>
+            </optgroup>
+          </template>
+          <template v-else>
+            <option v-for="node in trackNodes" :key="node.id" :value="node.id">{{ node.title }}</option>
+          </template>
         </select>
       </div>
       <div class="roadmap-board" :class="{
         'roadmap-board--wide-map': trackNodes.length > 4,
         'roadmap-board--vertical': graph.vertical,
         'roadmap-board--dense': graph.vertical && graph.rows > 6,
+        'roadmap-board--broad': graph.vertical && graph.rows > 8,
       }">
         <div class="roadmap-map">
           <p class="graph-help">矢印の元が前提です。ノードを選ぶと教材と達成条件を確認できます。</p>
@@ -502,6 +510,9 @@ h2 { margin-bottom: 10px; font-size: 1.2rem; font-weight: 700; }
 @media (min-width: 1240px) {
   .roadmap-board--vertical .roadmap-detail { position: sticky; top: calc(var(--vp-nav-height) + 16px); }
 }
+.roadmap-board--broad { grid-template-columns: minmax(0, 1fr); }
+.roadmap-board--broad .roadmap-detail { position: static; }
+.roadmap-board--broad .detail-back { display: inline-block; }
 @media (max-width: 1239px) {
   .roadmap-board--wide-map { grid-template-columns: minmax(0, 1fr); }
   .roadmap-board--wide-map .detail-back { display: inline-block; }
@@ -536,5 +547,13 @@ h2 { margin-bottom: 10px; font-size: 1.2rem; font-weight: 700; }
   .roadmap-board--dense .roadmap-node-list li { padding: 0; }
   .roadmap-board--dense .roadmap-node { width: 100%; height: auto; margin-block: 0; }
   .roadmap-board--dense .node-prerequisite-hint { position: static; width: auto; height: auto; clip-path: none; color: var(--vp-c-text-2); font-size: .77rem; }
+}
+@container (max-width: 790px) {
+  .roadmap-board--broad :is(.graph-help, .roadmap-edges) { display: none; }
+  .roadmap-board--broad .list-help { display: block; }
+  .roadmap-board--broad .roadmap-node-list { display: flex; flex-direction: column; gap: 8px; min-height: 0; }
+  .roadmap-board--broad .roadmap-node-list li { padding: 0; }
+  .roadmap-board--broad .roadmap-node { width: 100%; height: auto; margin-block: 0; }
+  .roadmap-board--broad .node-prerequisite-hint { position: static; width: auto; height: auto; clip-path: none; color: var(--vp-c-text-2); font-size: .77rem; }
 }
 </style>

@@ -140,7 +140,18 @@ function checkRoadmap() {
     if (track.guide && (!hasText(track.guide.label) || pagesByUrl.get(track.guide.url)?.meta.status !== 'published')) {
       errors.push(`${label}: invalid or unpublished guide ${track.guide.url}`)
     }
-    for (const id of checkRoadmapIds(track.nodeIds, label)) {
+    const trackNodeIds = checkRoadmapIds(track.nodeIds, label)
+    if (track.goalGroups) {
+      if (!Array.isArray(track.goalGroups) || track.goalGroups.some(group => !hasText(group?.label) || !Array.isArray(group?.nodeIds) || !group.nodeIds.length)) {
+        errors.push(`${label}: expected goal groups with labels and node IDs`)
+      } else {
+        const groupIds = checkRoadmapIds(track.goalGroups.flatMap(group => group.nodeIds), `${label} goal groups`)
+        if (groupIds.size !== trackNodeIds.size || [...groupIds].some(id => !trackNodeIds.has(id))) {
+          errors.push(`${label}: goal groups must cover the track's nodes`)
+        }
+      }
+    }
+    for (const id of trackNodeIds) {
       if (!nodeIds.has(id)) errors.push(`${label}: unknown node ${id}`)
       registeredNodes.add(id)
     }

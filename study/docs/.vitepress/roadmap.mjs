@@ -1,13 +1,27 @@
 import networkBrowser from './roadmap-network-browser.mjs'
 import game from './roadmap-game.mjs'
+import memoryOs from './roadmap-memory-os.mjs'
+import compilers from './roadmap-compilers.mjs'
+
+const lowLevelBasics = ['bytes', 'c-bytes', 'cpu', 'x64-disassembly']
+const compilerIds = compilers.nodes.map(node => node.id)
+const memoryOsIds = memoryOs.nodes.map(node => node.id)
 
 export default {
   tracks: [
     {
       id: 'low-level',
       title: '低レイヤ・言語',
-      summary: 'バイト列を読むCの処理を、CPUの命令まで追います。',
-      nodeIds: ['bytes', 'c-bytes', 'cpu', 'x64-disassembly'],
+      summary: 'CPUとCの基礎から、メモリ、OSの動作、コンパイルと実行までをたどります。',
+      showAllByDefault: true,
+      guide: { label: '低レイヤからゲームの仕組みを学ぶ', url: '/guide/low-level/' },
+      nodeIds: [...lowLevelBasics, ...compilerIds, ...memoryOsIds],
+      goalGroups: [
+        { label: 'CPU・C・アセンブリ', nodeIds: lowLevelBasics },
+        { label: 'メモリ', nodeIds: memoryOsIds.filter(id => id.startsWith('memory-')) },
+        { label: 'OS', nodeIds: memoryOsIds.filter(id => id.startsWith('os-')) },
+        { label: 'コンパイラ', nodeIds: compilerIds },
+      ],
     },
     {
       id: 'network-browser',
@@ -39,6 +53,8 @@ export default {
   nodes: [
     ...networkBrowser.nodes,
     ...game.nodes,
+    ...memoryOs.nodes,
+    ...compilers.nodes,
     {
       id: 'bytes',
       title: '整数とバイト列',
