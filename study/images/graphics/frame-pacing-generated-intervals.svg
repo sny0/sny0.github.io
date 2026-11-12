@@ -1,0 +1,58 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="760" height="295" viewBox="0 0 760 295" role="img" aria-labelledby="title desc" xml:lang="ja">
+  <title id="title">フレーム生成後の4枚を等間隔と不等間隔で表示する</title>
+  <desc id="desc">固定120 Hzで8更新分の例。どちらも描画A、生成M、描画B、生成Nの順で表示。等間隔では4枚とも16.67ミリ秒。不等間隔では描画フレームが25ミリ秒、生成フレームが8.33ミリ秒。どちらも合計約66.67ミリ秒で4枚。</desc>
+  <rect width="760" height="295" rx="18" fill="#f8fafc"/>
+  <g font-family="'Noto Sans JP', 'Yu Gothic', 'Meiryo', sans-serif" fill="#162334">
+    <text x="25" y="40" font-size="23" font-weight="700">同じ4枚を、異なる間隔で表示する</text>
+    <text x="25" y="68" font-size="16" fill="#475569">固定120 Hzの8更新分。枠の横幅は画像を表示していた時間</text>
+
+    <path d="M200 108V239 M264 108V239 M328 108V239 M392 108V239 M456 108V239 M520 108V239 M584 108V239 M648 108V239 M712 108V239" fill="none" stroke="#9aa8bb" stroke-dasharray="4 4"/>
+    <g font-size="15" fill="#475569" text-anchor="middle">
+      <text x="200" y="103" text-anchor="start">0 ms</text>
+      <text x="328" y="103">16.67</text>
+      <text x="456" y="103">33.33</text>
+      <text x="584" y="103">50.00</text>
+      <text x="712" y="103" text-anchor="end">66.67 ms</text>
+    </g>
+
+    <g font-size="17" font-weight="700">
+      <text x="25" y="152">等間隔</text>
+      <text x="25" y="216">不等間隔</text>
+    </g>
+    <g stroke="#5680ac" stroke-width="1.5" fill="#e4f1ff">
+      <rect x="200" y="118" width="128" height="54" rx="5"/>
+      <rect x="456" y="118" width="128" height="54" rx="5"/>
+      <rect x="200" y="182" width="192" height="54" rx="5"/>
+      <rect x="456" y="182" width="192" height="54" rx="5"/>
+    </g>
+    <g stroke="#997232" stroke-width="1.5" fill="#fff0d4">
+      <rect x="328" y="118" width="128" height="54" rx="5"/>
+      <rect x="584" y="118" width="128" height="54" rx="5"/>
+      <rect x="392" y="182" width="64" height="54" rx="5"/>
+      <rect x="648" y="182" width="64" height="54" rx="5"/>
+    </g>
+    <g text-anchor="middle">
+      <g font-size="16" font-weight="700">
+        <text x="264" y="140">描画 A</text>
+        <text x="392" y="140">生成 M</text>
+        <text x="520" y="140">描画 B</text>
+        <text x="648" y="140">生成 N</text>
+        <text x="296" y="204">描画 A</text>
+        <text x="424" y="204" font-size="14">生成 M</text>
+        <text x="552" y="204">描画 B</text>
+        <text x="680" y="204" font-size="14">生成 N</text>
+      </g>
+      <g font-size="13" fill="#475569">
+        <text x="264" y="159">16.67 ms</text>
+        <text x="392" y="159">16.67 ms</text>
+        <text x="520" y="159">16.67 ms</text>
+        <text x="648" y="159">16.67 ms</text>
+        <text x="296" y="223">25.00 ms</text>
+        <text x="424" y="223">8.33 ms</text>
+        <text x="552" y="223">25.00 ms</text>
+        <text x="680" y="223">8.33 ms</text>
+      </g>
+    </g>
+    <text x="25" y="269" font-size="15" fill="#475569">どちらも平均60 FPS。MはAとBの中間、NはBとその次の描画フレームの中間。</text>
+  </g>
+</svg>

@@ -9,6 +9,7 @@ function ticksToMs(ticks) {
 function makeIntervals(mode) {
   switch (mode) {
     case 'regular':
+    case 'generated-regular':
       return Array(FRAME_COUNT).fill(TARGET_TICKS);
     case 'spike': {
       const intervals = Array(FRAME_COUNT).fill(TARGET_TICKS);
@@ -20,6 +21,8 @@ function makeIntervals(mode) {
     }
     case 'alternating':
       return Array.from({ length: FRAME_COUNT }, (_, index) => index % 2 === 0 ? 1 : 3);
+    case 'generated-uneven':
+      return Array.from({ length: FRAME_COUNT }, (_, index) => index % 2 === 0 ? 3 : 1);
     default:
       throw new RangeError(`Unknown frame pacing mode: ${mode}`);
   }
@@ -27,15 +30,20 @@ function makeIntervals(mode) {
 
 export function buildPacing(mode) {
   const intervals = makeIntervals(mode);
+  const usesGeneration = mode === 'generated-regular' || mode === 'generated-uneven';
   let endTick = 0;
   const frames = intervals.map((ticks, index) => {
     const startTick = endTick;
     endTick += ticks;
+    // Generated comparisons share the same content sequence, including halfway frames.
+    const contentTick = usesGeneration ? index * TARGET_TICKS : startTick;
     return {
       index,
       startTick,
       endTick,
       ticks,
+      contentTick,
+      source: usesGeneration ? (index % 2 === 0 ? 'rendered' : 'generated') : 'sampled',
       startMs: ticksToMs(startTick),
       durationMs: ticksToMs(ticks),
     };
@@ -46,6 +54,7 @@ export function buildPacing(mode) {
   const p99Index = Math.ceil(sortedTicks.length * 0.99) - 1;
   return {
     mode,
+    usesGeneration,
     refreshHz: REFRESH_HZ,
     durationMs,
     frames,

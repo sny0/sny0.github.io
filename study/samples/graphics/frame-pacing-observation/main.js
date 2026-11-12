@@ -6,6 +6,7 @@ const playButton = document.querySelector('#playback');
 const resetButton = document.querySelector('#reset');
 const inspectButton = document.querySelector('#inspect');
 const pattern = document.querySelector('#pattern');
+const generationNote = document.querySelector('#generation-note');
 const speed = document.querySelector('#speed');
 const playhead = document.querySelector('#playhead');
 const time = document.querySelector('#time');
@@ -24,6 +25,8 @@ const titles = {
   regular: '一定の表示間隔',
   spike: 'ときどき長く止まる',
   alternating: '短い間隔と長い間隔が交互',
+  'generated-regular': 'フレーム生成・等間隔',
+  'generated-uneven': 'フレーム生成・不等間隔',
 };
 const plotWidth = 480;
 const plotHeight = 100;
@@ -49,6 +52,8 @@ function createTrack(letter, mode) {
     position: element.querySelector('.position'),
     frameInfo: element.querySelector('.frame-info'),
     frameRange: element.querySelector('.frame-range'),
+    contentTime: element.querySelector('.content-time'),
+    framePair: element.querySelector('.frame-pair'),
   };
   setPattern(view, mode);
   return view;
@@ -59,6 +64,15 @@ function setPattern(view, mode) {
   view.series = series;
   view.activeFrame = null;
   view.title.textContent = titles[mode];
+  view.contentTime.hidden = !series.usesGeneration;
+  view.framePair.hidden = !series.usesGeneration;
+  if (series.usesGeneration) {
+    for (const frame of series.frames.slice(0, 2)) {
+      const part = view.framePair.querySelector('.pair-' + frame.source);
+      part.dataset.ticks = frame.ticks;
+      part.querySelector('strong').textContent = intervalFormat.format(frame.durationMs) + ' ms';
+    }
+  }
 
   // Each horizontal run spans the actual hold time on the virtual display.
   const totalTicks = series.frames.at(-1).endTick;
@@ -101,15 +115,22 @@ function renderTrack(view) {
   const frame = frameAtTime(series, elapsedMs);
   if (frame === view.activeFrame) return;
 
-  // The point keeps the position captured when this frame began.
+  // The marker follows the image's content. The graph follows its presentation interval.
   const totalTicks = series.frames.at(-1).endTick;
-  const position = frame.startTick / totalTicks;
+  const position = frame.contentTick / totalTicks;
   view.position.setAttribute('d', `M${12 + position * 456} 21v0.01`);
-  view.selection.setAttribute('x', position * plotWidth);
+  view.selection.setAttribute('x', frame.startTick / totalTicks * plotWidth);
   view.selection.setAttribute('width', frame.ticks / totalTicks * plotWidth);
-  view.frameInfo.textContent = `フレーム ${frame.index + 1} · ${intervalFormat.format(frame.durationMs)} ms（更新 ${frame.ticks} 回分）`;
+  const source = frame.source === 'generated' ? '生成フレーム' : '描画フレーム';
+  const frameLabel = series.usesGeneration ? source : 'フレーム';
+  view.frameInfo.textContent = `${frameLabel} ${frame.index + 1} · ${intervalFormat.format(frame.durationMs)} ms（更新 ${frame.ticks} 回分）`;
   const endMs = frame.endTick * 1000 / series.refreshHz;
-  view.frameRange.textContent = `${intervalFormat.format(frame.startMs)}–${intervalFormat.format(endMs)} ms`;
+  const range = `${intervalFormat.format(frame.startMs)}–${intervalFormat.format(endMs)} ms`;
+  view.frameRange.textContent = series.usesGeneration ? '表示区間 ' + range : range;
+  if (series.usesGeneration) {
+    const contentMs = frame.contentTick * 1000 / series.refreshHz;
+    view.contentTime.textContent = '絵の時刻 ' + intervalFormat.format(contentMs) + ' ms';
+  }
   view.activeFrame = frame;
 }
 
@@ -180,6 +201,9 @@ inspectButton.addEventListener('click', () => {
 pattern.addEventListener('change', () => {
   stopPlayback();
   setPattern(compared, pattern.value);
+  const regularMode = compared.series.usesGeneration ? 'generated-regular' : 'regular';
+  if (regular.series.mode !== regularMode) setPattern(regular, regularMode);
+  generationNote.hidden = !compared.series.usesGeneration;
   render(elapsedMs);
   setPlaybackLabel();
   status.textContent = `Bを「${titles[pattern.value]}」に切り替えました。`;
