@@ -104,7 +104,7 @@
       "id": "graphics",
       "title": "3DCGとグラフィックス",
       "description": "制作データからGPUの処理、最終表示までをつなぐ。",
-      "count": 79,
+      "count": 80,
       "status": "辞典本文あり"
     },
     {
@@ -143,6 +143,13 @@
       "title": "シェーダーで三角形の位置と色を変える",
       "description": "WebGL 2で頂点属性とuniformを渡し、UVの補間、位置と色の計算を描画で確かめる。",
       "start": "/practice/graphics/shader-first-steps.html"
+    },
+    {
+      "id": "texture-filtering-observation",
+      "section": "practice",
+      "title": "斜めの床でテクスチャのフィルタリングを比べる",
+      "description": "同じ床で4種類のフィルターを切り替え、カメラの移動に伴うちらつきを見る。",
+      "start": "/practice/graphics/texture-filtering-observation.html"
     },
     {
       "id": "foundations",
@@ -10317,6 +10324,44 @@
       "importance": "specialized"
     },
     {
+      "title": "テクスチャのフィルタリングとミップマップ — 遠くの模様はなぜちらつく？",
+      "url": "/graphics/texture/texture-filtering-and-mipmaps.html",
+      "file": "graphics/texture/texture-filtering-and-mipmaps.md",
+      "domain": "graphics",
+      "section": "reference",
+      "format": "article",
+      "status": "published",
+      "summary": "斜めの床で1画素が覆うテクスチャ上の範囲を考え、ポイント、バイリニア、ミップマップ、異方性フィルタリングの違いを試す。",
+      "source": "新規執筆",
+      "aliases": [
+        "テクスチャフィルタリング",
+        "サンプラー",
+        "テクセル",
+        "ポイントサンプリング",
+        "ニアレスト",
+        "バイリニア",
+        "ミップマップ",
+        "mipmap",
+        "トライリニア",
+        "異方性フィルタリング",
+        "anisotropic filtering",
+        "エイリアシング",
+        "モアレ",
+        "LOD"
+      ],
+      "verification": "KhronosのWebGL 2.0・OpenGL ES 3.0・異方性フィルタリング拡張仕様に照合（2026-11-13）",
+      "links": [
+        "/practice/graphics/texture-filtering-observation.html",
+        "/graphics/pipeline/overview.html",
+        "/graphics/texture/texture-streaming-and-mip-residency.html",
+        "/graphics/basics/materials-textures-and-shaders.html",
+        "/graphics/pipeline/rasterization.html",
+        "/learn/roadmap.html"
+      ],
+      "difficulty": "intro",
+      "importance": "core"
+    },
+    {
       "title": "デストラクタと Dispose / RAII と using",
       "url": "/languages/csharp/destructor-dispose-raii-using.html",
       "file": "languages/csharp/destructor-dispose-raii-using.md",
@@ -11472,7 +11517,8 @@
         "/graphics/texture/texture-streaming-and-mip-residency.html",
         "/graphics/basics/light-and-rendered-images.html",
         "/graphics/shader/overview.html",
-        "/graphics/lighting/pbr.html"
+        "/graphics/lighting/pbr.html",
+        "/graphics/texture/texture-filtering-and-mipmaps.html"
       ],
       "difficulty": "intro",
       "importance": "core"
@@ -13325,6 +13371,34 @@
       ],
       "difficulty": "intermediate",
       "importance": "specialized"
+    },
+    {
+      "title": "斜めの床でテクスチャのフィルタリングを比べる",
+      "url": "/practice/graphics/texture-filtering-observation.html",
+      "file": "practice/graphics/texture-filtering-observation.md",
+      "domain": "graphics",
+      "section": "practice",
+      "format": "sample",
+      "status": "published",
+      "summary": "WebGL 2で同じ床を描き、ポイント、バイリニア、トライリニア、異方性を切り替えて遠くの模様を観察する。",
+      "source": "新規執筆",
+      "aliases": [
+        "テクスチャの実践",
+        "WebGL 2",
+        "ポイント",
+        "バイリニア",
+        "トライリニア",
+        "ミップマップ",
+        "異方性",
+        "ちらつき"
+      ],
+      "collection": "texture-filtering-observation",
+      "order": 1,
+      "verification": "KhronosのWebGL 2.0と異方性フィルタリング拡張仕様に照合（2026-11-13）",
+      "links": [
+        "/graphics/texture/texture-filtering-and-mipmaps.html",
+        "/learn/roadmap.html"
+      ]
     },
     {
       "title": "手動メモリ管理と GC",
@@ -15517,6 +15591,8 @@
         "/graphics/pipeline/rasterization.html",
         "/graphics/pipeline/fragment-shader.html",
         "/graphics/pipeline/output-merger.html",
+        "/graphics/texture/texture-filtering-and-mipmaps.html",
+        "/practice/graphics/texture-filtering-observation.html",
         "/graphics/shader/overview.html",
         "/graphics/shader/hlsl.html",
         "/graphics/shader/glsl.html",
@@ -15913,6 +15989,7 @@
         "/graphics/postprocess/ping-pong-and-history.html",
         "/graphics/optimization/render-pass-attachments.html",
         "/graphics/texture/dds-and-subresources.html",
+        "/graphics/texture/texture-filtering-and-mipmaps.html",
         "/graphics/texture/d3d12-texture-upload.html",
         "/graphics/texture/texture-streaming-and-mip-residency.html",
         "/graphics/mesh/gltf-mesh-buffers.html",

@@ -62,3 +62,5 @@ study:
 キャラクターの服、肌、金属の装備には、異なるマテリアルを割り当てられます。描画時には、メッシュの部分と対応するマテリアルを組にして扱います。例えばglTFでは、メッシュを構成する各プリミティブがマテリアルを参照できます。[glTFのメッシュとマテリアルの対応](https://registry.khronos.org/glTF/specs/2.0/glTF-2.0.html#meshes)
 
 画面の色ができるまでの全体は[光とレンダリングの基本](/graphics/basics/light-and-rendered-images.html)、シェーダーの種類は[シェーダ言語の総論](/graphics/shader/overview.html)、表面と光の詳しい計算は[PBR](/graphics/lighting/pbr.html)へ進めます。
+
+UVに対応する色をどの範囲から取るかは、[テクスチャのフィルタリングとミップマップ](/graphics/texture/texture-filtering-and-mipmaps.html)で確認できます。

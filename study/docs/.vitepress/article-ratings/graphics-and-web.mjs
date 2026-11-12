@@ -104,6 +104,7 @@ export default {
   '/graphics/shader/wgsl.html': ['advanced', 'specialized'],
   '/graphics/texture/d3d12-texture-upload.html': ['advanced', 'specialized'],
   '/graphics/texture/dds-and-subresources.html': ['advanced', 'specialized'],
+  '/graphics/texture/texture-filtering-and-mipmaps.html': ['intro', 'core'],
   '/graphics/texture/texture-streaming-and-mip-residency.html': ['advanced', 'specialized'],
   '/guide/rendering/timeline.html': ['intermediate', 'useful'],
   '/math/floating-point-comparison.html': ['intermediate', 'core'],

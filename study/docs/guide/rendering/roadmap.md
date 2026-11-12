@@ -62,6 +62,8 @@ GPU・数学・パイプラインの前提を確認します。不明な項目�
 
 手を動かし始めるフェーズです。シェーダ言語→APIの順を推奨します。
 
+UVから色を読む処理は、[テクスチャのフィルタリングとミップマップ](/graphics/texture/texture-filtering-and-mipmaps.html)と[斜めの床で見比べる実践](/practice/graphics/texture-filtering-observation.html)で確認できます。
+
 1. [シェーダ言語総論と比較](/graphics/shader/overview.html) — まず全体像
 2. [HLSL](/graphics/shader/hlsl.html) — Unity/UE/DX12の共通言語として最優先
 3. [GLSL](/graphics/shader/glsl.html) / [WGSL](/graphics/shader/wgsl.html) / [SPIR-V](/graphics/shader/spirv.html)

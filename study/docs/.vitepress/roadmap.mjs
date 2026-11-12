@@ -173,6 +173,8 @@ export default {
       resources: [
         { label: 'レンダリングパイプライン全体像', url: '/graphics/pipeline/overview.html' },
         { label: 'ラスタライゼーション', url: '/graphics/pipeline/rasterization.html' },
+        { label: 'テクスチャのフィルタリングとミップマップ', url: '/graphics/texture/texture-filtering-and-mipmaps.html' },
+        { label: '実践 斜めの床でフィルタリングを比べる', url: '/practice/graphics/texture-filtering-observation.html' },
         { label: '出力結合と深度テスト', url: '/graphics/pipeline/output-merger.html' },
       ],
     },
