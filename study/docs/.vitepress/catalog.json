@@ -8465,6 +8465,7 @@
       "collection": "foundations",
       "order": 5,
       "links": [
+        "/learn/roadmap.html",
         "/game/basics/game-engine-basics.html",
         "/game/basics/game-loop-and-time.html",
         "/game/basics/scenes-and-components.html",
@@ -9742,6 +9743,7 @@
       "collection": "foundations",
       "order": 2,
       "links": [
+        "/learn/roadmap.html",
         "/network/network-basics.html",
         "/network/ip-addresses-and-ports.html",
         "/network/home-network-devices.html",
@@ -11414,7 +11416,7 @@
       "section": "learning",
       "format": "path",
       "status": "published",
-      "summary": "学びたい目標から前提をたどり、達成条件を確認して進捗を記録する。低レイヤ・言語と3DCG・描画の学習ルートを扱う。",
+      "summary": "低レイヤ・言語、ネットワーク・ブラウザ、3DCG・描画、ゲーム開発の学習ルート。目標から前提をたどり、達成条件を確認して進捗を記録する。",
       "source": "新規執筆",
       "aliases": [
         "テックツリー",
@@ -11422,7 +11424,10 @@
         "到達目標",
         "前提知識",
         "3DCG・描画",
-        "レンダリング"
+        "レンダリング",
+        "ネットワーク",
+        "ブラウザ",
+        "ゲーム開発"
       ],
       "links": []
     },
@@ -11683,6 +11688,7 @@
         "/practice/network/name-resolution-observation.html",
         "/network/tls-https.html",
         "/practice/network/https-observation.html",
+        "/learn/roadmap.html",
         "/browser/rendering-journey.html",
         "/practice/browser/render-observation.html",
         "/browser/event-loop-promises.html",

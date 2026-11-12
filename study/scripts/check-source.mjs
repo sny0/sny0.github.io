@@ -137,6 +137,9 @@ function checkRoadmap() {
       errors.push(`${label}: expected a title, summary and node IDs`)
       continue
     }
+    if (track.guide && (!hasText(track.guide.label) || pagesByUrl.get(track.guide.url)?.meta.status !== 'published')) {
+      errors.push(`${label}: invalid or unpublished guide ${track.guide.url}`)
+    }
     for (const id of checkRoadmapIds(track.nodeIds, label)) {
       if (!nodeIds.has(id)) errors.push(`${label}: unknown node ${id}`)
       registeredNodes.add(id)
@@ -157,7 +160,8 @@ function checkRoadmap() {
       errors.push(`${label}: expected at least one resource`)
     } else {
       for (const resource of node.resources) {
-        if (!hasText(resource?.label) || pagesByUrl.get(resource?.url)?.meta.status !== 'published') {
+        const pageUrl = typeof resource?.url === 'string' ? resource.url.split(/[?#]/, 1)[0] : undefined
+        if (!hasText(resource?.label) || pagesByUrl.get(pageUrl)?.meta.status !== 'published') {
           errors.push(`${label}: invalid or unpublished resource ${resource?.url}`)
         }
       }

@@ -1,3 +1,6 @@
+import networkBrowser from './roadmap-network-browser.mjs'
+import game from './roadmap-game.mjs'
+
 export default {
   tracks: [
     {
@@ -9,13 +12,16 @@ export default {
     {
       id: 'network-browser',
       title: 'ネットワーク・ブラウザ',
-      summary: '名前解決とHTTPから、ブラウザがページを描くまでを学ぶ分野です。',
-      nodeIds: [],
+      summary: 'IP・DNS・HTTPの通信から、ブラウザがページを描くまでをたどります。',
+      showAllByDefault: true,
+      guide: { label: 'ネットワークの基本から読む', url: '/guide/network-basics.html' },
+      nodeIds: networkBrowser.nodes.map(node => node.id),
     },
     {
       id: 'graphics',
       title: '3DCG・描画',
       summary: 'GPUと3D数学を土台に、三角形の描画からレンダラーの設計まで進みます。',
+      guide: { label: '描画の学習ロードマップ', url: '/guide/rendering/roadmap.html' },
       nodeIds: [
         'gfx-gpu', 'gfx-math', 'gfx-pipeline', 'gfx-shaders', 'gfx-apis', 'gfx-compute',
         'gfx-rendering-paths', 'gfx-lighting', 'gfx-postprocess', 'gfx-optimization', 'gfx-engine', 'gfx-capstone',
@@ -24,11 +30,15 @@ export default {
     {
       id: 'game',
       title: 'ゲーム開発',
-      summary: '入力、ゲームループ、アセットの読み込みなどを学ぶ分野です。',
-      nodeIds: [],
+      summary: '入力・更新・衝突を組み合わせて小さなゲームを作り、必要に応じて設計や計測へ進みます。',
+      showAllByDefault: true,
+      guide: { label: 'ゲームの動きと構成から読む', url: '/guide/game-development-basics.html' },
+      nodeIds: game.nodes.map(node => node.id),
     },
   ],
   nodes: [
+    ...networkBrowser.nodes,
+    ...game.nodes,
     {
       id: 'bytes',
       title: '整数とバイト列',

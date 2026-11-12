@@ -228,6 +228,8 @@
 
 ## URLを開いてからページが見えるまで
 
+[ネットワーク・ブラウザのテックツリー](/learn/roadmap.html#network-browser)で、通信から描画までの前提と達成条件を確認できます。
+
 1. 通信は[DNSと名前解決](/network/dns-resolution.html)、[TCPとソケット](/network/tcp-sockets.html)、[HTTPの要求と応答](/network/http-messages.html)、[TLS・証明書・HTTPS](/network/tls-https.html)で調べる。
 2. [ブラウザの描画](/browser/rendering-journey.html)で、受信したHTMLからDOM、スタイル、レイアウト、描画、合成までをつなぐ。
 3. [DOMと描画の変化を観察する](/practice/browser/render-observation.html)で、幅・色・移動・透明度を変え、寸法APIとrAFで確認できる範囲を試す。

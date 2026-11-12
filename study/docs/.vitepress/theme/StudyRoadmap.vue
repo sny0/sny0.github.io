@@ -10,9 +10,10 @@ const storageKey = 'sny0-study:roadmap:v1'
 const checkKey = (nodeId: string, checkId: string) => nodeId + ':' + checkId
 const nodeById = new Map(roadmap.nodes.map(node => [node.id, node]))
 const validCheckIds = new Set(roadmap.nodes.flatMap(node => node.checks.map(check => checkKey(node.id, check.id))))
+const initialGoal = (track: Track) => track.showAllByDefault ? '' : (track.nodeIds.at(-1) ?? '')
 const currentTrack = ref(roadmap.tracks[0])
-const goalId = ref(currentTrack.value.nodeIds.at(-1) ?? '')
-const selectedId = ref(goalId.value)
+const goalId = ref(initialGoal(currentTrack.value))
+const selectedId = ref(goalId.value || currentTrack.value.nodeIds[0])
 const completedChecks = ref(new Set<string>())
 const storageAvailable = ref(true)
 const detailHeading = ref<HTMLElement>()
@@ -64,7 +65,7 @@ const graph = computed(() => {
     layers[depth].push(node)
   }
   const rowCount = Math.max(1, ...layers.map(layer => layer.length))
-  const vertical = layers.length >= 4
+  const vertical = layers.length >= 4 || visibleNodes.value.length > 6
   const positions = new Map<string, { column: number; row: number }>()
   for (const [column, layer] of layers.entries()) {
     for (const [index, node] of layer.entries()) {
@@ -121,7 +122,7 @@ function nodePlacement(id: string) {
 function changeTrack(track: Track) {
   if (track.id === currentTrack.value.id) return
   currentTrack.value = track
-  goalId.value = track.nodeIds.at(-1) ?? ''
+  goalId.value = initialGoal(track)
   changeGoal()
 }
 
@@ -252,7 +253,7 @@ onUnmounted(() => {
         <h2 id="study-roadmap-route-title">{{ currentTrack.title }}</h2>
         <p>表示中のルート <strong>{{ routeCompleted }}/{{ visibleNodes.length }}ノード完了（{{ percent(routeCompleted, visibleNodes.length) }}%）</strong></p>
       </div>
-      <p v-if="currentTrack.id === 'graphics'" class="route-guide"><a class="roadmap-link" :href="withBase('/guide/rendering/roadmap.html')">描画の学習ロードマップ</a>で分野ごとの読み順と教材を確認できます。</p>
+      <p v-if="currentTrack.guide" class="route-guide"><a class="roadmap-link" :href="withBase(currentTrack.guide.url)">{{ currentTrack.guide.label }}</a>で読み順と教材を確認できます。</p>
       <div class="route-controls">
         <label for="study-roadmap-goal">学習目標</label>
         <select id="study-roadmap-goal" v-model="goalId" @change="changeGoal">
@@ -260,7 +261,11 @@ onUnmounted(() => {
           <option v-for="node in trackNodes" :key="node.id" :value="node.id">{{ node.title }}</option>
         </select>
       </div>
-      <div class="roadmap-board" :class="{ 'roadmap-board--graphics': currentTrack.id === 'graphics', 'roadmap-board--vertical': graph.vertical }">
+      <div class="roadmap-board" :class="{
+        'roadmap-board--wide-map': trackNodes.length > 4,
+        'roadmap-board--vertical': graph.vertical,
+        'roadmap-board--dense': graph.vertical && graph.rows > 6,
+      }">
         <div class="roadmap-map">
           <p class="graph-help">矢印の元が前提です。ノードを選ぶと教材と達成条件を確認できます。</p>
           <p class="list-help">前提と進捗を確認し、ノードを選んで教材と達成条件を開けます。</p>
@@ -420,9 +425,9 @@ h2 { margin-bottom: 10px; font-size: 1.2rem; font-weight: 700; }
   color: inherit;
 }
 .roadmap-board { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 340px); align-items: start; gap: 16px; }
-.roadmap-board--graphics { grid-template-columns: minmax(0, 1fr) minmax(0, 300px); }
+.roadmap-board--wide-map { grid-template-columns: minmax(0, 1fr) minmax(0, 300px); }
 .roadmap-map, .roadmap-detail { padding: 16px; border: 1px solid var(--vp-c-divider); border-radius: 10px; }
-.roadmap-map { background: var(--vp-c-bg-soft); }
+.roadmap-map { container-type: inline-size; background: var(--vp-c-bg-soft); }
 .graph-help, .list-help, .storage-note { color: var(--vp-c-text-2); font-size: .83rem; }
 .list-help { display: none; }
 .study-roadmap-graph { position: relative; margin-top: 8px; }
@@ -440,8 +445,9 @@ h2 { margin-bottom: 10px; font-size: 1.2rem; font-weight: 700; }
 [data-roadmap-layout="vertical"] .roadmap-node-list {
   grid-template-columns: 10% repeat(var(--roadmap-rows), minmax(0, 1fr)) 10%;
   grid-template-rows: repeat(var(--roadmap-columns), minmax(0, 1fr));
-  min-height: calc(var(--roadmap-columns) * 11rem);
+  min-height: calc(var(--roadmap-columns) * var(--roadmap-tier-height, 11rem));
 }
+.roadmap-board--dense { --roadmap-tier-height: 13rem; }
 [data-roadmap-layout="vertical"] .roadmap-node-list li { padding: 0; }
 [data-roadmap-layout="vertical"] .roadmap-node { height: 76%; margin-block: auto; padding: 8px; gap: 4px; line-height: 1.45; }
 .roadmap-node {
@@ -497,8 +503,13 @@ h2 { margin-bottom: 10px; font-size: 1.2rem; font-weight: 700; }
   .roadmap-board--vertical .roadmap-detail { position: sticky; top: calc(var(--vp-nav-height) + 16px); }
 }
 @media (max-width: 1239px) {
-  .roadmap-board--graphics { grid-template-columns: minmax(0, 1fr); }
-  .roadmap-board--graphics .detail-back { display: inline-block; }
+  .roadmap-board--wide-map { grid-template-columns: minmax(0, 1fr); }
+  .roadmap-board--wide-map .detail-back { display: inline-block; }
+}
+@media (max-width: 1439px) {
+  .roadmap-board--dense { grid-template-columns: minmax(0, 1fr); }
+  .roadmap-board--dense .roadmap-detail { position: static; }
+  .roadmap-board--dense .detail-back { display: inline-block; }
 }
 @media (max-width: 1050px) {
   .roadmap-board { grid-template-columns: minmax(0, 1fr); }
@@ -517,5 +528,13 @@ h2 { margin-bottom: 10px; font-size: 1.2rem; font-weight: 700; }
   [data-roadmap-layout="vertical"] .roadmap-node-list { min-height: 0; }
   [data-roadmap-layout="vertical"] .roadmap-node { height: auto; margin-block: 0; }
   .node-prerequisite-hint { position: static; width: auto; height: auto; clip-path: none; color: var(--vp-c-text-2); font-size: .77rem; }
+}
+@container (max-width: 640px) {
+  .roadmap-board--dense :is(.graph-help, .roadmap-edges) { display: none; }
+  .roadmap-board--dense .list-help { display: block; }
+  .roadmap-board--dense .roadmap-node-list { display: flex; flex-direction: column; gap: 8px; min-height: 0; }
+  .roadmap-board--dense .roadmap-node-list li { padding: 0; }
+  .roadmap-board--dense .roadmap-node { width: 100%; height: auto; margin-block: 0; }
+  .roadmap-board--dense .node-prerequisite-hint { position: static; width: auto; height: auto; clip-path: none; color: var(--vp-c-text-2); font-size: .77rem; }
 }
 </style>
