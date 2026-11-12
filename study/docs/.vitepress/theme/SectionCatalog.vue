@@ -2,7 +2,8 @@
 import { computed, ref, watch } from 'vue'
 import { withBase } from 'vitepress'
 import catalog from '../catalog.json'
-import { formatLabels, statusLabels } from '../content-model.mjs'
+import { difficultyLabels, formatLabels, importanceLabels, statusLabels } from '../content-model.mjs'
+import StudyArticleRatings from './StudyArticleRatings.vue'
 import StudyCollectionCards from './StudyCollectionCards.vue'
 
 const props = withDefaults(defineProps<{ section?: 'reference' | 'learning' | 'practice' }>(), { section: 'reference' })
@@ -10,6 +11,8 @@ const query = ref('')
 const selectedDomain = ref('')
 const selectedFormat = ref('')
 const selectedCollection = ref('')
+const selectedDifficulty = ref('')
+const selectedImportance = ref('')
 const sectionInfo = computed(() => catalog.sections.find(section => section.id === props.section)!)
 const pool = computed(() => catalog.entries.filter(entry => entry.section === props.section))
 const groups = computed(() => catalog.collections.filter(collection => collection.section === props.section))
@@ -22,13 +25,18 @@ const collectionCards = computed(() => groups.value
 const formats = computed(() => [...new Set(pool.value.map(entry => entry.format))])
 const domainName = (id: string) => catalog.domains.find(domain => domain.id === id)?.title || ({ guide: '分野横断', terms: '用語索引' }[id]) || id
 const normalize = (text: string) => text.normalize('NFKC').toLocaleLowerCase('ja').trim()
-const hasFilters = computed(() => Boolean(query.value || selectedDomain.value || selectedFormat.value || selectedCollection.value))
+const hasFilters = computed(() => Boolean(
+  query.value || selectedDomain.value || selectedFormat.value || selectedCollection.value ||
+  selectedDifficulty.value || selectedImportance.value
+))
 const results = computed(() => {
   const terms = normalize(query.value).split(/\s+/).filter(Boolean)
   return pool.value.filter(entry => (
     (!selectedDomain.value || entry.domain === selectedDomain.value) &&
     (!selectedFormat.value || entry.format === selectedFormat.value) &&
     (!selectedCollection.value || entry.collection === selectedCollection.value) &&
+    (!selectedDifficulty.value || entry.difficulty === selectedDifficulty.value) &&
+    (!selectedImportance.value || entry.importance === selectedImportance.value) &&
     terms.every(term => normalize([entry.title, ...entry.aliases].join(' ')).includes(term))
   )).sort((a, b) => selectedCollection.value ? (a.order ?? 999) - (b.order ?? 999) : a.title.localeCompare(b.title, 'ja'))
 })
@@ -39,6 +47,8 @@ function resetFilters() {
   selectedDomain.value = ''
   selectedFormat.value = ''
   selectedCollection.value = ''
+  selectedDifficulty.value = ''
+  selectedImportance.value = ''
 }
 watch(() => props.section, resetFilters)
 </script>
@@ -87,12 +97,31 @@ watch(() => props.section, resetFilters)
     <section class="study-index-section" aria-labelledby="study-index-heading">
       <div class="study-section-heading"><h2 id="study-index-heading">{{ props.section === 'reference' ? '用語・記事の索引' : props.section === 'learning' ? 'ガイド内のページを探す' : '実践・演習の索引' }}</h2></div>
       <p id="study-index-help" class="study-index-help">この入口のページをタイトル・別名で絞り込めます。画面上部の全文検索はサイト全体が対象です。</p>
-      <form class="study-index-filters" role="search" :aria-label="sectionInfo.title + 'の絞り込み'" @submit.prevent>
+      <form class="study-index-filters" :class="{ 'study-index-filters--rated': props.section === 'reference' }" role="search" :aria-label="sectionInfo.title + 'の絞り込み'" @submit.prevent>
         <div class="study-query-control"><label for="study-index-query">タイトル・別名</label><input id="study-index-query" v-model="query" type="search" :placeholder="props.section === 'reference' ? '例：アロケータ、Vulkan、C++' : '例：GPU、シューティング、演習'" autocomplete="off" spellcheck="false" aria-describedby="study-index-help" aria-controls="study-index-results"></div>
         <div class="study-select-control"><label for="study-index-domain">分野</label><select id="study-index-domain" v-model="selectedDomain" aria-controls="study-index-results"><option value="">すべての分野</option><option v-for="domain in catalog.domains" :key="domain.id" :value="domain.id">{{ domain.title }}</option></select></div>
         <div v-if="props.section === 'reference'" class="study-select-control"><label for="study-index-format">形式</label><select id="study-index-format" v-model="selectedFormat" aria-controls="study-index-results"><option value="">すべての形式</option><option v-for="format in formats" :key="format" :value="format">{{ formatLabels[format] }}</option></select></div>
         <div v-else class="study-select-control"><label for="study-index-collection">{{ props.section === 'learning' ? 'コース' : '題材' }}</label><select id="study-index-collection" v-model="selectedCollection" aria-controls="study-index-results"><option value="">すべて</option><option v-for="collection in groups" :key="collection.id" :value="collection.id">{{ collection.title }}</option></select></div>
+        <div v-if="props.section === 'reference'" class="study-select-control">
+          <label for="study-index-difficulty">難易度</label>
+          <select id="study-index-difficulty" v-model="selectedDifficulty" aria-controls="study-index-results">
+            <option value="">すべて</option>
+            <option v-for="(label, id) in difficultyLabels" :key="id" :value="id">{{ label }}</option>
+          </select>
+        </div>
+        <div v-if="props.section === 'reference'" class="study-select-control">
+          <label for="study-index-importance">重要度</label>
+          <select id="study-index-importance" v-model="selectedImportance" aria-controls="study-index-results">
+            <option value="">すべて</option>
+            <option v-for="(label, id) in importanceLabels" :key="id" :value="id">{{ label }}</option>
+          </select>
+        </div>
       </form>
+      <details v-if="props.section === 'reference'" class="study-rating-guide">
+        <summary>難易度と重要度の目安</summary>
+        <p>難易度は、この記事を読むのに必要な前提知識の目安です。入門は予備知識が少なくても読める記事、中級は基礎用語を使う記事、上級は内部実装や専門的な仕様を扱う記事です。</p>
+        <p>重要度は、このサイトで学ぶ順番の目安です。高は後の学習で繰り返し使う知識、中は分野内で出番が多い知識、目的別は特定の技術や課題を調べるときに役立つ知識です。</p>
+      </details>
       <StudyCollectionCards
         v-if="props.section === 'practice' && !hasFilters && collectionCards.length"
         title="複数ページで進める題材"
@@ -106,7 +135,17 @@ watch(() => props.section, resetFilters)
         <p v-if="props.section === 'learning' && !hasFilters" class="study-index-help">上のコースから読み始められます。特定の章を探すときは、タイトル・分野・コースで絞り込んでください。</p>
         <div v-else-if="results.length === 0" class="study-empty"><p>{{ hasNoBody ? 'この分野の辞典本文は準備中です。' : '一致するページが見つかりませんでした。' }}</p><p>別の表記や絞り込み条件でも探せます。</p><button class="study-empty-reset" type="button" @click="resetFilters">絞り込みを解除</button></div>
         <ul v-else class="study-entry-list">
-          <li v-for="entry in results" :key="entry.url" class="study-entry"><div class="study-entry-labels"><span>{{ domainName(entry.domain) }}</span><span class="study-kind">{{ formatLabels[entry.format] }}</span><span v-if="entry.status !== 'published'" class="study-entry-status" :class="{ 'is-plan': entry.status === 'outline', 'is-draft': entry.status === 'draft' }">{{ statusLabels[entry.status] }}</span></div><a class="study-entry-title" :href="withBase(entry.url)">{{ entry.title }}</a><p v-if="entry.summary" class="study-entry-summary">{{ entry.summary }}</p><p v-if="entry.aliases.length" class="study-entry-aliases">別名：{{ entry.aliases.join(' · ') }}</p></li>
+          <li v-for="entry in results" :key="entry.url" class="study-entry">
+            <div class="study-entry-labels">
+              <span>{{ domainName(entry.domain) }}</span>
+              <span class="study-kind">{{ formatLabels[entry.format] }}</span>
+              <span v-if="entry.status !== 'published'" class="study-entry-status" :class="{ 'is-plan': entry.status === 'outline', 'is-draft': entry.status === 'draft' }">{{ statusLabels[entry.status] }}</span>
+              <StudyArticleRatings :difficulty="entry.difficulty" :importance="entry.importance" />
+            </div>
+            <a class="study-entry-title" :href="withBase(entry.url)">{{ entry.title }}</a>
+            <p v-if="entry.summary" class="study-entry-summary">{{ entry.summary }}</p>
+            <p v-if="entry.aliases.length" class="study-entry-aliases">別名：{{ entry.aliases.join(' · ') }}</p>
+          </li>
         </ul>
       </div>
       <aside v-if="otherEntries.length" class="study-other-section" aria-label="別の入口にある関連ページ"><h3>同じ分野の{{ props.section === 'reference' ? '学習ガイド・実践' : 'ほかの入口' }}</h3><ul><li v-for="entry in otherEntries" :key="entry.url"><span>{{ catalog.sections.find(section => section.id === entry.section)?.title }}</span><a :href="withBase(entry.url)">{{ entry.title }}</a></li></ul></aside>

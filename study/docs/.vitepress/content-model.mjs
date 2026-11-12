@@ -11,6 +11,13 @@ export const formatLabels = {
 
 export const statusLabels = { published: '公開中', outline: '学習計画・概要', draft: '草稿', planned: '執筆予定' }
 
+export const difficultyLabels = { intro: '入門', intermediate: '中級', advanced: '上級' }
+export const importanceLabels = { core: '高', useful: '中', specialized: '目的別' }
+
+export function isRateableArticle({ section, format, domain }) {
+  return section === 'reference' && domain !== 'terms' && ['article', 'history', 'glossary'].includes(format)
+}
+
 export const collections = [
   { id: 'c-byte-decoder-disassembly', section: 'practice', title: 'Cのバイト読み取りをx86-64で追う', description: '短いデコーダーをビルドし、引数、メモリ読み取り、戻り値を逆アセンブリで確かめる。', start: '/practice/compilers/c-byte-decoder-disassembly.html' },
   { id: 'shader-first-steps', section: 'practice', title: 'シェーダーで三角形の位置と色を変える', description: 'WebGL 2で頂点属性とuniformを渡し、UVの補間、位置と色の計算を描画で確かめる。', start: '/practice/graphics/shader-first-steps.html' },

@@ -1,5 +1,8 @@
 import fs from 'node:fs'
-import { sections, formatLabels, statusLabels, collections } from '../docs/.vitepress/content-model.mjs'
+import { sections, formatLabels, statusLabels, collections, difficultyLabels, importanceLabels, isRateableArticle } from '../docs/.vitepress/content-model.mjs'
+import graphicsAndWebRatings from '../docs/.vitepress/article-ratings/graphics-and-web.mjs'
+import designAndGameRatings from '../docs/.vitepress/article-ratings/design-and-game.mjs'
+import systemsRatings from '../docs/.vitepress/article-ratings/systems.mjs'
 import path from 'node:path'
 import { fileURLToPath } from 'node:url'
 import { createRequire } from 'node:module'
@@ -803,12 +806,26 @@ for (const file of walk(docs)) {
     ...(Number.isFinite(meta.order) ? { order: meta.order } : {}), links: linkedUrls(parsed.content, file) })
 }
 entries.sort(byTitle)
+const ratingPairs = [graphicsAndWebRatings, designAndGameRatings, systemsRatings].flatMap(group => Object.entries(group))
+const ratingsByUrl = new Map(ratingPairs)
+if (ratingsByUrl.size !== ratingPairs.length) throw new Error('Duplicate article rating URL')
 const seen = new Set()
 for (const entry of entries) {
   if (seen.has(entry.url)) throw new Error('Duplicate catalog URL: ' + entry.url)
   seen.add(entry.url)
   entry.links = entry.links.filter(url => entries.some(item => item.url === url))
+  if (isRateableArticle(entry)) {
+    const rating = ratingsByUrl.get(entry.url)
+    if (!Array.isArray(rating) || rating.length !== 2 || !Object.hasOwn(difficultyLabels, rating[0]) || !Object.hasOwn(importanceLabels, rating[1])) {
+      throw new Error('Missing or invalid article rating: ' + entry.url)
+    }
+    const [difficulty, importance] = rating
+    entry.difficulty = difficulty
+    entry.importance = importance
+    ratingsByUrl.delete(entry.url)
+  }
 }
+if (ratingsByUrl.size) throw new Error('Ratings without a matching article: ' + [...ratingsByUrl.keys()].join(', '))
 for (const collection of collections) {
   if (!at(collection.start)) throw new Error('Missing collection entry: ' + collection.id)
   const pages = entries.filter(entry => entry.collection === collection.id).sort(byOrder)

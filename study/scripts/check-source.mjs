@@ -2,7 +2,7 @@ import fs from 'node:fs'
 import path from 'node:path'
 import { fileURLToPath } from 'node:url'
 import { createRequire } from 'node:module'
-import { sections, formatLabels, statusLabels } from '../docs/.vitepress/content-model.mjs'
+import { sections, formatLabels, statusLabels, difficultyLabels, importanceLabels, isRateableArticle } from '../docs/.vitepress/content-model.mjs'
 import roadmap from '../docs/.vitepress/roadmap.mjs'
 
 const root=path.resolve(path.dirname(fileURLToPath(import.meta.url)),'..')
@@ -93,6 +93,13 @@ for(const entry of catalog.entries) {
   if(seenFiles.has(entry.file))errors.push('Duplicate catalog file: '+entry.file)
   seenFiles.add(entry.file)
   validateClassification(entry,entry.url)
+  if (isRateableArticle(entry)) {
+    if (!Object.hasOwn(difficultyLabels, entry.difficulty) || !Object.hasOwn(importanceLabels, entry.importance)) {
+      errors.push('Missing or invalid article rating: ' + entry.url)
+    }
+  } else if ('difficulty' in entry || 'importance' in entry) {
+    errors.push('Rating on a non-article page: ' + entry.url)
+  }
   const page=pages.get(entry.file)
   if(!page)errors.push('Catalog source file is missing: '+entry.file)
   else {

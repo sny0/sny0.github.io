@@ -13,6 +13,15 @@ const filePaths=new Set(files)
 const htmlFiles=files.filter(file=>file.endsWith('.html'))
 const documents=new Map(htmlFiles.map(file=>[file,fs.readFileSync(file,'utf8')]))
 const ids=new Map([...documents].map(([file,text])=>[file,new Set([...text.matchAll(/\bid=["']([^"']+)["']/g)].map(m=>m[1]))]))
+const catalog=JSON.parse(fs.readFileSync(path.join(root,'docs/.vitepress/catalog.json'),'utf8'))
+const ratedArticles=catalog.entries.filter(entry=>entry.difficulty && entry.importance)
+for(const {url,difficulty,importance} of ratedArticles) {
+  const relative=url.slice(1)+(url.endsWith('/')?'index.html':'')
+  const meta=documents.get(path.join(dist,relative))?.match(/<aside class="study-article-meta[^"]*"[^>]*>([\s\S]*?)<\/aside>/)?.[1]
+  if(!meta?.includes(`data-difficulty="${difficulty}"`) || !meta.includes(`data-importance="${importance}"`)) {
+    errors.push(`${relative}: article ratings missing from page metadata`)
+  }
+}
 let checked=0
 for(const [file,text] of documents) {
   if(/(?:D:[\\/](?:ClaudeCode|IT教本|プログラミング学習)|file:\/\/\/|study-review[\\/]|review_report\.md)/i.test(text))errors.push(`${path.relative(dist,file)}: internal source/review path`)
@@ -46,4 +55,4 @@ if(sitemapUrls.length!==indexableHtml.length || indexableHtml.some(([file])=>{
 if(!documents.get(path.join(dist,'game/ecs.html'))?.includes('Sparse Set'))errors.push('ECS chapter missing')
 if(!documents.get(path.join(dist,'history/video-games.html'))?.includes('2026'))errors.push('History annual content missing')
 if(errors.length){console.error([...new Set(errors)].join('\n'));process.exit(1)}
-console.log(`Build check passed: ${htmlFiles.length} HTML pages, ${checked} local references and anchors`)
+console.log(`Build check passed: ${htmlFiles.length} HTML pages, ${checked} local references and anchors, ${ratedArticles.length} article ratings`)

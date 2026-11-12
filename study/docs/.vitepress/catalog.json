@@ -860,7 +860,9 @@
         "/graphics/api/webgpu.html",
         "/graphics/compute/compute-shader.html",
         "/graphics/capstone/01-design.html"
-      ]
+      ],
+      "difficulty": "advanced",
+      "importance": "useful"
     },
     {
       "title": "5. 1フレームの構成 — 影・ライト・ポスト",
@@ -919,7 +921,9 @@
         "/design/solid/ocp.html",
         "/design/case-studies/object-spawning.html",
         "/design/patterns/"
-      ]
+      ],
+      "difficulty": "intermediate",
+      "importance": "specialized"
     },
     {
       "title": "Adapter",
@@ -941,7 +945,9 @@
         "/design/case-studies/sound-manager.html",
         "/design/patterns/singleton.html",
         "/design/patterns/"
-      ]
+      ],
+      "difficulty": "intermediate",
+      "importance": "useful"
     },
     {
       "title": "AudioWorkletで先読みとアンダーランを観察する",
@@ -1000,7 +1006,9 @@
         "/browser/streams-backpressure.html",
         "/practice/browser/audio-buffer-observation.html",
         "/browser/audio-mixing-and-headroom.html"
-      ]
+      ],
+      "difficulty": "advanced",
+      "importance": "specialized"
     },
     {
       "title": "auto・decltype・constexpr・consteval(型推論とコンパイル時計算)",
@@ -1018,7 +1026,9 @@
         "/languages/cpp/exceptions.html",
         "/languages/cpp/",
         "/languages/cpp/static-inline-friend.html"
-      ]
+      ],
+      "difficulty": "intermediate",
+      "importance": "useful"
     },
     {
       "title": "Behavior Tree と Blackboard",
@@ -1037,7 +1047,9 @@
         "/design/case-studies/enemy-ai.html",
         "/game/patterns/",
         "/game/patterns/command-buffer-and-input.html"
-      ]
+      ],
+      "difficulty": "intermediate",
+      "importance": "useful"
     },
     {
       "title": "Bridge",
@@ -1059,7 +1071,9 @@
         "/design/foundations/inheritance-delegation-composition.html",
         "/design/patterns/",
         "/design/patterns/composite.html"
-      ]
+      ],
+      "difficulty": "intermediate",
+      "importance": "specialized"
     },
     {
       "title": "Builder",
@@ -1079,7 +1093,9 @@
         "/design/patterns/abstract-factory.html",
         "/languages/cpp/structs-and-classes.html",
         "/design/patterns/"
-      ]
+      ],
+      "difficulty": "intermediate",
+      "importance": "useful"
     },
     {
       "title": "BVHとAABB — 箱でまとめて衝突候補を絞る",
@@ -1110,7 +1126,9 @@
         "/algorithms/quadtrees-and-octrees.html",
         "/practice/algorithms/spatial-query-observation.html",
         "/graphics/lighting/raytracing.html"
-      ]
+      ],
+      "difficulty": "advanced",
+      "importance": "specialized"
     },
     {
       "title": "C# — GC・Dispose・非同期処理の境界",
@@ -1135,7 +1153,9 @@
         "/design/naming.html",
         "/design/pattern-index.html",
         "/design/notebook-references.html"
-      ]
+      ],
+      "difficulty": "intermediate",
+      "importance": "useful"
     },
     {
       "title": "C++ — 所有権・RAII・値の意味を設計する",
@@ -1161,7 +1181,9 @@
         "/design/naming.html",
         "/design/pattern-index.html",
         "/design/notebook-references.html"
-      ]
+      ],
+      "difficulty": "intermediate",
+      "importance": "core"
     },
     {
       "title": "C++・設計・開発ツールの参考資料",
@@ -1263,7 +1285,9 @@
         "/game/unreal/smart-pointers.html",
         "/game/unreal/gameplay-framework.html",
         "/guide/cpp-index.html"
-      ]
+      ],
+      "difficulty": "intro",
+      "importance": "useful"
     },
     {
       "title": "C++20でfloatの表現間隔と丸めを観察する",
@@ -2323,7 +2347,9 @@
         "/game/asset-worker-handoff.html",
         "/game/asset-loading.html",
         "/practice/threads/asset-worker-handoff-observation.html"
-      ]
+      ],
+      "difficulty": "advanced",
+      "importance": "useful"
     },
     {
       "title": "C++例外と C#例外",
@@ -2346,7 +2372,9 @@
         "/languages/csharp/memory-management-vs-gc.html",
         "/languages/csharp/",
         "/languages/csharp/exercises.html"
-      ]
+      ],
+      "difficulty": "intermediate",
+      "importance": "useful"
     },
     {
       "title": "Chain of Responsibility",
@@ -2368,7 +2396,9 @@
         "/design/case-studies/damage-calculation.html",
         "/design/patterns/proxy.html",
         "/design/patterns/"
-      ]
+      ],
+      "difficulty": "intermediate",
+      "importance": "specialized"
     },
     {
       "title": "COFFのシンボルと再配置 — リンカーがcallの距離を埋めるまで",
@@ -2396,7 +2426,9 @@
       "links": [
         "/runtime/cpp-internals/object-files-and-libraries.html",
         "/os/pe-loading-and-imports.html"
-      ]
+      ],
+      "difficulty": "advanced",
+      "importance": "specialized"
     },
     {
       "title": "Command",
@@ -2418,7 +2450,9 @@
         "/design/patterns/chain-of-responsibility.html",
         "/design/patterns/",
         "/design/patterns/interpreter.html"
-      ]
+      ],
+      "difficulty": "intermediate",
+      "importance": "useful"
     },
     {
       "title": "Command Buffer と入力処理(Commandパターンとの関係)",
@@ -2440,7 +2474,9 @@
         "/game/patterns/behavior-tree-and-blackboard.html",
         "/game/patterns/",
         "/game/patterns/mvc-mvp-mvvm.html"
-      ]
+      ],
+      "difficulty": "advanced",
+      "importance": "useful"
     },
     {
       "title": "Component と Entity Component System(比較つき)",
@@ -2471,7 +2507,9 @@
         "/game/patterns/game-loop-and-update.html",
         "/game/patterns/",
         "/game/patterns/event-queue-and-pubsub.html"
-      ]
+      ],
+      "difficulty": "intermediate",
+      "importance": "core"
     },
     {
       "title": "Composite",
@@ -2494,7 +2532,9 @@
         "/design/patterns/chain-of-responsibility.html",
         "/design/patterns/bridge.html",
         "/design/patterns/"
-      ]
+      ],
+      "difficulty": "intermediate",
+      "importance": "useful"
     },
     {
       "title": "Compute Shader",
@@ -2517,7 +2557,9 @@
         "/hardware/gpu/architecture.html",
         "/graphics/shader/hlsl.html",
         "/graphics/compute/execution-model.html"
-      ]
+      ],
+      "difficulty": "intermediate",
+      "importance": "core"
     },
     {
       "title": "const と const correctness",
@@ -2539,7 +2581,9 @@
         "/languages/cpp/auto-and-constexpr.html",
         "/languages/cpp/",
         "/languages/cpp/arrays-and-strings.html"
-      ]
+      ],
+      "difficulty": "intermediate",
+      "importance": "core"
     },
     {
       "title": "Cookieとセッション — 要求への付与とサーバー側の寿命",
@@ -2578,7 +2622,9 @@
         "/browser/xss-and-csp.html",
         "/browser/csrf-and-request-validation.html",
         "/practice/browser/cookie-session-observation.html"
-      ]
+      ],
+      "difficulty": "intermediate",
+      "importance": "core"
     },
     {
       "title": "CPUとGPUの役割分担",
@@ -2600,7 +2646,9 @@
         "/graphics/api/directx12.html",
         "/graphics/api/vulkan.html",
         "/graphics/optimization/basics.html"
-      ]
+      ],
+      "difficulty": "intermediate",
+      "importance": "core"
     },
     {
       "title": "CPUの命令実行 — レジスタとプログラムカウンター",
@@ -2637,7 +2685,9 @@
         "/hardware/memory/ram-cache-and-storage.html",
         "/runtime/cpp-internals/cache-branch-simd.html",
         "/runtime/thread-synchronization.html"
-      ]
+      ],
+      "difficulty": "intro",
+      "importance": "core"
     },
     {
       "title": "CSRFでCookie付きの要求が届く条件を観察する",
@@ -2697,7 +2747,9 @@
         "/network/http-messages.html",
         "/browser/xss-and-csp.html",
         "/practice/browser/csrf-observation.html"
-      ]
+      ],
+      "difficulty": "intermediate",
+      "importance": "useful"
     },
     {
       "title": "CUDA と OpenCL",
@@ -2716,7 +2768,9 @@
         "/graphics/compute/parallel-algorithms.html",
         "/graphics/postprocess/upscaling.html",
         "/graphics/lighting/raytracing.html"
-      ]
+      ],
+      "difficulty": "advanced",
+      "importance": "specialized"
     },
     {
       "title": "Cでバイト列を読む",
@@ -2745,7 +2799,9 @@
         "/data/binary-file-validation.html",
         "/runtime/cpp-internals/memory-layout.html",
         "/practice/compilers/c-byte-decoder-disassembly.html"
-      ]
+      ],
+      "difficulty": "intermediate",
+      "importance": "core"
     },
     {
       "title": "Cのバイト読み取りをx86-64の逆アセンブリで追う",
@@ -2811,7 +2867,9 @@
         "/graphics/postprocess/ping-pong-and-history.html",
         "/graphics/optimization/swap-chain-and-vsync.html",
         "/practice/graphics/render-to-texture-observation.html"
-      ]
+      ],
+      "difficulty": "advanced",
+      "importance": "specialized"
     },
     {
       "title": "D3D12でテクスチャをアップロードする",
@@ -2842,7 +2900,9 @@
         "/graphics/api/directx12.html",
         "/practice/graphics/dds-upload-observation.html",
         "/game/directstorage.html"
-      ]
+      ],
+      "difficulty": "advanced",
+      "importance": "specialized"
     },
     {
       "title": "D3D12のキューをフェンスでつなぐ",
@@ -2871,7 +2931,9 @@
         "/graphics/optimization/d3d12-resource-barriers.html",
         "/graphics/optimization/gpu-resource-lifetime.html",
         "/practice/graphics/parallel-command-recording-observation.html"
-      ]
+      ],
+      "difficulty": "advanced",
+      "importance": "specialized"
     },
     {
       "title": "D3D12のコマンドリストを複数スレッドで記録する",
@@ -2900,7 +2962,9 @@
         "/game/asset-worker-handoff.html",
         "/practice/graphics/parallel-command-recording-observation.html",
         "/graphics/optimization/d3d12-resource-barriers.html"
-      ]
+      ],
+      "difficulty": "advanced",
+      "importance": "specialized"
     },
     {
       "title": "D3D12のディスクリプタヒープとテーブルを使う",
@@ -2927,7 +2991,9 @@
         "/graphics/texture/d3d12-texture-upload.html",
         "/graphics/optimization/gpu-resource-lifetime.html",
         "/graphics/optimization/parallel-command-recording.html"
-      ]
+      ],
+      "difficulty": "advanced",
+      "importance": "specialized"
     },
     {
       "title": "D3D12のリソースバリアと状態遷移",
@@ -2960,7 +3026,9 @@
         "/graphics/optimization/gpu-queue-synchronization.html",
         "/graphics/optimization/gpu-resource-lifetime.html",
         "/practice/graphics/parallel-command-recording-observation.html"
-      ]
+      ],
+      "difficulty": "advanced",
+      "importance": "specialized"
     },
     {
       "title": "DDD — 業務の言葉でモデルを作る",
@@ -2984,7 +3052,9 @@
         "/design/naming.html",
         "/design/pattern-index.html",
         "/design/notebook-references.html"
-      ]
+      ],
+      "difficulty": "advanced",
+      "importance": "specialized"
     },
     {
       "title": "DDSの中身とテクスチャのサブリソース",
@@ -3018,7 +3088,9 @@
         "/data/binary-file-validation.html",
         "/os/file-read-journey.html",
         "/practice/graphics/dds-upload-observation.html"
-      ]
+      ],
+      "difficulty": "advanced",
+      "importance": "specialized"
     },
     {
       "title": "Decorator",
@@ -3042,7 +3114,9 @@
         "/design/case-studies/status-effects.html",
         "/design/patterns/",
         "/design/patterns/facade.html"
-      ]
+      ],
+      "difficulty": "intermediate",
+      "importance": "useful"
     },
     {
       "title": "Deferred Rendering",
@@ -3065,7 +3139,9 @@
         "/graphics/lighting/ssao.html",
         "/graphics/lighting/ssr.html",
         "/graphics/lighting/pbr.html"
-      ]
+      ],
+      "difficulty": "intermediate",
+      "importance": "core"
     },
     {
       "title": "DIP: 依存性逆転の原則 (Dependency Inversion Principle)",
@@ -3097,7 +3173,9 @@
         "/design/decisions/events-di-singleton.html",
         "/design/solid/",
         "/design/solid/exercises.html"
-      ]
+      ],
+      "difficulty": "intermediate",
+      "importance": "core"
     },
     {
       "title": "DirectStorageでゲームの読み取りと展開をまとめる",
@@ -3129,7 +3207,9 @@
         "/graphics/texture/dds-and-subresources.html",
         "/graphics/texture/d3d12-texture-upload.html",
         "/tools/windows/file-io-tracing.html"
-      ]
+      ],
+      "difficulty": "advanced",
+      "importance": "specialized"
     },
     {
       "title": "DirectX 11",
@@ -3152,7 +3232,9 @@
         "/graphics/api/history.html",
         "/graphics/pipeline/overview.html",
         "/graphics/api/comparison.html"
-      ]
+      ],
+      "difficulty": "intermediate",
+      "importance": "specialized"
     },
     {
       "title": "DirectX 12",
@@ -3183,7 +3265,9 @@
         "/game/directstorage.html",
         "/graphics/api/vulkan.html",
         "/graphics/shader/hlsl.html"
-      ]
+      ],
+      "difficulty": "advanced",
+      "importance": "useful"
     },
     {
       "title": "DMAとIOMMUでデバイスがメモリにアクセスする仕組み",
@@ -3215,7 +3299,9 @@
         "/hardware/io/pcie-links.html",
         "/os/io-completion-ports.html",
         "/game/directstorage.html"
-      ]
+      ],
+      "difficulty": "advanced",
+      "importance": "useful"
     },
     {
       "title": "DNSと名前解決 — 名前から接続先が決まるまで",
@@ -3263,7 +3349,9 @@
         "/network/tcp-sockets.html",
         "/network/tls-https.html",
         "/practice/network/name-resolution-observation.html"
-      ]
+      ],
+      "difficulty": "intermediate",
+      "importance": "core"
     },
     {
       "title": "DRAMのチャネルと帯域 — データをどこから、どの速さで読むか",
@@ -3295,7 +3383,9 @@
         "/runtime/memory/cache-locality-aos-soa.html",
         "/hardware/gpu/cpu-vs-gpu.html",
         "/hardware/io/dma-and-iommu.html"
-      ]
+      ],
+      "difficulty": "advanced",
+      "importance": "specialized"
     },
     {
       "title": "ECS — Entity Component System",
@@ -3318,7 +3408,9 @@
         "/game/patterns/component-and-ecs.html",
         "/guide/low-level/engine-architecture-ecs.html",
         "/guide/learning-paths.html"
-      ]
+      ],
+      "difficulty": "advanced",
+      "importance": "useful"
     },
     {
       "title": "enum・enum class・namespace",
@@ -3339,7 +3431,9 @@
         "/languages/cpp/lambdas-and-functions.html",
         "/languages/cpp/",
         "/languages/cpp/exceptions.html"
-      ]
+      ],
+      "difficulty": "intro",
+      "importance": "useful"
     },
     {
       "title": "Event Queue・Message Bus・Publish/Subscribe(Observerとの比較)",
@@ -3362,7 +3456,9 @@
         "/game/patterns/component-and-ecs.html",
         "/game/patterns/",
         "/game/patterns/service-locator-and-di.html"
-      ]
+      ],
+      "difficulty": "intermediate",
+      "importance": "useful"
     },
     {
       "title": "Facade",
@@ -3387,7 +3483,9 @@
         "/design/patterns/decorator.html",
         "/design/patterns/",
         "/design/patterns/flyweight.html"
-      ]
+      ],
+      "difficulty": "intermediate",
+      "importance": "useful"
     },
     {
       "title": "Factory Method",
@@ -3411,7 +3509,9 @@
         "/design/patterns/template-method.html",
         "/design/case-studies/object-spawning.html",
         "/design/patterns/"
-      ]
+      ],
+      "difficulty": "intermediate",
+      "importance": "useful"
     },
     {
       "title": "FIFO・MAILBOX・IMMEDIATEで画面の切り替わりを比べる",
@@ -3477,7 +3577,9 @@
         "/practice/data/float-spacing-observation.html",
         "/data/integer-bits-and-bytes.html",
         "/guide/low-level/computer-and-data.html"
-      ]
+      ],
+      "difficulty": "advanced",
+      "importance": "useful"
     },
     {
       "title": "Flyweight",
@@ -3500,7 +3602,9 @@
         "/design/patterns/facade.html",
         "/design/patterns/",
         "/design/patterns/proxy.html"
-      ]
+      ],
+      "difficulty": "intermediate",
+      "importance": "specialized"
     },
     {
       "title": "Forward Rendering",
@@ -3522,7 +3626,9 @@
         "/graphics/pipeline/output-merger.html",
         "/math/rendering/vector.html",
         "/graphics/lighting/pbr.html"
-      ]
+      ],
+      "difficulty": "intermediate",
+      "importance": "core"
     },
     {
       "title": "Forward+ / Tiled / Clustered Rendering",
@@ -3544,7 +3650,9 @@
         "/graphics/lighting/pbr.html",
         "/graphics/optimization/gpu-driven.html",
         "/graphics/engine/urp.html"
-      ]
+      ],
+      "difficulty": "advanced",
+      "importance": "specialized"
     },
     {
       "title": "Fragment Shader (Pixel Shader)",
@@ -3567,7 +3675,9 @@
         "/math/rendering/vector.html",
         "/math/rendering/transform.html",
         "/graphics/shader/overview.html"
-      ]
+      ],
+      "difficulty": "intermediate",
+      "importance": "core"
     },
     {
       "title": "Game Loop と Update Method",
@@ -3588,7 +3698,9 @@
         "/game/patterns/component-and-ecs.html",
         "/game/patterns/command-buffer-and-input.html",
         "/game/patterns/"
-      ]
+      ],
+      "difficulty": "intermediate",
+      "importance": "core"
     },
     {
       "title": "Gameplay Framework・Subsystem・Slate/UMG・DataAsset/DataTable",
@@ -3614,7 +3726,9 @@
         "/game/unreal/delegates-and-interfaces.html",
         "/game/unreal/",
         "/game/unreal/exercises.html"
-      ]
+      ],
+      "difficulty": "intermediate",
+      "importance": "specialized"
     },
     {
       "title": "Geometry Shader",
@@ -3633,7 +3747,9 @@
         "/graphics/pipeline/mesh-shader.html",
         "/graphics/pipeline/tessellation.html",
         "/graphics/compute/compute-shader.html"
-      ]
+      ],
+      "difficulty": "advanced",
+      "importance": "specialized"
     },
     {
       "title": "GLSL",
@@ -3658,7 +3774,9 @@
         "/graphics/shader/overview.html",
         "/graphics/api/opengl.html",
         "/graphics/shader/wgsl.html"
-      ]
+      ],
+      "difficulty": "intermediate",
+      "importance": "useful"
     },
     {
       "title": "glTFのバッファから頂点とインデックスを読む",
@@ -3690,7 +3808,9 @@
         "/graphics/mesh/vertex-and-index-input.html",
         "/data/binary-file-validation.html",
         "/practice/graphics/glb-mesh-observation.html"
-      ]
+      ],
+      "difficulty": "advanced",
+      "importance": "specialized"
     },
     {
       "title": "GoFデザインパターンの演習",
@@ -3787,7 +3907,9 @@
         "/graphics/compute/execution-model.html",
         "/graphics/optimization/render-graph.html",
         "/graphics/engine/unreal-renderer.html"
-      ]
+      ],
+      "difficulty": "advanced",
+      "importance": "specialized"
     },
     {
       "title": "GPUアーキテクチャ詳解",
@@ -3811,7 +3933,9 @@
         "/hardware/gpu/cpu-vs-gpu.html",
         "/graphics/pipeline/overview.html",
         "/graphics/compute/shared-memory.html"
-      ]
+      ],
+      "difficulty": "advanced",
+      "importance": "useful"
     },
     {
       "title": "GPUが使うメモリはいつ再利用できるか — フェンスとリソースの寿命",
@@ -3841,7 +3965,9 @@
         "/graphics/optimization/gpu-timestamp-queries.html",
         "/graphics/api/directx12.html",
         "/graphics/optimization/parallel-command-recording.html"
-      ]
+      ],
+      "difficulty": "advanced",
+      "importance": "useful"
     },
     {
       "title": "GPUタイムスタンプクエリ — 描画パスの時間をGPUの時計で測る",
@@ -3868,7 +3994,9 @@
         "/graphics/optimization/tools.html",
         "/graphics/optimization/gpu-resource-lifetime.html",
         "/graphics/optimization/basics.html"
-      ]
+      ],
+      "difficulty": "advanced",
+      "importance": "useful"
     },
     {
       "title": "GPUとは何か",
@@ -3889,7 +4017,9 @@
         "/graphics/pipeline/rasterization.html",
         "/hardware/gpu/cpu-vs-gpu.html",
         "/graphics/pipeline/overview.html"
-      ]
+      ],
+      "difficulty": "intro",
+      "importance": "core"
     },
     {
       "title": "GPU最適化の基礎",
@@ -3911,7 +4041,9 @@
         "/hardware/gpu/architecture.html",
         "/graphics/optimization/render-graph.html",
         "/graphics/optimization/frame-pacing.html"
-      ]
+      ],
+      "difficulty": "intermediate",
+      "importance": "core"
     },
     {
       "title": "GPU並列実行モデル — Warp / Wave / SIMT",
@@ -3931,7 +4063,9 @@
         "/graphics/compute/shared-memory.html",
         "/graphics/compute/parallel-algorithms.html",
         "/graphics/optimization/basics.html"
-      ]
+      ],
+      "difficulty": "advanced",
+      "importance": "useful"
     },
     {
       "title": "HDRP (High Definition Render Pipeline)",
@@ -3958,7 +4092,9 @@
         "/graphics/engine/urp.html",
         "/graphics/path/deferred.html",
         "/graphics/engine/unreal-renderer.html"
-      ]
+      ],
+      "difficulty": "advanced",
+      "importance": "specialized"
     },
     {
       "title": "HLSL",
@@ -3985,7 +4121,9 @@
         "/graphics/shader/glsl.html",
         "/graphics/shader/spirv.html",
         "/graphics/compute/compute-shader.html"
-      ]
+      ],
+      "difficulty": "intermediate",
+      "importance": "useful"
     },
     {
       "title": "HTML・CSS・JavaScriptでブラウザの変更と計測を観察する",
@@ -4057,7 +4195,9 @@
         "/browser/same-origin-cors.html",
         "/browser/rendering-journey.html",
         "/practice/network/http-cache-observation.html"
-      ]
+      ],
+      "difficulty": "intermediate",
+      "importance": "useful"
     },
     {
       "title": "HTTP通信 — 要求・応答と本文の区切り",
@@ -4101,7 +4241,9 @@
         "/network/quic-and-http3.html",
         "/network/dns-resolution.html",
         "/practice/network/http-message-observation.html"
-      ]
+      ],
+      "difficulty": "intermediate",
+      "importance": "core"
     },
     {
       "title": "IBL (イメージベースドライティング)",
@@ -4122,7 +4264,9 @@
         "/math/rendering/vector.html",
         "/graphics/lighting/ssr.html",
         "/graphics/lighting/shadow.html"
-      ]
+      ],
+      "difficulty": "advanced",
+      "importance": "useful"
     },
     {
       "title": "Interpreter",
@@ -4147,7 +4291,9 @@
         "/design/patterns/command.html",
         "/design/patterns/",
         "/design/patterns/iterator.html"
-      ]
+      ],
+      "difficulty": "advanced",
+      "importance": "specialized"
     },
     {
       "title": "IPアドレス・ポート・ホスト名 — 接続先をどう指定するか",
@@ -4182,7 +4328,9 @@
         "/network/home-network-devices.html",
         "/network/dns-resolution.html",
         "/network/ip-routing-and-ethernet.html"
-      ]
+      ],
+      "difficulty": "intro",
+      "importance": "core"
     },
     {
       "title": "IPルーティングとEthernetフレーム",
@@ -4215,7 +4363,9 @@
         "/network/udp-datagrams.html",
         "/network/dns-resolution.html",
         "/network/latency-throughput-and-queues.html"
-      ]
+      ],
+      "difficulty": "intermediate",
+      "importance": "useful"
     },
     {
       "title": "ISP: インターフェース分離の原則 (Interface Segregation Principle)",
@@ -4239,7 +4389,9 @@
         "/design/foundations/polymorphism-interface.html",
         "/design/decisions/create-interface.html",
         "/design/solid/"
-      ]
+      ],
+      "difficulty": "intermediate",
+      "importance": "useful"
     },
     {
       "title": "Iterator",
@@ -4263,7 +4415,9 @@
         "/design/patterns/interpreter.html",
         "/design/patterns/",
         "/design/patterns/mediator.html"
-      ]
+      ],
+      "difficulty": "intermediate",
+      "importance": "useful"
     },
     {
       "title": "Layered・Clean・Hexagonal — 境界と依存の向き",
@@ -4286,7 +4440,9 @@
         "/design/naming.html",
         "/design/pattern-index.html",
         "/design/notebook-references.html"
-      ]
+      ],
+      "difficulty": "advanced",
+      "importance": "useful"
     },
     {
       "title": "LLVM IRとSSA — 分岐で選ばれる値を追う",
@@ -4317,7 +4473,9 @@
         "/compilers/tokens-ast-and-type-checking.html",
         "/runtime/cpp-internals/optimization-and-ub.html",
         "/compilers/coff-relocations.html"
-      ]
+      ],
+      "difficulty": "advanced",
+      "importance": "useful"
     },
     {
       "title": "localStorage・IndexedDB・Cache APIの保存と完了を観察する",
@@ -4367,7 +4525,9 @@
         "/languages/cpp/inheritance-and-virtual.html",
         "/design/decisions/inheritance-or-composition.html",
         "/design/solid/"
-      ]
+      ],
+      "difficulty": "intermediate",
+      "importance": "core"
     },
     {
       "title": "Lumen",
@@ -4388,7 +4548,9 @@
         "/graphics/engine/unreal-renderer.html",
         "/graphics/lighting/path-tracing.html",
         "/graphics/optimization/gpu-driven.html"
-      ]
+      ],
+      "difficulty": "advanced",
+      "importance": "specialized"
     },
     {
       "title": "main.cpp から CPU命令までの旅",
@@ -4417,7 +4579,9 @@
         "/languages/csharp/il2cpp.html",
         "/practice/process/windows-process-observation.html",
         "/runtime/cpp-internals/"
-      ]
+      ],
+      "difficulty": "intermediate",
+      "importance": "core"
     },
     {
       "title": "malloc・newから解放まで — アロケータとOSの境界",
@@ -4451,7 +4615,9 @@
         "/runtime/memory/ownership-and-borrowing.html",
         "/game/patterns/object-pool.html",
         "/practice/memory/windows-memory-observation.html"
-      ]
+      ],
+      "difficulty": "intermediate",
+      "importance": "core"
     },
     {
       "title": "Mediator",
@@ -4474,7 +4640,9 @@
         "/design/patterns/iterator.html",
         "/design/patterns/",
         "/design/patterns/memento.html"
-      ]
+      ],
+      "difficulty": "intermediate",
+      "importance": "specialized"
     },
     {
       "title": "Memento",
@@ -4497,7 +4665,9 @@
         "/design/patterns/mediator.html",
         "/design/patterns/",
         "/design/patterns/observer.html"
-      ]
+      ],
+      "difficulty": "intermediate",
+      "importance": "specialized"
     },
     {
       "title": "Mesh Shader / Task Shader",
@@ -4518,7 +4688,9 @@
         "/graphics/pipeline/tessellation.html",
         "/graphics/pipeline/rasterization.html",
         "/graphics/api/comparison.html"
-      ]
+      ],
+      "difficulty": "advanced",
+      "importance": "specialized"
     },
     {
       "title": "Metal",
@@ -4537,7 +4709,9 @@
         "/graphics/api/history.html",
         "/hardware/gpu/architecture.html",
         "/graphics/api/webgpu.html"
-      ]
+      ],
+      "difficulty": "advanced",
+      "importance": "specialized"
     },
     {
       "title": "MSL (Metal Shading Language)",
@@ -4555,7 +4729,9 @@
         "/graphics/shader/overview.html",
         "/graphics/api/metal.html",
         "/graphics/shader/spirv.html"
-      ]
+      ],
+      "difficulty": "advanced",
+      "importance": "specialized"
     },
     {
       "title": "MVC・MVP・MVVM — 画面の責務を分ける",
@@ -4579,7 +4755,9 @@
         "/design/naming.html",
         "/design/pattern-index.html",
         "/design/notebook-references.html"
-      ]
+      ],
+      "difficulty": "intermediate",
+      "importance": "useful"
     },
     {
       "title": "MVC・MVP・MVVM(比較)",
@@ -4601,7 +4779,9 @@
         "/design/case-studies/ui-notification.html",
         "/game/patterns/command-buffer-and-input.html",
         "/game/patterns/"
-      ]
+      ],
+      "difficulty": "intermediate",
+      "importance": "useful"
     },
     {
       "title": "NATとポート変換",
@@ -4633,7 +4813,9 @@
         "/network/udp-datagrams.html",
         "/network/quic-and-http3.html",
         "/network/latency-throughput-and-queues.html"
-      ]
+      ],
+      "difficulty": "advanced",
+      "importance": "useful"
     },
     {
       "title": "NICの受信キューとRSS — フレームがアプリへ届くまで",
@@ -4664,7 +4846,9 @@
         "/hardware/io/pcie-links.html",
         "/network/latency-throughput-and-queues.html",
         "/practice/network/udp-loopback-observation.html"
-      ]
+      ],
+      "difficulty": "advanced",
+      "importance": "specialized"
     },
     {
       "title": "Object Pool(通常のnew/deleteとの比較)",
@@ -4690,7 +4874,9 @@
         "/design/case-studies/object-spawning.html",
         "/game/patterns/service-locator-and-di.html",
         "/game/patterns/"
-      ]
+      ],
+      "difficulty": "intermediate",
+      "importance": "useful"
     },
     {
       "title": "Observer",
@@ -4715,7 +4901,9 @@
         "/design/patterns/memento.html",
         "/design/patterns/",
         "/design/patterns/state.html"
-      ]
+      ],
+      "difficulty": "intermediate",
+      "importance": "core"
     },
     {
       "title": "OCP: 開放閉鎖の原則 (Open-Closed Principle)",
@@ -4742,7 +4930,9 @@
         "/design/decisions/abstraction-and-patterns.html",
         "/design/solid/srp.html",
         "/design/solid/"
-      ]
+      ],
+      "difficulty": "intermediate",
+      "importance": "useful"
     },
     {
       "title": "OpenGL",
@@ -4765,7 +4955,9 @@
         "/graphics/api/directx11.html",
         "/graphics/api/webgpu.html",
         "/graphics/shader/glsl.html"
-      ]
+      ],
+      "difficulty": "intermediate",
+      "importance": "useful"
     },
     {
       "title": "OSの役割 — アプリとハードウェアをつなぐ",
@@ -4798,7 +4990,9 @@
         "/os/process-startup.html",
         "/os/files-and-paths.html",
         "/tools/terminal-shell-and-commands.html"
-      ]
+      ],
+      "difficulty": "intro",
+      "importance": "core"
     },
     {
       "title": "PBR (物理ベースレンダリング)",
@@ -4819,7 +5013,9 @@
         "/math/rendering/vector.html",
         "/graphics/pipeline/fragment-shader.html",
         "/graphics/lighting/shadow.html"
-      ]
+      ],
+      "difficulty": "intermediate",
+      "importance": "core"
     },
     {
       "title": "PCI Expressのリンクとレーン",
@@ -4849,7 +5045,9 @@
         "/tools/windows/file-io-tracing.html",
         "/game/directstorage.html",
         "/hardware/io/dma-and-iommu.html"
-      ]
+      ],
+      "difficulty": "intermediate",
+      "importance": "useful"
     },
     {
       "title": "PEローダーがEXEとDLLを配置する仕組み — RVA・再配置・IAT",
@@ -4881,7 +5079,9 @@
         "/os/process-startup.html",
         "/os/virtual-memory.html",
         "/compilers/coff-relocations.html"
-      ]
+      ],
+      "difficulty": "advanced",
+      "importance": "specialized"
     },
     {
       "title": "placement new・allocator・memory pool・arena allocator・fragmentation",
@@ -4909,7 +5109,9 @@
         "/runtime/memory/cache-locality-aos-soa.html",
         "/runtime/memory/",
         "/runtime/memory/gc-and-csharp-comparison.html"
-      ]
+      ],
+      "difficulty": "advanced",
+      "importance": "useful"
     },
     {
       "title": "Prototype",
@@ -4933,7 +5135,9 @@
         "/design/patterns/builder.html",
         "/design/patterns/",
         "/design/patterns/singleton.html"
-      ]
+      ],
+      "difficulty": "intermediate",
+      "importance": "useful"
     },
     {
       "title": "Proxy",
@@ -4956,7 +5160,9 @@
         "/design/patterns/flyweight.html",
         "/design/patterns/",
         "/design/patterns/chain-of-responsibility.html"
-      ]
+      ],
+      "difficulty": "intermediate",
+      "importance": "useful"
     },
     {
       "title": "QUICとHTTP/3",
@@ -4988,7 +5194,9 @@
         "/network/latency-throughput-and-queues.html",
         "/practice/network/stream-loss-observation.html",
         "/network/nat-and-port-mapping.html"
-      ]
+      ],
+      "difficulty": "advanced",
+      "importance": "useful"
     },
     {
       "title": "RAII (Resource Acquisition Is Initialization)",
@@ -5015,7 +5223,9 @@
         "/languages/cpp/ctor-dtor-copy-move.html",
         "/languages/cpp/",
         "/languages/cpp/inheritance-and-virtual.html"
-      ]
+      ],
+      "difficulty": "intermediate",
+      "importance": "core"
     },
     {
       "title": "RAM・キャッシュ・ストレージの違い",
@@ -5053,7 +5263,9 @@
         "/hardware/gpu/cpu-vs-gpu.html",
         "/hardware/cpu/instruction-execution.html",
         "/os/virtual-memory.html"
-      ]
+      ],
+      "difficulty": "intro",
+      "importance": "core"
     },
     {
       "title": "Reactive Programming",
@@ -5074,7 +5286,9 @@
         "/design/case-studies/ui-notification.html",
         "/game/patterns/",
         "/game/patterns/exercises.html"
-      ]
+      ],
+      "difficulty": "advanced",
+      "importance": "specialized"
     },
     {
       "title": "RenderGraph / FrameGraph",
@@ -5095,7 +5309,9 @@
         "/graphics/optimization/gpu-driven.html",
         "/graphics/engine/urp.html",
         "/graphics/engine/unreal-renderer.html"
-      ]
+      ],
+      "difficulty": "advanced",
+      "importance": "useful"
     },
     {
       "title": "RTTI・dynamic_cast・例外処理の仕組み",
@@ -5117,7 +5333,9 @@
         "/game/patterns/component-and-ecs.html",
         "/runtime/cpp-internals/",
         "/runtime/cpp-internals/memory-layout.html"
-      ]
+      ],
+      "difficulty": "advanced",
+      "importance": "specialized"
     },
     {
       "title": "Service Locator と Dependency Injection(比較)",
@@ -5139,7 +5357,9 @@
         "/game/patterns/event-queue-and-pubsub.html",
         "/game/patterns/",
         "/game/patterns/object-pool.html"
-      ]
+      ],
+      "difficulty": "intermediate",
+      "importance": "useful"
     },
     {
       "title": "Service Workerとオフライン動作 — 登録、制御、応答の選択",
@@ -5180,7 +5400,9 @@
         "/network/http-caching.html",
         "/browser/same-origin-cors.html",
         "/practice/browser/service-worker-observation.html"
-      ]
+      ],
+      "difficulty": "advanced",
+      "importance": "specialized"
     },
     {
       "title": "Service Workerの登録・制御・応答元を観察する",
@@ -5227,7 +5449,9 @@
         "/graphics/compute/compute-shader.html",
         "/graphics/compute/parallel-algorithms.html",
         "/graphics/optimization/basics.html"
-      ]
+      ],
+      "difficulty": "advanced",
+      "importance": "useful"
     },
     {
       "title": "Singleton",
@@ -5249,7 +5473,9 @@
         "/design/patterns/prototype.html",
         "/design/patterns/",
         "/design/patterns/adapter.html"
-      ]
+      ],
+      "difficulty": "intermediate",
+      "importance": "useful"
     },
     {
       "title": "SOLID を、変更の例で理解する",
@@ -5273,7 +5499,9 @@
         "/design/naming.html",
         "/design/pattern-index.html",
         "/design/notebook-references.html"
-      ]
+      ],
+      "difficulty": "intermediate",
+      "importance": "core"
     },
     {
       "title": "SOLID原則の演習",
@@ -5344,7 +5572,9 @@
         "/graphics/api/vulkan.html",
         "/graphics/api/directx12.html",
         "/graphics/shader/hlsl.html"
-      ]
+      ],
+      "difficulty": "advanced",
+      "importance": "specialized"
     },
     {
       "title": "SRP: 単一責任の原則 (Single Responsibility Principle)",
@@ -5367,7 +5597,9 @@
         "/design/foundations/yagni-kiss-dry.html",
         "/design/decisions/split-class.html",
         "/design/solid/"
-      ]
+      ],
+      "difficulty": "intermediate",
+      "importance": "core"
     },
     {
       "title": "SSAO (Screen-Space Ambient Occlusion)",
@@ -5388,7 +5620,9 @@
         "/graphics/compute/compute-shader.html",
         "/graphics/lighting/ssr.html",
         "/graphics/postprocess/taa.html"
-      ]
+      ],
+      "difficulty": "advanced",
+      "importance": "specialized"
     },
     {
       "title": "SSR (Screen-Space Reflections)",
@@ -5408,7 +5642,9 @@
         "/graphics/lighting/raytracing.html",
         "/graphics/lighting/lumen.html",
         "/graphics/postprocess/taa.html"
-      ]
+      ],
+      "difficulty": "advanced",
+      "importance": "specialized"
     },
     {
       "title": "State",
@@ -5430,7 +5666,9 @@
         "/game/patterns/type-object-and-sandbox.html",
         "/design/patterns/observer.html",
         "/design/patterns/"
-      ]
+      ],
+      "difficulty": "intermediate",
+      "importance": "core"
     },
     {
       "title": "static・inline・friend",
@@ -5455,7 +5693,9 @@
         "/languages/cpp/auto-and-constexpr.html",
         "/languages/cpp/",
         "/languages/cpp/casts.html"
-      ]
+      ],
+      "difficulty": "intermediate",
+      "importance": "useful"
     },
     {
       "title": "STLコンテナ・イテレータ・アルゴリズム・ranges",
@@ -5479,7 +5719,9 @@
         "/languages/cpp/smart-pointers.html",
         "/languages/cpp/",
         "/languages/cpp/undefined-behavior.html"
-      ]
+      ],
+      "difficulty": "intermediate",
+      "importance": "core"
     },
     {
       "title": "Strategy",
@@ -5506,7 +5748,9 @@
         "/design/patterns/command.html",
         "/design/patterns/bridge.html",
         "/design/patterns/"
-      ]
+      ],
+      "difficulty": "intermediate",
+      "importance": "core"
     },
     {
       "title": "Streams APIで遅いsinkとbackpressureを観察する",
@@ -5575,7 +5819,9 @@
         "/browser/web-workers-messages.html",
         "/data/unicode-and-encoding.html",
         "/practice/browser/stream-backpressure-observation.html"
-      ]
+      ],
+      "difficulty": "advanced",
+      "importance": "useful"
     },
     {
       "title": "TAA (Temporal Anti-Aliasing)",
@@ -5597,7 +5843,9 @@
         "/math/rendering/transform.html",
         "/graphics/compute/compute-shader.html",
         "/graphics/lighting/ssr.html"
-      ]
+      ],
+      "difficulty": "advanced",
+      "importance": "specialized"
     },
     {
       "title": "Template Method",
@@ -5619,7 +5867,9 @@
         "/design/patterns/factory-method.html",
         "/design/patterns/",
         "/design/patterns/visitor.html"
-      ]
+      ],
+      "difficulty": "intermediate",
+      "importance": "useful"
     },
     {
       "title": "Tessellation",
@@ -5638,7 +5888,9 @@
         "/graphics/pipeline/overview.html",
         "/graphics/pipeline/mesh-shader.html",
         "/graphics/optimization/gpu-driven.html"
-      ]
+      ],
+      "difficulty": "advanced",
+      "importance": "specialized"
     },
     {
       "title": "textContent・innerHTML・CSPの違いを観察する",
@@ -5712,7 +5964,9 @@
         "/network/http-messages.html",
         "/practice/network/https-observation.html",
         "/browser/rendering-journey.html"
-      ]
+      ],
+      "difficulty": "intermediate",
+      "importance": "core"
     },
     {
       "title": "Type Object・Subclass Sandbox・Bytecode",
@@ -5735,7 +5989,9 @@
         "/game/patterns/optimization-patterns.html",
         "/game/patterns/",
         "/game/patterns/state-machines.html"
-      ]
+      ],
+      "difficulty": "advanced",
+      "importance": "specialized"
     },
     {
       "title": "UDPデータグラムの境界と送受信",
@@ -5766,7 +6022,9 @@
         "/network/quic-and-http3.html",
         "/network/nat-and-port-mapping.html",
         "/practice/network/udp-loopback-observation.html"
-      ]
+      ],
+      "difficulty": "intermediate",
+      "importance": "useful"
     },
     {
       "title": "UEの Delegate と Interface",
@@ -5790,7 +6048,9 @@
         "/design/case-studies/event-notification.html",
         "/game/unreal/smart-pointers.html",
         "/game/unreal/gameplay-framework.html"
-      ]
+      ],
+      "difficulty": "intermediate",
+      "importance": "specialized"
     },
     {
       "title": "UEのガベージコレクションと UPROPERTY・TObjectPtr・TWeakObjectPtr",
@@ -5812,7 +6072,9 @@
         "/game/unreal/uobject-actor-component.html",
         "/game/unreal/",
         "/game/unreal/reflection-and-uht.html"
-      ]
+      ],
+      "difficulty": "advanced",
+      "importance": "specialized"
     },
     {
       "title": "UEのスマートポインタ — TSharedPtr・TUniquePtr・TWeakPtr・TSoftObjectPtr",
@@ -5839,7 +6101,9 @@
         "/game/unreal/build-system-ubt.html",
         "/game/unreal/",
         "/game/unreal/delegates-and-interfaces.html"
-      ]
+      ],
+      "difficulty": "intermediate",
+      "importance": "specialized"
     },
     {
       "title": "UI通知の設計",
@@ -5862,7 +6126,9 @@
         "/design/case-studies/damage-calculation.html",
         "/design/case-studies/",
         "/design/case-studies/object-spawning.html"
-      ]
+      ],
+      "difficulty": "intermediate",
+      "importance": "useful"
     },
     {
       "title": "Unicodeと文字コード — コードポイントからUTF-8・UTF-16のバイト列へ",
@@ -5905,7 +6171,9 @@
         "/data/integer-bits-and-bytes.html",
         "/practice/data/unicode-observation.html",
         "/guide/low-level/computer-and-data.html"
-      ]
+      ],
+      "difficulty": "intermediate",
+      "importance": "core"
     },
     {
       "title": "Unity のレンダラーと SRP",
@@ -5928,7 +6196,9 @@
         "/graphics/pipeline/overview.html",
         "/graphics/path/forward.html",
         "/graphics/optimization/render-graph.html"
-      ]
+      ],
+      "difficulty": "intermediate",
+      "importance": "useful"
     },
     {
       "title": "Unity/C#との対応の演習",
@@ -5982,7 +6252,9 @@
         "/game/unreal/reflection-and-uht.html",
         "/game/unreal/",
         "/game/unreal/smart-pointers.html"
-      ]
+      ],
+      "difficulty": "advanced",
+      "importance": "specialized"
     },
     {
       "title": "Unreal Engine のレンダラー",
@@ -6005,7 +6277,9 @@
         "/graphics/capstone/01-design.html",
         "/graphics/pipeline/mesh-shader.html",
         "/graphics/postprocess/taa.html"
-      ]
+      ],
+      "difficulty": "advanced",
+      "importance": "specialized"
     },
     {
       "title": "Unreal Engineと標準C++の演習",
@@ -6080,7 +6354,9 @@
         "/design/foundations/inheritance-delegation-composition.html",
         "/game/patterns/game-loop-and-update.html",
         "/game/unreal/"
-      ]
+      ],
+      "difficulty": "intermediate",
+      "importance": "specialized"
     },
     {
       "title": "URP (Universal Render Pipeline)",
@@ -6100,7 +6376,9 @@
         "/graphics/engine/hdrp.html",
         "/graphics/postprocess/overview.html",
         "/graphics/optimization/gpu-driven.html"
-      ]
+      ],
+      "difficulty": "intermediate",
+      "importance": "specialized"
     },
     {
       "title": "Vertex Shader",
@@ -6124,7 +6402,9 @@
         "/graphics/pipeline/overview.html",
         "/graphics/pipeline/rasterization.html",
         "/graphics/pipeline/fragment-shader.html"
-      ]
+      ],
+      "difficulty": "intermediate",
+      "importance": "core"
     },
     {
       "title": "Visitor",
@@ -6148,7 +6428,9 @@
         "/design/patterns/template-method.html",
         "/design/patterns/",
         "/design/patterns/exercises.html"
-      ]
+      ],
+      "difficulty": "advanced",
+      "importance": "specialized"
     },
     {
       "title": "vtable・vptr・仮想関数呼び出し",
@@ -6170,7 +6452,9 @@
         "/runtime/cpp-internals/template-instantiation-and-inline.html",
         "/runtime/cpp-internals/",
         "/runtime/cpp-internals/exceptions-and-rtti-impl.html"
-      ]
+      ],
+      "difficulty": "advanced",
+      "importance": "useful"
     },
     {
       "title": "Vulkan",
@@ -6197,7 +6481,9 @@
         "/graphics/shader/hlsl.html",
         "/graphics/api/comparison.html",
         "/graphics/api/webgpu.html"
-      ]
+      ],
+      "difficulty": "advanced",
+      "importance": "useful"
     },
     {
       "title": "Web Audioでゲインとクリッピングを観察する",
@@ -6252,7 +6538,9 @@
         "/browser/audio-spatial-panning.html",
         "/practice/browser/audio-doppler-observation.html",
         "/browser/audio-flyby.html"
-      ]
+      ],
+      "difficulty": "intermediate",
+      "importance": "specialized"
     },
     {
       "title": "Web Audioでドップラー効果を聴き比べる",
@@ -6364,7 +6652,9 @@
         "/browser/audio-spatial-panning.html",
         "/browser/audio-doppler.html",
         "/practice/browser/audio-flyby-observation.html"
-      ]
+      ],
+      "difficulty": "advanced",
+      "importance": "specialized"
     },
     {
       "title": "Web Audioで急な消音とフェードを観察する",
@@ -6418,7 +6708,9 @@
         "/browser/audio-occlusion.html",
         "/browser/audio-gain-automation.html",
         "/practice/browser/audio-occlusion-transition-observation.html"
-      ]
+      ],
+      "difficulty": "advanced",
+      "importance": "specialized"
     },
     {
       "title": "Web Audioで畳み込みリバーブを聴き比べる",
@@ -6615,7 +6907,9 @@
         "/browser/audio-mixing-and-headroom.html",
         "/practice/browser/audio-crossfade-observation.html",
         "/browser/audio-comb-filter.html"
-      ]
+      ],
+      "difficulty": "intermediate",
+      "importance": "specialized"
     },
     {
       "title": "Web Audioのゲインオートメーション — フェードとクリックノイズ",
@@ -6643,7 +6937,9 @@
         "/browser/audio-mixing-and-headroom.html",
         "/practice/browser/audio-fade-observation.html",
         "/browser/audio-crossfade.html"
-      ]
+      ],
+      "difficulty": "intermediate",
+      "importance": "useful"
     },
     {
       "title": "Web Audioのコムフィルター — 遅延と干渉",
@@ -6673,7 +6969,9 @@
         "/browser/audio-crossfade.html",
         "/practice/browser/audio-comb-observation.html",
         "/browser/audio-feedback-delay.html"
-      ]
+      ],
+      "difficulty": "advanced",
+      "importance": "specialized"
     },
     {
       "title": "Web Audioのフィードバックディレイ — 反響の間隔と減衰",
@@ -6703,7 +7001,9 @@
         "/browser/audio-mixing-and-headroom.html",
         "/practice/browser/audio-feedback-observation.html",
         "/browser/audio-convolution-reverb.html"
-      ]
+      ],
+      "difficulty": "intermediate",
+      "importance": "specialized"
     },
     {
       "title": "Web Audioのミキシング — ゲイン・ヘッドルーム・クリッピング",
@@ -6734,7 +7034,9 @@
         "/practice/browser/audio-mixing-observation.html",
         "/browser/audio-worklet-buffering.html",
         "/browser/audio-gain-automation.html"
-      ]
+      ],
+      "difficulty": "intro",
+      "importance": "useful"
     },
     {
       "title": "Web Audioの音の遮蔽 — 壁越しの音量と音色",
@@ -6764,7 +7066,9 @@
         "/browser/audio-convolution-reverb.html",
         "/practice/browser/audio-occlusion-observation.html",
         "/browser/audio-occlusion-transition.html"
-      ]
+      ],
+      "difficulty": "intermediate",
+      "importance": "specialized"
     },
     {
       "title": "Web Audioの音の定位と距離減衰",
@@ -6796,7 +7100,9 @@
         "/practice/browser/audio-spatial-observation.html",
         "/browser/audio-doppler.html",
         "/browser/audio-occlusion.html"
-      ]
+      ],
+      "difficulty": "intermediate",
+      "importance": "specialized"
     },
     {
       "title": "Web Audioの畳み込みリバーブ — インパルス応答から響きを作る",
@@ -6829,7 +7135,9 @@
         "/browser/audio-crossfade.html",
         "/practice/browser/audio-reverb-observation.html",
         "/browser/audio-spatial-panning.html"
-      ]
+      ],
+      "difficulty": "advanced",
+      "importance": "specialized"
     },
     {
       "title": "Web Workerでコピー・transfer・停止を観察する",
@@ -6899,7 +7207,9 @@
         "/practice/browser/worker-message-observation.html",
         "/browser/cross-origin-isolation.html",
         "/browser/service-worker-offline.html"
-      ]
+      ],
+      "difficulty": "intermediate",
+      "importance": "core"
     },
     {
       "title": "Web Workerと共有メモリの同期 — Atomics・競合・待機",
@@ -6934,7 +7244,9 @@
         "/runtime/thread-synchronization.html",
         "/practice/browser/atomics-observation.html",
         "/browser/spsc-ring-buffer.html"
-      ]
+      ],
+      "difficulty": "advanced",
+      "importance": "specialized"
     },
     {
       "title": "WebAssemblyと線形メモリ — バイナリから実行・共有するバイト列まで",
@@ -6970,7 +7282,9 @@
         "/game/asset-loading.html",
         "/practice/browser/wasm-memory-observation.html",
         "/browser/wasm-data-and-allocation.html"
-      ]
+      ],
+      "difficulty": "intermediate",
+      "importance": "useful"
     },
     {
       "title": "WebAssemblyのデータ受け渡しとメモリ確保 — ポインタ・長さ・アリーナ",
@@ -7004,7 +7318,9 @@
         "/data/unicode-and-encoding.html",
         "/practice/browser/wasm-abi-observation.html",
         "/browser/shared-memory-atomics.html"
-      ]
+      ],
+      "difficulty": "advanced",
+      "importance": "specialized"
     },
     {
       "title": "WebAssemblyの読み込みと線形メモリを観察する",
@@ -7083,7 +7399,9 @@
         "/graphics/compute/compute-shader.html",
         "/graphics/api/vulkan.html",
         "/graphics/api/metal.html"
-      ]
+      ],
+      "difficulty": "advanced",
+      "importance": "specialized"
     },
     {
       "title": "WGSL",
@@ -7102,7 +7420,9 @@
         "/graphics/shader/spirv.html",
         "/graphics/shader/hlsl.html",
         "/graphics/shader/glsl.html"
-      ]
+      ],
+      "difficulty": "advanced",
+      "importance": "specialized"
     },
     {
       "title": "Windowsで2回のファイル読み取りをトレースする",
@@ -7226,7 +7546,9 @@
         "/os/thread-scheduling.html",
         "/game/asset-loading.html",
         "/practice/io/iocp-observation.html"
-      ]
+      ],
+      "difficulty": "advanced",
+      "importance": "specialized"
     },
     {
       "title": "Windowsのスレッドスケジューリング — 実行・待機・実行可能",
@@ -7260,7 +7582,9 @@
         "/os/system-calls-and-privilege.html",
         "/runtime/thread-synchronization.html",
         "/graphics/optimization/frame-pacing.html"
-      ]
+      ],
+      "difficulty": "intermediate",
+      "importance": "useful"
     },
     {
       "title": "Windowsのパイプと子プロセスの標準入出力",
@@ -7286,7 +7610,9 @@
       "links": [
         "/os/windows-handles.html",
         "/practice/process/windows-pipe-observation.html"
-      ]
+      ],
+      "difficulty": "intermediate",
+      "importance": "useful"
     },
     {
       "title": "Windowsのハンドルとカーネルオブジェクト",
@@ -7314,7 +7640,9 @@
         "/algorithms/generational-handles.html",
         "/os/process-startup.html",
         "/os/pipes-and-process-io.html"
-      ]
+      ],
+      "difficulty": "intermediate",
+      "importance": "useful"
     },
     {
       "title": "WindowsのファイルI/OをProcmonとWPRで追う",
@@ -7345,7 +7673,9 @@
         "/os/io-completion-ports.html",
         "/game/asset-loading.html",
         "/practice/io/file-io-trace-observation.html"
-      ]
+      ],
+      "difficulty": "advanced",
+      "importance": "specialized"
     },
     {
       "title": "Windowsのファイルキャッシュと先読み",
@@ -7379,7 +7709,9 @@
         "/os/asynchronous-file-io.html",
         "/game/asset-loading.html",
         "/os/file-write-and-durability.html"
-      ]
+      ],
+      "difficulty": "advanced",
+      "importance": "useful"
     },
     {
       "title": "Windowsのファイル書き込みと永続化",
@@ -7406,7 +7738,9 @@
         "/os/file-read-journey.html",
         "/os/asynchronous-file-io.html",
         "/os/memory-mapped-files.html"
-      ]
+      ],
+      "difficulty": "advanced",
+      "importance": "useful"
     },
     {
       "title": "Windowsの非同期I/Oをキャンセルする — 要求・完了・解放",
@@ -7434,7 +7768,9 @@
         "/game/asset-loading.html",
         "/os/io-completion-ports.html",
         "/practice/io/iocp-observation.html"
-      ]
+      ],
+      "difficulty": "advanced",
+      "importance": "specialized"
     },
     {
       "title": "Worker poolで受付上限・待機取消し・結果破棄を観察する",
@@ -7506,7 +7842,9 @@
         "/practice/browser/worker-pool-observation.html",
         "/game/asset-loading.html",
         "/browser/spsc-ring-buffer.html"
-      ]
+      ],
+      "difficulty": "advanced",
+      "importance": "specialized"
     },
     {
       "title": "Workerの競合とAtomicsの待機・通知を観察する",
@@ -7600,7 +7938,9 @@
         "/browser/same-origin-cors.html",
         "/browser/cookies-and-sessions.html",
         "/practice/browser/xss-csp-observation.html"
-      ]
+      ],
+      "difficulty": "intermediate",
+      "importance": "core"
     },
     {
       "title": "YAGNI・KISS・DRY と早すぎる抽象化・早すぎる最適化",
@@ -7621,7 +7961,9 @@
         "/design/foundations/tech-debt-and-refactoring.html",
         "/design/decisions/abstraction-and-patterns.html",
         "/design/foundations/"
-      ]
+      ],
+      "difficulty": "intro",
+      "importance": "core"
     },
     {
       "title": "アイテム効果の設計",
@@ -7642,7 +7984,9 @@
         "/design/case-studies/sound-manager.html",
         "/design/case-studies/",
         "/design/case-studies/quest-system.html"
-      ]
+      ],
+      "difficulty": "intermediate",
+      "importance": "useful"
     },
     {
       "title": "アップスケーリング — DLSS / FSR / XeSS",
@@ -7660,7 +8004,9 @@
         "/graphics/postprocess/overview.html",
         "/graphics/lighting/path-tracing.html",
         "/graphics/optimization/basics.html"
-      ]
+      ],
+      "difficulty": "advanced",
+      "importance": "useful"
     },
     {
       "title": "アンチエイリアシング (MSAA / FXAA / SMAA)",
@@ -7680,7 +8026,9 @@
         "/graphics/path/forward.html",
         "/graphics/path/deferred.html",
         "/graphics/postprocess/upscaling.html"
-      ]
+      ],
+      "difficulty": "intermediate",
+      "importance": "useful"
     },
     {
       "title": "イベントループ・Promise・async/await — 実行順と描画の関係",
@@ -7722,7 +8070,9 @@
         "/os/asynchronous-file-io.html",
         "/browser/web-workers-messages.html",
         "/practice/browser/event-loop-observation.html"
-      ]
+      ],
+      "difficulty": "intermediate",
+      "importance": "core"
     },
     {
       "title": "イベント通知(通知設計の総合判断)の設計",
@@ -7743,7 +8093,9 @@
         "/design/case-studies/quest-system.html",
         "/design/case-studies/",
         "/design/case-studies/aim-control.html"
-      ]
+      ],
+      "difficulty": "advanced",
+      "importance": "useful"
     },
     {
       "title": "オブジェクトファイル・実行ファイル・静的ライブラリ・動的ライブラリ・DLL",
@@ -7765,7 +8117,9 @@
         "/tools/build/samples/tu-demo.html",
         "/runtime/cpp-internals/",
         "/runtime/cpp-internals/template-instantiation-and-inline.html"
-      ]
+      ],
+      "difficulty": "intermediate",
+      "importance": "core"
     },
     {
       "title": "オブジェクト指向と、不正な状態を作らない設計",
@@ -7787,7 +8141,9 @@
         "/design/naming.html",
         "/design/pattern-index.html",
         "/design/notebook-references.html"
-      ]
+      ],
+      "difficulty": "intermediate",
+      "importance": "core"
     },
     {
       "title": "オブジェクト生成の設計",
@@ -7810,7 +8166,9 @@
         "/design/case-studies/ui-notification.html",
         "/design/case-studies/",
         "/design/case-studies/screen-transition.html"
-      ]
+      ],
+      "difficulty": "intermediate",
+      "importance": "useful"
     },
     {
       "title": "ガベージコレクションとの違い — C#の管理ヒープ・UnityのGC Allocとの比較",
@@ -7831,7 +8189,9 @@
         "/runtime/memory/allocators-and-pools.html",
         "/runtime/memory/",
         "/runtime/memory/ownership-and-borrowing.html"
-      ]
+      ],
+      "difficulty": "intermediate",
+      "importance": "useful"
     },
     {
       "title": "カメラと射影",
@@ -7855,7 +8215,9 @@
         "/math/rendering/transform.html",
         "/graphics/pipeline/overview.html",
         "/math/rendering/quaternion.html"
-      ]
+      ],
+      "difficulty": "advanced",
+      "importance": "core"
     },
     {
       "title": "キーフレームとアニメーションの基本 — 時間から値を決める",
@@ -7887,7 +8249,9 @@
         "/math/rendering/quaternion.html",
         "/graphics/basics/rigs-and-skinning.html",
         "/graphics/basics/transforms-and-cameras.html"
-      ]
+      ],
+      "difficulty": "intro",
+      "importance": "useful"
     },
     {
       "title": "キャスト",
@@ -7910,7 +8274,9 @@
         "/languages/cpp/static-inline-friend.html",
         "/languages/cpp/",
         "/languages/cpp/smart-pointers.html"
-      ]
+      ],
+      "difficulty": "intermediate",
+      "importance": "useful"
     },
     {
       "title": "キャッシュ・分岐予測・SIMD",
@@ -7933,7 +8299,9 @@
         "/runtime/cpp-internals/function-calls-and-cpu.html",
         "/runtime/cpp-internals/",
         "/runtime/cpp-internals/optimization-and-ub.html"
-      ]
+      ],
+      "difficulty": "advanced",
+      "importance": "useful"
     },
     {
       "title": "キャッシュ局所性と AoS / SoA",
@@ -7952,7 +8320,9 @@
         "/runtime/memory/concurrency-bugs.html",
         "/runtime/memory/",
         "/runtime/memory/allocators-and-pools.html"
-      ]
+      ],
+      "difficulty": "intermediate",
+      "importance": "useful"
     },
     {
       "title": "クエストの設計",
@@ -7975,7 +8345,9 @@
         "/design/case-studies/item-effects.html",
         "/design/case-studies/",
         "/design/case-studies/event-notification.html"
-      ]
+      ],
+      "difficulty": "intermediate",
+      "importance": "specialized"
     },
     {
       "title": "クォータニオン",
@@ -7994,7 +8366,9 @@
         "/math/rendering/transform.html",
         "/graphics/pipeline/vertex-shader.html",
         "/graphics/compute/compute-shader.html"
-      ]
+      ],
+      "difficulty": "advanced",
+      "importance": "useful"
     },
     {
       "title": "クラス名を、役割の説明書にする",
@@ -8019,7 +8393,9 @@
         "/design/naming.html",
         "/design/pattern-index.html",
         "/design/notebook-references.html"
-      ]
+      ],
+      "difficulty": "intro",
+      "importance": "useful"
     },
     {
       "title": "クラス名辞典",
@@ -8098,7 +8474,9 @@
         "/design/notebook/composition.html",
         "/design/notebook/csharp.html",
         "/design/notebook/practice.html"
-      ]
+      ],
+      "difficulty": "intro",
+      "importance": "useful"
     },
     {
       "title": "クラッシュダンプとPDBで停止位置をたどる",
@@ -8127,7 +8505,9 @@
         "/tools/build/build-configurations.html",
         "/tools/windows/debugger-breakpoints-and-watchpoints.html",
         "/tools/build/debugging-and-analysis.html"
-      ]
+      ],
+      "difficulty": "advanced",
+      "importance": "useful"
     },
     {
       "title": "グラフィックスAPIの歴史",
@@ -8148,7 +8528,9 @@
         "/graphics/api/opengl.html",
         "/graphics/api/directx11.html",
         "/graphics/api/comparison.html"
-      ]
+      ],
+      "difficulty": "intermediate",
+      "importance": "useful"
     },
     {
       "title": "グローバルイルミネーション総論",
@@ -8170,7 +8552,9 @@
         "/graphics/lighting/pbr.html",
         "/graphics/lighting/ibl.html",
         "/graphics/lighting/shadow.html"
-      ]
+      ],
+      "difficulty": "intermediate",
+      "importance": "core"
     },
     {
       "title": "クロスオリジン分離と共有メモリ — COOP・COEPからSharedArrayBufferまで",
@@ -8204,7 +8588,9 @@
         "/practice/browser/cross-origin-isolation-observation.html",
         "/browser/webassembly-linear-memory.html",
         "/browser/shared-memory-atomics.html"
-      ]
+      ],
+      "difficulty": "advanced",
+      "importance": "specialized"
     },
     {
       "title": "ケーススタディの演習",
@@ -8274,7 +8660,9 @@
         "/game/basics/game-states-and-pause.html",
         "/game/basics/scenes-and-components.html",
         "/graphics/basics/transforms-and-cameras.html"
-      ]
+      ],
+      "difficulty": "intro",
+      "importance": "useful"
     },
     {
       "title": "ゲームエンジンの役割 — 素材とルールからゲームを動かす",
@@ -8309,7 +8697,9 @@
         "/graphics/basics/models-and-meshes.html",
         "/graphics/basics/transforms-and-cameras.html",
         "/game/shooter-design.html"
-      ]
+      ],
+      "difficulty": "intro",
+      "importance": "core"
     },
     {
       "title": "ゲームのアセットビルドと差分配信",
@@ -8340,7 +8730,9 @@
         "/game/directstorage.html",
         "/data/binary-file-validation.html",
         "/os/file-write-and-durability.html"
-      ]
+      ],
+      "difficulty": "advanced",
+      "importance": "specialized"
     },
     {
       "title": "ゲームのアセットロード設計 — 状態・世代・所有権",
@@ -8383,7 +8775,9 @@
         "/practice/assets/asset-lifecycle-model.html",
         "/practice/io/file-read-observation.html",
         "/practice/io/async-file-read-observation.html"
-      ]
+      ],
+      "difficulty": "advanced",
+      "importance": "core"
     },
     {
       "title": "ゲームのアセットをパックファイルにまとめる",
@@ -8416,7 +8810,9 @@
         "/tools/windows/file-io-tracing.html",
         "/game/directstorage.html",
         "/data/binary-file-validation.html"
-      ]
+      ],
+      "difficulty": "advanced",
+      "importance": "specialized"
     },
     {
       "title": "ゲームの状態とポーズ — タイトル・プレイ・結果を切り替える",
@@ -8449,7 +8845,9 @@
         "/game/basics/ui-layout-and-interaction.html",
         "/game/basics/prefabs-and-object-lifetimes.html",
         "/game/basics/game-events-and-notifications.html"
-      ]
+      ],
+      "difficulty": "intro",
+      "importance": "core"
     },
     {
       "title": "ゲームの動きと構成から読む",
@@ -8581,7 +8979,9 @@
         "/game/basics/input-actions-and-devices.html",
         "/game/patterns/command-buffer-and-input.html",
         "/game/shooter-design.html"
-      ]
+      ],
+      "difficulty": "intro",
+      "importance": "core"
     },
     {
       "title": "ゲーム内イベントと通知 — HPの変化をUIへ伝える",
@@ -8616,7 +9016,9 @@
         "/languages/csharp/delegates-events-function-pointers.html",
         "/game/basics/prefabs-and-object-lifetimes.html",
         "/game/basics/game-states-and-pause.html"
-      ]
+      ],
+      "difficulty": "intro",
+      "importance": "core"
     },
     {
       "title": "コンストラクタ・デストラクタ・コピー・ムーブ(Rule of Zero/Three/Five)",
@@ -8636,7 +9038,9 @@
         "/runtime/memory/ownership-and-borrowing.html",
         "/languages/cpp/structs-and-classes.html",
         "/languages/cpp/"
-      ]
+      ],
+      "difficulty": "intermediate",
+      "importance": "core"
     },
     {
       "title": "コンパイラ最適化・未定義動作の影響・Debug/Release・ゼロコスト抽象化",
@@ -8658,7 +9062,9 @@
         "/runtime/cpp-internals/cache-branch-simd.html",
         "/runtime/cpp-internals/",
         "/runtime/cpp-internals/exercises.html"
-      ]
+      ],
+      "difficulty": "advanced",
+      "importance": "useful"
     },
     {
       "title": "コンピュータの部品から読む",
@@ -8718,7 +9124,9 @@
         "/hardware/io/nic-receive-queues.html",
         "/os/file-read-journey.html",
         "/hardware/gpu/what-is-gpu.html"
-      ]
+      ],
+      "difficulty": "intro",
+      "importance": "core"
     },
     {
       "title": "サウンド管理の設計",
@@ -8740,7 +9148,9 @@
         "/design/case-studies/screen-transition.html",
         "/design/case-studies/",
         "/design/case-studies/item-effects.html"
-      ]
+      ],
+      "difficulty": "intermediate",
+      "importance": "specialized"
     },
     {
       "title": "シーン・オブジェクト・コンポーネントの基本",
@@ -8778,7 +9188,9 @@
         "/os/files-and-paths.html",
         "/game/patterns/component-and-ecs.html",
         "/game/basics/game-loop-and-time.html"
-      ]
+      ],
+      "difficulty": "intro",
+      "importance": "core"
     },
     {
       "title": "シェーダーコンパイルのカクつきとパイプラインキャッシュ",
@@ -8809,7 +9221,9 @@
         "/graphics/optimization/gpu-timestamp-queries.html",
         "/graphics/optimization/tools.html",
         "/game/asset-loading.html"
-      ]
+      ],
+      "difficulty": "intermediate",
+      "importance": "useful"
     },
     {
       "title": "シェーダーで三角形の位置と色を変える",
@@ -8873,7 +9287,9 @@
         "/graphics/basics/materials-textures-and-shaders.html",
         "/graphics/shader/hlsl.html",
         "/graphics/shader/glsl.html"
-      ]
+      ],
+      "difficulty": "intro",
+      "importance": "core"
     },
     {
       "title": "シェーダーへ渡すデータ — 頂点属性・uniform・テクスチャ",
@@ -8907,7 +9323,9 @@
         "/graphics/basics/materials-textures-and-shaders.html",
         "/practice/graphics/shader-first-steps.html",
         "/graphics/optimization/gpu-resource-lifetime.html"
-      ]
+      ],
+      "difficulty": "intermediate",
+      "importance": "core"
     },
     {
       "title": "シェーダ言語総論と比較",
@@ -8929,7 +9347,9 @@
         "/graphics/shader/hlsl.html",
         "/graphics/shader/glsl.html",
         "/graphics/shader/msl.html"
-      ]
+      ],
+      "difficulty": "intermediate",
+      "importance": "useful"
     },
     {
       "title": "システムコールでユーザーモードからカーネルモードへ",
@@ -8966,7 +9386,9 @@
         "/os/file-read-journey.html",
         "/os/asynchronous-file-io.html",
         "/tools/windows/debugger-breakpoints-and-watchpoints.html"
-      ]
+      ],
+      "difficulty": "advanced",
+      "importance": "core"
     },
     {
       "title": "シャドウ",
@@ -8986,7 +9408,9 @@
         "/graphics/pipeline/output-merger.html",
         "/graphics/lighting/gi.html",
         "/graphics/lighting/pbr.html"
-      ]
+      ],
+      "difficulty": "intermediate",
+      "importance": "useful"
     },
     {
       "title": "シューティング実装例 — C#とUnity 6",
@@ -9064,7 +9488,9 @@
         "/languages/csharp/il2cpp.html",
         "/tools/build/samples/tu-demo.html",
         "/runtime/cpp-internals/"
-      ]
+      ],
+      "difficulty": "advanced",
+      "importance": "core"
     },
     {
       "title": "スタック・キュー・デック — どちらの端から入れ、どちらから取るか",
@@ -9095,7 +9521,9 @@
         "/browser/spsc-ring-buffer.html",
         "/algorithms/arrays-and-dynamic-arrays.html",
         "/algorithms/linked-lists.html"
-      ]
+      ],
+      "difficulty": "intro",
+      "importance": "core"
     },
     {
       "title": "ステート異常(状態異常)の設計",
@@ -9116,7 +9544,9 @@
         "/design/case-studies/enemy-ai.html",
         "/design/case-studies/",
         "/design/case-studies/achievements.html"
-      ]
+      ],
+      "difficulty": "intermediate",
+      "importance": "specialized"
     },
     {
       "title": "スパースセットでIDの追加と削除を試す",
@@ -9169,7 +9599,9 @@
         "/game/patterns/component-and-ecs.html",
         "/algorithms/arrays-and-dynamic-arrays.html",
         "/practice/algorithms/sparse-set-observation.html"
-      ]
+      ],
+      "difficulty": "advanced",
+      "importance": "specialized"
     },
     {
       "title": "スマートポインタ",
@@ -9192,7 +9624,9 @@
         "/languages/cpp/casts.html",
         "/languages/cpp/",
         "/languages/cpp/stl.html"
-      ]
+      ],
+      "difficulty": "intermediate",
+      "importance": "core"
     },
     {
       "title": "スレッドと同期 — 共有状態の不変条件をmutexとlockで守る",
@@ -9231,7 +9665,9 @@
         "/runtime/bounded-worker-queues.html",
         "/practice/threads/asset-worker-handoff-observation.html",
         "/browser/shared-memory-atomics.html"
-      ]
+      ],
+      "difficulty": "intermediate",
+      "importance": "core"
     },
     {
       "title": "スワップチェーンとVSync — 描画した絵が画面に出るまで",
@@ -9262,7 +9698,9 @@
         "/graphics/capstone/02-device.html",
         "/practice/graphics/swap-chain-observation.html",
         "/graphics/optimization/frame-pacing.html"
-      ]
+      ],
+      "difficulty": "intermediate",
+      "importance": "useful"
     },
     {
       "title": "セーブデータの設計",
@@ -9285,7 +9723,9 @@
         "/design/case-studies/achievements.html",
         "/design/case-studies/",
         "/design/case-studies/damage-calculation.html"
-      ]
+      ],
+      "difficulty": "intermediate",
+      "importance": "useful"
     },
     {
       "title": "セーブとシリアライズの基本 — 実行中の状態を保存する",
@@ -9319,7 +9759,9 @@
         "/game/basics/scenes-and-components.html",
         "/os/file-write-and-durability.html",
         "/game/basics/game-states-and-pause.html"
-      ]
+      ],
+      "difficulty": "intro",
+      "importance": "useful"
     },
     {
       "title": "ソースコードから実行まで — コンパイラ・リンカー・ランタイム",
@@ -9359,7 +9801,9 @@
         "/runtime/cpp-internals/object-files-and-libraries.html",
         "/compilers/libraries-apis-and-sdks.html",
         "/tools/terminal-shell-and-commands.html"
-      ]
+      ],
+      "difficulty": "intro",
+      "importance": "core"
     },
     {
       "title": "ソケットとTCP通信 — send/recvの内部とメッセージ境界",
@@ -9410,7 +9854,9 @@
         "/network/tls-https.html",
         "/network/ip-routing-and-ethernet.html",
         "/practice/network/tcp-loopback-observation.html"
-      ]
+      ],
+      "difficulty": "intermediate",
+      "importance": "core"
     },
     {
       "title": "ターミナル・シェル・コマンドの基本",
@@ -9446,7 +9892,9 @@
         "/os/pipes-and-process-io.html",
         "/tools/development-tools-basics.html",
         "/compilers/source-code-and-execution.html"
-      ]
+      ],
+      "difficulty": "intro",
+      "importance": "core"
     },
     {
       "title": "ダメージ計算の設計",
@@ -9469,7 +9917,9 @@
         "/design/case-studies/save-data.html",
         "/design/case-studies/",
         "/design/case-studies/ui-notification.html"
-      ]
+      ],
+      "difficulty": "intermediate",
+      "importance": "useful"
     },
     {
       "title": "つなぎ方を整える — Adapter・Decorator・Facade",
@@ -9493,7 +9943,9 @@
         "/design/naming.html",
         "/design/pattern-index.html",
         "/design/notebook-references.html"
-      ]
+      ],
+      "difficulty": "intermediate",
+      "importance": "useful"
     },
     {
       "title": "テクスチャストリーミングとmipの常駐",
@@ -9524,7 +9976,9 @@
         "/game/directstorage.html",
         "/graphics/texture/d3d12-texture-upload.html",
         "/game/asset-loading.html"
-      ]
+      ],
+      "difficulty": "advanced",
+      "importance": "specialized"
     },
     {
       "title": "デストラクタと Dispose / RAII と using",
@@ -9546,7 +10000,9 @@
         "/game/unreal/gc-and-object-pointers.html",
         "/languages/csharp/",
         "/languages/csharp/pointers-references-value-semantics.html"
-      ]
+      ],
+      "difficulty": "intermediate",
+      "importance": "useful"
     },
     {
       "title": "デバッグ・プロファイリングツール — RenderDoc / PIX / Nsight / Frame Debugger",
@@ -9568,7 +10024,9 @@
         "/graphics/optimization/basics.html",
         "/graphics/pipeline/overview.html",
         "/graphics/capstone/01-design.html"
-      ]
+      ],
+      "difficulty": "intermediate",
+      "importance": "core"
     },
     {
       "title": "テンプレートと concepts",
@@ -9593,7 +10051,9 @@
         "/languages/cpp/overloading.html",
         "/languages/cpp/",
         "/languages/cpp/lambdas-and-functions.html"
-      ]
+      ],
+      "difficulty": "advanced",
+      "importance": "useful"
     },
     {
       "title": "テンプレートとジェネリック",
@@ -9614,7 +10074,9 @@
         "/languages/csharp/pointers-references-value-semantics.html",
         "/languages/csharp/",
         "/languages/csharp/virtual-and-polymorphism.html"
-      ]
+      ],
+      "difficulty": "intermediate",
+      "importance": "useful"
     },
     {
       "title": "テンプレートの実体化と inline の実際",
@@ -9636,7 +10098,9 @@
         "/runtime/cpp-internals/object-files-and-libraries.html",
         "/runtime/cpp-internals/",
         "/runtime/cpp-internals/vtable-and-virtual-calls.html"
-      ]
+      ],
+      "difficulty": "advanced",
+      "importance": "useful"
     },
     {
       "title": "トークン・AST・型検査 — C++のソースを読み解く",
@@ -9667,7 +10131,9 @@
       "links": [
         "/runtime/cpp-internals/build-pipeline-journey.html",
         "/compilers/llvm-ir-and-ssa.html"
-      ]
+      ],
+      "difficulty": "intermediate",
+      "importance": "core"
     },
     {
       "title": "ネイティブビルドと IL2CPP",
@@ -9692,7 +10158,9 @@
         "/languages/csharp/headers-vs-asmdef.html",
         "/languages/csharp/",
         "/languages/csharp/memory-management-vs-gc.html"
-      ]
+      ],
+      "difficulty": "advanced",
+      "importance": "specialized"
     },
     {
       "title": "ネットワークの基本 — アプリのデータが相手へ届くまで",
@@ -9727,7 +10195,9 @@
         "/network/dns-resolution.html",
         "/network/tcp-sockets.html",
         "/network/http-messages.html"
-      ]
+      ],
+      "difficulty": "intro",
+      "importance": "core"
     },
     {
       "title": "ネットワークの基本から読む",
@@ -9784,7 +10254,9 @@
         "/network/tcp-sockets.html",
         "/network/udp-datagrams.html",
         "/practice/network/udp-loopback-observation.html"
-      ]
+      ],
+      "difficulty": "intermediate",
+      "importance": "useful"
     },
     {
       "title": "ハードウェアレイトレーシング (DXR / Vulkan Ray Tracing)",
@@ -9811,7 +10283,9 @@
         "/graphics/api/vulkan.html",
         "/graphics/lighting/lumen.html",
         "/graphics/postprocess/upscaling.html"
-      ]
+      ],
+      "difficulty": "advanced",
+      "importance": "specialized"
     },
     {
       "title": "バイナリファイルの読み取り前に範囲を検査する",
@@ -9842,7 +10316,9 @@
         "/runtime/cpp-internals/memory-layout.html",
         "/game/asset-loading.html",
         "/practice/io/asset-pack-observation.html"
-      ]
+      ],
+      "difficulty": "intermediate",
+      "importance": "core"
     },
     {
       "title": "パケットが欠けたときのTCPとQUICの配送を比べる",
@@ -9892,7 +10368,9 @@
         "/graphics/lighting/pbr.html",
         "/graphics/lighting/lumen.html",
         "/graphics/postprocess/taa.html"
-      ]
+      ],
+      "difficulty": "advanced",
+      "importance": "specialized"
     },
     {
       "title": "ハッシュテーブル — 同じ場所に来たキーをどう探すか",
@@ -9925,7 +10403,9 @@
         "/algorithms/search-trees.html",
         "/game/asset-loading.html",
         "/graphics/optimization/gpu-resource-lifetime.html"
-      ]
+      ],
+      "difficulty": "intermediate",
+      "importance": "core"
     },
     {
       "title": "ビデオゲーム史 — 遊び・ハード・作り方の変化をつなぐ",
@@ -9951,7 +10431,9 @@
         "/runtime/memory/",
         "/graphics/api/comparison.html",
         "/guide/rendering/timeline.html"
-      ]
+      ],
+      "difficulty": "intro",
+      "importance": "useful"
     },
     {
       "title": "ビルドツール: CMake・Visual Studioプロジェクト・Make・Ninja",
@@ -9972,7 +10454,9 @@
         "/tools/build/compilers.html",
         "/tools/build/",
         "/tools/build/build-configurations.html"
-      ]
+      ],
+      "difficulty": "intermediate",
+      "importance": "useful"
     },
     {
       "title": "ビルドとは何か — コンパイラとビルドシステムの違い",
@@ -9994,7 +10478,9 @@
         "/tools/build/samples/tu-demo.html",
         "/tools/build/",
         "/tools/build/compilers.html"
-      ]
+      ],
+      "difficulty": "intro",
+      "importance": "core"
     },
     {
       "title": "ビルドとライブラリの演習",
@@ -10070,7 +10556,9 @@
         "/tools/build/build-tools-cmake.html",
         "/tools/build/",
         "/tools/build/build-speed.html"
-      ]
+      ],
+      "difficulty": "intermediate",
+      "importance": "core"
     },
     {
       "title": "ビルド時間 — incremental build・PCH・Unity Build・C++でビルドが遅くなる理由",
@@ -10094,7 +10582,9 @@
         "/tools/build/build-configurations.html",
         "/tools/build/",
         "/tools/build/debugging-and-analysis.html"
-      ]
+      ],
+      "difficulty": "advanced",
+      "importance": "useful"
     },
     {
       "title": "ファイルとパス — 名前からデータを開くまで",
@@ -10130,7 +10620,9 @@
         "/os/file-read-journey.html",
         "/os/file-write-and-durability.html",
         "/os/windows-handles.html"
-      ]
+      ],
+      "difficulty": "intro",
+      "importance": "core"
     },
     {
       "title": "ファイルを読むと内部で何が起きるか",
@@ -10175,7 +10667,9 @@
         "/os/windows-file-cache.html",
         "/practice/io/file-io-trace-observation.html",
         "/practice/io/file-read-observation.html"
-      ]
+      ],
+      "difficulty": "intermediate",
+      "importance": "core"
     },
     {
       "title": "ブラウザでCookieの範囲とセッションIDを観察する",
@@ -10304,7 +10798,9 @@
         "/os/process-startup.html",
         "/practice/browser/render-observation.html",
         "/browser/event-loop-promises.html"
-      ]
+      ],
+      "difficulty": "intermediate",
+      "importance": "core"
     },
     {
       "title": "ブラウザの保存領域 — localStorage・IndexedDB・Cache APIとデータの寿命",
@@ -10340,7 +10836,9 @@
         "/network/http-caching.html",
         "/practice/browser/storage-observation.html",
         "/browser/service-worker-offline.html"
-      ]
+      ],
+      "difficulty": "intermediate",
+      "importance": "useful"
     },
     {
       "title": "プレイヤー入力の設計",
@@ -10362,7 +10860,9 @@
         "/design/foundations/yagni-kiss-dry.html",
         "/design/case-studies/",
         "/design/case-studies/weapon-switching.html"
-      ]
+      ],
+      "difficulty": "intermediate",
+      "importance": "useful"
     },
     {
       "title": "ブレークポイントとデータブレークポイント",
@@ -10390,7 +10890,9 @@
         "/runtime/memory/storage-duration-and-lifetime.html",
         "/tools/build/debugging-and-analysis.html",
         "/tools/build/build-configurations.html"
-      ]
+      ],
+      "difficulty": "intermediate",
+      "importance": "core"
     },
     {
       "title": "プレハブと生成・破棄の基本 — 同じ部品から複数の物を作る",
@@ -10425,7 +10927,9 @@
         "/game/basics/game-events-and-notifications.html",
         "/game/asset-loading.html",
         "/game/basics/game-loop-and-time.html"
-      ]
+      ],
+      "difficulty": "intro",
+      "importance": "useful"
     },
     {
       "title": "プログラムを書く・動かす基礎から読む",
@@ -10475,7 +10979,9 @@
         "/graphics/lighting/pbr.html",
         "/math/rendering/matrix.html",
         "/math/rendering/transform.html"
-      ]
+      ],
+      "difficulty": "intro",
+      "importance": "core"
     },
     {
       "title": "ヘッダー分割と Assembly Definition",
@@ -10497,7 +11003,9 @@
         "/languages/csharp/delegates-events-function-pointers.html",
         "/languages/csharp/",
         "/languages/csharp/il2cpp.html"
-      ]
+      ],
+      "difficulty": "intermediate",
+      "importance": "specialized"
     },
     {
       "title": "ポインタと参照型 / 値セマンティクスと class・struct",
@@ -10523,7 +11031,9 @@
         "/languages/csharp/destructor-dispose-raii-using.html",
         "/languages/csharp/",
         "/languages/csharp/templates-vs-generics.html"
-      ]
+      ],
+      "difficulty": "intermediate",
+      "importance": "useful"
     },
     {
       "title": "ポストプロセスパイプライン",
@@ -10554,7 +11064,9 @@
         "/graphics/optimization/render-graph.html",
         "/graphics/compute/compute-shader.html",
         "/graphics/postprocess/antialiasing.html"
-      ]
+      ],
+      "difficulty": "intermediate",
+      "importance": "core"
     },
     {
       "title": "ポリモーフィズムとインターフェース",
@@ -10584,7 +11096,9 @@
         "/design/patterns/strategy.html",
         "/design/foundations/",
         "/design/foundations/quality-attributes.html"
-      ]
+      ],
+      "difficulty": "intro",
+      "importance": "core"
     },
     {
       "title": "マテリアル・テクスチャ・シェーダーの基本",
@@ -10620,7 +11134,9 @@
         "/graphics/basics/light-and-rendered-images.html",
         "/graphics/shader/overview.html",
         "/graphics/lighting/pbr.html"
-      ]
+      ],
+      "difficulty": "intro",
+      "importance": "core"
     },
     {
       "title": "メッシュをインポートして描画用データに変える",
@@ -10652,7 +11168,9 @@
         "/math/rendering/transform.html",
         "/graphics/pipeline/vertex-shader.html",
         "/game/asset-loading.html"
-      ]
+      ],
+      "difficulty": "advanced",
+      "importance": "useful"
     },
     {
       "title": "メモリと実行時の演習",
@@ -10734,7 +11252,9 @@
         "/tools/build/debugging-and-analysis.html",
         "/runtime/memory/",
         "/runtime/memory/concurrency-bugs.html"
-      ]
+      ],
+      "difficulty": "intermediate",
+      "importance": "core"
     },
     {
       "title": "メモリマップドファイル — ファイルの範囲をアドレスへ対応させる",
@@ -10769,7 +11289,9 @@
         "/data/integer-bits-and-bytes.html",
         "/game/asset-loading.html",
         "/practice/io/mapped-file-observation.html"
-      ]
+      ],
+      "difficulty": "advanced",
+      "importance": "useful"
     },
     {
       "title": "メモリレイアウト・パディング・アラインメント・エンディアン",
@@ -10797,7 +11319,9 @@
         "/runtime/cpp-internals/exceptions-and-rtti-impl.html",
         "/runtime/cpp-internals/",
         "/runtime/cpp-internals/function-calls-and-cpu.html"
-      ]
+      ],
+      "difficulty": "intermediate",
+      "importance": "core"
     },
     {
       "title": "モデルとメッシュの基本 — 頂点から形を作る",
@@ -10834,7 +11358,9 @@
         "/graphics/basics/transforms-and-cameras.html",
         "/graphics/basics/materials-textures-and-shaders.html",
         "/graphics/mesh/gltf-mesh-buffers.html"
-      ]
+      ],
+      "difficulty": "intro",
+      "importance": "core"
     },
     {
       "title": "ライブラリ・API・SDK — 用意された機能を使う",
@@ -10868,7 +11394,9 @@
         "/runtime/cpp-internals/object-files-and-libraries.html",
         "/tools/build/build-tools-cmake.html",
         "/tools/development-tools-basics.html"
-      ]
+      ],
+      "difficulty": "intro",
+      "importance": "core"
     },
     {
       "title": "ラスタライゼーション",
@@ -10890,7 +11418,9 @@
         "/math/rendering/vector.html",
         "/graphics/pipeline/fragment-shader.html",
         "/graphics/postprocess/antialiasing.html"
-      ]
+      ],
+      "difficulty": "intermediate",
+      "importance": "core"
     },
     {
       "title": "ラムダ式・関数ポインタ・std::function",
@@ -10912,7 +11442,9 @@
         "/languages/cpp/templates-and-concepts.html",
         "/languages/cpp/",
         "/languages/cpp/enums-and-namespaces.html"
-      ]
+      ],
+      "difficulty": "intermediate",
+      "importance": "useful"
     },
     {
       "title": "リアルタイム3D技術全史",
@@ -10943,7 +11475,9 @@
         "/graphics/lighting/path-tracing.html",
         "/graphics/api/webgpu.html",
         "/guide/rendering/roadmap.html"
-      ]
+      ],
+      "difficulty": "intermediate",
+      "importance": "useful"
     },
     {
       "title": "リアルタイムグラフィックスを学ぶ",
@@ -11011,7 +11545,9 @@
         "/game/basics/scenes-and-components.html",
         "/game/basics/collisions-and-physics.html",
         "/graphics/basics/keyframes-and-animation.html"
-      ]
+      ],
+      "difficulty": "intro",
+      "importance": "useful"
     },
     {
       "title": "リフレクション — UCLASS・UFUNCTION・UPROPERTY・Unreal Header Tool",
@@ -11033,7 +11569,9 @@
         "/design/patterns/visitor.html",
         "/runtime/cpp-internals/memory-layout.html",
         "/game/unreal/"
-      ]
+      ],
+      "difficulty": "advanced",
+      "importance": "specialized"
     },
     {
       "title": "リンクエラー — 未解決外部シンボル・多重定義・ABI互換性",
@@ -11059,7 +11597,9 @@
         "/tools/build/debugging-and-analysis.html",
         "/tools/build/",
         "/tools/build/exercises.html"
-      ]
+      ],
+      "difficulty": "intermediate",
+      "importance": "useful"
     },
     {
       "title": "リングバッファとSPSCキュー — 満杯・折り返し・受け渡し",
@@ -11094,7 +11634,9 @@
         "/browser/streams-backpressure.html",
         "/practice/browser/ring-buffer-observation.html",
         "/browser/audio-worklet-buffering.html"
-      ]
+      ],
+      "difficulty": "advanced",
+      "importance": "specialized"
     },
     {
       "title": "リングバッファの満杯・折り返し・読み出し順を観察する",
@@ -11160,7 +11702,9 @@
         "/graphics/optimization/gpu-queue-synchronization.html",
         "/graphics/optimization/gpu-resource-lifetime.html",
         "/graphics/optimization/gpu-timestamp-queries.html"
-      ]
+      ],
+      "difficulty": "advanced",
+      "importance": "specialized"
     },
     {
       "title": "レンダリングパイプライン全体像",
@@ -11187,7 +11731,9 @@
         "/hardware/gpu/architecture.html",
         "/hardware/gpu/what-is-gpu.html",
         "/math/rendering/transform.html"
-      ]
+      ],
+      "difficulty": "intermediate",
+      "importance": "core"
     },
     {
       "title": "ワーカーが準備したアセットを描画側へ渡す",
@@ -11220,7 +11766,9 @@
         "/graphics/texture/texture-streaming-and-mip-residency.html",
         "/os/cancelling-overlapped-io.html",
         "/practice/threads/asset-worker-handoff-observation.html"
-      ]
+      ],
+      "difficulty": "advanced",
+      "importance": "specialized"
     },
     {
       "title": "依存関係と依存の方向",
@@ -11246,7 +11794,9 @@
         "/design/foundations/exercises.html",
         "/design/foundations/",
         "/design/foundations/abstraction-encapsulation.html"
-      ]
+      ],
+      "difficulty": "intro",
+      "importance": "core"
     },
     {
       "title": "仮想メモリ — アドレス変換・ページ・予約とコミット",
@@ -11291,7 +11841,9 @@
         "/runtime/memory/allocation-journey.html",
         "/runtime/memory/allocators-and-pools.html",
         "/practice/memory/windows-memory-observation.html"
-      ]
+      ],
+      "difficulty": "intermediate",
+      "importance": "core"
     },
     {
       "title": "仮想関数と virtual/override / コンパイル時多態と実行時多態",
@@ -11314,7 +11866,9 @@
         "/languages/csharp/templates-vs-generics.html",
         "/languages/csharp/",
         "/languages/csharp/delegates-events-function-pointers.html"
-      ]
+      ],
+      "difficulty": "intermediate",
+      "importance": "useful"
     },
     {
       "title": "家庭のネットワーク機器 — LAN・ルーター・Wi-Fiの役割",
@@ -11349,7 +11903,9 @@
         "/network/dns-resolution.html",
         "/network/ip-addresses-and-ports.html",
         "/hardware/io/nic-receive-queues.html"
-      ]
+      ],
+      "difficulty": "intro",
+      "importance": "useful"
     },
     {
       "title": "画面遷移の設計",
@@ -11371,7 +11927,9 @@
         "/design/case-studies/object-spawning.html",
         "/design/case-studies/",
         "/design/case-studies/sound-manager.html"
-      ]
+      ],
+      "difficulty": "intermediate",
+      "importance": "useful"
     },
     {
       "title": "開発ツールの基本 — エディター・IDE・デバッガ・プロファイラー",
@@ -11406,7 +11964,9 @@
         "/graphics/optimization/tools.html",
         "/graphics/optimization/frame-pacing.html",
         "/tools/terminal-shell-and-commands.html"
-      ]
+      ],
+      "difficulty": "intro",
+      "importance": "core"
     },
     {
       "title": "学習ロードマップ",
@@ -11453,7 +12013,9 @@
         "/languages/cpp/lambdas-and-functions.html",
         "/languages/cpp/templates-and-concepts.html",
         "/languages/cpp/"
-      ]
+      ],
+      "difficulty": "intermediate",
+      "importance": "useful"
     },
     {
       "title": "関数ポインタと delegate / Observer と event",
@@ -11474,7 +12036,9 @@
         "/languages/csharp/virtual-and-polymorphism.html",
         "/languages/csharp/",
         "/languages/csharp/headers-vs-asmdef.html"
-      ]
+      ],
+      "difficulty": "intermediate",
+      "importance": "useful"
     },
     {
       "title": "関数型・データ指向・CQRS — クラス以外の視点",
@@ -11498,7 +12062,9 @@
         "/design/naming.html",
         "/design/pattern-index.html",
         "/design/notebook-references.html"
-      ]
+      ],
+      "difficulty": "advanced",
+      "importance": "useful"
     },
     {
       "title": "関数呼び出し・コールスタック・呼出規約・レジスタ",
@@ -11526,7 +12092,9 @@
         "/runtime/cpp-internals/memory-layout.html",
         "/runtime/cpp-internals/",
         "/runtime/cpp-internals/cache-branch-simd.html"
-      ]
+      ],
+      "difficulty": "intermediate",
+      "importance": "core"
     },
     {
       "title": "記憶域期間とスコープ・寿命の違い",
@@ -11548,7 +12116,9 @@
         "/runtime/memory/allocators-and-pools.html",
         "/runtime/memory/gc-and-csharp-comparison.html",
         "/practice/memory/windows-memory-observation.html"
-      ]
+      ],
+      "difficulty": "intermediate",
+      "importance": "core"
     },
     {
       "title": "技術的負債・コードの臭い・リファクタリング",
@@ -11573,7 +12143,9 @@
         "/design/foundations/quality-attributes.html",
         "/design/foundations/",
         "/design/foundations/exercises.html"
-      ]
+      ],
+      "difficulty": "intro",
+      "importance": "core"
     },
     {
       "title": "疑問から選ぶ読み順",
@@ -11810,7 +12382,9 @@
         "/design/foundations/responsibility-and-separation.html",
         "/design/foundations/dependency.html",
         "/design/foundations/"
-      ]
+      ],
+      "difficulty": "intro",
+      "importance": "core"
     },
     {
       "title": "均等グリッドと空間ハッシュ — 近くの候補をセルで絞る",
@@ -11838,7 +12412,9 @@
         "/practice/algorithms/spatial-query-observation.html",
         "/algorithms/quadtrees-and-octrees.html",
         "/algorithms/bounding-volume-hierarchies.html"
-      ]
+      ],
+      "difficulty": "intermediate",
+      "importance": "useful"
     },
     {
       "title": "継承・委譲・コンポジション(比較ページ)",
@@ -11865,7 +12441,9 @@
         "/design/foundations/abstraction-encapsulation.html",
         "/design/foundations/",
         "/design/foundations/polymorphism-interface.html"
-      ]
+      ],
+      "difficulty": "intro",
+      "importance": "core"
     },
     {
       "title": "継承・仮想関数・純粋仮想関数・抽象クラス・多重継承・override/final",
@@ -11896,7 +12474,9 @@
         "/languages/cpp/raii.html",
         "/languages/cpp/",
         "/languages/cpp/overloading.html"
-      ]
+      ],
+      "difficulty": "intermediate",
+      "importance": "core"
     },
     {
       "title": "継承より合成、そして依存性の注入",
@@ -11919,7 +12499,9 @@
         "/design/naming.html",
         "/design/pattern-index.html",
         "/design/notebook-references.html"
-      ]
+      ],
+      "difficulty": "intermediate",
+      "importance": "core"
     },
     {
       "title": "後処理のピンポンバッファとフレーム履歴",
@@ -11953,7 +12535,9 @@
         "/graphics/optimization/parallel-command-recording.html",
         "/graphics/optimization/gpu-queue-synchronization.html",
         "/graphics/optimization/gpu-resource-lifetime.html"
-      ]
+      ],
+      "difficulty": "advanced",
+      "importance": "specialized"
     },
     {
       "title": "光とレンダリングの基本 — シーンから画像を作る",
@@ -11993,7 +12577,9 @@
         "/graphics/optimization/swap-chain-and-vsync.html",
         "/game/basics/game-loop-and-time.html",
         "/graphics/basics/models-and-meshes.html"
-      ]
+      ],
+      "difficulty": "intro",
+      "importance": "core"
     },
     {
       "title": "構造体・クラス・アクセス指定子",
@@ -12019,7 +12605,9 @@
         "/languages/cpp/ctor-dtor-copy-move.html",
         "/languages/cpp/arrays-and-strings.html",
         "/languages/cpp/"
-      ]
+      ],
+      "difficulty": "intro",
+      "importance": "core"
     },
     {
       "title": "行列",
@@ -12037,7 +12625,9 @@
         "/math/rendering/vector.html",
         "/math/rendering/transform.html",
         "/math/rendering/quaternion.html"
-      ]
+      ],
+      "difficulty": "intermediate",
+      "importance": "core"
     },
     {
       "title": "座標変換",
@@ -12057,7 +12647,9 @@
         "/math/rendering/matrix.html",
         "/graphics/pipeline/overview.html",
         "/graphics/pipeline/vertex-shader.html"
-      ]
+      ],
+      "difficulty": "intermediate",
+      "importance": "core"
     },
     {
       "title": "座標変換とカメラの基本 — モデルの位置が画面に映るまで",
@@ -12092,7 +12684,9 @@
         "/math/rendering/camera.html",
         "/graphics/basics/light-and-rendered-images.html",
         "/graphics/pipeline/overview.html"
-      ]
+      ],
+      "difficulty": "intro",
+      "importance": "core"
     },
     {
       "title": "最終章 ボタンを押してから画面に出るまで",
@@ -12140,7 +12734,9 @@
         "/game/patterns/object-pool.html",
         "/game/patterns/",
         "/game/patterns/type-object-and-sandbox.html"
-      ]
+      ],
+      "difficulty": "advanced",
+      "importance": "useful"
     },
     {
       "title": "三大コンパイラ: MSVC・Clang・GCC",
@@ -12161,7 +12757,9 @@
         "/tools/build/what-is-build.html",
         "/tools/build/",
         "/tools/build/build-tools-cmake.html"
-      ]
+      ],
+      "difficulty": "intermediate",
+      "importance": "useful"
     },
     {
       "title": "四分木と八分木 — 必要な場所だけ細かく分ける",
@@ -12191,7 +12789,9 @@
         "/algorithms/uniform-grid-and-spatial-hash.html",
         "/algorithms/bounding-volume-hierarchies.html",
         "/algorithms/search-trees.html"
-      ]
+      ],
+      "difficulty": "advanced",
+      "importance": "specialized"
     },
     {
       "title": "実行ファイルを起動してmainへ到達するまで — プロセス・スレッド・ローダー",
@@ -12232,7 +12832,9 @@
         "/runtime/memory/concurrency-bugs.html",
         "/languages/csharp/il2cpp.html",
         "/practice/process/windows-process-observation.html"
-      ]
+      ],
+      "difficulty": "intermediate",
+      "importance": "core"
     },
     {
       "title": "実績システムの設計",
@@ -12256,7 +12858,9 @@
         "/design/case-studies/status-effects.html",
         "/design/case-studies/",
         "/design/case-studies/save-data.html"
-      ]
+      ],
+      "difficulty": "intermediate",
+      "importance": "specialized"
     },
     {
       "title": "手動メモリ管理と GC",
@@ -12283,7 +12887,9 @@
         "/languages/csharp/il2cpp.html",
         "/languages/csharp/",
         "/languages/csharp/exceptions-comparison.html"
-      ]
+      ],
+      "difficulty": "intermediate",
+      "importance": "useful"
     },
     {
       "title": "出力結合 (Depth / Stencil / Blend)",
@@ -12302,7 +12908,9 @@
         "/graphics/path/forward.html",
         "/graphics/path/deferred.html",
         "/graphics/optimization/basics.html"
-      ]
+      ],
+      "difficulty": "intermediate",
+      "importance": "core"
     },
     {
       "title": "所有権と借用",
@@ -12322,7 +12930,9 @@
         "/runtime/memory/storage-duration-and-lifetime.html",
         "/runtime/memory/",
         "/runtime/memory/memory-bugs.html"
-      ]
+      ],
+      "difficulty": "intermediate",
+      "importance": "core"
     },
     {
       "title": "小さなシューティングの設計 — C++とUnityで作る",
@@ -12408,7 +13018,9 @@
         "/design/case-studies/event-notification.html",
         "/design/case-studies/",
         "/design/case-studies/exercises.html"
-      ]
+      ],
+      "difficulty": "advanced",
+      "importance": "specialized"
     },
     {
       "title": "衝突と物理の基本 — コライダー・Rigidbody・トリガー",
@@ -12444,7 +13056,9 @@
         "/game/basics/game-loop-and-time.html",
         "/game/basics/scenes-and-components.html",
         "/graphics/basics/transforms-and-cameras.html"
-      ]
+      ],
+      "difficulty": "intro",
+      "importance": "core"
     },
     {
       "title": "条件分岐・繰り返し・関数 — 処理の順番を作る",
@@ -12479,7 +13093,9 @@
         "/languages/cpp/values-pointers-references.html",
         "/game/shooter-design.html",
         "/runtime/cpp-internals/function-calls-and-cpu.html"
-      ]
+      ],
+      "difficulty": "intro",
+      "importance": "core"
     },
     {
       "title": "振る舞いを変える — Strategy・State・Command",
@@ -12502,7 +13118,9 @@
         "/design/naming.html",
         "/design/pattern-index.html",
         "/design/notebook-references.html"
-      ]
+      ],
+      "difficulty": "intermediate",
+      "importance": "core"
     },
     {
       "title": "親子プロセスでパイプの終端を調べる",
@@ -12555,7 +13173,9 @@
         "/practice/algorithms/generational-handle-observation.html",
         "/runtime/thread-synchronization.html",
         "/game/asset-loading.html"
-      ]
+      ],
+      "difficulty": "advanced",
+      "importance": "useful"
     },
     {
       "title": "世代付きハンドルでスロットの再利用を追う",
@@ -12623,7 +13243,9 @@
         "/guide/low-level/computer-and-data.html",
         "/data/binary-file-validation.html",
         "/practice/io/asset-pack-observation.html"
-      ]
+      ],
+      "difficulty": "intro",
+      "importance": "core"
     },
     {
       "title": "生成を整理する — Factory と Builder",
@@ -12645,7 +13267,9 @@
         "/design/naming.html",
         "/design/pattern-index.html",
         "/design/notebook-references.html"
-      ]
+      ],
+      "difficulty": "intermediate",
+      "importance": "useful"
     },
     {
       "title": "責務と関心の分離",
@@ -12669,7 +13293,9 @@
         "/design/foundations/exercises.html",
         "/design/foundations/what-is-design.html",
         "/design/foundations/"
-      ]
+      ],
+      "difficulty": "intro",
+      "importance": "core"
     },
     {
       "title": "設計ケーススタディの読み進め方",
@@ -12931,7 +13557,9 @@
         "/design/foundations/quality-attributes.html",
         "/design/decisions/split-class.html",
         "/design/foundations/"
-      ]
+      ],
+      "difficulty": "intro",
+      "importance": "core"
     },
     {
       "title": "設計の基礎の演習",
@@ -13024,7 +13652,9 @@
         "/design/foundations/tech-debt-and-refactoring.html",
         "/design/decisions/optimize-or-refactor.html",
         "/design/foundations/"
-      ]
+      ],
+      "difficulty": "intro",
+      "importance": "core"
     },
     {
       "title": "設計は「変更の置き場所」を決めること",
@@ -13048,7 +13678,9 @@
         "/design/naming.html",
         "/design/pattern-index.html",
         "/design/notebook-references.html"
-      ]
+      ],
+      "difficulty": "intro",
+      "importance": "core"
     },
     {
       "title": "設計パターンの索引",
@@ -13638,7 +14270,9 @@
         "/languages/control-flow-and-functions.html",
         "/data/integer-bits-and-bytes.html",
         "/runtime/memory/storage-duration-and-lifetime.html"
-      ]
+      ],
+      "difficulty": "intro",
+      "importance": "core"
     },
     {
       "title": "値型と参照・ポインタ・参照",
@@ -13661,7 +14295,9 @@
         "/runtime/cpp-internals/memory-layout.html",
         "/languages/cpp/",
         "/languages/cpp/const-correctness.html"
-      ]
+      ],
+      "difficulty": "intro",
+      "importance": "core"
     },
     {
       "title": "抽象化・カプセル化・情報隠蔽",
@@ -13686,7 +14322,9 @@
         "/design/foundations/polymorphism-interface.html",
         "/design/foundations/",
         "/design/foundations/inheritance-delegation-composition.html"
-      ]
+      ],
+      "difficulty": "intro",
+      "importance": "core"
     },
     {
       "title": "頂点バッファとインデックスバッファから三角形を組み立てる",
@@ -13716,7 +14354,9 @@
         "/data/binary-file-validation.html",
         "/graphics/optimization/gpu-resource-lifetime.html",
         "/practice/graphics/glb-mesh-observation.html"
-      ]
+      ],
+      "difficulty": "intermediate",
+      "importance": "useful"
     },
     {
       "title": "通知と疎結合 — Observer・Event・Mediator",
@@ -13739,7 +14379,9 @@
         "/design/naming.html",
         "/design/pattern-index.html",
         "/design/notebook-references.html"
-      ]
+      ],
+      "difficulty": "intermediate",
+      "importance": "core"
     },
     {
       "title": "低レイヤからゲームの仕組みを学ぶ",
@@ -13812,7 +14454,9 @@
         "/design/case-studies/weapon-switching.html",
         "/design/case-studies/",
         "/design/case-studies/status-effects.html"
-      ]
+      ],
+      "difficulty": "intermediate",
+      "importance": "useful"
     },
     {
       "title": "同じ60 FPSで表示間隔を比べる",
@@ -13875,7 +14519,9 @@
         "/browser/cross-origin-isolation.html",
         "/browser/service-worker-offline.html",
         "/practice/browser/cors-observation.html"
-      ]
+      ],
+      "difficulty": "intermediate",
+      "importance": "core"
     },
     {
       "title": "二分ヒープと優先度付きキュー",
@@ -13903,7 +14549,9 @@
         "/algorithms/arrays-and-dynamic-arrays.html",
         "/algorithms/queues-and-deques.html",
         "/algorithms/search-trees.html"
-      ]
+      ],
+      "difficulty": "intermediate",
+      "importance": "useful"
     },
     {
       "title": "二分探索木と順序付き連想コンテナ",
@@ -13934,7 +14582,9 @@
       "links": [
         "/algorithms/hash-tables.html",
         "/algorithms/binary-heaps.html"
-      ]
+      ],
+      "difficulty": "intermediate",
+      "importance": "useful"
     },
     {
       "title": "入力から画面に出るまでの遅延",
@@ -13961,7 +14611,9 @@
         "/graphics/optimization/swap-chain-and-vsync.html",
         "/practice/graphics/input-latency-observation.html",
         "/graphics/optimization/frame-pacing.html"
-      ]
+      ],
+      "difficulty": "intermediate",
+      "importance": "useful"
     },
     {
       "title": "入力の基本 — デバイスからゲームのアクションへ",
@@ -13994,7 +14646,9 @@
         "/game/basics/ui-layout-and-interaction.html",
         "/game/basics/game-states-and-pause.html",
         "/game/basics/game-events-and-notifications.html"
-      ]
+      ],
+      "difficulty": "intro",
+      "importance": "core"
     },
     {
       "title": "入力遅延を待ち時間と描画時間に分けてみる",
@@ -14051,7 +14705,9 @@
         "/algorithms/queues-and-deques.html",
         "/algorithms/linked-lists.html",
         "/languages/cpp/stl.html"
-      ]
+      ],
+      "difficulty": "intro",
+      "importance": "core"
     },
     {
       "title": "配列と文字列",
@@ -14076,7 +14732,9 @@
         "/languages/cpp/const-correctness.html",
         "/languages/cpp/",
         "/languages/cpp/structs-and-classes.html"
-      ]
+      ],
+      "difficulty": "intro",
+      "importance": "core"
     },
     {
       "title": "発展編 専門テーマを選ぶ",
@@ -14128,7 +14786,9 @@
         "/design/decisions/events-di-singleton.html",
         "/design/decisions/",
         "/design/decisions/optimize-or-refactor.html"
-      ]
+      ],
+      "difficulty": "advanced",
+      "importance": "useful"
     },
     {
       "title": "判断ガイド: イベントを使うべきか・依存性注入を使うべきか・Singletonを許容できるか",
@@ -14149,7 +14809,9 @@
         "/design/decisions/abstraction-and-patterns.html",
         "/design/decisions/",
         "/design/decisions/cpp-choices.html"
-      ]
+      ],
+      "difficulty": "intermediate",
+      "importance": "useful"
     },
     {
       "title": "判断ガイド: インターフェースを作るべきか",
@@ -14172,7 +14834,9 @@
         "/design/decisions/split-class.html",
         "/design/decisions/",
         "/design/decisions/inheritance-or-composition.html"
-      ]
+      ],
+      "difficulty": "intermediate",
+      "importance": "useful"
     },
     {
       "title": "判断ガイド: クラスを分けるべきか",
@@ -14192,7 +14856,9 @@
         "/design/foundations/tech-debt-and-refactoring.html",
         "/design/decisions/",
         "/design/decisions/create-interface.html"
-      ]
+      ],
+      "difficulty": "intermediate",
+      "importance": "core"
     },
     {
       "title": "判断ガイド: 継承かコンポジションか",
@@ -14212,7 +14878,9 @@
         "/design/decisions/create-interface.html",
         "/design/decisions/",
         "/design/decisions/abstraction-and-patterns.html"
-      ]
+      ],
+      "difficulty": "intermediate",
+      "importance": "core"
     },
     {
       "title": "判断ガイド: 最適化すべきか・リファクタリングすべきか",
@@ -14232,7 +14900,9 @@
         "/design/decisions/cpp-choices.html",
         "/design/decisions/",
         "/design/decisions/exercises.html"
-      ]
+      ],
+      "difficulty": "intermediate",
+      "importance": "core"
     },
     {
       "title": "判断ガイド: 抽象化すべきか・デザインパターンを使うべきか",
@@ -14253,7 +14923,9 @@
         "/design/decisions/inheritance-or-composition.html",
         "/design/decisions/",
         "/design/decisions/events-di-singleton.html"
-      ]
+      ],
+      "difficulty": "intermediate",
+      "importance": "core"
     },
     {
       "title": "判断ガイドの演習",
@@ -14324,7 +14996,9 @@
         "/game/asset-loading.html",
         "/practice/assets/asset-lifecycle-model.html",
         "/practice/io/async-file-read-observation.html"
-      ]
+      ],
+      "difficulty": "intermediate",
+      "importance": "core"
     },
     {
       "title": "描画の学習ガイドについて",
@@ -14441,7 +15115,9 @@
         "/tools/build/build-speed.html",
         "/tools/build/",
         "/tools/build/link-errors.html"
-      ]
+      ],
+      "difficulty": "intermediate",
+      "importance": "core"
     },
     {
       "title": "浮動小数点の比較と誤差の扱い — 絶対許容差・相対許容差を決める",
@@ -14473,7 +15149,9 @@
         "/data/floating-point-spacing.html",
         "/practice/math/float-comparison-observation.html",
         "/guide/low-level/computer-and-data.html"
-      ]
+      ],
+      "difficulty": "intermediate",
+      "importance": "core"
     },
     {
       "title": "武器切り替えの設計",
@@ -14496,7 +15174,9 @@
         "/design/case-studies/player-input.html",
         "/design/case-studies/",
         "/design/case-studies/enemy-ai.html"
-      ]
+      ],
+      "difficulty": "intermediate",
+      "importance": "specialized"
     },
     {
       "title": "平均60 FPSでもカクつくのはなぜか — フレームタイムとフレームペーシング",
@@ -14527,7 +15207,9 @@
         "/graphics/optimization/swap-chain-and-vsync.html",
         "/guide/low-level/input-and-game-loop.html",
         "/graphics/optimization/tools.html"
-      ]
+      ],
+      "difficulty": "intro",
+      "importance": "core"
     },
     {
       "title": "並行処理のバグ — data race・race condition・false sharing",
@@ -14550,7 +15232,9 @@
         "/runtime/memory/memory-bugs.html",
         "/runtime/memory/",
         "/runtime/memory/cache-locality-aos-soa.html"
-      ]
+      ],
+      "difficulty": "advanced",
+      "importance": "core"
     },
     {
       "title": "並列アルゴリズム — Reduction / Prefix Sum (Scan)",
@@ -14569,7 +15253,9 @@
         "/graphics/compute/shared-memory.html",
         "/graphics/optimization/gpu-driven.html",
         "/graphics/compute/cuda-opencl.html"
-      ]
+      ],
+      "difficulty": "advanced",
+      "importance": "specialized"
     },
     {
       "title": "翻訳単位・ヘッダー・include・前方宣言・ODR",
@@ -14590,7 +15276,9 @@
         "/tools/build/samples/tu-demo.html",
         "/runtime/cpp-internals/",
         "/runtime/cpp-internals/symbols-and-linkage.html"
-      ]
+      ],
+      "difficulty": "intermediate",
+      "importance": "core"
     },
     {
       "title": "未定義動作・実装定義・未規定動作",
@@ -14611,7 +15299,9 @@
         "/languages/cpp/stl.html",
         "/languages/cpp/",
         "/languages/cpp/exercises.html"
-      ]
+      ],
+      "difficulty": "advanced",
+      "importance": "core"
     },
     {
       "title": "有限ステートマシンと階層型ステートマシン(State と Strategy の比較つき)",
@@ -14635,7 +15325,9 @@
         "/design/case-studies/enemy-ai.html",
         "/game/patterns/type-object-and-sandbox.html",
         "/game/patterns/"
-      ]
+      ],
+      "difficulty": "intermediate",
+      "importance": "core"
     },
     {
       "title": "用語・別名から調べる",
@@ -14822,7 +15514,9 @@
         "/languages/cpp/enums-and-namespaces.html",
         "/languages/cpp/",
         "/languages/cpp/auto-and-constexpr.html"
-      ]
+      ],
+      "difficulty": "intermediate",
+      "importance": "useful"
     },
     {
       "title": "連結リスト — ノードを見つける処理とつなぎ替え",
@@ -14850,7 +15544,9 @@
         "/algorithms/arrays-and-dynamic-arrays.html",
         "/algorithms/queues-and-deques.html",
         "/languages/cpp/stl.html"
-      ]
+      ],
+      "difficulty": "intro",
+      "importance": "useful"
     }
   ]
 }

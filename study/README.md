@@ -49,6 +49,8 @@ study:
 
 `format` は `article`（解説）、`glossary`（用語集）、`history`（技術史）、`references`（参考資料）、`index`（目次）、`path`（学習経路）、`tutorial`（制作手順）、`exercise`（演習）、`sample`（サンプル）です。定義は `docs/.vitepress/content-model.mjs` にあります。
 
+辞典の解説・技術史・用語集の難易度と重要度は、`docs/.vitepress/article-ratings/` にURLごとに記録します。難易度は読むための前提知識に合わせて `intro`・`intermediate`・`advanced`、重要度はこのサイトで後続の学習に使う頻度や用途に合わせて `core`・`useful`・`specialized` を選びます。
+
 `status` は `published`（公開中）、`outline`（学習計画・概要）、`draft`（草稿）、`planned`（執筆予定）です。公開状態と技術的な検証結果は分け、確認した環境・範囲は任意の `verification` と本文に記録します。`published` は全コードの動作確認や正しさを保証する値ではありません。
 
 分野IDは `data`、`hardware`、`os`、`compilers`、`languages`、`runtime`、`browser`、`network`、`math`、`algorithms`、`design`、`graphics`、`game`、`history`、`tools` です。横断的な案内は `guide`、用語索引は `terms` を使用できます。
