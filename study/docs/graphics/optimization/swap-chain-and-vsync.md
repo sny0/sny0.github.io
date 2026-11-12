@@ -6,9 +6,9 @@ study:
   format: article
   status: published
   domain: graphics
-  summary: 描画に使う画像を取得してから再取得できるまでを追い、FIFO・MAILBOX・IMMEDIATEで画面に出る絵と待ち時間を比べる。
-  aliases: [スワップチェーン, スワップチェイン, swap chain, swapchain, VSync, 垂直同期, ティアリング, scanout, FIFO, MAILBOX, IMMEDIATE, VRR]
-  verification: VulkanのVkPresentModeKHR・画像取得・Presentの仕様と、DXGIのPresent・VRRの公式資料に照合（2026-11-06）
+  summary: ティアリングが起きる走査と、VSyncオフ・オン・VRRの更新タイミングを図と実践で比べる。FIFO・MAILBOX・IMMEDIATEで画像を選ぶ規則も扱う。
+  aliases: [スワップチェーン, スワップチェイン, swap chain, swapchain, VSync, 垂直同期, ティアリング, scanout, FIFO, MAILBOX, IMMEDIATE, VRR, 可変リフレッシュレート, LFC]
+  verification: Vulkanの提示仕様、DXGIのPresentとVRR、Linux DRM/KMSのVRR、AMDのLFC資料に照合（2026-11-13）
 ---
 
 # スワップチェーンとVSync — 描画した絵が画面に出るまで
@@ -42,6 +42,29 @@ GPUが次の絵を描いている間にも、画面は前の絵を読み出し�
 
 上から下へ順に画像を読み出す画面を考えます。この読み出しを**スキャンアウト**と呼びます。固定60 Hzでは1回の更新が約16.67 msごとに始まります。読み出しの途中で参照する画像を切り替えると、上の行は古い絵、下の行は新しい絵になります。動く物の位置が境目でずれて見える現象が**ティアリング**です。VSyncは、次の読み出しまでの垂直ブランクに切り替えを合わせて、1回の走査で同じ絵を使う方法です。[Vulkanの表示モードと垂直ブランク](https://docs.vulkan.org/refpages/latest/refpages/source/VkPresentModeKHR.html)
 
+## VSyncオフ・オン・VRRで走査の始まりを比べる
+
+同じ場面を描き、絵Aは0 ms、絵Bは20 ms、絵Cは40 ms、絵Dは58 msで完成したとします。固定60 Hzの次の走査は約16.67 msで始まるため、絵Bはその開始に間に合いません。ここからの表示は、走査の開始と、走査中に画像を替えるかどうかで変わります。
+
+| 方式 | いつ切り替わるか | この例での絵B |
+| --- | --- | --- |
+| VSyncオフ（即時切り替えのモデル） | 固定周期で走査し、描画が終わると参照画像を替える | 20 msの時点で走査中。上約20%にA、下約80%にBが出る |
+| VSyncオン（固定60 Hz） | 固定周期の走査の境界で参照画像を替える | 約16.67 msでAを再表示し、約33.33 msからBを走査する |
+| VRR（仮想40〜60 Hz） | 対応範囲内で次の走査の開始を動かし、走査する1枚を選ぶ | 20 msからBを走査し、次の画像まで走査と走査の間で待つ |
+
+<figure class="study-figure">
+  <img src="/images/graphics/vsync-vrr-timing.svg" alt="絵Bが20 msで完成する例。VSyncオフでは16.67 msに始まった走査の途中でAからBへ切り替わる。オンでは16.67 msにAを再表示し、33.33 msにBを開始。VRRでは20 msにBの走査を始め、各走査の間に待ちが入る。" width="760" height="400" loading="lazy">
+  <figcaption>上段の破線は走査中の切り替えです。下段の空白は次の走査までの待ちです。<a href="/study/images/graphics/vsync-vrr-timing.svg" target="_blank" rel="noopener noreferrer">VSyncとVRRの図を拡大</a></figcaption>
+</figure>
+
+**VRR（可変リフレッシュレート）**は、対応範囲内で走査の開始間隔を変える仕組みです。例えばLinux DRM/KMSは、次の画像が届くか時間切れになるまで、垂直ブランクの一部を伸ばす仕組みを説明しています。このモデルのVRRは40〜60 Hzなので、更新の間隔に約16.67〜25 msを使えます。今回の画像は18〜22 ms間隔で届くので、描画完了に合わせて次の1枚を走査できます。固定周期に合わせるための追加の待ちは減りますが、描画自体が遅れれば、新しい絵が届く間隔も伸びます。[Linux DRM/KMSのVRR仕様](https://docs.kernel.org/6.14/gpu/drm-kms.html#variable-refresh-properties) · [VESAのAdaptive-Sync解説](https://www.vesa.org/wp-content/uploads/2014/07/VESA-Adaptive-Sync-Whitepaper-140620.pdf)
+
+最低リフレッシュレートより遅い場合、**LFC（Low Framerate Compensation）**に対応する環境では、同じ画像を複数回更新して対応範囲に収めることがあります。例えば60〜144 Hz対応で描画が40 FPSなら、同じ画像を2回ずつ更新して80 Hzにできます。上限より速く絵が届く場合の待ちや置き換え、ティアリングの扱いは、機器や表示方式、同期の設定によって変わります。[AMDのFreeSyncとLFCの解説](https://www.amd.com/en/products/graphics/technologies/freesync.html) · [Khronosの提示モード仕様](https://docs.vulkan.org/refpages/latest/refpages/source/VkPresentModeKHR.html)
+
+[VSyncオフ・オン・VRRを比べる実践](/practice/graphics/vsync-vrr-observation.html)では、同じ描画完了時刻を使って、動く物体の境目や、新しい位置が表示される時刻を見比べられます。ブラウザー内に仮想の走査結果を描くモデルです。
+
+<a href="/study/samples/graphics/vsync-vrr-observation/index.html" target="_self">3方式の比較デモを開く</a>
+
 ## 同じ絵が届いても、表示モードで選ばれる絵が変わる
 
 Vulkanでは、使える表示モードを出力先のサーフェスごとに問い合わせます。下の三つのうち、対応が必須なのは `VK_PRESENT_MODE_FIFO_KHR` です。[KhronosのVkPresentModeKHR仕様](https://docs.vulkan.org/refpages/latest/refpages/source/VkPresentModeKHR.html)
@@ -67,6 +90,25 @@ Vulkanでは、使える表示モードを出力先のサーフェスごとに�
 
 DXGIのフリップモデルで `Present(1, 0)` を使うと、提示を垂直ブランクに同期します。`Present(0, ...)` のフリップキューでは、後の提示によって待ち候補が省略される場合があります。ウィンドウやボーダーレスでティアリングを許可する場合は、対応を照会し、作成時の `DXGI_SWAP_CHAIN_FLAG_ALLOW_TEARING` と、`SyncInterval = 0` での `DXGI_PRESENT_ALLOW_TEARING` を組み合わせます。DXGIのフラグとVulkanの表示モードは、それぞれのAPIの規則で読みます。[DXGIのPresentとフリップキュー](https://learn.microsoft.com/en-us/windows/win32/api/dxgi/nf-dxgi-idxgiswapchain-present) · [DXGI_PRESENTのフラグ](https://learn.microsoft.com/en-us/windows/win32/direct3ddxgi/dxgi-present)
 
-**可変リフレッシュレート（VRR）**では、対応範囲内で画面の更新間隔そのものを変えられます。DXGIではVRR対応経路を使うためにティアリングを許可する設定が必要です。実際に途中で絵が切り替わるかは、VRRの動作範囲、画面モード、合成の経路などに依存します。[DXGIのVRR対応手順](https://learn.microsoft.com/en-us/windows/win32/direct3ddxgi/variable-refresh-rate-displays)
+DXGIのウィンドウやボーダーレスでは、VRR対応経路を使うためにティアリングを許可する設定が必要です。これは提示の制約を緩めるフラグです。実際に途中で絵が切り替わるかは、VRRの動作範囲、画面モード、合成の経路などに依存します。[DXGIのVRR対応手順](https://learn.microsoft.com/en-us/windows/win32/direct3ddxgi/variable-refresh-rate-displays)
 
 描画は速いのに操作が遅れて見えるときは、入力を読んだ時刻、GPUで描き終えた時刻、画面に出始める時刻を分けて測ります。表示待ちが増えているなら、DXGIの待機可能なスワップチェーンを使い、次のフレームを受け付けられる通知を待ってから入力を読み、描画を始める方法があります。安定性も確認するには、表示間隔の長い箇所と合わせて見ます。[MicrosoftのDXGIでの遅延低減](https://learn.microsoft.com/en-us/windows/uwp/gaming/reduce-latency-with-dxgi-1-3-swap-chains) · [フレームタイムとフレームペーシング](/graphics/optimization/frame-pacing.html)
+
+## 理解度チェック
+
+1. 上から下へ走査する途中でAからBへ切り替えると、動く縦棒はどう見えますか。
+
+   ::: details 解答
+   上の行にはAでの位置、下の行にはBでの位置が描かれます。縦棒は切り替わった行で横にずれて見えます。
+   :::
+
+2. Bが20 msに完成する例で、固定60 HzのVSyncオンとVRRでは、Bをいつ使い始めますか。
+
+   ::: details 解答
+   固定60 HzのVSyncオンでは約16.67 msの走査に間に合わず、約33.33 msからBを使います。仮想40〜60 HzのVRRでは、前の走査開始から20 msが対応範囲内なので、20 msからBを走査します。
+   :::
+
+## 関連項目
+
+- [VSyncオフ・オン・VRRを比べる](/practice/graphics/vsync-vrr-observation.html)で、絵の完成から走査開始までを同じ場面で確認する。
+- [3DCG・描画ロードマップの「GPU最適化」](/learn/roadmap.html?node=gfx-optimization#graphics)

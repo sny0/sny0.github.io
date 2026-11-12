@@ -62,7 +62,7 @@
 | [頂点入力 / インデックスバッファ / Input Assembler / DrawIndexedInstanced / BaseVertexLocation](/graphics/mesh/vertex-and-index-input.html) | インデックスを頂点へ対応付け、属性を頂点シェーダーへ渡す |
 | [メッシュインポート / クック / 座標系 / winding / UVシーム / AABB](/graphics/mesh/mesh-import-and-cooking.html) | 制作した形状を実行時のバッファと描画単位へ変換する |
 | [PSO / パイプラインキャッシュ / シェーダーコンパイル / pipeline cache / warm-up](/graphics/optimization/pipeline-compilation-stutter.html) | 初回使用までに必要なパイプライン作成とキャッシュの役割を調べる |
-| [スワップチェーン / swapchain / VSync / 垂直同期 / Present / scanout / 走査 / ティアリング / FIFO / MAILBOX / IMMEDIATE](/graphics/optimization/swap-chain-and-vsync.html) | 描画済みの絵が画面へ出る順序と時刻、次の描画に画像を使い回せる条件を調べる |
+| [スワップチェーン / swapchain / VSync / 垂直同期 / Present / scanout / 走査 / ティアリング / FIFO / MAILBOX / IMMEDIATE / VRR / 可変リフレッシュレート / LFC](/graphics/optimization/swap-chain-and-vsync.html) | 固定周期と可変周期の走査、描画済みの絵が画面に出る順序と時刻を調べる |
 | [フレームタイム / frame time / フレームペーシング / frame pacing / フレーム予算 / p99 / スタッター](/graphics/optimization/frame-pacing.html) | CPU・GPUの処理時間と表示間隔を分け、カクつきが起きた時刻を調べる |
 | [CPU プロファイリング / サンプリング / 計装 / ProfilerMarker / p95](/tools/profiling/cpu-profiling.html) | フレーム中の仕事と待機を追い、遅いフレームの原因を絞る |
 | [通過音 / フライバイ / flyby / 最接近 / 視線方向の速度 / PannerNode / playbackRate](/browser/audio-flyby.html) | 横切る音源の軌道から、時間ごとの高さ、左右の配分、距離減衰を求める |

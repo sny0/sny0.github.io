@@ -74,3 +74,7 @@ python -m http.server 4202 --bind 127.0.0.1
 ### 選んだ走査を3方式で描く
 
 <<< @/public/samples/graphics/swap-chain-observation/main.js{js}
+
+## 関連項目
+
+- [同じシーンでVSyncオフ・オン・VRRを比べる](/practice/graphics/vsync-vrr-observation.html)で、固定周期と可変周期の走査を確認する。

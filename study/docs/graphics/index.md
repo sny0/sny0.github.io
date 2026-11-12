@@ -124,6 +124,7 @@
 - [フレーム生成を切り替えて滑らかさと入力への反応を比べる](/practice/graphics/frame-generation-observation.html)
 - [斜めの床でテクスチャのフィルタリングを比べる](/practice/graphics/texture-filtering-observation.html)
 - [同じ60 FPSで表示間隔を比べる](/practice/graphics/frame-pacing-observation.html)
+- [同じシーンでVSyncオフ・オン・VRRを比べる](/practice/graphics/vsync-vrr-observation.html)
 - [同じシーンでネイティブ描画・バイリニア・時間方向の拡大を比べる](/practice/graphics/taau-observation.html)
 - [入力遅延を待ち時間と描画時間に分けてみる](/practice/graphics/input-latency-observation.html)
 - [2. デバイス初期化とスワップチェイン](/graphics/capstone/02-device.html)

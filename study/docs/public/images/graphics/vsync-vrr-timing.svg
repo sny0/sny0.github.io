@@ -1,0 +1,54 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="760" height="400" viewBox="0 0 760 400" role="img" aria-labelledby="title desc" xml:lang="ja">
+  <title id="title">VSyncオフ・オンとVRRの走査開始時刻</title>
+  <desc id="desc">Aは0、Bは20、Cは40、Dは58ミリ秒に描画完了。VSyncオフの16.67ミリ秒からの走査では、20ミリ秒で上20%のAから下80%のBに切り替わる。VSyncオンは16.67ミリ秒でAを再表示し33.33ミリ秒でBを開始。VRRは20ミリ秒でBを走査し始め、次の画像まで待つ。</desc>
+  <rect width="760" height="400" rx="18" fill="#f8fafc"/>
+  <g font-family="'Noto Sans JP', 'Yu Gothic', 'Meiryo', sans-serif" fill="#162334">
+    <text x="25" y="40" font-size="23" font-weight="700">同じ描画完了時刻で、走査の始まりを比べる</text>
+    <text x="25" y="68" font-size="15" fill="#475569">固定60 Hz・仮想VRR 40〜60 Hz。枠は上から下へ走査する時間</text>
+
+    <g fill="none" stroke="#a8b7c9" stroke-dasharray="4 4">
+      <path d="M180 102V263 M316 102V263 M452 102V263 M574.4 102V263 M724 102V263"/>
+    </g>
+    <g fill="#475569" font-size="14" text-anchor="middle">
+      <text x="180" y="98" text-anchor="start">A・0 ms</text>
+      <text x="316" y="98">B・20 ms</text>
+      <text x="452" y="98">C・40 ms</text>
+      <text x="574.4" y="98">D・58 ms</text>
+      <text x="724" y="98" text-anchor="end">E・80 ms</text>
+    </g>
+
+    <g font-size="16" font-weight="700">
+      <text x="25" y="139">VSync オフ</text>
+      <text x="25" y="190">VSync オン</text>
+      <text x="25" y="241">VRR</text>
+    </g>
+    <g>
+      <path fill="#dcecff" d="M180 116H316V148H180Z M180 167H406.67V199H180Z M180 218H293.33V250H180Z"/>
+      <path fill="#dff3ec" d="M316 116H452V148H316Z M406.67 167H520V199H406.67Z M316 218H429.33V250H316Z"/>
+      <path fill="#ede5f7" d="M452 116H574.4V148H452Z M520 167H633.33V199H520Z M452 218H565.33V250H452Z"/>
+      <path fill="#fff0d4" d="M574.4 116H724V148H574.4Z M633.33 167H724V199H633.33Z M574.4 218H687.73V250H574.4Z"/>
+    </g>
+    <g fill="none" stroke="#61788e" stroke-width="1.3">
+      <path d="M180 116H724V148H180Z M293.33 116V148 M406.67 116V148 M520 116V148 M633.33 116V148"/>
+      <path d="M180 167H724V199H180Z M293.33 167V199 M406.67 167V199 M520 167V199 M633.33 167V199"/>
+      <path d="M180 218H293.33V250H180Z M316 218H429.33V250H316Z M452 218H565.33V250H452Z M574.4 218H687.73V250H574.4Z M724 218V250"/>
+    </g>
+    <path d="M316 116V148 M452 116V148 M574.4 116V148" stroke="#a24424" stroke-width="2" stroke-dasharray="4 2"/>
+    <g font-size="15" font-weight="700" text-anchor="middle">
+      <text x="235" y="138">A</text><text x="304" y="138" font-size="12">A</text><text x="361" y="138">B</text>
+      <text x="429" y="138">B</text><text x="485" y="138">C</text><text x="547" y="138">C</text><text x="605" y="138">D</text><text x="675" y="138">D</text>
+      <text x="235" y="189">A</text><text x="350" y="189">Aを再表示</text><text x="463" y="189">B</text><text x="576" y="189">C</text><text x="675" y="189">D</text>
+      <text x="235" y="240">A</text><text x="373" y="240">B</text><text x="509" y="240">C</text><text x="630" y="240">D</text>
+    </g>
+    <text x="180" y="271" font-size="14" fill="#475569">VRRでは枠の間に待ちを入れ、次の走査の開始をずらす</text>
+
+    <rect x="25" y="292" width="710" height="82" rx="8" fill="#fff" stroke="#a8b7c9"/>
+    <path d="M42 305H171V316H42Z" fill="#dcecff"/>
+    <path d="M42 316H171V361H42Z" fill="#dff3ec"/>
+    <path d="M42 305H171V361H42Z" fill="none" stroke="#61788e"/>
+    <path d="M80 305V316 M128 316V361" stroke="#253a50" stroke-width="6"/>
+    <path d="M42 316H171" stroke="#a24424" stroke-width="1.5" stroke-dasharray="4 3"/>
+    <text x="191" y="320" font-size="16" font-weight="700">VSyncオフの16.67〜33.33 msの走査</text>
+    <text x="191" y="346" font-size="15" fill="#475569">20 msに切り替わり、上約20%はA、下約80%はB。</text>
+  </g>
+</svg>

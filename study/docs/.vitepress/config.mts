@@ -60,6 +60,7 @@ export default withMermaid(defineConfig({
       { url: '/study/samples/browser/audio-flyby-observation/index.html' },
       { url: '/study/samples/graphics/frame-pacing-observation/index.html' },
       { url: '/study/samples/graphics/swap-chain-observation/index.html' },
+      { url: '/study/samples/graphics/vsync-vrr-observation/index.html' },
       { url: '/study/samples/graphics/input-latency-observation/index.html' },
       { url: '/study/samples/graphics/shader-first-steps/index.html' },
       { url: '/study/samples/graphics/texture-filtering-observation/index.html' },

@@ -306,6 +306,13 @@
       "start": "/practice/graphics/swap-chain-observation.html"
     },
     {
+      "id": "vsync-vrr-observation",
+      "section": "practice",
+      "title": "同じシーンでVSyncオフ・オン・VRRを比べる",
+      "description": "仮想画面で走査中の切り替え、固定周期での再表示、VRRの走査開始を見比べる。",
+      "start": "/practice/graphics/vsync-vrr-observation.html"
+    },
+    {
       "id": "frame-pacing-observation",
       "section": "practice",
       "title": "同じ60 FPSで表示間隔を比べる",
@@ -3690,7 +3697,8 @@
       "order": 1,
       "verification": "Nodeで全7走査の表示順と切り替え位置を検証し、Chromium系ブラウザで走査の切り替えと再生を確認（2026-11-06）",
       "links": [
-        "/graphics/optimization/swap-chain-and-vsync.html"
+        "/graphics/optimization/swap-chain-and-vsync.html",
+        "/practice/graphics/vsync-vrr-observation.html"
       ]
     },
     {
@@ -10149,7 +10157,7 @@
       "section": "reference",
       "format": "article",
       "status": "published",
-      "summary": "描画に使う画像を取得してから再取得できるまでを追い、FIFO・MAILBOX・IMMEDIATEで画面に出る絵と待ち時間を比べる。",
+      "summary": "ティアリングが起きる走査と、VSyncオフ・オン・VRRの更新タイミングを図と実践で比べる。FIFO・MAILBOX・IMMEDIATEで画像を選ぶ規則も扱う。",
       "source": "新規執筆",
       "aliases": [
         "スワップチェーン",
@@ -10163,13 +10171,17 @@
         "FIFO",
         "MAILBOX",
         "IMMEDIATE",
-        "VRR"
+        "VRR",
+        "可変リフレッシュレート",
+        "LFC"
       ],
-      "verification": "VulkanのVkPresentModeKHR・画像取得・Presentの仕様と、DXGIのPresent・VRRの公式資料に照合（2026-11-06）",
+      "verification": "Vulkanの提示仕様、DXGIのPresentとVRR、Linux DRM/KMSのVRR、AMDのLFC資料に照合（2026-11-13）",
       "links": [
         "/graphics/capstone/02-device.html",
+        "/practice/graphics/vsync-vrr-observation.html",
         "/practice/graphics/swap-chain-observation.html",
-        "/graphics/optimization/frame-pacing.html"
+        "/graphics/optimization/frame-pacing.html",
+        "/learn/roadmap.html"
       ],
       "difficulty": "intermediate",
       "importance": "useful"
@@ -15217,6 +15229,34 @@
       ]
     },
     {
+      "title": "同じシーンでVSyncオフ・オン・VRRを比べる",
+      "url": "/practice/graphics/vsync-vrr-observation.html",
+      "file": "practice/graphics/vsync-vrr-observation.md",
+      "domain": "graphics",
+      "section": "practice",
+      "format": "sample",
+      "status": "published",
+      "summary": "同じ描画完了時刻から、走査中のティアリング、固定周期での再表示、VRRで次の走査を始める時刻を見比べる。",
+      "source": "新規執筆",
+      "aliases": [
+        "VSync",
+        "VRR",
+        "可変リフレッシュレート",
+        "ティアリング",
+        "スキャンアウト",
+        "垂直ブランク"
+      ],
+      "collection": "vsync-vrr-observation",
+      "order": 1,
+      "verification": "Vulkanの提示仕様、Linux DRM/KMSのVRR、DXGIの公式資料に照合（2026-11-13）",
+      "links": [
+        "/graphics/optimization/swap-chain-and-vsync.html",
+        "/practice/graphics/frame-pacing-observation.html",
+        "/practice/graphics/swap-chain-observation.html",
+        "/learn/roadmap.html"
+      ]
+    },
+    {
       "title": "同じシーンでネイティブ描画・バイリニア・時間方向の拡大を比べる",
       "url": "/practice/graphics/taau-observation.html",
       "file": "practice/graphics/taau-observation.md",
@@ -15863,6 +15903,8 @@
         "/graphics/optimization/gpu-driven.html",
         "/graphics/optimization/frame-pacing.html",
         "/practice/graphics/frame-pacing-observation.html",
+        "/graphics/optimization/swap-chain-and-vsync.html",
+        "/practice/graphics/vsync-vrr-observation.html",
         "/graphics/engine/unity-renderer.html",
         "/graphics/engine/urp.html",
         "/graphics/engine/hdrp.html",
@@ -16019,6 +16061,7 @@
         "/graphics/postprocess/frame-generation.html",
         "/graphics/optimization/basics.html",
         "/graphics/optimization/swap-chain-and-vsync.html",
+        "/practice/graphics/vsync-vrr-observation.html",
         "/guide/low-level/input-and-game-loop.html",
         "/graphics/optimization/tools.html",
         "/tools/profiling/cpu-profiling.html",

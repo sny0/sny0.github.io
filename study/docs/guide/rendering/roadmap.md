@@ -102,6 +102,7 @@ Compute ShaderはGPU DrivenのカリングやNaniteの微小三角形のラス�
 3. [RenderGraph / FrameGraph](/graphics/optimization/render-graph.html)
 4. [GPU Driven Rendering](/graphics/optimization/gpu-driven.html)
 5. [フレームタイムとフレームペーシング](/graphics/optimization/frame-pacing.html) → [平均60 FPSの表示間隔を見比べる実践](/practice/graphics/frame-pacing-observation.html)
+6. [スワップチェーンとVSync](/graphics/optimization/swap-chain-and-vsync.html) → [VSyncオフ・オン・VRRを比べる実践](/practice/graphics/vsync-vrr-observation.html)
 
 ## フェーズ6: エンジン内部
 

@@ -296,6 +296,8 @@ export default {
         { label: 'デバッグ・プロファイリングツール', url: '/graphics/optimization/tools.html' },
         { label: 'フレームタイムとフレームペーシング', url: '/graphics/optimization/frame-pacing.html' },
         { label: '実践 同じ60 FPSで表示間隔を比べる', url: '/practice/graphics/frame-pacing-observation.html' },
+        { label: 'スワップチェーンとVSync・VRR', url: '/graphics/optimization/swap-chain-and-vsync.html' },
+        { label: '実践 VSyncオフ・オン・VRRを比べる', url: '/practice/graphics/vsync-vrr-observation.html' },
         { label: 'RenderGraphとFrameGraph', url: '/graphics/optimization/render-graph.html' },
       ],
     },
