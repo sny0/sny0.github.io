@@ -19,6 +19,8 @@ Unity/C#で使ってきた概念と対応させて、C++の各概念を学びま
 
 ## ページ一覧
 
+C#を初めて学ぶ場合は、[C#の基本](/languages/csharp/console-and-unity.html)で同じクラスをコンソールとUnityから動かせます。
+
 1. [デストラクタと Dispose / RAII と using](/languages/csharp/destructor-dispose-raii-using.html)
 2. [ポインタと参照型 / 値セマンティクスと class・struct](/languages/csharp/pointers-references-value-semantics.html)
 3. [テンプレートとジェネリック](/languages/csharp/templates-vs-generics.html)

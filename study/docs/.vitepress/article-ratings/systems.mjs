@@ -71,6 +71,7 @@ export default {
   '/languages/cpp/templates-and-concepts.html': ['advanced', 'useful'],
   '/languages/cpp/undefined-behavior.html': ['advanced', 'core'],
   '/languages/cpp/values-pointers-references.html': ['intro', 'core'],
+  '/languages/csharp/console-and-unity.html': ['intro', 'core'],
   '/languages/csharp/delegates-events-function-pointers.html': ['intermediate', 'useful'],
   '/languages/csharp/destructor-dispose-raii-using.html': ['intermediate', 'useful'],
   '/languages/csharp/exceptions-comparison.html': ['intermediate', 'useful'],

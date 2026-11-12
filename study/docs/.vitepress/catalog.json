@@ -55,7 +55,7 @@
       "id": "languages",
       "title": "言語",
       "description": "型、所有、寿命、実行の違いから、各言語の構文を調べる。",
-      "count": 31,
+      "count": 32,
       "status": "辞典本文あり"
     },
     {
@@ -1191,6 +1191,44 @@
       "importance": "useful"
     },
     {
+      "title": "C#の基本 — コンソールとUnityでHPを更新する",
+      "url": "/languages/csharp/console-and-unity.html",
+      "file": "languages/csharp/console-and-unity.md",
+      "domain": "languages",
+      "section": "reference",
+      "format": "article",
+      "status": "published",
+      "summary": "変数、条件分岐、繰り返し、メソッド、クラスを使ってHPを更新し、同じクラスを.NETのコンソールとUnityのコンポーネントから動かす。",
+      "source": "新規執筆",
+      "aliases": [
+        "C#入門",
+        "C#の基本",
+        "int",
+        "bool",
+        "if",
+        "for",
+        "メソッド",
+        "クラス",
+        "インスタンス",
+        "コンストラクター",
+        "プロパティ",
+        "Main",
+        "MonoBehaviour",
+        "Start"
+      ],
+      "verification": "Microsoft LearnとUnity 6.3の公式資料に照合。.NET SDK 10.0.403とUnity 6000.3.27f1のPlay Modeで実行確認（2026-11-12）",
+      "links": [
+        "/tools/setup-development-environment.html",
+        "/learn/roadmap.html",
+        "/languages/variables-types-and-expressions.html",
+        "/languages/control-flow-and-functions.html",
+        "/game/basics/scenes-and-components.html",
+        "/game/shooter-unity.html"
+      ],
+      "difficulty": "intro",
+      "importance": "core"
+    },
+    {
       "title": "C++ — 所有権・RAII・値の意味を設計する",
       "url": "/design/notebook/cpp.html",
       "file": "design/notebook/cpp.md",
@@ -1994,6 +2032,7 @@
       "collection": "cpp-design",
       "order": 9,
       "links": [
+        "/languages/csharp/console-and-unity.html",
         "/languages/csharp/destructor-dispose-raii-using.html",
         "/languages/csharp/pointers-references-value-semantics.html",
         "/languages/csharp/templates-vs-generics.html",

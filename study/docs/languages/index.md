@@ -20,6 +20,7 @@
 ## 辞典の本文
 
 - [auto・decltype・constexpr・consteval(型推論とコンパイル時計算)](/languages/cpp/auto-and-constexpr.html)
+- [C#の基本 — コンソールとUnityでHPを更新する](/languages/csharp/console-and-unity.html)
 - [C++・設計の用語集](/guide/cpp-glossary.html)
 - [C++例外と C#例外](/languages/csharp/exceptions-comparison.html)
 - [const と const correctness](/languages/cpp/const-correctness.html)

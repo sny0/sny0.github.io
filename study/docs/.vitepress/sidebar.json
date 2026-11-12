@@ -229,6 +229,10 @@
           "link": "/languages/cpp/auto-and-constexpr.html"
         },
         {
+          "text": "C#の基本 — コンソールとUnityでHPを更新する",
+          "link": "/languages/csharp/console-and-unity.html"
+        },
+        {
           "text": "C++・設計の用語集",
           "link": "/guide/cpp-glossary.html"
         },

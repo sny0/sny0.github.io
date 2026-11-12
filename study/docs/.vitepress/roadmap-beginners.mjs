@@ -114,14 +114,13 @@ export default {
       title: 'C#の基本',
       summary: 'C#で変数やメソッドを書き、処理をクラスにまとめます。',
       prerequisites: [],
-      status: 'planned',
-      plannedMaterials: ['C#入門 — コンソールのMainからUnityスクリプトへ'],
       checks: [
         { id: 'variables-and-control-flow', label: 'C#で int と bool の変数を宣言し、if と for を使って出力を変えられる。' },
         { id: 'method-and-class', label: 'C#のクラスに短いメソッドを書き、引数を渡して戻り値を確認できる。' },
         { id: 'unity-entry-point', label: 'C#のコンソール例の Main と、Unityが呼ぶ MonoBehaviour のメソッドを見分けられる。' },
       ],
       resources: [
+        { label: 'C#の基本 — コンソールとUnityでHPを更新する', url: '/languages/csharp/console-and-unity.html' },
         { label: '補助教材 変数・型・式のC#サンプル', url: '/languages/variables-types-and-expressions.html' },
         { label: '補助教材 条件分岐・繰り返し・関数のC#サンプル', url: '/languages/control-flow-and-functions.html' },
       ],
