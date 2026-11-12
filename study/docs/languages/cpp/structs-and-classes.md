@@ -71,7 +71,9 @@ struct Enemy {
 | struct/class | 値型/参照型という**意味の違い** | 既定アクセスの違いのみ(両方値) |
 | 割り当て | classは参照型。通常はGCヒープ上で管理するが、JITが割り当てを除去・スタック化する場合もある | どちらも自動/動的/静的記憶域などを選べる |
 | 継承 | structは継承不可 | structも継承可(機能差なし) |
-| internal | アセンブリ内公開がある | 対応物なし(無名namespace等で代用 → [ヘッダー分割と Assembly Definition](/languages/csharp/headers-vs-asmdef.html)) |
+| 型やメンバーの公開範囲 | `internal` は型やメンバーへのアクセスを原則として同じアセンブリ内に制限する | C++20以降の名前付きモジュールでは `export` する宣言を選び、モジュールの外に公開する名前を絞れる |
+
+C#の `internal` は型やメンバーに付けるアクセス修飾子です。C++20の名前付きモジュールを外部のコードが `import` すると、`export` で公開した名前が名前探索の対象になります。ヘッダー方式では、非公開ヘッダーでライブラリの公開APIを絞り、無名namespaceで名前のリンケージを翻訳単位内に限定できます。[C#のinternal](https://learn.microsoft.com/en-us/dotnet/csharp/language-reference/keywords/internal) · [C++20草案のモジュール公開宣言](https://timsong-cpp.github.io/cppwp/n4861/module.interface) · [ヘッダー分割と Assembly Definition](/languages/csharp/headers-vs-asmdef.html)
 
 C#の値型・参照型の意味と、実際の格納先は別です。.NETのエスケープ解析による最適化はランタイムやコードの形に依存し、Unityのすべての実行環境で同じになるとは限りません。[.NET 10のスタック割り当て](https://learn.microsoft.com/en-us/dotnet/core/whats-new/dotnet-10/runtime)
 

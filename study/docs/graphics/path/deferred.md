@@ -27,7 +27,7 @@ Deferred Rendering (遅延レンダリング) は、画面にどの面が見え�
 - 2004: **S.T.A.L.K.E.R.** が商用ゲームでの本格採用を発表 (GSC / Shishkovtsov, GPU Gems 2)
 - **2007年以降: 採用の拡大** — Killzone 2（Guerrilla、2007年のDevelop講演。製品は2009年）、Crysis 2（2011年）など。PS3/X360のメモリ帯域とMRT対応が方式を後押し
 - 2009: **Tiled Deferred** — Johan AnderssonがFrostbiteの手法をSIGGRAPHで発表。Computeでライトをタイル単位に絞り込む
-- 2011: *Battlefield 3* のFrostbite 2でタイル単位のDeferred Lightingを採用
+- 2011: GDCで *Battlefield 3* のDirectX 11版におけるタイルベースのDeferred Shadingを発表
 - 2013〜: PBR標準化でG-Bufferレイアウトも標準化 (BaseColor/Metallic/Roughness/Normal)
 - 現在: UE5・HDRPの既定は依然Deferred系。ただしForward+の復権とモバイルの制約で「唯一の正解」ではなくなった
 
@@ -174,6 +174,6 @@ void TiledLightingCS(uint3 dtid : SV_DispatchThreadID, uint gi : SV_GroupIndex) 
 - Shishkovtsov, *"Deferred Shading in S.T.A.L.K.E.R."* (GPU Gems 2, 2005)
 - Valient, *"Deferred Rendering in Killzone 2"* (Develop 2007) — 伝説的資料
 - [Andersson, *Parallel Graphics in Frostbite - Current & Future* (SIGGRAPH 2009)](https://www.slideshare.net/slideshow/parallel-graphics-in-frostbite-current-future-siggraph-2009-1860503/1860503) — Tiled Deferred
-- [DICE: *Rendering in Battlefield 3* (SIGGRAPH 2011)](https://www.gamedevs.org/uploads/rendering-in-battlefield3.pdf)
+- [Johan Andersson (DICE), *DirectX 11 Rendering in Battlefield 3* (GDC 2011)](https://www.slideshare.net/slideshow/directx-11-rendering-in-battlefield-3/7207663)
 - Unreal Engine ソース: `DeferredShadingRenderer.cpp`
 - [Guerrilla: Deferred Rendering in Killzone 2 (Develop 2007)](https://www.guerrilla-games.com/read/deferred-rendering-in-killzone-2)

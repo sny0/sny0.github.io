@@ -78,8 +78,8 @@ flowchart TB
 
 - スレッドは **Warp (32) / Wave (32 or 64)** 単位で束ねられ、1つのプログラムカウンタを共有して同じ命令を実行する
 - `if` で分岐が割れると両方のパスを**マスク付きで順番に実行** (divergence) → 実効性能が半減しうる
-- SMは多数のWarpを保持し、あるWarpがメモリ待ちになると**即座に別のWarpへ切替**える(レイテンシ隠蔽)
-- 保持できるWarp数は**レジスタ使用量とShared Memory使用量**で決まる = **Occupancy**
+- SMは多数のWarpを保持し、あるWarpがメモリを待つ間に、実行可能な別のWarpの命令を発行できる(レイテンシ隠蔽)
+- **Occupancy（占有率）**は、SMの上限に対する常駐Warp数の割合。常駐できる数の上限は、レジスタやShared Memoryの使用量、スレッドグループの大きさなどで変わる。[NVIDIAのoccupancyの説明](https://docs.nvidia.com/nsight-compute/ProfilingGuide/index.html)
 
 この詳細は [GPU並列実行モデル (Warp/Wave)](/graphics/compute/execution-model.html) で徹底的に扱います。
 
@@ -150,52 +150,53 @@ void CSMain(uint3 id : SV_DispatchThreadID) {
 }
 ```
 
-Occupancyを意識したレジスタ削減の考え方 (HLSL SM6の比較例)。各入力に対して40個の特徴値を先に計算する版と、ライトが参照する値をその場で計算する版です。`Input`・`Output`には`ItemCount`要素、`LightFeature`には`LightCount`要素を用意します。
+レジスタの使用量を考えるときは、値を使い終わるまでの期間がどれだけ重なるかを見ます。次のHLSL SM6の例は、各スレッドで`SamplesPerItem`個の`float4`を成分ごとに足し、最後に4成分を一つの値にまとめます。`Input`には`ItemCount * SamplesPerItem`要素、`Output`には`ItemCount`要素を用意し、X方向だけに起動します。
 
 ```hlsl
-StructuredBuffer<float> Input : register(t0);
-StructuredBuffer<uint> LightFeature : register(t1);
+StructuredBuffer<float4> Input : register(t0);
 RWStructuredBuffer<float> Output : register(u0);
 cbuffer Counts : register(b0) {
     uint ItemCount;
-    uint LightCount;
+    uint SamplesPerItem;
 };
 
-float Feature(float value, uint index) {
-    return sin(value * float(index + 1u));
+// 1回の走査中に4成分の途中和を持ち続ける。
+[numthreads(64, 1, 1)]
+void TogetherCS(uint3 id : SV_DispatchThreadID) {
+    if (id.x >= ItemCount) return;
+    uint start = id.x * SamplesPerItem;
+    float4 sum = float4(0, 0, 0, 0);
+    [loop]
+    for (uint i = 0; i < SamplesPerItem; ++i) {
+        sum += Input[start + i];
+    }
+    Output[id.x] = (sum.x + sum.y) + (sum.z + sum.w);
 }
 
-// 事前計算版。値を保持するコストと、同じ値を再利用できる利点がある。
+// 前半の2成分を1値にまとめてから、残りの2成分を足す。
 [numthreads(64, 1, 1)]
-void PrecomputeCS(uint3 id : SV_DispatchThreadID) {
+void SplitCS(uint3 id : SV_DispatchThreadID) {
     if (id.x >= ItemCount) return;
-    float value = Input[id.x];
-    float features[40];
-    for (uint i = 0; i < 40u; ++i) {
-        features[i] = Feature(value, i);
+    uint start = id.x * SamplesPerItem;
+    float2 first = float2(0, 0);
+    [loop]
+    for (uint i = 0; i < SamplesPerItem; ++i) {
+        first += Input[start + i].xy;
     }
+    float firstSum = first.x + first.y;
 
-    float sum = 0.0f;
-    for (uint light = 0; light < LightCount; ++light) {
-        sum += features[LightFeature[light] % 40u];
+    float2 second = float2(0, 0);
+    [loop]
+    for (uint j = 0; j < SamplesPerItem; ++j) {
+        second += Input[start + j].zw;
     }
-    Output[id.x] = sum;
-}
-
-// 都度計算版。演算に余裕があり、値の保持が律速なら改善することがある。
-[numthreads(64, 1, 1)]
-void RecomputeCS(uint3 id : SV_DispatchThreadID) {
-    if (id.x >= ItemCount) return;
-    float value = Input[id.x];
-    float sum = 0.0f;
-    for (uint light = 0; light < LightCount; ++light) {
-        sum += Feature(value, LightFeature[light] % 40u);
-    }
-    Output[id.x] = sum;
+    Output[id.x] = firstSum + (second.x + second.y);
 }
 ```
 
-配列が実際に何本のレジスタを使うかはコンパイラとGPUによります。両方を同じ入力で測り、レジスタ数、メモリ待ち、演算の利用状況、処理時間を比較します。[NVIDIAのシェーダープロファイラー資料](https://docs.nvidia.com/nsight-graphics/UserGuide/shader-profiler.html)
+`SplitCS`の後半のループで必要な途中和は、前半の合計1成分と後半の2成分です。コード上で保持する途中和が減る一方で、入力を2回走査します。物理レジスタの割り当てはコンパイラとGPUで変わるので、同じ入力と起動条件で、レジスタ数、occupancy、メモリアクセス、処理時間を比較します。[NVIDIAのシェーダープロファイラー資料](https://docs.nvidia.com/nsight-graphics/UserGuide/shader-profiler.html)
+
+実行時に添字が決まるスレッド内の配列は、スレッド専用のローカルメモリに置かれることがあります。CUDAでは、この領域の実体はデバイスメモリにあります。配列の配置に伴うアクセスと、レジスタが足りずに値がスピルする場合を分けて調べます。この例の実行時の添字は、入力バッファの要素を選ぶためのものです。スレッド内の途中和は固定のベクトル成分で扱います。[NVIDIAのローカルメモリの説明](https://docs.nvidia.com/cuda/cuda-programming-guide/02-basics/writing-cuda-kernels.html#local-memory)
 
 ## 前提知識
 
@@ -218,12 +219,12 @@ void RecomputeCS(uint3 id : SV_DispatchThreadID) {
 
 2. **GPUがキャッシュと併せて多数の常駐スレッドを持ち、メモリレイテンシを隠す仕組みを説明せよ。**
    ::: details 解答
-   1つのSMに多数のWarpを常駐させ、メモリ待ちが発生したWarpから実行可能な別のWarpへハードウェアが1サイクルで切り替えることで、演算器を遊ばせない(レイテンシ隠蔽)。これが可能なWarp数の余裕をOccupancyと呼ぶ。
+   1つのSMに多数のWarpを常駐させ、あるWarpがメモリを待っている間に、実行できる別のWarpの命令を発行して待ち時間を隠す。SMの上限に対する常駐Warp数の割合がoccupancy。
    :::
 
 3. **シェーダのレジスタ使用量を減らすと性能が向上することがあるのはなぜか。**
    ::: details 解答
-   SMのレジスタファイルは全常駐Warpで分け合うため、1スレッドのレジスタ消費が多いと常駐できるWarp数(Occupancy)が減り、レイテンシ隠蔽能力が下がる。レジスタを削れば同時常駐Warpが増え、メモリ待ちを隠しやすくなる。
+   レジスタが常駐Warp数の制約になっているときは、1スレッドあたりの使用量を減らすと常駐Warp数が増え、メモリ待ちを隠しやすくなることがある。スピルや入力の再読み込みが増えると処理時間が伸びる場合もあるため、occupancyと処理時間を併せて確認する。
    :::
 
 4. **TBDRがモバイルで採用される最大の理由と、その代償を述べよ。**

@@ -114,7 +114,8 @@ struct Blackboard {
 
 ## Unity/C# との対応
 
-- GameObjectの基本機能とは別に、Unity Behavior(公式パッケージ)、外部アセット、または自作を使う。Unity Behaviorは2026年の公式方針で、新機能より保守・安定性を重視するとされています。採用時は必要機能とパッケージ版を確認します。[Behaviorのサポート方針](https://discussions.unity.com/t/update-on-behavior-package-support-and-team-presence/1718517)
+- GameObjectの基本機能とは別に、Unity Behavior(公式パッケージ)、外部アセット、または自作を使う。採用時は必要機能とパッケージ版を確認します。
+- 2025年2月10日、Behaviorの開発チームは人員整理に伴い従来の支援を続けられなくなると告知しました。同年4月10日、UnityはUnity 6向けパッケージのサポートを継続し、不具合の修正と安定性の向上に注力すると説明しました。2026年5月1日にもUnityは、保守と安定性を優先する方針を示しました。[2025年2月の告知](https://discussions.unity.com/t/an-update-on-behavior/1598451) · [2025年4月のサポート方針](https://discussions.unity.com/t/an-update-on-behavior/1598451?page=8) · [2026年5月の更新](https://discussions.unity.com/t/update-on-behavior-package-support-and-team-presence/1718517)
 - ScriptableObjectでノードをアセット化すると、企画がツリーをエディタで組める
 
 ## Unreal Engine との対応
