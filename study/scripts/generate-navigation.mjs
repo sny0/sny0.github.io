@@ -832,7 +832,8 @@ function sectionSidebar(section, collectionId) {
   const sectionInfo = sections.find(item => item.id === section)
   const collection = collections.find(item => item.id === collectionId)
   const current = collection ? [{ text: collection.title, items: entries.filter(entry => entry.collection === collection.id).sort(byOrder).map(item) }] : []
-  return [{ text: sectionInfo.title + '一覧', link: sectionInfo.url }, ...current,
+  const roadmap = section === 'learning' ? [item(at('/learn/roadmap.html'))] : []
+  return [{ text: sectionInfo.title + '一覧', link: sectionInfo.url }, ...roadmap, ...current,
     { text: collection ? 'ほかの' + sectionInfo.title : sectionInfo.title, collapsed: Boolean(collection),
       items: collections.filter(item => item.section === section && item.id !== collectionId).map(item => ({ text: item.title, link: item.start })) }]
 }

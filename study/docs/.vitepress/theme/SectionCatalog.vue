@@ -54,6 +54,14 @@ watch(() => props.section, resetFilters)
       </nav>
     </header>
 
+    <section v-if="props.section === 'learning'" class="study-roadmap-entry" aria-labelledby="study-roadmap-entry-heading">
+      <div>
+        <h2 id="study-roadmap-entry-heading">学習ロードマップ</h2>
+        <p>目標から必要な基礎をたどり、できるようになったことを記録できます。</p>
+      </div>
+      <a :href="withBase('/learn/roadmap.html')">ロードマップを開く <span aria-hidden="true">→</span></a>
+    </section>
+
     <section v-if="props.section === 'reference'" aria-labelledby="study-domains-heading" class="study-domain-section">
       <div class="study-section-heading"><h2 id="study-domains-heading">分野から調べる</h2><p>{{ catalog.domains.length }}分野</p></div>
       <ul class="study-domain-grid">

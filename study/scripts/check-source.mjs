@@ -3,6 +3,7 @@ import path from 'node:path'
 import { fileURLToPath } from 'node:url'
 import { createRequire } from 'node:module'
 import { sections, formatLabels, statusLabels } from '../docs/.vitepress/content-model.mjs'
+import roadmap from '../docs/.vitepress/roadmap.mjs'
 
 const root=path.resolve(path.dirname(fileURLToPath(import.meta.url)),'..')
 const docs=path.join(root,'docs')
@@ -111,6 +112,94 @@ for(const page of pages.values()) {
 if(new Set(catalog.domains.map(domain=>domain.id)).size!==catalog.domains.length)errors.push('Duplicate domain IDs')
 if(collections.size!==catalog.collections.length)errors.push('Duplicate collection IDs')
 
+function checkRoadmapIds(ids, label) {
+  const unique = new Set(ids)
+  if (unique.size !== ids.length) errors.push(`${label}: duplicate IDs`)
+  if (ids.some(id => typeof id !== 'string' || !/^[a-z][a-z0-9]*(?:-[a-z0-9]+)*$/.test(id))) {
+    errors.push(`${label}: IDs must be lowercase slugs`)
+  }
+  return unique
+}
+
+function checkRoadmap() {
+  if (!Array.isArray(roadmap.tracks) || !roadmap.tracks.length || !Array.isArray(roadmap.nodes) || !roadmap.nodes.length) {
+    errors.push('Roadmap must contain tracks and nodes')
+    return
+  }
+
+  const hasText = value => typeof value === 'string' && value.trim().length > 0
+  const nodeIds = checkRoadmapIds(roadmap.nodes.map(node => node?.id), 'Roadmap nodes')
+  checkRoadmapIds(roadmap.tracks.map(track => track?.id), 'Roadmap tracks')
+  const registeredNodes = new Set()
+  for (const track of roadmap.tracks) {
+    const label = `Roadmap track ${track?.id}`
+    if (!hasText(track?.title) || !hasText(track?.summary) || !Array.isArray(track?.nodeIds)) {
+      errors.push(`${label}: expected a title, summary and node IDs`)
+      continue
+    }
+    for (const id of checkRoadmapIds(track.nodeIds, label)) {
+      if (!nodeIds.has(id)) errors.push(`${label}: unknown node ${id}`)
+      registeredNodes.add(id)
+    }
+  }
+
+  const prerequisitesByNode = new Map()
+  for (const node of roadmap.nodes) {
+    const label = `Roadmap node ${node?.id}`
+    if (!hasText(node?.title) || !hasText(node?.summary)) errors.push(`${label}: expected a title and summary`)
+    if (!registeredNodes.has(node?.id)) errors.push(`${label}: absent from all tracks`)
+    if (!Array.isArray(node?.checks) || !node.checks.length || node.checks.some(check => !hasText(check?.label))) {
+      errors.push(`${label}: expected labeled achievement checks`)
+    } else {
+      checkRoadmapIds(node.checks.map(check => check.id), `${label} checks`)
+    }
+    if (!Array.isArray(node?.resources) || !node.resources.length) {
+      errors.push(`${label}: expected at least one resource`)
+    } else {
+      for (const resource of node.resources) {
+        if (!hasText(resource?.label) || pagesByUrl.get(resource?.url)?.meta.status !== 'published') {
+          errors.push(`${label}: invalid or unpublished resource ${resource?.url}`)
+        }
+      }
+    }
+    if (!Array.isArray(node?.prerequisites)) {
+      errors.push(`${label}: expected a prerequisite list`)
+      continue
+    }
+    const prerequisites = checkRoadmapIds(node.prerequisites, `${label} prerequisites`)
+    prerequisitesByNode.set(node.id, prerequisites)
+    for (const prerequisite of prerequisites) {
+      if (!nodeIds.has(prerequisite)) errors.push(`${label}: unknown prerequisite ${prerequisite}`)
+    }
+  }
+
+  for (const track of roadmap.tracks.filter(track => Array.isArray(track?.nodeIds))) {
+    const members = new Set(track.nodeIds)
+    for (const id of members) {
+      for (const prerequisite of prerequisitesByNode.get(id) ?? []) {
+        if (!members.has(prerequisite)) errors.push(`Roadmap track ${track.id}: ${id} requires ${prerequisite} in this track`)
+      }
+    }
+  }
+
+  const visiting = new Set()
+  const visited = new Set()
+  function visit(id) {
+    if (visited.has(id)) return
+    if (visiting.has(id)) {
+      errors.push(`Roadmap prerequisite cycle: ${[...visiting, id].join(' -> ')}`)
+      return
+    }
+    visiting.add(id)
+    for (const prerequisite of prerequisitesByNode.get(id) ?? []) visit(prerequisite)
+    visiting.delete(id)
+    visited.add(id)
+  }
+  for (const id of prerequisitesByNode.keys()) visit(id)
+}
+
+checkRoadmap()
+
 // Sidebar links are navigation peers. Cross-section recommendations belong in the article.
 function sidebarLinks(nodes,label) {
   if(!Array.isArray(nodes)){errors.push('Missing sidebar: '+label);return []}
@@ -159,4 +248,4 @@ for(const entry of catalog.entries)for(const direction of ['previous','next']) {
   if(!collections.get(entry.collection)?.linear || !neighbor || neighbor.collection!==entry.collection || neighbor.section!==entry.section || neighbor[reverse]!==entry.url)errors.push(`Invalid ${direction} course link: ${entry.url}`)
 }
 if(errors.length){console.error(errors.join('\n'));process.exit(1)}
-console.log(`Source check passed: ${files.length} Markdown pages, ${catalog.entries.length} classified entries, ${links} internal file links; section sidebars and course order verified`)
+console.log(`Source check passed: ${files.length} Markdown pages, ${catalog.entries.length} classified entries, ${links} internal file links; section sidebars, course order and roadmap verified`)
