@@ -17,6 +17,10 @@
 
 URLを開いてから描画されるまでを、通信・実行・表示に分ける。
 
+## この分野の学習ガイド
+
+- [URLを開いてからページが見えるまで](/guide/learning-paths.html#browser-navigation-path) — DNSやHTTPから、DOMと描画の観察までを順にたどる。
+
 ## 辞典の本文
 
 - [AudioWorkletと音声バッファ — フレーム・先読み・アンダーラン](/browser/audio-worklet-buffering.html)
@@ -47,10 +51,6 @@ URLを開いてから描画されるまでを、通信・実行・表示に分�
 - [ブラウザの保存領域 — localStorage・IndexedDB・Cache APIとデータの寿命](/browser/storage-lifetime.html)
 - [リングバッファとSPSCキュー — 満杯・折り返し・受け渡し](/browser/spsc-ring-buffer.html)
 - [同一オリジンポリシーとCORS — 送信と応答の公開](/browser/same-origin-cors.html)
-
-## この分野の学習ガイド
-
-この分野専用の学習経路は準備中です。[学習ガイド一覧](/learn/)から、公開中のコースを選べます。
 
 ## 作って試す
 

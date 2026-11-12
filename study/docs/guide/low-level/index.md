@@ -21,10 +21,11 @@ study:
 
 ## 関連する辞典本文・実践
 
+- 情報表現は[整数・ビット列・バイト列](/data/integer-bits-and-bytes.html)や[Unicodeと文字コード](/data/unicode-and-encoding.html)で調べられます。
+- OSは[OSの役割](/os/operating-system-basics.html)から、[プロセスの起動](/os/process-startup.html)や[仮想メモリ](/os/virtual-memory.html)へ進めます。
+- [Cでバイト列を読む](/languages/c/reading-byte-arrays.html)で配列とポインタの扱いを確認し、[Cの処理をx86-64の逆アセンブリで追う実践](/practice/compilers/c-byte-decoder-disassembly.html)で対応する命令列を観察できます。Cの構文全般や個別命令の仕様は第4・5章の資料を参照してください。
 - [ソースコードからCPU命令まで](/runtime/cpp-internals/build-pipeline-journey.html)と[アロケータ](/runtime/memory/allocators-and-pools.html)で、個別の仕組みを調べられます。
 - [ECS](/game/ecs.html)ではデータと更新の構成、[小さなシューティング](/game/shooter-design.html)では動く実装へのつなぎ方を扱います。
-
-情報表現、C、アセンブリ、OSなどは、このコースの概説が中心で、専用の辞典本文がまだ揃っていません。各章の冒頭に、既存本文へのリンクと未整備の範囲を示します。
 
 ## 入力から表示までを学ぶ
 

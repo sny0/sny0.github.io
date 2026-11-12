@@ -3,6 +3,7 @@ import { computed, ref, watch } from 'vue'
 import { withBase } from 'vitepress'
 import catalog from '../catalog.json'
 import { formatLabels, statusLabels } from '../content-model.mjs'
+import StudyCollectionCards from './StudyCollectionCards.vue'
 
 const props = withDefaults(defineProps<{ section?: 'reference' | 'learning' | 'practice' }>(), { section: 'reference' })
 const query = ref('')
@@ -12,6 +13,12 @@ const selectedCollection = ref('')
 const sectionInfo = computed(() => catalog.sections.find(section => section.id === props.section)!)
 const pool = computed(() => catalog.entries.filter(entry => entry.section === props.section))
 const groups = computed(() => catalog.collections.filter(collection => collection.section === props.section))
+const collectionCards = computed(() => groups.value
+  .map(collection => ({
+    ...collection,
+    pageCount: pool.value.filter(entry => entry.collection === collection.id).length
+  }))
+  .filter(collection => props.section === 'learning' || collection.pageCount > 1))
 const formats = computed(() => [...new Set(pool.value.map(entry => entry.format))])
 const domainName = (id: string) => catalog.domains.find(domain => domain.id === id)?.title || ({ guide: '分野横断', terms: '用語索引' }[id]) || id
 const normalize = (text: string) => text.normalize('NFKC').toLocaleLowerCase('ja').trim()
@@ -26,7 +33,6 @@ const results = computed(() => {
   )).sort((a, b) => selectedCollection.value ? (a.order ?? 999) - (b.order ?? 999) : a.title.localeCompare(b.title, 'ja'))
 })
 const otherEntries = computed(() => selectedDomain.value ? catalog.entries.filter(entry => entry.domain === selectedDomain.value && entry.section !== props.section).slice(0, 4) : [])
-const countFor = (id: string) => catalog.entries.filter(entry => entry.collection === id).length
 const hasNoBody = computed(() => selectedDomain.value && !query.value && !selectedFormat.value && props.section === 'reference' && !catalog.domains.find(domain => domain.id === selectedDomain.value)?.count)
 function resetFilters() {
   query.value = ''
@@ -62,14 +68,13 @@ watch(() => props.section, resetFilters)
       <p class="study-index-help">ここに表示する件数は辞典本文の数です。読む順番は「学習ガイド」、制作手順や演習は「実践・サンプル」で確認できます。</p>
     </section>
 
-    <section v-else class="study-collection-section" aria-labelledby="study-collections-heading">
-      <div class="study-section-heading"><h2 id="study-collections-heading">{{ props.section === 'learning' ? '学習コースを選ぶ' : '作る・試す題材を選ぶ' }}</h2></div>
-      <ul class="study-collection-grid">
-        <li v-for="collection in groups" :key="collection.id">
-          <a :href="withBase(collection.start)" class="study-collection-card"><span class="study-collection-count">{{ countFor(collection.id) }}ページ</span><strong>{{ collection.title }}</strong><span>{{ collection.description }}</span><span class="study-collection-open">{{ props.section === 'learning' ? '学習ガイドを開く' : '題材を開く' }} →</span></a>
-        </li>
-      </ul>
-    </section>
+    <StudyCollectionCards
+      v-else-if="props.section === 'learning'"
+      title="学習コースを選ぶ"
+      heading-level="h2"
+      link-label="学習ガイドを開く"
+      :collections="collectionCards"
+    />
 
     <section class="study-index-section" aria-labelledby="study-index-heading">
       <div class="study-section-heading"><h2 id="study-index-heading">{{ props.section === 'reference' ? '用語・記事の索引' : props.section === 'learning' ? 'ガイド内のページを探す' : '実践・演習の索引' }}</h2></div>
@@ -80,6 +85,13 @@ watch(() => props.section, resetFilters)
         <div v-if="props.section === 'reference'" class="study-select-control"><label for="study-index-format">形式</label><select id="study-index-format" v-model="selectedFormat" aria-controls="study-index-results"><option value="">すべての形式</option><option v-for="format in formats" :key="format" :value="format">{{ formatLabels[format] }}</option></select></div>
         <div v-else class="study-select-control"><label for="study-index-collection">{{ props.section === 'learning' ? 'コース' : '題材' }}</label><select id="study-index-collection" v-model="selectedCollection" aria-controls="study-index-results"><option value="">すべて</option><option v-for="collection in groups" :key="collection.id" :value="collection.id">{{ collection.title }}</option></select></div>
       </form>
+      <StudyCollectionCards
+        v-if="props.section === 'practice' && !hasFilters && collectionCards.length"
+        title="複数ページで進める題材"
+        heading-level="h3"
+        link-label="題材を開く"
+        :collections="collectionCards"
+      />
       <div class="study-results-toolbar"><p class="study-results-count" role="status" aria-live="polite" aria-atomic="true"><strong>{{ results.length }}</strong>件<span class="study-count-total"> / {{ sectionInfo.title }} 全{{ pool.length }}件</span></p><button v-if="hasFilters" class="study-reset" type="button" @click="resetFilters">絞り込みを解除</button></div>
       <p v-if="selectedDomain && props.section === 'reference'" class="study-index-help"><a :href="withBase('/' + selectedDomain + '/')">{{ domainName(selectedDomain) }}の目次を開く →</a></p>
       <div id="study-index-results">

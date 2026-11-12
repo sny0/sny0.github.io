@@ -12,6 +12,7 @@ export const formatLabels = {
 export const statusLabels = { published: '公開中', outline: '学習計画・概要', draft: '草稿', planned: '執筆予定' }
 
 export const collections = [
+  { id: 'c-byte-decoder-disassembly', section: 'practice', title: 'Cのバイト読み取りをx86-64で追う', description: '短いデコーダーをビルドし、引数、メモリ読み取り、戻り値を逆アセンブリで確かめる。', start: '/practice/compilers/c-byte-decoder-disassembly.html' },
   { id: 'shader-first-steps', section: 'practice', title: 'シェーダーで三角形の位置と色を変える', description: 'WebGL 2で頂点属性とuniformを渡し、UVの補間、位置と色の計算を描画で確かめる。', start: '/practice/graphics/shader-first-steps.html' },
   { id: 'foundations', section: 'learning', title: 'コンピュータと開発の基礎', description: '部品、通信、OS、言語、開発ツール、3DCGとゲームの役割から詳しい解説へ進む。', start: '/guide/hardware-basics.html' },
   { id: 'stream-loss-observation', section: 'practice', title: 'パケットが欠けたときのTCPとQUICの配送を比べる', description: '失うパケットを変え、接続全体で順序を保つ場合とストリームごとに順序を保つ場合を比べる。', start: '/practice/network/stream-loss-observation.html' },

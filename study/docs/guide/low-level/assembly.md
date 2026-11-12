@@ -21,6 +21,8 @@ x64のレジスタや基本命令を学び、デバッガでコンパイラ出�
 
 ## 関連する辞典本文・実践
 
+- [Cの処理をx86-64の逆アセンブリで追う実践](/practice/compilers/c-byte-decoder-disassembly.html)では、同じC関数を最適化の有無でビルドし、引数、メモリの読み込み、戻り値を追います。
+- [Cでバイト列を読む](/languages/c/reading-byte-arrays.html)で、実践に使うコードの配列とポインタの扱いを確認できます。
 - [関数呼び出し・コールスタック・呼出規約](/runtime/cpp-internals/function-calls-and-cpu.html)で、逆アセンブリの具体例へ進めます。
 - [最適化と未定義動作](/runtime/cpp-internals/optimization-and-ub.html)では、元のソースと命令列が単純に対応しない理由を扱います。
 

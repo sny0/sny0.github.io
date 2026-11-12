@@ -23,6 +23,7 @@
 - [C++・設計の用語集](/guide/cpp-glossary.html)
 - [C++例外と C#例外](/languages/csharp/exceptions-comparison.html)
 - [const と const correctness](/languages/cpp/const-correctness.html)
+- [Cでバイト列を読む](/languages/c/reading-byte-arrays.html)
 - [enum・enum class・namespace](/languages/cpp/enums-and-namespaces.html)
 - [RAII (Resource Acquisition Is Initialization)](/languages/cpp/raii.html)
 - [static・inline・friend](/languages/cpp/static-inline-friend.html)

@@ -259,7 +259,7 @@
   margin-bottom: 12px;
 }
 
-.study-section-heading h2 {
+.study-section-heading :is(h2, h3) {
   margin: 0;
   border: 0;
   padding: 0;

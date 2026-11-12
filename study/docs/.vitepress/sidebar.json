@@ -241,6 +241,10 @@
           "link": "/languages/cpp/const-correctness.html"
         },
         {
+          "text": "Cでバイト列を読む",
+          "link": "/languages/c/reading-byte-arrays.html"
+        },
+        {
           "text": "enum・enum class・namespace",
           "link": "/languages/cpp/enums-and-namespaces.html"
         },
@@ -1601,6 +1605,10 @@
       "collapsed": false,
       "items": [
         {
+          "text": "Cのバイト読み取りをx86-64で追う",
+          "link": "/practice/compilers/c-byte-decoder-disassembly.html"
+        },
+        {
           "text": "シェーダーで三角形の位置と色を変える",
           "link": "/practice/graphics/shader-first-steps.html"
         },
@@ -1910,6 +1918,10 @@
       "collapsed": true,
       "items": [
         {
+          "text": "Cのバイト読み取りをx86-64で追う",
+          "link": "/practice/compilers/c-byte-decoder-disassembly.html"
+        },
+        {
           "text": "シェーダーで三角形の位置と色を変える",
           "link": "/practice/graphics/shader-first-steps.html"
         },
@@ -2215,6 +2227,10 @@
       "collapsed": true,
       "items": [
         {
+          "text": "Cのバイト読み取りをx86-64で追う",
+          "link": "/practice/compilers/c-byte-decoder-disassembly.html"
+        },
+        {
           "text": "シェーダーで三角形の位置と色を変える",
           "link": "/practice/graphics/shader-first-steps.html"
         },
@@ -2503,6 +2519,10 @@
       "text": "ほかの実践・サンプル",
       "collapsed": true,
       "items": [
+        {
+          "text": "Cのバイト読み取りをx86-64で追う",
+          "link": "/practice/compilers/c-byte-decoder-disassembly.html"
+        },
         {
           "text": "シェーダーで三角形の位置と色を変える",
           "link": "/practice/graphics/shader-first-steps.html"
@@ -2808,6 +2828,10 @@
       "text": "ほかの実践・サンプル",
       "collapsed": true,
       "items": [
+        {
+          "text": "Cのバイト読み取りをx86-64で追う",
+          "link": "/practice/compilers/c-byte-decoder-disassembly.html"
+        },
         {
           "text": "シェーダーで三角形の位置と色を変える",
           "link": "/practice/graphics/shader-first-steps.html"
@@ -3167,6 +3191,10 @@
       "collapsed": true,
       "items": [
         {
+          "text": "Cのバイト読み取りをx86-64で追う",
+          "link": "/practice/compilers/c-byte-decoder-disassembly.html"
+        },
+        {
           "text": "シェーダーで三角形の位置と色を変える",
           "link": "/practice/graphics/shader-first-steps.html"
         },
@@ -3472,6 +3500,10 @@
       "collapsed": true,
       "items": [
         {
+          "text": "Cのバイト読み取りをx86-64で追う",
+          "link": "/practice/compilers/c-byte-decoder-disassembly.html"
+        },
+        {
           "text": "シェーダーで三角形の位置と色を変える",
           "link": "/practice/graphics/shader-first-steps.html"
         },
@@ -3760,6 +3792,10 @@
       "text": "ほかの実践・サンプル",
       "collapsed": true,
       "items": [
+        {
+          "text": "Cのバイト読み取りをx86-64で追う",
+          "link": "/practice/compilers/c-byte-decoder-disassembly.html"
+        },
         {
           "text": "シェーダーで三角形の位置と色を変える",
           "link": "/practice/graphics/shader-first-steps.html"
@@ -4050,6 +4086,10 @@
       "collapsed": true,
       "items": [
         {
+          "text": "Cのバイト読み取りをx86-64で追う",
+          "link": "/practice/compilers/c-byte-decoder-disassembly.html"
+        },
+        {
           "text": "シェーダーで三角形の位置と色を変える",
           "link": "/practice/graphics/shader-first-steps.html"
         },
@@ -4338,6 +4378,10 @@
       "text": "ほかの実践・サンプル",
       "collapsed": true,
       "items": [
+        {
+          "text": "Cのバイト読み取りをx86-64で追う",
+          "link": "/practice/compilers/c-byte-decoder-disassembly.html"
+        },
         {
           "text": "シェーダーで三角形の位置と色を変える",
           "link": "/practice/graphics/shader-first-steps.html"
@@ -4636,6 +4680,10 @@
       "collapsed": true,
       "items": [
         {
+          "text": "Cのバイト読み取りをx86-64で追う",
+          "link": "/practice/compilers/c-byte-decoder-disassembly.html"
+        },
+        {
           "text": "シェーダーで三角形の位置と色を変える",
           "link": "/practice/graphics/shader-first-steps.html"
         },
@@ -4933,6 +4981,10 @@
       "collapsed": true,
       "items": [
         {
+          "text": "Cのバイト読み取りをx86-64で追う",
+          "link": "/practice/compilers/c-byte-decoder-disassembly.html"
+        },
+        {
           "text": "シェーダーで三角形の位置と色を変える",
           "link": "/practice/graphics/shader-first-steps.html"
         },
@@ -5221,6 +5273,10 @@
       "text": "ほかの実践・サンプル",
       "collapsed": true,
       "items": [
+        {
+          "text": "Cのバイト読み取りをx86-64で追う",
+          "link": "/practice/compilers/c-byte-decoder-disassembly.html"
+        },
         {
           "text": "シェーダーで三角形の位置と色を変える",
           "link": "/practice/graphics/shader-first-steps.html"
@@ -5511,6 +5567,10 @@
       "collapsed": true,
       "items": [
         {
+          "text": "Cのバイト読み取りをx86-64で追う",
+          "link": "/practice/compilers/c-byte-decoder-disassembly.html"
+        },
+        {
           "text": "シェーダーで三角形の位置と色を変える",
           "link": "/practice/graphics/shader-first-steps.html"
         },
@@ -5799,6 +5859,10 @@
       "text": "ほかの実践・サンプル",
       "collapsed": true,
       "items": [
+        {
+          "text": "Cのバイト読み取りをx86-64で追う",
+          "link": "/practice/compilers/c-byte-decoder-disassembly.html"
+        },
         {
           "text": "シェーダーで三角形の位置と色を変える",
           "link": "/practice/graphics/shader-first-steps.html"
@@ -6089,6 +6153,10 @@
       "collapsed": true,
       "items": [
         {
+          "text": "Cのバイト読み取りをx86-64で追う",
+          "link": "/practice/compilers/c-byte-decoder-disassembly.html"
+        },
+        {
           "text": "シェーダーで三角形の位置と色を変える",
           "link": "/practice/graphics/shader-first-steps.html"
         },
@@ -6377,6 +6445,10 @@
       "text": "ほかの実践・サンプル",
       "collapsed": true,
       "items": [
+        {
+          "text": "Cのバイト読み取りをx86-64で追う",
+          "link": "/practice/compilers/c-byte-decoder-disassembly.html"
+        },
         {
           "text": "シェーダーで三角形の位置と色を変える",
           "link": "/practice/graphics/shader-first-steps.html"
@@ -6667,6 +6739,10 @@
       "collapsed": true,
       "items": [
         {
+          "text": "Cのバイト読み取りをx86-64で追う",
+          "link": "/practice/compilers/c-byte-decoder-disassembly.html"
+        },
+        {
           "text": "シェーダーで三角形の位置と色を変える",
           "link": "/practice/graphics/shader-first-steps.html"
         },
@@ -6955,6 +7031,10 @@
       "text": "ほかの実践・サンプル",
       "collapsed": true,
       "items": [
+        {
+          "text": "Cのバイト読み取りをx86-64で追う",
+          "link": "/practice/compilers/c-byte-decoder-disassembly.html"
+        },
         {
           "text": "シェーダーで三角形の位置と色を変える",
           "link": "/practice/graphics/shader-first-steps.html"
@@ -7245,6 +7325,10 @@
       "collapsed": true,
       "items": [
         {
+          "text": "Cのバイト読み取りをx86-64で追う",
+          "link": "/practice/compilers/c-byte-decoder-disassembly.html"
+        },
+        {
           "text": "シェーダーで三角形の位置と色を変える",
           "link": "/practice/graphics/shader-first-steps.html"
         },
@@ -7533,6 +7617,10 @@
       "text": "ほかの実践・サンプル",
       "collapsed": true,
       "items": [
+        {
+          "text": "Cのバイト読み取りをx86-64で追う",
+          "link": "/practice/compilers/c-byte-decoder-disassembly.html"
+        },
         {
           "text": "シェーダーで三角形の位置と色を変える",
           "link": "/practice/graphics/shader-first-steps.html"
@@ -7823,6 +7911,10 @@
       "collapsed": true,
       "items": [
         {
+          "text": "Cのバイト読み取りをx86-64で追う",
+          "link": "/practice/compilers/c-byte-decoder-disassembly.html"
+        },
+        {
           "text": "シェーダーで三角形の位置と色を変える",
           "link": "/practice/graphics/shader-first-steps.html"
         },
@@ -8111,6 +8203,10 @@
       "text": "ほかの実践・サンプル",
       "collapsed": true,
       "items": [
+        {
+          "text": "Cのバイト読み取りをx86-64で追う",
+          "link": "/practice/compilers/c-byte-decoder-disassembly.html"
+        },
         {
           "text": "シェーダーで三角形の位置と色を変える",
           "link": "/practice/graphics/shader-first-steps.html"
@@ -8401,6 +8497,10 @@
       "collapsed": true,
       "items": [
         {
+          "text": "Cのバイト読み取りをx86-64で追う",
+          "link": "/practice/compilers/c-byte-decoder-disassembly.html"
+        },
+        {
           "text": "シェーダーで三角形の位置と色を変える",
           "link": "/practice/graphics/shader-first-steps.html"
         },
@@ -8689,6 +8789,10 @@
       "text": "ほかの実践・サンプル",
       "collapsed": true,
       "items": [
+        {
+          "text": "Cのバイト読み取りをx86-64で追う",
+          "link": "/practice/compilers/c-byte-decoder-disassembly.html"
+        },
         {
           "text": "シェーダーで三角形の位置と色を変える",
           "link": "/practice/graphics/shader-first-steps.html"
@@ -8979,6 +9083,10 @@
       "collapsed": true,
       "items": [
         {
+          "text": "Cのバイト読み取りをx86-64で追う",
+          "link": "/practice/compilers/c-byte-decoder-disassembly.html"
+        },
+        {
           "text": "シェーダーで三角形の位置と色を変える",
           "link": "/practice/graphics/shader-first-steps.html"
         },
@@ -9267,6 +9375,10 @@
       "text": "ほかの実践・サンプル",
       "collapsed": true,
       "items": [
+        {
+          "text": "Cのバイト読み取りをx86-64で追う",
+          "link": "/practice/compilers/c-byte-decoder-disassembly.html"
+        },
         {
           "text": "シェーダーで三角形の位置と色を変える",
           "link": "/practice/graphics/shader-first-steps.html"
@@ -9557,6 +9669,10 @@
       "collapsed": true,
       "items": [
         {
+          "text": "Cのバイト読み取りをx86-64で追う",
+          "link": "/practice/compilers/c-byte-decoder-disassembly.html"
+        },
+        {
           "text": "シェーダーで三角形の位置と色を変える",
           "link": "/practice/graphics/shader-first-steps.html"
         },
@@ -9845,6 +9961,10 @@
       "text": "ほかの実践・サンプル",
       "collapsed": true,
       "items": [
+        {
+          "text": "Cのバイト読み取りをx86-64で追う",
+          "link": "/practice/compilers/c-byte-decoder-disassembly.html"
+        },
         {
           "text": "シェーダーで三角形の位置と色を変える",
           "link": "/practice/graphics/shader-first-steps.html"
@@ -10135,6 +10255,10 @@
       "collapsed": true,
       "items": [
         {
+          "text": "Cのバイト読み取りをx86-64で追う",
+          "link": "/practice/compilers/c-byte-decoder-disassembly.html"
+        },
+        {
           "text": "シェーダーで三角形の位置と色を変える",
           "link": "/practice/graphics/shader-first-steps.html"
         },
@@ -10423,6 +10547,10 @@
       "text": "ほかの実践・サンプル",
       "collapsed": true,
       "items": [
+        {
+          "text": "Cのバイト読み取りをx86-64で追う",
+          "link": "/practice/compilers/c-byte-decoder-disassembly.html"
+        },
         {
           "text": "シェーダーで三角形の位置と色を変える",
           "link": "/practice/graphics/shader-first-steps.html"
@@ -10801,6 +10929,10 @@
       "text": "ほかの実践・サンプル",
       "collapsed": true,
       "items": [
+        {
+          "text": "Cのバイト読み取りをx86-64で追う",
+          "link": "/practice/compilers/c-byte-decoder-disassembly.html"
+        },
         {
           "text": "シェーダーで三角形の位置と色を変える",
           "link": "/practice/graphics/shader-first-steps.html"
@@ -11232,6 +11364,10 @@
       "collapsed": true,
       "items": [
         {
+          "text": "Cのバイト読み取りをx86-64で追う",
+          "link": "/practice/compilers/c-byte-decoder-disassembly.html"
+        },
+        {
           "text": "シェーダーで三角形の位置と色を変える",
           "link": "/practice/graphics/shader-first-steps.html"
         },
@@ -11573,6 +11709,10 @@
       "collapsed": true,
       "items": [
         {
+          "text": "Cのバイト読み取りをx86-64で追う",
+          "link": "/practice/compilers/c-byte-decoder-disassembly.html"
+        },
+        {
           "text": "シェーダーで三角形の位置と色を変える",
           "link": "/practice/graphics/shader-first-steps.html"
         },
@@ -11869,6 +12009,10 @@
       "text": "ほかの実践・サンプル",
       "collapsed": true,
       "items": [
+        {
+          "text": "Cのバイト読み取りをx86-64で追う",
+          "link": "/practice/compilers/c-byte-decoder-disassembly.html"
+        },
         {
           "text": "シェーダーで三角形の位置と色を変える",
           "link": "/practice/graphics/shader-first-steps.html"
@@ -12210,6 +12354,10 @@
       "text": "ほかの実践・サンプル",
       "collapsed": true,
       "items": [
+        {
+          "text": "Cのバイト読み取りをx86-64で追う",
+          "link": "/practice/compilers/c-byte-decoder-disassembly.html"
+        },
         {
           "text": "シェーダーで三角形の位置と色を変える",
           "link": "/practice/graphics/shader-first-steps.html"
@@ -12641,6 +12789,10 @@
       "collapsed": true,
       "items": [
         {
+          "text": "Cのバイト読み取りをx86-64で追う",
+          "link": "/practice/compilers/c-byte-decoder-disassembly.html"
+        },
+        {
           "text": "シェーダーで三角形の位置と色を変える",
           "link": "/practice/graphics/shader-first-steps.html"
         },
@@ -13019,6 +13171,10 @@
       "collapsed": true,
       "items": [
         {
+          "text": "Cのバイト読み取りをx86-64で追う",
+          "link": "/practice/compilers/c-byte-decoder-disassembly.html"
+        },
+        {
           "text": "シェーダーで三角形の位置と色を変える",
           "link": "/practice/graphics/shader-first-steps.html"
         },
@@ -13289,6 +13445,299 @@
       ]
     }
   ],
+  "/practice/compilers/c-byte-decoder-disassembly.md": [
+    {
+      "text": "実践・サンプル一覧",
+      "link": "/practice/"
+    },
+    {
+      "text": "Cのバイト読み取りをx86-64で追う",
+      "items": [
+        {
+          "text": "Cのバイト読み取りをx86-64の逆アセンブリで追う",
+          "link": "/practice/compilers/c-byte-decoder-disassembly.html"
+        }
+      ]
+    },
+    {
+      "text": "ほかの実践・サンプル",
+      "collapsed": true,
+      "items": [
+        {
+          "text": "シェーダーで三角形の位置と色を変える",
+          "link": "/practice/graphics/shader-first-steps.html"
+        },
+        {
+          "text": "パケットが欠けたときのTCPとQUICの配送を比べる",
+          "link": "/practice/network/stream-loss-observation.html"
+        },
+        {
+          "text": "C++とWinsockでUDPの受信境界を確かめる",
+          "link": "/practice/network/udp-loopback-observation.html"
+        },
+        {
+          "text": "C++でテクスチャに描き、次のパスで色を変える",
+          "link": "/practice/graphics/render-to-texture-observation.html"
+        },
+        {
+          "text": "C++でD3D12のコマンドを別スレッドで記録する",
+          "link": "/practice/graphics/parallel-command-recording-observation.html"
+        },
+        {
+          "text": "C++でワーカーの結果を描画側へ渡し、古い世代を捨てる",
+          "link": "/practice/threads/asset-worker-handoff-observation.html"
+        },
+        {
+          "text": "C++でGLBの頂点とインデックスを読み、三角形を描く",
+          "link": "/practice/graphics/glb-mesh-observation.html"
+        },
+        {
+          "text": "C++でDDSの2つのmipをD3D12へ転送して読み戻す",
+          "link": "/practice/graphics/dds-upload-observation.html"
+        },
+        {
+          "text": "C++でアセットパックを作って必要な範囲を読む",
+          "link": "/practice/io/asset-pack-observation.html"
+        },
+        {
+          "text": "Windowsで2回のファイル読み取りをトレースする",
+          "link": "/practice/io/file-io-trace-observation.html"
+        },
+        {
+          "text": "C++で2件のファイル読み取りをIOCPから回収する",
+          "link": "/practice/io/iocp-observation.html"
+        },
+        {
+          "text": "親子プロセスでパイプの終端を調べる",
+          "link": "/practice/process/windows-pipe-observation.html"
+        },
+        {
+          "text": "世代付きハンドルでスロットの再利用を追う",
+          "link": "/practice/algorithms/generational-handle-observation.html"
+        },
+        {
+          "text": "2つのC++ファイルからOBJ・EXE・PDBを作って読む",
+          "link": "/practice/compilers/build-artifact-observation.html"
+        },
+        {
+          "text": "総当たり・グリッド・BVHで範囲検索を比べる",
+          "link": "/practice/algorithms/spatial-query-observation.html"
+        },
+        {
+          "text": "スパースセットでIDの追加と削除を試す",
+          "link": "/practice/algorithms/sparse-set-observation.html"
+        },
+        {
+          "text": "入力遅延を待ち時間と描画時間に分けてみる",
+          "link": "/practice/graphics/input-latency-observation.html"
+        },
+        {
+          "text": "FIFO・MAILBOX・IMMEDIATEで画面の切り替わりを比べる",
+          "link": "/practice/graphics/swap-chain-observation.html"
+        },
+        {
+          "text": "同じ60 FPSで表示間隔を比べる",
+          "link": "/practice/graphics/frame-pacing-observation.html"
+        },
+        {
+          "text": "Web Audioで音源が通過する前後の音を比べる",
+          "link": "/practice/browser/audio-flyby-observation.html"
+        },
+        {
+          "text": "Web Audioでドップラー効果を聴き比べる",
+          "link": "/practice/browser/audio-doppler-observation.html"
+        },
+        {
+          "text": "Web Audioで扉が開くときの音の切り替えを比べる",
+          "link": "/practice/browser/audio-occlusion-transition-observation.html"
+        },
+        {
+          "text": "Web Audioで壁越しの音量と音色を比べる",
+          "link": "/practice/browser/audio-occlusion-observation.html"
+        },
+        {
+          "text": "Web Audioで音の方向と距離を変えて聴く",
+          "link": "/practice/browser/audio-spatial-observation.html"
+        },
+        {
+          "text": "Web Audioで畳み込みリバーブを聴き比べる",
+          "link": "/practice/browser/audio-reverb-observation.html"
+        },
+        {
+          "text": "Web Audioで反響の間隔と減衰を観察する",
+          "link": "/practice/browser/audio-feedback-observation.html"
+        },
+        {
+          "text": "Web Audioで遅延とコムフィルターを観察する",
+          "link": "/practice/browser/audio-comb-observation.html"
+        },
+        {
+          "text": "Web Audioで線形と等電力のクロスフェードを比べる",
+          "link": "/practice/browser/audio-crossfade-observation.html"
+        },
+        {
+          "text": "Web Audioで急な消音とフェードを観察する",
+          "link": "/practice/browser/audio-fade-observation.html"
+        },
+        {
+          "text": "Web Audioでゲインとクリッピングを観察する",
+          "link": "/practice/browser/audio-mixing-observation.html"
+        },
+        {
+          "text": "AudioWorkletで先読みとアンダーランを観察する",
+          "link": "/practice/browser/audio-buffer-observation.html"
+        },
+        {
+          "text": "リングバッファの満杯・折り返し・読み出し順を観察する",
+          "link": "/practice/browser/ring-buffer-observation.html"
+        },
+        {
+          "text": "Workerの競合とAtomicsの待機・通知を観察する",
+          "link": "/practice/browser/atomics-observation.html"
+        },
+        {
+          "text": "WebAssemblyへ配列とUTF-8を渡し、メモリ確保を観察する",
+          "link": "/practice/browser/wasm-abi-observation.html"
+        },
+        {
+          "text": "WebAssemblyの読み込みと線形メモリを観察する",
+          "link": "/practice/browser/wasm-memory-observation.html"
+        },
+        {
+          "text": "Workerへのコピーと共有メモリをブラウザで観察する",
+          "link": "/practice/browser/cross-origin-isolation-observation.html"
+        },
+        {
+          "text": "CSRFでCookie付きの要求が届く条件を観察する",
+          "link": "/practice/browser/csrf-observation.html"
+        },
+        {
+          "text": "textContent・innerHTML・CSPの違いを観察する",
+          "link": "/practice/browser/xss-csp-observation.html"
+        },
+        {
+          "text": "ブラウザでCookieの範囲とセッションIDを観察する",
+          "link": "/practice/browser/cookie-session-observation.html"
+        },
+        {
+          "text": "ブラウザで同一オリジンとCORSの応答を比べる",
+          "link": "/practice/browser/cors-observation.html"
+        },
+        {
+          "text": "Service Workerで応答元と登録状態を観察する",
+          "link": "/practice/browser/service-worker-observation.html"
+        },
+        {
+          "text": "ブラウザで保存・再読込・削除を観察する",
+          "link": "/practice/browser/storage-observation.html"
+        },
+        {
+          "text": "C++とC#でHTTPの再検証を観察する",
+          "link": "/practice/network/http-cache-observation.html"
+        },
+        {
+          "text": "Streams APIで供給と処理の速度差を観察する",
+          "link": "/practice/browser/stream-backpressure-observation.html"
+        },
+        {
+          "text": "Worker poolで待機数と取消しを観察する",
+          "link": "/practice/browser/worker-pool-observation.html"
+        },
+        {
+          "text": "Web Workerでコピー・転送・停止を観察する",
+          "link": "/practice/browser/worker-message-observation.html"
+        },
+        {
+          "text": "ブラウザでPromiseとawaitの実行順を観察する",
+          "link": "/practice/browser/event-loop-observation.html"
+        },
+        {
+          "text": "ブラウザでDOMと描画の変化を観察する",
+          "link": "/practice/browser/render-observation.html"
+        },
+        {
+          "text": "C++とC#でHTTPSの接続情報を観察する",
+          "link": "/practice/network/https-observation.html"
+        },
+        {
+          "text": "C++とC#で名前解決の結果を観察する",
+          "link": "/practice/network/name-resolution-observation.html"
+        },
+        {
+          "text": "C++とC#でHTTPの要求と応答を観察する",
+          "link": "/practice/network/http-message-observation.html"
+        },
+        {
+          "text": "C++とC#でTCPのバイト列と半閉鎖を観察する",
+          "link": "/practice/network/tcp-loopback-observation.html"
+        },
+        {
+          "text": "C++とC#で読み取り専用のファイルマッピングを観察する",
+          "link": "/practice/io/mapped-file-observation.html"
+        },
+        {
+          "text": "C++とC#でアセットの状態と寿命を試す",
+          "link": "/practice/assets/asset-lifecycle-model.html"
+        },
+        {
+          "text": "C++とC#で同期・非同期I/Oを比べる",
+          "link": "/practice/io/async-file-read-observation.html"
+        },
+        {
+          "text": "C++とC#でファイルの読み取りを観察する",
+          "link": "/practice/io/file-read-observation.html"
+        },
+        {
+          "text": "C++とC#で在庫の同期を確かめる",
+          "link": "/practice/threads/inventory-synchronization.html"
+        },
+        {
+          "text": "C++とC#でfloatの比較を確かめる",
+          "link": "/practice/math/float-comparison-observation.html"
+        },
+        {
+          "text": "C++とC#で文字の表現を観察する",
+          "link": "/practice/data/unicode-observation.html"
+        },
+        {
+          "text": "C++でfloatの表現と刻み幅を観察する",
+          "link": "/practice/data/float-spacing-observation.html"
+        },
+        {
+          "text": "C++で整数とバイト列を観察する",
+          "link": "/practice/data/integer-byte-observation.html"
+        },
+        {
+          "text": "Windowsでプロセスとスレッドを観察する",
+          "link": "/practice/process/windows-process-observation.html"
+        },
+        {
+          "text": "Windowsでメモリの状態を観察する",
+          "link": "/practice/memory/windows-memory-observation.html"
+        },
+        {
+          "text": "小さなシューティングを作る",
+          "link": "/game/shooter-design.html"
+        },
+        {
+          "text": "小さなレンダラーを作る",
+          "link": "/graphics/capstone/01-design.html"
+        },
+        {
+          "text": "C++と設計の演習",
+          "link": "/guide/exercises/"
+        },
+        {
+          "text": "C++のビルドサンプル",
+          "link": "/tools/build/samples/"
+        },
+        {
+          "text": "小さなアプリで設計を試す",
+          "link": "/design/notebook/practice.html"
+        }
+      ]
+    }
+  ],
   "/practice/graphics/swap-chain-observation.md": [
     {
       "text": "実践・サンプル一覧",
@@ -13307,6 +13756,10 @@
       "text": "ほかの実践・サンプル",
       "collapsed": true,
       "items": [
+        {
+          "text": "Cのバイト読み取りをx86-64で追う",
+          "link": "/practice/compilers/c-byte-decoder-disassembly.html"
+        },
         {
           "text": "シェーダーで三角形の位置と色を変える",
           "link": "/practice/graphics/shader-first-steps.html"
@@ -13648,6 +14101,10 @@
       "text": "ほかの実践・サンプル",
       "collapsed": true,
       "items": [
+        {
+          "text": "Cのバイト読み取りをx86-64で追う",
+          "link": "/practice/compilers/c-byte-decoder-disassembly.html"
+        },
         {
           "text": "シェーダーで三角形の位置と色を変える",
           "link": "/practice/graphics/shader-first-steps.html"
@@ -14027,6 +14484,10 @@
       "collapsed": true,
       "items": [
         {
+          "text": "Cのバイト読み取りをx86-64で追う",
+          "link": "/practice/compilers/c-byte-decoder-disassembly.html"
+        },
+        {
           "text": "シェーダーで三角形の位置と色を変える",
           "link": "/practice/graphics/shader-first-steps.html"
         },
@@ -14316,6 +14777,10 @@
       "collapsed": true,
       "items": [
         {
+          "text": "Cのバイト読み取りをx86-64で追う",
+          "link": "/practice/compilers/c-byte-decoder-disassembly.html"
+        },
+        {
           "text": "シェーダーで三角形の位置と色を変える",
           "link": "/practice/graphics/shader-first-steps.html"
         },
@@ -14604,6 +15069,10 @@
       "text": "ほかの実践・サンプル",
       "collapsed": true,
       "items": [
+        {
+          "text": "Cのバイト読み取りをx86-64で追う",
+          "link": "/practice/compilers/c-byte-decoder-disassembly.html"
+        },
         {
           "text": "シェーダーで三角形の位置と色を変える",
           "link": "/practice/graphics/shader-first-steps.html"
@@ -14945,6 +15414,10 @@
       "text": "ほかの実践・サンプル",
       "collapsed": true,
       "items": [
+        {
+          "text": "Cのバイト読み取りをx86-64で追う",
+          "link": "/practice/compilers/c-byte-decoder-disassembly.html"
+        },
         {
           "text": "シェーダーで三角形の位置と色を変える",
           "link": "/practice/graphics/shader-first-steps.html"
@@ -15324,6 +15797,10 @@
       "collapsed": true,
       "items": [
         {
+          "text": "Cのバイト読み取りをx86-64で追う",
+          "link": "/practice/compilers/c-byte-decoder-disassembly.html"
+        },
+        {
           "text": "シェーダーで三角形の位置と色を変える",
           "link": "/practice/graphics/shader-first-steps.html"
         },
@@ -15612,6 +16089,10 @@
       "text": "ほかの実践・サンプル",
       "collapsed": true,
       "items": [
+        {
+          "text": "Cのバイト読み取りをx86-64で追う",
+          "link": "/practice/compilers/c-byte-decoder-disassembly.html"
+        },
         {
           "text": "シェーダーで三角形の位置と色を変える",
           "link": "/practice/graphics/shader-first-steps.html"
@@ -15954,6 +16435,10 @@
       "collapsed": true,
       "items": [
         {
+          "text": "Cのバイト読み取りをx86-64で追う",
+          "link": "/practice/compilers/c-byte-decoder-disassembly.html"
+        },
+        {
           "text": "シェーダーで三角形の位置と色を変える",
           "link": "/practice/graphics/shader-first-steps.html"
         },
@@ -16294,6 +16779,10 @@
       "text": "ほかの実践・サンプル",
       "collapsed": true,
       "items": [
+        {
+          "text": "Cのバイト読み取りをx86-64で追う",
+          "link": "/practice/compilers/c-byte-decoder-disassembly.html"
+        },
         {
           "text": "シェーダーで三角形の位置と色を変える",
           "link": "/practice/graphics/shader-first-steps.html"
@@ -16673,6 +17162,10 @@
       "collapsed": true,
       "items": [
         {
+          "text": "Cのバイト読み取りをx86-64で追う",
+          "link": "/practice/compilers/c-byte-decoder-disassembly.html"
+        },
+        {
           "text": "シェーダーで三角形の位置と色を変える",
           "link": "/practice/graphics/shader-first-steps.html"
         },
@@ -16961,6 +17454,10 @@
       "text": "ほかの実践・サンプル",
       "collapsed": true,
       "items": [
+        {
+          "text": "Cのバイト読み取りをx86-64で追う",
+          "link": "/practice/compilers/c-byte-decoder-disassembly.html"
+        },
         {
           "text": "シェーダーで三角形の位置と色を変える",
           "link": "/practice/graphics/shader-first-steps.html"
@@ -17251,6 +17748,10 @@
       "collapsed": true,
       "items": [
         {
+          "text": "Cのバイト読み取りをx86-64で追う",
+          "link": "/practice/compilers/c-byte-decoder-disassembly.html"
+        },
+        {
           "text": "シェーダーで三角形の位置と色を変える",
           "link": "/practice/graphics/shader-first-steps.html"
         },
@@ -17539,6 +18040,10 @@
       "text": "ほかの実践・サンプル",
       "collapsed": true,
       "items": [
+        {
+          "text": "Cのバイト読み取りをx86-64で追う",
+          "link": "/practice/compilers/c-byte-decoder-disassembly.html"
+        },
         {
           "text": "シェーダーで三角形の位置と色を変える",
           "link": "/practice/graphics/shader-first-steps.html"
@@ -17829,6 +18334,10 @@
       "collapsed": true,
       "items": [
         {
+          "text": "Cのバイト読み取りをx86-64で追う",
+          "link": "/practice/compilers/c-byte-decoder-disassembly.html"
+        },
+        {
           "text": "シェーダーで三角形の位置と色を変える",
           "link": "/practice/graphics/shader-first-steps.html"
         },
@@ -18117,6 +18626,10 @@
       "text": "ほかの実践・サンプル",
       "collapsed": true,
       "items": [
+        {
+          "text": "Cのバイト読み取りをx86-64で追う",
+          "link": "/practice/compilers/c-byte-decoder-disassembly.html"
+        },
         {
           "text": "シェーダーで三角形の位置と色を変える",
           "link": "/practice/graphics/shader-first-steps.html"
@@ -18407,6 +18920,10 @@
       "collapsed": true,
       "items": [
         {
+          "text": "Cのバイト読み取りをx86-64で追う",
+          "link": "/practice/compilers/c-byte-decoder-disassembly.html"
+        },
+        {
           "text": "シェーダーで三角形の位置と色を変える",
           "link": "/practice/graphics/shader-first-steps.html"
         },
@@ -18695,6 +19212,10 @@
       "text": "ほかの実践・サンプル",
       "collapsed": true,
       "items": [
+        {
+          "text": "Cのバイト読み取りをx86-64で追う",
+          "link": "/practice/compilers/c-byte-decoder-disassembly.html"
+        },
         {
           "text": "シェーダーで三角形の位置と色を変える",
           "link": "/practice/graphics/shader-first-steps.html"
@@ -18985,6 +19506,10 @@
       "collapsed": true,
       "items": [
         {
+          "text": "Cのバイト読み取りをx86-64で追う",
+          "link": "/practice/compilers/c-byte-decoder-disassembly.html"
+        },
+        {
           "text": "シェーダーで三角形の位置と色を変える",
           "link": "/practice/graphics/shader-first-steps.html"
         },
@@ -19273,6 +19798,10 @@
       "text": "ほかの実践・サンプル",
       "collapsed": true,
       "items": [
+        {
+          "text": "Cのバイト読み取りをx86-64で追う",
+          "link": "/practice/compilers/c-byte-decoder-disassembly.html"
+        },
         {
           "text": "シェーダーで三角形の位置と色を変える",
           "link": "/practice/graphics/shader-first-steps.html"
@@ -19563,6 +20092,10 @@
       "collapsed": true,
       "items": [
         {
+          "text": "Cのバイト読み取りをx86-64で追う",
+          "link": "/practice/compilers/c-byte-decoder-disassembly.html"
+        },
+        {
           "text": "シェーダーで三角形の位置と色を変える",
           "link": "/practice/graphics/shader-first-steps.html"
         },
@@ -19851,6 +20384,10 @@
       "text": "ほかの実践・サンプル",
       "collapsed": true,
       "items": [
+        {
+          "text": "Cのバイト読み取りをx86-64で追う",
+          "link": "/practice/compilers/c-byte-decoder-disassembly.html"
+        },
         {
           "text": "シェーダーで三角形の位置と色を変える",
           "link": "/practice/graphics/shader-first-steps.html"
@@ -20141,6 +20678,10 @@
       "collapsed": true,
       "items": [
         {
+          "text": "Cのバイト読み取りをx86-64で追う",
+          "link": "/practice/compilers/c-byte-decoder-disassembly.html"
+        },
+        {
           "text": "シェーダーで三角形の位置と色を変える",
           "link": "/practice/graphics/shader-first-steps.html"
         },
@@ -20429,6 +20970,10 @@
       "text": "ほかの実践・サンプル",
       "collapsed": true,
       "items": [
+        {
+          "text": "Cのバイト読み取りをx86-64で追う",
+          "link": "/practice/compilers/c-byte-decoder-disassembly.html"
+        },
         {
           "text": "シェーダーで三角形の位置と色を変える",
           "link": "/practice/graphics/shader-first-steps.html"
@@ -20719,6 +21264,10 @@
       "collapsed": true,
       "items": [
         {
+          "text": "Cのバイト読み取りをx86-64で追う",
+          "link": "/practice/compilers/c-byte-decoder-disassembly.html"
+        },
+        {
           "text": "シェーダーで三角形の位置と色を変える",
           "link": "/practice/graphics/shader-first-steps.html"
         },
@@ -21007,6 +21556,10 @@
       "text": "ほかの実践・サンプル",
       "collapsed": true,
       "items": [
+        {
+          "text": "Cのバイト読み取りをx86-64で追う",
+          "link": "/practice/compilers/c-byte-decoder-disassembly.html"
+        },
         {
           "text": "シェーダーで三角形の位置と色を変える",
           "link": "/practice/graphics/shader-first-steps.html"
@@ -21297,6 +21850,10 @@
       "collapsed": true,
       "items": [
         {
+          "text": "Cのバイト読み取りをx86-64で追う",
+          "link": "/practice/compilers/c-byte-decoder-disassembly.html"
+        },
+        {
           "text": "シェーダーで三角形の位置と色を変える",
           "link": "/practice/graphics/shader-first-steps.html"
         },
@@ -21585,6 +22142,10 @@
       "text": "ほかの実践・サンプル",
       "collapsed": true,
       "items": [
+        {
+          "text": "Cのバイト読み取りをx86-64で追う",
+          "link": "/practice/compilers/c-byte-decoder-disassembly.html"
+        },
         {
           "text": "シェーダーで三角形の位置と色を変える",
           "link": "/practice/graphics/shader-first-steps.html"
@@ -21875,6 +22436,10 @@
       "collapsed": true,
       "items": [
         {
+          "text": "Cのバイト読み取りをx86-64で追う",
+          "link": "/practice/compilers/c-byte-decoder-disassembly.html"
+        },
+        {
           "text": "シェーダーで三角形の位置と色を変える",
           "link": "/practice/graphics/shader-first-steps.html"
         },
@@ -22163,6 +22728,10 @@
       "text": "ほかの実践・サンプル",
       "collapsed": true,
       "items": [
+        {
+          "text": "Cのバイト読み取りをx86-64で追う",
+          "link": "/practice/compilers/c-byte-decoder-disassembly.html"
+        },
         {
           "text": "シェーダーで三角形の位置と色を変える",
           "link": "/practice/graphics/shader-first-steps.html"
@@ -22504,6 +23073,10 @@
       "text": "ほかの実践・サンプル",
       "collapsed": true,
       "items": [
+        {
+          "text": "Cのバイト読み取りをx86-64で追う",
+          "link": "/practice/compilers/c-byte-decoder-disassembly.html"
+        },
         {
           "text": "シェーダーで三角形の位置と色を変える",
           "link": "/practice/graphics/shader-first-steps.html"
@@ -22898,6 +23471,10 @@
       "text": "ほかの実践・サンプル",
       "collapsed": true,
       "items": [
+        {
+          "text": "Cのバイト読み取りをx86-64で追う",
+          "link": "/practice/compilers/c-byte-decoder-disassembly.html"
+        },
         {
           "text": "シェーダーで三角形の位置と色を変える",
           "link": "/practice/graphics/shader-first-steps.html"
@@ -23330,6 +23907,10 @@
       "collapsed": true,
       "items": [
         {
+          "text": "Cのバイト読み取りをx86-64で追う",
+          "link": "/practice/compilers/c-byte-decoder-disassembly.html"
+        },
+        {
           "text": "パケットが欠けたときのTCPとQUICの配送を比べる",
           "link": "/practice/network/stream-loss-observation.html"
         },
@@ -23626,6 +24207,10 @@
       "text": "ほかの実践・サンプル",
       "collapsed": true,
       "items": [
+        {
+          "text": "Cのバイト読み取りをx86-64で追う",
+          "link": "/practice/compilers/c-byte-decoder-disassembly.html"
+        },
         {
           "text": "シェーダーで三角形の位置と色を変える",
           "link": "/practice/graphics/shader-first-steps.html"
@@ -23924,6 +24509,10 @@
       "collapsed": true,
       "items": [
         {
+          "text": "Cのバイト読み取りをx86-64で追う",
+          "link": "/practice/compilers/c-byte-decoder-disassembly.html"
+        },
+        {
           "text": "シェーダーで三角形の位置と色を変える",
           "link": "/practice/graphics/shader-first-steps.html"
         },
@@ -24212,6 +24801,10 @@
       "text": "ほかの実践・サンプル",
       "collapsed": true,
       "items": [
+        {
+          "text": "Cのバイト読み取りをx86-64で追う",
+          "link": "/practice/compilers/c-byte-decoder-disassembly.html"
+        },
         {
           "text": "シェーダーで三角形の位置と色を変える",
           "link": "/practice/graphics/shader-first-steps.html"
@@ -24555,6 +25148,10 @@
       "collapsed": true,
       "items": [
         {
+          "text": "Cのバイト読み取りをx86-64で追う",
+          "link": "/practice/compilers/c-byte-decoder-disassembly.html"
+        },
+        {
           "text": "シェーダーで三角形の位置と色を変える",
           "link": "/practice/graphics/shader-first-steps.html"
         },
@@ -24895,6 +25492,10 @@
       "text": "ほかの実践・サンプル",
       "collapsed": true,
       "items": [
+        {
+          "text": "Cのバイト読み取りをx86-64で追う",
+          "link": "/practice/compilers/c-byte-decoder-disassembly.html"
+        },
         {
           "text": "シェーダーで三角形の位置と色を変える",
           "link": "/practice/graphics/shader-first-steps.html"
@@ -25274,6 +25875,10 @@
       "collapsed": true,
       "items": [
         {
+          "text": "Cのバイト読み取りをx86-64で追う",
+          "link": "/practice/compilers/c-byte-decoder-disassembly.html"
+        },
+        {
           "text": "シェーダーで三角形の位置と色を変える",
           "link": "/practice/graphics/shader-first-steps.html"
         },
@@ -25563,6 +26168,10 @@
       "collapsed": true,
       "items": [
         {
+          "text": "Cのバイト読み取りをx86-64で追う",
+          "link": "/practice/compilers/c-byte-decoder-disassembly.html"
+        },
+        {
           "text": "シェーダーで三角形の位置と色を変える",
           "link": "/practice/graphics/shader-first-steps.html"
         },
@@ -25851,6 +26460,10 @@
       "text": "ほかの実践・サンプル",
       "collapsed": true,
       "items": [
+        {
+          "text": "Cのバイト読み取りをx86-64で追う",
+          "link": "/practice/compilers/c-byte-decoder-disassembly.html"
+        },
         {
           "text": "シェーダーで三角形の位置と色を変える",
           "link": "/practice/graphics/shader-first-steps.html"
@@ -26245,6 +26858,10 @@
       "text": "ほかの実践・サンプル",
       "collapsed": true,
       "items": [
+        {
+          "text": "Cのバイト読み取りをx86-64で追う",
+          "link": "/practice/compilers/c-byte-decoder-disassembly.html"
+        },
         {
           "text": "シェーダーで三角形の位置と色を変える",
           "link": "/practice/graphics/shader-first-steps.html"
@@ -26668,6 +27285,10 @@
       "text": "ほかの実践・サンプル",
       "collapsed": true,
       "items": [
+        {
+          "text": "Cのバイト読み取りをx86-64で追う",
+          "link": "/practice/compilers/c-byte-decoder-disassembly.html"
+        },
         {
           "text": "シェーダーで三角形の位置と色を変える",
           "link": "/practice/graphics/shader-first-steps.html"
@@ -27124,6 +27745,10 @@
       "collapsed": true,
       "items": [
         {
+          "text": "Cのバイト読み取りをx86-64で追う",
+          "link": "/practice/compilers/c-byte-decoder-disassembly.html"
+        },
+        {
           "text": "シェーダーで三角形の位置と色を変える",
           "link": "/practice/graphics/shader-first-steps.html"
         },
@@ -27412,6 +28037,10 @@
       "text": "ほかの実践・サンプル",
       "collapsed": true,
       "items": [
+        {
+          "text": "Cのバイト読み取りをx86-64で追う",
+          "link": "/practice/compilers/c-byte-decoder-disassembly.html"
+        },
         {
           "text": "シェーダーで三角形の位置と色を変える",
           "link": "/practice/graphics/shader-first-steps.html"
@@ -27702,6 +28331,10 @@
       "collapsed": true,
       "items": [
         {
+          "text": "Cのバイト読み取りをx86-64で追う",
+          "link": "/practice/compilers/c-byte-decoder-disassembly.html"
+        },
+        {
           "text": "シェーダーで三角形の位置と色を変える",
           "link": "/practice/graphics/shader-first-steps.html"
         },
@@ -27990,6 +28623,10 @@
       "text": "ほかの実践・サンプル",
       "collapsed": true,
       "items": [
+        {
+          "text": "Cのバイト読み取りをx86-64で追う",
+          "link": "/practice/compilers/c-byte-decoder-disassembly.html"
+        },
         {
           "text": "シェーダーで三角形の位置と色を変える",
           "link": "/practice/graphics/shader-first-steps.html"
@@ -28510,6 +29147,10 @@
       "collapsed": true,
       "items": [
         {
+          "text": "Cのバイト読み取りをx86-64で追う",
+          "link": "/practice/compilers/c-byte-decoder-disassembly.html"
+        },
+        {
           "text": "シェーダーで三角形の位置と色を変える",
           "link": "/practice/graphics/shader-first-steps.html"
         },
@@ -28976,6 +29617,10 @@
       "text": "ほかの実践・サンプル",
       "collapsed": true,
       "items": [
+        {
+          "text": "Cのバイト読み取りをx86-64で追う",
+          "link": "/practice/compilers/c-byte-decoder-disassembly.html"
+        },
         {
           "text": "シェーダーで三角形の位置と色を変える",
           "link": "/practice/graphics/shader-first-steps.html"
@@ -31686,6 +32331,10 @@
       "collapsed": true,
       "items": [
         {
+          "text": "Cのバイト読み取りをx86-64で追う",
+          "link": "/practice/compilers/c-byte-decoder-disassembly.html"
+        },
+        {
           "text": "シェーダーで三角形の位置と色を変える",
           "link": "/practice/graphics/shader-first-steps.html"
         },
@@ -31974,6 +32623,10 @@
       "text": "ほかの実践・サンプル",
       "collapsed": true,
       "items": [
+        {
+          "text": "Cのバイト読み取りをx86-64で追う",
+          "link": "/practice/compilers/c-byte-decoder-disassembly.html"
+        },
         {
           "text": "シェーダーで三角形の位置と色を変える",
           "link": "/practice/graphics/shader-first-steps.html"
@@ -32436,6 +33089,10 @@
       "text": "ほかの実践・サンプル",
       "collapsed": true,
       "items": [
+        {
+          "text": "Cのバイト読み取りをx86-64で追う",
+          "link": "/practice/compilers/c-byte-decoder-disassembly.html"
+        },
         {
           "text": "シェーダーで三角形の位置と色を変える",
           "link": "/practice/graphics/shader-first-steps.html"

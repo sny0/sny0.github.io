@@ -4,6 +4,7 @@ study:
   source: RenderingWiki
   status: published
   summary: 描画済みの画像にトーンマッピング、ブルーム、被写界深度、色調補正などを適用する。各処理の順序と、HDRやリニア色空間との関係を扱う。
+  aliases: [sRGB, HDR10, トーンマッピング, トーンマップ, tone mapping, リニアワークフロー]
   section: reference
   format: article
   domain: graphics

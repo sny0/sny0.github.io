@@ -17,12 +17,14 @@ study:
 
 ## このページで案内すること
 
-本編から先に調べる専門テーマと、そのための教材・演習を選ぶ**学習計画・概要**です。すべてを必修にせず、実装したいものや観測した問題に合わせて選びます。Rust、Linuxカーネル、ゲーム通信、オーディオなどの専用本文は未整備です。
+本編から先に調べる専門テーマと、そのための教材・演習を選ぶ**学習計画・概要**です。実装したいものや観測した問題に合わせてテーマを選びます。通信やブラウザの音声処理は下の辞典本文で基礎を確認できます。Rust、Linuxカーネル、ゲーム固有の状態同期、ネイティブのゲームエンジンでの音声処理は、各節の教材や演習から進めます。
 
 ## 関連する辞典本文・実践
 
 - [並行処理のバグ](/runtime/memory/concurrency-bugs.html)、[Compute Shader](/graphics/compute/compute-shader.html)で、並行・並列処理を調べられます。
 - [レイトレーシング](/graphics/lighting/raytracing.html)と[UBT・Module](/game/unreal/build-system-ubt.html)は、描画とビルドの専門テーマへ進む入口です。
+- [ネットワークの基本](/network/network-basics.html)と[UDPデータグラム](/network/udp-datagrams.html)で、通信の各層やゲームで使う送受信の基本を確認できます。
+- [Web Audioのミキシング](/browser/audio-mixing-and-headroom.html)と[AudioWorkletと音声バッファ](/browser/audio-worklet-buffering.html)で、ブラウザでの音声の合成と供給を調べられます。
 
 本編(第0〜19章)では、ゲームを支える主要な層の関係を学ぶ。
 ここから先は、担当する機能や関心に合わせて選ぶ専門テーマである。

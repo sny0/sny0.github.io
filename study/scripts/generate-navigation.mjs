@@ -181,6 +181,12 @@ writePage('guide/learning-paths.md', '疑問から選ぶ読み順', {
 2. [C++の整数・バイト列観察サンプル](/practice/data/integer-byte-observation.html)で、型の幅と実メモリ、明示的なLE/BE形式を比較する。
 3. [メモリレイアウトとアラインメント](/runtime/cpp-internals/memory-layout.html)で、オブジェクトを置く場所やパディングとの違いを調べる。
 
+## Cでバイト列を読み、機械語を追う
+
+1. [Cでバイト列を読む](/languages/c/reading-byte-arrays.html)で、配列を関数へ渡すときの型と長さ、構造体の配置、バイト列から値を作る手順を確認する。
+2. [x86-64の逆アセンブリでCの処理を追う](/practice/compilers/c-byte-decoder-disassembly.html)で、同じCコードをビルドし、引数、バイトの読み取り、戻り値を調べる。
+3. レジスタの割り当てを詳しく調べるときは[関数呼び出し・レジスタ](/runtime/cpp-internals/function-calls-and-cpu.html)へ進む。
+
 ## floatで小さな差が消えるのはなぜか
 
 1. [floatが表せる値と丸め](/data/floating-point-spacing.html)で、binary32の有効精度、表現できる値の間隔、丸めを調べる。
@@ -362,6 +368,8 @@ writePage('guide/learning-paths.md', '疑問から選ぶ読み順', {
 1. [TLS・証明書・HTTPS](/network/tls-https.html)で、鍵共有、証明書、相手名の検証、暗号化したHTTPの関係を調べる。
 2. [C++・C#のHTTPS観察](/practice/network/https-observation.html)で、標準の証明書検証を保ち、APIが返す接続情報とHTTP応答を確かめる。
 3. 接続先の候補は[DNSと名前解決](/network/dns-resolution.html)、要求の意味は[HTTP通信](/network/http-messages.html)で確認する。
+
+<div id="browser-navigation-path" class="study-legacy-anchor" aria-hidden="true"></div>
 
 ## URLを開いてからページが見えるまで
 
@@ -702,10 +710,11 @@ const termRows = [
   ['Unicode / 文字コード / UTF-8 / UTF-16 / コードポイント / サロゲートペア / BOM / 文字化け', '/data/unicode-and-encoding.html', '文字の番号、コード単位、バイト列と、長さの数え方を区別する'],
   ['float / binary32 / 浮動小数点 / 丸め / 刻み幅 / epsilon / nextafter', '/data/floating-point-spacing.html', 'ビット表現と有効精度、隣接値、最近接・偶数丸めを区別する'],
   ['bit / byte / 2進数 / 16進数 / 整数表現 / 2の補数 / エンディアン', '/data/integer-bits-and-bytes.html', '値と表記、符号の解釈、アドレス順のバイト列を区別する'],
+  ['Cの配列 / sizeof / パディング / バイト列', '/languages/c/reading-byte-arrays.html', '配列の長さ、関数へ渡るポインタ、メモリと保存形式での配置の違いを調べる'],
   ['バイナリファイル / 範囲検査 / バイナリパーサー / magic number / bounds check / 整数オーバーフロー', '/data/binary-file-validation.html', '件数・オフセット・長さを確かめ、読み取りや確保に使える範囲を決める'],
   ['プロセス / スレッド / PID / TID / ローダー / エントリポイント / CRT', '/os/process-startup.html', '実行環境と実行単位、EXEの開始点からmainまでの違い'],
   ['alloc / allocate / malloc / アロック / メモリ確保', '/runtime/memory/allocation-journey.html', '確保・初期化・解放、再利用とOSへの要求の関係'],
-  ['仮想メモリ / reserve / commit / resident / ページフォルト', '/os/virtual-memory.html', 'アドレス変換と、予約・コミット・常駐の違い'],
+  ['仮想メモリ / reserve / commit / resident / ページフォルト / ページフォールト', '/os/virtual-memory.html', 'アドレス変換と、予約・コミット・常駐の違い'],
   ['モデル / メッシュ / 頂点 / 辺 / 面 / ポリゴン / 三角形 / 法線', '/graphics/basics/models-and-meshes.html', '形をデータで表し、頂点から面を組み立てる基本を調べる'],
   ['ローカル座標 / ワールド座標 / ビュー座標 / 座標変換 / カメラ / 透視投影 / 正投影', '/graphics/basics/transforms-and-cameras.html', '形の位置を決め、カメラからの見え方へ変換する流れを追う'],
   ['マテリアル / 材質 / テクスチャ / UV / シェーダー / サンプラー', '/graphics/basics/materials-textures-and-shaders.html', '表面の見た目を決めるデータ、値、計算の役割を調べる'],
@@ -724,6 +733,8 @@ const termRows = [
   ['ゲームイベント / イベント通知 / 発行 / 購読 / ハンドラー / 購読解除', '/game/basics/game-events-and-notifications.html', 'HPの変化などをUIへ伝え、利用期間に合わせて通知を受ける'],
   ['シェーダー / 頂点シェーダー / フラグメントシェーダー / ピクセルシェーダー / mix / lerp', '/graphics/shader/shader-first-steps.html', '頂点から三角形の色を作る処理を、GLSLとHLSLの短いコードで追う'],
   ['頂点属性 / attribute / varying / uniform / 定数バッファ / cbuffer / binding', '/graphics/shader/shader-inputs-and-uniforms.html', '描画に使うデータを、シェーダーのどの入力へ渡すかを調べる'],
+  ['sRGB / HDR10 / トーンマップ', '/graphics/postprocess/overview.html', '色の表現と、描画結果を画面へ出すまでの変換を調べる'],
+  ['フレームデバッガ / Frame Debugger / RenderDoc / Unreal Insights', '/graphics/optimization/tools.html', '描画の状態や処理時間を調べるツールを選ぶ'],
   ['ECS / Entity Component System', '/game/ecs.html', 'ID、Component、System、Query、格納方式'],
   ['RAII / 所有 / 寿命', '/runtime/memory/storage-duration-and-lifetime.html', '記憶域、寿命、後片付けの区別'],
   ['HLSL', '/graphics/shader/hlsl.html', 'Direct3Dやエンジンで使うシェーダ言語'],
@@ -752,19 +763,24 @@ for (const domain of domains) {
   const reference = entries.filter(entry => entry.domain === domain.id && entry.section === 'reference').sort(byTitle)
   const learning = entries.filter(entry => entry.domain === domain.id && entry.section === 'learning').sort(byOrder)
   const practice = entries.filter(entry => entry.domain === domain.id && entry.section === 'practice').sort(byOrder)
+  const isBrowser = domain.id === 'browser'
+  const guideLinks = isBrowser
+    ? '- [URLを開いてからページが見えるまで](/guide/learning-paths.html#browser-navigation-path) — DNSやHTTPから、DOMと描画の観察までを順にたどる。'
+    : learning.length ? list(learning) : 'この分野専用の学習経路は準備中です。[学習ガイド一覧](/learn/)から、公開中のコースを選べます。'
+  const guideSection = `## この分野の学習ガイド
+
+${guideLinks}`
+  const referenceSection = `## 辞典の本文
+
+${reference.length ? list(reference) : 'この分野の専用の辞典本文は準備中です。学習計画や分野の目次を、詳しい解説本文として数えてはいません。'}`
+  const domainSections = isBrowser ? [guideSection, referenceSection] : [referenceSection, guideSection]
   domain.count = reference.length
   domain.status = reference.length ? '辞典本文あり' : '辞典本文を準備中'
   writePage(domain.id + '/index.md', domain.title, { section: 'reference', format: 'index', domain: domain.id }, `# ${domain.title}
 
 ${domain.description}
 
-## 辞典の本文
-
-${reference.length ? list(reference) : 'この分野の専用の辞典本文は準備中です。学習計画や分野の目次を、詳しい解説本文として数えてはいません。'}
-
-## この分野の学習ガイド
-
-${learning.length ? list(learning) : 'この分野専用の学習経路は準備中です。[学習ガイド一覧](/learn/)から、公開中のコースを選べます。'}
+${domainSections.join('\n\n')}
 
 ## 作って試す
 

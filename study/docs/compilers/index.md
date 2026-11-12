@@ -39,6 +39,7 @@
 ## 作って試す
 
 - [2つのC++ファイルからOBJ・EXE・PDBを作って読む](/practice/compilers/build-artifact-observation.html)
+- [Cのバイト読み取りをx86-64の逆アセンブリで追う](/practice/compilers/c-byte-decoder-disassembly.html)
 
 ## 扱う範囲・増補する項目
 

@@ -7,7 +7,7 @@ study:
   status: published
   domain: os
   summary: 仮想アドレスが物理ページへ対応する仕組みと、Windowsの予約・コミット・常駐を区別する。TLB、ページフォルト、遅延割当、コピーオンライト、保護と観察方法を調べる。
-  aliases: [virtual memory, 仮想メモリ, 仮想アドレス, 物理アドレス, アドレス空間, ページ, page table, ページ表, TLB, MMU, page fault, ページフォルト, demand paging, demand-zero, copy-on-write, COW, reserve, commit, resident, working set, ワーキングセット, VirtualAlloc]
+  aliases: [virtual memory, 仮想メモリ, 仮想アドレス, 物理アドレス, アドレス空間, ページ, page table, ページ表, TLB, MMU, page fault, ページフォルト, ページフォールト, demand paging, demand-zero, copy-on-write, COW, reserve, commit, resident, working set, ワーキングセット, VirtualAlloc]
   verification: Windows API契約とIntel SDMの一次資料照合（2026-11-02）
 ---
 

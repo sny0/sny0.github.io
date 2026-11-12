@@ -36,6 +36,12 @@
 2. [C++の整数・バイト列観察サンプル](/practice/data/integer-byte-observation.html)で、型の幅と実メモリ、明示的なLE/BE形式を比較する。
 3. [メモリレイアウトとアラインメント](/runtime/cpp-internals/memory-layout.html)で、オブジェクトを置く場所やパディングとの違いを調べる。
 
+## Cでバイト列を読み、機械語を追う
+
+1. [Cでバイト列を読む](/languages/c/reading-byte-arrays.html)で、配列を関数へ渡すときの型と長さ、構造体の配置、バイト列から値を作る手順を確認する。
+2. [x86-64の逆アセンブリでCの処理を追う](/practice/compilers/c-byte-decoder-disassembly.html)で、同じCコードをビルドし、引数、バイトの読み取り、戻り値を調べる。
+3. レジスタの割り当てを詳しく調べるときは[関数呼び出し・レジスタ](/runtime/cpp-internals/function-calls-and-cpu.html)へ進む。
+
 ## floatで小さな差が消えるのはなぜか
 
 1. [floatが表せる値と丸め](/data/floating-point-spacing.html)で、binary32の有効精度、表現できる値の間隔、丸めを調べる。
@@ -217,6 +223,8 @@
 1. [TLS・証明書・HTTPS](/network/tls-https.html)で、鍵共有、証明書、相手名の検証、暗号化したHTTPの関係を調べる。
 2. [C++・C#のHTTPS観察](/practice/network/https-observation.html)で、標準の証明書検証を保ち、APIが返す接続情報とHTTP応答を確かめる。
 3. 接続先の候補は[DNSと名前解決](/network/dns-resolution.html)、要求の意味は[HTTP通信](/network/http-messages.html)で確認する。
+
+<div id="browser-navigation-path" class="study-legacy-anchor" aria-hidden="true"></div>
 
 ## URLを開いてからページが見えるまで
 

@@ -40,9 +40,9 @@ C#ソース ──Roslyn──> IL(中間言語)+メタデータ
 | iOSビルドが遅い | 生成された膨大なC++のコンパイル([ビルドが遅い理由](/tools/build/build-speed.html)がフル適用) |
 | IL2CPPの方が速いことが多い | C++コンパイラの最適化([コンパイラ最適化・未定義動作の影響・Debug/Release・ゼロコスト抽象化](/runtime/cpp-internals/optimization-and-ub.html))がフルに掛かる。ただしGCはBoehmのまま(→ [GC比較](/runtime/memory/gc-and-csharp-comparison.html)) |
 
-## ネイティブプラグインとの境界(P/Invoke)
+Full Generic Sharingでは、特殊化された実装と共有実装で性能特性が異なる場合があります。共有実装が扱える型の組み合わせを調べるときは、使用するUnityの版、コード生成設定、ビルドに残るメタデータを確認します。[Unity 2022.1の説明](https://unity.com/blog/engine-platform/il2cpp-full-generic-sharing-in-unity-2022-1-beta)
 
-Full Generic Sharingでは、特殊化された実装と共有実装で性能特性が異なる場合があります。「AOTでは未知のジェネリックの組み合わせはすべて実行できない」とはせず、使用するUnityの版・設定・保持されるメタデータを確認します。[Unity 2022.1の説明](https://unity.com/blog/engine-platform/il2cpp-full-generic-sharing-in-unity-2022-1-beta)
+## ネイティブプラグインとの境界(P/Invoke)
 
 ```csharp
 // C#側
@@ -56,8 +56,9 @@ extern "C" __declspec(dllexport) int Simulate(float dt) { /* ... */ return 0; }
 ```
 
 - 境界のルールは[DLLのページ](/runtime/cpp-internals/object-files-and-libraries.html)そのまま: **C ABI+プレーンなデータ**(構造体はblittableに=参照型・stringを含めない)
-- 呼び出しコストは1回あたり数十〜数百サイクル(マーシャリング)。**細かく何度も呼ばず、まとめて渡す**(配列でバッチ)が定石
-- 文字列・配列を受け渡すときは、所有権を明確にします。GCはC#側のメモリを移動・回収するため、C++側でそのアドレスを保持してはいけません。ここでpinningを考えます。
+- 呼び出しやマーシャリングのコストは、引数の型やコピー量によって変わります。何度も呼び出す箇所では、配列などでまとめて渡す場合と計測して比べます。
+- **GCによる回収とオブジェクトの移動は別の処理です。** GCは到達できなくなったオブジェクトの領域を回収します。CoreCLRでは、ヒープを圧縮するときに生存中のオブジェクトのアドレスも変わることがあります。Unity 6.0で使うBoehm GCは非圧縮で、空きを詰めるための再配置を行いません。[UnityのGCモード](https://docs.unity.com/en-us/engine/6000.0/manual/analysis/performance-memory/managed-memory/incremental-garbage-collection) · [.NETのGC](https://learn.microsoft.com/en-us/dotnet/standard/garbage-collection/fundamentals)
+- **C++側で使うポインタの有効期間を決めます。** 文字列や配列を渡すとき、型やマーシャリング設定によっては変換・コピー用の一時領域を渡します。呼び出し中だけ借りる契約なら、C++側はその呼び出しの中で使い切ります。`fixed`で得たポインタを使う場合も、そのブロック内で使います。関数が戻った後もC++側で使うデータは、たとえばネイティブ側が所有するバッファへコピーし、処理の完了後に誰が解放するかを決めておきます。[.NETのマーシャリング指針](https://learn.microsoft.com/en-us/dotnet/standard/native-interop/best-practices) · [C#の`fixed`](https://learn.microsoft.com/en-us/dotnet/csharp/language-reference/statements/fixed)
 
 ## Burstとの関係
 

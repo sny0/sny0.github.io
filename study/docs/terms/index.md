@@ -133,10 +133,11 @@
 | [Unicode / 文字コード / UTF-8 / UTF-16 / コードポイント / サロゲートペア / BOM / 文字化け](/data/unicode-and-encoding.html) | 文字の番号、コード単位、バイト列と、長さの数え方を区別する |
 | [float / binary32 / 浮動小数点 / 丸め / 刻み幅 / epsilon / nextafter](/data/floating-point-spacing.html) | ビット表現と有効精度、隣接値、最近接・偶数丸めを区別する |
 | [bit / byte / 2進数 / 16進数 / 整数表現 / 2の補数 / エンディアン](/data/integer-bits-and-bytes.html) | 値と表記、符号の解釈、アドレス順のバイト列を区別する |
+| [Cの配列 / sizeof / パディング / バイト列](/languages/c/reading-byte-arrays.html) | 配列の長さ、関数へ渡るポインタ、メモリと保存形式での配置の違いを調べる |
 | [バイナリファイル / 範囲検査 / バイナリパーサー / magic number / bounds check / 整数オーバーフロー](/data/binary-file-validation.html) | 件数・オフセット・長さを確かめ、読み取りや確保に使える範囲を決める |
 | [プロセス / スレッド / PID / TID / ローダー / エントリポイント / CRT](/os/process-startup.html) | 実行環境と実行単位、EXEの開始点からmainまでの違い |
 | [alloc / allocate / malloc / アロック / メモリ確保](/runtime/memory/allocation-journey.html) | 確保・初期化・解放、再利用とOSへの要求の関係 |
-| [仮想メモリ / reserve / commit / resident / ページフォルト](/os/virtual-memory.html) | アドレス変換と、予約・コミット・常駐の違い |
+| [仮想メモリ / reserve / commit / resident / ページフォルト / ページフォールト](/os/virtual-memory.html) | アドレス変換と、予約・コミット・常駐の違い |
 | [モデル / メッシュ / 頂点 / 辺 / 面 / ポリゴン / 三角形 / 法線](/graphics/basics/models-and-meshes.html) | 形をデータで表し、頂点から面を組み立てる基本を調べる |
 | [ローカル座標 / ワールド座標 / ビュー座標 / 座標変換 / カメラ / 透視投影 / 正投影](/graphics/basics/transforms-and-cameras.html) | 形の位置を決め、カメラからの見え方へ変換する流れを追う |
 | [マテリアル / 材質 / テクスチャ / UV / シェーダー / サンプラー](/graphics/basics/materials-textures-and-shaders.html) | 表面の見た目を決めるデータ、値、計算の役割を調べる |
@@ -155,6 +156,8 @@
 | [ゲームイベント / イベント通知 / 発行 / 購読 / ハンドラー / 購読解除](/game/basics/game-events-and-notifications.html) | HPの変化などをUIへ伝え、利用期間に合わせて通知を受ける |
 | [シェーダー / 頂点シェーダー / フラグメントシェーダー / ピクセルシェーダー / mix / lerp](/graphics/shader/shader-first-steps.html) | 頂点から三角形の色を作る処理を、GLSLとHLSLの短いコードで追う |
 | [頂点属性 / attribute / varying / uniform / 定数バッファ / cbuffer / binding](/graphics/shader/shader-inputs-and-uniforms.html) | 描画に使うデータを、シェーダーのどの入力へ渡すかを調べる |
+| [sRGB / HDR10 / トーンマップ](/graphics/postprocess/overview.html) | 色の表現と、描画結果を画面へ出すまでの変換を調べる |
+| [フレームデバッガ / Frame Debugger / RenderDoc / Unreal Insights](/graphics/optimization/tools.html) | 描画の状態や処理時間を調べるツールを選ぶ |
 | [ECS / Entity Component System](/game/ecs.html) | ID、Component、System、Query、格納方式 |
 | [RAII / 所有 / 寿命](/runtime/memory/storage-duration-and-lifetime.html) | 記憶域、寿命、後片付けの区別 |
 | [HLSL](/graphics/shader/hlsl.html) | Direct3Dやエンジンで使うシェーダ言語 |

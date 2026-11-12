@@ -55,7 +55,7 @@
       "id": "languages",
       "title": "言語",
       "description": "型、所有、寿命、実行の違いから、各言語の構文を調べる。",
-      "count": 30,
+      "count": 31,
       "status": "辞典本文あり"
     },
     {
@@ -130,6 +130,13 @@
     }
   ],
   "collections": [
+    {
+      "id": "c-byte-decoder-disassembly",
+      "section": "practice",
+      "title": "Cのバイト読み取りをx86-64で追う",
+      "description": "短いデコーダーをビルドし、引数、メモリ読み取り、戻り値を逆アセンブリで確かめる。",
+      "start": "/practice/compilers/c-byte-decoder-disassembly.html"
+    },
     {
       "id": "shader-first-steps",
       "section": "practice",
@@ -2709,6 +2716,68 @@
         "/graphics/compute/parallel-algorithms.html",
         "/graphics/postprocess/upscaling.html",
         "/graphics/lighting/raytracing.html"
+      ]
+    },
+    {
+      "title": "Cでバイト列を読む",
+      "url": "/languages/c/reading-byte-arrays.html",
+      "file": "languages/c/reading-byte-arrays.md",
+      "domain": "languages",
+      "section": "reference",
+      "format": "article",
+      "status": "published",
+      "summary": "配列とポインタの違い、sizeof、構造体のパディングを、4バイトのデータから16ビット値を読む例で説明する。",
+      "source": "新規執筆",
+      "aliases": [
+        "C言語",
+        "C17",
+        "バイト列",
+        "配列からポインタへの変換",
+        "sizeof",
+        "offsetof",
+        "パディング",
+        "リトルエンディアン",
+        "read_u16_le"
+      ],
+      "verification": "WG14の公開草案に照合し、MSVC x64のC17モードで正常入力と短い入力を実行確認（2026-11-12）",
+      "links": [
+        "/data/integer-bits-and-bytes.html",
+        "/data/binary-file-validation.html",
+        "/runtime/cpp-internals/memory-layout.html",
+        "/practice/compilers/c-byte-decoder-disassembly.html"
+      ]
+    },
+    {
+      "title": "Cのバイト読み取りをx86-64の逆アセンブリで追う",
+      "url": "/practice/compilers/c-byte-decoder-disassembly.html",
+      "file": "practice/compilers/c-byte-decoder-disassembly.md",
+      "domain": "compilers",
+      "section": "practice",
+      "format": "sample",
+      "status": "published",
+      "summary": "同じCのデコーダーをMSVC x64で最適化あり・なしの2通りにビルドし、引数レジスタ、長さの検査、バイトの読み込み、戻り値を追う。",
+      "source": "新規執筆",
+      "aliases": [
+        "x86-64",
+        "x64",
+        "Visual Studio",
+        "MSVC",
+        "DUMPBIN",
+        "逆アセンブリ",
+        "Windows x64 ABI",
+        "RCX",
+        "RDX",
+        "R8",
+        "movzx"
+      ],
+      "collection": "c-byte-decoder-disassembly",
+      "order": 1,
+      "verification": "MSVC 19.35.32217.1 x64でC17の両構成をコンパイル・実行し、DUMPBINで命令を照合（2026-11-12）",
+      "links": [
+        "/languages/c/reading-byte-arrays.html",
+        "/guide/low-level/assembly.html",
+        "/runtime/cpp-internals/function-calls-and-cpu.html",
+        "/practice/compilers/build-artifact-observation.html"
       ]
     },
     {
@@ -9488,7 +9557,12 @@
       "status": "published",
       "summary": "描画結果やGPUの処理時間を調べるために、RenderDoc、PIX、Nsight Graphics、Unity Frame Debuggerを使い分けます。各ツールの役割と調査の進め方を説明します。",
       "source": "RenderingWiki",
-      "aliases": [],
+      "aliases": [
+        "フレームデバッガ",
+        "フレームデバッガー",
+        "フレームキャプチャ",
+        "Unreal Insights"
+      ],
       "links": [
         "/graphics/optimization/basics.html",
         "/graphics/pipeline/overview.html",
@@ -10459,7 +10533,14 @@
       "status": "published",
       "summary": "描画済みの画像にトーンマッピング、ブルーム、被写界深度、色調補正などを適用する。各処理の順序と、HDRやリニア色空間との関係を扱う。",
       "source": "RenderingWiki",
-      "aliases": [],
+      "aliases": [
+        "sRGB",
+        "HDR10",
+        "トーンマッピング",
+        "トーンマップ",
+        "tone mapping",
+        "リニアワークフロー"
+      ],
       "links": [
         "/graphics/postprocess/render-to-texture.html",
         "/practice/graphics/render-to-texture-observation.html",
@@ -11188,6 +11269,7 @@
         "MMU",
         "page fault",
         "ページフォルト",
+        "ページフォールト",
         "demand paging",
         "demand-zero",
         "copy-on-write",
@@ -11486,6 +11568,9 @@
         "/data/integer-bits-and-bytes.html",
         "/practice/data/integer-byte-observation.html",
         "/runtime/cpp-internals/memory-layout.html",
+        "/languages/c/reading-byte-arrays.html",
+        "/practice/compilers/c-byte-decoder-disassembly.html",
+        "/runtime/cpp-internals/function-calls-and-cpu.html",
         "/data/floating-point-spacing.html",
         "/practice/data/float-spacing-observation.html",
         "/math/rendering/transform.html",
@@ -11507,7 +11592,6 @@
         "/runtime/cpp-internals/object-files-and-libraries.html",
         "/os/process-startup.html",
         "/practice/process/windows-process-observation.html",
-        "/runtime/cpp-internals/function-calls-and-cpu.html",
         "/runtime/thread-synchronization.html",
         "/practice/threads/inventory-synchronization.html",
         "/runtime/memory/concurrency-bugs.html",
@@ -13330,6 +13414,8 @@
       "collection": "low-level",
       "order": 5,
       "links": [
+        "/practice/compilers/c-byte-decoder-disassembly.html",
+        "/languages/c/reading-byte-arrays.html",
         "/runtime/cpp-internals/function-calls-and-cpu.html",
         "/runtime/cpp-internals/optimization-and-ub.html"
       ],
@@ -13344,12 +13430,14 @@
       "section": "learning",
       "format": "path",
       "status": "outline",
-      "summary": "Cの構文、ポインタ、構造体、動的確保を低レイヤで観察するための学習計画です。C++の記事は比較用に使い、Cの規則は章末の資料で確認します。",
+      "summary": "Cの構文、ポインタ、構造体、動的確保を低レイヤで観察するための学習計画です。配列とバイト列の辞典本文や、Cの関数を逆アセンブリで追う実践へ進めます。",
       "source": "IT教本",
       "aliases": [],
       "collection": "low-level",
       "order": 6,
       "links": [
+        "/languages/c/reading-byte-arrays.html",
+        "/practice/compilers/c-byte-decoder-disassembly.html",
         "/runtime/memory/storage-duration-and-lifetime.html",
         "/runtime/cpp-internals/memory-layout.html"
       ],
@@ -13637,6 +13725,13 @@
       "collection": "low-level",
       "order": 0,
       "links": [
+        "/data/integer-bits-and-bytes.html",
+        "/data/unicode-and-encoding.html",
+        "/os/operating-system-basics.html",
+        "/os/process-startup.html",
+        "/os/virtual-memory.html",
+        "/languages/c/reading-byte-arrays.html",
+        "/practice/compilers/c-byte-decoder-disassembly.html",
         "/runtime/cpp-internals/build-pipeline-journey.html",
         "/runtime/memory/allocators-and-pools.html",
         "/game/ecs.html",
@@ -13969,7 +14064,11 @@
         "/runtime/memory/concurrency-bugs.html",
         "/graphics/compute/compute-shader.html",
         "/graphics/lighting/raytracing.html",
-        "/game/unreal/build-system-ubt.html"
+        "/game/unreal/build-system-ubt.html",
+        "/network/network-basics.html",
+        "/network/udp-datagrams.html",
+        "/browser/audio-mixing-and-headroom.html",
+        "/browser/audio-worklet-buffering.html"
       ],
       "previous": "/guide/low-level/button-to-screen.html"
     },
@@ -14633,6 +14732,7 @@
         "/data/unicode-and-encoding.html",
         "/data/floating-point-spacing.html",
         "/data/integer-bits-and-bytes.html",
+        "/languages/c/reading-byte-arrays.html",
         "/data/binary-file-validation.html",
         "/os/process-startup.html",
         "/runtime/memory/allocation-journey.html",
@@ -14655,6 +14755,8 @@
         "/game/basics/game-events-and-notifications.html",
         "/graphics/shader/shader-first-steps.html",
         "/graphics/shader/shader-inputs-and-uniforms.html",
+        "/graphics/postprocess/overview.html",
+        "/graphics/optimization/tools.html",
         "/game/ecs.html",
         "/runtime/memory/storage-duration-and-lifetime.html",
         "/graphics/shader/hlsl.html",
