@@ -93,6 +93,7 @@ Compute ShaderはGPU DrivenのカリングやNaniteの微小三角形のラス�
 - 実践: [MSAAを切り替えて輪郭と床模様を見比べる](/practice/graphics/msaa-observation.html)
 - 実践: [TAAを切り替えて床のちらつきとゴーストを比べる](/practice/graphics/taa-observation.html)
 - 実践: [ネイティブ描画・バイリニア・時間方向の拡大を比べる](/practice/graphics/taau-observation.html)
+- 表示: [フレーム生成](/graphics/postprocess/frame-generation.html) → [滑らかさと入力への反応を比べる実践](/practice/graphics/frame-generation-observation.html)
 
 ## フェーズ5: 最適化と実務
 

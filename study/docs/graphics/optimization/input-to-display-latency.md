@@ -44,3 +44,5 @@ study:
 3. **機器込みの遅延を測る。** 物理入力と光の変化が分かる治具や、入力の目印と画面の対象を同時に撮る高速度カメラを使います。撮影で数える場合は、撮影フレーム間隔の分だけ時刻の分解能が限られます。画面位置、表示設定、入力機器をそろえて複数回測り、中央値とばらつきを比べます。[NVIDIAの入力機器・PC・画面を含む測定例](https://www.nvidia.com/en-us/geforce/news/reflex-latency-analyzer-360hz-g-sync-monitors/)
 
 DXGIの待機可能なスワップチェーンで、フレームを受け付けられるまで待ってから最新の入力を読む方法があります。対策を入れたら、入力が使われるまでの待ちと、表示間隔のばらつきの両方を確認します。[MicrosoftのDXGI遅延低減手順](https://learn.microsoft.com/en-us/windows/uwp/gaming/reduce-latency-with-dxgi-1-3-swap-chains) · [フレームタイムとフレームペーシング](/graphics/optimization/frame-pacing.html)
+
+[フレーム生成](/graphics/postprocess/frame-generation.html)では、表示する枚数と、入力が反映された画像が表示されるまでの時間を分けて考えます。

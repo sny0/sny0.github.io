@@ -1,0 +1,63 @@
+<!doctype html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="同じシーンで中間フレームの有無を切り替え、見た目の滑らかさと入力が画面に現れる時刻を比べる。">
+  <title>フレーム生成の比較 | Sny0 Study</title>
+  <link rel="stylesheet" href="./styles.css">
+  <script type="module" src="./main.js"></script>
+</head>
+<body>
+  <main>
+    <header>
+      <h1>フレーム生成で動きと入力の反応を比べる</h1>
+      <p>ロボットの移動を見ながらフレーム生成を切り替えます。次に色を切り替えて、入力が表示に現れるまでを比べます。</p>
+    </header>
+
+    <fieldset id="controls" disabled>
+      <legend>描画の設定</legend>
+      <div class="options">
+        <label><input type="checkbox" id="frame-generation"> フレーム生成をオンにする</label>
+        <label><input type="checkbox" id="slow-motion"> スロー表示（1/4倍速）</label>
+        <button type="button" id="toggle-color" aria-keyshortcuts="Space">色を切り替える（Space）</button>
+      </div>
+    </fieldset>
+
+    <canvas id="view" width="640" height="216" role="img"
+      aria-label="目盛りのある通路を青またはオレンジのロボットが左右に移動する。">この教材ではcanvasを使います。</canvas>
+    <p id="status">Canvasを準備しています。</p>
+    <p class="caption">等速時は両方とも毎秒30回、入力を読み取って基礎フレームを作ります。生成オンでは中間を1枚ずつ挟み、毎秒60枚の表示を予定します。</p>
+
+    <section aria-labelledby="response-heading">
+      <h2 id="response-heading">色が変わるまで</h2>
+      <table aria-describedby="measurement-caption">
+        <thead>
+          <tr>
+            <th scope="col">フレーム生成</th>
+            <th scope="col">入力からCanvas更新</th>
+            <th scope="col">表示用の待ち（等速）</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr id="measurement-off">
+            <th scope="row">オフ</th>
+            <td class="elapsed">未計測</td>
+            <td>0 ms</td>
+          </tr>
+          <tr id="measurement-on">
+            <th scope="row">オン</th>
+            <td class="elapsed">未計測</td>
+            <td>約33.3 ms</td>
+          </tr>
+        </tbody>
+      </table>
+      <p id="measurement-caption" class="caption">入力を受け付けてから、色が変わるCanvas描画を実行するまでを計測します。入力のタイミング、スロー表示、ブラウザーの描画間隔で値が変わります。モニターに表示されるまでの実測は含みません。</p>
+      <p class="sr-only" id="announcement" aria-live="polite"></p>
+    </section>
+
+    <footer><a href="../../../practice/graphics/frame-generation-observation.html">実践の解説へ戻る</a></footer>
+    <noscript><p>描画するにはJavaScriptを有効にしてください。</p></noscript>
+  </main>
+</body>
+</html>

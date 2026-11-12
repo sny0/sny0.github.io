@@ -104,7 +104,7 @@
       "id": "graphics",
       "title": "3DCGとグラフィックス",
       "description": "制作データからGPUの処理、最終表示までをつなぐ。",
-      "count": 80,
+      "count": 81,
       "status": "辞典本文あり"
     },
     {
@@ -171,6 +171,13 @@
       "title": "同じシーンでネイティブ描画・バイリニア・時間方向の拡大を比べる",
       "description": "同じシーンを3方式で描き、時間方向のサンプルで高解像度の格子が埋まる様子を見る。",
       "start": "/practice/graphics/taau-observation.html"
+    },
+    {
+      "id": "frame-generation-observation",
+      "section": "practice",
+      "title": "フレーム生成を切り替えて滑らかさと入力への反応を比べる",
+      "description": "同じシーンの補間を切り替え、ロボットの動きと入力が色に反映される時刻を比べる。",
+      "start": "/practice/graphics/frame-generation-observation.html"
     },
     {
       "id": "foundations",
@@ -8373,6 +8380,8 @@
         "/practice/graphics/taau-observation.html",
         "/graphics/postprocess/taa.html",
         "/graphics/optimization/basics.html",
+        "/graphics/postprocess/frame-generation.html",
+        "/practice/graphics/frame-generation-observation.html",
         "/graphics/postprocess/overview.html",
         "/graphics/lighting/path-tracing.html",
         "/learn/roadmap.html"
@@ -11398,6 +11407,66 @@
       ],
       "difficulty": "intermediate",
       "importance": "core"
+    },
+    {
+      "title": "フレーム生成 — 2枚の間を補い、表示を滑らかにする",
+      "url": "/graphics/postprocess/frame-generation.html",
+      "file": "graphics/postprocess/frame-generation.md",
+      "domain": "graphics",
+      "section": "reference",
+      "format": "article",
+      "status": "published",
+      "summary": "アップスケーリングとフレーム生成の違い、中間フレームを補間する仕組み、表示の滑らかさと入力遅延の関係を図とブラウザー実践で確かめる。",
+      "source": "新規執筆",
+      "aliases": [
+        "フレーム生成",
+        "Frame Generation",
+        "フレーム補間",
+        "中間フレーム",
+        "オプティカルフロー",
+        "基礎FPS",
+        "表示FPS",
+        "DLSS Frame Generation",
+        "FSR Frame Generation"
+      ],
+      "verification": "AMDのフレーム補間資料とNVIDIA Streamlineの開発者向け資料に照合（2026-11-13）",
+      "links": [
+        "/practice/graphics/frame-generation-observation.html",
+        "/graphics/postprocess/upscaling.html",
+        "/graphics/optimization/frame-pacing.html",
+        "/graphics/optimization/input-to-display-latency.html",
+        "/learn/roadmap.html"
+      ],
+      "difficulty": "intro",
+      "importance": "useful"
+    },
+    {
+      "title": "フレーム生成を切り替えて滑らかさと入力への反応を比べる",
+      "url": "/practice/graphics/frame-generation-observation.html",
+      "file": "practice/graphics/frame-generation-observation.md",
+      "domain": "graphics",
+      "section": "practice",
+      "format": "sample",
+      "status": "published",
+      "summary": "30 Hzで更新するロボットに中間フレームを挿入し、表示する位置の数と、入力で色が変わる時刻を比べる。",
+      "source": "新規執筆",
+      "aliases": [
+        "フレーム生成の実践",
+        "フレーム補間",
+        "表示FPS",
+        "入力遅延",
+        "Canvas"
+      ],
+      "collection": "frame-generation-observation",
+      "order": 1,
+      "verification": "AMDのフレーム補間・表示タイミング資料とNVIDIA Streamlineの開発者向け資料に照合（2026-11-13）",
+      "links": [
+        "/graphics/postprocess/frame-generation.html",
+        "/graphics/optimization/input-to-display-latency.html",
+        "/practice/graphics/taau-observation.html",
+        "/practice/graphics/frame-pacing-observation.html",
+        "/learn/roadmap.html"
+      ]
     },
     {
       "title": "プレハブと生成・破棄の基本 — 同じ部品から複数の物を作る",
@@ -15300,7 +15369,8 @@
         "/graphics/optimization/gpu-timestamp-queries.html",
         "/graphics/optimization/swap-chain-and-vsync.html",
         "/practice/graphics/input-latency-observation.html",
-        "/graphics/optimization/frame-pacing.html"
+        "/graphics/optimization/frame-pacing.html",
+        "/graphics/postprocess/frame-generation.html"
       ],
       "difficulty": "intermediate",
       "importance": "useful"
@@ -15363,7 +15433,8 @@
       "order": 1,
       "verification": "Nodeで全1500通りの設定を検証し、Chromium系ブラウザで走査の境界・設定変更・初期値への復帰を確認（2026-11-06）",
       "links": [
-        "/graphics/optimization/input-to-display-latency.html"
+        "/graphics/optimization/input-to-display-latency.html",
+        "/graphics/postprocess/frame-generation.html"
       ]
     },
     {
@@ -15780,6 +15851,8 @@
         "/practice/graphics/msaa-observation.html",
         "/practice/graphics/taa-observation.html",
         "/practice/graphics/taau-observation.html",
+        "/graphics/postprocess/frame-generation.html",
+        "/practice/graphics/frame-generation-observation.html",
         "/graphics/optimization/basics.html",
         "/graphics/optimization/tools.html",
         "/graphics/optimization/render-graph.html",
@@ -16146,6 +16219,7 @@
         "/graphics/postprocess/antialiasing.html",
         "/graphics/postprocess/taa.html",
         "/graphics/postprocess/upscaling.html",
+        "/graphics/postprocess/frame-generation.html",
         "/graphics/texture/d3d12-texture-upload.html",
         "/graphics/texture/texture-streaming-and-mip-residency.html",
         "/graphics/mesh/gltf-mesh-buffers.html",

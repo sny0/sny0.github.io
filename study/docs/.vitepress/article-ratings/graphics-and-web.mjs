@@ -89,6 +89,7 @@ export default {
   '/graphics/pipeline/tessellation.html': ['advanced', 'specialized'],
   '/graphics/pipeline/vertex-shader.html': ['intermediate', 'core'],
   '/graphics/postprocess/antialiasing.html': ['intermediate', 'useful'],
+  '/graphics/postprocess/frame-generation.html': ['intro', 'useful'],
   '/graphics/postprocess/overview.html': ['intermediate', 'core'],
   '/graphics/postprocess/ping-pong-and-history.html': ['advanced', 'specialized'],
   '/graphics/postprocess/render-to-texture.html': ['advanced', 'specialized'],

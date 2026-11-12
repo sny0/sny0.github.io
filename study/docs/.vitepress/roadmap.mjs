@@ -276,6 +276,8 @@ export default {
         { label: '実践 TAAで床のちらつきとゴーストを比べる', url: '/practice/graphics/taa-observation.html' },
         { label: 'アップスケーリングとTAAU', url: '/graphics/postprocess/upscaling.html' },
         { label: '実践 ネイティブ描画と2つの拡大方式を比べる', url: '/practice/graphics/taau-observation.html' },
+        { label: 'フレーム生成と入力への反応', url: '/graphics/postprocess/frame-generation.html' },
+        { label: '実践 フレーム生成のオン・オフを比べる', url: '/practice/graphics/frame-generation-observation.html' },
         { label: '実践 テクスチャに描き、次のパスで色を変える', url: '/practice/graphics/render-to-texture-observation.html' },
       ],
     },

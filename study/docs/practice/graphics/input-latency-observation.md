@@ -36,3 +36,7 @@ python -m http.server 4203 --bind 127.0.0.1
 ## コード
 
 <<< @/public/samples/graphics/input-latency-observation/main.js{js}
+
+## 関連項目
+
+- [フレーム生成](/graphics/postprocess/frame-generation.html)で、中間フレームを挿入するときの表示順と待ち時間を確認する。

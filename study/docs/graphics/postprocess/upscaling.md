@@ -112,6 +112,8 @@ DLSSの**Ray Reconstruction**は、レイトレーシングの少ないサンプ
 
 描画したフレームやモーションベクタなどから中間画像を**生成**し、表示の滑らかさを高める機能です。DLSS 3やFSR 3の1枚生成は2倍モード、RTX 50シリーズのDLSS 4のMFGは最大3枚生成する4倍モード、DLSS 4.5は最大5枚生成する6倍モードと動的な倍率選択を提供します。この倍率が数えるのは表示枚数です。基礎フレームレート、生成・提示のコスト、入力から表示までの時間は実測します。[NVIDIAの6X提供開始時の資料](https://www.nvidia.com/en-us/geforce/news/dlss-4-5-dynamic-multi-frame-generation-6x-mode-released/) · [AMDのFSR 3資料](https://gpuopen.com/fidelityfx-super-resolution-3/)
 
+[フレーム生成の記事](/graphics/postprocess/frame-generation.html)で、2枚から中間画像を作る処理を図解しています。[オン・オフの比較実践](/practice/graphics/frame-generation-observation.html)では、表示する位置と入力が反映されるタイミングを比べられます。
+
 ## 各環境での扱い
 
 ### Unity
