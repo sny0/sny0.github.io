@@ -1,0 +1,42 @@
+:root {
+  color-scheme: light;
+  color: #203248;
+  background: #edf2f7;
+  font: 16px/1.6 system-ui, sans-serif;
+}
+
+* { box-sizing: border-box; }
+body { margin: 0; }
+main { width: min(100% - 2rem, 55rem); margin: 1.5rem auto 2.5rem; }
+header { padding: clamp(1rem, 3vw, 1.45rem); border-radius: .75rem; color: #f2f7fd; background: #162c42; }
+header a { color: #a8e5ef; }
+h1 { margin: .35rem 0; font-size: clamp(1.48rem, 4vw, 2.1rem); line-height: 1.35; }
+h2 { margin: 0 0 .4rem; font-size: 1.12rem; }
+p { margin: 0; }
+.controls, .scene, .schedule { margin-top: .75rem; padding: clamp(.7rem, 2vw, 1rem); border: 1px solid #bfd0de; border-radius: .65rem; background: white; }
+fieldset { margin: 0; padding: 0; border: 0; min-width: 0; }
+legend, .scrub { font-weight: 650; }
+.options, .actions { display: flex; flex-wrap: wrap; gap: .4rem; }
+.options { margin-top: .25rem; }
+.actions { margin: .55rem 0; }
+.options label, button { display: inline-flex; align-items: center; gap: .35rem; min-height: 2.65rem; padding: .25rem .6rem; color: inherit; font: inherit; background: white; border: 1px solid #9fb5c7; border-radius: .35rem; cursor: pointer; }
+.options label:has(:checked) { color: #174f75; background: #e5eff7; border-color: #276392; font-weight: 650; }
+#play { color: white; background: #205a8e; border-color: #205a8e; }
+button:disabled { opacity: .6; cursor: default; }
+:focus-visible { outline: 3px solid #9e510b; outline-offset: 3px; }
+input { accent-color: #205a8e; }
+.scrub { display: flex; justify-content: space-between; gap: .6rem; }
+output { color: #174f75; font-variant-numeric: tabular-nums; }
+#time { display: block; width: 100%; margin: .15rem 0; }
+canvas, #timeline { display: block; width: 100%; height: auto; }
+canvas { border: 1px solid #8499ac; border-radius: .35rem; background: #162c42; }
+#timeline { color: #203248; background: #f5f8fb; border-radius: .35rem; }
+canvas[data-render-state="error"], #timeline[hidden] { display: none; }
+#status { margin-top: .35rem; font-weight: 650; }
+#status[data-error="true"] { color: #942d38; }
+.caption { margin-top: .25rem; color: #465d70; font-size: .88rem; }
+
+@media (max-width: 36rem) {
+  main { width: calc(100% - 1.25rem); margin-top: .7rem; }
+  .options label, button { padding-inline: .45rem; font-size: .9rem; }
+}

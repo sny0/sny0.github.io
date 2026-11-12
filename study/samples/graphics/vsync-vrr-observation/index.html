@@ -1,0 +1,54 @@
+<!doctype html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="仮想画面でVSyncオフ・オン・VRRを切り替え、ティアリングと走査の開始時刻を比べる。">
+  <title>VSyncとVRRで画面の更新を比べる | Sny0 Study</title>
+  <link rel="stylesheet" href="./styles.css">
+  <script type="module" src="./main.js"></script>
+</head>
+<body>
+  <main>
+    <header>
+      <a href="../../../practice/graphics/vsync-vrr-observation.html">実践の解説へ戻る</a>
+      <h1>VSyncとVRRで画面の更新を比べる</h1>
+      <p>同じ描画フレームを、仮想の固定60 Hz画面と40〜60 HzのVRR画面に送ります。スロー再生か時間のつまみで、絵が切り替わる場所を追えます。</p>
+    </header>
+
+    <section class="controls" aria-label="表示の操作">
+      <fieldset id="modes" disabled>
+        <legend>表示方式</legend>
+        <div class="options">
+          <label><input type="radio" name="mode" value="off" checked> VSync オフ</label>
+          <label><input type="radio" name="mode" value="on"> VSync オン</label>
+          <label><input type="radio" name="mode" value="vrr"> VRR</label>
+        </div>
+      </fieldset>
+      <div class="actions">
+        <button id="play" type="button" disabled>スロー再生</button>
+        <button id="step" type="button" disabled>次の描画完了へ</button>
+        <button id="example" type="button" disabled>20 msの例を見る</button>
+      </div>
+      <label class="scrub" for="time">仮想の時刻 <output id="time-label" for="time">20.0 ms</output></label>
+      <input id="time" type="range" min="0" max="240" step="0.1" value="20" disabled>
+    </section>
+
+    <section class="scene" aria-labelledby="scene-heading">
+      <h2 id="scene-heading">選んだ走査の結果</h2>
+      <canvas id="view" width="720" height="288" role="img"
+        aria-label="画面を横切る車両と、走査が途中で絵を切り替えた箇所">この実践はCanvas 2Dを使用します。</canvas>
+      <p id="status" role="status">表示を準備しています。</p>
+      <p class="caption">選択時刻を含む走査を下端まで終えた絵です。走査の待ち時間中は直前の絵を表示します。横線は継ぎ目の位置を示す目印です。</p>
+    </section>
+
+    <section class="schedule" aria-labelledby="timeline-heading">
+      <h2 id="timeline-heading">描画完了と走査のタイムライン</h2>
+      <svg id="timeline" viewBox="0 0 640 158" role="img" aria-label="描画完了と三方式の走査の時刻"></svg>
+      <p class="caption">横軸は仮想の時刻。枠は上から下へ走査している区間、枠内の文字は描画フレームです。↻は同じ絵の再表示です。</p>
+      <p class="caption">これは表示のモデルです。実際のVSyncやVRRの設定は変更せず、走査の結果をブラウザーに描きます。</p>
+    </section>
+    <noscript><p>比較を操作するにはJavaScriptを有効にしてください。</p></noscript>
+  </main>
+</body>
+</html>
