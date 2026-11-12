@@ -136,6 +136,7 @@ export default {
         { id: 'parent-child', label: '親と子のGameObjectを置き、親だけを移動したときに子のローカル位置とワールド位置がどうなるか確認できる。' },
       ],
       resources: [
+        { label: 'Unity実践 — シーンにキャラクターとダメージ床を配置する', url: '/practice/unity/scene-health-demo.html' },
         { label: 'シーン・オブジェクト・コンポーネントの基本', url: '/game/basics/scenes-and-components.html' },
         { label: 'ゲームエンジンの役割', url: '/game/basics/game-engine-basics.html' },
       ],

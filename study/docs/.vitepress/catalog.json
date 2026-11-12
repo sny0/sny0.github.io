@@ -622,6 +622,13 @@
       "start": "/game/shooter-design.html"
     },
     {
+      "id": "unity-scene-health",
+      "section": "practice",
+      "title": "Unityでキャラクターとダメージ床を配置する",
+      "description": "親子の座標とコンポーネントを組み合わせ、キャラクターの移動とHPの変化を確認する。",
+      "start": "/practice/unity/scene-health-demo.html"
+    },
+    {
       "id": "renderer-project",
       "section": "practice",
       "title": "小さなレンダラーを作る",
@@ -1223,6 +1230,7 @@
         "/languages/variables-types-and-expressions.html",
         "/languages/control-flow-and-functions.html",
         "/game/basics/scenes-and-components.html",
+        "/practice/unity/scene-health-demo.html",
         "/game/shooter-unity.html"
       ],
       "difficulty": "intro",
@@ -6377,6 +6385,40 @@
       ]
     },
     {
+      "title": "Unity実践 — シーンにキャラクターとダメージ床を配置する",
+      "url": "/practice/unity/scene-health-demo.html",
+      "file": "practice/unity/scene-health-demo.md",
+      "domain": "game",
+      "section": "practice",
+      "format": "tutorial",
+      "status": "published",
+      "summary": "GameObjectを親子に配置し、表示、移動、当たり判定、HPのコンポーネントを組み合わせて、ダメージ床を通る場面を作る。",
+      "source": "新規執筆",
+      "aliases": [
+        "Unity入門",
+        "シーン",
+        "GameObject",
+        "Transform",
+        "Sprite Renderer",
+        "親子関係",
+        "ローカル座標",
+        "ワールド座標",
+        "Rigidbody2D",
+        "BoxCollider2D",
+        "OnTriggerEnter2D",
+        "ダメージ床"
+      ],
+      "collection": "unity-scene-health",
+      "order": 1,
+      "verification": "Unity 6.3の公式資料に照合し、Unity 6000.3.27f1のPlay Modeで移動・HP・子の座標を実行確認（2026-11-12）",
+      "links": [
+        "/languages/csharp/console-and-unity.html",
+        "/learn/roadmap.html",
+        "/game/basics/scenes-and-components.html",
+        "/game/basics/collisions-and-physics.html"
+      ]
+    },
+    {
       "title": "Unreal Build Tool・Module・Build.cs・Target.cs",
       "url": "/game/unreal/build-system-ubt.html",
       "file": "game/unreal/build-system-ubt.md",
@@ -9410,7 +9452,8 @@
         "/game/shooter-design.html",
         "/os/files-and-paths.html",
         "/game/patterns/component-and-ecs.html",
-        "/game/basics/game-loop-and-time.html"
+        "/game/basics/game-loop-and-time.html",
+        "/practice/unity/scene-health-demo.html"
       ],
       "difficulty": "intro",
       "importance": "core"

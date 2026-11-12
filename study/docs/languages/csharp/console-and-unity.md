@@ -124,6 +124,7 @@ Unity 6.3（6000.3系）の新規プロジェクトで試します。出力を�
 - [Unityでゲームを作る — C#の基本の達成条件](/learn/roadmap.html?node=unity-csharp#unity-game)
 - [変数・型・式](/languages/variables-types-and-expressions.html)と[条件分岐・繰り返し・関数](/languages/control-flow-and-functions.html)で、式や処理の順番を練習する。
 - [シーン・オブジェクト・コンポーネントの基本](/game/basics/scenes-and-components.html)で、Unityのシーンに部品を組み合わせる。
+- [Unity実践 シーンにキャラクターとダメージ床を配置する](/practice/unity/scene-health-demo.html)で、同じHPクラスを使って、重なった床からダメージを受ける場面を作る。
 - [シューティング実装例 C#とUnity 6](/game/shooter-unity.html)で、ゲームルールを入力と表示につなぐ。
 
 ## 参考資料

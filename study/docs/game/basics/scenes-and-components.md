@@ -57,3 +57,5 @@ UnityのGameObjectとUnreal EngineのActorは、どちらも配置するまと�
 シーンに保存した配置から実行を始めると、移動したり、敵を生成したり、HPを減らしたりして状態が変わります。次回のプレイでも残したい情報は、ゲームが選んでセーブします。エディターで保存するシーンの配置と、プレイヤーの進行を保存する仕組みを、それぞれ用意します。[ゲームの小さな設計例](/game/shooter-design.html) · [ファイルとパス](/os/files-and-paths.html)
 
 部品の組み合わせをさらに設計へつなぐときは、[ComponentとECS](/game/patterns/component-and-ecs.html)へ進みます。フレームごとの更新は[ゲームループと時間](/game/basics/game-loop-and-time.html)で扱います。
+
+[Unity実践 シーンにキャラクターとダメージ床を配置する](/practice/unity/scene-health-demo.html)では、HierarchyとInspectorを使い、親子の座標と表示・当たり判定の担当を手を動かして確認します。

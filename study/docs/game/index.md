@@ -74,6 +74,7 @@
 
 - [C++でアセットパックを作って必要な範囲を読む](/practice/io/asset-pack-observation.html)
 - [C++とC#でアセットの状態・世代・所有権を検証する](/practice/assets/asset-lifecycle-model.html)
+- [Unity実践 — シーンにキャラクターとダメージ床を配置する](/practice/unity/scene-health-demo.html)
 - [小さなシューティングの設計 — C++とUnityで作る](/game/shooter-design.html)
 - [シューティング実装例 — C++17とraylib](/game/shooter-cpp.html)
 - [シューティング実装例 — C#とUnity 6](/game/shooter-unity.html)

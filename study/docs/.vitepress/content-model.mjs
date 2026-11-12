@@ -89,6 +89,7 @@ export const collections = [
   { id: 'rendering', section: 'learning', title: 'リアルタイム描画を学ぶ', description: 'GPUと数学から、パイプライン、シェーダ、描画APIへ進む。', start: '/guide/rendering/roadmap.html' },
   { id: 'low-level', section: 'learning', title: '低レイヤからゲームの仕組みを学ぶ', description: 'CPU・メモリ・OSからゲームまでの学習計画。詳解が未整備のテーマも明示。', start: '/guide/low-level/', linear: true },
   { id: 'shooter', section: 'practice', title: '小さなシューティングを作る', description: '共通の設計を読み、C++版またはUnityのC#版で実装する。', start: '/game/shooter-design.html' },
+  { id: 'unity-scene-health', section: 'practice', title: 'Unityでキャラクターとダメージ床を配置する', description: '親子の座標とコンポーネントを組み合わせ、キャラクターの移動とHPの変化を確認する。', start: '/practice/unity/scene-health-demo.html' },
   { id: 'renderer-project', section: 'practice', title: '小さなレンダラーを作る', description: '設計、デバイス、リソース、三角形、1フレームの構成を、主要コードの断片とともに追う。', start: '/graphics/capstone/01-design.html', linear: true },
   { id: 'cpp-exercises', section: 'practice', title: 'C++と設計の演習', description: '分野別の問題と総合演習で、判断理由と実装の理解を確かめる。', start: '/guide/exercises/' },
   { id: 'cpp-samples', section: 'practice', title: 'C++のビルドサンプル', description: '翻訳単位やCMakeの小さなコードを手元で動かす。', start: '/tools/build/samples/' },
