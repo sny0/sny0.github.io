@@ -14,6 +14,7 @@ export default {
   '/hardware/io/dma-and-iommu.html': ['advanced', 'useful'],
   '/hardware/io/nic-receive-queues.html': ['advanced', 'specialized'],
   '/hardware/io/pcie-links.html': ['intermediate', 'useful'],
+  '/hardware/io/usb-keyboard-raw-input.html': ['intermediate', 'useful'],
   '/hardware/memory/dram-channels-and-bandwidth.html': ['advanced', 'specialized'],
   '/hardware/memory/ram-cache-and-storage.html': ['intro', 'core'],
 

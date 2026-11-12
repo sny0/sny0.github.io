@@ -116,6 +116,7 @@
 | [PCI Express / PCIe / root complex / レーン / リンク速度 / GT/s](/hardware/io/pcie-links.html) | デバイスまでの経路とリンクの転送上限を調べる |
 | [DMA / IOMMU / DMAアドレス / バスマスター / MSI-X / 割り込み](/hardware/io/dma-and-iommu.html) | デバイスが使うメモリ範囲、転送の向き、完了通知を調べる |
 | [NIC / RXリング / 受信記述子 / RSS / NAPI / 割り込み集約](/hardware/io/nic-receive-queues.html) | フレームのDMA、CPUへの処理の分配、ドロップ箇所の違いを調べる |
+| [USB HID / HIDレポート / Raw Input / WM_INPUT / RAWKEYBOARD / RI_KEY_BREAK](/hardware/io/usb-keyboard-raw-input.html) | キーボードが報告する状態と、Windowsがアプリへ伝える押下・解放を調べる |
 | [DRAM / DDR / メモリチャネル / ランク / バンク / 行バッファ / MT/s](/hardware/memory/dram-channels-and-bandwidth.html) | メモリ側の並行性、帯域の計算、アクセス時の待ち時間を調べる |
 | [メモリマップドファイル / file mapping / mmap / MapViewOfFile / MemoryMappedFile / ビュー](/os/memory-mapped-files.html) | ファイルの範囲と仮想アドレスを対応付け、ページとビューの寿命を調べる |
 | [アセットロード / asset loading / リソース管理 / cook / 読み込み完了 / 利用可能 / 世代トークン](/game/asset-loading.html) | byte取得から登録・利用可能化・解放までの状態と所有権を整理する |

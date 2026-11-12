@@ -45,6 +45,7 @@ export default {
       ],
       resources: [
         { label: '入力の基本', url: '/game/basics/input-actions-and-devices.html' },
+        { label: 'USBキーボードの入力とWindowsのRaw Input', url: '/hardware/io/usb-keyboard-raw-input.html' },
         { label: '実践 再開要求を保持する流れ', url: '/game/shooter-design.html' },
         { label: '実践 C++版で入力を読むコード', url: '/game/shooter-cpp.html' },
       ],

@@ -34,7 +34,7 @@
       "id": "hardware",
       "title": "ハードウェア",
       "description": "CPU・GPU・メモリ・デバイスの間で、命令とデータがどう動くかを調べる。",
-      "count": 10,
+      "count": 11,
       "status": "辞典本文あり"
     },
     {
@@ -6604,6 +6604,42 @@
       "importance": "specialized"
     },
     {
+      "title": "USBキーボードの入力がWindowsのアプリに届くまで — HIDレポートとWM_INPUT",
+      "url": "/hardware/io/usb-keyboard-raw-input.html",
+      "file": "hardware/io/usb-keyboard-raw-input.md",
+      "domain": "hardware",
+      "section": "reference",
+      "format": "article",
+      "status": "published",
+      "summary": "USBキーボードがキーの状態を報告する流れと、Windowsのウィンドウが受け取る押下・解放を図とC++の実行例で追う。",
+      "source": "新規執筆",
+      "aliases": [
+        "USB HID",
+        "キーボード",
+        "HIDレポート",
+        "Report Descriptor",
+        "Boot Protocol",
+        "Interrupt IN",
+        "ポーリング",
+        "スキャンコード",
+        "Raw Input",
+        "WM_INPUT",
+        "RAWKEYBOARD",
+        "MakeCode",
+        "RI_KEY_BREAK",
+        "VKey"
+      ],
+      "verification": "USB-IFとMicrosoftの資料に照合。MSVC C++20でビルドと起動を確認し、テスト入力で押下・解放の表示を照合（2026-11-12）",
+      "links": [
+        "/tools/development-tools-basics.html",
+        "/game/basics/input-actions-and-devices.html",
+        "/guide/low-level/button-to-screen.html",
+        "/learn/roadmap.html"
+      ],
+      "difficulty": "intermediate",
+      "importance": "useful"
+    },
+    {
       "title": "Vertex Shader",
       "url": "/graphics/pipeline/vertex-shader.html",
       "file": "graphics/pipeline/vertex-shader.md",
@@ -13132,7 +13168,8 @@
         "/game/patterns/game-loop-and-update.html",
         "/runtime/cpp-internals/build-pipeline-journey.html",
         "/graphics/pipeline/overview.html",
-        "/game/shooter-design.html"
+        "/game/shooter-design.html",
+        "/hardware/io/usb-keyboard-raw-input.html"
       ],
       "previous": "/guide/low-level/debugging-and-profiling.html",
       "next": "/guide/low-level/advanced-topics.html"
@@ -15075,7 +15112,8 @@
         "/game/basics/ui-layout-and-interaction.html",
         "/game/basics/game-states-and-pause.html",
         "/game/basics/game-events-and-notifications.html",
-        "/practice/unity/input-health-demo.html"
+        "/practice/unity/input-health-demo.html",
+        "/hardware/io/usb-keyboard-raw-input.html"
       ],
       "difficulty": "intro",
       "importance": "core"
@@ -15940,6 +15978,7 @@
         "/hardware/io/pcie-links.html",
         "/hardware/io/dma-and-iommu.html",
         "/hardware/io/nic-receive-queues.html",
+        "/hardware/io/usb-keyboard-raw-input.html",
         "/hardware/memory/dram-channels-and-bandwidth.html",
         "/os/memory-mapped-files.html",
         "/game/asset-loading.html",

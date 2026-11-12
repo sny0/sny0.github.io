@@ -23,6 +23,7 @@ study:
 
 - [Game Loop](/game/patterns/game-loop-and-update.html)、[ビルドの流れ](/runtime/cpp-internals/build-pipeline-journey.html)、[レンダリングパイプライン](/graphics/pipeline/overview.html)で、不明な段階へ戻れます。
 - [小さなシューティング](/game/shooter-design.html)は、入力・状態更新・描画をコード上で対応させる実践例です。
+- [USBキーボードとWindowsのRaw Input](/hardware/io/usb-keyboard-raw-input.html)で、USBからアプリまでの経路を追い、押下と解放を観察できます。
 
 ## この章の目的
 
@@ -42,10 +43,10 @@ study:
 2. パッド内のマイコンが数ms周期でボタンマトリクスをスキャンし、
    状態変化を検出。**ボタン状態はビットフラグ**として
    HIDレポートにパックされる。[第1章: ビット表現]
-3. USBはホスト主導。PCのUSBホストコントローラが**1〜8ms周期の
-   ポーリング**でレポートを回収する(無線ならBTスタック経由)。[第8章]
+3. USBはホスト主導。PC側がエンドポイントの設定と通信速度に応じた間隔で
+   受信の機会を作り、準備できたレポートを回収する(無線ならBTスタック経由)。[第8章]
 
-### 第2幕 OSの中を通る(+1〜8ms)
+### 第2幕 OSの中を通る
 
 4. USBコントローラが受信を**割り込み**でCPUに通知。CPUは実行中の
    処理を中断してカーネルモードへ遷移、割り込みハンドラ→

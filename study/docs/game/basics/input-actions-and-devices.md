@@ -63,3 +63,5 @@ Unity Input Systemでは、入力イベントを描画フレームに対応し�
 画面側の選択や決定は[ゲームUI](/game/basics/ui-layout-and-interaction.html)、ポーズ時の切り替えは[ゲームの状態とポーズ](/game/basics/game-states-and-pause.html)、ゲーム内で決まった結果の通知は[ゲーム内イベント](/game/basics/game-events-and-notifications.html)へ進みます。
 
 [Unity実践 キーボードとゲームパッドでPlayerを動かす](/practice/unity/input-health-demo.html)では、同じ移動アクションに両方のデバイスを割り当て、ダメージ床のシーンを操作します。
+
+[USBキーボードとWindowsのRaw Input](/hardware/io/usb-keyboard-raw-input.html)では、キーボード内の状態がWindowsのアプリに届くまでを追い、押下と解放をWin32のC++例で見比べます。

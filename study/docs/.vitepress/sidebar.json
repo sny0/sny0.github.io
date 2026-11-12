@@ -79,6 +79,10 @@
           "link": "/hardware/memory/ram-cache-and-storage.html"
         },
         {
+          "text": "USBキーボードの入力がWindowsのアプリに届くまで — HIDレポートとWM_INPUT",
+          "link": "/hardware/io/usb-keyboard-raw-input.html"
+        },
+        {
           "text": "コンピュータの部品と役割 — ゲームが動くまで",
           "link": "/hardware/computer-components.html"
         }
