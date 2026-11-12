@@ -11414,13 +11414,15 @@
       "section": "learning",
       "format": "path",
       "status": "published",
-      "summary": "学びたい目標から前提をたどり、達成条件を確認して進捗を記録する。低レイヤではCのバイト列からx86-64の逆アセンブリまでを扱う。",
+      "summary": "学びたい目標から前提をたどり、達成条件を確認して進捗を記録する。低レイヤ・言語と3DCG・描画の学習ルートを扱う。",
       "source": "新規執筆",
       "aliases": [
         "テックツリー",
         "学習進捗",
         "到達目標",
-        "前提知識"
+        "前提知識",
+        "3DCG・描画",
+        "レンダリング"
       ],
       "links": []
     },
@@ -14347,6 +14349,7 @@
       "collection": "rendering",
       "order": 1,
       "links": [
+        "/learn/roadmap.html",
         "/guide/graphics-basics.html",
         "/hardware/gpu/what-is-gpu.html",
         "/hardware/gpu/cpu-vs-gpu.html",
