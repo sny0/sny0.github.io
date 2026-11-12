@@ -100,6 +100,7 @@ flowchart LR
 
 - [マテリアル・テクスチャ・シェーダーの基本](/graphics/basics/materials-textures-and-shaders.html)で、テクスチャ、UV、サンプラーの担当を整理する。
 - [ラスタライゼーション](/graphics/pipeline/rasterization.html)で、三角形とUVが画面のサンプルにつながる段階を確認する。
+- [アンチエイリアシング](/graphics/postprocess/antialiasing.html)で、床模様のちらつきとポリゴンの輪郭のギザギザを比べる。
 - [3DCG・描画ロードマップの「レンダリングパイプライン」](/learn/roadmap.html?node=gfx-pipeline#graphics)
 
 ## 参考資料

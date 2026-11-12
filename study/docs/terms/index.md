@@ -52,6 +52,7 @@
 | [アタッチメント / render pass / clear / preserve / discard / resolve / transient](/graphics/optimization/render-pass-attachments.html) | 描画先の内容を残す範囲と、パスをまたぐ依存関係を調べる |
 | [DDS / DDS_HEADER / DXGI_FORMAT / mip / subresource / BC7 / cubemap](/graphics/texture/dds-and-subresources.html) | ファイルのヘッダー、テクスチャの形、mipや圧縮ブロックの位置を調べる |
 | [テクスチャフィルタリング / テクセル / ミップマップ / トライリニア / 異方性 / LOD](/graphics/texture/texture-filtering-and-mipmaps.html) | 1画素に入るテクスチャの範囲と、遠くの模様がちらつく理由を調べる |
+| [アンチエイリアシング / MSAA / カバレッジ / リゾルブ](/graphics/postprocess/antialiasing.html) | ポリゴンの輪郭のギザギザと床模様のちらつきの原因を比べる |
 | [テクスチャ転送 / RowPitch / GetCopyableFootprints / CopyTextureRegion / readback](/graphics/texture/d3d12-texture-upload.html) | CPU側の行をバッファに並べ、コピー、状態遷移、完了の順序を調べる |
 | [テクスチャストリーミング / mip residency / SRV / reserved resource / タイル](/graphics/texture/texture-streaming-and-mip-residency.html) | 先に使うmip、シェーダーに公開する範囲、GPUメモリの予算を調べる |
 | [glTF / GLB / bufferView / accessor / byteStride / POSITION / NORMAL](/graphics/mesh/gltf-mesh-buffers.html) | メッシュの参照をたどり、頂点とインデックスの範囲や型を調べる |

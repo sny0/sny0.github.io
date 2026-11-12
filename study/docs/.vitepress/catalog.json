@@ -152,6 +152,13 @@
       "start": "/practice/graphics/texture-filtering-observation.html"
     },
     {
+      "id": "msaa-observation",
+      "section": "practice",
+      "title": "MSAAを切り替えて輪郭と床模様を見比べる",
+      "description": "同じシーンでMSAAを切り替え、斜めの輪郭と床模様の変化を見比べる。",
+      "start": "/practice/graphics/msaa-observation.html"
+    },
+    {
       "id": "foundations",
       "section": "learning",
       "title": "コンピュータと開発の基礎",
@@ -4875,6 +4882,33 @@
       "importance": "specialized"
     },
     {
+      "title": "MSAAを切り替えて輪郭と床模様を見比べる",
+      "url": "/practice/graphics/msaa-observation.html",
+      "file": "practice/graphics/msaa-observation.md",
+      "domain": "graphics",
+      "section": "practice",
+      "format": "sample",
+      "status": "published",
+      "summary": "同じシーンを単一サンプルとMSAAで描き、ポリゴンの斜めの輪郭と、床の模様のちらつきを比べる。",
+      "source": "新規執筆",
+      "aliases": [
+        "MSAAの実践",
+        "WebGL 2",
+        "アンチエイリアシング",
+        "カバレッジ",
+        "リゾルブ"
+      ],
+      "collection": "msaa-observation",
+      "order": 1,
+      "verification": "KhronosのOpenGL ES 3.0.6・WebGL 2.0仕様に照合（2026-11-13）",
+      "links": [
+        "/graphics/postprocess/antialiasing.html",
+        "/practice/graphics/texture-filtering-observation.html",
+        "/graphics/texture/texture-filtering-and-mipmaps.html",
+        "/learn/roadmap.html"
+      ]
+    },
+    {
       "title": "MSL (Metal Shading Language)",
       "url": "/graphics/shader/msl.html",
       "file": "graphics/shader/msl.md",
@@ -8282,16 +8316,29 @@
       "section": "reference",
       "format": "article",
       "status": "published",
-      "summary": "エイリアシングは、連続的な画像を離散的なピクセルでサンプリングするときに生じる歪みです。輪郭のギザギザや細部のちらつきの原因と、SSAA、MSAA、FXAA、SMAAを説明します。",
+      "summary": "床模様のちらつきとポリゴンの輪郭のギザギザを図で比較し、同じシーンでMSAAのオン・オフを試す。SSAA・FXAA・SMAAとの違いも扱う。",
       "source": "RenderingWiki",
-      "aliases": [],
+      "aliases": [
+        "AA",
+        "MSAA",
+        "マルチサンプルアンチエイリアシング",
+        "カバレッジ",
+        "リゾルブ",
+        "ジャギー",
+        "FXAA",
+        "SMAA"
+      ],
+      "verification": "MSAAとリゾルブの説明をKhronosのOpenGL ES 3.0.6・WebGL 2.0仕様に照合（2026-11-13）",
       "links": [
         "/graphics/postprocess/taa.html",
         "/graphics/pipeline/rasterization.html",
+        "/graphics/texture/texture-filtering-and-mipmaps.html",
+        "/graphics/path/deferred.html",
+        "/practice/graphics/msaa-observation.html",
         "/graphics/pipeline/output-merger.html",
         "/graphics/path/forward.html",
-        "/graphics/path/deferred.html",
-        "/graphics/postprocess/upscaling.html"
+        "/graphics/postprocess/upscaling.html",
+        "/learn/roadmap.html"
       ],
       "difficulty": "intermediate",
       "importance": "useful"
@@ -10356,6 +10403,7 @@
         "/graphics/texture/texture-streaming-and-mip-residency.html",
         "/graphics/basics/materials-textures-and-shaders.html",
         "/graphics/pipeline/rasterization.html",
+        "/graphics/postprocess/antialiasing.html",
         "/learn/roadmap.html"
       ],
       "difficulty": "intro",
@@ -15627,6 +15675,7 @@
         "/graphics/postprocess/antialiasing.html",
         "/graphics/postprocess/taa.html",
         "/graphics/postprocess/upscaling.html",
+        "/practice/graphics/msaa-observation.html",
         "/graphics/optimization/basics.html",
         "/graphics/optimization/tools.html",
         "/graphics/optimization/render-graph.html",
@@ -15990,6 +16039,7 @@
         "/graphics/optimization/render-pass-attachments.html",
         "/graphics/texture/dds-and-subresources.html",
         "/graphics/texture/texture-filtering-and-mipmaps.html",
+        "/graphics/postprocess/antialiasing.html",
         "/graphics/texture/d3d12-texture-upload.html",
         "/graphics/texture/texture-streaming-and-mip-residency.html",
         "/graphics/mesh/gltf-mesh-buffers.html",

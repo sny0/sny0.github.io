@@ -117,6 +117,7 @@
 - [C++でGLBの頂点とインデックスを読み、三角形を描く](/practice/graphics/glb-mesh-observation.html)
 - [C++でテクスチャに描き、次のパスで色を変える](/practice/graphics/render-to-texture-observation.html)
 - [FIFO・MAILBOX・IMMEDIATEで画面の切り替わりを比べる](/practice/graphics/swap-chain-observation.html)
+- [MSAAを切り替えて輪郭と床模様を見比べる](/practice/graphics/msaa-observation.html)
 - [シェーダーで三角形の位置と色を変える](/practice/graphics/shader-first-steps.html)
 - [斜めの床でテクスチャのフィルタリングを比べる](/practice/graphics/texture-filtering-observation.html)
 - [同じ60 FPSで表示間隔を比べる](/practice/graphics/frame-pacing-observation.html)

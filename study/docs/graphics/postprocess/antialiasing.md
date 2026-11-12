@@ -3,7 +3,9 @@ title: アンチエイリアシング (MSAA / FXAA / SMAA)
 study:
   source: RenderingWiki
   status: published
-  summary: エイリアシングは、連続的な画像を離散的なピクセルでサンプリングするときに生じる歪みです。輪郭のギザギザや細部のちらつきの原因と、SSAA、MSAA、FXAA、SMAAを説明します。
+  summary: 床模様のちらつきとポリゴンの輪郭のギザギザを図で比較し、同じシーンでMSAAのオン・オフを試す。SSAA・FXAA・SMAAとの違いも扱う。
+  aliases: [AA, MSAA, マルチサンプルアンチエイリアシング, カバレッジ, リゾルブ, ジャギー, FXAA, SMAA]
+  verification: MSAAとリゾルブの説明をKhronosのOpenGL ES 3.0.6・WebGL 2.0仕様に照合（2026-11-13）
   section: reference
   format: article
   domain: graphics
@@ -15,11 +17,25 @@ study:
 
 エイリアシングは、連続的な画像信号を離散的なピクセルでサンプリングしたときに生じる折り返し歪みです。ジオメトリのエッジのギザギザ (ジャギー) や細部のちらつき (シマー) として現れます。サンプリング理論の基礎と、空間的AAであるSSAA・MSAA (ハードウェア系)、FXAA・SMAA (ポストプロセス系) を扱います。時間的AAは[TAAの記事](/graphics/postprocess/taa.html)で説明します。
 
-## なぜ必要なのか
+## 輪郭のギザギザと床模様のちらつき
 
-- ラスタライザはピクセル中心の1点でカバレッジを判定する → エッジは必ず階段状になる
-- 動くと悪化する: エッジの階段が毎フレームずれて「這う」「ちらつく」— 静止画より動画で目立つ
-- シェーディングのエイリアシング (鏡面ハイライトのちらつき等) はジオメトリAAでは解決しない — 問題の分類が対策選択の鍵
+斜めの辺が画素を横切ると、その画素の一部をポリゴンが覆います。この被覆を**カバレッジ**と呼びます。三角形を単一サンプルで描く場合、中心の点が三角形に入るかどうかで、画素全体に三角形の色が付くかが決まります。斜めの辺に沿って内側と外側が画素単位で切り替わり、輪郭が階段状に見えます。
+
+床模様の場合は、床の内側にある画素でもちらつきます。遠くの床では、画面の1画素が白と黒の模様をいくつもまたぎます。ポイントサンプリングで1テクセルを読むと、カメラが少し動くだけで参照先が白から黒へ移ります。ここで変わるのは床が画素を覆う割合ではなく、テクスチャから読んだ色です。
+
+```mermaid
+flowchart LR
+    subgraph G["ポリゴンの輪郭"]
+        G0["斜めの辺が<br/>1画素を横切る"] --> G1["中心が内側ならポリゴン色<br/>外側なら背景色"]
+        G1 --> G2["輪郭が階段状に見える"]
+    end
+    subgraph T["床ポリゴンの内側"]
+        T0["床が画素を覆う<br/>模様は画素の中で ■ □ ■ □"] --> T1["一点で読む色が<br/>カメラ移動で ■ から □ へ"]
+        T1 --> T2["細かな模様がちらつく"]
+    end
+```
+
+輪郭に沿った階段も、物体やカメラが動くと明滅して見えることがあります。ちらつきが**輪郭に沿っているか、面の模様にも出ているか**を見ると、どちらを調べるべきか切り分けられます。輪郭は[ラスタライゼーション](/graphics/pipeline/rasterization.html)、床の模様は[テクスチャのフィルタリングとミップマップ](/graphics/texture/texture-filtering-and-mipmaps.html)で詳しく扱います。
 
 ## 歴史・誕生した背景
 
@@ -42,9 +58,9 @@ AAなし (PS2期以前は解像度とテレビのにじみが実質のAAだっ�
 | 手法 | 原理 | コスト | 弱点 |
 |---|---|---|---|
 | SSAA | 全ピクセルをN倍サンプルで描画し縮小 | 極大 (シェーディングN倍) | コスト |
-| **MSAA** | **カバレッジ/深度のみN倍、シェーディングは1回** | 中 (帯域N倍) | Deferredと相性最悪、シェーディングAAに無力 |
-| **FXAA** | 輝度からエッジを推定し方向にぼかす | 極小 (1パス) | 細部が溶ける、ちらつきに無力 |
-| **SMAA** | エッジ形状をパターン分類し高精度に再構成 | 小 | ちらつきに無力 (SMAA T2xで時間拡張) |
+| **MSAA** | カバレッジや深度をサンプルごとに扱い、シェーディング結果は複数サンプルで共有できる | サンプル用の格納領域とリゾルブが必要 | 面の内側の細かな模様には別の対策が必要 |
+| **FXAA** | 輝度からエッジを推定し方向にぼかす | 小 (1パス) | 細部もぼける場合がある。フレーム履歴は使わない |
+| **SMAA** | エッジ形状をパターン分類し、輪郭の色を混ぜる | 小 | 空間版ではフレーム履歴を使わない (SMAA T2xで時間拡張) |
 | TAA | 時間方向にサンプルを蓄積 | 小 | ゴースト・ぼけ → [TAA](/graphics/postprocess/taa.html) |
 
 ## 現在の位置づけ
@@ -57,22 +73,28 @@ AAなし (PS2期以前は解像度とテレビのにじみが実質のAAだっ�
 
 ### エイリアシングの正体 (サンプリング理論)
 
-ナイキスト周波数を超える成分を含む信号 (エッジ=無限周波数) を点サンプルすると、高周波が偽の低周波として折り返します。**根本解は「サンプル前に帯域制限 (プリフィルタ)」**ですが、ラスタライズは点サンプルしかできないため、全AA技術は「サンプルを増やす」か「後から推定して混ぜる」かのどちらかになります。
+画素の間隔に対して細かすぎる模様を点でサンプルすると、画面上では別の粗い模様として現れることがあります。これを**折り返し**と呼びます。テクスチャではミップマップでサンプル前に細かな模様をならせます。輪郭ではMSAAで画素内のカバレッジを複数点から推定します。FXAAなど、描画した画像から輪郭を推定して色を調整する方法もあります。
 
-### MSAA詳解
+### MSAAは輪郭を画素内の複数位置で調べる
 
 ```mermaid
 flowchart LR
-    T[三角形] --> R["ラスタライザ:<br/>ピクセル内のN個のサンプル位置で<br/>カバレッジ+深度テスト"]
-    R --> FS["Fragment Shader:<br/>ピクセルにつき1回だけ実行<br/>(結果をカバーしたサンプルへ複製)"]
-    FS --> MS[("マルチサンプルRT<br/>各ピクセルにN色格納")]
-    MS --> RES["Resolve:<br/>N個を平均して通常RTへ"]
+    A["輪郭をまたぐ1画素<br/>4つの位置でカバレッジを調べる"] --> B["ポリゴンが覆った2点はポリゴン色<br/>残る2点は背景色"]
+    B --> C["リゾルブ<br/>サンプルの色を1画素分にまとめる"]
+    C --> D["輪郭に中間色が出る"]
 ```
 
-- **鍵**: ジオメトリエッジ (カバレッジ) だけをN倍サンプルし、高価なシェーディングは1回 — 「エッジ問題に特化した賢いSSAA」
-- 深度・ステンシルもサンプル数分必要 → 帯域とメモリはN倍相当 (圧縮で緩和)
-- **Deferredで崩壊する理由**: G-Buffer全部をMSAA化し、ライティングもサンプル単位で行わないとエッジで破綻 → コストがSSAAに接近
-- シェーディング起因のちらつき (法線マップのスペキュラ等) には無力 — そこはTAAやプリフィルタ (Toksvig/LEAN) の領分
+**MSAA**（Multisample Anti-Aliasing）は、1画素内の複数位置でポリゴンが覆う点を調べます。図は4点のうち2点をポリゴンが覆う例です。背景色とポリゴン色を含むサンプルを1画素にまとめる**リゾルブ**（resolve）により、輪郭に中間色が出ます。サンプルの配置やリゾルブの詳細は実装に依存します。[OpenGL ES 3.0.6仕様の §3.3・§3.6.3・§4.3.3](https://registry.khronos.org/OpenGL/specs/es/3.0/es_spec_3.0.pdf)
+
+深度バッファを使う場合は、サンプルごとに深度を扱えます。フラグメントシェーダーで求めた色は複数のサンプルで共有できます。そのため、4× MSAAは画素ごとのカバレッジを4点で調べますが、各点で独立にテクスチャを読み直す設定ではありません。床の内側で全サンプルを同じポリゴンが覆い、ポイントサンプリングを使い続けると、細かな模様のちらつきが残ります。
+
+MSAAではサンプルを保存する領域やリゾルブの処理が増えます。帯域や実行時間はGPUと描画パスの構成によります。Deferred Renderingで複数のGバッファをマルチサンプル化する場合は、シルエット付近で異なる面の情報をどう保持して照明を計算するかも考えます。[ForwardとDeferredの違い](/graphics/path/deferred.html)
+
+### 同じシーンでMSAAを切り替える
+
+[輪郭と床模様を見比べる実践](/practice/graphics/msaa-observation.html)では、カメラを止めて単色ポリゴンの斜めの辺を比べます。次にカメラを動かし、MSAAをオンにしたまま床の奥の模様を見ます。床はポイントサンプリングに固定しているので、輪郭の変化と床のちらつきを一つの画面で観察できます。
+
+<a href="/study/samples/graphics/msaa-observation/index.html" target="_self">MSAAの比較デモを開く</a>
 
 ### FXAA詳解
 
@@ -95,7 +117,7 @@ URP: Camera単位で FXAA / SMAA / TAA を選択、MSAAはForward系でRenderTex
 `r.AntiAliasingMethod`: 0=なし, 1=FXAA, 2=TAA, 3=MSAA (Forwardのみ), 4=TSR。既定はTAA/TSR。MSAAはForward Shadingモード専用です。
 
 ### DirectX 12
-MSAAは `DXGI_SAMPLE_DESC{Count, Quality}` をPSOとRTに指定し、`ResolveSubresource` で解決。`SV_SampleIndex` 使用でサンプル毎シェーディング (=SSAA化) も可能。
+MSAAは `DXGI_SAMPLE_DESC{Count, Quality}` をPSOとレンダーターゲットに指定し、`ResolveSubresource` で単一サンプルの画像にまとめます。ピクセルシェーダーの入力に `SV_SampleIndex` を使うと、サンプル単位で実行できます。[MicrosoftのResolveSubresource](https://learn.microsoft.com/en-us/windows/win32/api/d3d12/nf-d3d12-id3d12graphicscommandlist-resolvesubresource) · [SV_SampleIndexの例](https://learn.microsoft.com/en-us/windows/win32/direct3dhlsl/dx-graphics-hlsl-to-get-sample-position)
 
 ### Vulkan
 `VkPipelineMultisampleStateCreateInfo::rasterizationSamples`、Resolveは `vkCmdResolveImage` またはレンダーパスのresolve attachment (TBDRではタイル内resolveが無料に近い — `VK_ATTACHMENT_STORE_OP_DONT_CARE` でMSAAバッファをVRAMに書かない定石)。
@@ -146,27 +168,29 @@ resolveAtt.samples = VK_SAMPLE_COUNT_1_BIT;           // resolve先だけ書く
 
 - [TAA](/graphics/postprocess/taa.html) — 現代の主役
 - [アップスケーリング](/graphics/postprocess/upscaling.html) — TAAの発展形
+- [3DCG・描画ロードマップの「ポストプロセスとAA」](/learn/roadmap.html?node=gfx-postprocess#graphics)
 
 ## 理解度チェック
 
-1. **MSAAが「SSAAの賢い省略形」である点を、何を省き何を残したかで説明せよ。**
+1. **4× MSAAで、斜めの輪郭をまたぐ画素のうち2サンプルにポリゴンの色が入りました。リゾルブ後はどう見えますか。**
    ::: details 解答
-   SSAAはカバレッジ・深度・シェーディングの全てをNサンプルで行う。MSAAはこのうちエイリアシングの主因であるジオメトリエッジのカバレッジ判定と深度テストだけをNサンプルに残し、コストの大半を占めるFragment Shader実行をピクセル1回に省略した(結果をカバーサンプルに複製)。エッジ品質はSSAA同等、内部のシェーディングエイリアシングは未解決、コストは帯域のみ増、という特性がここから全て導かれる。
+   残り2サンプルが背景色なら、両方の色がリゾルブに反映され、輪郭に中間色が出ます。単一サンプルでは、この例の画素はポリゴン色か背景色のどちらかです。
    :::
 
-2. **ポストプロセスAA (FXAA/SMAA) がDeferred時代に隆盛した理由は。**
+2. **MSAAをオンにしても、実践の遠くの床がちらつくのはなぜですか。**
    ::: details 解答
-   DeferredではMSAAのコストが爆発する(G-Buffer全体のマルチサンプル化+サンプル毎ライティング)ため、ハードウェアAAが事実上使えなくなった。FXAA/SMAAは最終画像だけから輪郭を推定して補正するため、レンダリング方式と完全に独立で、Deferredでも1パスの追加で済んだ。
+   床の内側では、複数のサンプルを同じポリゴンが覆います。床の色は引き続き元画像のポイントサンプリングで決まります。広い範囲の模様を縮小して読むにはミップマップを使います。
    :::
 
 3. **FXAAをかけても「細いワイヤーのちらつき」が直らない理由は。**
    ::: details 解答
-   サブピクセルサイズの形状は、フレームごとにサンプル点に「当たったり外れたり」して出現・消滅を繰り返す。FXAAは各フレームで完成した画像内のエッジを滑らかにするだけで、フレーム間の情報を持たないため、この時間的な明滅は補正できない。解決にはサンプル位置を毎フレームずらして蓄積するTAA系の時間的スーパーサンプリングが必要。
+   画素より細い形状は、フレームごとにサンプル点に当たったり外れたりします。FXAAは描画済みの画像を使うため、そのフレームで一度もサンプルされなかった形状の情報は拾えません。同じフレームでサンプルを増やす方法や、異なる位置でサンプルした複数フレームの情報を使うTAAが、明滅を抑える候補になります。
    :::
 
 ## 参考資料
 
+- [Khronos — OpenGL ES 3.0.6 Specification](https://registry.khronos.org/OpenGL/specs/es/3.0/es_spec_3.0.pdf) · [WebGL 2.0 Specification](https://registry.khronos.org/webgl/specs/latest/2.0/)
 - Franklin Crow, *"The Aliasing Problem in Computer-Generated Shaded Images"* (1977)
-- Timothy Lottes, *"FXAA"* whitepaper (2011) / FXAA 3.11 ソース
-- Jimenez et al., *"SMAA: Enhanced Subpixel Morphological Antialiasing"* (2012)
+- [Timothy Lottes — FXAA](https://developer.download.nvidia.com/assets/gamedev/files/sdk/11/FXAA_WhitePaper.pdf)
+- [Jorge Jimenez et al. — SMAA: Enhanced Subpixel Morphological Antialiasing (2012)](https://www.iryoku.com/smaa/)
 - Matt Pettineo, *"Applying Sampling Theory to Real-Time Graphics"*
