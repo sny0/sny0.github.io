@@ -57,4 +57,6 @@ UDPを直接使うインターネット通信では、アプリか上位プロ�
 
 ルーターを通るUDP通信では、応答を返せる時間や外部から接続できる条件が変換表の状態にも左右されます。[NATとポート変換](/network/nat-and-port-mapping.html)
 
+届いた状態を補間し、入力の予測結果をサーバーの状態と照合する方法は、[ゲームのネットワーク同期](/game/network-sync.html)で扱います。
+
 実践ではWindowsのIPv4ループバックで、二件の境界、受信バッファ不足、空のデータグラムに続く通常の受信を観察します。[C++でUDPの受信結果を確かめる](/practice/network/udp-loopback-observation.html)

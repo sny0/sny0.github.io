@@ -129,6 +129,7 @@ public:
 - [Double Buffer / Data Locality(最適化系)](/game/patterns/optimization-patterns.html)
 - [ECS](/game/patterns/component-and-ecs.html) / [Command Buffer](/game/patterns/command-buffer-and-input.html)
 - [Template Method](/design/patterns/template-method.html)
+- [物理の時間積分と衝突判定](/math/physics-integration-and-collision.html) — 時間刻みと位置・速度の計算を比べる
 
 ## 理解度チェック
 

@@ -635,6 +635,14 @@
         {
           "text": "浮動小数点の比較と誤差の扱い — 絶対許容差・相対許容差を決める",
           "link": "/math/floating-point-comparison.html"
+        },
+        {
+          "text": "物理の時間積分と衝突判定 — Euler・Verlet・形状の交差",
+          "link": "/math/physics-integration-and-collision.html"
+        },
+        {
+          "text": "補間と曲線 — Lerp・Slerp・イージング・スプライン",
+          "link": "/math/rendering/interpolation-and-curves.html"
         }
       ]
     },
@@ -665,6 +673,10 @@
         {
           "text": "均等グリッドと空間ハッシュ — 近くの候補をセルで絞る",
           "link": "/algorithms/uniform-grid-and-spatial-hash.html"
+        },
+        {
+          "text": "経路探索 — A* とナビメッシュ",
+          "link": "/algorithms/pathfinding.html"
         },
         {
           "text": "四分木と八分木 — 必要な場所だけ細かく分ける",
@@ -1445,6 +1457,10 @@
           "link": "/game/asset-pack-files.html"
         },
         {
+          "text": "ゲームのネットワーク同期 — 状態・入力・予測とロールバック",
+          "link": "/game/network-sync.html"
+        },
+        {
           "text": "ゲームの状態とポーズ — タイトル・プレイ・結果を切り替える",
           "link": "/game/basics/game-states-and-pause.html"
         },
@@ -1515,6 +1531,10 @@
         {
           "text": "分野の目次",
           "link": "/tools/"
+        },
+        {
+          "text": "CPU プロファイリング — サンプリングと計装でフレームを測る",
+          "link": "/tools/profiling/cpu-profiling.html"
         },
         {
           "text": "WindowsのファイルI/OをProcmonとWPRで追う",

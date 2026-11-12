@@ -58,6 +58,7 @@ export default {
       resources: [
         { label: 'UDPデータグラムの境界と送受信', url: '/network/udp-datagrams.html' },
         { label: '実践 C++とWinsockでUDPの受信境界を確かめる', url: '/practice/network/udp-loopback-observation.html' },
+        { label: 'ゲームのネットワーク同期', url: '/game/network-sync.html' },
       ],
     },
     {

@@ -58,3 +58,5 @@ IDE（統合開発環境）は編集、ビルド、デバッグなどを一つ�
 例えば「CPUが計算していた時間」と「I/Oなどの完了を待っていた時間」では、改善する箇所が変わります。GPUの描画を調べるときは、GPU向けの計測やフレーム解析も使います。デバッガで停止する操作は実行のタイミングを変えるため、通常の実行速度を調べるときは計測用の実行を用意します。[計測ツールの選び方](https://learn.microsoft.com/en-us/visualstudio/profiling/choose-performance-tool) · [GPUの調査ツール](/graphics/optimization/tools.html) · [フレームタイム](/graphics/optimization/frame-pacing.html)
 
 コマンドから道具を呼び出す方法は、[ターミナル・シェル・コマンド](/tools/terminal-shell-and-commands.html)で扱います。
+
+CPUの計測結果から関数の実行やスレッドの待ちを調べる方法は、[CPU プロファイリング](/tools/profiling/cpu-profiling.html)へ進みます。

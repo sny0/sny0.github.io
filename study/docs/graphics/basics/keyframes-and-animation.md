@@ -59,3 +59,5 @@ study:
 ## 関連する仕組み
 
 キャラクターの腕や脚を動かす仕組みは、[リグとスキニング](/graphics/basics/rigs-and-skinning.html)へ進みます。位置や回転の基準は、[座標変換とカメラ](/graphics/basics/transforms-and-cameras.html)で確認できます。
+
+キーフレーム間の値や変化の速さを計算する方法は、[補間と曲線](/math/rendering/interpolation-and-curves.html)で扱います。

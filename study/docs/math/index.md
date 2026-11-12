@@ -25,6 +25,8 @@
 - [行列](/math/rendering/matrix.html)
 - [座標変換](/math/rendering/transform.html)
 - [浮動小数点の比較と誤差の扱い — 絶対許容差・相対許容差を決める](/math/floating-point-comparison.html)
+- [物理の時間積分と衝突判定 — Euler・Verlet・形状の交差](/math/physics-integration-and-collision.html)
+- [補間と曲線 — Lerp・Slerp・イージング・スプライン](/math/rendering/interpolation-and-curves.html)
 
 ## この分野の学習ガイド
 

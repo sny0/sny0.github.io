@@ -13,6 +13,7 @@ export default {
       resources: [
         { label: 'ゲームエンジンの役割', url: '/game/basics/game-engine-basics.html' },
         { label: 'ゲームの動きと構成から読む', url: '/guide/game-development-basics.html' },
+        { label: '経路探索とナビメッシュ', url: '/algorithms/pathfinding.html' },
       ],
     },
     {
@@ -29,6 +30,7 @@ export default {
         { label: 'ゲームループと時間', url: '/game/basics/game-loop-and-time.html' },
         { label: '固定タイムステップと補間', url: '/game/patterns/game-loop-and-update.html' },
         { label: '実践 固定tickの図と入力処理を読む', url: '/game/shooter-design.html' },
+        { label: 'ゲームのネットワーク同期', url: '/game/network-sync.html' },
       ],
     },
     {
@@ -74,6 +76,7 @@ export default {
       ],
       resources: [
         { label: 'コライダー・Rigidbody・トリガー', url: '/game/basics/collisions-and-physics.html' },
+        { label: '物理の時間積分と衝突判定', url: '/math/physics-integration-and-collision.html' },
         { label: '実践 円同士の当たり判定を試す', url: '/game/shooter-design.html' },
       ],
     },
@@ -168,6 +171,7 @@ export default {
         { label: 'ブレークポイントとデータブレークポイント', url: '/tools/windows/debugger-breakpoints-and-watchpoints.html' },
         { label: '実践 同じ60 FPSで表示間隔を比べる', url: '/practice/graphics/frame-pacing-observation.html' },
         { label: 'デバッグ・プロファイリングツール', url: '/graphics/optimization/tools.html' },
+        { label: 'CPU プロファイリング', url: '/tools/profiling/cpu-profiling.html' },
       ],
     },
     {

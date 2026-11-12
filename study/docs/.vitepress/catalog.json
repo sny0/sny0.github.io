@@ -83,14 +83,14 @@
       "id": "math",
       "title": "数学・数値計算",
       "description": "座標と式を、描画やシミュレーションへ結び付ける。",
-      "count": 6,
+      "count": 8,
       "status": "辞典本文あり"
     },
     {
       "id": "algorithms",
       "title": "データ構造・アルゴリズム",
       "description": "操作手順、計算量、不変条件から道具を選ぶ。",
-      "count": 11,
+      "count": 12,
       "status": "辞典本文あり"
     },
     {
@@ -111,7 +111,7 @@
       "id": "game",
       "title": "ゲームとエンジン",
       "description": "入力、時間、ECSと各サブシステムの関係を調べる。",
-      "count": 35,
+      "count": 36,
       "status": "辞典本文あり"
     },
     {
@@ -125,7 +125,7 @@
       "id": "tools",
       "title": "開発ツールと調査機能",
       "description": "どの機能で何を観察し、どう確かめるかを調べる。",
-      "count": 11,
+      "count": 12,
       "status": "辞典本文あり"
     }
   ],
@@ -1045,6 +1045,7 @@
         "/design/patterns/composite.html",
         "/game/patterns/state-machines.html",
         "/design/case-studies/enemy-ai.html",
+        "/algorithms/pathfinding.html",
         "/game/patterns/",
         "/game/patterns/command-buffer-and-input.html"
       ],
@@ -1125,7 +1126,8 @@
         "/algorithms/uniform-grid-and-spatial-hash.html",
         "/algorithms/quadtrees-and-octrees.html",
         "/practice/algorithms/spatial-query-observation.html",
-        "/graphics/lighting/raytracing.html"
+        "/graphics/lighting/raytracing.html",
+        "/math/physics-integration-and-collision.html"
       ],
       "difficulty": "advanced",
       "importance": "specialized"
@@ -2627,6 +2629,43 @@
       "importance": "core"
     },
     {
+      "title": "CPU プロファイリング — サンプリングと計装でフレームを測る",
+      "url": "/tools/profiling/cpu-profiling.html",
+      "file": "tools/profiling/cpu-profiling.md",
+      "domain": "tools",
+      "section": "reference",
+      "format": "article",
+      "status": "published",
+      "summary": "フレームを遅らせる処理と待機を見分け、サンプリングや計装で原因を絞る。",
+      "source": "新規執筆",
+      "aliases": [
+        "CPU profiling",
+        "CPUプロファイラ",
+        "サンプリング",
+        "計装",
+        "instrumentation",
+        "Unity Profiler",
+        "Profile Analyzer",
+        "ProfilerMarker",
+        "Unreal Insights",
+        "Tracy",
+        "Superluminal",
+        "PIX",
+        "WPR",
+        "p95",
+        "p99"
+      ],
+      "verification": "Unity 6.0、Unreal Engine 5.6、各計測ツールの公式資料に照合（2026-11-12）",
+      "links": [
+        "/graphics/optimization/frame-pacing.html",
+        "/guide/low-level/debugging-and-profiling.html",
+        "/runtime/thread-synchronization.html",
+        "/game/asset-loading.html"
+      ],
+      "difficulty": "intermediate",
+      "importance": "core"
+    },
+    {
       "title": "CPUとGPUの役割分担",
       "url": "/hardware/gpu/cpu-vs-gpu.html",
       "file": "hardware/gpu/cpu-vs-gpu.md",
@@ -3697,6 +3736,7 @@
         "/design/patterns/iterator.html",
         "/game/patterns/component-and-ecs.html",
         "/game/patterns/command-buffer-and-input.html",
+        "/math/physics-integration-and-collision.html",
         "/game/patterns/"
       ],
       "difficulty": "intermediate",
@@ -6021,6 +6061,7 @@
         "/network/latency-throughput-and-queues.html",
         "/network/quic-and-http3.html",
         "/network/nat-and-port-mapping.html",
+        "/game/network-sync.html",
         "/practice/network/udp-loopback-observation.html"
       ],
       "difficulty": "intermediate",
@@ -8248,7 +8289,8 @@
         "/game/basics/game-loop-and-time.html",
         "/math/rendering/quaternion.html",
         "/graphics/basics/rigs-and-skinning.html",
-        "/graphics/basics/transforms-and-cameras.html"
+        "/graphics/basics/transforms-and-cameras.html",
+        "/math/rendering/interpolation-and-curves.html"
       ],
       "difficulty": "intro",
       "importance": "useful"
@@ -8365,7 +8407,8 @@
         "/math/rendering/matrix.html",
         "/math/rendering/transform.html",
         "/graphics/pipeline/vertex-shader.html",
-        "/graphics/compute/compute-shader.html"
+        "/graphics/compute/compute-shader.html",
+        "/math/rendering/interpolation-and-curves.html"
       ],
       "difficulty": "advanced",
       "importance": "useful"
@@ -8813,6 +8856,48 @@
       ],
       "difficulty": "advanced",
       "importance": "specialized"
+    },
+    {
+      "title": "ゲームのネットワーク同期 — 状態・入力・予測とロールバック",
+      "url": "/game/network-sync.html",
+      "file": "game/network-sync.md",
+      "domain": "game",
+      "section": "reference",
+      "format": "article",
+      "status": "published",
+      "summary": "ネット対戦で何を送り、どの時点の状態を表示するかを整理し、サーバー権威、補間、入力の再適用、ロールバック、ラグ補償を図とC++20のサンプルで説明する。",
+      "source": "新規執筆",
+      "aliases": [
+        "ネットコード",
+        "マルチプレイヤー",
+        "ネットワーク同期",
+        "レプリケーション",
+        "サーバー権威",
+        "listen server",
+        "P2P",
+        "スナップショット",
+        "ロックステップ",
+        "tick",
+        "補間",
+        "クライアント予測",
+        "リコンシリエーション",
+        "ロールバック",
+        "ラグ補償",
+        "lag compensation",
+        "GGPO",
+        "Iris",
+        "Unity Netcode"
+      ],
+      "verification": "IETF、ValveのYahn Bernier、Ensemble Studios、GGPO、Epic、Unityの資料に照合し、MSVC x64のC++20モードで補正と補間を実行確認（2026-11-12）",
+      "links": [
+        "/game/basics/game-loop-and-time.html",
+        "/network/udp-datagrams.html",
+        "/network/latency-throughput-and-queues.html",
+        "/game/basics/collisions-and-physics.html",
+        "/game/ecs.html"
+      ],
+      "difficulty": "advanced",
+      "importance": "core"
     },
     {
       "title": "ゲームの状態とポーズ — タイトル・プレイ・結果を切り替える",
@@ -10023,7 +10108,8 @@
       "links": [
         "/graphics/optimization/basics.html",
         "/graphics/pipeline/overview.html",
-        "/graphics/capstone/01-design.html"
+        "/graphics/capstone/01-design.html",
+        "/tools/profiling/cpu-profiling.html"
       ],
       "difficulty": "intermediate",
       "importance": "core"
@@ -10194,7 +10280,8 @@
         "/network/home-network-devices.html",
         "/network/dns-resolution.html",
         "/network/tcp-sockets.html",
-        "/network/http-messages.html"
+        "/network/http-messages.html",
+        "/game/network-sync.html"
       ],
       "difficulty": "intro",
       "importance": "core"
@@ -10253,7 +10340,8 @@
       "links": [
         "/network/tcp-sockets.html",
         "/network/udp-datagrams.html",
-        "/practice/network/udp-loopback-observation.html"
+        "/practice/network/udp-loopback-observation.html",
+        "/game/network-sync.html"
       ],
       "difficulty": "intermediate",
       "importance": "useful"
@@ -11963,7 +12051,8 @@
         "/tools/build/build-configurations.html",
         "/graphics/optimization/tools.html",
         "/graphics/optimization/frame-pacing.html",
-        "/tools/terminal-shell-and-commands.html"
+        "/tools/terminal-shell-and-commands.html",
+        "/tools/profiling/cpu-profiling.html"
       ],
       "difficulty": "intro",
       "importance": "core"
@@ -12415,6 +12504,42 @@
       ],
       "difficulty": "intermediate",
       "importance": "useful"
+    },
+    {
+      "title": "経路探索 — A* とナビメッシュ",
+      "url": "/algorithms/pathfinding.html",
+      "file": "algorithms/pathfinding.md",
+      "domain": "algorithms",
+      "section": "reference",
+      "format": "article",
+      "status": "published",
+      "summary": "グリッド上でDijkstra法とA*の探索範囲を比べ、ナビメッシュのポリゴン列から移動経路を組み立てる仕組みを追う。",
+      "source": "新規執筆",
+      "aliases": [
+        "経路探索",
+        "pathfinding",
+        "A*",
+        "Aスター",
+        "ダイクストラ法",
+        "Dijkstra",
+        "BFS",
+        "ナビメッシュ",
+        "NavMesh",
+        "ファネル",
+        "funnel",
+        "Recast",
+        "Detour",
+        "HPA*"
+      ],
+      "verification": "DijkstraとHartらの原論文、RecastとDetourの公式資料、Unreal Engine 5.7とUnity 6.0の公式資料に照合（2026-11-12）",
+      "links": [
+        "/algorithms/queues-and-deques.html",
+        "/algorithms/binary-heaps.html",
+        "/game/patterns/behavior-tree-and-blackboard.html",
+        "/game/basics/collisions-and-physics.html"
+      ],
+      "difficulty": "intermediate",
+      "importance": "core"
     },
     {
       "title": "継承・委譲・コンポジション(比較ページ)",
@@ -13055,7 +13180,8 @@
         "/game/shooter-design.html",
         "/game/basics/game-loop-and-time.html",
         "/game/basics/scenes-and-components.html",
-        "/graphics/basics/transforms-and-cameras.html"
+        "/graphics/basics/transforms-and-cameras.html",
+        "/math/physics-integration-and-collision.html"
       ],
       "difficulty": "intro",
       "importance": "core"
@@ -14548,7 +14674,8 @@
       "links": [
         "/algorithms/arrays-and-dynamic-arrays.html",
         "/algorithms/queues-and-deques.html",
-        "/algorithms/search-trees.html"
+        "/algorithms/search-trees.html",
+        "/algorithms/pathfinding.html"
       ],
       "difficulty": "intermediate",
       "importance": "useful"
@@ -15179,6 +15306,43 @@
       "importance": "specialized"
     },
     {
+      "title": "物理の時間積分と衝突判定 — Euler・Verlet・形状の交差",
+      "url": "/math/physics-integration-and-collision.html",
+      "file": "math/physics-integration-and-collision.md",
+      "domain": "math",
+      "section": "reference",
+      "format": "article",
+      "status": "published",
+      "summary": "位置と速度を時間刻みで更新し、形状の交差やステップの途中で起きる衝突を調べる。",
+      "source": "新規執筆",
+      "aliases": [
+        "時間積分",
+        "陽的Euler",
+        "半陰的Euler",
+        "シンプレクティックEuler",
+        "Verlet",
+        "固定刻み",
+        "アキュムレーター",
+        "AABB",
+        "Möller–Trumbore",
+        "分離軸定理",
+        "SAT",
+        "GJK",
+        "CCD",
+        "トンネリング"
+      ],
+      "verification": "数値積分と衝突判定の原論文、Box2D 3.1の公式資料に照合（2026-11-12）",
+      "links": [
+        "/game/basics/collisions-and-physics.html",
+        "/math/rendering/interpolation-and-curves.html",
+        "/game/patterns/game-loop-and-update.html",
+        "/algorithms/bounding-volume-hierarchies.html",
+        "/game/basics/game-loop-and-time.html"
+      ],
+      "difficulty": "advanced",
+      "importance": "core"
+    },
+    {
       "title": "平均60 FPSでもカクつくのはなぜか — フレームタイムとフレームペーシング",
       "url": "/graphics/optimization/frame-pacing.html",
       "file": "graphics/optimization/frame-pacing.md",
@@ -15206,7 +15370,8 @@
         "/graphics/optimization/basics.html",
         "/graphics/optimization/swap-chain-and-vsync.html",
         "/guide/low-level/input-and-game-loop.html",
-        "/graphics/optimization/tools.html"
+        "/graphics/optimization/tools.html",
+        "/tools/profiling/cpu-profiling.html"
       ],
       "difficulty": "intro",
       "importance": "core"
@@ -15256,6 +15421,39 @@
       ],
       "difficulty": "advanced",
       "importance": "specialized"
+    },
+    {
+      "title": "補間と曲線 — Lerp・Slerp・イージング・スプライン",
+      "url": "/math/rendering/interpolation-and-curves.html",
+      "file": "math/rendering/interpolation-and-curves.md",
+      "domain": "math",
+      "section": "reference",
+      "format": "article",
+      "status": "published",
+      "summary": "値の補間、時間の進め方、曲線の形を分けて考え、追従や回転、一定速の移動に使う。",
+      "source": "新規執筆",
+      "aliases": [
+        "Lerp",
+        "線形補間",
+        "Slerp",
+        "Nlerp",
+        "イージング",
+        "指数減衰",
+        "Bézier",
+        "ベジェ曲線",
+        "de Casteljau",
+        "Catmull-Rom",
+        "エルミート曲線",
+        "弧長"
+      ],
+      "verification": "C++規格草案、glTF 2.0仕様、曲線とクォータニオンの原論文に照合（2026-11-12）",
+      "links": [
+        "/graphics/basics/keyframes-and-animation.html",
+        "/math/rendering/quaternion.html",
+        "/game/basics/game-loop-and-time.html"
+      ],
+      "difficulty": "intermediate",
+      "importance": "core"
     },
     {
       "title": "翻訳単位・ヘッダー・include・前方宣言・ODR",
@@ -15360,6 +15558,7 @@
         "/algorithms/queues-and-deques.html",
         "/algorithms/hash-tables.html",
         "/algorithms/binary-heaps.html",
+        "/algorithms/pathfinding.html",
         "/algorithms/search-trees.html",
         "/algorithms/sparse-sets.html",
         "/graphics/optimization/input-to-display-latency.html",
@@ -15381,6 +15580,7 @@
         "/graphics/optimization/pipeline-compilation-stutter.html",
         "/graphics/optimization/swap-chain-and-vsync.html",
         "/graphics/optimization/frame-pacing.html",
+        "/tools/profiling/cpu-profiling.html",
         "/browser/audio-flyby.html",
         "/browser/audio-doppler.html",
         "/browser/audio-occlusion-transition.html",
@@ -15429,6 +15629,7 @@
         "/network/http-messages.html",
         "/network/tcp-sockets.html",
         "/network/udp-datagrams.html",
+        "/game/network-sync.html",
         "/network/quic-and-http3.html",
         "/network/nat-and-port-mapping.html",
         "/network/ip-routing-and-ethernet.html",
@@ -15469,7 +15670,9 @@
         "/game/basics/game-loop-and-time.html",
         "/game/basics/scenes-and-components.html",
         "/game/basics/collisions-and-physics.html",
+        "/math/physics-integration-and-collision.html",
         "/graphics/basics/keyframes-and-animation.html",
+        "/math/rendering/interpolation-and-curves.html",
         "/graphics/basics/rigs-and-skinning.html",
         "/game/basics/ui-layout-and-interaction.html",
         "/game/basics/input-actions-and-devices.html",

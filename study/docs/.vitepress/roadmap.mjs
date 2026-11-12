@@ -144,6 +144,7 @@ export default {
         { label: 'ベクトルの内積と向き', url: '/math/rendering/vector.html' },
         { label: 'モデルからカメラまでの座標変換', url: '/math/rendering/transform.html' },
         { label: 'カメラと射影', url: '/math/rendering/camera.html' },
+        { label: '補間と曲線', url: '/math/rendering/interpolation-and-curves.html' },
       ],
     },
     {

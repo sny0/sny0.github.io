@@ -69,3 +69,4 @@ Webページを見るとき、ブラウザーは「このページのデータ�
 - [DNSと名前解決](/network/dns-resolution.html)
 - [ソケットとTCP通信](/network/tcp-sockets.html)
 - [HTTP通信](/network/http-messages.html)
+- [ゲームのネットワーク同期](/game/network-sync.html) — 送受信した入力や状態をゲーム内の更新に使う

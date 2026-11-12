@@ -24,6 +24,7 @@
 - [スパースセットとECSのコンポーネント管理](/algorithms/sparse-sets.html)
 - [ハッシュテーブル — 同じ場所に来たキーをどう探すか](/algorithms/hash-tables.html)
 - [均等グリッドと空間ハッシュ — 近くの候補をセルで絞る](/algorithms/uniform-grid-and-spatial-hash.html)
+- [経路探索 — A* とナビメッシュ](/algorithms/pathfinding.html)
 - [四分木と八分木 — 必要な場所だけ細かく分ける](/algorithms/quadtrees-and-octrees.html)
 - [世代付きハンドル — 再利用したIDを区別する](/algorithms/generational-handles.html)
 - [二分ヒープと優先度付きキュー](/algorithms/binary-heaps.html)

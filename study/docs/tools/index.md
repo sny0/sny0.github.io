@@ -19,6 +19,7 @@
 
 ## 辞典の本文
 
+- [CPU プロファイリング — サンプリングと計装でフレームを測る](/tools/profiling/cpu-profiling.html)
 - [WindowsのファイルI/OをProcmonとWPRで追う](/tools/windows/file-io-tracing.html)
 - [クラッシュダンプとPDBで停止位置をたどる](/tools/windows/crash-dumps-and-symbols.html)
 - [ターミナル・シェル・コマンドの基本](/tools/terminal-shell-and-commands.html)

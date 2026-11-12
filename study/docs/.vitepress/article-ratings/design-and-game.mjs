@@ -97,6 +97,7 @@ export default {
   '/game/basics/ui-layout-and-interaction.html': ['intro', 'useful'],
   '/game/directstorage.html': ['advanced', 'specialized'],
   '/game/ecs.html': ['advanced', 'useful'],
+  '/game/network-sync.html': ['advanced', 'core'],
 
   '/game/patterns/behavior-tree-and-blackboard.html': ['intermediate', 'useful'],
   '/game/patterns/command-buffer-and-input.html': ['advanced', 'useful'],

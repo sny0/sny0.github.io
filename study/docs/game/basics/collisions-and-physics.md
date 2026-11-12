@@ -55,3 +55,5 @@ Unityの3Dトリガーでは、組のうち少なくとも片方にRigidbodyが�
 **レイキャスト**は、始点からある方向へ線を伸ばし、設定した距離内でどのコライダーに当たるかを調べる問い合わせです。地面の位置、照準、遮られているかの確認などに使えます。太さを持つ物体の移動を調べたい場合は、球などの形を使う問い合わせもあります。[UnityのPhysics.Raycast](https://docs.unity3d.com/6000.0/Documentation/ScriptReference/Physics.Raycast.html) · [Physics.SphereCast](https://docs.unity3d.com/6000.0/Documentation/ScriptReference/Physics.SphereCast.html)
 
 部品の付け方と配置の関係は[シーンとコンポーネント](/game/basics/scenes-and-components.html)、位置や大きさの基準は[座標とカメラ](/graphics/basics/transforms-and-cameras.html)へ進みます。
+
+物理ステップで位置を進め、形状の重なりを調べる計算は、[物理の時間積分と衝突判定](/math/physics-integration-and-collision.html)で確認できます。

@@ -68,3 +68,5 @@ study:
 描画が終わった絵をどの順番で出すか、表示の途中で絵を替えると何が見えるかは、[スワップチェーンとVSync](/graphics/optimization/swap-chain-and-vsync.html)で扱います。
 
 関連項目は[入力とゲームループ](/guide/low-level/input-and-game-loop.html)と[デバッグ・プロファイリングツール](/graphics/optimization/tools.html)です。
+
+CPU側のスパイクを関数やスレッドまで追う手順は、[CPU プロファイリング](/tools/profiling/cpu-profiling.html)で確認できます。

@@ -69,3 +69,5 @@ int main() {
 出力は `10:1`、`10:2`、`20:3`、`30:0` の順です。C#では .NET 6以降の `PriorityQueue<TElement, TPriority>` が使えます。既定では小さい優先度から取り出すため、同じ例なら優先度に `(int Tick, int Sequence)` を指定します。.NETの実装は1ノードが最大4つの子を持つ配列ベースのヒープです。[.NETのPriorityQueue](https://learn.microsoft.com/en-us/dotnet/api/system.collections.generic.priorityqueue-2?view=net-6.0)
 
 到着順に処理するなら[FIFOキュー](/algorithms/queues-and-deques.html)が対応します。任意のキーを探したり、キー範囲を順に走査したりするなら[探索木](/algorithms/search-trees.html)を使えます。ヒープが保持する順序は親子の関係なので、優先度と無関係なイベントIDを探すには、別の索引がなければ最悪 `O(n)` の走査が必要です。
+
+優先度付きキューで探索候補を管理する実装は、[経路探索 — A* とナビメッシュ](/algorithms/pathfinding.html)で確認できます。

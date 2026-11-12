@@ -56,3 +56,7 @@ query(node, area):
 pbrtはレイとプリミティブの交差を絞るためにBVHを構築します。Box2Dの動的AABB木では、物体の代理データを葉に持たせて範囲問い合わせやレイキャストを行います。例えば `b2DynamicTree_MoveProxy` は移動した代理データを木から外し、新しいAABBで挿入し直します。物理の**ブロードフェーズ**ではこのような木で衝突候補を集め、その後に実際の形状を照合します。レイキャストでも、箱との交差を通過した葉で形状との交差を調べます。[pbrtの構築と走査](https://www.pbr-book.org/4ed/Primitives_and_Intersection_Acceleration/Bounding_Volume_Hierarchies) · [Box2DのDynamic Tree API](https://box2d.org/documentation/group__tree.html) · [Koptaらのリフィットと局所更新の論文](https://hwrt.cs.utah.edu/papers/hwrt_rotations.pdf)
 
 [範囲問い合わせの実験](/practice/algorithms/spatial-query-observation.html)では、円の中心で物体をおおむね半分ずつに分け、葉に最大4個の円を置いた2DのBVHを使います。範囲を動かしながら、BVH、全件検索、均等グリッドで候補数とヒット結果を比べられます。3D描画での使い方は[ハードウェアレイトレーシング](/graphics/lighting/raytracing.html)で扱います。
+
+## 関連項目
+
+- [物理の時間積分と衝突判定](/math/physics-integration-and-collision.html)で、候補に残った形状の交差を調べる。

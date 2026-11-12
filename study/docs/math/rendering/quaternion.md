@@ -142,6 +142,7 @@ void Update() {
 - [座標変換](/math/rendering/transform.html) — 回転が変換パイプラインに入る場所
 - [Vertex Shader](/graphics/pipeline/vertex-shader.html) — スキニングでの行列パレット
 - [Compute Shader](/graphics/compute/compute-shader.html) — GPUスキニング
+- [補間と曲線](/math/rendering/interpolation-and-curves.html) — Lerp・Slerp・イージングの使い分け
 
 ## 理解度チェック
 

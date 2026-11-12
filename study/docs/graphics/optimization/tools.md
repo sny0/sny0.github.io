@@ -154,6 +154,7 @@ if (rdoc && frameHasArtifact) {
 
 - [GPU最適化の基礎](/graphics/optimization/basics.html) と往復して使う
 - [最終章: ゼロからレンダラーを作る](/graphics/capstone/01-design.html) — 自作レンダラーはツールの練習台として最高
+- [CPU プロファイリング](/tools/profiling/cpu-profiling.html) — サンプリングと計装でCPU側のフレームを調べる
 
 ## 理解度チェック
 
