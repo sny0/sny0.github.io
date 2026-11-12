@@ -1,0 +1,39 @@
+<!doctype html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="WebGL 2で同じ床と移動物体を描き、TAAのちらつき低減と残像を比べる。">
+  <title>床のちらつきと残像をTAAで比べる | Sny0 Study</title>
+  <link rel="stylesheet" href="./styles.css">
+  <script type="module" src="./main.js"></script>
+</head>
+<body>
+  <main>
+    <header>
+      <h1>床のちらつきと残像をTAAで比べる</h1>
+      <p>カメラを横に動かし、床の奥を見ながらTAAを切り替えます。黄色い物体を動かすと、その後ろの残像も観察できます。</p>
+    </header>
+
+    <fieldset id="controls" disabled>
+      <legend>描画の設定</legend>
+      <div class="options">
+        <label><input type="checkbox" id="taa"> TAAをオンにする</label>
+        <label><input type="checkbox" id="camera-motion"> カメラを横に動かす</label>
+        <label><input type="checkbox" id="object-motion"> 物体を横に動かす</label>
+        <label><input type="checkbox" id="reject-history" aria-describedby="history-note"> 異なる面の履歴を捨てる</label>
+        <button type="button" id="reset-history">履歴を消す</button>
+      </div>
+      <p id="history-note">TAAオンでは現在の色を10%、履歴の色を90%で混ぜます。初期設定では、物体が通り過ぎて床が見えた場所にも履歴を使います。</p>
+    </fieldset>
+
+    <canvas id="view" width="256" height="144" role="img"
+      aria-label="斜めから見た市松模様の床と黄色い板。">この教材ではcanvasを使います。</canvas>
+    <p id="status" role="status">WebGL 2を準備しています。</p>
+    <p class="caption">描画は256×144画素。床はポイントサンプリングで読みます。</p>
+
+    <footer><a href="../../../practice/graphics/taa-observation.html">実践の解説へ戻る</a></footer>
+    <noscript><p>描画するにはJavaScriptを有効にしてください。</p></noscript>
+  </main>
+</body>
+</html>
