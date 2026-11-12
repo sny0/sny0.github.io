@@ -92,6 +92,7 @@ Compute ShaderはGPU DrivenのカリングやNaniteの微小三角形のラス�
 - 画像処理: [ポストプロセス](/graphics/postprocess/overview.html) → [AA](/graphics/postprocess/antialiasing.html) → [TAA](/graphics/postprocess/taa.html) → [アップスケーリング](/graphics/postprocess/upscaling.html)
 - 実践: [MSAAを切り替えて輪郭と床模様を見比べる](/practice/graphics/msaa-observation.html)
 - 実践: [TAAを切り替えて床のちらつきとゴーストを比べる](/practice/graphics/taa-observation.html)
+- 実践: [ネイティブ描画・バイリニア・時間方向の拡大を比べる](/practice/graphics/taau-observation.html)
 
 ## フェーズ5: 最適化と実務
 

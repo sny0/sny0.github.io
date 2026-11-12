@@ -65,6 +65,7 @@ export default withMermaid(defineConfig({
       { url: '/study/samples/graphics/texture-filtering-observation/index.html' },
       { url: '/study/samples/graphics/msaa-observation/index.html' },
       { url: '/study/samples/graphics/taa-observation/index.html' },
+      { url: '/study/samples/graphics/taau-observation/index.html' },
       { url: '/study/samples/network/stream-loss-observation/index.html' },
       { url: '/study/samples/algorithms/sparse-set-observation/index.html' },
       { url: '/study/samples/algorithms/spatial-query-observation/index.html' },

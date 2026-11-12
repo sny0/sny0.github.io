@@ -1,0 +1,53 @@
+:root {
+  color-scheme: light;
+  color: #182c3d;
+  background: #f2f6fa;
+  font: 16px/1.65 system-ui, sans-serif;
+}
+
+* { box-sizing: border-box; }
+html { scrollbar-gutter: stable; }
+body { margin: 0; }
+main { width: min(100% - 2rem, 52rem); margin: auto; padding: 1.5rem 0 2rem; }
+h1, p { margin: 0; }
+h1 { margin-bottom: .45rem; font-size: clamp(1.55rem, 4vw, 2.15rem); line-height: 1.35; }
+fieldset { min-width: 0; margin: 1rem 0 .75rem; padding: .65rem .85rem .75rem; background: white; border: 1px solid #bfd0de; border-radius: .55rem; }
+legend { font-weight: 650; }
+.options { display: flex; flex-wrap: wrap; gap: .4rem; }
+.history-controls { margin-top: .5rem; }
+.options label, button {
+  display: inline-flex;
+  align-items: center;
+  gap: .35rem;
+  min-height: 2.75rem;
+  padding: .25rem .6rem;
+  color: inherit;
+  font: inherit;
+  background: white;
+  border: 1px solid #9fb5c7;
+  border-radius: .35rem;
+  cursor: pointer;
+}
+.options label:has(:checked) { background: #e5eff7; border-color: #276392; }
+.options label:has(:disabled), button:disabled { color: #5b6c79; border-style: dashed; cursor: default; }
+input { accent-color: #205a8e; }
+canvas { display: block; width: 100%; height: auto; image-rendering: pixelated; border: 1px solid #839db3; border-radius: .45rem; background: #182b3e; }
+canvas[data-render-state="error"] { display: none; }
+#status { margin-top: .55rem; font-weight: 600; }
+#status[data-error="true"] { color: #942d38; }
+#history:not([hidden]) { display: flex; align-items: center; gap: .85rem; margin-top: .5rem; }
+#history p, .caption { color: #465d70; font-size: .875rem; }
+.caption { margin-top: .4rem; }
+#phase-grid { flex: none; display: grid; grid-template-columns: repeat(2, 1fr); gap: 3px; margin: 0; padding: 0; list-style: none; }
+#phase-grid li { min-width: 3.7rem; padding: .15rem .4rem; text-align: center; color: #465d70; background: white; border: 1px solid #a9bccb; border-radius: .25rem; font-size: .82rem; }
+#phase-grid li.filled { background: #ddeee9; border-color: #377869; color: #193d36; }
+#phase-grid span { display: block; font-size: .75rem; }
+footer { margin-top: 1rem; }
+a { color: #15558c; }
+:focus-visible { outline: 3px solid #aa510c; outline-offset: 3px; }
+
+@media (max-width: 36rem) {
+  main { width: calc(100% - 1.25rem); padding-top: 1rem; }
+  fieldset { padding: .55rem .65rem; }
+  #history:not([hidden]) { align-items: start; }
+}

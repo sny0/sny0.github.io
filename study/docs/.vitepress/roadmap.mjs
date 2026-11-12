@@ -274,6 +274,8 @@ export default {
         { label: '実践 MSAAを切り替えて輪郭と床模様を見比べる', url: '/practice/graphics/msaa-observation.html' },
         { label: 'TAAとフレーム履歴', url: '/graphics/postprocess/taa.html' },
         { label: '実践 TAAで床のちらつきとゴーストを比べる', url: '/practice/graphics/taa-observation.html' },
+        { label: 'アップスケーリングとTAAU', url: '/graphics/postprocess/upscaling.html' },
+        { label: '実践 ネイティブ描画と2つの拡大方式を比べる', url: '/practice/graphics/taau-observation.html' },
         { label: '実践 テクスチャに描き、次のパスで色を変える', url: '/practice/graphics/render-to-texture-observation.html' },
       ],
     },

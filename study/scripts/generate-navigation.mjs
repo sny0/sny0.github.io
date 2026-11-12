@@ -636,6 +636,7 @@ const termRows = [
   ['テクスチャフィルタリング / テクセル / ミップマップ / トライリニア / 異方性 / LOD', '/graphics/texture/texture-filtering-and-mipmaps.html', '1画素に入るテクスチャの範囲と、遠くの模様がちらつく理由を調べる'],
   ['アンチエイリアシング / MSAA / カバレッジ / リゾルブ', '/graphics/postprocess/antialiasing.html', 'ポリゴンの輪郭のギザギザと床模様のちらつきの原因を比べる'],
   ['TAA / ジッタ / 再投影 / 履歴検証 / ディスオクルージョン / ゴースティング', '/graphics/postprocess/taa.html', '過去のサンプルでちらつきを抑える仕組みと、ゴーストが出る理由を調べる'],
+  ['アップスケーリング / TAAU / DLSS / FSR / XeSS', '/graphics/postprocess/upscaling.html', '内部解像度と出力解像度の違い、時間方向の再構成と製品ごとの方式を調べる'],
   ['テクスチャ転送 / RowPitch / GetCopyableFootprints / CopyTextureRegion / readback', '/graphics/texture/d3d12-texture-upload.html', 'CPU側の行をバッファに並べ、コピー、状態遷移、完了の順序を調べる'],
   ['テクスチャストリーミング / mip residency / SRV / reserved resource / タイル', '/graphics/texture/texture-streaming-and-mip-residency.html', '先に使うmip、シェーダーに公開する範囲、GPUメモリの予算を調べる'],
   ['glTF / GLB / bufferView / accessor / byteStride / POSITION / NORMAL', '/graphics/mesh/gltf-mesh-buffers.html', 'メッシュの参照をたどり、頂点とインデックスの範囲や型を調べる'],

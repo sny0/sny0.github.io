@@ -24,6 +24,7 @@ export const collections = [
   { id: 'texture-filtering-observation', section: 'practice', title: '斜めの床でテクスチャのフィルタリングを比べる', description: '同じ床で4種類のフィルターを切り替え、カメラの移動に伴うちらつきを見る。', start: '/practice/graphics/texture-filtering-observation.html' },
   { id: 'msaa-observation', section: 'practice', title: 'MSAAを切り替えて輪郭と床模様を見比べる', description: '同じシーンでMSAAを切り替え、斜めの輪郭と床模様の変化を見比べる。', start: '/practice/graphics/msaa-observation.html' },
   { id: 'taa-observation', section: 'practice', title: 'TAAを切り替えて床のちらつきとゴーストを比べる', description: 'カメラと物体を別々に動かし、過去フレームの蓄積と履歴検証の効果を観察する。', start: '/practice/graphics/taa-observation.html' },
+  { id: 'taau-observation', section: 'practice', title: '同じシーンでネイティブ描画・バイリニア・時間方向の拡大を比べる', description: '同じシーンを3方式で描き、時間方向のサンプルで高解像度の格子が埋まる様子を見る。', start: '/practice/graphics/taau-observation.html' },
   { id: 'foundations', section: 'learning', title: 'コンピュータと開発の基礎', description: '部品、通信、OS、言語、開発ツール、3DCGとゲームの役割から詳しい解説へ進む。', start: '/guide/hardware-basics.html' },
   { id: 'stream-loss-observation', section: 'practice', title: 'パケットが欠けたときのTCPとQUICの配送を比べる', description: '失うパケットを変え、接続全体で順序を保つ場合とストリームごとに順序を保つ場合を比べる。', start: '/practice/network/stream-loss-observation.html' },
   { id: 'udp-loopback-observation', section: 'practice', title: 'C++とWinsockでUDPの受信境界を確かめる', description: 'UDPの区切りと、短い受信バッファや空のデータグラムの戻り値を調べる。', start: '/practice/network/udp-loopback-observation.html' },

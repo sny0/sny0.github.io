@@ -122,6 +122,7 @@
 - [シェーダーで三角形の位置と色を変える](/practice/graphics/shader-first-steps.html)
 - [斜めの床でテクスチャのフィルタリングを比べる](/practice/graphics/texture-filtering-observation.html)
 - [同じ60 FPSで表示間隔を比べる](/practice/graphics/frame-pacing-observation.html)
+- [同じシーンでネイティブ描画・バイリニア・時間方向の拡大を比べる](/practice/graphics/taau-observation.html)
 - [入力遅延を待ち時間と描画時間に分けてみる](/practice/graphics/input-latency-observation.html)
 - [2. デバイス初期化とスワップチェイン](/graphics/capstone/02-device.html)
 - [3. リソースとパイプライン構築](/graphics/capstone/03-resources.html)

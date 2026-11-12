@@ -166,6 +166,13 @@
       "start": "/practice/graphics/taa-observation.html"
     },
     {
+      "id": "taau-observation",
+      "section": "practice",
+      "title": "同じシーンでネイティブ描画・バイリニア・時間方向の拡大を比べる",
+      "description": "同じシーンを3方式で描き、時間方向のサンプルで高解像度の格子が埋まる様子を見る。",
+      "start": "/practice/graphics/taau-observation.html"
+    },
+    {
       "id": "foundations",
       "section": "learning",
       "title": "コンピュータと開発の基礎",
@@ -6058,6 +6065,7 @@
         "/practice/graphics/taa-observation.html",
         "/math/rendering/transform.html",
         "/graphics/compute/compute-shader.html",
+        "/practice/graphics/taau-observation.html",
         "/learn/roadmap.html"
       ],
       "difficulty": "advanced",
@@ -8347,14 +8355,27 @@
       "section": "reference",
       "format": "article",
       "status": "published",
-      "summary": "時間的アップスケーラは、ジッタ、モーションベクタ、過去のフレームを使い、低解像度の描画結果を高解像度に再構成します。1080p〜1440pから4Kに拡大する例では、4Kで直接描画する場合と比べてGPU負荷を抑えられます。",
+      "summary": "TAAからTAAUへつながる仕組みと、DLSS Super Resolution・FSRの世代ごとの違いを図で整理し、ネイティブ描画、バイリニア拡大、時間方向のアップスケーリングを比べる。",
       "source": "RenderingWiki",
-      "aliases": [],
+      "aliases": [
+        "アップスケーリング",
+        "時間的アップスケーリング",
+        "TAAU",
+        "DLSS",
+        "Super Resolution",
+        "FSR",
+        "XeSS",
+        "内部解像度",
+        "出力解像度"
+      ],
+      "verification": "Yangらの論文とEpic・NVIDIA・AMDの公式資料に照合（2026-11-13）",
       "links": [
+        "/practice/graphics/taau-observation.html",
         "/graphics/postprocess/taa.html",
+        "/graphics/optimization/basics.html",
         "/graphics/postprocess/overview.html",
         "/graphics/lighting/path-tracing.html",
-        "/graphics/optimization/basics.html"
+        "/learn/roadmap.html"
       ],
       "difficulty": "advanced",
       "importance": "useful"
@@ -15123,6 +15144,35 @@
       ]
     },
     {
+      "title": "同じシーンでネイティブ描画・バイリニア・時間方向の拡大を比べる",
+      "url": "/practice/graphics/taau-observation.html",
+      "file": "practice/graphics/taau-observation.md",
+      "domain": "graphics",
+      "section": "practice",
+      "format": "sample",
+      "status": "published",
+      "summary": "384×216の同じ画面で、ネイティブ描画と192×108からの拡大を比べ、4フレームのサンプルで高解像度の画素を埋める。",
+      "source": "新規執筆",
+      "aliases": [
+        "TAAUの実践",
+        "WebGL 2",
+        "アップスケーリング",
+        "バイリニア拡大",
+        "ジッタ",
+        "内部解像度",
+        "出力解像度"
+      ],
+      "collection": "taau-observation",
+      "order": 1,
+      "verification": "Yangらの論文とEpicのTAAU資料に照合（2026-11-13）",
+      "links": [
+        "/graphics/postprocess/upscaling.html",
+        "/practice/graphics/taa-observation.html",
+        "/graphics/postprocess/taa.html",
+        "/learn/roadmap.html"
+      ]
+    },
+    {
       "title": "同一オリジンポリシーとCORS — 送信と応答の公開",
       "url": "/browser/same-origin-cors.html",
       "file": "browser/same-origin-cors.md",
@@ -15729,6 +15779,7 @@
         "/graphics/postprocess/upscaling.html",
         "/practice/graphics/msaa-observation.html",
         "/practice/graphics/taa-observation.html",
+        "/practice/graphics/taau-observation.html",
         "/graphics/optimization/basics.html",
         "/graphics/optimization/tools.html",
         "/graphics/optimization/render-graph.html",
@@ -16094,6 +16145,7 @@
         "/graphics/texture/texture-filtering-and-mipmaps.html",
         "/graphics/postprocess/antialiasing.html",
         "/graphics/postprocess/taa.html",
+        "/graphics/postprocess/upscaling.html",
         "/graphics/texture/d3d12-texture-upload.html",
         "/graphics/texture/texture-streaming-and-mip-residency.html",
         "/graphics/mesh/gltf-mesh-buffers.html",

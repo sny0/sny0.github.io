@@ -180,7 +180,8 @@ clipPosition.xy += jitterNdc * clipPosition.w;
 
 ## 次に読むべきページ
 
-- [アップスケーリング (DLSS/FSR/XeSS)](/graphics/postprocess/upscaling.html) — TAAの直系進化
+- [アップスケーリング (DLSS/FSR/XeSS)](/graphics/postprocess/upscaling.html)で、TAAの履歴を高解像度の再構成に使う方法を確認する。
+- [時間方向のアップスケーリングの実践](/practice/graphics/taau-observation.html)で、異なるフレームのサンプルが出力の2×2画素を埋める様子を見る。
 - [SSAO](/graphics/lighting/ssao.html) / [SSR](/graphics/lighting/ssr.html) — TAAを再構成基盤として使う技法
 - [3DCG・描画ロードマップの「ポストプロセスとAA」](/learn/roadmap.html?node=gfx-postprocess#graphics)
 
