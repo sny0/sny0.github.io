@@ -125,7 +125,7 @@
       "id": "tools",
       "title": "開発ツールと調査機能",
       "description": "どの機能で何を観察し、どう確かめるかを調べる。",
-      "count": 12,
+      "count": 17,
       "status": "辞典本文あり"
     }
   ],
@@ -947,6 +947,37 @@
         "/design/patterns/"
       ],
       "difficulty": "intermediate",
+      "importance": "useful"
+    },
+    {
+      "title": "AIが書いたコードとの付き合い方 — 差分と実行結果から採用を決める",
+      "url": "/tools/reviewing-ai-generated-code.html",
+      "file": "tools/reviewing-ai-generated-code.md",
+      "domain": "tools",
+      "section": "reference",
+      "format": "article",
+      "status": "published",
+      "summary": "コードの提案を受け取ったら、変更前に決めた仕様、使用中の版の公式資料、小さなテストと照らし合わせる。",
+      "source": "新規執筆",
+      "aliases": [
+        "生成AI",
+        "AIコード",
+        "コードレビュー",
+        "差分",
+        "diff",
+        "境界値",
+        "期待値",
+        "回帰テスト"
+      ],
+      "verification": "Microsoft Learnの.NET 10 APIに照合し、C#の提案版と修正版を実行確認（2026-11-12）",
+      "links": [
+        "/tools/git-basics.html",
+        "/tools/reading-official-documentation.html",
+        "/tools/setup-development-environment.html",
+        "/tools/reading-error-messages.html",
+        "/learn/roadmap.html"
+      ],
+      "difficulty": "intro",
       "importance": "useful"
     },
     {
@@ -3792,6 +3823,40 @@
       ],
       "difficulty": "advanced",
       "importance": "specialized"
+    },
+    {
+      "title": "Gitの基本 — 差分を見てコミットする",
+      "url": "/tools/git-basics.html",
+      "file": "tools/git-basics.md",
+      "domain": "tools",
+      "section": "reference",
+      "format": "article",
+      "status": "published",
+      "summary": "練習用リポジトリでテキストファイルを変更し、git statusと二種類のdiffを読んでからコミットを作る。",
+      "source": "新規執筆",
+      "aliases": [
+        "Git",
+        "バージョン管理",
+        "リポジトリ",
+        "作業ツリー",
+        "ステージング",
+        "インデックス",
+        "コミット",
+        "git status",
+        "git diff",
+        "git add",
+        "git commit",
+        "git log"
+      ],
+      "verification": "Git公式マニュアルに照合し、WindowsのPowerShell 7.6とGit for Windows 2.39.2で2つのコミットと差分を実行確認（2026-11-12）",
+      "links": [
+        "/tools/terminal-shell-and-commands.html",
+        "/os/files-and-paths.html",
+        "/tools/reading-official-documentation.html",
+        "/learn/roadmap.html"
+      ],
+      "difficulty": "intro",
+      "importance": "core"
     },
     {
       "title": "GLSL",
@@ -8141,6 +8206,38 @@
       "importance": "useful"
     },
     {
+      "title": "エラーメッセージの読み方 — ビルド時と実行時を見分ける",
+      "url": "/tools/reading-error-messages.html",
+      "file": "tools/reading-error-messages.md",
+      "domain": "tools",
+      "section": "reference",
+      "format": "article",
+      "status": "published",
+      "summary": "C#のビルドエラーと実行中の例外を起こし、ファイル名・行番号・診断番号を読み、原因を一か所直して再確認する。",
+      "source": "新規執筆",
+      "aliases": [
+        "エラーメッセージ",
+        "error message",
+        "コンパイルエラー",
+        "ビルドエラー",
+        "実行時エラー",
+        "スタックトレース",
+        "CS1002",
+        "FormatException",
+        "C#入門"
+      ],
+      "verification": "Microsoftの.NET CLI・C#コンパイラ・例外の資料に照合。WindowsのPowerShellと.NET SDK 10.0.403で失敗と修正後の出力を確認（2026-11-12）",
+      "links": [
+        "/tools/setup-development-environment.html",
+        "/learn/roadmap.html",
+        "/tools/build/what-is-build.html",
+        "/tools/windows/debugger-breakpoints-and-watchpoints.html",
+        "/tools/reading-official-documentation.html"
+      ],
+      "difficulty": "intro",
+      "importance": "core"
+    },
+    {
       "title": "オブジェクトファイル・実行ファイル・静的ライブラリ・動的ライブラリ・DLL",
       "url": "/runtime/cpp-internals/object-files-and-libraries.html",
       "file": "runtime/cpp-internals/object-files-and-libraries.md",
@@ -12060,6 +12157,37 @@
       "importance": "core"
     },
     {
+      "title": "開発環境の用意 — Windowsで最初のC#を動かす",
+      "url": "/tools/setup-development-environment.html",
+      "file": "tools/setup-development-environment.md",
+      "domain": "tools",
+      "section": "reference",
+      "format": "article",
+      "status": "published",
+      "summary": "Windowsで.NET SDKとエディターを用意し、PowerShellからC#プロジェクトを作り、表示する文字を変えて再実行する。",
+      "source": "新規執筆",
+      "aliases": [
+        "開発環境",
+        "環境構築",
+        "C#入門",
+        ".NET SDK",
+        "dotnet CLI",
+        "dotnet new",
+        "dotnet run",
+        "Hello World",
+        "PowerShell"
+      ],
+      "verification": "MicrosoftのWindows向け.NETインストール手順と.NET CLI資料に照合。WindowsのPowerShellと.NET SDK 10.0.403で作成・実行を確認（2026-11-12）",
+      "links": [
+        "/learn/roadmap.html",
+        "/tools/terminal-shell-and-commands.html",
+        "/languages/variables-types-and-expressions.html",
+        "/tools/reading-error-messages.html"
+      ],
+      "difficulty": "intro",
+      "importance": "core"
+    },
+    {
       "title": "学習ロードマップ",
       "url": "/learn/roadmap.html",
       "file": "learn/roadmap.md",
@@ -12727,6 +12855,39 @@
         "/graphics/optimization/swap-chain-and-vsync.html",
         "/game/basics/game-loop-and-time.html",
         "/graphics/basics/models-and-meshes.html"
+      ],
+      "difficulty": "intro",
+      "importance": "core"
+    },
+    {
+      "title": "公式ドキュメントの読み方 — バージョンとAPIの動作を確かめる",
+      "url": "/tools/reading-official-documentation.html",
+      "file": "tools/reading-official-documentation.md",
+      "domain": "tools",
+      "section": "reference",
+      "format": "article",
+      "status": "published",
+      "summary": "使用中の版から公式資料を選び、引数・戻り値・動作条件を読み、C#のInt32.TryParseで期待値と実行結果を照合する。",
+      "source": "新規執筆",
+      "aliases": [
+        "公式ドキュメント",
+        "公式資料",
+        "APIリファレンス",
+        "バージョン",
+        "ターゲットフレームワーク",
+        "オーバーロード",
+        "Int32.TryParse",
+        "int.TryParse",
+        "out",
+        "Microsoft Learn"
+      ],
+      "verification": "Microsoft Learnの.NET 10 APIリファレンスに照合し、Windowsの.NET SDK 10.0.403で掲載コードを実行確認（2026-11-12）",
+      "links": [
+        "/compilers/libraries-apis-and-sdks.html",
+        "/languages/variables-types-and-expressions.html",
+        "/languages/control-flow-and-functions.html",
+        "/tools/reviewing-ai-generated-code.html",
+        "/learn/roadmap.html"
       ],
       "difficulty": "intro",
       "importance": "core"

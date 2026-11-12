@@ -1533,12 +1533,24 @@
           "link": "/tools/"
         },
         {
+          "text": "AIが書いたコードとの付き合い方 — 差分と実行結果から採用を決める",
+          "link": "/tools/reviewing-ai-generated-code.html"
+        },
+        {
           "text": "CPU プロファイリング — サンプリングと計装でフレームを測る",
           "link": "/tools/profiling/cpu-profiling.html"
         },
         {
+          "text": "Gitの基本 — 差分を見てコミットする",
+          "link": "/tools/git-basics.html"
+        },
+        {
           "text": "WindowsのファイルI/OをProcmonとWPRで追う",
           "link": "/tools/windows/file-io-tracing.html"
+        },
+        {
+          "text": "エラーメッセージの読み方 — ビルド時と実行時を見分ける",
+          "link": "/tools/reading-error-messages.html"
         },
         {
           "text": "クラッシュダンプとPDBで停止位置をたどる",
@@ -1575,6 +1587,14 @@
         {
           "text": "開発ツールの基本 — エディター・IDE・デバッガ・プロファイラー",
           "link": "/tools/development-tools-basics.html"
+        },
+        {
+          "text": "開発環境の用意 — Windowsで最初のC#を動かす",
+          "link": "/tools/setup-development-environment.html"
+        },
+        {
+          "text": "公式ドキュメントの読み方 — バージョンとAPIの動作を確かめる",
+          "link": "/tools/reading-official-documentation.html"
         },
         {
           "text": "品質のための道具 — 静的解析・サニタイザ・警告レベル・CI",

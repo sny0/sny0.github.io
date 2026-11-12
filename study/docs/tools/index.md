@@ -19,8 +19,11 @@
 
 ## 辞典の本文
 
+- [AIが書いたコードとの付き合い方 — 差分と実行結果から採用を決める](/tools/reviewing-ai-generated-code.html)
 - [CPU プロファイリング — サンプリングと計装でフレームを測る](/tools/profiling/cpu-profiling.html)
+- [Gitの基本 — 差分を見てコミットする](/tools/git-basics.html)
 - [WindowsのファイルI/OをProcmonとWPRで追う](/tools/windows/file-io-tracing.html)
+- [エラーメッセージの読み方 — ビルド時と実行時を見分ける](/tools/reading-error-messages.html)
 - [クラッシュダンプとPDBで停止位置をたどる](/tools/windows/crash-dumps-and-symbols.html)
 - [ターミナル・シェル・コマンドの基本](/tools/terminal-shell-and-commands.html)
 - [ビルドツール: CMake・Visual Studioプロジェクト・Make・Ninja](/tools/build/build-tools-cmake.html)
@@ -30,6 +33,8 @@
 - [ブレークポイントとデータブレークポイント](/tools/windows/debugger-breakpoints-and-watchpoints.html)
 - [リンクエラー — 未解決外部シンボル・多重定義・ABI互換性](/tools/build/link-errors.html)
 - [開発ツールの基本 — エディター・IDE・デバッガ・プロファイラー](/tools/development-tools-basics.html)
+- [開発環境の用意 — Windowsで最初のC#を動かす](/tools/setup-development-environment.html)
+- [公式ドキュメントの読み方 — バージョンとAPIの動作を確かめる](/tools/reading-official-documentation.html)
 - [品質のための道具 — 静的解析・サニタイザ・警告レベル・CI](/tools/build/debugging-and-analysis.html)
 
 ## この分野の学習ガイド

@@ -28,14 +28,14 @@ export default {
       title: '開発環境を用意する',
       summary: 'エディターと実行に必要なツールを用意し、最初のプログラムを動かします。',
       prerequisites: [],
-      status: 'planned',
-      plannedMaterials: ['.NET SDKとエディターを用意し、Hello Worldを動かす手順'],
       checks: [
         { id: 'verify-sdk', label: 'ターミナルでSDKのバージョンを表示し、使う環境を確認できる。' },
         { id: 'create-project', label: 'コンソールプロジェクトを作り、エディターで開いてソースファイルの場所を指せる。' },
         { id: 'change-output', label: '表示する文字を1か所変えて再実行し、新しい文字が出ることを確認できる。' },
       ],
-      resources: [],
+      resources: [
+        { label: '開発環境の用意 — Windowsで最初のC#を動かす', url: '/tools/setup-development-environment.html' },
+      ],
     },
     {
       id: 'intro-values',
@@ -70,14 +70,14 @@ export default {
       title: 'エラーメッセージの読み方',
       summary: 'エラーを再現し、メッセージを手掛かりに直す場所を絞ります。',
       prerequisites: ['intro-flow'],
-      status: 'planned',
-      plannedMaterials: ['ビルド時と実行時のエラーを読み、1か所ずつ直す練習'],
       checks: [
         { id: 'error-location', label: 'エラー出力からファイル名、行番号、エラー番号が示された箇所を指せる。' },
         { id: 'error-stage', label: 'サンプルをビルドまたは実行し、コンパイル時の診断と実行中の例外がどの段階で出たか説明できる。' },
         { id: 'verify-fix', label: '原因と思った箇所を1か所直し、同じ操作を繰り返してエラーの消失と期待した出力を確認できる。' },
       ],
-      resources: [],
+      resources: [
+        { label: 'エラーメッセージの読み方 — ビルド時と実行時を見分ける', url: '/tools/reading-error-messages.html' },
+      ],
     },
     {
       id: 'intro-debugger',
@@ -221,14 +221,14 @@ export default {
       title: 'Gitとバージョン管理',
       summary: '変更を確認し、作業の区切りごとに履歴を残します。',
       prerequisites: ['dev-terminal'],
-      status: 'planned',
-      plannedMaterials: ['Git入門 — ローカルで変更を確認し、コミットを作る'],
       checks: [
         { id: 'read-status', label: '練習用リポジトリで git status を使い、追加したファイルと変更したファイルがどう表示されるか確認できる。' },
         { id: 'compare-diffs', label: 'git diff と git diff --staged を使い、次のコミットに入る変更を確かめられる。' },
         { id: 'commit-and-log', label: 'ファイルを2回変更して2つのコミットを作り、git log からそれぞれの履歴を確認できる。' },
       ],
-      resources: [],
+      resources: [
+        { label: 'Gitの基本 — 差分を見てコミットする', url: '/tools/git-basics.html' },
+      ],
     },
     {
       id: 'dev-build',
@@ -280,28 +280,28 @@ export default {
       title: '公式ドキュメントの読み方',
       summary: '使っているバージョンを確認し、APIの仕様を小さな例と照らし合わせます。',
       prerequisites: ['dev-profiler'],
-      status: 'planned',
-      plannedMaterials: ['公式マニュアルとAPIリファレンスで、版と動作条件を確認する練習'],
       checks: [
         { id: 'choose-doc-version', label: '手元のツールやエンジンのバージョンを調べ、それに対応する公式資料を開ける。' },
         { id: 'find-api-contract', label: '対象APIの引数、戻り値、動作条件を公式資料の該当箇所で指せる。' },
         { id: 'verify-doc-example', label: '公式資料から読み取った動作を、短いサンプルの期待値と実行結果で確認できる。' },
       ],
-      resources: [],
+      resources: [
+        { label: '公式ドキュメントの読み方 — バージョンとAPIの動作を確かめる', url: '/tools/reading-official-documentation.html' },
+      ],
     },
     {
       id: 'dev-ai',
       title: 'AIが書いたコードとの付き合い方',
       summary: '提案された変更を読み、目的を満たすかコードと実行結果から判断します。',
       prerequisites: ['dev-docs'],
-      status: 'planned',
-      plannedMaterials: ['AIが提案した変更を、差分・公式資料・テストで確認する実践'],
       checks: [
         { id: 'explain-diff', label: '提案された差分を読み、どの入力でどんな動作が変わるか説明できる。' },
         { id: 'verify-apis', label: 'コードが呼ぶAPIが、使っているバージョンに存在し、使い方も合っているか公式資料で確認できる。' },
         { id: 'test-before-adoption', label: '通常の入力と境界の入力で期待値を先に書き、実行結果を照合して採用する変更を決められる。' },
       ],
-      resources: [],
+      resources: [
+        { label: 'AIが書いたコードとの付き合い方 — 差分と実行結果から採用を決める', url: '/tools/reviewing-ai-generated-code.html' },
+      ],
     },
   ],
 }

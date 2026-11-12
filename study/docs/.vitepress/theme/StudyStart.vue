@@ -59,10 +59,6 @@ const recommendation = computed(() => {
             </a>
           </p>
           <p>{{ recommendation.explanation }}</p>
-          <p v-if="recommendation.node.status === 'planned'" class="start-material-note">
-            環境を用意する教材は未整備です。今すぐ始めたい場合は、<a
-              :href="withBase(roadmapUrl('programming-intro', 'intro-values'))">値・変数・型・式</a>の掲載コードと出力を読めます。
-          </p>
           <p v-if="recommendation.nextTrack">
             基礎を練習したら、<a :href="withBase(roadmapUrl('dev-tools', 'dev-terminal'))">開発の道具</a>でコマンドの使い方を確認し、<a
               :href="withBase(roadmapUrl(recommendation.nextTrack.id))">{{ recommendation.nextTrack.title }}</a>へ進みます。
@@ -124,7 +120,6 @@ const recommendation = computed(() => {
 .start-result { margin-top: 14px; padding: 10px 16px; border: 1px solid var(--vp-c-divider); border-radius: 8px; background: var(--vp-c-bg-soft); }
 .start-result p { margin: 6px 0; }
 .start-result-title { font-weight: 700; }
-.start-material-note { font-size: .9rem; }
 .start-table { overflow-x: auto; }
 .start-table table { display: table; width: 100%; min-width: 690px; margin: 0; }
 .start-table th, .start-table td { text-align: left; vertical-align: top; }
