@@ -1,0 +1,36 @@
+<!doctype html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="同じ床と三角形をWebGL 2で描き、MSAAが輪郭と床の模様にどう影響するか比べる。">
+  <title>ポリゴンの輪郭と床模様をMSAAで比べる | Sny0 Study</title>
+  <link rel="stylesheet" href="./styles.css">
+  <script type="module" src="./main.js"></script>
+</head>
+<body>
+  <main>
+    <header>
+      <h1>ポリゴンの輪郭と床模様をMSAAで比べる</h1>
+      <p>黄色い三角形の斜めの輪郭を見ながら、MSAAを切り替えます。カメラを動かすと、床の奥の模様がどう変わるかも観察できます。</p>
+    </header>
+
+    <fieldset id="controls" disabled>
+      <legend>描画の設定</legend>
+      <div class="settings">
+        <label><input id="msaa" type="checkbox" aria-describedby="msaa-status"> MSAAをオンにする</label>
+        <label><input id="motion" type="checkbox"> カメラを横に動かす</label>
+      </div>
+      <p id="msaa-status"></p>
+    </fieldset>
+
+    <canvas id="view" width="256" height="144" role="img"
+      aria-label="細かい市松模様の床と黄色い三角形。三角形の斜めの輪郭と床の奥を見比べる。">この教材ではcanvasを使います。</canvas>
+    <p id="status" role="status">WebGL 2を準備しています。</p>
+    <p class="detail">描画は256×144画素。画素を拡大表示しています。床はポイントサンプリングで読みます。</p>
+
+    <footer><a href="../../../practice/graphics/msaa-observation.html">実践の解説へ戻る</a></footer>
+    <noscript><p>描画するにはJavaScriptを有効にしてください。</p></noscript>
+  </main>
+</body>
+</html>
