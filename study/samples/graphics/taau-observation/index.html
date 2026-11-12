@@ -1,0 +1,50 @@
+<!doctype html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="同じ静止シーンでネイティブ描画、バイリニア拡大、時間方向のアップスケーリングを比べる。">
+  <title>3方式のアップスケーリング比較 | Sny0 Study</title>
+  <link rel="stylesheet" href="./styles.css">
+  <script type="module" src="./main.js"></script>
+</head>
+<body>
+  <main>
+    <header>
+      <h1>同じシーンでアップスケーリングを比べる</h1>
+      <p>斜めの手すりや床の奥を見ながら、出力384×216画素で描画方法を切り替えます。</p>
+    </header>
+
+    <fieldset id="controls" disabled>
+      <legend>描画方法</legend>
+      <div class="options">
+        <label><input type="radio" name="mode" value="native" checked> ネイティブ描画</label>
+        <label><input type="radio" name="mode" value="bilinear"> バイリニア拡大</label>
+        <label><input type="radio" name="mode" value="temporal"> 時間方向のアップスケーリング</label>
+      </div>
+      <div class="options history-controls">
+        <label><input type="checkbox" id="auto" checked> 自動で進める</label>
+        <button type="button" id="step" disabled>1フレーム進める</button>
+        <button type="button" id="reset-history" disabled>履歴をリセット</button>
+      </div>
+    </fieldset>
+
+    <canvas id="view" width="384" height="216" role="img"
+      aria-label="市松模様の床、斜めの手すり、黄色い縞の標識を描いたシーン。">この教材ではcanvasを使います。</canvas>
+    <p id="status" role="status">WebGL 2を準備しています。</p>
+    <section id="history" aria-label="履歴のサンプル" hidden>
+      <ol id="phase-grid" aria-label="出力の2×2画素の取得状況">
+        <li data-phase="2">左上<span>未取得</span></li>
+        <li data-phase="3">右上<span>未取得</span></li>
+        <li data-phase="0">左下<span>未取得</span></li>
+        <li data-phase="1">右下<span>未取得</span></li>
+      </ol>
+      <p>低解像度の1画素に対応する、出力の2×2画素です。未取得の位置は一時的にバイリニアで補い、フレームが進むたびに1か所ずつ実際に描いた色に置き換わります。</p>
+    </section>
+    <p class="caption">静止シーンのサンプルを4フレームで集める教材用の実装です。</p>
+
+    <footer><a href="../../../practice/graphics/taau-observation.html">実践の解説へ戻る</a></footer>
+    <noscript><p>描画するにはJavaScriptを有効にしてください。</p></noscript>
+  </main>
+</body>
+</html>
