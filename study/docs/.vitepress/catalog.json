@@ -309,7 +309,7 @@
       "id": "frame-pacing-observation",
       "section": "practice",
       "title": "同じ60 FPSで表示間隔を比べる",
-      "description": "一定間隔とばらつきのある表示を、動く目印と共通の時間軸で比べる。",
+      "description": "平均60 FPSの動きとグラフを見比べ、フレーム生成を含む等間隔・不等間隔の表示を試す。",
       "start": "/practice/graphics/frame-pacing-observation.html"
     },
     {
@@ -11435,6 +11435,7 @@
         "/graphics/postprocess/upscaling.html",
         "/graphics/optimization/frame-pacing.html",
         "/graphics/optimization/input-to-display-latency.html",
+        "/practice/graphics/frame-pacing-observation.html",
         "/learn/roadmap.html"
       ],
       "difficulty": "intro",
@@ -15195,7 +15196,7 @@
       "section": "practice",
       "format": "sample",
       "status": "published",
-      "summary": "平均60 FPSで表示する二つの動きを再生し、表示間隔が長くなる時刻を共通のグラフで調べる。",
+      "summary": "平均60 FPSの表示間隔をグラフで見比べる。フレーム生成の例では同じ絵を等間隔と不等間隔で表示し、動きの違いを観察する。",
       "source": "新規執筆",
       "aliases": [
         "フレームタイム",
@@ -15207,9 +15208,12 @@
       ],
       "collection": "frame-pacing-observation",
       "order": 1,
-      "verification": "Nodeで全フレームの切り替え境界と3パターンの集計を検証し、Chromium系ブラウザで再生と比較画面を確認（2026-11-06）",
+      "verification": "仮想120 Hzのタイムラインを使用。フレーム生成の提示間隔はAMDの開発者向け資料に照合（2026-11-13）",
       "links": [
-        "/graphics/optimization/frame-pacing.html"
+        "/graphics/optimization/frame-pacing.html",
+        "/graphics/postprocess/frame-generation.html",
+        "/practice/graphics/frame-generation-observation.html",
+        "/learn/roadmap.html"
       ]
     },
     {
@@ -15857,6 +15861,8 @@
         "/graphics/optimization/tools.html",
         "/graphics/optimization/render-graph.html",
         "/graphics/optimization/gpu-driven.html",
+        "/graphics/optimization/frame-pacing.html",
+        "/practice/graphics/frame-pacing-observation.html",
         "/graphics/engine/unity-renderer.html",
         "/graphics/engine/urp.html",
         "/graphics/engine/hdrp.html",
@@ -15993,7 +15999,7 @@
       "section": "reference",
       "format": "article",
       "status": "published",
-      "summary": "同じ平均FPSでも画面が切り替わる間隔で見え方が変わる。CPUの処理、GPUの描画、画面への提示をタイムラインで分け、カクつきが起きた区間を調べる。",
+      "summary": "同じ平均FPSでも画面が切り替わる間隔で見え方が変わる。フレーム生成を含む表示間隔を図と実践で比べ、CPU・GPU・提示のどこでカクついたかを調べる。",
       "source": "新規執筆",
       "aliases": [
         "フレームタイム",
@@ -16007,14 +16013,16 @@
         "p99",
         "PresentMon"
       ],
-      "verification": "Android Frame Pacing、DXGI Present、PresentMon 2.6.0のCSV列、PIX Timing Capturesの公式資料に照合（2026-11-06）",
+      "verification": "Android Frame Pacing、DXGI Present、PresentMon 2.6.0、PIX、AMD FSR Frame Generation Swapchainの公式資料に照合（2026-11-13）",
       "links": [
         "/practice/graphics/frame-pacing-observation.html",
+        "/graphics/postprocess/frame-generation.html",
         "/graphics/optimization/basics.html",
         "/graphics/optimization/swap-chain-and-vsync.html",
         "/guide/low-level/input-and-game-loop.html",
         "/graphics/optimization/tools.html",
-        "/tools/profiling/cpu-profiling.html"
+        "/tools/profiling/cpu-profiling.html",
+        "/learn/roadmap.html"
       ],
       "difficulty": "intro",
       "importance": "core"

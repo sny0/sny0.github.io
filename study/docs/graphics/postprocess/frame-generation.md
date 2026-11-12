@@ -97,6 +97,7 @@ NVIDIAのDLSSでは、**Super Resolution**が1枚の解像度を上げ、**Frame
 - [アップスケーリング](/graphics/postprocess/upscaling.html)で、1枚あたりの画素を増やす方法を確認する。
 - [入力から画面に出るまでの遅延](/graphics/optimization/input-to-display-latency.html)で、入力からディスプレイまでの待ちを分ける。
 - [フレームペーシング](/graphics/optimization/frame-pacing.html)で、表示枚数と表示間隔の関係を整理する。
+- [フレームペーシングの実践](/practice/graphics/frame-pacing-observation.html)で、同じ生成フレームを出しても提示間隔によって動きがどう変わるかを比べる。
 - [3DCG・描画ロードマップの「ポストプロセスとAA」](/learn/roadmap.html?node=gfx-postprocess#graphics)
 
 ## 参考資料

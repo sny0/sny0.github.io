@@ -6,9 +6,9 @@ study:
   format: article
   status: published
   domain: graphics
-  summary: 同じ平均FPSでも画面が切り替わる間隔で見え方が変わる。CPUの処理、GPUの描画、画面への提示をタイムラインで分け、カクつきが起きた区間を調べる。
+  summary: 同じ平均FPSでも画面が切り替わる間隔で見え方が変わる。フレーム生成を含む表示間隔を図と実践で比べ、CPU・GPU・提示のどこでカクついたかを調べる。
   aliases: [フレームタイム, frame time, フレームペーシング, frame pacing, スタッター, stutter, Present, VSync, p99, PresentMon]
-  verification: Android Frame Pacing、DXGI Present、PresentMon 2.6.0のCSV列、PIX Timing Capturesの公式資料に照合（2026-11-06）
+  verification: Android Frame Pacing、DXGI Present、PresentMon 2.6.0、PIX、AMD FSR Frame Generation Swapchainの公式資料に照合（2026-11-13）
 ---
 
 # 平均60 FPSでもカクつくのはなぜか — フレームタイムとフレームペーシング
@@ -37,6 +37,23 @@ study:
 表は表示間隔を最後まで観測できた120フレームで集計しています。平均FPSはフレーム数を経過秒数で割って求めます。p99（99パーセンタイル）は、ここでは間隔を短い順に並べ、`ceil(0.99 × 件数)` 番目の値を取ります。120件なら119番目なので、50 msの間隔が1回だけの場合はp99に現れません。どの場面で何度起きたかを調べるには、最長値と時系列も見ます。
 
 ブラウザ実践では、同じ時刻を使った二つの動きとグラフを見比べ、再生を止めてスパイクの前後を調べられます。数値は仮想120 Hzのモデルから計算します。[表示間隔を見比べる実践](/practice/graphics/frame-pacing-observation.html)
+
+<a href="/study/samples/graphics/frame-pacing-observation/index.html" target="_self">表示間隔の比較デモを開く</a>
+
+## フレーム生成でも表示間隔はそろえる
+
+30 FPSで描いたAとBの間に、[フレーム生成](/graphics/postprocess/frame-generation.html)で中間画像Mを作るとします。物体がAでは位置0、Mでは10、Bでは20にあり、順番も同じです。変えるのは各画像をいつ表示するかです。
+
+等間隔ではA、M、Bを約16.67 msずつ離して表示します。不等間隔の例では、Aを25 ms保持し、Mを約8.33 msだけ表示してBに切り替えます。どちらもAからBまでは約33.33 msですが、不等間隔では**止まって見える時間のあとに、MとBが立て続けに出ます**。同じ距離を進む表示が長い間隔と短い間隔を交互に通るので、進む速さにむらがあるように見えます。
+
+<figure class="study-figure">
+  <img src="/images/graphics/frame-pacing-generated-intervals.svg" alt="固定120 Hzで描画A、生成M、描画B、生成Nの4枚を比較。等間隔では各16.67 ms。不等間隔では描画AとBが各25 ms、生成MとNが各8.33 ms。どちらも約66.67 msに4枚を表示する。" width="760" height="295" loading="lazy">
+  <figcaption>描画と生成の順番は共通です。表示間隔が違うと、生成した位置を見せる時間も変わります。<a href="/study/images/graphics/frame-pacing-generated-intervals.svg" target="_blank" rel="noopener noreferrer">フレーム生成の表示間隔の図を拡大</a></figcaption>
+</figure>
+
+図の時間軸は、Aを表示し始めた時点からの相対時刻です。実際の表示では描画、生成、UI合成の完了を待つため、提示側が順番と間隔を調整します。例えばAMD FSR Frame Generationのスワップチェーンは、複数フレームの時間を使って目標の提示間隔を決め、生成画像と描画画像を順に提示します。どの絵が長く残るかは、処理の完了時刻やディスプレイの更新条件で変わります。[AMDのフレームペーシングと提示](https://gpuopen.com/manuals/fsr_sdk/techniques/frame-interpolation-swap-chain/#frame-pacing-and-presentation)
+
+実践の**フレーム生成で間隔が不均等**では、二つのレーンで同じ目印の位置を使います。時刻を20 ms付近で止めると、等間隔のレーンは中間画像へ進み、不等間隔のレーンはAのままです。グラフの高さは、その絵を保持する時間を示します。
 
 ## CPU、GPU、ディスプレイは別の時刻で動く
 
@@ -70,3 +87,23 @@ study:
 関連項目は[入力とゲームループ](/guide/low-level/input-and-game-loop.html)と[デバッグ・プロファイリングツール](/graphics/optimization/tools.html)です。
 
 CPU側のスパイクを関数やスレッドまで追う手順は、[CPU プロファイリング](/tools/profiling/cpu-profiling.html)で確認できます。
+
+## 理解度チェック
+
+1. 2秒で120枚を表示したとき、平均FPSだけで50 msの停止があったか判断できますか。
+
+   ::: details 解答
+   平均FPSは60です。50 msの間隔があったかは、表示間隔の時系列や最長値を調べます。
+   :::
+
+2. 生成Mの位置が同じでも、Aを長く保持してMを短く表示するとどう見えますか。
+
+   ::: details 解答
+   Aの位置で長く止まり、MとBが短い間隔で続きます。表示枚数が同じでも、動く速さにむらがあるように見えます。
+   :::
+
+## 関連項目
+
+- [同じ60 FPSで表示間隔を比べる](/practice/graphics/frame-pacing-observation.html)で、表示間隔と目印の動きを同じ時刻で調べる。
+- [フレーム生成](/graphics/postprocess/frame-generation.html)で、中間画像を作る仕組みと入力への反応を確認する。
+- [3DCG・描画ロードマップの「GPU最適化」](/learn/roadmap.html?node=gfx-optimization#graphics)

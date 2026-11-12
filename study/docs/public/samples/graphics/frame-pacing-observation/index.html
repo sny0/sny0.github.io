@@ -13,7 +13,7 @@
 <body>
   <main>
     <header class="intro">
-      <a href="https://sny0.com/study/practice/graphics/frame-pacing-observation.html">実践手順とコードを読む</a>
+      <a href="../../../practice/graphics/frame-pacing-observation.html">実践手順とコードを読む</a>
       <h1>平均60 FPSの動きを比べる</h1>
       <p>仮想の120 Hz画面で、どちらも2秒間に120フレームを表示します。同じ速さで進む二つの点を見比べ、同じ絵が残る時間の違いを確かめます。</p>
     </header>
@@ -28,6 +28,7 @@
           <select id="pattern" disabled>
             <option value="spike">ときどき長く止まる</option>
             <option value="alternating">短い間隔と長い間隔が交互</option>
+            <option value="generated-uneven">フレーム生成で間隔が不均等</option>
           </select>
         </label>
         <label>再生速度
@@ -37,6 +38,7 @@
           </select>
         </label>
       </div>
+      <p id="generation-note" class="hint" hidden>両方とも毎秒30枚の描画フレームの間に中間位置の絵を1枚ずつ入れます。絵の順番と位置をそろえ、各フレームが画面に残る時間だけを変えます。</p>
       <div class="scrubber">
         <div class="scrubber-heading">
           <label for="playhead">両方の表示時刻</label>
@@ -69,6 +71,11 @@
         <path class="position"/>
       </svg>
       <p class="frame"><span class="frame-info"></span> <span class="frame-range"></span></p>
+      <p class="content-time" hidden></p>
+      <div class="frame-pair" hidden aria-label="最初の描画フレームと生成フレームの表示間隔">
+        <div class="pair-rendered"><span>描画</span><strong></strong></div>
+        <div class="pair-generated"><span>生成</span><strong></strong></div>
+      </div>
       <figure>
         <figcaption>フレームを表示し続ける長さ (ms)</figcaption>
         <div class="plot">

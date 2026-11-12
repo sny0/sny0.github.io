@@ -294,6 +294,8 @@ export default {
       resources: [
         { label: 'GPU最適化の基礎', url: '/graphics/optimization/basics.html' },
         { label: 'デバッグ・プロファイリングツール', url: '/graphics/optimization/tools.html' },
+        { label: 'フレームタイムとフレームペーシング', url: '/graphics/optimization/frame-pacing.html' },
+        { label: '実践 同じ60 FPSで表示間隔を比べる', url: '/practice/graphics/frame-pacing-observation.html' },
         { label: 'RenderGraphとFrameGraph', url: '/graphics/optimization/render-graph.html' },
       ],
     },

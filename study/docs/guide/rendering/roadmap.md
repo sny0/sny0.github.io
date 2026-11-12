@@ -101,6 +101,7 @@ Compute ShaderはGPU DrivenのカリングやNaniteの微小三角形のラス�
 2. [デバッグ・プロファイリングツール](/graphics/optimization/tools.html) — RenderDoc / PIX / Nsight
 3. [RenderGraph / FrameGraph](/graphics/optimization/render-graph.html)
 4. [GPU Driven Rendering](/graphics/optimization/gpu-driven.html)
+5. [フレームタイムとフレームペーシング](/graphics/optimization/frame-pacing.html) → [平均60 FPSの表示間隔を見比べる実践](/practice/graphics/frame-pacing-observation.html)
 
 ## フェーズ6: エンジン内部
 
