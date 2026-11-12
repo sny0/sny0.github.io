@@ -78,6 +78,7 @@ export default withMermaid(defineConfig({
     siteTitle: 'Sny0 Study',
     logo: '/favicon.svg',
     nav: [
+      { text: '学習を始める', link: '/learn/start.html' },
       { text: '技術辞典', link: '/', activeMatch: sectionMatch('reference') },
       { text: '学習ガイド', link: '/learn/', activeMatch: sectionMatch('learning') },
       { text: '実践・サンプル', link: '/practice/', activeMatch: sectionMatch('practice') },

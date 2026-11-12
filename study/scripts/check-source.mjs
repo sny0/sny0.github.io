@@ -4,6 +4,7 @@ import { fileURLToPath } from 'node:url'
 import { createRequire } from 'node:module'
 import { sections, formatLabels, statusLabels, difficultyLabels, importanceLabels, isRateableArticle } from '../docs/.vitepress/content-model.mjs'
 import roadmap from '../docs/.vitepress/roadmap.mjs'
+import { experiences, purposes, trackOverviews } from '../docs/.vitepress/roadmap-start.mjs'
 
 const root=path.resolve(path.dirname(fileURLToPath(import.meta.url)),'..')
 const docs=path.join(root,'docs')
@@ -136,7 +137,8 @@ function checkRoadmap() {
 
   const hasText = value => typeof value === 'string' && value.trim().length > 0
   const nodeIds = checkRoadmapIds(roadmap.nodes.map(node => node?.id), 'Roadmap nodes')
-  checkRoadmapIds(roadmap.tracks.map(track => track?.id), 'Roadmap tracks')
+  const trackIds = checkRoadmapIds(roadmap.tracks.map(track => track?.id), 'Roadmap tracks')
+  const trackById = new Map(roadmap.tracks.map(track => [track.id, track]))
   const registeredNodes = new Set()
   for (const track of roadmap.tracks) {
     const label = `Roadmap track ${track?.id}`
@@ -174,10 +176,20 @@ function checkRoadmap() {
     } else {
       checkRoadmapIds(node.checks.map(check => check.id), `${label} checks`)
     }
-    if (!Array.isArray(node?.resources) || !node.resources.length) {
-      errors.push(`${label}: expected at least one resource`)
-    } else {
-      for (const resource of node.resources) {
+    const planned = node?.status === 'planned'
+    if (node?.status !== undefined && !planned) errors.push(`${label}: unknown material status`)
+    if (planned && (!Array.isArray(node.plannedMaterials) || !node.plannedMaterials.length ||
+        !node.plannedMaterials.every(hasText))) {
+      errors.push(`${label}: expected titles for planned materials`)
+    }
+    if (!Array.isArray(node?.resources) || (!node.resources.length && !planned)) {
+      errors.push(`${label}: expected published resources or planned materials`)
+    }
+    if (node?.furtherReading !== undefined && !Array.isArray(node.furtherReading)) {
+      errors.push(`${label}: expected a further reading list`)
+    }
+    for (const list of [node?.resources, node?.furtherReading].filter(Array.isArray)) {
+      for (const resource of list) {
         const pageUrl = typeof resource?.url === 'string' ? resource.url.split(/[?#]/, 1)[0] : undefined
         if (!hasText(resource?.label) || pagesByUrl.get(pageUrl)?.meta.status !== 'published') {
           errors.push(`${label}: invalid or unpublished resource ${resource?.url}`)
@@ -218,6 +230,22 @@ function checkRoadmap() {
     visited.add(id)
   }
   for (const id of prerequisitesByNode.keys()) visit(id)
+
+  const overviewIds = checkRoadmapIds(trackOverviews.map(row => row.id), 'Start page overviews')
+  if (overviewIds.size !== trackIds.size || [...overviewIds].some(id => !trackIds.has(id))) {
+    errors.push('Start page overviews must cover all roadmap tracks')
+  }
+  checkRoadmapIds(purposes.map(item => item.id), 'Start page purposes')
+  checkRoadmapIds(experiences.map(item => item.id), 'Start page experience levels')
+  for (const purpose of purposes) {
+    if (!trackIds.has(purpose.track)) errors.push(`Start page: unknown destination ${purpose.track}`)
+    for (const experience of experiences) {
+      const [trackId, nodeId, explanation] = purpose.starts[experience.id] ?? []
+      if (!trackById.get(trackId)?.nodeIds.includes(nodeId) || !hasText(explanation)) {
+        errors.push(`Start page: invalid recommendation for ${purpose.id}/${experience.id}`)
+      }
+    }
+  }
 }
 
 checkRoadmap()

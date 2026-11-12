@@ -2,20 +2,17 @@
 import { computed, nextTick, onMounted, onUnmounted, ref } from 'vue'
 import { withBase } from 'vitepress'
 import roadmap from '../roadmap.mjs'
+import { checkKey, nodeById, useRoadmapProgress } from './useRoadmapProgress'
 
 type RoadmapNode = (typeof roadmap.nodes)[number]
 type Track = (typeof roadmap.tracks)[number]
 
-const storageKey = 'sny0-study:roadmap:v1'
-const checkKey = (nodeId: string, checkId: string) => nodeId + ':' + checkId
-const nodeById = new Map(roadmap.nodes.map(node => [node.id, node]))
-const validCheckIds = new Set(roadmap.nodes.flatMap(node => node.checks.map(check => checkKey(node.id, check.id))))
 const initialGoal = (track: Track) => track.showAllByDefault ? '' : (track.nodeIds.at(-1) ?? '')
 const currentTrack = ref(roadmap.tracks[0])
 const goalId = ref(initialGoal(currentTrack.value))
 const selectedId = ref(goalId.value || currentTrack.value.nodeIds[0])
-const completedChecks = ref(new Set<string>())
-const storageAvailable = ref(true)
+const { completedChecks, storageAvailable, completedCount, isComplete,
+  completedNodeIds, trackCompleted, setCheck } = useRoadmapProgress()
 const detailHeading = ref<HTMLElement>()
 const nodeList = ref<HTMLOListElement>()
 
@@ -34,18 +31,11 @@ const visibleNodes = computed(() => {
   return trackNodes.value.filter(node => relevantIds.has(node.id))
 })
 
-const completedCount = (node: RoadmapNode) =>
-  node.checks.filter(check => completedChecks.value.has(checkKey(node.id, check.id))).length
-const isComplete = (node: RoadmapNode) => completedCount(node) === node.checks.length
 const percent = (completed: number, total: number) => total ? Math.round(completed * 100 / total) : 0
 const isReady = (node: RoadmapNode) => node.prerequisites.every(id => isComplete(nodeById.get(id)!))
 const statusLabels = { todo: '未着手', 'in-progress': '学習中', done: '完了' }
 const nodeStatus = (node: RoadmapNode) => isComplete(node) ? 'done' : completedCount(node) ? 'in-progress' : 'todo'
-const completedNodeIds = computed(() => new Set(roadmap.nodes.filter(isComplete).map(node => node.id)))
 const overallCompleted = computed(() => completedNodeIds.value.size)
-const trackCompleted = computed(() => new Map(roadmap.tracks.map(track => [
-  track.id, track.nodeIds.filter(id => completedNodeIds.value.has(id)).length,
-])))
 const routeCompleted = computed(() => visibleNodes.value.filter(node => completedNodeIds.value.has(node.id)).length)
 
 const graph = computed(() => {
@@ -128,15 +118,23 @@ function changeTrack(track: Track) {
 
 function selectTrack(track: Track) {
   changeTrack(track)
-  if (window.location.hash !== '#' + track.id) {
-    window.history.replaceState(window.history.state, '', '#' + track.id)
+  const url = new URL(window.location.href)
+  if (url.hash !== '#' + track.id || url.searchParams.has('node')) {
+    url.searchParams.delete('node')
+    url.hash = track.id
+    window.history.replaceState(window.history.state, '', url)
   }
 }
 
 function syncTrackFromHash() {
-  const hash = window.location.hash.slice(1)
-  const track = roadmap.tracks.find(track => track.id === hash && track.nodeIds.length)
-  changeTrack(track ?? roadmap.tracks[0])
+  const url = new URL(window.location.href)
+  const track = roadmap.tracks.find(track => track.id === url.hash.slice(1) && track.nodeIds.length) ?? roadmap.tracks[0]
+  changeTrack(track)
+  const target = url.searchParams.get('node')
+  if (target && track.nodeIds.includes(target)) {
+    goalId.value = ''
+    void openNode(target)
+  }
 }
 
 function changeGoal() {
@@ -153,67 +151,28 @@ function focusSelectedNode() {
   nodeList.value?.querySelector<HTMLButtonElement>('button[aria-pressed="true"]')?.focus()
 }
 
-function decodeChecks(value: string | null): Set<string> {
-  if (!value) return new Set()
-  try {
-    const saved: unknown = JSON.parse(value)
-    return new Set(Array.isArray(saved)
-      ? saved.filter((id): id is string => typeof id === 'string' && validCheckIds.has(id))
-      : [])
-  } catch {
-    return new Set()
-  }
-}
-
-function loadProgress() {
-  try {
-    completedChecks.value = decodeChecks(localStorage.getItem(storageKey))
-  } catch {
-    storageAvailable.value = false
-  }
-}
-
-function syncProgress(event: StorageEvent) {
-  if (!storageAvailable.value || (event.key !== storageKey && event.key !== null)) return
-  try {
-    if (event.storageArea === localStorage) loadProgress()
-  } catch {
-    storageAvailable.value = false
-  }
-}
-
 function toggleCheck(id: string, event: Event) {
-  if (storageAvailable.value) loadProgress()
-  const checked = (event.target as HTMLInputElement).checked
-  const next = new Set(completedChecks.value)
-  if (checked) next.add(id)
-  else next.delete(id)
-  completedChecks.value = next
-
-  if (!storageAvailable.value) return
-  try {
-    localStorage.setItem(storageKey, JSON.stringify([...next]))
-  } catch {
-    storageAvailable.value = false
-  }
+  setCheck(id, (event.target as HTMLInputElement).checked)
 }
 
 onMounted(() => {
   syncTrackFromHash()
-  loadProgress()
-  window.addEventListener('storage', syncProgress)
   window.addEventListener('hashchange', syncTrackFromHash)
+  window.addEventListener('popstate', syncTrackFromHash)
 })
 
 onUnmounted(() => {
-  window.removeEventListener('storage', syncProgress)
   window.removeEventListener('hashchange', syncTrackFromHash)
+  window.removeEventListener('popstate', syncTrackFromHash)
 })
 </script>
 
 <template>
   <div class="study-roadmap" data-study-roadmap>
-    <a class="roadmap-link back-link" :href="withBase('/learn/')">← 学習ガイド</a>
+    <nav class="roadmap-back-links" aria-label="学習の入口">
+      <a class="roadmap-link back-link" :href="withBase('/learn/start.html')">← 学習を始める</a>
+      <a class="roadmap-link back-link" :href="withBase('/learn/')">学習ガイド一覧</a>
+    </nav>
     <header class="roadmap-header">
       <div>
         <h1>学習ロードマップ</h1>
@@ -253,7 +212,10 @@ onUnmounted(() => {
         <h2 id="study-roadmap-route-title">{{ currentTrack.title }}</h2>
         <p>表示中のルート <strong>{{ routeCompleted }}/{{ visibleNodes.length }}ノード完了（{{ percent(routeCompleted, visibleNodes.length) }}%）</strong></p>
       </div>
-      <p v-if="currentTrack.guide" class="route-guide"><a class="roadmap-link" :href="withBase(currentTrack.guide.url)">{{ currentTrack.guide.label }}</a>で読み順と教材を確認できます。</p>
+      <p v-if="currentTrack.guide" class="route-guide">
+        <template v-if="currentTrack.id === 'design'">設計の達成条件はこの図で確認できます。C++とゲーム設計を合わせて読む順番は<a class="roadmap-link" :href="withBase(currentTrack.guide.url)">{{ currentTrack.guide.label }}</a>にあります。</template>
+        <template v-else><a class="roadmap-link" :href="withBase(currentTrack.guide.url)">{{ currentTrack.guide.label }}</a>で読み順と教材を確認できます。</template>
+      </p>
       <div class="route-controls">
         <label for="study-roadmap-goal">学習目標</label>
         <select id="study-roadmap-goal" v-model="goalId" @change="changeGoal">
@@ -303,7 +265,8 @@ onUnmounted(() => {
                   <span class="node-meter" aria-hidden="true">
                     <span :style="{ width: percent(completedCount(node), node.checks.length) + '%' }" />
                   </span>
-                  <span v-if="!isComplete(node)" class="node-readiness">
+                  <span v-if="node.status === 'planned'" class="node-material-status">教材は未整備</span>
+                  <span v-else-if="!isComplete(node)" class="node-readiness">
                     {{ isReady(node) ? '次に学べる' : '先に確認する項目あり' }}
                   </span>
                   <span v-if="node.prerequisites.length" class="node-prerequisite-hint">
@@ -329,11 +292,26 @@ onUnmounted(() => {
           </ul>
           <p v-else>前提なし</p>
           <h4>教材</h4>
-          <ul class="detail-list">
+          <template v-if="selectedNode.status === 'planned'">
+            <p class="material-note"><strong>未整備</strong>。追加予定の教材があります。すでに知っている内容は下の達成条件で確認できます。</p>
+            <ul class="detail-list">
+              <li v-for="title in selectedNode.plannedMaterials" :key="title">{{ title }}</li>
+            </ul>
+            <h4 v-if="selectedNode.resources.length">補助教材</h4>
+          </template>
+          <ul v-if="selectedNode.resources.length" class="detail-list">
             <li v-for="resource in selectedNode.resources" :key="resource.url">
               <a class="roadmap-link" :href="withBase(resource.url)">{{ resource.label }}</a>
             </li>
           </ul>
+          <details v-if="selectedNode.furtherReading?.length" class="roadmap-further-reading">
+            <summary>さらに読む</summary>
+            <ul class="detail-list">
+              <li v-for="resource in selectedNode.furtherReading" :key="resource.url">
+                <a class="roadmap-link" :href="withBase(resource.url)">{{ resource.label }}</a>
+              </li>
+            </ul>
+          </details>
           <fieldset class="roadmap-checklist">
             <legend>達成条件 <span>{{ completedCount(selectedNode) }}/{{ selectedNode.checks.length }}</span></legend>
             <label v-for="check in selectedNode.checks" :key="checkKey(selectedId, check.id)">
@@ -362,7 +340,12 @@ onUnmounted(() => {
   line-height: 1.75;
 }
 .roadmap-link { color: var(--vp-c-brand-1); text-align: left; text-decoration: underline; text-underline-offset: .2em; }
+.roadmap-back-links { display: flex; flex-wrap: wrap; gap: 0 18px; }
 .back-link { display: inline-block; margin-bottom: 14px; font-size: .88rem; }
+.node-material-status { color: var(--vp-c-warning-1); font-size: .78rem; font-weight: 650; }
+.material-note { color: var(--vp-c-text-2); }
+.roadmap-further-reading { margin: 12px 0; }
+.roadmap-further-reading summary { cursor: pointer; font-weight: 600; }
 .study-roadmap :is(a, button, select, input, h3):focus-visible {
   outline: 2px solid var(--vp-c-brand-1);
   outline-offset: 3px;

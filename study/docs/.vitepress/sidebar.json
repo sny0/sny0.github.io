@@ -1589,6 +1589,10 @@
       "link": "/learn/"
     },
     {
+      "text": "学習を始める",
+      "link": "/learn/start.html"
+    },
+    {
       "text": "学習ロードマップ",
       "link": "/learn/roadmap.html"
     },
@@ -3131,6 +3135,10 @@
     {
       "text": "学習ガイド一覧",
       "link": "/learn/"
+    },
+    {
+      "text": "学習を始める",
+      "link": "/learn/start.html"
     },
     {
       "text": "学習ロードマップ",
@@ -10856,6 +10864,10 @@
       "link": "/learn/"
     },
     {
+      "text": "学習を始める",
+      "link": "/learn/start.html"
+    },
+    {
       "text": "学習ロードマップ",
       "link": "/learn/roadmap.html"
     },
@@ -11240,6 +11252,10 @@
     {
       "text": "学習ガイド一覧",
       "link": "/learn/"
+    },
+    {
+      "text": "学習を始める",
+      "link": "/learn/start.html"
     },
     {
       "text": "学習ロードマップ",
@@ -12671,6 +12687,10 @@
       "link": "/learn/"
     },
     {
+      "text": "学習を始める",
+      "link": "/learn/start.html"
+    },
+    {
       "text": "学習ロードマップ",
       "link": "/learn/roadmap.html"
     },
@@ -13107,6 +13127,10 @@
     {
       "text": "学習ガイド一覧",
       "link": "/learn/"
+    },
+    {
+      "text": "学習を始める",
+      "link": "/learn/start.html"
     },
     {
       "text": "学習ロードマップ",
@@ -14426,6 +14450,10 @@
       "link": "/learn/"
     },
     {
+      "text": "学習を始める",
+      "link": "/learn/start.html"
+    },
+    {
       "text": "学習ロードマップ",
       "link": "/learn/roadmap.html"
     },
@@ -15741,6 +15769,10 @@
     {
       "text": "学習ガイド一覧",
       "link": "/learn/"
+    },
+    {
+      "text": "学習を始める",
+      "link": "/learn/start.html"
     },
     {
       "text": "学習ロードマップ",
@@ -17110,6 +17142,10 @@
     {
       "text": "学習ガイド一覧",
       "link": "/learn/"
+    },
+    {
+      "text": "学習を始める",
+      "link": "/learn/start.html"
     },
     {
       "text": "学習ロードマップ",
@@ -23410,6 +23446,10 @@
       "link": "/learn/"
     },
     {
+      "text": "学習を始める",
+      "link": "/learn/start.html"
+    },
+    {
       "text": "学習ロードマップ",
       "link": "/learn/roadmap.html"
     },
@@ -23812,6 +23852,10 @@
       "link": "/learn/"
     },
     {
+      "text": "学習を始める",
+      "link": "/learn/start.html"
+    },
+    {
       "text": "学習ロードマップ",
       "link": "/learn/roadmap.html"
     },
@@ -23903,6 +23947,10 @@
     {
       "text": "学習ガイド一覧",
       "link": "/learn/"
+    },
+    {
+      "text": "学習を始める",
+      "link": "/learn/start.html"
     },
     {
       "text": "学習ロードマップ",
@@ -25150,6 +25198,10 @@
       "link": "/learn/"
     },
     {
+      "text": "学習を始める",
+      "link": "/learn/start.html"
+    },
+    {
       "text": "学習ロードマップ",
       "link": "/learn/roadmap.html"
     },
@@ -25843,6 +25895,10 @@
     {
       "text": "学習ガイド一覧",
       "link": "/learn/"
+    },
+    {
+      "text": "学習を始める",
+      "link": "/learn/start.html"
     },
     {
       "text": "学習ロードマップ",
@@ -26817,6 +26873,10 @@
       "link": "/learn/"
     },
     {
+      "text": "学習を始める",
+      "link": "/learn/start.html"
+    },
+    {
       "text": "学習ロードマップ",
       "link": "/learn/roadmap.html"
     },
@@ -27219,6 +27279,10 @@
       "link": "/learn/"
     },
     {
+      "text": "学習を始める",
+      "link": "/learn/start.html"
+    },
+    {
       "text": "学習ロードマップ",
       "link": "/learn/roadmap.html"
     },
@@ -27310,6 +27374,10 @@
     {
       "text": "学習ガイド一覧",
       "link": "/learn/"
+    },
+    {
+      "text": "学習を始める",
+      "link": "/learn/start.html"
     },
     {
       "text": "学習ロードマップ",
@@ -27654,6 +27722,50 @@
       "link": "/learn/"
     },
     {
+      "text": "学習を始める",
+      "link": "/learn/start.html"
+    },
+    {
+      "text": "学習ロードマップ",
+      "link": "/learn/roadmap.html"
+    },
+    {
+      "text": "学習ガイド",
+      "collapsed": false,
+      "items": [
+        {
+          "text": "コンピュータと開発の基礎",
+          "link": "/guide/hardware-basics.html"
+        },
+        {
+          "text": "疑問から選ぶ読み順",
+          "link": "/guide/learning-paths.html"
+        },
+        {
+          "text": "C++とゲーム設計を学ぶ",
+          "link": "/guide/cpp-roadmap.html"
+        },
+        {
+          "text": "リアルタイム描画を学ぶ",
+          "link": "/guide/rendering/roadmap.html"
+        },
+        {
+          "text": "低レイヤからゲームの仕組みを学ぶ",
+          "link": "/guide/low-level/"
+        }
+      ]
+    }
+  ],
+  "/learn/start.md": [
+    {
+      "text": "学習ガイド一覧",
+      "link": "/learn/"
+    },
+    {
+      "text": "学習を始める",
+      "link": "/learn/start.html"
+    },
+    {
       "text": "学習ロードマップ",
       "link": "/learn/roadmap.html"
     },
@@ -27688,6 +27800,10 @@
     {
       "text": "学習ガイド一覧",
       "link": "/learn/"
+    },
+    {
+      "text": "学習を始める",
+      "link": "/learn/start.html"
     },
     {
       "text": "学習ロードマップ",
@@ -27729,6 +27845,10 @@
     {
       "text": "学習ガイド一覧",
       "link": "/learn/"
+    },
+    {
+      "text": "学習を始める",
+      "link": "/learn/start.html"
     },
     {
       "text": "学習ロードマップ",
@@ -29036,6 +29156,10 @@
       "link": "/learn/"
     },
     {
+      "text": "学習を始める",
+      "link": "/learn/start.html"
+    },
+    {
       "text": "学習ロードマップ",
       "link": "/learn/roadmap.html"
     },
@@ -29127,6 +29251,10 @@
     {
       "text": "学習ガイド一覧",
       "link": "/learn/"
+    },
+    {
+      "text": "学習を始める",
+      "link": "/learn/start.html"
     },
     {
       "text": "学習ロードマップ",
@@ -29567,6 +29695,10 @@
       "link": "/learn/"
     },
     {
+      "text": "学習を始める",
+      "link": "/learn/start.html"
+    },
+    {
       "text": "学習ロードマップ",
       "link": "/learn/roadmap.html"
     },
@@ -29658,6 +29790,10 @@
     {
       "text": "学習ガイド一覧",
       "link": "/learn/"
+    },
+    {
+      "text": "学習を始める",
+      "link": "/learn/start.html"
     },
     {
       "text": "学習ロードマップ",
@@ -30046,6 +30182,10 @@
       "link": "/learn/"
     },
     {
+      "text": "学習を始める",
+      "link": "/learn/start.html"
+    },
+    {
       "text": "学習ロードマップ",
       "link": "/learn/roadmap.html"
     },
@@ -30169,6 +30309,10 @@
     {
       "text": "学習ガイド一覧",
       "link": "/learn/"
+    },
+    {
+      "text": "学習を始める",
+      "link": "/learn/start.html"
     },
     {
       "text": "学習ロードマップ",
@@ -30296,6 +30440,10 @@
       "link": "/learn/"
     },
     {
+      "text": "学習を始める",
+      "link": "/learn/start.html"
+    },
+    {
       "text": "学習ロードマップ",
       "link": "/learn/roadmap.html"
     },
@@ -30419,6 +30567,10 @@
     {
       "text": "学習ガイド一覧",
       "link": "/learn/"
+    },
+    {
+      "text": "学習を始める",
+      "link": "/learn/start.html"
     },
     {
       "text": "学習ロードマップ",
@@ -30546,6 +30698,10 @@
       "link": "/learn/"
     },
     {
+      "text": "学習を始める",
+      "link": "/learn/start.html"
+    },
+    {
       "text": "学習ロードマップ",
       "link": "/learn/roadmap.html"
     },
@@ -30669,6 +30825,10 @@
     {
       "text": "学習ガイド一覧",
       "link": "/learn/"
+    },
+    {
+      "text": "学習を始める",
+      "link": "/learn/start.html"
     },
     {
       "text": "学習ロードマップ",
@@ -30796,6 +30956,10 @@
       "link": "/learn/"
     },
     {
+      "text": "学習を始める",
+      "link": "/learn/start.html"
+    },
+    {
       "text": "学習ロードマップ",
       "link": "/learn/roadmap.html"
     },
@@ -30919,6 +31083,10 @@
     {
       "text": "学習ガイド一覧",
       "link": "/learn/"
+    },
+    {
+      "text": "学習を始める",
+      "link": "/learn/start.html"
     },
     {
       "text": "学習ロードマップ",
@@ -31046,6 +31214,10 @@
       "link": "/learn/"
     },
     {
+      "text": "学習を始める",
+      "link": "/learn/start.html"
+    },
+    {
       "text": "学習ロードマップ",
       "link": "/learn/roadmap.html"
     },
@@ -31169,6 +31341,10 @@
     {
       "text": "学習ガイド一覧",
       "link": "/learn/"
+    },
+    {
+      "text": "学習を始める",
+      "link": "/learn/start.html"
     },
     {
       "text": "学習ロードマップ",
@@ -31296,6 +31472,10 @@
       "link": "/learn/"
     },
     {
+      "text": "学習を始める",
+      "link": "/learn/start.html"
+    },
+    {
       "text": "学習ロードマップ",
       "link": "/learn/roadmap.html"
     },
@@ -31419,6 +31599,10 @@
     {
       "text": "学習ガイド一覧",
       "link": "/learn/"
+    },
+    {
+      "text": "学習を始める",
+      "link": "/learn/start.html"
     },
     {
       "text": "学習ロードマップ",
@@ -31546,6 +31730,10 @@
       "link": "/learn/"
     },
     {
+      "text": "学習を始める",
+      "link": "/learn/start.html"
+    },
+    {
       "text": "学習ロードマップ",
       "link": "/learn/roadmap.html"
     },
@@ -31669,6 +31857,10 @@
     {
       "text": "学習ガイド一覧",
       "link": "/learn/"
+    },
+    {
+      "text": "学習を始める",
+      "link": "/learn/start.html"
     },
     {
       "text": "学習ロードマップ",
@@ -31796,6 +31988,10 @@
       "link": "/learn/"
     },
     {
+      "text": "学習を始める",
+      "link": "/learn/start.html"
+    },
+    {
       "text": "学習ロードマップ",
       "link": "/learn/roadmap.html"
     },
@@ -31919,6 +32115,10 @@
     {
       "text": "学習ガイド一覧",
       "link": "/learn/"
+    },
+    {
+      "text": "学習を始める",
+      "link": "/learn/start.html"
     },
     {
       "text": "学習ロードマップ",
@@ -32046,6 +32246,10 @@
       "link": "/learn/"
     },
     {
+      "text": "学習を始める",
+      "link": "/learn/start.html"
+    },
+    {
       "text": "学習ロードマップ",
       "link": "/learn/roadmap.html"
     },
@@ -32169,6 +32373,10 @@
     {
       "text": "学習ガイド一覧",
       "link": "/learn/"
+    },
+    {
+      "text": "学習を始める",
+      "link": "/learn/start.html"
     },
     {
       "text": "学習ロードマップ",
@@ -32296,6 +32504,10 @@
       "link": "/learn/"
     },
     {
+      "text": "学習を始める",
+      "link": "/learn/start.html"
+    },
+    {
       "text": "学習ロードマップ",
       "link": "/learn/roadmap.html"
     },
@@ -32419,6 +32631,10 @@
     {
       "text": "学習ガイド一覧",
       "link": "/learn/"
+    },
+    {
+      "text": "学習を始める",
+      "link": "/learn/start.html"
     },
     {
       "text": "学習ロードマップ",
@@ -33132,6 +33348,10 @@
       "link": "/learn/"
     },
     {
+      "text": "学習を始める",
+      "link": "/learn/start.html"
+    },
+    {
       "text": "学習ロードマップ",
       "link": "/learn/roadmap.html"
     },
@@ -33602,6 +33822,10 @@
       "link": "/learn/"
     },
     {
+      "text": "学習を始める",
+      "link": "/learn/start.html"
+    },
+    {
       "text": "学習ロードマップ",
       "link": "/learn/roadmap.html"
     },
@@ -33651,6 +33875,10 @@
       "link": "/learn/"
     },
     {
+      "text": "学習を始める",
+      "link": "/learn/start.html"
+    },
+    {
       "text": "学習ロードマップ",
       "link": "/learn/roadmap.html"
     },
@@ -33698,6 +33926,10 @@
     {
       "text": "学習ガイド一覧",
       "link": "/learn/"
+    },
+    {
+      "text": "学習を始める",
+      "link": "/learn/start.html"
     },
     {
       "text": "学習ロードマップ",

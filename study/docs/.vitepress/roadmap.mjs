@@ -2,6 +2,8 @@ import networkBrowser from './roadmap-network-browser.mjs'
 import game from './roadmap-game.mjs'
 import memoryOs from './roadmap-memory-os.mjs'
 import compilers from './roadmap-compilers.mjs'
+import beginners from './roadmap-beginners.mjs'
+import design from './roadmap-design.mjs'
 
 const lowLevelBasics = ['bytes', 'c-bytes', 'cpu', 'x64-disassembly']
 const compilerIds = compilers.nodes.map(node => node.id)
@@ -49,12 +51,23 @@ export default {
       guide: { label: 'ゲームの動きと構成から読む', url: '/guide/game-development-basics.html' },
       nodeIds: game.nodes.map(node => node.id),
     },
+    ...beginners.tracks,
+    {
+      id: 'design',
+      title: '設計',
+      summary: '責務と依存を整理し、原則やパターンを選び、変更しやすい構造を説明します。',
+      showAllByDefault: true,
+      guide: { label: 'C++とゲーム設計の学習ロードマップ', url: '/guide/cpp-roadmap.html' },
+      nodeIds: design.nodes.map(node => node.id),
+    },
   ],
   nodes: [
     ...networkBrowser.nodes,
     ...game.nodes,
     ...memoryOs.nodes,
     ...compilers.nodes,
+    ...beginners.nodes,
+    ...design.nodes,
     {
       id: 'bytes',
       title: '整数とバイト列',
