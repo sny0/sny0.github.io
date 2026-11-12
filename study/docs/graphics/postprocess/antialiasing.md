@@ -167,6 +167,7 @@ resolveAtt.samples = VK_SAMPLE_COUNT_1_BIT;           // resolve先だけ書く
 ## 次に読むべきページ
 
 - [TAA](/graphics/postprocess/taa.html) — 現代の主役
+- [TAAの比較実践](/practice/graphics/taa-observation.html)で、フレームの履歴を使うと床のちらつきがどう変わるかを試す。
 - [アップスケーリング](/graphics/postprocess/upscaling.html) — TAAの発展形
 - [3DCG・描画ロードマップの「ポストプロセスとAA」](/learn/roadmap.html?node=gfx-postprocess#graphics)
 

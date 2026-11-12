@@ -159,6 +159,13 @@
       "start": "/practice/graphics/msaa-observation.html"
     },
     {
+      "id": "taa-observation",
+      "section": "practice",
+      "title": "TAAを切り替えて床のちらつきとゴーストを比べる",
+      "description": "カメラと物体を別々に動かし、過去フレームの蓄積と履歴検証の効果を観察する。",
+      "start": "/practice/graphics/taa-observation.html"
+    },
+    {
       "id": "foundations",
       "section": "learning",
       "title": "コンピュータと開発の基礎",
@@ -6026,21 +6033,65 @@
       "section": "reference",
       "format": "article",
       "status": "published",
-      "summary": "TAAはサンプル位置を毎フレームわずかにずらし、過去のフレームを再投影して蓄積するアンチエイリアシングです。同じ考え方は、SSAO、SSR、GI、影などのノイズを減らす処理にも使われます。",
+      "summary": "MSAAとの違いを図で整理し、TAAが異なるフレームのサンプルを再投影して床模様のちらつきを抑える仕組みと、ゴーストが出る理由を実践で確かめる。",
       "source": "RenderingWiki",
-      "aliases": [],
+      "aliases": [
+        "TAA",
+        "Temporal AA",
+        "時間的アンチエイリアシング",
+        "ジッタ",
+        "ジッター",
+        "再投影",
+        "モーションベクトル",
+        "履歴検証",
+        "ディスオクルージョン",
+        "ゴースティング"
+      ],
+      "verification": "Yang・Liu・Salviの論文とKarisのSIGGRAPH講演に照合（2026-11-13）",
       "links": [
+        "/practice/graphics/msaa-observation.html",
+        "/graphics/texture/texture-filtering-and-mipmaps.html",
+        "/graphics/postprocess/upscaling.html",
         "/graphics/postprocess/antialiasing.html",
         "/graphics/lighting/ssao.html",
-        "/graphics/lighting/lumen.html",
-        "/graphics/lighting/path-tracing.html",
-        "/graphics/postprocess/upscaling.html",
+        "/graphics/lighting/ssr.html",
+        "/practice/graphics/taa-observation.html",
         "/math/rendering/transform.html",
         "/graphics/compute/compute-shader.html",
-        "/graphics/lighting/ssr.html"
+        "/learn/roadmap.html"
       ],
       "difficulty": "advanced",
       "importance": "specialized"
+    },
+    {
+      "title": "TAAを切り替えて床のちらつきとゴーストを比べる",
+      "url": "/practice/graphics/taa-observation.html",
+      "file": "practice/graphics/taa-observation.md",
+      "domain": "graphics",
+      "section": "practice",
+      "format": "sample",
+      "status": "published",
+      "summary": "カメラと物体を別々に動かし、TAAで床のちらつきが弱まる場面と、異なる面の履歴が残像になる場面を観察する。",
+      "source": "新規執筆",
+      "aliases": [
+        "TAAの実践",
+        "WebGL 2",
+        "時間的アンチエイリアシング",
+        "再投影",
+        "履歴検証",
+        "ディスオクルージョン",
+        "ゴースティング"
+      ],
+      "collection": "taa-observation",
+      "order": 1,
+      "verification": "Yang・Liu・Salviの論文とKarisのSIGGRAPH講演に照合（2026-11-13）",
+      "links": [
+        "/graphics/postprocess/taa.html",
+        "/practice/graphics/texture-filtering-observation.html",
+        "/graphics/postprocess/ping-pong-and-history.html",
+        "/practice/graphics/msaa-observation.html",
+        "/learn/roadmap.html"
+      ]
     },
     {
       "title": "Template Method",
@@ -8337,6 +8388,7 @@
         "/practice/graphics/msaa-observation.html",
         "/graphics/pipeline/output-merger.html",
         "/graphics/path/forward.html",
+        "/practice/graphics/taa-observation.html",
         "/graphics/postprocess/upscaling.html",
         "/learn/roadmap.html"
       ],
@@ -15676,6 +15728,7 @@
         "/graphics/postprocess/taa.html",
         "/graphics/postprocess/upscaling.html",
         "/practice/graphics/msaa-observation.html",
+        "/practice/graphics/taa-observation.html",
         "/graphics/optimization/basics.html",
         "/graphics/optimization/tools.html",
         "/graphics/optimization/render-graph.html",
@@ -16040,6 +16093,7 @@
         "/graphics/texture/dds-and-subresources.html",
         "/graphics/texture/texture-filtering-and-mipmaps.html",
         "/graphics/postprocess/antialiasing.html",
+        "/graphics/postprocess/taa.html",
         "/graphics/texture/d3d12-texture-upload.html",
         "/graphics/texture/texture-streaming-and-mip-residency.html",
         "/graphics/mesh/gltf-mesh-buffers.html",

@@ -91,6 +91,7 @@ Compute ShaderはGPU DrivenのカリングやNaniteの微小三角形のラス�
 - GI: [GI総論](/graphics/lighting/gi.html) → [SSAO](/graphics/lighting/ssao.html) → [SSR](/graphics/lighting/ssr.html) → [レイトレーシング](/graphics/lighting/raytracing.html) → [パストレーシング](/graphics/lighting/path-tracing.html) → [Lumen](/graphics/lighting/lumen.html)
 - 画像処理: [ポストプロセス](/graphics/postprocess/overview.html) → [AA](/graphics/postprocess/antialiasing.html) → [TAA](/graphics/postprocess/taa.html) → [アップスケーリング](/graphics/postprocess/upscaling.html)
 - 実践: [MSAAを切り替えて輪郭と床模様を見比べる](/practice/graphics/msaa-observation.html)
+- 実践: [TAAを切り替えて床のちらつきとゴーストを比べる](/practice/graphics/taa-observation.html)
 
 ## フェーズ5: 最適化と実務
 
