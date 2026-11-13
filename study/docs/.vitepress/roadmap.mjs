@@ -51,6 +51,7 @@ export default {
       showAllByDefault: true,
       guide: { label: 'WebGPUでシェーダーの出力を比べる', url: '/practice/graphics/shader-lab.html' },
       nodeIds: shaders.nodes.map(node => node.id),
+      goalGroups: shaders.goalGroups,
     },
     {
       id: 'game',
@@ -203,7 +204,7 @@ export default {
         { label: 'シェーダ言語の比較', url: '/graphics/shader/overview.html' },
         { label: 'シェーダーの第一歩', url: '/graphics/shader/shader-first-steps.html' },
         { label: '実践 シェーダーで三角形の位置と色を変える', url: '/practice/graphics/shader-first-steps.html' },
-        { label: 'シェーダーのロードマップ', url: '/learn/roadmap.html?node=shader-basics#shaders' },
+        { label: 'シェーダーのロードマップ', url: '/learn/roadmap.html?node=shader-normal-space#shaders' },
       ],
     },
     {

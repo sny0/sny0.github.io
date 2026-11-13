@@ -8,7 +8,7 @@ study:
   domain: languages
   summary: バッファのコピー、実行時の呼び出し、数値型をまたぐ演算を分けて考え、C#の機能を選ぶ。
   aliases: [Span, ReadOnlySpan, ref struct, delegate*, 関数ポインター, static abstract, generic math]
-  verification: C# 9・11・13、.NET 7以降のgeneric math、Unity 6.3 LTSに照合（2026-11-13）
+  verification: C# 9・11・13・14、.NET 7以降のgeneric math、.NET 10、Unity 6.3 LTSに照合（2026-11-13）
 ---
 
 # C#のパフォーマンス機能 — Span・関数ポインター・generic math
@@ -29,6 +29,33 @@ flowchart LR
 `Span<T>` は連続したメモリへのビューです。配列の一部を `Slice` で選んでも、要素は複製されません。書き込み用の `Span<T>` を通じて要素を変更すると、元の配列から同じ変更が見えます。受け取った範囲を書き換えない処理には `ReadOnlySpan<T>` が使えます。他の参照からの変更までは防ぎません。
 
 `Span<T>` は `ref struct` なので、クラスのフィールドに保存したり、ボックス化したり、ラムダに捕捉したりできません。C# 13以降では `async` メソッド内で使える範囲が広がりましたが、`await` をまたいで保持できません。メモリの所有者が生きている間だけビューを使います。たとえばプールへ配列を返すと、同じ配列を他の利用者が書き換えられます。非同期処理にバッファ範囲を渡すなら、`Memory<T>` と所有者の寿命を合わせて管理します。
+
+### C# 11のrefフィールドとscoped
+
+`ref struct` はC# 11から `ref` フィールドを宣言できます。値のコピーを格納する代わりに、元の変数への参照を保持します。`= ref` は参照先を付け替え、通常の `=` は参照先へ値を書き込みます。フィールド宣言の `readonly` は、置く位置で制約の対象が変わります。
+
+| フィールドの宣言 | 参照先の付け替え | 参照先への書き込み |
+| --- | --- | --- |
+| `ref T` | 可能 | 可能 |
+| `readonly ref T` | 宣言型のコンストラクターや `init` アクセサーに限る | 可能 |
+| `ref readonly T` | 可能 | 不可 |
+| `readonly ref readonly T` | 宣言型のコンストラクターや `init` アクセサーに限る | 不可 |
+
+コンパイラーは参照先の寿命を調べ、参照を保存する側がそれより長く生きられると判断した場合に拒否します。メソッド内のローカル変数への参照をビューに入れて返すことはできません。ビューをコンストラクターに渡したときも、返せる範囲は引数の寿命に従います。`default` で初期化した構造体では `ref` フィールドが null 参照になり得るので、その値を受け付ける型ではアクセス前に検査します。
+
+`scoped` は、引数として受け取ったビューや参照をメソッドの外へ持ち出せる範囲を制限する修飾子です。`scoped ReadOnlySpan<T>` はビューが含む参照、`scoped ref T` は渡された参照自体を対象にします。例えば `static int Sum(scoped ReadOnlySpan<int> values)` は要素を読み、合計の値を返せます。戻り値を `ReadOnlySpan<int>` にして `values` やその一部を返すと、同じ参照が外へ出るためコンパイルエラーになります。呼び出し元が渡したバッファの一部を返す関数を設計するときは、返却する引数にこの制約を付けず、返したビューを使える範囲をコンパイラーに判定させます。配列をプールへ返した時点など、アプリケーションの所有権による利用終了は別に管理します。
+
+### C# 13のallows ref struct
+
+C# 13から、型パラメーターの制約の末尾に `allows ref struct` を置くと、その型引数として `ref struct` を使えます。これは型を絞り込む制約に対する「反制約（anti-constraint）」で、通常の型も渡せます。ジェネリック実装は、型引数がビューのような寿命制約を持ち得る前提で検査されます。例えば、型パラメーター型の値を `object` に変換する操作はボックス化を起こし得るため拒否されます。
+
+同じく C# 13から、`ref struct` 自身がインターフェースを実装できます。`where T : IIntView, allows ref struct` のような制約付き呼び出しなら、`T` をインターフェース型の変数へ変換せずにメンバーを呼べます。具体的なビューを直接受け取る実装に対して、入力の取り方だけが異なる複数のビューを同じコードで扱えます。標準ライブラリ側の既存の型パラメーターすべてにこの反制約が付いたわけではないので、ジェネリック API を呼ぶときは受け手の制約も確認します。
+
+### C# 14のSpan変換
+
+C# 14は、配列や文字列、`Span<T>` と `ReadOnlySpan<T>` の間の変換を、言語の組み込み変換として扱います。たとえば配列から同じ要素型の `Span<T>`、文字列から `ReadOnlySpan<char>`、書き込み可能なビューから読み取り専用のビューへ変換できます。さらに `ReadOnlySpan<string>` から `ReadOnlySpan<object>` のように、参照型の共変変換を使える読み取り専用ビューもあります。書き込み可能な `Span<object>` に広げると、元の文字列配列に文字列以外を書けてしまうため、同じ暗黙の変換はありません。これらのビューへの変換で要素は複製されません。
+
+以前からあった変換演算子で代入できる例もあります。C# 14では、拡張メソッドを直接呼ぶときの受け手や、型引数の推論、オーバーロード解決にも Span 変換が参加するようになりました。例えば `this ReadOnlySpan<T>` だけを受け取る拡張メソッドを、要素型の合う配列から直接呼べます。同名の配列用・列挙用のオーバーロードがある場合、言語版の変更で選ばれる候補が変わる場合があるため、選択を固定したい箇所は引数を意図する型で受けます。拡張メソッドのメソッドグループをデリゲートへ変換するときの受け手には、この変換は使われません。
 
 ## delegate* と static abstract は異なる選択を表す
 
@@ -85,6 +112,69 @@ internal static class Program
 
 結果は `99 | 6, 10, 14 | 30`。この例では `int[]` の割り当てと出力用の文字列は残ります。実測するときは画面出力を計測区間の外に置き、同じデータで直接呼び出し、再利用するデリゲート、関数ポインターを比べます。
 
+### コード例 — 参照付きビューをジェネリック処理へ渡す
+
+C# 14・.NET 10のコンソール例です。参照先を持つビューと、コピーした整数を持つ型の両方を同じメソッドに渡します。配列の拡張メソッド呼び出しは、C# 14の Span 変換を使います。
+
+```csharp
+using System;
+
+public interface IIntView
+{
+    int Read();
+}
+
+public ref struct IntView : IIntView
+{
+    private readonly ref int cell;
+
+    public IntView(ref int cell) => this.cell = ref cell;
+
+    public int Read() => cell;
+
+    public void Write(int value) => cell = value;
+}
+
+public readonly struct Snapshot(int value) : IIntView
+{
+    public int Read() => value;
+}
+
+public static class Samples
+{
+    public static T FirstSample<T>(this scoped ReadOnlySpan<T> values) => values[0];
+}
+
+internal static class Program
+{
+    private static int ReadValue<T>(T view) where T : IIntView, allows ref struct
+        => view.Read();
+
+    private static void AddTwo(scoped ref int value) => value += 2;
+
+    private static int Main()
+    {
+        int health = 10;
+        var snapshot = new Snapshot(health);
+        var view = new IntView(ref health);
+        view.Write(13);
+        AddTwo(ref health);
+
+        int[] samples = { 4, 9 };
+        string[] labels = { "HP" };
+        ReadOnlySpan<object> names = labels;
+        int changed = ReadValue(view);
+        int original = ReadValue(snapshot);
+        int first = samples.FirstSample();
+        Console.WriteLine($"{changed}, {original}, {first}, {names[0]}");
+        return changed == 15 && original == 10 && first == 4
+            && Equals(names[0], "HP") ? 0 : 1;
+    }
+}
+```
+
+結果は `15, 10, 4, HP`。ビューへの書き込みは参照先の `health` に届きます。`Snapshot` は整数の値を受け取るので後から変わりません。`FirstSample` は借りたビューから値を一つ読み、ビューを外へ持ち出しません。`ReadValue` 内でインターフェース型のローカルへ代入せず、型制約を通して `Read` を呼ぶことで、同じ実装が `IntView` にも適用できます。
+
 ### Unityで使うとき
 
 Unity 6.3 LTSのEditorが使う言語版はC# 9.0です。公式マニュアルには、Windows向けの非マネージド関数ポインターの例と、拡張可能な呼び出し規約の制約があります。上のgeneric math部分はC# 11と.NET 7以降のライブラリを前提とするため、Unity 6.3向けの共有コードでは具体的な型のオーバーロードなどで置き換えます。UnityのMonoとIL2CPPでも、対象プラットフォームのPlayerビルドで測定します。
@@ -94,12 +184,18 @@ Unity 6.3 LTSのEditorが使う言語版はC# 9.0です。公式マニュアル�
 1. `samples.AsSpan(1)` の先頭へ書くと、元の配列のどの要素が変わるか。
 2. 入力ごとに選ぶコールバックがレベルの状態を閉じ込めている。`delegate*` で置き換えるときに必要になる変更は何か。
 3. Unity 6.3で上の `Sum<T>` を流用する前に、言語版とAPIのどちらを確認するか。
+4. `readonly ref int` フィールドに通常の代入をすると、参照先は付け替わるか。
+5. `scoped ReadOnlySpan<int>` を受け取った関数から、そのビューを `Slice` した結果を返せるか。
+6. C# 14で配列から `this ReadOnlySpan<T>` の拡張メソッドを呼んだとき、要素は別のバッファへコピーされるか。
 
 ::: details 解答
 
 1. `samples[1]`。ビューの先頭が元の配列の添字1に対応する。
 2. 関数ポインターには状態を持たせられないので、必要な値を引数や別の状態として渡す。状態を捕捉したいならデリゲートを使える。
 3. 両方。`static abstract` はC# 11、`INumber<T>` は.NET 7のライブラリから使える。Unity 6.3のC# 9.0ではこの例の制約をそのまま使えない。
+4. 付け替わらない。通常の代入は参照先へ値を書く。`readonly ref` は参照先を変更できる場所を制限する。
+5. 返せない。部分ビューにも同じ借りた参照が含まれる。
+6. コピーされない。C# 14の変更は変換や呼び出しの解決に関するもので、ビューは元の範囲を参照する。
 
 :::
 
@@ -113,6 +209,9 @@ Unity 6.3 LTSのEditorが使う言語版はC# 9.0です。公式マニュアル�
 
 - [Microsoft — System.Span\<T\>（.NET 10 APIリファレンス）](https://learn.microsoft.com/en-us/dotnet/api/system.span-1?view=net-10.0)
 - [Microsoft — ref struct（C# 13での変更を含む）](https://learn.microsoft.com/en-us/dotnet/csharp/language-reference/builtin-types/ref-struct)
+- [Microsoft — C# 11のrefフィールドとscopedの仕様](https://github.com/dotnet/csharplang/blob/main/proposals/csharp-11.0/low-level-struct-improvements.md)
+- [Microsoft — C# 13のref structインターフェース実装とallows ref structの仕様](https://github.com/dotnet/csharplang/blob/main/proposals/csharp-13.0/ref-struct-interfaces.md)
+- [Microsoft — C# 14のSpan変換の仕様](https://learn.microsoft.com/en-us/dotnet/csharp/language-reference/proposals/csharp-14.0/first-class-span-types)
 - [Microsoft — C# 9 function pointersの仕様](https://github.com/dotnet/csharplang/blob/main/proposals/csharp-9.0/function-pointers.md)
 - [Microsoft — Generic math（.NET 7以降）](https://learn.microsoft.com/en-us/dotnet/standard/generics/math)
 - [Unity 6.3 LTS — C# compiler and language version reference](https://docs.unity3d.com/6000.3/Documentation/Manual/csharp-compiler.html)

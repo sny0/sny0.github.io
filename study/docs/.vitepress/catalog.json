@@ -1342,7 +1342,7 @@
         "static abstract",
         "generic math"
       ],
-      "verification": "C# 9・11・13、.NET 7以降のgeneric math、Unity 6.3 LTSに照合（2026-11-13）",
+      "verification": "C# 9・11・13・14、.NET 7以降のgeneric math、.NET 10、Unity 6.3 LTSに照合（2026-11-13）",
       "links": [
         "/languages/csharp/delegates-events-function-pointers.html",
         "/languages/csharp/templates-vs-generics.html",
@@ -3150,10 +3150,10 @@
       ],
       "verification": "C++20 N4861のテンプレート実体化とstatic_castに照合（2026-11-13）",
       "links": [
+        "/languages/cpp/explicit-object-and-expected.html",
         "/design/patterns/template-method.html",
         "/languages/cpp/templates-and-concepts.html",
-        "/languages/cpp/inheritance-and-virtual.html",
-        "/languages/cpp/explicit-object-and-expected.html"
+        "/languages/cpp/inheritance-and-virtual.html"
       ],
       "difficulty": "advanced",
       "importance": "useful"
@@ -4577,8 +4577,10 @@
         "ExecuteIndirect",
         "コンパクション"
       ],
-      "verification": "MicrosoftのHLSLアトミック操作、Direct3D 12の間接描画とリソース状態、Khronosの合成式に照合（2026-11-13）",
+      "verification": "MicrosoftのHLSLとDirect3D 12、Khronosの合成式、Batcherのソーティングネットワーク、AMD FidelityFX Parallel Sortの資料に照合（2026-11-13）",
       "links": [
+        "/math/physics-integration-and-collision.html",
+        "/graphics/shader/shader-optimization.html",
         "/algorithms/sorting.html",
         "/graphics/compute/compute-shader.html",
         "/graphics/optimization/d3d12-resource-barriers.html",
@@ -10633,7 +10635,8 @@
       "links": [
         "/graphics/optimization/pipeline-compilation-stutter.html",
         "/graphics/shader/hlsl.html",
-        "/tools/profiling/cpu-profiling.html"
+        "/tools/profiling/cpu-profiling.html",
+        "/graphics/shader/shader-optimization.html"
       ],
       "difficulty": "advanced",
       "importance": "useful"
@@ -10690,11 +10693,13 @@
         "ダイバージェンス",
         "GPU 帯域"
       ],
-      "verification": "HLSL Shader Model 6.2 の 16 ビット型、AMD RDNA Performance Guide、Nsight Graphics Shader Profiler（2026-11-13）",
+      "verification": "HLSL Shader Model 6.0 の wave 演算と 6.2 の 16 ビット型、AMD RDNA 3 ISA・RGP 2.7.1、Nsight Graphics 2026.4 の公式資料に照合（2026-11-13）",
       "links": [
         "/graphics/optimization/tools.html",
         "/graphics/optimization/basics.html",
-        "/graphics/shader/hlsl.html"
+        "/graphics/shader/hlsl.html",
+        "/hardware/gpu/architecture.html",
+        "/graphics/shader/gpu-particles.html"
       ],
       "difficulty": "advanced",
       "importance": "core"
@@ -11863,7 +11868,7 @@
         "Fractal Brownian Motion",
         "Domain Warp"
       ],
-      "verification": "Ken Perlin の参照実装、Ashima Arts と Stefan Gustavson の 2D Simplex 実装、NVIDIA GPU Gems 3 に照合（2026-11-13）",
+      "verification": "Ken Perlin の原論文・参照実装、Stefan Gustavson の解説と 2D Simplex 実装、O’Neill の PCG、JCGT の GPU ハッシュ比較、NVIDIA GPU Gems に照合（2026-11-13）",
       "links": [
         "/practice/graphics/shader-lab.html",
         "/graphics/shader/hlsl.html",
@@ -11944,18 +11949,20 @@
       "section": "reference",
       "format": "article",
       "status": "published",
-      "summary": "PコアとEコア、Thread Director、WindowsのCPU Setsとタイマー分解能を分け、フレームの待ち時間を切り分ける。",
+      "summary": "異種コアの構成、Thread Director、WindowsのCPU SetsとQoS、タイマー分解能からフレームの待ち時間を切り分ける。",
       "source": "新規執筆",
       "aliases": [
         "Pコア",
         "Eコア",
+        "LP Eコア",
         "ハイブリッドCPU",
         "Intel Thread Director",
         "EfficiencyClass",
         "CPU Sets",
+        "EcoQoS",
         "timeBeginPeriod"
       ],
-      "verification": "Intel第12世代Coreの開発資料、Windows 10/11 CPU Sets、Windows 11のタイマー動作に照合（2026-11-13）",
+      "verification": "Intel第12世代CoreとCore Ultra Series 2・3、AMD Ryzen AI 400 Seriesの製品仕様、Windows 10/11 CPU Sets、Windows 11のQoS・タイマー動作に照合（2026-11-13）",
       "links": [
         "/os/thread-scheduling.html",
         "/runtime/jobs-and-work-stealing.html",
@@ -12900,9 +12907,10 @@
       ],
       "verification": "Hillaire の SIGGRAPH 2015 資料と大気散乱の原論文、HLSL Shader Model 6.0（2026-11-13）",
       "links": [
+        "/graphics/optimization/enhanced-barriers-and-synchronization2.html",
+        "/graphics/shader/procedural-noise.html",
         "/graphics/shader/color-space-and-hdr.html",
         "/graphics/shader/sdf-and-raymarching.html",
-        "/graphics/shader/procedural-noise.html",
         "/graphics/shader/water-shading.html"
       ],
       "difficulty": "advanced",
@@ -14783,11 +14791,14 @@
       ],
       "verification": "Slang v2026.22、Direct3D 12 Shader Model 6.6・6.8・6.10 Preview、Vulkan VK_NV_cooperative_vector rev. 4（2026-11-13）",
       "links": [
+        "/graphics/optimization/d3d12-resource-barriers.html",
+        "/graphics/path/neural-rendering.html",
         "/graphics/shader/hlsl.html",
         "/graphics/shader/spirv.html",
         "/graphics/compute/compute-shader.html",
         "/graphics/optimization/gpu-driven.html",
-        "/graphics/shader/shader-optimization.html"
+        "/graphics/shader/shader-optimization.html",
+        "/graphics/shader/shader-variants.html"
       ],
       "difficulty": "advanced",
       "importance": "specialized"
@@ -14841,6 +14852,7 @@
       "links": [
         "/graphics/shader/brdf-internals.html",
         "/graphics/shader/normal-mapping.html",
+        "/graphics/shader/color-space-and-hdr.html",
         "/graphics/lighting/pbr.html",
         "/graphics/shader/water-shading.html"
       ],
@@ -15310,7 +15322,7 @@
         "AgX",
         "Exposure"
       ],
-      "verification": "W3C CSS Color 4、Khronos glTF 2.0、Microsoft DXGI Advanced Color、ACES 2.0、Blender 4.5 LTS に照合（2026-11-13）",
+      "verification": "W3C CSS Color 4、glTF 2.0、DXGI Advanced Color、ACES 2.0 の CTL、Blender 4.5.0 の OCIO 設定と LUT、Unreal Engine 5.8、ITU-R BT.2100-3 に照合（2026-11-13）",
       "links": [
         "/practice/graphics/shader-lab.html",
         "/graphics/texture/texture-filtering-and-mipmaps.html",
@@ -16023,11 +16035,12 @@
         "リザーバーサンプリング",
         "MegaLights"
       ],
-      "verification": "BitterliらのReSTIR原論文、OuyangらのReSTIR GI原論文、Unreal Engine 5.8のMegaLightsとリリースノートに照合（2026-11-13）",
+      "verification": "BitterliらとOuyangらのReSTIR原論文、Voseのエイリアス法、Conty EstevezとKullaのライト階層、pbrt第4版、Unreal Engine 5.8のMegaLightsに照合（2026-11-13）",
       "links": [
         "/graphics/path/forward-plus.html",
         "/graphics/lighting/gi.html",
-        "/graphics/lighting/path-tracing.html"
+        "/graphics/lighting/path-tracing.html",
+        "/algorithms/bounding-volume-hierarchies.html"
       ],
       "difficulty": "advanced",
       "importance": "specialized"
