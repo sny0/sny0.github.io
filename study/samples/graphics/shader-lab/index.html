@@ -1,0 +1,28 @@
+<!doctype html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>シェーダーのWebGPU実践 | Sny0 Study</title>
+  <link rel="stylesheet" href="./styles.css">
+  <script type="module" src="./main.js"></script>
+</head>
+<body>
+  <main>
+    <nav><a href="../../../practice/graphics/shader-lab.html">実践の解説</a></nav>
+    <h1>シェーダーの出力を比べる</h1>
+    <div class="controls">
+      <label>題材 <select id="mode" disabled></select></label>
+      <label><span id="first-label"></span> <output id="first-value" for="first"></output>
+        <input id="first" type="range" disabled>
+      </label>
+      <label><span id="second-label"></span> <output id="second-value" for="second"></output>
+        <input id="second" type="range" disabled>
+      </label>
+    </div>
+    <p id="hint"></p>
+    <canvas width="768" height="432" aria-label="パラメーターを反映したシェーダーの描画結果" aria-describedby="hint"></canvas>
+    <p id="status" role="status">WebGPUを初期化しています。</p>
+  </main>
+</body>
+</html>

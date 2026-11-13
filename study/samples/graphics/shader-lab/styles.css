@@ -1,0 +1,50 @@
+:root {
+  color-scheme: light dark;
+  font-family: Inter, "Noto Sans JP", system-ui, sans-serif;
+  line-height: 1.55;
+  accent-color: #568bd5;
+}
+
+body {
+  margin: 0;
+  background: light-dark(#f5f7fb, #141821);
+  color: light-dark(#17253a, #eef2fa);
+}
+
+main {
+  max-width: 56rem;
+  margin-inline: auto;
+  padding: 1rem clamp(0.875rem, 4vw, 2rem) 2rem;
+}
+
+a { color: light-dark(#265ca8, #a5c9ff); }
+h1 { font-size: clamp(1.55rem, 5vw, 2.1rem); }
+
+.controls {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 13rem), 1fr));
+  gap: 0.75rem;
+}
+
+.controls label {
+  min-width: 0;
+  padding: 0.75rem;
+  background: light-dark(#fff, #202939);
+  border: 1px solid light-dark(#d7dfea, #35425a);
+  border-radius: 0.5rem;
+}
+
+output { font-variant-numeric: tabular-nums; font-weight: 600; }
+input, select { display: block; width: 100%; margin: 0.35rem 0 0; }
+select { font: inherit; }
+
+canvas {
+  display: block;
+  width: 100%;
+  height: auto;
+  border-radius: 0.5rem;
+  background: #121b2a;
+}
+
+#hint { min-height: 1.6em; }
+#status { font-size: 0.9rem; }
