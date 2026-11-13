@@ -153,7 +153,11 @@ void UpdateCS(uint3 id : SV_DispatchThreadID)
 
 ## 間接描画へ渡すときの同期
 
-Direct3D 12のレガシーバリアを使う例では、引数をUAVへの書き込みから `D3D12_RESOURCE_STATE_INDIRECT_ARGUMENT` に遷移させます。頂点シェーダーで生存リストと粒子をSRVとして読むなら、それらも `D3D12_RESOURCE_STATE_NON_PIXEL_SHADER_RESOURCE` へ遷移させます。初期化・生成・更新が同じリソースをUAVのまま使い、後段が前段の書き込みに依存する場合は、その間にUAVバリアを入れます。例えば更新と次回の生成の間で、空きリストと件数の両方を順序付けます。`InterlockedAdd` はカウンターへの加算をアトミックに行う操作です。リストへの書き込みを後続パスから読めるようにする同期は別に指定します。別キューで動かす場合はキュー間のフェンスによる順序付けも必要です。
+Direct3D 12のレガシーバリアを使う例では、引数をUAVへの書き込みから `D3D12_RESOURCE_STATE_INDIRECT_ARGUMENT` に遷移させます。頂点シェーダーで生存リストと粒子をSRVとして読むなら、それらも `D3D12_RESOURCE_STATE_NON_PIXEL_SHADER_RESOURCE` へ遷移させます。
+
+次の `ReserveEmitCS` の前に、引数バッファを `UNORDERED_ACCESS` へ戻します。状態の起点は、二つの処理をどこでキューへ渡すかで変わります。同じ `ExecuteCommandLists` 呼び出しの中では、コマンドリストが分かれていても `INDIRECT_ARGUMENT` から遷移させます。前の `ExecuteCommandLists` の処理がGPU上で完了すると、バッファは `COMMON` へ戻ります。次の実行では `COMMON` を起点にし、条件を満たせば暗黙の昇格を使えます。リセットをコピーで行う場合は、コピー前に `COPY_DEST`、次のUAV書き込み前に `UNORDERED_ACCESS` を使います。粒子と生存リストも、現在の状態からUAVで書き込める状態に戻します。
+
+初期化・生成・更新が同じリソースをUAVのまま使い、同じ `ExecuteCommandLists` の中で後段が前段の書き込みに依存する場合は、その間にUAVバリアを入れます。例えば更新と次回の生成の間で、空きリストと件数の両方を順序付けます。`InterlockedAdd` はカウンターへの加算をアトミックに行う操作です。リストへの書き込みを後続パスから読めるようにする同期は別に指定します。別キューで動かす場合はキュー間のフェンスによる順序付けも必要です。
 
 この例はDrawのコマンドシグネチャを1件使います。`ExecuteIndirect` に最大コマンド数1を渡し、Count Bufferは省略できます。粒子の件数はコマンド数ではなく、引数の `InstanceCount` に入っています。頂点側は `SV_InstanceID` を生存リストの添字に、`SV_VertexID` を四角形の頂点選択に使えます。
 

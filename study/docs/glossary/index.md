@@ -36,6 +36,7 @@ import StudyGlossarySearch from '../.vitepress/theme/StudyGlossarySearch.vue'
 | 語 | 分野ごとの意味 |
 | --- | --- |
 | bake | [ライティング](/glossary/graphics.html#bake)　照明の計算結果をライトマップへ書き込む。<br>[DCC](/glossary/graphics.html#bake)　シミュレーションや制約の結果をキャッシュやキーフレームに保存する。<br>[ゲーム制作](/glossary/game.html#asset-baking)　事前に求めた結果を、実行時に読み込めるデータとして固定する。 |
+| 焼く | [ゲーム制作](/glossary/game.html#asset-baking)　計算結果をテクスチャやキャッシュに保存する。<br>[配布・実機検証](/glossary/game.html#asset-baking)　光ディスクや書き込み可能なROMにデータを書き込む。 |
 | cook | [Unreal Engine](/glossary/game.html#cook)　制作時のアセットを対象プラットフォームで使う形式に変換する。<br>[Houdini](/glossary/game.html#houdini-cook)　依存するノードを評価して、現在の入力・設定・時刻で出力を作る。 |
 | boot | [PC](/glossary/pc.html#boot)　ファームウェアが制御を取り、ブートローダーを経てOSを起動する。<br>[ゲーム](/glossary/game.html#boot-sequence)　タイトルが起動し、設定やサービスを初期化して最初の画面へ進む。 |
 | blit | [2D画像](/glossary/graphics.html#blit)　画像の矩形領域をまとめて別の描画先へ転送する。<br>[GPU](/glossary/graphics.html#blit)　テクスチャを別の描画先に移す。描画で実装する場合は色変換などもできる。 |

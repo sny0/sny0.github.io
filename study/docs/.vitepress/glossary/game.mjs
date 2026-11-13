@@ -98,6 +98,18 @@ export default {
       "label": "任天堂 — 社長が訊く Wii Street U（制作現場での「ROM」）",
       "url": "https://www.nintendo.co.jp/wiiu/interview/hardware/vol12/index.html"
     },
+    "nintendoDirection": {
+      "label": "任天堂 — 社長が訊く『パンドラの塔』（ディレクターの担当）",
+      "url": "https://www.nintendo.co.jp/wii/interview/sx3j/vol1/index.html"
+    },
+    "appleDisc": {
+      "label": "Apple — CDやDVDに情報を書き込む",
+      "url": "https://support.apple.com/en-euro/guide/mac-help/mchl8addfd95/27/mac/27"
+    },
+    "microchipEprom": {
+      "label": "Microchip — EPROM Memory Programming Specifications",
+      "url": "https://ww1.microchip.com/downloads/en/DeviceDoc/30274b.pdf"
+    },
     "nintendoPlanning": {
       "label": "任天堂 — 制作企画系の職種紹介",
       "url": "https://www.nintendo.co.jp/jobs/introduction/planning/career.html"
@@ -107,12 +119,28 @@ export default {
       "url": "https://www.nintendo.co.jp/jobs/keyword/154.html"
     },
     "xboxCert": {
-      "label": "Microsoft — Xbox Requirements（GDK 2604）",
-      "url": "https://learn.microsoft.com/en-us/xbox/gdk/docs/store/policies/console/certification-requirements?view=gdk-2604"
+      "label": "Microsoft — Xbox Requirements（GDK 2610）",
+      "url": "https://learn.microsoft.com/en-us/gaming/gdk/docs/store/policies/console/console-certification-requirements-and-tests?view=gdk-2610"
     },
-    "nugetVersions": {
-      "label": "Microsoft — NuGet Package Version Reference",
-      "url": "https://learn.microsoft.com/en-us/nuget/concepts/package-versioning"
+    "ubisoftMilestones": {
+      "label": "Ubisoft — Creative Process（Alpha・Betaの到達条件の例）",
+      "url": "https://www.ubisoft.com/en-us/company/how-we-make-games/creative-process"
+    },
+    "capcomRom": {
+      "label": "カプコン開発者による『プラグマタ』の合同インタビュー（Gamer）",
+      "url": "https://www.gamer.ne.jp/news/202512140001/"
+    },
+    "playstationTrc": {
+      "label": "SCEA・Take-Two — PlayStationライセンス契約 §4.5",
+      "url": "https://ir.take2games.com/static-files/1c0445c6-016b-41f7-97bc-03274e8f3fa3"
+    },
+    "xbox360Tcr": {
+      "label": "Microsoft XNA Game Quality — Xbox 360認証の解説",
+      "url": "https://www.gamedeveloper.com/business/sponsored-feature-xna-game-quality-the-certification-story"
+    },
+    "pcTrc": {
+      "label": "Ubisoft・NVIDIA — Watch Dogs 2: PC Adaptation（GDC 2017）",
+      "url": "https://developer.download.nvidia.com/assets/gameworks/downloads/regular/GDC17/WD2_Success_Story_with%20_NVIDIA-GDC_2017-Final.pdf#page=10"
     },
     "appleBuild": {
       "label": "Apple — CFBundleVersion",
@@ -147,7 +175,7 @@ export default {
       "reading": "くっく",
       "definition": "Unreal Engine 5.8で、エディター用のアセットを対象プラットフォームの実行時に使える形式へ変換する工程。",
       "context": "Houdiniではノードの評価を指す。",
-      "example": "Switch向けにテクスチャをクックする。",
+      "example": "対象のゲーム機向けにテクスチャをクックする。",
       "articles": [
         {
           "label": "ゲームのアセットビルドと差分配信",
@@ -672,12 +700,12 @@ export default {
     },
     {
       "id": "asset-baking",
-      "term": "アセットの「焼き」",
-      "en": "asset baking / bake",
-      "reading": "あせっとのやき やき やきこみ べいく",
+      "term": "「焼く」・アセットの「焼き」",
+      "en": "asset baking / bake / burn a disc / program a ROM",
+      "reading": "やく あせっとのやき やき やきこみ べいく",
       "definition": "制作時の計算結果や設定を、実行時に読み取れるデータとして書き出すこと。",
-      "context": "何をどの形式へ焼くかは、対象の工程とツールで変わる。",
-      "example": "アニメーションを頂点テクスチャに焼く。",
+      "context": "「ディスクを焼く」は光ディスクにデータを書き込むこと。「ROMを焼く」は書き込み可能なROMにプログラムなどを書き込むことを指す。",
+      "example": "アニメーションを頂点テクスチャに焼く。提出用のディスクを焼く。",
       "articles": [
         {
           "label": "頂点シェーダーでの表現",
@@ -686,10 +714,13 @@ export default {
       ],
       "related": [
         "graphics:bake",
-        "game:cook"
+        "game:cook",
+        "game:rom"
       ],
       "refs": [
-        "vat"
+        "vat",
+        "appleDisc",
+        "microchipEprom"
       ]
     },
     {
@@ -718,7 +749,7 @@ export default {
       "en": "ROM / Read-Only Memory",
       "reading": "ろむ あーるおーえむ",
       "definition": "本来は読み出し専用のメモリ。ゲーム制作の会話では、試遊や検査に使うビルド一式を「ロム」と呼ぶこともある。",
-      "context": "開発現場の「ロム」は物理的なROMチップに限らない。",
+      "context": "「今日のロム」「開発中のロム」のような用法では、媒体の種類より、試遊や検査に使うビルドの版を指す。",
       "example": "今日のロムを実機で確認する。",
       "articles": [
         {
@@ -731,6 +762,7 @@ export default {
       ],
       "refs": [
         "nintendoRom",
+        "capcomRom",
         "nistRom"
       ]
     },
@@ -739,15 +771,15 @@ export default {
       "term": "α版・β版",
       "en": "alpha / beta",
       "reading": "あるふぁばん べーたばん あるふぁべーた",
-      "definition": "正式版より前の開発段階を示す呼び名。α版は検証中の段階、β版はより形になった版のテストに使うことが多い。",
-      "context": "完了条件や公開範囲はプロジェクトで決める。",
+      "definition": "正式版より前のビルドや開発段階の呼び名。主要機能を入れて通して遊べる段階をα版とし、内容がそろい、不具合修正やバランス調整に集中する段階をβ版とする例がある。",
+      "context": "機能やコンテンツの到達条件とテスト参加者の範囲は、プロジェクトごとに決める。β版にも限定公開と一般公開がある。",
       "example": "β版を配って実機での問題を集める。",
       "related": [
         "game:feature-freeze",
         "game:build-number"
       ],
       "refs": [
-        "nugetVersions"
+        "ubisoftMilestones"
       ]
     },
     {
@@ -867,14 +899,18 @@ export default {
       "term": "TRC",
       "en": "Technical Requirements Checklist",
       "reading": "てぃーあーるしー",
-      "definition": "プラットフォームの技術要件を確認するチェックリストを指す呼び名。提出前には、各プラットフォームの正式な要件と適用範囲を確認する。",
-      "context": "名称と要件はプラットフォームごとに異なる。公開されている例ではXboxはXbox Requirements（XR）と呼ぶ。",
+      "definition": "PlayStationのソフト提出時に使われてきた、技術要件のチェックリスト。PC向けの品質検査などでも同じ略語を使う例がある。",
+      "context": "Xboxの現行文書ではXbox Requirements（XR）、Xbox 360時代の資料ではTechnical Certification Requirements（TCR）と呼ぶ。任天堂ではガイドラインへの適合を確認する工程をロットチェックと呼ぶ。",
       "example": "コントローラーを抜いたときの挙動をTRCに沿って確認する。",
       "related": [
         "game:lot-check"
       ],
       "refs": [
-        "xboxCert"
+        "playstationTrc",
+        "pcTrc",
+        "xboxCert",
+        "xbox360Tcr",
+        "nintendoLot"
       ]
     },
     {
@@ -1008,7 +1044,7 @@ export default {
         "game:game-feel"
       ],
       "refs": [
-        "nintendoRom"
+        "nintendoDirection"
       ]
     },
     {

@@ -8,7 +8,7 @@ study:
   domain: game
   summary: ゲームのイベントから音が出るまでを追い、Wwise と FMOD、実ボイスと仮想ボイス、3D の位置・距離・遮蔽を整理する。
   aliases: [Game Audio, Wwise, FMOD, Audio Voice, Virtual Voice, Voice Stealing, Spatial Audio]
-  verification: Audiokinetic Wwise 2024.1 教材と公式技術資料、FMOD Studio / Engine 2.04 マニュアルに照合（2026-11-13）
+  verification: Audiokinetic Wwise 2025.1.12 の公開告知と公式技術資料、FMOD Studio / Engine 2.04 マニュアルに照合（2026-11-13）
 ---
 
 # ゲームオーディオの仕組み — イベント・ボイス管理・3D 音響
@@ -35,7 +35,11 @@ flowchart LR
 | バス | 効果音、台詞、音楽などの出力をまとめて処理する経路。グループ全体の音量やエフェクトを変えられる。 |
 | バンク | 実行時にロードする音響データのまとまり。どの場面で使うバンクや素材を常駐させるかがロード設計に関わる。 |
 
-Audiokinetic の Wwise 2024.1 系には Event、SoundBank、ゲームの数値を音響プロパティーへ結びつける RTPC などがある。FMOD Studio 2.04 では Event をオーサリングし、実行時には Event Instance を作って再生する。Parameter、Bus、Bank などで変化やルーティング、配布するデータを管理する。ゲームコードの `SoundManager` などには、これらを呼び出す窓口と、ゲーム側の再生要求を管理する役割を置ける。
+この記事では、2026 年 10 月に公開された Audiokinetic の Wwise 2025.1.12 を例にする。Wwise では Event、SoundBank、ゲームの数値を音響プロパティーへ結びつける RTPC などを使う。参考資料の Wwise Fundamentals 認定教材は 2024.1 向けで、2025.1 では階層名や画面の一部が変わっている。FMOD Studio 2.04 では Event をオーサリングし、実行時には Event Instance を作って再生する。Parameter、Bus、Bank などで変化やルーティング、配布するデータを管理する。ゲームコードの `SoundManager` などには、これらを呼び出す窓口と、ゲーム側の再生要求を管理する役割を置ける。
+
+### Wwise の階層とゲームから渡す値
+
+Wwise 2024.1 の教材に出てくる Actor-Mixer Hierarchy は、2025.1 系では Containers と呼ばれる。音源やコンテナを親子に配置し、共通の音量などを親から子へ受け継がせる。例えば足音を Switch Container にまとめ、キャラクターごとの床材 Switch で木床と金属床の音を選ぶ。State は水中にいるか、戦闘中かといったゲーム全体で共有する状態を伝えるために使える。足音の再生を要求する Event、床材のような離散値、速度を音に結びつける RTPC は、ゲーム側でそれぞれ更新する時点を決める。 [Audiokinetic — ReaWwise の Wwise 2025.1 対応](https://github.com/audiokinetic/ReaWwise/releases)・[The Wwise Project](https://www.audiokinetic.com/download/documents/WwiseProjectAdventure_en.pdf)・[The Wwise Approach](https://www.audiokinetic.com/download/documents/TheWwiseApproach.pdf)
 
 ## 実ボイスの上限と仮想化
 
@@ -146,7 +150,9 @@ int main()
 
 ## 参考資料
 
-- [Audiokinetic — Wwise Fundamentals の対象版とコアワークフロー](https://info.audiokinetic.com/recertification)
+- [Audiokinetic — Wwise 2025.1.12 と 2024.1.18 の公開告知（2026 年 10 月 21 日）](https://bsky.app/profile/audiokinetic.bsky.social/post/3myfwdfxvus2r)
+- [Audiokinetic — Wwise SDK 2025.1.12 Release Notes](https://www.audiokinetic.com/en/public-library/2025.1.12_9287/?source=SDK&id=whatsnew_2025_1_12.html)
+- [Audiokinetic — Wwise Fundamentals の対象版（2024.1）と 2025.1 での変更](https://info.audiokinetic.com/recertification)
 - [Audiokinetic — The Wwise Project](https://www.audiokinetic.com/download/documents/WwiseProjectAdventure_en.pdf)
 - [Audiokinetic — Integrating Audio in your Game: The Wwise Approach](https://www.audiokinetic.com/download/documents/TheWwiseApproach.pdf)
 - [Firelight Technologies — FMOD Studio 2.04 Concepts](https://www.fmod.com/docs/2.04/studio/fmod-studio-concepts.html)

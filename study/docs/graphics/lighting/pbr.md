@@ -69,6 +69,8 @@ $$f_r = k_d \frac{albedo}{\pi} + \frac{D(h) \, F(v,h) \, G(l,v)}{4 (\mathbf{n} \
 | $F$ (フレネル) | 視射角による反射率上昇 | **Schlick近似**: $F = F_0 + (1-F_0)(1-\mathbf{v}\cdot\mathbf{h})^5$ |
 | $G$ (幾何減衰) | 微細面同士の遮蔽 | Smith GGX (Height-correlated) |
 
+ここで使う高さ相関形 Smith は、光側と視線側の遮蔽が微小面の高さを通じて相関することを考慮します。glTF 2.0 Appendix B の分離形との式・数値の比較は、[BRDFの中身](/graphics/shader/brdf-internals.html)にあります。
+
 GGXが勝った理由は**裾の長さ**: 実測データのハイライトは中心が鋭く裾が長く、Beckmannより GGX の分布形状が一致しました。
 
 ### Metallic ワークフロー

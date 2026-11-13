@@ -49,7 +49,7 @@ C++には主要な処理系が3つあり、**ゲーム開発では複数と付�
 2. **警告の検出範囲が違う**: GCCで警告ゼロでもMSVCで出る(逆も)。**複数コンパイラでビルドするだけでバグが見つかる**のはこのため(CIで両方回す価値)
 3. 拡張機能: `#pragma once` は3社対応(事実上標準)だが、`__forceinline`(MSVC)/`__attribute__`(GCC/Clang)、可変長配列(GCC拡張。標準C++にはない)などは移植の罠
 4. 標準ライブラリも別物: MSVC STL / libstdc++(GCC) / libc++(Clang)。実装依存の挙動(unordered_mapの成長戦略、SSOの閾値等)が異なる(→ [実装定義](/languages/cpp/undefined-behavior.html))
-5. 最適化の傾向や浮動小数点演算の厳密さ(`/fp:fast` vs `-ffast-math`)の違いで、プラットフォーム間のリプレイやロックステップ同期が正しく動かなくなることがあります。決定性が必要なら固定小数点や厳密モードを検討します。
+5. 最適化や浮動小数点の設定が異なると、プラットフォーム間のリプレイやロックステップ同期の結果がずれることがあります。CPU向けC++では、Clang 22.1 と GCC 16.1 の既定でも、ターゲットが対応していれば `a * b + c` を FMA に縮約できます。決定性が必要な場合にそろえる条件は[浮動小数点の決定性](/languages/cpp/floating-point-determinism.html)で扱います。[Clang 22.1 の既定](https://releases.llvm.org/22.1.0/tools/clang/docs/UsersManual.html#controlling-floating-point-behavior) · [GCC 16.1 の既定](https://gcc.gnu.org/onlinedocs/gcc-16.1.0/gcc/Optimize-Options.html#index-ffp-contract)
 
 ## C#/Unityとの対応
 

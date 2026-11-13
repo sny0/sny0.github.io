@@ -3,7 +3,7 @@ title: 未定義動作・実装定義・未規定動作
 study:
   source: C++ Wiki
   status: published
-  summary: 未定義動作・実装定義・未規定動作を区別し、C++26草案のerroneous behaviorと未初期化値の扱いも確認する。
+  summary: 未定義動作・実装定義・未規定動作を区別し、C++26のerroneous behaviorと未初期化値の扱いも確認する。
   section: reference
   format: article
   domain: languages
@@ -13,7 +13,7 @@ study:
 
 ## 一言で言うと
 
-C++標準が動作に課す条件には違いがあります。まず従来からの次の3分類を区別し、後述のC++26草案のerroneous behaviorも規格版を分けて確認します。
+C++標準が動作に課す条件には違いがあります。まず従来からの次の3分類を区別し、後述の[C++26（DIS）](/languages/cpp/cpp26-features.html)のerroneous behaviorも規格版を分けて確認します。
 
 - **未定義動作 (UB: Undefined Behavior)**: 標準が**一切の要求をしない**。何が起きてもよい(クラッシュ、黙って壊れる、たまたま動く)。**プログラムに含めてはいけない**
 - **実装定義 (implementation-defined)**: 処理系(コンパイラ)が決めて**文書化する**。移植性はないが、その処理系では一貫(例: `int`のサイズ、`char`の符号)
@@ -52,11 +52,11 @@ int main() {
 }
 ```
 
-`std::vector`の`v[i]`も範囲内が前提です。C++23までの標準では範囲外は未定義動作で、C++26草案では非強化実装で未定義動作、強化実装で契約違反になります。標準ライブラリのデバッグ設定による診断や、`v.at(i)`の`std::out_of_range`と区別します。[C++草案: コンテナ要件](https://eel.is/c++draft/sequence.reqmts)・[強化事前条件](https://eel.is/c++draft/structure.specifications)
+`std::vector`の`v[i]`も範囲内が前提です。C++23までの標準では範囲外は未定義動作で、C++26では非強化実装で未定義動作、強化実装で契約違反になります。標準ライブラリのデバッグ設定による診断や、`v.at(i)`の`std::out_of_range`と区別します。[C++草案: コンテナ要件](https://eel.is/c++draft/sequence.reqmts)・[強化事前条件](https://eel.is/c++draft/structure.specifications)
 
 ### 未初期化の読み取りは、規格版と記憶域を分ける {#uninitialized-values}
 
-C++20/23では、上の未初期化`int`を値として読む例はUBです。C++26草案では、通常の自動記憶域の未初期化値を読むケースに**erroneous behavior（誤った動作）**を導入しています。診断や終了を許す規則であり、安全に使える既定値が得られるという意味ではありません。動的記憶域や`[[indeterminate]]`指定の値はindeterminateのままで、その読み取りは原則UBです。型として無効な値表現の読み取りや、文字型・`std::byte`の限られた操作の例外もあるため、「C++26なら未初期化読み取りはすべてUBではない」とも断定できません。最初から初期化する方針は同じです。[C++草案: 未決定値と誤った値](https://eel.is/c++draft/basic.indet)
+C++20/23では、上の未初期化`int`を値として読む例はUBです。C++26では、通常の自動記憶域の未初期化値を読むケースに**erroneous behavior（誤った動作）**を導入しています。診断や終了を許す規則であり、安全に使える既定値が得られるという意味ではありません。動的記憶域や`[[indeterminate]]`指定の値はindeterminateのままで、その読み取りは原則UBです。型として無効な値表現の読み取りや、文字型・`std::byte`の限られた操作の例外もあるため、「C++26なら未初期化読み取りはすべてUBではない」とも断定できません。最初から初期化する方針は同じです。[C++草案: 未決定値と誤った値](https://eel.is/c++draft/basic.indet)
 
 ## UBの怖さ: 「たまたま動く」
 
@@ -102,7 +102,7 @@ C#にもunsafeや一部未定義に近い領域はありますが、通常のC#�
 
 1. UBはエラーが出ずに実行できることがあるため、動作確認だけではUBの有無を判定できません。
 2. 「try-catchで拾える」— UBは例外ではない(→ [例外](/languages/cpp/exceptions.html))
-3. 「未初期化でもデフォルト値(0)になる」— C#のフィールドは0初期化されるが、C++の未初期化ローカル変数を値として使ってはいけない。C++20/23のUBと、C++26草案のerroneous behaviorなどの区別は上記を参照。
+3. 「未初期化でもデフォルト値(0)になる」— C#のフィールドは0初期化されるが、C++の未初期化ローカル変数を値として使ってはいけない。C++20/23のUBと、C++26のerroneous behaviorなどの区別は上記を参照。
 
 ## ゲーム開発での使用例(遭遇シーン)
 

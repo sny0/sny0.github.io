@@ -8,7 +8,7 @@ study:
   domain: languages
   summary: FMAの縮約、SIMDの加算順、コンパイラの浮動小数点設定がロックステップやリプレイにどう影響するかを調べる。
   aliases: [浮動小数点の決定性, deterministic simulation, FMA, fp:fast, SIMD, ロックステップ, リプレイ]
-  verification: IEEE 754-2019、MSVC 17系、Clang Users Manual、C++20に照合（2026-11-13）
+  verification: IEEE 754-2019、Visual Studio 2022・2026のMSVC、Clang 22.1、GCC 16系、C++20に照合（2026-11-13）
 ---
 
 # 浮動小数点の決定性 — 同じ入力から同じtickを再現する
@@ -33,14 +33,19 @@ C++20の `std::fma(a,b,c)` なら、命令を一つにできるかに関わら�
 
 | 対象 | 確認する項目 |
 | --- | --- |
-| MSVC 17系 | `/fp:fast` は演算の並べ替えなどを許し、既定で `/fp:contract` を有効にします。Visual Studio 2022以降では `/fp:precise` の既定で縮約はオフです。実行時に浮動小数点環境を操作するコードでは `/fp:strict` の要件も確認します。 |
-| Clang | `-ffp-contract=off` で縮約を無効にできます。`-ffp-model` や `-ffast-math` の指定と組み合わせるときは、実際のビルドで指定順と最終的なオプションを確認します。 |
+| MSVC（Visual Studio 2022の19.3x・19.4x系、Visual Studio 2026の19.50以降） | `/fp:fast` は演算の並べ替えなどを許し、既定で `/fp:contract` を有効にします。Microsoftの現行資料では、Visual Studio 2022以降の `/fp:precise` の既定で縮約はオフです。実行時に浮動小数点環境を操作するコードでは `/fp:strict` の要件も確認します。 |
+| Clang 22.1（CPU向けの `clang++`） | 既定は `-ffp-contract=on` で、同じ文内の演算を縮約できます。`-ffp-contract=fast` は文をまたぐ縮約も許します。 |
+| GCC 16系 | C++はGNUモードとISOモードのどちらも既定は `-ffp-contract=fast` で、文をまたぐ縮約も許します。規格準拠モードのC（例 `-std=c11`）では既定が `off` です。 |
+
+ClangとGCCでC++をビルドするときは、`-ffast-math` を付けない既定の設定でも、ターゲットでFMA命令が使えれば `a * b + c` がFMAになり得ます。縮約を無効にするには `-ffp-contract=off` を使います。`-ffp-model` や `-ffast-math` などと組み合わせる場合は、実際の指定順と生成された命令を確認します。GCC 16.2でFMAに対応したx86-64向けに `-O2 -mfma` を指定し、同じ `return a * b + c;` をコンパイルすると、`-std=gnu++23` と `-std=c++23` は `vfmadd132ss`、`-std=c11` は `vmulss` と `vaddss` を生成しました。
 
 ## SIMD経路と更新の順番
 
 SIMDで粒子の力を合計すると、同じ加算でもレーン幅や水平加算の組み方によって括弧の位置が変わります。binary32で $a=2^{24}$、$b=1$、$c=-2^{24}$ とすると、最近接偶数丸めで $(a+b)+c=0$、$(a+c)+b=1$ です。2の24乗の直上では隣り合う値の間隔が2で、$a+b$ は中間に来ます。
 
 SIMDの経路を選ぶCPU機能検出、非正規化数をゼロに寄せる実行時設定、近似命令、数学ライブラリの実装も確認します。同じ数式を書いた複数の経路は、それぞれの出力を比較します。ジョブが完了した順に結果を足す実装でも、同様に加算順が変わります。固定順に並べ直してから足す、決まった木構造で合計するなど、順序をコードに持たせます。
+
+旧来の32ビットx86など、x87で式を計算する構成では、中間値を80ビット形式で保持し、型の精度へ丸める位置によって結果が変わり得ます。SSEで同じ式を計算した結果と比較するときは、縮約だけでなく中間精度の設定も確認します。`sin` や `exp` のような数学関数についても、演算子の設定をそろえるだけではライブラリの近似やコード経路までそろいません。同期対象の計算で使う場合は、処理系・ライブラリ・対象CPUを記録し、境界付近の入力も含めてビット列を比較します。
 
 ## コード例 — 一度丸める場合と二度丸める場合
 
@@ -111,6 +116,9 @@ int main()
 
 - [IEEE Std 754-2019 — Floating-Point Arithmetic](https://ieeexplore.ieee.org/document/8766229)
 - [WG21 N4861（C++20最終作業草案）— cmath](https://timsong-cpp.github.io/cppwp/n4861/c.math)
+- [Microsoft — MSVCとVisual Studioの版番号の対応](https://learn.microsoft.com/en-us/cpp/overview/compiler-versions)
 - [Microsoft — /fp（浮動小数点の動作の指定）](https://learn.microsoft.com/en-us/cpp/build/reference/fp-specify-floating-point-behavior?view=msvc-170)
-- [LLVM — Clang Compiler User’s Manual、Controlling Floating-Point Behavior](https://clang.llvm.org/docs/UsersManual.html#controlling-floating-point-behavior)
+- [LLVM — Clang 22.1 Compiler User’s Manual、Controlling Floating-Point Behavior](https://releases.llvm.org/22.1.0/tools/clang/docs/UsersManual.html#controlling-floating-point-behavior)
+- [GNU Project — GCC x86オプション（mfpmathと中間精度）](https://gcc.gnu.org/onlinedocs/gcc/x86-Options.html#index-mfpmath)
+- [GNU Project — GCC 16.1、Options That Control Optimization（ffp-contract）](https://gcc.gnu.org/onlinedocs/gcc-16.1.0/gcc/Optimize-Options.html#index-ffp-contract)
 - [Glenn Fiedler — Deterministic Lockstep（自作の物理同期例）](https://gafferongames.com/post/deterministic_lockstep/)

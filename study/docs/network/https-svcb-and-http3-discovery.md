@@ -8,7 +8,7 @@ study:
   domain: network
   summary: HTTPS・SVCBとAlt-Svcで接続候補を発見し、ALPN、オリジンの証明書、Happy Eyeballsが接続確立でどう関わるかを追う。
   aliases: [HTTPS RR, SVCB, Service Binding, HTTPSレコード, Alt-Svc, HTTP/3 discovery, Happy Eyeballs, ALPN, ipv4hint, ipv6hint]
-  verification: RFC 9460・RFC 9114・RFC 7838・RFC 8305の接続候補の発見、ALPN、検証、接続試行に照合（2026-11-13）
+  verification: RFC 9460・9114・7838・8305・9848・9849、Happy Eyeballs v3 Internet-Draft -05 に照合（2026-11-13）
 ---
 
 # HTTPS・SVCBレコードとHTTP/3の発見 — 接続候補をDNSとHTTPから知る
@@ -35,6 +35,8 @@ AliasModeはサービスに対する別名であり、同じ名前の全DNSレ�
 
 `ipv4hint` と `ipv6hint` は、アドレスの問い合わせを待つ間の候補です。ターゲット名のAとAAAAがすでに手元にあればそちらを使います。ヒントが先に届いた場合も、クライアントはターゲットのアドレスを問い合わせ、後の接続にその結果を使えます。
 
+`ech` は TLS Encrypted Client Hello（ECH）の設定を運ぶ ServiceMode のパラメーターです。対応クライアントは接続前に設定を取得し、本来のサーバー名を入れた内側の ClientHello を暗号化できます。RFC 9848 では、SVCB の解決に成功し、すべての代替候補に `ech` がある場合、ECH 対応クライアントが通常の SVCB 省略経路へ戻ることを禁じています。オリジンの証明書の検証は引き続き行います。
+
 ```mermaid
 flowchart LR
     U["URLからオリジンを決定"] --> D["DNSのHTTPS RRを確認"]
@@ -57,7 +59,9 @@ flowchart LR
 
 RFC 8305のHappy Eyeballs v2は、IPv6とIPv4の名前解決や接続試行を組み合わせます。候補を並べ、最初の試行が完了しない間に、間隔を空けて次のアドレスを試します。RFCの推奨既定値の一つは接続試行の間隔250 msです。例えばIPv6を0 ms、IPv4を250 msに開始し、IPv4が80 msで確立するなら、他が先に成功しない場合は330 msで使える接続を得ます。この時間は説明用で、実装は観測や設定に応じて間隔を変えられます。
 
-IPv4とIPv6のどちらを試すかと、QUICかTCPかを選ぶことは別の判断です。QUICが確立しないネットワークでは、HTTP/3のRFCはTCPベースのHTTPを試すことを推奨しています。ブラウザーごとの具体的な並行試行や待ち時間は、同じものとして扱えません。
+IPv4とIPv6はアドレスの種類、QUICとTCPはトランスポートです。RFC 8305 の v2 はアドレスの解決と接続試行を扱います。QUIC が確立しないネットワークでは、RFC 9114 は TCP ベースの HTTP を試すことを推奨しています。
+
+2026 年 11 月 13 日時点で、IETF の **Happy Eyeballs v3** は Internet-Draft `draft-ietf-happy-happyeyeballs-v3-05`（11 月 2 日版）です。HTTPS・SVCB レコードから得た ALPN や接続先をアドレス情報と組み合わせ、QUIC と TCP＋TLS の試行も候補に含めます。例えば HTTPS レコードが `h3` と `h2` を案内する接続先では、アドレスごとの候補に QUIC と TCP＋TLS を組み合わせて順序を決めます。並行試行の間隔や優先方針は、ブラウザーの実装でも確認します。
 
 ## コード例 — 互換性を確認し、優先度の小さい候補を選ぶ
 
@@ -155,3 +159,5 @@ int main()
 - [IETF RFC 9114、HTTP/3 §3](https://www.rfc-editor.org/rfc/rfc9114.html#section-3)
 - [IETF RFC 7838、HTTP Alternative Services](https://www.rfc-editor.org/rfc/rfc7838.html)
 - [IETF RFC 8305、Happy Eyeballs Version 2](https://www.rfc-editor.org/rfc/rfc8305.html)
+- [IETF、Happy Eyeballs Version 3 Internet-Draft -05](https://datatracker.ietf.org/doc/html/draft-ietf-happy-happyeyeballs-v3-05)
+- [IETF RFC 9848、SVCB・HTTPS での ECH 設定の配布](https://www.rfc-editor.org/rfc/rfc9848.html)・[RFC 9849、TLS Encrypted Client Hello](https://www.rfc-editor.org/rfc/rfc9849.html)

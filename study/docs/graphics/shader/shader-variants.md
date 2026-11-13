@@ -240,6 +240,7 @@ float4 MaterialPS(PixelInput input) : SV_Target
 - [パイプラインのコンパイルによるカクつき](/graphics/optimization/pipeline-compilation-stutter.html)
 - [CPUプロファイリング](/tools/profiling/cpu-profiling.html)
 - [シェーダー最適化の実践](shader-optimization.md)
+- [Unity のレンダラーと SRP](/graphics/engine/unity-renderer.html)
 
 ## 参考資料
 

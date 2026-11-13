@@ -103,13 +103,13 @@ if (onDamage) onDamage(10);                      // 空チェック→呼び出�
 | アルゴリズム・即時実行に渡す | ラムダを直接(テンプレート引数で受ける) |
 | コピー可能なコールバックを**保存**する([Observer](/design/patterns/observer.html)等) | `std::function`。参照・ポインタが指す先の寿命も管理する |
 | `unique_ptr`を捕捉するなど、ムーブ専用のコールバックを保存 | C++23の`std::move_only_function` |
-| 呼び出し期間だけ借り、保存しない関数ラッパー | C++26草案の`std::function_ref`（対象より長生きさせない） |
+| 呼び出し期間だけ借り、保存しない関数ラッパー | [C++26（DIS）](/languages/cpp/cpp26-features.html)の`std::function_ref`（対象より長生きさせない） |
 | C APIとの境界・データテーブル | 関数ポインタ |
 | 性能が最優先の内側ループ | テンプレート+ラムダ(functionを避ける) |
 
 ## C#との違い
 
-`std::function`の格納対象にはコピー可能性が必要です。C++26草案には、呼び出しのconst・参照・noexcept修飾も表せる`std::copyable_function`もあります。新しいラッパーは標準ライブラリの対応を確認して選びます。[C++草案: 関数ラッパー](https://eel.is/c++draft/func.wrap)
+`std::function`の格納対象にはコピー可能性が必要です。C++26には、呼び出しのconst・参照・noexcept修飾も表せる`std::copyable_function`もあります。新しいラッパーは標準ライブラリの対応を確認して選びます。[C++草案: 関数ラッパー](https://eel.is/c++draft/func.wrap)
 
 - C#のラムダは変数をクロージャクラスへ移すので、外側からの変更がラムダにも反映されます。C++では値キャプチャと参照キャプチャを選びます。値キャプチャでは元の変数を変更してもキャプチャ時の値を読み、参照キャプチャでは対象の寿命が切れると参照がdanglingになります。
 - C#のdelegateはGC管理で寿命の心配がない。C++の参照キャプチャは寿命を自分で保証する

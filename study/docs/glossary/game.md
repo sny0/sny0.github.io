@@ -32,33 +32,19 @@
 
 **出典**　[Unity 6.3 — Introduction to assets](https://docs.unity3d.com/6000.3/Documentation/Manual/AssetWorkflow.html)
 
-## アセットの「焼き」 {#asset-baking}
-
-**asset baking / bake** ／ 読み あせっとのやき やき やきこみ べいく
-
-制作時の計算結果や設定を、実行時に読み取れるデータとして書き出すこと。
-
-**この分野での意味**　何をどの形式へ焼くかは、対象の工程とツールで変わる。
-
-**例**　アニメーションを頂点テクスチャに焼く。
-
-**関連**　[頂点シェーダーでの表現](/graphics/shader/vertex-effects.html) · [ベイク（焼き込み）](/glossary/graphics.html#bake) · [クック](/glossary/game.html#cook)
-
-**出典**　[SideFX — Labs Vertex Animation Textures 3.0](https://www.sidefx.com/docs/houdini/nodes/out/labs--vertex_animation_textures-3.0.html)
-
 ## α版・β版 {#alpha-beta}
 
 **alpha / beta** ／ 読み あるふぁばん べーたばん あるふぁべーた
 
-正式版より前の開発段階を示す呼び名。α版は検証中の段階、β版はより形になった版のテストに使うことが多い。
+正式版より前のビルドや開発段階の呼び名。主要機能を入れて通して遊べる段階をα版とし、内容がそろい、不具合修正やバランス調整に集中する段階をβ版とする例がある。
 
-**この分野での意味**　完了条件や公開範囲はプロジェクトで決める。
+**この分野での意味**　機能やコンテンツの到達条件とテスト参加者の範囲は、プロジェクトごとに決める。β版にも限定公開と一般公開がある。
 
 **例**　β版を配って実機での問題を集める。
 
 **関連**　[フィーチャーフリーズ](/glossary/game.html#feature-freeze) · [ビルド番号](/glossary/game.html#build-number)
 
-**出典**　[Microsoft — NuGet Package Version Reference](https://learn.microsoft.com/en-us/nuget/concepts/package-versioning)
+**出典**　[Ubisoft — Creative Process（Alpha・Betaの到達条件の例）](https://www.ubisoft.com/en-us/company/how-we-make-games/creative-process)
 
 ## アンロード {#unload}
 
@@ -120,7 +106,7 @@ Unreal Engine 5.8で、エディター用のアセットを対象プラットフ
 
 **この分野での意味**　Houdiniではノードの評価を指す。
 
-**例**　Switch向けにテクスチャをクックする。
+**例**　対象のゲーム機向けにテクスチャをクックする。
 
 **関連**　[ゲームのアセットビルドと差分配信](/game/asset-build-and-patches.html) · [クック（Houdini）](/glossary/game.html#houdini-cook) · [パッケージング](/glossary/game.html#packaging)
 
@@ -324,15 +310,15 @@ Unityで、ある場面のGameObjectの配置や環境を保存する単位。�
 
 **Technical Requirements Checklist** ／ 読み てぃーあーるしー
 
-プラットフォームの技術要件を確認するチェックリストを指す呼び名。提出前には、各プラットフォームの正式な要件と適用範囲を確認する。
+PlayStationのソフト提出時に使われてきた、技術要件のチェックリスト。PC向けの品質検査などでも同じ略語を使う例がある。
 
-**この分野での意味**　名称と要件はプラットフォームごとに異なる。公開されている例ではXboxはXbox Requirements（XR）と呼ぶ。
+**この分野での意味**　Xboxの現行文書ではXbox Requirements（XR）、Xbox 360時代の資料ではTechnical Certification Requirements（TCR）と呼ぶ。任天堂ではガイドラインへの適合を確認する工程をロットチェックと呼ぶ。
 
 **例**　コントローラーを抜いたときの挙動をTRCに沿って確認する。
 
 **関連**　[ロットチェック](/glossary/game.html#lot-check)
 
-**出典**　[Microsoft — Xbox Requirements（GDK 2604）](https://learn.microsoft.com/en-us/xbox/gdk/docs/store/policies/console/certification-requirements?view=gdk-2604)
+**出典**　[SCEA・Take-Two — PlayStationライセンス契約 §4.5](https://ir.take2games.com/static-files/1c0445c6-016b-41f7-97bc-03274e8f3fa3) · [Ubisoft・NVIDIA — Watch Dogs 2: PC Adaptation（GDC 2017）](https://developer.download.nvidia.com/assets/gameworks/downloads/regular/GDC17/WD2_Success_Story_with%20_NVIDIA-GDC_2017-Final.pdf#page=10) · [Microsoft — Xbox Requirements（GDK 2610）](https://learn.microsoft.com/en-us/gaming/gdk/docs/store/policies/console/console-certification-requirements-and-tests?view=gdk-2610) · [Microsoft XNA Game Quality — Xbox 360認証の解説](https://www.gamedeveloper.com/business/sponsored-feature-xna-game-quality-the-certification-story) · [任天堂 — ゲームソフト適合性検査とロットチェック](https://www.nintendo.co.jp/jobs/keyword/154.html)
 
 ## ティック {#tick}
 
@@ -360,7 +346,7 @@ Unityで、ある場面のGameObjectの配置や環境を保存する単位。�
 
 **関連**　[プランナー](/glossary/game.html#planner) · [ゲームフィール・手触り](/glossary/game.html#game-feel)
 
-**出典**　[任天堂 — 社長が訊く Wii Street U（制作現場での「ROM」）](https://www.nintendo.co.jp/wiiu/interview/hardware/vol12/index.html)
+**出典**　[任天堂 — 社長が訊く『パンドラの塔』（ディレクターの担当）](https://www.nintendo.co.jp/wii/interview/sx3j/vol1/index.html)
 
 ## テクニカルアーティスト {#technical-artist}
 
@@ -638,6 +624,20 @@ Unityで、GameObjectとそのコンポーネントや子の構成を保存し�
 
 **出典**　[Epic Games — Level Streaming Overview（UE 5.8）](https://dev.epicgames.com/documentation/unreal-engine/level-streaming-overview-in-unreal-engine?lang=en-US)
 
+## 「焼く」・アセットの「焼き」 {#asset-baking}
+
+**asset baking / bake / burn a disc / program a ROM** ／ 読み やく あせっとのやき やき やきこみ べいく
+
+制作時の計算結果や設定を、実行時に読み取れるデータとして書き出すこと。
+
+**この分野での意味**　「ディスクを焼く」は光ディスクにデータを書き込むこと。「ROMを焼く」は書き込み可能なROMにプログラムなどを書き込むことを指す。
+
+**例**　アニメーションを頂点テクスチャに焼く。提出用のディスクを焼く。
+
+**関連**　[頂点シェーダーでの表現](/graphics/shader/vertex-effects.html) · [ベイク（焼き込み）](/glossary/graphics.html#bake) · [クック](/glossary/game.html#cook) · [ROM（ロム）](/glossary/game.html#rom)
+
+**出典**　[SideFX — Labs Vertex Animation Textures 3.0](https://www.sidefx.com/docs/houdini/nodes/out/labs--vertex_animation_textures-3.0.html) · [Apple — CDやDVDに情報を書き込む](https://support.apple.com/en-euro/guide/mac-help/mchl8addfd95/27/mac/27) · [Microchip — EPROM Memory Programming Specifications](https://ww1.microchip.com/downloads/en/DeviceDoc/30274b.pdf)
+
 ## リグレッション {#regression}
 
 **regression** ／ 読み りぐれっしょん でぐれ
@@ -700,13 +700,13 @@ Unityで、GameObjectとそのコンポーネントや子の構成を保存し�
 
 本来は読み出し専用のメモリ。ゲーム制作の会話では、試遊や検査に使うビルド一式を「ロム」と呼ぶこともある。
 
-**この分野での意味**　開発現場の「ロム」は物理的なROMチップに限らない。
+**この分野での意味**　「今日のロム」「開発中のロム」のような用法では、媒体の種類より、試遊や検査に使うビルドの版を指す。
 
 **例**　今日のロムを実機で確認する。
 
 **関連**　[ビデオゲーム史](/history/video-games.html) · [ビルド（成果物）](/glossary/game.html#build)
 
-**出典**　[任天堂 — 社長が訊く Wii Street U（制作現場での「ROM」）](https://www.nintendo.co.jp/wiiu/interview/hardware/vol12/index.html) · [NIST — Read-Only Memory](https://csrc.nist.gov/glossary/term/read_only_memory)
+**出典**　[任天堂 — 社長が訊く Wii Street U（制作現場での「ROM」）](https://www.nintendo.co.jp/wiiu/interview/hardware/vol12/index.html) · [カプコン開発者による『プラグマタ』の合同インタビュー（Gamer）](https://www.gamer.ne.jp/news/202512140001/) · [NIST — Read-Only Memory](https://csrc.nist.gov/glossary/term/read_only_memory)
 
 ## ワークフロー {#workflow}
 

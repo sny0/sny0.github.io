@@ -37,6 +37,13 @@ flowchart LR
 
 ソース行を追うには、キャプチャに記録したバイナリと対応するデバッグ情報が必要になる。DXC で `-Zi -Qembed_debug` を指定すると、DXIL シェーダーオブジェクトへデバッグ情報を埋め込める。最適化で変数や式が統合される場合は `-Od` で再現できるか確認する。リリース構成だけで再現する現象では、最適化を切った結果と元のキャプチャを区別して扱う。デバッガーが扱える機能は API、シェーダー命令、ドライバーなどに依存し、選んだ呼び出しでデバッグできないときは、色やバッファーでの可視化を使う。
 
+### Vulkan のソースデバッグとエンジンのシンボル
+
+RenderDoc v1.47 の Vulkan ソースデバッグは SPIR-V の `NonSemantic.Shader.DebugInfo.100` を使う。例えば DXC では `dxc -spirv -T ps_6_0 -E main -fspv-target-env=vulkan1.2 -fspv-debug=vulkan-with-source shader.hlsl -Fo shader.spv`、glslang では `glslangValidator -V -gVS shader.frag -o shader.spv` でソースを含む情報を埋め込める。キャプチャしたモジュールがそのバイナリかを確認し、デバッグ可能な呼び出しを選ぶ。
+
+- **Unity 6.3 LTS** の `#pragma enable_d3d11_debug_symbols` は、名前に D3D11 を含むが、D3D11・D3D12・Vulkan と対応コンソールでシンボルを生成する。最適化も無効にするため、普段のビルドと比較する際は同じパスとキーワードを選び、最適化による差も考慮する。
+- **Unreal Engine 5.8** では、対象プラットフォームの設定で `r.Shaders.Symbols=1` を指定してシェーダーを再コンパイルする。対応するプラットフォームではシンボルを外部ファイルに書き出し、必要ならキャプチャツールに `Saved/ShaderSymbols/Platform` のパスを渡す。外部ファイルを使わないプラットフォームでは、シンボルがシェーダーデータに入る。
+
 ## 値を色へ写す
 
 | 調べる値 | 可視化の例 |
@@ -46,6 +53,8 @@ flowchart LR
 | 非有限値 | `any(isnan(value))` をマゼンタ、`any(isinf(value))` をオレンジで出す。 |
 
 色の変換、ブレンド、露出などが間に入ると値を読みにくくなる。数値を比較する場合は、デバッグ用出力を直接表示するか、キャプチャ上で浮動小数点レンダーターゲットの中身を読む。
+
+RenderDoc v1.47 の Texture Viewer にある **NaN/Inf/-ve display** は、選んだテクスチャをグレースケールにし、NaN を赤、無限大を緑、負値を青で強調する。複数チャンネルのうち一つだけに該当する値があっても、ピクセルに色が付く。符号付きの法線や速度には正当な負値もある。どのパスで異常が入ったかを調べるときは、最終出力から順に前の浮動小数点バッファへ戻って同じ位置を確認する。負値を格納できない出力や、書き込み前に置き換わった非有限値は、このオーバーレイでは見えない。
 
 ### 最初に NaN が出た場所を探す
 
@@ -130,9 +139,13 @@ float4 main(float3 interpolatedNormal : TEXCOORD0) : SV_Target
 ## 参考資料
 
 - [RenderDoc v1.47 のリリースノート](https://github.com/baldurk/renderdoc/releases/tag/v1.47)
-- [RenderDoc — How do I debug a shader?](https://github.com/baldurk/renderdoc/blob/v1.x/docs/how/how_debug_shader.rst)
+- [RenderDoc — How do I debug a shader?](https://github.com/baldurk/renderdoc/blob/v1.47/docs/how/how_debug_shader.rst)
 - [Microsoft — PIX 2610.28 のリリースノート](https://devblogs.microsoft.com/pix/pix-2610-28/)
 - [Microsoft — PIX GPU Captures](https://devblogs.microsoft.com/pix/gpu-captures/)
 - [Microsoft — PIX でのシェーダー PDB と埋め込みデバッグ情報](https://learn.microsoft.com/windows/pix/directx-dump-files/analyze-dump-files-in-pix)
 - [Microsoft HLSL リファレンス — isnan](https://learn.microsoft.com/en-us/windows/win32/direct3dhlsl/dx-graphics-hlsl-isnan)
 - [Microsoft HLSL リファレンス — saturate 命令修飾子](https://learn.microsoft.com/en-us/windows/win32/direct3dhlsl/saturate)
+
+- [RenderDoc v1.47 — Texture Viewer のオーバーレイ](https://github.com/baldurk/renderdoc/blob/v1.47/docs/window/texture_viewer.rst)
+- [Unity 6.3 LTS — HLSL pragma directives](https://docs.unity3d.com/6000.3/Documentation/Manual/SL-PragmaDirectives.html)
+- [Epic Games — Shader Debugging Workflows（Unreal Engine 5.8）](https://dev.epicgames.com/documentation/en-us/unreal-engine/shader-debugging-workflows-unreal-engine?application_version=5.8)

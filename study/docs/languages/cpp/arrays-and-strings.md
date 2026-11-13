@@ -110,7 +110,7 @@ void PrintName(std::string_view n);   // 読むだけの引数はstring_viewが�
 
 ## Unity開発者が誤解しやすい点
 
-1. 「配列は安全なもの」— 生配列の範囲外アクセスはUB。`v[i]`も範囲内が前提で、C++23までは範囲外での動作を標準は保証しない(デバッグ設定等で診断する実装もある)。C++26草案は`vector::operator[]`をhardened preconditionとして規定し、強化実装では範囲外が契約違反になる。`at()`は範囲外を`std::out_of_range`で報告する。[C++草案: コンテナ要件](https://eel.is/c++draft/sequence.reqmts)・[強化事前条件](https://eel.is/c++draft/structure.specifications)
+1. 「配列は安全なもの」— 生配列の範囲外アクセスはUB。`v[i]`も範囲内が前提で、C++23までは範囲外での動作を標準は保証しない(デバッグ設定等で診断する実装もある)。[C++26（DIS）](/languages/cpp/cpp26-features.html)は`vector::operator[]`をhardened preconditionとして規定し、強化実装では範囲外が契約違反になる。`at()`は範囲外を`std::out_of_range`で報告する。[C++草案: コンテナ要件](https://eel.is/c++draft/sequence.reqmts)・[強化事前条件](https://eel.is/c++draft/structure.specifications)
 2. C++にはGCがありませんが、文字列連結では再確保のコストがかかります。ループ内で連結する場合は `reserve` でこのコストを抑えられます。
 3. Cの文字列APIは一般にNUL終端(`'\0'`)を前提にする。`char*`という型だけで終端や文字コードが保証されるわけではない。`c_str()`の返すポインタは元のstringの破棄や、再確保などを伴う変更で無効になり得る。`std::string`は途中にもNULを保持できるため、NUL終端APIへ渡すと長さの解釈も変わる（[C++20草案: string.require](https://timsong-cpp.github.io/cppwp/n4861/string.require)、[string.accessors](https://timsong-cpp.github.io/cppwp/n4861/string.accessors)）
 

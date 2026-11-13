@@ -51,6 +51,12 @@ Burns・Hunt の 2013 年の実装は、サンプルあたり三角形とイン�
 
 Unreal Engine 5.8 の公式資料では、Nanite はメッシュを階層化したクラスタに分け、描画時に見える詳細度を選ぶ仮想化ジオメトリとして説明されている。Epic Games の SIGGRAPH 2021 講演では、Nanite が可視クラスタと三角形を特定できる情報を記録し、材質パスで頂点属性を復元して G-Buffer へ出力する設計を示している。この構成では、可視性と材質評価を分けつつ、エンジンの Deferred の照明処理を共有できる。
 
+### Deferred Texturing で材質の仕事を振り分ける
+
+可視性パスの後でテクスチャを読む構成では、各ピクセルにどの材質プログラムを適用するかが分かる。例えば画面を 8×8 ピクセルのタイルに分け、可視性バッファーからタイル内に出現する材質を集計する。材質ごとのタイルリストを作り、後段のパスは該当タイルだけを走査して、その材質のピクセルを評価する。同じタイルに 3 材質が混じる場合は 3 リストへ入るので、タイル数だけで実行量は決まらない。ピクセル座標を材質ごとに直接詰める構成では、詰めるための読み書きと、隣接ピクセルをまとめて処理しやすいかを確認する。
+
+Nanite の SIGGRAPH 2021 講演には、材質 ID を深度として使う `Material Depth` によって対象ピクセルを選ぶ方式がある。Unreal Engine 5.4 のリリースノートでは、後の Compute Shading の経路で材質のシェーディングビンを組み立てる処理が確認できる。ここでの 8×8 は教材の分類例であり、エンジン内部の固定サイズを示すものではない。 [Epic Games — Nanite 講演（2021）](https://advances.realtimerendering.com/s2021/Karis_Nanite_SIGGRAPH_Advances_2021_final.pdf)・[Unreal Engine 5.4 リリースノート](https://dev.epicgames.com/documentation/en-us/unreal-engine/unreal-engine-5.4-release-notes?application_version=5.4)
+
 ## コード例 — ID と UV を別々のパスで求める
 
 HLSL Shader Model 6.0 のピクセルシェーダー 2 本を 1 ファイルに置いた例。DXC で `writeVisibility` と `sampleVisibleMaterial` をそれぞれ `ps_6_0` としてコンパイルできる。最初のパスでは `R32G32_UINT` のターゲットを 0 でクリアし、深度テストを有効にしてインスタンスを一つずつ描く。`drawInstanceIndex` は 0 始まり。`instanceFirstTriangle` は各インスタンスの三角形の開始位置を記録する。

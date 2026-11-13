@@ -110,7 +110,7 @@
 - [光とレンダリングの基本 — シーンから画像を作る](/graphics/basics/light-and-rendered-images.html)
 - [座標変換とカメラの基本 — モデルの位置が画面に映るまで](/graphics/basics/transforms-and-cameras.html)
 - [最新のシェーダー技術 — Slang・bindless・Work Graphs・VRS・Cooperative Vectors](/graphics/shader/modern-shader-technologies.html)
-- [材質モデルの拡張 — 異方性・クリアコート・シーン・皮膚と髪](/graphics/shader/extended-material-models.html)
+- [材質モデルの拡張 — 異方性・クリアコート・繊維の光沢・皮膚と髪](/graphics/shader/extended-material-models.html)
 - [視差とデカール — 表面の凹凸と模様を重ねる](/graphics/shader/parallax-and-decals.html)
 - [出力結合 (Depth / Stencil / Blend)](/graphics/pipeline/output-merger.html)
 - [色空間と HDR — リニア光量からディスプレイ出力まで](/graphics/shader/color-space-and-hdr.html)

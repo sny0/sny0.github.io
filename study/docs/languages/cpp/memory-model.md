@@ -53,6 +53,24 @@ flowchart LR
 
 図の左端から右端まで関係をつなぐと、書き込みが読み出しに **happens-before** する。途中の acquire が古い `false` を読む時点では、その release とまだ同期していない。両端のアクセスが同じメモリ位置で競合し、少なくとも一方が非 atomic で、どちら向きにも happens-before がなければ、異なるスレッドのアクセスはデータ競合となる。[並行処理のバグ](../../runtime/memory/concurrency-bugs.md)では、データ競合と、順序の選び方で生じるロジック上の競合を区別している。
 
+### acq_rel とフェンスを使う場合
+
+`acq_rel` は `fetch_add` や成功した `compare_exchange` などの RMW に使える。読み取った値が対応する release に由来する場合は acquire 側の同期が成立し、自分が書いた値は後続の acquire に向けて release の役割を持つ。例えば別のスレッドから作業を引き継ぎ、結果を次の担当へ渡す状態遷移で両側の順序が必要になる。`compare_exchange` が失敗した場合は書き込みがなく、失敗時の順序に `release` や `acq_rel` は指定できない。
+
+`std::atomic_thread_fence` で順序付けを atomic の操作から分けることもできる。公開側では通常データの書き込み、release フェンス、フラグへの relaxed store の順に行う。受け手では対応する値を relaxed load で読み、acquire フェンスを通ってから通常データを読む。この読み出しが書き込みを観測することが、二つのフェンスを同期させる条件。フェンスを両スレッドに置くだけでは受け渡しは成立しない。フラグ一つで受け渡すなら、次の掲載例のように atomic 自体に release/acquire を指定すると、同期の条件をコードから読み取りやすい。
+
+```mermaid
+flowchart LR
+    A["通常データを書く"] --> B["release フェンス"]
+    B --> C["relaxed store"]
+    C -. "書いた値を読む" .-> D["relaxed load"]
+    D --> E["acquire フェンス"]
+    E --> F["通常データを読む"]
+    B -. "synchronizes-with" .-> E
+```
+
+C++20 の `memory_order::consume` は、ロードした値に依存する後続のアクセスを対象にした順序。C++26 の DIS では非推奨となり、`acquire` と同じ意味になる。新しいコードでは `acquire` を使い、既存の `consume` を読むときは対象の規格と処理系を確認する。
+
 ## seq_cst の全順序を読む
 
 初期値 0 の atomic `x`、`y` について、スレッド A が `x = 1` を書いてから `y` を読み、B が `y = 1` を書いてから `x` を読む。すべて `seq_cst` なら、両方の読み出しが 0 になることはない。A が 0 を読むにはその読み出しが B の書き込みより前、B が 0 を読むにはその読み出しが A の書き込みより前である必要がある。各スレッド内の順序と合わせると全順序に閉路ができてしまう。
@@ -103,12 +121,14 @@ int main()
 1. 複数スレッドが一つのカウンターを `fetch_add(1, std::memory_order::relaxed)` で増やす。対象のカウンターへの更新は不可分か。
 2. release store の前に書いた通常データを、同じフラグの acquire load が古い `false` を返した直後に読めるか。
 3. 上のコードで `join()` を値の読み出しより後に置けるのはなぜか。
+4. 両スレッドにフェンスを置いた。受け手が通常データを読めると判断するには、何を確認するか。
 
 ::: details 解答
 
 1. 不可分。`relaxed` でも、同じ atomic に対する RMW として一つの更新になる。
 2. その release との同期がまだ成立していないので、フラグを根拠には読めない。
 3. `true` を読む release/acquire の組によって、通常データの書き込みが読み出しに happens-before するため。
+4. フェンスの間に対応する atomic の読み書きがあり、受け手が公開側の書いた値を読み出したことを確認する。
 
 :::
 
@@ -122,3 +142,4 @@ int main()
 
 - WG21, [作業草案 N4861](https://www.open-std.org/jtc1/sc22/wg21/docs/papers/2020/n4861.pdf)・[C++20 DIS N4860 との対応を示す編集報告 N4859](https://www.open-std.org/jtc1/sc22/wg21/docs/papers/2020/n4859.html)
 - N4861 の HTML 版, [intro.races](https://timsong-cpp.github.io/cppwp/n4861/intro.races)・[atomics.order](https://timsong-cpp.github.io/cppwp/n4861/atomics.order)・[atomics.types.operations](https://timsong-cpp.github.io/cppwp/n4861/atomics.types.operations)・[atomics.lockfree](https://timsong-cpp.github.io/cppwp/n4861/atomics.lockfree)・[thread.thread.member](https://timsong-cpp.github.io/cppwp/n4861/thread.thread.member)
+- WG21, [N4861 の atomics.fences](https://timsong-cpp.github.io/cppwp/n4861/atomics.fences)・[N5050 の非推奨となった atomic 操作](https://timsong-cpp.github.io/cppwp/n5050/depr#depr.atomics.order)・[P3475R2（C++26の memory_order::consume の変更）](https://www.open-std.org/jtc1/sc22/wg21/docs/papers/2025/p3475r2.pdf)

@@ -8,12 +8,12 @@ study:
   domain: languages
   summary: データを借りるビューと、要素を所有するコンテナを、配置、容量、参照が無効になる条件で比較する。
   aliases: [std::span, std::mdspan, std::flat_map, std::inplace_vector, std::hive, 非所有ビュー, フラットマップ]
-  verification: WG21のC++20草案N4861、C++23最終草案N4950、C++26草案N5050の該当節に照合（2026-11-13）
+  verification: WG21のC++20草案N4861、C++23最終草案N4950、C++26のDISの基礎となったN5050に照合し、GCC 16.2で実行確認（2026-11-13）
 ---
 
 # C++23・26のコンテナとビュー — span・mdspan・flat_map・inplace_vector・hive
 
-テクスチャの行列を関数へ渡す、IDから描画設定を引く、フレームごとの小さなリストを作る。どの場面で使うかによって、必要な性質が変わります。C++20の `span`、C++23の `mdspan` と `flat_map`、C++26草案の `inplace_vector` と `hive` を、メモリの所有権と配置から見ていきます。
+テクスチャの行列を関数へ渡す、IDから描画設定を引く、フレームごとの小さなリストを作る。どの場面で使うかによって、必要な性質が変わります。C++20の `span`、C++23の `mdspan` と `flat_map`、C++26の `inplace_vector` と `hive` を、メモリの所有権と配置から見ていきます。C++26は2026年11月13日時点でISOのDIS投票終了（40.60）です。規格の進捗と処理系の対応は [C++26の主な新機能](/languages/cpp/cpp26-features.html) で確認できます。
 
 ## どこに要素を置くか
 
@@ -22,8 +22,8 @@ study:
 | `std::span<T>` | C++20 | 他のオブジェクトが所有する連続した要素列を借りる。動的な長さとコンパイル時に決まる長さを表せる |
 | `std::mdspan<T, Extents, Layout>` | C++23 | 次元ごとの添字から要素へのアクセスを作る。既定のアクセサーで既存バッファを借り、行優先、列優先、ストライド付きなどの配置を表せる |
 | `std::flat_map<K, V>` | C++23 | 順序付きのキーと値をそれぞれのコンテナに保持する。既定では双方が `std::vector`。一意なキーで検索できる |
-| `std::inplace_vector<T, N>` | C++26草案 | 最大N個の要素をオブジェクト自身の内部に連続して置く。サイズを0〜Nの範囲で変えられる |
-| `std::hive<T>` | C++26草案 | 複数のブロックに要素を置き、消した位置を後の挿入で再利用できる。反復は双方向 |
+| `std::inplace_vector<T, N>` | C++26（DIS） | 最大N個の要素をオブジェクト自身の内部に連続して置く。サイズを0〜Nの範囲で変えられる |
+| `std::hive<T>` | C++26（DIS） | 複数のブロックに要素を置き、消した位置を後の挿入で再利用できる。反復は双方向 |
 
 ```mermaid
 flowchart LR
@@ -42,9 +42,11 @@ flowchart LR
 
 `mdspan` は次元ごとの添字を、レイアウトの写像を通じて位置へ変換します。2行3列なら、`layout_right` で `(row, column)` のオフセットは `row * 3 + column` です。`layout_left` なら `row + column * 2` です。添字 `(1, 0)` は前者で3、後者で1になります。行末に余白がある幅3・行間隔4のバッファなら、`layout_stride` で行のストライドを4、列を1にできます。サイズとストライドは、実際に所有しているメモリの範囲に合わせます。
 
+C++26の `std::submdspan` では、整数で指定した軸を一つの添字に固定し、`std::full_extent` で指定した軸を全体のまま残せます。例えば2行3列の行列に `std::submdspan(rows, 1, std::full_extent)` を適用すると、第1軸が消えて、2行目の3要素を借りる1次元ビューになります。スライスを取っても元の記憶域の寿命は延びません。
+
 ## flat_map・inplace_vector・hiveの使い分け
 
-**`flat_map`** はキーと値を別々のコンテナで保持し、キーの並び順で検索します。キーによる検索は対数時間、1要素の挿入・削除は線形時間です。よく読む材質テーブルをまとめて構築する場面では候補になります。ゲーム中に1件ずつ頻繁に挿入・削除するなら、移動する要素数と参照の無効化を考えます。
+**`flat_map`** はキーと値を別々のコンテナで保持し、キーの並び順で検索します。キーによる検索は対数時間、1要素の挿入・削除は線形時間です。よく読む材質テーブルをまとめて構築する場面では候補になります。ゲーム中に1件ずつ頻繁に挿入・削除するなら、移動する要素数と参照の無効化を考えます。データが比較関数の順序で整列済みで、比較上同値のキーがないことを呼び出し側で保証できる場合は、`std::sorted_unique` を指定して構築または一括挿入できます。指定のない範囲コンストラクターや範囲挿入なら、コンテナ側に整列・同値キーの処理を任せられます。
 
 **`inplace_vector`** は要素用の領域をオブジェクト自身に持つので、容量Nを超えるような再確保は行いません。通常の `push_back` が容量を超える場合は `std::bad_alloc` を送出します。失敗を戻り値で調べるなら `try_push_back` を使い、戻り値が空か確認します。途中へ挿入・削除すると後続の要素は移動し得ます。内部に持つ容量は空でもオブジェクトの大きさに関わるため、大量のオブジェクトへ埋め込む場合はNの上限を実測に合わせます。
 
@@ -52,12 +54,13 @@ flowchart LR
 
 ## コード例 — 同じバッファを1次元と2次元で読む
 
-完全なC++ソースです。`cl /std:c++20 /EHsc views.cpp` では `span` の部分を確認できます。`mdspan` などを実装した標準ライブラリと対応する規格モードを選ぶと、`<version>` の機能テストマクロに応じて該当部分も有効になります。
+完全なC++ソースです。`g++ -std=c++20 views.cpp -o views` で `span` を確認できます。同じファイルを `-std=c++23` または `-std=c++26` でビルドすると、標準ライブラリの `<version>` が公開する機能テストマクロに応じて、実装済みの型や関数の分岐も有効になります。
 
 ```cpp
 #include <array>
 #include <iostream>
 #include <span>
+#include <utility>
 #include <version>
 
 #ifdef __cpp_lib_mdspan
@@ -82,12 +85,17 @@ int main()
 #ifdef __cpp_lib_mdspan
     std::mdspan<int, std::extents<int, 2, 3>> rows{pixels.data()};
     std::cout << "mdspan: " << rows[1, 0] << '\n';
+#ifdef __cpp_lib_submdspan
+    const auto row = std::submdspan(rows, 1, std::full_extent);
+    std::cout << "submdspan: " << row[2] << '\n';
+#endif
 #endif
 
 #ifdef __cpp_lib_flat_map
-    std::flat_map<int, int> materials;
-    materials.emplace(42, 7);
-    std::cout << "flat_map: " << materials.at(42) << '\n';
+    std::flat_map<int, int> materials{std::sorted_unique, {{12, 3}, {42, 7}}};
+    const std::array additional{std::pair{20, 5}, std::pair{50, 9}};
+    materials.insert(std::sorted_unique, additional.begin(), additional.end());
+    std::cout << "flat_map: " << materials.at(42) << ',' << materials.at(20) << '\n';
 #endif
 
 #ifdef __cpp_lib_inplace_vector
@@ -109,7 +117,7 @@ int main()
 }
 ```
 
-`span` と行優先の `mdspan` はどちらも元の配列の要素20を読みます。`inplace_vector` の容量は2なので3つ目を追加すると `full` です。`hive` で消したのは10だけなので、既存の20へのイテレーターを使えます。手元のVisual Studio 2022 17.5.5では `span` の分岐を実行して20を確認しました。この環境にはほかの4型の対応ヘッダーがないため、その分岐は該当する草案の宣言に照合しています。
+`span` と行優先の `mdspan` はどちらも元の配列の要素20を読みます。`inplace_vector` の容量は2なので3つ目を追加すると `full` です。`hive` で消したのは10だけなので、既存の20へのイテレーターを使えます。GCC 16.2と付属のlibstdc++で実行しました。C++20モードは `span: 20`、C++23モードはさらに `mdspan: 20` と `flat_map: 7,5` を表示します。C++26モードでは `submdspan: 22` と `inplace_vector: full` も表示します。この配布のlibstdc++では `hive` の分岐が有効にならないため、その例はN5050の宣言と無効化規則に照合しました。初回のVisual Studio 2022 17.5.5での確認は `span` の分岐が対象でした。Microsoftの適合表では `<mdspan>` はVisual Studio 2022 17.9からです。
 
 ## 理解度チェック
 
@@ -134,5 +142,8 @@ int main()
 - [WG21、C++20草案N4861のspan](https://timsong-cpp.github.io/cppwp/n4861/span.overview)
 - [WG21、C++23草案N4950のmdspanとレイアウト](https://timsong-cpp.github.io/cppwp/n4950/mdspan.layout)
 - [WG21、C++23草案N4950のflat_map](https://timsong-cpp.github.io/cppwp/n4950/flat.map.overview)
-- [WG21、C++26草案N5050のinplace_vector](https://timsong-cpp.github.io/cppwp/n5050/inplace.vector)
-- [WG21、C++26草案N5050のhive](https://timsong-cpp.github.io/cppwp/n5050/hive)
+- [WG21、C++26 DISの基礎となったN5050のinplace_vector](https://timsong-cpp.github.io/cppwp/n5050/inplace.vector)
+- [WG21、N5050のhive](https://timsong-cpp.github.io/cppwp/n5050/hive)
+- [WG21 N5050 — submdspan](https://timsong-cpp.github.io/cppwp/n5050/mdspan.sub)
+- [GCC 16 — 標準ライブラリの実装状況](https://gcc.gnu.org/gcc-16/changes.html#libstdcxx)
+- [Microsoft — Visual Studio 2022 17.9のC++適合性の改善](https://learn.microsoft.com/en-us/cpp/overview/cpp-conformance-improvements#conformance-improvements-in-visual-studio-2022-version-179)

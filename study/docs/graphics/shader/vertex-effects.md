@@ -31,6 +31,12 @@ flowchart LR
     V --> C
 ```
 
+### 草の長さを保ち、風を位置で変える
+
+横へ平行移動するだけでは、草の根元から先端までが伸びることがあります。草の中心線を、根元で上向き、先端へ向かうにつれて曲がる円弧にすると、中心線の長さを保てます。草の長さを $\ell$、根元からの距離を $s$、先端での曲がり角を $\theta$ とすると、曲がる平面内の横・上の座標は、曲率 $k=\theta/\ell$ を使って $((1-\cos(ks))/k,\ \sin(ks)/k)$。この式を $s$ で微分したベクトルは $(\sin(ks),\cos(ks))$ で長さ 1 なので、弧長は元の $s$ になります。$k=0$ の近くでは $(0,s)$ を使います。例えば長さ 1 m、曲がり角 $\pi/2$ なら先端は横・上ともに $2/\pi\approx0.637$ m。草の板の幅は、中心線からのオフセットも断面と一緒に回すと保ちやすくなります。
+
+風を位置で変えるには、ワールドの XZ 座標で風テクスチャをサンプルし、RG から水平の風向・強さを読みます。一株の頂点が同じ方向に曲がるよう、株の根元で読んだ値を共有し、頂点側では明示したミップをサンプルします。周期が近い株が一斉に動く場合は、株ごとに位相をずらします。Unity 6.3 LTS の Wind Zone は対応する Terrain の木などへ風を与える仕組みです。独自の草の頂点シェーダーでは、風の値をテクスチャや定数へ渡す処理を実装します。
+
 ## コード例 — ワールド空間で草を曲げる
 
 HLSL Shader Model 6.0の頂点シェーダーです。`dxc -T vs_6_0 -E WindVS Wind.hlsl` でコンパイルできます。各頂点にオブジェクト空間の根元位置と0〜1の変形重みを渡します。`WindDirectionXZ` は単位ベクトル、`Amplitude` はメートル、`SpatialFrequency` はrad/m、`AngularFrequency` はrad/sです。行列は列ベクトルへ左から掛ける規約で、定数バッファにもこの規約で渡します。
@@ -89,6 +95,10 @@ $$
 
 例えば $A=0.10$ m、$k_x=2$ rad/m、$k_z=0$ で位相が0なら、$x$ 方向の傾きは $0.10\cdot2\cdot\cos(0)=0.20$、$z$ 方向は0です。法線は $(-0.20,1,0)$ を正規化し、約 $(-0.196,0.981,0)$ になります。頂点の間隔より細かな波は形として表現しづらいので、頂点には大きな波を使い、細かい波は法線の表現に回せます。
 
+### Gerstner 波で頂点を横にも動かす
+
+Gerstner 波では高さだけでなく、水平方向の位置も動かして波の頂へ頂点を寄せます。基準の水平位置を $p=(x,z)$、波の方向を単位ベクトル $D$、振幅を $A$、波数を $k$、急峻さの係数を $Q$ とし、位相を $\phi=kD\cdot p-\omega t$ とします。水平位置は $p'=p+QA D\cos\phi$、高さは $A\sin\phi$。高さだけの法線式をそのまま使うと横の変位が抜けるため、変形した 3D 位置を $x,z$ で微分し、上向きになる順序で外積を取ります。波が一つなら、進行方向に対する水平変位の微分は $1-QAk\sin\phi$。$QAk<1$ にすると折り返しを防げます。複数波では $\sum_i Q_iA_ik_i<1$ を余裕のある目安にできます。 [Mark Finch — GPU Gems, §1.2.3](https://developer.nvidia.com/gpugems/gpugems/part-i-natural-effects/chapter-1-effective-water-simulation-physical-models)
+
 ## VAT — 事前計算した動きを読む
 
 VAT（頂点アニメーションテクスチャ）では、シミュレーション結果をテクスチャへ書き出します。例えば固定トポロジーの単純な配置では、テクスチャの列を頂点の番号、行をフレームに対応させ、変位や回転を読みます。フレーム10.25を再生するなら、10と11の位置を0.25で線形補間できます。頂点の列は整数で指定し、隣の頂点のデータをフィルタで混ぜないようにします。
@@ -99,6 +109,53 @@ VAT（頂点アニメーションテクスチャ）では、シミュレーシ�
 | VAT | 事前に求めた位置や回転を読む。データ量は頂点数・フレーム数・格納形式などで変わり、再生できる動きは書き出したデータに依存する |
 
 SideFX Labs VAT 3.0では、固定トポロジーの変形、剛体、トポロジーが変わる流体などで書き出しモードが分かれます。3.0のRotation Textureは法線と接線の向きを記述します。エクスポーターが使う頂点識別子、データの配置、座標系に合わせて読み出します。インポート時に頂点が分割や並べ替えされるパイプラインでは、素材に保存した参照用の値が引き続き一致するか確認します。
+
+### コード例 — 頂点番号とフレームで VAT を読む
+
+HLSL Shader Model 6.0 の `vs_6_0`、エントリーは `VatVS`。この例は独自の固定トポロジー形式で、SideFX の出力形式とは別です。描画の `SV_VertexID` とテクスチャの列を一致させ、位置テクスチャと回転テクスチャは共に幅が頂点数、高さが `FrameCount`（1 以上）です。位置は AABB で正規化した RGB、回転は UNORM の XYZW に $[-1,1]$ を写したクォータニオンです。二つのフレームの回転を同じ半球にそろえてから nlerp し、頂点の元の法線へ適用します。位置を各頂点に直接保存するので、位置に回転は重ねません。`Frame` は非負の有限値で、ループするクリップを扱います。
+
+```hlsl
+Texture2D<float4> PositionVat : register(t0);
+Texture2D<float4> RotationVat : register(t1);
+
+cbuffer VatSettings : register(b0)
+{
+    float4x4 ClipFromObject;
+    float3 PositionMin;
+    float Frame;
+    float3 PositionExtent;
+    uint FrameCount;
+};
+
+struct VertexOutput
+{
+    float4 position : SV_Position;
+    float3 normalOS : TEXCOORD0;
+};
+
+VertexOutput VatVS(float3 bindNormal : NORMAL, uint vertex : SV_VertexID)
+{
+    float wrapped = fmod(Frame, float(FrameCount));
+    uint a = uint(floor(wrapped));
+    uint b = (a + 1u) % FrameCount;
+    float blend = frac(wrapped);
+    float3 p0 = PositionVat.Load(int3(vertex, a, 0)).rgb;
+    float3 p1 = PositionVat.Load(int3(vertex, b, 0)).rgb;
+    float4 q0 = normalize(2.0 * RotationVat.Load(int3(vertex, a, 0)) - 1.0);
+    float4 q1 = normalize(2.0 * RotationVat.Load(int3(vertex, b, 0)) - 1.0);
+    if (dot(q0, q1) < 0.0)
+        q1 = -q1;
+    float4 q = normalize(lerp(q0, q1, blend));
+
+    float3 p = PositionMin + PositionExtent * lerp(p0, p1, blend);
+    VertexOutput output;
+    output.position = mul(ClipFromObject, float4(p, 1.0));
+    output.normalOS = bindNormal + 2.0 * cross(q.xyz, cross(q.xyz, bindNormal) + q.w * bindNormal);
+    return output;
+}
+```
+
+例えば位置の X が $[-2,2]$ m の範囲で、二つのフレームに $0.25,0.75$ を格納し、補間が 0.25 なら、復元した X は $-2+4(0.25+0.25(0.75-0.25))=-0.5$ m。フレーム末尾から先頭を補間するので、ループをつなげた素材を使います。頂点の並べ替えがあるインポートでは、バッファ番号から推測せず VAT 用の ID を明示的な頂点属性にできます。
 
 ## 理解度チェック
 
@@ -123,3 +180,6 @@ SideFX Labs VAT 3.0では、固定トポロジーの変形、剛体、トポロ�
 - [Tiago Sousa、Vegetation Procedural Animation and Shading in Crysis（GPU Gems 3）](https://developer.nvidia.com/gpugems/gpugems3/part-iii-rendering/chapter-16-vegetation-procedural-animation-and-shading-crysis)
 - [Mark Finch、Effective Water Simulation from Physical Models（GPU Gems）](https://developer.nvidia.com/gpugems/gpugems/part-i-natural-effects/chapter-1-effective-water-simulation-physical-models)
 - [SideFX、Labs Vertex Animation Textures 3.0](https://www.sidefx.com/docs/houdini/nodes/out/labs--vertex_animation_textures-3.0.html)
+
+- [Unity 6.3 LTS — Add wind zones to trees](https://docs.unity3d.com/6000.3/Documentation/Manual/class-WindZone.html)
+- [Microsoft — HLSL のシステム値セマンティクス](https://learn.microsoft.com/en-us/windows/win32/direct3dhlsl/dx-graphics-hlsl-semantics)・[Texture2D.Load](https://learn.microsoft.com/en-us/windows/win32/direct3dhlsl/dx-graphics-hlsl-to-load)

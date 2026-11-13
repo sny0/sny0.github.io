@@ -30,6 +30,8 @@ flowchart LR
 
 `Span<T>` は `ref struct` なので、クラスのフィールドに保存したり、ボックス化したり、ラムダに捕捉したりできません。C# 13以降では `async` メソッド内で使える範囲が広がりましたが、`await` をまたいで保持できません。メモリの所有者が生きている間だけビューを使います。たとえばプールへ配列を返すと、同じ配列を他の利用者が書き換えられます。非同期処理にバッファ範囲を渡すなら、`Memory<T>` と所有者の寿命を合わせて管理します。
 
+`Span<byte> scratch = stackalloc byte[64];` なら、メソッドのスタック領域に64バイトの作業領域を確保してビューで扱えます。`Span<T>` に受ける書き方は `unsafe` を要求しません。初期化子なしの領域の初期値は保証されないため、読み出す範囲を先に書くか `Clear()` を呼びます。繰り返し処理ではループの外で領域を確保して再利用します。サイズが入力次第で大きくなる場合は、配列やプールから借りた領域へ切り替えます。
+
 ### C# 11のrefフィールドとscoped
 
 `ref struct` はC# 11から `ref` フィールドを宣言できます。値のコピーを格納する代わりに、元の変数への参照を保持します。`= ref` は参照先を付け替え、通常の `=` は参照先へ値を書き込みます。フィールド宣言の `readonly` は、置く位置で制約の対象が変わります。
@@ -67,6 +69,8 @@ C# 14は、配列や文字列、`Span<T>` と `ReadOnlySpan<T>` の間の変換�
 関数ポインターは型の付いたアドレスです。呼び出しはILの `calli` になり、関数ポインター自体はデリゲートオブジェクトを作りません。通常のデリゲートも再利用でき、ターゲットオブジェクトやクロージャーを扱えます。ネイティブとの境界で `delegate* unmanaged` を使うときは、呼び出し規約と引数・戻り値のレイアウトも合わせます。
 
 `static abstract` を持つインターフェースで `T` を制約すると、`T.Zero` や `a + b` を型に応じて書けます。`INumber<T>` は .NET 7で追加された制約の一つです。値型をインターフェースのインスタンスに変換する書き方を避けられます。実際のインライン化、ベクトル化、分岐コストはターゲットのコード生成と計測で確認します。
+
+Unity 6.3 LTSでBurst 1.8を使う場合、Burstがコンパイルする静的関数を実行時に選ぶ用途には `BurstCompiler.CompileFunctionPointer<T>()` と `FunctionPointer<T>` があります。`T` は呼び出しのシグネチャを表すデリゲート型で、引数と戻り値にはBurstの相互運用でサポートされる型を使います。C#の `delegate* managed` と同じ機能として扱わず、Burstの対象範囲とプラットフォームごとのAOT要件を確認します。1要素ずつ間接呼び出しするとコンパイラーがループをまとめて最適化しにくくなるため、複数要素と件数を渡す方式や、ジョブに処理を直接書く方式と計測で比べます。
 
 ## コード例 — バッファの一部を変換して集計する
 
@@ -214,4 +218,6 @@ Unity 6.3 LTSのEditorが使う言語版はC# 9.0です。公式マニュアル�
 - [Microsoft — C# 14のSpan変換の仕様](https://learn.microsoft.com/en-us/dotnet/csharp/language-reference/proposals/csharp-14.0/first-class-span-types)
 - [Microsoft — C# 9 function pointersの仕様](https://github.com/dotnet/csharplang/blob/main/proposals/csharp-9.0/function-pointers.md)
 - [Microsoft — Generic math（.NET 7以降）](https://learn.microsoft.com/en-us/dotnet/standard/generics/math)
+- [Microsoft — stackalloc式](https://learn.microsoft.com/en-us/dotnet/csharp/language-reference/operators/stackalloc)
+- [Unity — Burst 1.8の関数ポインター](https://docs.unity3d.com/Packages/com.unity.burst@1.8/manual/csharp-function-pointers.html)
 - [Unity 6.3 LTS — C# compiler and language version reference](https://docs.unity3d.com/6000.3/Documentation/Manual/csharp-compiler.html)

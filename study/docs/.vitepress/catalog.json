@@ -1569,7 +1569,7 @@
         "ODR",
         "import std"
       ],
-      "verification": "WG21 N4861・N4950・P2465R3、Microsoft Visual Studio 2022 の資料、CMake 3.30 公式マニュアルに照合（2026-11-13）",
+      "verification": "WG21 N4861・N4950・P2465R3、Microsoft Visual Studio 2022、GCC 16、libc++、CMake 4.4 の公式資料に照合（2026-11-13）",
       "links": [
         "/runtime/cpp-internals/translation-units-and-headers.html",
         "/tools/build/build-tools-cmake.html",
@@ -1658,8 +1658,9 @@
         "非所有ビュー",
         "フラットマップ"
       ],
-      "verification": "WG21のC++20草案N4861、C++23最終草案N4950、C++26草案N5050の該当節に照合（2026-11-13）",
+      "verification": "WG21のC++20草案N4861、C++23最終草案N4950、C++26のDISの基礎となったN5050に照合し、GCC 16.2で実行確認（2026-11-13）",
       "links": [
+        "/languages/cpp/cpp26-features.html",
         "/algorithms/arrays-and-dynamic-arrays.html",
         "/algorithms/search-trees.html",
         "/algorithms/generational-handles.html"
@@ -1687,6 +1688,7 @@
       ],
       "verification": "WG21のC++23最終草案N4950、P0847R7・P0323R12・P2505R5、MicrosoftのC++適合状況に照合（2026-11-13）",
       "links": [
+        "/languages/cpp/crtp.html",
         "/languages/cpp/const-correctness.html",
         "/languages/cpp/values-pointers-references.html",
         "/languages/cpp/exceptions.html"
@@ -3926,6 +3928,7 @@
       "aliases": [],
       "links": [
         "/design/solid/ocp.html",
+        "/languages/cpp/cpp26-features.html",
         "/game/unreal/reflection-and-uht.html",
         "/runtime/cpp-internals/symbols-and-linkage.html",
         "/runtime/cpp-internals/object-files-and-libraries.html",
@@ -4746,7 +4749,7 @@
         "ipv4hint",
         "ipv6hint"
       ],
-      "verification": "RFC 9460・RFC 9114・RFC 7838・RFC 8305の接続候補の発見、ALPN、検証、接続試行に照合（2026-11-13）",
+      "verification": "RFC 9460・9114・7838・8305・9848・9849、Happy Eyeballs v3 Internet-Draft -05 に照合（2026-11-13）",
       "links": [
         "/network/dns-resolution.html",
         "/network/quic-and-http3.html",
@@ -5692,11 +5695,11 @@
         "/graphics/lighting/ibl.html",
         "/graphics/lighting/gi.html",
         "/graphics/lighting/path-tracing.html",
+        "/graphics/shader/brdf-internals.html",
         "/graphics/postprocess/overview.html",
         "/math/rendering/vector.html",
         "/graphics/pipeline/fragment-shader.html",
         "/graphics/lighting/shadow.html",
-        "/graphics/shader/brdf-internals.html",
         "/graphics/shader/normal-mapping.html",
         "/graphics/shader/extended-material-models.html"
       ],
@@ -6087,6 +6090,7 @@
       "verification": "MicrosoftのDirect3D 12 Sampler Feedback、Shader Model 6.5、機能照会とUAV作成の資料に照合（2026-11-13）",
       "links": [
         "/graphics/texture/texture-filtering-and-mipmaps.html",
+        "/graphics/optimization/enhanced-barriers-and-synchronization2.html",
         "/graphics/optimization/d3d12-resource-barriers.html",
         "/game/asset-loading.html"
       ],
@@ -6495,6 +6499,7 @@
         "/game/patterns/optimization-patterns.html",
         "/design/patterns/iterator.html",
         "/languages/cpp/templates-and-concepts.html",
+        "/languages/cpp/cpp26-features.html",
         "/runtime/memory/allocators-and-pools.html",
         "/tools/build/build-configurations.html",
         "/languages/cpp/arrays-and-strings.html",
@@ -9892,7 +9897,7 @@
         "Voice Stealing",
         "Spatial Audio"
       ],
-      "verification": "Audiokinetic Wwise 2024.1 教材と公式技術資料、FMOD Studio / Engine 2.04 マニュアルに照合（2026-11-13）",
+      "verification": "Audiokinetic Wwise 2025.1.12 の公開告知と公式技術資料、FMOD Studio / Engine 2.04 マニュアルに照合（2026-11-13）",
       "links": [
         "/browser/audio-spatial-panning.html",
         "/browser/audio-occlusion.html",
@@ -10246,8 +10251,6 @@
         "/glossary/",
         "/game/asset-loading.html",
         "/glossary/game.html",
-        "/graphics/shader/vertex-effects.html",
-        "/glossary/graphics.html",
         "/game/asset-build-and-patches.html",
         "/languages/csharp/memory-management-vs-gc.html",
         "/tools/automated-testing.html",
@@ -10258,6 +10261,7 @@
         "/tools/profiling/cpu-profiling.html",
         "/game/basics/scenes-and-components.html",
         "/graphics/basics/materials-textures-and-shaders.html",
+        "/glossary/graphics.html",
         "/game/world-streaming.html",
         "/game/basics/prefabs-and-object-lifetimes.html",
         "/algorithms/generational-handles.html",
@@ -10271,6 +10275,7 @@
         "/tools/ci-and-build-automation.html",
         "/game/basics/game-engine-basics.html",
         "/game/unreal/uobject-actor-component.html",
+        "/graphics/shader/vertex-effects.html",
         "/history/video-games.html"
       ]
     },
@@ -10349,6 +10354,7 @@
         "/runtime/cpp-internals/function-calls-and-cpu.html",
         "/runtime/memory/concurrency-bugs.html",
         "/languages/cpp/undefined-behavior.html",
+        "/languages/cpp/cpp26-features.html",
         "/tools/build/build-configurations.html",
         "/runtime/cpp-internals/cache-branch-simd.html",
         "/runtime/cpp-internals/",
@@ -10636,7 +10642,8 @@
         "/graphics/optimization/pipeline-compilation-stutter.html",
         "/graphics/shader/hlsl.html",
         "/tools/profiling/cpu-profiling.html",
-        "/graphics/shader/shader-optimization.html"
+        "/graphics/shader/shader-optimization.html",
+        "/graphics/engine/unity-renderer.html"
       ],
       "difficulty": "advanced",
       "importance": "useful"
@@ -11259,8 +11266,8 @@
       "verification": "WG21 C++20 N4861、Musser（1997）、Satish・Harris・Garland（2009）、Microsoft のブレンド式に照合（2026-11-13）",
       "links": [
         "/algorithms/binary-heaps.html",
-        "/graphics/compute/compute-shader.html",
-        "/graphics/shader/gpu-particles.html"
+        "/graphics/shader/gpu-particles.html",
+        "/graphics/compute/compute-shader.html"
       ],
       "difficulty": "intermediate",
       "importance": "useful"
@@ -12690,6 +12697,7 @@
       "links": [
         "/glossary/",
         "/tools/automated-testing.html",
+        "/languages/cpp/cpp26-features.html",
         "/glossary/programming.html",
         "/tools/build/build-speed.html",
         "/compilers/libraries-apis-and-sdks.html",
@@ -12787,6 +12795,7 @@
         "/tools/build/build-speed.html",
         "/runtime/cpp-internals/translation-units-and-headers.html",
         "/design/foundations/dependency.html",
+        "/languages/cpp/modules.html",
         "/tools/build/samples/cmake-demo.html",
         "/languages/csharp/delegates-events-function-pointers.html",
         "/languages/csharp/",
@@ -13253,6 +13262,7 @@
       "links": [
         "/languages/csharp/delegates-events-function-pointers.html",
         "/design/patterns/observer.html",
+        "/languages/cpp/cpp26-features.html",
         "/game/patterns/event-queue-and-pubsub.html",
         "/design/patterns/strategy.html",
         "/design/patterns/command.html",
@@ -13602,9 +13612,10 @@
         "MPMC",
         "Hazard Pointers"
       ],
-      "verification": "C++20 最終作業草案 N4861、Michael・Scott（1996）、Michael（2004）、WG21 P2530R3 に照合（2026-11-13）",
+      "verification": "C++20 最終作業草案 N4861、Michael・Scott（1996）、Michael（2004）、WG21 P2530R3・N4959・C++26 の DIS の基礎となった N5050 に照合（2026-11-13）",
       "links": [
         "/languages/cpp/memory-model.html",
+        "/languages/cpp/cpp26-features.html",
         "/runtime/thread-synchronization.html",
         "/browser/spsc-ring-buffer.html",
         "/runtime/bounded-worker-queues.html"
@@ -13972,7 +13983,7 @@
       "section": "learning",
       "format": "path",
       "status": "published",
-      "summary": "目的と経験を選び、分野ごとのロードマップのどの節点から始めるかを確認する。ブラウザに保存した進捗も見られる。",
+      "summary": "目的と経験を選び、分野ごとのロードマップのどのノードから始めるかを確認する。ブラウザに保存した進捗も見られる。",
       "source": "新規執筆",
       "aliases": [
         "初心者",
@@ -14832,7 +14843,7 @@
       "importance": "useful"
     },
     {
-      "title": "材質モデルの拡張 — 異方性・クリアコート・シーン・皮膚と髪",
+      "title": "材質モデルの拡張 — 異方性・クリアコート・繊維の光沢・皮膚と髪",
       "url": "/graphics/shader/extended-material-models.html",
       "file": "graphics/shader/extended-material-models.md",
       "domain": "graphics",
@@ -14845,6 +14856,7 @@
         "異方性BRDF",
         "クリアコート",
         "シーン（sheen）",
+        "繊維の光沢（sheen）",
         "サブサーフェス散乱",
         "ヘアシェーディング"
       ],
@@ -14873,6 +14885,7 @@
       "links": [
         "/runtime/cpp-internals/symbols-and-linkage.html",
         "/languages/cpp/undefined-behavior.html",
+        "/languages/cpp/floating-point-determinism.html",
         "/languages/csharp/il2cpp.html",
         "/tools/build/debugging-and-analysis.html",
         "/tools/build/what-is-build.html",
@@ -16611,9 +16624,10 @@
       ],
       "verification": "LosassoとHoppeのGeometry Clipmaps、Unreal Engine 5.8、Direct3D HLSL Shader Model 6.0に照合（2026-11-13）",
       "links": [
+        "/graphics/texture/sampler-feedback.html",
+        "/game/asset-loading.html",
         "/graphics/texture/texture-filtering-and-mipmaps.html",
         "/graphics/texture/texture-streaming-and-mip-residency.html",
-        "/graphics/texture/sampler-feedback.html",
         "/graphics/shader/vertex-effects.html"
       ],
       "difficulty": "advanced",
@@ -17140,6 +17154,7 @@
         "/runtime/cpp-internals/memory-layout.html",
         "/data/unicode-and-encoding.html",
         "/practice/data/unicode-observation.html",
+        "/languages/cpp/cpp26-features.html",
         "/game/patterns/optimization-patterns.html",
         "/design/decisions/cpp-choices.html",
         "/languages/cpp/modern-containers-and-views.html",
@@ -17564,7 +17579,7 @@
         "ロックステップ",
         "リプレイ"
       ],
-      "verification": "IEEE 754-2019、MSVC 17系、Clang Users Manual、C++20に照合（2026-11-13）",
+      "verification": "IEEE 754-2019、Visual Studio 2022・2026のMSVC、Clang 22.1、GCC 16系、C++20に照合（2026-11-13）",
       "links": [
         "/game/network-sync.html",
         "/data/floating-point-spacing.html",
@@ -17804,7 +17819,7 @@
         "MikkTSpace",
         "BC5"
       ],
-      "verification": "Khronos glTF 2.0、MikkTSpaceの公開実装、Microsoft DXGI形式とブロック圧縮資料に照合（2026-11-13）",
+      "verification": "Khronos glTF 2.0、MikkTSpaceの公開実装、Unity 6.3 LTS、Blender 5.2 LTS、Unreal Engine 5.8、Microsoft DXGI形式とブロック圧縮資料に照合（2026-11-13）",
       "links": [
         "/practice/graphics/shader-lab.html",
         "/graphics/shader/shader-inputs-and-uniforms.html",
@@ -17846,10 +17861,11 @@
       "section": "reference",
       "format": "article",
       "status": "published",
-      "summary": "未定義動作・実装定義・未規定動作を区別し、C++26草案のerroneous behaviorと未初期化値の扱いも確認する。",
+      "summary": "未定義動作・実装定義・未規定動作を区別し、C++26のerroneous behaviorと未初期化値の扱いも確認する。",
       "source": "C++ Wiki",
       "aliases": [],
       "links": [
+        "/languages/cpp/cpp26-features.html",
         "/runtime/cpp-internals/optimization-and-ub.html",
         "/runtime/cpp-internals/memory-layout.html",
         "/tools/build/debugging-and-analysis.html",
@@ -18148,6 +18164,7 @@
         "/languages/cpp/raii.html",
         "/runtime/cpp-internals/exceptions-and-rtti-impl.html",
         "/game/unreal/",
+        "/languages/cpp/cpp26-features.html",
         "/languages/cpp/undefined-behavior.html",
         "/languages/csharp/exceptions-comparison.html",
         "/languages/cpp/enums-and-namespaces.html",

@@ -105,6 +105,49 @@ public sealed class AsyncScaleExample : MonoBehaviour
 
 剰余0〜6の合計は21で、100,000個には14,285周と剰余0〜4の5個が含まれます。したがって正常終了では `Async total: 299995` が出力され、ローカルスケールの各軸が1.5になります。コードはUnity 6000.3.27f1付属のコンパイラとUnityEngineの参照でビルド確認しました。Playモードでの確認は未実施です。
 
+### コード例 — UniTask の次フレーム待ちをキャンセルする
+
+Unity 6.3 LTS と UniTask 2.5.11 の `UniTaskNextFrameExample.cs` です。`UniTask.NextFrame` は現在のフレームより後で再開します。`UniTask.Yield` は指定した PlayerLoop の実行位置まで待つため、呼び出し位置によっては同じフレームで再開します。次の例はメインスレッドから開始し、再開後に対象が有効な場合だけ表示します。
+
+```csharp
+using System;
+using System.Threading;
+using Cysharp.Threading.Tasks;
+using UnityEngine;
+
+public sealed class UniTaskNextFrameExample : MonoBehaviour
+{
+    private async void Start()
+    {
+        using var lifetime = CancellationTokenSource.CreateLinkedTokenSource(
+            destroyCancellationToken, Application.exitCancellationToken);
+
+        try
+        {
+            await ShowAfterFrameAsync(lifetime.Token);
+        }
+        catch (OperationCanceledException) when (lifetime.IsCancellationRequested)
+        {
+            // 寿命が終わったため、表示しない。
+        }
+        catch (Exception error)
+        {
+            Debug.LogException(error);
+        }
+    }
+
+    private static async UniTask ShowAfterFrameAsync(CancellationToken token)
+    {
+        int started = Time.frameCount;
+        await UniTask.NextFrame(PlayerLoopTiming.Update, token);
+        token.ThrowIfCancellationRequested();
+        Debug.Log($"Frames elapsed: {Time.frameCount - started}");
+    }
+}
+```
+
+通常は `Frames elapsed: 1` が出ます。オブジェクトの破棄や Play モード終了でトークンが取り消されると、ログを出さずに終了します。`Start` は Unity が呼ぶ入口なので `void` のままにし、再利用する処理は `UniTask` を返して、呼び出し側が完了や例外を受け取ります。 Unity 6000.3.27f1 の参照アセンブリと UniTask 2.5.11 でコンパイルを確認しました。 [Cysharp — UniTask 2.5.11 の PlayerLoop](https://github.com/Cysharp/UniTask/tree/2.5.11#playerloop)
+
 ## 理解度チェック
 
 1. メインスレッドで重い計算を行い、その直後に `NextFrameAsync` を待つと、計算はどのスレッドで動きますか。

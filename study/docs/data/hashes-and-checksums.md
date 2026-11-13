@@ -234,7 +234,7 @@ int main()
 ## 関連項目
 
 - [ハッシュ表](/algorithms/hash-tables.html)
-- [バイナリファイルの検証](/data/binary-file-validation.html)
+- [バイナリファイルの読み取り前に範囲を検査する](/data/binary-file-validation.html)
 - [圧縮の基礎](/data/compression-basics.html)
 - [アセットロード](/game/asset-loading.html)
 

@@ -145,6 +145,8 @@ void Shade(ThreadNodeInputRecord<Tile> input)
 
 **Mesh nodes** はグラフの葉をラスタライズへつなぐ。例えば前段のノードが可視クラスタのレコードを出すと、`[NodeLaunch("mesh")]` のノードが頂点とプリミティブを生成し、関連付けたグラフィックスプログラムで描画する。Microsoft の 2024 年 7 月の公開プレビューは Agility SDK 1.715 と専用の DXC を使う。告知で指定された `lib_6_9` は当時の実験用ターゲットで、正式版 SM 6.9 に mesh nodes が入ったという意味ではない。通常の `WorkGraphsTier` によるコンピュートノードの可否に加え、mesh nodes 用のプレビュー SDK とドライバーの対応を確認する。
 
+Vulkan には、GPU 側で後続ノードを起動する実験的なデバイス拡張 `VK_AMDX_shader_enqueue` がある。rev. 2 では、`shaderEnqueue` に加えて `shaderMeshEnqueue` が有効ならメッシュノードを追加できる。`vkCreateExecutionGraphPipelinesAMDX` でグラフを作り、必要なスクラッチ領域を問い合わせて `vkCmdDispatchGraphAMDX` で入口にペイロードを投入する。D3D12 のグラフとはノードの記述形式や API が異なるため、機能検出とパス構成は API ごとに行う。 [Khronos Group — VK_AMDX_shader_enqueue rev. 2](https://docs.vulkan.org/refpages/latest/refpages/source/VK_AMDX_shader_enqueue.html)
+
 ### VRS — Vulkan のフラグメントサイズと合成規則
 
 **VRS**（Variable Rate Shading）は、複数ピクセルをまとめて 1 回のシェーディング結果を使えるようにする。Direct3D 12 の Tier 1 は描画単位のレート、Tier 2 はプリミティブごとの指定や画面タイルごとのレート画像を追加する。2×2 の粗いレートでは、まとめられた領域の 4 ピクセルで結果を共有できる。細かい輪郭や高周波の材質では画質を確認する。画面の解像度や表示リフレッシュを変える機能とは適用箇所が異なる。

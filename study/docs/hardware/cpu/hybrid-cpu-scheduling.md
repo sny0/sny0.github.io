@@ -37,6 +37,8 @@ Windows 10以降のCPU Sets APIでは、論理プロセッサが属するグル�
 
 Core Ultra Series 2 のデスクトップ向け 285K は P コア 8 基と E コア 16 基を持ち、合計 24 スレッドです。モバイル向けの 288V と同じ Series 2 でも、コアの内訳が異なります。AMD Ryzen AI 400 Series の Ryzen AI 9 HX 470 は Zen 5 が 4 基、Zen 5c が 8 基で、SMT を含めて 12 コア・24 スレッドです。論理プロセッサ数が同じ 24 でも、285K では 24 物理コア、HX 470 では 12 物理コアを共有します。 [Intel — Core Ultra 200S Series](https://download.intel.com/newsroom/2024/client-computing/Intel-Core-Ultra-200S-Series-Presentation.pdf)、[AMD — Ryzen AI 9 HX 470](https://www.amd.com/en/products/processors/laptop/ryzen/ai-400-series/amd-ryzen-ai-9-hx-470.html)
 
+コアが同じ Zen 5 でも、コアを載せるチップレット（CCD）ごとに L3 キャッシュの構成が変わる製品があります。Ryzen 9 9950X3D は片方の CCD に 3D V-Cache を備え、L3 は合計 128 MB です。Ryzen 9 9950X3D2 Dual Edition は両方の CCD に備え、L3 は合計 192 MB です。どちらも 16 コア・32 スレッドなので、コア数からキャッシュの配置は分かりません。実行先の影響を調べる際は、コアの種類に加えて、スレッドがどの L3 を共有するかも確認します。 [AMD — Ryzen 9 9950X3D の仕様](https://www.amd.com/en/products/processors/desktops/ryzen/9000-series/amd-ryzen-9-9950x3d.html)、[AMD — Ryzen 9 9950X3D2 Dual Edition の発表](https://newsroom.amd.com/news/amd-launches-ryzen-9-9950x3d2-dual-edition-processor/)
+
 ジョブシステムでワーカー数や配置を調整するなら、論理プロセッサの総数に加えて、物理コアの共有とクラスを確認します。`EfficiencyClass` は Windows が報告する相対的なクラスです。Intel の P コアや E コア、AMD の Zen 5 や Zen 5c を、OS 上で共通の名前や固定のクラス番号に対応づけて使うと、機種ごとの違いを取りこぼします。最後にフレームを止めているジョブは、CPU タイムラインで実行先と待ち時間を調べます。
 
 ### Windows 11 の QoS と EcoQoS

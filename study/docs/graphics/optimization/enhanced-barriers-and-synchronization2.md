@@ -38,11 +38,19 @@ flowchart LR
 
 ### 従来の API との違い
 
-Direct3D 12 の従来の `ResourceBarrier` なら、この例は `D3D12_RESOURCE_STATE_UNORDERED_ACCESS` から `D3D12_RESOURCE_STATE_PIXEL_SHADER_RESOURCE` への遷移になる。このステートにはアクセス用途が含まれる。Enhanced Barriers は、実行の範囲、メモリーアクセス、画像レイアウトを分けて指定できる。遷移しない UAV 同士の依存も扱える。既存の `ResourceBarrier` と同じサブリソースで混在させる場合は、仕様の `COMMON` を介する規則に従う。
+Direct3D 12 の従来の `ResourceBarrier` なら、この例は `D3D12_RESOURCE_STATE_UNORDERED_ACCESS` から `D3D12_RESOURCE_STATE_PIXEL_SHADER_RESOURCE` への遷移になる。このステートにはアクセス用途が含まれる。Enhanced Barriers は、実行の範囲、メモリーアクセス、画像レイアウトを分けて指定できる。
+
+同じリソースを UAV のまま使い続ける場合も、従来の `ResourceBarrier` では UAV バリアで依存を表せる。従来の UAV バリアで指定するのは対象リソースで、前後のパイプライン段階を個別には指定できない。Enhanced Barriers では、例えば同じキューの二つの Compute 処理の依存を、前後の同期範囲を Compute、アクセスを UAV、テクスチャなら前後のレイアウトをともに `UNORDERED_ACCESS` に指定して表せる。同じサブリソースで従来の `ResourceBarrier` と混在させる場合は、仕様の `COMMON` を介する規則に従う。
 
 Vulkan の従来の `vkCmdPipelineBarrier` は、一回の呼び出しに渡すステージマスクを、その呼び出しのバリア群で共有する。synchronization2 はステージとアクセスの組を個々のバリアに持たせ、`VkDependencyInfo` にまとめる。ステージとアクセスのビットマスクは 64 ビットで、シェーダーの読み取りをサンプルとストレージなどに分けて指定できる。
 
 広いマスクを使うと依存関係を記述しやすいが、関係のない処理まで待たせる可能性がある。使うステージや書き込みと読み取りの組を実際のパスと照合して指定する。
+
+### 依存を分けて置く場合と、同じメモリーを使い回す場合
+
+D3D12 の拡張テクスチャ・バッファーバリアでは、開始側の `SyncAfter` と終了側の `SyncBefore` にそれぞれ `D3D12_BARRIER_SYNC_SPLIT` を指定できる。二つのバリアでは同じリソース範囲、アクセス、レイアウトを指定し、その間に対象リソースへ別のバリアやアクセスを挟まない。Vulkan 1.3 では `vkCmdSetEvent2` と `vkCmdWaitEvents2` を使って依存を二つのコマンドに分けられる。基本のイベント方式では、通知と待機に対応する同じ `VkDependencyInfo` の内容を指定する。 [Microsoft — Split Barriers](https://microsoft.github.io/DirectX-Specs/d3d/D3D12EnhancedBarriers.html#split-barriers)・[Khronos — vkCmdWaitEvents2](https://docs.vulkan.org/refpages/latest/refpages/source/vkCmdWaitEvents2.html)
+
+D3D12 でヒープの同じ範囲を別のテクスチャに再利用する場合は、古いリソースのアクセスを完了させてから、新しいリソースへアクセスする。新しい画像の以前の内容を使わない場合は、`LayoutBefore` に `UNDEFINED` を指定できる。前のリソース用のバリアでレイアウト遷移や書き込みのフラッシュを行わない条件では、`D3D12_TEXTURE_BARRIER_FLAG_DISCARD` で圧縮メタデータの初期化を要求できる。前の書き込みにフラッシュが必要な場合は、別のクリアやコピーなどで後のリソースを初期化する。 [Microsoft — Enhanced Barriers の Resource Aliasing と DISCARD](https://microsoft.github.io/DirectX-Specs/d3d/D3D12EnhancedBarriers.html)
 
 ## コード例 — Compute の出力を描画で読む
 
@@ -123,7 +131,7 @@ void recordVulkanImageBarrier(VkCommandBuffer commands, VkImage image)
 
 <details><summary>Compute の書き込みを別の Compute が読む。レイアウトを同じままにできるならバリアも省ける？</summary>
 
-同じ画像の領域に依存がある場合、書き込みの結果を読むためのメモリー依存が必要。たとえば Vulkan のストレージ画像を `GENERAL` のまま使うなら、レイアウト遷移を伴わないメモリーバリアで依存を表せる。
+同じ画像の領域に依存がある場合、書き込みの結果を読むためのメモリー依存が必要。Vulkan でストレージ画像を `GENERAL` のまま使う場合や、Direct3D 12 で UAV のまま使う場合は、レイアウト遷移を伴わずに依存を表せる。Direct3D 12 の従来の UAV バリアもこの用途に使える。
 
 </details>
 
@@ -148,6 +156,7 @@ void recordVulkanImageBarrier(VkCommandBuffer commands, VkImage image)
 ## 参考資料
 
 - [Microsoft DirectX-Specs — Enhanced Barriers](https://microsoft.github.io/DirectX-Specs/d3d/D3D12EnhancedBarriers.html)
+- [Microsoft — 従来の ResourceBarrier の UAV バリア](https://learn.microsoft.com/en-us/windows/win32/api/d3d12/nf-d3d12-id3d12graphicscommandlist-resourcebarrier#remarks)
 - [Microsoft — DirectX 12 Agility SDK 1.608.0](https://devblogs.microsoft.com/directx/agility-sdk-1-608-0/)
 - [Microsoft — ID3D12GraphicsCommandList7::Barrier](https://learn.microsoft.com/en-us/windows/win32/api/d3d12/nf-d3d12-id3d12graphicscommandlist7-barrier)
 - [Khronos Vulkan Guide — VK_KHR_synchronization2](https://docs.vulkan.org/guide/latest/extensions/VK_KHR_synchronization2.html)

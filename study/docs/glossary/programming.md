@@ -26,13 +26,13 @@
 
 ここで成り立つはずの条件をコードに記述し、条件が破れた場合に検出する仕組み。
 
-**この分野での意味**　C++20のassertマクロはNDEBUGの設定で検査が無効になる。テストフレームワークのアサーションはテストの成否を記録する。
+**この分野での意味**　C++20のassertマクロはNDEBUGを定義すると検査を省く。C++26の草案N5050には、関数の事前条件pre・事後条件postと、文として書くcontract\_assertがある。テストフレームワークのアサーションはテストの成否を記録する。
 
 **例**　添字が範囲内であることをアサートする。
 
-**関連**　[自動テストの基礎](/tools/automated-testing.html) · [テスト](/glossary/programming.html#test) · [例外を投げる](/glossary/programming.html#throw)
+**関連**　[自動テストの基礎](/tools/automated-testing.html) · [C++26の契約](/languages/cpp/cpp26-features.html) · [テスト](/glossary/programming.html#test) · [例外を投げる](/glossary/programming.html#throw)
 
-**出典**　[WG21 N4861（C++20）— Assertions](https://timsong-cpp.github.io/cppwp/n4861/assertions) · [GoogleTest — Primer](https://google.github.io/googletest/primer.html)
+**出典**　[WG21 N4861（C++20）— Assertions](https://timsong-cpp.github.io/cppwp/n4861/assertions) · [WG21 N5050（C++26 DISの基礎となった草案）— Contract assertions](https://timsong-cpp.github.io/cppwp/n5050/basic.contract) · [GoogleTest — Primer](https://google.github.io/googletest/primer.html)
 
 ## インクリメンタルビルド {#incremental-build}
 
@@ -44,7 +44,7 @@
 
 **関連**　[ビルド高速化](/tools/build/build-speed.html) · [クリーンビルド](/glossary/programming.html#clean-build) · [ビルド](/glossary/programming.html#build)
 
-**出典**　[Ninja — Manual](https://ninja-build.org/manual.html) · [Visual Studio 2022 — Build and clean projects and solutions](https://learn.microsoft.com/en-us/visualstudio/ide/building-and-cleaning-projects-and-solutions-in-visual-studio?view=vs-2022)
+**出典**　[Ninja — Manual](https://ninja-build.org/manual.html) · [Microsoft Learn — Visual Studioのビルド・リビルド・クリーン](https://learn.microsoft.com/en-us/visualstudio/ide/building-and-cleaning-projects-and-solutions-in-visual-studio?view=visualstudio)
 
 ## API {#api}
 
@@ -66,6 +66,8 @@
 
 APIを呼び出すという現場の言い回し。Web APIならHTTPなどで要求を送ることを指す。
 
+**この分野での意味**　シェルなどでコマンドを入力して実行することは「コマンドを叩く」と言う。
+
 **例**　ランキング取得APIを叩いて結果を表示する。
 
 **関連**　[ライブラリ・API・SDK](/compilers/libraries-apis-and-sdks.html) · [API](/glossary/programming.html#api)
@@ -76,7 +78,9 @@ APIを呼び出すという現場の言い回し。Web APIならHTTPなどで要
 
 コードや設定を変更した結果、新しい不具合を入れてしまうことを指す現場の言い回し。
 
-**例**　入力処理の修正で、キーの長押しにエンバグした。
+**この分野での意味**　日本語の開発現場で使う言い方。英語では introduce a bug と表現する。
+
+**例**　入力処理の修正で、長押しの処理にエンバグした。
 
 **関連**　[デグレ](/glossary/programming.html#degrade) · [リグレッション](/glossary/programming.html#regression)
 
@@ -86,7 +90,7 @@ APIを呼び出すという現場の言い回し。Web APIならHTTPなどで要
 
 ソフトウェアが異常終了することを指す現場の言い回し。
 
-**この分野での意味**　「テストが落ちる」は検査の失敗、「サーバーが落ちる」はサービスを利用できない状態を指す。原因は文脈やログから判断する。
+**この分野での意味**　「テストが落ちる」は検査の失敗、「ビルドが落ちる」はビルドの失敗、「サーバーが落ちる」はサービスを利用できない状態を指す。原因は文脈やログから判断する。
 
 **例**　セーブを開くとアプリが落ちる。
 
@@ -118,7 +122,7 @@ APIを呼び出すという現場の言い回し。Web APIならHTTPなどで要
 
 **関連**　[ビルド高速化](/tools/build/build-speed.html) · [インクリメンタルビルド](/glossary/programming.html#incremental-build) · [リビルド](/glossary/programming.html#rebuild)
 
-**出典**　[Visual Studio 2022 — Build and clean projects and solutions](https://learn.microsoft.com/en-us/visualstudio/ide/building-and-cleaning-projects-and-solutions-in-visual-studio?view=vs-2022) · [CMake 4.3 — cmake(1)](https://cmake.org/cmake/help/v4.3/manual/cmake.1.html)
+**出典**　[Microsoft Learn — Visual Studioのビルド・リビルド・クリーン](https://learn.microsoft.com/en-us/visualstudio/ide/building-and-cleaning-projects-and-solutions-in-visual-studio?view=visualstudio) · [Microsoft — Visual Studio 2026 リリースノート](https://learn.microsoft.com/en-us/visualstudio/releases/2026/release-notes) · [CMake 4.3 — cmake(1)](https://cmake.org/cmake/help/v4.3/manual/cmake.1.html)
 
 ## コミット {#commit}
 
@@ -312,6 +316,8 @@ Gitで、その時点の変更を履歴に記録する操作。また、記録�
 
 変更後に、以前はできたことができなくなったり、性能や品質が以前より悪化したりすることを指す現場の言い回し。
 
+**この分野での意味**　日本語の開発現場で使う略語。変更による機能や性能の後退は、英語では regression と表現する。
+
 **例**　メニューの修正後、ゲームパッドでの操作がデグレした。
 
 **関連**　[エンバグ](/glossary/programming.html#enbug) · [リグレッション](/glossary/programming.html#regression)
@@ -372,13 +378,13 @@ Gitで、その時点の変更を履歴に記録する操作。また、記録�
 
 本来の処理へジャンプする前に経由する小さな中継コード。呼び出し先が必要とする情報の設定を受け持つことがある。
 
-**この分野での意味**　GCCの入れ子関数では、対象によって外側の文脈を渡してから本体へジャンプする中継が使われる。
+**この分野での意味**　GCCの入れ子関数では、外側の文脈を渡してから本体へ移る中継を使う構成がある。関数フックでは、置き換え前の関数の処理を呼び出すための中継を指す。
 
-**例**　入れ子関数のアドレスを呼ぶと、トランポリンが外側の文脈をセットする。
+**例**　計測用のフックから、トランポリンを通して元の関数を呼ぶ。
 
-**関連**　[関数呼び出しとCPU](/runtime/cpp-internals/function-calls-and-cpu.html) · [スタブ](/glossary/programming.html#stub) · [スタックフレーム](/glossary/programming.html#stack-frame)
+**関連**　[関数呼び出しとCPU](/runtime/cpp-internals/function-calls-and-cpu.html) · [フック](/glossary/programming.html#hook) · [スタブ](/glossary/programming.html#stub) · [スタックフレーム](/glossary/programming.html#stack-frame)
 
-**出典**　[GCC Internals — Trampolines](https://gcc.gnu.org/onlinedocs/gccint/Trampolines.html)
+**出典**　[GCC Internals — Trampolines](https://gcc.gnu.org/onlinedocs/gccint/Trampolines.html) · [Microsoft Detours — Interception of Binary Functions](https://github.com/microsoft/Detours/wiki/OverviewInterception)
 
 ## パース {#parse}
 
@@ -470,6 +476,8 @@ Gitで、その時点の変更を履歴に記録する操作。また、記録�
 
 ビルドを実行して成果物や結果を確認できる状態にする、という開発現場の言い回し。
 
+**この分野での意味**　「CIを回す」「テストを回す」のように、処理を繰り返し、あるいは定期的に実行するときにも使う。
+
 **例**　修正を取り込んだら、もう一度ビルドを回す。
 
 **関連**　[ビルド](/glossary/programming.html#build) · [CI / 継続的インテグレーション](/glossary/programming.html#ci)
@@ -552,7 +560,7 @@ Gitで、その時点の変更を履歴に記録する操作。また、記録�
 
 **関連**　[ビルド](/glossary/programming.html#build) · [デバッガー](/glossary/programming.html#debugger)
 
-**出典**　[Visual Studio 2022 — Hot Reload](https://learn.microsoft.com/en-us/visualstudio/debugger/hot-reload?view=vs-2022)
+**出典**　[Microsoft Learn — Visual Studioのホットリロード設定](https://learn.microsoft.com/en-us/visualstudio/debugger/edit-and-continue) · [Microsoft — Visual Studio 2026 リリースノート](https://learn.microsoft.com/en-us/visualstudio/releases/2026/release-notes)
 
 ## マージ {#merge}
 
@@ -654,7 +662,7 @@ Gitで、その時点の変更を履歴に記録する操作。また、記録�
 
 **rebuild** ／ 読み りびるど
 
-成果物を作り直すこと。Visual Studio 2022の「リビルド」は、選んだ対象をクリーンにしてからビルドする操作。
+成果物を作り直すこと。Visual Studio 2022・2026の「リビルド」は、選んだ対象をクリーンにしてからビルドする操作。
 
 **この分野での意味**　「リビルドして」は単にビルドを再実行する意味でも使う。対象や消す範囲は操作名とツールによる。
 
@@ -662,7 +670,7 @@ Gitで、その時点の変更を履歴に記録する操作。また、記録�
 
 **関連**　[クリーンビルド](/glossary/programming.html#clean-build) · [インクリメンタルビルド](/glossary/programming.html#incremental-build)
 
-**出典**　[Visual Studio 2022 — Build and clean projects and solutions](https://learn.microsoft.com/en-us/visualstudio/ide/building-and-cleaning-projects-and-solutions-in-visual-studio?view=vs-2022)
+**出典**　[Microsoft Learn — Visual Studioのビルド・リビルド・クリーン](https://learn.microsoft.com/en-us/visualstudio/ide/building-and-cleaning-projects-and-solutions-in-visual-studio?view=visualstudio) · [Microsoft — Visual Studio 2026 リリースノート](https://learn.microsoft.com/en-us/visualstudio/releases/2026/release-notes)
 
 ## リファクタリング {#refactoring}
 
@@ -688,7 +696,7 @@ Gitで、その時点の変更を履歴に記録する操作。また、記録�
 
 **関連**　[ビルド構成とデバッグ情報](/tools/build/build-configurations.html) · [デプロイ](/glossary/programming.html#deploy) · [パッチ](/glossary/programming.html#patch)
 
-**出典**　[GitHub Docs — About releases](https://docs.github.com/en/repositories/releasing-projects-on-github/about-releases) · [Visual Studio 2022 — Build and clean projects and solutions](https://learn.microsoft.com/en-us/visualstudio/ide/building-and-cleaning-projects-and-solutions-in-visual-studio?view=vs-2022)
+**出典**　[GitHub Docs — About releases](https://docs.github.com/en/repositories/releasing-projects-on-github/about-releases) · [Microsoft Learn — Visual Studioのビルド・リビルド・クリーン](https://learn.microsoft.com/en-us/visualstudio/ide/building-and-cleaning-projects-and-solutions-in-visual-studio?view=visualstudio)
 
 ## リンク {#link}
 
@@ -721,6 +729,8 @@ Gitで、その時点の変更を履歴に記録する操作。また、記録�
 **emit a log / write a log** ／ 読み ろぐをはく
 
 実行時の情報をログとして出力する、という現場の言い回し。
+
+**この分野での意味**　ダンプを書き出すことや、ツールがコードを生成して出力することも「吐く」と表現する。
 
 **例**　ロードが失敗したら、対象のファイル名と理由をログに吐く。
 

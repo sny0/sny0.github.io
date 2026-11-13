@@ -110,6 +110,51 @@ public class HealthTests
 }
 ```
 
+### コード例 — 時間を入力にした規則を GoogleTest で確かめる
+
+クールダウンの規則に、直前に観測した実時間を内部で読ませると、テストの境界値が実行速度で変わる。更新時に経過時間をミリ秒で渡す設計なら、残り 1 ms、ちょうど 0、期限を越えた場合を、待機なしで確かめられる。入力は非負の整数ミリ秒とする。ゲーム側では、ポーズで止める時間か実時間かを選ぶ処理を呼び出し元に置く。
+
+```cpp
+#include <algorithm>
+#include <gtest/gtest.h>
+
+class Cooldown
+{
+public:
+    explicit Cooldown(unsigned remaining_ms) : remaining_ms_(remaining_ms) {}
+
+    void advance(unsigned elapsed_ms)
+    {
+        remaining_ms_ -= std::min(elapsed_ms, remaining_ms_);
+    }
+
+    bool ready() const { return remaining_ms_ == 0; }
+
+private:
+    unsigned remaining_ms_;
+};
+
+TEST(CooldownTest, BecomesReadyAtDeadline)
+{
+    Cooldown cooldown(3000);
+    cooldown.advance(2999);
+    EXPECT_FALSE(cooldown.ready());
+    cooldown.advance(1);
+    EXPECT_TRUE(cooldown.ready());
+}
+
+TEST(CooldownTest, StaysReadyPastDeadline)
+{
+    Cooldown cooldown(3000);
+    cooldown.advance(5000);
+    ASSERT_TRUE(cooldown.ready());
+    cooldown.advance(20);
+    EXPECT_TRUE(cooldown.ready());
+}
+```
+
+この翻訳単位を C++20 でビルドし、GoogleTest 1.18.0 の `GTest::gtest_main` にリンクすると、2 件のテストを実行できる。MSVC の C++20 モードで実行し、2 件とも通過することを確認した。`gtest_discover_tests` で CTest に登録する方法は [CI とビルド自動化](ci-and-build-automation.md) を参照。乱数を使う処理でも、規則に抽選結果や制御できる乱数源を渡すと境界を再現できる。例えばドロップ率の比較条件はしきい値の直前と一致点を固定入力でテストし、長期間の出現率は別の統計テストで扱う。 [GoogleTest Primer](https://google.github.io/googletest/primer.html)
+
 ## 理解度チェック
 
 1. ダメージを適用する純粋な規則と、Trigger に入ったときの通知を確かめるには、テスト範囲をどう分けるか。

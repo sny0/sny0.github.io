@@ -105,7 +105,7 @@ GGPO型の**ロールバック**では、相手の入力がまだ届いていな
 
 即時に結果が決まる対戦アクションを判定するとき、サーバー到着時の相手の位置と、操作した人が画面で見た位置はずれます。Valveの方式では、サーバーが位置の履歴を持ち、操作時の通信遅延と描画の補間遅延を考慮して、その人が見ていた時刻の状態を判定に使います。判定結果は現在の状態へ反映します。[GDC 2001講演資料の「Lag Compensation」節](https://www.gamedevs.org/uploads/latency-compensation-in-client-server-protocols.pdf)
 
-例えば相手の画面ではすでに壁の裏に入っていても、操作した側が見ていた時点ではまだ手前だった場合があります。どちらの見え方をどこまで優先するかを決めるため、履歴の長さや許容する巻き戻し時間に上限を設けます。復元するのはその判定に必要な過去の状態で、格闘ゲームのロールバックのように過去から現在までシミュレーション全体を進め直す手順とは区別できます。[GDC 2001講演資料の公平性の議論](https://www.gamedevs.org/uploads/latency-compensation-in-client-server-protocols.pdf)・[Game Developer 2001年8月号のBernierによる補足](https://media.gdcvault.com/GD_Mag_Archives/GDM_August_2001.pdf)
+例えば相手の画面ではすでに壁の裏に入っていても、操作した側が見ていた時点ではまだ手前だった場合があります。どちらの見え方をどこまで優先するかを決めるため、履歴の長さや許容する巻き戻し時間に上限を設けます。復元するのはその判定に必要な過去の状態で、格闘ゲームのロールバックのように過去から現在までシミュレーション全体を進め直す手順とは区別できます。[GDC 2001講演資料の公平性の議論](https://www.gamedevs.org/uploads/latency-compensation-in-client-server-protocols.pdf)・[Game Developer 2001年8月号の読者欄でのBernierの回答](https://media.gdcvault.com/GD_Mag_Archives/GDM_August_2001.pdf#page=3)
 
 ## 誰にどの状態をどれだけ送るか
 
@@ -150,7 +150,7 @@ GGPO型の**ロールバック**では、相手の入力がまだ届いていな
 
 - [RFC 768 User Datagram Protocol](https://www.rfc-editor.org/rfc/rfc768.html) · [RFC 8085 UDP Usage Guidelines](https://www.rfc-editor.org/rfc/rfc8085.html)
 - [Yahn W. Bernier「Latency Compensating Methods in Client/Server In-game Protocol Design and Optimization」GDC 2001講演資料](https://www.gamedevs.org/uploads/latency-compensation-in-client-server-protocols.pdf)・[GDC 2001 Programming Proceedings](https://web.archive.org/web/20010426145840id_/http://www.gdconf.com/archives/proceedings/2001/prog_papers.html)
-- [Yahn W. Bernier「Artificial Lag」への回答、Game Developer、2001年8月号](https://media.gdcvault.com/GD_Mag_Archives/GDM_August_2001.pdf)
+- [Yahn W. Bernier、Folker Schamelの投稿「Artificial Lag」への回答、Game Developer、2001年8月号、読者欄「Says You」、p. 6](https://media.gdcvault.com/GD_Mag_Archives/GDM_August_2001.pdf#page=3)
 - [Paul BettnerとMark Terrano「1500 Archers on a 28.8: Network Programming in Age of Empires and Beyond」](https://zoo.cs.yale.edu/classes/cs538/readings/papers/terrano_1500arch.pdf)
 - [GGPO README](https://github.com/pond3r/ggpo/blob/master/doc/README.md) · [GGPO Developer Guide](https://github.com/pond3r/ggpo/blob/master/doc/DeveloperGuide.md)
 - [Unreal Engine 5.6 Networking Overview](https://dev.epicgames.com/documentation/en-us/unreal-engine/networking-overview-for-unreal-engine?application_version=5.6) · [5.6のIris](https://dev.epicgames.com/documentation/en-us/unreal-engine/introduction-to-iris-in-unreal-engine?application_version=5.6) · [State of Unreal 2026での5.8の発表](https://www.unrealengine.com/news/state-of-unreal-2026-top-news-from-the-show)

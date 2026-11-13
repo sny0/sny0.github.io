@@ -516,13 +516,13 @@ PCを起動し、ファームウェアやローダーを経てOSを動かせる�
 
 Windowsが処理の続行が危険と判断して停止したときの通称。停止コードやダンプが原因調査の手がかりになる。
 
-**この分野での意味**　エラー画面の色や表示はWindowsの版などで変わる。Windowsの技術文書ではbug checkやstop codeと呼ぶ。
+**この分野での意味**　Windows 11 バージョン24H2の2025年の更新以降は黒い停止画面が使われる。Windowsの技術文書では、停止をbug check、調査に使う識別番号をstop codeと呼ぶ。
 
 **例**　ブルースクリーンで表示された停止コードを控える。
 
 **関連**　[クラッシュ](/glossary/pc.html#crash) · [クラッシュダンプ](/glossary/pc.html#crash-dump) · [カーネル](/glossary/pc.html#kernel)
 
-**出典**　[Microsoft — Bug Checkと停止コード](https://learn.microsoft.com/en-us/windows-hardware/drivers/debugger/bug-checks--blue-screens-) · [Microsoft — Windowsの予期しない再起動と停止コード](https://support.microsoft.com/en-us/windows/experience/performance-optimization/troubleshooting-windows-unexpected-restarts-and-stop-code-errors)
+**出典**　[Microsoft — Bug Checkと停止コード](https://learn.microsoft.com/en-us/windows-hardware/drivers/debugger/bug-checks--blue-screens-) · [Microsoft — Windowsの予期しない再起動と停止コード](https://support.microsoft.com/en-us/windows/experience/performance-optimization/troubleshooting-windows-unexpected-restarts-and-stop-code-errors) · [Microsoft — Windows 11 24H2の更新 KB5062660（2025年7月）](https://support.microsoft.com/en-us/servicing/os/windows-11/2025/07/july-22-2025-kb5062660-os-build-26100-4770-preview)
 
 ## プロセス {#process}
 

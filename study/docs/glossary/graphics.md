@@ -72,7 +72,7 @@
 
 **関連**　[SSAOと遮蔽の近似](/graphics/lighting/ssao.html) · [ベイク（焼き込み）](/glossary/graphics.html#bake) · [ライトマップ](/glossary/graphics.html#lightmap)
 
-**出典**　[Blender 5.0 — Render Baking](https://docs.blender.org/manual/en/5.0/render/cycles/baking.html) · [Khronos glTF 2.0仕様](https://registry.khronos.org/glTF/specs/2.0/glTF-2.0.html)
+**出典**　[Blender 5.2 LTS — Render Baking](https://docs.blender.org/manual/en/5.2/render/cycles/baking.html) · [Khronos glTF 2.0仕様](https://registry.khronos.org/glTF/specs/2.0/glTF-2.0.html)
 
 ## インスタンシング {#instancing}
 
@@ -206,7 +206,7 @@ GPUで並列実行する処理の入口となる関数。起動時に指定し�
 
 **関連**　[モデルとメッシュ](/graphics/basics/models-and-meshes.html) · [トライアングル（三角形）](/glossary/graphics.html#triangle) · [トポロジー](/glossary/graphics.html#topology) · [フラグメント](/glossary/graphics.html#fragment)
 
-**出典**　[Blender 5.0 — Mesh Primitives](https://docs.blender.org/manual/en/5.0/modeling/meshes/primitives.html) · [Khronos Vulkan 1.4 — Rasterization](https://docs.vulkan.org/spec/latest/chapters/primsrast.html)
+**出典**　[Blender 5.2 LTS — Mesh Primitives](https://docs.blender.org/manual/en/5.2/modeling/meshes/primitives.html) · [Khronos Vulkan 1.4 — Rasterization](https://docs.vulkan.org/spec/latest/chapters/primsrast.html)
 
 ## ゴースト（残像） {#ghosting}
 
@@ -348,7 +348,7 @@ GPUで並列実行する処理の入口となる関数。起動時に指定し�
 
 **関連**　[色空間とHDR](/graphics/shader/color-space-and-hdr.html) · [バンディング（色の段差）](/glossary/graphics.html#banding) · [アルファテスト（アルファクリップ）](/glossary/graphics.html#alpha-test)
 
-**出典**　[Blender 5.0 — Post Processing / Dither](https://docs.blender.org/manual/en/5.0/render/output/properties/post_processing.html) · [Unity 6.3 LTS — URPのLOD Cross Fade Dithering](https://docs.unity.com/ja-jp/engine/6000.3/manual/render-pipelines/universal-render-pipeline/urp-reference/universalrp-asset)
+**出典**　[Blender 5.2 LTS — Post Processing / Dither](https://docs.blender.org/manual/en/5.2/render/output/properties/post_processing.html) · [Unity 6.3 LTS — URPのLOD Cross Fade Dithering](https://docs.unity.com/ja-jp/engine/6000.3/manual/render-pipelines/universal-render-pipeline/urp-reference/universalrp-asset)
 
 ## テクスチャアトラス {#atlas}
 
@@ -412,7 +412,7 @@ GPUで並列実行する処理の入口となる関数。起動時に指定し�
 
 **関連**　[頂点入力とインデックス描画](/graphics/mesh/vertex-and-index-input.html) · [ポリゴン](/glossary/graphics.html#polygon) · [クアッド（四角形）](/glossary/graphics.html#quad) · [ラスタライズ](/glossary/graphics.html#rasterize)
 
-**出典**　[Khronos Vulkan 1.4 — Drawing Commands](https://docs.vulkan.org/spec/latest/chapters/drawing.html) · [Blender 5.0 — Mesh Primitives](https://docs.blender.org/manual/en/5.0/modeling/meshes/primitives.html)
+**出典**　[Khronos Vulkan 1.4 — Drawing Commands](https://docs.vulkan.org/spec/latest/chapters/drawing.html) · [Blender 5.2 LTS — Mesh Primitives](https://docs.blender.org/manual/en/5.2/modeling/meshes/primitives.html)
 
 ## ドローコール {#draw-call}
 
@@ -438,7 +438,7 @@ GPUで並列実行する処理の入口となる関数。起動時に指定し�
 
 **関連**　[法線マップと接空間](/graphics/shader/normal-mapping.html) · [法線マップ（ノーマルマップ）](/glossary/graphics.html#normal-map) · [カリング](/glossary/graphics.html#culling) · [接空間](/glossary/graphics.html#tangent-space)
 
-**出典**　[Blender 5.0 — Editing Normals](https://docs.blender.org/manual/en/5.0/modeling/meshes/editing/mesh/normals.html) · [Khronos Vulkan 1.4 — Rasterization](https://docs.vulkan.org/spec/latest/chapters/primsrast.html) · [Khronos glTF 2.0仕様](https://registry.khronos.org/glTF/specs/2.0/glTF-2.0.html)
+**出典**　[Blender 5.2 LTS — Editing Normals](https://docs.blender.org/manual/en/5.2/modeling/meshes/editing/mesh/normals.html) · [Khronos Vulkan 1.4 — Rasterization](https://docs.vulkan.org/spec/latest/chapters/primsrast.html) · [Khronos glTF 2.0仕様](https://registry.khronos.org/glTF/specs/2.0/glTF-2.0.html)
 
 ## バッチング {#batching}
 
@@ -464,7 +464,7 @@ GPUで並列実行する処理の入口となる関数。起動時に指定し�
 
 **関連**　[色空間とHDR](/graphics/shader/color-space-and-hdr.html) · [ディザ（ディザリング）](/glossary/graphics.html#dither) · [HDR（ハイダイナミックレンジ）](/glossary/graphics.html#hdr)
 
-**出典**　[Blender 5.0 — Post Processing / Dither](https://docs.blender.org/manual/en/5.0/render/output/properties/post_processing.html) · [Microsoft DirectX — Advanced Color](https://learn.microsoft.com/en-us/windows/win32/direct3darticles/high-dynamic-range)
+**出典**　[Blender 5.2 LTS — Post Processing / Dither](https://docs.blender.org/manual/en/5.2/render/output/properties/post_processing.html) · [Microsoft DirectX — Advanced Color](https://learn.microsoft.com/en-us/windows/win32/direct3darticles/high-dynamic-range)
 
 ## ハンドル（制作ツール） {#handle}
 
@@ -624,7 +624,7 @@ RGBにアルファをあらかじめ掛けた表現。合成式では、手前�
 
 **関連**　[グローバルイルミネーション](/graphics/lighting/gi.html) · [ライトマップ](/glossary/graphics.html#lightmap) · [アンビエントオクルージョン（AO）](/glossary/graphics.html#ao) · [法線マップ（ノーマルマップ）](/glossary/graphics.html#normal-map)
 
-**出典**　[Unity 6.3 LTS — ライトマップのベイク](https://docs.unity3d.com/6000.3/Documentation/Manual/Lightmapping.html) · [Blender 5.0 — Render Baking](https://docs.blender.org/manual/en/5.0/render/cycles/baking.html) · [Blender 5.2 LTS — Baking Physics Simulations](https://docs.blender.org/manual/en/5.2/physics/baking.html) · [Autodesk Maya 2023 — HumanIKのベイク](https://help.autodesk.com/cloudhelp/2023/ENU/Maya-CharacterAnimation/files/GUID-1704AD41-8435-4AD4-AF29-43EF13803EAC.htm)
+**出典**　[Unity 6.3 LTS — ライトマップのベイク](https://docs.unity3d.com/6000.3/Documentation/Manual/Lightmapping.html) · [Blender 5.2 LTS — Render Baking](https://docs.blender.org/manual/en/5.2/render/cycles/baking.html) · [Blender 5.2 LTS — Baking Physics Simulations](https://docs.blender.org/manual/en/5.2/physics/baking.html) · [Autodesk Maya 2026 — HumanIKのベイク](https://help.autodesk.com/cloudhelp/2026/ENU/Maya-CharacterAnimation/files/GUID-1704AD41-8435-4AD4-AF29-43EF13803EAC.htm)
 
 ## 法線マップ（ノーマルマップ） {#normal-map}
 
@@ -636,7 +636,7 @@ RGBにアルファをあらかじめ掛けた表現。合成式では、手前�
 
 **関連**　[法線マップと接空間](/graphics/shader/normal-mapping.html) · [接空間](/glossary/graphics.html#tangent-space) · [ベイク（焼き込み）](/glossary/graphics.html#bake) · [ノーマルの反転（法線の反転）](/glossary/graphics.html#flip-normal)
 
-**出典**　[Khronos glTF 2.0仕様](https://registry.khronos.org/glTF/specs/2.0/glTF-2.0.html) · [Blender 5.0 — Render Baking](https://docs.blender.org/manual/en/5.0/render/cycles/baking.html)
+**出典**　[Khronos glTF 2.0仕様](https://registry.khronos.org/glTF/specs/2.0/glTF-2.0.html) · [Blender 5.2 LTS — Render Baking](https://docs.blender.org/manual/en/5.2/render/cycles/baking.html)
 
 ## ポストプロセス {#post-process}
 

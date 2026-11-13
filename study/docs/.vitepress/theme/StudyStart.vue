@@ -64,7 +64,7 @@ const recommendation = computed(() => {
               :href="withBase(roadmapUrl(recommendation.nextTrack.id))">{{ recommendation.nextTrack.title }}</a>へ進みます。
           </p>
         </template>
-        <p v-else>目的と経験を一つずつ選ぶと、ここに最初の節点が表示されます。</p>
+        <p v-else>目的と経験を一つずつ選ぶと、ここに最初のノードが表示されます。</p>
       </div>
     </section>
 
@@ -93,11 +93,11 @@ const recommendation = computed(() => {
 
     <section aria-labelledby="start-progress">
       <h2 id="start-progress">分野ごとの進捗</h2>
-      <p>{{ storageAvailable ? 'このブラウザに保存した達成条件を集計します。節点の達成条件をすべてチェックすると完了です。' : 'このブラウザでは保存済みの進捗を読み込めません。' }}</p>
+      <p>{{ storageAvailable ? 'このブラウザに保存した達成条件を集計します。ノードの達成条件をすべてチェックすると完了です。' : 'このブラウザでは保存済みの進捗を読み込めません。' }}</p>
       <ul class="start-progress-list">
         <li v-for="row in overview" :key="row.id" :data-study-track-progress="row.id">
           <a :href="withBase(roadmapUrl(row.id))">{{ row.track.title }}</a>
-          <span>{{ trackCompleted.get(row.id) ?? 0 }}/{{ row.track.nodeIds.length }}節点完了</span>
+          <span>{{ trackCompleted.get(row.id) ?? 0 }}/{{ row.track.nodeIds.length }}ノード完了</span>
           <progress :value="trackCompleted.get(row.id) ?? 0" :max="row.track.nodeIds.length" :aria-label="row.track.title + 'の進捗'" />
         </li>
       </ul>

@@ -738,7 +738,7 @@ const termRows = [
   ['CI / CTest / GitHub Actions / 成果物 / ビルド自動化', '/tools/ci-and-build-automation.html', '同じ構成でビルド・テストし、成果物を記録する'],
   ['Nagle / delayed ACK / 遅延ACK / TCP_NODELAY', '/network/nagle-and-delayed-ack.html', '小さいTCP送信が待たされる条件を調べる'],
   ['HTTPS RR / SVCB / ALPN / Alt-Svc / Happy Eyeballs', '/network/https-svcb-and-http3-discovery.html', 'HTTP/3を試す候補をDNSとHTTPから得る'],
-  ['Pコア / Eコア / Thread Director / CPU Sets / タイマー分解能', '/hardware/cpu/hybrid-cpu-scheduling.html', 'コアの特性と、待機後に走り出す時刻を切り分ける'],
+  ['Pコア / Eコア / LP Eコア / Thread Director / CPU Sets / タイマー分解能', '/hardware/cpu/hybrid-cpu-scheduling.html', 'コアの特性と、待機後に走り出す時刻を切り分ける'],
   ['atomic / memory_order / acquire / release / seq_cst / happens-before', '/languages/cpp/memory-model.html', '共有データを読める条件を順序関係で確かめる'],
   ['CAS / ABA / ロックフリー / SPSC / MPMC / ハザードポインター', '/runtime/lock-free-basics.html', '競合時の進捗とノードの寿命を分けて設計する'],
   ['ジョブシステム / TaskGraph / Unity Job System / ワークスティーリング', '/runtime/jobs-and-work-stealing.html', '依存関係を満たした仕事をワーカーへ割り振る'],

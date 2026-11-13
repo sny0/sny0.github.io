@@ -40,6 +40,7 @@ export default {
     dumps: { label: 'Microsoft — ユーザーモードダンプ', url: 'https://learn.microsoft.com/en-us/windows/win32/wer/collecting-user-mode-dumps' },
     bugCheck: { label: 'Microsoft — Bug Checkと停止コード', url: 'https://learn.microsoft.com/en-us/windows-hardware/drivers/debugger/bug-checks--blue-screens-' },
     stopCode: { label: 'Microsoft — Windowsの予期しない再起動と停止コード', url: 'https://support.microsoft.com/en-us/windows/experience/performance-optimization/troubleshooting-windows-unexpected-restarts-and-stop-code-errors' },
+    stopScreenUpdate: { label: 'Microsoft — Windows 11 24H2の更新 KB5062660（2025年7月）', url: 'https://support.microsoft.com/en-us/servicing/os/windows-11/2025/07/july-22-2025-kb5062660-os-build-26100-4770-preview' },
     watchdog: { label: 'Linuxカーネル文書 — ウォッチドッグAPI', url: 'https://docs.kernel.org/watchdog/watchdog-api.html' },
     pnp: { label: 'Microsoft — WindowsのPlug and Play', url: 'https://learn.microsoft.com/en-us/windows-hardware/drivers/kernel/introduction-to-plug-and-play' },
     mapping: { label: 'Microsoft — ファイルマッピング', url: 'https://learn.microsoft.com/en-us/windows/win32/memory/file-mapping' },
@@ -440,9 +441,9 @@ export default {
     {
       id: 'blue-screen', term: 'ブルースクリーン', en: 'BSOD / Blue Screen of Death / bug check', reading: 'ぶるーすくりーん / びーえすおーでぃー',
       definition: 'Windowsが処理の続行が危険と判断して停止したときの通称。停止コードやダンプが原因調査の手がかりになる。',
-      context: 'エラー画面の色や表示はWindowsの版などで変わる。Windowsの技術文書ではbug checkやstop codeと呼ぶ。',
+      context: 'Windows 11 バージョン24H2の2025年の更新以降は黒い停止画面が使われる。Windowsの技術文書では、停止をbug check、調査に使う識別番号をstop codeと呼ぶ。',
       example: 'ブルースクリーンで表示された停止コードを控える。',
-      related: ['pc:crash', 'pc:crash-dump', 'pc:kernel'], refs: ['bugCheck', 'stopCode'],
+      related: ['pc:crash', 'pc:crash-dump', 'pc:kernel'], refs: ['bugCheck', 'stopCode', 'stopScreenUpdate'],
     },
     {
       id: 'watchdog', term: 'ウォッチドッグ', en: 'watchdog / watchdog timer', reading: 'うぉっちどっぐ',

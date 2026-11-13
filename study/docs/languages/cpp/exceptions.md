@@ -84,7 +84,7 @@ if (auto item = FindItem(id)) { Use(*item); }
 | コスト | try自体は安い、throwはそこそこ | 投げなければほぼゼロ、throwは高い(実装依存) |
 | 捕捉漏れ | スタックトレース付きで落ちる | `std::terminate`(トレースは処理系・設定依存) |
 
-**C++の`v[i]`には、C#の配列のような範囲外例外を期待しません**。標準ライブラリのデバッグ・hardening設定では違反を検出するものがあり、C++26草案でもhardened preconditionを規定しています。検出後の処理は実装・設定に従い、必ず回復可能な例外になるわけではありません。`v.at(i)`は`std::out_of_range`で報告します。[C++草案: vectorのアクセス](https://www.open-std.org/jtc1/sc22/wg21/docs/papers/2025/p3471r4.html)
+**C++の`v[i]`には、C#の配列のような範囲外例外を期待しません**。標準ライブラリのデバッグ・hardening設定では違反を検出するものがあり、[C++26（DIS）](/languages/cpp/cpp26-features.html)でもhardened preconditionを規定しています。検出後の処理は実装・設定に従い、必ず回復可能な例外になるわけではありません。`v.at(i)`は`std::out_of_range`で報告します。[C++草案: vectorのアクセス](https://www.open-std.org/jtc1/sc22/wg21/docs/papers/2025/p3471r4.html)
 
 ## Unity開発者が誤解しやすい点
 

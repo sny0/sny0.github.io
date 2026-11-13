@@ -52,6 +52,12 @@ flowchart LR
 
 背面法をDirect3D 12で行うなら、別のパイプラインで `D3D12_CULL_MODE_FRONT` を使い、前面の巻き順と深度条件を元の描画に合わせます。画面空間の深度差は、デバイス深度をそのまま比較した場合と、ビュー空間の深度へ戻して比較した場合で距離による変化が異なります。線が欲しい対象と画面上の太さを決めてから、検出に使う入力を選びます。
 
+### 背面法の方向と太さ
+
+照明用の法線が分かれているハードエッジでは、各頂点をそれぞれの法線へ押すと、同じ位置にあった頂点が別々に動いて殻に隙間ができます。輪郭用に、同じ輪郭を作る頂点で共有した平均法線を頂点カラーや追加の頂点属性に格納します。頂点カラーなら `2 * color.rgb - 1` で復号し、照明用の法線は元のまま使います。スキニングする場合は輪郭用の方向にもボーンの回転を反映します。別々の部品まで位置だけで結合すると意図しない方向を共有するので、グループを決めて平均します。
+
+画面上で幅を $w$ ピクセルに近づけるなら、変形前のクリップ座標と、押し出す向きに微小量動かした点のクリップ座標をそれぞれ $w_c$ で割り、画面上の方向を得ます。画面サイズを $(W,H)$、その方向をピクセル単位の単位ベクトル $s$ とすると、NDC の変位は $2w(s_x/W,s_y/H)$。元のクリップ座標の $xy$ にこの変位と元の $w_c$ の積を加えると、透視除算後の変位を保てます。近クリップ面での $w_c$ や、法線がほぼ視線と平行で画面上の方向を取れない場合は、押し出しを抑えます。クリップ空間で幅を保つ方法でも、接近した面との深度関係は別に確認します。
+
 ## コード例 — 3段の陰影とリム
 
 HLSL Shader Model 6.0のピクセルシェーダーです。`dxc -T ps_6_0 -E ToonPS Toon.hlsl` でコンパイルできます。頂点側からワールド空間の法線と面からカメラへのベクトルを渡します。色は線形値です。アウトラインは別パスで合成します。
@@ -90,6 +96,51 @@ float4 ToonPS(PixelInput input) : SV_Target
 
 段の間で `middle=1`、`bright=0` なら $0.18+0.37=0.55$、両方が1なら $0.18+0.37+0.45=1.00$ です。微分で求めた幅が大きいと中間値が増えます。帯の面積を保ちたいときは幅の上限を設けて、低解像度と遠距離で見比べます。
 
+### コード例 — 深度と法線の Sobel 輪郭
+
+HLSL Shader Model 6.0 の `ps_6_0`、エントリーは `OutlinePS`。`LinearDepth` は正のビュー空間深度と、背景を示す 0 を持ちます。同じサイズの `WorldNormal` は復号済みの単位法線 XYZ を格納します。深度は中央の距離で正規化し、法線は RGB 各成分の勾配をまとめて判定します。出力は輪郭マスクで、元のカラー画像との合成は別パスです。被写体の種類を限定するなら、ID またはステンシルのマスクを併用します。
+
+```hlsl
+Texture2D<float> LinearDepth : register(t0);
+Texture2D<float4> WorldNormal : register(t1);
+
+cbuffer EdgeSettings : register(b0)
+{
+    int2 ImageSize;
+    float DepthThreshold;
+    float NormalThreshold;
+};
+
+float4 OutlinePS(float4 position : SV_Position) : SV_Target
+{
+    int2 pixel = int2(position.xy);
+    float center = LinearDepth.Load(int3(pixel, 0));
+    float2 gradD = 0.0;
+    float3 gradNX = 0.0;
+    float3 gradNY = 0.0;
+    for (int y = -1; y <= 1; ++y)
+    {
+        for (int x = -1; x <= 1; ++x)
+        {
+            int2 p = clamp(pixel + int2(x, y), 0, ImageSize - 1);
+            float d = LinearDepth.Load(int3(p, 0));
+            float3 n = d > 0.0 ? WorldNormal.Load(int3(p, 0)).xyz : 0.0;
+            float2 weight = float2(x * (2 - abs(y)), y * (2 - abs(x)));
+            gradD += weight * d;
+            gradNX += weight.x * n;
+            gradNY += weight.y * n;
+        }
+    }
+
+    float depthEdge = length(gradD) / (8.0 * max(center, 0.01));
+    float normalEdge = sqrt(dot(gradNX, gradNX) + dot(gradNY, gradNY)) / 8.0;
+    float edge = max(step(DepthThreshold, depthEdge), step(NormalThreshold, normalEdge));
+    return float4(edge.xxx, 1.0);
+}
+```
+
+Sobel の横方向の係数は、左列が $-1,-2,-1$、右列が $1,2,1$。中央を含む左 2 列の深度が 4 m、右列が 5 m なら横の和は 4、縦は 0 で、`depthEdge` は $4/(8\times4)=0.125$ になります。
+
 ## 理解度チェック
 
 1. 影色と明色をそれぞれ決めたいとき、ランプには何を入れる？
@@ -114,3 +165,6 @@ float4 ToonPS(PixelInput input) : SV_Target
 - [Goochほか、A Non-Photorealistic Lighting Model for Automatic Technical Illustration（SIGGRAPH 1998）](https://users.cs.northwestern.edu/~ago820/SIG98/abstract.html)
 - [Microsoft、HLSLのfwidth](https://learn.microsoft.com/en-us/windows/win32/direct3dhlsl/dx-graphics-hlsl-fwidth)
 - [Microsoft、Direct3D 12のD3D12_CULL_MODE](https://learn.microsoft.com/en-us/windows/win32/api/d3d12/ne-d3d12-d3d12_cull_mode)
+
+- [Epic Games — Stylized Rendering Post Processing（Unreal Engine 4.27 の輪郭例）](https://dev.epicgames.com/documentation/en-us/unreal-engine/stylized-rendering-post-processing?application_version=4.27)
+- [Microsoft — Direct3D のビューポート変換（15.6節）](https://microsoft.github.io/DirectX-Specs/d3d/archive/D3D11_3_FunctionalSpec.htm)

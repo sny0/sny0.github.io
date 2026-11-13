@@ -60,7 +60,7 @@ switch (e) {
 
 enumの値の表現は基底型に従います。`enum class`の基底型は省略時`int`、旧式enumは省略時に実装が選びます。列挙子名の文字列テーブルが実行時に自動で付くわけではありません。C++23までは、自前の変換表やコード生成などを使います。
 
-C++26草案の静的リフレクションでは、`^^Element`や`std::meta::enumerators_of`などから列挙子を調べ、名前への変換をコンパイル時に生成できます。使う処理系と標準ライブラリの対応を確認してください。C#の実行時`ToString()`や、UEのUHTによるコード生成とは仕組みが異なります。[C++草案: 列挙子のリフレクション](https://eel.is/c++draft/meta.reflection.member.queries)・[UEのリフレクション](/game/unreal/reflection-and-uht.html)
+[C++26（DIS）](/languages/cpp/cpp26-features.html)の静的リフレクションでは、`^^Element`や`std::meta::enumerators_of`などから列挙子を調べ、名前への変換をコンパイル時に生成できます。使う処理系と標準ライブラリの対応を確認してください。C#の実行時`ToString()`や、UEのUHTによるコード生成とは仕組みが異なります。[C++草案: 列挙子のリフレクション](https://eel.is/c++draft/meta.reflection.member.queries)・[UEのリフレクション](/game/unreal/reflection-and-uht.html)
 
 ## namespace
 

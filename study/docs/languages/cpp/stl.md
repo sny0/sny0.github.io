@@ -111,7 +111,7 @@ for (const auto& e : strongAlive) { /* 走査時に初めてfilterが動く */ }
 
 1. `List<T>` はC++の `std::list` ではなく **`std::vector`** に対応(C++のlistは連結リスト)。名前の罠の代表
 2. `Dictionary<K,V>` ≒ `unordered_map`。ただしC++版は要素へのポインタ・参照が(リハッシュ後も)有効という違いがある
-3. `v[i]`に範囲外例外を期待しない。デバッグ・hardening設定では違反を検出する実装があり、C++26草案にもhardened preconditionがある。`at()`は`std::out_of_range`で範囲外を報告する。[vectorのアクセス](https://www.open-std.org/jtc1/sc22/wg21/docs/papers/2025/p3471r4.html)・[ranges::to](https://eel.is/c++draft/range.utility.conv.to)
+3. `v[i]`に範囲外例外を期待しない。デバッグ・hardening設定では違反を検出する実装があり、[C++26（DIS）](/languages/cpp/cpp26-features.html)にもhardened preconditionがある。`at()`は`std::out_of_range`で範囲外を報告する。[vectorのアクセス](https://www.open-std.org/jtc1/sc22/wg21/docs/papers/2025/p3471r4.html)・[ranges::to](https://eel.is/c++draft/range.utility.conv.to)
 4. foreachでの削除はC#では例外、C++では**未定義動作**(黙って壊れる)
 
 ## ゲーム開発での使用例

@@ -44,7 +44,7 @@ for (int i = 0; i <= n; ++i) { ... }
 // 例3: C++20/23の未初期化intの読み取りもUBであり、意図した分岐は保証されない
 ```
 
-C++26草案は、通常の自動記憶域の未初期化値を読むケースにerroneous behaviorを導入しています。動的記憶域や`[[indeterminate]]`指定などは規則が異なります。規格版を無視して「未初期化なら何でもUBとして除去できる」とは説明できません。[未初期化値の分類](/languages/cpp/undefined-behavior.html#uninitialized-values)・[C++草案](https://eel.is/c++draft/basic.indet)
+[C++26（DIS）](/languages/cpp/cpp26-features.html)は、通常の自動記憶域の未初期化値を読むケースにerroneous behaviorを導入しています。動的記憶域や`[[indeterminate]]`指定などは規則が異なります。規格版を無視して「未初期化なら何でもUBとして除去できる」とは説明できません。[未初期化値の分類](/languages/cpp/undefined-behavior.html#uninitialized-values)・[C++草案](https://eel.is/c++draft/basic.indet)
 
 最適化後にだけ不具合が出たときは、まずUB、初期化漏れ、データレースなどを調べます。UBがなくても、未規定の評価順や許された浮動小数点演算の差によって結果が変わる場合があります。as-ifルールは「規格が許す動作の範囲を守る」ということで、全設定で同一の数値結果になる保証ではありません。`-ffast-math`など、標準の浮動小数点の前提を緩めるオプションも区別します。[GCCの最適化・浮動小数点オプション](https://gcc.gnu.org/onlinedocs/gcc/Optimize-Options.html)
 

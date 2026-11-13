@@ -22,9 +22,9 @@ study:
 | Nagle アルゴリズム | 送信済みのデータに対する ACK、またはフルサイズのセグメントを送れる量のデータ | 小さい TCP セグメントが続くときに、複数の書き込みをまとめる。 |
 | 遅延 ACK | ACK を一緒に返せる機会や、実装が選んだ期限 | ACK 単体のセグメント数を減らす。 |
 
-RFC 896 で提案され、RFC 9293 `3.7.4 が説明する Nagle の基本形では、未確認のデータがある間、新しい小さい送信をまとめる。`MSS` は TCP セグメントのデータ部分のサイズを表し、この判定では接続の有効送信 MSS を使う。未確認のデータがなく、送信ウィンドウにも余裕があれば、この規則による待ちは生じない。実装には変種があり、ほかの送信制約も残る。
+RFC 896 で提案され、RFC 9293 §3.7.4 が説明する Nagle の基本形では、未確認のデータがある間、新しい小さい送信をまとめる。`MSS`（Maximum Segment Size）は TCP セグメントに入るデータ部分の最大サイズを表し、この判定では接続の有効送信 MSS を使う。未確認のデータがなく、送信ウィンドウにも余裕があれば、この規則による待ちは生じない。実装には変種があり、ほかの送信制約も残る。
 
-遅延 ACK はデータを受け取った側の処理。RFC 1122 `4.2.3.2 と RFC 9293 `3.8.6.3 は、遅延を 0.5 秒未満とし、フルサイズのセグメントが続く場合の ACK の頻度も示す。0.5 秒は規格上の上限であり、実際の待ち時間は OS、通信状況、接続の状態などに依存する。TCP の ACK は接続上でバイトを受け取ったことを示し、相手のゲームがそのメッセージを処理したかどうかはアプリの応答で確認する。
+遅延 ACK はデータを受け取った側の処理。RFC 1122 §4.2.3.2 と RFC 9293 §3.8.6.3 は、遅延を 0.5 秒未満とし、フルサイズのセグメントが続く場合の ACK の頻度も示す。0.5 秒は規格上の上限であり、実際の待ち時間は OS、通信状況、接続の状態などに依存する。TCP の ACK は接続上でバイトを受け取ったことを示し、相手のゲームがそのメッセージを処理したかどうかはアプリの応答で確認する。
 
 ## 二回の書き込みが待つ例
 
@@ -48,6 +48,14 @@ Winsock と Linux の TCP ソケットでは、`setsockopt` のレベルを `IPP
 `TCP_NODELAY` を有効にしても、相手側の遅延 ACK は残る。輻輳制御、送受信のウィンドウ、送信キューなどの影響も受ける。TCP はバイトストリームなので、アプリの `send` と相手の `recv` の呼び出し数やバイトの区切りが対応するとは限らない。
 
 ヘッダーと本体が同時に用意できるなら、先にアプリ側で一つの論理メッセージにまとめて書き込む方法がある。時刻が別の小さい操作を早く届けたい接続では `TCP_NODELAY` を比較し、送るセグメント数、遅延の分布、実際のフレームへの影響を測る。計測ではアプリが書き込んだ時刻、TCP のデータと ACK が観測された時刻、相手アプリが読み取った時刻を区別する。ローカルループバックだけでは同じ待ちが現れない場合がある。
+
+### 書き込みのまとめ方と受信側の設定
+
+Linux では、ヘッダーと本体を別々のメモリに置いたまま `writev` や `sendmsg` にまとめて渡せる。`MSG_MORE` は同じ送信の続きがあることを呼び出し単位で示す。`TCP_CORK` はソケット単位で部分セグメントの送出を抑え、解除すると保留分の送出を促す。書き込みの結合や `MSG_MORE` を使っても、TCP のセグメント境界と受信側の読み取り境界は一致するとは限らない。 [Linux man-pages — writev(2)](https://man7.org/linux/man-pages/man2/writev.2.html)・[send(2)](https://man7.org/linux/man-pages/man2/send.2.html)・[tcp(7)](https://man7.org/linux/man-pages/man7/tcp.7.html)
+
+Linux の受信側で `TCP_QUICKACK` を設定すると、即時 ACK を送るモードへの切り替えを要求できる。以後の TCP の処理でモードは変わり得る。Windows Server には `TcpAckFrequency` のレジストリ設定があり、遅延 ACK のタイマーを待たずに ACK を送るまでの件数に関わる。こちらは送信ソケット単位の `TCP_NODELAY` と異なる範囲に作用する。 [Linux man-pages — tcp(7)](https://man7.org/linux/man-pages/man7/tcp.7.html)・[Microsoft — TcpAckFrequency](https://learn.microsoft.com/en-us/troubleshoot/windows-server/networking/registry-entry-control-tcp-acknowledgment-behavior)
+
+Linux で送信の計測点を分けたい場合は `SO_TIMESTAMPING` を使える。`SOF_TIMESTAMPING_TX_SCHED` はパケットスケジューラーへ入る前、`SOF_TIMESTAMPING_TX_SOFTWARE` はデバイスドライバーへの引き渡し付近のソフトウェア時刻を記録する。TCP はバイトストリームで、書き込み単位がパケットに一対一で対応しないため、アプリの書き込み時刻とは別に記録する。 [Linux Kernel Documentation — Timestamping](https://docs.kernel.org/networking/timestamping.html)
 
 ## コード例 — 2 回目の書き込み時刻を比較する
 
@@ -121,9 +129,9 @@ TCP はバイトストリーム。受信側はメッセージの長さや区切�
 ## 参考資料
 
 - [John Nagle — RFC 896: Congestion Control in IP/TCP Internetworks](https://www.rfc-editor.org/rfc/rfc896.html)
-- [IETF — RFC 1122 `4.2.3.2: When to Send an ACK Segment](https://www.rfc-editor.org/rfc/rfc1122.html#page-96)
-- [IETF — RFC 9293 `3.7.4: Nagle Algorithm](https://www.rfc-editor.org/rfc/rfc9293.html#section-3.7.4)
-- [IETF — RFC 9293 `3.8.6.3: Delayed Acknowledgments](https://www.rfc-editor.org/rfc/rfc9293.html#section-3.8.6.3)
+- [IETF — RFC 1122 §4.2.3.2 When to Send an ACK Segment](https://www.rfc-editor.org/rfc/rfc1122.html#page-96)
+- [IETF — RFC 9293 §3.7.4 Nagle Algorithm](https://www.rfc-editor.org/rfc/rfc9293.html#section-3.7.4)
+- [IETF — RFC 9293 §3.8.6.3 Delayed Acknowledgments](https://www.rfc-editor.org/rfc/rfc9293.html#section-3.8.6.3)
 - [Microsoft Winsock — IPPROTO_TCP socket options](https://learn.microsoft.com/en-us/windows/win32/winsock/ipproto-tcp-socket-options)
 - [Linux man-pages — tcp(7)](https://man7.org/linux/man-pages/man7/tcp.7.html)
 - [Linux Kernel Documentation — Timestamping](https://docs.kernel.org/networking/timestamping.html)

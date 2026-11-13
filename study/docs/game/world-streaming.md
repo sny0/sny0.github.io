@@ -91,6 +91,51 @@ int main()
 
 プレイヤーが 1 → 2 → 1 と戻ったとき、セル 0 は一時的に距離 2 になっても保持される。セル 0 が解放対象になるのは、プレイヤーがセル 3 まで離れてから。読み込み中のセルもメモリ予算に含め、重複要求や古い完了通知を扱う。
 
+### コード例 — 加算シーンをロードして解放する
+
+Unity 6.3 LTS と Addressables 2.10.3 のコンポーネント例。残しておく管理用シーンに付け、Addressable にしたセルのアドレスを `sceneKey` に指定する。ロードに成功したら現在のシーンに追加し、結果を 1 フレーム確認した後でロード時のハンドルを渡して解放する。管理用オブジェクトはこの一連の処理が終わるまで有効に保つ。複数セルを管理する場合は、どのセルがどのハンドルを所有するかを表に持たせる。
+
+```csharp
+using System.Collections;
+using UnityEngine;
+using UnityEngine.AddressableAssets;
+using UnityEngine.ResourceManagement.AsyncOperations;
+using UnityEngine.SceneManagement;
+
+public sealed class AddressableCellExample : MonoBehaviour
+{
+    [SerializeField] private string sceneKey = "cell-01";
+
+    private IEnumerator Start()
+    {
+        var load = Addressables.LoadSceneAsync(
+            sceneKey, LoadSceneMode.Additive, activateOnLoad: true);
+        yield return load;
+
+        if (load.Status != AsyncOperationStatus.Succeeded)
+        {
+            Debug.LogError($"Cell load failed: {load.OperationException}");
+            Addressables.Release(load);
+            yield break;
+        }
+
+        Debug.Log($"Cell loaded: {load.Result.Scene.name}");
+        yield return null;
+
+        var unload = Addressables.UnloadSceneAsync(load, autoReleaseHandle: false);
+        yield return unload;
+
+        if (unload.Status == AsyncOperationStatus.Succeeded)
+            Debug.Log("Cell unloaded");
+        else
+            Debug.LogError($"Cell unload failed: {unload.OperationException}");
+        Addressables.Release(unload);
+    }
+}
+```
+
+`autoReleaseHandle: false` はアンロード操作の結果を読んでから自分でそのハンドルを解放する指定。ロード成功時はロードハンドルをアンロードへ渡す。ロードに失敗したときは失敗した操作のハンドルを解放する。上の例は有効化を保留しない。実運用では `yield return null` の位置で、セルを参照する処理が終わったかをゲーム側の状態で判断する。 Unity 6000.3.27f1 と Addressables 2.10.3 の参照でコンパイルを確認した。 [Unity — Addressables 2.10 のシーンのロード](https://docs.unity3d.com/Packages/com.unity.addressables@2.10/manual/LoadingScenes.html)
+
 ## 理解度チェック
 
 1. 読み込み距離より解放距離を広くする理由は何か。

@@ -50,6 +50,10 @@ $$
 
 水中の距離を $d$、波長帯ごとの吸収係数を $\sigma_a$ とすると、透過率は $e^{-\sigma_a d}$。赤が青より強く吸収される設定なら、遠くの水底ほど赤が弱まる。透過率が低い場所では、水中で散乱して視線に届く光の色が目立つ。RGB ごとに近似した吸収と散乱色の例は次のコードで確認できる。
 
+### SSR と平面反射
+
+SSR は現在の画面の深度と色を使うため、画面外の物体や、手前の物体に隠れて深度バッファにない物体は反射できない。画面端やレイが外れた場所では環境マップなどを使う。平面反射は水面でカメラを鏡映し、反射側から見える範囲を別のパスで描く。水面を平らな鏡に近づけたいときは画面外も映せる一方、追加のカリングや描画が必要になる。波の法線で平面反射の参照先を少し揺らすのは近似で、大きく湾曲する水面では元の平面と反射方向のずれが目立つ。 [Epic Games — Planar Reflections（UE 5.8）](https://dev.epicgames.com/documentation/en-us/unreal-engine/planar-reflections-in-unreal-engine?application_version=5.8)
+
 ## 泡と厚みの扱い
 
 浅瀬の泡は水面と底の距離が小さい場所で強くし、ノイズや波の位相で形を崩せる。沖の白波は波の頂や砕波を目安に置くことがある。水面と底の深度差を使う場合は、同じカメラ空間の深度に直す。水面から水底までの鉛直距離と、屈折したレイが水中を進んだ長さは別の値になる。
@@ -99,6 +103,61 @@ float4 main(float2 uv : TEXCOORD0) : SV_Target0
 }
 ```
 
+### コード例 — シーン深度で屈折の前景を除く
+
+HLSL Shader Model 6.0 の `ps_6_0`、エントリーは `RefractionPS`。水面パスより先に描いた不透明シーンの色と、ビュー空間で前方を正とする線形深度を渡す。深度 0 は背景、`surfaceZ` は同じ空間における水面の深度。`toCameraVS` は水面からカメラへ向かうビュー空間ベクトルで、前方が +Z の透視カメラを使う。`offsetPixels` は水面の傾きから別途求めた画面上の変位。屈折先の深度はポイントサンプルで調べ、画面外や水面より手前なら元の座標へ戻す。見つかった深度差を元の視線方向へ換算し、吸収の距離の近似に使う。
+
+```hlsl
+Texture2D<float4> OpaqueColor : register(t0);
+Texture2D<float> LinearSceneDepth : register(t1);
+SamplerState PointClamp : register(s0);
+
+cbuffer WaterOptics : register(b0)
+{
+    float2 InvTargetSize;
+    float DepthBias;
+    float MaxTravel;
+    float3 Absorption;
+    float BackgroundTravel;
+    float3 WaterTint;
+};
+
+struct RefractionInput
+{
+    float4 position : SV_Position;
+    float surfaceZ : TEXCOORD0;
+    float3 toCameraVS : TEXCOORD1;
+    float2 offsetPixels : TEXCOORD2;
+};
+
+float4 RefractionPS(RefractionInput input) : SV_Target
+{
+    float2 original = input.position.xy * InvTargetSize;
+    float2 distorted = original + input.offsetPixels * InvTargetSize;
+    float2 chosen = original;
+    float depth = LinearSceneDepth.SampleLevel(PointClamp, original, 0.0);
+    if (all(distorted >= 0.0) && all(distorted < 1.0))
+    {
+        float candidate = LinearSceneDepth.SampleLevel(PointClamp, distorted, 0.0);
+        if (candidate > input.surfaceZ + DepthBias)
+        {
+            depth = candidate;
+            chosen = distorted;
+        }
+    }
+
+    float zDelta = max(depth - input.surfaceZ, 0.0);
+    float rayZ = max(-normalize(input.toCameraVS).z, 0.01);
+    float travel = depth > 0.0 ? zDelta / rayZ : BackgroundTravel;
+    travel = clamp(travel, 0.0, MaxTravel);
+    float3 t = exp(-max(Absorption, 0.0) * travel);
+    float3 color = OpaqueColor.SampleLevel(PointClamp, chosen, 0.0).rgb;
+    return float4(color * t + WaterTint * (1.0 - t), 1.0);
+}
+```
+
+例えば水面が 5 m、候補が 4 m なら候補を使わない。元の深度が 8 m、元の視線の前方成分が 0.8 なら、距離の近似は $(8-5)/0.8=3.75$ m。候補を採用したときの水面深度は元のピクセルの値なので、歪みを大きくすると厚みもずれやすい。正確な屈折経路が必要なら、水中を進むレイと背景との交差を追う。水面の泡を鉛直の水深に基づいて出す場合は、背景深度から位置を復元して水面と背景の高さの差を使うか、別の水深データを使う。白波の泡は波頭や波の圧縮で発生させ、時間とともに減衰させると、浅瀬の泡と別々に調整できる。
+
 ## 理解度チェック
 
 1. 空気側から水面を水平に近い角度で見ると、反射と透過の比率はどう変わるか。
@@ -127,3 +186,6 @@ float4 main(float2 uv : TEXCOORD0) : SV_Target0
 - Tiago Sousa, [GPU Gems 2 — Generic Refraction Simulation](https://developer.nvidia.com/gpugems/gpugems2/part-ii-shading-lighting-and-shadows/chapter-19-generic-refraction-simulation)
 - Christophe Schlick, [An Inexpensive BRDF Model for Physically-based Rendering](https://doi.org/10.1111/1467-8659.1330233)
 - Epic Games, [Single Layer Water Shading Model（UE 5.8）](https://dev.epicgames.com/documentation/en-us/unreal-engine/single-layer-water-shading-model-in-unreal-engine)
+
+- [GPU Gems 3 — Deferred Shading in Tabula Rasa, §19.3.3 Water Depth](https://developer.nvidia.com/gpugems/gpugems3/part-iii-rendering/chapter-19-deferred-shading-tabula-rasa)
+- Epic Games, [Planar Reflections（UE 5.8）](https://dev.epicgames.com/documentation/en-us/unreal-engine/planar-reflections-in-unreal-engine?application_version=5.8)

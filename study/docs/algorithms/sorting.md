@@ -47,6 +47,12 @@ flowchart LR
 
 GPU では、たとえばスレッドグループごとに桁の個数を集計し、並列の累積和でグループ別の書き込み位置を求める。各グループ内でも同じ桁の要素の位置を求め、ソート用の書き込み先へ移す。段階を分けた場合は、前の段階の書き込みを後の段階が読めるよう同期する。全粒子のデータを移す代わりに `キーと粒子 ID` の組だけを移し、後の描画で ID から粒子データを読む構成にできる。
 
+### バイトニックソートと Onesweep
+
+バイトニックソートは、比較して入れ替える要素の組が入力値によらず決まるソーティングネットワーク。$2^k$ 要素なら比較の段数は $1+2+\cdots+k=k(k+1)/2$ で、たとえば 128 要素なら 28 段。小さな配列を一つのスレッドグループ内に収めると、グループ共有メモリーとグループ内同期で処理できる。実装例は [GPU パーティクル](/graphics/shader/gpu-particles.html) を参照。
+
+大量の固定幅キーには、全要素を桁ごとに振り分ける GPU 基数ソートがある。Adinets と Merrill の Onesweep は、全桁の総ヒストグラムを先に作る。各桁ではブロック内で振り分け、ブロック間のプレフィックスを求めながら書き込み先を決める。論文では通常の方式で桁ごとにキーを読む集計パスを省き、各桁で全体メモリーを通るデータ量を減らす。桁ごとの読み書き、作業用領域、比較の段数を実データのサイズで計測する。 [Adinets・Merrill — Onesweep（2022）](https://research.nvidia.com/publication/2022-06_onesweep-faster-least-significant-digit-radix-sort-gpus)
+
 ### 半透明を奥から手前へ描く
 
 通常の source-over の色ブレンドでは、背景の色を `Cb`、今回の色を `Cs`、今回のアルファを `a` として、`a*Cs + (1-a)*Cb` を求める。黒に赤と青をアルファ 0.5 で重ねる例では、赤→青で `(0.25, 0, 0.5)`、青→赤で `(0.5, 0, 0.25)`。手前にあるものを後から描く必要があるため、半透明粒子の中心を使う場合は、視線方向の深度で奥から手前へ並べる。中心の深度だけでは、交差する大きな面の全ピクセルを正しく並べられないこともある。
@@ -157,7 +163,7 @@ int main()
 
 ## 参考資料
 
-- [WG21 N4861 — C++20 最終作業草案 `alg.sort](https://timsong-cpp.github.io/cppwp/n4861/alg.sort)
+- [WG21 N4861 — C++20 最終作業草案 `alg.sort`](https://timsong-cpp.github.io/cppwp/n4861/alg.sort)
 - [David R. Musser — Introspective Sorting and Selection Algorithms（著者の公開資料、1997）](https://www.cs.rpi.edu/~musser/gp/index_1.html)
 - [Nadathur Satish・Mark Harris・Michael Garland — Designing Efficient Sorting Algorithms for Manycore GPUs（2009）](https://research.nvidia.com/publication/2009-05_designing-efficient-sorting-algorithms-manycore-gpus)
 - [Microsoft — Alpha Blending の合成式](https://learn.microsoft.com/en-us/windows/win32/learnwin32/using-color-in-direct2d#alpha-blending)

@@ -30,6 +30,8 @@ study:
 
 この形式には従来の暗黙の `this` がありません。明示的オブジェクトメンバー関数には末尾の `const` や参照修飾子を付けず、`virtual` にもできません。呼び出し元の型の違いはオブジェクト引数へ書きます。ラムダで `this auto&& self` を使えば、ラムダ本体から `self(...)` と自分を呼ぶ再帰も書けます。
 
+共通の基底メンバーに `this const Self& self` を指定すると、派生型から呼んだときは `Self` がその派生型になります。基底のテンプレート引数に派生型を渡し、ダウンキャストしてフックを呼んでいたCRTPの一部を、この推論で書き換えられます。型ごとに別の静的データを持つ例と併せて、[CRTPの書き換え例](/languages/cpp/crtp.html)を参照してください。
+
 ## std::expected — 正常値とエラーを型で伝える
 
 `std::expected<T, E>` は正常値 `T` とエラー `E` のどちらかを保持します。失敗は `std::unexpected(error)` で返します。例えばアセットIDを文字列から読む処理では、数値に変換できない、表現範囲を超える、末尾に余分な文字がある、という失敗理由を呼び出し側で使えます。正常時の値が不要な処理には `std::expected<void, E>` も使えます。
@@ -49,10 +51,14 @@ flowchart LR
 | `and_then` | 次の `expected` を返す処理へ進む | エラーを伝える |
 | `transform_error` | 正常値を伝える | エラーを別の型や値へ写す |
 | `or_else` | 正常値を伝える | エラーを受け取り `expected` で回復や伝播を表す |
+| `value_or(fallback)` | 正常値を値として返す | 代替値を返す |
+| `error_or(fallback)` | 代替エラー値を返す | 保持したエラーを値として返す |
+
+`value_or` と `error_or` の引数は普通の関数引数として先に評価されます。失敗のときだけ代替の処理を実行したい場合は分岐や `or_else` を使います。
 
 ## コード例 — アセットIDを読み、成功時に参照へアクセスする
 
-完全なC++ソースです。`cl /std:c++latest /EHsc asset_id.cpp` でコンパイルできます。`<expected>` を実装した環境が必要です。明示的オブジェクト引数を実装したコンパイラでは `__cpp_explicit_this_parameter` 側を使い、手元のVisual Studio 2022 17.5.5では左辺値用の従来のオーバーロード側を使います。
+完全なC++23ソースです。`g++ -std=c++23 asset_id.cpp -o asset_id` でコンパイルできます。MSVCでは `cl /std:c++latest /EHsc asset_id.cpp` が使えます。`<expected>` を実装した標準ライブラリが必要です。明示的オブジェクト引数をサポートする処理系では `__cpp_explicit_this_parameter` 側を使います。
 
 ```cpp
 #include <array>
@@ -137,7 +143,7 @@ int main()
 }
 ```
 
-`42` は成功し、例の代入でIDが43になります。`42x` は末尾の文字、`abc` は解析できない値、最後の24桁の値は `int` の範囲外として表示します。`static_assert` はconstの有無に応じた参照型と、右辺値から呼べないことを確認します。Microsoftの適合表では基本の `<expected>` はVisual Studio 2022 17.3、P0847R7の明示的オブジェクト引数は17.13に記載されています。手元では17.5.5で `expected` と従来のオーバーロード側をビルド・実行し、明示的オブジェクト引数側はC++23草案に照合しました。
+`42` は成功し、例の代入でIDが43になります。`42x` は末尾の文字、`abc` は解析できない値、最後の24桁の値は `int` の範囲外として表示します。`static_assert` はconstの有無に応じた参照型と、右辺値から呼べないことを確認します。Microsoftの適合表では基本の `<expected>` はVisual Studio 2022 17.3、P0847R7の明示的オブジェクト引数は17.13に記載されています。GCC 16.2のC++23モードで明示的オブジェクト引数の分岐をビルド・実行し、4行の出力と `static_assert` を確認しました。初回のVisual Studio 2022 17.5.5での確認は `expected` と従来のオーバーロードの分岐が対象です。
 
 ## 理解度チェック
 
@@ -156,6 +162,7 @@ int main()
 - [constの使い分け](/languages/cpp/const-correctness.html)
 - [値・ポインター・参照](/languages/cpp/values-pointers-references.html)
 - [C++の例外](/languages/cpp/exceptions.html)
+- [CRTPと静的ポリモーフィズム](/languages/cpp/crtp.html)
 
 ## 参考資料
 
@@ -164,4 +171,6 @@ int main()
 - [WG21、P0323R12 std::expected](https://www.open-std.org/jtc1/sc22/wg21/docs/papers/2022/p0323r12.html)
 - [WG21、P2505R5 Monadic Functions for std::expected](https://www.open-std.org/jtc1/sc22/wg21/docs/papers/2022/p2505r5.html)
 - [WG21、C++23草案N4950のexpectedの合成操作](https://timsong-cpp.github.io/cppwp/n4950/expected.object.monadic)
+- [WG21 N4950 — expectedの値とエラーを取り出す操作](https://timsong-cpp.github.io/cppwp/n4950/expected.object.obs)
+- [GCC — C++規格の対応表](https://gcc.gnu.org/projects/cxx-status.html)
 - [Microsoft、Visual C++の言語・ライブラリ適合状況](https://learn.microsoft.com/en-us/cpp/overview/visual-cpp-language-conformance?view=msvc-170)

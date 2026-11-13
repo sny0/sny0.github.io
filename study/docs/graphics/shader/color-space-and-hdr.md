@@ -68,6 +68,8 @@ g = 1.15, t = 0.04
 
 ### Blender 4.5 LTS の AgX
 
+ここでは数値例とシェーダーで同じカーブを再現できるように、同じリリースに入っている OCIO 設定と LUT を組にし、Blender 4.5.0 に固定する。別の版で比較するときも、その版の設定と LUT を一緒に使う。
+
 Blender 4.5.0 で Look を掛けず、sRGB 向けの AgX を使うと、線形の色は FilmLight E-Gamut に変換され、成分ごとに対数で 0〜1 の LUT 座標に写る。`AgX_Base_sRGB.cube` は一辺 57 点の 3D LUT。3 成分を一緒に参照し、格子セル内を四面体補間する。LUT の出力は 2.4 乗で線形 Rec.709 に戻し、最後に sRGB へ符号化する。途中の 2.4 乗は LUT の出力側の復号で、sRGB の区分的な伝達関数とは別の段階にある。 [Blender 4.5.0 — config.ocio](https://github.com/blender/blender/blob/v4.5.0/release/datafiles/colormanagement/config.ocio)、[AgX_Base_sRGB.cube](https://github.com/blender/blender/blob/v4.5.0/release/datafiles/colormanagement/luts/AgX_Base_sRGB.cube)
 
 ```text

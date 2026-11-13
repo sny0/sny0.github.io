@@ -47,6 +47,21 @@ CI 専用のコマンドを増やしすぎると、手元で同じ失敗を再�
 
 長く残す配布物と、一時的な CI 成果物には別々の保存期間を設定できる。例えばパッケージ名に対象 OS と構成を含め、コミットは成果物を作った実行の情報から確認する。キャッシュに含まれた内容が成果物の取り違えにつながらないよう、コンパイラや依存関係が変わったらキーも変える。
 
+### 依存パッケージをキャッシュする設定例
+
+Node.js 24 と npm を使う補助ツールがリポジトリのルートにある場合の例。`actions/checkout` の後に次のステップを置く。`cache: npm` で npm のダウンロードキャッシュを再利用し、`npm ci` はロックファイルに従って依存関係をインストールする。キャッシュがない実行でも同じ手順でビルドできる。テスト結果や配布バイナリは、上の表のように成果物として保存する。
+
+```yaml
+- uses: actions/setup-node@v6
+  with:
+    node-version: '24'
+    cache: npm
+    cache-dependency-path: package-lock.json
+- run: npm ci
+```
+
+[GitHub — setup-node v6](https://github.com/actions/setup-node/tree/v6)・[依存関係のキャッシュ](https://docs.github.com/en/actions/reference/workflows-and-actions/dependency-caching)
+
 ## コード例 — 小さな C++20 プロジェクトをビルドして保存する
 
 次の二つのファイルで、境界値を検査する実行ファイルを作る。テストは Release でも終了コードで結果を返す。
@@ -100,7 +115,7 @@ jobs:
       - uses: actions/checkout@v6.0.2
       - run: cmake -S . -B build -DCMAKE_BUILD_TYPE=Release
       - run: cmake --build build --parallel
-      - run: ctest --test-dir build --no-tests=error --output-on-failure --output-junit tests.xml
+      - run: ctest --test-dir build --no-tests=error --output-on-failure --output-junit "$GITHUB_WORKSPACE/build/tests.xml"
       - name: Store test report
         if: always()
         uses: actions/upload-artifact@v7.0.2
@@ -118,7 +133,7 @@ jobs:
           retention-days: 7
 ```
 
-`--no-tests=error` はテストが登録されていない場合にも失敗にする。Windows の Visual Studio のような複数構成を持つジェネレーターを使う場合は、ビルドに `--config Release`、CTest に `-C Release` を渡す。
+`--no-tests=error` はテストが登録されていない場合にも失敗にする。CTest 3.26.3 でリポジトリのルートから `--test-dir build --output-junit tests.xml` を実行すると、JUnit XML は `build/tests.xml` に出力された。例では GitHub Actions の作業ディレクトリを示す `GITHUB_WORKSPACE` から絶対パスを組み立て、アップロード先の指定と対応させている。Windows の Visual Studio のような複数構成を持つジェネレーターを使う場合は、ビルドに `--config Release`、CTest に `-C Release` を渡す。
 
 ## 理解度チェック
 
@@ -144,5 +159,5 @@ jobs:
 ## 参考資料
 
 - Kitware, [CMake 3.26 — cmake](https://cmake.org/cmake/help/v3.26/manual/cmake.1.html)・[ctest](https://cmake.org/cmake/help/v3.26/manual/ctest.1.html)・[add_test](https://cmake.org/cmake/help/v3.26/command/add_test.html)
-- GitHub, [Workflow syntax](https://docs.github.com/en/actions/reference/workflows-and-actions/workflow-syntax)・[Workflow artifacts](https://docs.github.com/en/actions/concepts/workflows-and-actions/workflow-artifacts)・[Dependency caching](https://docs.github.com/en/actions/concepts/workflows-and-actions/dependency-caching)
+- GitHub, [Workflow syntax](https://docs.github.com/en/actions/reference/workflows-and-actions/workflow-syntax)・[Workflow artifacts](https://docs.github.com/en/actions/concepts/workflows-and-actions/workflow-artifacts)・[Dependency caching](https://docs.github.com/en/actions/concepts/workflows-and-actions/dependency-caching)・[既定の環境変数](https://docs.github.com/en/actions/reference/workflows-and-actions/variables#default-environment-variables)
 - GitHub, [actions/checkout 6.0.2](https://github.com/actions/checkout/releases/tag/v6.0.2)・[actions/upload-artifact 7.0.2](https://github.com/actions/upload-artifact/releases/tag/v7.0.2)・[ホストランナーのイメージ](https://github.com/actions/runner-images)
