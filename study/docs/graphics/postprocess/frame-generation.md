@@ -56,17 +56,17 @@ flowchart LR
 
 中間フレームを作るには、後ろ側の描画フレームBが必要です。AとBの間に中間フレームを表示するために、Bが完成してから、表示する順序と間隔を調整します。表示間隔が不均等なら、表示枚数が増えても動きがカクついて見えることがあります。 [AMDのFrame Generation Swapchain](https://gpuopen.com/manuals/fsr_sdk/techniques/frame-interpolation-swap-chain/) · [フレームペーシング](/graphics/optimization/frame-pacing.html)
 
-この実践では、入力を反映する基礎フレームを約33.3 msごとに用意します。生成オンでは1基礎フレーム分、表示の予定を後ろへずらします。入力がBで色を変えた例を図にします。中間の位置は補間し、色の切り替えはBが表示される時点にそろえています。
+この実践では、入力を反映する基礎フレームを約33.3 msごとに用意します。生成オン時の予定表示に、教材の設定として1基礎フレーム分の待ちを加えます。図は入力がBで色を変えた場合です。中間の位置は補間し、色の切り替えはBが表示される時点にそろえています。
 
 ```mermaid
 flowchart TD
     I["色を切り替える入力"] --> B["次の基礎フレーム B が完成<br/>基礎更新の時刻は両モードで共通"]
     B --> N["オフ<br/>BをすぐCanvasに反映"]
     B --> Y["オン<br/>Aと中間フレームの表示枠を設ける"]
-    Y --> D["約33.3 ms後の表示枠で<br/>Bの色をCanvasに反映"]
+    Y --> D["デモで設定した約33.3 ms後に<br/>Bの色をCanvasに反映"]
 ```
 
-補間によって表示する位置は増えます。入力を読み、新しいゲーム状態を計算する回数は、ゲーム側の更新ループで決まります。実際のゲームでは、補間画像にもBに反映された変化が一部見える場合があります。入力への反応は、基礎FPS、レンダーキュー、生成処理、表示装置などを含む経路で測ります。デモの約33.3 msは、比較のために設定した表示待ちです。 [入力から画面に出るまでの遅延](/graphics/optimization/input-to-display-latency.html) · [NVIDIA Reflexの開発者向け資料](https://developer.nvidia.com/performance-rendering-tools/reflex)
+補間によって表示する位置は増えます。入力を読み、新しいゲーム状態を計算する回数は、ゲーム側の更新ループで決まります。実際のゲームでは、補間画像にもBに反映された変化が一部見える場合があります。製品で生成をオンにしたときの遅延の差は、生成方式と処理時間、基礎FPS、提示キュー、ディスプレイの更新条件によって変わります。入力から表示までの時間は、これらを含む経路で測ります。 [AMDの補間・外挿の比較](https://gpuopen.com/download/GDC2024_High_Performance_Rendering_in_Snowdrop_Using_AMD_FidelityFX_Super_Resolution_3.pdf) · [AMDの提示タイミング資料](https://gpuopen.com/manuals/fsr_sdk/techniques/frame-interpolation-swap-chain/#frame-pacing-and-presentation) · [NVIDIAの提示キューと遅延の解説](https://github.com/NVIDIA-RTX/Streamline/blob/main/docs/ProgrammingGuideDLSS_G.md#227-high-latency-with-high-fg-multipliers) · [入力から画面に出るまでの遅延](/graphics/optimization/input-to-display-latency.html)
 
 ## DLSSとFSRで設定を読む
 

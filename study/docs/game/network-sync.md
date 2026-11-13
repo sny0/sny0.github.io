@@ -8,12 +8,12 @@ study:
   domain: game
   summary: ネット対戦で何を送り、どの時点の状態を表示するかを整理し、サーバー権威、補間、入力の再適用、ロールバック、ラグ補償を図とC++20のサンプルで説明する。
   aliases: [ネットコード, マルチプレイヤー, ネットワーク同期, レプリケーション, サーバー権威, listen server, P2P, スナップショット, ロックステップ, tick, 補間, クライアント予測, リコンシリエーション, ロールバック, ラグ補償, lag compensation, GGPO, Iris, Unity Netcode]
-  verification: IETF、ValveのYahn Bernier、Ensemble Studios、GGPO、Epic、Unityの資料に照合し、MSVC x64のC++20モードで補正と補間を実行確認（2026-11-12）
+  verification: IETF、ValveのYahn W. Bernier、Ensemble Studios、GGPO、Epic、Unityの資料に照合し、MSVC x64のC++20モードで補正と補間を実行確認（2026-11-12）
 ---
 
 # ゲームのネットワーク同期 — 状態・入力・予測とロールバック
 
-対戦中に右へ移動すると、自分の画面ではすぐに動いてほしい一方、別のプレイヤーの画面でも同じルールで結果が決まる必要があります。各端末がいつの状態を描画し、誰が結果を確定するかを決めるのがネットワーク同期の設計です。[ValveのYahn Bernierによる解説](https://media.gdcvault.com/GD_Mag_Archives/GDM_June_2001.pdf)
+対戦中に右へ移動すると、自分の画面ではすぐに動いてほしい一方、別のプレイヤーの画面でも同じルールで結果が決まる必要があります。各端末がいつの状態を描画し、誰が結果を確定するかを決めるのがネットワーク同期の設計です。[Yahn W. BernierのGDC 2001講演資料](https://www.gamedevs.org/uploads/latency-compensation-in-client-server-protocols.pdf)
 
 ## 誰が状態を確定するか
 
@@ -34,13 +34,13 @@ study:
 
 『Age of Empires』の開発者は、決定論的なシミュレーションに入力を配ることで、数多くのユニットの状態を端末ごとに計算する構成を説明しています。[BettnerとTerrano「1500 Archers on a 28.8」](https://zoo.cs.yale.edu/classes/cs538/readings/papers/terrano_1500arch.pdf)
 
-**ティック**はシミュレーションの一回分の更新です。例えばサーバーが固定の時間刻みで毎秒60ティック進み、状態は3ティックに一度の毎秒20回送信します。画面の描画頻度は別に決まります。スナップショットに入れるティック番号から、受信側はどの更新の状態かを識別できます。[ゲームループと時間](/game/basics/game-loop-and-time.html) · [Valveのクライアント・サーバー方式の解説](https://media.gdcvault.com/GD_Mag_Archives/GDM_June_2001.pdf)
+**ティック**はシミュレーションの一回分の更新です。例えばサーバーが固定の時間刻みで毎秒60ティック進み、状態は3ティックに一度の毎秒20回送信します。画面の描画頻度は別に決まります。スナップショットに入れるティック番号から、受信側はどの更新の状態かを識別できます。[ゲームループと時間](/game/basics/game-loop-and-time.html) · [GDC 2001講演資料のクライアント・サーバー方式の解説](https://www.gamedevs.org/uploads/latency-compensation-in-client-server-protocols.pdf)
 
 UDPでティック11、12の順に送っても、12だけが届いたり、12が先に届いたりします。全体を含む状態更新なら、同じ対象の12を適用した後に11で上書きする必要はありません。一方、入力や試合開始など、飛ばすと結果が変わるメッセージには、確認と再送などの配送ルールを用意します。移動入力なら、最新の入力と直近の数件をまとめて送り、受信側で入力番号の重複を除く方法もあります。[UDPデータグラムの境界と送受信](/network/udp-datagrams.html) · [遅延・スループットとキュー](/network/latency-throughput-and-queues.html) · [RFC 8085 §3.3](https://www.rfc-editor.org/rfc/rfc8085.html#section-3.3)
 
 ## 他のプレイヤーを少し前の時刻で描く
 
-相手の位置は、届いた値へ毎回飛ばすと階段状に動きます。**スナップショット補間**では、受信済みの状態を時刻順に保持し、描画したい時刻を挟む二点から位置を求めます。描画時刻を推定したサーバー時刻より少し遅らせると、到着間隔の揺れや一部の欠落があっても二点を確保しやすくなります。[Valveの補間とラグ補償の解説](https://media.gdcvault.com/GD_Mag_Archives/GDM_June_2001.pdf)
+相手の位置は、届いた値へ毎回飛ばすと階段状に動きます。**スナップショット補間**では、受信済みの状態を時刻順に保持し、描画したい時刻を挟む二点から位置を求めます。描画時刻を推定したサーバー時刻より少し遅らせると、到着間隔の揺れや一部の欠落があっても二点を確保しやすくなります。[GDC 2001講演資料の補間とラグ補償の解説](https://www.gamedevs.org/uploads/latency-compensation-in-client-server-protocols.pdf)
 
 ```mermaid
 flowchart LR
@@ -103,9 +103,9 @@ GGPO型の**ロールバック**では、相手の入力がまだ届いていな
 
 ## ラグ補償では判定が参照する時刻を戻す
 
-即時に結果が決まる対戦アクションを判定するとき、サーバー到着時の相手の位置と、操作した人が画面で見た位置はずれます。Valveの方式では、サーバーが位置の履歴を持ち、操作時の通信遅延と描画の補間遅延を考慮して、その人が見ていた時刻の状態を判定に使います。判定結果は現在の状態へ反映します。[Yahn Bernier「Using Lag Compensation」](https://media.gdcvault.com/GD_Mag_Archives/GDM_June_2001.pdf)
+即時に結果が決まる対戦アクションを判定するとき、サーバー到着時の相手の位置と、操作した人が画面で見た位置はずれます。Valveの方式では、サーバーが位置の履歴を持ち、操作時の通信遅延と描画の補間遅延を考慮して、その人が見ていた時刻の状態を判定に使います。判定結果は現在の状態へ反映します。[GDC 2001講演資料の「Lag Compensation」節](https://www.gamedevs.org/uploads/latency-compensation-in-client-server-protocols.pdf)
 
-例えば相手の画面ではすでに壁の裏に入っていても、操作した側が見ていた時点ではまだ手前だった場合があります。どちらの見え方をどこまで優先するかを決めるため、履歴の長さや許容する巻き戻し時間に上限を設けます。復元するのはその判定に必要な過去の状態で、格闘ゲームのロールバックのように過去から現在までシミュレーション全体を進め直す手順とは区別できます。[Yahn Bernierによる公平性の議論](https://media.gdcvault.com/GD_Mag_Archives/GDM_June_2001.pdf)
+例えば相手の画面ではすでに壁の裏に入っていても、操作した側が見ていた時点ではまだ手前だった場合があります。どちらの見え方をどこまで優先するかを決めるため、履歴の長さや許容する巻き戻し時間に上限を設けます。復元するのはその判定に必要な過去の状態で、格闘ゲームのロールバックのように過去から現在までシミュレーション全体を進め直す手順とは区別できます。[GDC 2001講演資料の公平性の議論](https://www.gamedevs.org/uploads/latency-compensation-in-client-server-protocols.pdf)・[Game Developer 2001年8月号のBernierによる補足](https://media.gdcvault.com/GD_Mag_Archives/GDM_August_2001.pdf)
 
 ## 誰にどの状態をどれだけ送るか
 
@@ -148,7 +148,8 @@ GGPO型の**ロールバック**では、相手の入力がまだ届いていな
 ## 参考資料
 
 - [RFC 768 User Datagram Protocol](https://www.rfc-editor.org/rfc/rfc768.html) · [RFC 8085 UDP Usage Guidelines](https://www.rfc-editor.org/rfc/rfc8085.html)
-- [Yahn Bernier「Implementing Lag Compensation to Improve the Online Multiplayer Experience」Game Developer、2001年6月号](https://media.gdcvault.com/GD_Mag_Archives/GDM_June_2001.pdf)
+- [Yahn W. Bernier「Latency Compensating Methods in Client/Server In-game Protocol Design and Optimization」GDC 2001講演資料](https://www.gamedevs.org/uploads/latency-compensation-in-client-server-protocols.pdf)・[GDC 2001 Programming Proceedings](https://web.archive.org/web/20010426145840id_/http://www.gdconf.com/archives/proceedings/2001/prog_papers.html)
+- [Yahn W. Bernier「Artificial Lag」への回答、Game Developer、2001年8月号](https://media.gdcvault.com/GD_Mag_Archives/GDM_August_2001.pdf)
 - [Paul BettnerとMark Terrano「1500 Archers on a 28.8: Network Programming in Age of Empires and Beyond」](https://zoo.cs.yale.edu/classes/cs538/readings/papers/terrano_1500arch.pdf)
 - [GGPO README](https://github.com/pond3r/ggpo/blob/master/doc/README.md) · [GGPO Developer Guide](https://github.com/pond3r/ggpo/blob/master/doc/DeveloperGuide.md)
 - [Unreal Engine 5.6 Networking Overview](https://dev.epicgames.com/documentation/en-us/unreal-engine/networking-overview-for-unreal-engine?application_version=5.6) · [5.6のIris](https://dev.epicgames.com/documentation/en-us/unreal-engine/introduction-to-iris-in-unreal-engine?application_version=5.6) · [State of Unreal 2026での5.8の発表](https://www.unrealengine.com/news/state-of-unreal-2026-top-news-from-the-show)

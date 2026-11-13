@@ -72,6 +72,8 @@ git status --short
 git --no-pager diff -- score.txt
 ```
 
+次は変更行だけを抜き出した例です。実際の出力にある `diff --git`、`index`、`---`・`+++`、`@@` の見出し行は省いています。[Gitのパッチ形式](https://git-scm.com/docs/diff-format)
+
 ```diff
 -score=0
 +score=10

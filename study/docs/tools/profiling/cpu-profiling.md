@@ -8,7 +8,7 @@ study:
   domain: tools
   summary: フレームを遅らせる処理と待機を見分け、サンプリングや計装で原因を絞る。
   aliases: [CPU profiling, CPUプロファイラ, サンプリング, 計装, instrumentation, Unity Profiler, Profile Analyzer, ProfilerMarker, Unreal Insights, Tracy, Superluminal, PIX, WPR, p95, p99]
-  verification: Unity 6.0、Unreal Engine 5.6、各計測ツールの公式資料に照合（2026-11-12）
+  verification: Unity 6.3 LTS、Unreal Engine 5.8、各計測ツールの公式資料に照合（2026-11-13）
 ---
 
 # CPU プロファイリング — サンプリングと計装でフレームを測る
@@ -50,15 +50,15 @@ sequenceDiagram
 | このフレームでロードが始まった時刻と終わった時刻 | ロード処理に付けたマーカー |
 | スレッドがいつ実行を止め、何を待ったか | スケジューリング、待機、同期の記録 |
 
-## Unity 6.0とUnreal Engine 5.6で見る
+## Unity 6.3 LTSとUnreal Engine 5.8で見る
 
 | 対象 | 道具 | 見る内容 |
 | --- | --- | --- |
-| Unity 6.0（6000.0） | Unity ProfilerのCPU Usage | Timelineでフレーム内のスレッドの並び、Hierarchyでマーカーの時間と呼び出し回数を確認する。 |
-| Unity 6.0（6000.0） | Profile Analyzer 1.4.2 | 複数フレームのマーカーを集計し、変更前と変更後の記録を比較する。 |
-| Unity 6.0（6000.0） | `Unity.Profiling.ProfilerMarker` | 自分の更新処理を名前付きで計測する。`using (marker.Auto())` でブロックの範囲をマークできる。 |
-| Unreal Engine 5.6 | `stat unit` | Frame、Game、Draw、GPUなどの時間を見て、どの段階を掘り下げるか決める。 |
-| Unreal Engine 5.6 | Unreal InsightsのTiming Insights | トレースを開き、CPUスレッドやGPUのタイムライン、計測イベントを追う。 |
+| Unity 6.3 LTS（6000.3） | Unity ProfilerのCPU Usage | Timelineでフレーム内のスレッドの並び、Hierarchyでマーカーの時間と呼び出し回数を確認する。 |
+| Unity 6.3 LTS（6000.3） | Profile Analyzer 1.4.2 | 複数フレームのマーカーを集計し、変更前と変更後の記録を比較する。 |
+| Unity 6.3 LTS（6000.3） | `Unity.Profiling.ProfilerMarker` | 自分の更新処理を名前付きで計測する。`using (marker.Auto())` でブロックの範囲をマークできる。 |
+| Unreal Engine 5.8 | `stat unit` | Frame、Game、Draw、GPUなどの時間を見て、どの段階を掘り下げるか決める。 |
+| Unreal Engine 5.8 | Unreal InsightsのTiming Insights | トレースを開き、TimingパネルのCPU・GPUや各スレッドのトラックで計測イベントを追う。 |
 
 Unityでは、対象端末のPlayerで問題が起きるなら、まずその端末で再現を記録します。Editorの計測にはEditor自身の仕事が混ざります。Unreal Engineの`stat unit`で突出する値を見つけたら、Unreal Insightsで該当する区間の処理と待ちを確認します。
 
@@ -158,9 +158,9 @@ int main() {
 
 ## 参考資料
 
-- [Unity 6.0 — CPU Usage Profiler](https://docs.unity3d.com/6000.0/Documentation/Manual/ProfilerCPU.html)、[ProfilerMarker](https://docs.unity3d.com/6000.0/Documentation/ScriptReference/Unity.Profiling.ProfilerMarker.html)
-- [Unity 6.0 — Profile Analyzerの対応版](https://docs.unity3d.com/6000.0/Documentation/Manual/com.unity.performance.profile-analyzer.html)、[Profile Analyzer 1.4マニュアル](https://docs.unity3d.com/Packages/com.unity.performance.profile-analyzer@1.4/manual/index.html)
-- [Epic Games — Unreal Insights 5.6](https://dev.epicgames.com/documentation/en-us/unreal-engine/unreal-insights-in-unreal-engine?application_version=5.6)、[Stat Commands 5.6](https://dev.epicgames.com/documentation/en-us/unreal-engine/stat-commands-in-unreal-engine?application_version=5.6)
+- [Unity 6.3 — CPU Usage Profiler](https://docs.unity.com/en-us/engine/6000.3/manual/analysis/profiler/visualizing-data/cpu/cpu)、[ProfilerMarker](https://docs.unity.com/en-us/engine/6000.3/script-reference/unity/profiling/profilermarker)
+- [Unity 6.3 — Profile Analyzerの対応版](https://docs.unity.com/en-us/engine/6000.3/manual/packages-list/packages-all/pack-safe/com-unity-performance-profile-analyzer)、[Profile Analyzer 1.4マニュアル](https://docs.unity3d.com/Packages/com.unity.performance.profile-analyzer@1.4/manual/index.html)
+- [Epic Games — Unreal Insights 5.8](https://dev.epicgames.com/documentation/unreal-engine/unreal-insights-in-unreal-engine?application_version=5.8)、[Timing Insights 5.8](https://dev.epicgames.com/documentation/unreal-engine/timing-insights-in-unreal-engine?application_version=5.8)、[Stat Commands 5.8](https://dev.epicgames.com/documentation/unreal-engine/stat-commands-in-unreal-engine?application_version=5.8)
 - [Tracy — 公式リポジトリとマニュアル](https://github.com/wolfpld/tracy)
 - [Superluminal — 公式機能説明](https://superluminal.eu/)
 - [Microsoft — PIX Timing Captures](https://devblogs.microsoft.com/pix/timing-captures/)、[Windows Performance Recorder](https://learn.microsoft.com/en-us/windows-hardware/test/wpt/windows-performance-recorder)

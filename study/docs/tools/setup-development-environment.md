@@ -60,7 +60,9 @@ Get-ChildItem -Name
 dotnet run
 ```
 
-ファイルの一覧には `Program.cs` と `HelloStudy.csproj` が現れます。`Program.cs` がコード、`HelloStudy.csproj` が対象とする.NETの版などを記録するプロジェクトファイルです。最後のコマンドは今のフォルダーのプロジェクトをビルドして起動します。ひな形を変更する前の表示は次のとおりです。[dotnet run](https://learn.microsoft.com/en-us/dotnet/core/tools/dotnet-run)
+一覧から主なファイルを抜粋すると、`Program.cs` と `HelloStudy.csproj` があります。`Program.cs` がコード、`HelloStudy.csproj` が対象とする.NETの版などを記録するプロジェクトファイルです。`dotnet new` は依存関係を自動で復元するので、一覧には復元結果を保存する `obj` フォルダーも表示されます。[dotnet new の自動復元](https://learn.microsoft.com/en-us/dotnet/core/tools/dotnet-new#implicit-restore) · [復元時に obj に作られるファイル](https://learn.microsoft.com/en-us/dotnet/core/tools/sdk-errors/netsdk1004)
+
+最後のコマンドは今のフォルダーのプロジェクトをビルドして起動します。ひな形を変更する前の表示は次のとおりです。[dotnet run](https://learn.microsoft.com/en-us/dotnet/core/tools/dotnet-run)
 
 ```text
 Hello, World!

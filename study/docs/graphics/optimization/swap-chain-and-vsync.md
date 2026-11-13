@@ -57,7 +57,7 @@ GPUが次の絵を描いている間にも、画面は前の絵を読み出し�
   <figcaption>上段の破線は走査中の切り替えです。下段の空白は次の走査までの待ちです。<a href="/study/images/graphics/vsync-vrr-timing.svg" target="_blank" rel="noopener noreferrer">VSyncとVRRの図を拡大</a></figcaption>
 </figure>
 
-**VRR（可変リフレッシュレート）**は、対応範囲内で走査の開始間隔を変える仕組みです。例えばLinux DRM/KMSは、次の画像が届くか時間切れになるまで、垂直ブランクの一部を伸ばす仕組みを説明しています。このモデルのVRRは40〜60 Hzなので、更新の間隔に約16.67〜25 msを使えます。今回の画像は18〜22 ms間隔で届くので、描画完了に合わせて次の1枚を走査できます。固定周期に合わせるための追加の待ちは減りますが、描画自体が遅れれば、新しい絵が届く間隔も伸びます。[Linux DRM/KMSのVRR仕様](https://docs.kernel.org/6.14/gpu/drm-kms.html#variable-refresh-properties) · [VESAのAdaptive-Sync解説](https://www.vesa.org/wp-content/uploads/2014/07/VESA-Adaptive-Sync-Whitepaper-140620.pdf)
+**VRR（可変リフレッシュレート）**は、対応範囲内で走査の開始間隔を変える仕組みです。例えばLinux DRM/KMSは、次の画像が届くか時間切れになるまで、垂直ブランクの一部を伸ばす仕組みを説明しています。このモデルのVRRは40〜60 Hzなので、更新の間隔に約16.67〜25 msを使えます。本文のA〜Dは18〜20 ms間隔で届くので、描画完了に合わせて次の1枚を走査できます。図にある次の絵Eも、Dの22 ms後に届くため、VRRの対応範囲内です。固定周期に合わせるための追加の待ちは減りますが、描画自体が遅れれば、新しい絵が届く間隔も伸びます。[Linux DRM/KMSのVRR仕様](https://docs.kernel.org/6.14/gpu/drm-kms.html#variable-refresh-properties) · [VESAのAdaptive-Sync解説](https://www.vesa.org/wp-content/uploads/2014/07/VESA-Adaptive-Sync-Whitepaper-140620.pdf)
 
 最低リフレッシュレートより遅い場合、**LFC（Low Framerate Compensation）**に対応する環境では、同じ画像を複数回更新して対応範囲に収めることがあります。例えば60〜144 Hz対応で描画が40 FPSなら、同じ画像を2回ずつ更新して80 Hzにできます。上限より速く絵が届く場合の待ちや置き換え、ティアリングの扱いは、機器や表示方式、同期の設定によって変わります。[AMDのFreeSyncとLFCの解説](https://www.amd.com/en/products/graphics/technologies/freesync.html) · [Khronosの提示モード仕様](https://docs.vulkan.org/refpages/latest/refpages/source/VkPresentModeKHR.html)
 

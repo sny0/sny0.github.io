@@ -52,7 +52,7 @@ Console.WriteLine(hp)
 dotnet build --nologo
 ```
 
-次は出力から診断の一行を抜き出し、フォルダー名を省略した例です。メッセージの言語は環境によって変わります。
+次は従来のコンソールロガーの出力から診断の一行を抜き出し、フォルダー名を省略した例です。メッセージの言語は環境によって変わります。.NET 9以降のSDKは、対応する対話型ターミナルでは既定で Terminal Logger を使うため、診断行の末尾の `[...csproj]` が省かれるなど、表示形式が変わることがあります。下の形式で確認するには `dotnet build --nologo --tl:off` を実行します。[.NET 9でのロガーの変更](https://learn.microsoft.com/en-us/dotnet/core/compatibility/sdk/9.0/terminal-logger)
 
 ```text
 ...\ErrorStudy\Program.cs(4,22): error CS1002: ; が必要です [...\ErrorStudy\ErrorStudy.csproj]
@@ -64,7 +64,7 @@ dotnet build --nologo
 | `(4,22)` | 4行目の22列目。この例では行末の閉じ括弧の直後 |
 | `error CS1002` | C#コンパイラのエラー番号 |
 | `; が必要です` | コンパイラがその場所で期待した記号 |
-| `ErrorStudy.csproj` | ビルドしたプロジェクト |
+| `ErrorStudy.csproj`（行末に表示される場合） | ビルドしたプロジェクト |
 
 複数の診断が出たら、自分が編集したファイルの最初のエラーから読みます。一つの記号が欠けると後続の診断も出る場合があります。報告された行で原因が見つからなければ、すぐ前の行も確かめます。この例では4行目の末尾に `;` を一つ足して保存し、同じビルドコマンドを実行します。[コンパイラエラーCS1002](https://learn.microsoft.com/en-us/dotnet/csharp/misc/cs1002)
 

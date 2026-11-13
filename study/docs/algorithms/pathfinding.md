@@ -8,7 +8,7 @@ study:
   domain: algorithms
   summary: グリッド上でDijkstra法とA*の探索範囲を比べ、ナビメッシュのポリゴン列から移動経路を組み立てる仕組みを追う。
   aliases: [経路探索, pathfinding, 'A*', Aスター, ダイクストラ法, Dijkstra, BFS, ナビメッシュ, NavMesh, ファネル, funnel, Recast, Detour, HPA*]
-  verification: DijkstraとHartらの原論文、RecastとDetourの公式資料、Unreal Engine 5.7とUnity 6.0の公式資料に照合（2026-11-12）
+  verification: DijkstraとHartらの原論文、RecastとDetourの公式資料、Unreal Engine 5.8とUnity 6.3 LTSの公式資料に照合（2026-11-13）
 ---
 
 # 経路探索 — A* とナビメッシュ
@@ -102,12 +102,12 @@ flowchart LR
 
 **Recast**は入力の三角形をボクセル化し、キャラクターが歩ける領域をポリゴンに変換します。**Detour**は生成したナビメッシュを使い、実行時に `findPath` でポリゴンの列、`findStraightPath` でコリドー内の曲がり角を求めます。部分経路が返る場合もあるので、完全な経路を要求する処理では、結果のステータスと最後のポリゴンを確認します。ジャンプなどの特殊な接続を経路に含めた場合は、その区間に対応する動作を呼び出します。[Recastの生成工程](https://recastnav.com/md_Docs_2__1__Introduction.html)、[Detourの経路クエリAPI](https://recastnav.com/classdtNavMeshQuery.html)
 
-- **Unreal Engine 5.7**のNavigation Systemは、レベルの衝突形状を使ってタイル単位のナビメッシュを作ります。生成モードにはStatic、Dynamic、Dynamic Modifiers Onlyがあり、エリアごとのコストも設定できます。[Unreal Engine 5.7のNavigation System](https://dev.epicgames.com/documentation/en-us/unreal-engine/navigation-system-in-unreal-engine?application_version=5.7)
-- **Unity 6.0のAI Navigation 2.0系**では、`NavMeshSurface` で対象の形状からエージェント用のナビメッシュを生成し、`NavMeshLink` で分かれた領域をつなげられます。`NavMeshAgent.SetDestination` で目的地を指定すると、結果が出るまで `pathPending` が数フレームにわたって真になる場合があります。[Unity 6.0のAI Navigation](https://docs.unity3d.com/6000.0/Documentation/Manual/com.unity.ai.navigation.html)、[NavMeshSurface](https://docs.unity3d.com/Packages/com.unity.ai.navigation@2.0/manual/NavMeshSurface.html)、[NavMeshLink](https://docs.unity3d.com/Packages/com.unity.ai.navigation@2.0/manual/NavMeshLink.html)、[SetDestination](https://docs.unity3d.com/6000.0/Documentation/ScriptReference/AI.NavMeshAgent.SetDestination.html)
+- **Unreal Engine 5.8**のNavigation Systemは、レベルの衝突形状を使ってタイル単位のナビメッシュを作ります。生成モードにはStatic、Dynamic、Dynamic Modifiers Onlyがあり、エリアごとのコストも設定できます。[Unreal Engine 5.8のNavigation System](https://dev.epicgames.com/documentation/unreal-engine/navigation-system-in-unreal-engine?application_version=5.8)
+- **Unity 6.3 LTS（6000.3）のAI Navigation 2.0.16**では、`NavMeshSurface` で対象の形状からエージェント用のナビメッシュを生成し、`NavMeshLink` で分かれた領域をつなげられます。`NavMeshAgent.SetDestination` で目的地を指定すると、結果が出るまで `pathPending` が数フレームにわたって真になる場合があります。[Unity 6.3のAI Navigation](https://docs.unity.com/en-us/engine/6000.3/manual/packages-list/packages-all/pack-safe/com-unity-ai-navigation)、[NavMeshSurface](https://docs.unity3d.com/Packages/com.unity.ai.navigation@2.0/manual/NavMeshSurface.html)、[NavMeshLink](https://docs.unity3d.com/Packages/com.unity.ai.navigation@2.0/manual/NavMeshLink.html)、[SetDestination](https://docs.unity.com/en-us/engine/6000.3/script-reference/unityengine/ai/navmeshagent/setdestination)
 
 ## 障害物が動くときと、探索を1フレームで終えられないとき
 
-同じ通路を歩く別のキャラクターとすれ違うだけなら、コリドーを保ったまま、近くの衝突を避けるように速度や方向を調整できます。扉が閉じて通れなくなった場合は、通行不可になった接続をグラフに反映し、その接続を使う経路を再計算します。経路の再計算が必要かどうかは、障害物が動いた事実と、現在の経路を無効にしたかどうかを分けて考えると判断できます。[Unreal Engine 5.7の生成モードと回避方式](https://dev.epicgames.com/documentation/en-us/unreal-engine/navigation-system-in-unreal-engine?application_version=5.7)
+同じ通路を歩く別のキャラクターとすれ違うだけなら、コリドーを保ったまま、近くの衝突を避けるように速度や方向を調整できます。扉が閉じて通れなくなった場合は、通行不可になった接続をグラフに反映し、その接続を使う経路を再計算します。経路の再計算が必要かどうかは、障害物が動いた事実と、現在の経路を無効にしたかどうかを分けて考えると判断できます。[Unreal Engine 5.8の生成モードと回避方式](https://dev.epicgames.com/documentation/unreal-engine/navigation-system-in-unreal-engine?application_version=5.8)
 
 - **探索を分割する**。1回に展開するノード数に上限を設け、候補、コスト、親を保持して続きから進めます。Detourには `initSlicedFindPath`、`updateSlicedFindPath`、`finalizeSlicedFindPath` があります。途中で地図を更新する設計なら、保持した探索状態が新しい地図でも有効かを確認します。[Detourの分割クエリAPI](https://recastnav.com/classdtNavMeshQuery.html)
 - **階層を作る**。HPA*では地図を領域に分け、境界をまたぐ出入口と、領域内の出入口間コストを用意します。遠距離は上位グラフで探索し、選んだ区間を具体的な移動に展開します。前計算と保存領域を使って探索を減らせます。出入口の抽出方法によっては最短経路より長くなり、地図が変わる場合は影響を受けた区間の情報を更新します。[HPA*の原論文](https://www.academia.edu/14521553/Near_optimal_hierarchical_path_finding)
@@ -148,4 +148,4 @@ flowchart LR
 - Hart, Nilsson, Raphael, *A Formal Basis for the Heuristic Determination of Minimum Cost Paths*（1968年）。[原論文](https://doi.org/10.1109/TSSC.1968.300136)、[著者らの訂正（1972年）](https://cse.sc.edu/~mgv/csce580sp15/astarHNR1972.pdf)
 - Botea, Müller, Schaeffer, *Near Optimal Hierarchical Path-Finding*（2004年）。[原論文](https://www.academia.edu/14521553/Near_optimal_hierarchical_path_finding)
 - [Recast公式資料](https://recastnav.com/md_Docs_2__1__Introduction.html)、[Detour公式API](https://recastnav.com/classdtNavMeshQuery.html)
-- [Unreal Engine 5.7 Navigation System](https://dev.epicgames.com/documentation/en-us/unreal-engine/navigation-system-in-unreal-engine?application_version=5.7)、[Unity 6.0 AI Navigation](https://docs.unity3d.com/6000.0/Documentation/Manual/com.unity.ai.navigation.html)
+- [Unreal Engine 5.8 Navigation System](https://dev.epicgames.com/documentation/unreal-engine/navigation-system-in-unreal-engine?application_version=5.8)、[Unity 6.3 AI Navigation 2.0.16](https://docs.unity.com/en-us/engine/6000.3/manual/packages-list/packages-all/pack-safe/com-unity-ai-navigation)
