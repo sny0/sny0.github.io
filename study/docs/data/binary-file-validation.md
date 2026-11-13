@@ -57,3 +57,7 @@ bool fits(std::uint64_t file_size, std::uint64_t offset, std::uint64_t length) {
 チェックサムは保存や転送で起きた破損を検出する手掛かりです。配布元を確かめるには、信頼済みの公開鍵でデジタル署名を検証する方法があります。秘密鍵を共有する構成では、メッセージ認証コード（MAC）で共有鍵を持つ側が認証したデータかを確かめられます。照合に成功したファイルも、受け入れる版や展開量など、読み手の条件を満たすか検査します。[RFC 1952のCRC32](https://www.rfc-editor.org/rfc/rfc1952.html#section-2.3.1) · [NISTのデジタル署名仕様](https://csrc.nist.gov/pubs/fips/186-5/final) · [RFC 2104のメッセージ認証コード](https://www.rfc-editor.org/rfc/rfc2104.html#section-1)
 
 実践では、パックを生成して名前からアセットを読み、壊れた索引がデータの読み取り前に拒否される様子を確認できます。[C++でアセットパックを観察する](/practice/io/asset-pack-observation.html)
+
+## 関連項目
+
+- [ハッシュとチェックサム](/data/hashes-and-checksums.html)

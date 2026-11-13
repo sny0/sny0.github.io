@@ -167,6 +167,7 @@ public class HpBarView : MonoBehaviour {
 
 ## 関連項目
 
+- [Null Objectパターン](/design/patterns/null-object.html)
 - [Event Queue・Message Bus・Pub/Sub](/game/patterns/event-queue-and-pubsub.html)(比較の詳細)
 - [関数ポインタとdelegate](/languages/csharp/delegates-events-function-pointers.html)
 - [ケーススタディ: UI通知](/design/case-studies/ui-notification.html) / [イベント通知](/design/case-studies/event-notification.html)

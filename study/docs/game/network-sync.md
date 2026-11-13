@@ -139,6 +139,7 @@ GGPO型の**ロールバック**では、相手の入力がまだ届いていな
 
 ## 関連項目
 
+- [浮動小数点の決定性](/languages/cpp/floating-point-determinism.html)
 - [UDPデータグラムの境界と送受信](/network/udp-datagrams.html)
 - [遅延・スループットとキュー](/network/latency-throughput-and-queues.html)
 - [ゲームループと時間](/game/basics/game-loop-and-time.html)

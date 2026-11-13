@@ -135,6 +135,7 @@ void PrintName(std::string_view n);   // 読むだけの引数はstring_viewが�
 
 ## 関連項目
 
+- [C++23/26のコンテナとビュー](/languages/cpp/modern-containers-and-views.html)
 - [STLコンテナ](/languages/cpp/stl.html) / [メモリバグ図鑑](/runtime/memory/memory-bugs.html)
 - [値型と参照](/languages/cpp/values-pointers-references.html)
 

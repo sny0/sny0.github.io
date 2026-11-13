@@ -21,6 +21,7 @@ export function isRateableArticle({ section, format, domain }) {
 export const collections = [
   { id: 'c-byte-decoder-disassembly', section: 'practice', title: 'Cのバイト読み取りをx86-64で追う', description: '短いデコーダーをビルドし、引数、メモリ読み取り、戻り値を逆アセンブリで確かめる。', start: '/practice/compilers/c-byte-decoder-disassembly.html' },
   { id: 'shader-first-steps', section: 'practice', title: 'シェーダーで三角形の位置と色を変える', description: 'WebGL 2で頂点属性とuniformを渡し、UVの補間、位置と色の計算を描画で確かめる。', start: '/practice/graphics/shader-first-steps.html' },
+  { id: 'shader-lab', section: 'practice', title: 'WebGPUでシェーダーの出力を比べる', description: '照明、色、ノイズ、トゥーン、距離関数、水面を描き、パラメーターと出力の関係を確かめる。', start: '/practice/graphics/shader-lab.html' },
   { id: 'texture-filtering-observation', section: 'practice', title: '斜めの床でテクスチャのフィルタリングを比べる', description: '同じ床で4種類のフィルターを切り替え、カメラの移動に伴うちらつきを見る。', start: '/practice/graphics/texture-filtering-observation.html' },
   { id: 'msaa-observation', section: 'practice', title: 'MSAAを切り替えて輪郭と床模様を見比べる', description: '同じシーンでMSAAを切り替え、斜めの輪郭と床模様の変化を見比べる。', start: '/practice/graphics/msaa-observation.html' },
   { id: 'taa-observation', section: 'practice', title: 'TAAを切り替えて床のちらつきとゴーストを比べる', description: 'カメラと物体を別々に動かし、過去フレームの蓄積と履歴検証の効果を観察する。', start: '/practice/graphics/taa-observation.html' },

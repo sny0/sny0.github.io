@@ -75,7 +75,7 @@ const recommendation = computed(() => {
     </section>
 
     <section aria-labelledby="start-tracks">
-      <h2 id="start-tracks">8つのロードマップ</h2>
+      <h2 id="start-tracks">分野別のロードマップ</h2>
       <p>時間は教材を読み、代表的な実践を一度試す目安です。</p>
       <div class="start-table" role="region" aria-label="ロードマップの比較表" tabindex="0">
         <table>

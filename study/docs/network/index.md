@@ -20,10 +20,12 @@
 ## 辞典の本文
 
 - [DNSと名前解決 — 名前から接続先が決まるまで](/network/dns-resolution.html)
+- [HTTPS・SVCBレコードとHTTP/3の発見 — 接続候補をDNSとHTTPから知る](/network/https-svcb-and-http3-discovery.html)
 - [HTTPキャッシュ — 保存・鮮度・再検証と304応答](/network/http-caching.html)
 - [HTTP通信 — 要求・応答と本文の区切り](/network/http-messages.html)
 - [IPアドレス・ポート・ホスト名 — 接続先をどう指定するか](/network/ip-addresses-and-ports.html)
 - [IPルーティングとEthernetフレーム](/network/ip-routing-and-ethernet.html)
+- [Nagle アルゴリズムと遅延 ACK — TCP の小さい送信を観察する](/network/nagle-and-delayed-ack.html)
 - [NATとポート変換](/network/nat-and-port-mapping.html)
 - [QUICとHTTP/3](/network/quic-and-http3.html)
 - [TLS・証明書・HTTPS — 暗号化と相手の確認](/network/tls-https.html)

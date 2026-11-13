@@ -110,3 +110,9 @@ Unrealの参照文書はAsset ManagerのPrimary/Secondary Assetやbundle、`Load
 `MockSink`の整数tokenはモデル用で、実ファイル・worker・展開・GPU転送・エンジン登録はありません。8bytesというカウンタも実RSSやmanaged heap、GPUメモリの測定値ではありません。実I/Oは既存の[sync](/practice/io/file-read-observation.html)・[async](/practice/io/async-file-read-observation.html)サンプルへ分け、実GPUやエンジン接続はAPIの寿命・thread・利用可能条件に従って追加します。完成したAssetManagerとして使うものではありません。
 
 shutdownも通常のRelease一回では終わりません。新規要求の受付を止め、未完了をcancel/drainして結果を回収し、利用側の保持と転送中資源を解放してからownerを破棄します。このモデルのdestructorやGCが、実I/Oの取消しやGPUの完了待ちを代行することはありません。
+
+## 関連項目
+
+- [ワールドストリーミング](/game/world-streaming.html)
+- [Unityの非同期処理](/game/unity-async.html)
+- [圧縮の基礎](/data/compression-basics.html)

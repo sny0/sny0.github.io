@@ -57,4 +57,4 @@ Vulkanで `vkGetPipelineCacheData` が返すデータは、あとで `vkCreatePi
 
 Vulkanで `pipelineCreationCacheControl` を有効にしている場合、`VK_PIPELINE_CREATE_FAIL_ON_PIPELINE_COMPILE_REQUIRED_BIT` を指定すると、コンパイルが必要な作成は `VK_PIPELINE_COMPILE_REQUIRED` を返します。このとき有効なパイプラインは得られないため、その描画を後に回すか、互換性のある作成済みの代替を選び、別途作成を予約します。このフラグを使う場合も、作成の呼び出しにかかる時間は計測します。[Vulkanのパイプライン作成フラグ](https://docs.vulkan.org/spec/latest/chapters/pipelines.html#VkPipelineCreateFlagBits)
 
-関連項目は[デバッグ・プロファイリングツール](/graphics/optimization/tools.html)と[アセットロード](/game/asset-loading.html)です。
+関連項目は[デバッグ・プロファイリングツール](/graphics/optimization/tools.html)、[アセットロード](/game/asset-loading.html)、[シェーダーバリアントの管理](/graphics/shader/shader-variants.html)です。

@@ -60,3 +60,7 @@ UIの位置と大きさを表す部品が**RectTransform**です。**アンカ�
 再開ボタンを決定すると、ゲームへ再開を要求し、ゲーム側が状態を切り替えます。その結果をUIに反映すると、表示と操作のつながりを追えます。ポーズ中の操作とプレイ中の移動をどう切り替えるかは、[入力アクション](/game/basics/input-actions-and-devices.html)と[ゲームの状態とポーズ](/game/basics/game-states-and-pause.html)へ進みます。
 
 シーン内の部品としての配置は[シーンとコンポーネント](/game/basics/scenes-and-components.html)、画面へ映す座標は[座標変換とカメラ](/graphics/basics/transforms-and-cameras.html)で扱います。
+
+## 関連項目
+
+- [ローカライズの設計](/game/localization-design.html)

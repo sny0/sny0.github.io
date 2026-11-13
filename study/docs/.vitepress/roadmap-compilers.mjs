@@ -13,6 +13,9 @@ export default {
       resources: [
         { label: 'main.cppからCPU命令までの旅', url: '/runtime/cpp-internals/build-pipeline-journey.html' },
         { label: '翻訳単位とヘッダー', url: '/runtime/cpp-internals/translation-units-and-headers.html' },
+        { label: 'C++26の主な新機能', url: '/languages/cpp/cpp26-features.html' },
+        { label: 'C++23の実践機能', url: '/languages/cpp/explicit-object-and-expected.html' },
+        { label: 'C++20モジュール', url: '/languages/cpp/modules.html' },
         { label: '実践 2つのC++ファイルからOBJを作る', url: '/practice/compilers/build-artifact-observation.html' },
       ],
     },

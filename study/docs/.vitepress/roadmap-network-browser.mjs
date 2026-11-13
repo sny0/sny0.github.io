@@ -42,6 +42,7 @@ export default {
       ],
       resources: [
         { label: 'TCPの送受信バッファとメッセージ境界', url: '/network/tcp-sockets.html' },
+        { label: 'Nagleアルゴリズムと遅延ACK', url: '/network/nagle-and-delayed-ack.html' },
         { label: '実践 TCPのフレーム復元と半閉鎖', url: '/practice/network/tcp-loopback-observation.html' },
       ],
     },
@@ -103,6 +104,7 @@ export default {
       ],
       resources: [
         { label: 'QUICとHTTP/3', url: '/network/quic-and-http3.html' },
+        { label: 'HTTPS / SVCBレコードとHTTP/3の発見', url: '/network/https-svcb-and-http3-discovery.html' },
         { label: '実践 パケットが欠けたときの配送を比較する', url: '/practice/network/stream-loss-observation.html' },
       ],
     },

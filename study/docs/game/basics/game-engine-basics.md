@@ -60,3 +60,7 @@ study:
 **ビルド**では、コードやアセットを、選んだ環境で実行できるアプリにまとめます。エディターからの再生と、実機へ配布するアプリでは設定や使える機能が変わる場合があります。対象の設定をそろえて確認します。[Unityのビルド手順](https://docs.unity3d.com/6000.0/Documentation/Manual/BuildSettings.html) · [ゲームのアセットビルド](/game/asset-build-and-patches.html)
 
 実行中に処理がどう回るかは[ゲームループと時間](/game/basics/game-loop-and-time.html)、形と位置は[モデルとメッシュ](/graphics/basics/models-and-meshes.html)と[座標とカメラ](/graphics/basics/transforms-and-cameras.html)へ進めます。小さな作品にまとめる例は[シューティングの設計](/game/shooter-design.html)で扱います。
+
+## 関連項目
+
+- [ゲームオーディオの仕組み](/game/game-audio-systems.html)

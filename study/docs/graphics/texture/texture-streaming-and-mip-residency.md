@@ -55,3 +55,8 @@ D3D12で**常駐**とは、GPUが対象のメモリにアクセスできる状�
 GPU側ではテクスチャ用の枠と、レンダーターゲットなどの他の使用量を見ます。Windowsでは `QueryVideoMemoryInfo` で現在の使用量と予算を確認できます。CPU側では読み込み中のデータや展開バッファ、コピーに使う一時領域に上限を設けます。各フレームで発行する要求数や転送量も制限し、見えている対象やすぐに必要な対象を先に処理します。[DXGIのビデオメモリ予算](https://learn.microsoft.com/en-us/windows/win32/api/dxgi1_4/nf-dxgi1_4-idxgiadapter3-queryvideomemoryinfo) · [Unreal Engineのストリーミング指標](https://dev.epicgames.com/documentation/en-us/unreal-engine/texture-streaming-metrics-in-unreal-engine)
 
 境界でカメラが前後するたびに同じmipを読み直さないよう、細かくする条件と粗く戻す条件を離します。たとえば同じ面が384ピクセル以上を占めたらmip 1を要求し、256ピクセル以下の状態が1秒続いたら手放す候補にします。このように切り替え条件に幅を持たせる考え方が**ヒステリシス**です。画面に残る粗さとロードの往復を評価するときは、目標mip、描画が使えるmip、保留中のI/Oと転送量、GPUメモリの使用量を一緒に記録します。[Unreal Engineの可視性とメモリ変動の指標](https://dev.epicgames.com/documentation/en-us/unreal-engine/texture-streaming-metrics-in-unreal-engine)
+
+## 関連項目
+
+- [Sampler Feedbackとテクスチャストリーミング](/graphics/texture/sampler-feedback.html)
+- [地形とバーチャルテクスチャ](/graphics/texture/terrain-and-virtual-texturing.html)

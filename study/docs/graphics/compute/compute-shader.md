@@ -165,6 +165,10 @@ void Update() {
 - [Shared Memory と Atomic](/graphics/compute/shared-memory.html)
 - [並列アルゴリズム](/graphics/compute/parallel-algorithms.html)
 
+## 関連項目
+
+- [GPUパーティクル](/graphics/shader/gpu-particles.html)
+
 ## 理解度チェック
 
 1. **`[numthreads(64,1,1)]` で100万要素を処理するときのDispatch数と、シェーダ内に必要なガードを述べよ。**

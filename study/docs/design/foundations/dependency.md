@@ -147,6 +147,7 @@ void SetupUi(BattleLogic& battle, HpBarWidget& bar) {
 
 ## 関連項目
 
+- [デメテルの法則](/design/foundations/law-of-demeter.html)
 - [凝集度と結合度](/design/foundations/cohesion-and-coupling.html)
 - [DIP: 依存性逆転の原則](/design/solid/dip.html)
 - [Observer](/design/patterns/observer.html) / [Service LocatorとDI](/game/patterns/service-locator-and-di.html)

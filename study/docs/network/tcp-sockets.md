@@ -144,3 +144,7 @@ Webの要求・応答へ進む場合は[HTTP通信](/network/http-messages.html)
 IPアドレスが決まった後に、OSがどのインターフェースと経由先を選ぶかは、[IPの経路選択とEthernet](/network/ip-routing-and-ethernet.html)で追えます。
 
 [C++とC#でTCPループバックを観察する](/practice/network/tcp-loopback-observation.html)では、既知の2フレーム、部分的なAPI処理、アプリ側ACK、両方向の送信終了を照合します。実パケットの境界、再送、外部ネットワーク性能、物理NICの動作は観測対象に含めません。
+
+## 関連項目
+
+- [Nagleアルゴリズムと遅延ACK](/network/nagle-and-delayed-ack.html)

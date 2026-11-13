@@ -14,6 +14,8 @@ export default {
         { label: 'ゲームエンジンの役割', url: '/game/basics/game-engine-basics.html' },
         { label: 'ゲームの動きと構成から読む', url: '/guide/game-development-basics.html' },
         { label: '経路探索とナビメッシュ', url: '/algorithms/pathfinding.html' },
+        { label: 'ゲームAIの意思決定', url: '/game/ai-decision-making.html' },
+        { label: 'ゲームオーディオの仕組み', url: '/game/game-audio-systems.html' },
       ],
     },
     {
@@ -31,6 +33,7 @@ export default {
         { label: '固定タイムステップと補間', url: '/game/patterns/game-loop-and-update.html' },
         { label: '実践 固定tickの図と入力処理を読む', url: '/game/shooter-design.html' },
         { label: 'ゲームのネットワーク同期', url: '/game/network-sync.html' },
+        { label: '浮動小数点の決定性', url: '/languages/cpp/floating-point-determinism.html' },
       ],
     },
     {
@@ -45,6 +48,7 @@ export default {
       ],
       resources: [
         { label: '入力の基本', url: '/game/basics/input-actions-and-devices.html' },
+        { label: 'カメラシステム', url: '/game/camera-system.html' },
         { label: 'USBキーボードの入力とWindowsのRaw Input', url: '/hardware/io/usb-keyboard-raw-input.html' },
         { label: '実践 再開要求を保持する流れ', url: '/game/shooter-design.html' },
         { label: '実践 C++版で入力を読むコード', url: '/game/shooter-cpp.html' },
@@ -108,6 +112,7 @@ export default {
         { id: 'menu-navigation', label: '再開・設定・終了の3ボタンについて、マウスで指す操作と、パッドで選択を移して決定する操作をそれぞれ確認できる。' },
       ],
       resources: [
+        { label: 'ローカライズの設計', url: '/game/localization-design.html' },
         { label: 'ゲーム内イベントと通知', url: '/game/basics/game-events-and-notifications.html' },
         { label: 'ゲームUIの配置と操作', url: '/game/basics/ui-layout-and-interaction.html' },
       ],
@@ -138,6 +143,10 @@ export default {
         { id: 'stale-generation', label: '実践を実行するか掲載結果を読み、シーン切り替え前の要求が後から完了したとき、世代の照合で結果をどう扱うか説明できる。' },
       ],
       resources: [
+        { label: '圧縮の基礎', url: '/data/compression-basics.html' },
+        { label: 'ワールドストリーミング', url: '/game/world-streaming.html' },
+        { label: 'Unityの非同期処理', url: '/game/unity-async.html' },
+        { label: 'ハッシュとチェックサム', url: '/data/hashes-and-checksums.html' },
         { label: 'アセットロードの状態・世代・所有権', url: '/game/asset-loading.html' },
         { label: '実践 C++とC#でアセットの寿命を検証', url: '/practice/assets/asset-lifecycle-model.html' },
         { label: '実践 ワーカーの結果と世代を照合する', url: '/practice/threads/asset-worker-handoff-observation.html' },

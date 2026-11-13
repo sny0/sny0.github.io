@@ -177,6 +177,10 @@ fn fsMain(in: VSOut) -> @location(0) vec4f {
 - [SPIR-V と中間表現](/graphics/shader/spirv.html) — 変換先の理解
 - [HLSL](/graphics/shader/hlsl.html) / [GLSL](/graphics/shader/glsl.html) との対応表は [総論](/graphics/shader/overview.html) 参照
 
+## 関連項目
+
+- [WebGPUでシェーダーの出力を比べる](/practice/graphics/shader-lab.html)
+
 ## 理解度チェック
 
 1. **WebGPUがSPIR-Vバイナリを直接採用せずWGSLを新設計した理由を3つ挙げよ。**

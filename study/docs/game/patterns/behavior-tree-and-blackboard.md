@@ -135,6 +135,7 @@ struct Blackboard {
 
 ## 関連項目
 
+- [ゲームAIの意思決定](/game/ai-decision-making.html)
 - [ステートマシン(FSM/HSM)](/game/patterns/state-machines.html) / [Composite](/design/patterns/composite.html)
 - [ケーススタディ: 敵AI](/design/case-studies/enemy-ai.html)
 - [経路探索 — A* とナビメッシュ](/algorithms/pathfinding.html) — 移動タスクが使う経路を求める

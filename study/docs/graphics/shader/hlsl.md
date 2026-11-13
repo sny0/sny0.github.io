@@ -168,6 +168,12 @@ dxc -T cs_6_6 -E CSMain -Zi -Qembed_debug histogram.hlsl -Fo histogram.dxil
 - [SPIR-V と中間表現](/graphics/shader/spirv.html) — DXC/DXILの立ち位置
 - [Compute Shader](/graphics/compute/compute-shader.html)
 
+## 関連項目
+
+- [シェーダーのデバッグ](/graphics/shader/shader-debugging.html)
+- [シェーダー最適化の実践](/graphics/shader/shader-optimization.html)
+- [最新のシェーダー技術](/graphics/shader/modern-shader-technologies.html)
+
 ## 理解度チェック
 
 1. **FXCからDXCへの移行で何が変わったか。**

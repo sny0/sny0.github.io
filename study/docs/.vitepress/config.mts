@@ -63,6 +63,7 @@ export default withMermaid(defineConfig({
       { url: '/study/samples/graphics/vsync-vrr-observation/index.html' },
       { url: '/study/samples/graphics/input-latency-observation/index.html' },
       { url: '/study/samples/graphics/shader-first-steps/index.html' },
+      { url: '/study/samples/graphics/shader-lab/index.html' },
       { url: '/study/samples/graphics/texture-filtering-observation/index.html' },
       { url: '/study/samples/graphics/msaa-observation/index.html' },
       { url: '/study/samples/graphics/taa-observation/index.html' },

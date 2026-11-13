@@ -56,6 +56,10 @@ study:
 
 回転では、向きの表し方と、どちらへ回るかも関わります。例えば角度350度から10度へ回すとき、数値をそのまま直線でつなぐ場合と、短い経路で向きをつなぐ場合では動きが違います。glTFの回転は**クォータニオン**で記録し、線形モードの回転には球面線形補間（slerp）の使用が推奨されています。一周以上回したいときは、途中のキーなどで意図を表す必要があります。[glTFの回転の補間](https://registry.khronos.org/glTF/specs/2.0/glTF-2.0.html#interpolation-slerp) · [クォータニオンの詳解](/math/rendering/quaternion.html)
 
+## 関連項目
+
+- [アニメーションシステム](/graphics/basics/animation-systems.html)
+
 ## 関連する仕組み
 
 キャラクターの腕や脚を動かす仕組みは、[リグとスキニング](/graphics/basics/rigs-and-skinning.html)へ進みます。位置や回転の基準は、[座標変換とカメラ](/graphics/basics/transforms-and-cameras.html)で確認できます。

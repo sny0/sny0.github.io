@@ -150,6 +150,10 @@ float3 OneBounceGI(float3 posWS, float3 N, uint2 pixel, uint frame) {
 - [ハードウェアレイトレーシング](/graphics/lighting/raytracing.html)
 - [パストレーシング](/graphics/lighting/path-tracing.html) → [Lumen](/graphics/lighting/lumen.html)
 
+## 関連項目
+
+- [大量光源の手法](/graphics/lighting/many-light-sampling.html)
+
 ## 理解度チェック
 
 1. **レンダリング方程式が「解けない」理由を、式の構造から説明せよ。**

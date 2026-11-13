@@ -114,6 +114,12 @@
 | [ソケット / socket / TCP / IPアドレス / ポート / send / recv / フレーミング / 半閉鎖 / loopback](/network/tcp-sockets.html) | 送受信バッファ、バイト列の境界、EOFとエラー、接続の終了を調べる |
 | [UDP / データグラム / sendto / recvfrom / WSAEMSGSIZE / MTU](/network/udp-datagrams.html) | メッセージの区切りと受信失敗、送信サイズや期限を調べる |
 | [ゲームのネットワーク同期 / スナップショット / ロックステップ / クライアント予測 / ロールバック / ラグ補償](/game/network-sync.html) | 入力や状態をいつ送り、いつ表示やシミュレーションを補正するか調べる |
+| [ワールドストリーミング / World Partition / Addressables / セル](/game/world-streaming.html) | 移動に合わせてシーンの部分を準備し、寿命を管理する |
+| [Utility AI / GOAP / Behavior Tree / ゲームAI](/game/ai-decision-making.html) | 行動を選ぶ基準と計画・実行の責務を考える |
+| [カメラ追従 / ばね / カメラ衝突 / 画面揺れ](/game/camera-system.html) | 追従の状態と衝突補正・演出の役割を分ける |
+| [Unity Awaitable / UniTask / キャンセル / メインスレッド](/game/unity-async.html) | 待機後の実行先とキャンセルの寿命を管理する |
+| [Wwise / FMOD / ボイス管理 / 3D音響](/game/game-audio-systems.html) | 発音要求、ボイスの予算、空間処理を分ける |
+| [ローカライズ / 文字列テーブル / フォント / 双方向テキスト / RTL](/game/localization-design.html) | 翻訳と書式を分け、文字の並びと画面を確認する |
 | [QUIC / HTTP/3 / HTTP/2 / 0-RTT / 接続ID / HOLブロッキング / QUIC DATAGRAM](/network/quic-and-http3.html) | UDP上で接続を保ち、欠けたデータをストリームごとに組み立てる仕組みを調べる |
 | [NAT / NAPT / ポート転送 / CGNAT / STUN / ICE / TURN](/network/nat-and-port-mapping.html) | 内外のIPとポートの対応、外部からの到達性、P2Pの接続手段を調べる |
 | [IPルーティング / デフォルトゲートウェイ / Ethernet / MACアドレス / ARP / Neighbor Discovery / TTL](/network/ip-routing-and-ethernet.html) | IPの行き先から次の経由先を選び、各リンクでフレームを渡す |
@@ -141,6 +147,26 @@
 | [近似一致 / 絶対許容差 / 相対許容差 / 浮動小数点の比較 / NaN / Inf](/math/floating-point-comparison.html) | 厳密な等値、用途に応じた近似判定、特殊値と非推移性を区別する |
 | [Unicode / 文字コード / UTF-8 / UTF-16 / コードポイント / サロゲートペア / BOM / 文字化け](/data/unicode-and-encoding.html) | 文字の番号、コード単位、バイト列と、長さの数え方を区別する |
 | [float / binary32 / 浮動小数点 / 丸め / 刻み幅 / epsilon / nextafter](/data/floating-point-spacing.html) | ビット表現と有効精度、隣接値、最近接・偶数丸めを区別する |
+| [Null Object / Active Nothing / No-op](/design/patterns/null-object.html) | 任意の機能を空の実装で表す |
+| [デメテルの法則 / LoD / Principle of Least Knowledge](/design/foundations/law-of-demeter.html) | メソッドが知る相手を絞り、内部構造の変更を局所化する |
+| [CRTP / 静的ポリモーフィズム / Template Method](/languages/cpp/crtp.html) | 共通処理と型ごとのフックをテンプレートで結ぶ |
+| [自動テスト / GoogleTest / Unity Test Framework / 単体テスト](/tools/automated-testing.html) | ルールと依存を分離し、境界条件を自動で確認する |
+| [CI / CTest / GitHub Actions / 成果物 / ビルド自動化](/tools/ci-and-build-automation.html) | 同じ構成でビルド・テストし、成果物を記録する |
+| [Nagle / delayed ACK / 遅延ACK / TCP_NODELAY](/network/nagle-and-delayed-ack.html) | 小さいTCP送信が待たされる条件を調べる |
+| [HTTPS RR / SVCB / ALPN / Alt-Svc / Happy Eyeballs](/network/https-svcb-and-http3-discovery.html) | HTTP/3を試す候補をDNSとHTTPから得る |
+| [Pコア / Eコア / Thread Director / CPU Sets / タイマー分解能](/hardware/cpu/hybrid-cpu-scheduling.html) | コアの特性と、待機後に走り出す時刻を切り分ける |
+| [atomic / memory_order / acquire / release / seq_cst / happens-before](/languages/cpp/memory-model.html) | 共有データを読める条件を順序関係で確かめる |
+| [CAS / ABA / ロックフリー / SPSC / MPMC / ハザードポインター](/runtime/lock-free-basics.html) | 競合時の進捗とノードの寿命を分けて設計する |
+| [ジョブシステム / TaskGraph / Unity Job System / ワークスティーリング](/runtime/jobs-and-work-stealing.html) | 依存関係を満たした仕事をワーカーへ割り振る |
+| [FMA / 浮動小数点の決定性 / SIMD / ロックステップ / リプレイ](/languages/cpp/floating-point-determinism.html) | 丸めや更新順によるtick間の差を調べる |
+| [C++26 / 静的リフレクション / 契約 / hardening / std::execution](/languages/cpp/cpp26-features.html) | 規格の機能と処理系の対応状況を分けて確認する |
+| [span / mdspan / flat_map / inplace_vector / hive](/languages/cpp/modern-containers-and-views.html) | 所有権、配置、無効化条件からデータ構造を選ぶ |
+| [deducing this / 明示的オブジェクト引数 / std::expected](/languages/cpp/explicit-object-and-expected.html) | オーバーロードとエラーの受け渡しを記述する |
+| [C++20 modules / ODR / export module / import std](/languages/cpp/modules.html) | 翻訳単位の境界とインポート時のビルド依存を読む |
+| [Span / ref struct / delegate* / static abstract / generic math](/languages/csharp/performance-features.html) | バッファを借り、呼び出しと数値型の制約を選ぶ |
+| [ソート / イントロソート / 基数ソート / 安定ソート / GPUソート](/algorithms/sorting.html) | 描画のキーを並べ替え、同値や大きな入力を扱う |
+| [LZ4 / zlib / Zstandard / GDeflate / エントロピー符号化](/data/compression-basics.html) | 辞書圧縮と符号化を分け、アセット展開の経路を選ぶ |
+| [CRC / CRC-32C / xxHash / SHA-256 / チェックサム](/data/hashes-and-checksums.html) | アセットの破損検出と識別を使い分ける |
 | [bit / byte / 2進数 / 16進数 / 整数表現 / 2の補数 / エンディアン](/data/integer-bits-and-bytes.html) | 値と表記、符号の解釈、アドレス順のバイト列を区別する |
 | [Cの配列 / sizeof / パディング / バイト列](/languages/c/reading-byte-arrays.html) | 配列の長さ、関数へ渡るポインタ、メモリと保存形式での配置の違いを調べる |
 | [バイナリファイル / 範囲検査 / バイナリパーサー / magic number / bounds check / 整数オーバーフロー](/data/binary-file-validation.html) | 件数・オフセット・長さを確かめ、読み取りや確保に使える範囲を決める |
@@ -167,6 +193,29 @@
 | [ゲームイベント / イベント通知 / 発行 / 購読 / ハンドラー / 購読解除](/game/basics/game-events-and-notifications.html) | HPの変化などをUIへ伝え、利用期間に合わせて通知を受ける |
 | [シェーダー / 頂点シェーダー / フラグメントシェーダー / ピクセルシェーダー / mix / lerp](/graphics/shader/shader-first-steps.html) | 頂点から三角形の色を作る処理を、GLSLとHLSLの短いコードで追う |
 | [頂点属性 / attribute / varying / uniform / 定数バッファ / cbuffer / binding](/graphics/shader/shader-inputs-and-uniforms.html) | 描画に使うデータを、シェーダーのどの入力へ渡すかを調べる |
+| [法線マップ / TBN / 接空間 / MikkTSpace / BC5](/graphics/shader/normal-mapping.html) | 頂点の接空間と法線テクスチャの向きをそろえる |
+| [BRDF / Lambert / Blinn–Phong / GGX / Smith / Schlick](/graphics/shader/brdf-internals.html) | 拡散と鏡面の反射を式とコードで追う |
+| [色空間 / sRGB / HDR / ACES / AgX / 露出](/graphics/shader/color-space-and-hdr.html) | リニアの照明値から表示用の色を作る |
+| [値ノイズ / Perlin / Simplex / fBm / ドメインワープ](/graphics/shader/procedural-noise.html) | 座標から模様を生成し、周波数と変形を調整する |
+| [シェーダーデバッガー / RenderDoc / PIX / NaN](/graphics/shader/shader-debugging.html) | 中間値を画面とキャプチャで確認する |
+| [トゥーン / NPR / ランプテクスチャ / アウトライン / リムライト](/graphics/shader/toon-and-npr.html) | 陰影を段階化し、輪郭と縁の光を描く |
+| [POM / パララックスオクルージョン / デカール / 投影デカール](/graphics/shader/parallax-and-decals.html) | 高さでUVをずらし、表面に別の材質を投影する |
+| [頂点変形 / 風 / 波 / VAT / 頂点アニメーションテクスチャ](/graphics/shader/vertex-effects.html) | 頂点の位置を時刻やテクスチャで変える |
+| [GPUパーティクル / Compute / Indirect描画 / パーティクルソート](/graphics/shader/gpu-particles.html) | 粒子の生成・更新・破棄をGPUで管理する |
+| [シェーダーバリアント / shader_feature / multi_compile / パーミュテーション](/graphics/shader/shader-variants.html) | キーワードの組み合わせとビルド対象を管理する |
+| [異方性 / クリアコート / シーン / サブサーフェス / 髪 / 肌](/graphics/shader/extended-material-models.html) | 基本の反射モデルに層や方向性を加える |
+| [SDF / 符号付き距離関数 / レイマーチング / sphere tracing](/graphics/shader/sdf-and-raymarching.html) | 距離でレイを進め、合成した形と影を描く |
+| [高さフォグ / froxel / ボリューム / 雲 / 大気散乱](/graphics/shader/volumetrics.html) | 媒質中の透過と散乱を積分する |
+| [水面 / 屈折 / 反射 / Fresnel / 泡 / 吸収](/graphics/shader/water-shading.html) | 水面の法線と水中の距離から見た目を組み立てる |
+| [half / 16ビット精度 / ダイバージェンス / ALU / テクスチャ帯域](/graphics/shader/shader-optimization.html) | GPU計測で精度・分岐・フェッチの仮説を検証する |
+| [Slang / bindless / Work Graphs / VRS / Cooperative Vectors](/graphics/shader/modern-shader-technologies.html) | 機能ごとの対応条件と処理範囲を確認する |
+| [Visibility Buffer / Deferred Texturing / 重心座標 / Nanite](/graphics/path/visibility-buffer.html) | 可視面の識別子から材質評価を遅延する |
+| [Enhanced Barriers / synchronization2 / vkCmdPipelineBarrier2 / D3D12_BARRIER](/graphics/optimization/enhanced-barriers-and-synchronization2.html) | ステージ、アクセス、レイアウトを明示して同期する |
+| [Sampler Feedback / MinMip / MipRegionUsed / テクスチャ常駐](/graphics/texture/sampler-feedback.html) | GPUのサンプリング要求を次の常駐判断に使う |
+| [ReSTIR DI / ReSTIR GI / MegaLights / リザーバサンプリング](/graphics/lighting/many-light-sampling.html) | 多数の光源から限られたサンプルを選ぶ |
+| [ニューラルレンダリング / DLSS 4 / Transformer / Cooperative Vectors](/graphics/path/neural-rendering.html) | 画面の再構成とシェーダー内の推論を区別する |
+| [ステートマシン / ブレンドツリー / IK / ルートモーション / GPUスキニング](/graphics/basics/animation-systems.html) | 姿勢の選択から頂点の変形までを追う |
+| [地形LOD / ハイトマップ / Geometry Clipmap / SVT / RVT](/graphics/texture/terrain-and-virtual-texturing.html) | 地形格子の密度と材質ページの常駐を管理する |
 | [sRGB / HDR10 / トーンマップ](/graphics/postprocess/overview.html) | 色の表現と、描画結果を画面へ出すまでの変換を調べる |
 | [フレームデバッガ / Frame Debugger / RenderDoc / Unreal Insights](/graphics/optimization/tools.html) | 描画の状態や処理時間を調べるツールを選ぶ |
 | [ECS / Entity Component System](/game/ecs.html) | ID、Component、System、Query、格納方式 |

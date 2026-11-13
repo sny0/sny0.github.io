@@ -64,6 +64,10 @@ QUICでも、次のような条件では複数のストリームに影響が及�
 
 Wi-Fiからモバイル回線へ切り替えると、送信元IPアドレスやUDPポートが変わることがあります。NATが外側のポートを割り当て直した場合も、相手からは送信元が変わって見えます。QUICでは端点が**コネクションID**を手がかりに受信パケットを既存の接続に対応付けます。一つの接続に複数のIDを用意できるので、経路を変えるときは別のIDで同じ接続を指せます。新しい経路の検証では、`PATH_CHALLENGE` で送った値を相手が `PATH_RESPONSE` で返せるかを確認します。QUIC v1でハンドシェイク確認後に能動的な移行を始めるのはクライアントで、サーバーは能動的な移行を無効にする設定を通知できます。[RFC 9000のコネクションID](https://www.rfc-editor.org/rfc/rfc9000.html#section-5.1) · [経路の検証](https://www.rfc-editor.org/rfc/rfc9000.html#section-8.2) · [接続の移行](https://www.rfc-editor.org/rfc/rfc9000.html#section-9) · [NATとポートの対応付け](/network/nat-and-port-mapping.html)
 
+## 関連項目
+
+- [HTTPS / SVCBレコードとHTTP/3の発見](/network/https-svcb-and-http3-discovery.html)
+
 ## 0-RTTで先に送るデータを選ぶ
 
 **0-RTT（Early Data）**では、以前の接続で得た再開用の情報を使い、クライアントが新しいハンドシェイクの返事を待つ前にアプリデータを送れます。サーバーはこのデータを拒否できます。また、攻撃者が記録したEarly Dataを再送する**リプレイ**を考慮します。例えば、通貨を消費してアイテムを買う操作は、同じリクエストが再度処理されると困るため、1-RTTのデータとして送ります。HTTPの `425 Too Early` は、再実行の危険があるリクエストの処理を拒むための応答です。再試行はEarly Dataを使わずに行います。[RFC 9001の0-RTT](https://www.rfc-editor.org/rfc/rfc9001.html#section-4.6) · [RFC 9114のEarly Data](https://www.rfc-editor.org/rfc/rfc9114.html#section-10.9) · [RFC 8470の425](https://www.rfc-editor.org/rfc/rfc8470.html#section-5.2)

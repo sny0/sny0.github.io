@@ -29,6 +29,14 @@
           "link": "/data/binary-file-validation.html"
         },
         {
+          "text": "ハッシュとチェックサム — アセットの識別と破損検出を分ける",
+          "link": "/data/hashes-and-checksums.html"
+        },
+        {
+          "text": "圧縮の基礎 — LZ の参照・エントロピー符号・GPU 展開",
+          "link": "/data/compression-basics.html"
+        },
+        {
           "text": "整数をビット列・16進数・バイト列で読む",
           "link": "/data/integer-bits-and-bytes.html"
         }
@@ -85,6 +93,10 @@
         {
           "text": "コンピュータの部品と役割 — ゲームが動くまで",
           "link": "/hardware/computer-components.html"
+        },
+        {
+          "text": "ハイブリッドCPUのスケジューリング — コアの特性とスレッドの待ち時間",
+          "link": "/hardware/cpu/hybrid-cpu-scheduling.html"
         }
       ]
     },
@@ -233,12 +245,36 @@
           "link": "/languages/cpp/auto-and-constexpr.html"
         },
         {
+          "text": "C#のパフォーマンス機能 — Span・関数ポインター・generic math",
+          "link": "/languages/csharp/performance-features.html"
+        },
+        {
           "text": "C#の基本 — コンソールとUnityでHPを更新する",
           "link": "/languages/csharp/console-and-unity.html"
         },
         {
+          "text": "C++ メモリモデル — atomic と happens-before で共有データを受け渡す",
+          "link": "/languages/cpp/memory-model.html"
+        },
+        {
           "text": "C++・設計の用語集",
           "link": "/guide/cpp-glossary.html"
+        },
+        {
+          "text": "C++20 モジュール — インターフェース・ビルド依存・ODR",
+          "link": "/languages/cpp/modules.html"
+        },
+        {
+          "text": "C++23・26のコンテナとビュー — span・mdspan・flat_map・inplace_vector・hive",
+          "link": "/languages/cpp/modern-containers-and-views.html"
+        },
+        {
+          "text": "C++23の実践機能 — deducing thisとstd::expected",
+          "link": "/languages/cpp/explicit-object-and-expected.html"
+        },
+        {
+          "text": "C++26 の主な新機能 — 静的リフレクション・契約・ライブラリ強化・実行制御",
+          "link": "/languages/cpp/cpp26-features.html"
         },
         {
           "text": "C++例外と C#例外",
@@ -247,6 +283,10 @@
         {
           "text": "const と const correctness",
           "link": "/languages/cpp/const-correctness.html"
+        },
+        {
+          "text": "CRTPと静的ポリモーフィズム — 共通処理から型ごとの操作を呼ぶ",
+          "link": "/languages/cpp/crtp.html"
         },
         {
           "text": "Cでバイト列を読む",
@@ -349,6 +389,10 @@
           "link": "/languages/cpp/arrays-and-strings.html"
         },
         {
+          "text": "浮動小数点の決定性 — 同じ入力から同じtickを再現する",
+          "link": "/languages/cpp/floating-point-determinism.html"
+        },
+        {
           "text": "未定義動作・実装定義・未規定動作",
           "link": "/languages/cpp/undefined-behavior.html"
         },
@@ -399,6 +443,10 @@
           "link": "/runtime/memory/cache-locality-aos-soa.html"
         },
         {
+          "text": "ジョブシステムとワークスティーリング — 依存グラフをワーカーで実行する",
+          "link": "/runtime/jobs-and-work-stealing.html"
+        },
+        {
           "text": "スレッドと同期 — 共有状態の不変条件をmutexとlockで守る",
           "link": "/runtime/thread-synchronization.html"
         },
@@ -409,6 +457,10 @@
         {
           "text": "メモリレイアウト・パディング・アラインメント・エンディアン",
           "link": "/runtime/cpp-internals/memory-layout.html"
+        },
+        {
+          "text": "ロックフリーの基礎 — CAS・リングキュー・メモリー回収",
+          "link": "/runtime/lock-free-basics.html"
         },
         {
           "text": "関数呼び出し・コールスタック・呼出規約・レジスタ",
@@ -563,6 +615,10 @@
           "link": "/network/dns-resolution.html"
         },
         {
+          "text": "HTTPS・SVCBレコードとHTTP/3の発見 — 接続候補をDNSとHTTPから知る",
+          "link": "/network/https-svcb-and-http3-discovery.html"
+        },
+        {
           "text": "HTTPキャッシュ — 保存・鮮度・再検証と304応答",
           "link": "/network/http-caching.html"
         },
@@ -577,6 +633,10 @@
         {
           "text": "IPルーティングとEthernetフレーム",
           "link": "/network/ip-routing-and-ethernet.html"
+        },
+        {
+          "text": "Nagle アルゴリズムと遅延 ACK — TCP の小さい送信を観察する",
+          "link": "/network/nagle-and-delayed-ack.html"
         },
         {
           "text": "NATとポート変換",
@@ -673,6 +733,10 @@
         {
           "text": "スパースセットとECSのコンポーネント管理",
           "link": "/algorithms/sparse-sets.html"
+        },
+        {
+          "text": "ソート — イントロソート・基数ソート・GPU の描画順",
+          "link": "/algorithms/sorting.html"
         },
         {
           "text": "ハッシュテーブル — 同じ場所に来たキーをどう探すか",
@@ -817,6 +881,10 @@
           "link": "/design/notebook/presentation.html"
         },
         {
+          "text": "Null Objectパターン — 任意の機能を何もしない実装で表す",
+          "link": "/design/patterns/null-object.html"
+        },
+        {
           "text": "Observer",
           "link": "/design/patterns/observer.html"
         },
@@ -915,6 +983,10 @@
         {
           "text": "つなぎ方を整える — Adapter・Decorator・Facade",
           "link": "/design/notebook/structure.html"
+        },
+        {
+          "text": "デメテルの法則 — 相手の内部構造を知らずに仕事を頼む",
+          "link": "/design/foundations/law-of-demeter.html"
         },
         {
           "text": "プレイヤー入力の設計",
@@ -1051,6 +1123,10 @@
           "link": "/graphics/api/comparison.html"
         },
         {
+          "text": "BRDF の中身 — Lambert・Blinn–Phong・GGX",
+          "link": "/graphics/shader/brdf-internals.html"
+        },
+        {
           "text": "Compute Shader",
           "link": "/graphics/compute/compute-shader.html"
         },
@@ -1099,6 +1175,10 @@
           "link": "/graphics/api/directx12.html"
         },
         {
+          "text": "Enhanced Barriers と Vulkan synchronization2 — 順序・アクセス・レイアウト",
+          "link": "/graphics/optimization/enhanced-barriers-and-synchronization2.html"
+        },
+        {
           "text": "Forward Rendering",
           "link": "/graphics/path/forward.html"
         },
@@ -1133,6 +1213,10 @@
         {
           "text": "GPUタイムスタンプクエリ — 描画パスの時間をGPUの時計で測る",
           "link": "/graphics/optimization/gpu-timestamp-queries.html"
+        },
+        {
+          "text": "GPUパーティクル — Computeで更新し、Indirectで描く",
+          "link": "/graphics/shader/gpu-particles.html"
         },
         {
           "text": "GPU最適化の基礎",
@@ -1183,6 +1267,14 @@
           "link": "/graphics/optimization/render-graph.html"
         },
         {
+          "text": "Sampler Feedbackとテクスチャストリーミング — 必要なミップをGPUで記録する",
+          "link": "/graphics/texture/sampler-feedback.html"
+        },
+        {
+          "text": "SDF とレイマーチング — 距離を使って形状・影・AO を描く",
+          "link": "/graphics/shader/sdf-and-raymarching.html"
+        },
+        {
           "text": "Shared Memory と Atomic",
           "link": "/graphics/compute/shared-memory.html"
         },
@@ -1223,6 +1315,10 @@
           "link": "/graphics/pipeline/vertex-shader.html"
         },
         {
+          "text": "Visibility Buffer と Deferred Texturing — 可視面から材質を復元する",
+          "link": "/graphics/path/visibility-buffer.html"
+        },
+        {
           "text": "Vulkan",
           "link": "/graphics/api/vulkan.html"
         },
@@ -1237,6 +1333,10 @@
         {
           "text": "アップスケーリング — DLSS / FSR / XeSS",
           "link": "/graphics/postprocess/upscaling.html"
+        },
+        {
+          "text": "アニメーションシステム — クリップの選択から GPU スキニングまで",
+          "link": "/graphics/basics/animation-systems.html"
         },
         {
           "text": "アンチエイリアシング (MSAA / FXAA / SMAA)",
@@ -1259,12 +1359,24 @@
           "link": "/graphics/optimization/pipeline-compilation-stutter.html"
         },
         {
+          "text": "シェーダーのデバッグ — 値の可視化と NaN の追跡",
+          "link": "/graphics/shader/shader-debugging.html"
+        },
+        {
           "text": "シェーダーの第一歩 — 頂点から三角形の色を作る",
           "link": "/graphics/shader/shader-first-steps.html"
         },
         {
+          "text": "シェーダーバリアントの管理 — コンパイルの組み合わせを減らす",
+          "link": "/graphics/shader/shader-variants.html"
+        },
+        {
           "text": "シェーダーへ渡すデータ — 頂点属性・uniform・テクスチャ",
           "link": "/graphics/shader/shader-inputs-and-uniforms.html"
+        },
+        {
+          "text": "シェーダー最適化の実践 — 精度・分岐・フェッチを計測する",
+          "link": "/graphics/shader/shader-optimization.html"
         },
         {
           "text": "シェーダ言語総論と比較",
@@ -1291,6 +1403,18 @@
           "link": "/graphics/optimization/tools.html"
         },
         {
+          "text": "トゥーンとNPR — 陰影の段と輪郭線を描き分ける",
+          "link": "/graphics/shader/toon-and-npr.html"
+        },
+        {
+          "text": "ニューラルレンダリング — フレームを再構成する推論とシェーダー内の推論",
+          "link": "/graphics/path/neural-rendering.html"
+        },
+        {
+          "text": "ノイズと手続き的テクスチャ — 格子・fBm・ドメインワープ",
+          "link": "/graphics/shader/procedural-noise.html"
+        },
+        {
           "text": "ハードウェアレイトレーシング (DXR / Vulkan Ray Tracing)",
           "link": "/graphics/lighting/raytracing.html"
         },
@@ -1305,6 +1429,10 @@
         {
           "text": "ポストプロセスパイプライン",
           "link": "/graphics/postprocess/overview.html"
+        },
+        {
+          "text": "ボリューメトリック — 高さフォグ・フロクセル・雲と大気",
+          "link": "/graphics/shader/volumetrics.html"
         },
         {
           "text": "マテリアル・テクスチャ・シェーダーの基本",
@@ -1351,8 +1479,40 @@
           "link": "/graphics/basics/transforms-and-cameras.html"
         },
         {
+          "text": "最新のシェーダー技術 — Slang・bindless・Work Graphs・VRS・Cooperative Vectors",
+          "link": "/graphics/shader/modern-shader-technologies.html"
+        },
+        {
+          "text": "材質モデルの拡張 — 異方性・クリアコート・シーン・皮膚と髪",
+          "link": "/graphics/shader/extended-material-models.html"
+        },
+        {
+          "text": "視差とデカール — 表面の凹凸と模様を重ねる",
+          "link": "/graphics/shader/parallax-and-decals.html"
+        },
+        {
           "text": "出力結合 (Depth / Stencil / Blend)",
           "link": "/graphics/pipeline/output-merger.html"
+        },
+        {
+          "text": "色空間と HDR — リニア光量からディスプレイ出力まで",
+          "link": "/graphics/shader/color-space-and-hdr.html"
+        },
+        {
+          "text": "水面の表現 — 波の法線・反射・屈折・泡を合成する",
+          "link": "/graphics/shader/water-shading.html"
+        },
+        {
+          "text": "大量光源のサンプリング — ReSTIR DI・GIとMegaLights",
+          "link": "/graphics/lighting/many-light-sampling.html"
+        },
+        {
+          "text": "地形とバーチャルテクスチャ — 高さの格子と材質ページを別々に配る",
+          "link": "/graphics/texture/terrain-and-virtual-texturing.html"
+        },
+        {
+          "text": "頂点シェーダーでの表現 — 風・波・VATで形を動かす",
+          "link": "/graphics/shader/vertex-effects.html"
         },
         {
           "text": "頂点バッファとインデックスバッファから三角形を組み立てる",
@@ -1369,6 +1529,10 @@
         {
           "text": "並列アルゴリズム — Reduction / Prefix Sum (Scan)",
           "link": "/graphics/compute/parallel-algorithms.html"
+        },
+        {
+          "text": "法線マップと接空間 — TBN・MikkTSpace・チャンネル規約",
+          "link": "/graphics/shader/normal-mapping.html"
         }
       ]
     },
@@ -1445,6 +1609,10 @@
           "link": "/game/unreal/smart-pointers.html"
         },
         {
+          "text": "Unityの非同期処理 — Awaitable・UniTaskとライフサイクル",
+          "link": "/game/unity-async.html"
+        },
+        {
           "text": "Unreal Build Tool・Module・Build.cs・Target.cs",
           "link": "/game/unreal/build-system-ubt.html"
         },
@@ -1453,12 +1621,24 @@
           "link": "/game/unreal/uobject-actor-component.html"
         },
         {
+          "text": "カメラシステム — 追従・衝突回避・画面揺れを組み合わせる",
+          "link": "/game/camera-system.html"
+        },
+        {
+          "text": "ゲーム AI の意思決定 — Utility AI・GOAP・Behavior Tree を選ぶ",
+          "link": "/game/ai-decision-making.html"
+        },
+        {
           "text": "ゲームUIの基本 — 表示・配置・操作をつなぐ",
           "link": "/game/basics/ui-layout-and-interaction.html"
         },
         {
           "text": "ゲームエンジンの役割 — 素材とルールからゲームを動かす",
           "link": "/game/basics/game-engine-basics.html"
+        },
+        {
+          "text": "ゲームオーディオの仕組み — イベント・ボイス管理・3D 音響",
+          "link": "/game/game-audio-systems.html"
         },
         {
           "text": "ゲームのアセットビルドと差分配信",
@@ -1505,8 +1685,16 @@
           "link": "/game/unreal/reflection-and-uht.html"
         },
         {
+          "text": "ローカライズの設計 — 文字列テーブル・フォント・右から左の UI",
+          "link": "/game/localization-design.html"
+        },
+        {
           "text": "ワーカーが準備したアセットを描画側へ渡す",
           "link": "/game/asset-worker-handoff.html"
+        },
+        {
+          "text": "ワールドストリーミング — セルの先読み・有効化・解放",
+          "link": "/game/world-streaming.html"
         },
         {
           "text": "最適化系パターン: Dirty Flag・Spatial Partition・Data Locality・Double Buffer",
@@ -1551,6 +1739,10 @@
         {
           "text": "AIが書いたコードとの付き合い方 — 差分と実行結果から採用を決める",
           "link": "/tools/reviewing-ai-generated-code.html"
+        },
+        {
+          "text": "CI とビルド自動化 — 同じ変更からテスト結果と成果物を作る",
+          "link": "/tools/ci-and-build-automation.html"
         },
         {
           "text": "CPU プロファイリング — サンプリングと計装でフレームを測る",
@@ -1611,6 +1803,10 @@
         {
           "text": "公式ドキュメントの読み方 — バージョンとAPIの動作を確かめる",
           "link": "/tools/reading-official-documentation.html"
+        },
+        {
+          "text": "自動テストの基礎 — C++ と Unity でゲームの規則を検証する",
+          "link": "/tools/automated-testing.html"
         },
         {
           "text": "品質のための道具 — 静的解析・サニタイザ・警告レベル・CI",
@@ -1675,6 +1871,10 @@
         {
           "text": "シェーダーで三角形の位置と色を変える",
           "link": "/practice/graphics/shader-first-steps.html"
+        },
+        {
+          "text": "WebGPUでシェーダーの出力を比べる",
+          "link": "/practice/graphics/shader-lab.html"
         },
         {
           "text": "斜めの床でテクスチャのフィルタリングを比べる",
@@ -2018,6 +2218,10 @@
           "link": "/practice/graphics/shader-first-steps.html"
         },
         {
+          "text": "WebGPUでシェーダーの出力を比べる",
+          "link": "/practice/graphics/shader-lab.html"
+        },
+        {
           "text": "斜めの床でテクスチャのフィルタリングを比べる",
           "link": "/practice/graphics/texture-filtering-observation.html"
         },
@@ -2355,6 +2559,10 @@
           "link": "/practice/graphics/shader-first-steps.html"
         },
         {
+          "text": "WebGPUでシェーダーの出力を比べる",
+          "link": "/practice/graphics/shader-lab.html"
+        },
+        {
           "text": "斜めの床でテクスチャのフィルタリングを比べる",
           "link": "/practice/graphics/texture-filtering-observation.html"
         },
@@ -2674,6 +2882,10 @@
         {
           "text": "シェーダーで三角形の位置と色を変える",
           "link": "/practice/graphics/shader-first-steps.html"
+        },
+        {
+          "text": "WebGPUでシェーダーの出力を比べる",
+          "link": "/practice/graphics/shader-lab.html"
         },
         {
           "text": "斜めの床でテクスチャのフィルタリングを比べる",
@@ -3011,6 +3223,10 @@
         {
           "text": "シェーダーで三角形の位置と色を変える",
           "link": "/practice/graphics/shader-first-steps.html"
+        },
+        {
+          "text": "WebGPUでシェーダーの出力を比べる",
+          "link": "/practice/graphics/shader-lab.html"
         },
         {
           "text": "斜めの床でテクスチャのフィルタリングを比べる",
@@ -3411,6 +3627,10 @@
           "link": "/practice/graphics/shader-first-steps.html"
         },
         {
+          "text": "WebGPUでシェーダーの出力を比べる",
+          "link": "/practice/graphics/shader-lab.html"
+        },
+        {
           "text": "斜めの床でテクスチャのフィルタリングを比べる",
           "link": "/practice/graphics/texture-filtering-observation.html"
         },
@@ -3748,6 +3968,10 @@
           "link": "/practice/graphics/shader-first-steps.html"
         },
         {
+          "text": "WebGPUでシェーダーの出力を比べる",
+          "link": "/practice/graphics/shader-lab.html"
+        },
+        {
           "text": "斜めの床でテクスチャのフィルタリングを比べる",
           "link": "/practice/graphics/texture-filtering-observation.html"
         },
@@ -4067,6 +4291,10 @@
         {
           "text": "シェーダーで三角形の位置と色を変える",
           "link": "/practice/graphics/shader-first-steps.html"
+        },
+        {
+          "text": "WebGPUでシェーダーの出力を比べる",
+          "link": "/practice/graphics/shader-lab.html"
         },
         {
           "text": "斜めの床でテクスチャのフィルタリングを比べる",
@@ -4390,6 +4618,10 @@
           "link": "/practice/graphics/shader-first-steps.html"
         },
         {
+          "text": "WebGPUでシェーダーの出力を比べる",
+          "link": "/practice/graphics/shader-lab.html"
+        },
+        {
           "text": "斜めの床でテクスチャのフィルタリングを比べる",
           "link": "/practice/graphics/texture-filtering-observation.html"
         },
@@ -4709,6 +4941,10 @@
         {
           "text": "シェーダーで三角形の位置と色を変える",
           "link": "/practice/graphics/shader-first-steps.html"
+        },
+        {
+          "text": "WebGPUでシェーダーの出力を比べる",
+          "link": "/practice/graphics/shader-lab.html"
         },
         {
           "text": "斜めの床でテクスチャのフィルタリングを比べる",
@@ -5040,6 +5276,10 @@
           "link": "/practice/graphics/shader-first-steps.html"
         },
         {
+          "text": "WebGPUでシェーダーの出力を比べる",
+          "link": "/practice/graphics/shader-lab.html"
+        },
+        {
           "text": "斜めの床でテクスチャのフィルタリングを比べる",
           "link": "/practice/graphics/texture-filtering-observation.html"
         },
@@ -5369,6 +5609,10 @@
           "link": "/practice/graphics/shader-first-steps.html"
         },
         {
+          "text": "WebGPUでシェーダーの出力を比べる",
+          "link": "/practice/graphics/shader-lab.html"
+        },
+        {
           "text": "斜めの床でテクスチャのフィルタリングを比べる",
           "link": "/practice/graphics/texture-filtering-observation.html"
         },
@@ -5688,6 +5932,10 @@
         {
           "text": "シェーダーで三角形の位置と色を変える",
           "link": "/practice/graphics/shader-first-steps.html"
+        },
+        {
+          "text": "WebGPUでシェーダーの出力を比べる",
+          "link": "/practice/graphics/shader-lab.html"
         },
         {
           "text": "斜めの床でテクスチャのフィルタリングを比べる",
@@ -6011,6 +6259,10 @@
           "link": "/practice/graphics/shader-first-steps.html"
         },
         {
+          "text": "WebGPUでシェーダーの出力を比べる",
+          "link": "/practice/graphics/shader-lab.html"
+        },
+        {
           "text": "斜めの床でテクスチャのフィルタリングを比べる",
           "link": "/practice/graphics/texture-filtering-observation.html"
         },
@@ -6330,6 +6582,10 @@
         {
           "text": "シェーダーで三角形の位置と色を変える",
           "link": "/practice/graphics/shader-first-steps.html"
+        },
+        {
+          "text": "WebGPUでシェーダーの出力を比べる",
+          "link": "/practice/graphics/shader-lab.html"
         },
         {
           "text": "斜めの床でテクスチャのフィルタリングを比べる",
@@ -6653,6 +6909,10 @@
           "link": "/practice/graphics/shader-first-steps.html"
         },
         {
+          "text": "WebGPUでシェーダーの出力を比べる",
+          "link": "/practice/graphics/shader-lab.html"
+        },
+        {
           "text": "斜めの床でテクスチャのフィルタリングを比べる",
           "link": "/practice/graphics/texture-filtering-observation.html"
         },
@@ -6972,6 +7232,10 @@
         {
           "text": "シェーダーで三角形の位置と色を変える",
           "link": "/practice/graphics/shader-first-steps.html"
+        },
+        {
+          "text": "WebGPUでシェーダーの出力を比べる",
+          "link": "/practice/graphics/shader-lab.html"
         },
         {
           "text": "斜めの床でテクスチャのフィルタリングを比べる",
@@ -7295,6 +7559,10 @@
           "link": "/practice/graphics/shader-first-steps.html"
         },
         {
+          "text": "WebGPUでシェーダーの出力を比べる",
+          "link": "/practice/graphics/shader-lab.html"
+        },
+        {
           "text": "斜めの床でテクスチャのフィルタリングを比べる",
           "link": "/practice/graphics/texture-filtering-observation.html"
         },
@@ -7614,6 +7882,10 @@
         {
           "text": "シェーダーで三角形の位置と色を変える",
           "link": "/practice/graphics/shader-first-steps.html"
+        },
+        {
+          "text": "WebGPUでシェーダーの出力を比べる",
+          "link": "/practice/graphics/shader-lab.html"
         },
         {
           "text": "斜めの床でテクスチャのフィルタリングを比べる",
@@ -7937,6 +8209,10 @@
           "link": "/practice/graphics/shader-first-steps.html"
         },
         {
+          "text": "WebGPUでシェーダーの出力を比べる",
+          "link": "/practice/graphics/shader-lab.html"
+        },
+        {
           "text": "斜めの床でテクスチャのフィルタリングを比べる",
           "link": "/practice/graphics/texture-filtering-observation.html"
         },
@@ -8256,6 +8532,10 @@
         {
           "text": "シェーダーで三角形の位置と色を変える",
           "link": "/practice/graphics/shader-first-steps.html"
+        },
+        {
+          "text": "WebGPUでシェーダーの出力を比べる",
+          "link": "/practice/graphics/shader-lab.html"
         },
         {
           "text": "斜めの床でテクスチャのフィルタリングを比べる",
@@ -8579,6 +8859,10 @@
           "link": "/practice/graphics/shader-first-steps.html"
         },
         {
+          "text": "WebGPUでシェーダーの出力を比べる",
+          "link": "/practice/graphics/shader-lab.html"
+        },
+        {
           "text": "斜めの床でテクスチャのフィルタリングを比べる",
           "link": "/practice/graphics/texture-filtering-observation.html"
         },
@@ -8898,6 +9182,10 @@
         {
           "text": "シェーダーで三角形の位置と色を変える",
           "link": "/practice/graphics/shader-first-steps.html"
+        },
+        {
+          "text": "WebGPUでシェーダーの出力を比べる",
+          "link": "/practice/graphics/shader-lab.html"
         },
         {
           "text": "斜めの床でテクスチャのフィルタリングを比べる",
@@ -9221,6 +9509,10 @@
           "link": "/practice/graphics/shader-first-steps.html"
         },
         {
+          "text": "WebGPUでシェーダーの出力を比べる",
+          "link": "/practice/graphics/shader-lab.html"
+        },
+        {
           "text": "斜めの床でテクスチャのフィルタリングを比べる",
           "link": "/practice/graphics/texture-filtering-observation.html"
         },
@@ -9540,6 +9832,10 @@
         {
           "text": "シェーダーで三角形の位置と色を変える",
           "link": "/practice/graphics/shader-first-steps.html"
+        },
+        {
+          "text": "WebGPUでシェーダーの出力を比べる",
+          "link": "/practice/graphics/shader-lab.html"
         },
         {
           "text": "斜めの床でテクスチャのフィルタリングを比べる",
@@ -9863,6 +10159,10 @@
           "link": "/practice/graphics/shader-first-steps.html"
         },
         {
+          "text": "WebGPUでシェーダーの出力を比べる",
+          "link": "/practice/graphics/shader-lab.html"
+        },
+        {
           "text": "斜めの床でテクスチャのフィルタリングを比べる",
           "link": "/practice/graphics/texture-filtering-observation.html"
         },
@@ -10182,6 +10482,10 @@
         {
           "text": "シェーダーで三角形の位置と色を変える",
           "link": "/practice/graphics/shader-first-steps.html"
+        },
+        {
+          "text": "WebGPUでシェーダーの出力を比べる",
+          "link": "/practice/graphics/shader-lab.html"
         },
         {
           "text": "斜めの床でテクスチャのフィルタリングを比べる",
@@ -10505,6 +10809,10 @@
           "link": "/practice/graphics/shader-first-steps.html"
         },
         {
+          "text": "WebGPUでシェーダーの出力を比べる",
+          "link": "/practice/graphics/shader-lab.html"
+        },
+        {
           "text": "斜めの床でテクスチャのフィルタリングを比べる",
           "link": "/practice/graphics/texture-filtering-observation.html"
         },
@@ -10824,6 +11132,10 @@
         {
           "text": "シェーダーで三角形の位置と色を変える",
           "link": "/practice/graphics/shader-first-steps.html"
+        },
+        {
+          "text": "WebGPUでシェーダーの出力を比べる",
+          "link": "/practice/graphics/shader-lab.html"
         },
         {
           "text": "斜めの床でテクスチャのフィルタリングを比べる",
@@ -11147,6 +11459,10 @@
           "link": "/practice/graphics/shader-first-steps.html"
         },
         {
+          "text": "WebGPUでシェーダーの出力を比べる",
+          "link": "/practice/graphics/shader-lab.html"
+        },
+        {
           "text": "斜めの床でテクスチャのフィルタリングを比べる",
           "link": "/practice/graphics/texture-filtering-observation.html"
         },
@@ -11466,6 +11782,10 @@
         {
           "text": "シェーダーで三角形の位置と色を変える",
           "link": "/practice/graphics/shader-first-steps.html"
+        },
+        {
+          "text": "WebGPUでシェーダーの出力を比べる",
+          "link": "/practice/graphics/shader-lab.html"
         },
         {
           "text": "斜めの床でテクスチャのフィルタリングを比べる",
@@ -11884,6 +12204,10 @@
         {
           "text": "シェーダーで三角形の位置と色を変える",
           "link": "/practice/graphics/shader-first-steps.html"
+        },
+        {
+          "text": "WebGPUでシェーダーの出力を比べる",
+          "link": "/practice/graphics/shader-lab.html"
         },
         {
           "text": "斜めの床でテクスチャのフィルタリングを比べる",
@@ -12356,6 +12680,10 @@
           "link": "/practice/graphics/shader-first-steps.html"
         },
         {
+          "text": "WebGPUでシェーダーの出力を比べる",
+          "link": "/practice/graphics/shader-lab.html"
+        },
+        {
           "text": "斜めの床でテクスチャのフィルタリングを比べる",
           "link": "/practice/graphics/texture-filtering-observation.html"
         },
@@ -12729,6 +13057,10 @@
           "link": "/practice/graphics/shader-first-steps.html"
         },
         {
+          "text": "WebGPUでシェーダーの出力を比べる",
+          "link": "/practice/graphics/shader-lab.html"
+        },
+        {
           "text": "斜めの床でテクスチャのフィルタリングを比べる",
           "link": "/practice/graphics/texture-filtering-observation.html"
         },
@@ -13056,6 +13388,10 @@
         {
           "text": "シェーダーで三角形の位置と色を変える",
           "link": "/practice/graphics/shader-first-steps.html"
+        },
+        {
+          "text": "WebGPUでシェーダーの出力を比べる",
+          "link": "/practice/graphics/shader-lab.html"
         },
         {
           "text": "斜めの床でテクスチャのフィルタリングを比べる",
@@ -13429,6 +13765,10 @@
         {
           "text": "シェーダーで三角形の位置と色を変える",
           "link": "/practice/graphics/shader-first-steps.html"
+        },
+        {
+          "text": "WebGPUでシェーダーの出力を比べる",
+          "link": "/practice/graphics/shader-lab.html"
         },
         {
           "text": "斜めの床でテクスチャのフィルタリングを比べる",
@@ -13901,6 +14241,10 @@
           "link": "/practice/graphics/shader-first-steps.html"
         },
         {
+          "text": "WebGPUでシェーダーの出力を比べる",
+          "link": "/practice/graphics/shader-lab.html"
+        },
+        {
           "text": "斜めの床でテクスチャのフィルタリングを比べる",
           "link": "/practice/graphics/texture-filtering-observation.html"
         },
@@ -14319,6 +14663,10 @@
           "link": "/practice/graphics/shader-first-steps.html"
         },
         {
+          "text": "WebGPUでシェーダーの出力を比べる",
+          "link": "/practice/graphics/shader-lab.html"
+        },
+        {
           "text": "斜めの床でテクスチャのフィルタリングを比べる",
           "link": "/practice/graphics/texture-filtering-observation.html"
         },
@@ -14634,6 +14982,10 @@
         {
           "text": "シェーダーで三角形の位置と色を変える",
           "link": "/practice/graphics/shader-first-steps.html"
+        },
+        {
+          "text": "WebGPUでシェーダーの出力を比べる",
+          "link": "/practice/graphics/shader-lab.html"
         },
         {
           "text": "斜めの床でテクスチャのフィルタリングを比べる",
@@ -14959,6 +15311,10 @@
         {
           "text": "シェーダーで三角形の位置と色を変える",
           "link": "/practice/graphics/shader-first-steps.html"
+        },
+        {
+          "text": "WebGPUでシェーダーの出力を比べる",
+          "link": "/practice/graphics/shader-lab.html"
         },
         {
           "text": "斜めの床でテクスチャのフィルタリングを比べる",
@@ -15332,6 +15688,10 @@
         {
           "text": "シェーダーで三角形の位置と色を変える",
           "link": "/practice/graphics/shader-first-steps.html"
+        },
+        {
+          "text": "WebGPUでシェーダーの出力を比べる",
+          "link": "/practice/graphics/shader-lab.html"
         },
         {
           "text": "斜めの床でテクスチャのフィルタリングを比べる",
@@ -15752,6 +16112,10 @@
           "link": "/practice/graphics/shader-first-steps.html"
         },
         {
+          "text": "WebGPUでシェーダーの出力を比べる",
+          "link": "/practice/graphics/shader-lab.html"
+        },
+        {
           "text": "斜めの床でテクスチャのフィルタリングを比べる",
           "link": "/practice/graphics/texture-filtering-observation.html"
         },
@@ -16071,6 +16435,10 @@
         {
           "text": "シェーダーで三角形の位置と色を変える",
           "link": "/practice/graphics/shader-first-steps.html"
+        },
+        {
+          "text": "WebGPUでシェーダーの出力を比べる",
+          "link": "/practice/graphics/shader-lab.html"
         },
         {
           "text": "斜めの床でテクスチャのフィルタリングを比べる",
@@ -16394,6 +16762,10 @@
           "link": "/practice/graphics/shader-first-steps.html"
         },
         {
+          "text": "WebGPUでシェーダーの出力を比べる",
+          "link": "/practice/graphics/shader-lab.html"
+        },
+        {
           "text": "斜めの床でテクスチャのフィルタリングを比べる",
           "link": "/practice/graphics/texture-filtering-observation.html"
         },
@@ -16713,6 +17085,10 @@
         {
           "text": "シェーダーで三角形の位置と色を変える",
           "link": "/practice/graphics/shader-first-steps.html"
+        },
+        {
+          "text": "WebGPUでシェーダーの出力を比べる",
+          "link": "/practice/graphics/shader-lab.html"
         },
         {
           "text": "斜めの床でテクスチャのフィルタリングを比べる",
@@ -17086,6 +17462,10 @@
         {
           "text": "シェーダーで三角形の位置と色を変える",
           "link": "/practice/graphics/shader-first-steps.html"
+        },
+        {
+          "text": "WebGPUでシェーダーの出力を比べる",
+          "link": "/practice/graphics/shader-lab.html"
         },
         {
           "text": "斜めの床でテクスチャのフィルタリングを比べる",
@@ -17506,6 +17886,10 @@
           "link": "/practice/graphics/shader-first-steps.html"
         },
         {
+          "text": "WebGPUでシェーダーの出力を比べる",
+          "link": "/practice/graphics/shader-lab.html"
+        },
+        {
           "text": "斜めの床でテクスチャのフィルタリングを比べる",
           "link": "/practice/graphics/texture-filtering-observation.html"
         },
@@ -17827,6 +18211,10 @@
           "link": "/practice/graphics/shader-first-steps.html"
         },
         {
+          "text": "WebGPUでシェーダーの出力を比べる",
+          "link": "/practice/graphics/shader-lab.html"
+        },
+        {
           "text": "斜めの床でテクスチャのフィルタリングを比べる",
           "link": "/practice/graphics/texture-filtering-observation.html"
         },
@@ -18146,6 +18534,10 @@
         {
           "text": "シェーダーで三角形の位置と色を変える",
           "link": "/practice/graphics/shader-first-steps.html"
+        },
+        {
+          "text": "WebGPUでシェーダーの出力を比べる",
+          "link": "/practice/graphics/shader-lab.html"
         },
         {
           "text": "斜めの床でテクスチャのフィルタリングを比べる",
@@ -18521,6 +18913,10 @@
           "link": "/practice/graphics/shader-first-steps.html"
         },
         {
+          "text": "WebGPUでシェーダーの出力を比べる",
+          "link": "/practice/graphics/shader-lab.html"
+        },
+        {
           "text": "斜めの床でテクスチャのフィルタリングを比べる",
           "link": "/practice/graphics/texture-filtering-observation.html"
         },
@@ -18846,6 +19242,10 @@
           "link": "/practice/graphics/shader-first-steps.html"
         },
         {
+          "text": "WebGPUでシェーダーの出力を比べる",
+          "link": "/practice/graphics/shader-lab.html"
+        },
+        {
           "text": "斜めの床でテクスチャのフィルタリングを比べる",
           "link": "/practice/graphics/texture-filtering-observation.html"
         },
@@ -19169,6 +19569,10 @@
         {
           "text": "シェーダーで三角形の位置と色を変える",
           "link": "/practice/graphics/shader-first-steps.html"
+        },
+        {
+          "text": "WebGPUでシェーダーの出力を比べる",
+          "link": "/practice/graphics/shader-lab.html"
         },
         {
           "text": "斜めの床でテクスチャのフィルタリングを比べる",
@@ -19542,6 +19946,10 @@
         {
           "text": "シェーダーで三角形の位置と色を変える",
           "link": "/practice/graphics/shader-first-steps.html"
+        },
+        {
+          "text": "WebGPUでシェーダーの出力を比べる",
+          "link": "/practice/graphics/shader-lab.html"
         },
         {
           "text": "斜めの床でテクスチャのフィルタリングを比べる",
@@ -19962,6 +20370,10 @@
           "link": "/practice/graphics/shader-first-steps.html"
         },
         {
+          "text": "WebGPUでシェーダーの出力を比べる",
+          "link": "/practice/graphics/shader-lab.html"
+        },
+        {
           "text": "斜めの床でテクスチャのフィルタリングを比べる",
           "link": "/practice/graphics/texture-filtering-observation.html"
         },
@@ -20281,6 +20693,10 @@
         {
           "text": "シェーダーで三角形の位置と色を変える",
           "link": "/practice/graphics/shader-first-steps.html"
+        },
+        {
+          "text": "WebGPUでシェーダーの出力を比べる",
+          "link": "/practice/graphics/shader-lab.html"
         },
         {
           "text": "斜めの床でテクスチャのフィルタリングを比べる",
@@ -20604,6 +21020,10 @@
           "link": "/practice/graphics/shader-first-steps.html"
         },
         {
+          "text": "WebGPUでシェーダーの出力を比べる",
+          "link": "/practice/graphics/shader-lab.html"
+        },
+        {
           "text": "斜めの床でテクスチャのフィルタリングを比べる",
           "link": "/practice/graphics/texture-filtering-observation.html"
         },
@@ -20923,6 +21343,10 @@
         {
           "text": "シェーダーで三角形の位置と色を変える",
           "link": "/practice/graphics/shader-first-steps.html"
+        },
+        {
+          "text": "WebGPUでシェーダーの出力を比べる",
+          "link": "/practice/graphics/shader-lab.html"
         },
         {
           "text": "斜めの床でテクスチャのフィルタリングを比べる",
@@ -21246,6 +21670,10 @@
           "link": "/practice/graphics/shader-first-steps.html"
         },
         {
+          "text": "WebGPUでシェーダーの出力を比べる",
+          "link": "/practice/graphics/shader-lab.html"
+        },
+        {
           "text": "斜めの床でテクスチャのフィルタリングを比べる",
           "link": "/practice/graphics/texture-filtering-observation.html"
         },
@@ -21565,6 +21993,10 @@
         {
           "text": "シェーダーで三角形の位置と色を変える",
           "link": "/practice/graphics/shader-first-steps.html"
+        },
+        {
+          "text": "WebGPUでシェーダーの出力を比べる",
+          "link": "/practice/graphics/shader-lab.html"
         },
         {
           "text": "斜めの床でテクスチャのフィルタリングを比べる",
@@ -21888,6 +22320,10 @@
           "link": "/practice/graphics/shader-first-steps.html"
         },
         {
+          "text": "WebGPUでシェーダーの出力を比べる",
+          "link": "/practice/graphics/shader-lab.html"
+        },
+        {
           "text": "斜めの床でテクスチャのフィルタリングを比べる",
           "link": "/practice/graphics/texture-filtering-observation.html"
         },
@@ -22207,6 +22643,10 @@
         {
           "text": "シェーダーで三角形の位置と色を変える",
           "link": "/practice/graphics/shader-first-steps.html"
+        },
+        {
+          "text": "WebGPUでシェーダーの出力を比べる",
+          "link": "/practice/graphics/shader-lab.html"
         },
         {
           "text": "斜めの床でテクスチャのフィルタリングを比べる",
@@ -22530,6 +22970,10 @@
           "link": "/practice/graphics/shader-first-steps.html"
         },
         {
+          "text": "WebGPUでシェーダーの出力を比べる",
+          "link": "/practice/graphics/shader-lab.html"
+        },
+        {
           "text": "斜めの床でテクスチャのフィルタリングを比べる",
           "link": "/practice/graphics/texture-filtering-observation.html"
         },
@@ -22849,6 +23293,10 @@
         {
           "text": "シェーダーで三角形の位置と色を変える",
           "link": "/practice/graphics/shader-first-steps.html"
+        },
+        {
+          "text": "WebGPUでシェーダーの出力を比べる",
+          "link": "/practice/graphics/shader-lab.html"
         },
         {
           "text": "斜めの床でテクスチャのフィルタリングを比べる",
@@ -23172,6 +23620,10 @@
           "link": "/practice/graphics/shader-first-steps.html"
         },
         {
+          "text": "WebGPUでシェーダーの出力を比べる",
+          "link": "/practice/graphics/shader-lab.html"
+        },
+        {
           "text": "斜めの床でテクスチャのフィルタリングを比べる",
           "link": "/practice/graphics/texture-filtering-observation.html"
         },
@@ -23491,6 +23943,10 @@
         {
           "text": "シェーダーで三角形の位置と色を変える",
           "link": "/practice/graphics/shader-first-steps.html"
+        },
+        {
+          "text": "WebGPUでシェーダーの出力を比べる",
+          "link": "/practice/graphics/shader-lab.html"
         },
         {
           "text": "斜めの床でテクスチャのフィルタリングを比べる",
@@ -23814,6 +24270,10 @@
           "link": "/practice/graphics/shader-first-steps.html"
         },
         {
+          "text": "WebGPUでシェーダーの出力を比べる",
+          "link": "/practice/graphics/shader-lab.html"
+        },
+        {
           "text": "斜めの床でテクスチャのフィルタリングを比べる",
           "link": "/practice/graphics/texture-filtering-observation.html"
         },
@@ -24135,6 +24595,10 @@
           "link": "/practice/graphics/shader-first-steps.html"
         },
         {
+          "text": "WebGPUでシェーダーの出力を比べる",
+          "link": "/practice/graphics/shader-lab.html"
+        },
+        {
           "text": "斜めの床でテクスチャのフィルタリングを比べる",
           "link": "/practice/graphics/texture-filtering-observation.html"
         },
@@ -24429,6 +24893,331 @@
       ]
     }
   ],
+  "/practice/graphics/shader-lab.md": [
+    {
+      "text": "実践・サンプル一覧",
+      "link": "/practice/"
+    },
+    {
+      "text": "WebGPUでシェーダーの出力を比べる",
+      "items": [
+        {
+          "text": "WebGPUでシェーダーの出力を比べる",
+          "link": "/practice/graphics/shader-lab.html"
+        }
+      ]
+    },
+    {
+      "text": "ほかの実践・サンプル",
+      "collapsed": true,
+      "items": [
+        {
+          "text": "Cのバイト読み取りをx86-64で追う",
+          "link": "/practice/compilers/c-byte-decoder-disassembly.html"
+        },
+        {
+          "text": "シェーダーで三角形の位置と色を変える",
+          "link": "/practice/graphics/shader-first-steps.html"
+        },
+        {
+          "text": "斜めの床でテクスチャのフィルタリングを比べる",
+          "link": "/practice/graphics/texture-filtering-observation.html"
+        },
+        {
+          "text": "MSAAを切り替えて輪郭と床模様を見比べる",
+          "link": "/practice/graphics/msaa-observation.html"
+        },
+        {
+          "text": "TAAを切り替えて床のちらつきとゴーストを比べる",
+          "link": "/practice/graphics/taa-observation.html"
+        },
+        {
+          "text": "同じシーンでネイティブ描画・バイリニア・時間方向の拡大を比べる",
+          "link": "/practice/graphics/taau-observation.html"
+        },
+        {
+          "text": "フレーム生成を切り替えて滑らかさと入力への反応を比べる",
+          "link": "/practice/graphics/frame-generation-observation.html"
+        },
+        {
+          "text": "パケットが欠けたときのTCPとQUICの配送を比べる",
+          "link": "/practice/network/stream-loss-observation.html"
+        },
+        {
+          "text": "C++とWinsockでUDPの受信境界を確かめる",
+          "link": "/practice/network/udp-loopback-observation.html"
+        },
+        {
+          "text": "C++でテクスチャに描き、次のパスで色を変える",
+          "link": "/practice/graphics/render-to-texture-observation.html"
+        },
+        {
+          "text": "C++でD3D12のコマンドを別スレッドで記録する",
+          "link": "/practice/graphics/parallel-command-recording-observation.html"
+        },
+        {
+          "text": "C++でワーカーの結果を描画側へ渡し、古い世代を捨てる",
+          "link": "/practice/threads/asset-worker-handoff-observation.html"
+        },
+        {
+          "text": "C++でGLBの頂点とインデックスを読み、三角形を描く",
+          "link": "/practice/graphics/glb-mesh-observation.html"
+        },
+        {
+          "text": "C++でDDSの2つのmipをD3D12へ転送して読み戻す",
+          "link": "/practice/graphics/dds-upload-observation.html"
+        },
+        {
+          "text": "C++でアセットパックを作って必要な範囲を読む",
+          "link": "/practice/io/asset-pack-observation.html"
+        },
+        {
+          "text": "Windowsで2回のファイル読み取りをトレースする",
+          "link": "/practice/io/file-io-trace-observation.html"
+        },
+        {
+          "text": "C++で2件のファイル読み取りをIOCPから回収する",
+          "link": "/practice/io/iocp-observation.html"
+        },
+        {
+          "text": "親子プロセスでパイプの終端を調べる",
+          "link": "/practice/process/windows-pipe-observation.html"
+        },
+        {
+          "text": "世代付きハンドルでスロットの再利用を追う",
+          "link": "/practice/algorithms/generational-handle-observation.html"
+        },
+        {
+          "text": "2つのC++ファイルからOBJ・EXE・PDBを作って読む",
+          "link": "/practice/compilers/build-artifact-observation.html"
+        },
+        {
+          "text": "総当たり・グリッド・BVHで範囲検索を比べる",
+          "link": "/practice/algorithms/spatial-query-observation.html"
+        },
+        {
+          "text": "スパースセットでIDの追加と削除を試す",
+          "link": "/practice/algorithms/sparse-set-observation.html"
+        },
+        {
+          "text": "入力遅延を待ち時間と描画時間に分けてみる",
+          "link": "/practice/graphics/input-latency-observation.html"
+        },
+        {
+          "text": "FIFO・MAILBOX・IMMEDIATEで画面の切り替わりを比べる",
+          "link": "/practice/graphics/swap-chain-observation.html"
+        },
+        {
+          "text": "同じシーンでVSyncオフ・オン・VRRを比べる",
+          "link": "/practice/graphics/vsync-vrr-observation.html"
+        },
+        {
+          "text": "同じ60 FPSで表示間隔を比べる",
+          "link": "/practice/graphics/frame-pacing-observation.html"
+        },
+        {
+          "text": "Web Audioで音源が通過する前後の音を比べる",
+          "link": "/practice/browser/audio-flyby-observation.html"
+        },
+        {
+          "text": "Web Audioでドップラー効果を聴き比べる",
+          "link": "/practice/browser/audio-doppler-observation.html"
+        },
+        {
+          "text": "Web Audioで扉が開くときの音の切り替えを比べる",
+          "link": "/practice/browser/audio-occlusion-transition-observation.html"
+        },
+        {
+          "text": "Web Audioで壁越しの音量と音色を比べる",
+          "link": "/practice/browser/audio-occlusion-observation.html"
+        },
+        {
+          "text": "Web Audioで音の方向と距離を変えて聴く",
+          "link": "/practice/browser/audio-spatial-observation.html"
+        },
+        {
+          "text": "Web Audioで畳み込みリバーブを聴き比べる",
+          "link": "/practice/browser/audio-reverb-observation.html"
+        },
+        {
+          "text": "Web Audioで反響の間隔と減衰を観察する",
+          "link": "/practice/browser/audio-feedback-observation.html"
+        },
+        {
+          "text": "Web Audioで遅延とコムフィルターを観察する",
+          "link": "/practice/browser/audio-comb-observation.html"
+        },
+        {
+          "text": "Web Audioで線形と等電力のクロスフェードを比べる",
+          "link": "/practice/browser/audio-crossfade-observation.html"
+        },
+        {
+          "text": "Web Audioで急な消音とフェードを観察する",
+          "link": "/practice/browser/audio-fade-observation.html"
+        },
+        {
+          "text": "Web Audioでゲインとクリッピングを観察する",
+          "link": "/practice/browser/audio-mixing-observation.html"
+        },
+        {
+          "text": "AudioWorkletで先読みとアンダーランを観察する",
+          "link": "/practice/browser/audio-buffer-observation.html"
+        },
+        {
+          "text": "リングバッファの満杯・折り返し・読み出し順を観察する",
+          "link": "/practice/browser/ring-buffer-observation.html"
+        },
+        {
+          "text": "Workerの競合とAtomicsの待機・通知を観察する",
+          "link": "/practice/browser/atomics-observation.html"
+        },
+        {
+          "text": "WebAssemblyへ配列とUTF-8を渡し、メモリ確保を観察する",
+          "link": "/practice/browser/wasm-abi-observation.html"
+        },
+        {
+          "text": "WebAssemblyの読み込みと線形メモリを観察する",
+          "link": "/practice/browser/wasm-memory-observation.html"
+        },
+        {
+          "text": "Workerへのコピーと共有メモリをブラウザで観察する",
+          "link": "/practice/browser/cross-origin-isolation-observation.html"
+        },
+        {
+          "text": "CSRFでCookie付きの要求が届く条件を観察する",
+          "link": "/practice/browser/csrf-observation.html"
+        },
+        {
+          "text": "textContent・innerHTML・CSPの違いを観察する",
+          "link": "/practice/browser/xss-csp-observation.html"
+        },
+        {
+          "text": "ブラウザでCookieの範囲とセッションIDを観察する",
+          "link": "/practice/browser/cookie-session-observation.html"
+        },
+        {
+          "text": "ブラウザで同一オリジンとCORSの応答を比べる",
+          "link": "/practice/browser/cors-observation.html"
+        },
+        {
+          "text": "Service Workerで応答元と登録状態を観察する",
+          "link": "/practice/browser/service-worker-observation.html"
+        },
+        {
+          "text": "ブラウザで保存・再読込・削除を観察する",
+          "link": "/practice/browser/storage-observation.html"
+        },
+        {
+          "text": "C++とC#でHTTPの再検証を観察する",
+          "link": "/practice/network/http-cache-observation.html"
+        },
+        {
+          "text": "Streams APIで供給と処理の速度差を観察する",
+          "link": "/practice/browser/stream-backpressure-observation.html"
+        },
+        {
+          "text": "Worker poolで待機数と取消しを観察する",
+          "link": "/practice/browser/worker-pool-observation.html"
+        },
+        {
+          "text": "Web Workerでコピー・転送・停止を観察する",
+          "link": "/practice/browser/worker-message-observation.html"
+        },
+        {
+          "text": "ブラウザでPromiseとawaitの実行順を観察する",
+          "link": "/practice/browser/event-loop-observation.html"
+        },
+        {
+          "text": "ブラウザでDOMと描画の変化を観察する",
+          "link": "/practice/browser/render-observation.html"
+        },
+        {
+          "text": "C++とC#でHTTPSの接続情報を観察する",
+          "link": "/practice/network/https-observation.html"
+        },
+        {
+          "text": "C++とC#で名前解決の結果を観察する",
+          "link": "/practice/network/name-resolution-observation.html"
+        },
+        {
+          "text": "C++とC#でHTTPの要求と応答を観察する",
+          "link": "/practice/network/http-message-observation.html"
+        },
+        {
+          "text": "C++とC#でTCPのバイト列と半閉鎖を観察する",
+          "link": "/practice/network/tcp-loopback-observation.html"
+        },
+        {
+          "text": "C++とC#で読み取り専用のファイルマッピングを観察する",
+          "link": "/practice/io/mapped-file-observation.html"
+        },
+        {
+          "text": "C++とC#でアセットの状態と寿命を試す",
+          "link": "/practice/assets/asset-lifecycle-model.html"
+        },
+        {
+          "text": "C++とC#で同期・非同期I/Oを比べる",
+          "link": "/practice/io/async-file-read-observation.html"
+        },
+        {
+          "text": "C++とC#でファイルの読み取りを観察する",
+          "link": "/practice/io/file-read-observation.html"
+        },
+        {
+          "text": "C++とC#で在庫の同期を確かめる",
+          "link": "/practice/threads/inventory-synchronization.html"
+        },
+        {
+          "text": "C++とC#でfloatの比較を確かめる",
+          "link": "/practice/math/float-comparison-observation.html"
+        },
+        {
+          "text": "C++とC#で文字の表現を観察する",
+          "link": "/practice/data/unicode-observation.html"
+        },
+        {
+          "text": "C++でfloatの表現と刻み幅を観察する",
+          "link": "/practice/data/float-spacing-observation.html"
+        },
+        {
+          "text": "C++で整数とバイト列を観察する",
+          "link": "/practice/data/integer-byte-observation.html"
+        },
+        {
+          "text": "Windowsでプロセスとスレッドを観察する",
+          "link": "/practice/process/windows-process-observation.html"
+        },
+        {
+          "text": "Windowsでメモリの状態を観察する",
+          "link": "/practice/memory/windows-memory-observation.html"
+        },
+        {
+          "text": "小さなシューティングを作る",
+          "link": "/game/shooter-design.html"
+        },
+        {
+          "text": "Unityでキャラクターを配置して動かす",
+          "link": "/practice/unity/scene-health-demo.html"
+        },
+        {
+          "text": "小さなレンダラーを作る",
+          "link": "/graphics/capstone/01-design.html"
+        },
+        {
+          "text": "C++と設計の演習",
+          "link": "/guide/exercises/"
+        },
+        {
+          "text": "C++のビルドサンプル",
+          "link": "/tools/build/samples/"
+        },
+        {
+          "text": "小さなアプリで設計を試す",
+          "link": "/design/notebook/practice.html"
+        }
+      ]
+    }
+  ],
   "/practice/io/file-io-trace-observation.md": [
     {
       "text": "実践・サンプル一覧",
@@ -24454,6 +25243,10 @@
         {
           "text": "シェーダーで三角形の位置と色を変える",
           "link": "/practice/graphics/shader-first-steps.html"
+        },
+        {
+          "text": "WebGPUでシェーダーの出力を比べる",
+          "link": "/practice/graphics/shader-lab.html"
         },
         {
           "text": "斜めの床でテクスチャのフィルタリングを比べる",
@@ -24777,6 +25570,10 @@
           "link": "/practice/graphics/shader-first-steps.html"
         },
         {
+          "text": "WebGPUでシェーダーの出力を比べる",
+          "link": "/practice/graphics/shader-lab.html"
+        },
+        {
           "text": "斜めの床でテクスチャのフィルタリングを比べる",
           "link": "/practice/graphics/texture-filtering-observation.html"
         },
@@ -25096,6 +25893,10 @@
         {
           "text": "シェーダーで三角形の位置と色を変える",
           "link": "/practice/graphics/shader-first-steps.html"
+        },
+        {
+          "text": "WebGPUでシェーダーの出力を比べる",
+          "link": "/practice/graphics/shader-lab.html"
         },
         {
           "text": "斜めの床でテクスチャのフィルタリングを比べる",
@@ -25419,6 +26220,10 @@
           "link": "/practice/graphics/shader-first-steps.html"
         },
         {
+          "text": "WebGPUでシェーダーの出力を比べる",
+          "link": "/practice/graphics/shader-lab.html"
+        },
+        {
           "text": "斜めの床でテクスチャのフィルタリングを比べる",
           "link": "/practice/graphics/texture-filtering-observation.html"
         },
@@ -25740,6 +26545,10 @@
           "link": "/practice/graphics/shader-first-steps.html"
         },
         {
+          "text": "WebGPUでシェーダーの出力を比べる",
+          "link": "/practice/graphics/shader-lab.html"
+        },
+        {
           "text": "斜めの床でテクスチャのフィルタリングを比べる",
           "link": "/practice/graphics/texture-filtering-observation.html"
         },
@@ -26059,6 +26868,10 @@
         {
           "text": "シェーダーで三角形の位置と色を変える",
           "link": "/practice/graphics/shader-first-steps.html"
+        },
+        {
+          "text": "WebGPUでシェーダーの出力を比べる",
+          "link": "/practice/graphics/shader-lab.html"
         },
         {
           "text": "斜めの床でテクスチャのフィルタリングを比べる",
@@ -26432,6 +27245,10 @@
         {
           "text": "シェーダーで三角形の位置と色を変える",
           "link": "/practice/graphics/shader-first-steps.html"
+        },
+        {
+          "text": "WebGPUでシェーダーの出力を比べる",
+          "link": "/practice/graphics/shader-lab.html"
         },
         {
           "text": "斜めの床でテクスチャのフィルタリングを比べる",
@@ -26866,6 +27683,10 @@
         {
           "text": "シェーダーで三角形の位置と色を変える",
           "link": "/practice/graphics/shader-first-steps.html"
+        },
+        {
+          "text": "WebGPUでシェーダーの出力を比べる",
+          "link": "/practice/graphics/shader-lab.html"
         },
         {
           "text": "斜めの床でテクスチャのフィルタリングを比べる",
@@ -27343,6 +28164,10 @@
           "link": "/practice/compilers/c-byte-decoder-disassembly.html"
         },
         {
+          "text": "WebGPUでシェーダーの出力を比べる",
+          "link": "/practice/graphics/shader-lab.html"
+        },
+        {
           "text": "斜めの床でテクスチャのフィルタリングを比べる",
           "link": "/practice/graphics/texture-filtering-observation.html"
         },
@@ -27676,6 +28501,10 @@
           "link": "/practice/graphics/shader-first-steps.html"
         },
         {
+          "text": "WebGPUでシェーダーの出力を比べる",
+          "link": "/practice/graphics/shader-lab.html"
+        },
+        {
           "text": "斜めの床でテクスチャのフィルタリングを比べる",
           "link": "/practice/graphics/texture-filtering-observation.html"
         },
@@ -28005,6 +28834,10 @@
           "link": "/practice/graphics/shader-first-steps.html"
         },
         {
+          "text": "WebGPUでシェーダーの出力を比べる",
+          "link": "/practice/graphics/shader-lab.html"
+        },
+        {
           "text": "斜めの床でテクスチャのフィルタリングを比べる",
           "link": "/practice/graphics/texture-filtering-observation.html"
         },
@@ -28324,6 +29157,10 @@
         {
           "text": "シェーダーで三角形の位置と色を変える",
           "link": "/practice/graphics/shader-first-steps.html"
+        },
+        {
+          "text": "WebGPUでシェーダーの出力を比べる",
+          "link": "/practice/graphics/shader-lab.html"
         },
         {
           "text": "斜めの床でテクスチャのフィルタリングを比べる",
@@ -28708,6 +29545,10 @@
           "link": "/practice/graphics/shader-first-steps.html"
         },
         {
+          "text": "WebGPUでシェーダーの出力を比べる",
+          "link": "/practice/graphics/shader-lab.html"
+        },
+        {
           "text": "斜めの床でテクスチャのフィルタリングを比べる",
           "link": "/practice/graphics/texture-filtering-observation.html"
         },
@@ -29079,6 +29920,10 @@
         {
           "text": "シェーダーで三角形の位置と色を変える",
           "link": "/practice/graphics/shader-first-steps.html"
+        },
+        {
+          "text": "WebGPUでシェーダーの出力を比べる",
+          "link": "/practice/graphics/shader-lab.html"
         },
         {
           "text": "斜めの床でテクスチャのフィルタリングを比べる",
@@ -29499,6 +30344,10 @@
           "link": "/practice/graphics/shader-first-steps.html"
         },
         {
+          "text": "WebGPUでシェーダーの出力を比べる",
+          "link": "/practice/graphics/shader-lab.html"
+        },
+        {
           "text": "斜めの床でテクスチャのフィルタリングを比べる",
           "link": "/practice/graphics/texture-filtering-observation.html"
         },
@@ -29818,6 +30667,10 @@
         {
           "text": "シェーダーで三角形の位置と色を変える",
           "link": "/practice/graphics/shader-first-steps.html"
+        },
+        {
+          "text": "WebGPUでシェーダーの出力を比べる",
+          "link": "/practice/graphics/shader-lab.html"
         },
         {
           "text": "斜めの床でテクスチャのフィルタリングを比べる",
@@ -30141,6 +30994,10 @@
           "link": "/practice/graphics/shader-first-steps.html"
         },
         {
+          "text": "WebGPUでシェーダーの出力を比べる",
+          "link": "/practice/graphics/shader-lab.html"
+        },
+        {
           "text": "斜めの床でテクスチャのフィルタリングを比べる",
           "link": "/practice/graphics/texture-filtering-observation.html"
         },
@@ -30460,6 +31317,10 @@
         {
           "text": "シェーダーで三角形の位置と色を変える",
           "link": "/practice/graphics/shader-first-steps.html"
+        },
+        {
+          "text": "WebGPUでシェーダーの出力を比べる",
+          "link": "/practice/graphics/shader-lab.html"
         },
         {
           "text": "斜めの床でテクスチャのフィルタリングを比べる",
@@ -30894,6 +31755,10 @@
         {
           "text": "シェーダーで三角形の位置と色を変える",
           "link": "/practice/graphics/shader-first-steps.html"
+        },
+        {
+          "text": "WebGPUでシェーダーの出力を比べる",
+          "link": "/practice/graphics/shader-lab.html"
         },
         {
           "text": "斜めの床でテクスチャのフィルタリングを比べる",
@@ -31365,6 +32230,10 @@
         {
           "text": "シェーダーで三角形の位置と色を変える",
           "link": "/practice/graphics/shader-first-steps.html"
+        },
+        {
+          "text": "WebGPUでシェーダーの出力を比べる",
+          "link": "/practice/graphics/shader-lab.html"
         },
         {
           "text": "斜めの床でテクスチャのフィルタリングを比べる",
@@ -31942,6 +32811,10 @@
           "link": "/practice/graphics/shader-first-steps.html"
         },
         {
+          "text": "WebGPUでシェーダーの出力を比べる",
+          "link": "/practice/graphics/shader-lab.html"
+        },
+        {
           "text": "MSAAを切り替えて輪郭と床模様を見比べる",
           "link": "/practice/graphics/msaa-observation.html"
         },
@@ -32271,6 +33144,10 @@
           "link": "/practice/graphics/shader-first-steps.html"
         },
         {
+          "text": "WebGPUでシェーダーの出力を比べる",
+          "link": "/practice/graphics/shader-lab.html"
+        },
+        {
           "text": "斜めの床でテクスチャのフィルタリングを比べる",
           "link": "/practice/graphics/texture-filtering-observation.html"
         },
@@ -32590,6 +33467,10 @@
         {
           "text": "シェーダーで三角形の位置と色を変える",
           "link": "/practice/graphics/shader-first-steps.html"
+        },
+        {
+          "text": "WebGPUでシェーダーの出力を比べる",
+          "link": "/practice/graphics/shader-lab.html"
         },
         {
           "text": "斜めの床でテクスチャのフィルタリングを比べる",
@@ -32913,6 +33794,10 @@
           "link": "/practice/graphics/shader-first-steps.html"
         },
         {
+          "text": "WebGPUでシェーダーの出力を比べる",
+          "link": "/practice/graphics/shader-lab.html"
+        },
+        {
           "text": "斜めの床でテクスチャのフィルタリングを比べる",
           "link": "/practice/graphics/texture-filtering-observation.html"
         },
@@ -33232,6 +34117,10 @@
         {
           "text": "シェーダーで三角形の位置と色を変える",
           "link": "/practice/graphics/shader-first-steps.html"
+        },
+        {
+          "text": "WebGPUでシェーダーの出力を比べる",
+          "link": "/practice/graphics/shader-lab.html"
         },
         {
           "text": "斜めの床でテクスチャのフィルタリングを比べる",
@@ -33801,6 +34690,10 @@
           "link": "/practice/graphics/shader-first-steps.html"
         },
         {
+          "text": "WebGPUでシェーダーの出力を比べる",
+          "link": "/practice/graphics/shader-lab.html"
+        },
+        {
           "text": "斜めの床でテクスチャのフィルタリングを比べる",
           "link": "/practice/graphics/texture-filtering-observation.html"
         },
@@ -34314,6 +35207,10 @@
         {
           "text": "シェーダーで三角形の位置と色を変える",
           "link": "/practice/graphics/shader-first-steps.html"
+        },
+        {
+          "text": "WebGPUでシェーダーの出力を比べる",
+          "link": "/practice/graphics/shader-lab.html"
         },
         {
           "text": "斜めの床でテクスチャのフィルタリングを比べる",
@@ -37217,6 +38114,10 @@
           "link": "/practice/graphics/shader-first-steps.html"
         },
         {
+          "text": "WebGPUでシェーダーの出力を比べる",
+          "link": "/practice/graphics/shader-lab.html"
+        },
+        {
           "text": "斜めの床でテクスチャのフィルタリングを比べる",
           "link": "/practice/graphics/texture-filtering-observation.html"
         },
@@ -37536,6 +38437,10 @@
         {
           "text": "シェーダーで三角形の位置と色を変える",
           "link": "/practice/graphics/shader-first-steps.html"
+        },
+        {
+          "text": "WebGPUでシェーダーの出力を比べる",
+          "link": "/practice/graphics/shader-lab.html"
         },
         {
           "text": "斜めの床でテクスチャのフィルタリングを比べる",
@@ -37859,6 +38764,10 @@
           "link": "/practice/graphics/shader-first-steps.html"
         },
         {
+          "text": "WebGPUでシェーダーの出力を比べる",
+          "link": "/practice/graphics/shader-lab.html"
+        },
+        {
           "text": "斜めの床でテクスチャのフィルタリングを比べる",
           "link": "/practice/graphics/texture-filtering-observation.html"
         },
@@ -38178,6 +39087,10 @@
         {
           "text": "シェーダーで三角形の位置と色を変える",
           "link": "/practice/graphics/shader-first-steps.html"
+        },
+        {
+          "text": "WebGPUでシェーダーの出力を比べる",
+          "link": "/practice/graphics/shader-lab.html"
         },
         {
           "text": "斜めの床でテクスチャのフィルタリングを比べる",
@@ -38680,6 +39593,10 @@
         {
           "text": "シェーダーで三角形の位置と色を変える",
           "link": "/practice/graphics/shader-first-steps.html"
+        },
+        {
+          "text": "WebGPUでシェーダーの出力を比べる",
+          "link": "/practice/graphics/shader-lab.html"
         },
         {
           "text": "斜めの床でテクスチャのフィルタリングを比べる",

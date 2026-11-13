@@ -20,6 +20,7 @@
 ## 辞典の本文
 
 - [AIが書いたコードとの付き合い方 — 差分と実行結果から採用を決める](/tools/reviewing-ai-generated-code.html)
+- [CI とビルド自動化 — 同じ変更からテスト結果と成果物を作る](/tools/ci-and-build-automation.html)
 - [CPU プロファイリング — サンプリングと計装でフレームを測る](/tools/profiling/cpu-profiling.html)
 - [Gitの基本 — 差分を見てコミットする](/tools/git-basics.html)
 - [WindowsのファイルI/OをProcmonとWPRで追う](/tools/windows/file-io-tracing.html)
@@ -35,6 +36,7 @@
 - [開発ツールの基本 — エディター・IDE・デバッガ・プロファイラー](/tools/development-tools-basics.html)
 - [開発環境の用意 — Windowsで最初のC#を動かす](/tools/setup-development-environment.html)
 - [公式ドキュメントの読み方 — バージョンとAPIの動作を確かめる](/tools/reading-official-documentation.html)
+- [自動テストの基礎 — C++ と Unity でゲームの規則を検証する](/tools/automated-testing.html)
 - [品質のための道具 — 静的解析・サニタイザ・警告レベル・CI](/tools/build/debugging-and-analysis.html)
 
 ## この分野の学習ガイド

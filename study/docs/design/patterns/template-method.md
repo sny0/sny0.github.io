@@ -172,6 +172,7 @@ public abstract class ScreenBase : MonoBehaviour {   // 画面遷移の骨格
 
 ## 関連項目
 
+- [CRTPと静的ポリモーフィズム](/languages/cpp/crtp.html)
 - [Strategy](/design/patterns/strategy.html) / [Factory Method](/design/patterns/factory-method.html)
 - [継承・委譲・コンポジション](/design/foundations/inheritance-delegation-composition.html)
 - [Game Loop と Update Method](/game/patterns/game-loop-and-update.html)

@@ -27,14 +27,14 @@
       "id": "data",
       "title": "情報表現とバイナリ",
       "description": "数値・文字・バイト列を、メモリやファイルの表現へつなぐ。",
-      "count": 4,
+      "count": 6,
       "status": "辞典本文あり"
     },
     {
       "id": "hardware",
       "title": "ハードウェア",
       "description": "CPU・GPU・メモリ・デバイスの間で、命令とデータがどう動くかを調べる。",
-      "count": 11,
+      "count": 12,
       "status": "辞典本文あり"
     },
     {
@@ -55,14 +55,14 @@
       "id": "languages",
       "title": "言語",
       "description": "型、所有、寿命、実行の違いから、各言語の構文を調べる。",
-      "count": 32,
+      "count": 40,
       "status": "辞典本文あり"
     },
     {
       "id": "runtime",
       "title": "実行時の仕組み",
       "description": "確保・所有・解放から、GC、非同期、言語境界へつなぐ。",
-      "count": 15,
+      "count": 17,
       "status": "辞典本文あり"
     },
     {
@@ -76,7 +76,7 @@
       "id": "network",
       "title": "ネットワーク",
       "description": "通信の層と失敗を、Webとゲームの両方から調べる。",
-      "count": 13,
+      "count": 15,
       "status": "辞典本文あり"
     },
     {
@@ -90,28 +90,28 @@
       "id": "algorithms",
       "title": "データ構造・アルゴリズム",
       "description": "操作手順、計算量、不変条件から道具を選ぶ。",
-      "count": 12,
+      "count": 13,
       "status": "辞典本文あり"
     },
     {
       "id": "design",
       "title": "設計",
       "description": "責務、依存、パターンと、その使いどころを調べる。",
-      "count": 79,
+      "count": 81,
       "status": "辞典本文あり"
     },
     {
       "id": "graphics",
       "title": "3DCGとグラフィックス",
       "description": "制作データからGPUの処理、最終表示までをつなぐ。",
-      "count": 81,
+      "count": 104,
       "status": "辞典本文あり"
     },
     {
       "id": "game",
       "title": "ゲームとエンジン",
       "description": "入力、時間、ECSと各サブシステムの関係を調べる。",
-      "count": 36,
+      "count": 42,
       "status": "辞典本文あり"
     },
     {
@@ -125,7 +125,7 @@
       "id": "tools",
       "title": "開発ツールと調査機能",
       "description": "どの機能で何を観察し、どう確かめるかを調べる。",
-      "count": 17,
+      "count": 19,
       "status": "辞典本文あり"
     }
   ],
@@ -143,6 +143,13 @@
       "title": "シェーダーで三角形の位置と色を変える",
       "description": "WebGL 2で頂点属性とuniformを渡し、UVの補間、位置と色の計算を描画で確かめる。",
       "start": "/practice/graphics/shader-first-steps.html"
+    },
+    {
+      "id": "shader-lab",
+      "section": "practice",
+      "title": "WebGPUでシェーダーの出力を比べる",
+      "description": "照明、色、ノイズ、トゥーン、距離関数、水面を描き、パラメーターと出力の関係を確かめる。",
+      "start": "/practice/graphics/shader-lab.html"
     },
     {
       "id": "texture-filtering-observation",
@@ -1124,6 +1131,7 @@
       "links": [
         "/design/patterns/composite.html",
         "/game/patterns/state-machines.html",
+        "/game/ai-decision-making.html",
         "/design/case-studies/enemy-ai.html",
         "/algorithms/pathfinding.html",
         "/game/patterns/",
@@ -1131,6 +1139,36 @@
       ],
       "difficulty": "intermediate",
       "importance": "useful"
+    },
+    {
+      "title": "BRDF の中身 — Lambert・Blinn–Phong・GGX",
+      "url": "/graphics/shader/brdf-internals.html",
+      "file": "graphics/shader/brdf-internals.md",
+      "domain": "graphics",
+      "section": "reference",
+      "format": "article",
+      "status": "published",
+      "summary": "Lambert 拡散と Blinn–Phong を起点に、GGX の分布・フレネル・幾何項を式と HLSL で追う。",
+      "source": "新規執筆",
+      "aliases": [
+        "BRDF",
+        "双方向反射率分布関数",
+        "Lambert",
+        "Blinn-Phong",
+        "Cook-Torrance",
+        "GGX",
+        "Smith",
+        "Fresnel"
+      ],
+      "verification": "Blinn（1977）、Walter ほか（2007）、Khronos glTF 2.0 Appendix B に照合（2026-11-13）",
+      "links": [
+        "/graphics/lighting/pbr.html",
+        "/graphics/shader/color-space-and-hdr.html",
+        "/practice/graphics/shader-lab.html",
+        "/graphics/shader/normal-mapping.html"
+      ],
+      "difficulty": "intermediate",
+      "importance": "core"
     },
     {
       "title": "Bridge",
@@ -1240,6 +1278,34 @@
       "importance": "useful"
     },
     {
+      "title": "C#のパフォーマンス機能 — Span・関数ポインター・generic math",
+      "url": "/languages/csharp/performance-features.html",
+      "file": "languages/csharp/performance-features.md",
+      "domain": "languages",
+      "section": "reference",
+      "format": "article",
+      "status": "published",
+      "summary": "バッファのコピー、実行時の呼び出し、数値型をまたぐ演算を分けて考え、C#の機能を選ぶ。",
+      "source": "新規執筆",
+      "aliases": [
+        "Span",
+        "ReadOnlySpan",
+        "ref struct",
+        "delegate*",
+        "関数ポインター",
+        "static abstract",
+        "generic math"
+      ],
+      "verification": "C# 9・11・13、.NET 7以降のgeneric math、Unity 6.3 LTSに照合（2026-11-13）",
+      "links": [
+        "/languages/csharp/delegates-events-function-pointers.html",
+        "/languages/csharp/templates-vs-generics.html",
+        "/languages/csharp/memory-management-vs-gc.html"
+      ],
+      "difficulty": "advanced",
+      "importance": "useful"
+    },
+    {
       "title": "C#の基本 — コンソールとUnityでHPを更新する",
       "url": "/languages/csharp/console-and-unity.html",
       "file": "languages/csharp/console-and-unity.md",
@@ -1304,6 +1370,33 @@
         "/design/notebook-references.html"
       ],
       "difficulty": "intermediate",
+      "importance": "core"
+    },
+    {
+      "title": "C++ メモリモデル — atomic と happens-before で共有データを受け渡す",
+      "url": "/languages/cpp/memory-model.html",
+      "file": "languages/cpp/memory-model.md",
+      "domain": "languages",
+      "section": "reference",
+      "format": "article",
+      "status": "published",
+      "summary": "atomic の不可分性、release・acquire による公開、seq_cst の全順序を C++20 の規則と実行例で追う。",
+      "source": "新規執筆",
+      "aliases": [
+        "C++ Memory Model",
+        "std::atomic",
+        "memory_order",
+        "happens-before",
+        "release/acquire",
+        "sequential consistency"
+      ],
+      "verification": "C++20 DIS N4860 と同内容の作業草案 N4861 の intro.races・atomics.order・thread.thread.member（2026-11-13）",
+      "links": [
+        "/runtime/thread-synchronization.html",
+        "/runtime/memory/concurrency-bugs.html",
+        "/languages/cpp/undefined-behavior.html"
+      ],
+      "difficulty": "advanced",
       "importance": "core"
     },
     {
@@ -1411,6 +1504,36 @@
       "importance": "useful"
     },
     {
+      "title": "C++20 モジュール — インターフェース・ビルド依存・ODR",
+      "url": "/languages/cpp/modules.html",
+      "file": "languages/cpp/modules.md",
+      "domain": "languages",
+      "section": "reference",
+      "format": "article",
+      "status": "published",
+      "summary": "名前付きモジュールをヘッダー方式と比べ、名前の公開、BMI とオブジェクトファイル、ODR、C++23 の import std を整理する。",
+      "source": "新規執筆",
+      "aliases": [
+        "C++20 Modules",
+        "named module",
+        "名前付きモジュール",
+        "module unit",
+        "BMI",
+        "IFC",
+        "ODR",
+        "import std"
+      ],
+      "verification": "WG21 N4861・N4950・P2465R3、Microsoft Visual Studio 2022 の資料、CMake 3.30 公式マニュアルに照合（2026-11-13）",
+      "links": [
+        "/runtime/cpp-internals/translation-units-and-headers.html",
+        "/tools/build/build-tools-cmake.html",
+        "/tools/build/link-errors.html",
+        "/languages/csharp/headers-vs-asmdef.html"
+      ],
+      "difficulty": "advanced",
+      "importance": "useful"
+    },
+    {
       "title": "C++20でfloatの表現間隔と丸めを観察する",
       "url": "/practice/data/float-spacing-observation.html",
       "file": "practice/data/float-spacing-observation.md",
@@ -1469,6 +1592,90 @@
         "/data/integer-bits-and-bytes.html",
         "/runtime/cpp-internals/memory-layout.html"
       ]
+    },
+    {
+      "title": "C++23・26のコンテナとビュー — span・mdspan・flat_map・inplace_vector・hive",
+      "url": "/languages/cpp/modern-containers-and-views.html",
+      "file": "languages/cpp/modern-containers-and-views.md",
+      "domain": "languages",
+      "section": "reference",
+      "format": "article",
+      "status": "published",
+      "summary": "データを借りるビューと、要素を所有するコンテナを、配置、容量、参照が無効になる条件で比較する。",
+      "source": "新規執筆",
+      "aliases": [
+        "std::span",
+        "std::mdspan",
+        "std::flat_map",
+        "std::inplace_vector",
+        "std::hive",
+        "非所有ビュー",
+        "フラットマップ"
+      ],
+      "verification": "WG21のC++20草案N4861、C++23最終草案N4950、C++26草案N5050の該当節に照合（2026-11-13）",
+      "links": [
+        "/algorithms/arrays-and-dynamic-arrays.html",
+        "/algorithms/search-trees.html",
+        "/algorithms/generational-handles.html"
+      ],
+      "difficulty": "advanced",
+      "importance": "useful"
+    },
+    {
+      "title": "C++23の実践機能 — deducing thisとstd::expected",
+      "url": "/languages/cpp/explicit-object-and-expected.html",
+      "file": "languages/cpp/explicit-object-and-expected.md",
+      "domain": "languages",
+      "section": "reference",
+      "format": "article",
+      "status": "published",
+      "summary": "明示的オブジェクト引数でconstと参照の違いを表し、expectedで予期するエラーを呼び出し側へ返す。",
+      "source": "新規執筆",
+      "aliases": [
+        "deducing this",
+        "explicit object parameter",
+        "明示的オブジェクト引数",
+        "std::expected",
+        "std::unexpected",
+        "monadic operations"
+      ],
+      "verification": "WG21のC++23最終草案N4950、P0847R7・P0323R12・P2505R5、MicrosoftのC++適合状況に照合（2026-11-13）",
+      "links": [
+        "/languages/cpp/const-correctness.html",
+        "/languages/cpp/values-pointers-references.html",
+        "/languages/cpp/exceptions.html"
+      ],
+      "difficulty": "advanced",
+      "importance": "useful"
+    },
+    {
+      "title": "C++26 の主な新機能 — 静的リフレクション・契約・ライブラリ強化・実行制御",
+      "url": "/languages/cpp/cpp26-features.html",
+      "file": "languages/cpp/cpp26-features.md",
+      "domain": "languages",
+      "section": "reference",
+      "format": "article",
+      "status": "published",
+      "summary": "C++26 の DIS の基礎になった N5050 を読み、型情報・不変条件・境界検査・非同期合成への応用と実装状況を整理する。",
+      "source": "新規執筆",
+      "aliases": [
+        "C++26",
+        "静的リフレクション",
+        "Contracts",
+        "Standard Library Hardening",
+        "std::execution",
+        "sender receiver"
+      ],
+      "verification": "WG21 N5050、ISO/IEC DIS 14882、GCC 16 系・LLVM の公式文書（2026-11-13）",
+      "links": [
+        "/os/asynchronous-file-io.html",
+        "/languages/cpp/templates-and-concepts.html",
+        "/languages/cpp/exceptions.html",
+        "/languages/cpp/undefined-behavior.html",
+        "/languages/cpp/memory-model.html"
+      ],
+      "difficulty": "advanced",
+      "importance": "specialized"
     },
     {
       "title": "C++サンプル: cmake_demo",
@@ -2525,6 +2732,34 @@
       "importance": "specialized"
     },
     {
+      "title": "CI とビルド自動化 — 同じ変更からテスト結果と成果物を作る",
+      "url": "/tools/ci-and-build-automation.html",
+      "file": "tools/ci-and-build-automation.md",
+      "domain": "tools",
+      "section": "reference",
+      "format": "article",
+      "status": "published",
+      "summary": "GitHub Actions と CMake/CTest の例で、変更の検証、成果物の保存、失敗の切り分けを組み立てる。",
+      "source": "新規執筆",
+      "aliases": [
+        "CI",
+        "継続的インテグレーション",
+        "ビルド自動化",
+        "GitHub Actions",
+        "CTest",
+        "アーティファクト"
+      ],
+      "verification": "CMake・CTest 3.26 以降、GitHub.com の Actions、actions/checkout 6.0.2、actions/upload-artifact 7.0.2（2026-11-13）",
+      "links": [
+        "/tools/build/build-tools-cmake.html",
+        "/tools/build/build-configurations.html",
+        "/tools/automated-testing.html",
+        "/tools/git-basics.html"
+      ],
+      "difficulty": "intermediate",
+      "importance": "useful"
+    },
+    {
       "title": "COFFのシンボルと再配置 — リンカーがcallの距離を埋めるまで",
       "url": "/compilers/coff-relocations.html",
       "file": "compilers/coff-relocations.md",
@@ -2680,7 +2915,8 @@
         "/graphics/optimization/basics.html",
         "/hardware/gpu/architecture.html",
         "/graphics/shader/hlsl.html",
-        "/graphics/compute/execution-model.html"
+        "/graphics/compute/execution-model.html",
+        "/graphics/shader/gpu-particles.html"
       ],
       "difficulty": "intermediate",
       "importance": "core"
@@ -2849,6 +3085,32 @@
       ],
       "difficulty": "intro",
       "importance": "core"
+    },
+    {
+      "title": "CRTPと静的ポリモーフィズム — 共通処理から型ごとの操作を呼ぶ",
+      "url": "/languages/cpp/crtp.html",
+      "file": "languages/cpp/crtp.md",
+      "domain": "languages",
+      "section": "reference",
+      "format": "article",
+      "status": "published",
+      "summary": "派生型を基底テンプレートへ渡し、仮想関数を使わずに共通の処理手順と型ごとのフックを組み合わせる。",
+      "source": "新規執筆",
+      "aliases": [
+        "CRTP",
+        "Curiously Recurring Template Pattern",
+        "静的ポリモーフィズム",
+        "static polymorphism"
+      ],
+      "verification": "C++20 N4861のテンプレート実体化とstatic_castに照合（2026-11-13）",
+      "links": [
+        "/design/patterns/template-method.html",
+        "/languages/cpp/templates-and-concepts.html",
+        "/languages/cpp/inheritance-and-virtual.html",
+        "/languages/cpp/explicit-object-and-expected.html"
+      ],
+      "difficulty": "advanced",
+      "importance": "useful"
     },
     {
       "title": "CSRFでCookie付きの要求が届く条件を観察する",
@@ -3186,7 +3448,8 @@
         "/graphics/optimization/parallel-command-recording.html",
         "/graphics/optimization/gpu-queue-synchronization.html",
         "/graphics/optimization/gpu-resource-lifetime.html",
-        "/practice/graphics/parallel-command-recording-observation.html"
+        "/practice/graphics/parallel-command-recording-observation.html",
+        "/graphics/optimization/enhanced-barriers-and-synchronization2.html"
       ],
       "difficulty": "advanced",
       "importance": "specialized"
@@ -3299,7 +3562,9 @@
         "/graphics/pipeline/fragment-shader.html",
         "/graphics/lighting/ssao.html",
         "/graphics/lighting/ssr.html",
-        "/graphics/lighting/pbr.html"
+        "/graphics/lighting/pbr.html",
+        "/graphics/shader/parallax-and-decals.html",
+        "/graphics/path/visibility-buffer.html"
       ],
       "difficulty": "intermediate",
       "importance": "core"
@@ -3569,6 +3834,35 @@
         "/game/patterns/component-and-ecs.html",
         "/guide/low-level/engine-architecture-ecs.html",
         "/guide/learning-paths.html"
+      ],
+      "difficulty": "advanced",
+      "importance": "useful"
+    },
+    {
+      "title": "Enhanced Barriers と Vulkan synchronization2 — 順序・アクセス・レイアウト",
+      "url": "/graphics/optimization/enhanced-barriers-and-synchronization2.html",
+      "file": "graphics/optimization/enhanced-barriers-and-synchronization2.md",
+      "domain": "graphics",
+      "section": "reference",
+      "format": "article",
+      "status": "published",
+      "summary": "Compute が書いた画像をピクセルシェーダーで読む例で、Direct3D 12 Enhanced Barriers と Vulkan 1.3 synchronization2 の指定を比較する。",
+      "source": "新規執筆",
+      "aliases": [
+        "Enhanced Barriers",
+        "ResourceBarrier",
+        "ID3D12GraphicsCommandList7",
+        "Vulkan synchronization2",
+        "VK_KHR_synchronization2",
+        "vkCmdPipelineBarrier2",
+        "Vulkan",
+        "VK"
+      ],
+      "verification": "Microsoft DirectX 12 Agility SDK 1.608 と Enhanced Barriers 仕様、Khronos Vulkan 1.3 synchronization2 の仕様に照合（2026-11-13）",
+      "links": [
+        "/graphics/optimization/d3d12-resource-barriers.html",
+        "/graphics/api/vulkan.html",
+        "/graphics/path/visibility-buffer.html"
       ],
       "difficulty": "advanced",
       "importance": "useful"
@@ -4219,6 +4513,35 @@
       "importance": "core"
     },
     {
+      "title": "GPUパーティクル — Computeで更新し、Indirectで描く",
+      "url": "/graphics/shader/gpu-particles.html",
+      "file": "graphics/shader/gpu-particles.md",
+      "domain": "graphics",
+      "section": "reference",
+      "format": "article",
+      "status": "published",
+      "summary": "粒子の寿命と空き枠を管理し、生存粒子の番号と描画引数をGPUで作る。描画前の同期と半透明粒子のソートも扱う。",
+      "source": "新規執筆",
+      "aliases": [
+        "GPU particle",
+        "パーティクルシステム",
+        "GPU粒子",
+        "Indirect描画",
+        "DrawIndirect",
+        "ExecuteIndirect",
+        "コンパクション"
+      ],
+      "verification": "MicrosoftのHLSLアトミック操作、Direct3D 12の間接描画とリソース状態、Khronosの合成式に照合（2026-11-13）",
+      "links": [
+        "/algorithms/sorting.html",
+        "/graphics/compute/compute-shader.html",
+        "/graphics/optimization/d3d12-resource-barriers.html",
+        "/graphics/pipeline/output-merger.html"
+      ],
+      "difficulty": "advanced",
+      "importance": "useful"
+    },
+    {
       "title": "GPU最適化の基礎",
       "url": "/graphics/optimization/basics.html",
       "file": "graphics/optimization/basics.md",
@@ -4317,7 +4640,10 @@
         "/graphics/pipeline/overview.html",
         "/graphics/shader/glsl.html",
         "/graphics/shader/spirv.html",
-        "/graphics/compute/compute-shader.html"
+        "/graphics/compute/compute-shader.html",
+        "/graphics/shader/shader-debugging.html",
+        "/graphics/shader/shader-optimization.html",
+        "/graphics/shader/modern-shader-technologies.html"
       ],
       "difficulty": "intermediate",
       "importance": "useful"
@@ -4349,6 +4675,37 @@
       "links": [
         "/browser/rendering-journey.html"
       ]
+    },
+    {
+      "title": "HTTPS・SVCBレコードとHTTP/3の発見 — 接続候補をDNSとHTTPから知る",
+      "url": "/network/https-svcb-and-http3-discovery.html",
+      "file": "network/https-svcb-and-http3-discovery.md",
+      "domain": "network",
+      "section": "reference",
+      "format": "article",
+      "status": "published",
+      "summary": "HTTPS・SVCBとAlt-Svcで接続候補を発見し、ALPN、オリジンの証明書、Happy Eyeballsが接続確立でどう関わるかを追う。",
+      "source": "新規執筆",
+      "aliases": [
+        "HTTPS RR",
+        "SVCB",
+        "Service Binding",
+        "HTTPSレコード",
+        "Alt-Svc",
+        "HTTP/3 discovery",
+        "Happy Eyeballs",
+        "ALPN",
+        "ipv4hint",
+        "ipv6hint"
+      ],
+      "verification": "RFC 9460・RFC 9114・RFC 7838・RFC 8305の接続候補の発見、ALPN、検証、接続試行に照合（2026-11-13）",
+      "links": [
+        "/network/dns-resolution.html",
+        "/network/quic-and-http3.html",
+        "/network/tls-https.html"
+      ],
+      "difficulty": "advanced",
+      "importance": "useful"
     },
     {
       "title": "HTTPキャッシュ — 保存・鮮度・再検証と304応答",
@@ -5008,6 +5365,34 @@
       "importance": "useful"
     },
     {
+      "title": "Nagle アルゴリズムと遅延 ACK — TCP の小さい送信を観察する",
+      "url": "/network/nagle-and-delayed-ack.html",
+      "file": "network/nagle-and-delayed-ack.md",
+      "domain": "network",
+      "section": "reference",
+      "format": "article",
+      "status": "published",
+      "summary": "小さい TCP 送信をまとめる Nagle と受信側の遅延 ACK を区別し、ゲームで TCP_NODELAY と送信単位を選ぶ根拠を整理する。",
+      "source": "新規執筆",
+      "aliases": [
+        "Nagle Algorithm",
+        "Delayed ACK",
+        "TCP_NODELAY",
+        "TCP Small Packet",
+        "MSS",
+        "遅延確認応答"
+      ],
+      "verification": "IETF RFC 896・1122・9293、Microsoft Winsock、Linux man-pages と Linux カーネル文書に照合（2026-11-13）",
+      "links": [
+        "/network/tcp-sockets.html",
+        "/network/udp-datagrams.html",
+        "/network/latency-throughput-and-queues.html",
+        "/game/network-sync.html"
+      ],
+      "difficulty": "advanced",
+      "importance": "useful"
+    },
+    {
       "title": "NATとポート変換",
       "url": "/network/nat-and-port-mapping.html",
       "file": "network/nat-and-port-mapping.md",
@@ -5075,6 +5460,31 @@
       "importance": "specialized"
     },
     {
+      "title": "Null Objectパターン — 任意の機能を何もしない実装で表す",
+      "url": "/design/patterns/null-object.html",
+      "file": "design/patterns/null-object.md",
+      "domain": "design",
+      "section": "reference",
+      "format": "article",
+      "status": "published",
+      "summary": "任意の通知先を何もしない実装へ差し替え、ゲームルールを同じ経路で実行する。欠落をエラーにすべき場合も見分ける。",
+      "source": "新規執筆",
+      "aliases": [
+        "Null Object",
+        "Active Nothing",
+        "ヌルオブジェクト",
+        "No-op"
+      ],
+      "verification": "Bobby Woolfの原稿、C++20 N4861の仮想関数と参照に照合（2026-11-13）",
+      "links": [
+        "/design/foundations/dependency.html",
+        "/design/patterns/strategy.html",
+        "/design/patterns/observer.html"
+      ],
+      "difficulty": "intermediate",
+      "importance": "useful"
+    },
+    {
       "title": "Object Pool(通常のnew/deleteとの比較)",
       "url": "/game/patterns/object-pool.html",
       "file": "game/patterns/object-pool.md",
@@ -5121,6 +5531,7 @@
         "/game/patterns/event-queue-and-pubsub.html",
         "/design/case-studies/event-notification.html",
         "/design/patterns/mediator.html",
+        "/design/patterns/null-object.html",
         "/design/case-studies/ui-notification.html",
         "/design/patterns/memento.html",
         "/design/patterns/",
@@ -5236,7 +5647,10 @@
         "/graphics/postprocess/overview.html",
         "/math/rendering/vector.html",
         "/graphics/pipeline/fragment-shader.html",
-        "/graphics/lighting/shadow.html"
+        "/graphics/lighting/shadow.html",
+        "/graphics/shader/brdf-internals.html",
+        "/graphics/shader/normal-mapping.html",
+        "/graphics/shader/extended-material-models.html"
       ],
       "difficulty": "intermediate",
       "importance": "core"
@@ -5417,7 +5831,8 @@
         "/network/tcp-sockets.html",
         "/network/latency-throughput-and-queues.html",
         "/practice/network/stream-loss-observation.html",
-        "/network/nat-and-port-mapping.html"
+        "/network/nat-and-port-mapping.html",
+        "/network/https-svcb-and-http3-discovery.html"
       ],
       "difficulty": "advanced",
       "importance": "useful"
@@ -5560,6 +5975,62 @@
       ],
       "difficulty": "advanced",
       "importance": "specialized"
+    },
+    {
+      "title": "Sampler Feedbackとテクスチャストリーミング — 必要なミップをGPUで記録する",
+      "url": "/graphics/texture/sampler-feedback.html",
+      "file": "graphics/texture/sampler-feedback.md",
+      "domain": "graphics",
+      "section": "reference",
+      "format": "article",
+      "status": "published",
+      "summary": "Direct3D 12のSampler Feedbackでテクスチャの領域ごとに必要なミップを記録し、常駐するタイルと照合してストリーミングに使う。",
+      "source": "新規執筆",
+      "aliases": [
+        "Sampler Feedback",
+        "サンプラーフィードバック",
+        "Sampler Feedback Streaming",
+        "SFS",
+        "ミップストリーミング",
+        "タイルストリーミング",
+        "MinMip",
+        "MipRegionUsed"
+      ],
+      "verification": "MicrosoftのDirect3D 12 Sampler Feedback、Shader Model 6.5、機能照会とUAV作成の資料に照合（2026-11-13）",
+      "links": [
+        "/graphics/texture/texture-filtering-and-mipmaps.html",
+        "/graphics/optimization/d3d12-resource-barriers.html",
+        "/game/asset-loading.html"
+      ],
+      "difficulty": "advanced",
+      "importance": "specialized"
+    },
+    {
+      "title": "SDF とレイマーチング — 距離を使って形状・影・AO を描く",
+      "url": "/graphics/shader/sdf-and-raymarching.html",
+      "file": "graphics/shader/sdf-and-raymarching.md",
+      "domain": "graphics",
+      "section": "reference",
+      "format": "article",
+      "status": "published",
+      "summary": "符号付き距離関数を合成し、球面追跡のステップを決める。ソフトシャドウと AO の近似も扱う。",
+      "source": "新規執筆",
+      "aliases": [
+        "符号付き距離関数",
+        "Signed Distance Function",
+        "レイマーチング",
+        "球面追跡",
+        "sphere tracing"
+      ],
+      "verification": "Hart の球面追跡原論文と Quilez の実装資料、HLSL Shader Model 6.0（2026-11-13）",
+      "links": [
+        "/practice/graphics/shader-lab.html",
+        "/graphics/lighting/raytracing.html",
+        "/graphics/lighting/ssao.html",
+        "/graphics/shader/volumetrics.html"
+      ],
+      "difficulty": "advanced",
+      "importance": "useful"
     },
     {
       "title": "Service Locator と Dependency Injection(比較)",
@@ -6134,6 +6605,7 @@
         "/design/foundations/inheritance-delegation-composition.html",
         "/design/patterns/strategy.html",
         "/design/patterns/factory-method.html",
+        "/languages/cpp/crtp.html",
         "/design/patterns/",
         "/design/patterns/visitor.html"
       ],
@@ -6500,6 +6972,34 @@
       ]
     },
     {
+      "title": "Unityの非同期処理 — Awaitable・UniTaskとライフサイクル",
+      "url": "/game/unity-async.html",
+      "file": "game/unity-async.md",
+      "domain": "game",
+      "section": "reference",
+      "format": "article",
+      "status": "published",
+      "summary": "Unityで処理を待つ位置、再開するスレッド、ゲームオブジェクトの破棄やプレイ終了時のキャンセルを扱う。",
+      "source": "新規執筆",
+      "aliases": [
+        "Unity async",
+        "Unity Awaitable",
+        "UniTask",
+        "PlayerLoop",
+        "CancellationToken",
+        "メインスレッド",
+        "destroyCancellationToken"
+      ],
+      "verification": "Unity 6.3 LTSのAwaitableとMonoBehaviourのAPI、Cysharp UniTask 2.5.11の資料に照合（2026-11-13）",
+      "links": [
+        "/os/asynchronous-file-io.html",
+        "/game/asset-loading.html",
+        "/runtime/jobs-and-work-stealing.html"
+      ],
+      "difficulty": "advanced",
+      "importance": "useful"
+    },
+    {
       "title": "Unity実践 — キーボードとゲームパッドでPlayerを動かす",
       "url": "/practice/unity/input-health-demo.html",
       "file": "practice/unity/input-health-demo.md",
@@ -6779,6 +7279,33 @@
       ],
       "difficulty": "intermediate",
       "importance": "core"
+    },
+    {
+      "title": "Visibility Buffer と Deferred Texturing — 可視面から材質を復元する",
+      "url": "/graphics/path/visibility-buffer.html",
+      "file": "graphics/path/visibility-buffer.md",
+      "domain": "graphics",
+      "section": "reference",
+      "format": "article",
+      "status": "published",
+      "summary": "可視ピクセルに三角形の ID を記録し、後段で属性とテクスチャを評価する。Forward・Deferred・Nanite の例と比較する。",
+      "source": "新規執筆",
+      "aliases": [
+        "Visibility Buffer",
+        "VisBuffer",
+        "Deferred Texturing",
+        "Deferred Material Evaluation",
+        "可視性バッファー",
+        "Nanite"
+      ],
+      "verification": "Burns・Hunt（2013）、Epic Games の Nanite 講演（2021）と Unreal Engine 5.8 公式資料、Microsoft HLSL リファレンスに照合（2026-11-13）",
+      "links": [
+        "/graphics/path/forward.html",
+        "/graphics/path/deferred.html",
+        "/graphics/texture/texture-filtering-and-mipmaps.html"
+      ],
+      "difficulty": "advanced",
+      "importance": "specialized"
     },
     {
       "title": "Visitor",
@@ -7778,6 +8305,36 @@
       "importance": "specialized"
     },
     {
+      "title": "WebGPUでシェーダーの出力を比べる",
+      "url": "/practice/graphics/shader-lab.html",
+      "file": "practice/graphics/shader-lab.md",
+      "domain": "graphics",
+      "section": "practice",
+      "format": "sample",
+      "status": "published",
+      "summary": "法線、GGX、露出、ノイズ、トゥーン、距離関数、水面のパラメーターを動かし、同じ座標で何が変わるかを見る。",
+      "source": "新規執筆",
+      "aliases": [
+        "WebGPU",
+        "WGSL",
+        "シェーダー実践",
+        "シェーダーのパラメーター"
+      ],
+      "collection": "shader-lab",
+      "order": 1,
+      "links": [
+        "/graphics/shader/normal-mapping.html",
+        "/graphics/shader/brdf-internals.html",
+        "/graphics/shader/color-space-and-hdr.html",
+        "/graphics/shader/procedural-noise.html",
+        "/graphics/shader/toon-and-npr.html",
+        "/graphics/shader/sdf-and-raymarching.html",
+        "/graphics/shader/water-shading.html",
+        "/learn/roadmap.html",
+        "/graphics/shader/wgsl.html"
+      ]
+    },
+    {
       "title": "WGSL",
       "url": "/graphics/shader/wgsl.html",
       "file": "graphics/shader/wgsl.md",
@@ -7793,7 +8350,8 @@
         "/graphics/shader/overview.html",
         "/graphics/shader/spirv.html",
         "/graphics/shader/hlsl.html",
-        "/graphics/shader/glsl.html"
+        "/graphics/shader/glsl.html",
+        "/practice/graphics/shader-lab.html"
       ],
       "difficulty": "advanced",
       "importance": "specialized"
@@ -7955,7 +8513,8 @@
         "/os/process-startup.html",
         "/os/system-calls-and-privilege.html",
         "/runtime/thread-synchronization.html",
-        "/graphics/optimization/frame-pacing.html"
+        "/graphics/optimization/frame-pacing.html",
+        "/hardware/cpu/hybrid-cpu-scheduling.html"
       ],
       "difficulty": "intermediate",
       "importance": "useful"
@@ -8392,9 +8951,38 @@
         "/practice/graphics/frame-generation-observation.html",
         "/graphics/postprocess/overview.html",
         "/graphics/lighting/path-tracing.html",
-        "/learn/roadmap.html"
+        "/learn/roadmap.html",
+        "/graphics/path/neural-rendering.html"
       ],
       "difficulty": "advanced",
+      "importance": "useful"
+    },
+    {
+      "title": "アニメーションシステム — クリップの選択から GPU スキニングまで",
+      "url": "/graphics/basics/animation-systems.html",
+      "file": "graphics/basics/animation-systems.md",
+      "domain": "graphics",
+      "section": "reference",
+      "format": "article",
+      "status": "published",
+      "summary": "ゲームの状態と移動速度から姿勢を作り、IK・ルートモーション・GPU スキニングを通してキャラクターを描く。",
+      "source": "新規執筆",
+      "aliases": [
+        "Animation System",
+        "アニメーションステートマシン",
+        "ブレンドツリー",
+        "IK",
+        "ルートモーション",
+        "GPU スキニング"
+      ],
+      "verification": "Unity 6.3 LTS・Animation Rigging 1.4.1、Unreal Engine 5.8、glTF 2.0、HLSL Shader Model 6.0（2026-11-13）",
+      "links": [
+        "/math/rendering/interpolation-and-curves.html",
+        "/graphics/basics/keyframes-and-animation.html",
+        "/graphics/basics/rigs-and-skinning.html",
+        "/graphics/compute/compute-shader.html"
+      ],
+      "difficulty": "intermediate",
       "importance": "useful"
     },
     {
@@ -8629,6 +9217,35 @@
       "importance": "useful"
     },
     {
+      "title": "カメラシステム — 追従・衝突回避・画面揺れを組み合わせる",
+      "url": "/game/camera-system.html",
+      "file": "game/camera-system.md",
+      "domain": "game",
+      "section": "reference",
+      "format": "article",
+      "status": "published",
+      "summary": "追従目標と表示用の姿勢を分け、臨界減衰のばね、衝突を避けるアーム、短時間の揺れを同じ更新で扱う。",
+      "source": "新規執筆",
+      "aliases": [
+        "カメラシステム",
+        "追従カメラ",
+        "camera rig",
+        "camera lag",
+        "critically damped spring",
+        "camera collision",
+        "screen shake"
+      ],
+      "verification": "Ryan Juckettの減衰ばねの導出、Cinemachine 3.1とUnreal Engine 5.8のカメラ資料に照合（2026-11-13）",
+      "links": [
+        "/graphics/basics/transforms-and-cameras.html",
+        "/design/case-studies/aim-control.html",
+        "/math/rendering/interpolation-and-curves.html",
+        "/math/physics-integration-and-collision.html"
+      ],
+      "difficulty": "intermediate",
+      "importance": "useful"
+    },
+    {
       "title": "カメラと射影",
       "url": "/math/rendering/camera.html",
       "file": "math/rendering/camera.md",
@@ -8682,6 +9299,7 @@
       "links": [
         "/game/basics/game-loop-and-time.html",
         "/math/rendering/quaternion.html",
+        "/graphics/basics/animation-systems.html",
         "/graphics/basics/rigs-and-skinning.html",
         "/graphics/basics/transforms-and-cameras.html",
         "/math/rendering/interpolation-and-curves.html"
@@ -8988,7 +9606,8 @@
         "/graphics/lighting/lumen.html",
         "/graphics/lighting/pbr.html",
         "/graphics/lighting/ibl.html",
-        "/graphics/lighting/shadow.html"
+        "/graphics/lighting/shadow.html",
+        "/graphics/lighting/many-light-sampling.html"
       ],
       "difficulty": "intermediate",
       "importance": "core"
@@ -9066,6 +9685,32 @@
       ]
     },
     {
+      "title": "ゲーム AI の意思決定 — Utility AI・GOAP・Behavior Tree を選ぶ",
+      "url": "/game/ai-decision-making.html",
+      "file": "game/ai-decision-making.md",
+      "domain": "game",
+      "section": "reference",
+      "format": "article",
+      "status": "published",
+      "summary": "観測結果から次の行動や行動列を決める三つの方法を、同じ NPC の例と再計画の条件で比べる。",
+      "source": "新規執筆",
+      "aliases": [
+        "ゲームAI",
+        "Utility AI",
+        "GOAP",
+        "Goal-Oriented Action Planning",
+        "Behavior Tree"
+      ],
+      "verification": "Mark・Dill（GDC 2010）、Orkin（GDC 2006）、Unreal Engine 5.8 Behavior Tree、C++20（2026-11-13）",
+      "links": [
+        "/algorithms/pathfinding.html",
+        "/game/patterns/behavior-tree-and-blackboard.html",
+        "/game/patterns/state-machines.html"
+      ],
+      "difficulty": "intermediate",
+      "importance": "useful"
+    },
+    {
       "title": "ゲームUIの基本 — 表示・配置・操作をつなぐ",
       "url": "/game/basics/ui-layout-and-interaction.html",
       "file": "game/basics/ui-layout-and-interaction.md",
@@ -9096,7 +9741,8 @@
         "/game/basics/input-actions-and-devices.html",
         "/game/basics/game-states-and-pause.html",
         "/game/basics/scenes-and-components.html",
-        "/graphics/basics/transforms-and-cameras.html"
+        "/graphics/basics/transforms-and-cameras.html",
+        "/game/localization-design.html"
       ],
       "difficulty": "intro",
       "importance": "useful"
@@ -9133,10 +9779,41 @@
         "/game/basics/game-loop-and-time.html",
         "/graphics/basics/models-and-meshes.html",
         "/graphics/basics/transforms-and-cameras.html",
-        "/game/shooter-design.html"
+        "/game/shooter-design.html",
+        "/game/game-audio-systems.html"
       ],
       "difficulty": "intro",
       "importance": "core"
+    },
+    {
+      "title": "ゲームオーディオの仕組み — イベント・ボイス管理・3D 音響",
+      "url": "/game/game-audio-systems.html",
+      "file": "game/game-audio-systems.md",
+      "domain": "game",
+      "section": "reference",
+      "format": "article",
+      "status": "published",
+      "summary": "ゲームのイベントから音が出るまでを追い、Wwise と FMOD、実ボイスと仮想ボイス、3D の位置・距離・遮蔽を整理する。",
+      "source": "新規執筆",
+      "aliases": [
+        "Game Audio",
+        "Wwise",
+        "FMOD",
+        "Audio Voice",
+        "Virtual Voice",
+        "Voice Stealing",
+        "Spatial Audio"
+      ],
+      "verification": "Audiokinetic Wwise 2024.1 教材と公式技術資料、FMOD Studio / Engine 2.04 マニュアルに照合（2026-11-13）",
+      "links": [
+        "/browser/audio-spatial-panning.html",
+        "/browser/audio-occlusion.html",
+        "/design/case-studies/sound-manager.html",
+        "/game/asset-loading.html",
+        "/browser/audio-mixing-and-headroom.html"
+      ],
+      "difficulty": "intermediate",
+      "importance": "useful"
     },
     {
       "title": "ゲームのアセットビルドと差分配信",
@@ -9211,7 +9888,10 @@
         "/practice/threads/asset-worker-handoff-observation.html",
         "/practice/assets/asset-lifecycle-model.html",
         "/practice/io/file-read-observation.html",
-        "/practice/io/async-file-read-observation.html"
+        "/practice/io/async-file-read-observation.html",
+        "/game/world-streaming.html",
+        "/game/unity-async.html",
+        "/data/compression-basics.html"
       ],
       "difficulty": "advanced",
       "importance": "core"
@@ -9287,6 +9967,7 @@
         "/game/basics/game-loop-and-time.html",
         "/network/udp-datagrams.html",
         "/network/latency-throughput-and-queues.html",
+        "/languages/cpp/floating-point-determinism.html",
         "/game/basics/collisions-and-physics.html",
         "/game/ecs.html"
       ],
@@ -9700,7 +10381,8 @@
         "/graphics/optimization/frame-pacing.html",
         "/graphics/optimization/gpu-timestamp-queries.html",
         "/graphics/optimization/tools.html",
-        "/game/asset-loading.html"
+        "/game/asset-loading.html",
+        "/graphics/shader/shader-variants.html"
       ],
       "difficulty": "intermediate",
       "importance": "useful"
@@ -9733,6 +10415,34 @@
         "/graphics/shader/shader-first-steps.html",
         "/graphics/shader/shader-inputs-and-uniforms.html"
       ]
+    },
+    {
+      "title": "シェーダーのデバッグ — 値の可視化と NaN の追跡",
+      "url": "/graphics/shader/shader-debugging.html",
+      "file": "graphics/shader/shader-debugging.md",
+      "domain": "graphics",
+      "section": "reference",
+      "format": "article",
+      "status": "published",
+      "summary": "RenderDoc と PIX で描画の入力を調べ、途中の値を色へ写して NaN と無限大が最初に発生した場所を追う。",
+      "source": "新規執筆",
+      "aliases": [
+        "Shader Debugging",
+        "RenderDoc",
+        "PIX",
+        "GPU Capture",
+        "Pixel History",
+        "NaN",
+        "無限大"
+      ],
+      "verification": "RenderDoc v1.47、PIX 2610.28、Microsoft HLSL リファレンスと DirectX Shader Compiler の資料に照合（2026-11-13）",
+      "links": [
+        "/graphics/shader/hlsl.html",
+        "/graphics/shader/shader-inputs-and-uniforms.html",
+        "/graphics/shader/normal-mapping.html"
+      ],
+      "difficulty": "intermediate",
+      "importance": "core"
     },
     {
       "title": "シェーダーの第一歩 — 頂点から三角形の色を作る",
@@ -9772,6 +10482,34 @@
       "importance": "core"
     },
     {
+      "title": "シェーダーバリアントの管理 — コンパイルの組み合わせを減らす",
+      "url": "/graphics/shader/shader-variants.html",
+      "file": "graphics/shader/shader-variants.md",
+      "domain": "graphics",
+      "section": "reference",
+      "format": "article",
+      "status": "published",
+      "summary": "静的な機能の組み合わせが増える理由を数え、UnityのキーワードとUnreal Engineのパーミュテーションをビルド単位で管理する。",
+      "source": "新規執筆",
+      "aliases": [
+        "シェーダーバリアント",
+        "shader variant",
+        "シェーダーパーミュテーション",
+        "shader permutation",
+        "shader_feature",
+        "multi_compile",
+        "stripping"
+      ],
+      "verification": "Unity 6.3 LTSのシェーダーキーワードとストリッピング、Unreal Engine 5.8のパーミュテーションAPIとコンパイル資料、MicrosoftのHLSLプリプロセッサーに照合（2026-11-13）",
+      "links": [
+        "/graphics/optimization/pipeline-compilation-stutter.html",
+        "/graphics/shader/hlsl.html",
+        "/tools/profiling/cpu-profiling.html"
+      ],
+      "difficulty": "advanced",
+      "importance": "useful"
+    },
+    {
       "title": "シェーダーへ渡すデータ — 頂点属性・uniform・テクスチャ",
       "url": "/graphics/shader/shader-inputs-and-uniforms.html",
       "file": "graphics/shader/shader-inputs-and-uniforms.md",
@@ -9808,6 +10546,31 @@
       "importance": "core"
     },
     {
+      "title": "シェーダー最適化の実践 — 精度・分岐・フェッチを計測する",
+      "url": "/graphics/shader/shader-optimization.html",
+      "file": "graphics/shader/shader-optimization.md",
+      "domain": "graphics",
+      "section": "reference",
+      "format": "article",
+      "status": "published",
+      "summary": "GPU 時間とプロファイラーの指標から、演算・テクスチャ・帯域・分岐のどこを調べるか決める。",
+      "source": "新規執筆",
+      "aliases": [
+        "シェーダー最適化",
+        "half 精度",
+        "ダイバージェンス",
+        "GPU 帯域"
+      ],
+      "verification": "HLSL Shader Model 6.2 の 16 ビット型、AMD RDNA Performance Guide、Nsight Graphics Shader Profiler（2026-11-13）",
+      "links": [
+        "/graphics/optimization/tools.html",
+        "/graphics/optimization/basics.html",
+        "/graphics/shader/hlsl.html"
+      ],
+      "difficulty": "advanced",
+      "importance": "core"
+    },
+    {
       "title": "シェーダ言語総論と比較",
       "url": "/graphics/shader/overview.html",
       "file": "graphics/shader/overview.md",
@@ -9826,7 +10589,25 @@
         "/graphics/pipeline/overview.html",
         "/graphics/shader/hlsl.html",
         "/graphics/shader/glsl.html",
-        "/graphics/shader/msl.html"
+        "/graphics/shader/msl.html",
+        "/learn/roadmap.html",
+        "/practice/graphics/shader-lab.html",
+        "/graphics/shader/normal-mapping.html",
+        "/graphics/shader/brdf-internals.html",
+        "/graphics/shader/color-space-and-hdr.html",
+        "/graphics/shader/procedural-noise.html",
+        "/graphics/shader/shader-debugging.html",
+        "/graphics/shader/toon-and-npr.html",
+        "/graphics/shader/parallax-and-decals.html",
+        "/graphics/shader/vertex-effects.html",
+        "/graphics/shader/gpu-particles.html",
+        "/graphics/shader/shader-variants.html",
+        "/graphics/shader/extended-material-models.html",
+        "/graphics/shader/sdf-and-raymarching.html",
+        "/graphics/shader/volumetrics.html",
+        "/graphics/shader/water-shading.html",
+        "/graphics/shader/shader-optimization.html",
+        "/graphics/shader/modern-shader-technologies.html"
       ],
       "difficulty": "intermediate",
       "importance": "useful"
@@ -9947,6 +10728,35 @@
         "/game/shooter-unity.html",
         "/game/patterns/game-loop-and-update.html"
       ]
+    },
+    {
+      "title": "ジョブシステムとワークスティーリング — 依存グラフをワーカーで実行する",
+      "url": "/runtime/jobs-and-work-stealing.html",
+      "file": "runtime/jobs-and-work-stealing.md",
+      "domain": "runtime",
+      "section": "reference",
+      "format": "article",
+      "status": "published",
+      "summary": "ジョブの前提が終わると実行可能になる仕組みと、ワーカー間の負荷の偏りを仕事の移動で解消する方法を追う。",
+      "source": "新規執筆",
+      "aliases": [
+        "ジョブシステム",
+        "job system",
+        "work stealing",
+        "ワークスティーリング",
+        "タスクグラフ",
+        "TaskGraph",
+        "スレッドプール",
+        "JobHandle"
+      ],
+      "verification": "BlumofeとLeisersonのワークスティーリングの原論文、C++20最終草案、Unity 6.3 LTSとUnreal Engine 5.8の公式資料に照合（2026-11-13）",
+      "links": [
+        "/runtime/thread-synchronization.html",
+        "/algorithms/queues-and-deques.html",
+        "/tools/profiling/cpu-profiling.html"
+      ],
+      "difficulty": "advanced",
+      "importance": "useful"
     },
     {
       "title": "シンボル・名前修飾・リンケージ・ABI",
@@ -10144,7 +10954,10 @@
         "/practice/threads/inventory-synchronization.html",
         "/runtime/bounded-worker-queues.html",
         "/practice/threads/asset-worker-handoff-observation.html",
-        "/browser/shared-memory-atomics.html"
+        "/browser/shared-memory-atomics.html",
+        "/languages/cpp/memory-model.html",
+        "/runtime/lock-free-basics.html",
+        "/runtime/jobs-and-work-stealing.html"
       ],
       "difficulty": "intermediate",
       "importance": "core"
@@ -10290,6 +11103,35 @@
       "importance": "core"
     },
     {
+      "title": "ソート — イントロソート・基数ソート・GPU の描画順",
+      "url": "/algorithms/sorting.html",
+      "file": "algorithms/sorting.md",
+      "domain": "algorithms",
+      "section": "reference",
+      "format": "article",
+      "status": "published",
+      "summary": "比較ソートと整数キーの基数ソートを比べ、安定性と GPU での半透明描画順に結びつける。",
+      "source": "新規執筆",
+      "aliases": [
+        "Sort",
+        "Sorting",
+        "Introsort",
+        "Radix Sort",
+        "Stable Sort",
+        "GPU Sort",
+        "基数ソート",
+        "安定ソート"
+      ],
+      "verification": "WG21 C++20 N4861、Musser（1997）、Satish・Harris・Garland（2009）、Microsoft のブレンド式に照合（2026-11-13）",
+      "links": [
+        "/algorithms/binary-heaps.html",
+        "/graphics/compute/compute-shader.html",
+        "/graphics/shader/gpu-particles.html"
+      ],
+      "difficulty": "intermediate",
+      "importance": "useful"
+    },
+    {
       "title": "ソケットとTCP通信 — send/recvの内部とメッセージ境界",
       "url": "/network/tcp-sockets.html",
       "file": "network/tcp-sockets.md",
@@ -10337,7 +11179,8 @@
         "/network/dns-resolution.html",
         "/network/tls-https.html",
         "/network/ip-routing-and-ethernet.html",
-        "/practice/network/tcp-loopback-observation.html"
+        "/practice/network/tcp-loopback-observation.html",
+        "/network/nagle-and-delayed-ack.html"
       ],
       "difficulty": "intermediate",
       "importance": "core"
@@ -10459,7 +11302,9 @@
         "/game/asset-pack-files.html",
         "/game/directstorage.html",
         "/graphics/texture/d3d12-texture-upload.html",
-        "/game/asset-loading.html"
+        "/game/asset-loading.html",
+        "/graphics/texture/sampler-feedback.html",
+        "/graphics/texture/terrain-and-virtual-texturing.html"
       ],
       "difficulty": "advanced",
       "importance": "specialized"
@@ -10547,10 +11392,38 @@
         "/graphics/optimization/basics.html",
         "/graphics/pipeline/overview.html",
         "/graphics/capstone/01-design.html",
-        "/tools/profiling/cpu-profiling.html"
+        "/tools/profiling/cpu-profiling.html",
+        "/graphics/shader/shader-debugging.html",
+        "/graphics/shader/shader-optimization.html"
       ],
       "difficulty": "intermediate",
       "importance": "core"
+    },
+    {
+      "title": "デメテルの法則 — 相手の内部構造を知らずに仕事を頼む",
+      "url": "/design/foundations/law-of-demeter.html",
+      "file": "design/foundations/law-of-demeter.md",
+      "domain": "design",
+      "section": "reference",
+      "format": "article",
+      "status": "published",
+      "summary": "オブジェクトの奥をたどる呼び出しを見直し、Facade・Mediator・DIPが扱う結合との違いを整理する。",
+      "source": "新規執筆",
+      "aliases": [
+        "Law of Demeter",
+        "LoD",
+        "Principle of Least Knowledge",
+        "最小知識の原則"
+      ],
+      "verification": "Lieberherr・Holland・RielのOOPSLA 1988論文とLieberherrの解説に照合（2026-11-13）",
+      "links": [
+        "/design/foundations/dependency.html",
+        "/design/patterns/facade.html",
+        "/design/patterns/mediator.html",
+        "/design/solid/dip.html"
+      ],
+      "difficulty": "intermediate",
+      "importance": "useful"
     },
     {
       "title": "テンプレートと concepts",
@@ -10572,6 +11445,8 @@
         "/game/patterns/object-pool.html",
         "/game/patterns/component-and-ecs.html",
         "/languages/csharp/templates-vs-generics.html",
+        "/languages/cpp/cpp26-features.html",
+        "/languages/cpp/explicit-object-and-expected.html",
         "/languages/cpp/overloading.html",
         "/languages/cpp/",
         "/languages/cpp/lambdas-and-functions.html"
@@ -10627,6 +11502,36 @@
       "importance": "useful"
     },
     {
+      "title": "トゥーンとNPR — 陰影の段と輪郭線を描き分ける",
+      "url": "/graphics/shader/toon-and-npr.html",
+      "file": "graphics/shader/toon-and-npr.md",
+      "domain": "graphics",
+      "section": "reference",
+      "format": "article",
+      "status": "published",
+      "summary": "拡散光を色帯に変換するランプ、リムライト、背面法と画面空間のアウトラインを描画工程ごとに比較する。",
+      "source": "新規執筆",
+      "aliases": [
+        "トゥーンシェーディング",
+        "セルシェーディング",
+        "NPR",
+        "toon shading",
+        "ランプテクスチャ",
+        "背面法",
+        "inverted hull",
+        "リムライト"
+      ],
+      "verification": "Goochらの技術イラストの原論文、MicrosoftのHLSLとDirect3D 12の面カリングの仕様に照合（2026-11-13）",
+      "links": [
+        "/practice/graphics/shader-lab.html",
+        "/graphics/pipeline/fragment-shader.html",
+        "/graphics/shader/vertex-effects.html",
+        "/graphics/postprocess/antialiasing.html"
+      ],
+      "difficulty": "intermediate",
+      "importance": "useful"
+    },
+    {
       "title": "トークン・AST・型検査 — C++のソースを読み解く",
       "url": "/compilers/tokens-ast-and-type-checking.html",
       "file": "compilers/tokens-ast-and-type-checking.md",
@@ -10658,6 +11563,32 @@
       ],
       "difficulty": "intermediate",
       "importance": "core"
+    },
+    {
+      "title": "ニューラルレンダリング — フレームを再構成する推論とシェーダー内の推論",
+      "url": "/graphics/path/neural-rendering.html",
+      "file": "graphics/path/neural-rendering.md",
+      "domain": "graphics",
+      "section": "reference",
+      "format": "article",
+      "status": "published",
+      "summary": "DLSS の Transformer と、材質・照明を小さなネットワークで評価するニューラルシェーディングを入出力から区別する。",
+      "source": "新規執筆",
+      "aliases": [
+        "Neural Rendering",
+        "ニューラルシェーディング",
+        "DLSS 4",
+        "ニューラル材質"
+      ],
+      "verification": "NVIDIA DLSS 4・4.5、RTX Kit 2026.3、D3D12 Shader Model 6.10 Preview、HLSL Shader Model 6.0（2026-11-13）",
+      "links": [
+        "/graphics/postprocess/upscaling.html",
+        "/graphics/postprocess/frame-generation.html",
+        "/graphics/shader/modern-shader-technologies.html",
+        "/graphics/lighting/path-tracing.html"
+      ],
+      "difficulty": "advanced",
+      "importance": "specialized"
     },
     {
       "title": "ネイティブビルドと IL2CPP",
@@ -10785,6 +11716,35 @@
       "importance": "useful"
     },
     {
+      "title": "ノイズと手続き的テクスチャ — 格子・fBm・ドメインワープ",
+      "url": "/graphics/shader/procedural-noise.html",
+      "file": "graphics/shader/procedural-noise.md",
+      "domain": "graphics",
+      "section": "reference",
+      "format": "article",
+      "status": "published",
+      "summary": "格子のハッシュから値ノイズ、Perlin、Simplex の違いを整理し、fBm とドメインワープを HLSL で比較する。",
+      "source": "新規執筆",
+      "aliases": [
+        "Procedural Noise",
+        "Value Noise",
+        "Perlin Noise",
+        "Simplex Noise",
+        "fBm",
+        "Fractal Brownian Motion",
+        "Domain Warp"
+      ],
+      "verification": "Ken Perlin の参照実装、Ashima Arts と Stefan Gustavson の 2D Simplex 実装、NVIDIA GPU Gems 3 に照合（2026-11-13）",
+      "links": [
+        "/practice/graphics/shader-lab.html",
+        "/graphics/shader/hlsl.html",
+        "/graphics/texture/texture-filtering-and-mipmaps.html",
+        "/graphics/shader/shader-debugging.html"
+      ],
+      "difficulty": "intermediate",
+      "importance": "useful"
+    },
+    {
       "title": "ハードウェアレイトレーシング (DXR / Vulkan Ray Tracing)",
       "url": "/graphics/lighting/raytracing.html",
       "file": "graphics/lighting/raytracing.md",
@@ -10841,10 +11801,39 @@
         "/data/integer-bits-and-bytes.html",
         "/runtime/cpp-internals/memory-layout.html",
         "/game/asset-loading.html",
-        "/practice/io/asset-pack-observation.html"
+        "/practice/io/asset-pack-observation.html",
+        "/data/hashes-and-checksums.html"
       ],
       "difficulty": "intermediate",
       "importance": "core"
+    },
+    {
+      "title": "ハイブリッドCPUのスケジューリング — コアの特性とスレッドの待ち時間",
+      "url": "/hardware/cpu/hybrid-cpu-scheduling.html",
+      "file": "hardware/cpu/hybrid-cpu-scheduling.md",
+      "domain": "hardware",
+      "section": "reference",
+      "format": "article",
+      "status": "published",
+      "summary": "PコアとEコア、Thread Director、WindowsのCPU Setsとタイマー分解能を分け、フレームの待ち時間を切り分ける。",
+      "source": "新規執筆",
+      "aliases": [
+        "Pコア",
+        "Eコア",
+        "ハイブリッドCPU",
+        "Intel Thread Director",
+        "EfficiencyClass",
+        "CPU Sets",
+        "timeBeginPeriod"
+      ],
+      "verification": "Intel第12世代Coreの開発資料、Windows 10/11 CPU Sets、Windows 11のタイマー動作に照合（2026-11-13）",
+      "links": [
+        "/os/thread-scheduling.html",
+        "/runtime/jobs-and-work-stealing.html",
+        "/tools/profiling/cpu-profiling.html"
+      ],
+      "difficulty": "advanced",
+      "importance": "useful"
     },
     {
       "title": "パケットが欠けたときのTCPとQUICの配送を比べる",
@@ -10934,6 +11923,37 @@
       "importance": "core"
     },
     {
+      "title": "ハッシュとチェックサム — アセットの識別と破損検出を分ける",
+      "url": "/data/hashes-and-checksums.html",
+      "file": "data/hashes-and-checksums.md",
+      "domain": "data",
+      "section": "reference",
+      "format": "article",
+      "status": "published",
+      "summary": "CRC・xxHash・SHA-256の用途を比べ、アセットの内容と変換条件からキャッシュキーを作る。",
+      "source": "新規執筆",
+      "aliases": [
+        "CRC",
+        "CRC-32",
+        "CRC-32C",
+        "xxHash",
+        "XXH3",
+        "SHA-256",
+        "チェックサム",
+        "content hash",
+        "アセット識別子"
+      ],
+      "verification": "RFC 1952、xxHash公式仕様、NIST FIPS 180-4とSP 800-107 Rev.1に照合（2026-11-13）",
+      "links": [
+        "/algorithms/hash-tables.html",
+        "/data/binary-file-validation.html",
+        "/data/compression-basics.html",
+        "/game/asset-loading.html"
+      ],
+      "difficulty": "intermediate",
+      "importance": "useful"
+    },
+    {
       "title": "ビデオゲーム史 — 遊び・ハード・作り方の変化をつなぐ",
       "url": "/history/video-games.html",
       "file": "history/video-games.md",
@@ -10977,6 +11997,8 @@
         "/design/foundations/dependency.html",
         "/languages/csharp/headers-vs-asmdef.html",
         "/game/unreal/build-system-ubt.html",
+        "/tools/automated-testing.html",
+        "/tools/ci-and-build-automation.html",
         "/tools/build/compilers.html",
         "/tools/build/",
         "/tools/build/build-configurations.html"
@@ -11688,6 +12710,33 @@
       "importance": "core"
     },
     {
+      "title": "ボリューメトリック — 高さフォグ・フロクセル・雲と大気",
+      "url": "/graphics/shader/volumetrics.html",
+      "file": "graphics/shader/volumetrics.md",
+      "domain": "graphics",
+      "section": "reference",
+      "format": "article",
+      "status": "published",
+      "summary": "視線上の減衰と散乱を積分し、霧・雲・大気の計算とフロクセルによる共有を理解する。",
+      "source": "新規執筆",
+      "aliases": [
+        "ボリューメトリックフォグ",
+        "高さフォグ",
+        "フロクセル",
+        "froxel",
+        "参加媒質"
+      ],
+      "verification": "Hillaire の SIGGRAPH 2015 資料と大気散乱の原論文、HLSL Shader Model 6.0（2026-11-13）",
+      "links": [
+        "/graphics/shader/color-space-and-hdr.html",
+        "/graphics/shader/sdf-and-raymarching.html",
+        "/graphics/shader/procedural-noise.html",
+        "/graphics/shader/water-shading.html"
+      ],
+      "difficulty": "advanced",
+      "importance": "specialized"
+    },
+    {
       "title": "マテリアル・テクスチャ・シェーダーの基本",
       "url": "/graphics/basics/materials-textures-and-shaders.html",
       "file": "graphics/basics/materials-textures-and-shaders.md",
@@ -12324,6 +13373,66 @@
       "importance": "core"
     },
     {
+      "title": "ローカライズの設計 — 文字列テーブル・フォント・右から左の UI",
+      "url": "/game/localization-design.html",
+      "file": "game/localization-design.md",
+      "domain": "game",
+      "section": "reference",
+      "format": "article",
+      "status": "published",
+      "summary": "ロケールごとの文章と表示設定を分離し、書式・フォント・文字の並び・レイアウトを検証する。",
+      "source": "新規執筆",
+      "aliases": [
+        "Localization",
+        "L10n",
+        "Internationalization",
+        "i18n",
+        "String Table",
+        "Font Fallback",
+        "Bidi",
+        "RTL",
+        "Pseudolocalization"
+      ],
+      "verification": "Unicode 18.0 UAX",
+      "links": [
+        "/data/unicode-and-encoding.html",
+        "/practice/data/unicode-observation.html",
+        "/game/asset-loading.html"
+      ],
+      "difficulty": "intermediate",
+      "importance": "useful"
+    },
+    {
+      "title": "ロックフリーの基礎 — CAS・リングキュー・メモリー回収",
+      "url": "/runtime/lock-free-basics.html",
+      "file": "runtime/lock-free-basics.md",
+      "domain": "runtime",
+      "section": "reference",
+      "format": "article",
+      "status": "published",
+      "summary": "CAS と進行保証から、SPSC と MPMC のキュー設計、ABA 問題、ハザードポインターまでを整理する。",
+      "source": "新規執筆",
+      "aliases": [
+        "Lock-free",
+        "Wait-free",
+        "CAS",
+        "Compare-and-Swap",
+        "ABA 問題",
+        "SPSC",
+        "MPMC",
+        "Hazard Pointers"
+      ],
+      "verification": "C++20 最終作業草案 N4861、Michael・Scott（1996）、Michael（2004）、WG21 P2530R3 に照合（2026-11-13）",
+      "links": [
+        "/languages/cpp/memory-model.html",
+        "/runtime/thread-synchronization.html",
+        "/browser/spsc-ring-buffer.html",
+        "/runtime/bounded-worker-queues.html"
+      ],
+      "difficulty": "advanced",
+      "importance": "useful"
+    },
+    {
       "title": "ワーカーが準備したアセットを描画側へ渡す",
       "url": "/game/asset-worker-handoff.html",
       "file": "game/asset-worker-handoff.md",
@@ -12359,6 +13468,62 @@
       "importance": "specialized"
     },
     {
+      "title": "ワールドストリーミング — セルの先読み・有効化・解放",
+      "url": "/game/world-streaming.html",
+      "file": "game/world-streaming.md",
+      "domain": "game",
+      "section": "reference",
+      "format": "article",
+      "status": "published",
+      "summary": "広い世界をセルに分け、プレイヤーの移動に合わせて読み込みと有効化の予算を管理する。World Partition と Addressables の役割を比べる。",
+      "source": "新規執筆",
+      "aliases": [
+        "World Streaming",
+        "World Partition",
+        "Addressables",
+        "シーンストリーミング",
+        "加算シーンロード"
+      ],
+      "verification": "Unreal Engine 5.8 World Partition、Unity 6.3 LTS と Addressables 2.10.3、C++20（2026-11-13）",
+      "links": [
+        "/game/asset-loading.html",
+        "/os/asynchronous-file-io.html",
+        "/game/directstorage.html",
+        "/graphics/texture/texture-streaming-and-mip-residency.html"
+      ],
+      "difficulty": "advanced",
+      "importance": "useful"
+    },
+    {
+      "title": "圧縮の基礎 — LZ の参照・エントロピー符号・GPU 展開",
+      "url": "/data/compression-basics.html",
+      "file": "data/compression-basics.md",
+      "domain": "data",
+      "section": "reference",
+      "format": "article",
+      "status": "published",
+      "summary": "可逆圧縮で繰り返しを距離と長さへ置き換え、LZ4、zlib、Zstandard、GDeflate をデータの形式と展開経路で比較する。",
+      "source": "新規執筆",
+      "aliases": [
+        "LZ77",
+        "LZ4",
+        "zlib",
+        "DEFLATE",
+        "Zstandard",
+        "GDeflate",
+        "エントロピー符号化"
+      ],
+      "verification": "LZ4 Frame 仕様 1.6.4、RFC 1950・1951・8878、DirectStorage 1.1 の GDeflate、C++20（2026-11-13）",
+      "links": [
+        "/game/directstorage.html",
+        "/data/binary-file-validation.html",
+        "/game/asset-loading.html",
+        "/graphics/texture/texture-streaming-and-mip-residency.html"
+      ],
+      "difficulty": "intermediate",
+      "importance": "useful"
+    },
+    {
       "title": "依存関係と依存の方向",
       "url": "/design/foundations/dependency.html",
       "file": "design/foundations/dependency.md",
@@ -12376,6 +13541,7 @@
         "/languages/csharp/headers-vs-asmdef.html",
         "/game/unreal/build-system-ubt.html",
         "/design/decisions/create-interface.html",
+        "/design/foundations/law-of-demeter.html",
         "/design/foundations/cohesion-and-coupling.html",
         "/design/patterns/observer.html",
         "/game/patterns/service-locator-and-di.html",
@@ -12626,7 +13792,7 @@
       "section": "learning",
       "format": "path",
       "status": "published",
-      "summary": "目的と経験を選び、8つのロードマップのどの節点から始めるかを確認する。ブラウザに保存した分野ごとの進捗も見られる。",
+      "summary": "目的と経験を選び、分野ごとのロードマップのどの節点から始めるかを確認する。ブラウザに保存した進捗も見られる。",
       "source": "新規執筆",
       "aliases": [
         "初心者",
@@ -12676,6 +13842,7 @@
         "/design/patterns/observer.html",
         "/runtime/memory/memory-bugs.html",
         "/game/unreal/delegates-and-interfaces.html",
+        "/languages/csharp/performance-features.html",
         "/languages/csharp/virtual-and-polymorphism.html",
         "/languages/csharp/",
         "/languages/csharp/headers-vs-asmdef.html"
@@ -13395,7 +14562,8 @@
         "/game/basics/scenes-and-components.html",
         "/math/rendering/camera.html",
         "/graphics/basics/light-and-rendered-images.html",
-        "/graphics/pipeline/overview.html"
+        "/graphics/pipeline/overview.html",
+        "/game/camera-system.html"
       ],
       "difficulty": "intro",
       "importance": "core"
@@ -13424,6 +14592,35 @@
       "next": "/guide/low-level/advanced-topics.html"
     },
     {
+      "title": "最新のシェーダー技術 — Slang・bindless・Work Graphs・VRS・Cooperative Vectors",
+      "url": "/graphics/shader/modern-shader-technologies.html",
+      "file": "graphics/shader/modern-shader-technologies.md",
+      "domain": "graphics",
+      "section": "reference",
+      "format": "article",
+      "status": "published",
+      "summary": "言語・リソース参照・GPU の仕事の生成・シェーディング率・線形代数の新しい機能を、対象 API と対応条件ごとに読む。",
+      "source": "新規執筆",
+      "aliases": [
+        "Slang",
+        "bindless",
+        "Work Graphs",
+        "VRS",
+        "Variable Rate Shading",
+        "Cooperative Vectors"
+      ],
+      "verification": "Slang v2026.22、Direct3D 12 Shader Model 6.6・6.8・6.10 Preview、Vulkan VK_NV_cooperative_vector rev. 4（2026-11-13）",
+      "links": [
+        "/graphics/shader/hlsl.html",
+        "/graphics/shader/spirv.html",
+        "/graphics/compute/compute-shader.html",
+        "/graphics/optimization/gpu-driven.html",
+        "/graphics/shader/shader-optimization.html"
+      ],
+      "difficulty": "advanced",
+      "importance": "specialized"
+    },
+    {
       "title": "最適化系パターン: Dirty Flag・Spatial Partition・Data Locality・Double Buffer",
       "url": "/game/patterns/optimization-patterns.html",
       "file": "game/patterns/optimization-patterns.md",
@@ -13450,6 +14647,33 @@
       ],
       "difficulty": "advanced",
       "importance": "useful"
+    },
+    {
+      "title": "材質モデルの拡張 — 異方性・クリアコート・シーン・皮膚と髪",
+      "url": "/graphics/shader/extended-material-models.html",
+      "file": "graphics/shader/extended-material-models.md",
+      "domain": "graphics",
+      "section": "reference",
+      "format": "article",
+      "status": "published",
+      "summary": "等方的な金属度・粗さモデルに、向き・上層・繊維・内部散乱の情報をどう足すかを読む。",
+      "source": "新規執筆",
+      "aliases": [
+        "異方性BRDF",
+        "クリアコート",
+        "シーン（sheen）",
+        "サブサーフェス散乱",
+        "ヘアシェーディング"
+      ],
+      "verification": "glTF 2.0 の Khronos 拡張、Disney と SIGGRAPH の原資料、HLSL Shader Model 6.0（2026-11-13）",
+      "links": [
+        "/graphics/shader/brdf-internals.html",
+        "/graphics/shader/normal-mapping.html",
+        "/graphics/lighting/pbr.html",
+        "/graphics/shader/water-shading.html"
+      ],
+      "difficulty": "advanced",
+      "importance": "specialized"
     },
     {
       "title": "三大コンパイラ: MSVC・Clang・GCC",
@@ -13505,6 +14729,60 @@
       ],
       "difficulty": "advanced",
       "importance": "specialized"
+    },
+    {
+      "title": "視差とデカール — 表面の凹凸と模様を重ねる",
+      "url": "/graphics/shader/parallax-and-decals.html",
+      "file": "graphics/shader/parallax-and-decals.md",
+      "domain": "graphics",
+      "section": "reference",
+      "format": "article",
+      "status": "published",
+      "summary": "POMで高さ場と視線の交点を求め、投影デカールで既存の表面へ材質を重ねる。Unreal EngineのDBufferとGBufferも扱う。",
+      "source": "新規執筆",
+      "aliases": [
+        "視差マッピング",
+        "POM",
+        "parallax occlusion mapping",
+        "デカール",
+        "projected decal",
+        "deferred decal",
+        "DBuffer"
+      ],
+      "verification": "TatarchukのPOM原論文、HLSL SampleGrad、Unreal Engine 5.8のDecal Materials資料に照合（2026-11-13）",
+      "links": [
+        "/graphics/shader/normal-mapping.html",
+        "/graphics/path/deferred.html",
+        "/graphics/texture/texture-filtering-and-mipmaps.html"
+      ],
+      "difficulty": "advanced",
+      "importance": "useful"
+    },
+    {
+      "title": "自動テストの基礎 — C++ と Unity でゲームの規則を検証する",
+      "url": "/tools/automated-testing.html",
+      "file": "tools/automated-testing.md",
+      "domain": "tools",
+      "section": "reference",
+      "format": "article",
+      "status": "published",
+      "summary": "単体・結合・動作確認の境界を決め、時間や乱数に左右されないテストを C++ と Unity で設計する。",
+      "source": "新規執筆",
+      "aliases": [
+        "自動テスト",
+        "単体テスト",
+        "結合テスト",
+        "GoogleTest",
+        "Unity Test Framework"
+      ],
+      "verification": "C++20、GoogleTest 1.18.0、Unity 6.3 LTS（6000.3.27f1）の Unity Test Framework 1.6.0（2026-11-13）",
+      "links": [
+        "/tools/ci-and-build-automation.html",
+        "/tools/build/build-configurations.html",
+        "/game/basics/game-states-and-pause.html"
+      ],
+      "difficulty": "intermediate",
+      "importance": "core"
     },
     {
       "title": "実行ファイルを起動してmainへ到達するまで — プロセス・スレッド・ローダー",
@@ -13840,6 +15118,37 @@
       "importance": "core"
     },
     {
+      "title": "色空間と HDR — リニア光量からディスプレイ出力まで",
+      "url": "/graphics/shader/color-space-and-hdr.html",
+      "file": "graphics/shader/color-space-and-hdr.md",
+      "domain": "graphics",
+      "section": "reference",
+      "format": "article",
+      "status": "published",
+      "summary": "sRGB の変換、線形 HDR バッファ、露出とトーンマッピング、ACES 2.0・AgX と表示先の役割を整理する。",
+      "source": "新規執筆",
+      "aliases": [
+        "色管理",
+        "リニア色空間",
+        "ガンマ補正",
+        "sRGB",
+        "HDR",
+        "トーンマッピング",
+        "ACES",
+        "AgX",
+        "Exposure"
+      ],
+      "verification": "W3C CSS Color 4、Khronos glTF 2.0、Microsoft DXGI Advanced Color、ACES 2.0、Blender 4.5 LTS に照合（2026-11-13）",
+      "links": [
+        "/practice/graphics/shader-lab.html",
+        "/graphics/texture/texture-filtering-and-mipmaps.html",
+        "/graphics/shader/normal-mapping.html",
+        "/graphics/shader/brdf-internals.html"
+      ],
+      "difficulty": "intermediate",
+      "importance": "core"
+    },
+    {
       "title": "振る舞いを変える — Strategy・State・Command",
       "url": "/design/notebook/behavior.html",
       "file": "design/notebook/behavior.md",
@@ -13889,6 +15198,32 @@
       "links": [
         "/os/pipes-and-process-io.html"
       ]
+    },
+    {
+      "title": "水面の表現 — 波の法線・反射・屈折・泡を合成する",
+      "url": "/graphics/shader/water-shading.html",
+      "file": "graphics/shader/water-shading.md",
+      "domain": "graphics",
+      "section": "reference",
+      "format": "article",
+      "status": "published",
+      "summary": "波の傾き、反射と屈折、厚みで変わる透過色を組み合わせて水面を描く。",
+      "source": "新規執筆",
+      "aliases": [
+        "ウォーターシェーダー",
+        "水面シェーダー",
+        "水面のフレネル"
+      ],
+      "verification": "GPU Gems の波と屈折、UE 5.8 Single Layer Water、HLSL Shader Model 6.0（2026-11-13）",
+      "links": [
+        "/graphics/shader/normal-mapping.html",
+        "/graphics/lighting/ssr.html",
+        "/practice/graphics/shader-lab.html",
+        "/graphics/shader/brdf-internals.html",
+        "/graphics/shader/volumetrics.html"
+      ],
+      "difficulty": "advanced",
+      "importance": "useful"
     },
     {
       "title": "世代付きハンドル — 再利用したIDを区別する",
@@ -14497,6 +15832,35 @@
       ]
     },
     {
+      "title": "大量光源のサンプリング — ReSTIR DI・GIとMegaLights",
+      "url": "/graphics/lighting/many-light-sampling.html",
+      "file": "graphics/lighting/many-light-sampling.md",
+      "domain": "graphics",
+      "section": "reference",
+      "format": "article",
+      "status": "published",
+      "summary": "多数のライトから照明を推定する方法を、光源の候補、リザーバーでの再サンプリング、可視性とデノイズに分けて追う。",
+      "source": "新規執筆",
+      "aliases": [
+        "大量光源",
+        "many-light rendering",
+        "ReSTIR DI",
+        "ReSTIR GI",
+        "RIS",
+        "reservoir sampling",
+        "リザーバーサンプリング",
+        "MegaLights"
+      ],
+      "verification": "BitterliらのReSTIR原論文、OuyangらのReSTIR GI原論文、Unreal Engine 5.8のMegaLightsとリリースノートに照合（2026-11-13）",
+      "links": [
+        "/graphics/path/forward-plus.html",
+        "/graphics/lighting/gi.html",
+        "/graphics/lighting/path-tracing.html"
+      ],
+      "difficulty": "advanced",
+      "importance": "specialized"
+    },
+    {
       "title": "第0章 学習全体マップ",
       "url": "/guide/low-level/learning-map.html",
       "file": "guide/low-level/learning-map.md",
@@ -15042,6 +16406,35 @@
       "importance": "core"
     },
     {
+      "title": "地形とバーチャルテクスチャ — 高さの格子と材質ページを別々に配る",
+      "url": "/graphics/texture/terrain-and-virtual-texturing.html",
+      "file": "graphics/texture/terrain-and-virtual-texturing.md",
+      "domain": "graphics",
+      "section": "reference",
+      "format": "article",
+      "status": "published",
+      "summary": "ハイトマップの格子をカメラに合わせて粗くし、地形の材質は必要なページだけをGPUに置く。",
+      "source": "新規執筆",
+      "aliases": [
+        "地形",
+        "ハイトマップ",
+        "Terrain LOD",
+        "Geometry Clipmap",
+        "Virtual Texturing",
+        "RVT",
+        "SVT"
+      ],
+      "verification": "LosassoとHoppeのGeometry Clipmaps、Unreal Engine 5.8、Direct3D HLSL Shader Model 6.0に照合（2026-11-13）",
+      "links": [
+        "/graphics/texture/texture-filtering-and-mipmaps.html",
+        "/graphics/texture/texture-streaming-and-mip-residency.html",
+        "/graphics/texture/sampler-feedback.html",
+        "/graphics/shader/vertex-effects.html"
+      ],
+      "difficulty": "advanced",
+      "importance": "specialized"
+    },
+    {
       "title": "抽象化・カプセル化・情報隠蔽",
       "url": "/design/foundations/abstraction-encapsulation.html",
       "file": "design/foundations/abstraction-encapsulation.md",
@@ -15067,6 +16460,35 @@
       ],
       "difficulty": "intro",
       "importance": "core"
+    },
+    {
+      "title": "頂点シェーダーでの表現 — 風・波・VATで形を動かす",
+      "url": "/graphics/shader/vertex-effects.html",
+      "file": "graphics/shader/vertex-effects.md",
+      "domain": "graphics",
+      "section": "reference",
+      "format": "article",
+      "status": "published",
+      "summary": "草の根元を固定して風で曲げ、水面の波から法線を求める。シミュレーション結果をVATで再生するときの頂点番号とフレームも扱う。",
+      "source": "新規執筆",
+      "aliases": [
+        "頂点変形",
+        "vertex deformation",
+        "頂点アニメーション",
+        "VAT",
+        "Vertex Animation Texture",
+        "草の揺れ",
+        "水面の波"
+      ],
+      "verification": "Crytekの草木の手続き的アニメーション、GPU Gemsの水面モデル、SideFX Labs VAT 3.0の資料に照合（2026-11-13）",
+      "links": [
+        "/graphics/pipeline/vertex-shader.html",
+        "/graphics/postprocess/taa.html",
+        "/graphics/basics/rigs-and-skinning.html",
+        "/graphics/shader/toon-and-npr.html"
+      ],
+      "difficulty": "intermediate",
+      "importance": "useful"
     },
     {
       "title": "頂点バッファとインデックスバッファから三角形を組み立てる",
@@ -15535,6 +16957,7 @@
         "/practice/data/unicode-observation.html",
         "/game/patterns/optimization-patterns.html",
         "/design/decisions/cpp-choices.html",
+        "/languages/cpp/modern-containers-and-views.html",
         "/languages/cpp/values-pointers-references.html",
         "/languages/cpp/const-correctness.html",
         "/languages/cpp/",
@@ -15938,6 +17361,34 @@
       "importance": "core"
     },
     {
+      "title": "浮動小数点の決定性 — 同じ入力から同じtickを再現する",
+      "url": "/languages/cpp/floating-point-determinism.html",
+      "file": "languages/cpp/floating-point-determinism.md",
+      "domain": "languages",
+      "section": "reference",
+      "format": "article",
+      "status": "published",
+      "summary": "FMAの縮約、SIMDの加算順、コンパイラの浮動小数点設定がロックステップやリプレイにどう影響するかを調べる。",
+      "source": "新規執筆",
+      "aliases": [
+        "浮動小数点の決定性",
+        "deterministic simulation",
+        "FMA",
+        "fp:fast",
+        "SIMD",
+        "ロックステップ",
+        "リプレイ"
+      ],
+      "verification": "IEEE 754-2019、MSVC 17系、Clang Users Manual、C++20に照合（2026-11-13）",
+      "links": [
+        "/game/network-sync.html",
+        "/data/floating-point-spacing.html",
+        "/math/floating-point-comparison.html"
+      ],
+      "difficulty": "advanced",
+      "importance": "useful"
+    },
+    {
       "title": "浮動小数点の比較と誤差の扱い — 絶対許容差・相対許容差を決める",
       "url": "/math/floating-point-comparison.html",
       "file": "math/floating-point-comparison.md",
@@ -16150,6 +17601,35 @@
       "importance": "core"
     },
     {
+      "title": "法線マップと接空間 — TBN・MikkTSpace・チャンネル規約",
+      "url": "/graphics/shader/normal-mapping.html",
+      "file": "graphics/shader/normal-mapping.md",
+      "domain": "graphics",
+      "section": "reference",
+      "format": "article",
+      "status": "published",
+      "summary": "法線マップの値を接空間で復号し、TBNで照明計算の空間へ変換する。ベイクとの基底の一致、緑チャンネル、BC5も扱う。",
+      "source": "新規執筆",
+      "aliases": [
+        "法線マッピング",
+        "ノーマルマップ",
+        "Normal Mapping",
+        "Tangent Space",
+        "TBN",
+        "MikkTSpace",
+        "BC5"
+      ],
+      "verification": "Khronos glTF 2.0、MikkTSpaceの公開実装、Microsoft DXGI形式とブロック圧縮資料に照合（2026-11-13）",
+      "links": [
+        "/practice/graphics/shader-lab.html",
+        "/graphics/shader/shader-inputs-and-uniforms.html",
+        "/graphics/shader/brdf-internals.html",
+        "/graphics/shader/color-space-and-hdr.html"
+      ],
+      "difficulty": "intermediate",
+      "importance": "core"
+    },
+    {
       "title": "翻訳単位・ヘッダー・include・前方宣言・ODR",
       "url": "/runtime/cpp-internals/translation-units-and-headers.html",
       "file": "runtime/cpp-internals/translation-units-and-headers.md",
@@ -16165,6 +17645,7 @@
         "/languages/cpp/static-inline-friend.html",
         "/tools/build/build-speed.html",
         "/languages/csharp/headers-vs-asmdef.html",
+        "/languages/cpp/modules.html",
         "/tools/build/samples/tu-demo.html",
         "/runtime/cpp-internals/",
         "/runtime/cpp-internals/symbols-and-linkage.html"
@@ -16329,6 +17810,12 @@
         "/network/tcp-sockets.html",
         "/network/udp-datagrams.html",
         "/game/network-sync.html",
+        "/game/world-streaming.html",
+        "/game/ai-decision-making.html",
+        "/game/camera-system.html",
+        "/game/unity-async.html",
+        "/game/game-audio-systems.html",
+        "/game/localization-design.html",
         "/network/quic-and-http3.html",
         "/network/nat-and-port-mapping.html",
         "/network/ip-routing-and-ethernet.html",
@@ -16356,6 +17843,26 @@
         "/math/floating-point-comparison.html",
         "/data/unicode-and-encoding.html",
         "/data/floating-point-spacing.html",
+        "/design/patterns/null-object.html",
+        "/design/foundations/law-of-demeter.html",
+        "/languages/cpp/crtp.html",
+        "/tools/automated-testing.html",
+        "/tools/ci-and-build-automation.html",
+        "/network/nagle-and-delayed-ack.html",
+        "/network/https-svcb-and-http3-discovery.html",
+        "/hardware/cpu/hybrid-cpu-scheduling.html",
+        "/languages/cpp/memory-model.html",
+        "/runtime/lock-free-basics.html",
+        "/runtime/jobs-and-work-stealing.html",
+        "/languages/cpp/floating-point-determinism.html",
+        "/languages/cpp/cpp26-features.html",
+        "/languages/cpp/modern-containers-and-views.html",
+        "/languages/cpp/explicit-object-and-expected.html",
+        "/languages/cpp/modules.html",
+        "/languages/csharp/performance-features.html",
+        "/algorithms/sorting.html",
+        "/data/compression-basics.html",
+        "/data/hashes-and-checksums.html",
         "/data/integer-bits-and-bytes.html",
         "/languages/c/reading-byte-arrays.html",
         "/data/binary-file-validation.html",
@@ -16382,6 +17889,29 @@
         "/game/basics/game-events-and-notifications.html",
         "/graphics/shader/shader-first-steps.html",
         "/graphics/shader/shader-inputs-and-uniforms.html",
+        "/graphics/shader/normal-mapping.html",
+        "/graphics/shader/brdf-internals.html",
+        "/graphics/shader/color-space-and-hdr.html",
+        "/graphics/shader/procedural-noise.html",
+        "/graphics/shader/shader-debugging.html",
+        "/graphics/shader/toon-and-npr.html",
+        "/graphics/shader/parallax-and-decals.html",
+        "/graphics/shader/vertex-effects.html",
+        "/graphics/shader/gpu-particles.html",
+        "/graphics/shader/shader-variants.html",
+        "/graphics/shader/extended-material-models.html",
+        "/graphics/shader/sdf-and-raymarching.html",
+        "/graphics/shader/volumetrics.html",
+        "/graphics/shader/water-shading.html",
+        "/graphics/shader/shader-optimization.html",
+        "/graphics/shader/modern-shader-technologies.html",
+        "/graphics/path/visibility-buffer.html",
+        "/graphics/optimization/enhanced-barriers-and-synchronization2.html",
+        "/graphics/texture/sampler-feedback.html",
+        "/graphics/lighting/many-light-sampling.html",
+        "/graphics/path/neural-rendering.html",
+        "/graphics/basics/animation-systems.html",
+        "/graphics/texture/terrain-and-virtual-texturing.html",
         "/graphics/postprocess/overview.html",
         "/graphics/optimization/tools.html",
         "/game/ecs.html",

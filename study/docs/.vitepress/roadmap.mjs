@@ -4,6 +4,7 @@ import memoryOs from './roadmap-memory-os.mjs'
 import compilers from './roadmap-compilers.mjs'
 import beginners from './roadmap-beginners.mjs'
 import design from './roadmap-design.mjs'
+import shaders from './roadmap-shaders.mjs'
 
 const lowLevelBasics = ['bytes', 'c-bytes', 'cpu', 'x64-disassembly']
 const compilerIds = compilers.nodes.map(node => node.id)
@@ -44,6 +45,14 @@ export default {
       ],
     },
     {
+      id: 'shaders',
+      title: 'シェーダー',
+      summary: '材質と色の計算を読み、頂点・ピクセル・Computeで表現を作り、GPUの負荷を計測します。',
+      showAllByDefault: true,
+      guide: { label: 'WebGPUでシェーダーの出力を比べる', url: '/practice/graphics/shader-lab.html' },
+      nodeIds: shaders.nodes.map(node => node.id),
+    },
+    {
       id: 'game',
       title: 'ゲーム開発',
       summary: '入力・更新・衝突を組み合わせて小さなゲームを作り、必要に応じて設計や計測へ進みます。',
@@ -68,6 +77,7 @@ export default {
     ...compilers.nodes,
     ...beginners.nodes,
     ...design.nodes,
+    ...shaders.nodes,
     {
       id: 'bytes',
       title: '整数とバイト列',
@@ -175,6 +185,7 @@ export default {
         { label: 'ラスタライゼーション', url: '/graphics/pipeline/rasterization.html' },
         { label: 'テクスチャのフィルタリングとミップマップ', url: '/graphics/texture/texture-filtering-and-mipmaps.html' },
         { label: '実践 斜めの床でフィルタリングを比べる', url: '/practice/graphics/texture-filtering-observation.html' },
+        { label: 'Sampler Feedbackとテクスチャストリーミング', url: '/graphics/texture/sampler-feedback.html' },
         { label: '出力結合と深度テスト', url: '/graphics/pipeline/output-merger.html' },
       ],
     },
@@ -192,6 +203,7 @@ export default {
         { label: 'シェーダ言語の比較', url: '/graphics/shader/overview.html' },
         { label: 'シェーダーの第一歩', url: '/graphics/shader/shader-first-steps.html' },
         { label: '実践 シェーダーで三角形の位置と色を変える', url: '/practice/graphics/shader-first-steps.html' },
+        { label: 'シェーダーのロードマップ', url: '/learn/roadmap.html?node=shader-basics#shaders' },
       ],
     },
     {
@@ -240,6 +252,7 @@ export default {
         { label: 'Forward Rendering', url: '/graphics/path/forward.html' },
         { label: 'Deferred RenderingとGバッファ', url: '/graphics/path/deferred.html' },
         { label: 'Forward+、Tiled、Clustered Rendering', url: '/graphics/path/forward-plus.html' },
+        { label: 'Visibility BufferとDeferred Texturing', url: '/graphics/path/visibility-buffer.html' },
       ],
     },
     {
@@ -256,6 +269,7 @@ export default {
         { label: 'PBRと材質のパラメータ', url: '/graphics/lighting/pbr.html' },
         { label: 'グローバルイルミネーション総論', url: '/graphics/lighting/gi.html' },
         { label: 'IBLと環境マップ', url: '/graphics/lighting/ibl.html' },
+        { label: '大量光源の手法', url: '/graphics/lighting/many-light-sampling.html' },
       ],
     },
     {
@@ -275,6 +289,7 @@ export default {
         { label: 'TAAとフレーム履歴', url: '/graphics/postprocess/taa.html' },
         { label: '実践 TAAで床のちらつきとゴーストを比べる', url: '/practice/graphics/taa-observation.html' },
         { label: 'アップスケーリングとTAAU', url: '/graphics/postprocess/upscaling.html' },
+        { label: 'ニューラルレンダリング', url: '/graphics/path/neural-rendering.html' },
         { label: '実践 ネイティブ描画と2つの拡大方式を比べる', url: '/practice/graphics/taau-observation.html' },
         { label: 'フレーム生成と入力への反応', url: '/graphics/postprocess/frame-generation.html' },
         { label: '実践 フレーム生成のオン・オフを比べる', url: '/practice/graphics/frame-generation-observation.html' },
@@ -293,12 +308,14 @@ export default {
       ],
       resources: [
         { label: 'GPU最適化の基礎', url: '/graphics/optimization/basics.html' },
+        { label: 'ソート', url: '/algorithms/sorting.html' },
         { label: 'デバッグ・プロファイリングツール', url: '/graphics/optimization/tools.html' },
         { label: 'フレームタイムとフレームペーシング', url: '/graphics/optimization/frame-pacing.html' },
         { label: '実践 同じ60 FPSで表示間隔を比べる', url: '/practice/graphics/frame-pacing-observation.html' },
         { label: 'スワップチェーンとVSync・VRR', url: '/graphics/optimization/swap-chain-and-vsync.html' },
         { label: '実践 VSyncオフ・オン・VRRを比べる', url: '/practice/graphics/vsync-vrr-observation.html' },
         { label: 'RenderGraphとFrameGraph', url: '/graphics/optimization/render-graph.html' },
+        { label: 'Enhanced BarriersとVulkan synchronization2', url: '/graphics/optimization/enhanced-barriers-and-synchronization2.html' },
       ],
     },
     {
@@ -314,6 +331,8 @@ export default {
       resources: [
         { label: 'UnityのレンダラーとSRP', url: '/graphics/engine/unity-renderer.html' },
         { label: 'Unreal Engineのレンダラー', url: '/graphics/engine/unreal-renderer.html' },
+        { label: 'アニメーションシステム', url: '/graphics/basics/animation-systems.html' },
+        { label: '地形とバーチャルテクスチャ', url: '/graphics/texture/terrain-and-virtual-texturing.html' },
       ],
     },
     {

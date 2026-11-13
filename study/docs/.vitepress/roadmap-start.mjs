@@ -34,6 +34,7 @@ export const trackOverviews = [
   { id: 'design', audience: '小さなプログラムの変更が難しくなってきた人', prerequisite: 'クラスと関数の基本、小さな実装経験', time: '8〜16時間', outcome: '変更に合わせて責務と依存を分け、設計判断を説明する。' },
   { id: 'low-level', audience: '実行ファイルやOSの内側を知りたい人', prerequisite: 'バイト列から開始可。実践はCやC++の基礎', time: '16〜30時間', outcome: 'バイト表現、メモリ、OS、コンパイラを通してプログラムの実行を説明する。' },
   { id: 'graphics', audience: '3Dの形が画面に出る仕組みを知りたい人', prerequisite: 'GPUと3D数学から開始可。実践はプログラミングの基礎', time: '14〜28時間', outcome: '三角形の描画からシェーダーとレンダリングパスまでをたどる。' },
+  { id: 'shaders', audience: '材質やエフェクトをシェーダーで実装したい人', prerequisite: '3DCG・描画のシェーダー節点、ベクトルと座標系', time: '16〜32時間', outcome: '法線と色の計算から、表現の実装とGPU計測までを試す。' },
   { id: 'network-browser', audience: 'Webの通信やブラウザの内側を知りたい人', prerequisite: 'IPから開始可。実践はコマンドやコードの基礎', time: '12〜24時間', outcome: 'URLを開いてから、通信を経てページを描画するまでを説明する。' },
   { id: 'game', audience: '小さなゲームを作ったことがある人', prerequisite: '入力・更新・描画の基礎。目的に応じて設計・描画・低レイヤの知識', time: '10〜20時間', outcome: 'ゲームの機能を設計し、固定tick、アセットの寿命、フレーム時間を調べる。' },
 ]

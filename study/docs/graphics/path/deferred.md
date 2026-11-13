@@ -152,6 +152,11 @@ void TiledLightingCS(uint3 dtid : SV_DispatchThreadID, uint gi : SV_GroupIndex) 
 - [SSAO](/graphics/lighting/ssao.html) / [SSR](/graphics/lighting/ssr.html) — G-Bufferの上に建つ技法
 - [PBR](/graphics/lighting/pbr.html) — G-Bufferに何を入れるかの理論
 
+## 関連項目
+
+- [視差とデカール](/graphics/shader/parallax-and-decals.html)
+- [Visibility BufferとDeferred Texturing](/graphics/path/visibility-buffer.html)
+
 ## 理解度チェック
 
 1. **Deferredが半透明を苦手とする原理的な理由を述べよ。**

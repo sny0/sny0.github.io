@@ -124,6 +124,9 @@ export default {
         { label: '補助教材 変数・型・式のC#サンプル', url: '/languages/variables-types-and-expressions.html' },
         { label: '補助教材 条件分岐・繰り返し・関数のC#サンプル', url: '/languages/control-flow-and-functions.html' },
       ],
+        furtherReading: [
+          { label: 'C#のパフォーマンス機能', url: '/languages/csharp/performance-features.html' },
+        ],
     },
     {
       id: 'unity-scene',
@@ -244,6 +247,10 @@ export default {
       resources: [
         { label: 'ビルドとは何か', url: '/tools/build/what-is-build.html' },
         { label: 'ビルド構成とデバッグ情報', url: '/tools/build/build-configurations.html' },
+      ],
+      furtherReading: [
+        { label: '自動テストの基礎', url: '/tools/automated-testing.html' },
+        { label: 'CIとビルド自動化', url: '/tools/ci-and-build-automation.html' },
       ],
     },
     {

@@ -30,6 +30,7 @@ CPU・GPU・メモリ・デバイスの間で、命令とデータがどう動�
 - [RAM・キャッシュ・ストレージの違い](/hardware/memory/ram-cache-and-storage.html)
 - [USBキーボードの入力がWindowsのアプリに届くまで — HIDレポートとWM_INPUT](/hardware/io/usb-keyboard-raw-input.html)
 - [コンピュータの部品と役割 — ゲームが動くまで](/hardware/computer-components.html)
+- [ハイブリッドCPUのスケジューリング — コアの特性とスレッドの待ち時間](/hardware/cpu/hybrid-cpu-scheduling.html)
 
 ## この分野の学習ガイド
 

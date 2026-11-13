@@ -88,6 +88,11 @@ main.o: main.cpp enemy.h        # ヘッダー依存も書く(実際はコンパ
 - ビルドディレクトリはgit管理外(生成物)。「クリーンビルド=buildディレクトリ削除」で常に再現できる状態を保つ
 - `add_library` でライブラリを分けると、[依存の方向](/design/foundations/dependency.html)をビルド定義で制約できます。例えばcoreからuiへのリンクが設計に反する場合、ビルドで検出できます。
 
+## 関連項目
+
+- [自動テストの基礎](/tools/automated-testing.html)
+- [CIとビルド自動化](/tools/ci-and-build-automation.html)
+
 ## 理解度チェック
 
 1. CMakeとNinjaの役割分担は?

@@ -27,6 +27,7 @@ export default {
       ],
       resources: [
         { label: '記憶域期間・スコープ・寿命', url: '/runtime/memory/storage-duration-and-lifetime.html' },
+        { label: 'C++23/26のコンテナとビュー', url: '/languages/cpp/modern-containers-and-views.html' },
         { label: '所有権と借用', url: '/runtime/memory/ownership-and-borrowing.html' },
       ],
     },
@@ -103,6 +104,10 @@ export default {
       ],
       resources: [
         { label: 'スレッドと同期 — mutex・lock・join', url: '/runtime/thread-synchronization.html' },
+        { label: 'C++メモリモデル', url: '/languages/cpp/memory-model.html' },
+        { label: 'ロックフリーの基礎', url: '/runtime/lock-free-basics.html' },
+        { label: 'ジョブシステムとワークスティーリング', url: '/runtime/jobs-and-work-stealing.html' },
+        { label: 'ハイブリッドCPUのスケジューリング', url: '/hardware/cpu/hybrid-cpu-scheduling.html' },
         { label: '実践 C++とC#で共有する在庫の整合性を守る', url: '/practice/threads/inventory-synchronization.html' },
       ],
     },

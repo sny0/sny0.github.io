@@ -20,10 +20,17 @@
 ## 辞典の本文
 
 - [auto・decltype・constexpr・consteval(型推論とコンパイル時計算)](/languages/cpp/auto-and-constexpr.html)
+- [C#のパフォーマンス機能 — Span・関数ポインター・generic math](/languages/csharp/performance-features.html)
 - [C#の基本 — コンソールとUnityでHPを更新する](/languages/csharp/console-and-unity.html)
+- [C++ メモリモデル — atomic と happens-before で共有データを受け渡す](/languages/cpp/memory-model.html)
 - [C++・設計の用語集](/guide/cpp-glossary.html)
+- [C++20 モジュール — インターフェース・ビルド依存・ODR](/languages/cpp/modules.html)
+- [C++23・26のコンテナとビュー — span・mdspan・flat_map・inplace_vector・hive](/languages/cpp/modern-containers-and-views.html)
+- [C++23の実践機能 — deducing thisとstd::expected](/languages/cpp/explicit-object-and-expected.html)
+- [C++26 の主な新機能 — 静的リフレクション・契約・ライブラリ強化・実行制御](/languages/cpp/cpp26-features.html)
 - [C++例外と C#例外](/languages/csharp/exceptions-comparison.html)
 - [const と const correctness](/languages/cpp/const-correctness.html)
+- [CRTPと静的ポリモーフィズム — 共通処理から型ごとの操作を呼ぶ](/languages/cpp/crtp.html)
 - [Cでバイト列を読む](/languages/c/reading-byte-arrays.html)
 - [enum・enum class・namespace](/languages/cpp/enums-and-namespaces.html)
 - [RAII (Resource Acquisition Is Initialization)](/languages/cpp/raii.html)
@@ -49,6 +56,7 @@
 - [値・変数・型・式 — HPを書き換える](/languages/variables-types-and-expressions.html)
 - [値型と参照・ポインタ・参照](/languages/cpp/values-pointers-references.html)
 - [配列と文字列](/languages/cpp/arrays-and-strings.html)
+- [浮動小数点の決定性 — 同じ入力から同じtickを再現する](/languages/cpp/floating-point-determinism.html)
 - [未定義動作・実装定義・未規定動作](/languages/cpp/undefined-behavior.html)
 - [例外](/languages/cpp/exceptions.html)
 

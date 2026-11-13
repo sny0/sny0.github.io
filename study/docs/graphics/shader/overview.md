@@ -178,6 +178,36 @@ fragment float4 fsMain(VSOut in [[stage_in]],
 - [GLSL](/graphics/shader/glsl.html) → [WGSL](/graphics/shader/wgsl.html) → [MSL](/graphics/shader/msl.html)
 - [SPIR-V と中間表現](/graphics/shader/spirv.html)
 
+## 関連項目
+
+- [シェーダーのロードマップ](/learn/roadmap.html#shaders)
+- [WebGPUでシェーダーの出力を比べる](/practice/graphics/shader-lab.html)
+
+### 基礎
+
+- [法線マップと接空間](/graphics/shader/normal-mapping.html)
+- [BRDFの中身](/graphics/shader/brdf-internals.html)
+- [色空間とHDR](/graphics/shader/color-space-and-hdr.html)
+- [ノイズと手続き的テクスチャ](/graphics/shader/procedural-noise.html)
+- [シェーダーのデバッグ](/graphics/shader/shader-debugging.html)
+
+### 中級
+
+- [トゥーンとNPR](/graphics/shader/toon-and-npr.html)
+- [視差とデカール](/graphics/shader/parallax-and-decals.html)
+- [頂点シェーダーでの表現](/graphics/shader/vertex-effects.html)
+- [GPUパーティクル](/graphics/shader/gpu-particles.html)
+- [シェーダーバリアントの管理](/graphics/shader/shader-variants.html)
+
+### 応用
+
+- [材質モデルの拡張](/graphics/shader/extended-material-models.html)
+- [SDFとレイマーチング](/graphics/shader/sdf-and-raymarching.html)
+- [ボリューメトリック](/graphics/shader/volumetrics.html)
+- [水面の表現](/graphics/shader/water-shading.html)
+- [シェーダー最適化の実践](/graphics/shader/shader-optimization.html)
+- [最新のシェーダー技術](/graphics/shader/modern-shader-technologies.html)
+
 ## 理解度チェック
 
 1. **「中間表現 (SPIR-V/DXIL) を挟む」設計が解決した問題は何か。**

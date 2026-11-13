@@ -64,3 +64,7 @@ UAVを使う二つの処理が同じ `UNORDERED_ACCESS` 状態のままでも、
 別のキューへデータを渡す場合は、生成側が `Signal` するフェンス値を消費側の `Wait` に指定します。これで消費側の処理が進める時点を決め、さらにキュー種別と用途に合う状態を用意します。例えばCOPYとDIRECTの間でリソースを引き渡す場合は、`COMMON` の規則と、暗黙の昇格・減衰が適用される条件を確認します。CPUが読み戻しバッファを読んだりメモリを再利用したりできる時点も、関連するGPU処理の完了をフェンスで確認します。[Microsoftの複数キュー間の同期](https://learn.microsoft.com/en-us/windows/win32/direct3d12/user-mode-heap-synchronization) · [MicrosoftのCOMMONのキュー間規則](https://learn.microsoft.com/en-us/windows/win32/api/d3d12/ne-d3d12-d3d12_resource_states) · [GPUキュー間の同期](/graphics/optimization/gpu-queue-synchronization.html) · [GPUリソースの寿命](/graphics/optimization/gpu-resource-lifetime.html)
 
 実践では、二つのCPUスレッドが記録したリストを一つのキューへ渡し、遷移を挟んでコピーしたバイト列をWARPで読み戻して照合します。[D3D12の並列コマンド記録を試す](/practice/graphics/parallel-command-recording-observation.html)
+
+## 関連項目
+
+- [Enhanced BarriersとVulkan synchronization2](/graphics/optimization/enhanced-barriers-and-synchronization2.html)

@@ -59,3 +59,7 @@ study:
 上向きの軸、正面の方向、長さの単位、画面の原点、奥行きの範囲などは、ファイル形式やエンジン、APIの約束に従います。例えばglTFは右手系、上方向を`+Y`、距離の単位をメートルと定めています。読み込む側は、自分の座標の約束へ合わせて変換します。[Khronosの座標と単位](https://registry.khronos.org/glTF/specs/2.0/glTF-2.0.html#coordinate-system-and-units)
 
 頂点の位置が画面の色へ変わる続きは、[光とレンダリングの基本](/graphics/basics/light-and-rendered-images.html)と[レンダリングパイプライン](/graphics/pipeline/overview.html)へ進みます。
+
+## 関連項目
+
+- [カメラシステム](/game/camera-system.html)

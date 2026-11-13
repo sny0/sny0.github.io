@@ -156,6 +156,12 @@ float3 ShadePBR(float3 N, float3 V, float3 L, float3 lightColor,
 - [シャドウ](/graphics/lighting/shadow.html)
 - [GI総論](/graphics/lighting/gi.html)
 
+## 関連項目
+
+- [BRDFの中身](/graphics/shader/brdf-internals.html)
+- [法線マップと接空間](/graphics/shader/normal-mapping.html)
+- [材質モデルの拡張](/graphics/shader/extended-material-models.html)
+
 ## 理解度チェック
 
 1. **「エネルギー保存」がPhongモデルに欠けていたことによる実害と、PBRでの解決を説明せよ。**

@@ -1,4 +1,12 @@
 export default {
+  '/design/patterns/null-object.html': ['intermediate', 'useful'],
+  '/design/foundations/law-of-demeter.html': ['intermediate', 'useful'],
+  '/game/world-streaming.html': ['advanced', 'useful'],
+  '/game/ai-decision-making.html': ['intermediate', 'useful'],
+  '/game/camera-system.html': ['intermediate', 'useful'],
+  '/game/unity-async.html': ['advanced', 'useful'],
+  '/game/game-audio-systems.html': ['intermediate', 'useful'],
+  '/game/localization-design.html': ['intermediate', 'useful'],
   '/design/case-studies/achievements.html': ['intermediate', 'specialized'],
   '/design/case-studies/aim-control.html': ['advanced', 'specialized'],
   '/design/case-studies/damage-calculation.html': ['intermediate', 'useful'],

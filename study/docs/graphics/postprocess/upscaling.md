@@ -169,6 +169,10 @@ ffxFsr2ContextDispatch(&context, &d);
 - [GPU最適化の基礎](/graphics/optimization/basics.html)
 - [3DCG・描画ロードマップの「ポストプロセスとAA」](/learn/roadmap.html?node=gfx-postprocess#graphics)
 
+## 関連項目
+
+- [ニューラルレンダリング](/graphics/path/neural-rendering.html)
+
 ## 理解度チェック
 
 1. **低解像度の同じシーンを4フレーム描くとき、サンプル位置を固定する場合とずらす場合で何が変わりますか。**

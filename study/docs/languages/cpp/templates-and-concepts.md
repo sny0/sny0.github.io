@@ -122,6 +122,8 @@ C#で `T.TakeDamage()` を呼ぶにはinterface制約が必須です。C++では
 - [テンプレートの実体化とinline(内部の仕組み)](/runtime/cpp-internals/template-instantiation-and-inline.html)
 - [テンプレートとジェネリック(C#対比の詳細)](/languages/csharp/templates-vs-generics.html)
 - [判断ガイド: テンプレートか仮想関数か](/design/decisions/cpp-choices.html)
+- [C++26の主な新機能](/languages/cpp/cpp26-features.html)
+- [C++23の実践機能](/languages/cpp/explicit-object-and-expected.html)
 
 ## 理解度チェック
 

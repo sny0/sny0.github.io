@@ -156,6 +156,11 @@ if (rdoc && frameHasArtifact) {
 - [最終章: ゼロからレンダラーを作る](/graphics/capstone/01-design.html) — 自作レンダラーはツールの練習台として最高
 - [CPU プロファイリング](/tools/profiling/cpu-profiling.html) — サンプリングと計装でCPU側のフレームを調べる
 
+## 関連項目
+
+- [シェーダーのデバッグ](/graphics/shader/shader-debugging.html)
+- [シェーダー最適化の実践](/graphics/shader/shader-optimization.html)
+
 ## 理解度チェック
 
 1. **「画面が真っ黒」のとき、RenderDocでどの順に調べるか。**
