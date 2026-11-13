@@ -3,6 +3,8 @@ import { sections, formatLabels, statusLabels, collections, difficultyLabels, im
 import graphicsAndWebRatings from '../docs/.vitepress/article-ratings/graphics-and-web.mjs'
 import designAndGameRatings from '../docs/.vitepress/article-ratings/design-and-game.mjs'
 import systemsRatings from '../docs/.vitepress/article-ratings/systems.mjs'
+import { categories as glossaryCategories, categoryUrl } from '../docs/.vitepress/glossary/index.mjs'
+import { generateGlossary } from './generate-glossary.mjs'
 import path from 'node:path'
 import { fileURLToPath } from 'node:url'
 import { createRequire } from 'node:module'
@@ -815,6 +817,8 @@ writePage('terms/index.md', '用語・別名から調べる', {
   summary: '表記の違いから、用語や仕組みの主な説明へ進む。'
 }, `# 用語・別名から調べる
 
+言葉の意味を数行で確かめるには[用語集](/glossary/)へ。この索引からは詳しい解説記事を開けます。
+
 | 用語・別名 | 説明への入口 |
 | --- | --- |
 ${termRows.map(([name, url, description]) => `| [${name}](${url}) | ${description} |`).join('\n')}
@@ -823,6 +827,8 @@ ${termRows.map(([name, url, description]) => `| [${name}](${url}) | ${descriptio
 - [クラス名辞典](/design/naming.html)
 - [問題から選ぶパターン索引](/design/pattern-index.html)
 - [技術辞典のタイトル・別名索引](/)`)
+
+generateGlossary(writePage, entries)
 
 for (const domain of domains) {
   const reference = entries.filter(entry => entry.domain === domain.id && entry.section === 'reference').sort(byTitle)
@@ -902,6 +908,7 @@ for (const collection of collections) {
 const item = entry => ({ text: entry.title, link: entry.url })
 const referenceSidebar = [
   { text: '技術辞典', link: '/' }, { text: '用語・別名', link: '/terms/' },
+  { text: '用語集', link: '/glossary/' },
   ...domains.map(domain => ({ text: domain.title, collapsed: true, items: [
     { text: domain.count ? '分野の目次' : '本文を準備中', link: '/' + domain.id + '/' },
     ...entries.filter(entry => entry.section === 'reference' && entry.domain === domain.id).map(item)
@@ -920,6 +927,11 @@ function sectionSidebar(section, collectionId) {
       items: collections.filter(item => item.section === section && item.id !== collectionId).map(item => ({ text: item.title, link: item.start })) }]
 }
 const sidebar = { '/': referenceSidebar, '/learn/': sectionSidebar('learning'), '/practice/': sectionSidebar('practice') }
+sidebar['/glossary/'] = [
+  { text: '用語集', link: '/glossary/' },
+  ...glossaryCategories.map(category => ({ text: category.title, link: categoryUrl(category.id) })),
+  { text: '用語・別名から調べる', link: '/terms/' },
+]
 for (const entry of entries) {
   if (entry.section !== 'reference') sidebar['/' + entry.file] = sectionSidebar(entry.section, entry.collection)
 }

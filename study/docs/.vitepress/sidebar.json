@@ -9,6 +9,10 @@
       "link": "/terms/"
     },
     {
+      "text": "用語集",
+      "link": "/glossary/"
+    },
+    {
       "text": "情報表現とバイナリ",
       "collapsed": true,
       "items": [
@@ -2173,6 +2177,32 @@
           "link": "/design/notebook/practice.html"
         }
       ]
+    }
+  ],
+  "/glossary/": [
+    {
+      "text": "用語集",
+      "link": "/glossary/"
+    },
+    {
+      "text": "PC・OS・ハードウェア",
+      "link": "/glossary/pc.html"
+    },
+    {
+      "text": "プログラミング・ビルド・開発ツール",
+      "link": "/glossary/programming.html"
+    },
+    {
+      "text": "3DCG・グラフィックス",
+      "link": "/glossary/graphics.html"
+    },
+    {
+      "text": "ゲーム開発・エンジン・現場の言い回し",
+      "link": "/glossary/game.html"
+    },
+    {
+      "text": "用語・別名から調べる",
+      "link": "/terms/"
     }
   ],
   "/graphics/capstone/01-design.md": [
