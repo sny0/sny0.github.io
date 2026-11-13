@@ -8,7 +8,7 @@ study:
   domain: graphics
   summary: 格子のハッシュから値ノイズ、Perlin、Simplex の違いを整理し、fBm とドメインワープを HLSL で比較する。
   aliases: [Procedural Noise, Value Noise, Perlin Noise, Simplex Noise, fBm, Fractal Brownian Motion, Domain Warp]
-  verification: Ken Perlin の原論文・参照実装、Stefan Gustavson の解説と 2D Simplex 実装、O’Neill の PCG、JCGT の GPU ハッシュ比較、NVIDIA GPU Gems に照合（2026-11-13）
+  verification: Ken Perlin の原論文・参照実装、Stefan Gustavson の解説と 2D Simplex 実装、O’Neill の PCG、JCGT の GPU ハッシュ比較、NVIDIA GPU Gems、pbrt 第 3 版に照合（2026-11-13）
 ---
 
 # ノイズと手続き的テクスチャ — 格子・fBm・ドメインワープ
@@ -65,7 +65,7 @@ Perlin の 2002 年版では補間重みに `s(t)=6t⁵−15t⁴+10t³` を使�
 | 四隅の勾配番号 | `(0,0), (1,0), (0,1), (1,1)` の順に `6, 0, 2, 6` |
 | 内積 | 同じ順で約 `−0.176777, −0.750000, −0.500000, −0.176777` |
 | 補間重み | `s(0.25)=0.103515625`、`s(0.5)=0.5` |
-| 結果 | X、Y の順に補間すると約 `−0.351328`。コードの振幅調整を掛ける前の値。 |
+| 結果 | X、Y の順に補間すると約 `−0.351328`。これが `perlin2` の戻り値。 |
 
 ### Simplex — 三角形の選択と距離減衰
 
@@ -132,7 +132,7 @@ F(p) = Σ A(k) × n(f(k) × p + offset(k))
 
 ### ピクセル内に収まらない層を弱める
 
-画面上で隣のピクセルへ移ったとき、サンプル座標がノイズの何セル分動くかを `ρ = max(length(ddx(p)), length(ddy(p)))` で見積もる。層 `k` の入力に `λ^k` を掛けるなら、同じ量は `ρ × λ^k`。たとえば `ρ=0.125`、`λ=2` なら、層ごとに 0.125、0.25、0.5、1、2 セル/ピクセルになる。下のコードは `1−smoothstep(0.25, 0.5, ρ×λ^k)` で高周波を減衰させる。0.25 と 0.5 はノイズの見え方を調整する値。基底ノイズ自体の周波数帯には幅があるので、これは厳密な面積積分の代わりに使う近似。 [GPU Gems — High-Quality Filtering](https://developer.nvidia.com/gpugems/gpugems/part-iv-image-processing/chapter-24-high-quality-filtering)
+画面上で隣のピクセルへ移ったとき、サンプル座標がノイズの何セル分動くかを `ρ = max(length(ddx(p)), length(ddy(p)))` で見積もる。層 `k` の入力に `λ^k` を掛けるなら、同じ量は `ρ × λ^k`。たとえば `ρ=0.125`、`λ=2` なら、層ごとに 0.125、0.25、0.5、1、2 セル/ピクセルになる。pbrt 第 3 版の `FBm()` は位置の微分から評価する層数を決め、境界の層を滑らかに弱める。下の HLSL 例では層ごとに `1−smoothstep(0.25, 0.5, ρ×λ^k)` を掛ける。0.25 と 0.5 はこの例で使う調整値。基底ノイズ自体の周波数帯には幅があるので、これは厳密な面積積分の代わりに使う近似。 [pbrt 第 3 版 §10.6.3 — Noise Idioms and Spectral Synthesis](https://pbr-book.org/3ed-2018/Texture/Noise#NoiseIdiomsandSpectralSynthesis)
 
 ドメインワープを使うときは変形後の座標から `ρ` を測る。たとえば変位によって模様が横に詰まる場所では、同じ基準周波数でも 1 ピクセルの中に入るセル数が増える。減衰後の和を元の全層の振幅で割れば、カメラを遠ざけて細部を落としても、残った粗い層の振幅が急に強くならない。ワープを掛けるノイズ自体の周波数が高い場合は、その場の評価にも帯域制限が必要になる。
 
@@ -382,4 +382,4 @@ float4 main(float2 uv : TEXCOORD0) : SV_Target
 - [Ken Perlin — Improving Noise（SIGGRAPH、2002）](https://mrl.cs.nyu.edu/~perlin/paper445.pdf)
 - [Stefan Gustavson — Simplex Noise Demystified（2005）](https://itn-web.it.liu.se/~stegu76/TNM084-2011/simplexnoise-demystified.pdf)
 - [Benoit B. Mandelbrot — Random fractals: Self-affinity in noise, music, mountains, and clouds](https://research.ibm.com/publications/random-fractals-self-affinity-in-noise-music-mountains-and-clouds)
-- [Kevin Bjorke — High-Quality Filtering（NVIDIA GPU Gems）](https://developer.nvidia.com/gpugems/gpugems/part-iv-image-processing/chapter-24-high-quality-filtering)
+- [Pharr・Jakob・Humphreys — pbrt 第 3 版 §10.6.3、位置の微分を使った fBm のアンチエイリアス](https://pbr-book.org/3ed-2018/Texture/Noise#NoiseIdiomsandSpectralSynthesis)

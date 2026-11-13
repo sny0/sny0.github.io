@@ -93,6 +93,8 @@ int main()
 CRTPの基底を、共通の手順を定義する用途に加え、型へ小さな機能を付け足す **mixin** として使えます。以下の `Ordered` は具体型の `operator<` から `>`、`<=`、`>=` を作ります。`Counted` は生きているインスタンス数を型ごとに数えます。C++20 の単体例で、計数は単一スレッドを前提にします。
 
 ```cpp
+#include <algorithm>
+#include <array>
 #include <cassert>
 #include <cstddef>
 #include <memory>
@@ -123,6 +125,8 @@ class Counted
     Counted() { ++alive_; }
     Counted(const Counted&) : Counted() {}
     Counted(Counted&&) noexcept : Counted() {}
+    Counted& operator=(const Counted&) = default;
+    Counted& operator=(Counted&&) = default;
 
 protected:
     ~Counted() { --alive_; }
@@ -153,24 +157,33 @@ int main()
 {
     static_assert(!std::is_destructible_v<Counted<DrawItem>>);
     static_assert(std::is_destructible_v<DrawItem>);
+    static_assert(std::is_copy_assignable_v<DrawItem>);
+    static_assert(std::is_move_assignable_v<DrawItem>);
 
     {
-        DrawItem back{20};
-        DrawItem front{10};
-        auto copy = std::make_unique<DrawItem>(front);
+        std::array items{DrawItem{20}, DrawItem{10}};
+        auto copy = std::make_unique<DrawItem>(items.back());
         Light light;
-        assert(back > front && front <= *copy && *copy >= front);
+        assert(items.front() > items.back() && items.back() <= *copy && *copy >= items.back());
+        assert(DrawItem::alive() == 3 && Light::alive() == 1);
+
+        std::sort(items.begin(), items.end());
+        assert(items.front() < items.back());
+        *copy = items.back();
+        assert(*copy > items.front());
         assert(DrawItem::alive() == 3 && Light::alive() == 1);
     }
     assert(DrawItem::alive() == 0 && Light::alive() == 0);
 }
 ```
 
-比較関数をクラス内の `friend` として定義すると、具体型を使った演算で引数依存の名前探索から見つかります。`<` は一貫した順序を表す必要があります。ここでは整数のキーを使い、等価な順序の項目を許します。C++20 で同じキーから比較を定義できる場合は `operator<=>` も候補です。計数は `Counted<DrawItem>` と `Counted<Light>` で別々になり、コピー・ムーブ構築も新しい生存オブジェクトに数えます。複数スレッドから構築・破棄する型へ同じ mixin を付けるなら、計数の読み書きに同期が必要です。
+比較関数をクラス内の `friend` として定義すると、具体型を使った演算で引数依存の名前探索から見つかります。`<` は一貫した順序を表す必要があります。ここでは整数のキーを使い、等価な順序の項目を許します。C++20 で同じキーから比較を定義できる場合は `operator<=>` も候補です。
+
+計数は `Counted<DrawItem>` と `Counted<Light>` で別々になり、コピー・ムーブ構築も新しい生存オブジェクトに数えます。`Counted` のムーブコンストラクターを宣言すると、暗黙のコピー代入演算子は削除され、ムーブ代入演算子も暗黙には宣言されません。ここでは代入演算子を両方とも `= default` で宣言します。代入は既存オブジェクトの値を置き換える操作なので、静的な生存数には触れません。`std::sort` の内部で一時オブジェクトを構築しても、並べ替えが終わると生存数は元に戻ります。複数スレッドから構築・破棄する型へ同じ mixin を付けるなら、計数の読み書きに同期が必要です。
 
 ### コード例 — C++23 の明示的オブジェクト引数で書き換える
 
-`advance` の入口を `this const auto& self` にすると、呼び出しに使われた静的な型から `self` を推論できます。フックを呼ぶための基底テンプレートやダウンキャストを省けます。型の推論は静的なので、基底の参照に型を隠すと具体型のフックは見えなくなります。以下は C++23 の単体例です。
+`advance` を `template<class Self>` で宣言し、明示的オブジェクト引数を `this const Self& self` と書くと、呼び出しに使われた静的な型から `Self` を推論できます。フックを呼ぶための基底テンプレートやダウンキャストを省けます。型の推論は静的なので、基底の参照に型を隠すと具体型のフックは見えなくなります。以下は C++23 の単体例です。
 
 ```cpp
 #include <algorithm>
@@ -268,6 +281,7 @@ C++規格が定めるのは仮想呼び出しの意味で、テーブルの配�
 
 - [WG21 N4861（C++20）— Implicit instantiation](https://timsong-cpp.github.io/cppwp/n4861/temp.inst)
 - [WG21 N4861（C++20）— Static cast](https://timsong-cpp.github.io/cppwp/n4861/expr.static.cast)
+- [WG21 N4861（C++20）— コピー・ムーブ代入演算子](https://timsong-cpp.github.io/cppwp/n4861/class.copy.assign)
 - [WG21 P0847R7 — Deducing this（C++23）](https://www.open-std.org/jtc1/sc22/wg21/docs/papers/2021/p0847r7.html)
 
 - [WG21 N4861 — Delete expression](https://timsong-cpp.github.io/cppwp/n4861/expr.delete)・[Class member access](https://timsong-cpp.github.io/cppwp/n4861/class.access)

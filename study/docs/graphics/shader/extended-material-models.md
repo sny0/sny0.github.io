@@ -75,7 +75,7 @@ $D$ と $G$ はコートの法線と粗さ $r_c$ で評価する。ベースの�
 
 $c=0.75$ なら、正面で $w=0.03$、$|N_c\cdot V|=0.2$ で $F_c=0.3545728$、$w=0.2659296$。同じ塗膜でも斜めから見ると上層の寄与が増える。固定した $V$ に対してこの重みは $L$ に依存しない。両ローブが共通の法線と余弦で積分され、個々の方向半球反射率が 1 以下なら、その凸結合も 1 以下になる。実装で法線を変えるときは各ローブの余弦と可視半球を追い、斜めから見たときにシェーディング法線が幾何法線の裏側を向くケースを調べる。
 
-この重ね方は屈折率による方向の変化や層間の多重反射を省く薄層近似である。塗膜の厚みや吸収を扱う場合は、入射側の透過、層内のベースの応答、出射側の透過を別々に評価する。式を選ぶときは、ベースの材質として測定済みの反射率に何が含まれているかも確認する。塗装済みの測定値にもう一層を加えると、元の塗膜を二重にモデル化することになる。参考資料の glTF 2.0 `KHR_materials_clearcoat` と、Disney のレイヤー付き BSDF を参照。
+この重ね方は、glTF 2.0 の `KHR_materials_clearcoat` が示す薄層近似である。塗膜の厚みを無視し、屈折による方向の変化や層間の散乱を省く。塗膜の厚みや吸収を扱う場合は、入射側の透過、層内のベースの応答、出射側の透過を別々に評価する。層内や層間の多重散乱まで扱う例は Jakob らの論文を参照。式を選ぶときは、ベースの材質として測定済みの反射率に何が含まれているかも確認する。塗装済みの測定値にもう一層を加えると、元の塗膜を二重にモデル化することになる。
 
 ### 繊維の光沢（sheen） — 繊維のかすめ角を別のローブで扱う
 
@@ -310,10 +310,10 @@ float4 main(float2 uv : TEXCOORD0) : SV_Target0
 
 - Khronos Group, [glTF 2.0 PBR Material Extensions](https://www.khronos.org/gltf/pbr)
 - Khronos Group, [KHR_materials_anisotropy](https://github.com/KhronosGroup/glTF/tree/main/extensions/2.0/Khronos/KHR_materials_anisotropy)
-- Khronos Group, [KHR_materials_clearcoat](https://github.com/KhronosGroup/glTF/tree/main/extensions/2.0/Khronos/KHR_materials_clearcoat)
+- Khronos Group, [KHR_materials_clearcoat — Implementation, Discussion](https://github.com/KhronosGroup/glTF/blob/main/extensions/2.0/Khronos/KHR_materials_clearcoat/README.md#discussion)
 - Khronos Group, [KHR_materials_sheen](https://github.com/KhronosGroup/glTF/tree/main/extensions/2.0/Khronos/KHR_materials_sheen)
 - Brent Burley, [Physically Based Shading at Disney](https://media.disneyanimation.com/uploads/production/publication_asset/48/asset/s2012_pbs_disney_brdf_notes_v3.pdf)
-- Brent Burley, [Extending the Disney BRDF to a BSDF with Integrated Subsurface Scattering](https://blog.selfshadow.com/publications/s2015-shading-course/burley/s2015_pbs_disney_bsdf_notes.pdf), SIGGRAPH 2015
+- Wenzel Jakob et al., [A Comprehensive Framework for Rendering Layered Materials](https://rgl.epfl.ch/publications/Jakob2014Comprehensive), SIGGRAPH 2014
 - Alejandro Conty Estevez and Christopher Kulla, [Production Friendly Microfacet Sheen BRDF](https://fpsunflower.github.io/ckulla/data/s2017_pbs_imageworks_sheen.pdf), SIGGRAPH 2017
 - Eric Penner, [Pre-Integrated Skin Shading](https://advances.realtimerendering.com/s2011/), SIGGRAPH 2011 の講演資料
 - Jorge Jimenez et al., [Separable Subsurface Scattering](https://iryoku.com/separable-sss/), 2015

@@ -54,7 +54,55 @@ Unity 6.3 の公式マニュアルでは、予約された 4 個を含めて 1 �
 
 `IPreprocessShaders.OnProcessShader` は Player と AssetBundle のビルドで、グラフィックスシェーダーのスニペットについて候補の `IList<ShaderCompilerData>` を受け取ります。不要な組を `RemoveAt` で除きます。シェーダー名、パス、シェーダーステージ、コンパイラープラットフォーム、キーワードの組を使って、規則を必要な範囲に絞れます。コンピュートシェーダーのカーネルには別の `IPreprocessComputeShaders` が用意されています。すでにキャッシュされたシェーダーにはコールバックが呼ばれないため、規則変更後に全件を確認するときはクリーンビルドします。[Unity 6.3、OnProcessShader](https://docs.unity3d.com/6000.3/Documentation/ScriptReference/Build.IPreprocessShaders.OnProcessShader.html)
 
-次は Unity 6.3 の Editor アセンブリでコンパイルできる C# です。`Sny0/VariantDemo` の `ForwardLit` という名前のパスに、`QUALITY_HIGH` と `SHADOWS_ON` をそれぞれオフ／オンで宣言してあることを前提とします。下の規則はこのシェーダーのこのパスだけに適用し、最高品質で影を無効にする候補を削除します。キーワードが見つからないときは、宣言または名前が変わった可能性があるので、ビルドのログに記録して候補を残します。
+`Sny0/VariantDemo` の `ForwardLit` パスに、次の 3 組を宣言します。品質は低・中・高の排他的な 3 択で、影と霧はそれぞれ `_` がオフ、名前付きキーワードがオンです。パス内の各ステージで、この 3 組から作る候補はストリッピング前に $3\times2\times2=12$ 通りです。例のシェーダーは、キーワードの選択が分かるように三角形の色を変えます。[Unity 6.3、Introduction to shader variants](https://docs.unity3d.com/6000.3/Documentation/Manual/shader-variants.html)
+
+```hlsl
+Shader "Sny0/VariantDemo"
+{
+    SubShader
+    {
+        Pass
+        {
+            Name "ForwardLit"
+            Cull Off
+
+            HLSLPROGRAM
+            #pragma target 3.5
+            #pragma vertex Vert
+            #pragma fragment Frag
+            #pragma multi_compile_local QUALITY_LOW QUALITY_MEDIUM QUALITY_HIGH
+            #pragma multi_compile_local _ SHADOWS_ON
+            #pragma multi_compile_local _ FOG_ON
+
+            float4 Vert(uint vertexId : SV_VertexID) : SV_Position
+            {
+                float2 corner = float2((vertexId << 1) & 2, vertexId & 2);
+                return float4(corner * 2.0 - 1.0, 0.5, 1.0);
+            }
+
+            float4 Frag() : SV_Target
+            {
+                float3 color = float3(0.6, 0.25, 0.15);
+            #if defined(QUALITY_MEDIUM)
+                color = float3(0.2, 0.6, 0.3);
+            #elif defined(QUALITY_HIGH)
+                color = float3(0.2, 0.4, 0.8);
+            #endif
+            #if defined(SHADOWS_ON)
+                color *= 0.75;
+            #endif
+            #if defined(FOG_ON)
+                color = lerp(color, float3(0.5, 0.5, 0.5), 0.25);
+            #endif
+                return float4(color, 1.0);
+            }
+            ENDHLSL
+        }
+    }
+}
+```
+
+次は Unity 6.3 の Editor アセンブリでコンパイルできる C# です。このシェーダーのこのパスにだけ適用し、最高品質で影を無効にする候補を削除します。キーワードが見つからないときは、宣言または名前が変わった可能性があるので、ビルドのログに記録して候補を残します。
 
 ```csharp
 using System.Collections.Generic;

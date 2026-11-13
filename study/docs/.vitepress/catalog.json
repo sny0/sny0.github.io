@@ -11875,7 +11875,7 @@
         "Fractal Brownian Motion",
         "Domain Warp"
       ],
-      "verification": "Ken Perlin の原論文・参照実装、Stefan Gustavson の解説と 2D Simplex 実装、O’Neill の PCG、JCGT の GPU ハッシュ比較、NVIDIA GPU Gems に照合（2026-11-13）",
+      "verification": "Ken Perlin の原論文・参照実装、Stefan Gustavson の解説と 2D Simplex 実装、O’Neill の PCG、JCGT の GPU ハッシュ比較、NVIDIA GPU Gems、pbrt 第 3 版に照合（2026-11-13）",
       "links": [
         "/practice/graphics/shader-lab.html",
         "/graphics/shader/hlsl.html",
@@ -12914,7 +12914,7 @@
         "froxel",
         "参加媒質"
       ],
-      "verification": "Hillaire の SIGGRAPH 2015 資料と大気散乱の原論文、HLSL Shader Model 6.0（2026-11-13）",
+      "verification": "Hillaire と Schneider の SIGGRAPH 2015 講演資料、大気散乱の原論文、HLSL Shader Model 6.0（2026-11-13）",
       "links": [
         "/graphics/optimization/enhanced-barriers-and-synchronization2.html",
         "/graphics/shader/procedural-noise.html",
@@ -15335,7 +15335,7 @@
         "AgX",
         "Exposure"
       ],
-      "verification": "W3C CSS Color 4、glTF 2.0、DXGI Advanced Color、ACES 2.0 の CTL、Blender 4.5.0 の OCIO 設定と LUT、Unreal Engine 5.8、ITU-R BT.2100-3 に照合（2026-11-13）",
+      "verification": "W3C CSS Color 4、glTF 2.0、DXGI Advanced Color、ACES 2.0 の CTL、Blender 4.5.0 の OCIO 設定と LUT、Unreal Engine 5.8、Filament v1.80.0、ISO 2720:1974・12232:2019、ITU-R BT.2100-3 に照合（2026-11-13）",
       "links": [
         "/practice/graphics/shader-lab.html",
         "/graphics/texture/texture-filtering-and-mipmaps.html",

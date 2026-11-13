@@ -45,7 +45,7 @@ NVIDIA は **DLSS 4** で、Super Resolution、Ray Reconstruction、DLAA に Tra
 
 ### ニューラル材質 — どの段階を近似するか
 
-ニューラルテクスチャ圧縮が復号するのは、ベースカラー、法線、粗さといった材質入力である。その後は既存のシェーディングを続けられる。Kuznetsov らの **Real-Time Neural Appearance Models**（2023 年）は、元の材質グラフの反射評価や方向サンプリングをまとめて近似する。UV や細部のスケールから学習済みの特徴を取得し、光の入射・出射方向と組み合わせて、小さなデコーダーで材質の応答を求める。元の材質の評価を正解データにできるため、実行時に重ねる層が多い材質を、オフラインで一つの学習済み表現にまとめられる。
+ニューラルテクスチャ圧縮が復号するのは、ベースカラー、法線、粗さといった材質入力である。その後は既存のシェーディングを続けられる。NVIDIA の Tizian Zeltner らの **Real-Time Neural Appearance Models**（*ACM Transactions on Graphics* 43 巻 3 号、2024 年）は、元の材質グラフの反射評価や方向サンプリングをまとめて近似する。UV や細部のスケールから学習済みの特徴を取得し、光の入射・出射方向と組み合わせて、小さなデコーダーで材質の応答を求める。元の材質の評価を正解データにできるため、実行時に重ねる層が多い材質を、オフラインで一つの学習済み表現にまとめられる。
 
 | 近似する処理 | 推論が受け取るもの | 推論から後段へ渡すもの | 比較する参照 |
 | --- | --- | --- | --- |
@@ -53,9 +53,9 @@ NVIDIA は **DLSS 4** で、Super Resolution、Ray Reconstruction、DLAA に Tra
 | ニューラル材質の反射評価 | 位置の特徴・入射と出射の方向・スケールなど | その方向の反射評価値。方式によってはサンプリング分布のパラメーターも求める | 元の材質グラフの反射とサンプリング |
 | ニューラル放射輝度キャッシュ | パスの終端候補での位置・方向・材質など | 残りの光輸送の放射輝度 | 同じ位置から長く追跡したパスの統計 |
 
-材質グラフを近似する方式では、評価用の関数と、重要度サンプリングに使う分布を区別する。ある方向 $\omega_i$ を確率密度 $p(\omega_i)$ で引いたとき、1 サンプルの反射側の重みは $f(\omega_i,\omega_o)|N\cdot\omega_i|/p(\omega_i)$ になる。評価する BRDF $f$ は学習結果で、分母は実際に方向を引いた分布の PDF。近似した BRDF の値をそのまま分母に入れると、描画の明るさが正しく収束しない。学習でサンプリング分布も作る場合は、サンプルを生成するコードと PDF を返すコードを同じ分布から組み立てる。マイクロファセット分布を利用して異方性をサンプルする例は、Kuznetsov らの論文にある。
+材質グラフを近似する方式では、評価用の関数と、重要度サンプリングに使う分布を区別する。ある方向 $\omega_i$ を確率密度 $p(\omega_i)$ で引いたとき、1 サンプルの反射側の重みは $f(\omega_i,\omega_o)|N\cdot\omega_i|/p(\omega_i)$ になる。評価する BRDF $f$ は学習結果で、分母は実際に方向を引いた分布の PDF。近似した BRDF の値をそのまま分母に入れると、描画の明るさが正しく収束しない。学習でサンプリング分布も作る場合は、サンプルを生成するコードと PDF を返すコードを同じ分布から組み立てる。マイクロファセット分布を利用して異方性をサンプルする例は、Zeltner らの論文にある。
 
-特徴をどう格納するかでも、復号の演算と帯域の比が変わる。例えば **Real-Time Neural Materials using Block-Compressed Features**（2023 年の公開プレプリント）は、ネットワークへ入れる特徴をブロック圧縮で持つ。特徴をフィルタリングした結果をデコーダーに渡す構成と、材質を評価してから結果を平均する構成では、一般に結果が異なる。デコーダー $g$ が非線形なら $g((a+b)/2)$ と $(g(a)+g(b))/2$ が一致するとは限らないからだ。ミップ間を移動したときに粗さやハイライトが跳ばないかは、各 mip を固定した画像に加えて、カメラを連続移動させて確認する。
+特徴をどう格納するかでも、復号の演算と帯域の比が変わる。例えば Ubisoft La Forge の Weinreich らの **Real-Time Neural Materials using Block-Compressed Features**（*Computer Graphics Forum* 43 巻 2 号、Eurographics 2024）は、ネットワークへ入れる特徴をブロック圧縮で持つ。特徴をフィルタリングした結果をデコーダーに渡す構成と、材質を評価してから結果を平均する構成では、一般に結果が異なる。デコーダー $g$ が非線形なら $g((a+b)/2)$ と $(g(a)+g(b))/2$ が一致するとは限らないからだ。ミップ間を移動したときに粗さやハイライトが跳ばないかは、各 mip を固定した画像に加えて、カメラを連続移動させて確認する。
 
 ```mermaid
 flowchart LR
@@ -211,8 +211,8 @@ void main(uint3 id : SV_DispatchThreadID)
 - NVIDIA, [DLSS 4 — The New Transformer Model](https://www.nvidia.com/en-us/geforce/news/gfecnt/20251/dlss4-multi-frame-generation-ai-innovations/)
 - NVIDIA, [DLSS 4.5 Super Resolution](https://developer.nvidia.com/blog/nvidia-dlss-4-5-delivers-super-resolution-upgrades-and-new-dynamic-multi-frame-generation/)・[DLSS 4.5 Ray Reconstruction](https://www.nvidia.com/en-us/geforce/news/gamescom-2026-nvidia-geforce-rtx-dlss-4-5-announcements/)
 - Karthik Vaidyanathan et al., [Random-Access Neural Compression of Material Textures](https://research.nvidia.com/publication/2023-08_random-access-neural-compression-material-textures), SIGGRAPH 2023
-- Alexandr Kuznetsov et al., [Real-Time Neural Appearance Models](https://research.nvidia.com/labs/rtr/neural_appearance_models/), SIGGRAPH 2023
-- Clément Weinreich et al., [Real-Time Neural Materials using Block-Compressed Features](https://arxiv.org/abs/2311.16121), 2023 年公開プレプリント
+- Tizian Zeltner et al., [Real-Time Neural Appearance Models](https://doi.org/10.1145/3659577), *ACM Transactions on Graphics* 43(3), Article 33, 2024（SIGGRAPH 2024 で発表）。[NVIDIA の著者版と実装資料](https://research.nvidia.com/labs/rtr/neural_appearance_models/)
+- Clément Weinreich et al., [Real-Time Neural Materials using Block-Compressed Features](https://doi.org/10.1111/cgf.15013), *Computer Graphics Forum* 43(2), e15013（Eurographics 2024）
 - Thomas Müller et al., [Real-Time Neural Radiance Caching for Path Tracing](https://research.nvidia.com/labs/rtr/publication/muller2021nrc/), SIGGRAPH 2021
 - NVIDIA, [RTXGI SDK v2.8.0 — NRC Guide](https://github.com/NVIDIA-RTX/RTXGI/blob/v2.8.0/Docs/NrcGuide.md)
 - NVIDIA, [RTX Kit 2026.3](https://github.com/NVIDIA-RTX/RTX-Kit/releases/tag/2026.3)

@@ -55,7 +55,9 @@ C# 13から、型パラメーターの制約の末尾に `allows ref struct` を
 
 ### C# 14のSpan変換
 
-C# 14は、配列や文字列、`Span<T>` と `ReadOnlySpan<T>` の間の変換を、言語の組み込み変換として扱います。たとえば配列から同じ要素型の `Span<T>`、文字列から `ReadOnlySpan<char>`、書き込み可能なビューから読み取り専用のビューへ変換できます。さらに `ReadOnlySpan<string>` から `ReadOnlySpan<object>` のように、参照型の共変変換を使える読み取り専用ビューもあります。書き込み可能な `Span<object>` に広げると、元の文字列配列に文字列以外を書けてしまうため、同じ暗黙の変換はありません。これらのビューへの変換で要素は複製されません。
+C# 14は、配列や文字列、`Span<T>` と `ReadOnlySpan<T>` の間の変換を、言語の組み込み変換として扱います。たとえば配列から同じ要素型の `Span<T>`、文字列から `ReadOnlySpan<char>`、書き込み可能なビューから読み取り専用のビューへ変換できます。さらに `ReadOnlySpan<string>` から `ReadOnlySpan<object>` のように、参照型の共変変換を使える読み取り専用ビューもあります。これらのビューへの変換で要素は複製されません。
+
+実体が `string[]` の配列を、配列の共変変換で `object[]` 型の変数に入れることはできます。その変数を `Span<object>` へ暗黙に変換すると、コンパイルは通り、実行時にはビューを作る段階で `ArrayTypeMismatchException` が発生します。書き込み可能なビューを作るには、配列の実行時型も `object[]` である必要があります。`string[]` 型の式から `Span<object>` へ直接代入する場合、C# 13 では既存の変換演算子の引数に配列の共変変換を適用できるため、コンパイルが通って同じ例外が発生します。C# 14 ではこの型の組み合わせに言語組み込みの明示的な Span 変換があり、既存の演算子は変換候補から外れます。直接の代入はコンパイルエラー（CS0266）になり、明示的なキャストを使うと実行時に同じ例外が発生します。
 
 以前からあった変換演算子で代入できる例もあります。C# 14では、拡張メソッドを直接呼ぶときの受け手や、型引数の推論、オーバーロード解決にも Span 変換が参加するようになりました。例えば `this ReadOnlySpan<T>` だけを受け取る拡張メソッドを、要素型の合う配列から直接呼べます。同名の配列用・列挙用のオーバーロードがある場合、言語版の変更で選ばれる候補が変わる場合があるため、選択を固定したい箇所は引数を意図する型で受けます。拡張メソッドのメソッドグループをデリゲートへ変換するときの受け手には、この変換は使われません。
 
@@ -171,13 +173,26 @@ internal static class Program
         int original = ReadValue(snapshot);
         int first = samples.FirstSample();
         Console.WriteLine($"{changed}, {original}, {first}, {names[0]}");
+
+        object[] widened = labels;
+        bool rejected = false;
+        try
+        {
+            Span<object> writable = widened;
+            Console.WriteLine(writable.Length);
+        }
+        catch (ArrayTypeMismatchException)
+        {
+            rejected = true;
+            Console.WriteLine(nameof(ArrayTypeMismatchException));
+        }
         return changed == 15 && original == 10 && first == 4
-            && Equals(names[0], "HP") ? 0 : 1;
+            && Equals(names[0], "HP") && rejected ? 0 : 1;
     }
 }
 ```
 
-結果は `15, 10, 4, HP`。ビューへの書き込みは参照先の `health` に届きます。`Snapshot` は整数の値を受け取るので後から変わりません。`FirstSample` は借りたビューから値を一つ読み、ビューを外へ持ち出しません。`ReadValue` 内でインターフェース型のローカルへ代入せず、型制約を通して `Read` を呼ぶことで、同じ実装が `IntView` にも適用できます。
+1行目は `15, 10, 4, HP`、2行目は `ArrayTypeMismatchException` です。ビューへの書き込みは参照先の `health` に届きます。`Snapshot` は整数の値を受け取るので後から変わりません。`FirstSample` は借りたビューから値を一つ読み、ビューを外へ持ち出しません。`ReadValue` 内でインターフェース型のローカルへ代入せず、型制約を通して `Read` を呼ぶことで、同じ実装が `IntView` にも適用できます。`widened` の実体は `string[]` なので、書き込み可能な `Span<object>` を作るときに拒否されます。
 
 ### Unityで使うとき
 
@@ -191,6 +206,7 @@ Unity 6.3 LTSのEditorが使う言語版はC# 9.0です。公式マニュアル�
 4. `readonly ref int` フィールドに通常の代入をすると、参照先は付け替わるか。
 5. `scoped ReadOnlySpan<int>` を受け取った関数から、そのビューを `Slice` した結果を返せるか。
 6. C# 14で配列から `this ReadOnlySpan<T>` の拡張メソッドを呼んだとき、要素は別のバッファへコピーされるか。
+7. 実体が `string[]` の配列を `object[]` 型の変数経由で `Span<object>` に代入すると、どの段階で拒否されるか。
 
 ::: details 解答
 
@@ -200,6 +216,7 @@ Unity 6.3 LTSのEditorが使う言語版はC# 9.0です。公式マニュアル�
 4. 付け替わらない。通常の代入は参照先へ値を書く。`readonly ref` は参照先を変更できる場所を制限する。
 5. 返せない。部分ビューにも同じ借りた参照が含まれる。
 6. コピーされない。C# 14の変更は変換や呼び出しの解決に関するもので、ビューは元の範囲を参照する。
+7. コンパイルは通る。実行時に `Span<object>` を作る段階で配列の実行時型を確認し、`ArrayTypeMismatchException` が発生する。
 
 :::
 
@@ -216,6 +233,8 @@ Unity 6.3 LTSのEditorが使う言語版はC# 9.0です。公式マニュアル�
 - [Microsoft — C# 11のrefフィールドとscopedの仕様](https://github.com/dotnet/csharplang/blob/main/proposals/csharp-11.0/low-level-struct-improvements.md)
 - [Microsoft — C# 13のref structインターフェース実装とallows ref structの仕様](https://github.com/dotnet/csharplang/blob/main/proposals/csharp-13.0/ref-struct-interfaces.md)
 - [Microsoft — C# 14のSpan変換の仕様](https://learn.microsoft.com/en-us/dotnet/csharp/language-reference/proposals/csharp-14.0/first-class-span-types)
+- [Microsoft — C#の暗黙の参照変換（配列の共変変換）](https://learn.microsoft.com/en-us/dotnet/csharp/language-reference/language-specification/conversions#1028-implicit-reference-conversions)
+- [Microsoft — Span\<T\> の配列コンストラクターと ArrayTypeMismatchException](https://learn.microsoft.com/en-us/dotnet/api/system.span-1.-ctor?view=net-10.0)
 - [Microsoft — C# 9 function pointersの仕様](https://github.com/dotnet/csharplang/blob/main/proposals/csharp-9.0/function-pointers.md)
 - [Microsoft — Generic math（.NET 7以降）](https://learn.microsoft.com/en-us/dotnet/standard/generics/math)
 - [Microsoft — stackalloc式](https://learn.microsoft.com/en-us/dotnet/csharp/language-reference/operators/stackalloc)

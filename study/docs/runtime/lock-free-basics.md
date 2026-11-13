@@ -334,8 +334,8 @@ int main()
 
 ## 参考資料
 
-- [WG21 N4861 — C++20 最終作業草案 `intro.progress](https://timsong-cpp.github.io/cppwp/n4861/intro.progress)
-- [WG21 N4861 — C++20 最終作業草案 `atomics.types.operations](https://timsong-cpp.github.io/cppwp/n4861/atomics.types.operations)
+- [WG21 N4861 — C++20 最終作業草案 `intro.progress`](https://timsong-cpp.github.io/cppwp/n4861/intro.progress)
+- [WG21 N4861 — C++20 最終作業草案 `atomics.types.operations`](https://timsong-cpp.github.io/cppwp/n4861/atomics.types.operations)
 - [Maged M. Michael・Michael L. Scott — Simple, Fast, and Practical Non-Blocking and Blocking Concurrent Queue Algorithms（PODC 1996、訂正版擬似コード）](https://www.cs.rochester.edu/research/synchronization/pseudocode/queues.html)
 - [Maged M. Michael — Hazard Pointers: Safe Memory Reclamation for Lock-Free Objects（2004）](https://research.ibm.com/publications/hazard-pointers-safe-memory-reclamation-for-lock-free-objects)
 - [WG21 P2530R3 — Hazard Pointers for C++26](https://www.open-std.org/jtc1/sc22/wg21/docs/papers/2023/p2530r3.pdf)

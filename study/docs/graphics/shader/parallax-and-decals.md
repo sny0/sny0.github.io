@@ -177,4 +177,4 @@ float4 DecalPS(float4 position : SV_Position) : SV_Target
 - [Microsoft、Direct3D 11.3機能仕様のビューポート変換（15.6節）](https://microsoft.github.io/DirectX-Specs/d3d/archive/D3D11_3_FunctionalSpec.htm)
 - [Epic Games、Decal Materials（Unreal Engine 5.8）](https://dev.epicgames.com/documentation/unreal-engine/decal-materials-in-unreal-engine?application_version=5.8)
 
-- [Epic Games — EDecalBlendMode（UE 5.8）](https://dev.epicgames.com/documentation/en-us/unreal-engine/API/Runtime/Engine/EDecalBlendMode?application_version=5.8)
+- [Epic Games — EMaterialDecalResponse（Unreal Engine 5.8、受け手の材質設定）](https://dev.epicgames.com/documentation/unreal-engine/API/Runtime/Engine/EMaterialDecalResponse?application_version=5.8)

@@ -8,7 +8,7 @@ study:
   domain: graphics
   summary: sRGB の変換、線形 HDR バッファ、露出とトーンマッピング、ACES 2.0・AgX と表示先の役割を整理する。
   aliases: [色管理, リニア色空間, ガンマ補正, sRGB, HDR, トーンマッピング, ACES, AgX, Exposure]
-  verification: W3C CSS Color 4、glTF 2.0、DXGI Advanced Color、ACES 2.0 の CTL、Blender 4.5.0 の OCIO 設定と LUT、Unreal Engine 5.8、ITU-R BT.2100-3 に照合（2026-11-13）
+  verification: W3C CSS Color 4、glTF 2.0、DXGI Advanced Color、ACES 2.0 の CTL、Blender 4.5.0 の OCIO 設定と LUT、Unreal Engine 5.8、Filament v1.80.0、ISO 2720:1974・12232:2019、ITU-R BT.2100-3 に照合（2026-11-13）
 ---
 
 # 色空間と HDR — リニア光量からディスプレイ出力まで
@@ -188,7 +188,11 @@ flowchart LR
 
 100 ピクセルのうち、ビン中心 −4 段に 20 個、−1 段に 70 個、+5 段に 10 個あるとする。上下を除くと、各ビンに 10、70、5 個が残る。`ell = (−4×10 − 1×70 + 5×5)/85 = −1` なので測光値は `2^-1 = 0.5`、目標倍率は `0.18/0.5 = 0.36`（約 −1.474 段）。除外せずに平均を取った場合の `ell` は −1 で、この分布ではたまたま同じになる。たとえば最も明るい 10 個が +8 段に移ると、除外ありでは `ell ≈ −0.824`、除外なしでは −0.7 となる。明るい側のピクセルを除く割合を決めると、極端な値に対する応答も決まる。
 
-EV100 は ISO 100 を基準にした露出値。絞り値 `N`、シャッター時間 `t`（秒）、ISO 感度 `S` を使う場合、`EV100 = log2((N²/t) × (100/S))`。F4、1/125 秒、ISO 100 なら `log2(2000) ≈ 10.966`。同じ絞りと感度でシャッター時間を半分にすると 1 EV 増え、取り込む光が半分になる。測光の `ell` は任意のシーン単位の対数でも使える。物理カメラの EV100 と直接対応づける場合は、バッファ値を cd/m² に校正したうえで測光器側の校正定数も揃える。ここで使う露出倍率の段数は `+1` で画面が明るくなる定義なので、カメラ側の EV100 が増える向きと逆になる。 [Unreal Engine 5.8 — Auto Exposure](https://dev.epicgames.com/documentation/unreal-engine/auto-exposure-in-unreal-engine?lang=ja)
+EV100 は ISO 100 を基準にした露出値。絞り値 `N`、シャッター時間 `t`（秒）、ISO 感度 `S` を使う場合、`EV100 = log2((N²/t) × (100/S))`。F4、1/125 秒、ISO 100 なら `log2(2000) ≈ 10.966`。同じ絞りと感度でシャッター時間を半分にすると 1 EV 増え、取り込む光が半分になる。ここで使う露出補正の `+1` 段は、露出倍率を 2 倍にする定義。 [Unreal Engine 5.8 — Auto Exposure](https://dev.epicgames.com/documentation/unreal-engine/auto-exposure-in-unreal-engine?lang=ja)
+
+反射光式の露出計では、測光したシーン輝度を `L`（cd/m²）、校正定数を `K` とすると、感度 `S` での読みは `EV = log2(L × S / K)`。ISO 100 なら `EV100 = log2(L × 100 / K)` で、逆に `L = (K / 100) × 2^EV100` となる。Filament v1.80.0 が採る `K = 12.5` では、先ほどの EV100 に対応する測光値は `L = 0.125 × 2000 = 250 cd/m²`。ヒストグラムからこの式を使う場合は、露出前のバッファ値を cd/m² に校正する。 [ISO 2720:1974 — 写真用露出計](https://www.iso.org/standard/7690.html)・[Filament v1.80.0 — Exposure.cpp](https://raw.githubusercontent.com/google/filament/v1.80.0/filament/src/Exposure.cpp)
+
+Filament は、レンズの減衰係数を `q = 0.65` とする飽和基準のカメラモデルで、飽和に対応するシーン輝度を `Lmax = (0.78 / q) × 2^EV100 = 1.2 × 2^EV100` とする。線形 RGB に掛ける露出倍率は `1 / Lmax`。F4、1/125 秒、ISO 100 の例では `1 / (1.2 × 2000) ≈ 0.0004167` で、250 cd/m² の画素はトーンマップ前に約 0.1042 となる。係数 1.2 はこのレンズの仮定から決まる。上のヒストグラム例と下のコードは、中間調を 0.18 に置く `0.18 / 2^ell` の方式を使う。 [Filament — Exposure](https://google.github.io/filament/main/filament.html#imagingpipeline/physicallybasedcamera/exposure)・[Epic Games — Unreal Engine 4.25 における露出の変更](https://www.unrealengine.com/tech-blog/how-epic-games-is-handling-auto-exposure-in-4-25)
 
 現在の倍率を段数 `e`、目標を `target` とし、時間差を `dt` 秒として追従させる。`τ` を時定数（秒）とすると、目標が固定の区間に対して微分方程式 `de/dt = (target-e)/τ` を解いた更新式は `e += (target-e) × (1-exp(-dt/τ))`。たとえば目標まで 4 段、`τ=0.5` 秒なら、0.5 秒後に約 2.528 段進み、残差は約 1.472 段。`dt` が半分でも 2 回更新した総時間が同じなら残差は同じになる。明所に出たときの減光を速くし、暗所での増光を遅くするには、この 2 方向で時定数を分ける。UE 5.8 の Histogram モードも 64 ビンを使うが、目標との差が大きい区間では線形、小さい区間では指数的に追従し、速度設定は段/秒で与える。 [Unreal Engine 5.8 — Exposure Change Speed and Movement](https://dev.epicgames.com/documentation/unreal-engine/auto-exposure-in-unreal-engine?lang=ja)
 
@@ -415,4 +419,8 @@ PQ の上端は 10,000 cd/m² で、絶対輝度を非線形に符号化する�
 - [Blender 4.5.0 — OpenColorIO の設定](https://github.com/blender/blender/blob/v4.5.0/release/datafiles/colormanagement/config.ocio)
 - [Blender 4.5.0 — AgX Base sRGB の 3D LUT](https://github.com/blender/blender/blob/v4.5.0/release/datafiles/colormanagement/luts/AgX_Base_sRGB.cube)
 - [Epic Games — Unreal Engine 5.8 Auto Exposure](https://dev.epicgames.com/documentation/unreal-engine/auto-exposure-in-unreal-engine?lang=ja)
+- [ISO 2720:1974 — 写真用露出計の校正と試験](https://www.iso.org/standard/7690.html)
+- [ISO 12232:2019 — デジタルカメラの ISO 感度などの決定方法](https://www.iso.org/standard/73758.html)
+- [Filament v1.80.0 — Exposure.cpp、反射光の測光と飽和基準の露出倍率](https://raw.githubusercontent.com/google/filament/v1.80.0/filament/src/Exposure.cpp)
+- [Epic Games — Unreal Engine 4.25 の露出とレンズの減衰係数](https://www.unrealengine.com/tech-blog/how-epic-games-is-handling-auto-exposure-in-4-25)
 - [ITU-R BT.2100-3（2025 年版） — HDR の画像パラメーター](https://www.itu.int/rec/R-REC-BT.2100-3-202502-I/en)

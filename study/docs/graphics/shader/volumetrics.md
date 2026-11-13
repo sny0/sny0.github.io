@@ -13,7 +13,7 @@ study:
     - フロクセル
     - froxel
     - 参加媒質
-  verification: Hillaire の SIGGRAPH 2015 資料と大気散乱の原論文、HLSL Shader Model 6.0（2026-11-13）
+  verification: Hillaire と Schneider の SIGGRAPH 2015 講演資料、大気散乱の原論文、HLSL Shader Model 6.0（2026-11-13）
 ---
 
 # ボリューメトリック — 高さフォグ・フロクセル・雲と大気
@@ -135,7 +135,13 @@ flowchart LR
 
 雲のレイマーチでは、視線を雲が存在する高度範囲に限定する。各サンプルで雲の密度を評価し、カメラ側へ出る光の積分に加える。太陽からサンプルに届く光のために、太陽方向にも密度を積分する。カメラまでの透過率と太陽側の透過率は、向きも通る場所も別である。太陽方向のレイに沿った光学的厚さを $\tau_\odot$ とすれば、単一散乱の照明側は $e^{-\tau_\odot}p_\mathrm{HG}(\mu,g)$ に比例する。視線を雲から太陽へ近づけると、正の $g$ による前方散乱が輪郭を明るくする。
 
-Guerrilla の 2015 年の試作では、太陽の側から見た雲の縁が暗く、少し厚い所に明るさが出る見え方に、Powder の近似を使った。講演で示す因子の形は、無次元の光学的厚さを使って $P(\tau)=1-e^{-2\tau}$。Beer の減衰と併用する際は角度で適用量を変える。角度による補間を一旦省いて $e^{-\tau}P(\tau)$ だけを見ると、$\tau=0$ では 0、$\tau=0.2$ では約 0.270、$\tau=1$ では約 0.318、$\tau=3$ では約 0.050。薄い所では Powder 因子が小さく、厚い所では透過の減衰が強い。位相関数の正規化や背景への透過率をこの係数で置き換えると、雲の密度と見た目を独立に調整できなくなる。
+Guerrilla の 2015 年の試作では、太陽の側から見た雲の縁が暗く、少し厚い所に明るさが出る見え方に、Powder の近似を使った。Schneider の講演資料 p. 62 の曲線では、光学的厚さを $\tau$ とすると Beer の減衰は $e^{-\tau}$、Powder 因子は $P(\tau)=1-e^{-2\tau}$ で、係数 2 は Powder 側の指数に入る。二つを掛けた Beer–Powder の値は次の式になる。
+
+$$
+B(\tau)=e^{-\tau}(1-e^{-2\tau}).
+$$
+
+$\tau=0$ では 0、$\tau=0.2$ では約 0.269919、$\tau=1$ では約 0.318092、$\tau=3$ では約 0.049664。薄い所では Powder 因子が小さく、厚い所では Beer の減衰が強い。講演の照明モデルでは、Powder の適用量を視線と光源の角度に応じて変え、Henyey–Greenstein の位相関数も掛ける。上の数値例はこの角度依存と位相関数を省き、p. 62 の二つの因子だけを比較したもの。
 
 2017 年に公開された Nubis の実装方針では、低周波の形、細部の侵食、高さの形、広域の天候を分けて作る。Perlin–Worley を用いた低周波の形で雲の塊を作り、細かいノイズで表面を侵食する。天候データで被覆や雲の種類を変え、高さのプロファイルを切り替える。2017 年の照明資料では、2015 年の Powder の方向依存の扱いも更新し、密度や深さから光の入り方を調整する。複数の作品や年の実装で式を比較するときは、同じ「Nubis」でもモデルが更新されている点に注意する。
 
@@ -196,7 +202,7 @@ float4 main(float2 uv : TEXCOORD0) : SV_Target0
 
 ### コード例 — フロクセルに注入し、列ごとに積分する
 
-HLSL Shader Model 6.0 の `cs_6_0` で、同じソースを `Inject` と `Integrate` の二つのエントリーポイントとしてコンパイルする。格子は $64\times36\times48$。ビュー空間の $+Z$ を前方とする。近端を 0.5 m、遠端を 128 m とし、累積値は 0.5 m の境界から積分した各セルの遠端の値になる。照明には遮蔽物のない単一の方向光を使う。サンプルの `HeightFogOpticalDepth` は指数密度が成り立つ区間の解析解で、密度を地面でクランプした注入結果と照合するために使える。
+HLSL Shader Model 6.0 の `cs_6_0` で、同じソースを `Inject` と `Integrate` の二つのエントリーポイントとしてコンパイルする。格子は $64\times36\times48$。ビュー空間の $+Z$ を前方とする。近端を 0.5 m、遠端を 128 m とし、累積値は 0.5 m の境界から積分した各セルの遠端の値になる。照明には遮蔽物のない単一の方向光を使い、光源側の霧による減衰も無視できる場合を仮定する。そのため `Inject` の光源項では一般式の $V_\ell$ と $T_\ell$ をともに 1 とする。光源側の消散が無視できない場合は、光源から各セルまでの光学的厚さ $\tau_\ell$ を求めて $T_\ell=e^{-\tau_\ell}$ を光源項に掛ける。セルからカメラまでの透過率は別に `Integrate` で積分する。サンプルの `HeightFogOpticalDepth` は指数密度が成り立つ区間の解析解で、密度を地面でクランプした注入結果と照合するために使える。
 
 ```hlsl
 static const float PI = 3.14159265358979323846;
@@ -264,6 +270,7 @@ void Inject(uint3 id : SV_DispatchThreadID)
     float3 toLight = normalize(float3(0.2, 0.25, 1.0));
     // dot(-toLight, -ray) is the cosine between propagation directions.
     float phase = PhaseHG(dot(toLight, ray), 0.7);
+    // The light path has unit visibility and unit medium transmittance.
     float3 source = 0.85 * extinction * phase * float3(4.0, 3.6, 3.0);
     Injected[id] = float4(source, extinction);
 }
@@ -329,5 +336,5 @@ void Integrate(uint3 id : SV_DispatchThreadID)
 - Sébastien Hillaire, [A Scalable and Production Ready Sky and Atmosphere Rendering Technique](https://doi.org/10.1111/cgf.14050), 2020
 - Sébastien Hillaire, [Sky Atmosphere の参照実装](https://github.com/sebh/UnrealEngineSkyAtmosphere)
 - Bart Wronski, [Volumetric Fog — Unified, Compute Shader Based Solution to Atmospheric Scattering](https://bartwronski.com/wp-content/uploads/2014/08/bwronski_volumetric_fog_siggraph2014.pdf), SIGGRAPH 2014
-- Andrew Schneider and Nathan Vos, [The Real-Time Volumetric Cloudscapes of Horizon: Zero Dawn](https://advances.realtimerendering.com/s2015/The%20Real-time%20Volumetric%20Cloudscapes%20of%20Horizon%20-%20Zero%20Dawn%20-%20ARTR.pdf), SIGGRAPH 2015
+- Andrew Schneider and Nathan Vos, [The Real-Time Volumetric Cloudscapes of Horizon: Zero Dawn](https://advances.realtimerendering.com/s2015/The%20Real-time%20Volumetric%20Cloudscapes%20of%20Horizon%20-%20Zero%20Dawn%20-%20ARTR.pdf#page=64), SIGGRAPH 2015, pp. 62, 66, 69
 - Andrew Schneider and Nathan Vos, [Nubis: Authoring Real-Time Volumetric Cloudscapes with the Decima Engine](https://www.guerrilla-games.com/read/nubis-authoring-real-time-volumetric-cloudscapes-with-the-decima-engine), SIGGRAPH 2017
