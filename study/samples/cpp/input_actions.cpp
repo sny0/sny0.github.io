@@ -1,6 +1,7 @@
 // C++20 — 入力の意図構造体+差し替え可能なソース(docs/04_game_patterns/command_buffer_and_input.md)
+#include <cstddef>
 #include <cstdio>
-#include <memory>
+#include <utility>
 #include <vector>
 
 struct FrameInput {                                // デバイス非依存の「意図」
@@ -58,6 +59,8 @@ int main() {
     Player p2;
     ReplaySource replay(record);                   // 再生=ソース差し替えだけ
     for (int f = 0; f < 3; ++f) p2.Update(replay.Poll());
-    std::printf("replay: x=%.1f jumps=%d (一致=決定的)\n", p2.x, p2.jumps);
-    return 0;
+    const bool matches = p1.x == p2.x && p1.jumps == p2.jumps;
+    std::printf("replay: x=%.1f jumps=%d (%s)\n", p2.x, p2.jumps,
+                matches ? "match" : "mismatch");
+    return matches ? 0 : 1;
 }
