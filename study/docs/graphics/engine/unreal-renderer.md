@@ -113,7 +113,7 @@ Linux/Androidのネイティブビルド等で使うRHI。Steam DeckでWindows�
 
 ## コード例
 
-グローバルシェーダーを追加する例では、C++ の `FGlobalShader` を対応する `.usf` と結び付け、RDG パスに SRV の読み取りと UAV の書き込みを宣言します。出力は後続パスに渡します。プラグインの構成、C++ と HLSL のコード、出力の確認手順は RenderGraph の UE 5.1 の例を参照してください。[RenderGraph の Compute パス](/graphics/optimization/render-graph.html#unreal-rdg-compute)
+グローバルシェーダーを追加する例では、C++ の `FGlobalShader` を対応する `.usf` と結び付け、RDG パスに SRV の読み取りと UAV の書き込みを宣言します。出力は後続パスに渡します。プラグインの構成、C++ と HLSL のコード、UE 5.1.1 と UE 5.8.4 での実測結果を確認できます。[RenderGraph の Compute パス](/graphics/optimization/render-graph.html#unreal-rdg-compute)
 
 観察コマンド集 (実物で学ぶ):
 

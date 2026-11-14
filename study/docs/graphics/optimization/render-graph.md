@@ -164,7 +164,7 @@ Unity 6000.0.85f1 / URP 17.0.4 の Forward レンダラーで、`Intermediate Te
 
 ### Unreal Engine の RDG で Compute パスを追加する
 
-UE 5.1 の例です。プラグイン `StudyRdgProbe` のモジュールを `PostConfigInit` で読み込み、モジュールの依存に `Projects`、`RHI`、`RenderCore` を追加します。シェーダーはプラグインの `Shaders/Private/StudyEffect.usf` に置きます。モジュールの起動時に仮想パス `/StudyRdg` を `Shaders` に対応付けます。[Epic Games — UE 5.1 のプラグインシェーダー](https://dev.epicgames.com/documentation/en-us/unreal-engine/overview-of-shaders-in-plugins-unreal-engine?application_version=5.1)
+UE 5.1.1 と UE 5.8.4 で動作を確認した例です。プラグイン `StudyRdgProbe` のモジュールを `PostConfigInit` で読み込み、モジュールの依存に `Projects`、`RHI`、`RenderCore` を追加します。シェーダーはプラグインの `Shaders/Private/StudyEffect.usf` に置きます。モジュールの起動時に仮想パス `/StudyRdg` を `Shaders` に対応付けます。[Epic Games — プラグインシェーダー](https://dev.epicgames.com/documentation/en-us/unreal-engine/overview-of-shaders-in-plugins-unreal-engine?application_version=5.1)
 
 モジュールの起動処理 (`StudyRdgProbe.cpp`)。
 
@@ -251,7 +251,9 @@ void MainCS(uint3 Id : SV_DispatchThreadID)
 }
 ```
 
-`Input` は同じグラフで内容を初期化済みの、SRV として読める非 MSAA の 2D テクスチャです。パスの引数の SRV が読み取り、UAV が書き込みを表します。出力には SRV・UAV の両方を指定し、呼び出し側は返されたハンドルを後続パスで使います。CPU で確認する場合は `AddEnqueueCopyPass` で読み戻しを登録してから `GraphBuilder.Execute()` を呼び、GPU のコピー完了を待って読みます。グラフの外で GPU リソースを保持する場合は `QueueTextureExtraction` を使います。[Epic Games — UE 5.1 のパスの引数と外部リソース](https://dev.epicgames.com/documentation/en-us/unreal-engine/render-dependency-graph-in-unreal-engine?application_version=5.1)
+`Input` は同じグラフで内容を初期化済みの、SRV として読める非 MSAA の 2D テクスチャです。パスの引数の SRV が読み取り、UAV が書き込みを表します。出力には SRV・UAV の両方を指定し、呼び出し側は返されたハンドルを後続パスで使います。CPU で確認する場合は `AddEnqueueCopyPass` で読み戻しを登録してから `GraphBuilder.Execute()` を呼び、GPU のコピー完了を待って読みます。グラフの外で GPU リソースを保持する場合は `QueueTextureExtraction` を使います。[Epic Games — パスの引数と外部リソース](https://dev.epicgames.com/documentation/en-us/unreal-engine/render-dependency-graph-in-unreal-engine)
+
+UE 5.8.4 のテクスチャ版 `AddEnqueueCopyPass` は、コピー元のスライスを指定する `SourceSlice` を取ります。今回の 2D テクスチャでは `0` を渡しました。UE 5.1.1 のテクスチャ版はコピー範囲までの4引数です。[Epic Games — AddEnqueueCopyPass](https://dev.epicgames.com/documentation/unreal-engine/API/Runtime/RenderCore/AddEnqueueCopyPass?lang=en-US)
 
 ```mermaid
 flowchart LR
@@ -260,7 +262,7 @@ flowchart LR
     Unused["別の一時テクスチャへ書く"] --> NoRead["参照先なし<br/>パスカリングの対象"]
 ```
 
-**実行結果。** UE 5.1.1 の検証用コマンドレットを `-AllowCommandletRendering -dx12` で起動し、Direct3D 12 と GeForce RTX 3060 で実行しました。入力を 13 × 7 テクセルの `PF_FloatRGBA` テクスチャにし、`AddClearUAVPass` で全域を `(0.25, 0.5, 0.75, 1)` に初期化しました。8 × 8 スレッドのグループを横に2つ起動し、範囲チェックで画像外のスレッドを除きます。読み戻した91テクセルすべてが `(0.375, 0.25, 0.125, 1)` でした。グラフに登録した別のパスは、未使用の一時テクスチャだけに書き込む宣言だったため、実行ラムダが呼ばれませんでした。
+検証用コマンドレットを UE 5.1.1 と UE 5.8.4 で `-AllowCommandletRendering -dx12` を付けて起動し、Direct3D 12 と GeForce RTX 3060 で実行しました。入力を 13 × 7 テクセルの `PF_FloatRGBA` テクスチャにし、`AddClearUAVPass` で全域を `(0.25, 0.5, 0.75, 1)` に初期化しました。8 × 8 スレッドのグループを横に2つ起動し、範囲チェックで画像外のスレッドを除きます。どちらの版でも、読み戻した91テクセルすべてが `(0.375, 0.25, 0.125, 1)` でした。未使用の一時テクスチャだけに書き込む別のパスは、どちらの版でも実行ラムダが呼ばれませんでした。
 
 ## 前提知識
 
@@ -294,6 +296,7 @@ flowchart LR
 
 - Yuriy O'Donnell, *"FrameGraph: Extensible Rendering Architecture in Frostbite"* (GDC 2017) — 原典
 - [Epic Games — UE 5.1 の Render Dependency Graph](https://dev.epicgames.com/documentation/en-us/unreal-engine/render-dependency-graph-in-unreal-engine?application_version=5.1)
+- [Epic Games — Render Dependency Graph](https://dev.epicgames.com/documentation/en-us/unreal-engine/render-dependency-graph-in-unreal-engine)
 - [Epic Games — UE 5.1 のプラグインシェーダー](https://dev.epicgames.com/documentation/en-us/unreal-engine/overview-of-shaders-in-plugins-unreal-engine?application_version=5.1)
 - Unity, *Render graph system* マニュアル (URP 17+)
 - Themaister, *"Render graphs and Vulkan — a deep dive"* (Granite実装解説)
