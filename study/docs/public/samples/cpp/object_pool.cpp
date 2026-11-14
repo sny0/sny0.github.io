@@ -1,7 +1,9 @@
 // C++20 — Object Pool(フリーリスト方式)(docs/04_game_patterns/object_pool.md)
+#include <cstddef>
 #include <cstdio>
 #include <vector>
 
+// #region bullet-pool
 struct Bullet {
     float x = 0, y = 0, dx = 0, dy = 0;
     bool alive = false;
@@ -21,6 +23,7 @@ public:
         return &b;
     }
     void Release(Bullet* b) {
+        // 同じプールから取得した、返却前のポインタを一度だけ渡す。
         b->alive = false;
         free_.push_back(static_cast<std::size_t>(b - bullets_.data()));
     }
@@ -33,6 +36,7 @@ private:
     std::vector<Bullet> bullets_;                   // 起動時に一括確保、以後ヒープ操作なし
     std::vector<std::size_t> free_;
 };
+// #endregion bullet-pool
 
 int main() {
     BulletPool pool(4);

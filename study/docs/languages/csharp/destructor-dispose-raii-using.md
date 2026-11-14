@@ -61,8 +61,10 @@ int main() {
 ## using は「手動RAII」
 
 ```csharp
-// C#: Disposeを呼ぶ責任は「使う側」にある
-using var file = new StreamWriter("save.dat");   // usingを書き忘れたら? → リーク(検出は解析器頼み)
+using System.IO;
+
+using var file = new StreamWriter("save.dat");
+file.WriteLine("save data");
 ```
 
 ```cpp
@@ -70,7 +72,7 @@ using var file = new StreamWriter("save.dat");   // usingを書き忘れたら? 
 std::ofstream file("save.dat");
 ```
 
-- C#: 型がIDisposableでも、usingを書くかは利用者次第(呼び忘れが**コンパイルは通る**)
+- C#: 型が `IDisposable` でも、`using` を付け忘れたコードはコンパイルできます。上の例はスコープ終了時に `Dispose` を呼び、`StreamWriter` のバッファを下のストリームへ書き出して閉じます。呼び忘れると、その時点で書き出しや解放が行われる保証がありません。[Microsoft — StreamWriter.Dispose](https://learn.microsoft.com/en-us/dotnet/api/system.io.streamwriter.dispose?view=net-10.0)
 - C++: RAIIの所有オブジェクトが破棄されると、デストラクタが資源を解放。**「正しく使うのが簡単、間違って使うのが難しい」方向に倒れている**
 - C#の `using` はブロックや宣言のスコープに限られます。C++のRAIIはメンバ変数やコンテナ要素にも組み込めます。vectorが破棄されると全要素のデストラクタが呼ばれます。この合成可能性がC++の強みです。
 

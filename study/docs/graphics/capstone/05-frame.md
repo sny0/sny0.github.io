@@ -66,23 +66,27 @@ b.image = shadowImage;  // ... (Synchronization2の「文」として読む: vul
 
 ## 5.3 PBR Fragment Shader — ライティングの統合
 
-[PBR](/graphics/lighting/pbr.html)・[IBL](/graphics/lighting/ibl.html)・[シャドウ](/graphics/lighting/shadow.html) の各ページのコードをそのまま結合します:
+[PBR](/graphics/lighting/pbr.html)・[IBL](/graphics/lighting/ibl.html)・[シャドウ](/graphics/lighting/shadow.html) の処理を組み合わせる構成例です。各ヘルパーの引数とバインディングをこのレンダラーに合わせて接続します。`VSOut` とカメラの宣言は第4ステップにあり、ここでは光源用 UBO、ヘルパー本体、残りの画像・サンプラー宣言を省略しています。第3ステップで指定した `COMBINED_IMAGE_SAMPLER` を使う組には、DXC の `vk::combinedImageSampler` を付け、画像とサンプラーの binding をそろえます。[Microsoft DXC — Vulkan combined image sampler type](https://github.com/microsoft/DirectXShaderCompiler/wiki/Vulkan-combined-image-sampler-type)
 
 ```hlsl
-// pbr.frag.hlsl (要約 — 完全版は各章のコード例の結合)
-[[vk::binding(1,0)]] Texture2D gShadowMap;      [[vk::binding(1,0)]] SamplerComparisonState gShadowCmp;
-[[vk::binding(2,0)]] TextureCube gIrradiance;
-[[vk::binding(3,0)]] TextureCube gPrefiltered;
-[[vk::binding(4,0)]] Texture2D gBrdfLUT;
-[[vk::binding(0,1)]] Texture2D gAlbedo;         // set=1: マテリアル
-[[vk::binding(1,1)]] Texture2D gNormalMap;
-[[vk::binding(2,1)]] Texture2D gORM;
+// pbr.frag.hlsl の断片。セット0の binding 1 は深度画像と比較サンプラーの組。
+[[vk::combinedImageSampler, vk::binding(1,0)]] Texture2D<float> gShadowMap;
+[[vk::combinedImageSampler, vk::binding(1,0)]] SamplerComparisonState gShadowCmp;
+
+// セット1の各画像には対応するサンプラーを割り当てる。
+[[vk::combinedImageSampler, vk::binding(0,1)]] Texture2D<float4> gAlbedo;
+[[vk::combinedImageSampler, vk::binding(0,1)]] SamplerState gAlbedoSampler;
+[[vk::combinedImageSampler, vk::binding(1,1)]] Texture2D<float4> gNormalMap;
+[[vk::combinedImageSampler, vk::binding(1,1)]] SamplerState gNormalSampler;
+[[vk::combinedImageSampler, vk::binding(2,1)]] Texture2D<float4> gORM;
+[[vk::combinedImageSampler, vk::binding(2,1)]] SamplerState gOrmSampler;
 
 float4 main(VSOut i) : SV_Target0 {
     // 1. マテリアル取得 (fragment-shader章: TBNで法線をワールドへ)
-    float3 albedo = gAlbedo.Sample(gLinear, i.uv).rgb;
-    float3 orm    = gORM.Sample(gLinear, i.uv).rgb;
-    float3 N      = ApplyNormalMap(gNormalMap, i);   // TBN構築
+    float3 albedo = gAlbedo.Sample(gAlbedoSampler, i.uv).rgb;
+    float3 orm    = gORM.Sample(gOrmSampler, i.uv).rgb;
+    float3 nTS    = gNormalMap.Sample(gNormalSampler, i.uv).xyz * 2.0 - 1.0;
+    float3 N      = ApplyNormalMap(nTS, i);   // TBN構築
     float3 V      = normalize(gCamera.cameraPosWS.xyz - i.positionWS);
 
     // 2. 直接光: 太陽 x 影 (pbr章のShadePBR + shadow章のPCF)
@@ -101,7 +105,7 @@ float4 main(VSOut i) : SV_Target0 {
 
 ## 5.4 ポストプロセスとSDR最終出力
 
-[第3ステップのformat・usage・binding](/graphics/capstone/03-resources.html#pipeline-pso)に合わせた説明用断片です。ComputeはFP16の `ldrLinear` へトーンマップ後のリニアRGBを書き、最後のgraphics passが第2ステップのsRGB swapchain color attachmentへ出力します。swapchain画像にstorage対応を要求せず、sRGB符号化を最終attachmentへの書込みで一度だけ行います。HDRディスプレイ向けPQ/scRGB出力はこのSDR例とは別の設定です。
+[第3ステップのformat・usage・binding](/graphics/capstone/03-resources.html#pipeline-pso)に合わせたシェーダーです。Computeは `dxc -spirv -T cs_6_0 -E main tonemap.comp.hlsl` でコンパイルできます。FP16の `ldrLinear` へトーンマップ後のリニアRGBを書き、最後のgraphics passが第2ステップのsRGB swapchain color attachmentへ出力します。swapchain画像にstorage対応を要求せず、sRGB符号化を最終attachmentへの書込みで一度だけ行います。HDRディスプレイ向けPQ/scRGB出力はこのSDR例とは別の設定です。
 
 ```hlsl
 // tonemap.comp.hlsl — postSet (set=0)
@@ -110,20 +114,27 @@ float4 main(VSOut i) : SV_Target0 {
 [[vk::binding(2,0), vk::image_format("rgba16f")]]
 RWTexture2D<float4> gOut; // R16G16B16A16_SFLOAT view、GENERAL
 
+struct Exposure { float multiplier; };
+[[vk::push_constant]] ConstantBuffer<Exposure> gExposure;
+
+float3 ACESFitted(float3 x) {
+    return saturate((x * (2.51 * x + 0.03)) / (x * (2.43 * x + 0.59) + 0.14));
+}
+
 [numthreads(8, 8, 1)]
 void main(uint3 id : SV_DispatchThreadID) {
     uint width, height;
     gOut.GetDimensions(width, height);
     if (id.x >= width || id.y >= height) return; // ceil(extent/8) dispatchの端数
     float3 hdr = gHDR[id.xy].rgb + gBloom[id.xy].rgb * 0.04;
-    float3 color = ACESFitted(hdr * gExposure); // [0,1]のリニアRGB
+    float3 color = ACESFitted(hdr * gExposure.multiplier); // [0,1]のリニアRGB
     gOut[id.xy] = float4(color, 1);
 }
 ```
 
 `vk::image_format("rgba16f")` はstorage imageのSPIR-V formatを明示するDXC属性です。作成するviewは `R16G16B16A16_SFLOAT` と一致させ、この例はUnknown image formatのまま使う構成にはしません。
 
-`ACESFitted` は [ポストプロセス](/graphics/postprocess/overview.html) の関数、`gExposure` は事前に設定した値を使う省略変数です。HDR/Bloomのtexel loadと出力は同じextentを前提にしています。最終FSは同extentのfullscreen triangleで1 texelを1 pixelへ転送します:
+`ACESFitted` は [ポストプロセス](/graphics/postprocess/overview.html) と同じ近似式です。露出倍率は Compute 用の push constant に書き込みます。HDR/Bloomのtexel loadと出力は同じextentを前提にしています。最終FSは同extentのfullscreen triangleで1 texelを1 pixelへ転送します:
 
 ```hlsl
 // final.frag.hlsl — finalSet (set=0)、sampler不要のtexel load

@@ -98,7 +98,7 @@ std::string_view c = GetName();   // string_viewは所有せず、文字列の�
 
 ## 演習
 
-配布済みの<a href="/study/samples/cpp/lifetime_demo.cpp" download>lifetime_demo.cpp</a>は、デストラクタの順序と関数内staticの初期化を観察する既存サンプルです。この本文の改訂では、このサンプルの再実行は行っていません。
+<a href="/study/samples/cpp/lifetime_demo.cpp" download>lifetime_demo.cpp</a>は、デストラクタの順序と関数内staticの初期化を観察するサンプルです。MSVC 19.35のx64ビルドでは、`+global`、`main start`、`+a`、`+b`、`-b`、`-a`、`+function-static`、`main end`、`-function-static`、`-global` の順で観察できました。`Counter()` を2回呼んでも関数内staticの構築は1回です。グローバルの動的初期化を `main` の最初の文より前に行うか遅延するかは処理系が決めます。構築された静的オブジェクトはこの例のような正常終了時に破棄されます。[C++20作業草案 N4861 — 動的初期化](https://timsong-cpp.github.io/cppwp/n4861/basic.start.dynamic)・[終了時の破棄](https://timsong-cpp.github.io/cppwp/n4861/basic.start.term)
 
 OSの記憶域を観察する場合は、[Windowsの予約・コミット・初回書込みの実践](/practice/memory/windows-memory-observation.html)へ進んでください。
 

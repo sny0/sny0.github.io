@@ -57,6 +57,8 @@ Compute最適化の中心概念であり続けています。ただし近年は 
 
 ### バリアの意味論
 
+次の断片では、画像を読む `LoadPixel` の実装を省いています。
+
 ```hlsl
 groupshared float tile[16][16];
 
@@ -113,7 +115,7 @@ GLSL `shared`。上限は `maxComputeSharedMemorySize` (実機は32〜64KB+)。S
 
 ## コード例
 
-セパラブルぼかしのタイル読み込み (帯域最適化の教科書例):
+セパラブルぼかしの横方向のパスです。`BlurH` を `cs_6_0` でコンパイルできます。同じサイズで幅・高さが正の入出力画像を用意し、横は幅を256で割って切り上げたグループ数、縦は画像の高さでディスパッチします。端のレーンも座標をクランプして協調ロードとバリアに参加し、有効な画素だけを書き込みます。
 
 ```hlsl
 #define TILE 256
@@ -123,29 +125,41 @@ groupshared float3 sLine[TILE + RADIUS * 2];
 Texture2D<float4> gSrc : register(t0);
 RWTexture2D<float4> gDst : register(u0);
 
+int2 ClampCoord(int2 p, uint2 size)
+{
+    return clamp(p, int2(0, 0), int2(size) - 1);
+}
+
 [numthreads(TILE, 1, 1)]
 void BlurH(uint3 gtid : SV_GroupThreadID, uint3 dtid : SV_DispatchThreadID)
 {
+    uint width, height;
+    gSrc.GetDimensions(width, height);
+    uint2 size = uint2(width, height);
+
     // 1. タイル+袖領域を協調ロード (1スレッド1〜2回の読みで済む)
-    int2 base = int2(dtid.x - RADIUS, dtid.y);
-    sLine[gtid.x] = gSrc[ClampCoord(base)].rgb;
+    int2 base = int2(dtid.xy) - int2(RADIUS, 0);
+    sLine[gtid.x] = gSrc[ClampCoord(base, size)].rgb;
     if (gtid.x < RADIUS * 2)
-        sLine[TILE + gtid.x] = gSrc[ClampCoord(base + int2(TILE, 0))].rgb;
+        sLine[TILE + gtid.x] = gSrc[ClampCoord(base + int2(TILE, 0), size)].rgb;
 
     GroupMemoryBarrierWithGroupSync();
+    if (any(dtid.xy >= size)) return;
 
     // 2. Sharedからのみ読んで畳み込み (VRAM読みはもう発生しない)
     float3 sum = 0;
     [unroll]
     for (int i = 0; i <= RADIUS * 2; ++i)
-        sum += sLine[gtid.x + i] * gWeights[i];
-    gDst[dtid.xy] = float4(sum, 1);
+        sum += sLine[gtid.x + i];
+    gDst[dtid.xy] = float4(sum / (RADIUS * 2 + 1), 1);
 }
 ```
 
-Sharedヒストグラム (Atomic 2段構え):
+Shared ヒストグラムは、`t0` にある $0$〜$1$ の値を256区間に集計します。`HistCS` を `cs_6_0` でコンパイルし、`u0` に0で初期化した256個のカウンターを渡します。X 方向だけ、要素数を256で割って切り上げたグループ数で起動します。
 
 ```hlsl
+StructuredBuffer<float> gValues : register(t0);
+RWStructuredBuffer<uint> gGlobalHist : register(u0);
 groupshared uint sHist[256];
 
 [numthreads(256, 1, 1)]
@@ -154,13 +168,20 @@ void HistCS(uint gi : SV_GroupIndex, uint3 dtid : SV_DispatchThreadID)
     sHist[gi] = 0;
     GroupMemoryBarrierWithGroupSync();
 
-    uint bin = ComputeBin(gLoad(dtid.xy));
-    InterlockedAdd(sHist[bin], 1);            // Shared内Atomic (高速・競合は局所)
+    uint count, stride;
+    gValues.GetDimensions(count, stride);
+    if (dtid.x < count) {
+        uint bin = min(uint(saturate(gValues[dtid.x]) * 256), 255u);
+        InterlockedAdd(sHist[bin], 1);
+    }
     GroupMemoryBarrierWithGroupSync();
 
-    InterlockedAdd(gGlobalHist[gi], sHist[gi]); // グローバルへは256グループ→1回ずつ
+    uint hits = sHist[gi];
+    if (hits != 0) InterlockedAdd(gGlobalHist[gi], hits); // 1グループ・1使用区間につき1回
 }
 ```
+
+例えば入力が `0.0, 0.0, 0.5, 1.0` の4要素なら、区間0・128・255がそれぞれ2・1・1になります。グループからグローバルへの加算は3回です。
 
 ## 前提知識
 
@@ -186,7 +207,7 @@ void HistCS(uint gi : SV_GroupIndex, uint3 dtid : SV_DispatchThreadID)
 
 3. **ヒストグラムをグローバルAtomicだけで実装した場合と、Shared 2段構えの場合の性能差の要因は。**
    ::: details 解答
-   グローバルメモリだけを使うと、数百万のスレッドによるAtomicがL2/VRAM上の256アドレスに集中し、処理が直列化してメモリトラフィックが増える。2段階に分けると、256スレッドからなる各グループ内の競合は高速なSharedメモリ内で処理できる。グローバルメモリへの処理は「グループ数×256回」の整列した加算に減り、競合と帯域消費を桁単位で抑えられる。
+   グローバルメモリだけを使うと各要素が直接加算する。2段階の例では、同じグループ内の同じ区間への加算を Shared メモリに集め、グローバルへはそのグループで使った区間ごとに1回だけ加算する。グループ内で使った区間が少ないほど加算は減り、すべて異なる区間ならこの集約で加算回数は減らない。
    :::
 
 ## 参考資料

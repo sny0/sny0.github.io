@@ -81,23 +81,41 @@ void ApplyExplosion(std::vector<IDamageable*>& targets, int damage) {  // 生ポ
 
 ## C#版(Unityでの例)
 
+Unity 6.3 LTS の例です。樽の `Barrel.cs` に能力を実装します。
+
 ```csharp
-// Unityの定石: 小さなinterface + GetComponentでの能力問い合わせ
+using UnityEngine;
+
 public interface IDamageable { void TakeDamage(int amount); }
-public interface IInteractable { void Interact(PlayerContext player); }
 
 public class Barrel : MonoBehaviour, IDamageable {
-    public void TakeDamage(int amount) { /* 壊れる */ }
-}
+    [SerializeField, Min(1)] private int hp = 20;
 
-// 攻撃側: 「ダメージを受けられるか」だけを問う。相手が樽か敵かは知らない
-void OnHit(Collider other) {
-    if (other.TryGetComponent<IDamageable>(out var target))
-        target.TakeDamage(damage);
+    public void TakeDamage(int amount) {
+        if (amount <= 0 || hp <= 0) return;
+        hp = Mathf.Max(0, hp - amount);
+        if (hp == 0) gameObject.SetActive(false);
+    }
 }
 ```
 
-`TryGetComponent<IDamageable>` は「この相手はこの能力を持つか?」という問い合わせで、ISPの分割がそのまま活きる形です。逆に `GameObject` に生えた巨大な共通基底(自作の `BaseUnit` など)に何でも生やすと、違反例と同じ道をたどります。
+攻撃側の `DamageOnHit.cs` からは、当たり判定で得た `Collider` を使って `OnHit` を呼びます。
+
+```csharp
+using UnityEngine;
+
+// 攻撃側: 「ダメージを受けられるか」だけを問う。相手が樽か敵かは知らない
+public class DamageOnHit : MonoBehaviour {
+    [SerializeField, Min(0)] private int damage = 10;
+
+    public void OnHit(Collider other) {
+        if (other.TryGetComponent<IDamageable>(out var target))
+            target.TakeDamage(damage);
+    }
+}
+```
+
+`TryGetComponent<IDamageable>` は、`Collider` と同じ GameObject にあるコンポーネントを調べます。既定値では、そのオブジェクトの `Barrel` に2回命中すると HP が20→10→0となり、樽が非アクティブになります。攻撃側が参照するのは `IDamageable` だけなので、ダメージを受けない草などに空の実装を加える必要がありません。[Unity 6.3 — Component.TryGetComponent](https://docs.unity3d.com/6000.3/Documentation/ScriptReference/Component.TryGetComponent.html)
 
 ## ゲーム開発での例
 

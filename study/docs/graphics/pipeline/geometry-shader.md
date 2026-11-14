@@ -92,13 +92,18 @@ flowchart TB
 
 ## コード例
 
-点をカメラ向きの四角形に展開する典型例 (HLSL) — **教材として**:
+点をカメラ向きの四角形に展開する HLSL の例です。`GSMain` を `gs_6_0` でコンパイルできます。点プリミティブを入力し、カメラの右・上の単位ベクトルとビュー射影行列を `b0` に渡します。`size` は四角形の半分の幅・高さです。[Microsoft — Geometry-Shader Object](https://learn.microsoft.com/en-us/windows/win32/direct3dhlsl/dx-graphics-hlsl-geometry-shader)
 
 ```hlsl
 struct GSIn  { float3 centerWS : POSITION; float size : TEXCOORD0; };
 struct GSOut { float4 posCS : SV_Position; float2 uv : TEXCOORD0; };
+cbuffer Camera : register(b0) {
+    column_major float4x4 gViewProj;
+    float3 gCameraRightWS;
+    float3 gCameraUpWS;
+};
 
-[maxvertexcount(4)]   // 最大出力数の静的宣言が必須 (これが性能問題の根源)
+[maxvertexcount(4)]   // 4頂点の三角形ストリップから2三角形を組み立てる
 void GSMain(point GSIn input[1], inout TriangleStream<GSOut> stream)
 {
     float3 right = gCameraRightWS * input[0].size;

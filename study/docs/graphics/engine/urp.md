@@ -100,9 +100,14 @@ UnityのDX12バックエンドで動作。Unity 6のGPU Resident DrawerはDX12/V
 
 ## コード例
 
-Unity 6.0 / URP 17のRenderGraph経路での説明用断片（using・material shader・適切なintermediate colorの設定等は省略）:
+Unity 6.0 / URP 17 の RenderGraph 用 `TintFeature.cs` です。Renderer Feature に追加し、`_BlitTexture` を読むシェーダーのマテリアルを割り当てます。色は中間テクスチャから読み、バックバッファへ直接描いている場合はこのパスを実行しません。[Unity 6.0 — URP のブリットと色バッファの差し替え](https://docs.unity3d.com/6000.0/Documentation/Manual/urp/render-graph-optimize.html)
 
 ```csharp
+using UnityEngine;
+using UnityEngine.Rendering;
+using UnityEngine.Rendering.RenderGraphModule;
+using UnityEngine.Rendering.Universal;
+
 public class TintFeature : ScriptableRendererFeature {
     class TintPass : ScriptableRenderPass {
         Material m_Material;
@@ -116,10 +121,13 @@ public class TintFeature : ScriptableRendererFeature {
         public override void RecordRenderGraph(RenderGraph rg,
                                                ContextContainer frameData) {
             var res = frameData.Get<UniversalResourceData>();
+            if (res.isActiveTargetBackBuffer) return;
 
             // 一時ターゲットに書いてから差し替える (in-place不可のため)
             var desc = rg.GetTextureDesc(res.activeColorTexture);
             desc.name = "TintTarget";
+            desc.clearBuffer = false;
+            desc.depthBufferBits = 0;
             var dest = rg.CreateTexture(desc);
 
             using var builder = rg.AddRasterRenderPass<PassData>("Tint", out var data);
@@ -128,7 +136,7 @@ public class TintFeature : ScriptableRendererFeature {
             builder.UseTexture(data.src);
             builder.SetRenderAttachment(dest, 0);
             builder.SetRenderFunc((PassData d, RasterGraphContext ctx) =>
-                Blitter.BlitTexture(ctx.cmd, d.src, Vector2.one, d.mat, 0));
+                Blitter.BlitTexture(ctx.cmd, d.src, new Vector4(1, 1, 0, 0), d.mat, 0));
 
             res.cameraColor = dest;   // 以降のパスは新ターゲットを使う
         }
@@ -138,7 +146,9 @@ public class TintFeature : ScriptableRendererFeature {
     TintPass m_Pass;
     public override void Create() => m_Pass = new TintPass(material);
     public override void AddRenderPasses(ScriptableRenderer r,
-                                         ref RenderingData d) => r.EnqueuePass(m_Pass);
+                                         ref RenderingData d) {
+        if (material != null) r.EnqueuePass(m_Pass);
+    }
 }
 ```
 

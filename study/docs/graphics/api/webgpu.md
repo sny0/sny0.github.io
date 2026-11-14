@@ -92,17 +92,23 @@ macOS/iOS (Safari/Chrome) ではMetal上に実装。
 
 ## コード例
 
-JavaScriptで初期化からComputeディスパッチまでを実行します。
+WebGPU を使える HTTPS または localhost のページで、次の JavaScript をモジュールとして実行します。1024 個の値を GPU に渡して2倍にし、CPUで最初の4個を確認します。WebGPU の新規バッファーは初期状態でゼロなので、計算前に入力を書き込みます。[WebGPU 仕様 — バッファーの初期化](https://www.w3.org/TR/webgpu/#uninitialized-data)
 
 ```javascript
-const adapter = await navigator.gpu.requestAdapter();
+const adapter = await navigator.gpu?.requestAdapter();
+if (!adapter) throw new Error('WebGPU adapter is unavailable');
 const device  = await adapter.requestDevice();
 
-// ストレージバッファ
+const input = Float32Array.from({ length: 1024 }, (_, i) => i + 1);
 const buf = device.createBuffer({
-  size: 1024 * 4,
-  usage: GPUBufferUsage.STORAGE | GPUBufferUsage.COPY_SRC,
+  size: input.byteLength,
+  usage: GPUBufferUsage.STORAGE | GPUBufferUsage.COPY_SRC | GPUBufferUsage.COPY_DST,
 });
+const readback = device.createBuffer({
+  size: input.byteLength,
+  usage: GPUBufferUsage.COPY_DST | GPUBufferUsage.MAP_READ,
+});
+device.queue.writeBuffer(buf, 0, input);
 
 const pipeline = device.createComputePipeline({
   layout: 'auto',
@@ -128,29 +134,58 @@ const enc = device.createCommandEncoder();
 const pass = enc.beginComputePass();
 pass.setPipeline(pipeline);
 pass.setBindGroup(0, bindGroup);
-pass.dispatchWorkgroups(1024 / 64);
+pass.dispatchWorkgroups(input.length / 64);
 pass.end();
+enc.copyBufferToBuffer(buf, 0, readback, 0, input.byteLength);
 device.queue.submit([enc.finish()]);
+
+await readback.mapAsync(GPUMapMode.READ);
+const values = new Float32Array(readback.getMappedRange());
+console.log(Array.from(values.subarray(0, 4))); // [2, 4, 6, 8]
+readback.unmap();
+readback.destroy();
+buf.destroy();
 ```
 
-描画パスでcanvasへ表示します。
+続けて、同じ `device` を使うモジュールに描画パスを追加すると、青い三角形を表示できます。読み戻し用のバッファーと描画用のキャンバスは別に用意します。
 
 ```javascript
+const canvas = document.createElement('canvas');
+document.body.append(canvas);
 const ctx = canvas.getContext('webgpu');
-ctx.configure({ device, format: navigator.gpu.getPreferredCanvasFormat() });
+if (!ctx) throw new Error('WebGPU canvas context is unavailable');
+const format = navigator.gpu.getPreferredCanvasFormat();
+ctx.configure({ device, format });
 
-const enc = device.createCommandEncoder();
-const pass = enc.beginRenderPass({
+const shader = device.createShaderModule({ code: /* wgsl */`
+  @vertex
+  fn vertexMain(@builtin(vertex_index) index: u32) -> @builtin(position) vec4f {
+    let corners = array(vec2f(-0.7, -0.7), vec2f(0.7, -0.7), vec2f(0.0, 0.7));
+    return vec4f(corners[index], 0.0, 1.0);
+  }
+  @fragment
+  fn fragmentMain() -> @location(0) vec4f {
+    return vec4f(0.1, 0.45, 1.0, 1.0);
+  }
+` });
+const renderPipeline = device.createRenderPipeline({
+  layout: 'auto',
+  vertex: { module: shader, entryPoint: 'vertexMain' },
+  fragment: { module: shader, entryPoint: 'fragmentMain', targets: [{ format }] },
+});
+
+const renderEncoder = device.createCommandEncoder();
+const renderPass = renderEncoder.beginRenderPass({
   colorAttachments: [{
     view: ctx.getCurrentTexture().createView(),
     loadOp: 'clear', storeOp: 'store',
     clearValue: { r: 0.1, g: 0.1, b: 0.15, a: 1 },
   }],
 });
-pass.setPipeline(renderPipeline);
-pass.draw(3);          // 頂点バッファなしのフルスクリーン/三角形テク
-pass.end();
-device.queue.submit([enc.finish()]);
+renderPass.setPipeline(renderPipeline);
+renderPass.draw(3); // 頂点シェーダーが頂点番号から座標を選ぶ。
+renderPass.end();
+device.queue.submit([renderEncoder.finish()]);
 ```
 
 ## 前提知識
@@ -183,7 +218,7 @@ device.queue.submit([enc.finish()]);
 
 ## 参考資料
 
-- W3C, *WebGPU Specification* / webgpu.dev
+- [W3C — WebGPU 仕様](https://www.w3.org/TR/webgpu/)・[バッファーのマッピング](https://www.w3.org/TR/webgpu/#buffer-mapping)・[`writeBuffer`](https://www.w3.org/TR/webgpu/#dom-gpuqueue-writebuffer)
 - webgpufundamentals.org — 実践教材の決定版
 - gfx-rs/wgpu, google/dawn — ネイティブ実装
 - Surma, *"WebGPU — All of the cores, none of the canvas"*

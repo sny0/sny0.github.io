@@ -7,7 +7,9 @@ struct Tracer {
     const char* name;
 };
 
-Tracer g_static("global(静的: main前に構築、main後に破棄)");
+// この環境で観察する名前空間スコープの動的初期化。
+// C++では main の最初の文より前に行うか、遅延するかは処理系定義。
+Tracer g_static("global(名前空間スコープの静的オブジェクト)");
 
 void Counter() {
     static Tracer local("function-static(初回呼び出しで構築)");

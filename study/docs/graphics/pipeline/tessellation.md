@@ -60,7 +60,7 @@ flowchart LR
 
 | ステージ | 実行単位 | 主な仕事 |
 |---|---|---|
-| Hull Shader (VulkanではTess. Control) | パッチ (+制御点) | エッジ/内部の**TessFactor** (分割数、最大64) を出力 |
+| Hull Shader (VulkanではTess. Control) | パッチ (+制御点) | エッジ・内部の **TessFactor** を出力。Direct3D では分割モードにより上限が異なり、`fractional_odd` は63 |
 | Tessellator | 固定機能 | (u,v)パラメータ空間の分割点を機械的に生成 |
 | Domain Shader (VulkanではTess. Evaluation) | 生成頂点ごと | (u,v)と制御点から頂点位置を評価 (ここでハイトマップを読む) |
 
@@ -68,7 +68,7 @@ flowchart LR
 
 TessFactorをどう決めるかが品質と性能を分けます:
 
-- **距離ベース**: カメラ距離に反比例
+- **距離ベース**: 遠くなるほど分割係数を下げる。このページの例では、エッジの中点までの距離から線形に減らす
 - **スクリーンスペースエッジ長**: 「分割後のエッジが画面上で約Nピクセルになるように」— 最も原理的
 - **視錐台/背面カリング**: 見えないパッチはFactor=0で棄却
 - 隣接パッチとエッジのFactorを一致させないと**クラック (裂け目)** が生じる — エッジFactorはパッチ間で共有される値から計算するのが鉄則
@@ -97,10 +97,23 @@ UE4ではマテリアルのTessellation設定 (Flat/PN Triangles) がありま�
 
 ## コード例
 
-距離適応テッセレーションの骨格 (HLSL):
+距離適応テッセレーションの HLSL の例です。`HSMain` は `hs_6_0`、`DSMain` は `ds_6_0` でコンパイルできます。前段からワールド空間の位置と法線、UV を受け取ります。ホストは3制御点のパッチを入力し、カメラと変位の設定を `b0`、高さマップとサンプラーを `t0` と `s0` に渡します。`fractional_odd` の分割係数は1〜63です。[Microsoft — Tessellation Stages](https://learn.microsoft.com/en-us/windows/win32/direct3d11/direct3d-11-advanced-stages-tessellation)
 
 ```hlsl
 // ---- Hull Shader: パッチ定数関数で分割数を決める ----
+struct VSOut {
+    float3 posWS : TEXCOORD0;
+    float3 normalWS : NORMAL;
+    float2 uv : TEXCOORD1;
+};
+struct DSOut { float4 posCS : SV_Position; float2 uv : TEXCOORD0; };
+cbuffer Frame : register(b0) {
+    column_major float4x4 gViewProj;
+    float3 gCameraPosWS;
+    float gDisplaceScale;
+};
+Texture2D<float> gHeightMap : register(t0);
+SamplerState gLinear : register(s0);
 struct PatchTess { float edge[3] : SV_TessFactor; float inside : SV_InsideTessFactor; };
 
 PatchTess PatchConstant(InputPatch<VSOut, 3> patch) {
@@ -110,7 +123,7 @@ PatchTess PatchConstant(InputPatch<VSOut, 3> patch) {
         // エッジ中点のカメラ距離から分割数を決定 (隣接パッチと一致する計算)
         float3 mid = (patch[(i+1)%3].posWS + patch[(i+2)%3].posWS) * 0.5;
         float d = distance(mid, gCameraPosWS);
-        pt.edge[i] = clamp(64.0 * saturate(1.0 - d / 100.0), 1.0, 64.0);
+        pt.edge[i] = clamp(63.0 * saturate(1.0 - d / 100.0), 1.0, 63.0);
     }
     pt.inside = (pt.edge[0] + pt.edge[1] + pt.edge[2]) / 3.0;
     return pt;
@@ -135,7 +148,7 @@ DSOut DSMain(PatchTess pt, float3 bary : SV_DomainLocation,
     float3 n = normalize(patch[0].normalWS * bary.x
                        + patch[1].normalWS * bary.y
                        + patch[2].normalWS * bary.z);
-    float height = gHeightMap.SampleLevel(gLinear, uv, 0).r;
+    float height = gHeightMap.SampleLevel(gLinear, uv, 0);
     posWS += n * height * gDisplaceScale;        // ディスプレースメント
 
     o.posCS = mul(gViewProj, float4(posWS, 1));

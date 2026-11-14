@@ -135,17 +135,22 @@ void RasterizeTriangle(float2 v0, float2 v1, float2 v2, /*属性*/...) {
 }
 ```
 
-微分の挙動を確認するシェーダ (HLSL):
+UV の変化から等方的なミップレベルの目安を可視化する HLSL です。`PSMain` を `ps_6_0` でコンパイルし、`b0` にベースミップの幅・高さを渡します。幅と高さを別々に掛けて、画面上の1ピクセルあたりの変化をテクセル単位に直します。実際のサンプリングには、異方性、LOD バイアスやクランプ、テクスチャビューのミップ範囲なども関わります。[Microsoft — ddx](https://learn.microsoft.com/en-us/windows/win32/direct3dhlsl/dx-graphics-hlsl-ddx)・[Khronos — Vulkan の LOD 算出](https://docs.vulkan.org/spec/latest/chapters/textures.html#textures-level-of-detail-operation)
 
 ```hlsl
-float4 PSMain(Varyings i) : SV_Target {
+cbuffer DebugMip : register(b0) { float2 texSize; };
+
+float4 PSMain(float2 uv : TEXCOORD0) : SV_Target {
     // ddx/ddy は同一クワッド内の隣接ピクセルとの差分
-    float2 dx = ddx(i.uv), dy = ddy(i.uv);
-    // ミップレベルの手動計算 (ハードウェアがサンプル時に行うことと等価)
-    float lod = 0.5 * log2(max(dot(dx, dx), dot(dy, dy)) * texSize * texSize);
-    return float4(lod.xxx / 10.0, 1);
+    float2 dx = ddx(uv) * texSize;
+    float2 dy = ddy(uv) * texSize;
+    float footprintSquared = max(dot(dx, dx), dot(dy, dy));
+    float lod = 0.5 * log2(max(footprintSquared, 1.0));
+    return float4(saturate(lod / 10.0).xxx, 1.0);
 }
 ```
+
+例えば `texSize = (1024, 512)`、`ddx(uv) = (1/256, 0)`、`ddy(uv) = (0, 1/256)` なら、変化は水平方向4、垂直方向2テクセルで、LOD の目安は `log2(4) = 2` です。画面には強度0.2の灰色を出します。
 
 ## 前提知識
 

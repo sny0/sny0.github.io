@@ -79,6 +79,7 @@ VkDescriptorSetLayoutBinding bindings[] = {
     {2, VK_DESCRIPTOR_TYPE_COMBINED_IMAGE_SAMPLER, 1, VK_SHADER_STAGE_FRAGMENT_BIT}, // irradiance
     {3, VK_DESCRIPTOR_TYPE_COMBINED_IMAGE_SAMPLER, 1, VK_SHADER_STAGE_FRAGMENT_BIT}, // prefiltered
     {4, VK_DESCRIPTOR_TYPE_COMBINED_IMAGE_SAMPLER, 1, VK_SHADER_STAGE_FRAGMENT_BIT}, // brdfLUT
+    {5, VK_DESCRIPTOR_TYPE_UNIFORM_BUFFER,         1, VK_SHADER_STAGE_FRAGMENT_BIT}, // light
 };
 ```
 
@@ -126,6 +127,7 @@ PSOはすべて起動時に作ります。実行中に作るとスタッター�
 - トーンマップ後 `ldrLinear`: 同じFP16 format、`STORAGE | SAMPLED`。SDRの[0,1]の**リニアRGB**を保持し、まだsRGBへ符号化しない。第5ステップのfinalPSOが読む。
 - swapchain: 第2ステップのsRGB format、`COLOR_ATTACHMENT`（第2ステップのtransfer clearも残すなら `TRANSFER_DST` も必要）。storage image対応は前提にしない。
 - `postSet`: binding 0/1は `SAMPLED_IMAGE`（HDR/Bloom、samplerを使わずtexel load）、binding 2は `STORAGE_IMAGE`（ldrLinear、書込み時GENERAL）。`finalSet`: binding 0を `SAMPLED_IMAGE`（ldrLinear、描画時SHADER_READ_ONLY_OPTIMAL）とする。既存のframe/material setとは別のpipeline layoutで定義し、HLSLのset/bindingと一致させる。
+- `postPSO` の pipeline layout には `VK_SHADER_STAGE_COMPUTE_BIT`、オフセット0、サイズ4バイトの push constant 範囲を追加し、露出倍率を渡す。[Khronos — vkCmdPushConstants](https://docs.vulkan.org/refpages/latest/refpages/source/vkCmdPushConstants.html)
 
 FP16 storage画像のHLSL宣言は `[[vk::image_format("rgba16f")]] RWTexture2D<float4>` とし、DXCが出力するSPIR-V image formatと `R16G16B16A16_SFLOAT` viewを一致させます。`float4` だけからFP16 storage形式を推定しないでください。
 

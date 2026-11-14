@@ -108,7 +108,7 @@ AppendStructuredBuffer<uint> gVisibleList : register(u2); // 可変長出力
 
 ## コード例
 
-Unityでの完全な例 — パーティクル更新:
+Unity のパーティクル更新用カーネルです。`#pragma kernel CSMain` を含めて `Simulate.compute` に保存します。
 
 ```hlsl
 // Simulate.compute
@@ -134,7 +134,7 @@ void CSMain(uint3 id : SV_DispatchThreadID)
 ```
 
 ```csharp
-// C#側
+// ホスト側の断片。コンポーネントに組み込み、初期データの設定とバッファ破棄を別途行う。
 public ComputeShader sim;
 GraphicsBuffer buffer;
 int kernel;
@@ -171,9 +171,9 @@ void Update() {
 
 ## 理解度チェック
 
-1. **`[numthreads(64,1,1)]` で100万要素を処理するときのDispatch数と、シェーダ内に必要なガードを述べよ。**
+1. **`[numthreads(64,1,1)]` で1,000,001要素を処理するときのグループ数と、シェーダー内に必要なガードを述べよ。**
    ::: details 解答
-   groups = ceil(1,000,000 / 64) = 15,625。最終グループには余分なスレッドが含まれるため、シェーダ冒頭で `if (id.x >= count) return;` の範囲外ガードが必要。
+   `ceil(1,000,001 / 64) = 15,626` グループ。最終グループでは1スレッドだけが有効で、残り63スレッドは `if (id.x >= count) return;` で処理を終える。[Microsoft — numthreads](https://learn.microsoft.com/en-us/windows/win32/direct3dhlsl/sm5-attributes-numthreads)
    :::
 
 2. **通常のdispatchにグループ全体のバリアを置けない理由は。atomic通信との違いは。**

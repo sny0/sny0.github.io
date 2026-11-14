@@ -141,6 +141,7 @@ float4 PSMain(float4 pos : SV_Position, float2 uv : TEXCOORD0,
 
 ```glsl
 // GLSL (Vulkan)
+#version 450
 layout(set = 0, binding = 0) uniform sampler2D tex;
 layout(location = 0) in vec2 uv;
 layout(location = 1) in vec4 col;

@@ -125,12 +125,13 @@ Nanite (UE5) は三角形の画面上の大きさに応じて、小さい三角�
 
 ## コード例
 
-「パイプライン1周」を最小のシェーダペアで (HLSL):
+「パイプライン1周」を最小のシェーダーペアで示します。HLSL を保存し、`VSMain` を `vs_6_0`、`PSMain` を `ps_6_0` として個別にコンパイルできます。ホスト側はモデル・ビュー・射影を合成した行列を `b0` に渡します。[Microsoft — HLSL の定数バッファ](https://learn.microsoft.com/en-us/windows/win32/direct3dhlsl/dx-graphics-hlsl-constants)
 
 ```hlsl
 // ---- Vertex Shader: 一つの頂点入力を処理 ----
 struct VSIn  { float3 pos : POSITION; float3 color : COLOR; };
 struct VSOut { float4 pos : SV_Position; float3 color : COLOR; };
+cbuffer Transform : register(b0) { column_major float4x4 gMVP; };
 
 VSOut VSMain(VSIn i) {
     VSOut o;

@@ -103,39 +103,53 @@ flowchart LR
 
 ## コード例
 
-Unity RenderGraph APIでのカスタムパス (Unity 6 / URP):
+Unity 6.0 / URP 17 のカスタムパスです。呼び出し側は `_BlitTexture` を読むブラー用マテリアルを渡してパスを登録します。このパスはカメラが中間色テクスチャに描画するときに、後続パスが使うカメラ色を差し替えます。[Unity 6.0 — URP のブリットと色バッファの差し替え](https://docs.unity3d.com/6000.0/Documentation/Manual/urp/render-graph-optimize.html)
 
 ```csharp
+using UnityEngine;
+using UnityEngine.Rendering;
+using UnityEngine.Rendering.RenderGraphModule;
+using UnityEngine.Rendering.Universal;
+
 class BlurPass : ScriptableRenderPass {
+    private readonly Material blurMaterial;
+
+    public BlurPass(Material material) {
+        blurMaterial = material;
+        renderPassEvent = RenderPassEvent.BeforeRenderingPostProcessing;
+    }
+
     class PassData {
         public TextureHandle source;
-        public TextureHandle destination;
         public Material material;
     }
 
     public override void RecordRenderGraph(RenderGraph rg,
                                            ContextContainer frameData) {
         var resourceData = frameData.Get<UniversalResourceData>();
+        if (resourceData.isActiveTargetBackBuffer) return;
 
         // 一時RTを「宣言」(実確保はグラフが行う)
         var desc = rg.GetTextureDesc(resourceData.activeColorTexture);
         desc.name = "BlurTemp";
+        desc.clearBuffer = false;
+        desc.depthBufferBits = 0;
         TextureHandle temp = rg.CreateTexture(desc);
 
         using (var builder = rg.AddRasterRenderPass<PassData>(
                    "Blur", out PassData data)) {
             data.source = resourceData.activeColorTexture;
-            data.destination = temp;
             data.material = blurMaterial;
 
             builder.UseTexture(data.source, AccessFlags.Read);   // 依存を宣言
-            builder.SetRenderAttachment(data.destination, 0);    // 書き込み先
+            builder.SetRenderAttachment(temp, 0);    // 書き込み先
 
             builder.SetRenderFunc((PassData d, RasterGraphContext ctx) => {
                 Blitter.BlitTexture(ctx.cmd, d.source,
                                     new Vector4(1, 1, 0, 0), d.material, 0);
             });
         }
+        resourceData.cameraColor = temp;
         // バリア・メモリ・パス順序はRenderGraphが解決する
     }
 }

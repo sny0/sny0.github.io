@@ -49,25 +49,24 @@ ARBアセンブリ拡張と、ベンダー独自拡張 (NV_register_combiners等
 
 ### バージョンとプロファイル
 
-```glsl
-#version 450            // GL 4.5 / Vulkan系サンプルの定番
-#version 300 es         // WebGL2 / GLES3
-precision mediump float; // ES系では精度修飾子が必須
-```
+GL 4.5 や Vulkan 向けの例では `#version 450`、WebGL 2 や OpenGL ES 3.0 向けの例では `#version 300 es` を先頭に置きます。ソースの対象に合わせ、一方の指定を使います。後者のフラグメントシェーダーで `float` の既定精度を指定する例は `precision mediump float;` です。[Khronos — GLSL 4.50 §3.3](https://registry.khronos.org/OpenGL/specs/gl/GLSLangSpec.4.50.pdf)・[GLSL ES 3.00 §4.5.4](https://registry.khronos.org/OpenGL/specs/es/3.0/GLSL_ES_Specification_3.00.pdf)
 
 **精度修飾子** (`highp/mediump/lowp`) はES系特有で、モバイルGPUの半精度ユニットに直結する重要な最適化手段です。
 
 ### 入出力モデル
 
-ステージ間は `in` / `out` 変数を **location** で接続します:
+Vulkan 向けの GLSL 450 ではステージ間の `in` / `out` 変数を **location** で接続します。次は `glslc -fshader-stage=vert locations.vert -o locations.spv` でコンパイルできる例です。
 
 ```glsl
-// Vertex Shader
+#version 450
 layout(location = 0) in vec3 inPos;
+layout(location = 1) in vec2 inUV;
 layout(location = 0) out vec2 vUV;
+layout(set = 0, binding = 0) uniform Camera { mat4 mvp; } ubo;
+
 void main() {
     gl_Position = ubo.mvp * vec4(inPos, 1.0);  // 組み込み変数
-    vUV = ...;
+    vUV = inUV;
 }
 ```
 

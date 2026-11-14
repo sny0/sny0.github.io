@@ -97,7 +97,7 @@ $$\mathbf{p}' = \sum_{i=0}^{3} w_i \, M_{bone_i} \, \mathbf{p}$$
 
 ## コード例
 
-インスタンシング+風揺れ付きの実践的VS (HLSL):
+インスタンシングと風揺れを組み合わせた HLSL の頂点シェーダーです。`VSMain` を `vs_6_0` でコンパイルし、インスタンスごとの変換を `t0`、ビュー射影と秒単位の時刻を `b0` に渡します。この例の法線変換は回転と一様スケールを前提とし、揺れによる法線の変化は近似として省略します。[Microsoft — HLSL の定数バッファ](https://learn.microsoft.com/en-us/windows/win32/direct3dhlsl/dx-graphics-hlsl-constants)
 
 ```hlsl
 struct Attributes {
@@ -114,6 +114,10 @@ struct Varyings {
 };
 
 StructuredBuffer<float4x4> gInstanceMatrices : register(t0);
+cbuffer Frame : register(b0) {
+    column_major float4x4 gViewProj;
+    float gTime;
+};
 
 Varyings VSMain(Attributes IN) {
     Varyings OUT;
@@ -132,10 +136,12 @@ Varyings VSMain(Attributes IN) {
 }
 ```
 
-Vertex Pulling方式 (GLSL / Vulkan):
+Vertex Pulling の GLSL 450 / Vulkan 版です。`glslc -fshader-stage=vert pulling.vert -o pulling.spv` でコンパイルできます。頂点ごとの XYZ を3個の `float` としてストレージバッファに詰め、別のバインディングに変換行列を渡します。[Khronos — VertexIndex](https://docs.vulkan.org/refpages/latest/refpages/source/VertexIndex.html)
 
 ```glsl
+#version 450
 layout(std430, set=0, binding=0) readonly buffer Positions { float pos[]; };
+layout(std140, set=0, binding=1) uniform Transform { mat4 viewProj; mat4 model; } ubo;
 
 void main() {
     // 頂点レイアウト宣言なしで、IDから自分でフェッチする

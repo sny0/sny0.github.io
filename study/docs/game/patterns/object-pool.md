@@ -33,42 +33,11 @@ void World::Update() {
 
 ## パターン適用後のC++コード
 
-```cpp
-// C++20 — 固定サイズプール(フリーリスト方式)
-#include <cstdint>
-#include <vector>
+次のクラスは配布ファイルと同じ実装です。`Acquire` は位置・速度・使用状態をまとめて設定し、使用後は同じプールから取得したポインタを `Release` に一度だけ渡します。`Release` は弾と配列の先頭の差で枠番号を求めるので、他のプールのポインタは渡せません。[C++20作業草案 N4861 — ポインタの差](https://timsong-cpp.github.io/cppwp/n4861/expr.add#5)
 
-struct Bullet {
-    float x = 0, y = 0, dx = 0, dy = 0;
-    bool alive = false;
-};
+<<< @/public/samples/cpp/object_pool.cpp#bullet-pool{cpp}
 
-class BulletPool {
-public:
-    explicit BulletPool(std::size_t capacity) : bullets_(capacity) {
-        free_.reserve(capacity);
-        for (std::size_t i = 0; i < capacity; ++i) free_.push_back(capacity - 1 - i);
-    }
-    Bullet* Acquire() {                       // 生ポインタを返す: 所有権はプールに残る
-        if (free_.empty()) return nullptr;    // 満杯ポリシー: ここでは失敗を返す
-        Bullet& b = bullets_[free_.back()];
-        free_.pop_back();
-        b.alive = true;
-        return &b;
-    }
-    void Release(Bullet* b) {
-        b->alive = false;
-        free_.push_back(static_cast<std::size_t>(b - bullets_.data()));  // indexへ戻す
-    }
-    // 全弾走査(連続メモリなのでキャッシュに優しい)
-    std::vector<Bullet>& All() { return bullets_; }
-private:
-    std::vector<Bullet> bullets_;         // 起動時に一括確保。以後ヒープ操作なし
-    std::vector<std::size_t> free_;       // 空きスロットのindex
-};
-```
-
-検証済みサンプル: <a href="/study/samples/cpp/object_pool.cpp">samples/object_pool.cpp</a>
+<a href="/study/samples/cpp/object_pool.cpp" download>実行できるサンプル</a>では、容量4のうち2枠を貸し出し、片方を返すと空き枠が2から3に増えます。その後は3回取得に成功し、4回目で `POOL FULL` と表示されます。
 
 ### new/delete との比較
 

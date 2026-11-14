@@ -102,12 +102,25 @@ GLSLの `layout(location=N) out vec4`。`layout(early_fragment_tests) in;`は早
 
 ## コード例
 
-法線マップ+単純PBR風のFS (HLSL):
+法線マップに拡散と Blinn–Phong の鏡面項を組み合わせる HLSL の例です。`PSMain` を `ps_6_0` でコンパイルできます。前段はワールド空間の位置・法線・接線と UV を出力し、`b0` に光源とカメラを渡します。この接空間変換を使う場合は法線のベイク時も同じ基底を使います。[HLSL のセマンティクス](https://learn.microsoft.com/en-us/windows/win32/direct3dhlsl/dx-graphics-hlsl-semantics)・[法線マップと接空間](/graphics/shader/normal-mapping.html)
 
 ```hlsl
 Texture2D gAlbedo : register(t0);
 Texture2D gNormalMap : register(t1);
 SamplerState gLinear : register(s0);
+cbuffer Lighting : register(b0) {
+    float3 gSunDirWS;
+    float3 gCameraPosWS;
+    float3 gSunColor;
+    float3 gAmbient;
+};
+struct Varyings {
+    float4 positionCS : SV_Position;
+    float3 positionWS : TEXCOORD0;
+    float3 normalWS : NORMAL;
+    float4 tangentWS : TANGENT;
+    float2 uv : TEXCOORD1;
+};
 
 float4 PSMain(Varyings IN) : SV_Target
 {
@@ -133,10 +146,14 @@ float4 PSMain(Varyings IN) : SV_Target
 }
 ```
 
-フルスクリーンパス用FS (ポストプロセスの基本形):
+フルスクリーンの描画パスです。`FullscreenVS` を `vs_6_0`、`PostPS` を `ps_6_0` でコンパイルします。頂点バッファを使わず先頭頂点0から三角形リストで3頂点を描き、シーン色を `t0`、サンプラーを `s0` に渡します。
 
 ```hlsl
 // 頂点3つの巨大三角形で全画面を覆う定石 (頂点バッファ不要)
+Texture2D<float4> gSceneColor : register(t0);
+SamplerState gLinear : register(s0);
+struct Varyings { float4 positionCS : SV_Position; float2 uv : TEXCOORD0; };
+
 Varyings FullscreenVS(uint id : SV_VertexID) {
     Varyings o;
     float2 uv = float2((id << 1) & 2, id & 2);

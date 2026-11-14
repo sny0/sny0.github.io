@@ -112,27 +112,50 @@ private:
 
 ## C#またはUnityでの実装
 
-```csharp
-public interface IMoveStrategy { Vector2 NextStep(Vector2 self, Vector2 target); }
+Unity 6.3 LTS の例です。`KeepDistanceSO.cs` に戦略を置き、作成したアセットを `Enemy.cs` の `moveStrategy` に割り当てます。
 
-// ScriptableObjectにすると「戦略をアセットとして差し替え」できる(Unityの定石)
+```csharp
+using UnityEngine;
+
+public interface IMoveStrategy {
+    Vector2 NextStep(Vector2 self, Vector2 target, float deltaTime);
+}
+
 public abstract class MoveStrategySO : ScriptableObject, IMoveStrategy {
-    public abstract Vector2 NextStep(Vector2 self, Vector2 target);
+    public abstract Vector2 NextStep(Vector2 self, Vector2 target, float deltaTime);
 }
 
 [CreateAssetMenu(menuName = "AI/KeepDistance")]
 public class KeepDistanceSO : MoveStrategySO {
-    [SerializeField] private float distance = 8f;   // 企画がインスペクタで調整できる
-    public override Vector2 NextStep(Vector2 self, Vector2 target) { /* 次の位置の計算は省略 */ return self; }
-}
+    [SerializeField, Min(0f)] private float distance = 8f;
+    [SerializeField, Min(0f)] private float speed = 4f;
 
-public class Enemy : MonoBehaviour {
-    [SerializeField] private MoveStrategySO moveStrategy;   // 敵Prefabごとに差す
-    private void Update() => transform.position = (Vector3)moveStrategy.NextStep(transform.position, PlayerPos());
+    public override Vector2 NextStep(Vector2 self, Vector2 target, float deltaTime) {
+        Vector2 offset = self - target;
+        Vector2 direction = offset == Vector2.zero ? Vector2.right : offset.normalized;
+        Vector2 desired = target + direction * distance;
+        return Vector2.MoveTowards(self, desired, speed * deltaTime);
+    }
 }
 ```
 
-両版の`NextStep`は、次の絶対位置を返す契約です。この例はXY平面を使い、経路計算を省略しています。実際の速度に基づく移動では`dt`も引数で渡し、移動量を返す設計にするならC++・C#の両方を加算にそろえます。
+```csharp
+using UnityEngine;
+
+public class Enemy : MonoBehaviour {
+    [SerializeField] private MoveStrategySO moveStrategy;
+    [SerializeField] private Transform player;
+
+    private void Update() {
+        if (moveStrategy == null || player == null) return;
+        Vector3 current = transform.position;
+        Vector2 next = moveStrategy.NextStep(current, player.position, Time.deltaTime);
+        transform.position = new Vector3(next.x, next.y, current.z);
+    }
+}
+```
+
+両版の `NextStep` は、次の絶対位置を返す契約です。Unity 版は XY 平面で距離を計算し、移動速度と `deltaTime` から1回の移動量の上限を決めます。例えば目標が `(0, 0)`、敵が `(10, 0)`、`deltaTime = 0.25` 秒なら、既定の距離8・速度4では `(9, 0)` を返します。同じ位置から始まった場合は、右向きに距離を取ります。この例の移動は直線なので、障害物を避ける必要があれば経路探索を組み合わせます。[Unity 6.3 — Vector2.MoveTowards](https://docs.unity3d.com/6000.3/Documentation/ScriptReference/Vector2.MoveTowards.html)
 
 ## ゲームでの具体例
 

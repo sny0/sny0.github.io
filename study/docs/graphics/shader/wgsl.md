@@ -46,18 +46,18 @@ WebGPUの普及と一体です。ブラウザゲーム・Web上の3Dツール (F
 
 ### 構文の特徴 (Rust風)
 
-```wgsl
-// 変数: let=不変, var=可変。型は後置
-let x: f32 = 1.0;
-var y = vec3f(0.0);        // 型推論 + 短縮エイリアス (vec3f = vec3<f32>)
+関数内では `let` で値を固定し、`var` で再代入できる変数を宣言します。モジュールスコープでコンパイル時に値を決める場合は `const` を使います。[WGSL — Value Declarations](https://www.w3.org/TR/WGSL/#value-decls)
 
-// 関数
-fn add(a: f32, b: f32) -> f32 { return a + b; }
+```wgsl
+const clipW: f32 = 1.0;
 
 // エントリポイントは属性で宣言
 @vertex
 fn vsMain(@location(0) pos: vec3f) -> @builtin(position) vec4f {
-    return vec4f(pos, 1.0);
+    let offset: f32 = 0.25;
+    var shifted = pos; // 型推論で vec3f (vec3<f32>)
+    shifted.x += offset;
+    return vec4f(shifted, clipW);
 }
 ```
 
@@ -118,7 +118,7 @@ Compute Shader (パーティクル更新) の完全な例:
 
 ```wgsl
 struct Particle { pos: vec4f, vel: vec4f }
-struct SimParams { dt: f32, gravity: f32, bounds: f32, count: u32 }
+struct SimParams { dt: f32, gravity: f32, count: u32, _pad: u32 }
 
 @group(0) @binding(0) var<uniform> params: SimParams;
 @group(0) @binding(1) var<storage, read_write> particles: array<Particle>;
@@ -126,7 +126,7 @@ struct SimParams { dt: f32, gravity: f32, bounds: f32, count: u32 }
 @compute @workgroup_size(64)
 fn simulate(@builtin(global_invocation_id) gid: vec3u) {
     let i = gid.x;
-    if (i >= params.count) { return; }
+    if (i >= min(params.count, arrayLength(&particles))) { return; }
 
     var p = particles[i];
     p.vel.y = p.vel.y - params.gravity * params.dt;
@@ -162,8 +162,8 @@ fn vsMain(@builtin(vertex_index) vi: u32) -> VSOut {
 }
 
 @fragment
-fn fsMain(in: VSOut) -> @location(0) vec4f {
-    return vec4f(in.color, 1.0);
+fn fsMain(input: VSOut) -> @location(0) vec4f {
+    return vec4f(input.color, 1.0);
 }
 ```
 

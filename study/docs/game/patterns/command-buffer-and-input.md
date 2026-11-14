@@ -84,9 +84,7 @@ if (input.Pressed(Key::Space)) player.Jump();
 ```
 
 ```cpp
-// C++20 — アクション層を挟む(検証済み: samples/input_actions.cpp)
-#include <optional>
-
+// アクション層の骨組み。下の配布例では実際に記録・再生する。
 struct FrameInput {          // 1フレーム分の「意図」。デバイス非依存
     float moveX = 0;         // -1..1
     bool jump = false;
@@ -147,7 +145,7 @@ public:
 
 ## 演習
 
-samples/input_actions.cpp に「Pollの結果を毎フレーム`std::vector<FrameInput>`へ記録し、ReplaySourceで再生する」機能を追加し、同じ初期状態から同じ結果になることを確認してください(固定タイムステップ前提であることに注意 → [Game Loop](/game/patterns/game-loop-and-update.html))。
+<a href="/study/samples/cpp/input_actions.cpp" download>記録・再生の配布例</a>は、`Poll` の結果を更新ごとに `std::vector<FrameInput>` へ保存し、`ReplaySource` で再生します。最初から記録と再生が入り、両方で `x=2.5 jumps=1` が出ると `match` を表示して終了コード0を返します。練習では、記録した2回目の `jump` を再生前に `false` に変え、再生側のジャンプが0回になって終了コード1になることを確認できます。これは同じ初期状態と入力列を使う小さなモデルの確認です。実ゲームで結果を再現するには、更新の刻みや浮動小数点の条件などもそろえます。[ゲームループ](/game/patterns/game-loop-and-update.html)・[浮動小数点の決定性](/languages/cpp/floating-point-determinism.html)
 
 ---
 

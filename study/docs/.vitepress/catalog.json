@@ -2878,6 +2878,7 @@
         "/game/patterns/optimization-patterns.html",
         "/design/case-studies/player-input.html",
         "/game/patterns/game-loop-and-update.html",
+        "/languages/cpp/floating-point-determinism.html",
         "/game/patterns/behavior-tree-and-blackboard.html",
         "/game/patterns/",
         "/game/patterns/mvc-mvp-mvvm.html"
@@ -4177,6 +4178,7 @@
         "/graphics/lighting/pbr.html",
         "/graphics/pipeline/rasterization.html",
         "/graphics/pipeline/output-merger.html",
+        "/graphics/shader/normal-mapping.html",
         "/math/rendering/vector.html",
         "/math/rendering/transform.html",
         "/graphics/shader/overview.html"

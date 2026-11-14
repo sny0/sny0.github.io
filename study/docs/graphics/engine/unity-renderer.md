@@ -96,16 +96,20 @@ Unityの下層で `Direct3D12` デバイスとして動作。SRPのCommandBuffer
 
 ## コード例
 
-最小のカスタムSRP (仕組みの理解用 — 実務はURP拡張を推奨):
+Unity 6.3 LTS 用のカスタム SRP です。`MiniPipelineAsset.cs` として保存し、作成したアセットを Graphics の Render Pipeline Asset に設定します。この例で不透明物を描くには、`SRPDefaultUnlit` のパスを持つシェーダーを使います。[Unity 6.3 — RenderPipeline.Render](https://docs.unity3d.com/6000.3/Documentation/ScriptReference/Rendering.RenderPipeline.Render.html) · [RendererList](https://docs.unity3d.com/6000.3/Documentation/ScriptReference/Rendering.ScriptableRenderContext.CreateRendererList.html)
 
 ```csharp
+using System.Collections.Generic;
+using UnityEngine;
+using UnityEngine.Rendering;
+
 [CreateAssetMenu(menuName = "Rendering/MiniPipeline")]
 public class MiniPipelineAsset : RenderPipelineAsset {
     protected override RenderPipeline CreatePipeline() => new MiniPipeline();
 }
 
 public class MiniPipeline : RenderPipeline {
-    protected override void Render(ScriptableRenderContext ctx, Camera[] cameras) {
+    protected override void Render(ScriptableRenderContext ctx, List<Camera> cameras) {
         foreach (var cam in cameras) {
             // 1. カリング (C++ジョブが走る)
             if (!cam.TryGetCullingParameters(out var cullParams)) continue;
@@ -114,21 +118,20 @@ public class MiniPipeline : RenderPipeline {
             // 2. カメラ定数のセットアップ
             ctx.SetupCameraProperties(cam);
 
-            // 3. クリア
-            var cmd = new CommandBuffer { name = "Clear" };
+            // 3. クリアと不透明物をコマンドバッファーに記録
+            using var cmd = new CommandBuffer { name = "MiniPipeline" };
             cmd.ClearRenderTarget(true, true, Color.darkGray);
-            ctx.ExecuteCommandBuffer(cmd);
-            cmd.Release();
-
-            // 4. 不透明の描画リストを発行
             var sorting = new SortingSettings(cam) { criteria = SortingCriteria.CommonOpaque };
             var drawing = new DrawingSettings(new ShaderTagId("SRPDefaultUnlit"), sorting);
             var filtering = new FilteringSettings(RenderQueueRange.opaque);
-            ctx.DrawRenderers(cull, ref drawing, ref filtering);
+            var renderers = new RendererListParams(cull, drawing, filtering);
+            cmd.DrawRendererList(ctx.CreateRendererList(ref renderers));
 
-            // 5. スカイボックスと提出
-            if (cam.clearFlags == CameraClearFlags.Skybox) ctx.DrawSkybox(cam);
-            ctx.Submit();   // ここで初めて実行される
+            // 4. スカイボックスと提出
+            if (cam.clearFlags == CameraClearFlags.Skybox && RenderSettings.skybox != null)
+                cmd.DrawRendererList(ctx.CreateSkyboxRendererList(cam));
+            ctx.ExecuteCommandBuffer(cmd);
+            ctx.Submit();   // 記録したコマンドを描画の実行側へ提出する
         }
     }
 }
