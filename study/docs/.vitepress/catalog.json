@@ -4582,7 +4582,7 @@
         "ExecuteIndirect",
         "コンパクション"
       ],
-      "verification": "MicrosoftのHLSLとDirect3D 12、Khronosの合成式、Batcherのソーティングネットワーク、AMD FidelityFX Parallel Sortの資料に照合（2026-11-13）",
+      "verification": "MicrosoftのHLSLとDirect3D 12、Khronosの合成式、Batcher、AMD FidelityFXの資料に照合。GeForce RTX 3060とDirect3D 12で掲載HLSLを実行確認（2026-11-15）",
       "links": [
         "/math/physics-integration-and-collision.html",
         "/graphics/shader/shader-optimization.html",

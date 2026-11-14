@@ -8,7 +8,7 @@ study:
   domain: graphics
   summary: 粒子の寿命と空き枠を管理し、生存粒子の番号と描画引数をGPUで作る。描画前の同期と半透明粒子のソートも扱う。
   aliases: [GPU particle, パーティクルシステム, GPU粒子, Indirect描画, DrawIndirect, ExecuteIndirect, コンパクション]
-  verification: MicrosoftのHLSLとDirect3D 12、Khronosの合成式、Batcherのソーティングネットワーク、AMD FidelityFX Parallel Sortの資料に照合（2026-11-13）
+  verification: MicrosoftのHLSLとDirect3D 12、Khronosの合成式、Batcher、AMD FidelityFXの資料に照合。GeForce RTX 3060とDirect3D 12で掲載HLSLを実行確認（2026-11-15）
 ---
 
 # GPUパーティクル — Computeで更新し、Indirectで描く
@@ -25,6 +25,7 @@ flowchart LR
     F["前フレームの空きリスト"] --> G
     G --> U["Computeで速度・位置・寿命を更新"]
     U --> D["寿命切れを空きリストに戻す"]
+    D -. 次のフレーム .-> F
     U --> L["生存粒子の番号と件数"]
     L --> S["必要なら深度キーでソート"]
     S --> R["間接描画"]
@@ -157,9 +158,9 @@ Direct3D 12のレガシーバリアを使う例では、引数をUAVへの書き
 
 次の `ReserveEmitCS` の前に、引数バッファを `UNORDERED_ACCESS` へ戻します。状態の起点は、二つの処理をどこでキューへ渡すかで変わります。同じ `ExecuteCommandLists` 呼び出しの中では、コマンドリストが分かれていても `INDIRECT_ARGUMENT` から遷移させます。前の `ExecuteCommandLists` の処理がGPU上で完了すると、バッファは `COMMON` へ戻ります。次の実行では `COMMON` を起点にし、条件を満たせば暗黙の昇格を使えます。リセットをコピーで行う場合は、コピー前に `COPY_DEST`、次のUAV書き込み前に `UNORDERED_ACCESS` を使います。粒子と生存リストも、現在の状態からUAVで書き込める状態に戻します。
 
-初期化・生成・更新が同じリソースをUAVのまま使い、同じ `ExecuteCommandLists` の中で後段が前段の書き込みに依存する場合は、その間にUAVバリアを入れます。例えば更新と次回の生成の間で、空きリストと件数の両方を順序付けます。`InterlockedAdd` はカウンターへの加算をアトミックに行う操作です。リストへの書き込みを後続パスから読めるようにする同期は別に指定します。別キューで動かす場合はキュー間のフェンスによる順序付けも必要です。
+同じ `ExecuteCommandLists` の中でパス間の依存があり、対象リソースをUAVのまま使う場合は、パス間にUAVバリアを入れます。前の書き込みを後続パスから読む場合に加え、前の読み取りが終わってから同じ領域へ書き込む場合も順序付けます。`InterlockedAdd` はカウンターへの加算をアトミックに行う操作です。リストへの書き込みを後続パスから読めるようにする同期は別に指定します。別キューで動かす場合はキュー間のフェンスによる順序付けも必要です。
 
-この例はDrawのコマンドシグネチャを1件使います。`ExecuteIndirect` に最大コマンド数1を渡し、Count Bufferは省略できます。粒子の件数はコマンド数ではなく、引数の `InstanceCount` に入っています。頂点側は `SV_InstanceID` を生存リストの添字に、`SV_VertexID` を四角形の頂点選択に使えます。
+この例のコマンドシグネチャは、引数の種類に `D3D12_INDIRECT_ARGUMENT_TYPE_DRAW` を1つ指定し、ストライドを `sizeof(D3D12_DRAW_ARGUMENTS)` にします。`ExecuteIndirect` に `MaxCommandCount = 1` と `pCountBuffer = nullptr` を渡すと、引数バッファのDrawコマンドを1件実行します。粒子の件数は引数の `InstanceCount` に入っています。頂点側は `SV_InstanceID` を生存リストの添字に、`SV_VertexID` を四角形の頂点選択に使えます。
 
 | 区間 | 後続パスに渡すデータ |
 | --- | --- |
@@ -167,9 +168,26 @@ Direct3D 12のレガシーバリアを使う例では、引数をUAVへの書き
 | 予約 → 更新 | `FreeCount` の残数と、ゼロにした `DrawArgs.InstanceCount` |
 | 生成 → 更新 | 新しい粒子データ。生成が読み取った `FreeIndices` の末尾を、更新が空きリストへの追加で上書きすることもある |
 | 更新 → ソートまたは描画 | 位置と生存 ID、引数。ソートする場合は生存数を読み、並べ替えた ID を描画側が読む |
+| 生成 → 次フレームの予約 | 次の予約で `EmitRange` を上書きする前に、今回の生成による読み取りを終える |
 | 更新 → 次フレームの予約・生成 | 返却済みの `FreeIndices` と `FreeCount` |
 
-同じ Direct キューを使い UAV のまま順序付ける構成なら、予約後と生成後に対象の依存を覆う UAV バリアを置きます。生成 → 更新では `Particles` の書き込みに加えて、更新の `FreeIndices` への上書きを生成の読み取りより後にします。グループ内のバリアは別のグループや dispatch を待てないので、これらの依存にはコマンドリスト上のバリアを使います。
+同じ Direct キューで一連の処理を1回の `ExecuteCommandLists` にまとめる構成なら、予約後と生成後に対象の依存を覆う UAV バリアを置きます。生成 → 更新では `Particles` の書き込みに加えて、更新の `FreeIndices` への上書きを生成の読み取りより後にします。同じ呼び出し内に次のフレームも含める場合、引き続きUAVで使う `FreeIndices`・`FreeCount`・`EmitRange` も、次の予約・生成に入る前に順序付けます。グループ内のバリアは別のグループや dispatch を待てないので、これらの依存にはコマンドリスト上のバリアを使います。
+
+### 実機GPUでの確認
+
+2026年11月15日、NVIDIA GeForce RTX 3060とDirect3D 12で、掲載した `ReserveEmitCS`・`EmitCS`・`UpdateCS` と後述の `Sort128CS` を実行しました。コンパイラーは DXC 1.10.2605.37、ターゲットは Shader Model 6.0 です。検証用に追加した頂点シェーダーはソート済みのIDを参照し、ピクセルシェーダーは四角形ごとにスロット番号を識別できる値を描きました。[Microsoft、DXC 1.10.2605.37](https://github.com/microsoft/DirectXShaderCompiler/releases/tag/v1.10.2605.37)
+
+容量8、初期の空きリスト `[1, 4, 7]` で始め、各フレームを `ExecuteIndirect` でオフスクリーンの描画先へ描きました。GPUから粒子バッファ、空き・生存リスト、描画引数、パイプライン統計、描画先のピクセルを読み戻して照合しました。
+
+| フレーム | 生成と寿命切れ | 更新後の空き数 | `InstanceCount` | 描画した三角形数 |
+| --- | --- | ---: | ---: | ---: |
+| 1 | 4・7 に生成し、6 が寿命切れ。空きは `[1, 6]` | 2 | 6 | 12 |
+| 2 | 前フレームで空いた 6 を再利用 | 1 | 7 | 14 |
+| 3 | 5 件の要求に対し、残る空き 1 件に生成 | 0 | 8 | 16 |
+| 4 | 全粒子が寿命切れ | 8 | 0 | 0 |
+| 5 | 生成なし。空きスロットの二重登録なし | 8 | 0 | 0 |
+
+生存数が0のフレームも同じDrawコマンドを1件渡し、描画先に四角形が出ないことを確認しました。生存粒子がいるフレームでは、描画先に現れたスロット番号が生存リストと一致しました。
 
 ## 半透明の重なりを並べ替える
 
@@ -188,6 +206,8 @@ Direct3D 12のレガシーバリアを使う例では、引数をUAVへの書き
 バイトニックソートでは、隣り合う部分列を交互の向きに並べてから、長さを 2 倍にしながらマージします。例えば 8 件の最後のマージでは、前半と後半を距離 4 のペアで比較交換し、その後は距離 2、1 のペアを処理します。各段ではペアが重複しないので並列に比較交換できます。長さ $k$ のマージでは距離を $k/2,k/4,\dots,1$ と下げ、比較相手を添字の XOR で求めます。2 のべき乗 $N=2^m$ 件なら、全体の比較交換の段数は $1+2+\dots+m=m(m+1)/2$。各段は最大 $N/2$ 件を比較します。128 件では $m=7$ なので 28 段、1792 比較です。[K. E. Batcher、Sorting Networks and Their Applications](https://doi.org/10.1145/1468075.1468121)
 
 次の HLSL Shader Model 6.0 の例は、生存数が常に 128 以下のエミッターやパーティクルプール用です。`dxc -T cs_6_0 -E Sort128CS Sort128.hlsl` でコンパイルし、`Dispatch(1, 1, 1)` で実行します。`ParticleData` と `InputIds` は更新パスが書いた粒子と生存 ID、`InputDrawArgs` は更新済みの描画引数です。`SortedIds` に生存 ID を並べ替えて格納し、間接描画の引数はそのまま使います。未使用レーンには最大キーと最大 ID を設定し、末尾へ送ります。同じ深度ではスロット番号で順番を決めます。
+
+Direct3D 12 では、ソート前に粒子と生存リストを `NON_PIXEL_SHADER_RESOURCE` に、`DrawArgs` を `NON_PIXEL_SHADER_RESOURCE | INDIRECT_ARGUMENT` に遷移させます。`DrawArgs` はソートでSRVとして読み、続く `ExecuteIndirect` で引数として読みます。`SortedIds` はソートでUAVとして書き込み、描画前に `NON_PIXEL_SHADER_RESOURCE` に遷移させて頂点シェーダーに渡します。
 
 ```hlsl
 struct Particle
@@ -257,7 +277,7 @@ void Sort128CS(uint i : SV_GroupIndex)
 }
 ```
 
-範囲外のレーンも比較交換と同期に参加します。早期リターンさせるとグループ全体が同期点へそろわず、末尾を埋める要素もなくなります。この例では全生存 ID を 1 グループに載せます。複数グループへそのまま拡張した場合はグループ内だけがソートされるため、グループをまたぐ比較交換の段を別の dispatch にし、段の間を UAV バリアで順序付けます。128 件用のコードを利用する場合は、粒子プールの容量や描画する件数も 128 以下に制限します。D3D12 で SRV を使うこのコードでは、更新の UAV 書き込みが終わった粒子、ID、引数をコンピュートシェーダーで読み取れる状態に遷移させます。描画時は並べ替え後の ID を SRV へ、引数を間接描画用の状態へ遷移させます。[Microsoft、GroupMemoryBarrierWithGroupSync](https://learn.microsoft.com/en-us/windows/win32/direct3dhlsl/groupmemorybarrierwithgroupsync)
+範囲外のレーンも比較交換と同期に参加します。早期リターンさせるとグループ全体が同期点へそろわず、末尾を埋める要素もなくなります。この例では全生存 ID を 1 グループに載せます。複数グループへそのまま拡張した場合はグループ内だけがソートされるため、グループをまたぐ比較交換の段を別の dispatch にし、段の間を UAV バリアで順序付けます。128 件用のコードを利用する場合は、粒子プールの容量や描画する件数も 128 以下に制限します。[Microsoft、GroupMemoryBarrierWithGroupSync](https://learn.microsoft.com/en-us/windows/win32/direct3dhlsl/groupmemorybarrierwithgroupsync)
 
 ### 基数ソート — ヒストグラム、スキャン、書き出し
 
@@ -308,6 +328,7 @@ AMD FidelityFX SDK v1.1.4 の Parallel Sort は DirectX 12 と Vulkan を対象�
 - [Microsoft、HLSLのRWByteAddressBuffer](https://learn.microsoft.com/en-us/windows/win32/direct3dhlsl/sm5-object-rwbyteaddressbuffer)
 - [Microsoft、HLSLのInterlockedAdd](https://learn.microsoft.com/en-us/windows/win32/direct3dhlsl/interlockedadd)
 - [Microsoft、Direct3D 12の間接描画とコマンドシグネチャ](https://learn.microsoft.com/en-us/windows/win32/direct3d12/indirect-drawing)
+- [Microsoft、Direct3D 12のExecuteIndirect](https://learn.microsoft.com/en-us/windows/win32/api/d3d12/nf-d3d12-id3d12graphicscommandlist-executeindirect)
 - [Microsoft、Direct3D 12のD3D12_DRAW_ARGUMENTS](https://learn.microsoft.com/en-us/windows/win32/api/d3d12/ns-d3d12-d3d12_draw_arguments)
 - [Microsoft、Direct3D 12のリソース状態とバリア](https://learn.microsoft.com/en-us/windows/win32/direct3d12/using-resource-barriers-to-synchronize-resource-states-in-direct3d-12)
 - [Khronos、Vulkanのフレームバッファ合成式](https://docs.vulkan.org/spec/latest/chapters/framebuffer.html#framebuffer-blendoperations)
