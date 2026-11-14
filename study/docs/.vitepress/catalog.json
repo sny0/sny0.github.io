@@ -1658,7 +1658,7 @@
         "非所有ビュー",
         "フラットマップ"
       ],
-      "verification": "WG21のC++20草案N4861、C++23最終草案N4950、C++26のDISの基礎となったN5050に照合し、GCC 16.2で実行確認（2026-11-13）",
+      "verification": "WG21 N4861・N4950・N5050に照合。GCC 16.2で実行し、hiveはlibstdc++の開発パッチで確認（2026-11-15）",
       "links": [
         "/languages/cpp/cpp26-features.html",
         "/algorithms/arrays-and-dynamic-arrays.html",
@@ -1714,7 +1714,7 @@
         "std::execution",
         "sender receiver"
       ],
-      "verification": "WG21 N5050、ISO/IEC DIS 14882、GCC 16 系・LLVM の公式文書（2026-11-13）",
+      "verification": "WG21 N5050、ISO/IEC DIS 14882、GCC 16 系・LLVM の公式文書（2026-11-13）、nvc++ 26.9 で sender/receiver を実行確認（2026-11-15）",
       "links": [
         "/os/asynchronous-file-io.html",
         "/languages/cpp/templates-and-concepts.html",

@@ -8,7 +8,7 @@ study:
   domain: languages
   summary: データを借りるビューと、要素を所有するコンテナを、配置、容量、参照が無効になる条件で比較する。
   aliases: [std::span, std::mdspan, std::flat_map, std::inplace_vector, std::hive, 非所有ビュー, フラットマップ]
-  verification: WG21のC++20草案N4861、C++23最終草案N4950、C++26のDISの基礎となったN5050に照合し、GCC 16.2で実行確認（2026-11-13）
+  verification: WG21 N4861・N4950・N5050に照合。GCC 16.2で実行し、hiveはlibstdc++の開発パッチで確認（2026-11-15）
 ---
 
 # C++23・26のコンテナとビュー — span・mdspan・flat_map・inplace_vector・hive
@@ -54,7 +54,7 @@ C++26の `std::submdspan` では、整数で指定した軸を一つの添字に
 
 ## コード例 — 同じバッファを1次元と2次元で読む
 
-完全なC++ソースです。`g++ -std=c++20 views.cpp -o views` で `span` を確認できます。同じファイルを `-std=c++23` または `-std=c++26` でビルドすると、標準ライブラリの `<version>` が公開する機能テストマクロに応じて、実装済みの型や関数の分岐も有効になります。
+完全なC++ソースです。`g++ -std=c++20 views.cpp -o views` で `span` を確認できます。同じファイルを `-std=c++23` または `-std=c++26` でビルドすると、標準ライブラリの `<version>` が公開する機能テストマクロに応じて、実装済みの型や関数の分岐も有効になります。`STUDY_USE_HIVE_PREVIEW` は、後述する開発パッチを使うときの指定です。
 
 ```cpp
 #include <array>
@@ -72,7 +72,7 @@ C++26の `std::submdspan` では、整数で指定した軸を一つの添字に
 #ifdef __cpp_lib_inplace_vector
 #include <inplace_vector>
 #endif
-#ifdef __cpp_lib_hive
+#if defined(__cpp_lib_hive) || defined(STUDY_USE_HIVE_PREVIEW)
 #include <hive>
 #endif
 
@@ -106,7 +106,7 @@ int main()
               << (visible.try_push_back(11) ? "inserted" : "full") << '\n';
 #endif
 
-#ifdef __cpp_lib_hive
+#if defined(__cpp_lib_hive) || defined(STUDY_USE_HIVE_PREVIEW)
     std::hive<int> particles;
     const auto first = particles.insert(10);
     const auto keep = particles.insert(20);
@@ -117,7 +117,9 @@ int main()
 }
 ```
 
-`span` と行優先の `mdspan` はどちらも元の配列の要素20を読みます。`inplace_vector` の容量は2なので3つ目を追加すると `full` です。`hive` で消したのは10だけなので、既存の20へのイテレーターを使えます。GCC 16.2と付属のlibstdc++で実行しました。C++20モードは `span: 20`、C++23モードはさらに `mdspan: 20` と `flat_map: 7,5` を表示します。C++26モードでは `submdspan: 22` と `inplace_vector: full` も表示します。この配布のlibstdc++では `hive` の分岐が有効にならないため、その例はN5050の宣言と無効化規則に照合しました。初回のVisual Studio 2022 17.5.5での確認は `span` の分岐が対象でした。Microsoftの適合表では `<mdspan>` はVisual Studio 2022 17.9からです。
+`span` と行優先の `mdspan` はどちらも元の配列の要素20を読みます。`inplace_vector` の容量は2なので3つ目を追加すると `full` です。`hive` で消したのは10だけなので、既存の20へのイテレーターを使えます。GCC 16.2と付属のlibstdc++で実行しました。C++20モードは `span: 20`、C++23モードはさらに `mdspan: 20` と `flat_map: 7,5` を表示します。C++26モードでは `submdspan: 22` と `inplace_vector: full` も表示します。初回のVisual Studio 2022 17.5.5での確認は `span` の分岐が対象でした。Microsoftの適合表では `<mdspan>` はVisual Studio 2022 17.9からです。
+
+`hive` は、GCC 16.2.0にlibstdc++の開発パッチ（2026年10月6日のRFC v2）とGCC開発版の依存ヘッダーを作業用のインクルード先で組み合わせ、C++26モードで実行しました。`hive: 20` が表示され、10を削除して30を挿入した後も、保存していたイテレーターで20を読めました。このパッチは `__cpp_lib_hive` を公開していないため、開発版での実行時だけ `-DSTUDY_USE_HIVE_PREVIEW` を指定しました。通常の配布版では、標準の機能テストマクロ `__cpp_lib_hive` を持つ環境でこの分岐が有効になります。
 
 ## 理解度チェック
 
@@ -146,4 +148,5 @@ int main()
 - [WG21、N5050のhive](https://timsong-cpp.github.io/cppwp/n5050/hive)
 - [WG21 N5050 — submdspan](https://timsong-cpp.github.io/cppwp/n5050/mdspan.sub)
 - [GCC 16 — 標準ライブラリの実装状況](https://gcc.gnu.org/gcc-16/changes.html#libstdcxx)
+- [GCC — libstdc++のhive実装 RFC v2](https://gcc.gnu.org/pipermail/gcc-patches/2026-October/733588.html)
 - [Microsoft — Visual Studio 2022 17.9のC++適合性の改善](https://learn.microsoft.com/en-us/cpp/overview/cpp-conformance-improvements#conformance-improvements-in-visual-studio-2022-version-179)

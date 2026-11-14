@@ -14,7 +14,7 @@ study:
     - Standard Library Hardening
     - std::execution
     - sender receiver
-  verification: WG21 N5050、ISO/IEC DIS 14882、GCC 16 系・LLVM の公式文書（2026-11-13）
+  verification: WG21 N5050、ISO/IEC DIS 14882、GCC 16 系・LLVM の公式文書（2026-11-13）、nvc++ 26.9 で sender/receiver を実行確認（2026-11-15）
 ---
 
 # C++26 の主な新機能 — 静的リフレクション・契約・ライブラリ強化・実行制御
@@ -158,7 +158,9 @@ sender は、開始するとどのような完了を届ける処理かを表す�
 
 `just` は開始時に、保持した値を下流へ届ける sender を作る。`starts_on` に scheduler を指定すると、そこに処理の開始を委ねる。`when_all` は二つの sender の値を入力順でまとめ、`std::this_thread::sync_wait` はこの例のように値完了の形が一種類の場合に、`optional<tuple<…>>` で返す。停止なら空、エラーなら例外になる。`when_all` は仕事をまとめる演算で、各仕事をどこで実行するかは sender の構成で決まる。
 
-標準ライブラリに対応がある場合は `#include <execution>` を使う。下の同じソースは `-DSTUDY_USE_STDEXEC -I path/to/stdexec/include` を付けると、NVIDIA の参照実装で試せる。参照実装のコード例は 2026 年 11 月 13 日時点のリビジョン `28968426` に対応している。
+標準ライブラリの sender/receiver 対応は、`<execution>` または `<version>` の機能テストマクロ `__cpp_lib_senders` で確認できる。`__cpp_lib_execution` は並列アルゴリズムの実行ポリシー用のマクロ。
+
+Compiler Explorer の Linux x86-64 環境で、NVIDIA HPC SDK 26.9 の nvc++ に付属する `<execution>` を使って実行を確認した。`nvc++ -std=c++26 -pthread sender.cpp -o sender` でビルドし、`./sender` で実行する。同じソースに `-DSTUDY_USE_STDEXEC -I path/to/stdexec/include` を付ければ、NVIDIA の参照実装でも試せる。nvc++ で参照実装を選ぶ場合は `--no-stdexec` も指定する。参照実装の検証にはリビジョン `28968426` を使用した。
 
 ```cpp
 #include <cassert>
@@ -213,9 +215,10 @@ int main()
 | GCC 16.2 / libstdc++ 16.2 | P2996R13、P1306R5。`-std=c++26 -freflection` で上の例を確認 | P2900R14。`-fcontracts` で上の例を確認 | GCC の言語モードとは別。付属の `<execution>` で上の例に必要な sender API は提供されていない |
 | Clang / libc++ | LLVM の対応表では P2996R13 は未対応。展開文は Clang 23 の表で一部対応とされ、範囲を反復する形式は未対応 | LLVM の対応表では P2900R14 は未対応 | libc++ の P2300R10 は対応表で完了していない |
 | MSVC / Microsoft STL | Visual Studio 2026 の公式対応表に P2996R13 の対応記載なし | 公式対応表に P2900R14 の対応記載なし | Microsoft STL が P2300R10 を未実装として追跡している |
-| NVIDIA stdexec | 使用するコンパイラで決まる | 使用するコンパイラで決まる | C++20 以降から試せる参照実装。上の sender 例はこの経路で確認 |
+| NVIDIA HPC SDK 26.9 / nvc++ | — | — | 付属の `<execution>` で上の例を実行確認。`__cpp_lib_senders` は `202506L` |
+| NVIDIA stdexec | 使用するコンパイラで決まる | 使用するコンパイラで決まる | C++20 以降から試せる参照実装。上の例をこの経路でも実行確認 |
 
-libc++ には C++26 の標準化とは別に、実装独自の hardening モードがある。GCC・Clang・MSVC で同じ名前の規格モードを選んでも、使える機能はコンパイラと標準ライブラリの組み合わせで変わる。上の表は 2026 年 11 月 13 日時点。
+libc++ には C++26 の標準化とは別に、実装独自の hardening モードがある。コンパイラで同じ名前の規格モードを選んでも、使える機能はコンパイラと標準ライブラリの組み合わせで変わる。GCC・LLVM・MSVC と参照実装は 2026 年 11 月 13 日、nvc++ は 11 月 15 日に確認した。
 同じプロジェクトで複数の処理系を使うなら、コンパイラの規格モードに加え、標準ライブラリの版と各機能のテストをビルドに組み込める。
 
 ## コード例 — C++20 でメンバー列挙と入力検査を明示する
@@ -310,3 +313,4 @@ int main()
 - LLVM, [Clang C++ の対応表](https://clang.llvm.org/cxx_status.html)・[libc++ の C++26 対応表](https://libcxx.llvm.org/Status/Cxx26.html)
 - Microsoft, [MSVC の C/C++ 規格対応表](https://learn.microsoft.com/en-us/cpp/overview/visual-cpp-language-conformance)・[Microsoft STL の P2300R10 追跡](https://github.com/microsoft/STL/issues/4768)
 - NVIDIA, [stdexec の検証に使用したリビジョン](https://github.com/NVIDIA/stdexec/tree/2896842646d75f44cf574419a282bc36ca91f139)
+- NVIDIA, [HPC SDK 26.3 リリースノート（`<execution>` での提供開始）](https://docs.nvidia.com/hpc-sdk/archive/26.3/pdf/hpc-sdk263rn.pdf)・[HPC SDK 26.9 コンパイラリファレンス](https://docs.nvidia.com/hpc-sdk/compilers/hpc-compilers-ref-guide/index.html)
