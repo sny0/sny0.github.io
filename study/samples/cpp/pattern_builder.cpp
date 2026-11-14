@@ -32,7 +32,7 @@ int main() {
     Character hero = CharacterBuilder{}
                          .Name("Hero").Job("Warrior").AddSkill("Slash").AddSkill("Guard")
                          .Build();
-    std::printf("%s(%s) hp=%d skills=%u\n",
+    std::printf("%s(%s) hp=%d skills=%zu\n",
                 hero.name.c_str(), hero.job.c_str(), hero.hp, hero.skills.size());
 
     CharacterDesc d{.name = "Mage", .hp = 60};     // designated initializer

@@ -59,7 +59,7 @@ int main() {
     shop.AddModifier([](int price) { return price * 80 / 100; });   // 20%オフイベント
     shop.TryBuy(w, inv, {"sword", 60, designed::Currency::Gold});
     shop.TryBuy(w, inv, {"gacha", 3, designed::Currency::Gem});
-    std::printf("designed: gold=%d gem=%d items=%u\n",
+    std::printf("designed: gold=%d gem=%d items=%zu\n",
                 w.balance[0], w.balance[1], inv.size());
     return 0;
 }

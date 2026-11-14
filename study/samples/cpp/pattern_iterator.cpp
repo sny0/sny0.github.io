@@ -34,7 +34,7 @@ int main() {
         std::printf("enemy %d hp=%d\n", e.id, e.hp);
 
     mgr.RemoveDead();
-    std::printf("after RemoveDead: %u alive\n", mgr.Count());
+    std::printf("after RemoveDead: %zu alive\n", mgr.Count());
     for (const Enemy& e : mgr) std::printf("  id=%d\n", e.id);
     return 0;
 }

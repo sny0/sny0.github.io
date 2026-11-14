@@ -20,7 +20,7 @@ int main() {
     enemies.erase(std::remove_if(enemies.begin(), enemies.end(),
                                  [](const Enemy& e) { return e.hp <= 0; }),
                   enemies.end());
-    std::printf("alive=%u\n", enemies.size());
+    std::printf("alive=%zu\n", enemies.size());
 
     // ID→データ表
     std::unordered_map<int, std::string> itemNames{{1, "potion"}, {2, "sword"}};

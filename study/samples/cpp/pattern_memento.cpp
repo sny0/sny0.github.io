@@ -23,7 +23,7 @@ public:
     void MoveTo(float x, float y) { x_ = x; y_ = y; }
     void Pickup(int id) { items_.push_back(id); }
     void Print() const {
-        std::printf("hp=%d pos=(%.0f,%.0f) items=%u\n", hp_, x_, y_, items_.size());
+        std::printf("hp=%d pos=(%.0f,%.0f) items=%zu\n", hp_, x_, y_, items_.size());
     }
 private:
     int hp_ = 100;

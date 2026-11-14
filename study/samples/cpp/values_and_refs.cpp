@@ -27,6 +27,6 @@ int main() {
     std::printf("参照渡し後 a.hp=%d (変わる)\n", a.hp);
     std::printf("ReadOnly=%d\n", ReadOnly(a));
 
-    std::printf("sizeof(Enemy)=%u sizeof(Enemy*)=%u\n", sizeof(Enemy), sizeof(Enemy*));
+    std::printf("sizeof(Enemy)=%zu sizeof(Enemy*)=%zu\n", sizeof(Enemy), sizeof(Enemy*));
     return 0;
 }

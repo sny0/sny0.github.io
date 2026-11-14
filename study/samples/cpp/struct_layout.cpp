@@ -19,12 +19,12 @@ struct WithVptr {     // 仮想関数でvptrが足される(docs/06_cpp_internal
 struct NoVptr { int x = 0; };
 
 int main() {
-    std::printf("sizeof(Bad)=%u sizeof(Good)=%u\n", sizeof(Bad), sizeof(Good));
-    std::printf("Bad offsets: a=%u d=%u b=%u\n",
+    std::printf("sizeof(Bad)=%zu sizeof(Good)=%zu\n", sizeof(Bad), sizeof(Good));
+    std::printf("Bad offsets: a=%zu d=%zu b=%zu\n",
                 offsetof(Bad, a), offsetof(Bad, d), offsetof(Bad, b));
-    std::printf("Good offsets: d=%u a=%u b=%u\n",
+    std::printf("Good offsets: d=%zu a=%zu b=%zu\n",
                 offsetof(Good, d), offsetof(Good, a), offsetof(Good, b));
-    std::printf("sizeof(NoVptr)=%u sizeof(WithVptr)=%u (vptr分の差)\n",
+    std::printf("sizeof(NoVptr)=%zu sizeof(WithVptr)=%zu (vptr分の差)\n",
                 sizeof(NoVptr), sizeof(WithVptr));
     return 0;
 }
