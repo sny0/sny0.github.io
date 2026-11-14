@@ -7339,7 +7339,7 @@
         "RI_KEY_BREAK",
         "VKey"
       ],
-      "verification": "USB-IFとMicrosoftの資料に照合。MSVC C++20でビルドと起動を確認し、テスト入力で押下・解放の表示を照合（2026-11-12）",
+      "verification": "USB-IFとMicrosoftの資料に照合。MSVC C++20でビルドし、Windows上でUSBキーボードの押下・解放を実機確認（2026-11-14）",
       "links": [
         "/tools/development-tools-basics.html",
         "/game/basics/input-actions-and-devices.html",

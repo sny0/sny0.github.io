@@ -155,14 +155,24 @@ void CullCS(uint3 dtid : SV_DispatchThreadID) {
 
 `MinDepthInRect`は、選んだmipで投影矩形が覆う領域の最小値を保守的に取得するhelperです。通常の線形フィルターによる平均値では置き換えられません。矩形の画面端での丸め、mipの上限、near planeと交差して投影できない境界箱なども扱い、不確実な場合は不可視にせず描く側へ残します。`gVisibleInstances`には全インスタンスを格納できる容量を用意し、`instanceCount`はdispatch前に0へ初期化する前提です。
 
-CPU側 (DX12) は毎フレームこれだけ:
+CPU側 (Direct3D 12) は、カリングと描画を同じ Direct キューで実行する例です。引数バッファと可視リストを再利用するときは、明示的な遷移で次の書き込みに備えます。ここでは頂点シェーダーが可視リストをSRVで読みます。`resetArgs` は `COPY_SOURCE` で使える初期値のバッファで、描画引数の `InstanceCount` を0にしておきます。初回も下の `Transition` の変更前の状態に合わせてバッファを作成します。
 
 ```cpp
-// カリング → バリア → 描画。オブジェクト数がいくつでもCPUコストは一定
-cmd->Dispatch((instanceCount + 63) / 64, 1, 1);
+// カリング用パイプラインとバッファのバインドは省略
+Transition(cmd, drawArgsBuf, INDIRECT_ARGUMENT, COPY_DEST);
+cmd->CopyBufferRegion(drawArgsBuf.Get(), 0, resetArgs.Get(), 0,
+                      sizeof(D3D12_DRAW_INDEXED_ARGUMENTS));
+Transition(cmd, drawArgsBuf, COPY_DEST, UAV);
+Transition(cmd, visibleBuf, NON_PIXEL_SHADER_RESOURCE, UAV);
+if (instanceCount != 0)
+    cmd->Dispatch((instanceCount - 1) / 64 + 1, 1, 1);
 Transition(cmd, drawArgsBuf, UAV, INDIRECT_ARGUMENT);
+Transition(cmd, visibleBuf, UAV, NON_PIXEL_SHADER_RESOURCE);
+// 描画用パイプラインとSRVをバインドしてから実行
 cmd->ExecuteIndirect(cmdSignature.Get(), 1, drawArgsBuf.Get(), 0, nullptr, 0);
 ```
+
+Direct3D 12のデバッグレイヤーを有効にし、簡略化したカリング用Compute Shaderで2件、1件、0件を順に渡してこの手順を確認しました。引数バッファを再利用しても、読み戻した描画引数の `InstanceCount` は2、1、0でした。描画先のピクセルも最初の2回で更新され、0件ではクリア値のままでした。
 
 ## 前提知識
 
@@ -196,6 +206,7 @@ cmd->ExecuteIndirect(cmdSignature.Get(), 1, drawArgsBuf.Get(), 0, nullptr, 0);
 ## 参考資料
 
 - Haar & Aaltonen, *"GPU-Driven Rendering Pipelines"* (SIGGRAPH 2015) — 原典
+- [Microsoft — Direct3D 12のリソース状態とバリア](https://learn.microsoft.com/en-us/windows/win32/direct3d12/using-resource-barriers-to-synchronize-resource-states-in-direct3d-12)
 - Brian Karis et al., *"Nanite: A Deep Dive"* (SIGGRAPH 2021)
 - vkguide.dev *"GPU Driven Rendering"* 章 — 実装チュートリアル
 - Unity, *GPU Resident Drawer* ドキュメント

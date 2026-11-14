@@ -51,23 +51,25 @@ RenderGraphは「**各パスは自分の入出力だけ宣言する。全体の�
 
 ## 内部動作
 
-### 2フェーズ構造
+<span id="_2フェーズ構造"></span>
+
+### 記録・コンパイル・実行
 
 ```mermaid
 flowchart LR
-    subgraph Setup["1. セットアップ (毎フレーム・CPU)"]
+    subgraph Setup["1. 記録 (毎フレーム・CPU)"]
         A["各パスが宣言:<br/>Read(リソースA)<br/>Write(リソースB)<br/>+ 実行ラムダ登録"]
     end
     subgraph Compile["2. コンパイル"]
-        B["依存グラフ構築<br/>→ 不要パス除去 (culling)<br/>→ 実行順序決定<br/>→ バリア計算<br/>→ メモリ割当 (エイリアシング)"]
+        B["依存グラフ構築<br/>→ 不要パス除去 (culling)<br/>→ リソースの使用区間と同期を計画"]
     end
     subgraph Execute["3. 実行"]
-        C["各パスのラムダを順に呼び<br/>実リソース+コマンドリストを渡す"]
+        C["必要な一時リソースを用意し<br/>各パスに実リソースとコマンドリストを渡す"]
     end
     A --> B --> C
 ```
 
-- パス宣言時のリソースは**仮想ハンドル** (実メモリ未割当)。コンパイル時に実体化される
+- パスの記録時には、これから作る一時リソースを**仮想ハンドル**で参照します。コンパイルで使用区間を求め、Unity 6.0 の URP は実行時に、そのリソースへ最初に書き込むパスの直前でメモリを用意します。[Unity 6.0 — Render Graph の概要](https://docs.unity3d.com/6000.0/Documentation/Manual/urp/render-graph-introduction.html)
 - 毎フレーム作り直すのが基本 (シーン状態でパス構成が変わるため)。セットアップコストは軽量に設計する
 
 ### メモリエイリアシングの原理
@@ -103,7 +105,7 @@ flowchart LR
 
 ## コード例
 
-Unity 6.0 / URP 17 のカスタムパスです。呼び出し側は `_BlitTexture` を読むブラー用マテリアルを渡してパスを登録します。このパスはカメラが中間色テクスチャに描画するときに、後続パスが使うカメラ色を差し替えます。[Unity 6.0 — URP のブリットと色バッファの差し替え](https://docs.unity3d.com/6000.0/Documentation/Manual/urp/render-graph-optimize.html)
+Unity 6.0 / URP 17 の Render Graph 用カスタムパスです。呼び出し側は `_BlitTexture` を読むブラー用マテリアルを渡してパスを登録します。パスは `requiresIntermediateTexture` で中間色テクスチャを要求し、ブラーをかけたテクスチャを後続パスが使うカメラ色に設定します。バックバッファが現在の描画先であれば、そこからはサンプリングできないため処理を省きます。[Unity 6.0 — URP のブリットと色バッファの差し替え](https://docs.unity3d.com/6000.0/Documentation/Manual/urp/render-graph-optimize.html) / [Unity Technologies — BlitAndSwapColor のパッケージサンプル](https://github.com/Unity-Technologies/Graphics/blob/6000.0/staging/Packages/com.unity.render-pipelines.universal/Samples~/URPRenderGraphSamples/BlitWithMaterial/BlitAndSwapColorRendererFeature.cs)
 
 ```csharp
 using UnityEngine;
@@ -117,6 +119,7 @@ class BlurPass : ScriptableRenderPass {
     public BlurPass(Material material) {
         blurMaterial = material;
         renderPassEvent = RenderPassEvent.BeforeRenderingPostProcessing;
+        requiresIntermediateTexture = true;
     }
 
     class PassData {
@@ -155,6 +158,8 @@ class BlurPass : ScriptableRenderPass {
 }
 ```
 
+Unity 6000.0.85f1 / URP 17.0.4 の Forward レンダラーで、`Intermediate Texture` を `Auto` に設定して確認しました。カメラの出力先を 64 × 64 の `R8G8B8A8_UNorm` テクスチャにし、HDR・MSAA・ポストプロセスを無効にして、左半分を黒、右半分を白に描きます。マテリアルのシェーダーで `_BlitTexture` の左右 1 テクセルと中央をポイントサンプリングし、3 サンプルを平均します。Direct3D 11 で出力の境界付近 4 ピクセルを読み戻すと、R の値はパスなしで `0, 0, 255, 255`、パスありで `0, 85, 170, 255` になりました。
+
 UE RDGでのComputeパス (C++):
 
 ```cpp
@@ -189,7 +194,7 @@ FComputeShaderUtils::AddPass(GraphBuilder,
 
 1. **RenderGraphが「毎フレームグラフを作り直す」設計を採る理由は。**
    ::: details 解答
-   フレームごとにパス構成が変わるため(機能のオンオフ、可視性による省略、解像度変更、エディタ操作)。静的なグラフではこの動的性を扱えない。セットアップは仮想ハンドルの登録だけの軽量な処理に抑え、「宣言は毎フレーム、最適化(コンパイル)は高速」という設計でコストを許容範囲にしている。
+   機能のオンオフや可視性による省略、解像度変更などに応じて、パスやリソースの構成が変わるためです。記録時にパスの入出力を宣言すると、そのフレームの構成に合わせて不要なパスの除去や一時リソースの使用区間の計算ができます。
    :::
 
 2. **メモリエイリアシングが安全である条件と、それをグラフが保証できる理由を述べよ。**

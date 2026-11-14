@@ -8,7 +8,7 @@ study:
   domain: hardware
   summary: USBキーボードがキーの状態を報告する流れと、Windowsのウィンドウが受け取る押下・解放を図とC++の実行例で追う。
   aliases: [USB HID, キーボード, HIDレポート, Report Descriptor, Boot Protocol, Interrupt IN, ポーリング, スキャンコード, Raw Input, WM_INPUT, RAWKEYBOARD, MakeCode, RI_KEY_BREAK, VKey]
-  verification: USB-IFとMicrosoftの資料に照合。MSVC C++20でビルドと起動を確認し、テスト入力で押下・解放の表示を照合（2026-11-12）
+  verification: USB-IFとMicrosoftの資料に照合。MSVC C++20でビルドし、Windows上でUSBキーボードの押下・解放を実機確認（2026-11-14）
 ---
 
 # USBキーボードの入力がWindowsのアプリに届くまで — HIDレポートとWM_INPUT
@@ -76,7 +76,7 @@ cl /nologo /std:c++20 /permissive- /EHsc /W4 /WX /utf-8 raw_keyboard.cpp user32.
 3. サンプルのウィンドウを選び、スペースキーを一回押して離します。次に、独立した右矢印キーを押して離します。
 4. スペースキーをしばらく押し続けると、Windowsのキーリピートにより押下側の通知が複数並ぶことがあります。最後に離して解放の行を探します。ウィンドウ右上の×で終了すると一覧も消えます。
 
-一般的なキーボードで見られる表示例です。通知が使うコードはキーボードやキーによって変わります。
+Windows上でUSBキーボードのスペースキーと右矢印キーを押して離し、次の4件を確認しました。入力元は `RAWINPUTHEADER.hDevice` に対応するデバイスを調べ、Windowsが認識する接続経路がUSBであることを照合しました。ここで観測したのは `WM_INPUT` に届いた値です。上の8バイトはBoot Protocolの仕様例です。通知に含まれるコードはキーや機器によって変わります。[MicrosoftのGetRawInputDeviceInfoW](https://learn.microsoft.com/en-us/windows/win32/api/winuser/nf-winuser-getrawinputdeviceinfow)
 
 ```text
 DOWN  MakeCode=0x0039  Flags=0x0000  VKey=0x0020

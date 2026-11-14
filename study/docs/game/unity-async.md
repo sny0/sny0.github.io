@@ -103,7 +103,7 @@ public sealed class AsyncScaleExample : MonoBehaviour
 }
 ```
 
-剰余0〜6の合計は21で、100,000個には14,285周と剰余0〜4の5個が含まれます。したがって正常終了では `Async total: 299995` が出力され、ローカルスケールの各軸が1.5になります。コードはUnity 6000.3.27f1付属のコンパイラとUnityEngineの参照でビルド確認しました。Playモードでの確認は未実施です。
+剰余0〜6の合計は21で、100,000個には14,285周と剰余0〜4の5個が含まれます。Unity 6000.3.27f1 の Play モードでは、計算どおり `Async total: 299995` が出力され、ローカルスケールの各軸が 1.5 になりました。
 
 ### コード例 — UniTask の次フレーム待ちをキャンセルする
 
@@ -146,7 +146,7 @@ public sealed class UniTaskNextFrameExample : MonoBehaviour
 }
 ```
 
-通常は `Frames elapsed: 1` が出ます。オブジェクトの破棄や Play モード終了でトークンが取り消されると、ログを出さずに終了します。`Start` は Unity が呼ぶ入口なので `void` のままにし、再利用する処理は `UniTask` を返して、呼び出し側が完了や例外を受け取ります。 Unity 6000.3.27f1 の参照アセンブリと UniTask 2.5.11 でコンパイルを確認しました。 [Cysharp — UniTask 2.5.11 の PlayerLoop](https://github.com/Cysharp/UniTask/tree/2.5.11#playerloop)
+Unity 6000.3.27f1 と UniTask 2.5.11 の Play モードで `Frames elapsed: 1` を確認しました。次フレームを待っている間にオブジェクトを破棄する場合と、Play モードを終了する場合も試し、どちらのコード例もキャンセル後は結果を出力しませんでした。`Start` は Unity が呼ぶ入口なので `void` のままにし、再利用する処理は `UniTask` を返して、呼び出し側が完了や例外を受け取ります。[Cysharp — UniTask 2.5.11 の PlayerLoop](https://github.com/Cysharp/UniTask/tree/2.5.11#playerloop)
 
 ## 理解度チェック
 

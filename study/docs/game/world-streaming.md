@@ -134,7 +134,7 @@ public sealed class AddressableCellExample : MonoBehaviour
 }
 ```
 
-`autoReleaseHandle: false` はアンロード操作の結果を読んでから自分でそのハンドルを解放する指定。ロード成功時はロードハンドルをアンロードへ渡す。ロードに失敗したときは失敗した操作のハンドルを解放する。上の例は有効化を保留しない。実運用では `yield return null` の位置で、セルを参照する処理が終わったかをゲーム側の状態で判断する。 Unity 6000.3.27f1 と Addressables 2.10.3 の参照でコンパイルを確認した。 [Unity — Addressables 2.10 のシーンのロード](https://docs.unity3d.com/Packages/com.unity.addressables@2.10/manual/LoadingScenes.html)
+`autoReleaseHandle: false` はアンロード操作の結果を読んでから自分でそのハンドルを解放する指定。ロード成功時はロードハンドルをアンロードへ渡す。ロードに失敗したときは失敗した操作のハンドルを解放する。上の例は有効化を保留しない。実運用では `yield return null` の位置で、セルを参照する処理が終わったかをゲーム側の状態で判断する。Unity 6000.3.27f1 と Addressables 2.10.3 の Play Mode で `Use Asset Database` を選び、`Cell loaded` と `Cell unloaded` の時点でシーンの `isLoaded` がそれぞれ `true`、`false` になることを確認した。[Unity — Addressables 2.10 のシーンのロード](https://docs.unity3d.com/Packages/com.unity.addressables@2.10/manual/LoadingScenes.html)
 
 ## 理解度チェック
 

@@ -93,38 +93,53 @@ WindowsでHDRP 17のレイトレーシングを使うにはDirectX 12とDXR対�
 
 ## コード例
 
-物理ライティングでのシーン設定 (C#):
+Unity 6.0 / HDRP 17 の物理ライティングと自動露出の設定です。シーンの Directional Light と、カメラに適用される Volume のプロファイルを渡します。[Unity 6.0 — `Light.lightUnit`](https://docs.unity3d.com/6000.0/Documentation/ScriptReference/Light-lightUnit.html) / [HDRP 17 — Exposure](https://docs.unity.cn/Packages/com.unity.render-pipelines.high-definition@17.0/manual/Override-Exposure.html)
 
 ```csharp
-// 太陽: 130,000 lux (晴天の実測値)
-var sun = sunLight.GetComponent<HDAdditionalLightData>();
-sun.SetIntensity(130000f, LightUnit.Lux);
-sun.EnableColorTemperature(true);
-sun.colorTemperature = 5800f;   // ケルビン
+using UnityEngine;
+using UnityEngine.Rendering;
+using UnityEngine.Rendering.HighDefinition;
 
-// 露出をカメラ実機の感覚で (Volumeプロファイル)
-var exposure = profile.Add<Exposure>();
-exposure.mode.Override(ExposureMode.Automatic);
-exposure.limitMin.Override(10f);   // EV100: 屋外晴天〜
-exposure.limitMax.Override(15f);
-```
+public static class OutdoorLighting {
+    public static void Configure(Light sun, VolumeProfile profile) {
+        sun.lightUnit = LightUnit.Lux;
+        sun.intensity = 130000f;
+        sun.useColorTemperature = true;
+        sun.colorTemperature = 5800f;   // ケルビン
 
-Custom Pass (HDRPの拡張機構):
-
-```csharp
-class OutlinePass : CustomPass {
-    public LayerMask outlineLayer;
-    public Material outlineMaterial;
-
-    protected override void Execute(CustomPassContext ctx) {
-        // 指定レイヤをオーバーライドマテリアルで描き直す
-        CustomPassUtils.DrawRenderers(ctx, outlineLayer,
-            overrideMaterial: outlineMaterial);
+        if (!profile.TryGet<Exposure>(out var exposure))
+            exposure = profile.Add<Exposure>();
+        exposure.active = true;
+        exposure.mode.Override(ExposureMode.Automatic);
+        exposure.limitMin.Override(10f);   // EV100 の下限
+        exposure.limitMax.Override(15f);   // EV100 の上限
     }
 }
-// Volume上の Custom Pass Volume コンポーネントに登録し、
-// 挿入位置 (Before/After Post Process等) を選ぶ
 ```
+
+Custom Pass では、指定レイヤーに属する描画対象を別のマテリアルで描き直せます。カメラで Custom Pass を有効にし、Custom Pass Volume にこのパスを追加します。例では `Before Transparent` でカメラの色と深度を対象にし、上書き用マテリアル (`HDRP/Unlit`) の `ForwardOnly` パスを選びます。上書き用シェーダーを変える場合は、そのシェーダーの描画パス名を指定します。[HDRP 17 — Custom Pass の C# API](https://docs.unity.cn/Packages/com.unity.render-pipelines.high-definition@17.0/manual/Custom-Pass-Scripting.html)
+
+```csharp
+using UnityEngine;
+using UnityEngine.Rendering.HighDefinition;
+
+[System.Serializable]
+public class LayerOverridePass : CustomPass {
+    public LayerMask targetLayer;
+    public Material overrideMaterial;
+    public string overridePassName = "ForwardOnly";
+
+    protected override void Execute(CustomPassContext ctx) {
+        if (overrideMaterial == null) return;
+        int passIndex = overrideMaterial.FindPass(overridePassName);
+        if (passIndex < 0) return;
+        CustomPassUtils.DrawRenderers(ctx, targetLayer,
+            overrideMaterial: overrideMaterial, overrideMaterialIndex: passIndex);
+    }
+}
+```
+
+Unity 6000.0.85f1 / HDRP 17.0.4 で、ライトが 130,000 lux・5,800 K、自動露出の範囲が EV100 10～15 になることを確認しました。Custom Pass の検証では露出制御とポストプロセスを無効にし、緑の `HDRP/Unlit` で描いた立方体に赤のマテリアルを割り当てました。Direct3D 11 で 64 × 64 の出力画像を読み戻すと、中央のピクセルはパスなしで緑、パスありで赤になりました。
 
 ## 前提知識
 

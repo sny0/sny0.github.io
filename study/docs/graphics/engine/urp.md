@@ -49,18 +49,18 @@ Unityの2026年の公式方針では、URPの機能と対応範囲の拡充に�
 
 ```mermaid
 flowchart TB
-    S["セットアップ<br/>カメラ/ライトデータ収集・クラスタ構築(Jobs)"] --> DP["DepthPrepass<br/>(必要時: SSAO等が深度/法線を要求)"]
-    DP --> SH["MainLightShadow / AdditionalLightsShadow<br/>(CSM + アトラス)"]
-    SH --> AO["SSAO (オプション)"]
+    S["セットアップ<br/>カメラ/ライトデータ収集・クラスタ構築(Jobs)"] --> SH["MainLightShadow / AdditionalLightsShadow<br/>(有効な場合)"]
+    SH --> DP["DepthPrepass<br/>(必要時: SSAO等が深度/法線を要求)"]
+    DP --> AO["SSAO (不透明描画の前に実行する設定の例)"]
     AO --> OP["DrawOpaqueObjects<br/>(Forward+: クラスタライトリスト参照)"]
-    OP --> SKY[Skybox]
+    OP --> SKY["Skybox (設定時)"]
     SKY --> TR["DrawTransparentObjects"]
-    TR --> POST["PostProcessing (Uber)<br/>Bloom/Vignette/Tonemap..."]
-    POST --> AA["TAA / STP / FXAA"]
-    AA --> FB["FinalBlit → バックバッファ"]
+    TR --> AA["TAA または STP (有効な場合)"]
+    AA --> POST["ポスト処理の合成 (UberPost)<br/>Bloom / Vignette / Tonemap など"]
+    POST --> FB["必要に応じて FinalPost (FXAA など)<br/>または FinalBlit で最終出力"]
 ```
 
-RenderDocやFrame Debuggerでこのパス列がそのまま見えます — **実物で確認しながら読むのが最良の学習法**です。
+図は Unity 6.0 / URP 17.0 での代表的な流れです。影を描くパスはカメラの深度プリパスより先にあり、TAA または STP はポスト処理の合成より先に実行されます。SSAO を不透明描画の後に実行する設定もあります。パスの有無や統合結果は、カメラと Renderer の設定を変えて Render Graph Viewer や Frame Debugger で確認できます。[Unity 6.0 — Render Graph の分析](https://docs.unity3d.com/6000.0/Documentation/Manual/urp/render-graph-view.html) / [Unity Technologies — URP のパス記録](https://github.com/Unity-Technologies/Graphics/blob/6000.0/staging/Packages/com.unity.render-pipelines.universal/Runtime/UniversalRendererRenderGraph.cs) / [Unity Technologies — URP のポスト処理](https://github.com/Unity-Technologies/Graphics/blob/6000.0/staging/Packages/com.unity.render-pipelines.universal/Runtime/Passes/PostProcessPassRenderGraph.cs)
 
 ### 主要クラス地図 (ソースを読む人向け)
 
@@ -100,7 +100,7 @@ UnityのDX12バックエンドで動作。Unity 6のGPU Resident DrawerはDX12/V
 
 ## コード例
 
-Unity 6.0 / URP 17 の RenderGraph 用 `TintFeature.cs` です。Renderer Feature に追加し、`_BlitTexture` を読むシェーダーのマテリアルを割り当てます。色は中間テクスチャから読み、バックバッファへ直接描いている場合はこのパスを実行しません。[Unity 6.0 — URP のブリットと色バッファの差し替え](https://docs.unity3d.com/6000.0/Documentation/Manual/urp/render-graph-optimize.html)
+Unity 6.0 / URP 17.0 の RenderGraph 用 `TintFeature.cs` です。Universal Renderer Data の Renderer Feature に追加し、下の `StudyTint.shader` を使うマテリアルを割り当てます。`requiresIntermediateTexture` によって、Renderer の **Intermediate Texture** が **Auto** の場合も、現在のカメラ色をサンプリングできる中間テクスチャを要求します。描画先がバックバッファのままならパスを記録せずに戻ります。[Unity 6.0 — URP のブリットと色バッファの差し替え](https://docs.unity3d.com/6000.0/Documentation/Manual/urp/render-graph-optimize.html) / [URP 17.0 — ScriptableRenderPass.requiresIntermediateTexture](https://docs.unity3d.com/Packages/com.unity.render-pipelines.universal@17.0/api/UnityEngine.Rendering.Universal.ScriptableRenderPass.html#UnityEngine_Rendering_Universal_ScriptableRenderPass_requiresIntermediateTexture)
 
 ```csharp
 using UnityEngine;
@@ -114,6 +114,7 @@ public class TintFeature : ScriptableRendererFeature {
         public TintPass(Material mat) {
             m_Material = mat;
             renderPassEvent = RenderPassEvent.BeforeRenderingPostProcessing;
+            requiresIntermediateTexture = true;
         }
 
         class PassData { public TextureHandle src; public Material mat; }
@@ -152,6 +153,42 @@ public class TintFeature : ScriptableRendererFeature {
 }
 ```
 
+`StudyTint.shader` は元のカメラ色を `_BlitTexture` から読み、RGB にそれぞれ 0.5、1.0、0.25 を掛けます。出力先は `TintTarget` です。アルファは元の値を保持します。
+
+```hlsl
+Shader "Hidden/Study/Tint"
+{
+    SubShader
+    {
+        Tags { "RenderPipeline" = "UniversalPipeline" }
+        Pass
+        {
+            ZTest Always
+            ZWrite Off
+            Cull Off
+
+            HLSLPROGRAM
+            #pragma vertex Vert
+            #pragma fragment Frag
+            #include "Packages/com.unity.render-pipelines.universal/ShaderLibrary/Core.hlsl"
+            #include "Packages/com.unity.render-pipelines.core/Runtime/Utilities/Blit.hlsl"
+
+            half4 Frag(Varyings input) : SV_Target
+            {
+                UNITY_SETUP_STEREO_EYE_INDEX_POST_VERTEX(input);
+                half4 color = SAMPLE_TEXTURE2D_X(
+                    _BlitTexture, sampler_LinearClamp, input.texcoord);
+                color.rgb *= half3(0.5h, 1.0h, 0.25h);
+                return color;
+            }
+            ENDHLSL
+        }
+    }
+}
+```
+
+Unity 6000.0.85f1 / URP 17.0.4 の Forward レンダラーで、`Intermediate Texture` を `Auto` にし、カメラの Opaque Texture、Depth Texture、HDR、MSAA、ポスト処理を無効にして確認しました。白い背景を Direct3D 11 のリニアな 8 ビット出力から読み戻すと、Renderer Feature がオフのときの RGB は `(1.000, 1.000, 1.000)`、オンのときは `(0.498, 1.000, 0.251)` で、およそ `(0.5, 1.0, 0.25)` になりました。
+
 ## 前提知識
 
 - [Unity のレンダラーと SRP](/graphics/engine/unity-renderer.html)
@@ -177,7 +214,7 @@ public class TintFeature : ScriptableRendererFeature {
 
 3. **カスタムパスで `res.cameraColor = dest` と差し替える設計の意味は。**
    ::: details 解答
-   RenderGraphでは「現在のカメラカラー」が仮想ハンドルで表され、パスがin-placeで書き換えるのではなく、新しいターゲットに書いてハンドルを差し替える(ping-pong)。これによりグラフが依存関係を正確に把握でき、バリア・メモリエイリアシングの自動管理が成立する。
+   `res.cameraColor = dest` は、後続パスが取得するカメラ色を `TintTarget` に切り替えます。RenderGraph が入出力の依存関係を把握するための宣言は、元の色を読む `UseTexture` と、出力へ書く `SetRenderAttachment` です。元の色を読みながら、結果は別のテクスチャへ書きます。
    :::
 
 ## 参考資料
