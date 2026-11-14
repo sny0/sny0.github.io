@@ -83,11 +83,11 @@ flowchart LR
     (DX12: Placed Resources / VK: 1つのVkDeviceMemoryにバインド)
 ```
 
-グラフはパスの実行順とリソースの最初/最後の使用点を知っているため、この割当を毎フレーム最適に解けます。
+グラフはパスに宣言された読み書きから、リソースの使用区間と同期を求めます。UE の RDG は、一時リソース用アロケーターが利用できる構成で、使用区間が重ならないリソースにメモリを再利用できます。[Epic Games — UE 5.1 の一時リソース](https://dev.epicgames.com/documentation/en-us/unreal-engine/render-dependency-graph-in-unreal-engine?application_version=5.1#transientresources)
 
 ### バリア導出
 
-グラフから、パス3がリソースAにRTVで書き込み、パス5がSRVで読み取ることが分かります。そこで、パス3と5の間に遷移を1回だけ挿入します。手作業より正確に処理でき、不要なバリアの挿入も必要なバリアの書き忘れも防げます。
+たとえばパス3がリソースAにRTVで書き込み、パス5がSRVで読むと宣言すると、グラフは両者の間に必要な遷移を計画できます。依存を導くため、実行時に使うリソースはパスの引数に含めます。
 
 ## 各環境での扱い
 
@@ -160,24 +160,107 @@ class BlurPass : ScriptableRenderPass {
 
 Unity 6000.0.85f1 / URP 17.0.4 の Forward レンダラーで、`Intermediate Texture` を `Auto` に設定して確認しました。カメラの出力先を 64 × 64 の `R8G8B8A8_UNorm` テクスチャにし、HDR・MSAA・ポストプロセスを無効にして、左半分を黒、右半分を白に描きます。マテリアルのシェーダーで `_BlitTexture` の左右 1 テクセルと中央をポイントサンプリングし、3 サンプルを平均します。Direct3D 11 で出力の境界付近 4 ピクセルを読み戻すと、R の値はパスなしで `0, 0, 255, 255`、パスありで `0, 85, 170, 255` になりました。
 
-UE RDGでのComputeパス (C++):
+<span id="unreal-rdg-compute"></span>
+
+### Unreal Engine の RDG で Compute パスを追加する
+
+UE 5.1 の例です。プラグイン `StudyRdgProbe` のモジュールを `PostConfigInit` で読み込み、モジュールの依存に `Projects`、`RHI`、`RenderCore` を追加します。シェーダーはプラグインの `Shaders/Private/StudyEffect.usf` に置きます。モジュールの起動時に仮想パス `/StudyRdg` を `Shaders` に対応付けます。[Epic Games — UE 5.1 のプラグインシェーダー](https://dev.epicgames.com/documentation/en-us/unreal-engine/overview-of-shaders-in-plugins-unreal-engine?application_version=5.1)
+
+モジュールの起動処理 (`StudyRdgProbe.cpp`)。
 
 ```cpp
-FRDGTextureRef OutputTexture = GraphBuilder.CreateTexture(
-    FRDGTextureDesc::Create2D(Extent, PF_FloatRGBA,
-        FClearValueBinding::None, TexCreate_UAV), TEXT("MyOutput"));
+#include "Interfaces/IPluginManager.h"
+#include "Misc/Paths.h"
+#include "Modules/ModuleManager.h"
+#include "ShaderCore.h"
 
-FMyCS::FParameters* Params = GraphBuilder.AllocParameters<FMyCS::FParameters>();
-Params->InputTexture  = GraphBuilder.CreateSRV(SceneColor);
-Params->OutputTexture = GraphBuilder.CreateUAV(OutputTexture);
+class FStudyRdgProbeModule : public IModuleInterface
+{
+public:
+    void StartupModule() override
+    {
+        const auto Plugin = IPluginManager::Get().FindPlugin(TEXT("StudyRdgProbe"));
+        check(Plugin.IsValid());
+        AddShaderSourceDirectoryMapping(TEXT("/StudyRdg"),
+            FPaths::Combine(Plugin->GetBaseDir(), TEXT("Shaders")));
+    }
+};
 
-FComputeShaderUtils::AddPass(GraphBuilder,
-    RDG_EVENT_NAME("MyEffect"),
-    TShaderMapRef<FMyCS>(GetGlobalShaderMap(FeatureLevel)),
-    Params,
-    FComputeShaderUtils::GetGroupCount(Extent, 8));
-// 遷移・生存期間はRDGが管理
+IMPLEMENT_MODULE(FStudyRdgProbeModule, StudyRdgProbe);
 ```
+
+Compute パスの登録処理。
+
+```cpp
+#include "GlobalShader.h"
+#include "RenderGraphBuilder.h"
+#include "RenderGraphUtils.h"
+#include "ShaderParameterStruct.h"
+
+class FStudyRdgCS : public FGlobalShader
+{
+public:
+    DECLARE_GLOBAL_SHADER(FStudyRdgCS);
+    SHADER_USE_PARAMETER_STRUCT(FStudyRdgCS, FGlobalShader);
+
+    BEGIN_SHADER_PARAMETER_STRUCT(FParameters, )
+        SHADER_PARAMETER(FIntPoint, Extent)
+        SHADER_PARAMETER_RDG_TEXTURE_SRV(Texture2D<float4>, InputTexture)
+        SHADER_PARAMETER_RDG_TEXTURE_UAV(RWTexture2D<float4>, OutputTexture)
+    END_SHADER_PARAMETER_STRUCT()
+};
+
+IMPLEMENT_GLOBAL_SHADER(FStudyRdgCS,
+    "/StudyRdg/Private/StudyEffect.usf", "MainCS", SF_Compute);
+
+FRDGTextureRef AddStudyRdgPass(FRDGBuilder& GraphBuilder, FRDGTextureRef Input)
+{
+    const FIntPoint Extent = Input->Desc.Extent;
+    FRDGTextureRef Output = GraphBuilder.CreateTexture(
+        FRDGTextureDesc::Create2D(Extent, PF_FloatRGBA,
+            FClearValueBinding::None, TexCreate_ShaderResource | TexCreate_UAV),
+        TEXT("Study.Output"));
+
+    auto* Params = GraphBuilder.AllocParameters<FStudyRdgCS::FParameters>();
+    Params->Extent = Extent;
+    Params->InputTexture = GraphBuilder.CreateSRV(FRDGTextureSRVDesc::Create(Input));
+    Params->OutputTexture = GraphBuilder.CreateUAV(Output);
+
+    TShaderMapRef<FStudyRdgCS> Shader(GetGlobalShaderMap(GMaxRHIFeatureLevel));
+    FComputeShaderUtils::AddPass(GraphBuilder,
+        RDG_EVENT_NAME("Study.Effect"), Shader, Params,
+        FComputeShaderUtils::GetGroupCount(Extent, 8));
+    return Output;
+}
+```
+
+```hlsl
+#include "/Engine/Public/Platform.ush"
+
+int2 Extent;
+Texture2D<float4> InputTexture;
+RWTexture2D<float4> OutputTexture;
+
+[numthreads(8, 8, 1)]
+void MainCS(uint3 Id : SV_DispatchThreadID)
+{
+    if (any(Id.xy >= uint2(Extent)))
+        return;
+    float4 color = InputTexture.Load(int3(Id.xy, 0));
+    OutputTexture[Id.xy] = float4(color.bgr * 0.5, color.a);
+}
+```
+
+`Input` は同じグラフで内容を初期化済みの、SRV として読める非 MSAA の 2D テクスチャです。パスの引数の SRV が読み取り、UAV が書き込みを表します。出力には SRV・UAV の両方を指定し、呼び出し側は返されたハンドルを後続パスで使います。CPU で確認する場合は `AddEnqueueCopyPass` で読み戻しを登録してから `GraphBuilder.Execute()` を呼び、GPU のコピー完了を待って読みます。グラフの外で GPU リソースを保持する場合は `QueueTextureExtraction` を使います。[Epic Games — UE 5.1 のパスの引数と外部リソース](https://dev.epicgames.com/documentation/en-us/unreal-engine/render-dependency-graph-in-unreal-engine?application_version=5.1)
+
+```mermaid
+flowchart LR
+    Init["入力テクスチャを初期化"] -->|SRV| Effect["Study.Effect<br/>色を変換"]
+    Effect -->|UAV に書いた結果| Copy["GPU から CPU へコピー"]
+    Unused["別の一時テクスチャへ書く"] --> NoRead["参照先なし<br/>パスカリングの対象"]
+```
+
+**実行結果。** UE 5.1.1 の検証用コマンドレットを `-AllowCommandletRendering -dx12` で起動し、Direct3D 12 と GeForce RTX 3060 で実行しました。入力を 13 × 7 テクセルの `PF_FloatRGBA` テクスチャにし、`AddClearUAVPass` で全域を `(0.25, 0.5, 0.75, 1)` に初期化しました。8 × 8 スレッドのグループを横に2つ起動し、範囲チェックで画像外のスレッドを除きます。読み戻した91テクセルすべてが `(0.375, 0.25, 0.125, 1)` でした。グラフに登録した別のパスは、未使用の一時テクスチャだけに書き込む宣言だったため、実行ラムダが呼ばれませんでした。
 
 ## 前提知識
 
@@ -199,18 +282,19 @@ FComputeShaderUtils::AddPass(GraphBuilder,
 
 2. **メモリエイリアシングが安全である条件と、それをグラフが保証できる理由を述べよ。**
    ::: details 解答
-   条件は2つのリソースの使用期間(最初の書き込み〜最後の読み取り)がフレーム内で重ならないこと、およびエイリアス切替時に適切なバリア(エイリアシングバリア)と初期化が入ること。グラフは全パスの依存関係から各リソースの正確な生存区間と実行順序を静的に知っているため、重複判定と必要バリアの挿入をコンパイル時に厳密に行える。
+   同じ領域を再利用するには、先に使うリソースのGPUアクセスがすべて終わってから次のリソースを使えるようにします。グラフは宣言された読み書きから使用区間と同期を求め、必要なバリアを計画します。次のリソースの初回使用時は、読み取りに先立って内容を初期化します。
    :::
 
 3. **「デッドコード除去 (パスカリング)」はどう機能し、何に役立つか。**
    ::: details 解答
-   最終出力(バックバッファ等)から依存を逆に辿り、到達しないパスを実行対象から外す。機能フラグでどこにも読まれなくなった中間パス(例: 無効化したデバッグ表示の生成パス)が自動でスキップされるため、パスを書く側は「使われるかどうか」を気にせず宣言でき、モジュール性と性能が両立する。
+   バックバッファへの書き込みや読み戻しなど、グラフが残す出力から依存をさかのぼります。この例では読み戻しが `Study.Effect` の出力を使うため、入力を初期化するパスと `Study.Effect` が残ります。どこからも読まれない一時テクスチャにだけ書き込むパスは省けます。
    :::
 
 ## 参考資料
 
 - Yuriy O'Donnell, *"FrameGraph: Extensible Rendering Architecture in Frostbite"* (GDC 2017) — 原典
-- Epic, *Render Dependency Graph* 公式ドキュメント
+- [Epic Games — UE 5.1 の Render Dependency Graph](https://dev.epicgames.com/documentation/en-us/unreal-engine/render-dependency-graph-in-unreal-engine?application_version=5.1)
+- [Epic Games — UE 5.1 のプラグインシェーダー](https://dev.epicgames.com/documentation/en-us/unreal-engine/overview-of-shaders-in-plugins-unreal-engine?application_version=5.1)
 - Unity, *Render graph system* マニュアル (URP 17+)
 - Themaister, *"Render graphs and Vulkan — a deep dive"* (Granite実装解説)
 - [Microsoft: Enhanced Barriers](https://microsoft.github.io/DirectX-Specs/d3d/D3D12EnhancedBarriers.html)

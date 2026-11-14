@@ -113,40 +113,7 @@ Linux/Androidのネイティブビルド等で使うRHI。Steam DeckでWindows�
 
 ## コード例
 
-グローバルシェーダの追加 (エンジン拡張の定石、C++):
-
-```cpp
-// 1. シェーダクラス宣言
-class FMyComputeCS : public FGlobalShader {
-    DECLARE_GLOBAL_SHADER(FMyComputeCS);
-    SHADER_USE_PARAMETER_STRUCT(FMyComputeCS, FGlobalShader);
-    BEGIN_SHADER_PARAMETER_STRUCT(FParameters, )
-        SHADER_PARAMETER_RDG_TEXTURE_SRV(Texture2D, InputTexture)
-        SHADER_PARAMETER_RDG_TEXTURE_UAV(RWTexture2D<float4>, OutputTexture)
-        SHADER_PARAMETER(FVector2f, InvSize)
-    END_SHADER_PARAMETER_STRUCT()
-};
-IMPLEMENT_GLOBAL_SHADER(FMyComputeCS,
-    "/MyPlugin/MyCompute.usf", "MainCS", SF_Compute);
-
-// 2. RDGパスとして実行 (SceneViewExtension等から)
-void AddMyPass(FRDGBuilder& GraphBuilder, const FSceneView& View,
-               FRDGTextureRef SceneColor)
-{
-    FRDGTextureRef Output = GraphBuilder.CreateTexture(
-        SceneColor->Desc, TEXT("MyOutput"));
-
-    auto* Params = GraphBuilder.AllocParameters<FMyComputeCS::FParameters>();
-    Params->InputTexture  = GraphBuilder.CreateSRV(SceneColor);
-    Params->OutputTexture = GraphBuilder.CreateUAV(Output);
-
-    TShaderMapRef<FMyComputeCS> Shader(GetGlobalShaderMap(View.FeatureLevel));
-    FComputeShaderUtils::AddPass(GraphBuilder,
-        RDG_EVENT_NAME("MyEffect"), Shader, Params,
-        FComputeShaderUtils::GetGroupCount(
-            SceneColor->Desc.Extent, 8));
-}
-```
+グローバルシェーダーを追加する例では、C++ の `FGlobalShader` を対応する `.usf` と結び付け、RDG パスに SRV の読み取りと UAV の書き込みを宣言します。出力は後続パスに渡します。プラグインの構成、C++ と HLSL のコード、出力の確認手順は RenderGraph の UE 5.1 の例を参照してください。[RenderGraph の Compute パス](/graphics/optimization/render-graph.html#unreal-rdg-compute)
 
 観察コマンド集 (実物で学ぶ):
 
