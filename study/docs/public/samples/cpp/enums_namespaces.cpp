@@ -26,7 +26,7 @@ int main() {
     Element e = Element::Water;
     // int x = e;                      // エラー: 暗黙変換なし(旧enumとの違い)
     int x = static_cast<int>(e);       // 変換は明示
-    std::printf("elem=%s as_int=%d sizeof=%u\n", Name(e), x, sizeof(Element));
+    std::printf("elem=%s as_int=%d sizeof=%zu\n", Name(e), x, sizeof(Element));
 
     namespace gc = game::combat;       // 別名
     std::printf("calc=%d helper=%d\n", gc::Calc({21}), LocalHelper());

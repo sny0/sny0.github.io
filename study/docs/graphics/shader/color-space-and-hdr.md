@@ -96,7 +96,7 @@ v = AgX_Base_sRGB.cube(u)             四面体補間
 
 ### コード例 — ACES の無彩色と AgX の LUT を確認する
 
-HLSL の `ps_6_0`。`mode=0` は画面横方向に −8〜+6 段の無彩色ランプを作り、上半分を ACES 2.0 のトーンスケール、下半分を AgX で表示する。どちらも 100 cd/m² の白を 1 とした線形 RGB を返す。`mode=1` は `sceneHdr` に入れた線形 Rec.709 のシーン色を AgX に通す。`b0` の行列は使用する OCIO 設定の「線形 Rec.709 → 線形 FilmLight E-Gamut」に合わせて渡す。公式の .cube の RGB データを浮動小数点の 3D テクスチャとして用意し、X 軸を R、Y 軸を G、Z 軸を B に対応させる。`Load` で格子点を取得し、四面体補間をシェーダーで行う。出力先には sRGB の RTV を使う。
+HLSL の `ps_6_0`。`mode=0` は画面横方向に −8〜+6 段の無彩色ランプを作り、上半分を ACES 2.0 のトーンスケール、下半分を AgX で表示する。どちらも 100 cd/m² の白を 1 とした線形 RGB を返す。ACES 2.0 のトーンスケール単体は高い入力で目標ピークを超える値も返す。この例は SDR 表示用に、100 cd/m² で正規化した ACES 側の値を `saturate` で 0〜1 に制限する。`mode=1` は `sceneHdr` に入れた線形 Rec.709 のシーン色を AgX に通す。`b0` の行列は使用する OCIO 設定の「線形 Rec.709 → 線形 FilmLight E-Gamut」に合わせて渡す。公式の .cube の RGB データを浮動小数点の 3D テクスチャとして用意し、X 軸を R、Y 軸を G、Z 軸を B に対応させる。`Load` で格子点を取得し、四面体補間をシェーダーで行う。出力先には sRGB の RTV を使う。
 
 ```hlsl
 Texture3D<float4> agxLut : register(t0);

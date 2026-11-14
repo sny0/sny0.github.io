@@ -18,8 +18,8 @@ struct FiveVirtuals {                              // 仮想関数5つでもvptr
 };
 
 int main() {
-    std::printf("sizeof(Plain)       =%u\n", sizeof(Plain));
-    std::printf("sizeof(OneVirtual)  =%u (vptr + int + padding)\n", sizeof(OneVirtual));
-    std::printf("sizeof(FiveVirtuals)=%u (仮想関数の数はサイズに影響しない)\n", sizeof(FiveVirtuals));
+    std::printf("sizeof(Plain)       =%zu\n", sizeof(Plain));
+    std::printf("sizeof(OneVirtual)  =%zu (vptr + int + padding)\n", sizeof(OneVirtual));
+    std::printf("sizeof(FiveVirtuals)=%zu (仮想関数の数はサイズに影響しない)\n", sizeof(FiveVirtuals));
     return 0;
 }

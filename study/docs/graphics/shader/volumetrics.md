@@ -336,5 +336,5 @@ void Integrate(uint3 id : SV_DispatchThreadID)
 - Sébastien Hillaire, [A Scalable and Production Ready Sky and Atmosphere Rendering Technique](https://doi.org/10.1111/cgf.14050), 2020
 - Sébastien Hillaire, [Sky Atmosphere の参照実装](https://github.com/sebh/UnrealEngineSkyAtmosphere)
 - Bart Wronski, [Volumetric Fog — Unified, Compute Shader Based Solution to Atmospheric Scattering](https://bartwronski.com/wp-content/uploads/2014/08/bwronski_volumetric_fog_siggraph2014.pdf), SIGGRAPH 2014
-- Andrew Schneider and Nathan Vos, [The Real-Time Volumetric Cloudscapes of Horizon: Zero Dawn](https://advances.realtimerendering.com/s2015/The%20Real-time%20Volumetric%20Cloudscapes%20of%20Horizon%20-%20Zero%20Dawn%20-%20ARTR.pdf#page=64), SIGGRAPH 2015, pp. 62, 66, 69
+- Andrew Schneider and Nathan Vos, [The Real-Time Volumetric Cloudscapes of Horizon: Zero Dawn](https://advances.realtimerendering.com/s2015/The%20Real-time%20Volumetric%20Cloudscapes%20of%20Horizon%20-%20Zero%20Dawn%20-%20ARTR.pdf#page=64), SIGGRAPH 2015（登壇者 Andrew Schneider、スライド62・66・69）
 - Andrew Schneider and Nathan Vos, [Nubis: Authoring Real-Time Volumetric Cloudscapes with the Decima Engine](https://www.guerrilla-games.com/read/nubis-authoring-real-time-volumetric-cloudscapes-with-the-decima-engine), SIGGRAPH 2017

@@ -22,10 +22,10 @@ study:
 | 表現 | サイズ | 補間 | 合成 | 欠点 |
 |---|---|---|---|---|
 | オイラー角 | 3 float | 困難 | 困難 | **ジンバルロック**、順序依存、補間で暴れる |
-| 回転行列 | 9 float | 不可(直交性が壊れる) | 27乗算 | 冗長、ドリフトの再直交化が高価 |
-| クォータニオン | 4 float | **slerpで最短経路** | 16乗算 | 直感的でない、二重被覆 (q と -q が同じ回転) |
+| 回転行列 | 9 float | 成分ごとの線形補間では直交性を失うことがある | 27乗算 | 冗長、ドリフトの再直交化が高価 |
+| クォータニオン | 4 float | **符号をそろえて slerp で最短経路** | 16乗算 | 直感的でない、二重被覆 (q と -q が同じ回転) |
 
-アニメーションのキーフレーム補間・カメラ制御・物理の角速度積分には、クォータニオンがほぼ唯一の実用解です。
+クォータニオンは、アニメーションのキーフレーム補間、カメラ制御、物理の角速度積分で使われます。
 
 ## 歴史・誕生した背景
 
@@ -38,7 +38,7 @@ study:
 ## 解決した課題
 
 1. **ジンバルロックの根絶** — 回転を軸+角度の連続的な表現で扱う
-2. **正しい補間** — slerpは回転群 $SO(3)$ 上の最短測地線を等角速度で進む
+2. **回転の補間** — 端点の符号で短い経路を選び、slerp の補間率を時間に比例させると等角速度で進む
 3. **数値的安定性** — 誤差の蓄積は4成分の再正規化1回で修正できる (行列は再直交化が必要)
 
 ## 現在の位置づけ
@@ -63,10 +63,11 @@ $q_1 q_2$ は「$q_2$ の回転を先に、$q_1$ を後に」適用します (�
 
 ### slerp (球面線形補間)
 
-$$\text{slerp}(q_0, q_1, t) = \frac{\sin((1-t)\Omega)}{\sin\Omega} q_0 + \frac{\sin(t\Omega)}{\sin\Omega} q_1, \quad \cos\Omega = q_0 \cdot q_1$$
+単位クォータニオン $q_0,q_1$ の内積が負なら補間に使う終点を $q'_1=-q_1$ とし、それ以外は $q'_1=q_1$ とします。$\Omega>0$ では次の式で補間します。
 
-- $q_0 \cdot q_1 < 0$ のときは片方を反転して**最短経路**を取る (二重被覆対策)
-- 角度が小さいときは通常の線形補間+正規化 (**nlerp**) で十分高速・高品質。実務ではnlerpが多用されます
+$$\text{slerp}(q_0, q'_1, t) = \frac{\sin((1-t)\Omega)}{\sin\Omega} q_0 + \frac{\sin(t\Omega)}{\sin\Omega} q'_1, \quad \cos\Omega = q_0 \cdot q'_1$$
+
+$\Omega=0$ では両端が同じ向きなので $q_0$ を返せます。実装では、近い端点で $\sin\Omega$ が小さくなるときに、線形補間と正規化を組み合わせた **nlerp** で近似する方法もあります。[glTF 2.0 — 回転の球面線形補間](https://registry.khronos.org/glTF/specs/2.0/glTF-2.0.html#interpolation-slerp)
 
 ### 回転行列への変換
 
@@ -102,34 +103,56 @@ flowchart LR
 DirectXMath: `XMQuaternionRotationAxis`, `XMQuaternionSlerp`, `XMMatrixRotationQuaternion`。スキニング行列パレットの構築で多用します。
 
 ### Vulkan
-glm: `glm::quat`, `glm::slerp`, `glm::mat4_cast(q)`。GLTFのアニメーションデータは回転をクォータニオンで格納しており、そのまま扱えます。
+Vulkan と組み合わせる CPU 側の計算には GLM の `glm::quat`、`glm::slerp`、`glm::mat4_cast(q)` などが使えます。glTF 2.0 の回転値はクォータニオンの `(x, y, z, w)` 順です。GLM 1.0.1 に渡すときは、引数順が明示される `glm::quat::wxyz(w, x, y, z)` が使えます。4引数コンストラクターは既定ではこの順ですが、`GLM_FORCE_QUAT_DATA_XYZW` の定義によって順番が変わります。
 
 ## コード例
 
-C++とglmを使ったアニメーション補間の基本形です。
+C++17 と GLM 1.0.1 を使った単体例です。GLM の `slerp` は内部で終点の符号を選ぶので、呼び出し側では結果を正規化します。途中の回転と、回転を合成した視線を表示します。
 
 ```cpp
-// キーフレーム間の回転補間 (最短経路の保証つき)
+#include <glm/gtc/quaternion.hpp>
+#include <glm/trigonometric.hpp>
+#include <iostream>
+
 glm::quat Interpolate(glm::quat a, glm::quat b, float t) {
-    if (glm::dot(a, b) < 0.0f) b = -b;   // 二重被覆: 最短経路を選ぶ
     return glm::normalize(glm::slerp(a, b, t));
 }
 
-// 固定したワールド軸で読むとX軸ピッチ→Y軸ヨーの順に適用する
-glm::quat yaw   = glm::angleAxis(yawRad,   glm::vec3(0, 1, 0));
-glm::quat pitch = glm::angleAxis(pitchRad, glm::vec3(1, 0, 0));
-glm::quat camRot = yaw * pitch;          // 右側が先。ローカル軸で読めばヨー→回転後のX軸ピッチ
-glm::vec3 forward = camRot * glm::vec3(0, 0, -1);
+int main() {
+    const glm::quat start = glm::quat::wxyz(1.0f, 0.0f, 0.0f, 0.0f);
+    const glm::quat yaw = glm::angleAxis(glm::radians(90.0f), glm::vec3(0, 1, 0));
+    const glm::quat pitch = glm::angleAxis(glm::radians(30.0f), glm::vec3(1, 0, 0));
+    const glm::vec3 initialForward{0, 0, -1};
+
+    const glm::vec3 halfway = Interpolate(start, -yaw, 0.5f) * initialForward;
+    // 固定ワールド軸では X 軸ピッチを先に、Y 軸ヨーを後に適用する。
+    const glm::vec3 combined = (yaw * pitch) * initialForward;
+    std::cout << halfway.x << ' ' << halfway.y << ' ' << halfway.z << '\n';
+    std::cout << combined.x << ' ' << combined.y << ' ' << combined.z << '\n';
+}
 ```
 
-UnityのC#で滑らかに回転を追従させます。
+途中の視線はおよそ `(-0.7071, 0, -0.7071)`、合成後の視線は `(-0.8660, 0.5, 0)` です。Unity 6.3 LTS で固定方向へ追従する場合、次の例では目標が同じ位置に来たときに現在の回転を保ちます。
 
 ```csharp
-void Update() {
-    Quaternion target = Quaternion.LookRotation(enemy.position - transform.position);
-    // フレームレート非依存の指数的追従
-    float t = 1f - Mathf.Exp(-rotateSpeed * Time.deltaTime);
-    transform.rotation = Quaternion.Slerp(transform.rotation, target, t);
+using UnityEngine;
+
+public sealed class TrackRotation : MonoBehaviour
+{
+    [SerializeField] private Transform target;
+    [SerializeField, Min(0f)] private float rotateSpeed = 5f;
+
+    private void Update()
+    {
+        if (target == null) return;
+        Vector3 direction = target.position - transform.position;
+        if (direction.sqrMagnitude <= 1e-12f) return;
+
+        Quaternion desired = Quaternion.LookRotation(direction, Vector3.up);
+        // 固定した目標方向への差を、経過時間に応じて指数的に減らす。
+        float t = 1f - Mathf.Exp(-rotateSpeed * Time.deltaTime);
+        transform.rotation = Quaternion.Slerp(transform.rotation, desired, t);
+    }
 }
 ```
 
@@ -163,7 +186,9 @@ void Update() {
 
 ## 参考資料
 
-- Ken Shoemake, *"Animating Rotation with Quaternion Curves"* (SIGGRAPH 1985) — 原典
+- Ken Shoemake, [Animating Rotation with Quaternion Curves](https://doi.org/10.1145/325334.325242) (SIGGRAPH 1985) — 原典
+- [GLM 1.0.1 — クォータニオンのコンストラクター](https://github.com/g-truc/glm/blob/1.0.1/glm/detail/type_quat.hpp)・[slerp の実装](https://github.com/g-truc/glm/blob/1.0.1/glm/ext/quaternion_common.inl)
+- [Unity 6.3 LTS — Quaternion.LookRotation](https://docs.unity3d.com/6000.3/Documentation/ScriptReference/Quaternion.LookRotation.html)
 - Eric Lengyel, *Foundations of Game Engine Development, Vol.1* — Chapter 4
 - 3Blue1Brown & Ben Eater, *Visualizing quaternions* (インタラクティブ教材)
 - Jonathan Blow, *"Understanding Slerp, Then Not Using It"* (nlerpの実務的擁護)

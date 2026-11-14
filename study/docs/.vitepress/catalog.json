@@ -10330,6 +10330,7 @@
       "links": [
         "/languages/cpp/raii.html",
         "/languages/cpp/smart-pointers.html",
+        "/languages/cpp/crtp.html",
         "/languages/csharp/destructor-dispose-raii-using.html",
         "/runtime/memory/ownership-and-borrowing.html",
         "/languages/cpp/structs-and-classes.html",
@@ -12244,6 +12245,7 @@
         "/tools/windows/crash-dumps-and-symbols.html",
         "/runtime/memory/memory-bugs.html",
         "/languages/cpp/exceptions.html",
+        "/tools/build/samples/cmake-demo.html",
         "/tools/build/build-tools-cmake.html",
         "/tools/build/",
         "/tools/build/build-speed.html"

@@ -34,8 +34,8 @@ int main() {
     for (int i = 0; i < 10000; ++i)
         forest.push_back({i * 1.f, 0.f, 1.f, reg.GetOrCreate(i % 2 ? "oak" : "pine")});
 
-    std::printf("instances=%u types=%u\n", forest.size(), reg.TypeCount());
-    std::printf("sizeof(TreeInstance)=%u (共有部分は持たない)\n", sizeof(TreeInstance));
+    std::printf("instances=%zu types=%zu\n", forest.size(), reg.TypeCount());
+    std::printf("sizeof(TreeInstance)=%zu (共有部分は持たない)\n", sizeof(TreeInstance));
     std::printf("sample: %s at x=%.0f\n", forest[3].type->name.c_str(), forest[3].x);
     return 0;
 }

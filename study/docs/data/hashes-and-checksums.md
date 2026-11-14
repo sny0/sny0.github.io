@@ -30,7 +30,7 @@ flowchart LR
 
 | 方式 | 使いどころ | 注意点 |
 | --- | --- | --- |
-| CRC | 転送や保存で生じた偶発的なビットの変化を検出する。gzipは非圧縮データのCRC-32を末尾に保存する。 | CRC-32とCRC-32Cは異なる多項式を使う。初期値、入力・出力の反転、最終XORまでそろえる。 |
+| CRC | 転送や保存で生じた偶発的なビットの変化を検出する。gzipは各メンバーの末尾にあるトレーラーに、非圧縮データのCRC-32を保存する。 | CRC-32とCRC-32Cは異なる多項式を使う。初期値、入力・出力の反転、最終XORまでそろえる。 |
 | xxHash | メモリ上の多数のデータを高速に識別する。公式仕様のXXH64やXXH3-128などから、用途に合う出力幅を選ぶ。 | 非暗号学的ハッシュ。アルゴリズム、シード、保存時のバイト順を固定し、必要な場合は内容を照合する。 |
 | SHA-256 | 配布ファイルなどのダイジェストを作り、信頼済みの値と比較する。 | ファイルとダイジェストを同じ未検証の場所から取得するだけでは出所を保証できない。署名などでマニフェストを検証する。 |
 
@@ -145,7 +145,7 @@ int main()
 }
 ```
 
-最初の値は `cbf43926`、末尾1ビットを反転した後は `bcf309b0` です。gzipの末尾に最初の値を書くなら、バイト順は `26 39 f4 cb` になります。
+最初の値は `cbf43926`、末尾1ビットを反転した後は `bcf309b0` です。gzipの各メンバーのトレーラーでは、CRC-32の4バイトに非圧縮サイズを $2^{32}$ で割った余り（`ISIZE`）の4バイトが続きます。元の9バイトを圧縮したメンバーなら、トレーラーは `26 39 f4 cb | 09 00 00 00` です。どちらの欄もリトルエンディアンで格納します。
 
 ## アセットの名前と内容を分ける
 
@@ -241,7 +241,7 @@ int main()
 ## 参考資料
 
 - [RFC 1952 — GZIP file format specification version 4.3](https://www.rfc-editor.org/rfc/rfc1952)
-- [RFC 3720 Appendix B — CRC-32C](https://www.rfc-editor.org/rfc/rfc3720#appendix-B)
+- [RFC 7143 §13.1 — CRC-32C の生成多項式と計算](https://www.rfc-editor.org/rfc/rfc7143.html#section-13.1)
 - [xxHash公式仕様 — XXH32・XXH64・XXH3](https://github.com/Cyan4973/xxHash/blob/v0.8.4/doc/xxhash_spec.md)
 - [NIST FIPS 180-4 — Secure Hash Standard](https://csrc.nist.gov/pubs/fips/180-4/upd1/final)
 - [NIST SP 800-107 Rev. 1 — Recommendation for Applications Using Approved Hash Algorithms](https://csrc.nist.gov/pubs/sp/800/107/r1/final)

@@ -26,9 +26,10 @@ study:
 ## 歴史・誕生した背景
 
 - 1968: Appel のレイキャスティング / **1980: Whitted の再帰レイトレーシング** — 理論の原点
-- 1986: Kajiya のパストレーシング → オフラインレンダリングは2010年代までにフルパストレーシングへ移行済み
+- 1986: Kajiya がレンダリング方程式とパストレーシングを提示。2010年代には映画制作でもパストレーシングを用いるレンダラーが普及した。[パストレーシングの系譜](/graphics/lighting/path-tracing.html)
 - 2000年代: リアルタイムRT研究 (OpenRT、IntelのLarrabee構想、NVIDIA OptiX 2009)
-- **2018: Turing (RTX 20) + DXR** — BVHトラバーサル/三角形交差の固定機能化。Battlefield V (反射)、Metro Exodus (GI) が初陣
+- **2018: Turing (RTX 20) + DXR** — BVH走査と三角形交差をハードウェアで加速。『Battlefield V』は2018年11月の更新でDXRによる反射を追加
+- **2019: Metro Exodus** — 2019年2月の発売時にレイトレーシングによる間接照明を採用
 - 2020: Vulkan Ray Tracing (KHR) 標準化、PS5/Xbox Series X|S にRT搭載 (RDNA2)
 - 2022-23: Ada/RDNA3世代で性能向上、Cyberpunk 2077 Overdrive (フルパストレーシング) → [パストレーシング](/graphics/lighting/path-tracing.html)
 - 現在: 影・反射・GIの「品質オプション」から、Lumen HWモードやRestir系を通じて標準機能へ浸透中
@@ -100,11 +101,11 @@ UE4.22でRT機能導入 → UE5では **Lumen HW モード / Virtual Shadow Map�
 **DXR** (`ID3D12Device5::CreateStateObject`、`DispatchRays`)。SM6.3のHLSL (`TraceRay`, `RayDesc`)。DXR 1.1で `RayQuery` (インライン)。
 
 ### Vulkan
-`VK_KHR_acceleration_structure` + `VK_KHR_ray_tracing_pipeline` + `VK_KHR_ray_query`。GLSLでは `GL_EXT_ray_tracing`。概念はDXRとほぼ1対1です。
+`VK_KHR_acceleration_structure` で加速構造を扱います。レイトレーシング専用のシェーダーステージを使うときは `VK_KHR_ray_tracing_pipeline`、既存のステージ内でレイの結果を問い合わせるときは `VK_KHR_ray_query` を使います。二つの機能は別々に対応を確認します。GLSLでは、前者に `GL_EXT_ray_tracing`、後者に `GL_EXT_ray_query` を使います。
 
 ## コード例
 
-RayQuery (インラインRT) によるレイトレース影 — 最も実用的な入口 (HLSL SM6.5):
+RayQuery（インラインRT）による二値の影です。DXR Tier 1.1とHLSL Shader Model 6.5が必要です。`dxc -T ps_6_5 -E ShadowPS RayQueryShadow.hlsl` でコンパイルできます。例では不透明な三角形だけを調べ、非不透明のプリミティブと手続き的プリミティブを除外します。`dirToLight` は正規化した光源方向、`maxDist` はその方向の光源までの距離です。
 
 ```hlsl
 RaytracingAccelerationStructure gScene : register(t0);
@@ -114,20 +115,30 @@ float TraceShadowRay(float3 posWS, float3 dirToLight, float maxDist)
     RayDesc ray;
     ray.Origin    = posWS;
     ray.Direction = dirToLight;
-    ray.TMin      = 0.01;        // セルフヒット回避
+    ray.TMin      = 0.01;        // シーンの単位に合わせた最小距離
     ray.TMax      = maxDist;
 
     RayQuery<RAY_FLAG_ACCEPT_FIRST_HIT_AND_END_SEARCH |
-             RAY_FLAG_SKIP_CLOSEST_HIT_SHADER> q;
+             RAY_FLAG_CULL_NON_OPAQUE |
+             RAY_FLAG_SKIP_PROCEDURAL_PRIMITIVES> q;
     q.TraceRayInline(gScene, RAY_FLAG_NONE, 0xFF, ray);
-    q.Proceed();                 // 不透明のみなら1回で完了
+    q.Proceed();                 // 不透明な三角形のみなので1回で完了
 
     // 何かに当たれば影 (最初のヒットで打ち切り = 影レイの定石)
     return (q.CommittedStatus() == COMMITTED_TRIANGLE_HIT) ? 0.0 : 1.0;
 }
 
+float4 ShadowPS(float3 posWS : TEXCOORD0) : SV_Target
+{
+    const float3 sunDirection = normalize(float3(1.0, 2.0, 1.0));
+    float visibility = TraceShadowRay(posWS, sunDirection, 100.0);
+    return float4(visibility.xxx, 1.0);
+}
+
 // 面光源のソフトシャドウ: 光源上のランダム点へ複数レイ + デノイズが実戦形
 ```
+
+アルファテスト付きの草や柵も遮蔽物にする場合は、非不透明の三角形を除外せず、`Proceed()` が `true` を返すたびに候補を調べます。不透明と判定した候補を `CommitNonOpaqueTriangleHit()` で確定します。
 
 DXRパイプラインのRay Generation (概形):
 
@@ -164,7 +175,7 @@ void RayGen() {
 
 2. **影レイが「最初のヒットで打ち切れる」のはなぜか。Closest Hitが不要な理由と合わせて述べよ。**
    ::: details 解答
-   影の判定は「光源との間に遮蔽物が1つでもあるか」という二値の可視性クエリであり、最も近いヒットがどれか・その表面が何かという情報は不要。よってACCEPT_FIRST_HIT_AND_END_SEARCHで任意の1ヒットを見つけた時点で打ち切り、シェーディング(Closest Hit)もスキップできる。これが影レイが反射レイより大幅に安い理由。
+   影の判定は「光源との間に遮蔽物が1つでもあるか」という二値の可視性クエリなので、最も近い遮蔽物を求める必要はない。`RAY_FLAG_ACCEPT_FIRST_HIT_AND_END_SEARCH` を指定すれば、遮蔽物として確定した最初のヒットで打ち切れる。インラインの `RayQuery` は探索結果を呼び出し元に返し、Closest Hit シェーダーは起動しない。
    :::
 
 3. **「拡散GIのレイは一次レイより遅い」理由をメモリの観点から説明せよ。**
@@ -174,7 +185,9 @@ void RayGen() {
 
 ## 参考資料
 
-- Microsoft, *DirectX Raytracing (DXR) Functional Spec*
+- [Microsoft — DirectX Raytracing (DXR) Functional Spec、RayQuery::Proceed](https://microsoft.github.io/DirectX-Specs/d3d/Raytracing.html#rayquery-proceed)
+- [Khronos — VK_KHR_ray_tracing_pipeline](https://docs.vulkan.org/refpages/latest/refpages/source/VK_KHR_ray_tracing_pipeline.html)、[VK_KHR_ray_query](https://docs.vulkan.org/refpages/latest/refpages/source/VK_KHR_ray_query.html)、[GL_EXT_ray_query](https://github.com/KhronosGroup/GLSL/blob/main/extensions/ext/GLSL_EXT_ray_query.txt)
+- [NVIDIA — Battlefield V のDXR反射の提供開始（2018年11月）](https://www.nvidia.com/en-us/geforce/news/battlefield-v-rtx-ray-tracing-out-now/)、[Metro Exodus の発売日とレイトレーシングによるGI（2019年2月）](https://www.nvidia.com/en-us/geforce/news/battlefield-v-metro-exodus-ray-tracing-dlss/)
 - NVIDIA, *"Introduction to NVIDIA RTX and DirectX Ray Tracing"* / *Ray Tracing Gems I & II* (無料公開)
 - Khronos, *Vulkan Ray Tracing Best Practices*
 - *Physically Based Rendering* (pbrt) — 理論の標準教科書

@@ -40,7 +40,7 @@ void Boot() {
 
 ## 仕組み: スタック巻き戻し(stack unwinding)
 
-throwすると、対応するcatchまで**スタックを遡りながら、途中の全ローカルオブジェクトのデストラクタを実行**します。
+対応する `catch` へ制御が移るときは、`try` に入ってから構築を完了し、まだ破棄されていない自動記憶域のオブジェクトを、**構築完了の逆順**で破棄します。対応するハンドラが見つからず `std::terminate` に進む場合、その前にスタックを巻き戻すかは実装定義です。[C++20作業草案 N4861: スタック巻き戻し](https://timsong-cpp.github.io/cppwp/n4861/except.ctor)・[終了処理の規則](https://timsong-cpp.github.io/cppwp/n4861/except.terminate)
 
 ```
 Boot() → LoadConfig() → ParseJson() で throw
@@ -82,7 +82,7 @@ if (auto item = FindItem(id)) { Use(*item); }
 | checked/finally | finallyで後片付け | finallyなし。**RAIIが後片付け**(より強力) |
 | NullReference等 | ランタイムが自動で投げる | ヌル参照外しは例外ではなく**未定義動作**(何も投げない!) |
 | コスト | try自体は安い、throwはそこそこ | 投げなければほぼゼロ、throwは高い(実装依存) |
-| 捕捉漏れ | スタックトレース付きで落ちる | `std::terminate`(トレースは処理系・設定依存) |
+| 捕捉漏れ | 未処理例外として扱われる。表示は実行環境やホストの設定に依存する | `std::terminate`。ハンドラが見つからない場合に巻き戻すかは実装定義 |
 
 **C++の`v[i]`には、C#の配列のような範囲外例外を期待しません**。標準ライブラリのデバッグ・hardening設定では違反を検出するものがあり、[C++26（DIS）](/languages/cpp/cpp26-features.html)でもhardened preconditionを規定しています。検出後の処理は実装・設定に従い、必ず回復可能な例外になるわけではありません。`v.at(i)`は`std::out_of_range`で報告します。[C++草案: vectorのアクセス](https://www.open-std.org/jtc1/sc22/wg21/docs/papers/2025/p3471r4.html)
 

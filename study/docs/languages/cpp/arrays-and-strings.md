@@ -147,7 +147,7 @@ void PrintName(std::string_view n);   // 読むだけの引数はstring_viewが�
 
 ## 演習
 
-samples/arrays_strings.cpp(検証済み)で、(a) vectorの容量(capacity)がpush_backでどう成長するか、(b) 再確保の前後で要素のアドレスが変わることを、出力で観察してください。
+`samples/arrays_strings.cpp` で、`push_back` に伴う `vector` の容量の増加と、再確保後の先頭アドレスを観察してください。サンプルは追加の前後で容量を比較し、追加後の有効なポインタを表示します。再確保前のポインタは無効になるため、保持して再確保後に比較する方法は使いません。[C++20作業草案 N4861: vector の再確保](https://timsong-cpp.github.io/cppwp/n4861/vector.modifiers)・[無効なポインタ値](https://timsong-cpp.github.io/cppwp/n4861/basic.stc)
 
 ---
 

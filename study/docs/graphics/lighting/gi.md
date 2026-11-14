@@ -33,14 +33,13 @@ $$L_o(\mathbf{x}, \omega_o) = L_e + \int_\Omega f_r(\mathbf{x}, \omega_i, \omega
 timeline
     title GI手法の系譜
     1984-86 : ラジオシティ / レンダリング方程式 / パストレーシング (理論確立)
-    1996 : Quakeのライトマップ (事前計算GIの実用化)
+    1996-1997 : Quakeのライトマップ ／ Quake IIで間接光もベイク
     2000年代 : PRT・SHライティング / アンビエントオクルージョン
     2007 : SSAO (Crytek) — 画面空間の時代へ
     2010-14 : SSR / LPV / Voxel Cone Tracing (SVOGI)
-    2015-18 : DDGI (プローブ+レイ) / SDFGI系
     2018 : RTX/DXR — ハードウェアRTGI
-    2021 : Lumen (SW/HWハイブリッド) — 動的GIの実用標準
-    2022- : ReSTIR GI / リアルタイムパストレーシング / ニューラルGI
+    2019 : DDGI (プローブ+レイ) ／ Quake II RTX (リアルタイムパストレーシング)
+    2021 : Lumen (SW/HWハイブリッド) ／ ReSTIR GIとNeural Radiance Cachingの原論文
 ```
 
 ## それ以前の技術 → 各世代の課題と回答
@@ -49,7 +48,7 @@ timeline
 
 | 手法 | 内容 | 限界 |
 |---|---|---|
-| **ライトマップ** | オフラインでGIを解きテクスチャに焼く (Quake 1996〜現在) | 静的シーン限定、UV作業、ビルド時間 |
+| **ライトマップ** | 照明を事前計算してテクスチャに焼く。Quakeは主に直接光、Quake IIはラジオシティによる間接光も記録した | 静的シーン限定、UV作業、ビルド時間 |
 | **ライトプローブ (SH)** | 空間点の入射光をSH係数で保存、動的物体が補間 | 低周波のみ、リーク |
 | PRT | 遮蔽まで事前計算した転送関数 | 変形不可 |
 
@@ -76,7 +75,7 @@ G-Bufferと深度バッファ「画面に見えているもの」だけで近似
 
 - [ハードウェアRT](/graphics/lighting/raytracing.html) (2018〜): BVHに対する正確なレイ
 - [Lumen](/graphics/lighting/lumen.html) (2021): SDF+Surface Cache+スクリーンスペース+HW RTの総力戦
-- [リアルタイムパストレーシング](/graphics/lighting/path-tracing.html) (2022〜): ReSTIR+デノイザで統一的に解く
+- [リアルタイムパストレーシング](/graphics/lighting/path-tracing.html): Quake II RTX（2019）が実装例。ReSTIR DI（2020）とReSTIR GI（2021）の原論文は、直接・間接照明でのサンプルの再利用をそれぞれ扱う
 
 ## 解決した課題 / 現在の位置づけ
 
@@ -174,6 +173,9 @@ float3 OneBounceGI(float3 posWS, float3 N, uint2 pixel, uint frame) {
 ## 参考資料
 
 - Kajiya, *"The Rendering Equation"* (SIGGRAPH 1986)
+- [id Software — Quake Tools README](https://github.com/id-Software/Quake-Tools/blob/master/qutils/README.TXT)、[Quake II のラジオシティ計算ツール `qrad3`](https://github.com/id-Software/Quake-2-Tools/blob/master/bsp/qrad3/qrad3.c)
+- [Majercik ほか — Dynamic Diffuse Global Illumination with Ray-Traced Irradiance Fields（2019）](https://research.nvidia.com/publication/2019-05_dynamic-diffuse-global-illumination-ray-traced-irradiance-fields)、[NVIDIA — Quake II RTX の公開（2019）](https://www.nvidia.com/en-us/geforce/news/quake-ii-rtx-june-6-release-date/)
+- [Bitterli ほか — ReSTIR DI（2020）](https://research.nvidia.com/publication/2020-07_spatiotemporal-reservoir-resampling-real-time-ray-tracing-dynamic-direct)、[Ouyang ほか — ReSTIR GI（2021）](https://research.nvidia.com/publication/2021-06_restir-gi-path-resampling-real-time-path-tracing)、[Müller ほか — Neural Radiance Caching（2021）](https://research.nvidia.com/labs/rtr/publication/muller2021nrc/)
 - Ritschel et al., *"The State of the Art in Interactive Global Illumination"* (2012) — サーベイ
 - SIGGRAPH Courses: *"Advances in Real-Time Rendering"* 各年 — 実務GIの最前線が集まる場
 - PBR Book (pbrt) — オフライン側の理論の標準教科書 (無料公開)

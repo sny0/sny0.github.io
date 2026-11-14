@@ -38,13 +38,13 @@ int main() {
     BulletPool pool(4);
     Bullet* a = pool.Acquire(0, 0, 1, 0);
     Bullet* b = pool.Acquire(0, 0, 0, 1);
-    std::printf("acquired 2, free=%u\n", pool.FreeCount());
+    std::printf("acquired 2, free=%zu\n", pool.FreeCount());
 
     pool.UpdateAll(1.0f);
     std::printf("a=(%.0f,%.0f) b=(%.0f,%.0f)\n", a->x, a->y, b->x, b->y);
 
     pool.Release(a);
-    std::printf("released 1, free=%u\n", pool.FreeCount());
+    std::printf("released 1, free=%zu\n", pool.FreeCount());
 
     for (int i = 0; i < 4; ++i)                     // 満杯まで取得してみる
         std::printf("acquire -> %s\n", pool.Acquire(0, 0, 0, 0) ? "ok" : "POOL FULL");

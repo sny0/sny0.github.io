@@ -9,22 +9,21 @@ void PrintName(std::string_view n) { std::printf("name=%.*s\n", (int)n.size(), n
 
 int main() {
     std::array<int, 5> fixed{10, 20, 30, 40, 50};
-    std::printf("array size=%u front=%d\n", fixed.size(), fixed[0]);
+    std::printf("array size=%zu front=%d\n", fixed.size(), fixed[0]);
 
     std::vector<int> v;
-    const int* prevData = nullptr;
     for (int i = 0; i < 20; ++i) {
+        const auto oldCapacity = v.capacity();
         v.push_back(i);
-        if (v.data() != prevData) {   // 再確保で先頭アドレスが変わった瞬間を観察
-            std::printf("size=%u capacity=%u data=%p (再確保)\n",
-                        v.size(), v.capacity(), static_cast<const void*>(v.data()));
-            prevData = v.data();
+        if (v.capacity() != oldCapacity) {   // 容量の変化で再確保を検出する
+            std::printf("size=%zu capacity=%zu data=%p (再確保)\n",
+                        v.size(), v.capacity(), static_cast<void*>(v.data()));
         }
     }
 
     std::string name = "Slime";
     name += "_King";                   // 同一オブジェクト内で伸長
     PrintName(name);                   // string_viewでコピーなし受け渡し
-    std::printf("string size=%u\n", name.size());
+    std::printf("string size=%zu\n", name.size());
     return 0;
 }

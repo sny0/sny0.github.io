@@ -13,7 +13,7 @@ study:
 
 ## 概要
 
-パストレーシングは、レンダリング方程式をモンテカルロ積分で確率的に解く手法です。カメラからレイを飛ばして、光源に到達するまで表面で確率的に反射させながら追跡し、平均から輝度を推定します。映画のレンダリングは2010年代に完全に移行しました。リアルタイム描画でも、ReSTIR、デノイザ、アップスケーラを組み合わせて2022年頃から実用化が始まりました (Cyberpunk 2077 Overdrive、Alan Wake 2、Portal RTX)。
+パストレーシングは、レンダリング方程式をモンテカルロ積分で確率的に解く手法です。カメラからレイを飛ばして、表面で確率的に反射する経路をサンプリングし、平均から輝度を推定します。オフラインでは映画などで使われています。リアルタイム描画では2019年の『Quake II RTX』が公開例で、その後も『Portal with RTX』や『Cyberpunk 2077』の RT: Overdrive などに採用されました。サンプル数が限られる用途では、サンプルの再利用、デノイズ、アップスケーリングなどを組み合わせます。
 
 ## なぜ必要なのか
 
@@ -26,7 +26,7 @@ study:
 - **1986: Kajiya がレンダリング方程式とパストレーシングを同時に提示** — 「方程式」と「解き方」が同じ論文
 - 1990年代: 双方向パストレーシング、Metropolis光輸送などの発展 (オフライン)
 - 1997: Veach の博士論文 — MIS (Multiple Importance Sampling) 等、現代サンプリング理論の礎
-- 2010年代: 映画産業がレイトレ系 (Arnold, RenderMan RIS, Hyperion) へ全面移行
+- 2010年代: 映画でパストレーシングを用いるレンダラー（Arnold、RenderMan RIS、Hyperion）が普及
 - 2018: RTX/DXR → Quake II RTX (2019) が「古いゲームのフルパストレース化」を実証
 - **2020: ReSTIR (Bitterli et al.)** — 時空間リサンプリングによる桁違いのサンプル効率化
 - 2023年4月: **Cyberpunk 2077 RT: Overdrive** 技術プレビューを公開。2023年9月のUpdate 2.0でDLSS 3.5 Ray Reconstructionを追加。公開当初からRRがあったわけではない
@@ -192,6 +192,8 @@ NEEの対象外の発光面・環境光については、対応する`LightPdf`�
 - Kajiya, *"The Rendering Equation"* (1986) / Veach 博士論文 (1997)
 - *Physically Based Rendering: From Theory to Implementation* (pbrt, 無料公開) — 標準教科書
 - Bitterli et al., *"Spatiotemporal reservoir resampling (ReSTIR)"* (SIGGRAPH 2020)
+- [NVIDIA — Quake II RTX の公開（2019）](https://www.nvidia.com/en-us/geforce/news/quake-ii-rtx-june-6-release-date/)
+- [Disney — Hyperion の設計と変遷](https://disneyanimation.com/publications/the-design-and-evolution-of-disneys-hyperion-renderer/)、[Pixar — The Evolution of RenderMan](https://renderman.pixar.com/the-evolution-of-renderman)、[Autodesk — Arnold の概要](https://help.autodesk.com/cloudhelp/2024/ENU/AR-Maya/files/am-Arnold_for_Maya_User_Guide/getting-started/arnold_for_maya_getting_started_am_Arnold_html.html)
 - *Ray Tracing Gems II* / NVIDIA Falcor & RTXDI サンプル
 - CD PROJEKT RED & NVIDIA, Cyberpunk 2077 Overdrive 技術講演 (2023)
 - [pbrt v4: A Better Path Tracer — MISと発光面の扱い](https://pbr-book.org/4ed/Light_Transport_I_Surface_Reflection/A_Better_Path_Tracer)

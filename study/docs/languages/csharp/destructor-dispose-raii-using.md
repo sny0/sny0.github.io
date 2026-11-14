@@ -76,7 +76,7 @@ std::ofstream file("save.dat");
 
 ## Dispose相当をC++で設計するとき
 
-- 基本はデストラクタのみでよい(Rule of Zero → [特殊メンバ関数](/languages/cpp/ctor-dtor-copy-move.html))
+- RAIIのメンバに所有を任せる型では、通常はデストラクタも暗黙の処理に任せます（Rule of Zero）。生リソースを直接解放するデストラクタを書く場合は、所有権に合わせてコピーとムーブの扱いも決めます。[特殊メンバ関数](/languages/cpp/ctor-dtor-copy-move.html)
 - ファイルを閉じる処理など、後始末の失敗を報告するには明示的な `Close()` を用意します。デストラクタは `Close()` が呼ばれなかった場合の後始末を担います。C#の `Dispose` とファイナライザを組み合わせるパターンに構造が似ています。
 - C#の `IAsyncDisposable` に相当する標準機構はC++にない(非同期の後始末は自前設計)
 

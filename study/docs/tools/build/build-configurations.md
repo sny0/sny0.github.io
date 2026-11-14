@@ -15,17 +15,18 @@ study:
 
 同じソースから「**何を優先するか**」別に複数の成果物を作り分けるのが**ビルド構成 (configuration)**。最適化・チェック・デバッグ情報・ログの4軸の組み合わせです(最適化の中身は → [コンパイラ最適化・未定義動作の影響・Debug/Release・ゼロコスト抽象化](/runtime/cpp-internals/optimization-and-ub.html))。
 
-## ゲーム開発の典型4構成
+## 最適化と診断機能を組み合わせた構成例
 
 | 構成 | 最適化 | assert/チェック | デバッグ情報 | 用途 |
 |---|---|---|---|---|
-| **Debug** | なし(-O0//Od) | 全部有効 | フル | ロジックのステップ実行。ゲームによっては遊べない速度 |
-| **Development** | あり(-O2) | 有効(assert・チートメニュー・プロファイラ計測) | あり | **日常の開発・デバッグの主力**。UEのDevelopmentがこれ |
-| **Release/Profile** | あり | 計測のみ残す | あり(外部保存) | 性能計測(チェックのコストを排除した本番相当) |
-| **Shipping** | 最大+LTO | 無効(クラッシュレポートのみ) | **PDBは生成して手元に保管**(同梱しない) | 出荷物 |
+| **Debug** | なし（例 `-O0`、`/Od`） | 開発用チェックを有効化 | あり | ロジックのステップ実行 |
+| **Development** | あり | 開発用チェック、計測などを選んで残す | あり | 日常の開発・デバッグ |
+| **Release/Profile** | あり | 必要な計測を残すことがある | 必要に応じて生成・保管 | 本番相当の性能計測 |
+| **Shipping** | 出荷向けの設定。LTO の有無は個別に決まる | 出荷に不要な診断機能を除く | 調査用に生成・保管できる | 出荷物 |
 
-- 2構成(Debug/Release)しかない標準的なCMake設定に対し、ゲームは「最適化ありでデバッグもしたい」需要が強く、中間構成を足すのが通例
-- 構成ごとの分岐はマクロで: `NDEBUG`(標準: assert無効化)、自前の `#if GAME_SHIPPING` など。**構成間で挙動が変わりすぎると「Shippingでだけ出るバグ」が増える**ので、ゲームロジックの分岐は最小限に
+CMakeには `Debug`、`Release`、`RelWithDebInfo`、`MinSizeRel` という標準構成があり、Visual Studio などの複数構成ジェネレーターが初期状態で持つ構成の一覧はジェネレーターごとに異なります。最適化したコードの調査には `RelWithDebInfo` も選べます。Unreal Engine 5.8 には `Debug`、`DebugGame`、`Development`、`Shipping`、`Test` があり、使える組み合わせはターゲットで変わります。`Shipping` でも設定やビルド方法によってデバッグシンボルを生成できます。[CMake の標準構成](https://cmake.org/cmake/help/latest/manual/cmake-buildsystem.7.html#default-and-custom-configurations) · [Unreal Engine 5.8 のビルド構成](https://dev.epicgames.com/documentation/unreal-engine/build-configurations-reference-for-unreal-engine)
+
+標準の `assert` が有効かは `<cassert>` を取り込む時点の `NDEBUG` で決まります。最適化、構成名、自作の `#if GAME_SHIPPING` とは別の指定です。**構成間で挙動が変わりすぎると「Shippingでだけ出るバグ」が増える**ので、ゲームロジックの分岐は最小限にします。[Microsoft の assert と NDEBUG](https://learn.microsoft.com/en-us/cpp/c-runtime-library/reference/assert-macro-assert-wassert)
 
 ## シンボルファイル(PDB)
 
@@ -48,18 +49,19 @@ study:
 | Unity/C# | C++ |
 |---|---|
 | エディタ再生(Mono/JIT) | Debug/Development相当 |
-| Development Build チェックボックス | Development構成 |
-| IL2CPP + Release | Release/Shipping構成(このページの世界) |
+| Development Build | Unity の Player に開発用機能を含める設定 |
+| Script Debugging | Development Build と併用して、Player のスクリプトへのデバッガー接続を許可 |
+| IL2CPP の C++ Compiler Configuration | 生成 C++ のコンパイラー構成。Unity 6.3 LTS では Debug、Release、Master |
 | .pdb/.mdb(スクリプトデバッグ情報) | PDB(概念同一) |
 | Cloud Diagnostics / Crashlytics | クラッシュダンプ+シンボルサーバー |
 
-Unityでは構成が2〜3個に見えるが、その下でIL2CPPが吐いたC++がこのページの構成でビルドされています。
+Unity 6.3 LTS の Development Build と Script Debugging は Player のオプションです。IL2CPP の Debug、Release、Master は生成 C++ の最適化を設定する別項目です。[Unity 6.3 — BuildOptions.AllowDebugging](https://docs.unity3d.com/6000.3/Documentation/ScriptReference/BuildOptions.AllowDebugging.html) · [Unity 6.3 — Il2CppCompilerConfiguration](https://docs.unity3d.com/6000.3/Documentation/ScriptReference/Il2CppCompilerConfiguration.html)
 
 ## Unity開発者が誤解しやすい点
 
 1. 「デバッグはエディタでやるもの」— C++では**Shipping相当でだけ出るバグ**(最適化・タイミング・アセット差)を追う技術(ダンプ解析)が必須スキル
 2. 「PDBはビルドの副産物」— Shippingでは**成果物の一部**(保管しないとサポート不能)
-3. assertは「あると安心」ではなく構成戦略の一部——Debugで大量に入れ、Shippingで消えることで、開発中の検出力と出荷物の速度を両立する(→ [契約のassert](/languages/cpp/exceptions.html))
+3. 標準の `assert` を出荷構成で無効にする場合は `NDEBUG` の設定を確認します。出荷物でも必要な入力検査や失敗処理は、`assert` の外に実装します(→ [契約のassert](/languages/cpp/exceptions.html))。
 
 ## 実務指針
 
@@ -75,7 +77,7 @@ Unityでは構成が2〜3個に見えるが、その下でIL2CPPが吐いたC++�
 
 ## 演習
 
-samples/cmake_demo/ を `-DCMAKE_BUILD_TYPE=Debug` と `Release` でそれぞれビルドし、(a) 実行ファイルサイズ、(b) assertの有効/無効(NDEBUGの効果)を確認してください。
+[cmake_demo](/tools/build/samples/cmake-demo.html) を Debug と Release でそれぞれビルドし、実行ファイルのサイズと、`cmake --build build --verbose` で表示するコンパイラーのフラグを比較してください。このサンプルでは `assert` を呼ばないので、`NDEBUG` が設定されているかはフラグから読みます。Ninja などでは `-DCMAKE_BUILD_TYPE=Debug` と `Release` を別々のビルドフォルダーに指定します。Visual Studio などの場合は、同じビルドフォルダーに対して `--config Debug` と `--config Release` を指定します。
 
 ---
 

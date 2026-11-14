@@ -34,11 +34,11 @@ PBR (Physically Based Rendering) は、**光と表面の関係を物理的なモ
 
 ## それ以前の技術
 
-Phong / Blinn-Phong + アドホックな「スペキュラマップ」。エネルギー保存がなく (ハイライトを強くすると総エネルギーが増える)、フレネルも近似すらないことが多く、金属と非金属の区別も曖昧でした。
+当時よく使われた、ローブを正規化せず拡散と鏡面を独立に調整する Phong / Blinn-Phong の実装では、反射エネルギーが入射を上回ることがありました。正規化したローブとの違いは [BRDFの中身](/graphics/shader/brdf-internals.html) を参照してください。
 
 ## 解決した課題
 
-1. **エネルギー保存**: 反射光 ≤ 入射光を保証 — ラフネスを上げるとハイライトが「広く弱く」なる正しい挙動
+1. **エネルギー保存**: 反射光が入射光を上回らないように、鏡面反射の幾何項と、拡散・鏡面へのエネルギーの配分まで設計する
 2. **フレネル**: 斜めから見ると全ての物質は鏡になる — 物質の見た目の本質的要素
 3. **金属/非金属の物理的区別**: metallicワークフロー
 4. アセットの照明非依存性・スキャン値 (実測アルベド) の利用
@@ -168,7 +168,7 @@ float3 ShadePBR(float3 N, float3 V, float3 L, float3 lightColor,
 
 1. **「エネルギー保存」がPhongモデルに欠けていたことによる実害と、PBRでの解決を説明せよ。**
    ::: details 解答
-   Phongではスペキュラ強度と広さ(shininess)が独立パラメータで、鋭く強いハイライトを作ると反射エネルギーが入射を超え、照明を変えると露骨に破綻した。アーティストは環境ごとに再調整を強いられた。PBRではNDFの正規化により「ラフネスを下げると鋭く明るく、上げると広く暗く」が自動で成立し、総エネルギーが常に保存されるため、どの照明でも一貫する。
+   正規化せず拡散と鏡面を加える Phong の実装では、合わせた反射エネルギーが入射光を上回ることがある。マイクロファセットBRDFでは、NDFの正規化は微小面の投影面積に関する条件で、反射エネルギーはフレネル項や微小面の遮蔽、拡散と鏡面の配分にも依存する。単一散乱のモデルでは微小面の間で再反射する光が省かれ、粗い面が暗くなることもある。
    :::
 
 2. **金属のアルベド(拡散色)が黒である物理的理由は。**
@@ -187,4 +187,5 @@ float3 ShadePBR(float3 N, float3 V, float3 L, float3 lightColor,
 - Brian Karis, *"Real Shading in Unreal Engine 4"* (SIGGRAPH 2013)
 - Lagarde & de Rousiers, *"Moving Frostbite to PBR"* (SIGGRAPH 2014) — 実装詳細の決定版
 - Naty Hoffman, *"Physics and Math of Shading"* (SIGGRAPH PBS course, 各年)
+- [Eric Heitz — Understanding the Masking-Shadowing Function in Microfacet-Based BRDFs（2014）](https://jcgt.org/published/0003/02/03/)、[Heitz ほか — Multiple-Scattering Microfacet BSDFs with the Smith Model（SIGGRAPH 2016）](https://eheitzresearch.wordpress.com/240-2/)
 - Google Filament ドキュメント — 実装と理論の橋渡しとして最良

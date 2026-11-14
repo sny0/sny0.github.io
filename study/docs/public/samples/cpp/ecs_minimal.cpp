@@ -49,7 +49,7 @@ int main() {
     for (int frame = 0; frame < 3; ++frame) {
         MoveSystem(w, 0.1f);
         LifetimeSystem(w, 0.1f);
-        std::printf("frame %d: alive=%u", frame, w.Count());
+        std::printf("frame %d: alive=%zu", frame, w.Count());
         for (std::size_t i = 0; i < w.Count(); ++i)
             std::printf("  (%.1f,%.1f)", w.positions[i].x, w.positions[i].y);
         std::printf("\n");
