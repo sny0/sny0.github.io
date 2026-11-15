@@ -13,7 +13,7 @@ study:
     - フロクセル
     - froxel
     - 参加媒質
-  verification: Hillaire と Schneider の SIGGRAPH 2015 講演資料、大気散乱の原論文、HLSL Shader Model 6.0（2026-11-13）
+  verification: Hillaire と Schneider の SIGGRAPH 2015 講演資料、大気散乱の原論文に照合。フロクセルと高さフォグの HLSL を GeForce RTX 3060 と Direct3D 12 で実行確認（2026-11-15）
 ---
 
 # ボリューメトリック — 高さフォグ・フロクセル・雲と大気
@@ -120,7 +120,7 @@ flowchart LR
     M["密度・散乱係数<br/>光源・シャドウマップ"] --> I["注入パス<br/>セルごとの消散と光源項"]
     I --> V["3D テクスチャ<br/>RGB: S、A: 消散"]
     V --> P["積分パス<br/>同じ XY の列を近端から進める"]
-    P --> T["3D テクスチャ<br/>RGB: 累積散乱光、A: 累積透過率"]
+    P --> T["3D テクスチャ<br/>各セルの遠端までの累積値<br/>RGB: 散乱光、A: 透過率"]
     D["不透明面の深度"] --> C["深度で 3D テクスチャを引いて合成"]
     T --> C
 ```
@@ -202,7 +202,7 @@ float4 main(float2 uv : TEXCOORD0) : SV_Target0
 
 ### コード例 — フロクセルに注入し、列ごとに積分する
 
-HLSL Shader Model 6.0 の `cs_6_0` で、同じソースを `Inject` と `Integrate` の二つのエントリーポイントとしてコンパイルする。格子は $64\times36\times48$。ビュー空間の $+Z$ を前方とする。近端を 0.5 m、遠端を 128 m とし、累積値は 0.5 m の境界から積分した各セルの遠端の値になる。照明には遮蔽物のない単一の方向光を使い、光源側の霧による減衰も無視できる場合を仮定する。そのため `Inject` の光源項では一般式の $V_\ell$ と $T_\ell$ をともに 1 とする。光源側の消散が無視できない場合は、光源から各セルまでの光学的厚さ $\tau_\ell$ を求めて $T_\ell=e^{-\tau_\ell}$ を光源項に掛ける。セルからカメラまでの透過率は別に `Integrate` で積分する。サンプルの `HeightFogOpticalDepth` は指数密度が成り立つ区間の解析解で、密度を地面でクランプした注入結果と照合するために使える。
+HLSL Shader Model 6.0 の `cs_6_0` で、同じソースを `Inject` と `Integrate` の二つのエントリーポイントとしてコンパイルする。格子は $64\times36\times48$。ビュー空間の $+Z$ を前方とする。軸方向の近端を 0.5 m、遠端を 128 m とし、`Integrate` は近端から各セルの遠端までの累積散乱光と透過率を格納する。カメラから近端までの寄与を含める場合は、その区間を別に積分して手前に合成する。照明には遮蔽物のない単一の方向光を使い、光源側の霧による減衰も無視できる場合を仮定する。そのため `Inject` の光源項では一般式の $V_\ell$ と $T_\ell$ をともに 1 とする。光源側の消散が無視できない場合は、光源から各セルまでの光学的厚さ $\tau_\ell$ を求めて $T_\ell=e^{-\tau_\ell}$ を光源項に掛ける。サンプルの `HeightFogOpticalDepth` は指数密度が成り立つ区間の解析解で、注入時の地面によるクランプが効かない区間の結果と照合するために使える。
 
 ```hlsl
 static const float PI = 3.14159265358979323846;
@@ -297,7 +297,24 @@ void Integrate(uint3 id : SV_DispatchThreadID)
 }
 ```
 
-注入は 3D のディスパッチ `(16, 9, 12)`、積分は各スレッドが一本の列を担当する `(8, 5, 1)`。テクスチャはいずれも $64\times36\times48$ で、例えば RGBA16F のテクスチャなら一枚 884,736 バイト（864 KiB、パディングや別の履歴を除く）。注入先を UAV `u0` に、次のパスで同じリソースを SRV `t0` に指定し、別のテクスチャを積分先の UAV `u1` に指定する。サンプルの `PhaseRayleigh` に差し替えて向きによる違いを比較できる。指数密度の解析解を照合する場合は、両方で地面より上の同じ区間だけを積分し、積分の開始点の高さと距離を合わせる。RGB で別々に消散する大気をこの実装に広げるときは、各チャンネルの光学的厚さと透過率を独立に持つ。
+注入は 3D のディスパッチ `(16, 9, 12)`、積分は各スレッドが一本の列を担当する `(8, 5, 1)`。テクスチャはいずれも $64\times36\times48$ で、例えば RGBA16F のテクスチャなら一枚 884,736 バイト（864 KiB、パディングや別の履歴を除く）。注入先を UAV `u0` に、次のパスで同じリソースを SRV `t0` に指定し、別のテクスチャを積分先の UAV `u1` に指定する。D3D12 のレガシーバリアを使う場合、パス間で注入テクスチャを `D3D12_RESOURCE_STATE_UNORDERED_ACCESS` から `D3D12_RESOURCE_STATE_NON_PIXEL_SHADER_RESOURCE` に遷移させる。[Microsoft、D3D12 のリソース状態とバリア](https://learn.microsoft.com/en-us/windows/win32/direct3d12/using-resource-barriers-to-synchronize-resource-states-in-direct3d-12)
+
+サンプルの `PhaseRayleigh` に差し替えて向きによる違いを比較できる。指数密度の解析解を照合する場合は、両方で地面より上の同じ区間だけを積分し、積分の開始点の高さと距離を合わせる。RGB で別々に消散する大気をこの実装に広げるときは、各チャンネルの光学的厚さと透過率を独立に持つ。
+
+### 実機GPUでの確認
+
+2026年11月15日、GeForce RTX 3060 と Direct3D 12 で、掲載した `Inject` と `Integrate` をそのまま実行した。コンパイラーは DXC 1.10.2605.37、ターゲットは Shader Model 6.0。RGBA32F と RGBA16F でそれぞれ注入・積分結果の 3D テクスチャを読み戻し、全 110,592 セルの RGBA を倍精度の CPU 参照値と照合した。RGBA32F での最大絶対誤差は注入で $1.57\times10^{-6}$、積分で $2.15\times10^{-6}$ だった。積分の参照計算には読み戻した注入値を使い、注入時点の誤差と分けて測った。
+
+| セル $(x,y,z)$ | 累積散乱光 $L$（RGB） | 累積透過率 $T$ |
+| --- | --- | ---: |
+| (32, 18, 0) | (0.019846, 0.017862, 0.014885) | 0.990954 |
+| (32, 18, 24) | (1.578954, 1.421058, 1.184215) | 0.280344 |
+
+同じ列の最初のセルに注入された散乱光源項 $S$ は (0.325509, 0.292958, 0.244131)、消散係数 $\sigma_t$ は $0.148360\ \mathrm{m}^{-1}$ だった。このセルの遠端から奥へ進むと、手前の減衰を含めた散乱光が加わり、透過率は下がる。
+
+RGBA16F では、同じ列の最後のセルで RGBA32F が $2.12\times10^{-10}$ を保持した透過率が 0 になった。この値は 16 ビット浮動小数点テクスチャで表せる最小の正の値 $2^{-24}$ より小さい。別の試験では、空の区間、光学的厚さがごく小さい媒質、均一な媒質、セルごとに消散や光源項が変わる媒質を入力して `Integrate` を実行した。空の列では全区間で $(L,T)=(0,1)$ が保たれた。
+
+高さフォグのピクセルシェーダーも、検証用の全画面三角形で $64\times36$ ピクセルを描画した。背景色と合成した RGB の最大絶対誤差は倍精度の CPU 参照値に対して $3.91\times10^{-7}$ 未満だった。GPU ベースの検証を有効にした Direct3D 12 のデバッグ層で、エラーと警告はともに 0 件だった。
 
 ## 理解度チェック
 
@@ -316,7 +333,7 @@ void Integrate(uint3 id : SV_DispatchThreadID)
 3. セルの計算結果を広い範囲で共有できる。細い光の筋や遮蔽の境界はぼけやすい。
 4. 入射光の進行方向はサンプル点から太陽へ向かう方向の逆なので、そのベクトルを反転してから内積する。これで太陽を向いたときの $\mu$ は 1 に近くなる。
 5. 高さと消散係数は視線上で一定なので $\tau=\sigma_cD$、$T=e^{-\sigma_cD}$ になる。
-6. フロクセルの厚さはカメラの前方軸に沿った距離で定義している。周辺のレイはスライスを斜めに通るので、同じ消散係数でも通過距離が増える。
+6. フロクセルの厚さ $\Delta z$ はカメラの前方軸に沿った距離で定義している。レイとの内積 $\mu_z$ が小さい周辺では、通過距離 $\Delta s=\Delta z/\mu_z$ が増える。同じ消散係数でも $\sigma_t\Delta s$ は大きくなる。
 7. Sky-View は背景の空に向かう経路で、大気上端や地表に当たるまでを積分する。Aerial Perspective は視錐台の指定深度までなので、山の深度で引く。
 
 :::
@@ -336,5 +353,6 @@ void Integrate(uint3 id : SV_DispatchThreadID)
 - Sébastien Hillaire, [A Scalable and Production Ready Sky and Atmosphere Rendering Technique](https://doi.org/10.1111/cgf.14050), 2020
 - Sébastien Hillaire, [Sky Atmosphere の参照実装](https://github.com/sebh/UnrealEngineSkyAtmosphere)
 - Bart Wronski, [Volumetric Fog — Unified, Compute Shader Based Solution to Atmospheric Scattering](https://bartwronski.com/wp-content/uploads/2014/08/bwronski_volumetric_fog_siggraph2014.pdf), SIGGRAPH 2014
+- Microsoft, [DirectX Shader Compiler 1.10.2605.37](https://github.com/microsoft/DirectXShaderCompiler/releases/tag/v1.10.2605.37), [Direct3D 11.3 Functional Specification §3.1.5](https://microsoft.github.io/DirectX-Specs/d3d/archive/D3D11_3_FunctionalSpec.htm)（16 ビット浮動小数点形式）
 - Andrew Schneider and Nathan Vos, [The Real-Time Volumetric Cloudscapes of Horizon: Zero Dawn](https://advances.realtimerendering.com/s2015/The%20Real-time%20Volumetric%20Cloudscapes%20of%20Horizon%20-%20Zero%20Dawn%20-%20ARTR.pdf#page=64), SIGGRAPH 2015（登壇者 Andrew Schneider、スライド62・66・69）
 - Andrew Schneider and Nathan Vos, [Nubis: Authoring Real-Time Volumetric Cloudscapes with the Decima Engine](https://www.guerrilla-games.com/read/nubis-authoring-real-time-volumetric-cloudscapes-with-the-decima-engine), SIGGRAPH 2017

@@ -12918,7 +12918,7 @@
         "froxel",
         "参加媒質"
       ],
-      "verification": "Hillaire と Schneider の SIGGRAPH 2015 講演資料、大気散乱の原論文、HLSL Shader Model 6.0（2026-11-13）",
+      "verification": "Hillaire と Schneider の SIGGRAPH 2015 講演資料、大気散乱の原論文に照合。フロクセルと高さフォグの HLSL を GeForce RTX 3060 と Direct3D 12 で実行確認（2026-11-15）",
       "links": [
         "/graphics/optimization/enhanced-barriers-and-synchronization2.html",
         "/graphics/shader/procedural-noise.html",
