@@ -2731,6 +2731,36 @@
       "importance": "useful"
     },
     {
+      "title": "C++実践 — 入力を記録して最初にずれたtickを探す",
+      "url": "/practice/game/input-replay.html",
+      "file": "practice/game/input-replay.md",
+      "domain": "game",
+      "section": "practice",
+      "format": "sample",
+      "status": "published",
+      "summary": "シューティングのC++モデルで初期状態とtickごとの入力を記録し、30 FPS・120 FPS相当で再生して、最初に異なった状態を調べる。",
+      "source": "新規執筆",
+      "aliases": [
+        "入力リプレイ",
+        "リプレイ",
+        "入力ログ",
+        "デシンク",
+        "固定tick",
+        "状態照合",
+        "replay",
+        "deterministic replay"
+      ],
+      "collection": "shooter",
+      "order": 4,
+      "verification": "Windows x64のMSVC 19.35.32217.1とGCC 16.2.0で、30・120 FPS相当の全60tick一致と、入力を1tick遅らせた場合の最初の差を確認（2026-11-16）",
+      "links": [
+        "/game/shooter-design.html",
+        "/languages/cpp/floating-point-determinism.html",
+        "/game/network-sync.html",
+        "/game/patterns/game-loop-and-update.html"
+      ]
+    },
+    {
       "title": "C++例外と C#例外",
       "url": "/languages/csharp/exceptions-comparison.html",
       "file": "languages/csharp/exceptions-comparison.md",
@@ -4198,6 +4228,7 @@
       "source": "C++ Wiki",
       "aliases": [],
       "links": [
+        "/practice/game/input-replay.html",
         "/design/patterns/template-method.html",
         "/design/patterns/composite.html",
         "/game/patterns/optimization-patterns.html",
@@ -10091,6 +10122,7 @@
         "/game/basics/game-loop-and-time.html",
         "/network/udp-datagrams.html",
         "/network/latency-throughput-and-queues.html",
+        "/practice/game/input-replay.html",
         "/languages/cpp/floating-point-determinism.html",
         "/game/basics/collisions-and-physics.html",
         "/game/ecs.html"
@@ -15212,6 +15244,7 @@
         "/game/shooter-cpp.html",
         "/game/shooter-unity.html",
         "/game/patterns/game-loop-and-update.html",
+        "/practice/game/input-replay.html",
         "/game/ecs.html",
         "/game/patterns/object-pool.html",
         "/game/patterns/component-and-ecs.html"

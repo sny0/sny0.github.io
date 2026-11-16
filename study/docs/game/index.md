@@ -86,6 +86,7 @@
 - [シューティング実装例 — C++17とraylib](/game/shooter-cpp.html)
 - [Unity実践 — 壁で止まり、ダメージ床を通り抜ける](/practice/unity/collision-health-demo.html)
 - [シューティング実装例 — C#とUnity 6](/game/shooter-unity.html)
+- [C++実践 — 入力を記録して最初にずれたtickを探す](/practice/game/input-replay.html)
 - [ゲームプログラミングパターンの演習](/game/patterns/exercises.html)
 - [Unreal Engineと標準C++の演習](/game/unreal/exercises.html)
 
