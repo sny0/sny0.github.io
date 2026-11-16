@@ -6116,7 +6116,7 @@
         "球面追跡",
         "sphere tracing"
       ],
-      "verification": "Hart の球面追跡原論文と Quilez の実装資料、HLSL Shader Model 6.0（2026-11-13）",
+      "verification": "Hart の球面追跡原論文と Quilez の実装資料に照合。GeForce RTX 3060 と Direct3D 12 で掲載 HLSL を実行確認（2026-11-16）",
       "links": [
         "/practice/graphics/shader-lab.html",
         "/graphics/lighting/raytracing.html",
