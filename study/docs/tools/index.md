@@ -22,6 +22,7 @@
 - [AIが書いたコードとの付き合い方 — 差分と実行結果から採用を決める](/tools/reviewing-ai-generated-code.html)
 - [CI とビルド自動化 — 同じ変更からテスト結果と成果物を作る](/tools/ci-and-build-automation.html)
 - [CPU プロファイリング — サンプリングと計装でフレームを測る](/tools/profiling/cpu-profiling.html)
+- [Gitのステージング — 作業ツリー・index・HEAD](/tools/git-staging-index.html)
 - [Gitの基本 — 差分を見てコミットする](/tools/git-basics.html)
 - [Gitの保存モデル — blob・tree・commitとrefs／HEAD](/tools/git-objects.html)
 - [WindowsのファイルI/OをProcmonとWPRで追う](/tools/windows/file-io-tracing.html)

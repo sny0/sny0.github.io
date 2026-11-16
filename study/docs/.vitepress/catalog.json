@@ -125,7 +125,7 @@
       "id": "tools",
       "title": "開発ツールと調査機能",
       "description": "どの機能で何を観察し、どう確かめるかを調べる。",
-      "count": 20,
+      "count": 21,
       "status": "辞典本文あり"
     }
   ],
@@ -4321,6 +4321,33 @@
       "importance": "specialized"
     },
     {
+      "title": "Gitのステージング — 作業ツリー・index・HEAD",
+      "url": "/tools/git-staging-index.html",
+      "file": "tools/git-staging-index.md",
+      "domain": "tools",
+      "section": "reference",
+      "format": "article",
+      "status": "published",
+      "summary": "git addの後で再編集した例から、作業ツリー・index・HEADが示すファイルの版を見分け、indexのパスとblob IDから次のコミットのtreeが作られる仕組みを追う。",
+      "source": "新規執筆",
+      "aliases": [
+        "Git index",
+        "staging area",
+        "ステージング領域",
+        "作業ツリー",
+        "git diff --cached",
+        "git ls-files --stage",
+        "git write-tree"
+      ],
+      "verification": "Git公式データモデルとコマンド資料に照合し、Windowsの独立したGitリポジトリでindex・差分・次のtreeを確認（2026-11-17）",
+      "links": [
+        "/tools/git-basics.html",
+        "/tools/git-objects.html"
+      ],
+      "difficulty": "intermediate",
+      "importance": "useful"
+    },
+    {
       "title": "Gitの基本 — 差分を見てコミットする",
       "url": "/tools/git-basics.html",
       "file": "tools/git-basics.md",
@@ -4346,6 +4373,7 @@
       ],
       "verification": "Git公式マニュアルに照合し、WindowsのPowerShell 7.6とGit for Windows 2.39.2で2つのコミットと差分を実行確認（2026-11-12）",
       "links": [
+        "/tools/git-staging-index.html",
         "/tools/git-objects.html",
         "/tools/terminal-shell-and-commands.html",
         "/os/files-and-paths.html",
@@ -4378,6 +4406,7 @@
       ],
       "verification": "Git公式マニュアルとPro Gitに照合し、WindowsのGit 2.39.2で独立した2コミットのオブジェクトとpack化を実行確認（2026-11-17）",
       "links": [
+        "/tools/git-staging-index.html",
         "/tools/git-basics.html",
         "/glossary/programming.html"
       ],

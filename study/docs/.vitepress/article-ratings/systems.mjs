@@ -145,6 +145,7 @@ export default {
   '/tools/development-tools-basics.html': ['intro', 'core'],
   '/tools/git-basics.html': ['intro', 'core'],
   '/tools/git-objects.html': ['intermediate', 'useful'],
+  '/tools/git-staging-index.html': ['intermediate', 'useful'],
   '/tools/profiling/cpu-profiling.html': ['intermediate', 'core'],
   '/tools/reading-error-messages.html': ['intro', 'core'],
   '/tools/reading-official-documentation.html': ['intro', 'core'],

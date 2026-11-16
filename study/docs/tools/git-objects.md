@@ -103,6 +103,7 @@ new
 
 ## 関連項目
 
+- 次のコミットのtreeを作るために、indexが名前やblobのIDをどう保持するかを確かめる。[Gitのステージング — 作業ツリー・index・HEAD](/tools/git-staging-index.html)
 - [Gitの基本](/tools/git-basics.html) — 作業ツリー、ステージング、コミットの操作と差分の見方を確認する。
 - [用語集のブランチ](/glossary/programming.html#branch) — ブランチやマージなど、履歴を扱う用語を引く。
 

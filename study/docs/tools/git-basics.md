@@ -130,6 +130,7 @@ score=20
 
 ## 関連項目
 
+- `git add` した内容をindexがどう保持し、次のコミットへつなぐかを確かめる。[Gitのステージング — 作業ツリー・index・HEAD](/tools/git-staging-index.html)
 - コミットの中身や `HEAD` が指す先を確かめる。[Gitの保存モデル — blob・tree・commitとrefs／HEAD](/tools/git-objects.html)
 - [ターミナル・シェル・コマンドの基本](/tools/terminal-shell-and-commands.html)
 - [ファイルとパス](/os/files-and-paths.html)
