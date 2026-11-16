@@ -127,6 +127,7 @@ C++例は2026年11月16日に同じWindows x64環境のMSVC 19.35.32217.1とGCC 
 - [入力の記録とリプレイ](/practice/game/input-replay.html) — tickごとの入力を再生し、最初にずれた状態を照合する。
 - [ゲームのネットワーク同期](/game/network-sync.html) — ロールバックやサーバー権威で、状態をいつ復元・確定するかを考える。
 - [シャッフルバッグ — 独立抽選と引き切り方式の違い](/game/shuffle-bag.html) — 袋に残った候補が次の抽選に与える影響を考える。
+- 乱数で作る並びが等確率になる条件を、交換の手順から確かめる。[Fisher–Yates法 — 公平なシャッフルと偏る並べ替え](/algorithms/fisher-yates-shuffle.html)
 
 ## 参考資料
 

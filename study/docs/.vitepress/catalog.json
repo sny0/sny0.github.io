@@ -90,7 +90,7 @@
       "id": "algorithms",
       "title": "データ構造・アルゴリズム",
       "description": "操作手順、計算量、不変条件から道具を選ぶ。",
-      "count": 13,
+      "count": 14,
       "status": "辞典本文あり"
     },
     {
@@ -4076,6 +4076,33 @@
         "/graphics/optimization/swap-chain-and-vsync.html",
         "/practice/graphics/vsync-vrr-observation.html"
       ]
+    },
+    {
+      "title": "Fisher–Yates法 — 公平なシャッフルと偏る並べ替え",
+      "url": "/algorithms/fisher-yates-shuffle.html",
+      "file": "algorithms/fisher-yates-shuffle.md",
+      "domain": "algorithms",
+      "section": "reference",
+      "format": "article",
+      "status": "published",
+      "summary": "3枚の山札を例に、残りの範囲から1枚を選ぶFisher–Yates法と、毎回全範囲から選ぶ交換の確率を、選択経路の数で比べる。",
+      "source": "新規執筆",
+      "aliases": [
+        "Fisher–Yates shuffle",
+        "Fisher-Yates",
+        "フィッシャー・イェーツ法",
+        "Durstenfeld",
+        "一様シャッフル",
+        "一様ランダム順列"
+      ],
+      "verification": "Durstenfeldの原論文、Java SE 24の公式API、乱数の範囲変換の原論文に照合し、Windows x64のPython 3.12.4で2方式の全経路を列挙（2026-11-16）",
+      "links": [
+        "/game/shuffle-bag.html",
+        "/game/random-streams.html",
+        "/game/loot-tables.html"
+      ],
+      "difficulty": "intermediate",
+      "importance": "useful"
     },
     {
       "title": "floatが表せる値と丸め — binary32の表現と刻み幅",
@@ -10255,7 +10282,8 @@
         "/game/simulation-determinism.html",
         "/game/loot-tables.html",
         "/game/network-sync.html",
-        "/game/shuffle-bag.html"
+        "/game/shuffle-bag.html",
+        "/algorithms/fisher-yates-shuffle.html"
       ],
       "difficulty": "intermediate",
       "importance": "useful"
@@ -10940,6 +10968,7 @@
       "verification": "MITの確率講義、Jstris公式ガイド、Python 3.12公式仕様に照合し、Windows x64のPython 3.12.4で袋2つの576通りを全列挙（2026-11-16）",
       "links": [
         "/game/loot-tables.html",
+        "/algorithms/fisher-yates-shuffle.html",
         "/game/random-streams.html"
       ],
       "difficulty": "intermediate",

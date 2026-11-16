@@ -18,6 +18,7 @@ export default {
   '/languages/cpp/modules.html': ['advanced', 'useful'],
   '/languages/csharp/performance-features.html': ['advanced', 'useful'],
   '/algorithms/sorting.html': ['intermediate', 'useful'],
+  '/algorithms/fisher-yates-shuffle.html': ['intermediate', 'useful'],
   '/data/compression-basics.html': ['intermediate', 'useful'],
   '/data/hashes-and-checksums.html': ['intermediate', 'useful'],
   '/data/integer-bits-and-bytes.html': ['intro', 'core'],

@@ -731,6 +731,10 @@
           "link": "/algorithms/bounding-volume-hierarchies.html"
         },
         {
+          "text": "Fisher–Yates法 — 公平なシャッフルと偏る並べ替え",
+          "link": "/algorithms/fisher-yates-shuffle.html"
+        },
+        {
           "text": "スタック・キュー・デック — どちらの端から入れ、どちらから取るか",
           "link": "/algorithms/queues-and-deques.html"
         },
