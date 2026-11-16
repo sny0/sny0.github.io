@@ -111,7 +111,7 @@
       "id": "game",
       "title": "ゲームとエンジン",
       "description": "入力、時間、ECSと各サブシステムの関係を調べる。",
-      "count": 44,
+      "count": 45,
       "status": "辞典本文あり"
     },
     {
@@ -6858,7 +6858,8 @@
         "/languages/csharp/il2cpp.html",
         "/game/patterns/optimization-patterns.html",
         "/game/patterns/",
-        "/game/patterns/state-machines.html"
+        "/game/patterns/state-machines.html",
+        "/game/loot-tables.html"
       ],
       "difficulty": "advanced",
       "importance": "specialized"
@@ -10252,6 +10253,7 @@
       "links": [
         "/practice/game/input-replay.html",
         "/game/simulation-determinism.html",
+        "/game/loot-tables.html",
         "/game/network-sync.html"
       ],
       "difficulty": "intermediate",
@@ -11828,6 +11830,35 @@
       ],
       "difficulty": "intermediate",
       "importance": "core"
+    },
+    {
+      "title": "ドロップテーブルと重み付き抽選 — 確率・期待値・偏りを読む",
+      "url": "/game/loot-tables.html",
+      "file": "game/loot-tables.md",
+      "domain": "game",
+      "section": "reference",
+      "format": "article",
+      "status": "published",
+      "summary": "宝箱の重みを確率と累積区間に置き換え、レア報酬が出ない連続回数や、候補の条件・救済ルールが結果をどう変えるかを読む。",
+      "source": "新規執筆",
+      "aliases": [
+        "ドロップテーブル",
+        "ルートテーブル",
+        "loot table",
+        "重み付き抽選",
+        "累積重み",
+        "ドロップ率",
+        "幾何分布",
+        "天井"
+      ],
+      "verification": "Minecraft Bedrock、WG21 N4659、MIT、Bungieの資料に照合し、Windows x64のMSVC 19.35とGCC 16.2で全20枠のC++例を実行（2026-11-16）",
+      "links": [
+        "/game/random-streams.html",
+        "/game/patterns/type-object-and-sandbox.html",
+        "/game/simulation-determinism.html"
+      ],
+      "difficulty": "intermediate",
+      "importance": "useful"
     },
     {
       "title": "ニューラルレンダリング — フレームを再構成する推論とシェーダー内の推論",

@@ -54,6 +54,7 @@
 - [ゲーム内イベントと通知 — HPの変化をUIへ伝える](/game/basics/game-events-and-notifications.html)
 - [シーン・オブジェクト・コンポーネントの基本](/game/basics/scenes-and-components.html)
 - [セーブとシリアライズの基本 — 実行中の状態を保存する](/game/basics/save-data-and-serialization.html)
+- [ドロップテーブルと重み付き抽選 — 確率・期待値・偏りを読む](/game/loot-tables.html)
 - [プレハブと生成・破棄の基本 — 同じ部品から複数の物を作る](/game/basics/prefabs-and-object-lifetimes.html)
 - [リフレクション — UCLASS・UFUNCTION・UPROPERTY・Unreal Header Tool](/game/unreal/reflection-and-uht.html)
 - [ローカライズの設計 — 文字列テーブル・フォント・右から左の UI](/game/localization-design.html)

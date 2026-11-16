@@ -1689,6 +1689,10 @@
           "link": "/game/basics/save-data-and-serialization.html"
         },
         {
+          "text": "ドロップテーブルと重み付き抽選 — 確率・期待値・偏りを読む",
+          "link": "/game/loot-tables.html"
+        },
+        {
           "text": "プレハブと生成・破棄の基本 — 同じ部品から複数の物を作る",
           "link": "/game/basics/prefabs-and-object-lifetimes.html"
         },

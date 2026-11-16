@@ -167,4 +167,4 @@ samples/type_object.cpp に「攻撃パターンID」を追加し、IDからコ�
 
 ---
 
-関連項目：[最適化系パターン](/game/patterns/optimization-patterns.html) | [この分野の学習ガイド](/game/patterns/) | [ステートマシン(FSM/HSM)](/game/patterns/state-machines.html)
+関連項目：[最適化系パターン](/game/patterns/optimization-patterns.html) | [この分野の学習ガイド](/game/patterns/) | [ステートマシン(FSM/HSM)](/game/patterns/state-machines.html) | [ドロップテーブルと重み付き抽選](/game/loot-tables.html)
