@@ -71,7 +71,7 @@ watch(() => props.section, resetFilters)
       </div>
       <a :href="withBase('/learn/start.html')">学習を始める <span aria-hidden="true">→</span></a>
     </section>
-    <p v-if="props.section === 'learning'" class="study-index-help"><a :href="withBase('/learn/roadmap.html')">8つの学習ロードマップを開く →</a></p>
+    <p v-if="props.section === 'learning'" class="study-index-help"><a :href="withBase('/learn/roadmap.html')">分野別の学習ロードマップを開く →</a></p>
 
     <section v-if="props.section === 'reference'" aria-labelledby="study-domains-heading" class="study-domain-section">
       <div class="study-section-heading"><h2 id="study-domains-heading">分野から調べる</h2><p>{{ catalog.domains.length }}分野</p></div>

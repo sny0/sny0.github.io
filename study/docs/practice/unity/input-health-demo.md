@@ -108,6 +108,7 @@ flowchart LR
 - [Unityでゲームを作る — 入力の達成条件](/learn/roadmap.html?node=unity-input#unity-game)
 - [シーンにキャラクターとダメージ床を配置する](/practice/unity/scene-health-demo.html)で、Playerと床のコンポーネントを作る。
 - [入力アクションとデバイスの基本](/game/basics/input-actions-and-devices.html)で、入力の対応付けと押し始めの扱いを整理する。
+- [次の実践 — 壁で止まり、ダメージ床を通り抜ける](/practice/unity/collision-health-demo.html)で、この2Dシーンに壁を追加する。
 - [Unityでゲームを作る — 衝突と物理](/learn/roadmap.html?node=unity-collision#unity-game)
 
 ## 参考資料

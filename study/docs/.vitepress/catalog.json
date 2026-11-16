@@ -674,7 +674,7 @@
       "id": "unity-scene-health",
       "section": "practice",
       "title": "Unityでキャラクターを配置して動かす",
-      "description": "ダメージ床を配置し、キーボードとゲームパッドでキャラクターを動かす。",
+      "description": "ダメージ床を配置し、キーボードとゲームパッドでキャラクターを動かし、壁とトリガーを比べる。",
       "start": "/practice/unity/scene-health-demo.html"
     },
     {
@@ -7124,7 +7124,8 @@
       "links": [
         "/practice/unity/scene-health-demo.html",
         "/learn/roadmap.html",
-        "/game/basics/input-actions-and-devices.html"
+        "/game/basics/input-actions-and-devices.html",
+        "/practice/unity/collision-health-demo.html"
       ]
     },
     {
@@ -7160,6 +7161,34 @@
         "/game/basics/scenes-and-components.html",
         "/game/basics/collisions-and-physics.html",
         "/practice/unity/input-health-demo.html"
+      ]
+    },
+    {
+      "title": "Unity実践 — 壁で止まり、ダメージ床を通り抜ける",
+      "url": "/practice/unity/collision-health-demo.html",
+      "file": "practice/unity/collision-health-demo.md",
+      "domain": "game",
+      "section": "practice",
+      "format": "tutorial",
+      "status": "published",
+      "summary": "前回の2D入力シーンに壁を置き、Rigidbody2D.Castで移動を制限する処理と、ダメージ床のトリガー通知を比べる。",
+      "source": "新規執筆",
+      "aliases": [
+        "Unity入門",
+        "2D物理",
+        "Rigidbody2D.Cast",
+        "ContactFilter2D",
+        "壁",
+        "トリガー",
+        "ダメージ床"
+      ],
+      "collection": "unity-scene-health",
+      "order": 3,
+      "verification": "Unity 6000.3.27f1とInput System 1.20.1のPlay Modeで、仮想入力による壁での停止・迂回・トリガー通過とRTX 3060での描画を確認（2026-11-16）",
+      "links": [
+        "/practice/unity/input-health-demo.html",
+        "/learn/roadmap.html",
+        "/game/basics/collisions-and-physics.html"
       ]
     },
     {

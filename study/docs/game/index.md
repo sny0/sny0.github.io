@@ -84,6 +84,7 @@
 - [小さなシューティングの設計 — C++とUnityで作る](/game/shooter-design.html)
 - [Unity実践 — キーボードとゲームパッドでPlayerを動かす](/practice/unity/input-health-demo.html)
 - [シューティング実装例 — C++17とraylib](/game/shooter-cpp.html)
+- [Unity実践 — 壁で止まり、ダメージ床を通り抜ける](/practice/unity/collision-health-demo.html)
 - [シューティング実装例 — C#とUnity 6](/game/shooter-unity.html)
 - [ゲームプログラミングパターンの演習](/game/patterns/exercises.html)
 - [Unreal Engineと標準C++の演習](/game/unreal/exercises.html)

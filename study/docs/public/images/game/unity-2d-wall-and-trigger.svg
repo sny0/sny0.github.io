@@ -1,0 +1,33 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="760" height="407" viewBox="0 0 760 407" role="img" aria-labelledby="title desc">
+  <title id="title">同じPlayerで壁とダメージ床を試す</title>
+  <desc id="desc">左からPlayer、ダメージ床A、壁、ダメージ床B。床Aは通過でき、壁の直前で止まる。上へ移動して壁を迂回し、床Bへ入れる。</desc>
+  <defs>
+    <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto">
+      <path d="M0 0L10 5L0 10Z" fill="#23625a"/>
+    </marker>
+  </defs>
+  <rect x="1" y="1" width="758" height="405" rx="18" fill="#f5faf8" stroke="#bbcfc7" stroke-width="2"/>
+  <g font-family="system-ui, sans-serif" fill="#1d3732">
+    <text x="30" y="42" font-size="22" font-weight="700">同じPlayerで壁とダメージ床を試す</text>
+    <path d="M58 207H704" stroke="#bcc8c5" stroke-dasharray="5 5"/>
+    <text x="708" y="211" font-size="12">Y=0</text>
+    <rect x="67" y="170" width="75" height="75" rx="7" fill="#c0e7f3" stroke="#28758f" stroke-width="2"/>
+    <rect x="276" y="132" width="38" height="150" rx="5" fill="#f9dee0" stroke="#a84756" stroke-width="2" stroke-dasharray="6 4"/>
+    <rect x="430" y="132" width="19" height="150" rx="3" fill="#415866" stroke="#314652" stroke-width="2"/>
+    <rect x="565" y="132" width="38" height="150" rx="5" fill="#f9dee0" stroke="#a84756" stroke-width="2" stroke-dasharray="6 4"/>
+    <rect x="347" y="170" width="75" height="75" rx="7" fill="#e4f3f6" stroke="#28758f" stroke-width="2" stroke-dasharray="5 5"/>
+    <path d="M150 207H345 M384 163V89H553V194" fill="none" stroke="#23625a" stroke-width="3" marker-end="url(#arrow)"/>
+    <path d="M323 207H345" fill="none" stroke="#23625a" stroke-width="3" marker-end="url(#arrow)"/>
+    <text x="409" y="77" font-size="15">壁の上を回る</text>
+    <text x="384" y="214" text-anchor="middle" font-size="14" font-weight="700">停止</text>
+    <text x="104" y="310" text-anchor="middle" font-size="16" font-weight="700">Player</text>
+    <text x="104" y="335" text-anchor="middle" font-size="14">開始 x = −3</text>
+    <text x="295" y="310" text-anchor="middle" font-size="16" font-weight="700">ダメージ床A</text>
+    <text x="295" y="335" text-anchor="middle" font-size="14">通過・HP −3</text>
+    <text x="439" y="310" text-anchor="middle" font-size="16" font-weight="700">壁</text>
+    <text x="439" y="335" text-anchor="middle" font-size="14">移動量を制限</text>
+    <text x="584" y="310" text-anchor="middle" font-size="16" font-weight="700">ダメージ床B</text>
+    <text x="584" y="335" text-anchor="middle" font-size="14">通過・HP −9</text>
+    <text x="30" y="380" font-size="14">点線の床は、重なり始めたことを通知するトリガー。壁はCastが移動前に調べる。</text>
+  </g>
+</svg>

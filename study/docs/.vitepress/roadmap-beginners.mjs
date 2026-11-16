@@ -163,7 +163,7 @@ export default {
     {
       id: 'unity-collision',
       title: '衝突と物理',
-      summary: '形の接触を調べ、動きの変化とゲームのルールにつなげます。',
+      summary: '入力の実践で作った2Dシーンに壁を足して動きを確かめ、3Dの教材でコライダーと剛体の役割を見比べます。',
       prerequisites: ['unity-input'],
       checks: [
         { id: 'collider-and-rigidbody', label: 'Unityの3D物理で、床と重力で落ちる箱に必要なColliderとRigidbodyの組み合わせを選べる。' },
@@ -171,7 +171,8 @@ export default {
         { id: 'contact-rule', label: '弾が敵に触れたときの「重なりを検出する」と「敵のHPを減らす」を、判定とゲームのルールに分けられる。' },
       ],
       resources: [
-        { label: '衝突と物理の基本', url: '/game/basics/collisions-and-physics.html' },
+        { label: 'Unity実践 — 壁で止まり、ダメージ床を通り抜ける', url: '/practice/unity/collision-health-demo.html' },
+        { label: '衝突と物理の基本（Unityの3D物理で達成条件を確認する）', url: '/game/basics/collisions-and-physics.html' },
       ],
     },
     {
