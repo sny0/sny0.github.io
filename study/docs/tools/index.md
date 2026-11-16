@@ -23,6 +23,7 @@
 - [CI とビルド自動化 — 同じ変更からテスト結果と成果物を作る](/tools/ci-and-build-automation.html)
 - [CPU プロファイリング — サンプリングと計装でフレームを測る](/tools/profiling/cpu-profiling.html)
 - [Gitのrebase — コミットの再適用と履歴の書き換え](/tools/git-rebase.html)
+- [Gitのreflog — 履歴から見えなくなったコミットはどこにあるのか](/tools/git-reflog.html)
 - [Gitのステージング — 作業ツリー・index・HEAD](/tools/git-staging-index.html)
 - [Gitのマージ — 共通祖先と3-way merge](/tools/git-three-way-merge.html)
 - [Gitの基本 — 差分を見てコミットする](/tools/git-basics.html)

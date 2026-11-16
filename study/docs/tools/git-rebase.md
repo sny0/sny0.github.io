@@ -82,6 +82,7 @@ Cは引き続き元のT2を親に持ちます。新しいT2′の上で作業を
 
 ## 関連項目
 
+- rebase前の先端を参照の移動記録からたどり、いつまで探せるかを確認する。[Gitのreflog — 履歴から見えなくなったコミットはどこにあるのか](/tools/git-reflog.html)
 - [Gitの保存モデル](/tools/git-objects.html) — 親IDとtreeがコミットに入る仕組みを読む。
 - [Gitのマージ](/tools/git-three-way-merge.html) — 共通祖先と二つの先端を使って結果を作る方法を確認する。
 

@@ -1777,6 +1777,10 @@
           "link": "/tools/git-rebase.html"
         },
         {
+          "text": "Gitのreflog — 履歴から見えなくなったコミットはどこにあるのか",
+          "link": "/tools/git-reflog.html"
+        },
+        {
           "text": "Gitのステージング — 作業ツリー・index・HEAD",
           "link": "/tools/git-staging-index.html"
         },

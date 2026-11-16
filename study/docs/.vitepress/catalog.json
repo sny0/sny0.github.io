@@ -125,7 +125,7 @@
       "id": "tools",
       "title": "開発ツールと調査機能",
       "description": "どの機能で何を観察し、どう確かめるかを調べる。",
-      "count": 23,
+      "count": 24,
       "status": "辞典本文あり"
     }
   ],
@@ -4340,7 +4340,35 @@
       "verification": "Git公式のrebase・commit-treeとPro Gitに照合し、Windowsの独立リポジトリで再適用後の親・tree・旧履歴との関係を確認（2026-11-17）",
       "links": [
         "/tools/git-three-way-merge.html",
-        "/tools/git-objects.html"
+        "/tools/git-objects.html",
+        "/tools/git-reflog.html"
+      ],
+      "difficulty": "intermediate",
+      "importance": "useful"
+    },
+    {
+      "title": "Gitのreflog — 履歴から見えなくなったコミットはどこにあるのか",
+      "url": "/tools/git-reflog.html",
+      "file": "tools/git-reflog.md",
+      "domain": "tools",
+      "section": "reference",
+      "format": "article",
+      "status": "published",
+      "summary": "rebase後の旧コミットを例に、親をたどる履歴とローカルの参照更新記録の違い、reflogの期限とオブジェクトの回収の関係を読む。",
+      "source": "新規執筆",
+      "aliases": [
+        "Git reflog",
+        "リフログ",
+        "参照ログ",
+        "到達可能性",
+        "旧コミット"
+      ],
+      "verification": "Git公式資料と照合し、Windowsの独立リポジトリでrebase後の親・旧ファイルとcloneの参照ログを確認（2026-11-17）",
+      "links": [
+        "/tools/git-rebase.html",
+        "/tools/git-objects.html",
+        "/tools/git-staging-index.html",
+        "/tools/git-three-way-merge.html"
       ],
       "difficulty": "intermediate",
       "importance": "useful"
@@ -4465,6 +4493,7 @@
         "/tools/git-staging-index.html",
         "/tools/git-three-way-merge.html",
         "/tools/git-rebase.html",
+        "/tools/git-reflog.html",
         "/tools/git-basics.html",
         "/glossary/programming.html"
       ],
