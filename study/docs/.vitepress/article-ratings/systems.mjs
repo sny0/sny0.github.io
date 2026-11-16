@@ -147,6 +147,7 @@ export default {
   '/tools/git-objects.html': ['intermediate', 'useful'],
   '/tools/git-staging-index.html': ['intermediate', 'useful'],
   '/tools/git-three-way-merge.html': ['intermediate', 'useful'],
+  '/tools/git-rebase.html': ['intermediate', 'useful'],
   '/tools/profiling/cpu-profiling.html': ['intermediate', 'core'],
   '/tools/reading-error-messages.html': ['intro', 'core'],
   '/tools/reading-official-documentation.html': ['intro', 'core'],

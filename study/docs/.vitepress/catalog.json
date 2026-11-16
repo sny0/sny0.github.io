@@ -125,7 +125,7 @@
       "id": "tools",
       "title": "開発ツールと調査機能",
       "description": "どの機能で何を観察し、どう確かめるかを調べる。",
-      "count": 22,
+      "count": 23,
       "status": "辞典本文あり"
     }
   ],
@@ -4321,6 +4321,31 @@
       "importance": "specialized"
     },
     {
+      "title": "Gitのrebase — コミットの再適用と履歴の書き換え",
+      "url": "/tools/git-rebase.html",
+      "file": "tools/git-rebase.md",
+      "domain": "tools",
+      "section": "reference",
+      "format": "article",
+      "status": "published",
+      "summary": "ゲーム設定の同じ分岐をmergeとrebaseで統合し、同じtreeを指すコミットが異なる親とIDを持つ理由と、共有済み履歴への影響を読む。",
+      "source": "新規執筆",
+      "aliases": [
+        "Git rebase",
+        "リベース",
+        "コミットの再適用",
+        "履歴の書き換え",
+        "rebaseとmerge"
+      ],
+      "verification": "Git公式のrebase・commit-treeとPro Gitに照合し、Windowsの独立リポジトリで再適用後の親・tree・旧履歴との関係を確認（2026-11-17）",
+      "links": [
+        "/tools/git-three-way-merge.html",
+        "/tools/git-objects.html"
+      ],
+      "difficulty": "intermediate",
+      "importance": "useful"
+    },
+    {
       "title": "Gitのステージング — 作業ツリー・index・HEAD",
       "url": "/tools/git-staging-index.html",
       "file": "tools/git-staging-index.md",
@@ -4372,6 +4397,7 @@
       "links": [
         "/tools/git-staging-index.html",
         "/tools/git-objects.html",
+        "/tools/git-rebase.html",
         "/tools/automated-testing.html"
       ],
       "difficulty": "intermediate",
@@ -4438,6 +4464,7 @@
       "links": [
         "/tools/git-staging-index.html",
         "/tools/git-three-way-merge.html",
+        "/tools/git-rebase.html",
         "/tools/git-basics.html",
         "/glossary/programming.html"
       ],

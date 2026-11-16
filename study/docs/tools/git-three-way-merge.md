@@ -94,6 +94,7 @@ flowchart TD
 ## 関連項目
 
 - [Gitの保存モデル](/tools/git-objects.html) — commit、tree、親、ブランチ参照の役割を整理する。
+- 統合後のtreeが同じでも、親のつながりがどう変わるかを比べる。[Gitのrebase — コミットの再適用と履歴の書き換え](/tools/git-rebase.html)
 - [Gitのステージング](/tools/git-staging-index.html) — 競合のない場合にindexが次のtreeをどう作るかを読む。
 - [自動テストの基礎](/tools/automated-testing.html) — 統合した設定やコードが満たす条件を検証する。
 
