@@ -125,7 +125,7 @@
       "id": "tools",
       "title": "開発ツールと調査機能",
       "description": "どの機能で何を観察し、どう確かめるかを調べる。",
-      "count": 21,
+      "count": 22,
       "status": "辞典本文あり"
     }
   ],
@@ -4342,7 +4342,37 @@
       "verification": "Git公式データモデルとコマンド資料に照合し、Windowsの独立したGitリポジトリでindex・差分・次のtreeを確認（2026-11-17）",
       "links": [
         "/tools/git-basics.html",
-        "/tools/git-objects.html"
+        "/tools/git-objects.html",
+        "/tools/git-three-way-merge.html"
+      ],
+      "difficulty": "intermediate",
+      "importance": "useful"
+    },
+    {
+      "title": "Gitのマージ — 共通祖先と3-way merge",
+      "url": "/tools/git-three-way-merge.html",
+      "file": "tools/git-three-way-merge.md",
+      "domain": "tools",
+      "section": "reference",
+      "format": "article",
+      "status": "published",
+      "summary": "二つのブランチの先端と共通の基準から変更を統合する仕組みを、ゲーム設定の例で追い、fast-forwardと自動マージ後の不整合を区別する。",
+      "source": "新規執筆",
+      "aliases": [
+        "Git merge",
+        "3-way merge",
+        "三方向マージ",
+        "merge base",
+        "マージベース",
+        "共通祖先",
+        "fast-forward",
+        "意味的な競合"
+      ],
+      "verification": "Git公式のmerge-base・merge・ls-files仕様とPro Gitに照合し、Windowsの独立リポジトリでort・fast-forward・競合を確認（2026-11-17）",
+      "links": [
+        "/tools/git-staging-index.html",
+        "/tools/git-objects.html",
+        "/tools/automated-testing.html"
       ],
       "difficulty": "intermediate",
       "importance": "useful"
@@ -4407,6 +4437,7 @@
       "verification": "Git公式マニュアルとPro Gitに照合し、WindowsのGit 2.39.2で独立した2コミットのオブジェクトとpack化を実行確認（2026-11-17）",
       "links": [
         "/tools/git-staging-index.html",
+        "/tools/git-three-way-merge.html",
         "/tools/git-basics.html",
         "/glossary/programming.html"
       ],

@@ -1777,6 +1777,10 @@
           "link": "/tools/git-staging-index.html"
         },
         {
+          "text": "Gitのマージ — 共通祖先と3-way merge",
+          "link": "/tools/git-three-way-merge.html"
+        },
+        {
           "text": "Gitの基本 — 差分を見てコミットする",
           "link": "/tools/git-basics.html"
         },
