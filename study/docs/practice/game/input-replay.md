@@ -109,6 +109,7 @@ Windows x64で、Visual Studio 2022のMSVC `19.35.32217.1`（C++17、`/O2`）と
 ## 関連項目
 
 - [ゲームの決定性 — 同じ入力から同じ結果を得る条件](/game/simulation-determinism.html)。乱数やタイマーがあるゲームで、再生や巻き戻しに必要な状態を考えます。
+- [ゲームの乱数設計 — 戦闘・ドロップ・演出の乱数を分ける](/game/random-streams.html)。乱数を使うモデルで、最初からの再生と途中からの再開に必要な情報を比べます。
 - [Game Loop と Update Method](/game/patterns/game-loop-and-update.html)
 - [小さなシューティングの設計](/game/shooter-design.html)
 - [ゲームのネットワーク同期](/game/network-sync.html)

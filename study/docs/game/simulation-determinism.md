@@ -98,6 +98,7 @@ C++例は2026年11月16日に、同じ Windows x64 環境の MSVC 19.35.32217.1 
 
 ## 関連項目
 
+- [ゲームの乱数設計 — 戦闘・ドロップ・演出の乱数を分ける](/game/random-streams.html) — 用途ごとの生成器を設計し、リプレイに残す状態を選ぶ。
 - [ゲームループとUpdate — 入力・更新・描画を分ける](/game/patterns/game-loop-and-update.html) — 固定tickと描画の分離を確認する。
 - [入力の記録とリプレイ](/practice/game/input-replay.html) — 記録した入力を別の描画間隔で再生し、最初にずれたtickを特定する。
 - [浮動小数点の決定性](/languages/cpp/floating-point-determinism.html) — FMAやコンパイラ設定による数値の差を追う。

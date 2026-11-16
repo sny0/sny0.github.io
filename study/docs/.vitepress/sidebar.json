@@ -1669,6 +1669,10 @@
           "link": "/game/basics/game-states-and-pause.html"
         },
         {
+          "text": "ゲームの乱数設計 — 戦闘・ドロップ・演出の乱数を分ける",
+          "link": "/game/random-streams.html"
+        },
+        {
           "text": "ゲームループと時間 — 入力・更新・描画を繰り返す",
           "link": "/game/basics/game-loop-and-time.html"
         },

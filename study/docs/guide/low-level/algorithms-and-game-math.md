@@ -71,7 +71,7 @@ study:
    - ソート: 基数ソート(描画キーソート)、std::sortの中身(introsort)
    - 探索: BFS/DFS、**A***(ヒューリスティック、ゲームAIの中核)
    - 補間: lerp、smoothstep、イージング関数(ゲームフィールの基礎)
-   - 乱数: PCG/xorshift、シード再現性(リプレイ・デバッグ)
+   - 乱数: PCG/xorshift、シード再現性(リプレイ・デバッグ)。[ゲームの乱数設計](/game/random-streams.html)
 
 ### B. ゲーム数学
 

@@ -107,6 +107,7 @@ export default {
   '/game/ecs.html': ['advanced', 'useful'],
   '/game/network-sync.html': ['advanced', 'core'],
   '/game/simulation-determinism.html': ['intermediate', 'core'],
+  '/game/random-streams.html': ['intermediate', 'useful'],
 
   '/game/patterns/behavior-tree-and-blackboard.html': ['intermediate', 'useful'],
   '/game/patterns/command-buffer-and-input.html': ['advanced', 'useful'],
