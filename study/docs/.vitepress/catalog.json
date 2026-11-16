@@ -111,7 +111,7 @@
       "id": "game",
       "title": "ゲームとエンジン",
       "description": "入力、時間、ECSと各サブシステムの関係を調べる。",
-      "count": 42,
+      "count": 43,
       "status": "辞典本文あり"
     },
     {
@@ -2757,6 +2757,7 @@
         "/game/shooter-design.html",
         "/languages/cpp/floating-point-determinism.html",
         "/game/network-sync.html",
+        "/game/simulation-determinism.html",
         "/game/patterns/game-loop-and-update.html"
       ]
     },
@@ -4234,6 +4235,7 @@
         "/game/patterns/optimization-patterns.html",
         "/design/patterns/iterator.html",
         "/game/patterns/component-and-ecs.html",
+        "/game/simulation-determinism.html",
         "/game/patterns/command-buffer-and-input.html",
         "/math/physics-integration-and-collision.html",
         "/game/patterns/"
@@ -10122,12 +10124,41 @@
         "/game/basics/game-loop-and-time.html",
         "/network/udp-datagrams.html",
         "/network/latency-throughput-and-queues.html",
+        "/game/simulation-determinism.html",
         "/practice/game/input-replay.html",
         "/languages/cpp/floating-point-determinism.html",
         "/game/basics/collisions-and-physics.html",
         "/game/ecs.html"
       ],
       "difficulty": "advanced",
+      "importance": "core"
+    },
+    {
+      "title": "ゲームの決定性 — 同じ入力から同じ結果を得る条件",
+      "url": "/game/simulation-determinism.html",
+      "file": "game/simulation-determinism.md",
+      "domain": "game",
+      "section": "reference",
+      "format": "article",
+      "status": "published",
+      "summary": "固定tick、開始状態、乱数の状態、処理順、実行環境のどこをそろえるとゲームの結果が一致するかを、リプレイやネットワーク同期の用途ごとに整理する。",
+      "source": "新規執筆",
+      "aliases": [
+        "ゲームの決定性",
+        "決定論的シミュレーション",
+        "deterministic simulation",
+        "seed",
+        "乱数の状態",
+        "デシンク"
+      ],
+      "verification": "WG21、Box2D、GGPO、Microsoftの資料に照合し、Windows x64のMSVC 19.35とGCC 16.2で乱数と処理順のC++例を実行確認（2026-11-16）",
+      "links": [
+        "/game/patterns/game-loop-and-update.html",
+        "/practice/game/input-replay.html",
+        "/languages/cpp/floating-point-determinism.html",
+        "/game/network-sync.html"
+      ],
+      "difficulty": "intermediate",
       "importance": "core"
     },
     {
@@ -17648,6 +17679,7 @@
       "verification": "IEEE 754-2019、Visual Studio 2022・2026のMSVC、Clang 22.1、GCC 16系、C++20に照合（2026-11-13）",
       "links": [
         "/game/network-sync.html",
+        "/game/simulation-determinism.html",
         "/data/floating-point-spacing.html",
         "/math/floating-point-comparison.html"
       ],

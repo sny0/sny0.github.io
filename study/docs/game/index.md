@@ -47,6 +47,7 @@
 - [ゲームのアセットロード設計 — 状態・世代・所有権](/game/asset-loading.html)
 - [ゲームのアセットをパックファイルにまとめる](/game/asset-pack-files.html)
 - [ゲームのネットワーク同期 — 状態・入力・予測とロールバック](/game/network-sync.html)
+- [ゲームの決定性 — 同じ入力から同じ結果を得る条件](/game/simulation-determinism.html)
 - [ゲームの状態とポーズ — タイトル・プレイ・結果を切り替える](/game/basics/game-states-and-pause.html)
 - [ゲームループと時間 — 入力・更新・描画を繰り返す](/game/basics/game-loop-and-time.html)
 - [ゲーム内イベントと通知 — HPの変化をUIへ伝える](/game/basics/game-events-and-notifications.html)

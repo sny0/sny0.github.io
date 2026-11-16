@@ -108,6 +108,7 @@ int main()
 
 ## 関連項目
 
+- [ゲームの決定性 — 同じ入力から同じ結果を得る条件](/game/simulation-determinism.html)。数値計算のほかに、保存する状態や処理順が再現にどう関わるかを説明します。
 - [浮動小数点の間隔と丸め](/data/floating-point-spacing.html)
 - [浮動小数点の比較](/math/floating-point-comparison.html)
 - [ゲームのネットワーク同期](/game/network-sync.html)

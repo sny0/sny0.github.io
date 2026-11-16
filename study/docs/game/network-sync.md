@@ -139,6 +139,7 @@ GGPO型の**ロールバック**では、相手の入力がまだ届いていな
 
 ## 関連項目
 
+- [ゲームの決定性 — 同じ入力から同じ結果を得る条件](/game/simulation-determinism.html)。ロックステップやロールバックで、どの状態をどの範囲で一致させるかを考えます。
 - [入力を記録して最初にずれたtickを探すC++実践](/practice/game/input-replay.html)。同じ開始状態から入力列を再生し、どのtickで状態が分かれたかを調べます。
 - [浮動小数点の決定性](/languages/cpp/floating-point-determinism.html)
 - [UDPデータグラムの境界と送受信](/network/udp-datagrams.html)

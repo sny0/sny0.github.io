@@ -128,6 +128,7 @@ public:
 
 ## 関連項目
 
+- [ゲームの決定性 — 同じ入力から同じ結果を得る条件](/game/simulation-determinism.html)。固定ステップに加えて、初期状態や処理順など再現に必要な条件を整理する。
 - [Double Buffer / Data Locality(最適化系)](/game/patterns/optimization-patterns.html)
 - [ECS](/game/patterns/component-and-ecs.html) / [Command Buffer](/game/patterns/command-buffer-and-input.html)
 - [Template Method](/design/patterns/template-method.html)
