@@ -130,6 +130,7 @@ score=20
 
 ## 関連項目
 
+- コミットの中身や `HEAD` が指す先を確かめる。[Gitの保存モデル — blob・tree・commitとrefs／HEAD](/tools/git-objects.html)
 - [ターミナル・シェル・コマンドの基本](/tools/terminal-shell-and-commands.html)
 - [ファイルとパス](/os/files-and-paths.html)
 - [公式ドキュメントの読み方](/tools/reading-official-documentation.html)

@@ -349,7 +349,10 @@ export default {
       definition: 'バージョン管理で、変更を別の流れとして進めるための分岐。Gitのブランチ名は履歴の先端のコミットを指す。',
       context: 'プログラムやCPUでbranchと言うと、実行する経路を切り替える分岐を指す。',
       example: '敵の行動を修正する作業用ブランチを作る。',
-      articles: [{ label: 'Gitの基本', url: '/tools/git-basics.html' }],
+      articles: [
+        { label: 'Gitの基本', url: '/tools/git-basics.html' },
+        { label: 'Gitの保存モデル — blob・tree・commitとrefs／HEAD', url: '/tools/git-objects.html' },
+      ],
       related: ['programming:commit', 'programming:merge'], refs: ['git'],
     },
     {

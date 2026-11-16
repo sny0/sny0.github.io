@@ -532,7 +532,7 @@ Gitで、その時点の変更を履歴に記録する操作。また、記録�
 
 **例**　敵の行動を修正する作業用ブランチを作る。
 
-**関連**　[Gitの基本](/tools/git-basics.html) · [コミット](/glossary/programming.html#commit) · [マージ](/glossary/programming.html#merge)
+**関連**　[Gitの基本](/tools/git-basics.html) · [Gitの保存モデル — blob・tree・commitとrefs／HEAD](/tools/git-objects.html) · [コミット](/glossary/programming.html#commit) · [マージ](/glossary/programming.html#merge)
 
 **出典**　[Git — Git Glossary](https://git-scm.com/docs/gitglossary)
 

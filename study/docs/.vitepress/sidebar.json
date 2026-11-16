@@ -1777,6 +1777,10 @@
           "link": "/tools/git-basics.html"
         },
         {
+          "text": "Gitの保存モデル — blob・tree・commitとrefs／HEAD",
+          "link": "/tools/git-objects.html"
+        },
+        {
           "text": "WindowsのファイルI/OをProcmonとWPRで追う",
           "link": "/tools/windows/file-io-tracing.html"
         },

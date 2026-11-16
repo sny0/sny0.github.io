@@ -125,7 +125,7 @@
       "id": "tools",
       "title": "開発ツールと調査機能",
       "description": "どの機能で何を観察し、どう確かめるかを調べる。",
-      "count": 19,
+      "count": 20,
       "status": "辞典本文あり"
     }
   ],
@@ -4346,6 +4346,7 @@
       ],
       "verification": "Git公式マニュアルに照合し、WindowsのPowerShell 7.6とGit for Windows 2.39.2で2つのコミットと差分を実行確認（2026-11-12）",
       "links": [
+        "/tools/git-objects.html",
         "/tools/terminal-shell-and-commands.html",
         "/os/files-and-paths.html",
         "/tools/reading-official-documentation.html",
@@ -4353,6 +4354,35 @@
       ],
       "difficulty": "intro",
       "importance": "core"
+    },
+    {
+      "title": "Gitの保存モデル — blob・tree・commitとrefs／HEAD",
+      "url": "/tools/git-objects.html",
+      "file": "tools/git-objects.md",
+      "domain": "tools",
+      "section": "reference",
+      "format": "article",
+      "status": "published",
+      "summary": "2つのコミットを例に、Gitがファイル内容・名前・履歴・ブランチをどう結び付けるかを追い、差分表示とpack圧縮を区別する。",
+      "source": "新規執筆",
+      "aliases": [
+        "Git objects",
+        "Gitオブジェクト",
+        "blob",
+        "tree",
+        "commit",
+        "refs",
+        "HEAD",
+        "packfile",
+        "Gitの内部構造"
+      ],
+      "verification": "Git公式マニュアルとPro Gitに照合し、WindowsのGit 2.39.2で独立した2コミットのオブジェクトとpack化を実行確認（2026-11-17）",
+      "links": [
+        "/tools/git-basics.html",
+        "/glossary/programming.html"
+      ],
+      "difficulty": "intermediate",
+      "importance": "useful"
     },
     {
       "title": "GLSL",
@@ -12931,6 +12961,7 @@
         "/algorithms/binary-heaps.html",
         "/tools/build/what-is-build.html",
         "/design/patterns/template-method.html",
+        "/tools/git-objects.html",
         "/design/patterns/decorator.html",
         "/guide/cpp-glossary.html",
         "/tools/build/build-configurations.html",

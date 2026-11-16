@@ -23,6 +23,7 @@
 - [CI とビルド自動化 — 同じ変更からテスト結果と成果物を作る](/tools/ci-and-build-automation.html)
 - [CPU プロファイリング — サンプリングと計装でフレームを測る](/tools/profiling/cpu-profiling.html)
 - [Gitの基本 — 差分を見てコミットする](/tools/git-basics.html)
+- [Gitの保存モデル — blob・tree・commitとrefs／HEAD](/tools/git-objects.html)
 - [WindowsのファイルI/OをProcmonとWPRで追う](/tools/windows/file-io-tracing.html)
 - [エラーメッセージの読み方 — ビルド時と実行時を見分ける](/tools/reading-error-messages.html)
 - [クラッシュダンプとPDBで停止位置をたどる](/tools/windows/crash-dumps-and-symbols.html)
