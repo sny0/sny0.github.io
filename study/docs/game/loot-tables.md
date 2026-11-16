@@ -118,6 +118,7 @@ int main() {
 - [ゲームの乱数設計](/game/random-streams.html) — 戦闘と報酬の抽選に、どの乱数列を使うかを決める。
 - [Type ObjectとSandbox](/game/patterns/type-object-and-sandbox.html) — 敵の種類ごとのドロップテーブルをゲームデータとして持つ。
 - [ゲームの決定性](/game/simulation-determinism.html) — 抽選を含むゲームの結果を再現する条件を考える。
+- [シャッフルバッグ — 独立抽選と引き切り方式の違い](/game/shuffle-bag.html) — 引いた候補を袋に戻さないと、出現回数や連続がどう変わるかを比べる。
 
 ## 参考資料
 

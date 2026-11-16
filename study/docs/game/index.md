@@ -53,6 +53,7 @@
 - [ゲームループと時間 — 入力・更新・描画を繰り返す](/game/basics/game-loop-and-time.html)
 - [ゲーム内イベントと通知 — HPの変化をUIへ伝える](/game/basics/game-events-and-notifications.html)
 - [シーン・オブジェクト・コンポーネントの基本](/game/basics/scenes-and-components.html)
+- [シャッフルバッグ — 独立抽選と引き切り方式の違い](/game/shuffle-bag.html)
 - [セーブとシリアライズの基本 — 実行中の状態を保存する](/game/basics/save-data-and-serialization.html)
 - [ドロップテーブルと重み付き抽選 — 確率・期待値・偏りを読む](/game/loot-tables.html)
 - [プレハブと生成・破棄の基本 — 同じ部品から複数の物を作る](/game/basics/prefabs-and-object-lifetimes.html)

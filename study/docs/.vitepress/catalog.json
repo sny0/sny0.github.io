@@ -111,7 +111,7 @@
       "id": "game",
       "title": "ゲームとエンジン",
       "description": "入力、時間、ECSと各サブシステムの関係を調べる。",
-      "count": 45,
+      "count": 46,
       "status": "辞典本文あり"
     },
     {
@@ -10254,7 +10254,8 @@
         "/practice/game/input-replay.html",
         "/game/simulation-determinism.html",
         "/game/loot-tables.html",
-        "/game/network-sync.html"
+        "/game/network-sync.html",
+        "/game/shuffle-bag.html"
       ],
       "difficulty": "intermediate",
       "importance": "useful"
@@ -10917,6 +10918,32 @@
       ],
       "difficulty": "advanced",
       "importance": "core"
+    },
+    {
+      "title": "シャッフルバッグ — 独立抽選と引き切り方式の違い",
+      "url": "/game/shuffle-bag.html",
+      "file": "game/shuffle-bag.md",
+      "domain": "game",
+      "section": "reference",
+      "format": "article",
+      "status": "published",
+      "summary": "4種類の出題カードを使い、独立抽選とシャッフルバッグで、短い区間の出現数や連続、次に出るまでの最大回数がどう変わるかを整理する。",
+      "source": "新規執筆",
+      "aliases": [
+        "シャッフルバッグ",
+        "shuffle bag",
+        "bag randomizer",
+        "引き切り方式",
+        "非復元抽出",
+        "復元抽出"
+      ],
+      "verification": "MITの確率講義、Jstris公式ガイド、Python 3.12公式仕様に照合し、Windows x64のPython 3.12.4で袋2つの576通りを全列挙（2026-11-16）",
+      "links": [
+        "/game/loot-tables.html",
+        "/game/random-streams.html"
+      ],
+      "difficulty": "intermediate",
+      "importance": "useful"
     },
     {
       "title": "シャドウ",
@@ -11855,7 +11882,8 @@
       "links": [
         "/game/random-streams.html",
         "/game/patterns/type-object-and-sandbox.html",
-        "/game/simulation-determinism.html"
+        "/game/simulation-determinism.html",
+        "/game/shuffle-bag.html"
       ],
       "difficulty": "intermediate",
       "importance": "useful"
