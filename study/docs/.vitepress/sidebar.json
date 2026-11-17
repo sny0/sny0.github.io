@@ -1773,6 +1773,10 @@
           "link": "/tools/profiling/cpu-profiling.html"
         },
         {
+          "text": "Git restoreの仕組み — 履歴を動かさず、復元元と復元先を選ぶ",
+          "link": "/tools/git-restore.html"
+        },
+        {
           "text": "Gitのcherry-pick — コミットではなく変更を別の履歴へ取り込む",
           "link": "/tools/git-cherry-pick.html"
         },

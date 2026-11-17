@@ -22,6 +22,7 @@
 - [AIが書いたコードとの付き合い方 — 差分と実行結果から採用を決める](/tools/reviewing-ai-generated-code.html)
 - [CI とビルド自動化 — 同じ変更からテスト結果と成果物を作る](/tools/ci-and-build-automation.html)
 - [CPU プロファイリング — サンプリングと計装でフレームを測る](/tools/profiling/cpu-profiling.html)
+- [Git restoreの仕組み — 履歴を動かさず、復元元と復元先を選ぶ](/tools/git-restore.html)
 - [Gitのcherry-pick — コミットではなく変更を別の履歴へ取り込む](/tools/git-cherry-pick.html)
 - [Gitのrebase — コミットの再適用と履歴の書き換え](/tools/git-rebase.html)
 - [Gitのreflog — 履歴から見えなくなったコミットはどこにあるのか](/tools/git-reflog.html)

@@ -125,7 +125,7 @@
       "id": "tools",
       "title": "開発ツールと調査機能",
       "description": "どの機能で何を観察し、どう確かめるかを調べる。",
-      "count": 28,
+      "count": 29,
       "status": "辞典本文あり"
     }
   ],
@@ -4321,6 +4321,33 @@
       "importance": "specialized"
     },
     {
+      "title": "Git restoreの仕組み — 履歴を動かさず、復元元と復元先を選ぶ",
+      "url": "/tools/git-restore.html",
+      "file": "tools/git-restore.md",
+      "domain": "tools",
+      "section": "reference",
+      "format": "article",
+      "status": "published",
+      "summary": "git restoreの復元元と復元先の既定値を読み、HEADやブランチを動かさずに指定パスのindex・作業ツリーを更新する仕組みを確認する。",
+      "source": "新規執筆",
+      "aliases": [
+        "Git restore",
+        "復元元",
+        "復元先",
+        "git restore --staged",
+        "ステージ解除"
+      ],
+      "verification": "Git公式資料と照合し、Windowsの独立リポジトリで既定値と指定元の組み合わせを確認（2026-11-17）",
+      "links": [
+        "/tools/git-staging-index.html",
+        "/tools/git-reflog.html",
+        "/tools/git-reset.html",
+        "/tools/git-revert.html"
+      ],
+      "difficulty": "intermediate",
+      "importance": "core"
+    },
+    {
       "title": "Gitのcherry-pick — コミットではなく変更を別の履歴へ取り込む",
       "url": "/tools/git-cherry-pick.html",
       "file": "tools/git-cherry-pick.md",
@@ -4427,7 +4454,8 @@
         "/tools/git-objects.html",
         "/tools/git-staging-index.html",
         "/tools/git-revert.html",
-        "/tools/git-reflog.html"
+        "/tools/git-reflog.html",
+        "/tools/git-restore.html"
       ],
       "difficulty": "intermediate",
       "importance": "core"
@@ -4456,6 +4484,7 @@
         "/tools/git-remote-tracking.html",
         "/tools/git-three-way-merge.html",
         "/tools/git-basics.html",
+        "/tools/git-restore.html",
         "/tools/git-reset.html"
       ],
       "difficulty": "intermediate",
@@ -4484,6 +4513,7 @@
       "links": [
         "/tools/git-basics.html",
         "/tools/git-objects.html",
+        "/tools/git-restore.html",
         "/tools/git-reset.html",
         "/tools/git-three-way-merge.html"
       ],

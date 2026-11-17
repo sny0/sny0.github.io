@@ -98,6 +98,7 @@ revertです。変更を打ち消す新しいコミットを作るので、元�
 ## 関連項目
 
 - [Gitのステージング](/tools/git-staging-index.html) — HEAD、index、作業ツリーの比較対象を確認する。
+- パスを指定して、どの版からindexや作業ツリーへ内容を復元するかを確かめる。[Git restoreの仕組み — 履歴を動かさず、復元元と復元先を選ぶ](/tools/git-restore.html)
 - [Gitの保存モデル](/tools/git-objects.html) — 参照とスナップショットの関係を読む。
 - [Gitのrevert](/tools/git-revert.html) — 親を残したまま、変更を打ち消す新しいコミットを作る仕組みを読む。
 - [Gitのreflog](/tools/git-reflog.html) — 先端が以前指していたコミットの探し方と限界を確認する。
