@@ -1781,6 +1781,10 @@
           "link": "/tools/git-reflog.html"
         },
         {
+          "text": "Gitのreset — HEAD・index・作業ツリーはどう変わるのか",
+          "link": "/tools/git-reset.html"
+        },
+        {
           "text": "Gitのrevert — 履歴を消さずに変更を打ち消す仕組み",
           "link": "/tools/git-revert.html"
         },

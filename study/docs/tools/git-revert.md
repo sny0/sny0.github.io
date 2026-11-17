@@ -103,6 +103,7 @@ Dから親をたどるとCの次がBです。Bの変更を打ち消した操作�
 
 - [Gitの基本](/tools/git-basics.html) — 差分とコミットの関係を読む。
 - [Gitの保存モデル](/tools/git-objects.html) — スナップショットと親IDがコミットに入る仕組みを確認する。
+- 変更を打ち消すコミットを積む場合と、ブランチの先端を動かす場合を比べる。[Gitのreset — HEAD・index・作業ツリーはどう変わるのか](/tools/git-reset.html)
 - [Gitのマージ](/tools/git-three-way-merge.html) — テキストの競合と意味上の不整合を比べる。
 - [Gitのrebase](/tools/git-rebase.html) — 親を変えてコミットを作り直したときの履歴を読む。
 

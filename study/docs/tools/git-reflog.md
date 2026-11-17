@@ -99,6 +99,7 @@ reflogの期限切れ処理やGCは実行していません。実際の回収時
 ## 関連項目
 
 - [Gitのrebase](/tools/git-rebase.html) — 新しい親の上で変更を再適用し、旧コミットと新コミットが別のIDを持つ理由を読む。
+- resetで先端が動くとき、コミット済みの内容と未コミットの編集がどう扱われるかを確認する。[Gitのreset — HEAD・index・作業ツリーはどう変わるのか](/tools/git-reset.html)
 - [Gitの保存モデル](/tools/git-objects.html) — 参照、親コミット、tree、blobの関係を確認する。
 - [Gitのマージ](/tools/git-three-way-merge.html) — 二つの先端を親に持つ場合と比較する。
 

@@ -125,7 +125,7 @@
       "id": "tools",
       "title": "開発ツールと調査機能",
       "description": "どの機能で何を観察し、どう確かめるかを調べる。",
-      "count": 26,
+      "count": 27,
       "status": "辞典本文あり"
     }
   ],
@@ -4370,10 +4370,39 @@
         "/tools/git-rebase.html",
         "/tools/git-objects.html",
         "/tools/git-staging-index.html",
+        "/tools/git-reset.html",
         "/tools/git-three-way-merge.html"
       ],
       "difficulty": "intermediate",
       "importance": "useful"
+    },
+    {
+      "title": "Gitのreset — HEAD・index・作業ツリーはどう変わるのか",
+      "url": "/tools/git-reset.html",
+      "file": "tools/git-reset.md",
+      "domain": "tools",
+      "section": "reference",
+      "format": "article",
+      "status": "published",
+      "summary": "コミットを指定するresetを、先端、index、作業ファイルの三つに分けて読み、soft・mixed・hardとrevertの違いを比べる。",
+      "source": "新規執筆",
+      "aliases": [
+        "Git reset",
+        "リセット",
+        "soft reset",
+        "mixed reset",
+        "hard reset",
+        "HEAD index 作業ツリー"
+      ],
+      "verification": "Git公式資料と照合し、Windowsの独立リポジトリでsoft・mixed・hard実行後の参照とファイル内容を確認（2026-11-17）",
+      "links": [
+        "/tools/git-objects.html",
+        "/tools/git-staging-index.html",
+        "/tools/git-revert.html",
+        "/tools/git-reflog.html"
+      ],
+      "difficulty": "intermediate",
+      "importance": "core"
     },
     {
       "title": "Gitのrevert — 履歴を消さずに変更を打ち消す仕組み",
@@ -4398,7 +4427,8 @@
         "/tools/git-rebase.html",
         "/tools/git-remote-tracking.html",
         "/tools/git-three-way-merge.html",
-        "/tools/git-basics.html"
+        "/tools/git-basics.html",
+        "/tools/git-reset.html"
       ],
       "difficulty": "intermediate",
       "importance": "core"
@@ -4426,6 +4456,7 @@
       "links": [
         "/tools/git-basics.html",
         "/tools/git-objects.html",
+        "/tools/git-reset.html",
         "/tools/git-three-way-merge.html"
       ],
       "difficulty": "intermediate",
