@@ -106,6 +106,7 @@ new
 - 次のコミットのtreeを作るために、indexが名前やblobのIDをどう保持するかを確かめる。[Gitのステージング — 作業ツリー・index・HEAD](/tools/git-staging-index.html)
 - マージコミットが指す二つの親と、統合の基準になる共通祖先を図でたどる。[Gitのマージ — 共通祖先と3-way merge](/tools/git-three-way-merge.html)
 - 別の親の上に変更を適用し直すと、コミットIDがどう変わるかを確かめる。[Gitのrebase — コミットの再適用と履歴の書き換え](/tools/git-rebase.html)
+- 同じ修正を別の親の上に記録し、元のコミットと新しいコミットのIDを比べる。[Gitのcherry-pick — コミットではなく変更を別の履歴へ取り込む](/tools/git-cherry-pick.html)
 - 変更を打ち消したあとのtreeと、元のコミットを含む親のつながりを比べる。[Gitのrevert — 履歴を消さずに変更を打ち消す仕組み](/tools/git-revert.html)
 - ブランチが以前どのコミットを指していたか、ローカルの参照の移動記録からたどる。[Gitのreflog — 履歴から見えなくなったコミットはどこにあるのか](/tools/git-reflog.html)
 - `refs/heads/main` と `refs/remotes/origin/main` が、ローカルにあるどの情報を表すかを確かめる。[Gitのリモート追跡ブランチ — origin/mainはサーバーそのものではない](/tools/git-remote-tracking.html)

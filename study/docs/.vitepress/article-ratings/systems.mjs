@@ -152,6 +152,7 @@ export default {
   '/tools/git-remote-tracking.html': ['intermediate', 'core'],
   '/tools/git-revert.html': ['intermediate', 'core'],
   '/tools/git-reset.html': ['intermediate', 'core'],
+  '/tools/git-cherry-pick.html': ['intermediate', 'core'],
   '/tools/profiling/cpu-profiling.html': ['intermediate', 'core'],
   '/tools/reading-error-messages.html': ['intro', 'core'],
   '/tools/reading-official-documentation.html': ['intro', 'core'],

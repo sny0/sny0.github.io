@@ -125,7 +125,7 @@
       "id": "tools",
       "title": "開発ツールと調査機能",
       "description": "どの機能で何を観察し、どう確かめるかを調べる。",
-      "count": 27,
+      "count": 28,
       "status": "辞典本文あり"
     }
   ],
@@ -4321,6 +4321,33 @@
       "importance": "specialized"
     },
     {
+      "title": "Gitのcherry-pick — コミットではなく変更を別の履歴へ取り込む",
+      "url": "/tools/git-cherry-pick.html",
+      "file": "tools/git-cherry-pick.md",
+      "domain": "tools",
+      "section": "reference",
+      "format": "article",
+      "status": "published",
+      "summary": "選んだコミットが親に対して導入した変更を別の先端に適用し、新しい親・ID・ファイル内容を比較する。競合と仕様上の不整合もゲーム設定の例で区別する。",
+      "source": "新規執筆",
+      "aliases": [
+        "Git cherry-pick",
+        "cherry pick",
+        "チェリーピック",
+        "修正の取り込み",
+        "バックポート"
+      ],
+      "verification": "Git公式資料と照合し、Windowsの独立リポジトリで親・ID・ファイル内容・競合を確認（2026-11-17）",
+      "links": [
+        "/tools/git-objects.html",
+        "/tools/git-three-way-merge.html",
+        "/tools/git-rebase.html",
+        "/tools/git-revert.html"
+      ],
+      "difficulty": "intermediate",
+      "importance": "core"
+    },
+    {
       "title": "Gitのrebase — コミットの再適用と履歴の書き換え",
       "url": "/tools/git-rebase.html",
       "file": "tools/git-rebase.md",
@@ -4343,6 +4370,7 @@
         "/tools/git-objects.html",
         "/tools/git-reflog.html",
         "/tools/git-revert.html",
+        "/tools/git-cherry-pick.html",
         "/tools/git-remote-tracking.html"
       ],
       "difficulty": "intermediate",
@@ -4487,6 +4515,7 @@
         "/tools/git-staging-index.html",
         "/tools/git-objects.html",
         "/tools/git-rebase.html",
+        "/tools/git-cherry-pick.html",
         "/tools/automated-testing.html"
       ],
       "difficulty": "intermediate",
@@ -4587,6 +4616,7 @@
         "/tools/git-staging-index.html",
         "/tools/git-three-way-merge.html",
         "/tools/git-rebase.html",
+        "/tools/git-cherry-pick.html",
         "/tools/git-revert.html",
         "/tools/git-reflog.html",
         "/tools/git-remote-tracking.html",

@@ -1773,6 +1773,10 @@
           "link": "/tools/profiling/cpu-profiling.html"
         },
         {
+          "text": "Gitのcherry-pick — コミットではなく変更を別の履歴へ取り込む",
+          "link": "/tools/git-cherry-pick.html"
+        },
+        {
           "text": "Gitのrebase — コミットの再適用と履歴の書き換え",
           "link": "/tools/git-rebase.html"
         },
