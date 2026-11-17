@@ -24,6 +24,7 @@
 - [CPU プロファイリング — サンプリングと計装でフレームを測る](/tools/profiling/cpu-profiling.html)
 - [Gitのrebase — コミットの再適用と履歴の書き換え](/tools/git-rebase.html)
 - [Gitのreflog — 履歴から見えなくなったコミットはどこにあるのか](/tools/git-reflog.html)
+- [Gitのrevert — 履歴を消さずに変更を打ち消す仕組み](/tools/git-revert.html)
 - [Gitのステージング — 作業ツリー・index・HEAD](/tools/git-staging-index.html)
 - [Gitのマージ — 共通祖先と3-way merge](/tools/git-three-way-merge.html)
 - [Gitのリモート追跡ブランチ — origin/mainはサーバーそのものではない](/tools/git-remote-tracking.html)

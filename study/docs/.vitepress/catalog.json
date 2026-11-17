@@ -125,7 +125,7 @@
       "id": "tools",
       "title": "開発ツールと調査機能",
       "description": "どの機能で何を観察し、どう確かめるかを調べる。",
-      "count": 25,
+      "count": 26,
       "status": "辞典本文あり"
     }
   ],
@@ -4342,6 +4342,7 @@
         "/tools/git-three-way-merge.html",
         "/tools/git-objects.html",
         "/tools/git-reflog.html",
+        "/tools/git-revert.html",
         "/tools/git-remote-tracking.html"
       ],
       "difficulty": "intermediate",
@@ -4373,6 +4374,34 @@
       ],
       "difficulty": "intermediate",
       "importance": "useful"
+    },
+    {
+      "title": "Gitのrevert — 履歴を消さずに変更を打ち消す仕組み",
+      "url": "/tools/git-revert.html",
+      "file": "tools/git-revert.md",
+      "domain": "tools",
+      "section": "reference",
+      "format": "article",
+      "status": "published",
+      "summary": "元のコミットが親の経路に残る理由を読み、後続変更の保持、テキスト競合、ゲームの仕様上の不整合を比べる。",
+      "source": "新規執筆",
+      "aliases": [
+        "Git revert",
+        "リバート",
+        "取り消しコミット",
+        "逆変更",
+        "共有履歴"
+      ],
+      "verification": "Git公式資料と照合し、Windowsの独立リポジトリで通常コミットのrevert、競合、仕様上の不整合を確認（2026-11-17）",
+      "links": [
+        "/tools/git-objects.html",
+        "/tools/git-rebase.html",
+        "/tools/git-remote-tracking.html",
+        "/tools/git-three-way-merge.html",
+        "/tools/git-basics.html"
+      ],
+      "difficulty": "intermediate",
+      "importance": "core"
     },
     {
       "title": "Gitのステージング — 作業ツリー・index・HEAD",
@@ -4491,6 +4520,7 @@
       "links": [
         "/tools/git-staging-index.html",
         "/tools/git-objects.html",
+        "/tools/git-revert.html",
         "/tools/git-remote-tracking.html",
         "/tools/terminal-shell-and-commands.html",
         "/os/files-and-paths.html",
@@ -4526,6 +4556,7 @@
         "/tools/git-staging-index.html",
         "/tools/git-three-way-merge.html",
         "/tools/git-rebase.html",
+        "/tools/git-revert.html",
         "/tools/git-reflog.html",
         "/tools/git-remote-tracking.html",
         "/tools/git-basics.html",

@@ -132,6 +132,7 @@ score=20
 
 - `git add` した内容をindexがどう保持し、次のコミットへつなぐかを確かめる。[Gitのステージング — 作業ツリー・index・HEAD](/tools/git-staging-index.html)
 - コミットの中身や `HEAD` が指す先を確かめる。[Gitの保存モデル — blob・tree・commitとrefs／HEAD](/tools/git-objects.html)
+- すでにコミットした変更を、打ち消す差分として記録する仕組みを読む。[Gitのrevert — 履歴を消さずに変更を打ち消す仕組み](/tools/git-revert.html)
 - `git status` がブランチの進み・遅れを、どの履歴と比べて表示するかを読む。[Gitのリモート追跡ブランチ — origin/mainはサーバーそのものではない](/tools/git-remote-tracking.html)
 - [ターミナル・シェル・コマンドの基本](/tools/terminal-shell-and-commands.html)
 - [ファイルとパス](/os/files-and-paths.html)

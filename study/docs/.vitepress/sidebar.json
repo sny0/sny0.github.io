@@ -1781,6 +1781,10 @@
           "link": "/tools/git-reflog.html"
         },
         {
+          "text": "Gitのrevert — 履歴を消さずに変更を打ち消す仕組み",
+          "link": "/tools/git-revert.html"
+        },
+        {
           "text": "Gitのステージング — 作業ツリー・index・HEAD",
           "link": "/tools/git-staging-index.html"
         },

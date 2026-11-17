@@ -150,6 +150,7 @@ export default {
   '/tools/git-rebase.html': ['intermediate', 'useful'],
   '/tools/git-reflog.html': ['intermediate', 'useful'],
   '/tools/git-remote-tracking.html': ['intermediate', 'core'],
+  '/tools/git-revert.html': ['intermediate', 'core'],
   '/tools/profiling/cpu-profiling.html': ['intermediate', 'core'],
   '/tools/reading-error-messages.html': ['intro', 'core'],
   '/tools/reading-official-documentation.html': ['intro', 'core'],

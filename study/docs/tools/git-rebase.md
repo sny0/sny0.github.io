@@ -83,6 +83,7 @@ Cは引き続き元のT2を親に持ちます。新しいT2′の上で作業を
 ## 関連項目
 
 - rebase前の先端を参照の移動記録からたどり、いつまで探せるかを確認する。[Gitのreflog — 履歴から見えなくなったコミットはどこにあるのか](/tools/git-reflog.html)
+- 共有済みの変更を打ち消すコミットが、既存の履歴にどうつながるかを読む。[Gitのrevert — 履歴を消さずに変更を打ち消す仕組み](/tools/git-revert.html)
 - [Gitの保存モデル](/tools/git-objects.html) — 親IDとtreeがコミットに入る仕組みを読む。
 - [Gitのマージ](/tools/git-three-way-merge.html) — 共通祖先と二つの先端を使って結果を作る方法を確認する。
 - rebaseの基準に `origin/main` を選ぶとき、その参照がいつ更新されるかを確かめる。[Gitのリモート追跡ブランチ — origin/mainはサーバーそのものではない](/tools/git-remote-tracking.html)
