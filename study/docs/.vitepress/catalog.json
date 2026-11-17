@@ -125,7 +125,7 @@
       "id": "tools",
       "title": "開発ツールと調査機能",
       "description": "どの機能で何を観察し、どう確かめるかを調べる。",
-      "count": 24,
+      "count": 25,
       "status": "辞典本文あり"
     }
   ],
@@ -4341,7 +4341,8 @@
       "links": [
         "/tools/git-three-way-merge.html",
         "/tools/git-objects.html",
-        "/tools/git-reflog.html"
+        "/tools/git-reflog.html",
+        "/tools/git-remote-tracking.html"
       ],
       "difficulty": "intermediate",
       "importance": "useful"
@@ -4432,6 +4433,37 @@
       "importance": "useful"
     },
     {
+      "title": "Gitのリモート追跡ブランチ — origin/mainはサーバーそのものではない",
+      "url": "/tools/git-remote-tracking.html",
+      "file": "tools/git-remote-tracking.md",
+      "domain": "tools",
+      "section": "reference",
+      "format": "article",
+      "status": "published",
+      "summary": "手元のmain・origin/main・共有先のmainを区別し、fetchで追跡参照が動くとahead/behindの数字がどう変わるかを読む。",
+      "source": "新規執筆",
+      "aliases": [
+        "Git remote-tracking branch",
+        "remote-tracking ref",
+        "origin/main",
+        "upstream",
+        "リモート追跡参照",
+        "Git fetch",
+        "ahead/behind"
+      ],
+      "verification": "Git公式資料に照合し、Windows上の独立した共有先と2つの作業用リポジトリでfetch前後の状態を確認（2026-11-17）",
+      "links": [
+        "/tools/git-objects.html",
+        "/tools/git-staging-index.html",
+        "/tools/git-three-way-merge.html",
+        "/tools/git-rebase.html",
+        "/tools/git-basics.html",
+        "/tools/git-reflog.html"
+      ],
+      "difficulty": "intermediate",
+      "importance": "core"
+    },
+    {
       "title": "Gitの基本 — 差分を見てコミットする",
       "url": "/tools/git-basics.html",
       "file": "tools/git-basics.md",
@@ -4459,6 +4491,7 @@
       "links": [
         "/tools/git-staging-index.html",
         "/tools/git-objects.html",
+        "/tools/git-remote-tracking.html",
         "/tools/terminal-shell-and-commands.html",
         "/os/files-and-paths.html",
         "/tools/reading-official-documentation.html",
@@ -4494,6 +4527,7 @@
         "/tools/git-three-way-merge.html",
         "/tools/git-rebase.html",
         "/tools/git-reflog.html",
+        "/tools/git-remote-tracking.html",
         "/tools/git-basics.html",
         "/glossary/programming.html"
       ],

@@ -26,6 +26,7 @@
 - [Gitのreflog — 履歴から見えなくなったコミットはどこにあるのか](/tools/git-reflog.html)
 - [Gitのステージング — 作業ツリー・index・HEAD](/tools/git-staging-index.html)
 - [Gitのマージ — 共通祖先と3-way merge](/tools/git-three-way-merge.html)
+- [Gitのリモート追跡ブランチ — origin/mainはサーバーそのものではない](/tools/git-remote-tracking.html)
 - [Gitの基本 — 差分を見てコミットする](/tools/git-basics.html)
 - [Gitの保存モデル — blob・tree・commitとrefs／HEAD](/tools/git-objects.html)
 - [WindowsのファイルI/OをProcmonとWPRで追う](/tools/windows/file-io-tracing.html)

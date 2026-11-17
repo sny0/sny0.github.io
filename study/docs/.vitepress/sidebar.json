@@ -1789,6 +1789,10 @@
           "link": "/tools/git-three-way-merge.html"
         },
         {
+          "text": "Gitのリモート追跡ブランチ — origin/mainはサーバーそのものではない",
+          "link": "/tools/git-remote-tracking.html"
+        },
+        {
           "text": "Gitの基本 — 差分を見てコミットする",
           "link": "/tools/git-basics.html"
         },

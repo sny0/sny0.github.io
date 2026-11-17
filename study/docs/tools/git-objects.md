@@ -107,6 +107,7 @@ new
 - マージコミットが指す二つの親と、統合の基準になる共通祖先を図でたどる。[Gitのマージ — 共通祖先と3-way merge](/tools/git-three-way-merge.html)
 - 別の親の上に変更を適用し直すと、コミットIDがどう変わるかを確かめる。[Gitのrebase — コミットの再適用と履歴の書き換え](/tools/git-rebase.html)
 - ブランチが以前どのコミットを指していたか、ローカルの参照の移動記録からたどる。[Gitのreflog — 履歴から見えなくなったコミットはどこにあるのか](/tools/git-reflog.html)
+- `refs/heads/main` と `refs/remotes/origin/main` が、ローカルにあるどの情報を表すかを確かめる。[Gitのリモート追跡ブランチ — origin/mainはサーバーそのものではない](/tools/git-remote-tracking.html)
 - [Gitの基本](/tools/git-basics.html) — 作業ツリー、ステージング、コミットの操作と差分の見方を確認する。
 - [用語集のブランチ](/glossary/programming.html#branch) — ブランチやマージなど、履歴を扱う用語を引く。
 
