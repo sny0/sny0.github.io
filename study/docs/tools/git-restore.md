@@ -98,6 +98,7 @@ HP30です。既定ではindexから作業ツリーへ写します。
 ## 関連項目
 
 - [Gitのステージング](/tools/git-staging-index.html) — HEAD・index・作業ツリーの内容を比べる。
+- 編集途中の内容を保存し、後から作業ツリーやindexに再適用する仕組みを読む。[Git stashの内部構造 — 作業ツリーとindexの退避・再適用を追う](/tools/git-stash.html)
 - [Gitのreset](/tools/git-reset.html) — コミットを指定した形式とパスを指定した形式を比べる。
 - [Gitのrevert](/tools/git-revert.html) — 履歴に変更を打ち消した記録を残す仕組みを読む。
 - [Gitのreflog](/tools/git-reflog.html) — 参照の移動の記録で探せる範囲を確認する。

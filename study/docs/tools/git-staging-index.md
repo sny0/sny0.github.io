@@ -77,6 +77,7 @@ indexの項目は次のtreeを組み立てるために使います。変更し�
 
 - [Gitの基本](/tools/git-basics.html) — 作業ツリーとステージングを操作し、差分を読んでみる。
 - [Gitの保存モデル](/tools/git-objects.html) — 次のスナップショットが、treeとblobとしてどう保存されるかを読む。
+- indexと作業ツリーに異なる版がある途中状態を、退避して再適用する仕組みを読む。[Git stashの内部構造 — 作業ツリーとindexの退避・再適用を追う](/tools/git-stash.html)
 - 同じパスの内容をHEADからindexへ、indexから作業ツリーへ戻す場合を比べる。[Git restoreの仕組み — 履歴を動かさず、復元元と復元先を選ぶ](/tools/git-restore.html)
 - ブランチの先端を動かすとき、indexと作業ツリーをどこまで更新するかを比べる。[Gitのreset — HEAD・index・作業ツリーはどう変わるのか](/tools/git-reset.html)
 - 同じ行を編集したマージ競合の例で、共通祖先と両側の内容をindexのステージ1・2・3から読む。[Gitのマージ — 共通祖先と3-way merge](/tools/git-three-way-merge.html)

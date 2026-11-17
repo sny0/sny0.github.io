@@ -153,6 +153,7 @@ export default {
   '/tools/git-revert.html': ['intermediate', 'core'],
   '/tools/git-reset.html': ['intermediate', 'core'],
   '/tools/git-restore.html': ['intermediate', 'core'],
+  '/tools/git-stash.html': ['intermediate', 'useful'],
   '/tools/git-cherry-pick.html': ['intermediate', 'core'],
   '/tools/profiling/cpu-profiling.html': ['intermediate', 'core'],
   '/tools/reading-error-messages.html': ['intro', 'core'],

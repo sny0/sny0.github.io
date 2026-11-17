@@ -1777,6 +1777,10 @@
           "link": "/tools/git-restore.html"
         },
         {
+          "text": "Git stashの内部構造 — 作業ツリーとindexの退避・再適用を追う",
+          "link": "/tools/git-stash.html"
+        },
+        {
           "text": "Gitのcherry-pick — コミットではなく変更を別の履歴へ取り込む",
           "link": "/tools/git-cherry-pick.html"
         },

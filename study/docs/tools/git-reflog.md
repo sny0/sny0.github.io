@@ -101,6 +101,7 @@ reflogの期限切れ処理やGCは実行していません。実際の回収時
 - [Gitのrebase](/tools/git-rebase.html) — 新しい親の上で変更を再適用し、旧コミットと新コミットが別のIDを持つ理由を読む。
 - resetで先端が動くとき、コミット済みの内容と未コミットの編集がどう扱われるかを確認する。[Gitのreset — HEAD・index・作業ツリーはどう変わるのか](/tools/git-reset.html)
 - [Gitの保存モデル](/tools/git-objects.html) — 参照、親コミット、tree、blobの関係を確認する。
+- `refs/stash` とそのreflogが、退避した作業の一覧にどう使われるかを読む。[Git stashの内部構造 — 作業ツリーとindexの退避・再適用を追う](/tools/git-stash.html)
 - [Gitのマージ](/tools/git-three-way-merge.html) — 二つの先端を親に持つ場合と比較する。
 
 ## 参考資料

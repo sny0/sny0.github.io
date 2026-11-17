@@ -125,7 +125,7 @@
       "id": "tools",
       "title": "開発ツールと調査機能",
       "description": "どの機能で何を観察し、どう確かめるかを調べる。",
-      "count": 29,
+      "count": 30,
       "status": "辞典本文あり"
     }
   ],
@@ -4342,10 +4342,40 @@
         "/tools/git-staging-index.html",
         "/tools/git-reflog.html",
         "/tools/git-reset.html",
-        "/tools/git-revert.html"
+        "/tools/git-revert.html",
+        "/tools/git-stash.html"
       ],
       "difficulty": "intermediate",
       "importance": "core"
+    },
+    {
+      "title": "Git stashの内部構造 — 作業ツリーとindexの退避・再適用を追う",
+      "url": "/tools/git-stash.html",
+      "file": "tools/git-stash.md",
+      "domain": "tools",
+      "section": "reference",
+      "format": "article",
+      "status": "published",
+      "summary": "HEAD・index・作業ツリーをつなぐstashのコミット構造から、保存対象、applyとpop、再適用の競合と退避の限界を読む。",
+      "source": "新規執筆",
+      "aliases": [
+        "Git stash",
+        "スタッシュ",
+        "refs/stash",
+        "stash apply",
+        "stash pop",
+        "作業の退避"
+      ],
+      "verification": "Git公式資料と照合し、Windowsの独立リポジトリで親関係・退避対象・再適用と競合を確認（2026-11-18）",
+      "links": [
+        "/tools/git-objects.html",
+        "/tools/git-reflog.html",
+        "/tools/git-staging-index.html",
+        "/tools/git-three-way-merge.html",
+        "/tools/git-restore.html"
+      ],
+      "difficulty": "intermediate",
+      "importance": "useful"
     },
     {
       "title": "Gitのcherry-pick — コミットではなく変更を別の履歴へ取り込む",
@@ -4426,6 +4456,7 @@
         "/tools/git-objects.html",
         "/tools/git-staging-index.html",
         "/tools/git-reset.html",
+        "/tools/git-stash.html",
         "/tools/git-three-way-merge.html"
       ],
       "difficulty": "intermediate",
@@ -4513,6 +4544,7 @@
       "links": [
         "/tools/git-basics.html",
         "/tools/git-objects.html",
+        "/tools/git-stash.html",
         "/tools/git-restore.html",
         "/tools/git-reset.html",
         "/tools/git-three-way-merge.html"
