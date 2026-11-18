@@ -213,6 +213,7 @@ softmaxの前のスコアをマスクします。この例では位置2を負の
 ## 関連項目
 
 - [LLMの文章生成](/algorithms/llm-text-generation.html) — トークンを選んで続きを作る外側の流れを確認する。
+- [MCPの仕組み](/algorithms/model-context-protocol.html) — モデルの出力を受けたアプリが、外部のツールや資料を使う流れを読む。
 - [ベクトル](/math/rendering/vector.html) — 内積と重み付きのベクトル計算を読む。
 - [行列](/math/rendering/matrix.html) — ベクトルをまとめて変換する行列積を確認する。
 

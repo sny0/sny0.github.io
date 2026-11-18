@@ -739,6 +739,10 @@
           "link": "/algorithms/llm-text-generation.html"
         },
         {
+          "text": "MCPの仕組み — AIモデルと外部ツールをどうつなぐか",
+          "link": "/algorithms/model-context-protocol.html"
+        },
+        {
           "text": "TransformerとAttention — 埋め込み・位置情報・Q/K/Vで文脈を計算する",
           "link": "/algorithms/transformer-attention.html"
         },

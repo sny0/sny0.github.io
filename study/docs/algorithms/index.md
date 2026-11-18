@@ -22,6 +22,7 @@
 - [BVHとAABB — 箱でまとめて衝突候補を絞る](/algorithms/bounding-volume-hierarchies.html)
 - [Fisher–Yates法 — 公平なシャッフルと偏る並べ替え](/algorithms/fisher-yates-shuffle.html)
 - [LLMはどう文章を生成するのか — トークン・次トークン予測・学習と推論](/algorithms/llm-text-generation.html)
+- [MCPの仕組み — AIモデルと外部ツールをどうつなぐか](/algorithms/model-context-protocol.html)
 - [TransformerとAttention — 埋め込み・位置情報・Q/K/Vで文脈を計算する](/algorithms/transformer-attention.html)
 - [スタック・キュー・デック — どちらの端から入れ、どちらから取るか](/algorithms/queues-and-deques.html)
 - [スパースセットとECSのコンポーネント管理](/algorithms/sparse-sets.html)

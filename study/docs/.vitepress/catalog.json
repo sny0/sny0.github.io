@@ -90,7 +90,7 @@
       "id": "algorithms",
       "title": "データ構造・アルゴリズム",
       "description": "操作手順、計算量、不変条件から道具を選ぶ。",
-      "count": 16,
+      "count": 17,
       "status": "辞典本文あり"
     },
     {
@@ -5472,7 +5472,8 @@
         "/game/loot-tables.html",
         "/math/rendering/matrix.html",
         "/tools/reviewing-ai-generated-code.html",
-        "/algorithms/transformer-attention.html"
+        "/algorithms/transformer-attention.html",
+        "/algorithms/model-context-protocol.html"
       ],
       "difficulty": "intro",
       "importance": "useful"
@@ -5651,6 +5652,33 @@
       ],
       "difficulty": "intermediate",
       "importance": "core"
+    },
+    {
+      "title": "MCPの仕組み — AIモデルと外部ツールをどうつなぐか",
+      "url": "/algorithms/model-context-protocol.html",
+      "file": "algorithms/model-context-protocol.md",
+      "domain": "algorithms",
+      "section": "reference",
+      "format": "article",
+      "status": "published",
+      "summary": "AIアプリ内のMCPクライアントが外部のMCPサーバーとやり取りする流れを、能力の確認、ツール呼び出し、実行の許可に分けて追う。",
+      "source": "新規執筆",
+      "aliases": [
+        "MCP",
+        "Model Context Protocol",
+        "MCPホスト",
+        "MCPクライアント",
+        "MCPサーバー",
+        "JSON-RPC",
+        "ツール呼び出し"
+      ],
+      "verification": "MCP公式仕様2026-07-28版に照合し、Python 3.12.4で架空の要求と応答、引数の条件と計算結果をローカル検証（2026-11-18）",
+      "links": [
+        "/algorithms/llm-text-generation.html",
+        "/algorithms/transformer-attention.html"
+      ],
+      "difficulty": "intro",
+      "importance": "useful"
     },
     {
       "title": "Mediator",
@@ -7253,6 +7281,7 @@
       "verification": "Transformer原論文に照合し、Python 3.12.4の標準ライブラリで教材用行列・softmax・因果マスク・掲載コードを検算（2026-11-18）",
       "links": [
         "/algorithms/llm-text-generation.html",
+        "/algorithms/model-context-protocol.html",
         "/math/rendering/vector.html",
         "/math/rendering/matrix.html"
       ],
