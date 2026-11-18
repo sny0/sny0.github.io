@@ -755,6 +755,10 @@
           "link": "/algorithms/kv-cache.html"
         },
         {
+          "text": "LLMの量子化 — 精度とメモリ、重みとKVキャッシュの違い",
+          "link": "/algorithms/llm-quantization.html"
+        },
+        {
           "text": "LLMはどう文章を生成するのか — トークン・次トークン予測・学習と推論",
           "link": "/algorithms/llm-text-generation.html"
         },

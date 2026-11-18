@@ -22,6 +22,7 @@ export default {
   '/algorithms/llm-text-generation.html': ['intro', 'useful'],
   '/algorithms/transformer-attention.html': ['intermediate', 'useful'],
   '/algorithms/kv-cache.html': ['intermediate', 'useful'],
+  '/algorithms/llm-quantization.html': ['intermediate', 'useful'],
   '/algorithms/model-context-protocol.html': ['intro', 'useful'],
   '/algorithms/agent-skills.html': ['intro', 'useful'],
   '/algorithms/agent-harness.html': ['intro', 'useful'],

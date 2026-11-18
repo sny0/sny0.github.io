@@ -90,7 +90,7 @@
       "id": "algorithms",
       "title": "データ構造・アルゴリズム",
       "description": "操作手順、計算量、不変条件から道具を選ぶ。",
-      "count": 24,
+      "count": 25,
       "status": "辞典本文あり"
     },
     {
@@ -5563,7 +5563,8 @@
       "links": [
         "/algorithms/transformer-attention.html",
         "/algorithms/agent-context-management.html",
-        "/algorithms/llm-text-generation.html"
+        "/algorithms/llm-text-generation.html",
+        "/algorithms/llm-quantization.html"
       ],
       "difficulty": "intermediate",
       "importance": "useful"
@@ -5594,6 +5595,35 @@
       "importance": "useful"
     },
     {
+      "title": "LLMの量子化 — 精度とメモリ、重みとKVキャッシュの違い",
+      "url": "/algorithms/llm-quantization.html",
+      "file": "algorithms/llm-quantization.md",
+      "domain": "algorithms",
+      "section": "reference",
+      "format": "article",
+      "status": "published",
+      "summary": "少ないビットで数値を近似する仕組みを追い、重み・活性値・KVキャッシュで異なる容量と演算への影響を整理する。",
+      "source": "新規執筆",
+      "aliases": [
+        "LLM量子化",
+        "Quantization",
+        "線形量子化",
+        "逆量子化",
+        "INT4",
+        "weight-only",
+        "PTQ",
+        "QAT"
+      ],
+      "verification": "ONNX仕様、TensorRT・TorchAOの公式資料と原論文に照合し、Python 3.12.4で丸め・飽和・復元誤差と重みの容量を検算（2026-11-19）",
+      "links": [
+        "/algorithms/kv-cache.html",
+        "/algorithms/llm-text-generation.html",
+        "/algorithms/transformer-attention.html"
+      ],
+      "difficulty": "intermediate",
+      "importance": "useful"
+    },
+    {
       "title": "LLMはどう文章を生成するのか — トークン・次トークン予測・学習と推論",
       "url": "/algorithms/llm-text-generation.html",
       "file": "algorithms/llm-text-generation.md",
@@ -5620,6 +5650,7 @@
         "/tools/reviewing-ai-generated-code.html",
         "/algorithms/transformer-attention.html",
         "/algorithms/kv-cache.html",
+        "/algorithms/llm-quantization.html",
         "/algorithms/model-context-protocol.html",
         "/algorithms/agent-skills.html",
         "/algorithms/agent-harness.html",
@@ -7468,6 +7499,7 @@
       "links": [
         "/algorithms/llm-text-generation.html",
         "/algorithms/kv-cache.html",
+        "/algorithms/llm-quantization.html",
         "/algorithms/model-context-protocol.html",
         "/algorithms/agent-skills.html",
         "/algorithms/agent-harness.html",
