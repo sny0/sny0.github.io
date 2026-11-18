@@ -90,7 +90,7 @@
       "id": "algorithms",
       "title": "データ構造・アルゴリズム",
       "description": "操作手順、計算量、不変条件から道具を選ぶ。",
-      "count": 21,
+      "count": 22,
       "status": "辞典本文あり"
     },
     {
@@ -6502,6 +6502,7 @@
         "/algorithms/agent-context-management.html",
         "/algorithms/agent-harness.html",
         "/algorithms/model-context-protocol.html",
+        "/algorithms/embeddings-and-vector-search.html",
         "/algorithms/llm-text-generation.html"
       ],
       "difficulty": "intro",
@@ -7409,6 +7410,7 @@
         "/algorithms/agent-harness.html",
         "/algorithms/agent-context-management.html",
         "/math/rendering/vector.html",
+        "/algorithms/embeddings-and-vector-search.html",
         "/math/rendering/matrix.html"
       ],
       "difficulty": "intermediate",
@@ -13539,7 +13541,8 @@
         "/graphics/lighting/pbr.html",
         "/math/rendering/matrix.html",
         "/math/rendering/transform.html",
-        "/algorithms/transformer-attention.html"
+        "/algorithms/transformer-attention.html",
+        "/algorithms/embeddings-and-vector-search.html"
       ],
       "difficulty": "intro",
       "importance": "core"
@@ -18622,6 +18625,35 @@
       ],
       "difficulty": "intermediate",
       "importance": "core"
+    },
+    {
+      "title": "埋め込みとベクトル検索 — 似た資料をどう見つけるか",
+      "url": "/algorithms/embeddings-and-vector-search.html",
+      "file": "algorithms/embeddings-and-vector-search.md",
+      "domain": "algorithms",
+      "section": "reference",
+      "format": "article",
+      "status": "published",
+      "summary": "質問と資料を比較できるベクトルに変え、コサイン類似度で順位を出す流れを、正規化と計測条件の例で追う。",
+      "source": "新規執筆",
+      "aliases": [
+        "埋め込み",
+        "テキスト埋め込み",
+        "embeddings",
+        "ベクトル検索",
+        "vector search",
+        "コサイン類似度",
+        "cosine similarity",
+        "意味検索"
+      ],
+      "verification": "Sentence-BERT・DPR・Transformerの原論文と公式検索資料に照合。手作りベクトルの順位とゼロベクトルの扱いをPython 3.12.4で検証（2026-11-18）",
+      "links": [
+        "/algorithms/retrieval-augmented-generation.html",
+        "/math/rendering/vector.html",
+        "/algorithms/transformer-attention.html"
+      ],
+      "difficulty": "intermediate",
+      "importance": "useful"
     },
     {
       "title": "未定義動作・実装定義・未規定動作",

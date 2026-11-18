@@ -132,6 +132,7 @@ float area = 0.5f * glm::length(c);   // 外積の長さ = 平行四辺形の面
 - [座標変換](/math/rendering/transform.html) — ベクトルが空間を渡り歩く仕組み
 - [PBR](/graphics/lighting/pbr.html) — 内積とハーフベクトルの本格活用
 - 内積からトークン間のスコアを求め、別のベクトルの重み付き和を作る処理を読む。[TransformerとAttention — 埋め込み・位置情報・Q/K/Vで文脈を計算する](/algorithms/transformer-attention.html)
+- 正規化と内積を使って資料の候補を並べる例を読む。[埋め込みとベクトル検索 — 似た資料をどう見つけるか](/algorithms/embeddings-and-vector-search.html)
 
 ## 理解度チェック
 

@@ -218,6 +218,7 @@ softmaxの前のスコアをマスクします。この例では位置2を負の
 - [AIエージェントのハーネス](/algorithms/agent-harness.html) — モデルを呼び、ツールの結果と履歴を次の入力へつなぐ仕組みを読む。
 - [AIエージェントのコンテキスト管理](/algorithms/agent-context-management.html) — 入力するトークン列のもとになる情報を、履歴や資料からどう選ぶかを読む。
 - [ベクトル](/math/rendering/vector.html) — 内積と重み付きのベクトル計算を読む。
+- [埋め込みとベクトル検索](/algorithms/embeddings-and-vector-search.html) — トークンの内部表現と、文章検索用の表現の役割を比べる。
 - [行列](/math/rendering/matrix.html) — ベクトルをまとめて変換する行列積を確認する。
 
 ## 参考資料

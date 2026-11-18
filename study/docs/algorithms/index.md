@@ -39,6 +39,7 @@
 - [二分ヒープと優先度付きキュー](/algorithms/binary-heaps.html)
 - [二分探索木と順序付き連想コンテナ](/algorithms/search-trees.html)
 - [配列と動的配列 — 添字、容量、再確保](/algorithms/arrays-and-dynamic-arrays.html)
+- [埋め込みとベクトル検索 — 似た資料をどう見つけるか](/algorithms/embeddings-and-vector-search.html)
 - [連結リスト — ノードを見つける処理とつなぎ替え](/algorithms/linked-lists.html)
 
 ## この分野の学習ガイド

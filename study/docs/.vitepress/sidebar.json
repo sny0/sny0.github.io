@@ -807,6 +807,10 @@
           "link": "/algorithms/arrays-and-dynamic-arrays.html"
         },
         {
+          "text": "埋め込みとベクトル検索 — 似た資料をどう見つけるか",
+          "link": "/algorithms/embeddings-and-vector-search.html"
+        },
+        {
           "text": "連結リスト — ノードを見つける処理とつなぎ替え",
           "link": "/algorithms/linked-lists.html"
         }

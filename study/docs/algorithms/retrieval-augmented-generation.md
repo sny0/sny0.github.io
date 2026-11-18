@@ -161,6 +161,7 @@ if __name__ == "__main__":
 ## 関連項目
 
 - [AIエージェントのコンテキスト管理](/algorithms/agent-context-management.html) — 検索結果を含め、推論入力に何を残すかを読む。
+- [埋め込みとベクトル検索](/algorithms/embeddings-and-vector-search.html) — 質問と資料をどう比較し、順位を決めるかを読む。
 - [LLMの文章生成](/algorithms/llm-text-generation.html) — 渡された文脈をもとに続きを生成する仕組みを読む。
 - [AIエージェントのハーネス](/algorithms/agent-harness.html) — ツールの結果を受け取り、モデルの次の入力に渡す流れを確認する。
 - [MCPの仕組み](/algorithms/model-context-protocol.html) — 外部サーバーから情報を取得する要求と応答を読む。

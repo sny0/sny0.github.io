@@ -26,6 +26,7 @@ export default {
   '/algorithms/agent-harness.html': ['intro', 'useful'],
   '/algorithms/agent-context-management.html': ['intro', 'useful'],
   '/algorithms/retrieval-augmented-generation.html': ['intro', 'useful'],
+  '/algorithms/embeddings-and-vector-search.html': ['intermediate', 'useful'],
   '/data/compression-basics.html': ['intermediate', 'useful'],
   '/data/hashes-and-checksums.html': ['intermediate', 'useful'],
   '/data/integer-bits-and-bytes.html': ['intro', 'core'],
