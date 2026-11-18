@@ -154,6 +154,7 @@ flowchart TD
 - [TransformerとAttention](/algorithms/transformer-attention.html) — モデル内部でトークン間の情報をどう混ぜるかを読む。
 - [Agent Skillsの仕組み](/algorithms/agent-skills.html) — 手順と資料をまとめる形式と、外部ツールの接続をどう併用できるかを読む。
 - [AIエージェントのハーネス](/algorithms/agent-harness.html) — 受け取ったツール結果をモデルに戻し、実行を続けるか判断する流れを読む。
+- [RAGの仕組み](/algorithms/retrieval-augmented-generation.html) — 外部資料を検索して回答の入力に使う構成を読む。
 
 ## 参考資料
 

@@ -755,6 +755,10 @@
           "link": "/algorithms/model-context-protocol.html"
         },
         {
+          "text": "RAGの仕組み — 検索した資料をどう回答に使うか",
+          "link": "/algorithms/retrieval-augmented-generation.html"
+        },
+        {
           "text": "TransformerとAttention — 埋め込み・位置情報・Q/K/Vで文脈を計算する",
           "link": "/algorithms/transformer-attention.html"
         },
