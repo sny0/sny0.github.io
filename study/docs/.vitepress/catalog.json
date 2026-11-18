@@ -90,7 +90,7 @@
       "id": "algorithms",
       "title": "データ構造・アルゴリズム",
       "description": "操作手順、計算量、不変条件から道具を選ぶ。",
-      "count": 19,
+      "count": 20,
       "status": "辞典本文あり"
     },
     {
@@ -1080,6 +1080,34 @@
       "importance": "useful"
     },
     {
+      "title": "AIエージェントのコンテキスト管理 — 会話履歴・要約・メモリの違い",
+      "url": "/algorithms/agent-context-management.html",
+      "file": "algorithms/agent-context-management.md",
+      "domain": "algorithms",
+      "section": "reference",
+      "format": "article",
+      "status": "published",
+      "summary": "保存された履歴と推論ごとの入力を区別し、直近の選択、要約、再取得で何が残るかをフレーム時間の架空例で確かめる。",
+      "source": "新規執筆",
+      "aliases": [
+        "コンテキスト管理",
+        "context management",
+        "コンテキスト窓",
+        "context window",
+        "会話履歴",
+        "compaction",
+        "永続メモリ"
+      ],
+      "verification": "OpenAI公式の会話状態・圧縮・検索・メモリ資料に照合し、Python 3.12.4で保存履歴からの入力選択をローカル検証（2026-11-18）",
+      "links": [
+        "/algorithms/agent-harness.html",
+        "/algorithms/llm-text-generation.html",
+        "/algorithms/transformer-attention.html"
+      ],
+      "difficulty": "intro",
+      "importance": "useful"
+    },
+    {
       "title": "AIエージェントのハーネス — モデル・ツール・実行ループをつなぐ仕組み",
       "url": "/algorithms/agent-harness.html",
       "file": "algorithms/agent-harness.md",
@@ -1102,7 +1130,8 @@
         "/algorithms/agent-skills.html",
         "/algorithms/model-context-protocol.html",
         "/algorithms/llm-text-generation.html",
-        "/algorithms/transformer-attention.html"
+        "/algorithms/transformer-attention.html",
+        "/algorithms/agent-context-management.html"
       ],
       "difficulty": "intro",
       "importance": "useful"
@@ -5531,7 +5560,8 @@
         "/algorithms/transformer-attention.html",
         "/algorithms/model-context-protocol.html",
         "/algorithms/agent-skills.html",
-        "/algorithms/agent-harness.html"
+        "/algorithms/agent-harness.html",
+        "/algorithms/agent-context-management.html"
       ],
       "difficulty": "intro",
       "importance": "useful"
@@ -7344,6 +7374,7 @@
         "/algorithms/model-context-protocol.html",
         "/algorithms/agent-skills.html",
         "/algorithms/agent-harness.html",
+        "/algorithms/agent-context-management.html",
         "/math/rendering/vector.html",
         "/math/rendering/matrix.html"
       ],

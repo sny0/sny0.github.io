@@ -731,6 +731,10 @@
           "link": "/algorithms/agent-skills.html"
         },
         {
+          "text": "AIエージェントのコンテキスト管理 — 会話履歴・要約・メモリの違い",
+          "link": "/algorithms/agent-context-management.html"
+        },
+        {
           "text": "AIエージェントのハーネス — モデル・ツール・実行ループをつなぐ仕組み",
           "link": "/algorithms/agent-harness.html"
         },

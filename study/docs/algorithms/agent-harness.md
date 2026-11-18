@@ -151,6 +151,7 @@ Agent Skillsの手順は、たとえば「換算した時間を実測値とし�
 - [TransformerとAttention](/algorithms/transformer-attention.html) — モデル内部で文脈がどう計算されるかを追う。
 - [MCPの仕組み](/algorithms/model-context-protocol.html) — アプリと外部ツールの要求・応答を読む。
 - [Agent Skillsの仕組み](/algorithms/agent-skills.html) — 手順と資料を文脈に追加する流れを確認する。
+- [AIエージェントのコンテキスト管理](/algorithms/agent-context-management.html) — 保持した履歴から何を次のモデル入力に使うかを読む。
 
 ## 参考資料
 

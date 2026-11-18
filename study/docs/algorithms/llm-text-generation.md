@@ -161,6 +161,7 @@ Transformerでは、こうした数値計算にベクトル、行列、attention
 - モデルの提案を受けたAIアプリが、外部のツールを呼んで結果を受け取る流れを読む。[MCPの仕組み — AIモデルと外部ツールをどうつなぐか](/algorithms/model-context-protocol.html)
 - 作業に応じて、エージェントが手順や資料を文脈に加える流れを読む。[Agent Skillsの仕組み](/algorithms/agent-skills.html)
 - 提案されたツールを実行するか判断し、結果をモデルに戻す仕組みを読む。[AIエージェントのハーネス](/algorithms/agent-harness.html)
+- 長い会話のどの情報を推論入力に残すかを読む。[AIエージェントのコンテキスト管理](/algorithms/agent-context-management.html)
 - [Unicodeと文字コード](/data/unicode-and-encoding.html) — 文字とバイトの関係を確認する。
 - [重み付き抽選](/game/loot-tables.html) — 確率と累積区間で一つを選ぶ処理を読む。
 - [行列](/math/rendering/matrix.html) — ベクトルをまとめて変換する数値計算の基礎を確認する。

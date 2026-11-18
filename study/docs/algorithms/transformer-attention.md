@@ -216,6 +216,7 @@ softmaxの前のスコアをマスクします。この例では位置2を負の
 - [MCPの仕組み](/algorithms/model-context-protocol.html) — モデルの出力を受けたアプリが、外部のツールや資料を使う流れを読む。
 - [Agent Skillsの仕組み](/algorithms/agent-skills.html) — 手順と資料が必要なときにモデルの文脈へ入る流れを読む。
 - [AIエージェントのハーネス](/algorithms/agent-harness.html) — モデルを呼び、ツールの結果と履歴を次の入力へつなぐ仕組みを読む。
+- [AIエージェントのコンテキスト管理](/algorithms/agent-context-management.html) — 入力するトークン列のもとになる情報を、履歴や資料からどう選ぶかを読む。
 - [ベクトル](/math/rendering/vector.html) — 内積と重み付きのベクトル計算を読む。
 - [行列](/math/rendering/matrix.html) — ベクトルをまとめて変換する行列積を確認する。
 
