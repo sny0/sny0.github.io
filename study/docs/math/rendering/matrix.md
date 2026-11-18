@@ -150,6 +150,7 @@ VSOut VSMain(VSIn i) {
 - [カメラと射影](/math/rendering/camera.html) — View行列とProjection行列の中身
 - [クォータニオン](/math/rendering/quaternion.html) — 回転表現の本命
 - 学習した重みを持つ行列と数値ベクトルの計算が、文章の出力候補を求める処理へどうつながるかを読む。[LLMはどう文章を生成するのか — トークン・次トークン予測・学習と推論](/algorithms/llm-text-generation.html)
+- 学習済みの行列からQ/K/Vを作り、行列積で複数トークンの情報をまとめる仕組みを追う。[TransformerとAttention — 埋め込み・位置情報・Q/K/Vで文脈を計算する](/algorithms/transformer-attention.html)
 
 ## 理解度チェック
 

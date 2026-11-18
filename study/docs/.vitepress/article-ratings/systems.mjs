@@ -20,6 +20,7 @@ export default {
   '/algorithms/sorting.html': ['intermediate', 'useful'],
   '/algorithms/fisher-yates-shuffle.html': ['intermediate', 'useful'],
   '/algorithms/llm-text-generation.html': ['intro', 'useful'],
+  '/algorithms/transformer-attention.html': ['intermediate', 'useful'],
   '/data/compression-basics.html': ['intermediate', 'useful'],
   '/data/hashes-and-checksums.html': ['intermediate', 'useful'],
   '/data/integer-bits-and-bytes.html': ['intro', 'core'],

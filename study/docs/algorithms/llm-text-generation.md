@@ -157,6 +157,7 @@ Transformerでは、こうした数値計算にベクトル、行列、attention
 
 ## 関連項目
 
+- トークンの列から文脈を計算する内部を、Q/K/Vと重み付き和で追う。[TransformerとAttention — 埋め込み・位置情報・Q/K/Vで文脈を計算する](/algorithms/transformer-attention.html)
 - [Unicodeと文字コード](/data/unicode-and-encoding.html) — 文字とバイトの関係を確認する。
 - [重み付き抽選](/game/loot-tables.html) — 確率と累積区間で一つを選ぶ処理を読む。
 - [行列](/math/rendering/matrix.html) — ベクトルをまとめて変換する数値計算の基礎を確認する。

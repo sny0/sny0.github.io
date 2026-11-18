@@ -739,6 +739,10 @@
           "link": "/algorithms/llm-text-generation.html"
         },
         {
+          "text": "TransformerとAttention — 埋め込み・位置情報・Q/K/Vで文脈を計算する",
+          "link": "/algorithms/transformer-attention.html"
+        },
+        {
           "text": "スタック・キュー・デック — どちらの端から入れ、どちらから取るか",
           "link": "/algorithms/queues-and-deques.html"
         },

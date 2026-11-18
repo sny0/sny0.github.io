@@ -90,7 +90,7 @@
       "id": "algorithms",
       "title": "データ構造・アルゴリズム",
       "description": "操作手順、計算量、不変条件から道具を選ぶ。",
-      "count": 15,
+      "count": 16,
       "status": "辞典本文あり"
     },
     {
@@ -5471,7 +5471,8 @@
         "/data/unicode-and-encoding.html",
         "/game/loot-tables.html",
         "/math/rendering/matrix.html",
-        "/tools/reviewing-ai-generated-code.html"
+        "/tools/reviewing-ai-generated-code.html",
+        "/algorithms/transformer-attention.html"
       ],
       "difficulty": "intro",
       "importance": "useful"
@@ -7228,6 +7229,35 @@
       ],
       "difficulty": "intermediate",
       "importance": "core"
+    },
+    {
+      "title": "TransformerとAttention — 埋め込み・位置情報・Q/K/Vで文脈を計算する",
+      "url": "/algorithms/transformer-attention.html",
+      "file": "algorithms/transformer-attention.md",
+      "domain": "algorithms",
+      "section": "reference",
+      "format": "article",
+      "status": "published",
+      "summary": "埋め込みと位置情報からQ・K・Vを作り、スケール付き内積・因果マスク・softmax・重み付き和で各位置の表現を更新する流れを、小さな行列で追う。",
+      "source": "新規執筆",
+      "aliases": [
+        "Transformer",
+        "Attention",
+        "Self-Attention",
+        "自己注意",
+        "埋め込み",
+        "位置エンコーディング",
+        "Q/K/V",
+        "因果マスク"
+      ],
+      "verification": "Transformer原論文に照合し、Python 3.12.4の標準ライブラリで教材用行列・softmax・因果マスク・掲載コードを検算（2026-11-18）",
+      "links": [
+        "/algorithms/llm-text-generation.html",
+        "/math/rendering/vector.html",
+        "/math/rendering/matrix.html"
+      ],
+      "difficulty": "intermediate",
+      "importance": "useful"
     },
     {
       "title": "Type Object・Subclass Sandbox・Bytecode",
@@ -13353,7 +13383,8 @@
         "/graphics/lighting/ibl.html",
         "/graphics/lighting/pbr.html",
         "/math/rendering/matrix.html",
-        "/math/rendering/transform.html"
+        "/math/rendering/transform.html",
+        "/algorithms/transformer-attention.html"
       ],
       "difficulty": "intro",
       "importance": "core"
@@ -15274,7 +15305,8 @@
         "/math/rendering/vector.html",
         "/math/rendering/transform.html",
         "/math/rendering/quaternion.html",
-        "/algorithms/llm-text-generation.html"
+        "/algorithms/llm-text-generation.html",
+        "/algorithms/transformer-attention.html"
       ],
       "difficulty": "intermediate",
       "importance": "core"
