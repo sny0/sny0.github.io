@@ -727,6 +727,10 @@
           "link": "/algorithms/"
         },
         {
+          "text": "Agent Skillsの仕組み — 手順と資料を必要なときに読み込む",
+          "link": "/algorithms/agent-skills.html"
+        },
+        {
           "text": "BVHとAABB — 箱でまとめて衝突候補を絞る",
           "link": "/algorithms/bounding-volume-hierarchies.html"
         },

@@ -159,6 +159,7 @@ Transformerでは、こうした数値計算にベクトル、行列、attention
 
 - トークンの列から文脈を計算する内部を、Q/K/Vと重み付き和で追う。[TransformerとAttention — 埋め込み・位置情報・Q/K/Vで文脈を計算する](/algorithms/transformer-attention.html)
 - モデルの提案を受けたAIアプリが、外部のツールを呼んで結果を受け取る流れを読む。[MCPの仕組み — AIモデルと外部ツールをどうつなぐか](/algorithms/model-context-protocol.html)
+- 作業に応じて、エージェントが手順や資料を文脈に加える流れを読む。[Agent Skillsの仕組み](/algorithms/agent-skills.html)
 - [Unicodeと文字コード](/data/unicode-and-encoding.html) — 文字とバイトの関係を確認する。
 - [重み付き抽選](/game/loot-tables.html) — 確率と累積区間で一つを選ぶ処理を読む。
 - [行列](/math/rendering/matrix.html) — ベクトルをまとめて変換する数値計算の基礎を確認する。

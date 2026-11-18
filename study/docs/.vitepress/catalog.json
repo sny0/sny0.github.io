@@ -90,7 +90,7 @@
       "id": "algorithms",
       "title": "データ構造・アルゴリズム",
       "description": "操作手順、計算量、不変条件から道具を選ぶ。",
-      "count": 17,
+      "count": 18,
       "status": "辞典本文あり"
     },
     {
@@ -1049,6 +1049,33 @@
         "/design/patterns/"
       ],
       "difficulty": "intermediate",
+      "importance": "useful"
+    },
+    {
+      "title": "Agent Skillsの仕組み — 手順と資料を必要なときに読み込む",
+      "url": "/algorithms/agent-skills.html",
+      "file": "algorithms/agent-skills.md",
+      "domain": "algorithms",
+      "section": "reference",
+      "format": "article",
+      "status": "published",
+      "summary": "SKILL.mdの名前と説明から手順を選び、本文・資料・スクリプトを段階的に使う流れを、ゲームのフレーム時間の例で追う。",
+      "source": "新規執筆",
+      "aliases": [
+        "Agent Skills",
+        "エージェントスキル",
+        "SKILL.md",
+        "progressive disclosure",
+        "段階的な読み込み"
+      ],
+      "verification": "Agent Skills共通仕様とClaude公式文書に照合。教材のYAML・相対パスとPython 3.12.4の換算結果をローカル検証（2026-11-18）",
+      "links": [
+        "/tools/profiling/cpu-profiling.html",
+        "/algorithms/llm-text-generation.html",
+        "/algorithms/model-context-protocol.html",
+        "/algorithms/transformer-attention.html"
+      ],
+      "difficulty": "intro",
       "importance": "useful"
     },
     {
@@ -5473,7 +5500,8 @@
         "/math/rendering/matrix.html",
         "/tools/reviewing-ai-generated-code.html",
         "/algorithms/transformer-attention.html",
-        "/algorithms/model-context-protocol.html"
+        "/algorithms/model-context-protocol.html",
+        "/algorithms/agent-skills.html"
       ],
       "difficulty": "intro",
       "importance": "useful"
@@ -5675,7 +5703,8 @@
       "verification": "MCP公式仕様2026-07-28版に照合し、Python 3.12.4で架空の要求と応答、引数の条件と計算結果をローカル検証（2026-11-18）",
       "links": [
         "/algorithms/llm-text-generation.html",
-        "/algorithms/transformer-attention.html"
+        "/algorithms/transformer-attention.html",
+        "/algorithms/agent-skills.html"
       ],
       "difficulty": "intro",
       "importance": "useful"
@@ -7282,6 +7311,7 @@
       "links": [
         "/algorithms/llm-text-generation.html",
         "/algorithms/model-context-protocol.html",
+        "/algorithms/agent-skills.html",
         "/math/rendering/vector.html",
         "/math/rendering/matrix.html"
       ],

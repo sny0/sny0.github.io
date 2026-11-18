@@ -214,6 +214,7 @@ softmaxの前のスコアをマスクします。この例では位置2を負の
 
 - [LLMの文章生成](/algorithms/llm-text-generation.html) — トークンを選んで続きを作る外側の流れを確認する。
 - [MCPの仕組み](/algorithms/model-context-protocol.html) — モデルの出力を受けたアプリが、外部のツールや資料を使う流れを読む。
+- [Agent Skillsの仕組み](/algorithms/agent-skills.html) — 手順と資料が必要なときにモデルの文脈へ入る流れを読む。
 - [ベクトル](/math/rendering/vector.html) — 内積と重み付きのベクトル計算を読む。
 - [行列](/math/rendering/matrix.html) — ベクトルをまとめて変換する行列積を確認する。
 
