@@ -747,6 +747,10 @@
           "link": "/algorithms/fisher-yates-shuffle.html"
         },
         {
+          "text": "Function callingと構造化出力 — AIの返答をプログラムにつなぐ仕組み",
+          "link": "/algorithms/function-calling-and-structured-outputs.html"
+        },
+        {
           "text": "LLMはどう文章を生成するのか — トークン・次トークン予測・学習と推論",
           "link": "/algorithms/llm-text-generation.html"
         },

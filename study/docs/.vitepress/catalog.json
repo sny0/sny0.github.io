@@ -90,7 +90,7 @@
       "id": "algorithms",
       "title": "データ構造・アルゴリズム",
       "description": "操作手順、計算量、不変条件から道具を選ぶ。",
-      "count": 22,
+      "count": 23,
       "status": "辞典本文あり"
     },
     {
@@ -1132,6 +1132,7 @@
         "/algorithms/model-context-protocol.html",
         "/algorithms/llm-text-generation.html",
         "/algorithms/transformer-attention.html",
+        "/algorithms/function-calling-and-structured-outputs.html",
         "/algorithms/agent-context-management.html",
         "/algorithms/retrieval-augmented-generation.html"
       ],
@@ -4334,6 +4335,34 @@
       "importance": "core"
     },
     {
+      "title": "Function callingと構造化出力 — AIの返答をプログラムにつなぐ仕組み",
+      "url": "/algorithms/function-calling-and-structured-outputs.html",
+      "file": "algorithms/function-calling-and-structured-outputs.md",
+      "domain": "algorithms",
+      "section": "reference",
+      "format": "article",
+      "status": "published",
+      "summary": "モデルの返答をアプリが読む形式と、処理を依頼するツール呼び出しを区別し、検査・実行許可・結果返却まで追う。",
+      "source": "新規執筆",
+      "aliases": [
+        "Function calling",
+        "Structured Outputs",
+        "構造化出力",
+        "JSONモード",
+        "JSON Schema",
+        "ツール呼び出し",
+        "call_id"
+      ],
+      "verification": "OpenAI公式のFunction calling・Structured Outputs、JSONとJSON Schemaの仕様に照合し、模擬応答の検査・結果返却をPython 3.12.4でローカル検証（2026-11-18）",
+      "links": [
+        "/algorithms/agent-harness.html",
+        "/algorithms/model-context-protocol.html",
+        "/algorithms/llm-text-generation.html"
+      ],
+      "difficulty": "intro",
+      "importance": "useful"
+    },
+    {
       "title": "Game Loop と Update Method",
       "url": "/game/patterns/game-loop-and-update.html",
       "file": "game/patterns/game-loop-and-update.md",
@@ -5563,6 +5592,7 @@
         "/algorithms/model-context-protocol.html",
         "/algorithms/agent-skills.html",
         "/algorithms/agent-harness.html",
+        "/algorithms/function-calling-and-structured-outputs.html",
         "/algorithms/agent-context-management.html",
         "/algorithms/retrieval-augmented-generation.html"
       ],
@@ -5769,6 +5799,7 @@
         "/algorithms/transformer-attention.html",
         "/algorithms/agent-skills.html",
         "/algorithms/agent-harness.html",
+        "/algorithms/function-calling-and-structured-outputs.html",
         "/algorithms/retrieval-augmented-generation.html"
       ],
       "difficulty": "intro",

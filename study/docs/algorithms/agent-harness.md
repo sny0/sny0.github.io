@@ -150,6 +150,7 @@ Agent Skillsの手順は、たとえば「換算した時間を実測値とし�
 - [LLMの文章生成](/algorithms/llm-text-generation.html) — モデルが出力を生成する流れを読む。
 - [TransformerとAttention](/algorithms/transformer-attention.html) — モデル内部で文脈がどう計算されるかを追う。
 - [MCPの仕組み](/algorithms/model-context-protocol.html) — アプリと外部ツールの要求・応答を読む。
+- [Function callingと構造化出力](/algorithms/function-calling-and-structured-outputs.html) — モデルの回答と実行依頼を分け、形や引数をどう確かめるかを読む。
 - [Agent Skillsの仕組み](/algorithms/agent-skills.html) — 手順と資料を文脈に追加する流れを確認する。
 - [AIエージェントのコンテキスト管理](/algorithms/agent-context-management.html) — 保持した履歴から何を次のモデル入力に使うかを読む。
 - [RAGの仕組み](/algorithms/retrieval-augmented-generation.html) — 検索結果の候補を選び、回答に使える根拠にする流れを読む。
