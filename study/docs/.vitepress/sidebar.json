@@ -735,6 +735,10 @@
           "link": "/algorithms/fisher-yates-shuffle.html"
         },
         {
+          "text": "LLMはどう文章を生成するのか — トークン・次トークン予測・学習と推論",
+          "link": "/algorithms/llm-text-generation.html"
+        },
+        {
           "text": "スタック・キュー・デック — どちらの端から入れ、どちらから取るか",
           "link": "/algorithms/queues-and-deques.html"
         },

@@ -90,7 +90,7 @@
       "id": "algorithms",
       "title": "データ構造・アルゴリズム",
       "description": "操作手順、計算量、不変条件から道具を選ぶ。",
-      "count": 14,
+      "count": 15,
       "status": "辞典本文あり"
     },
     {
@@ -1076,6 +1076,7 @@
         "/tools/git-basics.html",
         "/tools/reading-official-documentation.html",
         "/tools/setup-development-environment.html",
+        "/algorithms/llm-text-generation.html",
         "/tools/reading-error-messages.html",
         "/learn/roadmap.html"
       ],
@@ -5444,6 +5445,35 @@
         "/design/notebook-references.html"
       ],
       "difficulty": "advanced",
+      "importance": "useful"
+    },
+    {
+      "title": "LLMはどう文章を生成するのか — トークン・次トークン予測・学習と推論",
+      "url": "/algorithms/llm-text-generation.html",
+      "file": "algorithms/llm-text-generation.md",
+      "domain": "algorithms",
+      "section": "reference",
+      "format": "article",
+      "status": "published",
+      "summary": "自己回帰型LLMが文脈から次トークンの確率を計算して生成する流れを読み、学習と推論、コンテキストと重み、もっともらしさと事実性を区別する。",
+      "source": "新規執筆",
+      "aliases": [
+        "LLM",
+        "大規模言語モデル",
+        "自己回帰",
+        "トークン",
+        "次トークン予測",
+        "コンテキスト",
+        "学習と推論"
+      ],
+      "verification": "原論文と公式資料に照合し、Python 3.12.4の標準ライブラリで教材用の分割・確率・掲載コードを検算（2026-11-18）",
+      "links": [
+        "/data/unicode-and-encoding.html",
+        "/game/loot-tables.html",
+        "/math/rendering/matrix.html",
+        "/tools/reviewing-ai-generated-code.html"
+      ],
+      "difficulty": "intro",
       "importance": "useful"
     },
     {
@@ -12244,6 +12274,7 @@
       "verification": "Minecraft Bedrock、WG21 N4659、MIT、Bungieの資料に照合し、Windows x64のMSVC 19.35とGCC 16.2で全20枠のC++例を実行（2026-11-16）",
       "links": [
         "/game/random-streams.html",
+        "/algorithms/llm-text-generation.html",
         "/game/patterns/type-object-and-sandbox.html",
         "/game/simulation-determinism.html",
         "/game/shuffle-bag.html"
@@ -15242,7 +15273,8 @@
         "/math/rendering/camera.html",
         "/math/rendering/vector.html",
         "/math/rendering/transform.html",
-        "/math/rendering/quaternion.html"
+        "/math/rendering/quaternion.html",
+        "/algorithms/llm-text-generation.html"
       ],
       "difficulty": "intermediate",
       "importance": "core"

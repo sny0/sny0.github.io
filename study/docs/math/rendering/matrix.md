@@ -149,6 +149,7 @@ VSOut VSMain(VSIn i) {
 - [座標変換](/math/rendering/transform.html) — 行列が繋ぐ空間の全体地図
 - [カメラと射影](/math/rendering/camera.html) — View行列とProjection行列の中身
 - [クォータニオン](/math/rendering/quaternion.html) — 回転表現の本命
+- 学習した重みを持つ行列と数値ベクトルの計算が、文章の出力候補を求める処理へどうつながるかを読む。[LLMはどう文章を生成するのか — トークン・次トークン予測・学習と推論](/algorithms/llm-text-generation.html)
 
 ## 理解度チェック
 

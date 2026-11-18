@@ -148,6 +148,7 @@ return Math.Clamp(hp - Math.Max(damage, 0), 0, 100);
 
 ## 関連項目
 
+- 生成されたコードを検証する背景として、モデルが次の出力候補を求める仕組みを読む。[LLMはどう文章を生成するのか — トークン・次トークン予測・学習と推論](/algorithms/llm-text-generation.html)
 - [Gitの基本](/tools/git-basics.html)で、コミット前の差分を確認する。
 - [公式ドキュメントの読み方](/tools/reading-official-documentation.html)で、使う版と動作条件を確かめる。
 - [エラーメッセージの読み方](/tools/reading-error-messages.html)で、ビルドや実行の失敗を切り分ける。
