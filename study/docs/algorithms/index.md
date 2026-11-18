@@ -20,6 +20,7 @@
 ## 辞典の本文
 
 - [Agent Skillsの仕組み — 手順と資料を必要なときに読み込む](/algorithms/agent-skills.html)
+- [AIエージェントのハーネス — モデル・ツール・実行ループをつなぐ仕組み](/algorithms/agent-harness.html)
 - [BVHとAABB — 箱でまとめて衝突候補を絞る](/algorithms/bounding-volume-hierarchies.html)
 - [Fisher–Yates法 — 公平なシャッフルと偏る並べ替え](/algorithms/fisher-yates-shuffle.html)
 - [LLMはどう文章を生成するのか — トークン・次トークン予測・学習と推論](/algorithms/llm-text-generation.html)

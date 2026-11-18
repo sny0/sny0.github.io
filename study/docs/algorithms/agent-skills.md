@@ -94,6 +94,8 @@ print(f"{1000 / fps:.2f} ms")
 
 共通仕様はファイル形式と段階的な読み込みの考え方を定めます。アプリがどこからSkillを見つけるか、どのUIで選ぶか、どこでコードを実行するかは製品側の設計です。たとえばClaude Codeは関連するSkillを選べるほか、利用者が `/skill-name` で明示して呼び出せます。`disable-model-invocation` は、その製品の自動選択を制御する拡張です。ClaudeのMessages APIでは、要求にSkillを指定し、コード実行のコンテナを使います。同じ形式を採用していても、入口や実行環境の違いは残ります。[Claude Code公式文書](https://code.claude.com/docs/en/skills#control-who-invokes-a-skill) · [Claude Platform公式文書](https://platform.claude.com/docs/en/agents-and-tools/agent-skills/overview)
 
+用途の近いSkillが候補に並ぶと、自動選択は名前と説明、依頼の文脈、製品の選択方法に左右され、利用者の意図とずれることがあります。使いたいSkillが決まっていれば、対応する製品では明示的に指定できます。たとえばClaude Codeではコマンドで呼び出せます。Responses APIのシェルツールでは、候補のSkill名をプロンプトで指定する方法が案内されています。同名の候補をどう表示し、どちらを選べるかは製品と読み込み元によって変わります。[Agent Skillsのクライアント実装ガイド](https://agentskills.io/client-implementation/adding-skills-support#handling-name-collisions) · [Claude Codeの同名Skillの扱い](https://code.claude.com/docs/en/skills#resolve-skills-that-share-a-name) · [OpenAI公式資料のSkills in the user prompt](https://developers.openai.com/api/docs/guides/tools-skills#skills-in-the-user-prompt)
+
 ## 学習・Skill・MCP・実行が担うもの
 
 | 仕組み | 担うもの |
@@ -136,6 +138,7 @@ WindowsのPython 3.12.4で掲載スクリプトを通常のプログラムとし
 - [LLMの文章生成](/algorithms/llm-text-generation.html) — 文脈と学習済みの重みの役割を読む。
 - [TransformerとAttention](/algorithms/transformer-attention.html) — 入力された文脈がモデル内部でどう計算されるかを追う。
 - [MCPの仕組み](/algorithms/model-context-protocol.html) — 外部の機能を呼んで結果を受け取る流れを読む。
+- [AIエージェントのハーネス](/algorithms/agent-harness.html) — 指示を文脈に含め、ツール結果を受け取って次の処理へ進む流れを読む。
 
 ## 参考資料
 

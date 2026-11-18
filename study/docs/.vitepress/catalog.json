@@ -90,7 +90,7 @@
       "id": "algorithms",
       "title": "データ構造・アルゴリズム",
       "description": "操作手順、計算量、不変条件から道具を選ぶ。",
-      "count": 18,
+      "count": 19,
       "status": "辞典本文あり"
     },
     {
@@ -1073,6 +1073,35 @@
         "/tools/profiling/cpu-profiling.html",
         "/algorithms/llm-text-generation.html",
         "/algorithms/model-context-protocol.html",
+        "/algorithms/transformer-attention.html",
+        "/algorithms/agent-harness.html"
+      ],
+      "difficulty": "intro",
+      "importance": "useful"
+    },
+    {
+      "title": "AIエージェントのハーネス — モデル・ツール・実行ループをつなぐ仕組み",
+      "url": "/algorithms/agent-harness.html",
+      "file": "algorithms/agent-harness.md",
+      "domain": "algorithms",
+      "section": "reference",
+      "format": "article",
+      "status": "published",
+      "summary": "モデルが提案した処理を検査してツールに渡し、結果を履歴に戻す実行ループを、停止条件やサンドボックスとの境界まで追う。",
+      "source": "新規執筆",
+      "aliases": [
+        "AIエージェント",
+        "エージェントハーネス",
+        "agent harness",
+        "agent loop",
+        "エージェントの実行ループ",
+        "サンドボックス"
+      ],
+      "verification": "OpenAI Agents APIとAgents SDKの公式資料に照合。WindowsのPython 3.12.4で、教材用の実行ループの履歴、入力の拒否、回数上限を検証（2026-11-18）",
+      "links": [
+        "/algorithms/agent-skills.html",
+        "/algorithms/model-context-protocol.html",
+        "/algorithms/llm-text-generation.html",
         "/algorithms/transformer-attention.html"
       ],
       "difficulty": "intro",
@@ -5501,7 +5530,8 @@
         "/tools/reviewing-ai-generated-code.html",
         "/algorithms/transformer-attention.html",
         "/algorithms/model-context-protocol.html",
-        "/algorithms/agent-skills.html"
+        "/algorithms/agent-skills.html",
+        "/algorithms/agent-harness.html"
       ],
       "difficulty": "intro",
       "importance": "useful"
@@ -5704,7 +5734,8 @@
       "links": [
         "/algorithms/llm-text-generation.html",
         "/algorithms/transformer-attention.html",
-        "/algorithms/agent-skills.html"
+        "/algorithms/agent-skills.html",
+        "/algorithms/agent-harness.html"
       ],
       "difficulty": "intro",
       "importance": "useful"
@@ -7312,6 +7343,7 @@
         "/algorithms/llm-text-generation.html",
         "/algorithms/model-context-protocol.html",
         "/algorithms/agent-skills.html",
+        "/algorithms/agent-harness.html",
         "/math/rendering/vector.html",
         "/math/rendering/matrix.html"
       ],

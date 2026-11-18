@@ -153,6 +153,7 @@ flowchart TD
 - [LLMの文章生成](/algorithms/llm-text-generation.html) — モデルが文脈から次のトークンを選ぶ流れに戻る。
 - [TransformerとAttention](/algorithms/transformer-attention.html) — モデル内部でトークン間の情報をどう混ぜるかを読む。
 - [Agent Skillsの仕組み](/algorithms/agent-skills.html) — 手順と資料をまとめる形式と、外部ツールの接続をどう併用できるかを読む。
+- [AIエージェントのハーネス](/algorithms/agent-harness.html) — 受け取ったツール結果をモデルに戻し、実行を続けるか判断する流れを読む。
 
 ## 参考資料
 

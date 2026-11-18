@@ -731,6 +731,10 @@
           "link": "/algorithms/agent-skills.html"
         },
         {
+          "text": "AIエージェントのハーネス — モデル・ツール・実行ループをつなぐ仕組み",
+          "link": "/algorithms/agent-harness.html"
+        },
+        {
           "text": "BVHとAABB — 箱でまとめて衝突候補を絞る",
           "link": "/algorithms/bounding-volume-hierarchies.html"
         },

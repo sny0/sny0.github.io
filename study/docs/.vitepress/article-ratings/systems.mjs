@@ -23,6 +23,7 @@ export default {
   '/algorithms/transformer-attention.html': ['intermediate', 'useful'],
   '/algorithms/model-context-protocol.html': ['intro', 'useful'],
   '/algorithms/agent-skills.html': ['intro', 'useful'],
+  '/algorithms/agent-harness.html': ['intro', 'useful'],
   '/data/compression-basics.html': ['intermediate', 'useful'],
   '/data/hashes-and-checksums.html': ['intermediate', 'useful'],
   '/data/integer-bits-and-bytes.html': ['intro', 'core'],
