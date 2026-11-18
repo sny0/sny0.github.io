@@ -25,6 +25,7 @@
 - [BVHとAABB — 箱でまとめて衝突候補を絞る](/algorithms/bounding-volume-hierarchies.html)
 - [Fisher–Yates法 — 公平なシャッフルと偏る並べ替え](/algorithms/fisher-yates-shuffle.html)
 - [Function callingと構造化出力 — AIの返答をプログラムにつなぐ仕組み](/algorithms/function-calling-and-structured-outputs.html)
+- [KVキャッシュ — 推論で何を保存し、何が速くなり、メモリをどれだけ使うか](/algorithms/kv-cache.html)
 - [LLMはどう文章を生成するのか — トークン・次トークン予測・学習と推論](/algorithms/llm-text-generation.html)
 - [MCPの仕組み — AIモデルと外部ツールをどうつなぐか](/algorithms/model-context-protocol.html)
 - [RAGの仕組み — 検索した資料をどう回答に使うか](/algorithms/retrieval-augmented-generation.html)

@@ -140,6 +140,7 @@ OpenAI Agents SDKのSandbox memoryは、会話履歴を保持するSessionとは
 
 - [LLMの文章生成](/algorithms/llm-text-generation.html) — 文脈とトークン、学習と推論の違いを読む。
 - [TransformerとAttention](/algorithms/transformer-attention.html) — 渡された入力をモデル内部でどう処理するかを追う。
+- [KVキャッシュ](/algorithms/kv-cache.html) — 入力を処理して得た中間状態と、共通の先頭部分を再利用する仕組みを読む。
 - [AIエージェントのハーネス](/algorithms/agent-harness.html) — 履歴とツール結果を次のモデル呼び出しにつなぐ役割を確認する。
 - [RAGの仕組み](/algorithms/retrieval-augmented-generation.html) — 入力に加える資料をどう分け、探し、選ぶかを読む。
 

@@ -751,6 +751,10 @@
           "link": "/algorithms/function-calling-and-structured-outputs.html"
         },
         {
+          "text": "KVキャッシュ — 推論で何を保存し、何が速くなり、メモリをどれだけ使うか",
+          "link": "/algorithms/kv-cache.html"
+        },
+        {
           "text": "LLMはどう文章を生成するのか — トークン・次トークン予測・学習と推論",
           "link": "/algorithms/llm-text-generation.html"
         },

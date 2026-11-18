@@ -213,6 +213,7 @@ softmaxの前のスコアをマスクします。この例では位置2を負の
 ## 関連項目
 
 - [LLMの文章生成](/algorithms/llm-text-generation.html) — トークンを選んで続きを作る外側の流れを確認する。
+- [KVキャッシュ](/algorithms/kv-cache.html) — 因果マスクのもとで、各層の過去のK・Vを続きの生成に使う仕組みを読む。
 - [MCPの仕組み](/algorithms/model-context-protocol.html) — モデルの出力を受けたアプリが、外部のツールや資料を使う流れを読む。
 - [Agent Skillsの仕組み](/algorithms/agent-skills.html) — 手順と資料が必要なときにモデルの文脈へ入る流れを読む。
 - [AIエージェントのハーネス](/algorithms/agent-harness.html) — モデルを呼び、ツールの結果と履歴を次の入力へつなぐ仕組みを読む。
