@@ -763,6 +763,10 @@
           "link": "/algorithms/llm-text-generation.html"
         },
         {
+          "text": "LLM推論のprefillとdecode — 最初のトークンを待つ時間と、続きが出る間隔が違う理由",
+          "link": "/algorithms/llm-prefill-and-decode.html"
+        },
+        {
           "text": "MCPの仕組み — AIモデルと外部ツールをどうつなぐか",
           "link": "/algorithms/model-context-protocol.html"
         },

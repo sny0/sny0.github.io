@@ -90,7 +90,7 @@
       "id": "algorithms",
       "title": "データ構造・アルゴリズム",
       "description": "操作手順、計算量、不変条件から道具を選ぶ。",
-      "count": 25,
+      "count": 26,
       "status": "辞典本文あり"
     },
     {
@@ -5564,6 +5564,7 @@
         "/algorithms/transformer-attention.html",
         "/algorithms/agent-context-management.html",
         "/algorithms/llm-text-generation.html",
+        "/algorithms/llm-prefill-and-decode.html",
         "/algorithms/llm-quantization.html"
       ],
       "difficulty": "intermediate",
@@ -5618,7 +5619,8 @@
       "links": [
         "/algorithms/kv-cache.html",
         "/algorithms/llm-text-generation.html",
-        "/algorithms/transformer-attention.html"
+        "/algorithms/transformer-attention.html",
+        "/algorithms/llm-prefill-and-decode.html"
       ],
       "difficulty": "intermediate",
       "importance": "useful"
@@ -5650,6 +5652,7 @@
         "/tools/reviewing-ai-generated-code.html",
         "/algorithms/transformer-attention.html",
         "/algorithms/kv-cache.html",
+        "/algorithms/llm-prefill-and-decode.html",
         "/algorithms/llm-quantization.html",
         "/algorithms/model-context-protocol.html",
         "/algorithms/agent-skills.html",
@@ -5659,6 +5662,35 @@
         "/algorithms/retrieval-augmented-generation.html"
       ],
       "difficulty": "intro",
+      "importance": "useful"
+    },
+    {
+      "title": "LLM推論のprefillとdecode — 最初のトークンを待つ時間と、続きが出る間隔が違う理由",
+      "url": "/algorithms/llm-prefill-and-decode.html",
+      "file": "algorithms/llm-prefill-and-decode.md",
+      "domain": "algorithms",
+      "section": "reference",
+      "format": "article",
+      "status": "published",
+      "summary": "最初の出力までの時間と出力間隔を測る位置から整理し、入力をまとめるprefillと、生成済みのトークンから続けるdecodeの計算と帯域の違いを追う。",
+      "source": "新規執筆",
+      "aliases": [
+        "LLM推論",
+        "prefillとdecode",
+        "TTFT",
+        "Time to First Token",
+        "ITL",
+        "Inter-Token Latency",
+        "TPOT"
+      ],
+      "verification": "Transformer・PagedAttention・DistServe・Sarathi-Serveの原論文と公式計測資料に照合し、Python 3.12.4で説明用の時刻とAttentionのペア数を検算（2026-11-19）",
+      "links": [
+        "/algorithms/llm-text-generation.html",
+        "/algorithms/kv-cache.html",
+        "/algorithms/transformer-attention.html",
+        "/algorithms/llm-quantization.html"
+      ],
+      "difficulty": "intermediate",
       "importance": "useful"
     },
     {
@@ -7499,6 +7531,7 @@
       "links": [
         "/algorithms/llm-text-generation.html",
         "/algorithms/kv-cache.html",
+        "/algorithms/llm-prefill-and-decode.html",
         "/algorithms/llm-quantization.html",
         "/algorithms/model-context-protocol.html",
         "/algorithms/agent-skills.html",

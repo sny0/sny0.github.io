@@ -180,6 +180,7 @@ GQA: 512 MiB (1 seq), 2048 MiB (4 seq)
 
 - [TransformerとAttention](/algorithms/transformer-attention.html) — Q・K・Vと因果マスクの計算を追う。
 - [LLMの文章生成](/algorithms/llm-text-generation.html) — 次トークンを選び、入力の末尾に加える流れを読む。
+- [LLM推論のprefillとdecode](/algorithms/llm-prefill-and-decode.html) — キャッシュを作る段階と読み直す段階を、測定区間と計算の違いから比べる。
 - [LLMの量子化](/algorithms/llm-quantization.html) — K・Vを少ないビットで表す仕組みと、重みの量子化との違いを読む。
 - [AIエージェントのコンテキスト管理](/algorithms/agent-context-management.html) — 会話履歴から何を入力に残すかを考える。
 

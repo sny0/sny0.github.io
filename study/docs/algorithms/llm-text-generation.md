@@ -159,6 +159,7 @@ Transformerでは、こうした数値計算にベクトル、行列、attention
 
 - トークンの列から文脈を計算する内部を、Q/K/Vと重み付き和で追う。[TransformerとAttention — 埋め込み・位置情報・Q/K/Vで文脈を計算する](/algorithms/transformer-attention.html)
 - 続きを1トークンずつ書くとき、推論で何を保存し、どの計算を省けるかを読む。[KVキャッシュ](/algorithms/kv-cache.html)
+- 最初のトークンまでの待ち時間と、それ以降の出力間隔を分けて読む。[LLM推論のprefillとdecode](/algorithms/llm-prefill-and-decode.html)
 - 推論で使う重みや中間値を、少ないビットでどう近似するかを読む。[LLMの量子化](/algorithms/llm-quantization.html)
 - モデルの提案を受けたAIアプリが、外部のツールを呼んで結果を受け取る流れを読む。[MCPの仕組み — AIモデルと外部ツールをどうつなぐか](/algorithms/model-context-protocol.html)
 - 作業に応じて、エージェントが手順や資料を文脈に加える流れを読む。[Agent Skillsの仕組み](/algorithms/agent-skills.html)

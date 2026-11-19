@@ -28,6 +28,7 @@
 - [KVキャッシュ — 推論で何を保存し、何が速くなり、メモリをどれだけ使うか](/algorithms/kv-cache.html)
 - [LLMの量子化 — 精度とメモリ、重みとKVキャッシュの違い](/algorithms/llm-quantization.html)
 - [LLMはどう文章を生成するのか — トークン・次トークン予測・学習と推論](/algorithms/llm-text-generation.html)
+- [LLM推論のprefillとdecode — 最初のトークンを待つ時間と、続きが出る間隔が違う理由](/algorithms/llm-prefill-and-decode.html)
 - [MCPの仕組み — AIモデルと外部ツールをどうつなぐか](/algorithms/model-context-protocol.html)
 - [RAGの仕組み — 検索した資料をどう回答に使うか](/algorithms/retrieval-augmented-generation.html)
 - [TransformerとAttention — 埋め込み・位置情報・Q/K/Vで文脈を計算する](/algorithms/transformer-attention.html)
