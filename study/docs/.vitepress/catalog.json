@@ -90,7 +90,7 @@
       "id": "algorithms",
       "title": "データ構造・アルゴリズム",
       "description": "操作手順、計算量、不変条件から道具を選ぶ。",
-      "count": 33,
+      "count": 34,
       "status": "辞典本文あり"
     },
     {
@@ -4195,6 +4195,32 @@
       "importance": "useful"
     },
     {
+      "title": "FlashAttention：計算を近似せずにGPUメモリの往復を減らす",
+      "url": "/algorithms/flash-attention.html",
+      "file": "algorithms/flash-attention.md",
+      "domain": "algorithms",
+      "section": "reference",
+      "format": "article",
+      "status": "published",
+      "summary": "HBMに中間行列を保存するAttentionと、オンチップでタイルを処理するFlashAttentionを比べる。走行最大値が変わるオンラインsoftmaxを検算する。",
+      "source": "新規執筆",
+      "aliases": [
+        "FlashAttention",
+        "Flash Attention",
+        "フラッシュアテンション",
+        "オンラインsoftmax",
+        "Online Softmax"
+      ],
+      "verification": "FlashAttentionとPagedAttentionの原論文およびNVIDIAの数値資料に照合し、WindowsのPython 3.12.4でオンラインsoftmaxと容量例を検算（2026-11-21）",
+      "links": [
+        "/algorithms/transformer-attention.html",
+        "/hardware/gpu/architecture.html",
+        "/algorithms/paged-attention.html"
+      ],
+      "difficulty": "intermediate",
+      "importance": "useful"
+    },
+    {
       "title": "floatが表せる値と丸め — binary32の表現と刻み幅",
       "url": "/data/floating-point-spacing.html",
       "file": "data/floating-point-spacing.md",
@@ -4995,7 +5021,8 @@
         "/hardware/gpu/what-is-gpu.html",
         "/hardware/gpu/cpu-vs-gpu.html",
         "/graphics/pipeline/overview.html",
-        "/graphics/compute/shared-memory.html"
+        "/graphics/compute/shared-memory.html",
+        "/algorithms/flash-attention.html"
       ],
       "difficulty": "advanced",
       "importance": "useful"
@@ -6456,6 +6483,7 @@
         "/os/virtual-memory.html",
         "/algorithms/llm-prefill-and-decode.html",
         "/algorithms/prompt-prefix-cache.html",
+        "/algorithms/flash-attention.html",
         "/algorithms/continuous-batching.html"
       ],
       "difficulty": "intermediate",
@@ -7666,6 +7694,7 @@
       "links": [
         "/algorithms/llm-text-generation.html",
         "/algorithms/kv-cache.html",
+        "/algorithms/flash-attention.html",
         "/algorithms/llm-prefill-and-decode.html",
         "/algorithms/llm-quantization.html",
         "/algorithms/model-context-protocol.html",

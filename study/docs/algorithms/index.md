@@ -24,6 +24,7 @@
 - [AIエージェントのハーネス — モデル・ツール・実行ループをつなぐ仕組み](/algorithms/agent-harness.html)
 - [BVHとAABB — 箱でまとめて衝突候補を絞る](/algorithms/bounding-volume-hierarchies.html)
 - [Fisher–Yates法 — 公平なシャッフルと偏る並べ替え](/algorithms/fisher-yates-shuffle.html)
+- [FlashAttention：計算を近似せずにGPUメモリの往復を減らす](/algorithms/flash-attention.html)
 - [Function callingと構造化出力 — AIの返答をプログラムにつなぐ仕組み](/algorithms/function-calling-and-structured-outputs.html)
 - [KVキャッシュ — 推論で何を保存し、何が速くなり、メモリをどれだけ使うか](/algorithms/kv-cache.html)
 - [LLMのファインチューニングとLoRAの仕組み — 基底重みを凍結し、差分だけを学ぶ](/algorithms/lora-fine-tuning.html)

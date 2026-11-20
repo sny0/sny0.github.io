@@ -747,6 +747,10 @@
           "link": "/algorithms/fisher-yates-shuffle.html"
         },
         {
+          "text": "FlashAttention：計算を近似せずにGPUメモリの往復を減らす",
+          "link": "/algorithms/flash-attention.html"
+        },
+        {
           "text": "Function callingと構造化出力 — AIの返答をプログラムにつなぐ仕組み",
           "link": "/algorithms/function-calling-and-structured-outputs.html"
         },

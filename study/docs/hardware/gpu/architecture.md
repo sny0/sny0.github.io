@@ -216,6 +216,7 @@ void SplitCS(uint3 id : SV_DispatchThreadID) {
 - [パイプライン全体像](/graphics/pipeline/overview.html) — このハードウェアの上で走る論理パイプライン
 - [Shared Memory と Atomic](/graphics/compute/shared-memory.html)
 - [GPU最適化の基礎](/graphics/optimization/basics.html)
+- [FlashAttention](/algorithms/flash-attention.html) — オンチップの作業領域を活用して、Attentionの中間行列の読み書きを減らす例。
 
 ## 理解度チェック
 

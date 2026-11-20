@@ -21,6 +21,7 @@ export default {
   '/algorithms/fisher-yates-shuffle.html': ['intermediate', 'useful'],
   '/algorithms/llm-text-generation.html': ['intro', 'useful'],
   '/algorithms/transformer-attention.html': ['intermediate', 'useful'],
+  '/algorithms/flash-attention.html': ['intermediate', 'useful'],
   '/algorithms/kv-cache.html': ['intermediate', 'useful'],
   '/algorithms/prompt-prefix-cache.html': ['intermediate', 'useful'],
   '/algorithms/paged-attention.html': ['intermediate', 'useful'],
