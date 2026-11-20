@@ -90,7 +90,7 @@
       "id": "algorithms",
       "title": "データ構造・アルゴリズム",
       "description": "操作手順、計算量、不変条件から道具を選ぶ。",
-      "count": 35,
+      "count": 36,
       "status": "辞典本文あり"
     },
     {
@@ -5693,7 +5693,8 @@
         "/algorithms/transformer-attention.html",
         "/algorithms/lora-fine-tuning.html",
         "/algorithms/qlora.html",
-        "/algorithms/llm-prefill-and-decode.html"
+        "/algorithms/llm-prefill-and-decode.html",
+        "/algorithms/moe-routing.html"
       ],
       "difficulty": "intermediate",
       "importance": "useful"
@@ -5795,7 +5796,8 @@
         "/algorithms/continuous-batching.html",
         "/algorithms/chunked-prefill.html",
         "/algorithms/disaggregated-prefill-decode.html",
-        "/algorithms/speculative-decoding.html"
+        "/algorithms/speculative-decoding.html",
+        "/algorithms/moe-routing.html"
       ],
       "difficulty": "intermediate",
       "importance": "useful"
@@ -6099,6 +6101,33 @@
       ],
       "difficulty": "advanced",
       "importance": "specialized"
+    },
+    {
+      "title": "MoEの仕組み：トークンごとに使う専門家をどう選ぶか",
+      "url": "/algorithms/moe-routing.html",
+      "file": "algorithms/moe-routing.md",
+      "domain": "algorithms",
+      "section": "reference",
+      "format": "article",
+      "status": "published",
+      "summary": "一部のFFNを専門家に置き換え、4トークンを2専門家へtop-1で振り分ける。専門家の容量、ルーターの学習、重みと通信の費用を説明する。",
+      "source": "新規執筆",
+      "aliases": [
+        "MoE",
+        "Mixture of Experts",
+        "Switch Transformers",
+        "専門家混合",
+        "混合専門家",
+        "エキスパート並列"
+      ],
+      "verification": "Switch TransformersとMegaBlocksの原論文に照合し、WindowsのPython 3.12.4でtop-1の振り分け、容量制限、パラメーター数を検算（2026-11-21）",
+      "links": [
+        "/algorithms/transformer-attention.html",
+        "/algorithms/llm-quantization.html",
+        "/algorithms/llm-prefill-and-decode.html"
+      ],
+      "difficulty": "intermediate",
+      "importance": "useful"
     },
     {
       "title": "MSAAを切り替えて輪郭と床模様を見比べる",
@@ -7725,6 +7754,7 @@
         "/algorithms/flash-attention.html",
         "/algorithms/llm-prefill-and-decode.html",
         "/algorithms/llm-quantization.html",
+        "/algorithms/moe-routing.html",
         "/algorithms/model-context-protocol.html",
         "/algorithms/agent-skills.html",
         "/algorithms/agent-harness.html",

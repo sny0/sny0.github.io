@@ -202,6 +202,7 @@ KとVに別のグループ化を選んだ研究例もあります。 [TensorRT L
 - [LLMのファインチューニングとLoRAの仕組み](/algorithms/lora-fine-tuning.html) — 既存の重みに学んだ更新分を足し、マージするときに格納形式がどう関わるかを読む。
 - [QLoRAの仕組み](/algorithms/qlora.html) — 量子化した基底を凍結してアダプターを学ぶ方法と、二重量子化で減る容量を読む。
 - [LLM推論のprefillとdecode](/algorithms/llm-prefill-and-decode.html) — 入力の処理と続きの生成で、演算とメモリ帯域の影響がどう変わるかを読む。
+- [MoEの仕組み](/algorithms/moe-routing.html) — モデルが保持する重みと、1トークンの計算で選ぶ重みを区別する。
 
 ## 参考資料
 

@@ -176,6 +176,7 @@ Sarathi-Serveでは、prefillを小分けにして進行中のdecodeと同じバ
 - [Prefillとdecodeの分離](/algorithms/disaggregated-prefill-decode.html) — GPU群を分けると、どの待ちが減り、KVの転送の待ちがどこに入るかを読む。
 - [投機的デコーディング](/algorithms/speculative-decoding.html) — 下書きで続きの候補を用意し、本命のdecodeを複数位置まとめて進める仕組みを読む。
 - [LLMの量子化](/algorithms/llm-quantization.html) — 重みやKVを低ビットで表すと読み出し量や演算にどう影響するかを読む。
+- [MoEの仕組み](/algorithms/moe-routing.html) — トークンを専門家に振り分ける計算と、GPU間通信の費用を読む。
 
 ## 参考資料
 

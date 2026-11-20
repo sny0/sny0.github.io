@@ -783,6 +783,10 @@
           "link": "/algorithms/model-context-protocol.html"
         },
         {
+          "text": "MoEの仕組み：トークンごとに使う専門家をどう選ぶか",
+          "link": "/algorithms/moe-routing.html"
+        },
+        {
           "text": "PagedAttention — LLMのKVキャッシュを、連続した領域に置かなくてよいのはなぜか",
           "link": "/algorithms/paged-attention.html"
         },

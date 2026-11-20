@@ -232,6 +232,7 @@ softmaxの前のスコアをマスクします。この例では位置2を負の
 - [FlashAttention](/algorithms/flash-attention.html) — 同じAttentionを計算しながら、スコアと重みの全行列を保存する途中処理を省く。
 - [LLM推論のprefillとdecode](/algorithms/llm-prefill-and-decode.html) — 因果マスクで入力の計算をまとめられる理由と、続きの生成を待つ理由を読む。
 - [LLMの量子化](/algorithms/llm-quantization.html) — 射影の重みと、生成したK・Vを低ビットで保存する場合の違いを読む。
+- [MoEの仕組み](/algorithms/moe-routing.html) — 一部のFFNを複数の専門家に置き換え、トークンごとに使う専門家を選ぶ方法を読む。
 - [MCPの仕組み](/algorithms/model-context-protocol.html) — モデルの出力を受けたアプリが、外部のツールや資料を使う流れを読む。
 - [Agent Skillsの仕組み](/algorithms/agent-skills.html) — 手順と資料が必要なときにモデルの文脈へ入る流れを読む。
 - [AIエージェントのハーネス](/algorithms/agent-harness.html) — モデルを呼び、ツールの結果と履歴を次の入力へつなぐ仕組みを読む。
