@@ -15,6 +15,10 @@ study:
 
 UEは全プラットフォームのビルドに、C#で書かれた独自の**UBT（Unreal Build Tool）**を使います。[CMakeなどの一般的なビルドツール](/tools/build/build-tools-cmake.html)と同様に、ビルドの単位、依存関係、成果物を指定します。UBTでの分割単位は**Module**で、依存関係は **Build.cs**、成果物の種類は **Target.cs** に書きます。[ビルドの基本概念](/tools/build/what-is-build.html)
 
+## この記事で分かること
+
+Unrealでモジュールの依存を宣言するBuild.csと、何をビルドするか決めるTarget.csを区別できます。コード生成や差分ビルドがUBTのどこに関わるか説明できます。
+
 ## ビルド概念の対応表
 
 | 一般C++ | UE | 備考 |
@@ -84,6 +88,13 @@ public class MyGameTarget : TargetRules {
 1. 「ビルド設定はGUIでやるもの」— UEはBuild.cs/Target.csという**コード**が正。GUI(プロジェクト設定)とは役割が別
 2. Moduleを切らずに全部1 Moduleに入れる——小規模なら正解(過剰分割は[asmdefの教訓](/languages/csharp/headers-vs-asmdef.html)と同じ)。ビルド時間・再利用の必要が出てから分割
 3. 「Live Codingがあるからビルドは気にしなくていい」— 構造変更(ヘッダー・UPROPERTY)はフルパスが走る。ヘッダー衛生([ビルド時間の改善](/tools/build/build-speed.html))はUEでも主戦場
+
+## 要点
+
+- Build.csでモジュールの依存を宣言します。公開ヘッダーから必要かどうかに応じてPublicとPrivateを選びます。
+- Target.csではゲーム、エディター、専用サーバーなどのビルド対象を定義します。
+- UBTはUHTのコード生成、対象プラットフォームの設定、コンパイルをまとめて進めます。
+- PCHやUnity Buildはコンパイルをまとめる仕組みです。Adaptive Unity Buildは変更中のファイルを分けて扱えます。
 
 ## 理解度チェック
 

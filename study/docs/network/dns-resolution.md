@@ -19,6 +19,10 @@ study:
 
 [HTTP](/network/http-messages.html)のURLに名前を使う場合、まず接続先の候補を調べ、その後に[TCPなどの接続](/network/tcp-sockets.html)へ進みます。`/study-demo`というHTTPのパスをDNSへ問い合わせるわけではありません。名前からアドレスを得ることと、portを選んで接続することも分けます。
 
+## この記事で分かること
+
+アプリがホスト名からアドレスを得るまでを、OS、リゾルバー、権威サーバーの仕事に分けて説明できます。得られた接続候補と、接続自体の成功を区別できます。
+
 ## アプリが呼ぶ名前解決API
 
 Windowsの`GetAddrInfoExW`は、名前や数値IPの文字列からアドレス情報を得るAPIです。どの名前空間のproviderを使うかなどを指定でき、DNSだけに限定しない機能も持ちます。C#の`Dns.GetHostAddressesAsync`も、名前またはIP文字列に対するアドレス一覧を非同期操作として返します。[Microsoft: GetAddrInfoExW](https://learn.microsoft.com/en-us/windows/win32/api/ws2tcpip/nf-ws2tcpip-getaddrinfoexw)、[Dns.GetHostAddressesAsync](https://learn.microsoft.com/en-us/dotnet/api/system.net.dns.gethostaddressesasync?view=net-10.0)
@@ -134,6 +138,13 @@ OSの名前解決APIが返すエラーは、こうしたDNS応答を含む処理
 名前解決が成功しても、相手のportが開いていること、TCP接続が成功すること、HTTPが成功することは確定しません。返ったアドレスは接続先の候補です。
 
 HTTPの`Host`などは、要求対象の名前を伝える仕事を持ちます。HTTPSでは、[TLSと証明書](/network/tls-https.html)で接続相手が元の対象名に対して適切かも確認します。解決したIPでURLの名前を機械的に置き換えれば、同じHTTP／HTTPSの意味と認証条件を保てるとは限りません。[HTTPの要求と対象](/network/http-messages.html)、[RFC 9110 §4.3.4: HTTPSの相手確認](https://www.rfc-editor.org/rfc/rfc9110.html#section-4.3.4)
+
+## 要点
+
+- 名前解決APIはローカル設定やキャッシュを利用することがあります。DNSの問い合わせにHTTPのパスは含めません。
+- DNSでは、再帰的なリゾルバーが委任をたどり、ゾーンを管理する権威サーバーから応答を得ます。
+- AはIPv4、AAAAはIPv6を表し、CNAMEは別名の参照を表します。キャッシュの有効時間はレコードのTTLに基づきます。
+- 名前がない応答、型がない応答、返事が来ない場合を区別します。アドレスを得た後も、接続先ポートやHTTPの結果を確認します。
 
 ## 観察記事で確かめる範囲
 

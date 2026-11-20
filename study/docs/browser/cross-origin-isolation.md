@@ -15,6 +15,10 @@ study:
 
 **クロスオリジン分離**（cross-origin isolation）は、あるページがウィンドウを開く関係と、ページに取り込めるリソースの条件をブラウザが制限する仕組みです。Workerと共有するカウンターは、処理時間の短い差を測って他の情報を推測するサイドチャネル攻撃にも使えます。ブラウザは共有メモリを使う環境に追加の分離を求めます。現在のページやWorkerで分離が有効かは `crossOriginIsolated` で観測できます。[W3C High Resolution Timeの安全性](https://w3c.github.io/hr-time/#clock-resolution)、[WHATWG HTMLのcrossOriginIsolated](https://html.spec.whatwg.org/multipage/webappapis.html#dom-crossoriginisolated)
 
+## この記事で分かること
+
+ページのウィンドウ関係と取り込める資源を、どの応答方針が制御するか説明できます。ブラウザで分離が有効か確認し、コピーと共有メモリを区別できます。
+
 ## ウィンドウとリソースで効く場所が違う
 
 | 応答ヘッダー | どの応答で指定するか | ブラウザが判断すること |
@@ -67,6 +71,13 @@ HTTPで配信するDedicated Workerの入口は、起点のスクリプト応答
 `view[0] += 1` は、現在値の読み取り、加算、書き戻しに分かれます。2つのWorkerがともに0を読んでから1を書けば、2回加えたつもりでも結果は1です。 `Atomics.add(view, 0, 1)` は、対応する整数型ビューの要素に対する読み取りと更新を不可分に行い、**更新前の値**を返します。実験では、Workerから更新完了を受け取って、ページ側で `Atomics.load(view, 0)` を使ってその要素を読み出します。[ECMAScriptのAtomics.add](https://tc39.es/ecma262/multipage/structured-data.html#sec-atomics.add)、[Atomics.load](https://tc39.es/ecma262/multipage/structured-data.html#sec-atomics.load)
 
 複数の要素をまとめて整合させる場合は、どちらが書き込むか、いつ読み出してよいかも決めます。例えばメッセージで完了を通知し、状態を示すフラグをAtomicsで管理する構成があります。共有バッファを渡した時点と、Workerの書き込みが終わった時点を分けて扱います。[ECMAScriptの共有メモリの指針](https://tc39.es/ecma262/multipage/memory-model.html#sec-shared-memory-guidelines)、[スレッドと同期](/runtime/thread-synchronization.html)
+
+## 要点
+
+- COOPはトップレベル文書のウィンドウ関係、COEPは取り込むリソースの条件に関わります。
+- 別オリジンの資源への要求モードによって、CORPの許可やCORSによる取得の扱いが変わります。
+- 応答ヘッダーに加え、実行環境のcrossOriginIsolatedを見て分離状態を確認します。
+- 通常のArrayBufferのコピーでは内容は別々です。共有メモリで同じ値を更新する場合はAtomicsなどで同期します。
 
 ## 実践との対応
 

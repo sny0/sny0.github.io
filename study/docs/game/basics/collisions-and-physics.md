@@ -15,6 +15,10 @@ study:
 
 ゲームの弾が敵に触れる、箱が床へ落ちる、入口へ入ると次の場面へ進む。どれも空間での接触や重なりを使いますが、その後に起こしたい処理は違います。ここでは**Unity 6.0の3D物理**を例に、形を用意して結果を使うまでを見ます。Unityの2D物理は、別のコンポーネントとシミュレーションを使います。[Unityの衝突の基本](https://docs.unity3d.com/6000.0/Documentation/Manual/CollidersOverview.html)
 
+## この記事で分かること
+
+見える形と当たり判定の形を区別し、Unityの3D物理で床・動く物体・入口にどの設定が合うか判断できます。接触の通知をダメージなどのルールにつなぐ流れを説明できます。
+
 ## 見える形と、接触を調べる形
 
 **メッシュ**は、頂点や面からなる描画用の形です。**コライダー（Collider）**は、当たり判定に使う形です。人型キャラクターにカプセル形のコライダーを付けるなど、見た目より単純な形を使えます。球、箱、カプセルなどの形を組み合わせる方法もあります。[Unityのコライダーの形](https://docs.unity3d.com/6000.0/Documentation/Manual/CollidersOverview.html) · [モデルとメッシュ](/graphics/basics/models-and-meshes.html)
@@ -53,6 +57,14 @@ Unityの3Dトリガーでは、組のうち少なくとも片方にRigidbodyが�
 物理は時間を区切った**ステップ**で進みます。位置を区切りごとに調べる**離散的な衝突判定**では、速い小さな弾が、前の位置と次の位置の間にある薄い壁を通り過ぎる場合があります。**CCD（連続衝突判定）**は、その間の移動も考慮して、すり抜けを減らすための仕組みです。対象の形や動きに応じて方式を選び、実際の速度で確かめます。[UnityのCCD](https://docs.unity3d.com/6000.0/Documentation/Manual/ContinuousCollisionDetection.html) · [ゲームループと時間](/game/basics/game-loop-and-time.html)
 
 **レイキャスト**は、始点からある方向へ線を伸ばし、設定した距離内でどのコライダーに当たるかを調べる問い合わせです。地面の位置、照準、遮られているかの確認などに使えます。太さを持つ物体の移動を調べたい場合は、球などの形を使う問い合わせもあります。[UnityのPhysics.Raycast](https://docs.unity3d.com/6000.0/Documentation/ScriptReference/Physics.Raycast.html) · [Physics.SphereCast](https://docs.unity3d.com/6000.0/Documentation/ScriptReference/Physics.SphereCast.html)
+
+## 要点
+
+- メッシュは描画用、コライダーは当たり判定用です。判定には見た目より単純な形も使えます。
+- 動かさない床は静的なコライダー、力で動く物体には動的なRigidbodyを使うなど、物体の動かし方で構成を選びます。
+- トリガーは押し返さずに重なりを知らせます。Unityの3Dでは組の少なくとも片方にRigidbodyが必要です。
+- 接触を受けてHPを減らすか、同じ弾のダメージを何回適用するかはゲーム側で決めます。
+- 離散的な判定では速い弾が薄い壁をすり抜ける場合があります。CCDを選ぶ際は対象の形と速度で確かめます。
 
 部品の付け方と配置の関係は[シーンとコンポーネント](/game/basics/scenes-and-components.html)、位置や大きさの基準は[座標とカメラ](/graphics/basics/transforms-and-cameras.html)へ進みます。
 

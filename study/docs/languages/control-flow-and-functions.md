@@ -17,6 +17,10 @@ HPからダメージを引く処理を、条件に応じて変え、繰り返し
 
 コードを保存して実行する手順は、[読む順ガイドの実行方法](/guide/software-development-basics.html#run-code)で確認できます。
 
+## この記事で分かること
+
+HPからダメージを引く例を読み、条件で処理を選び、同じ処理を繰り返し、関数の戻り値を使えます。
+
 ## 条件分岐で実行する道を選ぶ
 
 **条件分岐**は、条件の結果によって実行する処理を選びます。`if`の条件が`true`なら最初のブロック、`false`なら`else`のブロックへ進みます。下の例は、ダメージが現在のHP以上なら0を返し、それ以外なら差を返します。どちらかの`return`を実行すると、その呼び出しの処理を終えます。[C++のif文](https://learn.microsoft.com/en-us/cpp/cpp/if-else-statement-cpp?view=msvc-170) · [C#のif文](https://learn.microsoft.com/en-us/dotnet/csharp/language-reference/statements/selection-statements#the-if-statement)
@@ -110,5 +114,11 @@ hp=40
 hp=10
 final=0
 ```
+
+## 要点
+
+- `if` と `else` は条件に応じて実行する処理を選びます。
+- 関数は引数を受け取り、`return` でその呼び出しを終えて結果を返せます。
+- `for` では回数などを数える値を更新し、`while` では次も実行するか毎回条件を調べます。
 
 ゲームでは、攻撃イベントが発生するたびにHPを更新する設計も使います。毎フレーム何を呼ぶかは[小さなシューティングの設計](/game/shooter-design.html)、呼び出し時のCPU側の処理は[関数呼び出しとCPU](/runtime/cpp-internals/function-calls-and-cpu.html)へつながります。

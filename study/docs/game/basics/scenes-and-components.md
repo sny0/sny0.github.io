@@ -15,6 +15,10 @@ study:
 
 プレイヤー、地面、カメラ、照明などを配置し、それぞれの役割を組み合わせて遊べる場面を作ります。主にUnityを例に、オブジェクトを配置して機能を持たせる方法を扱います。[Unityのシーン](https://docs.unity3d.com/6000.0/Documentation/Manual/CreatingScenes.html) · [ゲームエンジンの基本](/game/basics/game-engine-basics.html)
 
+## この記事で分かること
+
+シーン、オブジェクト、コンポーネントがそれぞれ何を持つか説明できます。カメラをプレイヤーの子にしたときの位置や、プレイ後に保存すべき状態を判断できます。
+
 ## シーンは、配置する内容をまとめる
 
 **シーン**は、オブジェクトの配置や関連する設定をまとめる単位です。Unityでは、シーンをアセットとして保存し、読み込んでゲームを動かします。一つのシーンでゲーム全体を作ることも、複数のシーンを同時に読み込んで、背景とUIなどを分けて扱うこともできます。ステージとシーンの対応は、ゲームの構成によって決まります。[Unityのシーンの役割](https://docs.unity3d.com/6000.0/Documentation/Manual/CreatingScenes.html) · [複数シーンの読み込み](https://docs.unity3d.com/6000.0/Documentation/Manual/MultiSceneEditing.html)
@@ -59,3 +63,11 @@ UnityのGameObjectとUnreal EngineのActorは、どちらも配置するまと�
 部品の組み合わせをさらに設計へつなぐときは、[ComponentとECS](/game/patterns/component-and-ecs.html)へ進みます。フレームごとの更新は[ゲームループと時間](/game/basics/game-loop-and-time.html)で扱います。
 
 [Unity実践 シーンにキャラクターとダメージ床を配置する](/practice/unity/scene-health-demo.html)では、HierarchyとInspectorを使い、親子の座標と表示・当たり判定の担当を手を動かして確認します。
+
+## 要点
+
+- シーンはオブジェクトの配置と設定をまとめます。どこまでを一つのシーンに含めるかはゲームの構成次第です。
+- オブジェクトにTransform、描画、衝突、スクリプトなどのコンポーネントを組み合わせて役割を持たせます。
+- 子のローカルな位置は親が基準です。親の移動や回転は子のワールド上の配置に反映されます。
+- Unreal EngineではActorにコンポーネントを組み合わせ、位置を持つ部品にはSceneComponentを使います。
+- シーンに保存する初期配置と、プレイによって変わってセーブが必要になる状態を区別します。

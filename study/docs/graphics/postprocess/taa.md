@@ -13,6 +13,10 @@ study:
 
 # TAA (Temporal Anti-Aliasing)
 
+## この記事で分かること
+
+TAAが過去の色を今の画素へどう対応させ、ちらつきを減らすか説明できます。残像が出たときにモーションベクトル、履歴の有効性、混ぜる量を調べられます。
+
 ## 概要
 
 遠くの市松模様の床をポイントサンプリングで描くと、カメラが少し動くだけで、同じ場所の模様が明るくなったり暗くなったりします。**TAA**（Temporal Anti-Aliasing）は、フレームごとに画素内のサンプル位置を少しずらし、同じ面に対応する過去の結果を現在のサンプルと混ぜます。異なる位置の色が蓄積されるため、細かな模様のちらつきを抑えられます。[Yang・Liu・Salviの論文 §3–4](https://behindthepixels.io/assets/files/TemporalAA.pdf)
@@ -177,6 +181,13 @@ clipPosition.xy += jitterNdc * clipPosition.w;
 - [アンチエイリアシング](/graphics/postprocess/antialiasing.html) — 空間的AAの限界
 - [座標変換](/math/rendering/transform.html) — 再投影の数学
 - [Compute Shader](/graphics/compute/compute-shader.html)
+
+## 要点
+
+- MSAAは同じフレームの画素内でポリゴンの被覆を調べます。TAAは時間方向に異なる位置のサンプルを集めます。
+- 射影のジッタで画素内の違う位置をサンプルし、モーションベクトルで以前の位置を求めます。
+- 過去と現在で対応する面が違うと残像が出ます。使えない履歴は外し、扱う色を近傍の範囲に制限する方法もあります。
+- 初回やカメラの切り替えでは履歴を初期化します。遮蔽が解けた場所を判定するには法線や深度などの追加の情報を使う場合があります。
 
 ## 次に読むべきページ
 

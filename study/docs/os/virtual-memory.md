@@ -17,6 +17,10 @@ study:
 
 ここでは通常のWindowsアプリを中心に、CPU側はx64のページングを説明モデルにします。CPUの変換機構と、Windows APIの予約・コミットという契約を分けて読みます。GPUの仮想メモリ、仮想マシンの二段階変換、AWEやラージページの詳細は扱いません。
 
+## この記事で分かること
+
+同じポインタの値がプロセスごとに別のデータを指せる理由を説明できます。Windowsでアドレスの予約、使用の確約、RAMへの常駐を見分けられます。
+
 ## 仮想アドレスと物理アドレス
 
 アプリがポインタでメモリを読むとき、そのアドレスは通常、そのプロセスの仮想アドレス空間に属します。変換後にメモリへアクセスするために使うのが物理アドレスです。ポインタの数値からRAM上の位置を直接読み取ることはできません。
@@ -125,5 +129,11 @@ Windowsでは、`PAGE_READONLY`、`PAGE_READWRITE`、`PAGE_NOACCESS`、`PAGE_EXE
 | 現在のプロセスでRAMに常駐するページ量 | ワーキングセット。共有ページも含み得る |
 
 `VirtualQuery`は仮想領域の状態や保護を調べるAPIです。`MEM_COMMIT`という結果だけで全ページの常駐を確認したことにはなりません。ページごとの情報には、対象アドレスを指定する`QueryWorkingSetEx`などを使います。[Microsoft: VirtualQuery](https://learn.microsoft.com/en-us/windows/win32/api/memoryapi/nf-memoryapi-virtualquery)、[QueryWorkingSetEx](https://learn.microsoft.com/en-us/windows/win32/api/psapi/nf-psapi-queryworkingsetex)
+
+## 要点
+
+- ページ表は仮想ページと物理ページの対応や権限を持ち、TLBは変換結果を再利用します。
+- 通常の `VirtualAlloc` では、仮想アドレスの範囲を取り置くことと、コミットして使えるようにすることを区別します。
+- ページフォルトはアクセスを続けられるかOSが判断する入口です。原因や対処は、権限、対応付け、ページの内容によって変わります。
 
 [Windowsメモリ観察サンプル](/practice/memory/windows-memory-observation.html)では、予約・コミット・ページへの書込み・コミット解除・解放を分けて試せます。測定値は、その瞬間のOSの管理やプロセス全体の活動にも左右されます。「要求したバイト数と、ある指標の増分が毎回ぴったり一致する」と決めず、何を数えている値かを先に確認してください。

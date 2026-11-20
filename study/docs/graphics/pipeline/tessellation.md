@@ -11,6 +11,10 @@ study:
 
 # Tessellation
 
+## この記事で分かること
+
+一枚の粗いパッチから細かい三角形を作る処理を、分割係数の決定・パラメーター空間の分割・頂点の配置に分けて説明できます。
+
 ## 概要
 
 Tessellation (テッセレーション) は、粗いパッチをGPU上で細かい三角形に分割するためのステージ群です。DX11 (2009) で導入されました。Hull Shaderで分割を制御し、固定機能のTessellatorで分割したあと、Domain Shaderで頂点を配置します。地形、水面、ディスプレースメントマッピングで使われてきましたが、現在はその用途をMesh ShaderやNaniteへ移す動きがあります。
@@ -160,6 +164,12 @@ DSOut DSMain(PatchTess pt, float3 bary : SV_DomainLocation,
 ## 前提知識
 
 - [Vertex Shader](/graphics/pipeline/vertex-shader.html), [パイプライン全体像](/graphics/pipeline/overview.html)
+
+## 要点
+
+- Hull Shaderはパッチの辺と内部の分割係数を出力し、固定機能のTessellatorが分割点を作ります。
+- Domain Shaderが制御点と分割点の座標から頂点位置を求めます。高さマップを用いて位置をずらすこともできます。
+- 距離によって分割数を変えるときは、隣のパッチと共有する辺の設定が合うか確認します。係数の範囲は分割モードに従います。
 
 ## 次に読むべきページ
 

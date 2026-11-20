@@ -12,6 +12,10 @@ study:
 
 # ポストプロセスパイプライン
 
+## この記事で分かること
+
+後処理をどの画像に、どの順で適用するかを考えられます。処理を置く位置と、入力の解像度、色の範囲、出力形式の関係を説明できます。
+
 ## 概要
 
 ポストプロセスは、**描画済みの画像に行う画像処理**です。トーンマッピング、ブルーム、被写界深度、モーションブラー、色調補正などを、フルスクリーン描画やコンピュート処理でつなぎます。入力の色空間や値の範囲は処理の位置によって変わります。例えばUnreal Engineのポストプロセスマテリアルでは、トーンマッピング前のHDRシーン色と、後の画像を使う段階を選べます。[Epic Gamesのポストプロセスマテリアル](https://dev.epicgames.com/documentation/unreal-engine/post-process-materials-in-unreal-engine)
@@ -144,6 +148,13 @@ float3 DownsampleBox13(Texture2D src, float2 uv, float2 texel) {
 
 - [Fragment Shader](/graphics/pipeline/fragment-shader.html) — フルスクリーンパス
 - [Compute Shader](/graphics/compute/compute-shader.html), [並列アルゴリズム](/graphics/compute/parallel-algorithms.html) — 露出計測
+
+## 要点
+
+- 後処理は描画済みの画像を読み、全画面描画やComputeで次の画像を作ります。
+- トーンマッピングの前に使うHDRのシーン色と、その後の画像には異なる値が入ります。目的に合う段階を選びます。
+- アップスケーリングの前後で処理する画素数が変わります。エフェクトの順番は統合するアップスケーラーと実装の条件に合わせます。
+- 中間画像の精度と最終出力の形式を区別します。sRGB形式の描画先へ線形値を書く例では、シェーダー側で符号化を繰り返しません。
 
 ## 次に読むべきページ
 

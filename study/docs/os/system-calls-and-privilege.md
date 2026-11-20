@@ -15,6 +15,10 @@ study:
 
 ゲームが `CreateFileW` でアセットを開くとき、OSがファイル名を解決し、アクセス権を確認してハンドルを作ります。アプリのコードからOSのサービスを依頼する入口が**システムコール**です。CPUはカーネル用に設定された入口へ移り、呼び出したスレッドの文脈でOSのコードを実行し始めます。処理に待ちが生じると、途中で別のスレッドにCPUを渡すことがあります。[Microsoftのネイティブシステムサービスの説明](https://learn.microsoft.com/en-us/windows-hardware/drivers/kernel/libraries-and-headers) · [Windowsのコンテキストスイッチ](https://learn.microsoft.com/en-us/windows/win32/procthread/context-switches)
 
+## この記事で分かること
+
+Windowsでファイルを開く例から、システムコールでCPUが権限の異なる処理へ移る流れと、OSがアクセスを認める条件を説明できます。
+
 ## CPUの権限と、OSが認めるアクセス権
 
 通常のWindows x64アプリは**ユーザーモード**で動きます。x64では一般に現在の特権レベルが3です。Windowsカーネルなどのコードは特権レベル0の**カーネルモード**で動きます。CPUは特権命令を使える条件と、メモリのページにアクセスできる条件を検査します。カーネルに処理を渡したあとも、ファイルを開けるか、ハンドルを指定した操作に使えるかは、OSが要求元の権限をもとに判断します。[Microsoftのユーザーモードとカーネルモード](https://learn.microsoft.com/en-us/windows-hardware/drivers/gettingstarted/user-mode-and-kernel-mode) · [Windowsのオブジェクトハンドル](https://learn.microsoft.com/en-us/windows-hardware/drivers/kernel/object-handles)
@@ -61,3 +65,9 @@ ret            ; 復帰後にユーザーモードの呼び出し元へ戻る
 | トラップ型の例外 | 例として、デバッガーが置いた `INT3` をCPUが実行する | 例外の種類と保存した実行状態。`INT3` の保存先は命令の直後 |
 
 Windowsの資料では、カーネルへの移行の説明で「トラップ」という言葉が広く使われることがあります。Intel SDMの**トラップ型の例外**は、保存する命令位置で区別する用語です。OSが `#PF` を解決できたときは問題が起きた命令を再試行でき、`INT3` ではデバッガーが保存された次の命令位置をもとに処理します。[MicrosoftのPreviousMode](https://learn.microsoft.com/en-us/windows-hardware/drivers/kernel/previousmode) · [Intel SDM Volume 3Aの割り込みと例外](https://cdrdv2-public.intel.com/825758/253668-sdm-vol-3a.pdf) · [Windowsのブレークポイント](/tools/windows/debugger-breakpoints-and-watchpoints.html)
+
+## 要点
+
+- 通常のアプリはユーザーモードで動き、OSのサービスへ処理を渡すときにカーネルの入口を使います。
+- カーネルは、受け取ったハンドルで操作できるか、引数で示された場所を使えるかを検査します。
+- 処理が待機に入ると、CPUは別のスレッドを実行できます。システムコールと機器からの割り込みは起きる理由が違います。

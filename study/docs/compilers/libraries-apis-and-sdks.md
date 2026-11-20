@@ -15,6 +15,10 @@ study:
 
 ゲームを作るときは、ウィンドウを開いたり画像ファイルを読んだりする処理に、既存の機能を使えます。機能を呼び出すための約束がAPI、その処理を実装した部品がライブラリ、開発に使う一式がSDKです。[MicrosoftのWindows SDK](https://learn.microsoft.com/en-us/windows/apps/windows-sdk/)
 
+## この記事で分かること
+
+ゲームで画像を読み込む例から、呼び出しの約束を表すAPI、実装を提供するライブラリ、開発に使うSDKの役割を区別できます。
+
 ## まず三つの役割を区別する
 
 | 用語 | 意味 | 例 |
@@ -67,3 +71,9 @@ int add_score(int current, int bonus);
 4. ビルドと実行を確かめ、APIの結果を使って処理を続ける。
 
 具体的な設定は、利用するライブラリの配布方法とビルドツールによって変わります。API名、配布物の版、対象環境を合わせて調べると、どの部品を用意するか追えます。[Windows SDKの構成](https://learn.microsoft.com/en-us/windows/apps/windows-sdk/) · [ビルドツール](/tools/build/build-tools-cmake.html) · [開発ツールの基本](/tools/development-tools-basics.html)
+
+## 要点
+
+- APIは呼び出しの契約で、ライブラリは利用できる形にした実装です。
+- SDKには開発に必要なヘッダーやライブラリ、ツールなどが含まれます。
+- ヘッダーの宣言を読めることと、リンク時や実行時に実装を見つけられることは別です。

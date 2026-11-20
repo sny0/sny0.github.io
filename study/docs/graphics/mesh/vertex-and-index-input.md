@@ -20,6 +20,10 @@ study:
   <figcaption>インデックスの読み取り位置と、インデックスの値で選ぶ頂点の位置を区別します。<a href="/study/images/graphics/vertex-and-index-input.svg" target="_blank" rel="noopener noreferrer">頂点入力の図を拡大</a></figcaption>
 </figure>
 
+## この記事で分かること
+
+インデックス値から頂点属性のバイト位置を計算できます。描画を始めるインデックスの位置と、その値に足す基準の頂点番号を使い分けられます。
+
 ## 頂点番号から属性の位置を求める
 
 例えば、位置と法線をそれぞれ3個の32ビット浮動小数点数で持つ場合、各属性は12バイトです。頂点ごとに位置と法線をまとめて並べると、次の頂点までの間隔である**ストライド**は24バイトになります。属性の**オフセット**は、一つの頂点の先頭から測ります。D3D12では頂点バッファビューが先頭アドレス、バイト数、ストライドを持ち、パイプラインの入力レイアウトが各属性の形式、オフセット、参照する入力スロットを指定します。[Microsoftの頂点バッファビュー](https://learn.microsoft.com/en-us/windows/win32/api/d3d12/ns-d3d12-d3d12_vertex_buffer_view) · [Microsoftの入力要素の記述](https://learn.microsoft.com/en-us/windows/win32/api/d3d12/ns-d3d12-d3d12_input_element_desc)
@@ -55,3 +59,10 @@ study:
 3. ビューを`IASetVertexBuffers`と`IASetIndexBuffer`で設定し、三角形リストを選びます。コピー元の領域を再利用できるのはコピーが完了した後です。描画が参照する頂点・インデックスの領域は、描画の完了まで保持します。それぞれのキューでフェンスを使って完了を追います。[Microsoftのフェンスによるメモリ再利用](https://learn.microsoft.com/en-us/windows/win32/direct3d12/fence-based-resource-management) · [GPUリソースの寿命](/graphics/optimization/gpu-resource-lifetime.html)
 
 実践では、小さなGLBから頂点とインデックスを取得し、D3D12のWARPで三角形を描画します。描画先を読み戻して、インデックス付き描画の結果を確かめられます。[C++でGLBから三角形を描く](/practice/graphics/glb-mesh-observation.html)
+
+## 要点
+
+- 頂点バッファーに属性が入り、インデックスバッファーに頂点番号が入ります。三角形リストでは番号を3個ずつ使います。
+- 頂点番号にストライドを掛け、属性ごとのオフセットを足して読みます。入力レイアウトの形式やセマンティックをシェーダーと合わせます。
+- 開始インデックスは番号列のどこから読むかを決め、基準頂点は読み取った番号に加算します。両方の範囲を検査します。
+- GPUへ渡すときはバッファーの用途をそろえ、コピー元や描画が読む資源をそれぞれの使用完了まで保持します。

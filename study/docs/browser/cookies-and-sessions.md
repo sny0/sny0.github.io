@@ -15,6 +15,10 @@ study:
 
 **Cookie**は、ブラウザが名前と値を保存し、条件が合うHTTP要求に付ける仕組みです。たとえば**セッションID**をCookieに入れると、サーバーは次の要求でそのIDを受け取り、ログイン情報や期限などの状態を照合できます。ブラウザでCookieが残る期間と、サーバーがIDを有効と判断する期間は別々に決まります。[RFC 6265の例](https://www.rfc-editor.org/rfc/rfc6265.html#section-3.1)、[NISTのセッション管理](https://pages.nist.gov/800-63-4/sp800-63b/session/)
 
+## この記事で分かること
+
+ブラウザがCookieを保存・送信できる条件と、サーバーがセッションを有効と判断する条件を区別できます。Cookie属性がどこまで保護するか説明できます。
+
 ## 応答で設定し、次の要求で送る
 
 たとえば `https://app.example.com/study/` の応答で、サーバーが次のヘッダーを返します。
@@ -87,6 +91,13 @@ HTTP(S)のオリジンはスキーム・ホスト・ポートで区別します�
 **XSS** により攻撃者のスクリプトがページ内で実行されると、`HttpOnly` でセッションCookieの直接読取りを抑えられても、そのページから送られた要求にCookieが付くことがあります。データがHTMLやコードに変わる箇所と、実行を制限する仕組みは次の章で扱います。[OWASPのHttpOnly解説](https://cheatsheetseries.owasp.org/cheatsheets/Session_Management_Cheat_Sheet.html#httponly-attribute)、[XSSとCSP](/browser/xss-and-csp.html)
 
 **CSRF** では、別のページから利用者のブラウザに要求を送らせ、そこに付くCookieを利用して状態変更を起こそうとします。`SameSite` はCookieの送信範囲を絞ります。要求を受け取ったアプリが送信元やトークンを照合する手順は、次の章で扱います。[CSRFとリクエスト検証](/browser/csrf-and-request-validation.html)
+
+## 要点
+
+- サーバーが応答でCookieの値と属性を示し、ブラウザが条件に合う要求へ保存済みの値を付けます。
+- ホストやパス、HTTPS、サイトの関係などに応じて送信条件が決まります。オリジンとサイトの区切り方は別です。
+- サーバー側に状態を置く方式では、Cookie中のIDで利用者や権限、有効期限を照合します。
+- HttpOnlyはスクリプトからの直接読取りを制限します。ログイン状態を使った要求の検査はサーバーでも行います。
 
 ## 実践との対応
 

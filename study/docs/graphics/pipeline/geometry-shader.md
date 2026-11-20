@@ -129,6 +129,12 @@ void GSMain(point GSIn input[1], inout TriangleStream<GSOut> stream)
 
 - [Vertex Shader](/graphics/pipeline/vertex-shader.html), [パイプライン全体像](/graphics/pipeline/overview.html)
 
+## 要点
+
+- Geometry Shaderは一つのプリミティブの頂点を受け取り、変形したり、出力するプリミティブの数を変えたりできます。
+- 出力の最大頂点数を宣言し、ストリームへ頂点を追加します。掲載例は点を受け取り、カメラ方向に向く四角形へ展開します。
+- 出力数が増える処理では、プリミティブ単位の起動や出力のコストが増えます。インスタンシングやComputeで処理する構成と比較できます。
+
 ## 次に読むべきページ
 
 - [Mesh Shader](/graphics/pipeline/mesh-shader.html) — GSの正しいやり直し

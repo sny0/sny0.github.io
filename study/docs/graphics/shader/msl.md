@@ -11,6 +11,10 @@ study:
 
 # MSL (Metal Shading Language)
 
+## この記事で分かること
+
+Metalのシェーダーで使うステージ、バッファーの指定、アドレス空間を読み分けられます。Swiftで準備する入力とComputeの引数を対応付けられます。
+
 ## 概要
 
 MSL (Metal Shading Language) はAppleのMetal API専用のシェーダ言語です。Metal 1〜3ではC++14、Metal 4以降ではC++17を基盤とし、拡張と制限を加えています。テンプレート、ポインタ、名前空間を使える点で、シェーダ言語の中でも汎用のプログラミング言語に近い設計です。iOS、macOS、visionOSのGPUプログラミングはすべてMSLで書きます。
@@ -148,6 +152,13 @@ encoder.endEncoding()
 ## 前提知識
 
 - [シェーダ言語総論と比較](/graphics/shader/overview.html)
+
+## 要点
+
+- MSLにはC++由来の構文があります。基盤となる規格は、対象のMetalの版で確認します。
+- `device`、`constant`、`threadgroup`、`thread`は、それぞれ使うメモリと共有範囲を表します。
+- ステージの属性とバッファー番号をShaderとホストの間でそろえます。ホストは計算パイプラインを準備して処理を起動します。
+- グループ内の複数のスレッドが共有データを作って読む場合は、必要な同期を指定します。
 
 ## 次に読むべきページ
 

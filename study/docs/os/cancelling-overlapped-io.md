@@ -15,6 +15,10 @@ study:
 
 ゲームで次のシーンのアセットを先読みしている途中に、プレイヤーがタイトル画面へ戻ったとします。ローダーは読み取りのキャンセルを依頼できます。**依頼のあとも、読み取りが終わるまではOSがバッファを使う可能性があります。** ここではWindowsの`OVERLAPPED`を使うファイル読み取りを対象に、キャンセルの依頼と結果の回収を追います。[非同期I/Oの基礎](/os/asynchronous-file-io.html) · [ゲームのアセット読み込み](/game/asset-loading.html)
 
+## この記事で分かること
+
+Windowsの非同期読み取りで、キャンセルの依頼、完了の回収、バッファの解放をいつ行うか説明できます。
+
 ## CancelIoExは処理中の要求を探す
 
 `CancelIoEx(file, &request.overlapped)`は、現在のプロセスがそのハンドルに出したI/Oから、指定した`OVERLAPPED`に対応する要求を探し、キャンセルを依頼します。`CancelIoEx(file, nullptr)`はそのハンドルに対する同じプロセスの未完了I/O全体を対象にします。どちらも、呼び出すスレッドとI/Oを発行したスレッドが異なっていても使えます。`CancelIo(file)`は、呼び出したスレッド自身がそのハンドルに出した未完了のI/Oを対象にします。[Microsoft: CancelIoEx](https://learn.microsoft.com/en-us/windows/win32/api/ioapiset/nf-ioapiset-cancelioex) · [Microsoft: CancelIo](https://learn.microsoft.com/en-us/windows/win32/api/ioapiset/nf-ioapiset-cancelio)
@@ -54,6 +58,12 @@ study:
 2. **未回収の要求にキャンセルを依頼する。** ハンドルと要求の情報を保持したまま`CancelIoEx`を呼びます。キャンセル呼び出しの戻り値で未回収件数を減らす処理は行わず、完了処理の側で要求を管理します。
 3. **ワーカーを動かしたまま、残りの完了を回収する。** 通常完了・中止・エラーをそれぞれ片付け、完了処理とキャンセル処理の双方が要求を使い終えたらバッファや構造体を解放します。終了を待つ側が、完了処理にも必要なロックを保持したまま待つと、ワーカーが進めなくなります。
 4. **ワーカーを終了してハンドルを閉じる。** 例えば`PostQueuedCompletionStatus`でI/Oとは区別できる終了用パケットをワーカーの数だけ送り、全ワーカーの終了を待ってからファイルと完了ポートを閉じます。[Microsoft: PostQueuedCompletionStatus](https://learn.microsoft.com/en-us/windows/win32/api/ioapiset/nf-ioapiset-postqueuedcompletionstatus)
+
+## 要点
+
+- `CancelIoEx` で依頼しても、要求がどう完了したかは読み取り側の結果を調べます。
+- 完了を待つ操作がタイムアウトしても、要求やバッファをその時点で解放できるとは限りません。
+- 終了時は新規の発行を止め、受理された要求を回収してから、例のワーカーと資源を終了します。
 
 ## 完了パケットを観察する実践
 

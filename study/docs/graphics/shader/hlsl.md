@@ -13,6 +13,10 @@ study:
 
 短いVS・PSのコードは、[シェーダーの第一歩](/graphics/shader/shader-first-steps.html)と[GLSL・HLSLの対応例](/practice/graphics/shader-first-steps.html)で確認できます。
 
+## この記事で分かること
+
+HLSLで頂点位置や色、テクスチャなどをどのように入出力へ割り当てるか説明できます。Shader Modelとコンパイラーの指定を読み、Wave集約の例を追えます。
+
 ## 概要
 
 HLSL (High-Level Shading Language) はMicrosoftのシェーダ言語です。DirectX、Unity、Unreal Engineで使われるほか、DXCを経由すればVulkanにも使えるため、実務で特に重要です。Shader Model (SM) のバージョンに応じて使える機能が増えます。現行世代はSM 6.xで、DXILを生成するコンパイラにはDXCを使います。
@@ -161,6 +165,13 @@ dxc -T cs_6_6 -E CSMain -Zi -Qembed_debug histogram.hlsl -Fo histogram.dxil
 
 - [シェーダ言語総論と比較](/graphics/shader/overview.html)
 - [パイプライン全体像](/graphics/pipeline/overview.html)
+
+## 要点
+
+- セマンティクスはステージ間の値やシステム値の意味を指定します。クリップ空間の位置や色は対応するシステム値へ書きます。
+- HLSLのリソース宣言は、種類とレジスター空間で読み書きするバッファーやテクスチャを指定します。
+- コンパイルではステージとShader Modelを選びます。使える命令や出力の形式はターゲットとコンパイラーで変わります。
+- 掲載のヒストグラム例は同じbinの加算をWave内でまとめます。異なるbinが多いと削減できるアトミックの回数は少なくなります。
 
 ## 次に読むべきページ
 

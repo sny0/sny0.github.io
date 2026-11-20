@@ -17,6 +17,10 @@ study:
 
 [Web Workerとメッセージ通信](/browser/web-workers-messages.html)の、別の実行環境、ready通知、コピー・移譲、要求IDと世代が前提です。ここでの**job**は、入力を渡して結果を得るアプリの仕事一件を指します。[イベントループ](/browser/event-loop-promises.html)のHTML taskや、言語仕様のECMAScript Jobとは同じ単位ではありません。[ECMAScript: Jobs and Host Operations](https://tc39.es/ecma262/multipage/executable-code-and-execution-contexts.html#sec-jobs)
 
+## この記事で分かること
+
+Workerを再利用する仕組みで、受付・待機・実行をどこで制限し、間に合わない仕事や不要になった結果をどう扱うかを説明できます。
+
 ## Workerの数と、仕事の数を分ける
 
 仕事ごとにWorkerを作ると、スクリプトの取得・解析・初期化や、インスタンスごとのメモリなどの費用が繰り返し発生します。一定数を作って複数の仕事に再利用するのがpoolの基本です。ただし、長く生かす間に保持する状態や、仕事間に残してはいけないデータの初期化も必要です。[WHATWG HTML: Workersの用途と起動コスト](https://html.spec.whatwg.org/multipage/workers.html#workers)
@@ -97,6 +101,13 @@ Workerの生成要求が戻っただけでは、アプリとしてreadyとは限
 `terminate()`は、Worker側の`finally`や返信の完走を保証しません。付属例のstopは全Workerをterminateし、その世代の待機・実行中の管理を終了します。restartでは新しい世代と新しいWorkerを作り、readyを確認します。古いイベントで新しいslotやUIを変更しないよう、世代を照合します。世代の更新だけで旧Workerが停止するわけではありません。[WHATWG HTML: Terminate a worker](https://html.spec.whatwg.org/multipage/workers.html#terminate-a-worker)
 
 データを順次処理する流れで、下流の空きに合わせて供給を抑える標準APIは、[Streams APIとストリーミング処理](/browser/streams-backpressure.html)で扱います。poolの受付拒否と、ストリームの需要に応じたpullを区別できます。
+
+## 要点
+
+- Workerを用意して再利用し、受付と実際の割り当てを分けて待ち行列を管理します。
+- 下流が追いつかない状況を投入側に伝えると、追加投入を抑えられます。保持するバイト数と待ち時間も件数とは別に確認します。
+- 投入、完了、表示の順序は別です。未割り当ての取消しと、実行中の仕事の結果を破棄する操作も分けます。
+- スロットの準備完了や失敗を追跡し、受け付けた仕事を終えて閉じるか、即時停止するかを決めます。
 
 ## 固定サンプルが示すことと、測っていないこと
 

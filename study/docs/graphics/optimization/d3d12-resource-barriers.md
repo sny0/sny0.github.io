@@ -15,6 +15,10 @@ study:
 
 アップロードした頂点データを使うとき、コピー先のバッファへ書き込む処理と、それを頂点バッファとして読み取る処理では、同じバッファに求める使い方が変わります。Direct3D 12では、アプリがリソースの状態を追跡し、次の使い方へ切り替わる位置にバリアを記録します。ここでは `ID3D12GraphicsCommandList::ResourceBarrier` を使う従来のAPIを扱います。[Microsoftのリソースバリア解説](https://learn.microsoft.com/en-us/windows/win32/direct3d12/using-resource-barriers-to-synchronize-resource-states-in-direct3d-12)
 
+## この記事で分かること
+
+コピーから描画へ用途が変わるときや、同じUAVへ連続してアクセスするときに、D3D12のどのバリアを使うか判断できます。キュー内の依存とキュー間の待ちも区別できます。
+
 ## コピー先を次のコピー元にする
 
 たとえば、DEFAULTヒープにバッファを `COPY_DEST` で作り、コマンドリストAでUPLOADバッファからコピーします。次のリストBで同じDEFAULTバッファを読み戻すには、コピーの前に `COPY_DEST` から `COPY_SOURCE` への遷移バリアを記録します。このバリアを境に、先行するコピーで書いたデータを次のコピーで読めるようになります。UPLOADバッファは `GENERIC_READ` のままコピー元にでき、READBACKバッファは `COPY_DEST` のままコピー先にできます。[Microsoftのヒープごとの初期状態](https://learn.microsoft.com/en-us/windows/win32/direct3d12/using-resource-barriers-to-synchronize-resource-states-in-direct3d-12#initial-states-for-resources) · [Microsoftの読み戻し手順](https://learn.microsoft.com/en-us/windows/win32/direct3d12/readback-data-using-heaps)
@@ -64,6 +68,13 @@ UAVを使う二つの処理が同じ `UNORDERED_ACCESS` 状態のままでも、
 別のキューへデータを渡す場合は、生成側が `Signal` するフェンス値を消費側の `Wait` に指定します。これで消費側の処理が進める時点を決め、さらにキュー種別と用途に合う状態を用意します。例えばCOPYとDIRECTの間でリソースを引き渡す場合は、`COMMON` の規則と、暗黙の昇格・減衰が適用される条件を確認します。CPUが読み戻しバッファを読んだりメモリを再利用したりできる時点も、関連するGPU処理の完了をフェンスで確認します。[Microsoftの複数キュー間の同期](https://learn.microsoft.com/en-us/windows/win32/direct3d12/user-mode-heap-synchronization) · [MicrosoftのCOMMONのキュー間規則](https://learn.microsoft.com/en-us/windows/win32/api/d3d12/ne-d3d12-d3d12_resource_states) · [GPUキュー間の同期](/graphics/optimization/gpu-queue-synchronization.html) · [GPUリソースの寿命](/graphics/optimization/gpu-resource-lifetime.html)
 
 実践では、二つのCPUスレッドが記録したリストを一つのキューへ渡し、遷移を挟んでコピーしたバイト列をWARPで読み戻して照合します。[D3D12の並列コマンド記録を試す](/practice/graphics/parallel-command-recording-observation.html)
+
+## 要点
+
+- 同じリソースの用途を変えるときは遷移、状態を変えずUAV利用間の順序が必要なときはUAVバリアを使います。
+- 同じ領域に重ねて配置した別リソースへ使い方を切り替えるときは、エイリアシングバリアを選びます。
+- `COMMON`からの暗黙の昇格と、処理完了後の減衰には条件があります。対象リソースと使い方を確認します。
+- 別キューへ結果を渡すときは、生成側のフェンス通知を消費側が待ち、さらにキューと用途に合う状態を用意します。
 
 ## 関連項目
 

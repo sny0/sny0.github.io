@@ -15,6 +15,10 @@ study:
 
 **CSRF**（Cross-Site Request Forgery）は、攻撃者が利用者のブラウザに要求を送らせ、ログイン中のサイトなどで意図しない操作を行わせる攻撃です。たとえば別のページが設定変更先へフォームを送信し、ブラウザが対象サイトのセッションCookieを付けるとします。サーバーがセッションの有効性だけで更新を受理すれば、その利用者の設定が変更されます。サーバーが確認するべきなのは、Cookieに対応する利用者に加え、その操作をどの文脈で受理するかです。[OWASPのCSRF対策](https://cheatsheetseries.owasp.org/cheatsheets/Cross-Site_Request_Forgery_Prevention_Cheat_Sheet.html#introduction)、[Cookieとセッション](/browser/cookies-and-sessions.html)
 
+## この記事で分かること
+
+ログイン中の要求を受けたサーバーが、利用者の認証に加えて何を検査するか説明できます。状態を変える操作を守る仕組みを使い分けられます。
+
 ## フォームの送信にCookieが付くまで
 
 HTMLのフォームは、`action` に別オリジンのURLを指定して送信できます。ブラウザはその宛先、要求の文脈、Cookieの属性などを照合し、条件に合うCookieを要求に付けます。フォームを作ったページがCookieの値を知っている必要はありません。このように宛先に応じて自動的に使われる資格情報を、**ambient authority** と呼びます。[WHATWG HTMLのフォーム送信](https://html.spec.whatwg.org/multipage/form-control-infrastructure.html#form-submission-algorithm)、[IETF Cookie改訂草案のambient authority](https://datatracker.ietf.org/doc/html/draft-ietf-httpbis-rfc6265bis-22#section-8.2)
@@ -77,6 +81,13 @@ APIが `X-CSRF-Token` のような独自の要求ヘッダーを必須にする�
 ## XSSとの違いと組み合わせる防御
 
 CSRFは別ページなどからブラウザに対象サイトへの要求を送らせます。XSSでは攻撃者のコードが対象サイトのページの中で動きます。その場合は正規ページと同じオリジンから要求を送り、ページに置かれたトークンを読み取れることがあります。Cookieの送信範囲、変更用のメソッド、送信元の検証やトークン、XSSを防ぐ出力処理は、それぞれ異なる経路を受け持ちます。[XSSとCSP](/browser/xss-and-csp.html)、[OWASPのCSRF対策](https://cheatsheetseries.owasp.org/cheatsheets/Cross-Site_Request_Forgery_Prevention_Cheat_Sheet.html#introduction)
+
+## 要点
+
+- 状態の取得と変更の入口を分け、GETなどの取得用メソッドで状態を変更しないようにします。
+- 変更要求では送信元のオリジンを正確に比較し、採用した方式に応じてセッションに結び付くトークンを照合します。
+- SameSiteはCookieの送信条件を制限します。サーバーでは要求を受理してよい条件も検査します。
+- CORSで応答を読める範囲と、サーバーが変更を受け付ける条件は別です。ページ内でコードが動くXSSにも別途対処します。
 
 ## 実践との対応
 

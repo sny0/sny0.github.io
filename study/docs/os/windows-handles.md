@@ -20,6 +20,10 @@ Windowsでイベントやファイルを開くと、アプリは対象を操作�
   <figcaption>二つのプロセスが同じイベントを参照する例。値は説明用です。<a href="/study/images/os/windows-handles.svg" target="_blank" rel="noopener noreferrer">ハンドルテーブルの図を拡大</a></figcaption>
 </figure>
 
+## この記事で分かること
+
+Windowsのハンドルが指す対象と許可された操作を区別できます。値のコピーと独立した複製で、いつ閉じるかの判断がどう変わるかを説明できます。
+
 ## 操作の許可はハンドルごとに決まる
 
 既存のイベントを `OpenEventW` で開くときは、要求する権限をビットの組み合わせで指定します。システムはオブジェクトのセキュリティ記述子に照らして要求を検査します。イベントの状態を変更する `SetEvent` には `EVENT_MODIFY_STATE` が、イベントを待つ `WaitForSingleObject` には `SYNCHRONIZE` が必要です。通知する側と待つ側は、それぞれの操作に必要な権限で同じイベントを扱えます。必要なビットはオブジェクトの種類と関数によって決まります。[同期オブジェクトのセキュリティとアクセス権](https://learn.microsoft.com/en-us/windows/win32/sync/synchronization-object-security-and-access-rights) · [SetEvent](https://learn.microsoft.com/en-us/windows/win32/api/synchapi/nf-synchapi-setevent) · [WaitForSingleObject](https://learn.microsoft.com/en-us/windows/win32/api/synchapi/nf-synchapi-waitforsingleobject)
@@ -78,3 +82,9 @@ int main() {
     std::puts("WaitForSingleObject after CloseHandle(signal): WAIT_OBJECT_0");
 }
 ```
+
+## 要点
+
+- ハンドルは対象を参照し、そのハンドルで許可された操作に使います。
+- 値を変数間でコピーしても参照先の項目は増えません。独立した複製は別々に閉じます。
+- 一つのハンドルを閉じても、別の有効なハンドルがあればその経路から操作できます。擬似ハンドルは呼び出し時の対象を表します。

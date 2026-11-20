@@ -15,6 +15,10 @@ study:
 
 **クロスフェード**は、音源Aのゲインを下げながら音源Bのゲインを上げ、両方の出力を足して切り替える処理です。BGMの切り替えや、ゲームの環境音を入れ替える場面では、二つの音が重なる区間のレベルも考えます。前回のフェードで一つの音を小さくした処理と、ミキシングで複数の音を足した処理を組み合わせます。[Web Audioのゲインオートメーション](/browser/audio-gain-automation.html)、[Web Audioのミキシング](/browser/audio-mixing-and-headroom.html)
 
+## この記事で分かること
+
+二つの音を重ねて切り替えるとき、直線と等電力のゲイン曲線を比べられます。波形の相関によって、中点で音量の落ち込みやピークの上昇が変わる理由を説明できます。
+
 ## 二つのゲイン曲線で切り替える
 
 切り替えの開始を `u = 0`、終了を `u = 1` とします。AとBの同じフレームの値を `a`、`b`、その時刻のゲインを `gA`、`gB` とすると、合成後の値は `y = gA × a + gB × b` です。Web Audioでは、二つの音源を別々の `GainNode` に通し、後段の同じ入力へつなぐと足し合わせられます。[W3C Web Audio APIのGainNode](https://www.w3.org/TR/webaudio-1.1/#GainNode)、[チャンネルのミキシング](https://www.w3.org/TR/webaudio-1.1/#channel-up-mixing-and-down-mixing)
@@ -53,6 +57,13 @@ RMS  = √Pout
   <img src="/images/browser/audio-crossfade-correlation.svg" alt="入力の強さをそろえた理論値の比較。相関が0の場合、中点の等ゲインはマイナス3.01 dBで、等電力は0 dB。同じ波形が同位相で重なる場合、等ゲインは0 dBで、等電力はプラス3.01 dB。いずれも一方だけが鳴る始点と終点は0 dB。" width="760" height="870" loading="lazy">
   <figcaption>同じゲイン曲線でも、入力同士の重なり方で中点が下がる場合と上がる場合があります。<a href="/study/images/browser/audio-crossfade-correlation.svg" target="_blank" rel="noopener noreferrer">相関によるレベルの違いを拡大</a></figcaption>
 </figure>
+
+## 要点
+
+- クロスフェードはAのゲインを下げ、Bのゲインを上げ、同じ時刻の出力を足します。
+- 直線と等電力では二つのゲインの合わせ方が異なります。等電力でも合計のレベルは入力の関係に依存します。
+- 同じ波形が同位相で重なる場合と、相関の小さい音を混ぜる場合では、重なった区間の平均二乗値が違います。
+- 組み合わせる実際の音で、重なった区間のレベルとピークの余裕を確認します。
 
 ## ブラウザで音の切り替えを測る
 

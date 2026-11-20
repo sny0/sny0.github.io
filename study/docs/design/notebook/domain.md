@@ -15,6 +15,10 @@ DDD はフォルダ構成や Entity 基底クラスの導入ではありませ�
 
 タグ: DDD / Entity / Aggregate / Value Object / Repository / Domain Service
 
+## この記事で分かること
+
+同じ対象でも販売では商品、配送では荷物になる例から、業務の言葉が通じる範囲を決める方法が分かります。EntityやRepositoryを、名前からではなく守る規則と公開する契約から選べます。
+
 ## 戦略：言葉の意味が通じる範囲を決める
 
 <div v-pre>
@@ -95,6 +99,12 @@ public sealed class InMemoryOrderRepository : IOrderRepository
 <p>複雑な価格規則、契約、承認などの業務判断が中心なら、モデル化の投資が役立ちます。単純な管理画面やデータ転送なら、素直な CRUD と検証の方が分かりやすいことがあります。すべての処理へ同じ厚さのドメインモデルを強制する必要はありません。</p>
 
 </div>
+
+## 要点
+
+- 境界づけられたコンテキストでは、業務の担当者と開発者が同じ意味で言葉を使います。
+- Entityは識別子で同一性を追い、Value Objectは値で等しさを判断します。Aggregate Rootは一緒に整合性を保つ範囲の入口です。
+- Repositoryは業務上の集合に近い操作を表します。保存操作を扱うDAOや、情報を運ぶDTOとは役割を見分けます。
 
 ## 理解度チェック
 

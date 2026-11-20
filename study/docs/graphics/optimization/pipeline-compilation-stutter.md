@@ -15,6 +15,10 @@ study:
 
 初めて炎のエフェクトが出た瞬間だけゲームが止まり、次から滑らかに表示されることがあります。原因候補の一つは、描画に必要なパイプラインをその場で作り、レンダースレッドが作成の完了を待つことです。APIを呼び出してから戻るまでには、GPU向けのコード生成や状態の検証、ドライバ内部の待ちなどが入り得ます。原因を調べるには、まずパイプライン作成が起きた時刻を記録します。[Khronosのパイプライン作成コストの解説](https://docs.vulkan.org/refpages/latest/refpages/source/VK_EXT_pipeline_creation_cache_control.html)
 
+## この記事で分かること
+
+初めて描く場面だけ止まるとき、シェーダーのビルド後に残るパイプライン作成を切り分けられます。作成済みオブジェクトの再利用と、次回の作成を助ける保存データを区別できます。
+
 ## シェーダーをビルドしたあとに残る処理
 
 ゲームのビルドでシェーダーを [SPIR-VやDXILの中間表現](/graphics/shader/spirv.html) に変換しておけば、シェーダーのソースから中間表現を作る仕事を実行時から外せます。実行先のGPUで描画を行うには、どのシェーダーを組み合わせ、どの形式の画像に、どんな深度・ブレンド設定で書くかをAPIに渡して、パイプラインを作ります。ドライバは、この組み合わせに合わせたGPU向けの処理を、必要に応じて行います。[Vulkanのグラフィックスパイプライン作成](https://docs.vulkan.org/refpages/latest/refpages/source/vkCreateGraphicsPipelines.html) · [Direct3D 12のパイプライン状態](https://learn.microsoft.com/en-us/windows/win32/direct3d12/managing-graphics-pipeline-state-in-direct3d-12)
@@ -58,3 +62,10 @@ Vulkanで `vkGetPipelineCacheData` が返すデータは、あとで `vkCreatePi
 Vulkanで `pipelineCreationCacheControl` を有効にしている場合、`VK_PIPELINE_CREATE_FAIL_ON_PIPELINE_COMPILE_REQUIRED_BIT` を指定すると、コンパイルが必要な作成は `VK_PIPELINE_COMPILE_REQUIRED` を返します。このとき有効なパイプラインは得られないため、その描画を後に回すか、互換性のある作成済みの代替を選び、別途作成を予約します。このフラグを使う場合も、作成の呼び出しにかかる時間は計測します。[Vulkanのパイプライン作成フラグ](https://docs.vulkan.org/spec/latest/chapters/pipelines.html#VkPipelineCreateFlagBits)
 
 関連項目は[デバッグ・プロファイリングツール](/graphics/optimization/tools.html)、[アセットロード](/game/asset-loading.html)、[シェーダーバリアントの管理](/graphics/shader/shader-variants.html)です。
+
+## 要点
+
+- シェーダーが中間表現になっていても、描画状態や出力形式の組み合わせに対するパイプライン作成が残ります。
+- 初回描画で作成するとレンダースレッドが待つ場合があるため、必要な組み合わせを事前に作ると待ちの位置を移せます。
+- アプリ内の作成済みオブジェクト表、作成APIが使うキャッシュ、起動をまたいで保存するバイト列は用途が違います。
+- 作成の時刻、描画パス、鍵になる設定を記録し、保存データなし・ありと同一起動中の再使用を分けて比較します。

@@ -17,6 +17,10 @@ HTTPキャッシュは過去の応答を保存し、条件が合えば後の要�
 
 [HTTPの要求・応答](/network/http-messages.html)に、保存先と再利用の判断が加わります。この章はHTTP CachingのRFC 9111と、HTTP SemanticsのRFC 9110を主に参照します。2026-11-05にRFC EditorとIETFの現行情報を確認した、Internet Standardの文書です。[RFC 9111](https://www.rfc-editor.org/info/rfc9111/)、[RFC 9110](https://www.rfc-editor.org/info/rfc9110/)
 
+## この記事で分かること
+
+HTTP応答を保存できるか、確認なしに再利用できるか、再検証が必要かを区別できます。ETagと304のやり取りで、どの本文が使われるか説明できます。
+
 ## private cacheとshared cache
 
 **private cache**は一人のユーザー向けのキャッシュで、ブラウザなどに置かれます。**shared cache**は複数ユーザーへの再利用を目的とするもので、プロキシやCDNなどに置かれる場合があります。同じ応答でも、private側には保存でき、shared側には保存できないという指示ができます。[RFC 9111 §1](https://www.rfc-editor.org/rfc/rfc9111.html#section-1)
@@ -113,6 +117,13 @@ staleだから必ず本文を捨てるわけではなく、再検証で使える
 localStorage・IndexedDB・Cache APIの使い分けと、保存してから失われるまでの条件は、[ブラウザの保存領域とデータの寿命](/browser/storage-lifetime.html)で扱います。別オリジンへの事前確認を記録するpreflight cacheは、[同一オリジンポリシーとCORS](/browser/same-origin-cors.html)で扱います。
 
 **bfcache**は、戻る・進むのために文書やJavaScriptの状態などを保持・復元する仕組みです。HTTP応答だけの保存とは異なります。さらにService Workerは要求を仲介し、Cache APIなどから応答を返す経路も作れます。「キャッシュから表示した」という言葉だけでは、どの層を使ったか分かりません。[web.dev: Back/forward cache](https://web.dev/articles/bfcache)、[ブラウザの描画](/browser/rendering-journey.html)
+
+## 要点
+
+- キャッシュを使う範囲は、一人用のprivate cacheと複数利用者で共有するshared cacheで異なります。
+- キャッシュの照合にはメソッド、URI、Varyで指定された要求ヘッダーなどが関わります。
+- Cache-Controlを読み、保存の可否、鮮度、再検証の必要性を別々に確認します。
+- ETagを使う条件付き要求に304が返ったときは、対応する保存済みの本文を使います。古い応答を返せる条件も確認します。
 
 ## 付属例で確認する契約
 

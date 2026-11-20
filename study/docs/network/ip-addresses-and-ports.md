@@ -15,6 +15,10 @@ study:
 
 通信先はIPアドレスとポート番号を組み合わせて指定します。IPアドレスはIPによる配送先を示し、ポート番号はその先でTCPやUDPが受け口を区別するために使います。OSはポートをソケットに対応付け、アプリはそのソケットを通してデータを読み書きします。[IPアドレスとポート](https://www.rfc-editor.org/rfc/rfc9293.html#section-3.1) · [UDPの送信元・宛先ポート](https://www.rfc-editor.org/rfc/rfc768.html)
 
+## この記事で分かること
+
+URLの方式・ホスト名・ポート・パスを分けて読めます。OSの接続一覧で、アドレスが表す配送先とアプリの受け口を区別できます。
+
 ## URLに書いてあるもの
 
 次は説明用のURLです。`example.com`は文書の例に使えるドメイン名です。[RFC 2606の例示用ドメイン](https://www.rfc-editor.org/rfc/rfc2606.html#section-3)
@@ -71,6 +75,13 @@ Get-NetUDPEndpoint | Select-Object -First 10 LocalAddress, LocalPort, OwningProc
 ```
 
 TCPの`LocalAddress`と`LocalPort`が自分側、`RemoteAddress`と`RemotePort`が相手側です。`State`は待ち受け中や接続済みなどの状態を表します。UDPの表示では、ローカル側のアドレス・ポートと、所有するプロセスの番号を確認できます。相手先を指定して送るUDPの動作は、送受信の実践で確かめられます。[TCPソケットの実践](/practice/network/tcp-loopback-observation.html) · [UDPの送受信の実践](/practice/network/udp-loopback-observation.html)
+
+## 要点
+
+- IPアドレスは配送先を示し、TCPやUDPのポートはその先の受け口を区別します。
+- IPv4とIPv6はアドレスの幅と表記が異なります。IPv6をURLで使う場合は、ポートとの区切りも確認します。
+- TCPの接続先・接続元の組と、UDPソケットのローカル側の受け口は表示の意味が違います。
+- ホスト名は名前解決で接続先の候補へ変えられます。URLのパスは接続した先で要求する対象を示します。
 
 ## 関連記事
 

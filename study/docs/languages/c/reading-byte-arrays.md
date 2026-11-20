@@ -19,6 +19,10 @@ study:
 const unsigned char wire[] = {0xA5, 0x34, 0x12, 0x7E};
 ```
 
+## この記事で分かること
+
+ファイルや通信から受け取ったバイト列を、残りの長さとバイト順を確認しながらCで読めます。
+
 ```mermaid
 flowchart TB
     subgraph wire[データ形式の4バイト]
@@ -84,6 +88,12 @@ struct record {
 | MSVC x64で観察した `struct record` | `tag` | パディング | `value` の下位 | `value` の上位 | `flags` | パディング |
 
 実行例では `sizeof(struct record)` は6、`_Alignof(struct record)` は2です。`offsetof(struct record, value)` で分かる構造体内の `value` の位置は2、データ形式で整数が始まる位置は1です。構造体の具体的な配置は処理系や設定で変わります。バイト列を扱うときは、形式の位置とバイト順に従って値を読み、その結果を構造体のメンバーに入れます。[メモリレイアウト](/runtime/cpp-internals/memory-layout.html)
+
+## 要点
+
+- 配列から要素へのポインタを渡すときは、読める長さも渡します。
+- 必要なバイト数を満たすことを確かめてから、形式のバイト順に従って値を組み立てます。
+- 構造体には整列のための隙間が入ることがあるため、保存形式とは別に配置を確認します。
 
 ## 手元で確かめる
 

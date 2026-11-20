@@ -20,6 +20,10 @@ study:
   <figcaption>同じ範囲を2回読む概念例です。Aで取得したデータがOSに残っていれば、Bのファイル操作はディスクへの新しい読み取りを伴わずに終わります。<a href="/study/images/tools/file-io-tracing.svg" target="_blank" rel="noopener noreferrer">観測位置の図を拡大</a></figcaption>
 </figure>
 
+## この記事で分かること
+
+アセットの読み取りで、ファイルを開く処理とストレージへの要求を別々に調べ、同じ時間軸で照らし合わせられます。
+
 ## Procmonでファイル操作と結果を見る
 
 対象のプロセス名またはPID、ファイルのパス、操作の種類で絞り込みます。`CreateFile`の行で、パスを開く処理の結果や要求されたアクセス権を調べます。`ReadFile`の行では、ファイル先頭からのオフセットと読み取り長などを確認します。操作を開いて`Stack`を表示すると、記録された呼び出し元をたどれます。シンボルが解決できると、どのライブラリやアセットローダーから来た操作かを絞りやすくなります。[MicrosoftのProcmon資料](https://learn.microsoft.com/en-us/sysinternals/downloads/procmon) · [ファイルを開いて読むまで](/os/file-read-journey.html)
@@ -56,5 +60,11 @@ study:
 対象の操作を短く再現し、使うプロファイルを絞ります。ファイルへ記録する設定では、トレースファイルの書き込み自体もディスク使用量に加わります。メモリへ記録する設定では、長く続けると古いイベントが上書きされます。記録時に`Events dropped`が増えた場合は、対象区間を短くしたりプロファイルを減らしたりして、記録を取り直します。[WPRの記録モード](https://learn.microsoft.com/en-us/windows-hardware/test/wpt/logging-mode) · [WPRでイベント欠落を調べる方法](https://learn.microsoft.com/en-us/windows-hardware/test/wpt/wpr-how-to-topics#avoid-lost-events)
 
 記録にはファイルのパス、プロセス名やコマンドライン、環境によってはユーザー名なども含まれます。結果を教材やチケットに載せるときは、試験用の名前で再現し、必要な行を抜き出して共有します。Procmonの通常の表示フィルターは、元の記録にあるイベントを保持します。[MicrosoftのProcmon資料](https://learn.microsoft.com/en-us/sysinternals/downloads/procmon) · [WPRで記録に含まれる情報](https://learn.microsoft.com/en-us/windows-hardware/test/wpt/wpr-how-to-topics#stop-a-recording)
+
+## 要点
+
+- Procmonでは対象のプロセス、パス、操作、結果を絞り、呼び出し元を調べられます。
+- WPRで記録し、WPAでファイル操作とディスク要求を並べます。OS側の処理にも注意します。
+- 待ちを含むディスクI/O時間とサービス時間を分けて読みます。完了後のアセット準備には別の処理もあります。
 
 手元では、同じファイルに対する読み取りを繰り返し、アプリの出力とツールの記録を比べられます。[ファイル読み取りをトレースする実践](/practice/io/file-io-trace-observation.html)

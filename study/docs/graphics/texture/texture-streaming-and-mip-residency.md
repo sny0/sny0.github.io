@@ -15,6 +15,10 @@ study:
 
 遠くに見える建物なら粗いテクスチャでも描けます。カメラが近づいて画面の広い範囲を覆うと、細部を表示するために高解像度のデータが必要になります。**テクスチャストリーミング**は、こうした見え方の変化に応じて、必要な解像度のデータを実行中に読み込み、描画へ渡す仕組みです。[Unreal Engineのテクスチャストリーミング概要](https://dev.epicgames.com/documentation/en-us/unreal-engine/texture-streaming-overview-for-unreal-engine)
 
+## この記事で分かること
+
+必要なミップが変わったとき、ファイルの読み込み、GPUへの転送、描画への公開をどの順に行うか説明できます。描画で見えるミップの範囲と、実際に確保・常駐するGPUメモリを区別できます。
+
 ## 粗いmipで描き始め、必要な細部を足す
 
 mip 0は元の解像度で、番号が大きいほど粗くなります。1024 × 1024のテクスチャなら、mip 1は512 × 512、mip 2は256 × 256です。ストリーマーは、たとえば画面に投影した物体の大きさ、表面のUV密度、可視性から目標を決めます。目標のmipまで揃う前は、使える粗いmipで描画を続けます。描画時のシェーダーは、公開されている範囲の中からサンプリングに使うmipを選べます。[Unreal Engineの目標解像度と予算](https://dev.epicgames.com/documentation/en-us/unreal-engine/texture-streaming-overview-for-unreal-engine) · [ラスタライズとmip選択](/graphics/pipeline/rasterization.html)
@@ -55,6 +59,13 @@ D3D12で**常駐**とは、GPUが対象のメモリにアクセスできる状�
 GPU側ではテクスチャ用の枠と、レンダーターゲットなどの他の使用量を見ます。Windowsでは `QueryVideoMemoryInfo` で現在の使用量と予算を確認できます。CPU側では読み込み中のデータや展開バッファ、コピーに使う一時領域に上限を設けます。各フレームで発行する要求数や転送量も制限し、見えている対象やすぐに必要な対象を先に処理します。[DXGIのビデオメモリ予算](https://learn.microsoft.com/en-us/windows/win32/api/dxgi1_4/nf-dxgi1_4-idxgiadapter3-queryvideomemoryinfo) · [Unreal Engineのストリーミング指標](https://dev.epicgames.com/documentation/en-us/unreal-engine/texture-streaming-metrics-in-unreal-engine)
 
 境界でカメラが前後するたびに同じmipを読み直さないよう、細かくする条件と粗く戻す条件を離します。たとえば同じ面が384ピクセル以上を占めたらmip 1を要求し、256ピクセル以下の状態が1秒続いたら手放す候補にします。このように切り替え条件に幅を持たせる考え方が**ヒステリシス**です。画面に残る粗さとロードの往復を評価するときは、目標mip、描画が使えるmip、保留中のI/Oと転送量、GPUメモリの使用量を一緒に記録します。[Unreal Engineの可視性とメモリ変動の指標](https://dev.epicgames.com/documentation/en-us/unreal-engine/texture-streaming-metrics-in-unreal-engine)
+
+## 要点
+
+- 見えている範囲や画面上での大きさなどから目標の細かさを選び、必要な細部が用意できるまで粗いミップで描画します。
+- ファイルの範囲を検査し、必要なら展開してGPUへコピーします。描画に新しい範囲を渡す前にコピーとの依存をそろえます。
+- 通常の全ミップを持つテクスチャでは、読み込む範囲やビューを狭めても割り当ては自動では減りません。メモリを減らす方式と区別します。
+- I/O、展開、転送、一時領域、GPUメモリの各予算を見ます。細かくする条件と粗く戻す条件を分ければ、境界付近の読み直しを減らせます。
 
 ## 関連項目
 

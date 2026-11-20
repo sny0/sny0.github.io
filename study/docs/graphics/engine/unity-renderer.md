@@ -153,6 +153,13 @@ CBUFFER_END
 - [CPUとGPUの役割分担](/hardware/gpu/cpu-vs-gpu.html), [パイプライン全体像](/graphics/pipeline/overview.html)
 - [レンダリング方式](/graphics/path/forward.html) の各ページ
 
+## 要点
+
+- SRPはC#で描画の構成を定義できます。カリング結果から描画リストを作り、コンテキストやコマンドバッファーを通じて描画を提出します。
+- URPとHDRPは公式のSRP実装です。対象機種や必要な機能に合わせて選びます。
+- SRP Batcherはマテリアルの値をGPU上に保持し、同じシェーダーバリアントで描くときの設定切り替えを抑えます。
+- カメラやVolumeが持つ描画設定と、ビルド時のシェーダーバリアント削減や実行前の準備は、別々に確認します。
+
 ## 次に読むべきページ
 
 - [URP](/graphics/engine/urp.html) — 実務の主戦場

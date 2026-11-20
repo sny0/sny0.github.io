@@ -19,6 +19,10 @@ study:
 
 <a href="/study/samples/graphics/frame-generation-observation/index.html" target="_self">フレーム生成の比較デモを開く</a>
 
+## この記事で分かること
+
+フレーム生成が動いている物体の間の位置をどう作るか説明できます。表示枚数が増えることと、入力を反映した画像が出るまでの時間を分けて判断できます。
+
 ## アップスケーリングは画素を、フレーム生成は表示枚数を増やす
 
 [アップスケーリング](/graphics/postprocess/upscaling.html)では、例えば1280×720で描いた画像から、1920×1080の画像を作ります。TAAUのように過去フレームを使う方式でも、目的は一つの描画時刻の画像を細かい画素で出力することです。
@@ -71,6 +75,13 @@ flowchart TD
 ## DLSSとFSRで設定を読む
 
 NVIDIAのDLSSでは、**Super Resolution**が1枚の解像度を上げ、**Frame Generation**や**Multi Frame Generation**が間の画像を増やします。AMDのFSR 3.1ではアップスケーリングとフレーム生成のAPIが分かれ、対応する別のアップスケーラーとフレーム生成を組み合わせられます。AMD FSR Frame Generation 4.0.2は、動き情報と前後の画像を使う学習モデルを採用しています。各機能の対応GPUや設定は、使用する版ごとに確認します。 [NVIDIAのDLSS機能一覧](https://developer.nvidia.com/rtx/dlss) · [AMDのFSR 3.1移行ガイド](https://gpuopen.com/manuals/fidelityfx_sdk/getting-started/migrating-to-fsr-3-1/) · [AMD FSR Frame Generation 4.0.2](https://gpuopen.com/manuals/fsr_sdk/techniques/frame-interpolation-ml/)
+
+## 要点
+
+- アップスケーリングは一枚の出力画素数を増やし、補間型フレーム生成は二つの描画済みフレームの間に表示用の一枚を加えます。
+- 二枚の色を単純に平均すると古い位置と新しい位置が重なり得ます。動きの情報や画像の変化を使って中間の位置を推定します。
+- 補間に後ろのフレームが必要なので、いつどの画像を出すか調整します。表示の滑らかさは枚数と間隔の両方で決まります。
+- 入力を読み込む基礎フレームの間隔と、生成される表示用画像の間隔は別です。実践の待ち時間は教材の設定で、製品では条件を確認します。
 
 ## 理解度チェック
 

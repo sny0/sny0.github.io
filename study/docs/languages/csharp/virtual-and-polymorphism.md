@@ -13,6 +13,10 @@ study:
 
 言語機能の詳細は[継承と仮想関数](/languages/cpp/inheritance-and-virtual.html)、内部の仕組みは[vtable](/runtime/cpp-internals/vtable-and-virtual-calls.html)で説明済み。ここでは**C#との差分**に集中します。
 
+## この記事で分かること
+
+C#で仮想関数を使った経験をもとに、C++の上書きと隠蔽、テンプレートによる型ごとの処理を見分けられます。
+
 ## 対応表
 
 | C# | C++ | 差分 |
@@ -123,6 +127,12 @@ C#にもstructとジェネリック制約による特殊化や、C# 11以降のs
 1. 「interfaceがないからC++は不便」— 純粋仮想クラスで同じ設計ができ、さらに多重継承でinterface複数実装も可能(→ [ISPの例](/design/solid/isp.html))
 2. 「GetComponent的な型問い合わせ」を`dynamic_cast`連発で再現しない——コストと設計の両面で悪手になりがち([キャスト](/languages/cpp/casts.html))
 3. UnityのMessage(SendMessage)やUnityEventの遅い動的ディスパッチに慣れていると、C++の仮想関数は桁違いに軽いことに驚くはず——「virtualは遅い」の基準が違う
+
+## 要点
+
+- 基底の仮想関数を上書きするための `override` の扱いは、C#とC++で異なります。
+- C++では派生を基底の値として扱うコピーで、派生側の部分が残らないことがあります。
+- 実行時に実装を選ぶ場面と、型が分かっている時点で処理を選ぶ場面では、使う多態の仕組みが異なります。
 
 ## 理解度チェック
 

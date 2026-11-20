@@ -17,6 +17,10 @@ study:
 
 コードを保存して実行する手順は、[読む順ガイドの実行方法](/guide/software-development-basics.html#run-code)で確認できます。
 
+## この記事で分かること
+
+HPを更新するコードを見て、名前、型、初期値を見分け、式の評価と代入で値がどう変わるか説明できます。
+
 ## 名前、型、最初の値
 
 `int hp = 100;`では、整数を扱う型`int`の変数を、`hp`という名前で宣言し、`100`で**初期化**します。変数の**型**は、扱う値や使える演算の規則を決めます。この例の`int`は整数、`bool`は`true`と`false`を扱います。C++とC#で型の名前が同じでも、すべての型の大きさや演算規則が同じとは限りません。[C++の宣言と定義](https://learn.microsoft.com/en-us/cpp/cpp/declarations-and-definitions-cpp?view=msvc-170) · [C#の型](https://learn.microsoft.com/en-us/dotnet/csharp/fundamentals/types/)
@@ -101,5 +105,11 @@ same=False
 `hp - damage`や`hp == copy`は、演算などを組み合わせた**式**です。式の評価では、値を求めたり、代入のように状態を変えたりします。`hp = hp - damage;`のように処理として書いたものが**文**です。宣言も、例の関数内では宣言文として書きます。[C++の式](https://learn.microsoft.com/en-us/cpp/cpp/expressions-cpp?view=msvc-170)
 
 `main`や`Main`で宣言した`hp`は、その関数の中で名前が有効な範囲から参照します。名前が有効な範囲をスコープと呼びます。波括弧で囲むブロック内で宣言したローカル変数は、そのブロックのスコープに属します。名前の範囲と実際のデータの寿命は、参照やオブジェクトを学ぶときに区別します。[C++のスコープ](https://learn.microsoft.com/en-us/cpp/cpp/scope-visual-cpp?view=msvc-170)
+
+## 要点
+
+- 型は変数が扱う値と使える演算に関わります。宣言で名前を付け、初期化で最初の値を与えます。
+- `hp = hp - damage` は右側で更新前のHPを読み、計算結果を左側に代入します。
+- `=` は代入、`==` は比較に使います。式と文を読み分け、名前を使える範囲を確かめます。
 
 条件によって処理を変えたり、同じ計算を何度も呼んだりする方法は、[条件分岐・繰り返し・関数](/languages/control-flow-and-functions.html)へ進んでください。数の表現は[整数・ビット・バイト](/data/integer-bits-and-bytes.html)、変数が保持するデータの寿命は[記憶域期間と寿命](/runtime/memory/storage-duration-and-lifetime.html)で扱います。

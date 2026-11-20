@@ -15,6 +15,10 @@ study:
 
 聞き手から足音までの距離が同じでも、間に壁があると足音が小さく、こもって聞こえることがあります。ゲームでこの違いを表すには、聞き手と音源の間に壁があるかを調べ、音量と周波数ごとの強さを変えます。Unreal Engineの遮蔽機能にも、障害物を調べる設定と、遮蔽時のゲインやローパスフィルターを決める設定があります。[Unreal Engineの音の減衰と遮蔽](https://dev.epicgames.com/documentation/en-us/unreal-engine/sound-attenuation-in-unreal-engine#attenuationocclusion)
 
+## この記事で分かること
+
+同じ距離の音でも壁があると小さくこもる理由を説明できます。遮蔽物の判定、音全体の減衰、周波数による減衰を分けて調べられます。
+
 ## 直接届く経路に壁があるか調べる
 
 聞き手から音源に向かってレイキャストし、音源までの区間で壁などに当たるかを調べます。描画用の形と遮蔽判定用の形を分ける場合は、閉じた扉など、音を遮るものが判定に含まれるようにします。[Unreal Engineの遮蔽判定に使うトレース](https://dev.epicgames.com/documentation/en-us/unreal-engine/sound-attenuation-in-unreal-engine#occlusiontracechannel)
@@ -48,6 +52,13 @@ study:
 モノラルの効果音なら、音源ごとにゲインとフィルターで遮蔽を表し、`PannerNode` で方向と距離を反映できます。再生中に扉が開閉するときは、ゲインとカットオフ周波数を `AudioParam.setTargetAtTime()` などで新しい値に近づけると、音量や音色が急に変わるのを抑えられます。壁の端で判定が頻繁に切り替わる場合は、少し時間を置いて状態を確定する方法もあります。[Web Audioの音の定位と距離減衰](/browser/audio-spatial-panning.html) · [W3C Web Audio APIのAudioParam](https://www.w3.org/TR/webaudio/#AudioParam)
 
 壁を挟んだときも、扉や廊下を通る音、壁に反射した音などが聞き手に届く場合があります。線分1本のモデルは直接経路の判定に使い、ほかの経路の強さは必要に応じて別に調整します。ゲイン0.5やカットオフ1,000 Hzはこの実験の設定です。実際の聞こえ方は壁の材質や厚さ、周囲の形にも左右されます。[Web Audioの畳み込みリバーブ](/browser/audio-convolution-reverb.html)
+
+## 要点
+
+- 聞き手と音源の間をレイキャストし、直接届く経路を壁などが遮っているか確認します。
+- ゲインを下げると周波数成分全体が弱まり、ローパスでは高い周波数をより弱くできます。
+- 音の方向・距離による変化は、遮蔽の設定と別に扱えます。
+- 扉の開閉などで遮蔽が変わるときは、再生したままゲインとカットオフを更新できます。
 
 ## ブラウザで同じ音を聴き比べる
 

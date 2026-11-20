@@ -15,6 +15,10 @@ study:
 
 「敵・弾・エフェクト・アイテムをいつ、誰が、どうやって作るか」。生成は[Factory Method](/design/patterns/factory-method.html)/[Prototype](/design/patterns/prototype.html)/[Object Pool](/game/patterns/object-pool.html)の交差点です。
 
+## この記事で分かること
+
+敵の生成とミニマップへの登録を一か所に集める方法が分かります。設定済みの見本から作る敵と、高頻度で再利用する弾で生成方法を分ける判断ができます。
+
 ## 素朴な実装
 
 ```cpp

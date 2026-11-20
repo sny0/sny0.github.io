@@ -15,6 +15,10 @@ study:
 
 ゲームのコードを書くときは、文字を編集するほか、実行できる形を作り、動きを調べ、重い処理を測ります。こうした作業を助けるソフトウェアが**開発ツール**です。一つのアプリの中から複数の道具を呼び出すこともあります。[Visual Studioの開発環境](https://learn.microsoft.com/en-us/visualstudio/get-started/visual-studio-ide)
 
+## この記事で分かること
+
+ゲームのコードを書く、動作がおかしい場所を追う、処理時間を測るときに、どの開発ツールを使うか判断できます。
+
 ## 何をしたいかで機能を見る
 
 | 道具 | 主な仕事 | 使う場面 |
@@ -56,6 +60,12 @@ IDE（統合開発環境）は編集、ビルド、デバッグなどを一つ�
 **プロファイリング**は、実行中に計測データを集め、時間や資源を使う箇所を調べる作業です。CPU使用率や関数ごとの実行時間、メモリの使用量など、目的に合う計測を選びます。実際のゲームに近いビルド設定と操作をそろえると、変更前後を比べられます。[Visual Studioの性能計測](https://learn.microsoft.com/en-us/visualstudio/profiling/profiling-feature-tour)
 
 例えば「CPUが計算していた時間」と「I/Oなどの完了を待っていた時間」では、改善する箇所が変わります。GPUの描画を調べるときは、GPU向けの計測やフレーム解析も使います。デバッガで停止する操作は実行のタイミングを変えるため、通常の実行速度を調べるときは計測用の実行を用意します。[計測ツールの選び方](https://learn.microsoft.com/en-us/visualstudio/profiling/choose-performance-tool) · [GPUの調査ツール](/graphics/optimization/tools.html) · [フレームタイム](/graphics/optimization/frame-pacing.html)
+
+## 要点
+
+- エディターはコードを書き、コンパイラはコードを翻訳します。IDEは複数の開発機能を一つの環境から使えるようにします。
+- 値の変化を追うには、デバッガで停止し、変数を表示しながら処理を一段ずつ進めます。
+- 遅さを調べるには、計測条件をそろえ、時間や資源を使う箇所をプロファイラーで測ります。
 
 コマンドから道具を呼び出す方法は、[ターミナル・シェル・コマンド](/tools/terminal-shell-and-commands.html)で扱います。
 

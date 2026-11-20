@@ -11,6 +11,10 @@ study:
 
 # URP (Universal Render Pipeline)
 
+## この記事で分かること
+
+URPの描画パスを選ぶときに、ライトの扱いや使用バージョンを確認できます。RenderGraphへパスを加える例から、カメラが使う中間テクスチャの入出力を説明できます。
+
 ## 概要
 
 URPは、モバイルからPCやコンソールまでを一つの設計でカバーする、Unityの標準レンダーパイプラインです。Unity 6.0 / URP 17.0ではForward、Forward+、Deferredを選択でき、RenderGraphを標準で使います。Render Graphを無効にするCompatibility Modeもあります。後続バージョンではDeferred+などの選択肢が増えているため、使用するUnityとURPの版を確認してください。ソースコードを読み通しやすく、実際に使われるレンダラーの構成を学ぶ題材にもなります。
@@ -193,6 +197,13 @@ Unity 6000.0.85f1 / URP 17.0.4 の Forward レンダラーで、`Intermediate Te
 
 - [Unity のレンダラーと SRP](/graphics/engine/unity-renderer.html)
 - [Forward+](/graphics/path/forward-plus.html), [RenderGraph](/graphics/optimization/render-graph.html)
+
+## 要点
+
+- Forward・Forward+・Deferredの選択肢は、使用するUnityとURPの版で確認します。Forward+では、物体ごとの上限とカメラごとの上限を区別します。
+- URP AssetとRenderer Assetで、品質の設定と描画パスの構成を扱います。
+- URP 17ではRenderGraphを標準で使います。パスの有無や順序は設定次第なので、Render Graph ViewerやFrame Debuggerで実際の構成を確認します。
+- 掲載した色の加工パスは入力用の中間テクスチャを要求します。描画先がバックバッファーのままの場合は、そのパスを記録しません。
 
 ## 次に読むべきページ
 

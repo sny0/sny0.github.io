@@ -15,6 +15,10 @@ study:
 
 開発手順には、`dotnet build`や`cmake --build build`のように文字でツールを呼び出す操作が出てきます。この操作方法をCLI（コマンドラインインターフェース）と呼びます。入力した文字列をどのプログラムがどう受け取るかを追うと、コマンドの読み方が分かります。[Windows Terminalの概要](https://learn.microsoft.com/en-us/windows/terminal/)
 
+## この記事で分かること
+
+PowerShellの例から、画面を提供するターミナルとコマンドを解釈するシェルを区別し、実行する対象と引数を読み取れます。
+
 ## 画面と、入力を解釈するプログラム
 
 | 名前 | 役割 | 例 |
@@ -65,5 +69,11 @@ PowerShellで現在のフォルダーにある自作の実行ファイルを起�
 `Get-ChildItem -File | Select-Object -First 3 Name, Length`の`|`は**パイプ**です。左側が出力したものを右側へ渡します。この例ではファイルを表すオブジェクトを渡し、先頭3件の名前とサイズを取り出します。PowerShellのコマンドレット間では、名前やサイズなどの情報を持つオブジェクトを受け渡せます。[PowerShellのパイプ](https://learn.microsoft.com/en-us/powershell/scripting/learn/ps101/04-pipelines)
 
 外部プログラムには、入力を受ける**標準入力**、通常の結果を出す**標準出力**、エラーなどを出す**標準エラー出力**という受け渡し口があります。シェルから起動したプログラムの出力を画面に表示したり、別のプログラムへつないだりできます。外部プログラム間のパイプと、PowerShellのコマンドレット間のオブジェクトの受け渡しでは、扱う形式を確認します。[PowerShellの出力ストリーム](https://learn.microsoft.com/en-us/powershell/module/microsoft.powershell.core/about/about_output_streams) · [パイプと子プロセスの標準入出力](/os/pipes-and-process-io.html)
+
+## 要点
+
+- ターミナルは入力と出力を表示し、シェルはコマンドを解釈して処理を起動します。
+- 相対パスは現在のフォルダーを基準にします。プログラム名をどこから探すかにはPATHなどが関わります。
+- パイプは左の出力を右に渡します。PowerShellのコマンドレット間では、名前やサイズを持つオブジェクトを渡す例があります。
 
 開発環境全体の役割は[開発ツールの基本](/tools/development-tools-basics.html)、ソースからプログラムを作る処理は[ソースコードから実行まで](/compilers/source-code-and-execution.html)へ進みます。

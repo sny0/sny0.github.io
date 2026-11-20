@@ -15,6 +15,10 @@ study:
 
 ソース上の変数に二つの分岐から別々の値を入れる場合、最適化では、合流後に使う値がどちらの経路から来たかを調べます。**LLVM IR（Intermediate Representation、中間表現）**では、命令を実行する順序と、値を作る命令から値を使う命令へのつながりを、型付き命令で表せます。テキスト形式の `.ll` は人が読める表現で、対応するバイナリ形式をビットコードと呼びます。[LLVM IRの概要](https://llvm.org/docs/LangRef.html#abstract) · [トークン・AST・型検査](/compilers/tokens-ast-and-type-checking.html)
 
+## この記事で分かること
+
+分岐を含むC++の計算をLLVM IRで読み、どの経路で作った値を合流後に使うかを追えます。
+
 ## 基本ブロックと分岐
 
 次のC++関数は `keep` の値に応じて計算を切り替え、結果を2倍します。`unsigned` が32ビットの環境を想定します。
@@ -85,5 +89,11 @@ C++の例を `choose-offset.cpp` として保存すると、Clangが生成した
 clang++ -std=c++17 -S -emit-llvm -O0 choose-offset.cpp -o before.ll
 clang++ -std=c++17 -S -emit-llvm -O1 choose-offset.cpp -o after.ll
 ```
+
+## 要点
+
+- 基本ブロックの末尾の命令は、分岐先や関数の戻り方を決めます。
+- SSA値の定義箇所は一つです。合流点の `phi` は、どのブロックから来たかに応じて値を選びます。
+- アドレスを表す値の定義が一つでも、指すメモリには何度も書けます。条件を満たすローカルの記憶域は `mem2reg` でSSA値に置き換えられます。
 
 機械語を格納したオブジェクトファイルでは、別ファイルで定義される関数やデータへの参照をリンカーに渡します。[COFFの再配置](/compilers/coff-relocations.html)

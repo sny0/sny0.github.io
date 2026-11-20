@@ -20,6 +20,10 @@ study:
   <figcaption>Windows PCで圧縮アセットを読み取るときの概念図です。展開経路は書き込み先と実行環境によって変わります。<a href="/study/images/game/directstorage.svg" target="_blank" rel="noopener noreferrer">読み取りと展開の図を拡大</a></figcaption>
 </figure>
 
+## この記事で分かること
+
+DirectStorageで圧縮アセットを読み、指定したメモリへ届ける流れを説明できます。展開をどこで行うか、どの段階の待ちを計測すべきかを判断できます。
+
 ## 要求を積む、提出する、結果を受け取る
 
 1. ファイルを開き、`DSTORAGE_REQUEST`に読み取り元の範囲、展開形式、書き込み先を指定します。たとえば、パックファイル内のオフセットと圧縮後のサイズを読み取り元に、D3D12バッファの領域を出力先に設定します。圧縮済みなら、展開後のサイズも渡します。[Win32の`DSTORAGE_REQUEST`](https://learn.microsoft.com/en-us/windows/win32/dstorage/dstorage/ns-dstorage-dstorage_request) · [書き込み先の種類](https://learn.microsoft.com/en-us/windows/win32/dstorage/dstorage/ne-dstorage-dstorage_request_destination_type)
@@ -45,3 +49,10 @@ DirectStorageは処理途中のデータを**ステージングバッファ**に
 Windows 10と11で使えるDirectStorageのリリースがあり、使える機能は採用したSDK、ランタイム、Windowsのバージョン、デバイスとドライバーで決まります。たとえばWindows 11の**BypassIO**は、対応する保存先とドライバーで読み取り経路の一部を短縮します。使えない場合は従来のI/O経路が使われます。GPU展開がCPUへ切り替わる条件は、これとは別に確認します。[DirectStorage SDKのリリース一覧](https://devblogs.microsoft.com/directx/directstorage-api-downloads/) · [MicrosoftのWindows対応の説明](https://devblogs.microsoft.com/directx/directstorage-1-1-coming-soon/) · [WindowsのBypassIOドライバー仕様](https://learn.microsoft.com/en-us/windows-hardware/drivers/storage/bypassio)
 
 比較では、同じアセットを使い、提出から完了までの時間と、完了から描画できるまでの時間を分けて記録します。CPU時間、GPUのコピー・展開の負荷、描画フレーム時間も合わせると、展開先を変えたときに待ちがどこへ移ったかを確認できます。コードでは`HelloDirectStorage`がファイルからGPUバッファまでの流れ、`BulkLoadDemo`がアセットのまとまりと展開経路の比較を扱います。[ファイルI/Oの観測方法](/tools/windows/file-io-tracing.html) · [MicrosoftのHelloDirectStorage](https://github.com/microsoft/DirectStorage/tree/main/Samples/HelloDirectStorage) · [MicrosoftのBulkLoadDemo](https://github.com/microsoft/DirectStorage/tree/main/Samples/BulkLoadDemo)
+
+## 要点
+
+- 要求に読み取り元の範囲、展開形式、出力先を指定し、キューに積んで提出します。
+- GDeflateは可逆圧縮形式です。出力先や環境によってCPUでの展開や、対応するGPUの展開経路が選ばれます。
+- GPU展開の経路にもステージングやコピーが入ります。展開後のサイズと、途中のバッファに収まる範囲を確認します。
+- ファイル読み取りの完了と描画での利用可能時点を分け、読み取り・展開・転送のどこで待つかを測ります。

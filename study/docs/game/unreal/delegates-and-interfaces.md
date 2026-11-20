@@ -11,6 +11,10 @@ study:
 
 # UEの Delegate と Interface
 
+## この記事で分かること
+
+UEのDelegateで通知を結び付ける流れと、Interfaceで異なる型の共通機能を呼ぶ流れを区別できます。Blueprintへ公開するかどうかで呼び出し方を選べます。
+
 ## Delegate — C#のevent相当をマクロで実現
 
 [C++にはdelegate/eventの言語機能がない](/languages/csharp/delegates-events-function-pointers.html)ため、UEはマクロで型を生成する独自Delegateシステムを持ちます。
@@ -85,6 +89,13 @@ class ABarrel : public AActor, public IDamageable { /* ... */ };
 1. UnityEventの感覚で全部Dynamicにする——C++内部の高頻度通知が名前検索呼び出しになり遅い。**公開範囲で種類を選ぶ**
 2. C# interfaceの感覚で `dynamic_cast` や直接キャストで判定——UEでは `Implements<U>()`+`Execute_` の作法(BP実装を取りこぼすため)
 3. 「マクロだらけで気持ち悪い」— マクロの裏の必然(リフレクション・BP連携・RTTIなし)を[Unreal Engineの学習ガイド](/game/unreal/)で追えば、全部説明がつく
+
+## 要点
+
+- Delegateは通知の受け手をバインドし、Multicastなら複数の受け手に伝えられます。
+- Dynamic系のDelegateはBlueprint連携やシリアライズで使えます。C++内の通知なら公開範囲に応じて種類を選びます。
+- UEのInterfaceは専用マクロによる型情報を使い、Blueprintだけの実装にも対応します。
+- Blueprint実装を含めてインターフェースの関数を呼ぶ場合は、記事の例のようにExecute系の呼び出しを使います。
 
 ## 理解度チェック
 

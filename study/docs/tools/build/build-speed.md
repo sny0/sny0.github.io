@@ -11,6 +11,10 @@ study:
 
 # ビルド時間 — incremental build・PCH・Unity Build・C++でビルドが遅くなる理由
 
+## この記事で分かること
+
+C++のビルドでどこに時間がかかるかを見分け、差分ビルド、プリコンパイル済みヘッダー、Unity Buildのどれが効くか判断できます。
+
 ## なぜC++のビルドは遅いのか(原因の理解が対策の半分)
 
 1. `#include <vector>` だけで、[プリプロセッサ](/runtime/cpp-internals/build-pipeline-journey.html)が翻訳単位に数万行を取り込みます。100個の.cppが同じヘッダーを含めば、コンパイラは同じ数万行を100回解析します。

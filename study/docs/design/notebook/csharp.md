@@ -15,6 +15,10 @@ GC があっても、ファイル・接続・購読をいつ終了するかは�
 
 タグ: C# / IDisposable / async / await / record / DI / CancellationToken
 
+## この記事で分かること
+
+ファイルや接続を閉じる責任を誰に置き、待機中の処理の結果を誰が受け取るかが分かります。C#で寿命を設計するときに、GC、Dispose、非同期処理、DIを区別できます。
+
 ## GC と Dispose は別の役割
 
 <div v-pre>
@@ -76,6 +80,12 @@ public sealed class NoteReader
 <p><strong>Transient</strong> は解決ごと、<strong>Scoped</strong> はスコープごと、<strong>Singleton</strong> はコンテナ内で共有する寿命です。長寿命の部品が短寿命の部品を捕まえ続ける captive dependency に注意します。特に Singleton に Scoped な DbContext を直接保持させる設計を避け、必要なスコープを明示します。</p><p><code>record</code> は値に基づく等価性などを生成しますが、参照する List の中身まで不変にはしません。<code>readonly</code> フィールドも、参照先オブジェクトの変更を禁じるとは限りません。不変性はオブジェクトグラフまで見て設計します。</p>
 
 </div>
+
+## 要点
+
+- GCはマネージドメモリを回収します。ファイルや接続を必要な時点で閉じる責任は、所有者とDisposeの契約に置きます。
+- `await` で完了や例外を観察します。途中で打ち切る必要がある処理には `CancellationToken` を届くところまで渡します。
+- DIでは長寿命の部品が短寿命の部品を保持し続けないかを確かめます。`record` の参照先が可変かどうかも別に確認します。
 
 ## 理解度チェック
 

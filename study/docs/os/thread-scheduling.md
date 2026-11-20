@@ -15,6 +15,10 @@ study:
 
 ゲームのメインスレッドがワーカーの完了を待つとき、ワーカーが完了を通知してから、メインスレッドが実際に動き出すまでにも時間がかかることがあります。Windowsが論理プロセッサーに割り当てるのは、プロセスに属する個々の**スレッド**です。いつ条件待ちが終わり、いつCPUを使えたかを分けると、遅れた区間を特定できます。[プロセスを起動してmainへ到達するまで](/os/process-startup.html) · [Windowsのプロセスとスレッド](https://learn.microsoft.com/en-us/windows/win32/procthread/about-processes-and-threads)
 
+## この記事で分かること
+
+ワーカーがゲームのスレッドに完了を知らせたあと、いつ実行できる状態になり、実際にいつCPUを使えたかを区別できます。
+
 ## 実行可能になる時刻と、実行を再開する時刻
 
 動作中のスレッドを追うときは、まず次の三つの状態で考えます。実際のWindowsは内部でさらに細かい状態を持ちます。[Windowsのコンテキストスイッチ](https://learn.microsoft.com/en-us/windows/win32/procthread/context-switches) · [WPAのCPU解析ガイド](https://learn.microsoft.com/en-us/windows-hardware/test/wpt/cpu-analysis)
@@ -56,6 +60,12 @@ Windowsは、実行可能な候補から優先度の高いスレッドを選び�
 Windows Performance Recorder（WPR）で現象が起きた区間を記録し、Windows Performance Analyzer（WPA）で開きます。`CPU Usage (Precise)` で対象のプロセスとスレッドに絞り、`Waits (us)` と `Ready (us)` を比べます。待機が長い場合は、記録されたスタックやスレッドの依存関係から待ちの起点をたどります。実行可能な時間が長い場合は、その間に対象が実行できる論理CPUを誰が使っていたかを見ます。対象自身のCPU時間が長い場合は、同じ時間帯の `CPU Usage (Sampled)` でサンプルが集まった関数を調べます。[WPRとWPAの操作例](https://learn.microsoft.com/en-us/troubleshoot/windows-server/support-tools/support-tools-xperf-wpa-wpr) · [WPAのCPU Usageグラフ](https://learn.microsoft.com/en-us/windows-hardware/test/wpt/cpu-analysis#cpu-usage-precise-graph)
 
 ゲームのカクつきを調べる場合は、フレームが遅れた時刻を先に絞り、その区間のCPU側の状態を照合します。フレームが長かったときも、メインスレッドがCPUで仕事を続けていた場合と、ほかの仕事の完了を待っていた場合では、次に調べる場所が変わります。[フレームタイムとフレームペーシング](/graphics/optimization/frame-pacing.html)
+
+## 要点
+
+- 待機中、実行可能、実行中は別の状態です。待機を終えてもCPUへ直ちに割り当てられるとは限りません。
+- Windowsでは優先度などで実行候補を選びます。複数の論理CPUがあっても、割り当て可能な範囲に制限がある場合があります。
+- WPAでは時刻と状態の切り替えを追う表示と、CPU上で何を実行したかを調べる表示を使い分けます。
 
 ## 関連項目
 

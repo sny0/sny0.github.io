@@ -31,6 +31,10 @@ flowchart TD
     F --> G["GPU 時間と画像差を比較"]
 ```
 
+## この記事で分かること
+
+シェーダーの遅さを演算、メモリ待ち、分岐、レジスター使用量から調べられる。半精度やWave命令が効く場面を、出力と実測から判断できる。
+
 ## 16 ビット精度をどこで使うか
 
 HLSL の `min16float` は最小精度を指定する型で、実装はより高い精度でも演算できる。DXC の Shader Model 6.2 以降では、`-enable-16bit-types` を指定するとネイティブ 16 ビット型 `float16_t` が使え、`half` も 16 ビットになる。DXC でそのオプションを省いたとき、`half` は `float` に対応する。D3D12 でネイティブ型を実行するには、デバイスの `Native16BitShaderOpsSupported` を確認する。
@@ -188,6 +192,13 @@ void CompactPerWave(uint3 tid : SV_DispatchThreadID)
 ```
 
 端のグループで入力範囲外になったレーンは、SRV を読まずに `keep = false` を渡す。集計と先頭位置の共有は `if (keep)` の外側に置く。wave ごとの書き出し区間は atomic 加算で重複しなくなる。順番は wave の実行順に依存するので、2 つの実装を検証するときはカウンターと、書き出された ID の集合を比較する。例えば wave32 で 32 レーンがすべて通る場合、ソース上のカウンター加算は 32 回から 1 回になる。1 レーンだけが通る場合は両方とも 1 回で、集計分の命令が増える。入力の通過率に加え、通過レーンが同じ wave に集まるか、atomic 命令が実機でどう生成されるかも測る。[Microsoft、HLSL Shader Model 6.0 Wave Intrinsics](https://learn.microsoft.com/en-us/windows/win32/direct3dhlsl/hlsl-shader-model-6-0-features-for-direct3d-12)、[D3D12_FEATURE_DATA_D3D12_OPTIONS1](https://learn.microsoft.com/en-us/windows/win32/api/d3d12/ns-d3d12-d3d12_feature_data_d3d12_options1)
+
+## 要点
+
+- HLSLの最小精度指定とネイティブ16ビット型は区別する。半精度にする箇所を選び、対応、変換の負荷、画像差を確認する。
+- 同じWaveのレーンが違う経路に進むと、一部のレーンだけが動く場合がある。ソースの分岐数だけで負荷を決めない。
+- フェッチの待ちと帯域の使い方は、依存関係、アクセス先、キャッシュ次第。レジスター使用量は同時実行にも影響する。
+- Waveで処理をまとめると、書き出し先を確保するアトミックなどを減らせる場合がある。変更の効果は対象GPUで比べる。
 
 ## 理解度チェック
 

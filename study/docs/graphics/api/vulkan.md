@@ -11,6 +11,10 @@ study:
 
 # Vulkan
 
+## この記事で分かること
+
+Vulkanの1フレームを画像の取得・コマンド記録・提出・提示に分け、バリア、セマフォ、フェンスの役割を説明できます。使う機能と拡張をどの単位で確認するかも分かります。
+
 ## 概要
 
 Vulkanは**Khronosのクロスプラットフォーム明示的API**です (2016)。Windows・Linux・Android等の対応実装で利用できます。Apple環境では、Metal上にVulkanの一部機能を提供する [MoltenVK](https://github.com/KhronosGroup/MoltenVK) 等の移植実装を使う方法があります。利用可能なバージョン・機能・拡張には実装ごとの差があるため、「最も移植性が高い」と一律に順位付けせず、対象の対応状況を確認します。D3D12と共通する概念も多い一方、オブジェクト・メモリ・同期等の契約はAPIごとに異なります。
@@ -216,6 +220,13 @@ void DrawFrame() {
 
 - [CPUとGPUの役割分担](/hardware/gpu/cpu-vs-gpu.html), [DirectX 12](/graphics/api/directx12.html) (概念の対応把握に)
 - [SPIR-V](/graphics/shader/spirv.html), [GLSL](/graphics/shader/glsl.html) または [HLSL](/graphics/shader/hlsl.html)
+
+## 要点
+
+- Vulkanでは、対象の実装が対応するAPIバージョン、機能、拡張を調べて使う構成を決めます。
+- コマンドバッファーに命令を記録してキューに提出し、ディスクリプターセットを通じてシェーダーへリソースを渡します。
+- バリアは実行段階・メモリアクセス・画像レイアウトの依存を表し、セマフォは提出や提示の間を同期します。CPU側で完了を待つ場面ではフェンスを使います。
+- フレームスロットのリソースと、提示用画像に結び付く同期オブジェクトは、再利用の条件を分けて扱います。
 
 ## 次に読むべきページ
 

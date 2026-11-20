@@ -11,6 +11,10 @@ study:
 
 # HDRP (High Definition Render Pipeline)
 
+## この記事で分かること
+
+HDRPの遅延描画を、不透明物の照明、半透明や体積の描画、露出の処理に分けて追えます。Custom Passがどの段階の色・深度を使うかを例から説明できます。
+
 ## 概要
 
 HDRPは、ハイエンドPC、コンソール、映像制作向けのUnity公式レンダーパイプラインです。物理単位のライティング (lux/lumen/EV)、TiledとClusteredを組み合わせたライトループ、SSGI/RTGI、パストレーサ、水面、雲、ボリューメトリックフォグなどを備えます。Unityで最も高い画質を得られる構成で、現代のDeferred系AAAレンダラーの標準構成を学ぶ題材にもなります。
@@ -145,6 +149,13 @@ Unity 6000.0.85f1 / HDRP 17.0.4 で、ライトが 130,000 lux・5,800 K、自�
 
 - [Unity のレンダラーと SRP](/graphics/engine/unity-renderer.html), [URP](/graphics/engine/urp.html)
 - [Deferred](/graphics/path/deferred.html), [PBR](/graphics/lighting/pbr.html)
+
+## 要点
+
+- HDRPのライティングはルーメンやルクスなどの物理単位を使い、露出は物理カメラの設定と組み合わせます。
+- 遅延描画ではG-Bufferの情報を使います。不透明物ではタイル単位でライトを絞り、半透明や体積ではクラスタリングしたライトを使います。
+- GIや反射はプローブ、画面空間の手法、レイトレーシングなどを機能と実行条件に合わせて使います。
+- Custom Passでは挿入位置、対象レイヤー、使うマテリアルのパスを選びます。掲載例はHDRP 17で半透明描画の前に指定物体を描き直します。
 
 ## 次に読むべきページ
 

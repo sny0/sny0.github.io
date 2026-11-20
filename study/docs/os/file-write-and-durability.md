@@ -15,6 +15,10 @@ study:
 
 ゲームがセーブデータをファイルに書くと、Windowsは通常、そのデータをシステムのファイルキャッシュに受け取ります。この時点で書き込みAPIは成功を返せます。キャッシュ内の変更は、キャッシュマネージャーが後からストレージへ書き出します。電源断に備えて保存の区切りを決めるには、書き込みの完了と、保存先へのフラッシュの完了を別々に確認します。[Microsoft: File Caching](https://learn.microsoft.com/en-us/windows/win32/fileio/file-caching) · [ファイルを読むと内部で何が起きるか](/os/file-read-journey.html)
 
+## この記事で分かること
+
+Windowsで書き込みが成功してからデータが保存先へ届くまでを追い、セーブで守りたい状態を区別できます。
+
 ## バイトがストレージへ届くまで
 
 <figure class="study-figure">
@@ -76,3 +80,9 @@ Console.WriteLine("Flush completed.");
 ```
 
 `StreamWriter`を使う場合は、その書き込みバッファを先に`Flush()`で下の`FileStream`へ渡してから、`FileStream.Flush(flushToDisk: true)`を呼びます。この例で観察するのはフラッシュ要求の戻りです。保存名の更新や、電源断からの復旧を調べる場合は、それぞれ別に途中状態を再現して確認します。[Microsoft: StreamWriter.Flush](https://learn.microsoft.com/en-us/dotnet/api/system.io.streamwriter.flush?view=net-8.0)
+
+## 要点
+
+- 通常の書き込みでは、ファイルキャッシュがデータを受け取った時点でも成功を返せます。
+- バッファの書き出しを要求する操作と、通常の書き込みは区別します。
+- 次の読み手に見えること、更新途中を見せないこと、異常終了後も残ることは別に確認します。

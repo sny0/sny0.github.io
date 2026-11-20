@@ -17,6 +17,10 @@ study:
 - **AActor**: レベルに配置できるもの(UObjectの子孫)。Unityの**GameObject**に相当
 - **UActorComponent**: Actorに付ける部品。Unityの**MonoBehaviour(コンポーネント)**に相当
 
+## この記事で分かること
+
+UObject、レベルに置くActor、機能を追加するComponentの役割を説明できます。Unityのオブジェクト構成を移すときに、継承、部品の合成、初期化の場所を判断できます。
+
 ## 標準C++ではどう書くか / UEではなぜ独自か
 
 標準C++でゲームオブジェクトを作るなら:
@@ -85,6 +89,13 @@ public:
 1. **コンストラクタ≠Awake**: UEのコンストラクタはCDO(Class Default Object=クラスの雛形インスタンス)構築のためにエディタ起動時にも実行される。ゲームプレイの初期化はBeginPlayに書く
 2. 「全部Componentで作る」— UEではActor派生でBlueprint継承させる設計が主流の場面も多い(エンジンの想定に沿う方が楽)
 3. UObjectを`new`/`delete`しない(**NewObject/SpawnActor経由**が必須。GCの管理台帳に載せるため)。標準C++の習慣をUObjectに適用してはいけない代表例
+
+## 要点
+
+- UObjectはUEが型情報やGCなどで管理する基底です。レベル上の物はActorとして配置できます。
+- Actorの種類を継承で表しつつ、機能をComponentとして組み合わせる設計ができます。
+- Componentのうち、SceneComponentは位置などの変換を持ちます。目的に応じてActorに取り付ける部品を選びます。
+- UEのコンストラクタはクラスのひな形を作る際にも実行されます。ゲーム開始時の初期化に使う段階を区別します。
 
 ## 理解度チェック
 

@@ -15,6 +15,10 @@ study:
 
 タグ: Adapter / Decorator / Facade / Proxy / Bridge / Composite
 
+## この記事で分かること
+
+外部APIの単位を合わせる、処理にログを足す、複雑な呼び出しを一つにする場面で、何のために部品を包むか判断できます。公開する契約と委ねる先から、それぞれの役割を読めます。
+
 ## Adapter：契約の違いを翻訳する
 
 <div v-pre>
@@ -93,6 +97,12 @@ public sealed class LoggingNotifier : INotifier
 <p><strong>Composite</strong> は単体と集合を同じ契約で扱います。図形と図形グループが例です。<strong>Bridge</strong> は抽象側と実装側を別々に拡張できるよう分離します。形状と描画 API の組み合わせなどで使えます。どちらも必要な変動軸があるときに選ぶ道具です。</p><aside class="article-note"><strong>読み方のヒント</strong><p>クラス名より、引数・公開メソッド・内部へ委譲する契約を確認します。同じ Adapter という名前でも、プロジェクトによって責務の幅は異なります。</p></aside>
 
 </div>
+
+## 要点
+
+- Adapterは利用側の契約へ合わせるため、引数、単位、エラーなどを変換します。
+- Decoratorは共通の契約を保って処理を追加します。ログやキャッシュでは包む順で見える結果が変わります。
+- Facadeは複数の操作を入口にまとめ、Proxyはアクセスや遅延生成を制御します。名前に加えて、公開メソッドと内部で委ねる先を確認します。
 
 ## 理解度チェック
 

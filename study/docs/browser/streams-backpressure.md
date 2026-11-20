@@ -17,6 +17,10 @@ study:
 
 [Worker poolの受付制御](/browser/worker-pool-backpressure.html)と同様に、作る側が速いとデータがたまります。ただし、Streamの閾値は「待機4件を超えたら拒否」という固定上限とは異なります。**供給を抑える合図、処理完了、資源の解放を分けて読みます。**
 
+## この記事で分かること
+
+Streams APIが消費の速さに合わせて供給を抑える仕組みを説明し、書き込みの完了、正常終了、中止の通知を見分けられます。
+
 ## readable、writable、transformとchunk
 
 | 種類 | 役割 |
@@ -120,6 +124,14 @@ async function decodeToTextSink(byteSource, textSink) {
 ```
 
 `fatal: true`では、不正なUTF-8をTypeErrorとして扱い、変換の失敗につなげます。復元した文字列も、改行やJSON一件ずつの区切りとは限りません。必要な区切りの保持・解析は別です。[WHATWG Encoding: TextDecoderStream](https://encoding.spec.whatwg.org/#interface-textdecoderstream)
+
+## 要点
+
+- 読み出し・書き込み・変換の各Streamをつなぎ、データをchunk単位で渡します。
+- highWaterMarkは供給を抑える判断の閾値です。desiredSizeはキューの大きさに対してあとどれだけ受け入れたいかを示します。
+- writer.readyは書き込み側の抑制が解除されたことを知らせ、writeの戻り値は個々の書き込みの成功や失敗を知らせます。
+- close・cancel・abort・errorでは終了の理由と処理が異なります。ロックの解放は窓口の利用権を手放す操作です。
+- chunkの区切りは文字の区切りと独立しているため、分割されたUTF-8も考慮します。
 
 ## 実践と、観測の範囲
 

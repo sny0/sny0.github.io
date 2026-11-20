@@ -15,6 +15,10 @@ study:
 
 アプリがTCPやUDPで通信すると、OSのIP層は**宛先IPをどの経路へ送るか**を判断します。Ethernetを使う区間では、その区間で次に受け取る機器のMACアドレスを宛先にしてフレームを送ります。別のネットワークへ送るときは、IPパケットの宛先と、最初のフレームを受け取る機器が分かれます。[IETF RFC 1812 §5.2.4](https://datatracker.ietf.org/doc/html/rfc1812#section-5.2.4) · [TCPのソケット](/network/tcp-sockets.html) · [UDPのデータグラム](/network/udp-datagrams.html)
 
+## この記事で分かること
+
+別のネットワークへ送るとき、宛先IPから次ホップがどう決まり、Ethernetの宛先MACに何を書くか説明できます。tracerouteが中継点を観察する仕組みも区別できます。
+
 ## 宛先IPから次の送り先を選ぶ
 
 例えば送信端末のIPv4アドレスを`192.0.2.10/24`、ゲートウェイを`192.0.2.1`とします。`/24`は先頭24ビットが経路の照合に使われることを表します。簡略化した経路表では、宛先に一致する項目のうち、最も長いプレフィックスを使う項目を選びます。これを**最長プレフィックス一致**と呼びます。IPv4の`0.0.0.0/0`とIPv6の`::/0`は、照合する先頭ビットが0個のデフォルト経路です。[IETF RFC 1812 §5.2.4.3](https://datatracker.ietf.org/doc/html/rfc1812#section-5.2.4.3) · [IETF RFC 4191 §2.2](https://datatracker.ietf.org/doc/html/rfc4191#section-2.2)
@@ -46,3 +50,10 @@ IPv6では、**近隣探索**（Neighbor Discovery）がリンク上のアドレ
 IPv4の**TTL**は転送時にルーターが少なくとも1減らし、IPv6の**Hop Limit**は転送ごとに1減ります。上限に達して転送できなくなると、ルーターはパケットを破棄し、条件に応じて送信元へICMPのTime Exceededを返します。この仕組みは、経路にループがある場合にもパケットが回り続けるのを防ぎます。[IETF RFC 1812 §5.3.1](https://datatracker.ietf.org/doc/html/rfc1812#section-5.3.1) · [IETF RFC 8200 §3](https://datatracker.ietf.org/doc/html/rfc8200#section-3) · [IETF RFC 4443 §3.3](https://datatracker.ietf.org/doc/html/rfc4443#section-3.3)
 
 Windowsの`tracert`は、TTLやHop Limitを1から増やしながらICMPの探査パケットを送り、Time Exceededや宛先からの応答を記録します。`*`は、その探査への応答を制限時間内に受け取れなかった印です。ルーターがICMP応答を制限する場合や、計測中に経路が変わる場合があります。表示する時間は探査を送ってから応答が戻るまでなので、往路と復路の待ち時間を含みます。[Microsoftのtracert](https://learn.microsoft.com/en-us/windows-server/administration/windows-commands/tracert) · [IETF RFC 1812 §4.3.2.8](https://datatracker.ietf.org/doc/html/rfc1812#section-4.3.2.8) · [IETF RFC 1393 §1の探査手順](https://datatracker.ietf.org/doc/html/rfc1393#section-1) · [遅延・スループットと待ち行列](/network/latency-throughput-and-queues.html)
+
+## 要点
+
+- 宛先IPに合う経路を選び、直接届けるか、次ホップのルーターへ送るかを決めます。
+- Ethernetで送る際は、その区間で受け取る機器のMACアドレスを調べます。IPの宛先と同じ機器を指すとは限りません。
+- ルーターが次の区間へ転送するときは、その区間に合わせてフレームを用意します。
+- TTLやHop Limitは中継回数を制限します。tracerouteでは期限切れの応答を使い、応答しない中継点があり得ることを踏まえます。

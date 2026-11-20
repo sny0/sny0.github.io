@@ -15,6 +15,10 @@ study:
 
 例えば、ミップマップ付きのテクスチャをシェーダから読むとします。テクスチャの**リソース**が画像データを保持し、**ビュー**が読み取るミップ範囲や形式を決めます。ビューの設定を書き込んだ**ディスクリプタ**は、**ヒープ**のスロットに並びます。一つのテクスチャに全ミップを読むSRVと、特定のミップだけを読むSRVを作れば、画像データを共有しながら用途に応じて参照範囲を変えられます。[Microsoftのディスクリプタの概要](https://learn.microsoft.com/en-us/windows/win32/direct3d12/descriptors-overview) · [テクスチャのmipとサブリソース](/graphics/texture/dds-and-subresources.html)
 
+## この記事で分かること
+
+D3D12のリソース本体・ビュー・ディスクリプターテーブルの関係を説明できます。CPUが記述子を書き込む位置と、以前使ったスロットを再利用できる時点を判断できます。
+
 ## ヒープの種類で、渡す相手が決まる
 
 | ヒープの種類 | 格納するもの | コマンドでの使い方 |
@@ -62,3 +66,10 @@ Root Signature 1.1では、**スロットに入れたディスクリプタ**と�
 | 参照先のデータ | `DATA_VOLATILE` | CPUからの変更は提出前か実行完了後に行う。GPUの読み書きはバリアなどで同期する |
 
 データのフラグを省略した場合、CBV・SRVは `DATA_STATIC_WHILE_SET_AT_EXECUTE`、UAVは `DATA_VOLATILE` として扱われます。サンプラ範囲にはデータ用フラグを付けられず、`DESCRIPTORS_VOLATILE` と `DATA_STATIC` は併用できません。例えばフレームごとの定数バッファでは、テーブルのスロットと定数を書いた領域をそれぞれ確保し、記録前に準備して、最後のGPU参照後に両方を再利用する設計にできます。[Microsoftの既定値とフラグの組み合わせ](https://learn.microsoft.com/en-us/windows/win32/direct3d12/root-signature-version-1-1#combining-flags) · [Microsoftのフェンスによる領域管理](https://learn.microsoft.com/en-us/windows/win32/direct3d12/fence-based-resource-management)
+
+## 要点
+
+- リソースがデータを保持し、ビューが型やミップ範囲を指定します。ヒープの種類によって、シェーダーや描画コマンドへの渡し方が変わります。
+- CPUハンドルでスロットへビューを書き、シェーダー可視ヒープではテーブルの先頭をGPUハンドルで指定します。
+- テーブルの種類・レジスター・個数・配置はルートシグネチャーで決めます。使用中のシェーダー可視スロットは最後のGPU参照を終えるまで再利用しません。
+- Root Signature 1.1ではディスクリプターの変更時期と、そこから参照するデータの変更時期を分けて指定します。

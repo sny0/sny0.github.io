@@ -15,6 +15,10 @@ study:
 
 NVMe SSDがファイルのデータを読み出したり、ネットワークカード（NIC）がパケットを受信したりすると、デバイスはシステムメモリのバッファへデータを書き込めます。デバイスがホストメモリを読み書きするこの仕組みを**DMA（Direct Memory Access）**と呼びます。CPUで動くドライバーは、アクセスできるバッファを用意し、デバイスが読むコマンドや記述子を作り、結果を回収します。[NVM Express 1.0e §4.1](https://nvmexpress.org/wp-content/uploads/NVM-Express-1_0e.pdf) · [MicrosoftのNICとDMA](https://learn.microsoft.com/en-us/windows-hardware/drivers/network/network-interface-card-support)
 
+## この記事で分かること
+
+NVMeからホストメモリへデータが届く経路を、提出キューと完了キューから説明できます。CPUのポインターとデバイス用のDMAアドレスを区別できます。
+
 ## NVMeの読み取りをキューからたどる
 
 ここでは、ホストメモリ上にコマンドの提出キュー（SQ）と完了キュー（CQ）がある、PCIe接続のNVMe SSDを例にします。ファイルの読み取りがOSのキャッシュから満たせる場合は、OS内の別の経路でデータが返ります。[NVM Express 1.0e §4.1](https://nvmexpress.org/wp-content/uploads/NVM-Express-1_0e.pdf) · [ファイル読み取りの経路](/os/file-read-journey.html)
@@ -49,3 +53,10 @@ CPUがバッファを参照するときの**仮想アドレス**は、CPUのペ�
 PCIeデバイスは、**MSI-X**などのメッセージで割り込みを通知できます。複数のキューに割り込みベクターを分ける構成では、ドライバーは対応するキューを処理します。**ポーリング**では、CPU側が完了エントリーを調べます。短い間隔で調べるほど反応を早められる場合があり、その間CPU時間を使います。LinuxのNICで使うNAPIのように、割り込みをきっかけに受信キューをポーリングし、まとめて処理する方式もあります。[LinuxのMSI/MSI-Xドライバー解説](https://docs.kernel.org/PCI/msi-howto.html) · [LinuxのNAPI](https://docs.kernel.org/networking/napi.html)
 
 デバイスからの完了通知のあと、ドライバーとOSがI/Oの結果を処理し、呼び出し元へ返します。アプリが待つI/O完了通知はこの上の段階です。ゲームのロード時間を調べるときは、リンクの転送、OSの完了、アセットの展開を分けて観察します。[PCI Expressのリンクとレーン](/hardware/io/pcie-links.html) · [WindowsのI/O完了ポート](/os/io-completion-ports.html) · [DirectStorageの読み取りと展開](/game/directstorage.html)
+
+## 要点
+
+- ドライバーがバッファを用意してコマンドを提出し、デバイスがデータを転送します。完了はキューなどで確認します。
+- CPU側の仮想アドレスとデバイスに渡すDMAアドレスは別に扱います。IOMMUを使う構成ではデバイスのアクセスを変換・制限できます。
+- CPUとデバイスで見えるデータをそろえるため、マッピングの種類や方向に応じて同期します。記述子や完了情報が見える順序も管理します。
+- 割り込みは完了を知らせる手段です。ドライバーはキューを確認して処理し、ポーリングで確認する方式もあります。

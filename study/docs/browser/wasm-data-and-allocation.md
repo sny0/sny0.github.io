@@ -15,6 +15,10 @@ study:
 
 JavaScriptからWasmの関数に複数の値を渡す方法の一つは、**線形メモリ**にバイト列を書き、関数に**開始位置と長さ**を渡すことです。メモリ上の表現、長さの単位、誰が領域を管理するかまで双方で取り決めます。言語や実行環境の境界で値を渡す規約は **ABI**（Application Binary Interface）の一部です。この実践では二つの `i32` を引数に取り、先頭からのバイト位置と、読み取る範囲を表します。[WebAssembly JavaScript Interfaceのエクスポート関数](https://webassembly.github.io/spec/js-api/#exported-function-exotic-objects)、[WebAssemblyと線形メモリ](/browser/webassembly-linear-memory.html)
 
+## この記事で分かること
+
+JavaScriptとWasmが線形メモリ上の配列や文字列を受け渡すとき、バイト位置・長さの単位・領域の寿命をどのように取り決めるかを説明できます。
+
 ## 配列は要素数、UTF-8はバイト数を渡す
 
 | 関数 | 開始位置 `ptr` | 長さの単位 | メモリから読む量 |
@@ -63,6 +67,13 @@ JavaScriptからWasmの関数に複数の値を渡す方法の一つは、**線�
 Wasmのload命令が検査するのは、アクセスが**線形メモリ全体**に収まるかです。配列の最後を越えた位置が線形メモリ内にあれば、ロード自体は実行されます。実践の読み取り関数は開始位置が1024以上かつ `cursor` 以下かを確かめ、残りバイト数から読める個数の上限を求めます。例えば4バイトの要素なら、`count` を `(cursor - ptr) / 4` の整数部分と比べます。範囲外の引数ではWasmがトラップし、JavaScript側では `WebAssembly.RuntimeError` になります。[WebAssembly Coreのメモリ命令](https://webassembly.github.io/spec/core/exec/instructions.html#memory-instructions)、[JavaScript Interfaceのエラー対応](https://webassembly.github.io/spec/js-api/#errors)
 
 この検査で確かめられる範囲は、アリーナの先頭から `cursor` までです。例えば配列の開始位置1024に対して誤って要素数6を渡すと、24バイトが収まるため、パディングと文字列まで読み取ります。実践では、Wasmが領域の確保とリセットを管理し、JavaScriptは返された開始位置と実際に書いた長さを組にして、次のリセットまで使います。確保ごとに境界を検査するには領域の開始位置・サイズを、リセットをまたいだ古い参照を検査するには確保の世代も記録します。
+
+## 要点
+
+- Wasmに渡す開始位置はバイト単位です。この例の長さは整数配列なら要素数、UTF-8ならバイト数です。
+- ビューを作るとバッファを参照できます。値を配列から書き込む操作や、UTF-8のバイト列をコピーする操作は別に行います。
+- bump allocatorは位置をそろえてから空き領域の先頭を進めます。この例では、確保・メモリの拡張・アリーナのリセットを別々に行います。
+- Wasmのメモリ命令が検査する境界は線形メモリ全体です。アプリが管理する領域や受け取った長さは、読み取り側でも確認します。
 
 ## 実践との対応
 

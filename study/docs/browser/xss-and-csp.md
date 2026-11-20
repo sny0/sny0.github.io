@@ -15,6 +15,10 @@ study:
 
 **XSS**（Cross-Site Scripting）は、Webアプリが外部から受け取ったデータを扱う過程で、攻撃者が用意したコードを利用者のブラウザで実行できる脆弱性です。たとえばコメントをHTMLに埋め込むとき、コメントの一部がボタンの `onclick` 属性として解釈されると、そのコードがページの実行環境で動き得ます。対策はデータをどこから受け取り、どこで何として解釈させるかを確認するところから始まります。[OWASPのXSS対策](https://cheatsheetseries.owasp.org/cheatsheets/Cross_Site_Scripting_Prevention_Cheat_Sheet.html#xss-defense-philosophy)
 
+## この記事で分かること
+
+外部から受け取った値が、表示用テキストかコードを含み得る入力かを渡し先から判断できます。安全な出力方法とCSPが担う役割を説明できます。
+
 ## 入力から実行までをたどる
 
 **source** はデータの入口です。フォーム、URLのクエリやフラグメント、APIの応答、保存済みのコメントなどがあります。**sink** はデータの行き先で、値の意味を決めるAPIやテンプレートの出力箇所です。たとえばURLの値を `innerHTML` に渡すコードでは、受け取った文字列がHTMLとして解釈される経路を追います。[OWASPのDOM Based XSS対策](https://cheatsheetseries.owasp.org/cheatsheets/DOM_based_XSS_Prevention_Cheat_Sheet.html)
@@ -79,6 +83,13 @@ HTMLの解析でボタンが作られた場合、`script-src-attr 'none'` は、
 ### ヘッダーとmetaで配信できる範囲
 
 通常は `Content-Security-Policy` 応答ヘッダーで方針を配信します。静的HTMLでは `<head>` の早い位置に `<meta http-equiv="Content-Security-Policy">` を置いて適用する方法もあります。metaより前に処理された内容への適用は遡りません。埋め込み元を制限する `frame-ancestors` や、違反を観測しながら動作を止めずに試す `Content-Security-Policy-Report-Only` は、HTTP応答ヘッダーで指定します。[W3C CSP Level 3の配信方法](https://www.w3.org/TR/CSP3/#policy-delivery)
+
+## 要点
+
+- データの入口から渡し先までを追い、値がHTML・URL・テキストなど何として解釈されるか確かめます。
+- コメントなどを文字として表示するときはテキスト用のAPIを使います。生成する出力の構文に合わせて値を扱います。
+- CSPはブラウザで許すスクリプトの取得・実行条件を制限します。nonceやハッシュを使う方式があります。
+- CSPと、外部データを安全に扱う処理を組み合わせます。応答ヘッダーとmetaで適用できる範囲も確認します。
 
 ## 実践との対応
 

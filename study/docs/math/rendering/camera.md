@@ -162,6 +162,12 @@ bool AabbVisible(const glm::vec4 planes[6], glm::vec3 c, glm::vec3 e) {
 }
 ```
 
+## 要点
+
+- ビュー行列でワールド座標をカメラ基準へ移し、射影行列と同次除算で視錐台内の位置を画面へ写します。
+- 透視射影で奥行きの精度は距離によって変わります。浮動小数点の深度では、Reverse-Zで遠方に細かい刻みを割り当てられます。
+- 射影の深度範囲、深度比較、クリア値を同じ規約に合わせます。カリングの平面抽出や深度の復元もその規約に従います。
+
 ## 前提知識
 
 - [ベクトル](/math/rendering/vector.html), [行列](/math/rendering/matrix.html), [座標変換](/math/rendering/transform.html)

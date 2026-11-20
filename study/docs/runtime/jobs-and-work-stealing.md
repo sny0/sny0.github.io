@@ -15,6 +15,10 @@ study:
 
 フレーム中にアニメーションと視界判定を並行して進め、両方の結果がそろったら描画データをまとめるとします。**ジョブシステム**は、処理を小さな仕事に分け、各仕事の前提がそろった時点でワーカーに割り当てます。ワーカーは仕事を待ち受けるスレッドです。毎回スレッドを作る費用を避けるため、複数のワーカーを使い回す**スレッドプール**を使います。
 
+## この記事で分かること
+
+アニメーションと視界判定を例に、どの仕事を並行して行え、どの仕事が結果を待つかを依存グラフから読み取れます。
+
 ## 依存を数えて、実行できる仕事だけを渡す
 
 ジョブを頂点、「先の処理が終わってから次へ進む」という関係を辺として表します。この依存グラフは循環がないDAGです。各ジョブの未完了の前提数を数え、前提のジョブが完了するたびに1減らします。0になったジョブをワーカーが取れるキューへ入れます。
@@ -236,6 +240,12 @@ public sealed class StudyJobDependencies : MonoBehaviour
 Game Thread で結果を今すぐ使う境界には、TaskGraph の `FTaskGraphInterface::WaitUntilTaskCompletes` や `WaitUntilTasksComplete` があります。例えば B の直後に Game Thread が待ち始めると、D を必要とするまでに重ねられたはずの処理が止まる場合があります。D の依存として B、C を登録し、結果を消費する時点で待つと、待機位置を減らせます。Game Thread 上で実行する必要がある継続は、依存に加えて実行先も指定します。タスクを登録するときは、ラムダが参照するデータの寿命を完了まで確保します。[Epic Games、WaitUntilTasksComplete](https://dev.epicgames.com/documentation/unreal-engine/API/Runtime/Core/FTaskGraphInterface/WaitUntilTasksComplete)
 
 `UE::Tasks` 側では、実行完了を前提に渡すハンドルが `FTask`、結果値を持つ場合は `TTask<T>` です。実行できる時点を外部から通知したいときは、`FTaskEvent` を前提に登録し、通知元が `Trigger` します。タスクのタイムラインを読むときは、前提が未完了でまだキューに入っていない時間、キューに入ってからワーカーを得るまでの時間、処理本体、最後の同期待ちを順に確認します。ワーカー数を増やしても、前提を待つ時間や Game Thread に残した直列処理の時間は減らない場合があります。[Epic Games、Tasks System References](https://dev.epicgames.com/documentation/unreal-engine/tasks-system-references-in-unreal-engine?lang=en-US)
+
+## 要点
+
+- 前提の仕事がすべて終わった時点で、次の仕事をキューに入れます。
+- 仕事がなくなったワーカーは、ワークスティーリングで他のキューに残った仕事を引き受けられます。
+- ワーカーを増やしても、前後関係で直列に進む経路の時間は残ります。
 
 ## 理解度チェック
 

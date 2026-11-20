@@ -20,6 +20,10 @@ study:
   <figcaption>一つのDIRECTキューで、Aへの描画を先に記録し、遷移バリアを挟んでAを読みます。パス2の結果はBに残ります。<a href="/study/images/graphics/render-to-texture.svg" target="_blank" rel="noopener noreferrer">パス間の受け渡し図を拡大</a></figcaption>
 </figure>
 
+## この記事で分かること
+
+D3D12で同じ画像を描画先と読み取り元に使う流れを説明できます。画像を読むビュー、用途を変えるバリア、別の出力先を指定できます。
+
 ## 一つのテクスチャに二つのビューを作る
 
 この例のAとBは、32 × 32ピクセル、1ミップ、単一サンプルの `DXGI_FORMAT_R8G8B8A8_UNORM` テクスチャです。`D3D12_RESOURCE_FLAG_ALLOW_RENDER_TARGET` を指定して作り、対応する形式でレンダーターゲットビュー（RTV）を作ります。Aにはさらにシェーダーリソースビュー（SRV）を作ります。AのRTVとSRVは同じリソースを指します。画像が二枚に増えるのは、結果を書き出すBを別に作るためです。[Microsoftのリソース作成フラグ](https://learn.microsoft.com/en-us/windows/win32/api/d3d12/ne-d3d12-d3d12_resource_flags) · [Microsoftのビューとディスクリプター](https://learn.microsoft.com/en-us/windows/win32/direct3d12/descriptors-overview) · [テクスチャのミップとサブリソース](/graphics/texture/dds-and-subresources.html)
@@ -56,3 +60,10 @@ float4 Process(float4 position : SV_Position) : SV_Target
 ## 結果を画面へ出すか、データとして読むか
 
 中間テクスチャAは、次のパスがSRVで読みます。ウィンドウへ表示する場合は、最後にスワップチェーンのバックバッファへ描き、バックバッファを `PRESENT` の状態にして `Present` を呼びます。読み戻しで検証する実践では、AとBを `COPY_SOURCE` へ遷移させ、読み戻しバッファへコピーします。フェンスを待ってから、バッファの行ピッチに従って両方の画像の全ピクセルを照合します。[Microsoftのバックバッファの状態](https://learn.microsoft.com/en-us/windows/win32/direct3d12/using-resource-barriers-to-synchronize-resource-states-in-direct3d-12#resource-states-for-presenting-back-buffers) · [Microsoftのテクスチャの読み戻し](https://learn.microsoft.com/en-us/windows/win32/direct3d12/upload-and-readback-of-texture-data) · [スワップチェーンとVSync](/graphics/optimization/swap-chain-and-vsync.html) · [C++で描画結果を次のパスへ渡す](/practice/graphics/render-to-texture-observation.html)
+
+## 要点
+
+- 一つのテクスチャAにRTVとSRVを作ると、同じ画像を描画先とシェーダー入力として使えます。
+- Aへの描画を終えてから、`RENDER_TARGET`を`PIXEL_SHADER_RESOURCE`へ遷移させます。次のパスではAを読み、別のBへ書きます。
+- 全画面を覆う三角形を作り、ピクセル位置を使って対応するテクセルを読めます。掲載例は同じサイズの画像で色を変えます。
+- 表示とCPUへの読み戻しでは、最後の用途に合う状態を選びます。読み戻しはコピーの完了を確認して行います。

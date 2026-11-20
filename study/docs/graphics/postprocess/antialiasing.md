@@ -164,6 +164,12 @@ resolveAtt.samples = VK_SAMPLE_COUNT_1_BIT;           // resolve先だけ書く
 - [ラスタライゼーション](/graphics/pipeline/rasterization.html) — 点サンプルという原因
 - [出力結合](/graphics/pipeline/output-merger.html), [Forward](/graphics/path/forward.html) / [Deferred](/graphics/path/deferred.html)
 
+## 要点
+
+- 斜めの三角形の輪郭では画素を覆う割合が急に変わり、遠くの模様では一つの画素に収まらない細部を点で読むとちらつきます。
+- MSAAは一つの画素内の複数位置で被覆を調べ、サンプルを一つの色へまとめます。床のテクスチャの読み方までは改善しない場合があります。
+- 細かなテクスチャにはサンプリング前のミップマップが使えます。FXAAやSMAAは描画後の画像から輪郭を推定して調整します。
+
 ## 次に読むべきページ
 
 - [TAA](/graphics/postprocess/taa.html) — 現代の主役

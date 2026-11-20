@@ -15,6 +15,10 @@ study:
 
 三角形の形を保ったまま全体の色を変えるとき、シェーダーには「頂点ごとに違う位置」と「描画に共通する色」が必要です。コードに書く変数がどこから来るかを見分けると、CPU側で何を用意するかが分かります。[シェーダーの基礎](/graphics/shader/shader-first-steps.html)
 
+## この記事で分かること
+
+頂点ごとに異なるデータと、同じ描画に共通する設定を見分けられます。WebGLとHLSLの例を比べ、アプリが各入力をどう渡すか説明できます。
+
 ## データを使う範囲から見る
 
 | 入力の種類 | この例の値 | 用意するもの |
@@ -83,3 +87,10 @@ UVを色として表示する代わりに、UVでテクスチャを参照でき�
 WebGLではシェーダーをコンパイルしてプログラムをリンクし、描画時にはプログラム、頂点入力、uniform、テクスチャなどを設定します。D3D12では、コンパイルしたシェーダーや描画設定をPSOへまとめ、コマンドでPSOやリソースの接続を指定します。[WebGLのリンク](https://developer.mozilla.org/en-US/docs/Web/API/WebGLRenderingContext/linkProgram) · [D3D12のPSO](https://learn.microsoft.com/en-us/windows/win32/direct3d12/managing-graphics-pipeline-state-in-direct3d-12)
 
 実際の値を変えて追うには、[三角形の色と位置を変える実践](/practice/graphics/shader-first-steps.html)へ進みます。バッファやテクスチャをGPUで使い終える時点は、[GPUリソースの寿命](/graphics/optimization/gpu-resource-lifetime.html)で扱います。
+
+## 要点
+
+- 頂点属性の型、ストライド、オフセットが、バッファー内のどの値を頂点シェーダーへ渡すかを決めます。
+- 頂点シェーダーから渡したUVは、ラスタライザーが三角形の内部で補間します。
+- uniformや定数バッファーを使うと、色や移動量などを一つの描画に共通する値として渡せます。
+- テクスチャは参照するデータ、サンプラーは読むときの規則です。使う変数とホストの割り当てを合わせます。

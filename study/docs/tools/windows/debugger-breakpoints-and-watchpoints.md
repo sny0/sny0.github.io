@@ -15,6 +15,10 @@ study:
 
 スコアがいつの間にか0になるときは、代入箇所を一つずつ探す代わりに、スコアを格納するメモリへ書き込んだ時点で実行を止められます。処理を始めた時点を調べたいなら、関数の入口で停止します。ブレークポイントは実行中のプログラムをどんな条件で止めるかを決める機能です。以下はWindows x64のネイティブC++を想定しています。[Microsoftのブレークポイントの使い分け](https://learn.microsoft.com/en-us/visualstudio/debugger/using-breakpoints)
 
+## この記事で分かること
+
+スコアが変わった原因を探す例から、ソース行や命令、メモリへの書き込みのどこで実行を止めるか選べます。
+
 ## ソース行と命令のどちらで止めるか
 
 ソース行を指定すると、デバッガはデバッグ情報を使って対応する機械語のアドレスを探します。行に実行命令がなければ、停止できる別の行に移るか、未解決のままになります。インライン化や命令の並べ替えがあるビルドでは、一つのソース行が複数の場所に対応することもあります。対応が分かりにくいときは、逆アセンブル画面で命令アドレスを指定します。[Visual Studioで最適化済みコードをデバッグする](https://learn.microsoft.com/en-us/visualstudio/debugger/how-to-debug-optimized-code) · [WinDbgの命令ブレークポイント](https://learn.microsoft.com/en-us/windows-hardware/drivers/debuggercmds/bp--bu--bm--set-breakpoint-)
@@ -66,3 +70,9 @@ int main() {
 Visual StudioのF11（ステップイン）は呼び出し先に入り、F10（ステップオーバー）は呼び出しを実行してから元の関数で止まります。Shift+F11（ステップアウト）は現在の関数から戻るところまで進めます。途中で別のブレークポイントや例外に当たれば、予定していた場所より前に停止する場合があります。生成された命令を一つずつ追う場合は、逆アセンブル画面で命令単位に切り替えます。[Visual Studioのステップ実行](https://learn.microsoft.com/en-us/visualstudio/debugger/navigating-through-code-with-the-debugger) · [最適化済みコードでの逆アセンブル](https://learn.microsoft.com/en-us/visualstudio/debugger/how-to-debug-optimized-code)
 
 `enemyId == 42` のような条件を指定すると、候補に到達した時点でデバッガが式を評価します。頻繁に通る場所では、式が偽でも判定の費用がかかり、処理のタイミングに影響します。別のスレッドで同じ処理が止まる場合は、まず停止したスレッドとコールスタックを確認し、追いたいスレッドが特定できてからスレッドフィルターを使います。[Visual Studioのブレークポイント条件とフィルター](https://learn.microsoft.com/en-us/visualstudio/debugger/using-breakpoints#breakpoint-conditions) · [静的解析とサニタイザー](/tools/build/debugging-and-analysis.html) · [ビルド構成とデバッグ情報](/tools/build/build-configurations.html)
+
+## 要点
+
+- ソース行で止まる位置は、機械語との対応やビルド設定で変わります。
+- データブレークポイントは指定したメモリへの書き込みを追うときに使えます。
+- 関数の前後を見るときは、ステップイン、ステップオーバー、ステップアウトを使い分けます。

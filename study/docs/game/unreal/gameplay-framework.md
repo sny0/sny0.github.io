@@ -11,6 +11,10 @@ study:
 
 # Gameplay Framework・Subsystem・Slate/UMG・DataAsset/DataTable
 
+## この記事で分かること
+
+ルール、共有状態、操作するプレイヤー、操作されるキャラクターをUEの枠組みのどこに置くか判断できます。共通サービス・UI・データの置き場所も区別できます。
+
 ## Gameplay Framework — 「ゲームの骨格」の既製品
 
 UEは「ゲームには大抵これがある」という役割クラス群を最初から提供します。Unityが白紙(全部自作)なのと対照的な設計思想です。
@@ -71,6 +75,13 @@ public:
 1. 「GameModeは自作GameManagerと同じ」— ネットワーク上の存在場所(サーバーのみ)などの規約があり、**枠の意味を知らずに使うと同期で壊れる**
 2. 「UIはUMGだけ覚えればいい」— 実務ではSlate層の存在(非UObject・TSharedPtr)を知らないと、寿命バグやエディタ拡張で詰む
 3. ScriptableObjectの感覚でDataAssetを実行時に書き換える——共有データの書き換えは全参照者に波及([Flyweightの罠](/design/patterns/flyweight.html)と同じ)。実行時の可変状態は別オブジェクトへ
+
+## 要点
+
+- Gameplay Frameworkのクラスは役割とネットワーク上の存在場所が定まっています。GameModeはサーバー側のルールを持ちます。
+- Subsystemを選ぶときは、ゲーム全体、ワールド、ローカルプレイヤーなど、必要な寿命を考えます。
+- SlateはC++のUIの基盤です。UMGはその上でWidgetやエディターからUIを作る層です。
+- DataAssetは個別の構造化データ、DataTableは同じ行形式のデータをまとめる用途に使えます。
 
 ## 理解度チェック
 

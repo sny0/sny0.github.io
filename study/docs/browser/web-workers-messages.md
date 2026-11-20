@@ -17,6 +17,10 @@ study:
 
 [イベントループ・Promise・async/await](/browser/event-loop-promises.html)で説明したとおり、Promiseで包むだけでは計算を別の実行主体へ移せません。Workerは、その実行主体を分けるための別のAPIです。ここでは、作成元との専用の通信経路を持つ**Dedicated Worker**を対象にし、Node.jsのworkerやC#のTaskへ同じ規則を一般化しません。
 
+## この記事で分かること
+
+ページとDedicated Workerがどのように処理とデータを分けるかを説明し、コピーと移譲の違いや、返信を待つ間に扱う失敗を見分けられます。
+
 ## ページとWorkerには、別のグローバル環境がある
 
 ページ側のグローバル環境はWindow、Dedicated Worker側は**DedicatedWorkerGlobalScope**です。Workerには別の実行スタックやイベントループがあり、言語仕様上の**agent**という実行主体に対応します。ページの関数や変数を自由に参照する環境ではありません。[WHATWG HTML: Workersの処理モデル](https://html.spec.whatwg.org/multipage/workers.html#run-a-worker)、[ECMAScript: Agents](https://tc39.es/ecma262/multipage/executable-code-and-execution-contexts.html#sec-agents)
@@ -110,6 +114,13 @@ Worker側の`self.close()`は、自分のキューにあるtaskを破棄し、�
 **協調キャンセル**は、Workerが取消要求を受け取り、安全な区切りで仕事を止める方式です。ただし、長い同期ループの最中には、取消メッセージの受信taskも実行できません。処理を区切って受信の機会を作るなどの設計が必要で、fulfilledのPromiseをawaitし続けるだけでは、その機会を保証しません。
 
 返信待ちのタイマーが切れても、計算が止まった証拠にはなりません。ページ側のタイマー自体がイベントループや非表示状態などで遅れる場合もあるため、**soft timeout**として、どの状態へ移すかを決めます。タイムアウト、世代による結果の無視、協調キャンセル、terminateは、それぞれ違う操作です。
+
+## 要点
+
+- Workerは別の実行環境で作業し、postMessageで送ったデータは後のmessageイベントで届きます。
+- structured cloneには送れる型の規則があります。ArrayBufferを移譲した場合、送信元はそのバッファを使えなくなります。
+- 起動要求と準備完了を分け、要求IDや世代などで返信をどの処理に対応させるかを決めます。
+- 同期例外、error、messageerrorを分けて扱い、強制終了した場合は待ち続けている要求も整理します。
 
 ## この章の観察範囲と、別の共有方式
 

@@ -20,6 +20,10 @@ study:
   <figcaption>2枚の役割を交互に変える例です。縦ブラーの後にAに残る画像は同じフレームで使い、時間方向の処理で得た履歴は次のフレームに渡します。<a href="/study/images/graphics/ping-pong-and-history.svg" target="_blank" rel="noopener noreferrer">ピンポンと履歴の図を拡大</a></figcaption>
 </figure>
 
+## この記事で分かること
+
+二枚の画像を交互に使って複数の後処理をつなげられます。フレーム内の一時結果と、カメラごとに次のフレームへ残す履歴の寿命を区別できます。
+
 ## 1フレーム内で中間画像を渡す
 
 横と縦に分けて処理できるガウシアンブラーを例にします。ここではシーンを描いた画像をAに置き、Aの元の内容は横ブラーが最後に使うものとします。ピクセルシェーダーによる2パスを、同じD3D12のDIRECTキューへ順に提出します。[AMDの分離型ガウシアンブラーのサンプル](https://gpuopen.com/manuals/fidelityfx_sdk/samples/blur/) · [D3D12のリソースバリア](/graphics/optimization/d3d12-resource-barriers.html)
@@ -48,3 +52,10 @@ TAAのような時間方向の処理では、今フレームの色に加えて�
 履歴の入れ替えはカメラやビューごとの処理に合わせます。たとえばメインカメラとミニマップを別の頻度で描くなら、それぞれに「最後に作った有効な履歴」を持たせます。スワップチェーンの画像番号や、CPUが記録用メモリを使い回すフレームスロットは、別の対象を指します。[Unityのカメラ別履歴](https://docs.unity3d.com/Packages/com.unity.render-pipelines.core@17.0/manual/rthandle-system-using.html) · [スワップチェーンとVSync](/graphics/optimization/swap-chain-and-vsync.html) · [フレームスロットとフェンス](/graphics/optimization/parallel-command-recording.html)
 
 CPUが次のフレームを記録している間も、GPUは先の履歴を使っていることがあります。固定の2枚を同じキューで順に使う場合は、書き込みから読み取りへ、読み取りから次の書き込みへと、実行順と状態遷移を組みます。別キューなら、以前の書き込みや読み取りが完了する順序も `Signal` と `Wait` でつなぎます。CPUが古い履歴を無効と判断しても、提出済みの処理がそのテクスチャや記述子を使い終えるまでは保持します。リサイズで古いテクスチャを解放するときも、最後のGPU参照の完了をフェンスで確認します。[D3D12のキュー間同期](/graphics/optimization/gpu-queue-synchronization.html) · [GPUリソースの寿命](/graphics/optimization/gpu-resource-lifetime.html)
+
+## 要点
+
+- ピンポンバッファーは、各パスで一枚を読み、もう一枚に書きます。次のパスで読み書きの役割を入れ替えます。
+- アクセス範囲をサブリソース単位で確認し、描画先から読み取り元へ切り替わる箇所に必要な状態遷移を置きます。
+- フレーム履歴には以前の画像と、それを再投影するための情報が必要です。カメラ切り替えなどで履歴を使えない場合は現在の画像から作り直します。
+- 履歴はカメラやビューごとに追い、スワップチェーン画像やフレーム用一時領域の番号とは別に扱います。GPUが使用中の履歴は上書きしません。

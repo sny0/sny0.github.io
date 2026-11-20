@@ -15,6 +15,10 @@ study:
 
 UEは標準の `std::shared_ptr` 等を使わず、**同じ概念の独自実装**(TSharedPtr等)を持ちます。使い分けの考え方は[標準スマートポインタ](/languages/cpp/smart-pointers.html)と同一で、**適用対象が「非UObject」に限られる**点だけがUE特有の重要ルールです。
 
+## この記事で分かること
+
+UObject用の参照と、非UObject用のスマートポインタを区別できます。共有所有、nullを許さない参照、読み込み時期を分けるソフト参照を選ぶ観点が分かります。
+
 ## 対応表
 
 | 標準C++ | UE(非UObject用) | UObject用(→ [GCページ](/game/unreal/gc-and-object-pointers.html)) |
@@ -70,6 +74,13 @@ UStaticMesh* Mesh = HeavyMesh.LoadSynchronous();            // または Streama
 1. 「スマートポインタは1種類覚えればいい」— UEでは**UObject系と非UObject系の2系統**を必ず区別する
 2. SlateのUI(SWidget)はTSharedPtrの世界(UObjectではない)——UMG(UObject)とSlateで管理系が変わる(→ [Gameplay Framework](/game/unreal/gameplay-framework.html))
 3. `TSoftObjectPtr`を「弱参照の一種」と混同——弱参照(生死の観測)ではなく**ロード制御**(パス参照)。目的が違う
+
+## 要点
+
+- 非UObjectでは一意所有ならTUniquePtr、共有所有ならTSharedPtrなど、所有関係に応じて選びます。
+- TSharedRefはnullを許さない共有参照です。対象が常に存在することを型で表せます。
+- UObjectの寿命はGCの参照規則に従うので、非UObject用の参照カウントと区別します。
+- TSoftObjectPtrならアセットのロードを分けられます。必要な時期に読み込み、使い終わったときの扱いも決めます。
 
 ## 理解度チェック
 

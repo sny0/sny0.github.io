@@ -15,6 +15,10 @@ study:
 
 別のPCから送られたゲームの位置更新を、PCIe接続のネットワークカード（NIC）がEthernetで受け取る例を考えます。`recvfrom`でUDPデータグラムを読み出せるようになるまでに、NICによるメモリへの転送、ドライバーによる受信処理、OSによるソケットの振り分けが行われます。[MicrosoftのNICとDMA](https://learn.microsoft.com/en-us/windows-hardware/drivers/network/network-interface-card-support) · [UDPデータグラムの境界と送受信](/network/udp-datagrams.html)
 
+## この記事で分かること
+
+NICが受け取ったフレームがDMAとOSの処理を経て、UDPソケットに届くまでを説明できます。入力の取りこぼしが、受信リングとアプリの読み取りのどちらに近いか切り分けられます。
+
 ## フレームの置き場所を先に渡す
 
 1. **ドライバーが受信バッファを用意する。** ドライバーはホストメモリにバッファを用意し、NICから書き込めるようにDMAマッピングを設定します。NICに渡す**受信記述子（RX descriptor）**には、バッファのDMAアドレスなどが入ります。記述子を並べ、末尾の次に先頭へ戻るよう繰り返し使うのが**受信リング（RX ring）**です。
@@ -68,3 +72,10 @@ grep '^Udp:' /proc/net/snmp
 実際のNICを観察するには、別のPCから対象インターフェースのIPアドレスへ送信します。UDP受信の実践サンプルは、同じホスト内で通信するループバックの`127.0.0.1`を使います。こちらは物理NICを経由せず、ソケットの使い方を確認できます。[IETF RFC 1122 §3.2.1.3](https://www.rfc-editor.org/rfc/rfc1122.html#section-3.2.1.3) · [UDP受信の実践](/practice/network/udp-loopback-observation.html)
 
 ホスト上のキャプチャで送信パケットのチェックサムが不正に見える場合は、NICが送信時に計算する前のデータを見ている可能性があります。パケットキャプチャを読むときは、どの機器の、送受信処理のどの地点で取ったデータかも確認します。[Wiresharkのチェックサムオフロード](https://www.wireshark.org/docs/wsug_html_chunked/ChAdvChecksums.html#ChAdvChecksumsOffload)
+
+## 要点
+
+- ドライバーが受信記述子でバッファを渡し、NICがDMAでフレームを書き込みます。
+- 割り込みは処理のきっかけです。受信キューを調べて結果を回収し、使ったバッファを補充します。
+- RSSはフローを受信キューへ振り分け、複数のCPUへ処理を分散できる仕組みです。
+- NIC、OS、ソケットの各段階で失われる場合があります。アダプターやOSの統計とアプリの読み取り状況を別々に確認します。

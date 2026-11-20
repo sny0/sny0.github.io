@@ -17,6 +17,10 @@ study:
 
 ここではWebページのWindowを対象に、言語を定めるECMAScriptと、taskや描画を定めるHTMLの仕様を組み合わせて説明します。Node.js固有の実行順や、C#のTask／awaitの実行基盤まで同じ規則として扱いません。
 
+## この記事で分かること
+
+ブラウザのWindowで、同期処理、Promiseの続き、タイマー、画面更新がどの段階で進むか説明できます。非同期の待ち時間と、CPUで実行する仕事を区別できます。
+
 ## 実行スタックとrun-to-completion
 
 **実行スタック**は、呼び出し中の関数などの実行状態を積み重ねて管理する仕組みです。関数AがBを呼ぶと、その場でBを実行し、Bから戻るとAの続きを実行します。通常の関数呼び出しをすべて後で実行するためのキューに入れるわけではありません。
@@ -123,6 +127,13 @@ Promiseの失敗はrejectedという結果で伝わります。async関数内で
 async関数の`try`内で`return await p`する場合と、`return p`する場合は、その関数の`catch`で後のrejectionを捕まえたいときに違いがあります。後者はPromiseを返すので、将来その結果がrejectedになっても、その`catch`へ戻ってくるわけではありません。呼び出し元で`await`や`catch()`を使い、失敗を受け取る設計もできます。[MDN: awaitによるrejection処理](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/await#handling_rejected_promises)
 
 また、`then`のハンドラーがthrowした場合は、`then`が返すPromiseのrejectionにつながります。`queueMicrotask`のコールバックがthrowした場合の例外報告とは区別します。未処理のrejectionが報告されることと、例外を適切な場所で処理できていることも別です。[MDN: queueMicrotaskと例外](https://developer.mozilla.org/en-US/docs/Web/API/HTML_DOM_API/Microtask_guide#enqueueing_microtasks)
+
+## 要点
+
+- 通常の関数呼び出しは同期で進みます。ブラウザは実行可能なtaskを選び、処理を進めます。
+- microtask checkpointでは、処理中に追加された分も含めてmicrotaskを扱います。
+- Promiseの結果が確定した時点と、thenが実行される時点は別です。async関数の本体は最初のawaitまで同期で進みます。
+- 0ミリ秒タイマーとrequestAnimationFrameは別の指定です。長い計算をPromiseに入れても、それだけで別スレッドには移りません。
 
 ## 実行順の観察で分かること
 

@@ -15,6 +15,10 @@ study:
 
 二つのWorkerが同じ `SharedArrayBuffer` に `Int32Array` のビューを作ると、別々のJavaScript実行環境から同じバイト列を読み書きできます。カウンターを一つ増やす場合でも、どの処理をまとめるかで結果が変わります。値を渡す場合は、受け取り側が読み始めてよい時点も決めます。ここでは整数一つの加算と、準備完了を知らせるフラグを使って、この二つを観察します。[クロスオリジン分離と共有メモリ](/browser/cross-origin-isolation.html)、[Web Workerとメッセージ通信](/browser/web-workers-messages.html)
 
+## この記事で分かること
+
+共有カウンターの更新が取りこぼされる順序を追い、Atomicsで更新を一つにまとめる方法と、値が読める状態をフラグで伝える方法を説明できます。
+
 ## 個々の読み書きが不可分でも更新を取りこぼす
 
 共有カウンター `view[0]` を0から始めます。Worker AとBがそれぞれ `Atomics.load(view, 0)` で読んで、取得した値に1を足し、`Atomics.store(view, 0, old + 1)` で書き戻すとします。AとBの両方が先に読んだ場合、それぞれが持つ `old` は0です。両方の書き戻しが終わった時点のカウンターは1になります。この現象を**更新の取りこぼし**（lost update）と呼びます。[ECMAScriptのAtomics.load](https://tc39.es/ecma262/multipage/structured-data.html#sec-atomics.load)、[Atomics.store](https://tc39.es/ecma262/multipage/structured-data.html#sec-atomics.store)
@@ -54,6 +58,13 @@ study:
 `Atomics.notify(view, flagIndex, 1)` の戻り値は、通知した待機者の数です。通知だけではフラグが変わらないので、受け手は待機から戻ったあとにフラグを読み直し、条件がそろうまで待ち直すか、制限時間で打ち切ります。最初の `load` と `wait` の間に送り手がフラグを1にした場合、`wait` の比較で `"not-equal"` が返ります。最初から1を読んだ場合は待機を省けます。待機者がまだいなければ `notify` は0を返し、フラグに書いた1が残ります。[ECMAScriptのDoWait](https://tc39.es/ecma262/multipage/structured-data.html#sec-dowait)、[Atomics.notify](https://tc39.es/ecma262/multipage/structured-data.html#sec-atomics.notify)
 
 ブラウザのページ側のメインスレッドでは、`Atomics.wait` は `TypeError` になります。実践では、ページが二つのDedicated Workerに操作を指示します。待機中は受け手のWorkerが次のメッセージを処理できないので、もう一方のWorkerがデータとフラグを書いて通知します。[WHATWG HTMLのエージェントの定義](https://html.spec.whatwg.org/multipage/webappapis.html#integration-with-the-javascript-agent-formalism)、[ECMAScriptのDoWait](https://tc39.es/ecma262/multipage/structured-data.html#sec-dowait)
+
+## 要点
+
+- loadとstoreを個別にアトミックにしても、両方のWorkerが同じ値を読んでから書けば加算を取りこぼします。
+- Atomics.addは読み取り・加算・書き戻しを一つの操作で行い、加算前の値を返します。
+- 送り手はデータを書いてから準備フラグを立て、そのフラグの位置へ通知します。
+- 受け手は待機の戻り値と準備フラグを区別し、値を読む前にフラグを確認します。
 
 ## 実践との対応
 

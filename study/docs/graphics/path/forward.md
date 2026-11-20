@@ -11,6 +11,10 @@ study:
 
 # Forward Rendering
 
+## この記事で分かること
+
+Forward Renderingの描画で、材質と光をどの段階で計算するか説明できます。半透明やMSAAを扱う利点と、ライトが増えるときの負荷を比べられます。
+
 ## 概要
 
 Forward Renderingでは、オブジェクトを1つずつ描画し、各オブジェクトのFragment Shaderでライティングまで計算します。歴史的に最初の方式です。Deferredが広く使われた時期を経て、Forward+やClusteredの形で再び主流になっています。半透明、MSAA、多様なマテリアルを扱いやすいことが強みです。
@@ -124,6 +128,13 @@ float4 PSMain(Varyings IN) : SV_Target {
 
 - [Fragment Shader](/graphics/pipeline/fragment-shader.html), [出力結合](/graphics/pipeline/output-merger.html)
 - [ベクトル](/math/rendering/vector.html)
+
+## 要点
+
+- Forwardは各オブジェクトを描くとき、フラグメントシェーダーで光を評価し、色を出力します。
+- マテリアルごとに計算を変えやすく、半透明の合成やMSAAを組み込みやすい構成です。
+- 候補を絞らずライトを増やすと、無関係なライトの評価も増えます。物体ごとの上限や複数パスにはそれぞれ制約があります。
+- 画面をタイルやクラスタに分けて関連ライトを先に集めると、各フラグメントで回すライトの候補を減らせます。
 
 ## 次に読むべきページ
 

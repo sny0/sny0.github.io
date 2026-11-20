@@ -15,6 +15,10 @@ study:
 
 ゲーム画面を作るとき、最初のパスでシーン色と深度を書き、次のパスでシーン色を読んで表示用の画像を作ることがあります。パスが描画先として結び付ける色や深度・ステンシルのビューを、ここでは**アタッチメント**と呼びます。描画先ごとに、パスの入口でどんな内容が必要かと、出口の内容を誰が使うかを決めます。[MicrosoftのD3D12レンダーパス解説](https://learn.microsoft.com/en-us/windows/win32/direct3d12/direct3d-12-render-passes) · [中間画像を次の描画で読む](/graphics/postprocess/render-to-texture.html)
 
+## この記事で分かること
+
+描画先の色や深度をパスの前後で読み込む・残す・破棄する条件を判断できます。値の保持と、次の用途に変えるバリアの役割を区別できます。
+
 ## シーン色と深度の寿命は違う
 
 同じDIRECTキューを使う、MSAAなしの例です。Aはシーンを描き、Bは画面全体に後処理をかけ、Cはスワップチェーンに表示を渡します。この例では後処理に深度を使いません。[ポストプロセスの流れ](/graphics/postprocess/overview.html) · [スワップチェーンとPresent](/graphics/optimization/swap-chain-and-vsync.html)
@@ -69,3 +73,10 @@ D3D12の配置リソースで領域を共用する場合は、先行するGPUア
 ## 保持した画素がどれくらいあるかを見積もる
 
 1920×1080の `RGBA8` 画像は、1画素4バイトとして約7.9 MiBです。中間画像全体を一度書き、もう一度読むと、単純な画素データの合計は1フレーム約15.8 MiBになります。実機のメモリ転送量にはキャッシュ、圧縮、タイル処理、サンプル数などが影響します。タイルを使うGPUでは、後で使わない値の保持を省く宣言が外部メモリへの転送を減らせる場合があります。同じ場面でGPUの処理時間を比較し、メモリ帯域は使えるハードウェアカウンターで別に確認します。[Microsoftのタイルメモリとレンダーパス](https://learn.microsoft.com/en-us/windows/win32/direct3d12/direct3d-12-render-passes#scenarios) · [GPUタイムスタンプによる計測](/graphics/optimization/gpu-timestamp-queries.html) · [NVIDIAのGPU Trace計測ガイド](https://developer.nvidia.com/docs/drive/drive-os/7.0.3/public/nsight/nsight-graphics/AdvancedLearning/index.html)
+
+## 要点
+
+- パスの入口では従来の値に依存するかを決めます。初期値が要るならクリアし、重ね描きの背景が必要なら以前の値を保持します。
+- パスの出口では、後続が読む色を残し、以後使わない深度を破棄できます。MSAAの結果を単一サンプル画像へ渡すときは解決先も指定します。
+- 値を残す指定とは別に、描画先からシェーダー入力など、次の参照方法への状態遷移を記録します。
+- 一時メモリは最後の参照まで占有します。タイル処理やキャッシュなどは実機の転送量に影響するため、画素のバイト数と実測を分けます。

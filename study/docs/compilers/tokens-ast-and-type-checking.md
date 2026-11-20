@@ -26,6 +26,10 @@ double adjust(double value, unsigned step) {
   <figcaption>式の読み取りを3つの観点から見た図です。木の乗算ノードは、加算に渡す値を作ります。<a href="/study/images/compilers/tokens-ast-and-type-checking.svg" target="_blank" rel="noopener noreferrer">フロントエンドの図を拡大</a></figcaption>
 </figure>
 
+## この記事で分かること
+
+C++の式がトークンから抽象構文木になり、参照先や演算の型が決まるまでを追えます。
+
 ## 文字からトークンを取り出す
 
 **字句解析（lexing）**は、入力の文字列から、名前、数値リテラル、演算子などの単位を認識する処理です。一つずつ取り出した単位を**トークン**と呼びます。この `return` 文では、キーワード `return`、識別子 `value`、記号 `+`、識別子 `step`、記号 `*`、数値リテラル `2u`、記号 `;` が並びます。`2u` は接尾辞を含めて一つのトークンです。Clangのパーサーは、マクロなどを処理する前処理器からトークンを受け取ります。[ClangのLexerとPreprocessor](https://clang.llvm.org/docs/InternalsManual.html#the-lexer-and-preprocessor-library)
@@ -66,5 +70,12 @@ ReturnStmt
          │  └─ DeclRefExpr 'unsigned int' step
          └─ IntegerLiteral 'unsigned int' 2
 ```
+
+## 要点
+
+- 字句解析は文字列を、識別子や演算子などのトークンへ分けます。
+- 構文解析は文法と優先順位に従って式を木に組み立てます。
+- 意味解析では名前が指す宣言、式の型、必要な変換を調べます。
+- ClangのASTには、ソースに明示していない変換も現れます。
 
 演算の型が決まると、後続の処理は加算や変換を型付き命令にできます。[LLVM IRとSSA](/compilers/llvm-ir-and-ssa.html)

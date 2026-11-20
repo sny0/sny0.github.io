@@ -138,6 +138,13 @@ float3 color = directLighting                       // 直接光には掛けな�
 - [Deferred Rendering](/graphics/path/deferred.html) — G-Buffer/深度の由来
 - [Compute Shader](/graphics/compute/compute-shader.html)
 
+## 要点
+
+- SSAOは画面にある深度、方式によっては法線も使い、近傍の形による環境光の遮りを推定します。
+- 法線に合わせた半球のサンプルや、周囲の地平線の角度を調べる方式があります。GTAOは角度から遮蔽の積分を求めます。
+- 少ないサンプルで現れるノイズは、形の境界を考慮した平滑化や時間方向の蓄積で抑えられます。
+- 画面外や手前の形に隠れた情報は使えません。周囲から届く光の遮りを表す結果として、直接光や他の間接光処理と使い分けます。
+
 ## 次に読むべきページ
 
 - [SSR](/graphics/lighting/ssr.html) — 同じ画面空間の鏡面版

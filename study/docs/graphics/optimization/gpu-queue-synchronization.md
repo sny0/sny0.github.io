@@ -20,6 +20,10 @@ study:
   <figcaption>COPYとDIRECTの間でテクスチャを引き渡す例。横方向は各キューの処理順を示します。<a href="/study/images/graphics/gpu-queue-synchronization.svg" target="_blank" rel="noopener noreferrer">キュー間同期の図を拡大</a></figcaption>
 </figure>
 
+## この記事で分かること
+
+COPYキューで転送したテクスチャをDIRECTキューで使うとき、通知する値と待つ位置を決められます。コピー元と描画が参照する資源の寿命を別々に追えます。
+
 ## キューの種類で記録できる命令が決まる
 
 | キューの種類 | 提出するリストに記録できる主な処理 |
@@ -74,3 +78,10 @@ COPYが未到達の `drawDone = 24` を待ってから `copyDone = 11` を通知
 コンピュート処理をCOMPUTEキューへ移し、DIRECTキューの描画と重ねる設計を**非同期コンピュート**と呼びます。重なる区間は、データの依存関係、GPUが同時に実行できる処理、メモリ帯域などの競合で変わります。同じシーンとハードウェアで、DIRECTだけに提出する場合と、COMPUTEに分ける場合を測ります。PIXのTiming Captureなどで、両方のキューの実行区間、待ちの位置、フレーム全体にかかった時間を比べます。[Microsoftの非同期コンピュートの例](https://learn.microsoft.com/en-us/windows/win32/direct3d12/user-mode-heap-synchronization#pipelined-compute-and-graphics-example) · [Microsoft PIXのTiming Captures](https://devblogs.microsoft.com/pix/timing-captures-new/)
 
 実践では二つのCPUワーカーが別々に記録したリストを、一つのDIRECTキューへ依存順に提出します。GPUのコピー結果をCPUで読み戻し、記録順と実行に必要な順序を追います。[D3D12の並列記録を試す](/practice/graphics/parallel-command-recording-observation.html)
+
+## 要点
+
+- キューの種類は、記録できる命令の範囲を決めます。複数キューで実際に処理が重なるかは、GPUや負荷次第です。
+- 生成側のキューへ`Signal`、参照する命令より前の消費側キューへ`Wait`を置きます。キューへの`Wait`はCPUスレッドをその場で止めません。
+- コピー元だけを回収する場合はコピー側の完了を待ち、転送先とその記述子は最後の描画などが使い終わるまで保持します。
+- 互いの通知を待つ循環を避け、結果を必要としない仕事を待ちより前に置けるか確認します。

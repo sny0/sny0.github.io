@@ -15,6 +15,10 @@ study:
 
 `call.cpp`を単独でコンパイルすると、別ファイルで定義した`helper`の呼び出しも機械語の命令になります。この時点では、二つの関数が最終的な実行ファイルのどこに配置されるかは決まっていません。Windows x64のCOFFオブジェクトには呼び出し命令があり、その一部をリンカーが埋めるための記録も入っています。[MicrosoftのPE/COFF仕様 — COFF再配置](https://learn.microsoft.com/en-us/windows/win32/debug/pe-format#coff-relocations-object-only)
 
+## この記事で分かること
+
+別のファイルにある関数を呼ぶ例から、リンカーがシンボルを探し、機械語のどこに距離を書き込むかを追えます。
+
 ## シンボル表で名前を引き、再配置レコードで書き込み箇所を引く
 
 シンボル表は、関数などの名前と、その名前が定義されているセクションや位置を記録します。別のオブジェクトから供給される名前は未定義シンボルとして載ります。リンカーは入力を集め、参照に対応する定義を探して、出力セクションにコードとデータを配置します。[オブジェクトファイルとライブラリ](/runtime/cpp-internals/object-files-and-libraries.html) · [MicrosoftのPE/COFF仕様 — COFFシンボル表](https://learn.microsoft.com/en-us/windows/win32/debug/pe-format#coff-symbol-table)
@@ -83,3 +87,9 @@ echo %ERRORLEVEL%
 ## ロード時の再配置との関係
 
 この`call`と`helper`を含むイメージ全体が同じ量だけ移動しても、両者の差は`0x47`のままです。いっぽう、データ領域に格納された64ビットの絶対アドレスなど、移動量に応じて更新する箇所は、PEのベース再配置表に記録します。オブジェクトの`REL32`を処理するのはリンカーで、PEのベース再配置を処理するのはローダーです。[PEのマッピング、ベース再配置とIAT](/os/pe-loading-and-imports.html) · [MicrosoftのPE/COFF仕様 — ベース再配置](https://learn.microsoft.com/en-us/windows/win32/debug/pe-format#the-reloc-section-image-only)
+
+## 要点
+
+- シンボル表は、参照に対応する名前と定義の位置を調べる手掛かりです。
+- 再配置レコードは、リンカーが書き換える場所と計算の種類を示します。
+- リンク時の相対距離の調整と、ロード時のPEのベース再配置では、処理の担当と対象が違います。

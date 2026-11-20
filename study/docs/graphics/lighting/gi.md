@@ -143,6 +143,13 @@ float3 OneBounceGI(float3 posWS, float3 N, uint2 pixel, uint frame) {
 
 - [PBR](/graphics/lighting/pbr.html), [IBL](/graphics/lighting/ibl.html), [シャドウ](/graphics/lighting/shadow.html)
 
+## 要点
+
+- GIは、別の表面で反射して届く間接光まで扱います。反射した光が次の地点への入射光になるため、計算は再帰的になります。
+- 事前計算は静的な照明に向きます。画面空間の処理が参照できる情報は、現在の画面にある深度やマテリアルなどに限られます。
+- 動的なGIは、シーンを表すデータ、光の伝わり方、粗い結果やノイズを補う再構成の組み合わせとして比べられます。
+- 画質に加え、場面の変化に追従する速さ、意図しない光漏れ、対象機種の負荷を確認して方式を選びます。
+
 ## 次に読むべきページ
 
 - [SSAO](/graphics/lighting/ssao.html) → [SSR](/graphics/lighting/ssr.html) — 画面空間の2大技法

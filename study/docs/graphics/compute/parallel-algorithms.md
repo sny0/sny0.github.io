@@ -11,6 +11,10 @@ study:
 
 # 並列アルゴリズム — Reduction / Prefix Sum (Scan)
 
+## この記事で分かること
+
+合計を一つの値にまとめるReductionと、各要素の手前までの累積を求めるExclusive Scanを区別できます。可視な要素だけを連続して並べるために、Scanの結果をどう使うか説明できます。
+
 ## 概要
 
 順番に処理するなら単純なループで書ける合計や累積和も、数千スレッドのGPUで処理するには並列アルゴリズムを使います。代表例は、合計や最大値を求めるReduction (集約) と、累積和を求めるPrefix Sum / Scanです。Scanはコンパクション、ソート、パーティクル管理、GPU Drivenの可視リスト構築などに広く使われます。
@@ -170,6 +174,13 @@ void LumReduceCS(uint gi : SV_GroupIndex, uint3 gid : SV_GroupID) {
 
 - [Compute Shader](/graphics/compute/compute-shader.html)
 - [GPU並列実行モデル](/graphics/compute/execution-model.html), [Shared Memory と Atomic](/graphics/compute/shared-memory.html)
+
+## 要点
+
+- Reductionは入力を木のように段階的にまとめ、グループごとの部分結果を次の段で集約します。
+- Exclusive Scanは自分の値を含めず、Inclusive Scanは含めます。0か1の可視フラグをExclusive Scanすると、可視要素が書き込む位置を得られます。
+- グループ内の実装では、全スレッドが必要なバリアへ同じ回数到達するようにします。
+- Wave命令で内側の演算を短くできます。Wave幅やグループ内インデックスとWaveの対応は決め打ちしません。
 
 ## 次に読むべきページ
 

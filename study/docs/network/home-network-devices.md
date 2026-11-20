@@ -15,6 +15,10 @@ study:
 
 PCでオンラインゲームに接続すると、PC自身の通信機能に加え、家庭内の機器と回線を通ってサーバーへデータが向かいます。店頭で「Wi-Fiルーター」と呼ばれる一台の中にも、複数の役割が入っています。ここでは役割ごとに分けて、PCから家の外へ出るまでを追います。[Ciscoのネットワーク機器の概要](https://www.cisco.com/site/us/en/learn/topics/networking/what-is-computer-networking.html) · [ネットワークの基礎](/network/network-basics.html)
 
+## この記事で分かること
+
+家庭でゲームのデータがPCから外の回線へ向かう経路を説明できます。一台のWi-Fiルーターに含まれる接続・中継・設定配布の役割を区別できます。
+
 ## LANとWAN
 
 **LAN**（Local Area Network）は、自宅やオフィスなど、限られた範囲の機器を結ぶネットワークです。有線の**Ethernet**でも、無線の**Wi-Fi**でもLANを構成できます。家庭用ルーターのLAN側には、PC、ゲーム機、スマートフォンなどがつながります。[CiscoのLANの説明](https://www.cisco.com/site/us/en/learn/topics/networking/what-is-computer-networking.html#types-of-computer-networks)
@@ -54,3 +58,10 @@ Ethernetでは、同じリンクで届ける相手を示す**MACアドレス**�
 **DNS**は、`example.com`のような名前からIPアドレスなどの情報を調べる仕組みです。家庭用ルーターがDNSの問い合わせを受け、別のDNSサーバーへ問い合わせる構成もあります。IPv6では、ルーターの通知によるアドレス設定やDHCPv6など、IPv4のDHCPとは異なる設定方法も使われます。[IETF RFC 1034のDNS](https://www.rfc-editor.org/rfc/rfc1034.html#section-2) · [IPv6のアドレス自動設定](https://www.rfc-editor.org/rfc/rfc4862.html#section-5.5) · [DNSと名前解決](/network/dns-resolution.html)
 
 接続を調べるときは、PCのネットワークアダプター、接続先のLAN、ゲートウェイ、DNSの値を順に確認すると、どの機器やサービスを使っているか分かります。IPアドレスとポートの読み方は[IPアドレスとポート](/network/ip-addresses-and-ports.html)、実際にNICがデータを受け取る仕組みは[NICの受信キューとRSS](/hardware/io/nic-receive-queues.html)で扱います。
+
+## 要点
+
+- NICが端末の通信を受け持ち、スイッチやアクセスポイントがLAN上の機器をつなぎます。
+- 同じサブネットの相手にはLAN上で届けます。別のネットワークへは、ルーティングする機器を次の宛先にします。
+- 家庭用ルーターには、回線側へつなぐ機能と無線LANなど、複数の役割が組み合わさることがあります。
+- DHCPは使うアドレスやゲートウェイなどを配り、DNSは名前から接続先の情報を得る役割を持ちます。

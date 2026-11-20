@@ -11,6 +11,10 @@ study:
 
 # CUDA と OpenCL
 
+## この記事で分かること
+
+CUDA、OpenCL、Compute Shaderに共通するカーネルとスレッド階層を対応付けられます。ホストがGPUへ計算を渡す流れを、二つのベクトル加算例から説明できます。
+
 ## 概要
 
 CUDA (NVIDIA, 2007) とOpenCL (Khronos, 2008年仕様公開) は、グラフィックスAPIから独立した汎用GPU計算 (GPGPU) のプラットフォームです。ゲーム開発では主に[Compute Shader](/graphics/compute/compute-shader.html)を使います。機械学習、オフラインレンダリング、ツール開発ではCUDAが広く使われ、カーネル、Warp、Shared Memoryなどの概念と用語はGPU計算全体で使われています。
@@ -126,6 +130,13 @@ int main() {
 
 - [Compute Shader](/graphics/compute/compute-shader.html)
 - [GPU並列実行モデル](/graphics/compute/execution-model.html)
+
+## 要点
+
+- CUDAのgrid・block・threadは、OpenCLのNDRange・work-group・work-itemに対応します。HLSLのディスパッチとスレッドグループにも共通する構造です。
+- CUDAのWarp、HLSLのWave、OpenCLのsub-groupは、スレッドをまとめて扱う実行単位の用語です。
+- 同じベクトル加算でも、CUDAの例はホストとカーネルを同じソースに置き、OpenCLの例は対象の列挙、コンテキスト、キュー、カーネルの準備を明示します。
+- ゲーム内の描画に組み込む計算と、機械学習・ベイク・ツール向けの計算では、利用するAPIやライブラリーの選び方が変わります。
 
 ## 次に読むべきページ
 

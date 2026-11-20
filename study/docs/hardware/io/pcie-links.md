@@ -17,6 +17,10 @@ PCの各部品が担う役割は、[コンピュータを構成する部品](/ha
 
 GPUへのアップロード、NVMe SSDからの読み取り、ネットワークカードでのパケット受信では、データがCPU・メモリ側とデバイスの間を移動します。**PCI Express（PCIe）**は、こうした機器を、両端にポートを持つ点対点の**リンク**で結びます。どのリンクを通り、各リンクが何レーン・何GT/sで動くかを調べると、転送経路のどこで帯域を使い合うかが分かります。[Intel公開のPCIeトポロジー資料 §1.3](https://www.intel.com/content/dam/support/us/en/programmable/support-resources/fpga-wiki/asset03/pci-express-base-r2.1.pdf#page=39)
 
+## この記事で分かること
+
+PCに接続したGPUやSSDのデータがどのPCIeリンクを通るか説明できます。レーン数と転送率から帯域を見積もり、複数の機器で共有する区間を見つけられます。
+
 ## CPU側からデバイスまでの経路
 
 **ルートコンプレックス（Root Complex）**はCPU・メモリ側とPCIe階層をつなぎます。その**ルートポート**から、GPUなどの**エンドポイント**へ直接リンクを張ることも、PCIeスイッチへつなぐこともできます。スイッチは上流ポートと複数の下流ポートを持ち、行き先に応じてトランザクションを中継します。CPU側へ向かう複数機器のデータが同じ上流リンクを通る構成では、そのリンクの帯域を分け合います。[Intel公開のPCIeトポロジー資料 §1.3](https://www.intel.com/content/dam/support/us/en/programmable/support-resources/fpga-wiki/asset03/pci-express-base-r2.1.pdf#page=39) · [Linux PCIサポートライブラリー](https://docs.kernel.org/driver-api/pci/pci.html)
@@ -49,3 +53,10 @@ GT/sは、1レーンが1秒間に行う転送回数を10億回単位で表しま
 図のSSDとNICが同時にRAMへデータを書き込むと、両者は上流x4の同じ方向を使います。個々の下流リンクが速くても、上流の帯域が合計の上限になります。SSDを単独で読む場合は、経路の各リンクに加え、SSD内部の処理、要求サイズ、同時に出している要求の数、OSのキャッシュ、読み取り後の展開も時間に影響します。ゲームのロードでは、転送量と完了までの時間を段階ごとに測り、どの区間が実際に遅いかを調べます。[Linuxの経路上の帯域制約](https://docs.kernel.org/driver-api/pci/pci.html#c.pcie_bandwidth_available) · [WindowsのI/Oトレース](/tools/windows/file-io-tracing.html) · [DirectStorageの読み取りと展開](/game/directstorage.html)
 
 PCIeを通るデータの出発点と行き先を決めるとき、ドライバーはデバイスが使えるアドレスを用意します。[DMAとIOMMU](/hardware/io/dma-and-iommu.html)
+
+## 要点
+
+- ルートポートから機器へ直接つなぐ場合と、スイッチを介して複数の機器につなぐ場合があります。
+- レーン数と速度はリンクごとに決まります。実際に動作する幅と転送率を調べます。
+- 片方向の理論帯域を見積もるときは、レーンあたりの転送率、レーン数、符号化による分を考えます。
+- 下流の機器が同じ上流リンクを同方向に使えば、合計はその上流の帯域に制限されます。

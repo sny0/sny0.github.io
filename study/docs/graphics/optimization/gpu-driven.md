@@ -11,6 +11,10 @@ study:
 
 # GPU Driven Rendering
 
+## この記事で分かること
+
+GPUが可視リストと描画引数を作り、Indirect Drawで描く流れを説明できます。前フレームの可視リストを使う二段階のカリングでは、各段階でどの深度を使うか区別できます。
+
 ## 概要
 
 GPU Driven Renderingでは、描画対象の決定にあたるカリング、LOD選択、描画リスト構築をCPUからGPUへ移します。Compute Shaderでシーン全体の可視性を判定し、GPUが生成した引数を使ってIndirect Drawで描画します。CPUから多数のドローコールを発行することによるボトルネックを解消し、数十万オブジェクトや数億ポリゴンからなるシーンを扱えるため、現代のAAAレンダラーで使われています。UE5のNaniteは、この設計を大規模なジオメトリ処理に使う例です。
@@ -228,6 +232,13 @@ Direct3D 12とGeForce RTX 3060で、壁1枚と直方体4個を正投影で描画
 - [Compute Shader](/graphics/compute/compute-shader.html), [並列アルゴリズム](/graphics/compute/parallel-algorithms.html)
 - [GPU並列実行モデル](/graphics/compute/execution-model.html) — Wave命令
 - [Vertex Shader](/graphics/pipeline/vertex-shader.html) — Vertex Pulling
+
+## 要点
+
+- カリングやLOD選択、描画引数の生成をGPUへ移すと、CPUが個々の描画命令を発行する仕事を減らせます。
+- 先のパスは前フレームに見えた物体を、現在のカメラと位置で描いて現在の深度を作ります。その深度を階層化してHi-Zにします。
+- 次のパスは残りの候補をHi-Zで判定し、見える可能性がある物体を描き足します。判定条件を満たせない物体は保守的に残します。
+- Hi-Zには領域の最遠深度を保持します。通常ZとReverse-Zで縮小に使う比較方向が逆になります。
 
 ## 次に読むべきページ
 

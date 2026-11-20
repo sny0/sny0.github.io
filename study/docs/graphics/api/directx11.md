@@ -11,6 +11,10 @@ study:
 
 # DirectX 11
 
+## この記事で分かること
+
+描画命令を出すImmediate Contextと、別スレッドで命令を記録するDeferred Contextの役割を区別できます。DX12と比べて、リソース管理や同期のどこをドライバーが引き受けるか説明できます。
+
 ## 概要
 
 DirectX 11 (2009) は、描画状態やリソースの管理をドライバに任せる世代のAPIの集大成です。ステートオブジェクト・Compute Shader・Tessellationを備え、10年以上にわたりWindowsゲーム開発の標準であり続けました。DX12よりはるかにコードを書きやすく、手早くGPUを使いたい場合には今も選択肢です。DX12やVulkanを学ぶ前に、ドライバとアプリの役割を比較する題材にも適しています。
@@ -142,6 +146,13 @@ context->Unmap(cbuffer, 0);
 
 - [グラフィックスAPIの歴史](/graphics/api/history.html)
 - [パイプライン全体像](/graphics/pipeline/overview.html)
+
+## 要点
+
+- Deviceでリソースを作り、Immediate Contextから描画命令を発行します。
+- Deferred Contextでコマンドリストを並列に記録し、Immediate Contextで再生します。性能はドライバーの対応と処理内容によって変わります。
+- リソースの競合や常駐の管理はドライバーが担います。定数バッファーを更新するときにも、GPUとの待ち合わせが起き得ます。
+- ラスタライザー・ブレンド・深度の設定はステートオブジェクトにまとめます。Feature Levelで使える機能を確認します。
 
 ## 次に読むべきページ
 

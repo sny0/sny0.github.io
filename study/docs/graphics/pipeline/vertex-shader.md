@@ -13,6 +13,10 @@ study:
 
 短いコードから処理を追う場合は、[シェーダーの第一歩](/graphics/shader/shader-first-steps.html)へ進みます。
 
+## この記事で分かること
+
+頂点シェーダーが読み取る属性やインスタンスごとのデータを、後段へ渡すクリップ空間の位置と区別できます。頂点バッファーから固定機能で渡す方法と、自分で読み出す方法を比べられます。
+
 ## 概要
 
 Vertex Shader (VS) の一回の呼び出しは、一つの入力頂点を処理します。主な仕事は位置をクリップ座標へ変換し、UVや法線などを後段へ渡すことです。同じ頂点を繰り返し指定したときには、実装が結果を再利用する場合があります。実際の起動回数は、描画と実装に応じて計測します。[Microsoftの頂点シェーダーステージ](https://learn.microsoft.com/en-us/windows/win32/direct3d11/vertex-shader-stage) · [Vulkanの頂点処理](https://docs.vulkan.org/spec/latest/chapters/shaders.html#shaders-vertex-execution)
@@ -156,6 +160,13 @@ void main() {
 
 - [座標変換](/math/rendering/transform.html), [行列](/math/rendering/matrix.html)
 - [パイプライン全体像](/graphics/pipeline/overview.html)
+
+## 要点
+
+- 一回の呼び出しが入力頂点一つを扱い、クリップ空間の位置と必要な法線やUVを出力します。
+- 頂点属性は入力レイアウトとストライドに従って渡せます。Vertex Pullingでは頂点IDなどを使ってバッファーから読みます。
+- 描画で同じ番号を使っても、頂点シェーダーの実際の起動回数は処理結果の再利用によって変わる場合があります。
+- 掲載の風揺れ例はインスタンスごとの変換と時刻を使います。法線の扱いは回転と一様拡縮を前提にした近似です。
 
 ## 次に読むべきページ
 

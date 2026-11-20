@@ -21,6 +21,10 @@ HTTPは、クライアントが**要求**（request）を送り、サーバー�
 
 以前の応答を保存して使う条件と、本文を再送しない304応答は、[HTTPキャッシュと再検証](/network/http-caching.html)で扱います。
 
+## この記事で分かること
+
+HTTP/1.1の要求や応答がTCPのバイト列の中でどこからどこまでかを判断できます。受信の区切り、本文の長さ、HTTPの結果を区別できます。
+
 ## URLから要求メッセージへ
 
 対象を`http://127.0.0.1:<port>/study-demo`と考えます。`<port>`は説明用の置き場所で、実際にはOSが割り当てたport番号です。クライアントはそのIPとportへTCP接続し、次の要求を送ります。
@@ -147,6 +151,13 @@ GETは**idempotent**（冪等）でもあります。同じ要求を繰り返し
 HTTPSは、HTTPの通信をTLSで保護する仕組みとして捉えます。ここで扱うHTTP/1.1とTCPの会話に、暗号化、改ざん検出、相手の確認などを担う層が加わる場合も、HTTP本文の長さと意味を判断する仕事は残ります。今回のraw Socket実践はTLSを使いません。鍵共有や証明書、相手名の検証は[TLS・証明書・HTTPS](/network/tls-https.html)で詳しく説明します。[RFC 9110 §4.2.2](https://www.rfc-editor.org/rfc/rfc9110.html#section-4.2.2)
 
 HTTP/2は一つのTCP接続で複数のやり取りを並行して進めます。HTTP/3はQUICのストリームを使います。パケットが欠けたときの違いは[QUICとHTTP/3](/network/quic-and-http3.html)で扱います。接続先を名前から調べる処理は[DNSと名前解決](/network/dns-resolution.html)へ進んでください。[IETF RFC 9114 §1.1–1.2](https://www.rfc-editor.org/rfc/rfc9114.html#section-1.1)
+
+## 要点
+
+- 開始行とヘッダーの後の空行が、ヘッダー部分の終わりを示します。
+- Content-Typeは本文をどう解釈するか、Content-Lengthは本文のバイト数を示します。
+- 一回のrecvでメッセージ全体が得られるとは限りません。受信したバイトをため、HTTPの規則で区切ります。
+- 持続的接続では本文の終わりと接続の終了は別です。sendの成功やTCPのACKと、HTTPで得た結果も区別します。
 
 ## 実践記事
 

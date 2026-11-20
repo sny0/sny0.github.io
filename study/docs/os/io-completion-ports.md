@@ -15,6 +15,10 @@ study:
 
 Windowsの**I/O完了ポート**（IOCP）は、複数のハンドルで発行した非同期I/Oの結果を、一つのキューに集める仕組みです。例えば、二つのファイルから三つの読み取りを出すと、それぞれの完了を同じポートから回収できます。ワーカーはポートを待ち、取り出したパケットの値からファイルと要求を特定します。[非同期I/Oの基礎](/os/asynchronous-file-io.html) · [Microsoft: I/O Completion Ports](https://learn.microsoft.com/en-us/windows/win32/fileio/i-o-completion-ports)
 
+## この記事で分かること
+
+複数の読み取りの結果を一つの完了ポートから受け取り、どのファイルのどの要求かを識別できます。
+
 ## ハンドルをポートに関連付ける
 
 通常ファイルなら、まず`CreateFileW`で`FILE_FLAG_OVERLAPPED`を指定して開きます。読み取りを発行する前に、`CreateIoCompletionPort`でそのハンドルの完了通知の送り先を設定します。ポートを共有するファイルを後から追加する場合は、同じポートハンドルを渡します。[Microsoft: CreateIoCompletionPort](https://learn.microsoft.com/en-us/windows/win32/api/ioapiset/nf-ioapiset-createiocompletionport)
@@ -84,6 +88,12 @@ Windowsの**I/O完了ポート**（IOCP）は、複数のハンドルで発行�
 作成時の`NumberOfConcurrentThreads`は、ポートに関連付く**実行可能なワーカー数を制御する値**です。`0`ならシステムのプロセッサー数が使われます。例えば並行度が1でも、アプリは複数のワーカーを作って待機させ、複数の読み取りを発行できます。先に動いていたワーカーが別の待ちに入ったとき、ポートは別のワーカーへ処理を渡せます。元のワーカーが再開した直後などは、一時的に指定値を超えることもあります。発行するI/Oの数やバッファの総量を抑える上限は、アプリ側で別に設けます。[Microsoft: Threads and Concurrency](https://learn.microsoft.com/en-us/windows/win32/fileio/i-o-completion-ports#threads-and-concurrency) · [Windowsのスレッドスケジューリング](/os/thread-scheduling.html)
 
 ゲームのローダーでは、I/Oの転送完了をきっかけに、展開やデコードの仕事を渡せます。転送、CPU処理、GPUへのアップロードを別の段階として計測すると、完了ポートの通知を受け取った時点から利用可能になるまでの遅れを追えます。[ゲームのアセット読み込み](/game/asset-loading.html)
+
+## 要点
+
+- 対象のハンドルをポートに関連付け、完了通知を一つのキューに集めます。
+- 完了キーで関連付けたハンドルを、`OVERLAPPED` のポインターで個々の要求を区別します。
+- `GetQueuedCompletionStatus` が失敗を返したときは、ポインターとエラー情報を確認します。処理順が必要なら要求IDやオフセットを使います。
 
 ## 実践
 

@@ -11,6 +11,10 @@ study:
 
 # Forward+ / Tiled / Clustered Rendering
 
+## この記事で分かること
+
+画面のタイルと奥行きで分けたクラスタが、ライトの候補をどう減らすか説明できます。GPUで作ったライトリストを後続の描画で読む条件を判断できます。
+
 ## 概要
 
 Forward+ (Tiled Forward) とClustered Shadingは、Forward RenderingにCompute Shaderによるライトカリングを組み合わせた方式です。画面を2Dのタイルか、タイルと深度スライスを組み合わせた3Dのクラスタに分け、領域ごとに影響するライトのリストを作ってからシェーディングします。Deferredのように多数のライトを扱いつつ、Forwardの半透明、MSAA、任意のマテリアルを扱える柔軟性を保ちます。
@@ -164,6 +168,13 @@ void CullLightsCS(uint3 gid : SV_GroupID, uint gi : SV_GroupIndex) {
 
 - [Forward](/graphics/path/forward.html), [Deferred](/graphics/path/deferred.html)
 - [Compute Shader](/graphics/compute/compute-shader.html), [Shared Memory と Atomic](/graphics/compute/shared-memory.html)
+
+## 要点
+
+- タイルやクラスタごとに影響するライトのリストをComputeで作り、描画中は該当するリストを参照します。
+- 同じタイルに近い面と遠い面が並ぶと、タイルだけでは不要なライトが残りやすくなります。クラスタは奥行きでも分けます。
+- クラスタをジオメトリーから独立して作る構成では、不透明物と半透明で同じリストを使えます。
+- 固定長リストで容量を超える場合の処理を用意し、Computeが書いたリストを読む前にAPIで必要な依存関係を設定します。
 
 ## 次に読むべきページ
 

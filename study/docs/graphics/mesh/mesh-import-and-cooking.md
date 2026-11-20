@@ -20,6 +20,10 @@ glTFのメッシュには、形を作る頂点属性と、頂点をどう組み�
   <figcaption>描画に必要な情報を組み立てる流れです。UVの継ぎ目では、位置を共有する三角形が別の頂点番号を使います。<a href="/study/images/graphics/mesh-import-and-cooking.svg" target="_blank" rel="noopener noreferrer">メッシュのクック工程の図を拡大</a></figcaption>
 </figure>
 
+## この記事で分かること
+
+静的なglTFメッシュを取り込み、頂点・インデックス・描画単位へ変換する流れを説明できます。表裏や法線、UVの継ぎ目を保つために確認する条件を判断できます。
+
 ## primitiveの属性と描画範囲を読む
 
 `POSITION`、`NORMAL`、`TEXCOORD_0`などの属性はaccessorを介して読みます。インデックス付きのprimitiveでは、一つのインデックスが、各属性の同じ番号の要素を指します。インポーターは使う属性の要素数、インデックスの範囲、トポロジーを検査します。三角形リストでは3個のインデックスが1面です。たとえば三角形ストリップをリストに変換する場合は、ストリップで交互になる頂点順を考慮して表の向きを保ちます。[Khronosのprimitiveとトポロジーの仕様](https://registry.khronos.org/glTF/specs/2.0/glTF-2.0.html#meshes-overview) · [glTFのバッファから属性を読む](/graphics/mesh/gltf-mesh-buffers.html)
@@ -54,3 +58,10 @@ glTFは右手系で、上が`+Y`、アセットの前が`+Z`です。ノード�
 バッファとともに、プリミティブごとの描画範囲、マテリアルID、メッシュを囲む境界を保存します。座標軸に沿う境界箱（AABB）なら、描画する位置のX・Y・Zそれぞれの最小値と最大値から作れます。glTFの `POSITION` accessorにも `min` と `max` があります。座標を焼き込んだり、位置の精度を落として格納したりした場合は、実際に描画側が読む座標を囲むように境界を求めます。境界は視錐台の外にある物体の描画を省く判断に使えます。[Khronosのaccessorの境界](https://registry.khronos.org/glTF/specs/2.0/glTF-2.0.html#accessors-bounds) · [Microsoftの境界箱の作成](https://learn.microsoft.com/en-us/windows/win32/api/directxcollision/ns-directxcollision-boundingbox)
 
 実行時は、書き出した範囲を読み、頂点とインデックスをGPUへ転送します。各バッファの準備が完了し、マテリアルの参照先が揃うと、その描画範囲を使えます。取り込みの確認には、非一様スケールした物体、片軸を反転した物体、UVの継ぎ目を持つ物体を使うと、法線、表裏、頂点の分離を個別に見られます。[実行時のアセットロード](/game/asset-loading.html) · [頂点とインデックスを描画に渡す](/graphics/mesh/vertex-and-index-input.html)
+
+## 要点
+
+- プリミティブごとの属性・トポロジー・インデックスを調べ、出力の描画範囲とマテリアルを対応付けます。
+- 座標の基準と単位をそろえ、法線には逆転置を使います。反転する変換では頂点順や表面判定も確認します。
+- 同じ位置でも法線やUVが違えば頂点を分けます。頂点番号を変更したら対応するインデックスを更新します。
+- インデックス幅と頂点の格納方法は参照する番号の範囲や描画パスで選び、描画側が実際に読む位置を囲む境界も保存します。

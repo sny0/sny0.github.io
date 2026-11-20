@@ -15,6 +15,10 @@ study:
 
 ゲーム本体、画像、セーブデータはストレージ上のファイルとして保存できます。アプリから見ると、通常のデータファイルは順に並んだバイト列です。名前や保存場所を管理する仕組みをファイルシステムと呼びます。ファイルをまとめる場所がディレクトリで、画面上ではフォルダーとも呼びます。[Microsoftのファイルとディレクトリ](https://learn.microsoft.com/en-us/windows/win32/fileio/naming-a-file) · [ビットとバイト](/data/integer-bits-and-bytes.html)
 
+## この記事で分かること
+
+ゲームの素材やセーブデータを例に、パスでファイルを指定し、開いてから読み書きするまでを説明できます。
+
 ## 名前と保存場所をつなぐパス
 
 **パス**は、操作するファイルやディレクトリを指定する文字列です。ここではWindowsの説明用の配置を使います。`D:\Game`以下に、ゲーム本体、画像用の`assets`、セーブ用の`saves`がある例です。[MicrosoftのWindowsのパス形式](https://learn.microsoft.com/en-us/dotnet/standard/io/file-path-formats)
@@ -62,3 +66,9 @@ D:\Game
 開くときには、指定したファイルがあるか、操作が許可されているかなどをOSが確認します。書き込みでファイルを新しく作るか、既存の内容を置き換えるかは、APIに渡す指定で変わります。[Microsoftのファイル作成とオープン](https://learn.microsoft.com/en-us/windows/win32/fileio/creating-and-opening-files)
 
 読み取ったバイトは、ゲームが画像やセーブ内容として解釈します。また、閉じる処理と、突然電源が切れても保存内容が残る保証は、別に検討します。読み取りの内部は[ファイルを読むと内部で何が起きるか](/os/file-read-journey.html)、保存の完了は[ファイル書き込みと永続化](/os/file-write-and-durability.html)、ハンドルは[Windowsのハンドル](/os/windows-handles.html)で扱います。
+
+## 要点
+
+- 絶対パスと相対パスでは、場所をたどり始める基準が違います。
+- 拡張子は形式を知る手掛かりです。実際のデータは読む側が形式に従って解釈します。
+- ファイルを開いて操作に使う値を受け取り、読み書きが済んだら閉じます。

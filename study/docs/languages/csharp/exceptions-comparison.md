@@ -13,6 +13,10 @@ study:
 
 言語機能の詳細と業界事情は[例外のページ](/languages/cpp/exceptions.html)、内部実装は[例外処理の仕組み](/runtime/cpp-internals/exceptions-and-rtti-impl.html)で説明済み。ここでは対応と差分を整理します。
 
+## この記事で分かること
+
+C#とC++で範囲外のアクセスや失敗をどう扱うかを比べ、後片付けをどの仕組みに任せるか判断できます。
+
 ## 対応表
 
 | | C# | C++ |

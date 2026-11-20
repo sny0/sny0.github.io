@@ -15,6 +15,10 @@ study:
 
 対戦中に右へ移動すると、自分の画面ではすぐに動いてほしい一方、別のプレイヤーの画面でも同じルールで結果が決まる必要があります。各端末がいつの状態を描画し、誰が結果を確定するかを決めるのがネットワーク同期の設計です。[Yahn W. BernierのGDC 2001講演資料](https://www.gamedevs.org/uploads/latency-compensation-in-client-server-protocols.pdf)
 
+## この記事で分かること
+
+サーバーが確定する状態と、各端末が先に表示する状態を区別できます。スナップショット補間、入力の再適用、ロールバックとラグ補償がどの時刻を扱うか説明できます。
+
 ## 誰が状態を確定するか
 
 **サーバー権威**では、クライアントが「入力番号2で右へ移動したい」などの操作を送り、サーバーが衝突や得点を含む正規の結果を決めます。クライアントは先に手元の画面を更新でき、サーバーから確定結果が届いた時点で表示や予測に使う状態を合わせます。[Unreal Engine 5.6のネットワーキング概要](https://dev.epicgames.com/documentation/en-us/unreal-engine/networking-overview-for-unreal-engine?application_version=5.6)
@@ -124,6 +128,14 @@ GGPO型の**ロールバック**では、相手の入力がまだ届いていな
 | Unreal Engine 5.6と5.8のReplicationとIris | Replicationはアクターなどの状態をネットワークで伝える仕組みです。Irisは接続ごとのフィルタリングや優先付けを扱う方式です。5.6の資料ではオプトインの実験的な機能で、Epicは5.8で本番利用向け（Production Ready）になったと発表しました。キャラクターの入力履歴や移動補正はCharacter Movementの説明で追えます。[5.6のIrisの概要](https://dev.epicgames.com/documentation/en-us/unreal-engine/introduction-to-iris-in-unreal-engine?application_version=5.6) · [5.8の発表](https://www.unrealengine.com/news/state-of-unreal-2026-top-news-from-the-show) · [5.6のCharacter Movement](https://dev.epicgames.com/documentation/en-us/unreal-engine/understanding-networked-movement-in-the-character-movement-component-for-unreal-engine?application_version=5.6) |
 | Unity Netcode for GameObjects 2.7 | Client Anticipationは見込んだ結果を先に表示し、サーバーの値を受けて補正できます。完全なロールバックと入力の再実行ループは、同版の標準機能には含まれません。[Client Anticipation](https://docs.unity3d.com/Packages/com.unity.netcode.gameobjects@2.7/manual/advanced-topics/client-anticipation.html) |
 | Unity Netcode for Entities 1.10 | ECS上の同期対象であるGhostに対し、予測する対象のシミュレーションをサーバーのスナップショットから再実行できます。[Prediction in Netcode for Entities](https://docs.unity3d.com/Packages/com.unity.netcode@1.10/manual/prediction-n4e.html) |
+
+## 要点
+
+- サーバー権威ではサーバーが正規の結果を決めます。方式によって、状態を送るか同じティックの入力をそろえるかが変わります。
+- 相手を少し過去の時刻で表示すると、受信済みの二つの状態から滑らかに補間しやすくなります。
+- 自分の入力は先に予測へ反映し、確定状態が届いたら未反映の入力を順に適用し直せます。
+- ロールバックは過去の状態を復元して再計算します。ラグ補償はサーバーで判定に使う履歴の時刻を調整します。
+- 差分や関連性で送信量を抑えるときは、受信側が持つ基準と、誰に必要な情報かを管理します。
 
 ## 理解度チェック
 

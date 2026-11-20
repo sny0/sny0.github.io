@@ -15,6 +15,10 @@ study:
 
 Windowsのゲームがクラッシュし、現場で再現できないときでも、クラッシュダンプに残った状態を調べられます。例外を記録したダンプには、例外コード、発生したスレッド、レジスターの値などが含まれます。ロード済みのEXEやDLLの位置を合わせると、停止した命令がどのモジュールのどこにあったかが分かります。[Microsoftの例外情報ストリーム](https://learn.microsoft.com/en-us/windows/win32/api/minidumpapiset/ns-minidumpapiset-minidump_exception_stream) · [ユーザーモードダンプの解析](https://learn.microsoft.com/en-us/windows-hardware/drivers/debugger/analyzing-a-user-mode-dump-file)
 
+## この記事で分かること
+
+Windowsのクラッシュダンプから、どのモジュールのどこで停止したかを調べ、対応する関数やソース行を探せます。
+
 ## モジュールの先頭から何バイトかを求める
 
 実行中の命令アドレスはプロセスの仮想アドレス（VA）です。その値からロード済みモジュールのベースアドレスを引くと、モジュールの先頭からの位置を示すRVAになります。ASLRによって別の実行でベースが変わっても、同じバイナリの同じ命令は同じRVAで表せます。`game+0x1234` の `0x1234` はモジュールの先頭からの距離で、`game!UpdateActor+0x34` の `0x34` は関数の先頭からの距離です。[MicrosoftのPE形式とRVA](https://learn.microsoft.com/en-us/windows/win32/debug/pe-format) · [PEのロードとインポート](/os/pe-loading-and-imports.html)
@@ -63,3 +67,9 @@ game!UpdateActor+0x34 [Actor.cpp @ 87]:
 ```
 
 `0xC0000005` はアクセス違反です。この例では最初の例外引数が1なので書き込みで、次の引数が書き込み先の `0x10` です。`RCX` は0で、命令が書き込もうとした先は `RCX + 0x10` です。ここから、その関数がどこで対象を受け取ったかを呼び出し元へたどります。再現できる場合は、生きているプロセスにブレークポイントを置き、問題の値が作られたところを追えます。[Microsoftのアクセス違反の読み方](https://learn.microsoft.com/en-us/shows/inside/c0000005) · [ブレークポイントとデータブレークポイント](/tools/windows/debugger-breakpoints-and-watchpoints.html) · [静的解析とサニタイザー](/tools/build/debugging-and-analysis.html)
+
+## 要点
+
+- 実行時のアドレスからモジュールの開始位置を引くと、モジュール内での位置が得られます。
+- EXEやDLLとPDBは、名前だけで選ばず、バイナリに記録された識別情報を照合します。
+- 例外の記録、停止したスレッド、コールスタックを読み、ダンプに含まれる範囲で調べます。

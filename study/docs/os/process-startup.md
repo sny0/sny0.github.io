@@ -19,6 +19,10 @@ EXEを起動すると、OSがプロセスと実行の準備を整え、ローダ
 
 ソースからEXEができるまでは[ビルドの旅](/runtime/cpp-internals/build-pipeline-journey.html)、アドレスの変換やRAMへの配置は[仮想メモリ](/os/virtual-memory.html)を参照してください。
 
+## この記事で分かること
+
+Windowsで実行ファイルを起動してから、初期スレッドが `main` に入るまでを追えます。到達しないときは、どの段階を調べるか判断できます。
+
 ## プログラム・プロセス・スレッド
 
 | 用語 | 何を指すか | 例 |
@@ -148,6 +152,12 @@ int& CachedConfig() {
 C#アプリの`Main`は、実行基盤から呼ばれるC#側の開始点です。[トップレベルステートメント](https://learn.microsoft.com/en-us/dotnet/csharp/fundamentals/program-structure/top-level-statements)ではコンパイラが相当する開始処理を生成します。OSや実行ファイル形式の開始点、ランタイムの起動、C#の`Main`を同じものとして扱わず、.NETの配布・実行方式に応じて確認します。[Microsoft: Main() and command-line arguments](https://learn.microsoft.com/en-us/dotnet/csharp/fundamentals/program-structure/main-command-line)
 
 Unityでは、エンジン側の起動やPlayerループがあり、スクリプトの`Awake`・`Start`・`Update`などは所定の機会に呼ばれるイベント関数です。これらはEXEのPEエントリポイントではありません。C#コードを実行する仕組みも、プラットフォームやスクリプティングバックエンドで変わります。[Unity: Event function execution order](https://docs.unity.com/en-us/engine/6000.0/manual/scripting/managing-update-order/execution-order)、[IL2CPPの解説](/languages/csharp/il2cpp.html)
+
+## 要点
+
+- プロセスはアドレス空間や資源をまとめ、スレッドはCPU上で命令を実行します。
+- PEの開始点、スレッドを始める処理、ソースの `main` は同じ場所を指しません。
+- DLLの準備や実行時ライブラリの初期化を経て `main` が呼ばれます。初期化の分類と、いつ行われるかは分けて考えます。
 
 ## 実物で観察する
 

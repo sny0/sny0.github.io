@@ -15,6 +15,10 @@ study:
 
 **WebAssembly（Wasm）** は、ブラウザなどの実行環境が検証して動かせる命令形式です。ブラウザでは、JavaScriptがWasmのモジュールを読み込み、外部へ公開された関数を呼びます。関数に配列などを渡すときは、**線形メモリ**上にデータを並べ、どの位置から何バイト使うかを双方で決める方法があります。[WebAssembly Coreの概要](https://webassembly.github.io/spec/core/intro/introduction.html)、[WebAssembly JavaScript Interface](https://webassembly.github.io/spec/js-api/)
 
+## この記事で分かること
+
+Wasmのモジュールがバイト列から呼び出せる形になる流れを追い、JavaScriptとWasmが線形メモリの位置や拡張をどう扱うかを説明できます。
+
 ## .wasmの先頭とセクションを読む
 
 `.wasm` はモジュールのバイナリ表現です。実践のファイルでは、先頭4バイトの `00 61 73 6d` が形式を見分けるマジック番号、その次の `01 00 00 00` がバイナリ形式の版を表します。この後に、型、インポート、関数、メモリ、エクスポート、命令本体などの**セクション**が続きます。各セクションには種別を表すIDと内容のバイト数があり、バイト数は符号なしの**LEB128**という可変長形式で表します。[WebAssembly Coreのバイナリモジュール](https://webassembly.github.io/spec/core/binary/modules.html#binary-module)、[セクションの形式](https://webassembly.github.io/spec/core/binary/modules.html#binary-section)、[整数のエンコード](https://webassembly.github.io/spec/core/binary/values.html#integers)
@@ -81,6 +85,13 @@ JavaScriptの `memory.grow(1)` は1ページを追加し、成功時には拡張
 WasmからJavaScriptを呼びたい場合は、モジュールが関数をインポートとして宣言し、ページがインスタンス化の際に実装を渡します。たとえば表示処理やブラウザのAPI呼び出しをJavaScript側に置けます。Wasmの命令が読み書きできる範囲はメモリ命令の規則に従い、外の機能はホストが渡す実装を介して利用します。渡す関数にどの操作を許すかは、組み込む側で決めます。[WebAssembly Coreのホスト関数と実行環境](https://webassembly.github.io/spec/core/exec/runtime.html#function-instances)、[JavaScript Interfaceのインポート](https://webassembly.github.io/spec/js-api/)
 
 たとえばゲームの当たり判定やアセットのデコードをWasmにまとめ、入力、描画、音声などはページやツールチェーンの接続コードで扱う構成があります。C/C++ではEmscripten、Rustでは `wasm32-unknown-unknown` などがビルドの選択肢です。元のコードが使うファイルI/Oや描画APIをブラウザ向けに置き換える作業もあります。処理時間を見るときは、Wasm内の計算、JavaScriptとの呼び出し、データのコピーを別々に測ります。[EmscriptenのWebAssembly向けビルド](https://emscripten.org/docs/compiling/WebAssembly.html)、[rustcのWebAssemblyターゲット](https://doc.rust-lang.org/rustc/platform-support/wasm32-unknown-unknown.html)、[アセットロード](/game/asset-loading.html)
+
+## 要点
+
+- Wasmのバイナリは形式を示す先頭部分に続き、型・関数・メモリ・命令本体などをセクションに分けて持ちます。
+- 取得・検証・コンパイル・インスタンス化では、バイト列の取得から、実際のインポートやメモリを持つインスタンスの生成までを段階ごとに進めます。
+- 線形メモリ上の位置は先頭からのバイト数で表し、範囲外のアクセスは失敗します。
+- 実践の非共有メモリでは、拡張後に新しいバッファを参照するビューを作り直します。
 
 ## 実践との対応
 

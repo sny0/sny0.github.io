@@ -11,6 +11,10 @@ study:
 
 # Shared Memory と Atomic
 
+## この記事で分かること
+
+グループ共有メモリを使って画像やヒストグラムの処理を協調させる流れを説明できます。同期バリアとアトミック更新を使う理由を区別できます。
+
 ## 概要
 
 Shared Memory (HLSL: `groupshared`、CUDA: `__shared__`、GLSL: `shared`) は、スレッドグループ内の全スレッドが共有する、SMオンチップの高速メモリです。Atomic操作は、複数のスレッドが同じアドレスへの書き込みで競合しても、安全に処理するための命令群です。GPU上でスレッド同士が協力して処理するには、Shared Memory、Atomic操作、バリア (`GroupMemoryBarrierWithGroupSync`) を組み合わせます。
@@ -187,6 +191,13 @@ void HistCS(uint gi : SV_GroupIndex, uint3 dtid : SV_DispatchThreadID)
 
 - [Compute Shader](/graphics/compute/compute-shader.html)
 - [GPU並列実行モデル](/graphics/compute/execution-model.html)
+
+## 要点
+
+- グループ内で何度も読むデータを共有メモリへ載せると、同じデータを外側のメモリから繰り返し読む回数を抑えられます。
+- 共有メモリの書き込み後に他のスレッドが読む場合は、実行と可視化のバリアを使います。グループの全スレッドが同じ回数到達できるようにします。
+- アトミック加算は同じカウンターへの競合を処理します。ヒストグラムはグループ内で集計してから全体へ加えると、全体のカウンターへの更新をまとめられます。
+- 同じバンクの異なるアドレスが重なるとアクセスが直列化する場合があります。バンク構成や一斉読み出しの扱いは対象GPUで確認します。
 
 ## 次に読むべきページ
 

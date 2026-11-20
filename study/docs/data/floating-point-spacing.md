@@ -17,6 +17,10 @@ study:
 
 ここではC++20を主対象に、IEEE 754の32bit形式である**binary32**を説明します。C++の型名`float`だけから、必ずこの形式であるとは決まりません。[公開C++20草案N4861: basic.fundamental](https://timsong-cpp.github.io/cppwp/n4861/basic.fundamental)
 
+## この記事で分かること
+
+binary32のビットを符号・指数・小数部に分け、値の大きさによって隣の値とどれだけ離れるか説明できます。2の24乗に1を足した例で丸め先を判断できます。
+
 ## floatという型と、観察する環境
 
 具体例は**通常のMSVC・Windows x64の`float`**です。MSVCは`float`に4byteのIEEE単精度形式を使います。これをC++規格の全処理系に対する保証とは分けます。[Microsoft: IEEE Floating-Point Representation](https://learn.microsoft.com/en-us/cpp/build/ieee-floating-point-representation?view=msvc-170)
@@ -161,5 +165,12 @@ constexpr auto number = static_cast<std::uint32_t>(1.5f); // 数値変換なの�
 `std::fesetround(FE_TONEAREST)`の成功と、`std::fegetround()`の結果を確認し、実行時の計算結果を`float`へ保存して観察します。実行時に設定した丸めモードが、翻訳時のリテラル変換や定数式まで変更するわけではありません。[Microsoft: fegetround / fesetround](https://learn.microsoft.com/en-us/cpp/c-runtime-library/reference/fegetround-fesetround2?view=msvc-170)
 
 C#、Unity、GPUの結果へ広げるときも、実行基盤と精度の設定を確認します。単に型名が同じだから、この実験の結果がそのまま一致するとは判断しません。
+
+## 要点
+
+- binary32の通常の有限値では、値の桁が上がるほど値の間隔も広がります。
+- subnormalの範囲では間隔は一定です。指数の特殊な値ではゼロ・無限大・NaNなどを区別します。
+- 最近接偶数では、ちょうど中間の値を、保持する有効桁の最下位ビットが0となるほうに丸めます。
+- 隣接値を観察する関数、型のepsilon、ビット表現を見る操作は目的が違います。コンパイラや実行時の丸め条件も確認します。
 
 [C++でfloatの刻み幅と丸めを観察する](/practice/data/float-spacing-observation.html)では、型の性質、0.1fの表現、隣の値、2²⁴の中間値を確認します。ビット・16進数・バイト順の土台は[整数をビット列・16進数・バイト列で読む](/data/integer-bits-and-bytes.html)、分野全体の案内は[情報表現の学習ガイド](/guide/low-level/computer-and-data.html)を参照してください。

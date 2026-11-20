@@ -11,6 +11,10 @@ study:
 
 # Unreal Engine のレンダラー
 
+## この記事で分かること
+
+ゲームの状態から描画用の状態が作られ、RDGとRHIを経てGPUに処理が渡る流れを説明できます。Nanite、Lumen、VSM、TSRがフレームで何を担当するかを区別できます。
+
 ## 概要
 
 Unreal EngineのレンダラーはDeferred Shadingを中心に、Nanite (仮想化ジオメトリ)、Lumen (動的GI)、Virtual Shadow Maps、TSRを統合した商用レンダラーです。処理はGameThread、RenderThread、RHIThreadの3段階で進み、RHI (API抽象) とRDG (レンダーグラフ) の階層を使います。ソースコードを読めるため、商用AAAレンダラーの設計を学ぶ代表的な題材です。
@@ -130,6 +134,13 @@ freezerendering             … カリング結果を固定してカメラだけ
 
 - [Deferred](/graphics/path/deferred.html), [Lumen](/graphics/lighting/lumen.html), [GPU Driven Rendering](/graphics/optimization/gpu-driven.html)
 - [RenderGraph](/graphics/optimization/render-graph.html), [シャドウ](/graphics/lighting/shadow.html)
+
+## 要点
+
+- GameThreadの状態を描画用のSceneProxyへ写し、RenderThreadはその情報を使います。
+- RDGでパスとリソースの依存を宣言し、RHIがAPIの違いを抽象化します。
+- Naniteの形状、VSMの影、Lumenの照明や反射、TSRの再構成は、フレームの予算と品質に互いに影響します。
+- 掲載の計算パスではC++のグローバルシェーダー型とシェーダーファイルを結び付け、RDGに入力の読み取りと出力の書き込みを指定します。
 
 ## 次に読むべきページ
 

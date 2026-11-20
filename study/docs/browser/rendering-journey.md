@@ -17,6 +17,10 @@ study:
 
 [DNS](/network/dns-resolution.html)で接続先の候補を得て、[TCP](/network/tcp-sockets.html)や[TLS](/network/tls-https.html)を使い、[HTTP](/network/http-messages.html)で応答を得るところは通信側の話です。ここでは、その先のHTML・CSS・JavaScriptによる通常の文書描画を扱います。Webの仕様で定まる振る舞いと、Chrome／Chromiumの描画エンジンである**Blink**などの実装例を区別します。
 
+## この記事で分かること
+
+HTMLのバイト列がDOMになり、CSSと組み合わさって画面に出るまでを説明できます。DOM変更、寸法の読み取り、読み込みイベントが示す段階を区別できます。
+
 ## ページへの移動は、毎回すべての通信をやり直すとは限らない
 
 URLへの移動を**ナビゲーション**と呼びます。新しい文書を取得する場合でも、HTTPキャッシュに再利用できる応答があれば、それを使えることがあります。登録済みのService Workerがページを制御している場合は、要求を受けて、保存済みの応答などを返す経路もあります。HTTPキャッシュと、Service Workerが使うCache APIの保存領域は別の仕組みです。[MDN: HTTP caching](https://developer.mozilla.org/en-US/docs/Web/HTTP/Guides/Caching)、[MDN: Using Service Workers](https://developer.mozilla.org/en-US/docs/Web/API/Service_Worker_API/Using_Service_Workers)
@@ -103,6 +107,13 @@ JavaScriptで`textContent`、class、styleなどを変えると、エンジン�
 `DOMContentLoaded`は、HTMLの解析と、`defer`付き外部classic scriptなど所定の処理が済んだ節目です。すべての画像やasync scriptの完了を待つイベントではありません。`load`は、遅延読み込み対象を除く依存リソースなどの読み込みに関する節目です。どちらも、その瞬間の全ピクセルがディスプレイに表示されたという保証ではありません。その後もDOM変更やフォント・画像の状態などで表示は変わります。[MDN: DOMContentLoaded](https://developer.mozilla.org/en-US/docs/Web/API/Document/DOMContentLoaded_event)、[MDN: load](https://developer.mozilla.org/en-US/docs/Web/API/Window/load_event)
 
 **requestAnimationFrame**（rAF）は、次の再描画前にコールバックを呼ぶよう要求するAPIです。表示済み通知ではありません。コールバック中の値や時刻を記録しても、GPU処理や物理ディスプレイへの提示の完了時刻を測ったことにはなりません。固定60回／秒や、非表示ページで継続して呼ばれることも保証されません。[MDN: requestAnimationFrame](https://developer.mozilla.org/en-US/docs/Web/API/Window/requestAnimationFrame)
+
+## 要点
+
+- 応答を文字にデコードしてHTMLを解析し、文書の構造を作ります。CSSのルールから適用されるスタイルを決めます。
+- 配置の計算、描画内容の記録、ピクセル生成、合成は概念上別の段階です。実際の分担はエンジンによって変わります。
+- DOMやCSSを変えると、関連する結果を必要に応じて更新します。値や寸法を読むAPIで更新が必要になる場合があります。
+- DOMContentLoadedなどが示す読み込みの節目と、利用者の画面に出た時刻を区別します。
 
 ## JavaScriptで観察できる範囲
 

@@ -15,6 +15,10 @@ study:
 
 OS（Operating System）は、アプリがCPU、メモリ、ファイル、機器を使うための共通の仕組みを提供するソフトウェアです。Windows、macOS、Linuxなどがあります。ゲームとブラウザーを一緒に開くときも、OSはそれぞれのプログラムを動かし、必要な資源を管理します。ここではWindowsを主な例にします。[MicrosoftのWindowsアーキテクチャー](https://learn.microsoft.com/en-us/windows-hardware/drivers/gettingstarted/windows-kernel-mode-process-and-thread-manager) · [コンピュータの部品と役割](/hardware/computer-components.html)
 
+## この記事で分かること
+
+ゲームの起動を例に、アプリ、OS、ドライバーが担う仕事と、プロセス・スレッドの違いを説明できます。
+
 ## アプリがする仕事と、OSが受け持つ仕事
 
 ゲームはキャラクターの位置やルールを決めます。OSはその処理を実行させ、メモリやファイルなどを使うための機能を提供します。アプリがOSの機能を呼ぶための窓口を**API**と呼びます。例えばWindowsの`ReadFile`は、開いたファイルからデータを読むAPIです。[MicrosoftのWindows API](https://learn.microsoft.com/en-us/windows/win32/apiindex/windows-api-list) · [ReadFile](https://learn.microsoft.com/en-us/windows/win32/api/fileapi/nf-fileapi-readfile)
@@ -58,5 +62,11 @@ OSの中心で、資源の管理などを担当する部分を**カーネル**�
 2. 必要なプログラムやデータを使えるようにして、CPUで命令を実行する。
 3. ゲームがファイル、入力、描画、通信などの機能を利用する。
 4. 終了時に、開いた資源やメモリを解放する。
+
+## 要点
+
+- OSはアプリを実行させ、CPU、メモリ、機器を使うための共通の機能を提供します。
+- プロセスに実行用の資源をまとめ、スレッドが命令の実行を進めます。
+- 通常のアプリはユーザーモードで動きます。OSの中核やドライバーが機器を使う処理に関わります。
 
 詳しい起動処理は[実行ファイルを起動してmainへ到達するまで](/os/process-startup.html)、ファイルの基本は[ファイルとパス](/os/files-and-paths.html)へ進めます。コマンドからアプリを起動する操作は[ターミナル・シェル・コマンド](/tools/terminal-shell-and-commands.html)で扱います。

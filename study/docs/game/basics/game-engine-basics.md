@@ -15,6 +15,10 @@ study:
 
 プレイヤーを画面に表示し、入力で動かし、壁に当たったら止めるゲームを考えます。そこには画像を作る処理、機器からの入力、衝突の計算、ファイルの読み込みなどが必要です。**ゲームエンジン**は、こうしたゲームで使う機能や実行の仕組みを提供するソフトウェアです。UnityやUnreal Engineには、制作を支援するエディターもあります。[Unityの制作環境の概要](https://docs.unity.com/en-us/engine/6000.0/manual/get-started) · [Unreal EngineのGameplay Framework](https://dev.epicgames.com/documentation/en-us/unreal-engine/gameplay-framework-in-unreal-engine)
 
+## この記事で分かること
+
+プレイヤーを配置して動かす例から、エンジンが提供する機能と、ゲーム側で決めるルールを区別できます。エディターで作った素材や設定が、どう実行に使われるか説明できます。
+
 ## ゲームのルールと、使う機能
 
 | 作りたい動作 | エンジンの機能を使う例 | ゲーム側で決めること |
@@ -60,6 +64,13 @@ study:
 **ビルド**では、コードやアセットを、選んだ環境で実行できるアプリにまとめます。エディターからの再生と、実機へ配布するアプリでは設定や使える機能が変わる場合があります。対象の設定をそろえて確認します。[Unityのビルド手順](https://docs.unity3d.com/6000.0/Documentation/Manual/BuildSettings.html) · [ゲームのアセットビルド](/game/asset-build-and-patches.html)
 
 実行中に処理がどう回るかは[ゲームループと時間](/game/basics/game-loop-and-time.html)、形と位置は[モデルとメッシュ](/graphics/basics/models-and-meshes.html)と[座標とカメラ](/graphics/basics/transforms-and-cameras.html)へ進めます。小さな作品にまとめる例は[シューティングの設計](/game/shooter-design.html)で扱います。
+
+## 要点
+
+- 描画・入力・物理などにエンジンの機能を使い、移動速度や衝突後の反応はゲームのルールとして決めます。
+- エディターで素材を取り込んで配置し、ランタイムがゲームのコードやデータを使って動かします。
+- プロジェクトに保存する素材や初期値と、プレイ中に変わる位置やHPを分けて考えます。
+- ビルドはコードと素材を対象環境で動くアプリにまとめる工程です。エディターでの再生に加え、対象の環境で動作を確認します。
 
 ## 関連項目
 

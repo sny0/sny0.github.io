@@ -15,6 +15,10 @@ study:
 
 タグ: MVC / MVP / MVVM / Controller / Presenter / ViewModel
 
+## この記事で分かること
+
+画面で入力を受けて表示を更新する処理が、Controller・Presenter・ViewModelでどう分かれるかを見比べられます。業務上の状態と画面専用の状態を置く場所を判断できます。
+
 ## 三つの構成を比較する
 
 <div v-pre>
@@ -46,6 +50,12 @@ study:
 <p>Controller は入力を解釈し、ユースケースを呼び、結果を HTTP 応答などへ変換します。送料・割引・在庫の業務判断がすべて Controller に入ると、別の入口から再利用しづらくなります。一方、Application Service に全判断を移すだけでも巨大化は解決しません。ルールを適切なモデルへ寄せます。</p><aside class="article-note"><strong>よくある落とし穴</strong><p>ViewModel を API の DTO と共用すると、画面専用の状態が通信の契約へ漏れます。偶然同じ項目でも、変更理由が違うかを確認しましょう。</p></aside>
 
 </div>
+
+## 要点
+
+- MVCはControllerで入力を受けます。MVPはPresenterがViewの契約を介し、MVVMはViewModelの状態や操作をViewがバインドします。
+- 業務モデルの注文と、選択中の注文や読み込み表示などの画面状態は別の理由で変わります。
+- 業務判断は複数の入口から使える場所へ置きます。画面の規模やフレームワークの機能を見て分離の度合いを選びます。
 
 ## 理解度チェック
 

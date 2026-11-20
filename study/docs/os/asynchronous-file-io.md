@@ -21,6 +21,10 @@ study:
 
 [メモリマップドファイル](/os/memory-mapped-files.html)は、ファイルの範囲を仮想アドレス空間へ対応付ける別のアクセス方式です。マッピングしただけで全データの読取りが完了したり、非同期readを発行したりしたことにはなりません。ビューへのアクセス自体でページの準備やI/Oを待つ場合があるため、このページの「要求を発行して後から完了を回収する」手順と区別します。[Microsoft: File Mapping](https://learn.microsoft.com/en-us/windows/win32/memory/file-mapping)
 
+## この記事で分かること
+
+Windowsのファイル読み取りを例に、要求した時点と結果を使える時点を区別し、バッファをいつまで保つか判断できます。
+
 ## 同期・非同期と、並列実行は別の軸
 
 同期読み取りは、操作の完了や失敗を待ってから呼出し元へ戻ります。非同期読み取りは、未完了の要求を保持し、後から完了を受け取る仕組みを持ちます。そこで空いた時間を、別の計算や別の要求の処理へ使える場合があります。[Microsoft: Synchronous and Asynchronous I/O](https://learn.microsoft.com/en-us/windows/win32/fileio/synchronous-and-asynchronous-i-o)
@@ -143,6 +147,12 @@ GPUが使う資源の解放も、CPU側の読取り完了や参照数だけで�
 Readyの条件、登録する段階、要求の世代、所有権と解放をまとめた設計は[実行時のアセットロード](/game/asset-loading.html)を参照してください。[状態と寿命の観察例](/practice/assets/asset-lifecycle-model.html)は、単一スレッドの決定的なモデルです。実際のI/Oやワーカー、GPU、Unityでの完了・スレッド動作を検証するサンプルではありません。
 
 要求を増やし続けると、未完了バッファや要求情報も増えます。**バックプレッシャー**は、新規発行を待たせるなどして処理中の量を制限する考え方です。同時要求数や保持するbyte数に予算を設け、完了後の処理が追い付く量に抑えます。Windowsの`ReadFile`にも、未処理の非同期要求が多すぎる場合のメモリ関連の失敗が記載されています。[Microsoft: ReadFile — outstanding requests](https://learn.microsoft.com/en-us/windows/win32/api/fileapi/nf-fileapi-readfile)
+
+## 要点
+
+- 開始時の完了、処理中、失敗を区別し、必要なら後で完了を回収します。
+- バッファと要求情報は、I/Oが使い終わり、必要な結果の回収が済むまで保持します。
+- 非同期I/O、完了後の処理、ゲームでアセットを使える状態は別々に追います。
 
 ## 実践記事で確かめる範囲
 

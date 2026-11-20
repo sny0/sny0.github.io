@@ -11,6 +11,10 @@ study:
 
 # Deferred Rendering
 
+## この記事で分かること
+
+不透明物の可視面を求める処理と、その面の照明を計算する処理を分けて説明できます。G-Bufferの容量と帯域、半透明・MSAAの扱いが設計にどう影響するかを判断できます。
+
 ## 概要
 
 Deferred Rendering (遅延レンダリング) は、画面にどの面が見えるかを決める処理と、その面を照らす処理を分ける方式です。第1パス (Geometry Pass) で全オブジェクトのアルベド、法線、粗さなどのマテリアル属性を、G-Bufferと呼ばれる複数のテクスチャに書き出します。第2パス (Lighting Pass) では、画面のピクセルごとにライティングを一度だけ計算します。PS3/X360世代 (2007〜) のAAA開発で主流になりました。
@@ -145,6 +149,13 @@ void TiledLightingCS(uint3 dtid : SV_DispatchThreadID, uint gi : SV_GroupIndex) 
 
 - [Forward Rendering](/graphics/path/forward.html), [Fragment Shader](/graphics/pipeline/fragment-shader.html)
 - [座標変換](/math/rendering/transform.html) — 深度からの位置再構成
+
+## 要点
+
+- ジオメトリーパスで見える面の法線や色、粗さなどをG-Bufferへ記録し、照明パスで読み出します。
+- 深度から位置を再構成し、必要な属性は形式や精度を選んで格納します。複数の画像を読み書きする帯域が負荷になります。
+- 一つのピクセル位置に複数の半透明面がある場合は、別のForwardパスで合成できます。
+- G-Buffer全体のマルチサンプル化はサイズを増やします。アンチエイリアシングや材質の種類と合わせて格納形式を決めます。
 
 ## 次に読むべきページ
 

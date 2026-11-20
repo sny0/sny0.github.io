@@ -15,6 +15,10 @@ study:
 
 **同一オリジンポリシー**（Same-Origin Policy）は、あるページのコードが別のオリジンにある情報にアクセスできる範囲を制限します。**CORS**（Cross-Origin Resource Sharing）は、HTTPの応答を別のオリジンのコードに公開するための仕組みです。サーバーは公開条件を応答ヘッダーで示し、ブラウザがその条件を検査します。要求がサーバーに届くか、応答をJavaScriptから読めるかは別々に判断します。[WHATWG HTMLのOrigins](https://html.spec.whatwg.org/multipage/browsers.html#concept-origin)、[WHATWG FetchのCORS protocol](https://fetch.spec.whatwg.org/#http-cors-protocol)
 
+## この記事で分かること
+
+別オリジンの資源を要求できることと、その応答をスクリプトから読めることを区別できます。プリフライトと本要求それぞれで何を確認するか説明できます。
+
 ## オリジンを決める3つの要素
 
 HTTP(S)のオリジンは、**スキーム・ホスト・ポート**の組で決まります。ポートを省略したHTTPS URLは、既定の443番を明示したURLと同じオリジンです。パスやクエリが違っても、この3要素が一致すれば同一オリジンです。ローカル開発でも、同じホストの5173番と8000番を使うフロントエンドとAPIは別オリジンになります。[WHATWG HTMLのOrigins](https://html.spec.whatwg.org/multipage/browsers.html#concept-origin)、[WHATWG URLのOrigin](https://url.spec.whatwg.org/#concept-url-origin)
@@ -109,6 +113,13 @@ CORS検査を通過した`404`や`500`の本応答は、HTTP statusを持つ`Res
 サーバーには、利用者の認証、その操作を行う権限の確認、必要に応じた**CSRF**（利用者のセッションを使った意図しない送信）への対策が必要です。たとえば状態を変更するフォームが別サイトから送信され、条件次第でCookieが付くことがあります。応答の読み取りが制限されても更新は起き得るため、サーバーがCSRFトークンの照合などで要求を検査します。[OWASPのCSRF対策](https://cheatsheetseries.owasp.org/cheatsheets/Cross-Site_Request_Forgery_Prevention_Cheat_Sheet.html)
 
 [Service Workerとオフライン動作](/browser/service-worker-offline.html)では、制御中のページが行った取得に対し、ワーカーが保存済み応答を選ぶ場面を扱いました。ワーカー自身が別オリジンへ`fetch()`するときも、要求モードとCORS検査に従います。別オリジンのopaque応答をCache APIへ保存して取り出しても、JavaScriptから見える部分は変わりません。[WHATWG FetchのMain fetch](https://fetch.spec.whatwg.org/#main-fetch)、[Service WorkersのCache](https://w3c.github.io/ServiceWorker/#cache-interface)
+
+## 要点
+
+- オリジンはスキーム、ホスト、ポートで決まります。
+- ブラウザはCORSの応答ヘッダーを調べて、別オリジンのコードに応答を公開するか決めます。
+- 条件によっては本要求の前に許可を問い合わせます。許可が得られても、本要求の応答は別に検査されます。
+- 資格情報を付ける条件、応答を公開する範囲、サーバーが操作を認める条件を個別に扱います。
 
 ## 実践との対応
 

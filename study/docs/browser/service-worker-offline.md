@@ -17,6 +17,10 @@ study:
 
 CPU計算をページから分担するDedicated Workerは、ページが作成してメッセージをやり取りします。Service Workerでは登録と実行中の環境が別の寿命を持ち、処理するイベントがなくなるとブラウザが実行環境を終了できます。後でイベントが来れば再び起動され、グローバル変数は作り直されます。イベントをまたいで残すデータには、用途に応じてCache APIやIndexedDBを使います。[Service Workersの実行寿命](https://w3c.github.io/ServiceWorker/#service-worker-lifetime)、[Web Workerとメッセージ通信](/browser/web-workers-messages.html)、[ブラウザの保存領域](/browser/storage-lifetime.html)
 
+## この記事で分かること
+
+Service Workerの登録・有効化と、ページが実際に制御されている状態を区別できます。オフライン応答や更新時に、どの資源と版を使うか判断できます。
+
 ## 登録するURLと、ページを担当するscope
 
 ページから`navigator.serviceWorker.register(scriptURL, { scope })`を呼ぶと、ブラウザはワーカーのスクリプトと、制御対象を選ぶ**scope**を登録します。スクリプトURL、scope、登録を呼ぶページは同じoriginに属します。既定のscopeはスクリプトが置かれたディレクトリです。たとえば`/sample/offline/sw.js`なら`/sample/offline/`が既定です。サーバーが`Service-Worker-Allowed`ヘッダーで最大範囲を広げる方法もあります。[MDNのregister仕様とオプション](https://developer.mozilla.org/en-US/docs/Web/API/ServiceWorkerContainer/register#parameters)
@@ -98,6 +102,13 @@ Cache APIの中身は、アプリが名前を付けて管理します。HTTPキ�
 ## オリジンの境界
 
 Service Workerのscopeは、登録が担当するページのURLの範囲です。制御下のページが別オリジンへ要求した場合、Workerを経由しても、応答を読み取れる条件にはFetchの規則が適用されます。`no-cors`で受け取ったopaqueな応答の本文はWorkerからも読めません。[同一オリジンポリシーとCORS](/browser/same-origin-cors.html)
+
+## 要点
+
+- 登録のscopeで担当ページが決まります。登録成功やreadyと、現在のページにcontrollerがあることは別です。
+- fetchイベントでは、通常の取得、Cache APIの保存済み応答、自作の応答などから選べます。
+- オフラインで使う資源を準備し、要求の種類ごとにキャッシュと通信の優先順を決めます。
+- 更新では旧ページ・ワーカー・Cacheの組み合わせを考えます。登録解除と保存済みデータの削除も別の操作です。
 
 ## 実践との対応
 

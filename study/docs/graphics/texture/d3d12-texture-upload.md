@@ -20,6 +20,10 @@ study:
   <figcaption>同じ16バイトの行データを、コピー用バッファでは256バイト間隔で配置します。図の行と余白の幅は読みやすさのため調整しています。<a href="/study/images/graphics/d3d12-texture-upload.svg" target="_blank" rel="noopener noreferrer">コピー経路の図を拡大</a></figcaption>
 </figure>
 
+## この記事で分かること
+
+DDSなどから読んだ行データを、D3D12が要求する間隔で転送用バッファーに並べられます。テクスチャを描画で使う状態と、コピー元を再利用できる時点を説明できます。
+
 ## 行に入るバイト数と、次の行までの間隔
 
 `DXGI_FORMAT_R8G8B8A8_UNORM`の4×4 mipでは、1画素に4バイトを使うので1行のデータは16バイトです。この実践で作るDDSには4行を詰めて格納します。次の2×2 mipの1行は8バイトです。一般の画像入力では行の間に余白がある場合もあり、読み出し元の行の間隔は入力形式やデコーダーの情報から決めます。[DDSとサブリソース](/graphics/texture/dds-and-subresources.html)
@@ -51,3 +55,10 @@ study:
 同じDIRECTキューでは、コピー、遷移、描画を順に積めます。コピーを専用のCOPYキューに分ける場合は、消費側のキューにフェンスの待機を積み、COPYとDIRECT間の `COMMON` の規則も踏まえて状態を管理します。フェンスはキュー間の順序を作り、リソースの状態は次にどのアクセスを行うかを表します。[Microsoftの複数エンジン間の同期](https://learn.microsoft.com/en-us/windows/win32/direct3d12/user-mode-heap-synchronization) · [MicrosoftのCOMMON状態の規則](https://learn.microsoft.com/en-us/windows/win32/api/d3d12/ne-d3d12-d3d12_resource_states) · [DirectX 12の基礎](/graphics/api/directx12.html)
 
 実践では、WARPで2つのmipをアップロードし、テクスチャを `COPY_SOURCE` にしてREADBACKバッファへコピーします。フェンスの到達後にCPUでバッファを読み、行データが元のDDSと一致することを確かめます。アセットをそのまま描画に使う工程では、利用するシェーダーに合う状態とビューを用意します。[DDSを転送して読み戻すC++実践](/practice/graphics/dds-upload-observation.html) · [MicrosoftのREADBACK手順](https://learn.microsoft.com/en-us/windows/win32/direct3d12/readback-data-using-heaps) · [DirectStorageからD3D12リソースへ届ける場合](/game/directstorage.html)
+
+## 要点
+
+- 画像の行のデータ量と、転送用バッファーで次の行まで空ける間隔を区別します。各ミップの配置は`GetCopyableFootprints`で求めます。
+- CPUでUPLOADバッファーに詰め、`CopyTextureRegion`でDEFAULTヒープ上のテクスチャの各サブリソースへコピーします。
+- コピー後に、画像を読むシェーダーに合う状態へ切り替えます。
+- UPLOAD領域はGPUがコピーでの読み出しを終えてから再利用し、転送先テクスチャとSRVはその後の使用まで保持します。

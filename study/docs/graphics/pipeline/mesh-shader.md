@@ -11,6 +11,10 @@ study:
 
 # Mesh Shader / Task Shader
 
+## この記事で分かること
+
+Mesh Shaderで小さなメッシュ片を処理し、ラスタライザーへ頂点とプリミティブを渡す流れを説明できます。Task Shaderが対象を絞る構成も読み分けられます。
+
 ## 概要
 
 Mesh Shaderは、従来のIA、VS、Tess、GSからなるジオメトリパイプラインの前半全体を、Compute Shader型の実行モデルに置き換えるステージです。前段のTask Shader (DX12ではAmplification Shader) と組み合わせる構成では、スレッドグループが協力して小さなメッシュ片 (meshlet) を生成し、ラスタライザへ直接渡します。2018年のNVIDIA Turingで登場し、DX12 UltimateとVulkan拡張で標準化されました。
@@ -155,6 +159,13 @@ void ASMain(uint dtid : SV_DispatchThreadID, uint gi : SV_GroupIndex) {
 - [Compute Shader](/graphics/compute/compute-shader.html) — 実行モデルの土台
 - [GPU並列実行モデル](/graphics/compute/execution-model.html) — Wave命令
 - [Geometry Shader](/graphics/pipeline/geometry-shader.html) / [Tessellation](/graphics/pipeline/tessellation.html) — 置き換えられる側の理解
+
+## 要点
+
+- Mesh Shaderは、従来のジオメトリーパイプラインの前半をスレッドグループ単位の処理へ置き換えます。
+- メッシュレットには頂点と局所インデックスを持たせ、カリング用に境界球や法線円錐を使えます。規模は対象の出力上限に合わせます。
+- 前段にTask Shaderを置くと、見える候補を詰めて後段で処理するグループを選べます。
+- 可視候補の詰め込みにアトミックを使う実装では、出力順が変わっても、選ばれる候補の集合は同じにできます。
 
 ## 次に読むべきページ
 
