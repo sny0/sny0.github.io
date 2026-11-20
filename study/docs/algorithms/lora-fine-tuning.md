@@ -169,6 +169,7 @@ LoRAで学べる傾向は、訓練データ、対象の層、ランクなどに�
 - [LLMの文章生成](/algorithms/llm-text-generation.html) — 学習済みの重みと推論時の入力を区別する。
 - [RAGの仕組み](/algorithms/retrieval-augmented-generation.html) — 推論時に検索した資料をどう使うかを読む。
 - [LLMの量子化](/algorithms/llm-quantization.html) — 重みの格納形式と、計算に使う型の違いを読む。
+- [QLoRAの仕組み](/algorithms/qlora.html) — 差分を学ぶときに、4ビットで保持した基底が逆伝播でどう使われるかを読む。
 - [TransformerとAttention](/algorithms/transformer-attention.html) — LoRAの対象になり得る線形射影が何を作るかを追う。
 
 ## 参考資料

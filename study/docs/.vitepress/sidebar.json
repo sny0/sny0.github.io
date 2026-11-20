@@ -775,6 +775,10 @@
           "link": "/algorithms/model-context-protocol.html"
         },
         {
+          "text": "QLoRAの仕組み — 4ビットで保存した基底重みを凍結し、差分だけを学ぶ",
+          "link": "/algorithms/qlora.html"
+        },
+        {
           "text": "RAGの仕組み — 検索した資料をどう回答に使うか",
           "link": "/algorithms/retrieval-augmented-generation.html"
         },

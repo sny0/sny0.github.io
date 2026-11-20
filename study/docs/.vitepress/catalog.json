@@ -90,7 +90,7 @@
       "id": "algorithms",
       "title": "データ構造・アルゴリズム",
       "description": "操作手順、計算量、不変条件から道具を選ぶ。",
-      "count": 27,
+      "count": 28,
       "status": "辞典本文あり"
     },
     {
@@ -5628,7 +5628,8 @@
         "/algorithms/retrieval-augmented-generation.html",
         "/math/rendering/matrix.html",
         "/algorithms/transformer-attention.html",
-        "/algorithms/llm-quantization.html"
+        "/algorithms/llm-quantization.html",
+        "/algorithms/qlora.html"
       ],
       "difficulty": "intermediate",
       "importance": "useful"
@@ -5659,6 +5660,7 @@
         "/algorithms/llm-text-generation.html",
         "/algorithms/transformer-attention.html",
         "/algorithms/lora-fine-tuning.html",
+        "/algorithms/qlora.html",
         "/algorithms/llm-prefill-and-decode.html"
       ],
       "difficulty": "intermediate",
@@ -6604,6 +6606,34 @@
         "/design/patterns/flyweight.html",
         "/design/patterns/",
         "/design/patterns/chain-of-responsibility.html"
+      ],
+      "difficulty": "intermediate",
+      "importance": "useful"
+    },
+    {
+      "title": "QLoRAの仕組み — 4ビットで保存した基底重みを凍結し、差分だけを学ぶ",
+      "url": "/algorithms/qlora.html",
+      "file": "algorithms/qlora.md",
+      "domain": "algorithms",
+      "section": "reference",
+      "format": "article",
+      "status": "published",
+      "summary": "凍結した4ビットの基底を演算時に復元し、逆伝播でLoRAを学ぶ流れを追う。NF4、二重量子化、ページングの役割と基底の容量を整理する。",
+      "source": "新規執筆",
+      "aliases": [
+        "QLoRA",
+        "Quantized Low-Rank Adaptation",
+        "NF4",
+        "NormalFloat 4",
+        "二重量子化",
+        "Double Quantization",
+        "Paged Optimizers"
+      ],
+      "verification": "QLoRA原論文とbitsandbytes・PEFT公式資料に照合し、Python 3.12.4で重み・スケールの容量と1重みあたりの差を検算（2026-11-20）",
+      "links": [
+        "/algorithms/lora-fine-tuning.html",
+        "/algorithms/llm-quantization.html",
+        "/algorithms/kv-cache.html"
       ],
       "difficulty": "intermediate",
       "importance": "useful"

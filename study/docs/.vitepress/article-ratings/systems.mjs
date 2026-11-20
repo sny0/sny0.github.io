@@ -25,6 +25,7 @@ export default {
   '/algorithms/llm-prefill-and-decode.html': ['intermediate', 'useful'],
   '/algorithms/llm-quantization.html': ['intermediate', 'useful'],
   '/algorithms/lora-fine-tuning.html': ['intermediate', 'useful'],
+  '/algorithms/qlora.html': ['intermediate', 'useful'],
   '/algorithms/model-context-protocol.html': ['intro', 'useful'],
   '/algorithms/agent-skills.html': ['intro', 'useful'],
   '/algorithms/agent-harness.html': ['intro', 'useful'],
