@@ -90,7 +90,7 @@
       "id": "algorithms",
       "title": "データ構造・アルゴリズム",
       "description": "操作手順、計算量、不変条件から道具を選ぶ。",
-      "count": 28,
+      "count": 29,
       "status": "辞典本文あり"
     },
     {
@@ -5573,6 +5573,7 @@
         "/algorithms/agent-context-management.html",
         "/algorithms/llm-text-generation.html",
         "/algorithms/llm-prefill-and-decode.html",
+        "/algorithms/speculative-decoding.html",
         "/algorithms/llm-quantization.html"
       ],
       "difficulty": "intermediate",
@@ -5696,6 +5697,7 @@
         "/algorithms/kv-cache.html",
         "/algorithms/lora-fine-tuning.html",
         "/algorithms/llm-prefill-and-decode.html",
+        "/algorithms/speculative-decoding.html",
         "/algorithms/llm-quantization.html",
         "/algorithms/model-context-protocol.html",
         "/algorithms/agent-skills.html",
@@ -5730,7 +5732,8 @@
         "/algorithms/llm-text-generation.html",
         "/algorithms/kv-cache.html",
         "/algorithms/transformer-attention.html",
-        "/algorithms/llm-quantization.html"
+        "/algorithms/llm-quantization.html",
+        "/algorithms/speculative-decoding.html"
       ],
       "difficulty": "intermediate",
       "importance": "useful"
@@ -17790,6 +17793,33 @@
         "/design/case-studies/weapon-switching.html",
         "/design/case-studies/",
         "/design/case-studies/status-effects.html"
+      ],
+      "difficulty": "intermediate",
+      "importance": "useful"
+    },
+    {
+      "title": "投機的デコーディング（Speculative Decoding）— LLMは次のトークンを1個ずつ決めるのに、なぜまとめて速く出せるのか",
+      "url": "/algorithms/speculative-decoding.html",
+      "file": "algorithms/speculative-decoding.md",
+      "domain": "algorithms",
+      "section": "reference",
+      "format": "article",
+      "status": "published",
+      "summary": "小さなモデルが作った候補列を、本命のTransformerが一度の前向き計算で評価する。棄却で捨てる範囲、確率分布を保つ補正、速くなる条件を追う。",
+      "source": "新規執筆",
+      "aliases": [
+        "投機的デコーディング",
+        "Speculative Decoding",
+        "投機的サンプリング",
+        "Speculative Sampling",
+        "Draft Model",
+        "Target Model"
+      ],
+      "verification": "LeviathanらとChenらの原論文に照合し、WindowsのPython 3.12.4で候補列の分岐、確率の内訳、説明用の時間を検算（2026-11-21）",
+      "links": [
+        "/algorithms/kv-cache.html",
+        "/algorithms/llm-prefill-and-decode.html",
+        "/algorithms/llm-text-generation.html"
       ],
       "difficulty": "intermediate",
       "importance": "useful"

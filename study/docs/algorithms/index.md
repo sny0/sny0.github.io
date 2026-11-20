@@ -42,6 +42,7 @@
 - [経路探索 — A* とナビメッシュ](/algorithms/pathfinding.html)
 - [四分木と八分木 — 必要な場所だけ細かく分ける](/algorithms/quadtrees-and-octrees.html)
 - [世代付きハンドル — 再利用したIDを区別する](/algorithms/generational-handles.html)
+- [投機的デコーディング（Speculative Decoding）— LLMは次のトークンを1個ずつ決めるのに、なぜまとめて速く出せるのか](/algorithms/speculative-decoding.html)
 - [二分ヒープと優先度付きキュー](/algorithms/binary-heaps.html)
 - [二分探索木と順序付き連想コンテナ](/algorithms/search-trees.html)
 - [配列と動的配列 — 添字、容量、再確保](/algorithms/arrays-and-dynamic-arrays.html)

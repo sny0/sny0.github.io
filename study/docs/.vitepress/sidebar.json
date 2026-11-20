@@ -819,6 +819,10 @@
           "link": "/algorithms/generational-handles.html"
         },
         {
+          "text": "投機的デコーディング（Speculative Decoding）— LLMは次のトークンを1個ずつ決めるのに、なぜまとめて速く出せるのか",
+          "link": "/algorithms/speculative-decoding.html"
+        },
+        {
           "text": "二分ヒープと優先度付きキュー",
           "link": "/algorithms/binary-heaps.html"
         },

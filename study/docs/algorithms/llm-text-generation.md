@@ -182,6 +182,7 @@ GPT-2で使われたバイト単位BPEも、この教材のASCII文字だけの�
 - 続きを1トークンずつ書くとき、推論で何を保存し、どの計算を省けるかを読む。[KVキャッシュ](/algorithms/kv-cache.html)
 - 学習済みのモデルを用途に合わせるとき、どのパラメーターを学習するかを読む。[LLMのファインチューニングとLoRAの仕組み](/algorithms/lora-fine-tuning.html)
 - 最初のトークンまでの待ち時間と、それ以降の出力間隔を分けて読む。[LLM推論のprefillとdecode](/algorithms/llm-prefill-and-decode.html)
+- 次トークンを選ぶ規則を保ちながら、下書きの候補をまとめて評価する仕組みを読む。[投機的デコーディング](/algorithms/speculative-decoding.html)
 - 推論で使う重みや中間値を、少ないビットでどう近似するかを読む。[LLMの量子化](/algorithms/llm-quantization.html)
 - モデルの提案を受けたAIアプリが、外部のツールを呼んで結果を受け取る流れを読む。[MCPの仕組み — AIモデルと外部ツールをどうつなぐか](/algorithms/model-context-protocol.html)
 - 作業に応じて、エージェントが手順や資料を文脈に加える流れを読む。[Agent Skillsの仕組み](/algorithms/agent-skills.html)
