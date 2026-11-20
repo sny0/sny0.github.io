@@ -90,7 +90,7 @@
       "id": "algorithms",
       "title": "データ構造・アルゴリズム",
       "description": "操作手順、計算量、不変条件から道具を選ぶ。",
-      "count": 26,
+      "count": 27,
       "status": "辞典本文あり"
     },
     {
@@ -5596,6 +5596,36 @@
       "importance": "useful"
     },
     {
+      "title": "LLMのファインチューニングとLoRAの仕組み — 基底重みを凍結し、差分だけを学ぶ",
+      "url": "/algorithms/lora-fine-tuning.html",
+      "file": "algorithms/lora-fine-tuning.md",
+      "domain": "algorithms",
+      "section": "reference",
+      "format": "article",
+      "status": "published",
+      "summary": "学習済みモデルを用途に合わせるとき、LoRAが固定した重みと低ランクの更新をどう組み合わせるかを、行列の形・学習する要素数・マージから追う。",
+      "source": "新規執筆",
+      "aliases": [
+        "ファインチューニング",
+        "fine-tuning",
+        "LoRA",
+        "Low-Rank Adaptation",
+        "PEFT",
+        "低ランク適応",
+        "アダプター"
+      ],
+      "verification": "LoRA・RAG原論文と公式実装資料に照合し、Python 3.12.4で行列積・学習対象の要素数・マージ前後の出力を検算（2026-11-20）",
+      "links": [
+        "/algorithms/llm-text-generation.html",
+        "/algorithms/retrieval-augmented-generation.html",
+        "/math/rendering/matrix.html",
+        "/algorithms/transformer-attention.html",
+        "/algorithms/llm-quantization.html"
+      ],
+      "difficulty": "intermediate",
+      "importance": "useful"
+    },
+    {
       "title": "LLMの量子化 — 精度とメモリ、重みとKVキャッシュの違い",
       "url": "/algorithms/llm-quantization.html",
       "file": "algorithms/llm-quantization.md",
@@ -5620,6 +5650,7 @@
         "/algorithms/kv-cache.html",
         "/algorithms/llm-text-generation.html",
         "/algorithms/transformer-attention.html",
+        "/algorithms/lora-fine-tuning.html",
         "/algorithms/llm-prefill-and-decode.html"
       ],
       "difficulty": "intermediate",
@@ -5652,6 +5683,7 @@
         "/tools/reviewing-ai-generated-code.html",
         "/algorithms/transformer-attention.html",
         "/algorithms/kv-cache.html",
+        "/algorithms/lora-fine-tuning.html",
         "/algorithms/llm-prefill-and-decode.html",
         "/algorithms/llm-quantization.html",
         "/algorithms/model-context-protocol.html",
@@ -6627,6 +6659,7 @@
         "/algorithms/agent-context-management.html",
         "/algorithms/agent-harness.html",
         "/algorithms/model-context-protocol.html",
+        "/algorithms/lora-fine-tuning.html",
         "/algorithms/embeddings-and-vector-search.html",
         "/algorithms/llm-text-generation.html"
       ],

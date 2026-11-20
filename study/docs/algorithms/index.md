@@ -26,6 +26,7 @@
 - [Fisher–Yates法 — 公平なシャッフルと偏る並べ替え](/algorithms/fisher-yates-shuffle.html)
 - [Function callingと構造化出力 — AIの返答をプログラムにつなぐ仕組み](/algorithms/function-calling-and-structured-outputs.html)
 - [KVキャッシュ — 推論で何を保存し、何が速くなり、メモリをどれだけ使うか](/algorithms/kv-cache.html)
+- [LLMのファインチューニングとLoRAの仕組み — 基底重みを凍結し、差分だけを学ぶ](/algorithms/lora-fine-tuning.html)
 - [LLMの量子化 — 精度とメモリ、重みとKVキャッシュの違い](/algorithms/llm-quantization.html)
 - [LLMはどう文章を生成するのか — トークン・次トークン予測・学習と推論](/algorithms/llm-text-generation.html)
 - [LLM推論のprefillとdecode — 最初のトークンを待つ時間と、続きが出る間隔が違う理由](/algorithms/llm-prefill-and-decode.html)

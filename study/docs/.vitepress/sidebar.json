@@ -755,6 +755,10 @@
           "link": "/algorithms/kv-cache.html"
         },
         {
+          "text": "LLMのファインチューニングとLoRAの仕組み — 基底重みを凍結し、差分だけを学ぶ",
+          "link": "/algorithms/lora-fine-tuning.html"
+        },
+        {
           "text": "LLMの量子化 — 精度とメモリ、重みとKVキャッシュの違い",
           "link": "/algorithms/llm-quantization.html"
         },

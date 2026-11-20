@@ -174,6 +174,7 @@ FP16 / 4-bit+scales: 3.76
 - [LLMの文章生成](/algorithms/llm-text-generation.html) — 推論で使う重みと、入力から作る次トークンの分布を読む。
 - [TransformerとAttention](/algorithms/transformer-attention.html) — QとKの内積やVの重み付き和が何を計算するかを追う。
 - [KVキャッシュ](/algorithms/kv-cache.html) — 各層のK・Vがどれだけ増えるかを文脈長やKVヘッド数から見積もる。
+- [LLMのファインチューニングとLoRAの仕組み](/algorithms/lora-fine-tuning.html) — 既存の重みに学んだ更新分を足し、マージするときに格納形式がどう関わるかを読む。
 - [LLM推論のprefillとdecode](/algorithms/llm-prefill-and-decode.html) — 入力の処理と続きの生成で、演算とメモリ帯域の影響がどう変わるかを読む。
 
 ## 参考資料

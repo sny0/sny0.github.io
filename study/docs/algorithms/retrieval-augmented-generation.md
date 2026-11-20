@@ -160,6 +160,7 @@ if __name__ == "__main__":
 
 ## 関連項目
 
+- [LLMのファインチューニングとLoRAの仕組み](/algorithms/lora-fine-tuning.html) — 推論時に資料を加える処理と、学習で重みの更新分を得る処理を比べる。
 - [AIエージェントのコンテキスト管理](/algorithms/agent-context-management.html) — 検索結果を含め、推論入力に何を残すかを読む。
 - [埋め込みとベクトル検索](/algorithms/embeddings-and-vector-search.html) — 質問と資料をどう比較し、順位を決めるかを読む。
 - [LLMの文章生成](/algorithms/llm-text-generation.html) — 渡された文脈をもとに続きを生成する仕組みを読む。
