@@ -90,7 +90,7 @@
       "id": "algorithms",
       "title": "データ構造・アルゴリズム",
       "description": "操作手順、計算量、不変条件から道具を選ぶ。",
-      "count": 29,
+      "count": 30,
       "status": "辞典本文あり"
     },
     {
@@ -5573,6 +5573,7 @@
         "/algorithms/agent-context-management.html",
         "/algorithms/llm-text-generation.html",
         "/algorithms/llm-prefill-and-decode.html",
+        "/algorithms/paged-attention.html",
         "/algorithms/speculative-decoding.html",
         "/algorithms/llm-quantization.html"
       ],
@@ -6399,6 +6400,32 @@
       ],
       "difficulty": "intro",
       "importance": "core"
+    },
+    {
+      "title": "PagedAttention — LLMのKVキャッシュを、連続した領域に置かなくてよいのはなぜか",
+      "url": "/algorithms/paged-attention.html",
+      "file": "algorithms/paged-attention.md",
+      "domain": "algorithms",
+      "section": "reference",
+      "format": "article",
+      "status": "published",
+      "summary": "長さの異なる2リクエストでKVの連続予約とブロック割り当てを比べ、論理位置からの参照、終了後の再利用、共有とコピーオンライトを追う。",
+      "source": "新規執筆",
+      "aliases": [
+        "PagedAttention",
+        "Paged Attention",
+        "ページドアテンション",
+        "KVブロック",
+        "KV block table"
+      ],
+      "verification": "PagedAttentionの原論文、vLLMとLinuxの公式文書に照合し、WindowsのPython 3.12.4で確保枠・参照位置・再割り当ての説明例を検算（2026-11-21）",
+      "links": [
+        "/algorithms/kv-cache.html",
+        "/os/virtual-memory.html",
+        "/algorithms/llm-prefill-and-decode.html"
+      ],
+      "difficulty": "intermediate",
+      "importance": "useful"
     },
     {
       "title": "PBR (物理ベースレンダリング)",
@@ -14757,7 +14784,8 @@
         "/runtime/memory/memory-bugs.html",
         "/runtime/memory/allocation-journey.html",
         "/runtime/memory/allocators-and-pools.html",
-        "/practice/memory/windows-memory-observation.html"
+        "/practice/memory/windows-memory-observation.html",
+        "/algorithms/paged-attention.html"
       ],
       "difficulty": "intermediate",
       "importance": "core"

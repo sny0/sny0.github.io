@@ -775,6 +775,10 @@
           "link": "/algorithms/model-context-protocol.html"
         },
         {
+          "text": "PagedAttention — LLMのKVキャッシュを、連続した領域に置かなくてよいのはなぜか",
+          "link": "/algorithms/paged-attention.html"
+        },
+        {
           "text": "QLoRAの仕組み — 4ビットで保存した基底重みを凍結し、差分だけを学ぶ",
           "link": "/algorithms/qlora.html"
         },

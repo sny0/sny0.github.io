@@ -137,3 +137,5 @@ Windowsでは、`PAGE_READONLY`、`PAGE_READWRITE`、`PAGE_NOACCESS`、`PAGE_EXE
 - ページフォルトはアクセスを続けられるかOSが判断する入口です。原因や対処は、権限、対応付け、ページの内容によって変わります。
 
 [Windowsメモリ観察サンプル](/practice/memory/windows-memory-observation.html)では、予約・コミット・ページへの書込み・コミット解除・解放を分けて試せます。測定値は、その瞬間のOSの管理やプロセス全体の活動にも左右されます。「要求したバイト数と、ある指標の増分が毎回ぴったり一致する」と決めず、何を数えている値かを先に確認してください。
+
+[PagedAttention](/algorithms/paged-attention.html)では、LLMの推論エンジンがKVを管理するブロック表と、OSのページ表の共通点や違いを読み比べられます。

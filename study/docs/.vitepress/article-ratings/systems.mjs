@@ -22,6 +22,7 @@ export default {
   '/algorithms/llm-text-generation.html': ['intro', 'useful'],
   '/algorithms/transformer-attention.html': ['intermediate', 'useful'],
   '/algorithms/kv-cache.html': ['intermediate', 'useful'],
+  '/algorithms/paged-attention.html': ['intermediate', 'useful'],
   '/algorithms/llm-prefill-and-decode.html': ['intermediate', 'useful'],
   '/algorithms/speculative-decoding.html': ['intermediate', 'useful'],
   '/algorithms/llm-quantization.html': ['intermediate', 'useful'],
