@@ -15,9 +15,14 @@ study:
 
 「60 fpsで90フレームは何秒？」とAIアプリに聞いたとします。モデルが換算ツールを使う案を出し、アプリがそれを呼んで結果を受け取れば、モデルはその値を使って答えられます。**MCP（Model Context Protocol）は、AIアプリ側のクライアントと、ツールや資料を提供するサーバーの間で、要求と応答をやり取りするための規約です。** この記事ではMCP公式仕様の **2026-07-28版** を扱います。[MCP公式仕様](https://modelcontextprotocol.io/specification/2026-07-28)
 
+## この記事で分かること
+
+- モデルが出した提案を、誰が実際のツール要求に変えるかを説明する。
+- ツールの機能を調べ、要求と結果を対応づける流れと、実行許可を判断する場所を区別する。
+
 ## ホスト・クライアント・サーバーの役割
 
-**ホスト**は利用者が使うAIアプリです。モデルとのやり取りを担当し、どのサーバーを使えるようにするか、どのデータをどこへ渡すかを管理します。ホストは、やり取りするMCPサーバーごとに**MCPクライアント**を持ちます。**MCPサーバー**は機能を提供し、ツールの実行や資料の読み出しを引き受けます。サーバーはローカルの別プロセスでも、離れたサービスでも構いません。[MCP Architecture](https://modelcontextprotocol.io/specification/2026-07-28/architecture)
+**ホスト**は利用者が使うAIアプリです。LLM（大規模言語モデル）とのやり取りを担当し、どのサーバーを使えるようにするか、どのデータをどこへ渡すかを管理します。ホストは、やり取りするMCPサーバーごとに**MCPクライアント**を持ちます。**MCPサーバー**は機能を提供し、ツールの実行や資料の読み出しを引き受けます。サーバーはローカルの別プロセスでも、離れたサービスでも構いません。[MCP Architecture](https://modelcontextprotocol.io/specification/2026-07-28/architecture)
 
 ```mermaid
 ---
@@ -41,6 +46,8 @@ flowchart TD
 
 同じゲーム開発支援サーバーでも、換算処理、参照できる資料、よく使う依頼の型では用途が違います。一つのサーバーが、このうち必要な機能を提供できます。
 
+**URI**は、表のResourcesで、読み出す資料やデータを指定する識別子です。
+
 | 種類 | 役割とゲーム開発での例 |
 | --- | --- |
 | [Tools](https://modelcontextprotocol.io/specification/2026-07-28/server/tools) | `tools/list` で定義を知り、`tools/call` で処理を呼ぶ。たとえばフレーム数を秒に換算する。 |
@@ -51,9 +58,13 @@ flowchart TD
 
 ## 能力を確認してから、ツールを呼ぶ
 
-2026-07-28版では、クライアントが各要求の `params._meta` にプロトコル版と自分の対応能力を入れます。サーバーは要求ごとに対応する版かを判断します。サーバーの対応版と能力を先に知りたいときは `server/discover` を使えます。このメソッドはサーバーに実装必須で、クライアントから呼ぶかは任意です。2025-11-25以前の仕様では、接続の最初に `initialize` で版と能力を交換する方式でした。[Versioning and Compatibility](https://modelcontextprotocol.io/specification/2026-07-28/basic/versioning) · [Discovery](https://modelcontextprotocol.io/specification/2026-07-28/server/discover)
+### JSON-RPCの `id` で要求と応答を対応づける
 
-換算の例では、サーバーがToolsに対応していることを確認し、次にツール一覧から名前と引数の形式を取得します。`tools` という能力は機能の種類を示し、`frames_to_seconds` という個別のツールは一覧の中で分かります。
+クライアントとサーバーは、**JSON-RPC**というメッセージ形式でやり取りします。換算の要求では `method` が行う処理を示し、`params` に渡す値を入れます。サーバーは要求と同じ `id` を応答に入れ、クライアントはその `id` でどの要求への応答かを判断します。[Base Protocol](https://modelcontextprotocol.io/specification/2026-07-28/basic) · [Tools](https://modelcontextprotocol.io/specification/2026-07-28/server/tools)
+
+### 90フレームを秒に換算する
+
+まず、サーバーがToolsに対応していることを確認します。`tools` は機能の種類を示す**能力**の名前です。`server/discover` で対応能力を確認する手順は任意です。続いて `tools/list` で、`frames_to_seconds` という個別のツール名と、引数の形式を取得します。
 
 ```mermaid
 ---
@@ -70,7 +81,23 @@ flowchart TD
     invoke --> result["結果を受け取る"]
 ```
 
-`frames_to_seconds` の定義は `inputSchema` で、`frames` を0以上の整数、`fps` を1以上の整数とします。両方とも必須です。以下は、ホストが呼び出しを認めたあとの**クライアントからサーバーへの要求本体**です。`clientCapabilities` の空オブジェクトは、このクライアントが追加の能力を申告していないことを示します。[Base Protocol](https://modelcontextprotocol.io/specification/2026-07-28/basic) · [Tools](https://modelcontextprotocol.io/specification/2026-07-28/server/tools)
+`frames_to_seconds` は `frames` と `fps` の両方を受け取ります。引数の条件を示す `inputSchema` では、`frames` は0以上の整数、`fps` は1以上の整数です。ホストが認めれば、クライアントは `tools/call` に `frames: 90` と `fps: 60` を渡します。[Base Protocol](https://modelcontextprotocol.io/specification/2026-07-28/basic) · [Tools](https://modelcontextprotocol.io/specification/2026-07-28/server/tools)
+
+サーバーは換算して、$90 / 60 = 1.5$ 秒を `content` の文字列 `1.5 s` として返します。この例では要求と応答の `id` はどちらも `3` です。補足には、版やクライアント情報を含むメッセージ全体を載せています。
+
+## 対応能力と実行の許可は別に決まる
+
+一覧に出たツールを候補にできても、実行できるかは権限や入力次第です。たとえば、ビルド番号を読むツールと成果物を配布するツールが同じサーバーにあるとします。ホストは後者で送る情報と実行の影響を確かめ、設定されたポリシーに従って、必要なら利用者に確認します。サーバー側も、要求者が対象を操作できるか、引数が有効かを検査します。HTTP向けの認可仕様は、保護されたサーバーへ許可された範囲でアクセスするための仕組みを定めています。[MCP Architecture](https://modelcontextprotocol.io/specification/2026-07-28/architecture) · [ToolsのSecurity Considerations](https://modelcontextprotocol.io/specification/2026-07-28/server/tools#security-considerations) · [Authorization](https://modelcontextprotocol.io/specification/2026-07-28/basic/authorization)
+
+要求の形式が正しくても、返された文書やツールの結果は提供元のデータです。ホストは、結果のどの部分をモデルに渡すか、どの操作を許すかを管理します。`server/discover` に含まれるサーバー名や版もサーバーの自己申告なので、接続先を信頼する判断には別の根拠が必要です。[Discovery](https://modelcontextprotocol.io/specification/2026-07-28/server/discover) · [Security Best Practices](https://modelcontextprotocol.io/docs/2026-07-28/tutorials/security/security_best_practices)
+
+## 補足
+
+### 2026-07-28版の要求と完了応答
+
+2026-07-28版では、クライアントが各要求の `params._meta` にプロトコル版と自分の対応能力を入れます。サーバーは要求ごとに対応する版かを判断します。サーバーの対応版と能力を先に知りたいときは `server/discover` を使えます。このメソッドはサーバーに実装必須で、クライアントから呼ぶかは任意です。[Versioning and Compatibility](https://modelcontextprotocol.io/specification/2026-07-28/basic/versioning) · [Discovery](https://modelcontextprotocol.io/specification/2026-07-28/server/discover)
+
+以下は、ホストが呼び出しを認めたあとのクライアントからサーバーへの要求本体です。`clientCapabilities` の空オブジェクトは、このクライアントが追加の能力を申告していないことを示します。
 
 ```json
 {
@@ -95,7 +122,7 @@ flowchart TD
 }
 ```
 
-**サーバーからクライアントへの応答**には同じ `id` が入ります。クライアントはこの値で要求と応答を対応づけます。換算結果の $90 / 60 = 1.5$ 秒は `content` に文字列として入ります。`resultType` の `complete` は最終結果であることを示し、ツールの処理が失敗した場合は結果の `isError` がその失敗を表せます。[Base Protocol](https://modelcontextprotocol.io/specification/2026-07-28/basic) · [Tools](https://modelcontextprotocol.io/specification/2026-07-28/server/tools)
+以下はサーバーからクライアントへの応答です。`resultType` の `complete` は最終結果であることを示し、ツールの処理が失敗した場合は結果の `isError` がその失敗を表せます。
 
 ```json
 {
@@ -120,15 +147,22 @@ flowchart TD
 }
 ```
 
+### 2025-11-25版との違いと追加入力
+
+2025-11-25以前の仕様では、接続の最初に `initialize` で版と能力を交換する方式でした。
+
 `resultType` が `input_required` なら、サーバーは処理を終える前に追加情報を求めています。クライアントは `inputRequests` に対応する回答などを `inputResponses` にまとめ、返された `requestState` があればそれも添え、別のJSON-RPC `id` で元の要求を送り直します。2025-11-25版のツール完了結果には `resultType` がなく、2026-07-28版の互換規則では、その旧版結果を `complete` として扱います。[追加情報が必要なツール結果](https://modelcontextprotocol.io/specification/2026-07-28/server/tools#input-required-tool-results) · [2025-11-25版のTools](https://modelcontextprotocol.io/specification/2025-11-25/server/tools#calling-tools) · [2026-07-28版の変更点](https://modelcontextprotocol.io/specification/2026-07-28/changelog)
 
-このJSON-RPCメッセージを運ぶ方法を**トランスポート**と呼びます。2026-07-28版の標準トランスポートは、子プロセスの標準入出力で1メッセージを1行にする `stdio` と、HTTP POSTで送り、JSONまたは要求ごとのSSEストリームで返す Streamable HTTP です。上のコードはどちらでも使うメッセージ本体です。Streamable HTTPでは要求のプロトコル版やメソッド名、`tools/call` ならツール名をヘッダーにも入れます。2025-11-25版にあったGETによるストリームとプロトコルのセッションは、2026-07-28版で廃止されました。[Transports](https://modelcontextprotocol.io/specification/2026-07-28/basic/transports) · [Streamable HTTP](https://modelcontextprotocol.io/specification/2026-07-28/basic/transports/streamable-http) · [2025-11-25版のTransports](https://modelcontextprotocol.io/specification/2025-11-25/basic/transports)
+### トランスポート
 
-## 対応能力と実行の許可は別に決まる
+このJSON-RPCメッセージを運ぶ方法を**トランスポート**と呼びます。2026-07-28版の標準トランスポートは、子プロセスの標準入出力で1メッセージを1行にする `stdio` と、HTTP POSTで送り、JSONまたは要求ごとのSSE（サーバーからイベントを送る仕組み）のストリームで返す Streamable HTTP です。上のコードはどちらでも使うメッセージ本体です。Streamable HTTPでは要求のプロトコル版やメソッド名、`tools/call` ならツール名をヘッダーにも入れます。2025-11-25版にあったGETによるストリームとプロトコルのセッションは、2026-07-28版で廃止されました。[Transports](https://modelcontextprotocol.io/specification/2026-07-28/basic/transports) · [Streamable HTTP](https://modelcontextprotocol.io/specification/2026-07-28/basic/transports/streamable-http) · [2025-11-25版のTransports](https://modelcontextprotocol.io/specification/2025-11-25/basic/transports)
 
-一覧に出たツールを候補にできても、実行できるかは権限や入力次第です。たとえば、ビルド番号を読むツールと成果物を配布するツールが同じサーバーにあるとします。ホストは後者で送る情報と実行の影響を確かめ、設定されたポリシーに従って、必要なら利用者に確認します。サーバー側も、要求者が対象を操作できるか、引数が有効かを検査します。HTTP向けの認可仕様は、保護されたサーバーへ許可された範囲でアクセスするための仕組みを定めています。[MCP Architecture](https://modelcontextprotocol.io/specification/2026-07-28/architecture) · [ToolsのSecurity Considerations](https://modelcontextprotocol.io/specification/2026-07-28/server/tools#security-considerations) · [Authorization](https://modelcontextprotocol.io/specification/2026-07-28/basic/authorization)
+## 要点
 
-要求の形式が正しくても、返された文書やツールの結果は提供元のデータです。ホストは、結果のどの部分をモデルに渡すか、どの操作を許すかを管理します。`server/discover` に含まれるサーバー名や版もサーバーの自己申告なので、接続先を信頼する判断には別の根拠が必要です。[Discovery](https://modelcontextprotocol.io/specification/2026-07-28/server/discover) · [Security Best Practices](https://modelcontextprotocol.io/docs/2026-07-28/tutorials/security/security_best_practices)
+- ホストが実行を判断し、MCPクライアントがサーバーと要求・応答をやり取りする。
+- 機能への対応を調べ、一覧で個別のツール名と引数を確かめて呼び出す。
+- JSON-RPCの `id` で要求と応答を対応づける。
+- サーバーが機能に対応していても、実行の可否は権限と入力を確認して決める。
 
 ## 理解度チェック
 

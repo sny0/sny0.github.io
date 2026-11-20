@@ -13,7 +13,11 @@ study:
 
 # 埋め込みとベクトル検索 — 似た資料をどう見つけるか
 
-「影を軽くした記録」を探したとき、資料には「シャドウ描画を最適化」と書いてあるかもしれません。**ベクトル検索**は、質問と資料を数値の列に変換し、比較結果を使って候補を探す方法です。RAGの記事では検索した資料を回答に使う流れを見ました。ここでは、その検索の一方式として、文章をどう比較し、何を別の条件で確かめるかを扱います。[RAGの仕組み](/algorithms/retrieval-augmented-generation.html) · [Sentence Transformersの意味検索](https://sbert.net/examples/sentence_transformer/applications/semantic-search/README.html)
+「影を軽くした記録」を探したとき、資料には「シャドウ描画を最適化」と書いてあるかもしれません。**ベクトル検索**は、質問と資料をベクトル（数値の列）に変換し、比較結果を使って候補を探す方法です。RAG（検索した資料を回答の生成に使う方式）の記事では、その流れを見ました。ここでは、その検索の一方式として、文章をどう比較し、何を別の条件で確かめるかを扱います。[RAGの仕組み](/algorithms/retrieval-augmented-generation.html) · [Sentence Transformersの意味検索](https://sbert.net/examples/sentence_transformer/applications/semantic-search/README.html)
+
+## この記事で分かること
+
+質問と資料をどう数値に変えて比較するか説明できます。内積とコサイン類似度の違いを読み、順位が高い候補を根拠として使えるか条件を照合できます。
 
 ## 文章を、比較できる数値の列にする
 
@@ -25,7 +29,7 @@ study:
 | 位置情報 | 系列のどこにあるかをモデルに伝える。Transformer原論文では、位置ベクトルをトークン埋め込みに足す。 |
 | 文章検索用の埋め込み | 質問や資料の断片などを、検索単位で比較するためのベクトル。 |
 
-文章検索モデルも内部でトークンや位置を扱えます。索引に入れるのは、検索用に組み立てた文や断片の表現です。扱える入力の長さ、出力の次元、長文を切り詰めるかどうかは、モデルや実装の仕様を確認します。[Transformer原論文、§3.4〜3.5](https://arxiv.org/html/1706.03762v7#S3.SS4) · [Sentence Transformersのモデル参照](https://sbert.net/docs/package_reference/sentence_transformer/model.html)
+文章検索モデルも内部でトークンや位置を扱えます。索引（検索用に整理したデータ）に入れるのは、検索用に組み立てた文や断片の表現です。[Transformer原論文、§3.4〜3.5](https://arxiv.org/html/1706.03762v7#S3.SS4)
 
 ## 資料と質問を同じ空間で比べる
 
@@ -51,11 +55,11 @@ flowchart TD
     ranked --> verifySource["条件と出典を照合"]
 ```
 
-比較するには、ベクトルの次元数が合い、質問側と資料側の空間が対応している必要があります。たとえば同じモデルの対応する設定を使う方法や、検索のために組として学習したエンコーダーを使う方法があります。DPRの原論文では別々の質問エンコーダーと資料エンコーダーを学習し、質問と資料の**内積**を使っています。次元数が同じというだけで、別のモデルが出したベクトルの座標に互換性があるとは判断できません。モデルを変える場合は、既存の索引と比較できるかを確認します。[DPR原論文、§3.1〜3.2](https://aclanthology.org/2020.emnlp-main.550.pdf) · [Sentence Transformersの意味検索](https://sbert.net/examples/sentence_transformer/applications/semantic-search/README.html)
+比較するには、ベクトルの次元数（成分の数）が合い、質問側と資料側の空間が対応している必要があります。たとえば同じモデルの対応する設定を使う方法や、検索のために組として学習したエンコーダー（文章をベクトルに変換するモデル）を使う方法があります。次元数が同じというだけで、別のモデルが出したベクトルの座標に互換性があるとは判断できません。モデルを変える場合は、既存の索引と比較できるかを確認します。[Sentence Transformersの意味検索](https://sbert.net/examples/sentence_transformer/applications/semantic-search/README.html)
 
 ## コサイン類似度は方向を比べる
 
-質問ベクトルを $q$、資料のベクトルを $d$ とします。ゼロでない2つのベクトルの**コサイン類似度**は、内積をそれぞれの長さの積で割った値です。ユークリッド空間で、2つの向きが同じなら $1$、直交なら $0$、逆なら $-1$ になります。[ベクトルの内積と正規化](/math/rendering/vector.html)
+質問ベクトルを $q$、資料のベクトルを $d$ とします。ゼロでない2つのベクトルの**コサイン類似度**は、内積（対応する成分の積の合計）を、それぞれの長さの積で割った値です。ユークリッド空間で、2つの向きが同じなら $1$、直交なら $0$、逆なら $-1$ になります。[ベクトルの内積と正規化](/math/rendering/vector.html)
 
 $$
 \cos(q,d)=\frac{q\cdot d}{\lVert q\rVert\,\lVert d\rVert}
@@ -63,11 +67,11 @@ $$
 
 $q$ と $d$ をそれぞれ長さで割って単位ベクトルにすれば、その内積は元のコサイン類似度と同じです。正の定数倍で長さだけを変えてもコサインは変わりません。正規化していない内積は長さにも影響されるので、順位が変わる場合があります。いずれかがゼロベクトルなら分母が0になり、コサイン類似度は未定義です。長さを確認して、除外や別の検索方法へ切り替える処理を設計します。[Elasticsearch公式のdense_vector](https://www.elastic.co/docs/reference/elasticsearch/mapping-reference/dense-vector)
 
-検索には、モデルが前提とする指標を使います。たとえばElasticsearchの `dense_vector` の `cosine` 設定では、ゼロベクトルを受け付けず、返す `_score` は生のコサイン値を変換したものです。表示されたスコアを読むときは、製品と設定を確かめます。[Elasticsearch公式のdense_vector](https://www.elastic.co/docs/reference/elasticsearch/mapping-reference/dense-vector)
+検索には、モデルが前提とする指標を使います。
 
 ## 手で置いたベクトルで、順位の違いを確かめる
 
-質問は「r18・PC-Aでの影の計測」です。候補の `bench-01`〜`bench-03` は、RAGの記事の公開向け索引と同じ資料ID・計測条件です。チーム内資料の `bench-00` は対象外とし、この例ではゼロベクトルの処理を見るために `bench-04` を加えます。質問を $(3,4)$、候補を次の2次元ベクトルと仮定します。座標は説明用の手作りです。[RAGの仕組み](/algorithms/retrieval-augmented-generation.html)
+質問は「r18・PC-Aでの影の計測」です。候補の `bench-01`〜`bench-03` は、RAGの記事の公開向け索引と同じ資料ID・計測条件です。チーム内資料の `bench-00` は対象外とし、この例ではゼロベクトルの処理を見るために `bench-04` を加えます。質問を $(3,4)$、候補を次の2次元ベクトルとします。座標は説明用に決めた値です。[RAGの仕組み](/algorithms/retrieval-augmented-generation.html)
 
 | 候補と計測条件 | 手作りベクトル | 内積 / コサイン |
 | --- | --- | --- |
@@ -148,7 +152,24 @@ r18/PC-A: bench-03
 
 コサイン値が大きい資料でも、ビルドの一致や数値の正しさは元の記録で確かめます。版や機材のような必須条件は検索のフィルターにも使えます。教材のコードはすべての有効な候補を採点してから条件で絞っています。実運用で先に上位件数を切ると、必要な条件を満たす候補を切り落とすことがあります。必要な条件を検索に含め、結果が足りないときは分かった範囲を示します。[Microsoft Learnのベクトル検索フィルター](https://learn.microsoft.com/en-us/azure/search/vector-search-filters) · [RAGの仕組み](/algorithms/retrieval-augmented-generation.html)
 
-教材のコードは、候補のベクトルを一つずつ採点する全件走査です。近似近傍索引では、比較する候補を絞ることで大きいデータ集合での待ち時間を抑えられる場合があります。その代わり、全件走査なら上位に入る候補を取りこぼすことがあります。同じデータ・指標・検索条件のもとで、検索時間と、全件走査で得た上位候補のうち拾えた割合（再現率）を比べます。この再現率は、質問に必要な根拠を見つけたかという評価とは別です。[Elasticsearch公式のkNN検索](https://www.elastic.co/docs/solutions/search/vector/knn#knn-methods) · [BEIR原論文](https://arxiv.org/abs/2104.08663)
+教材のコードは、候補のベクトルを一つずつ採点する全件走査です。
+
+## 補足
+
+扱える入力の長さ、出力の次元、長文を切り詰めるかどうかは、モデルや実装の仕様を確認します。 [Sentence Transformersのモデル参照](https://sbert.net/docs/package_reference/sentence_transformer/model.html)
+
+DPRの原論文では別々の質問エンコーダーと資料エンコーダーを学習し、質問と資料の**内積**を使っています。 [DPR原論文、§3.1〜3.2](https://aclanthology.org/2020.emnlp-main.550.pdf)
+
+たとえばElasticsearchの `dense_vector` の `cosine` 設定では、ゼロベクトルを受け付けず、返す `_score` は生のコサイン値を変換したものです。表示されたスコアを読むときは、製品と設定を確かめます。[Elasticsearch公式のdense_vector](https://www.elastic.co/docs/reference/elasticsearch/mapping-reference/dense-vector)
+
+近似近傍索引では、比較する候補を絞ることで大きいデータ集合での待ち時間を抑えられる場合があります。その代わり、全件走査なら上位に入る候補を取りこぼすことがあります。同じデータ・指標・検索条件のもとで、検索時間と、全件走査で得た上位候補のうち拾えた割合（再現率）を比べます。この再現率は、質問に必要な根拠を見つけたかという評価とは別です。[Elasticsearch公式のkNN検索](https://www.elastic.co/docs/solutions/search/vector/knn#knn-methods) · [BEIR原論文](https://arxiv.org/abs/2104.08663)
+
+## 要点
+
+- 文章検索用の埋め込みは、質問や資料の断片など、検索する単位で比較するためのベクトルです。
+- 比較には質問側と資料側で対応する空間が必要です。次元数が同じだけでは互換性を判断できません。
+- コサイン類似度はベクトルの向きを比べます。長さが0なら分母も0になるため未定義です。
+- 検索の上位候補も、必要な版・機材・出典に合うかを照合してから根拠に使います。
 
 ## 理解度チェック
 

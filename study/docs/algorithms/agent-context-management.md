@@ -13,11 +13,24 @@ study:
 
 # AIエージェントのコンテキスト管理 — 会話履歴・要約・メモリの違い
 
-ゲームのフレーム時間を比較するとき、測定値だけでなく、同じステージか、VSyncの設定が同じかも大切です。AIエージェントとの長い会話では、これらの条件が履歴に残っていても、今回のモデル入力から外れることがあります。ハーネスは、保存した情報のうち何を今回の推論で使うかを決めます。[AIエージェントのハーネス](/algorithms/agent-harness.html) · [OpenAI公式文書のConversation state](https://developers.openai.com/api/docs/guides/conversation-state)
+ゲームのフレーム時間を比較するとき、測定値だけでなく、同じステージか、VSync（垂直同期）の設定が同じかも大切です。AIエージェントとの長い会話では、これらの条件が履歴に残っていても、今回のモデル入力から外れることがあります。モデルとツールをつなぐハーネスは、今回の推論で使う情報を選びます。ここでの**推論**は、モデルがその回の入力を処理することです。[AIエージェントのハーネス](/algorithms/agent-harness.html) · [OpenAI公式文書のConversation state](https://developers.openai.com/api/docs/guides/conversation-state)
+
+## この記事で分かること
+
+- 保存された履歴と、ある回の推論で使う情報を区別する。
+- 直近だけを選ぶ場合、要約を使う場合、元の条件を探して入れ直す場合に、何が残るかを説明する。
 
 ## 保存するものと、今回渡すもの
 
-ここでの**会話履歴**は、保存された発言やツールの呼び出し・結果の記録です。**推論ごとのコンテキスト**は、その回にモデルへ渡る入力のことです。今回の依頼と指示、選んだ履歴、要約、関連資料やツール結果などで組み立てます。たとえばOpenAIのConversations APIは会話IDにひもづけてメッセージやツール結果を保存できます。一方、長くなった入力をどう扱うかには、利用するAPIの仕組みとアプリの設計が関わります。[OpenAI公式文書のConversations API](https://developers.openai.com/api/docs/guides/conversation-state#using-the-conversations-api)
+**会話履歴**は、発言やツールの呼び出し・結果を保存した記録です。**推論ごとのコンテキスト**は、その回にモデルへ渡る入力です。今回の依頼と指示に、履歴から選んだ発言、要約、資料、ツール結果などを加えて作ります。
+
+| 用語 | 何を指すか |
+| --- | --- |
+| 会話履歴 | 会話で起きたことの記録。元の発言やツール出力を調べるときの出典になる。 |
+| 推論ごとのコンテキスト | 今回の依頼に答えるため、その回のモデルに渡る情報。 |
+| 要約 | 長い記録から目的に合う部分を短くまとめた情報。推論の入力に使える。 |
+| 永続メモリ | 将来の作業でも参照するために保存した設定、好み、作業上の決定など。保存期間と参照範囲は実装による。 |
+| 学習済みの重み | 学習で得たモデルのパラメーター。渡された入力を処理するときに使う。 |
 
 ```mermaid
 ---
@@ -36,25 +49,17 @@ flowchart TD
     inputNow -->|"学習済みの重みで処理"| modelRun["モデルの推論"]
 ```
 
-| 用語 | 何を指すか |
-| --- | --- |
-| 会話履歴 | 会話で起きたことの記録。元の発言やツール出力を調べるときの出典になる。 |
-| 推論ごとのコンテキスト | 今回の依頼に答えるため、その回のモデルに渡る情報。 |
-| 要約 | 長い記録から目的に合う部分を短くまとめた情報。推論の入力に使える。 |
-| 永続メモリ | 将来の作業でも参照するために保存した設定、好み、作業上の決定など。保存期間と参照範囲は実装による。 |
-| 学習済みの重み | 学習で得たモデルのパラメーター。渡された入力を処理するときに使う。 |
-
 ## コンテキスト窓には上限がある
 
-**コンテキスト窓**（context window）の上限はモデルごとに決まるトークン数です。文字数とは別の単位で、同じ文字数の文章でもトークン数は変わります。入力の量を見積もるときは、メッセージの本文に加えて役割や境界、ツール定義なども関係します。OpenAIのモデルでは入力と出力、該当するモデルでは推論トークンにも窓を使うため、入力を組み立てるときは応答に使う余地も考えます。[LLMの文章生成](/algorithms/llm-text-generation.html) · [OpenAI公式文書のコンテキスト窓](https://developers.openai.com/api/docs/guides/conversation-state#managing-the-context-window) · [Counting tokens](https://developers.openai.com/api/docs/guides/token-counting)
+**コンテキスト窓**（context window）の上限は、モデルごとに決まるトークン数です。トークンはモデルが入力や出力を処理するときに使う、テキストの単位です。同じ文字数でも、トークン数は変わります。
+
+入力の量を見積もるときは、メッセージの本文に加えて役割や境界、ツール定義なども関係します。応答に使う余地も考えて入力を組み立てます。[LLMの文章生成](/algorithms/llm-text-generation.html)
 
 長い会話から入力を作るとき、たとえば次の方法を組み合わせます。
 
 - **切り捨て**で、入力から古い項目などを外す。直近の流れは残せますが、後から必要になる前提も外れ得ます。元の履歴が残っていれば、あとで読み直せます。
-- **要約**で、複数の項目から要点をまとめる。変更前後の値が残っても、計測条件や例外が落ちることがあります。製品が行う圧縮の表現は実装によります。
+- **要約**で、複数の項目から要点をまとめる。変更前後の値が残っても、計測条件や例外が落ちることがあります。
 - **再取得**で、今の質問に必要な元の発言、ログ、資料をIDや検索で探し、必要な部分を入力に足す。見つからなかったり、別条件の記録を拾ったりする場合もあるので、出典や計測条件を照合します。[OpenAI公式文書のRetrieval](https://developers.openai.com/api/docs/guides/retrieval#performing-semantic-search)
-
-製品の実装例として、OpenAIのResponses APIにあるCompactionでは、次の入力に使う圧縮後の項目を返します。独立した `/responses/compact` の返り値には、人間が読める要約文とは異なる暗号化された項目が含まれ、元の項目が残る場合もあります。以下の手書き要約は、このAPIの中身を再現するものではなく、何を入力に残すかを観察するための教材です。[OpenAI公式文書のCompaction](https://developers.openai.com/api/docs/guides/compaction#standalone-compact-endpoint)
 
 ## 同じ3枠で、何が残るかを比べる
 
@@ -114,7 +119,30 @@ if __name__ == "__main__":
 
 永続メモリは、複数の会話や作業で再利用する情報を保存する設計です。たとえば「性能の報告には計測条件を添える」という好みは次回も役立ちます。実際の測定でVSyncがオフだったかは、その測定の元の記録を確かめます。保存した好みが変わったり、必要なメモが今回の入力に選ばれなかったりするので、メモリに残したことだけで完全な再現や正確さは保証されません。[OpenAI Agents SDKのSandbox memory](https://developers.openai.com/api/docs/guides/agents/sandboxes#persist-memory-across-runs)
 
-OpenAI Agents SDKのSandbox memoryは、会話履歴を保持するSessionとは別に、以前の作業から要点をファイルにまとめて再利用する例です。こうしたメモをモデルが参照すると今回の入力が変わります。学習済みの重みは、その入力を処理するモデルのパラメーターで、更新は学習の工程で行います。[OpenAI Agents SDKのSandbox memory](https://developers.openai.com/api/docs/guides/agents/sandboxes#persist-memory-across-runs) · [LLMの文章生成](/algorithms/llm-text-generation.html)
+保存したメモを参照すると、今回モデルに渡す入力が変わります。学習済みの重みは、その入力を処理するモデルのパラメーターです。重みを更新するのは学習の工程です。[LLMの文章生成](/algorithms/llm-text-generation.html)
+
+## 補足
+
+### 会話の保存とトークンの数え方
+
+OpenAIのConversations APIは会話IDにひもづけてメッセージやツール結果を保存できます。一方、長くなった入力をどう扱うかには、利用するAPIの仕組みとアプリの設計が関わります。[OpenAI公式文書のConversations API](https://developers.openai.com/api/docs/guides/conversation-state#using-the-conversations-api)
+
+OpenAIのモデルでは入力と出力、該当するモデルでは推論トークンにも窓を使うため、入力を組み立てるときは応答に使う余地も考えます。[OpenAI公式文書のコンテキスト窓](https://developers.openai.com/api/docs/guides/conversation-state#managing-the-context-window) · [Counting tokens](https://developers.openai.com/api/docs/guides/token-counting)
+
+### 要約と製品の圧縮機能
+
+製品が行う圧縮の表現は実装によります。製品の実装例として、OpenAIのResponses APIにあるCompactionでは、次の入力に使う圧縮後の項目を返します。独立した `/responses/compact` の返り値には、人間が読める要約文とは異なる暗号化された項目が含まれ、元の項目が残る場合もあります。掲載例では手書きの要約を使い、何が入力に残るかを観察します。このAPIの圧縮処理は教材の対象外です。[OpenAI公式文書のCompaction](https://developers.openai.com/api/docs/guides/compaction#standalone-compact-endpoint)
+
+### 会話履歴とファイルのメモを分ける実装
+
+OpenAI Agents SDKのSandbox memoryは、会話履歴を保持するSessionとは別に、以前の作業から要点をファイルにまとめて再利用する例です。[OpenAI Agents SDKのSandbox memory](https://developers.openai.com/api/docs/guides/agents/sandboxes#persist-memory-across-runs)
+
+## 要点
+
+- 会話履歴が残っていても、そのすべてが毎回の入力に含まれるとは限らない。
+- コンテキスト窓の上限はトークン数で決まる。同じ文字数でもトークン数は変わる。
+- 要約で抜けた計測条件は、元の発言や資料が残っていれば探し直せる。
+- 永続メモリを参照すると、その回の入力が変わる。学習済みの重みを更新するのは学習の工程。
 
 ## 理解度チェック
 

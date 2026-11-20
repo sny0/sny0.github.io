@@ -15,9 +15,16 @@ study:
 
 「ビルドr18をPC-Aで動かしたとき、影を軽くした前後のフレーム時間は？」という質問に答えるには、その条件の計測記録が要ります。**RAG**（Retrieval-Augmented Generation、検索拡張生成）は、質問に合わせて資料を検索し、その結果をモデルへの入力に加えて回答を生成する考え方です。前回のコンテキスト管理では入力に何を残すかを見ました。ここでは、必要な資料をどう見つけ、回答に使える状態にするかを扱います。[AIエージェントのコンテキスト管理](/algorithms/agent-context-management.html) · [Lewisらの原論文](https://arxiv.org/abs/2005.11401)
 
+## この記事で分かること
+
+- 質問に合う資料の断片を見つけ、出典を添えてモデルへ渡す流れを説明する。
+- 検索の順位が高い候補でも、ビルドや計測機材の条件が違えば根拠に使えないと判断する。
+
 ## 資料の準備と、質問が来てからの処理
 
-計測ログや設計文書を丸ごと渡すと、質問に無関係な内容も入力枠を使います。先に、見出しや段落を手掛かりに検索単位の**断片**（チャンク）へ分け、索引を作ります。索引は、語やベクトルなどから候補を引けるように整えたデータです。計測値とその条件が分かれそうなら、断片に条件や見出しを添えます。元のファイル名、節、版や日付、アクセスに必要な属性も断片と結びつけて保持します。[Microsoft Learnの資料分割ガイド](https://learn.microsoft.com/en-us/azure/architecture/ai-ml/guide/rag/rag-chunking-phase) · [検索索引とフィルター](https://learn.microsoft.com/en-us/azure/architecture/ai-ml/guide/rag/rag-information-retrieval)
+計測ログや設計文書を丸ごと渡すと、質問と関係のない内容も入力枠を使います。そこで、見出しや段落を手掛かりに、検索単位の**断片**（チャンク）に分けます。断片を語やベクトル（数値の並び）から探せるように整えたデータが**索引**です。
+
+計測値と条件が別々の断片に分かれそうなら、断片に条件や見出しを添えます。元のファイル名と節、版や日付、アクセスに必要な属性もひもづけます。[Microsoft Learnの資料分割ガイド](https://learn.microsoft.com/en-us/azure/architecture/ai-ml/guide/rag/rag-chunking-phase) · [検索索引とフィルター](https://learn.microsoft.com/en-us/azure/architecture/ai-ml/guide/rag/rag-information-retrieval)
 
 ```mermaid
 ---
@@ -36,13 +43,9 @@ flowchart TD
     addContext --> generateAnswer["根拠を踏まえて生成"]
 ```
 
-質問が来たら、たとえば `影` と `フレーム時間` を検索語にし、`r18` と `PC-A` を条件にします。呼び出し元に許可された範囲で候補を集め、質問との関連度や条件を確認します。実装によっては、候補を別の評価器で並べ替える**再順位付け**や、重複する断片の除外も行います。採用した本文と出典を質問と一緒に入力へ加え、モデルに根拠を使って回答するよう求めます。[Microsoft Learnの情報検索](https://learn.microsoft.com/en-us/azure/architecture/ai-ml/guide/rag/rag-information-retrieval) · [根拠を使う指示の設計](https://learn.microsoft.com/en-us/azure/architecture/ai-ml/guide/rag/rag-prompt-engineering#design-grounding-instructions)
+質問が来たら、たとえば `影` と `フレーム時間` を検索語にし、`r18` と `PC-A` を条件にします。許可された範囲で候補を集め、質問との関連度と条件を確認します。
 
-## キーワード検索、類似度検索、両方を使う検索
-
-語や型番の一致を使う**キーワード検索**では、`PC-A` やエラーコードのように同じ表記を探すのが得意です。**埋め込みによる検索**では、質問と断片を同じ表現空間のベクトルに変え、コサイン類似度などで近い候補を探します。表記の異なる言い換えが候補に入る場合があります。両方の順位を組み合わせる**ハイブリッド検索**や、構造化された項目を条件に検索する方法もあります。[Elastic公式の検索方式](https://www.elastic.co/docs/solutions/search/search-approaches) · [Hybrid search](https://www.elastic.co/docs/solutions/search/hybrid-search)
-
-Lewisらの2020年の原論文は、Wikipediaの密ベクトル索引からの検索を文章生成モデルに組み合わせて評価しました。論文には、密ベクトル検索をキーワードベースのBM25に置き換えた比較もあります。上の図はアプリ側で検索結果を選んで入力に加える構成の例です。原論文では取得した文書候補を確率的に扱い、どの文書に依存させるかについて複数の方式を比較しています。[Lewisら — NeurIPS 2020、§2と§4.5](https://papers.neurips.cc/paper_files/paper/2020/file/6b493230205f780e1bc26945df7481e5-Paper.pdf)
+採用した本文と出典を質問と一緒にモデルへ渡し、根拠を使って答えるよう求めます。[根拠を使う指示の設計](https://learn.microsoft.com/en-us/azure/architecture/ai-ml/guide/rag/rag-prompt-engineering#design-grounding-instructions)
 
 ## 小さな計測ログ集合を検索する
 
@@ -131,6 +134,10 @@ if __name__ == "__main__":
 
 根拠が足りないときは、たとえば「r18・PC-Aの条件では確認できなかった」と調べた範囲を示します。条件が曖昧なら聞き直し、表記の違いが疑わしければ別の語でも検索します。矛盾する資料があれば、どの条件で食い違うのかを伝えます。検索結果が0件でも、索引の更新待ちや検索漏れで見つかっていない場合があります。[Microsoft Learnの根拠付け](https://learn.microsoft.com/en-us/azure/architecture/ai-ml/guide/rag/rag-prompt-engineering#design-grounding-instructions)
 
+## キーワード検索、類似度検索、両方を使う検索
+
+語や型番の一致を使う**キーワード検索**では、`PC-A` やエラーコードのように同じ表記を探すのが得意です。**埋め込みによる検索**では、質問と断片を同じ表現空間のベクトルに変え、コサイン類似度などで近い候補を探します。表記の異なる言い換えが候補に入る場合があります。両方の順位を組み合わせる**ハイブリッド検索**や、構造化された項目を条件に検索する方法もあります。[Elastic公式の検索方式](https://www.elastic.co/docs/solutions/search/search-approaches) · [Hybrid search](https://www.elastic.co/docs/solutions/search/hybrid-search)
+
 ## 検索、学習、メモリ、入力管理の役割
 
 | 仕組み | 何を扱うか |
@@ -140,7 +147,26 @@ if __name__ == "__main__":
 | 永続メモリ | 次の作業でも再利用する好みや決定を保存する。検索対象にもできる。 |
 | コンテキスト管理 | 今回の入力枠にどの履歴、指示、検索結果をどれだけ入れるか決める。 |
 
-同じ学習済みモデルを使いながら、回答に使う資料を更新できます。一方、原論文では検索側や生成側の微調整も行っています。検索して入力を変える処理と、学習でパラメーターを変える処理は併用できます。検索処理をツールとして呼ぶなら、ハーネスが結果を受け取り、構成によってはMCPで検索側と通信します。[Lewisらの原論文](https://arxiv.org/abs/2005.11401) · [AIエージェントのハーネス](/algorithms/agent-harness.html) · [MCPの仕組み](/algorithms/model-context-protocol.html)
+同じ学習済みモデルを使いながら、回答に使う資料を更新できます。検索して入力を変える処理と、学習でパラメーターを変える処理は併用できます。検索処理をツールとして呼ぶなら、ハーネスが結果を受け取り、構成によってはMCPで検索側と通信します。[AIエージェントのハーネス](/algorithms/agent-harness.html) · [MCPの仕組み](/algorithms/model-context-protocol.html)
+
+## 補足
+
+### 検索結果の選び方
+
+実装によっては、候補を別の評価器で並べ替える**再順位付け**や、重複する断片の除外も行います。[Microsoft Learnの情報検索](https://learn.microsoft.com/en-us/azure/architecture/ai-ml/guide/rag/rag-information-retrieval)
+
+### 原論文で比較した方式
+
+Lewisらの2020年の原論文は、Wikipediaの密ベクトル索引からの検索を文章生成モデルに組み合わせて評価しました。論文には、密ベクトル検索をキーワードベースのBM25に置き換えた比較もあります。上の図はアプリ側で検索結果を選んで入力に加える構成の例です。原論文では取得した文書候補を確率的に扱い、どの文書に依存させるかについて複数の方式を比較しています。[Lewisら — NeurIPS 2020、§2と§4.5](https://papers.neurips.cc/paper_files/paper/2020/file/6b493230205f780e1bc26945df7481e5-Paper.pdf)
+
+原論文では検索側や生成側の微調整も行っています。[Lewisらの原論文](https://arxiv.org/abs/2005.11401)
+
+## 要点
+
+- 資料を断片に分け、索引から探せるようにする。断片には出典・版・アクセスに必要な属性を添える。
+- 質問の条件に合い、取得を許された断片を選んでモデルに渡す。
+- 検索結果を根拠にするときは、順位に加えて出典、条件、資料が主張を支えるかを確かめる。
+- 根拠が足りない場合は、何を調べて何が確認できなかったかを示す。
 
 ## 理解度チェック
 

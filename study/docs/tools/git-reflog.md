@@ -15,6 +15,12 @@ study:
 
 敵のHPを変更したブランチをrebaseすると、変更を再適用した新しいコミットが作られることがあります。元のコミットが `git log` に出なくなっても、その時点でGitがオブジェクトを消したとは限りません。前の先端を覚えているのが **reflog（参照ログ）** です。[Gitのrebase](/tools/git-rebase.html) · [Git公式のreflogマニュアル](https://git-scm.com/docs/git-reflog/2.39.0#_description)
 
+## この記事で分かること
+
+コミットの親をたどる履歴と、参照の移動を記録するreflogを区別できます。以前のコミットを探す手掛かりと、reflogでは取り戻せないものを判断できます。
+
+**どんなときに使うか**　rebaseのあと、今のブランチの履歴に出てこないコミットを確認したいときに使います。
+
 ## コミットの親と、参照が以前指していた先
 
 共通のコミットBから、`main` ではUでゲーム内のステージ設定を変更し、`topic` ではTで `enemy.txt` の `hp=1` を `hp=2` にしました。`topic` を `main` の上にrebaseすると、HPの変更がUの上に再適用され、T′ができます。図では実線が「現在の参照が指す先」または「コミットが持つ親」、破線が「reflogに記録されている以前の先端」です。
@@ -30,7 +36,12 @@ flowchart TD
     old -->|親| base
 ```
 
-`git log topic` はT′から親をたどります。そこにTはありません。reflogが記録するのは、このブランチの参照がTからT′に更新されたことです。`topic^` は「現在の先端T′の第1親」なのでU、`topic@{1}` は「この参照の一つ前の値」なので、この例ではTを指します。`@{1}` は親の数ではなく記録の位置です。参照がまた更新されると、同じ式が指す先も変わります。[Git公式のリビジョン指定](https://git-scm.com/docs/gitrevisions) · [Git公式のrev-listマニュアル](https://git-scm.com/docs/git-rev-list#_description)
+`git log topic` は現在の先端T′から親をたどります。この経路にTはありません。`topic` という参照が指す先は、TからT′へ変わりました。reflogはその移動を記録しています。
+
+- `topic^` は現在の先端T′の第1親です。この例ではUを指します。
+- `topic@{1}` の `@{1}` は記録の位置です。この参照の一つ前の値なので、ここではTを指します。
+
+参照がまた更新されると、同じ式が指す先も変わります。[Git公式のリビジョン指定](https://git-scm.com/docs/gitrevisions) · [Git公式のrev-listマニュアル](https://git-scm.com/docs/git-rev-list#_description)
 
 ## 親をたどれなくても、旧コミットは読める
 
@@ -52,7 +63,7 @@ $ git show 'topic@{1}:enemy.txt'
 hp=2
 ```
 
-この例にはTを指す別のブランチやタグがありません。それらがあれば、Tは `--all` でも見つかります。検証直後は `ORIG_HEAD` もTを指していましたが、これは別の操作で上書きされ得る値で、`--all` の起点には含まれません。reflogはコミットの写しを保存する場所ではなく、リポジトリ内にまだ存在するオブジェクトを探す手掛かりです。[Gitの保存モデル](/tools/git-objects.html) · [Git公式のrebaseマニュアル](https://git-scm.com/docs/git-rebase#_description)
+この例にはTを指す別のブランチやタグがありません。それらがあれば、Tは `--all` でも見つかります。reflogは、リポジトリ内にまだ存在するオブジェクトを探す手掛かりです。コミットの写しは持ちません。[Gitの保存モデル](/tools/git-objects.html)
 
 ### 旧コミットに新しいブランチを付ける
 
@@ -83,17 +94,34 @@ git rev-parse --short recover-topic
 
 Gitでは、ブランチやタグなどから親をたどって見つかるコミットを、その起点から**到達可能**と呼びます。rebase後のTに現在の先端から届かなくても、Tを含むreflogの記録が残っていれば、その記録からたどれる間は回収対象になりません。reflogの記録を取り除く条件と、オブジェクトを回収する条件は別です。[Git公式のgcマニュアルの設定と注意事項](https://git-scm.com/docs/git-gc#_configuration)
 
+実際の保持期間は設定や保守処理の実行時期で変わります。一つの記録が期限切れになっても、別の参照やreflogがコミットを保持することがあります。どこからも保護されなくなったオブジェクトはガベージコレクション（GC）の回収対象になり得ます。そのため、既定の日数だけでは「いつまで戻せるか」は決まりません。[Git公式のgcマニュアルの注意事項](https://git-scm.com/docs/git-gc#_notes)
+
+## 未コミットの編集はどこまで探せるか
+
+作業ツリー（手元の編集用ファイル）で `hp=3` に書き換えただけなら、参照は動かず、reflogにその編集は記録されません。`git add` した版は、コミット前でもファイルの中身を保存するblobとして残ることがあります。reflogは次にコミットする内容を準備するindexの変更を記録しないので、その版を指す記録ができるわけではありません。まだGitに保存されていない作業ツリーの内容は、reflogからは読み出せません。[Gitのステージング](/tools/git-staging-index.html) · [Git User Manualのdangling objects](https://git-scm.com/docs/user-manual#dangling-objects)
+
+## 補足
+
+### rebase直後のORIG_HEAD
+
+検証直後は `ORIG_HEAD` もTを指していましたが、これは別の操作で上書きされ得る値で、`--all` の起点には含まれません。[Git公式のrebaseマニュアル](https://git-scm.com/docs/git-rebase#_description)
+
+### Git 2.39での保持期間の既定値
+
 | 何の期限か | Git 2.39の既定 | 何に対する設定か |
 | --- | --- | --- |
 | reflogの通常の期限 | 90日 | 記録が古くなったとき、保守処理で取り除く基準。 |
 | reflogの短い期限 | 30日 | ブランチのreflogでは、現在の先端から到達できないコミットを含む古い記録に適用される。 |
 | オブジェクト回収の猶予 | 2週間前より古いもの | 回収の対象となる古さの基準。記録を失った日から2週間を数える設定ではない。 |
 
-設定名は上から順に `gc.reflogExpire`、`gc.reflogExpireUnreachable`、`gc.pruneExpire` です。実際の保持期間は設定や保守処理の実行時期で変わります。一つの記録が期限切れになっても、別の参照やreflogがコミットを保持することがあります。どこからも保護されなくなったオブジェクトはガベージコレクション（GC）の回収対象になり得ます。そのため、既定の日数だけでは「いつまで戻せるか」は決まりません。[Git公式のgcマニュアルの注意事項](https://git-scm.com/docs/git-gc#_notes)
+設定名は上から順に `gc.reflogExpire`、`gc.reflogExpireUnreachable`、`gc.pruneExpire` です。
 
-## 未コミットの編集はどこまで探せるか
+## 要点
 
-作業ツリーで `hp=3` に書き換えただけなら、参照は動かず、reflogにその編集は記録されません。`git add` した版はコミット前でもblobとして残ることがありますが、reflogはindexの変更を記録しないので、その版を指す記録ができるわけではありません。まだGitに保存されていない作業ツリーの内容は、reflogからは読み出せません。[Gitのステージング](/tools/git-staging-index.html) · [Git User Manualのdangling objects](https://git-scm.com/docs/user-manual#dangling-objects)
+- 履歴は親をたどり、reflogは参照が以前指していたコミットをたどります。
+- reflogはリポジトリごとの記録です。以前のコミットがまだあれば、新しいブランチの先端にできます。
+- 記録の期限切れとオブジェクト回収は別です。既定の日数で復旧できる期限は決まりません。
+- 作業ファイルやindexを編集しただけでは、reflogに編集内容は入りません。
 
 ## 理解度チェック
 

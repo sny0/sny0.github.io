@@ -13,11 +13,21 @@ study:
 
 # Gitのステージング — 作業ツリー・index・HEAD
 
-ゲームの検証用の `score.txt` を `score=0` から `score=10` に変え、`git add` したとします。その後で `score=20` に変えても、通常のコミットに入るのは `score=10` です。[Gitの基本](/tools/git-basics.html)に出てくるこの例を、今回はどの版がどこにあり、次のtreeが何を参照するかという観点から見ていきます。
+ゲームの検証用の `score.txt` を `score=0` から `score=10` に変え、`git add` したとします。その後で `score=20` に変えても、通常のコミットに入るのは `score=10` です。次のコミットがファイル名や内容をどう参照するか、この例で見ていきます。[Gitの基本](/tools/git-basics.html)
+
+## この記事で分かること
+
+同じファイルについて、編集中・ステージ済み・コミット済みのどの版を見ているか説明できます。差分で何と何を比べているか、次のコミットに何が入るかを判断できます。
+
+**どんなときに使うか**　`git add` のあとで編集を続けて、次のコミットに入る版を確かめたいときです。
 
 ## 同じパスに3つの版がある
 
-作業ツリーには、エディターで最後に保存した `score=20` があります。**index**（ステージング領域）には `git add` した時点でGitが記録する `score=10` を指す項目が残ります。**HEAD** が示す現在のコミットのtreeには、最後にコミットした `score=0` があります。`git add` はindexを更新します。再編集後の内容も入れたいときは、もう一度ステージします。[git-add](https://git-scm.com/docs/git-add#_description) · [Git公式のデータモデル](https://git-scm.com/docs/gitdatamodel#index)
+- **作業ツリー**は、エディターで編集・保存する場所です。ここでは `score=20` です。
+- **index**（ステージング領域）は、次のコミットに入れる候補を持ちます。`git add` したときの `score=10` を指します。
+- **HEAD** は現在のコミットを示す参照です。そのコミットの **tree**（ファイル名と内容を結び付ける記録）をたどると `score=0` が読めます。
+
+`git add` はindexを更新します。再編集後の内容も入れたいときは、もう一度ステージします。[git-add](https://git-scm.com/docs/git-add#_description) · [Git公式のデータモデル](https://git-scm.com/docs/gitdatamodel#index)
 
 ```mermaid
 flowchart TD
@@ -27,13 +37,20 @@ flowchart TD
     i -->|diff| w["作業ツリー　score=20"]
 ```
 
-図の矢印は、差分の比較元から比較先へ向いています。`git diff -- score.txt` ではindexの `score=10` が `-`、作業ツリーの `score=20` が `+` です。`git diff --cached -- score.txt` ではHEADの `score=0` が `-`、indexの `score=10` が `+` です。後者は比較するコミットを省略し、HEADにコミットがある場合の説明です。`--staged` も同じ意味で使えます。[git-diff](https://git-scm.com/docs/git-diff#_description)
+図の矢印は、差分の比較元から比較先へ向いています。
+
+- `git diff -- score.txt` ではindexの `score=10` が `-`、作業ツリーの `score=20` が `+` です。
+- `git diff --cached -- score.txt` ではHEADの `score=0` が `-`、indexの `score=10` が `+` です。比較するコミットを省略し、HEADにコミットがある場合の説明です。[git-diff](https://git-scm.com/docs/git-diff#_description)
 
 このとき `git status --short` は、`score.txt` に `MM`、作業ツリーにだけある `bonus.txt` に `??` を表示しました。競合のない例で、左の `M` はHEADとindexの間、右の `M` はindexと作業ツリーの間に変更があるという意味です。この `bonus.txt` は未追跡で、indexのコミット候補に登録されていません。通常の `git diff` と `git diff --cached` にもこの新規ファイルの内容は出ません。[git-statusの短縮形式](https://git-scm.com/docs/git-status#_short_format) · [git-diff](https://git-scm.com/docs/git-diff#_description)
 
 ## indexは次のスナップショットの項目を持つ
 
-indexを読むと、変更箇所だけではなく、次のコミットで使うパスと保存内容の対応が見えます。通常のファイルの項目にはパス、モード、blob IDなどがあります。`git ls-files --stage` の表示はモード、オブジェクトID、ステージ番号、パスの順です。この例の `0` は競合していない項目です。マージ競合中の1〜3は、基準・現在側・相手側の版を区別する番号です。[Gitのマージ](/tools/git-three-way-merge.html)に具体例があります。`git show ':score.txt'` はそのindex項目が指すblobを、`git show 'HEAD:score.txt'` はHEADのコミット側のblobを読みます。[Git公式のデータモデル](https://git-scm.com/docs/gitdatamodel#index) · [git-ls-files](https://git-scm.com/docs/git-ls-files#_output) · [gitrevisions](https://git-scm.com/docs/gitrevisions#_specifying_revisions)
+indexには、次のコミットで使うパスと保存内容の対応が入ります。通常のファイルの項目には、パス、モード、blob IDなどがあります。**blob** は保存したファイルのバイト列です。
+
+`git ls-files --stage` はモード、オブジェクトID、ステージ番号、パスの順に表示します。この例の `0` は競合していない項目です。`git show ':score.txt'` はindexが指すblobを、`git show 'HEAD:score.txt'` は現在のコミットが指すblobを読みます。[Git公式のデータモデル](https://git-scm.com/docs/gitdatamodel#index) · [git-ls-files](https://git-scm.com/docs/git-ls-files#_output) · [gitrevisions](https://git-scm.com/docs/gitrevisions#_specifying_revisions)
+
+競合時のステージ番号は補足で扱います。具体例はマージの記事にあります。[Gitのマージ](/tools/git-three-way-merge.html)
 
 ```text
 $ git ls-files --stage
@@ -57,7 +74,19 @@ score=0
 
 コミット後、HEADとindexは `score=10`、作業ツリーには `score=20` が残りました。このため `git diff --cached` は空になり、`git diff` には `10 → 20` が残ります。`keep.txt` は新しいtreeにもあり、`bonus.txt` は未追跡のままです。[git-diff](https://git-scm.com/docs/git-diff#_description) · [git-commit](https://git-scm.com/docs/git-commit#_description)
 
+## 補足
+
+`git diff --staged` は `git diff --cached` と同じ意味です。
+
+マージ競合中のステージ番号1〜3は、基準・現在側・相手側の版を区別します。
+
 `git commit -a` を使うと、Gitがすでに追跡しているファイルの変更や削除を先にステージします。新規の未追跡ファイルは `-a` の対象外です。コミット時に既知のパスを指定する方法にも別の規則があるので、この例ではindexをそのまま採用する場合に絞っています。[git-commit](https://git-scm.com/docs/git-commit#_description)
+
+## 要点
+
+- `git add` のあとに再編集すると、HEAD・index・作業ツリーに別々の版が残ります。
+- `git diff` はindexと作業ツリーを、`git diff --cached` はここではHEADとindexを比べます。
+- 通常のコミットはindexを使います。変更していない追跡ファイルも次のスナップショットに含まれ、未追跡ファイルは入りません。
 
 ## 理解度チェック
 

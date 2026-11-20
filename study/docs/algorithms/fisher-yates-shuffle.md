@@ -15,6 +15,10 @@ study:
 
 練習モードでお題カードA・B・Cを1枚ずつ出すとします。3枚の並び順は `ABC`、`ACB`、`BAC`、`BCA`、`CAB`、`CBA` の6通りです。**一様なシャッフル**では、この6通りがそれぞれ $1/6$ の確率で出ます。先頭だけを調べても、残りの2枚まで一様かどうかは分かりません。[シャッフルバッグ](/game/shuffle-bag.html)で袋ごとの並びを等確率とするなら、この性質を持つ並べ替えが必要です。
 
+## この記事で分かること
+
+Fisher–Yates法で、未確定の範囲だけから交換相手を選ぶ理由を説明できます。各並びが同じ確率になるための条件を判断できます。
+
 ## 未確定の範囲から1枚を選ぶ
 
 Fisher–Yates法では、右端から1か所ずつ確定します。まず未確定の3枚のどれかを等確率で選び、右端と交換します。次に残った左の2枚のどちらかを等確率で選び、中央と交換します。最後の1枚は左端に残ります。右端や中央にすでに置かれているカードも選べます。その場合は自分自身と交換するので、並びは動きません。確定した位置は、以降の選択範囲から外します。[DurstenfeldのAlgorithm 235](https://doi.org/10.1145/364520.364540) · [Java SE 25の `Collections.shuffle`](https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/util/Collections.html#shuffle(java.util.List,java.util.random.RandomGenerator))
@@ -43,7 +47,9 @@ Fisher–Yates法では、右端から1か所ずつ確定します。まず未�
   <figcaption style="font-size: 0.875rem; margin-top: 0.5rem">3枚からAを選んで右端を確定し、残り2枚からCを選ぶ。太字は確定した位置。</figcaption>
 </figure>
 
-最終形を `BCA` にしたいなら、最初に右端へ置くカードはAに決まり、次に中央へ置くカードはCに決まります。どの最終形にも、そこへ行く選択経路は1本です。3枚なら経路は $3\times2=6$ 本。最初の選択が $1/3$、その選択が分かったうえで次の選択が $1/2$ なので、各経路の確率は $1/3\times1/2=1/6$ になります。一般に $n$ 枚でも、各段階で以前の選択を条件に残りの候補が一様なら、各順列の確率は $1/n!$ です。[Manuel EberlによるFisher–Yates法の形式証明](https://isa-afp.org/entries/Fisher_Yates.html)
+最終形を `BCA` にしたいなら、右端のカードはA、中央のカードはCに決まります。どの最終形にも、そこへ行く選択経路は1本です。3枚なら経路は $3\times2=6$ 本です。最初の選択が $1/3$、その選択が分かったうえで次の選択が $1/2$ なので、各経路の確率は $1/3\times1/2=1/6$ になります。
+
+**順列**は、カードを並べた一つの順番です。一般に $n$ 枚でも、各段階で以前の選択を条件に残りの候補が一様なら、各順列の確率は $1/n!$ です。[Manuel EberlによるFisher–Yates法の形式証明](https://isa-afp.org/entries/Fisher_Yates.html)
 
 ## 毎回3枚すべてと交換すると偏る
 
@@ -90,9 +96,20 @@ for order in sorted(fisher_yates):
 
 一様な順列が得られる証明では、それまでにどの添字を選んだ場合でも、次の添字が許された範囲から一様に選ばれると仮定します。たとえば一様な `0`〜`7` の値を `3` で割った余りにすると、`0` と `1` にはそれぞれ3通り、`2` には2通りの元の値が対応します。交換範囲を正しく狭めても、このように範囲への割り当てが偏っていれば、証明の前提が崩れます。[Daniel Lemireの乱数の範囲変換に関する論文](https://arxiv.org/abs/1805.10941)
 
-一回のシャッフルを実装するときは、位置 `i` ごとに `0`〜`i` の交換相手を1つ引きます。たとえばPythonでは、渡された乱数生成器 `rng` に対し `rng.randrange(i + 1)` でその範囲を指定できます。各順列へ何本の経路が通じるかは列挙で確かめられますが、実際の乱数源が各経路を同じ確率でたどるかは別の条件です。[Python 3.12の `randrange`](https://docs.python.org/3.12/library/random.html#random.randrange) · [Java SE 25の `Collections.shuffle`](https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/util/Collections.html#shuffle(java.util.List,java.util.random.RandomGenerator))
+各順列へ何本の経路が通じるかは列挙で確かめられます。実際の乱数源が各経路を同じ確率でたどるかは別の条件です。順列の確率と、他人が次の結果を予測できるかも別の性質です。
 
-順列の確率と、他人が次の結果を予測できるかも別の性質です。たとえばPython 3.12の標準 `random` の既定生成器は、暗号用途には向かないと公式文書にあります。プレイヤーが公平だと感じるかは、どのくらいの連続や空白が起きるかにも左右されます。各種類を1枚ずつ入れた袋を一様に混ぜても、補充の境界では同じお題が続くことがあります。[Python 3.12の `random`](https://docs.python.org/3.12/library/random.html) · [シャッフルバッグ](/game/shuffle-bag.html)
+## 補足
+
+一回のシャッフルを実装するときは、位置 `i` ごとに `0`〜`i` の交換相手を1つ引きます。たとえばPythonでは、渡された乱数生成器 `rng` に対し `rng.randrange(i + 1)` でその範囲を指定できます。[Python 3.12の `randrange`](https://docs.python.org/3.12/library/random.html#random.randrange) · [Java SE 25の `Collections.shuffle`](https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/util/Collections.html#shuffle(java.util.List,java.util.random.RandomGenerator))
+
+Python 3.12の標準 `random` の既定生成器は、暗号用途には向かないと公式文書にあります。プレイヤーが公平だと感じるかは、どのくらいの連続や空白が起きるかにも左右されます。各種類を1枚ずつ入れた袋を一様に混ぜても、補充の境界では同じお題が続くことがあります。[Python 3.12の `random`](https://docs.python.org/3.12/library/random.html) · [シャッフルバッグ](/game/shuffle-bag.html)
+
+## 要点
+
+- 一様なシャッフルでは、先頭のカードだけでなく、各並び全体が等確率です。
+- Fisher–Yates法では、未確定の範囲から交換相手を選び、交換して範囲の右端を確定します。
+- 3枚を毎回全範囲と交換すると、27本の選択経路を6種類の並びに均等に割り当てられません。
+- 一様になる証明には、以前の選択がどうであっても次の候補を等確率で選ぶ、という前提があります。
 
 ## 理解度チェック
 

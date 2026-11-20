@@ -15,9 +15,15 @@ study:
 
 二人が同じゲームの設定を編集します。片方は選択中の装備を剣から盾に変え、もう片方は候補から盾を削除しました。どちらのブランチでも、選択中の装備は候補に含まれています。ところが、二つの変更を組み合わせると、選択中の盾が候補から消えます。Gitがどうやってこの組み合わせを作るかは、両方の先端に加えて、二人が編集を始めた時点を見ると分かります。
 
+## この記事で分かること
+
+Gitが三つの版を比較して変更を統合する仕組みを説明できます。マージ後の履歴と、設定として正しいかどうかを別々に確かめられます。
+
+**どんなときに使うか**　別々のブランチで進めた作業を一つの履歴にまとめるときに使います。
+
 ## 比べるのは基準と二つの先端
 
-コミットの親をたどって二つの先端の両方から到達できるコミットを、共通祖先と呼びます。共通祖先の候補から、別の共通祖先の祖先になっているものを除くと、**マージベース**が残ります。候補を絞る基準は履歴の親子関係です。検証例ではマージ前の `git merge-base main feature` が図のBを返しました。[git merge-baseの公式マニュアル](https://git-scm.com/docs/git-merge-base#_description)
+コミットの親をたどって、二つの先端の両方から到達できるコミットが**共通祖先**です。そこから親子関係をもとに選んだ基準を**マージベース**と呼びます。この例の基準は一つです。マージ前の `git merge-base main feature` は図のBを返しました。[git merge-baseの公式マニュアル](https://git-scm.com/docs/git-merge-base#_description)
 
 ```mermaid
 flowchart TD
@@ -29,7 +35,9 @@ flowchart TD
     f --> m
 ```
 
-図の矢印は履歴の親から子へ向いています。HとFだけを見て `selected.txt` の内容が違っても、どちらが変更したかは分かりません。Bと比べると、Hが選択を `shield` に変え、Fは元の `sword` を残したことが分かります。`items.txt` では逆に、Fだけが候補を変更しています。**3-way merge**は、このようにB・H・Fの三つの状態を使って両側の変更を組み合わせます。分岐した両側を通常のマージコミットでつなぐと、Mは統合したtreeと、H・Fの二つの親を持ちます。[Pro Gitのマージの解説](https://git-scm.com/book/en/v2/Git-Branching-Basic-Branching-and-Merging#_basic_merging) · [Git公式の `ort` の説明](https://git-scm.com/docs/git-merge/2.38.0#_merge_strategies)
+図の矢印は履歴の親から子へ向いています。HとFだけを見て `selected.txt` の内容が違っても、どちらが変更したかは分かりません。Bと比べると、Hが選択を `shield` に変え、Fは元の `sword` を残したことが分かります。`items.txt` ではFだけが候補を変更しています。
+
+**3-way merge**は、B・H・Fの三つの状態を使って両側の変更を組み合わせます。分岐した両側を通常のマージコミットでつなぐと、Mには統合したファイルの構成を表すtreeと、H・Fの二つの親が記録されます。[Pro Gitのマージの解説](https://git-scm.com/book/en/v2/Git-Branching-Basic-Branching-and-Merging#_basic_merging) · [Git公式の `ort` の説明](https://git-scm.com/docs/git-merge/2.38.0#_merge_strategies)
 
 ## 自動で結合できても、設定として成立するとは限らない
 
@@ -42,7 +50,7 @@ flowchart TD
 | F `feature` | `sword` | `sword` |
 | M マージ結果 | `sword` | `shield` |
 
-Git 2.39.2の `ort` を指定した `git merge -s ort --no-ff --no-edit feature` は成功しました。次の出力では、Mの短いIDの後ろにHとFのIDが並びます。設定を実際に読み取る小さな検査では、HとFはそれぞれ合格し、Mは `shield` が候補にないため失敗しました。
+検証用リポジトリでマージは成功しました。次の出力では、Mの短いIDの後ろにHとFのIDが並びます。設定を読み取る小さな検査では、HとFはそれぞれ合格しました。Mは `shield` が候補にないため失敗しました。
 
 ```text
 $ git show --no-patch --format='%h %p %s' main
@@ -53,7 +61,7 @@ f123ac5 b1ba17f 062a4fe Merge branch 'feature'
 
 ## 同じ行の変更を選べないとき
 
-別の検証では、基準の `key.txt` にある `jump=Space` を、現在の側で `jump=J`、相手側で `jump=K` に変えました。どちらの変更を採用するかが決まらず、マージは競合で停止しました。HEADは現在側のコミットに残ります。競合中のindexを読む `git ls-files -u -- key.txt` では、このパスにステージ1・2・3の項目がありました。[git mergeの競合時の動作](https://git-scm.com/docs/git-merge/2.38.0#_true_merge) · [git ls-files](https://git-scm.com/docs/git-ls-files/2.39.0#_output)
+別の検証では、基準の `key.txt` にある `jump=Space` を、現在の側で `jump=J`、相手側で `jump=K` に変えました。どちらの変更を採用するかが決まらず、マージは競合で停止しました。現在のコミットを示すHEADは現在側に残ります。競合中のindex（次のコミットに入れる内容を用意する場所）を `git ls-files -u -- key.txt` で読むと、このパスにステージ1・2・3の項目がありました。[git mergeの競合時の動作](https://git-scm.com/docs/git-merge/2.38.0#_true_merge) · [git ls-files](https://git-scm.com/docs/git-ls-files/2.39.0#_output)
 
 ```text
 $ git show ':1:key.txt'
@@ -64,7 +72,7 @@ $ git show ':3:key.txt'
 jump=K
 ```
 
-通常のindexでは、次にコミットする版はステージ0にあります。この競合中はステージ1が基準、2が現在側、3が相手側です。どの内容を残して結合するかは解消する人が決めます。ファイルが片側に存在しない競合などでは、全ステージがそろわない場合があります。[Gitのステージング](/tools/git-staging-index.html) · [git mergeの競合時の動作](https://git-scm.com/docs/git-merge/2.38.0#_true_merge)
+ここでのステージ番号は、indexの中でどの版を表すかを示します。通常は、次にコミットする版がステージ0にあります。この競合中はステージ1が基準、2が現在側、3が相手側です。どの内容を残して結合するかは解消する人が決めます。[Gitのステージング](/tools/git-staging-index.html) · [git mergeの競合時の動作](https://git-scm.com/docs/git-merge/2.38.0#_true_merge)
 
 このテキスト競合では、Git 2.39.2の `merge.conflictStyle=merge` で作業ツリーに次のマーカーが出ました。区切りより上が現在側、下が取り込み側です。
 
@@ -96,6 +104,23 @@ flowchart TD
     accDescr: 更新前はブランチ参照がBを、更新後は既存のFを指す。BとFの親子関係はそのまま。
     a["更新前 参照 → B"] -->|fast-forward| z["更新後 参照 → F"]
 ```
+
+## 補足
+
+### マージベースの選び方と検証時の指定
+
+共通祖先の候補から、別の共通祖先の祖先になっているものを除くと、マージベースが残ります。候補を絞る基準は履歴の親子関係です。
+
+装備の検証はGit 2.39.2で、マージ戦略に `ort` を指定した `git merge -s ort --no-ff --no-edit feature` で行いました。
+
+ファイルが片側に存在しない競合などでは、indexの全ステージがそろわない場合があります。
+
+## 要点
+
+- 3-way mergeでは、共通の基準と二つの先端を使って変更を組み合わせます。
+- 分岐をマージコミットでつなぐと、二つの先端が親になります。fast-forwardでは既存のコミットへ先端を進めます。
+- 競合を解消するときは、どの内容を残すかを人が決めます。
+- テキスト上の競合がなくても、組み合わせた設定がゲームのルールを満たすかは別に確認します。
 
 ## 理解度チェック
 

@@ -13,11 +13,17 @@ study:
 
 # Git restoreの仕組み — 履歴を動かさず、復元元と復元先を選ぶ
 
-敵のHPが、最後のコミットでは20、ステージ済みの版では30、編集中のファイルでは40だとします。`git restore` でそのファイルを指定するだけなら、編集中のHPは30になります。ステージ済みの版を復元元にするためです。[Git公式のrestoreマニュアル](https://git-scm.com/docs/git-restore#_description)
+敵のHPが、最後のコミットでは20、ステージ済みの版では30、編集中のファイルでは40だとします。`git restore` でそのファイルを指定するだけなら、編集中のHPは30になります。ステージ済みの版を復元元にするためです。編集中のHP40は上書きされます。[Git公式のrestoreマニュアル](https://git-scm.com/docs/git-restore#_description)
+
+## この記事で分かること
+
+`git restore` がどの版を読み、次のコミットの候補や作業ファイルのどこに写すか説明できます。ステージだけを外したいときに、作業中の編集まで上書きする指定を見分けられます。
+
+**どんなときに使うか**　編集したファイルやステージ済みの内容を、選んだ版に戻したいときです。
 
 ## パス・復元元・復元先を決める
 
-`git restore` は、指定したパスを、復元元の内容に合わせて復元先で更新します。復元先にできるのは、次のコミットの内容を用意するindexと、いま編集している作業ツリーです。`HEAD` は復元元になり得ます。操作したリポジトリのブランチの先端と、`HEAD` が指すコミットはrestoreの前後で同じです。[Gitのステージング](/tools/git-staging-index.html) · [Git公式のreset・restore・revertの比較](https://git-scm.com/docs/git#_reset_restore_and_revert)
+`git restore` は、指定したパスの内容を、選んだ版から復元先へ写します。復元先は **index**（次のコミットの内容を用意する場所）と **作業ツリー**（いま編集しているファイル）です。その一方または両方を選べます。**`HEAD`** は現在のコミットを示す参照で、復元元にも使えます。操作の前後でブランチの先端と、`HEAD` が指すコミットは同じです。[Gitのステージング](/tools/git-staging-index.html) · [Git公式のreset・restore・revertの比較](https://git-scm.com/docs/git#_reset_restore_and_revert)
 
 図は `--source` を省略したときの流れです。復元先としてindexを指定する `--staged` には、既定の復元元を `HEAD` に変える働きもあります。
 
@@ -44,7 +50,9 @@ flowchart TD
 
 ## 同じファイルを、どの版からどこへ戻すか
 
-`enemy.txt` が `hp=10` のコミットAの次に、`hp=20` のコミットBを作り、`main` の先端をBにしました。同じファイルを `hp=30` にしてステージしてから、作業ツリーだけ `hp=40` に編集しました。次の表は、この初期状態を用意した別々の使い捨てリポジトリで、各オプションを実行したあとのHPです。対象は `enemy.txt` で、すべての行で `HEAD` はHP20のBを指します。Aを復元元にする例では `--source=a57b882` を使いました。
+`enemy.txt` が `hp=10` のコミットAの次に、`hp=20` のコミットBを作りました。`main` の先端はBです。同じファイルを `hp=30` にしてステージしたあと、作業ツリーだけ `hp=40` に編集しました。
+
+表の各行では、この状態を用意した別々の使い捨てリポジトリで `enemy.txt` を復元しています。すべての行で `HEAD` はHP20のBを指します。Aを復元元にする例では `--source=a57b882` を使いました。
 
 | やりたいことと指定 | index | 作業ツリー |
 | --- | --- | --- |
@@ -71,13 +79,25 @@ hp=30
 
 ## 上書きした変更をどこまで探せるか
 
-復元先に変更があれば、その内容は復元元の内容で上書きされます。追跡対象のパスが復元元に存在しない場合は、既定ではそのパスを復元先から取り除いて元に合わせます。たとえば新しいファイルをステージしたあと、そのパスのindexを `HEAD` から復元すると、`HEAD` にそのパスがなければindexから外れます。作業ファイルは残り、未追跡になります。この削除条件は公式資料で確認しました。[Git公式のrestoreマニュアル](https://git-scm.com/docs/git-restore#_description)
+復元先に変更があれば、復元元の内容で上書きされます。追跡対象のパスが復元元にない場合、既定では復元先から取り除かれます。[Git公式のrestoreマニュアル](https://git-scm.com/docs/git-restore#_description)
 
-この検証でHP40は作業ツリーにしかなく、対応するblobはGitのオブジェクトデータベースにありませんでした。作業ツリーをHP30に上書きしたあと、以前のHP40をreflogから取り出すことはできません。別の `--staged` の例では、HP30がindexから外れたあとも、`git add` で作られたblobが残りました。ステージした版を後から探し出せるかは、オブジェクトが残っているかどうかなどに依存します。reflogが記録するのは参照の移動です。[Gitのreflog](/tools/git-reflog.html) · [Git User Manualのdangling objects](https://git-scm.com/docs/user-manual#dangling-objects)
+この検証でHP40は作業ツリーにしかなく、対応する **blob**（保存したファイルのバイト列）はGitのオブジェクトデータベースにありませんでした。**reflog** が記録するのは参照の移動です。作業ツリーをHP30で上書きしたあと、以前のHP40をreflogから取り出すことはできません。[Gitのreflog](/tools/git-reflog.html) · [Git User Manualのdangling objects](https://git-scm.com/docs/user-manual#dangling-objects)
 
 ## reset・revertとの関係
 
 コミットを指定する `reset` は、ブランチの先端を指定のコミットへ動かし、モードによってindexや作業ツリーも更新します。パスを指定する `reset` は、`restore --staged` と同じく、指定パスのindexを更新する使い方があります。`revert` は変更を打ち消す新しいコミットを作ります。`restore` で作業ファイルやindexを更新した結果を履歴に残すときは、その結果を別にコミットします。[Git公式のreset・restore・revertの比較](https://git-scm.com/docs/git#_reset_restore_and_revert) · [Gitのreset](/tools/git-reset.html) · [Gitのrevert](/tools/git-revert.html)
+
+## 補足
+
+新しいファイルをステージしたあと、`HEAD` からそのパスのindexを復元する場合を考えます。`HEAD` にそのパスがなければindexから外れ、作業ファイルは未追跡として残ります。この削除条件は公式資料で確認しました。
+
+別の `--staged` の例では、HP30がindexから外れたあとも、`git add` で作られたblobが残りました。ステージした版を後から探し出せるかは、オブジェクトが残っているかどうかなどに依存します。
+
+## 要点
+
+- `git restore` は、指定したパスのindexや作業ツリーを更新します。HEADとブランチの先端は動きません。
+- オプション省略時はindexから作業ツリーへ写します。`--staged` を含む場合の既定の復元元はHEADです。
+- 作業ツリーへの復元で未ステージの編集が失われることがあります。作業ツリーにしかなかった内容をreflogからは取り出せません。
 
 ## 理解度チェック
 

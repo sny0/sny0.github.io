@@ -13,11 +13,21 @@ study:
 
 # Gitのreset — HEAD・index・作業ツリーはどう変わるのか
 
-敵のHPを20にしたコミットがあります。そのあとHPを30にしてステージし、作業ファイルはさらに40まで編集しました。ここで一つ前のコミットをreset先に選ぶと、soft・mixed・hardのいずれも、HP10のコミットが先端になります。次にコミットする予定の内容と、実際に編集中のファイルはモードによって変わります。[Git公式のresetマニュアル](https://git-scm.com/docs/git-reset#_description)
+敵のHPを20にしたコミットがあります。そのあとHPを30にしてステージし、作業ファイルはさらに40まで編集しました。ここで一つ前のコミットをreset先に選ぶと、soft・mixed・hardのいずれも、HP10のコミットがブランチの先端になります。次にコミットする予定の内容と、実際に編集中のファイルはモードによって変わります。hardでは編集中のHP40も上書きされます。[Git公式のresetマニュアル](https://git-scm.com/docs/git-reset#_description)
+
+## この記事で分かること
+
+soft・mixed・hardが、ブランチの先端・ステージ済みの内容・編集中のファイルのうち、どこまで指定したコミットに揃えるか説明できます。モードごとに、手元に残る編集を判断できます。
+
+**どんなときに使うか**　ブランチの先端を移すときに、編集中のファイルやステージ済みの変更をどこまで残すか決めたいときです。
 
 ## 三つの状態のうち、何を揃えるか
 
-`HEAD` は現在のコミットを特定する参照です。ブランチ上では `HEAD` はブランチを指し、ブランチがコミットを指します。そのコミットのスナップショットが、差分を測る基準になります。indexは次のコミットに使うファイルの内容を持ち、作業ツリーにはいま開いて編集しているファイルがあります。`git add` のあとに再編集すれば、この三つに同じファイルの別々の版がある状態になります。[Gitの保存モデル](/tools/git-objects.html) · [Gitのステージング](/tools/git-staging-index.html)
+- **`HEAD`** は現在のコミットを特定する参照です。ブランチ上では `HEAD` がブランチを指し、ブランチがコミットを指します。その時点のファイル一式が、差分を測る基準です。
+- **index** は次のコミットに使うファイルの内容を持ちます。
+- **作業ツリー**には、いま開いて編集しているファイルがあります。
+
+`git add` のあとに再編集すると、この三つに同じファイルの別々の版が残ります。[Gitの保存モデル](/tools/git-objects.html) · [Gitのステージング](/tools/git-staging-index.html)
 
 コミットAを指定するresetでは、モードによってAに合わせる範囲が広がります。図の矢印は更新される対象を示します。
 
@@ -39,9 +49,9 @@ flowchart TD
 
 - **`--soft`** はブランチの先端をAに移します。indexと作業ファイルには、実行前の版が残ります。
 - **`--mixed`** は先端を移し、indexをAの内容に揃えます。作業ファイルはそのままです。コミットを指定し、モードを省いた場合の既定です。
-- **`--hard`** は先端とindexをAに揃え、作業ツリーにもAの追跡ファイルを書き出します。Aにない追跡ファイルは取り除かれます。書き出しを妨げるパスでは未追跡のファイルやディレクトリも失われる場合があります。別の検証例では、同じパスにあった未追跡の `enemy.txt` が上書きされ、無関係な未追跡ファイルの `notes.txt` は残りました。[Git公式のresetマニュアル](https://git-scm.com/docs/git-reset#_description)
+- **`--hard`** は先端とindexをAに揃え、作業ツリーにもAの追跡ファイルを書き出します。Aにない追跡ファイルは取り除かれます。書き出しを妨げるパスでは未追跡のファイルやディレクトリも失われる場合があります。[Git公式のresetマニュアル](https://git-scm.com/docs/git-reset#_description)
 
-図は `main` 上での例です。ブランチ上では `HEAD` が指すブランチの先端が更新されます。detached HEADでは `HEAD` がコミットを直接指すので、その直接の参照先が変わります。[Git公式のsymbolic-refマニュアル](https://git-scm.com/docs/git-symbolic-ref#_description) · [Git公式のupdate-refマニュアル](https://git-scm.com/docs/git-update-ref#_description)
+図は `main` 上での例です。ブランチ上では `HEAD` が指すブランチの先端が更新されます。
 
 ## HPの値と差分表示で比べる
 
@@ -73,11 +83,26 @@ MM enemy.txt
 
 ## パスを指定するresetと、revertの違い
 
-`git reset -- enemy.txt` は、現在のHEADからそのファイルの内容をindexに写します。読み出し元のコミットも指定できます。別の検証例で `git reset a57b882 -- enemy.txt` を実行すると、indexはAの `hp=10` になり、HEADはB、作業ファイルは `hp=40` のままでした。パスを指定する形式では、指定したパスのindexだけを更新します。[Git公式のresetマニュアル](https://git-scm.com/docs/git-reset#_description)
+パスを指定する形式では、指定したパスのindexだけを更新します。[Git公式のresetマニュアル](https://git-scm.com/docs/git-reset#_description)
 
 AからBへ進んだ履歴でコミット指定のresetをすると、ブランチの先端をAへ動かします。Bはそのブランチの先端からたどれなくなります。Bをrevertする場合は、Bの変更を打ち消す新しいコミットをBの先に追加します。取得済みの履歴と親がつながるため、共有ブランチでBの変更を取り消すときにも使えます。[Git公式のreset・restore・revertの解説](https://git-scm.com/docs/git#_reset_restore_and_revert) · [Gitのrevert](/tools/git-revert.html)
 
-resetで先端が動いた記録は、reflogがあれば旧コミットを探す手掛かりになります。一方、作業ツリーにしかなかった `hp=40` は、先端の履歴を戻しても取り出せません。[Gitのreflog](/tools/git-reflog.html)
+**reflog** は参照がいつどこを指したかの記録です。resetで先端が動いた記録があれば、旧コミットを探す手掛かりになります。作業ツリーにしかなかった `hp=40` は、先端の履歴を戻しても取り出せません。[Gitのreflog](/tools/git-reflog.html)
+
+## 補足
+
+**detached HEAD** は、`HEAD` がブランチを介さずにコミットを直接指す状態です。この状態でコミットを指定するresetをすると、その直接の参照先が変わります。[Git公式のsymbolic-refマニュアル](https://git-scm.com/docs/git-symbolic-ref#_description) · [Git公式のupdate-refマニュアル](https://git-scm.com/docs/git-update-ref#_description)
+
+未追跡ファイルの扱いを別の例で確かめました。`--hard` で同じパスにあった未追跡の `enemy.txt` は上書きされ、無関係な未追跡ファイルの `notes.txt` は残りました。
+
+`git reset -- enemy.txt` は、現在のHEADからそのファイルの内容をindexに写します。読み出し元のコミットも指定できます。別の検証例で `git reset a57b882 -- enemy.txt` を実行すると、indexはAの `hp=10` になり、HEADはB、作業ファイルは `hp=40` のままでした。
+
+## 要点
+
+- ブランチ上でコミットを指定するresetでは、どのモードもブランチの先端を指定のコミットへ移します。
+- softは先端だけを、mixedは先端とindexを、hardは作業ツリーも揃えます。
+- hardを使うと、残したい編集や書き出しを妨げる未追跡のパスが失われる場合があります。
+- revertは、変更を打ち消す新しいコミットを作ります。
 
 ## 理解度チェック
 

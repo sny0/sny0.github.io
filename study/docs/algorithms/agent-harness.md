@@ -15,7 +15,12 @@ study:
 
 AIエージェントが「60 FPSの時間予算を計算して」と頼まれ、換算ツールを使うとします。モデルからツール名と引数が返った時点では、アプリにはまだ換算結果がありません。呼び出しを受け取り、実行してよいか判断し、結果をモデルに渡す処理が要ります。この作業を繰り返す仕組みが**エージェントの実行ループ**です。[OpenAI公式資料のFunction calling](https://developers.openai.com/api/docs/guides/function-calling#the-tool-calling-flow)
 
-この記事では、そのループと、進捗や履歴を持ちながらループを進める部分を**ハーネス**と呼びます。用語が指す範囲は実装によって変わります。たとえばセッション管理や承認待ちからの再開、他のエージェントへの引き継ぎまで含める実装もあります。[OpenAI Agents APIのArchitecture](https://developers.openai.com/api/docs/guides/agents-api/architecture) · [OpenAI Agents SDKのSandbox Agents](https://developers.openai.com/api/docs/guides/agents/sandboxes)
+この記事では、実行ループと、進み具合や履歴を管理する部分を**ハーネス**と呼びます。
+
+## この記事で分かること
+
+- モデルの提案を誰が受け取り、ツールを実行し、結果を次の入力に渡すかを説明する。
+- 実行を許可する判断、実行中の制限、ループを止める条件を区別する。
 
 ## 誰が判断し、どこで処理するか
 
@@ -26,9 +31,7 @@ AIエージェントが「60 FPSの時間予算を計算して」と頼まれ、
 | ツール | 換算、データ取得、ファイル操作など、呼び出し先で定義された処理を行う。 |
 | 実行環境・サンドボックス | 実行環境はコードやコマンドが動く場所。サンドボックスは、その処理が使えるファイルやネットワークなどを制限するための実行境界。 |
 
-履歴には、利用者の依頼、モデルの提案、どの呼び出しに対して何が返ったかなどを記録できます。状態には、残りの呼び出し回数や承認待ちなど、次の処理を決める情報も含まれます。記録した項目のうち何を次のモデル入力に使うか、どこに保存するかは実装次第です。作業ファイルの保存や復元は、会話の履歴を管理することとは別に設計します。[OpenAI Agents SDKのRunning agents](https://developers.openai.com/api/docs/guides/agents/running-agents) · [Sandbox Agents](https://developers.openai.com/api/docs/guides/agents/sandboxes)
-
-OpenAIのAgents APIでは、OpenAIが運用するCodexハーネスがモデル呼び出しとセッション管理を担います。アプリ側は仕事を渡してイベントを受け取り、自分が提供する関数ツールの処理を担当できます。コマンドや作業ファイルを扱う場合の実行環境は別の役割です。同APIでは、専用の実行環境を付けずにアプリ側の関数やリモートのMCPツールを使う構成もあります。どの要素をどこで動かすかは製品や構成によって変わります。[OpenAI Agents APIのArchitecture](https://developers.openai.com/api/docs/guides/agents-api/architecture#start-without-an-environment)
+**履歴**には、利用者の依頼、モデルの提案、どの呼び出しに何が返ったかを記録できます。**状態**には、残りの回数や承認待ちなど、次の処理を決める情報も含まれます。
 
 ## 提案から実行へ、結果から次の判断へ
 
@@ -55,11 +58,13 @@ flowchart TD
     output --> history
 ```
 
-最終回答を返すほかに、モデルの呼び出し回数の上限、利用者の中止、続行できないエラーなどでもループを止められます。承認待ちは、承認後に同じ処理を再開できるよう状態を残して保留する場合があります。停止しても、すでに完了したツールの処理は残る場合があります。再開や再試行の判断には、どの処理まで実行したかの記録が役立ちます。[OpenAI Agents SDKの停止と保留](https://developers.openai.com/api/docs/guides/agents/running-agents#handle-pauses-and-failures-deliberately) · [Agents APIのエラー回復](https://developers.openai.com/api/docs/guides/agents-api/errors#recovery)
+最終回答が返るとループは終わります。モデルを呼ぶ回数の上限、利用者の中止、続行できないエラーでも停止できます。
+
+停止しても、すでに完了したツールの処理が残る場合があります。どの処理まで実行したかを記録しておくと、再開や再試行を判断できます。[OpenAI Agents SDKの停止と保留](https://developers.openai.com/api/docs/guides/agents/running-agents#handle-pauses-and-failures-deliberately) · [Agents APIのエラー回復](https://developers.openai.com/api/docs/guides/agents-api/errors#recovery)
 
 ## ローカルでループだけを模擬する
 
-以下の `fake_model` は、履歴の最後にツール結果があれば回答し、なければ60 FPSの換算を提案する関数です。`run` が履歴を持ち、登録済みのツールだけに処理を振り分けます。WindowsのPython 3.12.4で確認した教材で、標準ライブラリを使い、モデルへの入力と出力はPythonの値に置き換えています。
+以下の `fake_model` は、履歴の最後にツール結果があれば回答し、なければ60 FPSの換算を提案する関数です。`run` は履歴を持ち、登録済みのツールだけを呼びます。この例はモデルの入出力を模擬します。
 
 ```python
 from dataclasses import dataclass
@@ -126,7 +131,7 @@ step_limit ['user', 'tool_call', 'tool', 'tool_call', 'tool'] 16.67 ms
 
 `final` の履歴は `user → tool_call → tool → assistant` です。換算結果を受け取った2回目のモデル呼び出しで「予算は 16.67 ms です。」が返ります。`unknown_tool` は登録外の名前で止まり、換算処理に入りません。`invalid_args` は登録済みの換算関数に入り、FPSを検査した時点で止まります。毎回換算を提案する最後の例では `step_limit` で停止し、履歴の最後に残る `16.67 ms` はツール結果です。上限の2回は**モデルを呼ぶ回数**で、この教材では1回の呼び出しで最大1個のツールを処理します。
 
-この教材は、不正な引数でエラーを履歴に記録しても、その場で停止する設計です。実際のアプリには、修正可能な失敗を元の呼び出しに対応するツール結果としてモデルへ返し、引数の修正や別の方法を選べるようにする設計もあります。Responses APIの場合、対応する `call_id` の `function_call_output` にエラーを示す値を含められます。[OpenAI公式資料のFormatting results](https://developers.openai.com/api/docs/guides/function-calling#formatting-results) · [Agents SDKの停止と保留](https://developers.openai.com/api/docs/guides/agents/running-agents#handle-pauses-and-failures-deliberately)
+この教材は不正な引数を受けると、エラーを履歴に記録して停止します。
 
 ## 実行を許可する判断と、実行中の制限
 
@@ -137,6 +142,33 @@ step_limit ['user', 'tool_call', 'tool', 'tool_call', 'tool'] 16.67 ms
 ## Agent SkillsとMCPは、ループのどこに関わるか
 
 Agent Skillsの手順は、たとえば「換算した時間を実測値として示さない」といった作業上の指示を、必要なときにモデルの文脈に加えられます。換算ツールがMCPサーバーにある構成なら、実行時はアプリ側のMCPクライアントが要求を送り、返された値をハーネスが次のモデル入力へつなぎます。この記事の例では、処理を同じプログラム内の関数に渡しています。[Agent Skillsの仕組み](/algorithms/agent-skills.html) · [MCPの仕組み](/algorithms/model-context-protocol.html)
+
+## 補足
+
+### 実装ごとに異なるハーネスの範囲
+
+用語が指す範囲は実装によって変わります。たとえばセッション管理や承認待ちからの再開、他のエージェントへの引き継ぎまで含める実装もあります。[OpenAI Agents APIのArchitecture](https://developers.openai.com/api/docs/guides/agents-api/architecture) · [OpenAI Agents SDKのSandbox Agents](https://developers.openai.com/api/docs/guides/agents/sandboxes)
+
+記録した項目のうち何を次のモデル入力に使うか、どこに保存するかは実装次第です。作業ファイルの保存や復元は、会話の履歴を管理することとは別に設計します。[OpenAI Agents SDKのRunning agents](https://developers.openai.com/api/docs/guides/agents/running-agents) · [Sandbox Agents](https://developers.openai.com/api/docs/guides/agents/sandboxes)
+
+OpenAIのAgents APIでは、OpenAIが運用するCodexハーネスがモデル呼び出しとセッション管理を担います。アプリ側は仕事を渡してイベントを受け取り、自分が提供する関数ツールの処理を担当できます。コマンドや作業ファイルを扱う場合の実行環境は別の役割です。同APIでは、専用の実行環境を付けずにアプリ側の関数やリモートのMCPツールを使う構成もあります。どの要素をどこで動かすかは製品や構成によって変わります。[OpenAI Agents APIのArchitecture](https://developers.openai.com/api/docs/guides/agents-api/architecture#start-without-an-environment)
+
+### 承認待ちとエラーの扱い
+
+承認待ちは、承認後に同じ処理を再開できるよう状態を残して保留する場合があります。
+
+実際のアプリには、修正可能な失敗を元の呼び出しに対応するツール結果としてモデルへ返し、引数の修正や別の方法を選べるようにする設計もあります。Responses APIの場合、対応する `call_id` の `function_call_output` にエラーを示す値を含められます。[OpenAI公式資料のFormatting results](https://developers.openai.com/api/docs/guides/function-calling#formatting-results) · [Agents SDKの停止と保留](https://developers.openai.com/api/docs/guides/agents/running-agents#handle-pauses-and-failures-deliberately)
+
+### 教材の実行環境
+
+WindowsのPython 3.12.4で確認した教材で、標準ライブラリを使い、モデルへの入力と出力はPythonの値に置き換えています。
+
+## 要点
+
+- モデルは回答やツール呼び出しを提案し、ハーネスは状態と履歴を使って次の処理を決める。
+- 許可されたツールの結果を呼び出しに対応づけ、次のモデル入力に渡す。
+- 最終回答のほか、回数上限、中止、続行できないエラーでもループは止まる。
+- ハーネスはツールを実行してよいかを判断し、サンドボックスは処理が使えるファイルや通信を制限する。
 
 ## 理解度チェック
 

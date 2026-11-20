@@ -15,11 +15,16 @@ study:
 
 ゲームの「目標60 FPSに対する1フレームの予算」を答えるとき、計算式のほかに、丸め方や実測値との区別も毎回そろえたいとします。**Agent Skills**は、このような繰り返し使う手順と資料をディレクトリにまとめるための共通形式です。エージェントはどんな作業に使えるかを先に知り、該当する作業で手順を読みます。[Agent Skills公式のOverview](https://agentskills.io/home)
 
+## この記事で分かること
+
+- `SKILL.md` の名前と説明で候補を見つけ、本文・資料・コードを使う順序を説明する。
+- Skillの手順、MCPの通信、ツールを実行できる条件を区別する。
+
 ## 名前と説明で見つけ、本文と資料を順に使う
 
-Skillの入口は `SKILL.md` です。先頭にYAMLのメタデータ（frontmatter）があり、そのあとにMarkdownの手順が続きます。共通仕様で必須の項目は `name` と `description` です。`description` は1〜1024文字で、何をするSkillか、どの場面で使うかを書きます。`references/`、`scripts/`、`assets/` は用途に応じて資料、コード、テンプレートなどをまとめるための任意の構成です。[Agent Skills公式仕様](https://agentskills.io/specification)
+Skillの入口は `SKILL.md` です。先頭の**メタデータ**は、名前や説明を記録する欄で、YAML形式で書きます。この欄をfrontmatterと呼びます。そのあとにMarkdownで手順を書きます。
 
-`name` は1〜64文字で親ディレクトリ名と一致させます。共通仕様はUnicodeの小文字の英数字とハイフンを指定し、`a-z` と `0-9` を例示しています。先頭・末尾のハイフンと連続する `--` は使えません。参照バリデーターはUnicodeの英数字を判定します。対応する文字や予約名は製品でも確認します。たとえばClaude Platformでは `anthropic` と `claude` が予約語です。[Agent Skills公式仕様のname](https://agentskills.io/specification#name-field) · [参照バリデーター](https://github.com/agentskills/agentskills/blob/main/skills-ref/src/skills_ref/validator.py) · [Claude PlatformのSkill構成](https://platform.claude.com/docs/en/agents-and-tools/agent-skills/overview#skill-structure)
+共通仕様で必須の項目は `name`（名前）と `description`（何をするSkillか、どの場面で使うかの説明）です。`references/`、`scripts/`、`assets/` は用途に応じて資料、コード、テンプレートなどをまとめるための任意の構成です。[Agent Skills公式仕様](https://agentskills.io/specification)
 
 ```mermaid
 ---
@@ -38,7 +43,9 @@ flowchart TD
     runner --> resultText["計算結果"]
 ```
 
-この**段階的開示（progressive disclosure）**では、候補を探す段階では名前と説明を提示し、採用した時点で `SKILL.md` の本文を読み込み、作業で必要になった時点で参照資料やコードを使います。詳しい資料を別ファイルに置くと、候補を並べる段階でその全文をモデルへ渡さずに済みます。発見のためにアプリがファイルを開くことと、その内容をモデルへの入力に含めることは別の処理です。一覧の作り方や、利用者が明示して選ぶ方法には製品差があります。[Agent Skills公式仕様のProgressive disclosure](https://agentskills.io/specification#progressive-disclosure) · [クライアント実装ガイド](https://agentskills.io/client-implementation/adding-skills-support)
+名前と説明を見て作業に合うSkillを選び、選んだ時点で `SKILL.md` の本文を読みます。参照資料やコードは、作業で必要になった時点で使います。この順序を**段階的開示**（progressive disclosure）と呼びます。
+
+詳しい資料を別ファイルに置けば、候補を一覧にする段階でその全文をモデルへ渡さずに済みます。候補を見つけるためにアプリがファイルを開くことと、ファイルの内容をモデルへ渡すことは別の処理です。[Agent Skills公式仕様のProgressive disclosure](https://agentskills.io/specification#progressive-disclosure) · [クライアント実装ガイド](https://agentskills.io/client-implementation/adding-skills-support)
 
 ## ゲームのフレーム時間を扱う小さな例
 
@@ -92,12 +99,6 @@ print(f"{1000 / fps:.2f} ms")
 
 参照資料を読むと、その内容をモデルへの入力に使えます。スクリプトを呼ぶ場合は、実行環境がコードを処理し、アプリがその出力をモデルに渡せます。たとえば正常な実行の出力は `16.67 ms` です。本文だけで説明できる作業もあり、スクリプトは必要な計算や変換を再現できる形にしたいときに添えます。[Claude公式文書のResources and code](https://platform.claude.com/docs/en/agents-and-tools/agent-skills/overview#level-3-resources-and-code-loaded-as-needed)
 
-## 共通のファイル形式と、製品ごとの呼び出し方
-
-共通仕様はファイル形式と段階的な読み込みの考え方を定めます。アプリがどこからSkillを見つけるか、どのUIで選ぶか、どこでコードを実行するかは製品側の設計です。たとえばClaude Codeは関連するSkillを選べるほか、利用者が `/skill-name` で明示して呼び出せます。`disable-model-invocation` は、その製品の自動選択を制御する拡張です。ClaudeのMessages APIでは、要求にSkillを指定し、コード実行のコンテナを使います。同じ形式を採用していても、入口や実行環境の違いは残ります。[Claude Code公式文書](https://code.claude.com/docs/en/skills#control-who-invokes-a-skill) · [Claude Platform公式文書](https://platform.claude.com/docs/en/agents-and-tools/agent-skills/overview)
-
-用途の近いSkillが候補に並ぶと、自動選択は名前と説明、依頼の文脈、製品の選択方法に左右され、利用者の意図とずれることがあります。使いたいSkillが決まっていれば、対応する製品では明示的に指定できます。たとえばClaude Codeではコマンドで呼び出せます。Responses APIのシェルツールでは、候補のSkill名をプロンプトで指定する方法が案内されています。同名の候補をどう表示し、どちらを選べるかは製品と読み込み元によって変わります。[Agent Skillsのクライアント実装ガイド](https://agentskills.io/client-implementation/adding-skills-support#handling-name-collisions) · [Claude Codeの同名Skillの扱い](https://code.claude.com/docs/en/skills#resolve-skills-that-share-a-name) · [OpenAI公式資料のSkills in the user prompt](https://developers.openai.com/api/docs/guides/tools-skills#skills-in-the-user-prompt)
-
 ## 学習・Skill・MCP・実行が担うもの
 
 | 仕組み | 担うもの |
@@ -111,9 +112,34 @@ Skillを読み込むと、モデルに渡す文脈が変わります。[LLMの�
 
 ## 指示を採用する判断と、実行を許可する判断
 
-本文に「スクリプトを実行する」と書くのは作業の指示です。その処理が使えるかは、アプリのツール設定、実行環境の権限、利用者や組織の許可に従います。共通仕様には、事前許可するツールを挙げる実験的な `allowed-tools` もあります。対応や効果は製品によって変わります。たとえばClaude Codeでは管理設定などに従い、Skillを呼び出したターンで指定ツールを事前許可できます。[Agent Skills公式仕様のallowed-tools](https://agentskills.io/specification#allowed-tools-field) · [Claude Codeのツール事前許可](https://code.claude.com/docs/en/skills#pre-approve-tools-for-a-skill)
+本文に「スクリプトを実行する」と書くのは作業の指示です。その処理が使えるかは、アプリのツール設定、実行環境の権限、利用者や組織の許可に従います。
 
 Skillの名前と説明は用途を見つける手掛かりです。内容の信頼性は、配布元、本文と参照資料、スクリプトが触れるファイルやネットワーク、実際の出力を見て判断します。たとえば換算式が合っていても、資料に古い前提があったり、結果をモデルが測定値として説明してしまったりすることがあります。教材で値を確認したように、使う場面でも資料の前提と出力の両方が検証対象になります。[クライアント実装ガイドのTrust considerations](https://agentskills.io/client-implementation/adding-skills-support#trust-considerations) · [Claude PlatformのSecurity considerations](https://platform.claude.com/docs/en/agents-and-tools/agent-skills/overview#security-considerations)
+
+## 補足
+
+### `name` と `description` の条件
+
+`description` は1〜1024文字で、何をするSkillか、どの場面で使うかを書きます。 `name` は1〜64文字で親ディレクトリ名と一致させます。共通仕様はUnicodeの小文字の英数字とハイフンを指定し、`a-z` と `0-9` を例示しています。先頭・末尾のハイフンと連続する `--` は使えません。参照バリデーターはUnicodeの英数字を判定します。対応する文字や予約名は製品でも確認します。たとえばClaude Platformでは `anthropic` と `claude` が予約語です。[Agent Skills公式仕様のname](https://agentskills.io/specification#name-field) · [参照バリデーター](https://github.com/agentskills/agentskills/blob/main/skills-ref/src/skills_ref/validator.py) · [Claude PlatformのSkill構成](https://platform.claude.com/docs/en/agents-and-tools/agent-skills/overview#skill-structure)
+
+### 共通のファイル形式と、製品ごとの呼び出し方
+
+一覧の作り方や、利用者が明示して選ぶ方法には製品差があります。
+
+共通仕様はファイル形式と段階的な読み込みの考え方を定めます。アプリがどこからSkillを見つけるか、どのUIで選ぶか、どこでコードを実行するかは製品側の設計です。たとえばClaude Codeは関連するSkillを選べるほか、利用者が `/skill-name` で明示して呼び出せます。`disable-model-invocation` は、その製品の自動選択を制御する拡張です。ClaudeのMessages APIでは、要求にSkillを指定し、コード実行のコンテナを使います。同じ形式を採用していても、入口や実行環境の違いは残ります。[Claude Code公式文書](https://code.claude.com/docs/en/skills#control-who-invokes-a-skill) · [Claude Platform公式文書](https://platform.claude.com/docs/en/agents-and-tools/agent-skills/overview)
+
+用途の近いSkillが候補に並ぶと、自動選択は名前と説明、依頼の文脈、製品の選択方法に左右され、利用者の意図とずれることがあります。使いたいSkillが決まっていれば、対応する製品では明示的に指定できます。たとえばClaude Codeではコマンドで呼び出せます。Responses APIのシェルツールでは、候補のSkill名をプロンプトで指定する方法が案内されています。同名の候補をどう表示し、どちらを選べるかは製品と読み込み元によって変わります。[Agent Skillsのクライアント実装ガイド](https://agentskills.io/client-implementation/adding-skills-support#handling-name-collisions) · [Claude Codeの同名Skillの扱い](https://code.claude.com/docs/en/skills#resolve-skills-that-share-a-name) · [OpenAI公式資料のSkills in the user prompt](https://developers.openai.com/api/docs/guides/tools-skills#skills-in-the-user-prompt)
+
+### 対応製品でツールを事前許可する
+
+共通仕様には、事前許可するツールを挙げる実験的な `allowed-tools` もあります。対応や効果は製品によって変わります。たとえばClaude Codeでは管理設定などに従い、Skillを呼び出したターンで指定ツールを事前許可できます。[Agent Skills公式仕様のallowed-tools](https://agentskills.io/specification#allowed-tools-field) · [Claude Codeのツール事前許可](https://code.claude.com/docs/en/skills#pre-approve-tools-for-a-skill)
+
+## 要点
+
+- 名前と説明は発見に使い、選んだSkillの本文を読み、必要に応じて資料やコードを使う。
+- Skillの読み込みは、その回にモデルへ渡す情報を変える。
+- Skillの指示を使うには、アプリからツールを使えて、処理が許可されている必要がある。
+- MCPは外部の機能へ要求を送り、結果を受け取るやり取りをそろえる。
 
 ## 理解度チェック
 

@@ -15,6 +15,12 @@ study:
 
 ゲームの `stage.txt` を更新する間に、別のブランチで敵のHPと出現数を変更したとします。これらの変更はmergeでもrebaseでも取り込めます。この例では、出来上がるファイルは同じでも、どのコミットを親としてたどれるかが変わります。[Pro Gitのrebaseの解説](https://git-scm.com/book/en/v2/Git-Branching-Rebasing#_rebasing)
 
+## この記事で分かること
+
+rebaseが変更を新しい先端の上に作り直す流れを説明できます。mergeと同じファイルになっても履歴が異なる理由と、共有済みの作業に及ぶ影響を判断できます。
+
+**どんなときに使うか**　作業ブランチで加えた変更を、更新された `main` の上に載せ直したいときに使います。
+
 ## rebaseは新しい基準の上で変更を再適用する
 
 共通のコミットBから、`main` ではUでゲーム内のステージ番号を `2` に変えました。`topic` ではT1で敵のHPを `20` に変え、T2で出現数 `3` の `spawn.txt` を追加しました。図の矢印は親から子へ向いています。mergeとrebaseは元の分岐から別々に実行した結果です。
@@ -30,13 +36,13 @@ flowchart TD
     upstream --> r1["T1′ HP変更"] --> r2["T2′ 出現数追加"]
 ```
 
-Bは分岐をたどった先で共通になる**マージベース**で、Uは今回のrebaseで選んだ**載せ替え先**です。`rebased` にいる状態で `git rebase --merge main` とすると、`main` の先端Uの上へ `rebased` 側の変更を載せ替えます。`--onto` を使う形式では、再適用する範囲を選ぶ上流の参照と、載せ替え先を別々に指定できます。[Git 2.39のrebaseマニュアル](https://git-scm.com/docs/git-rebase/2.39.0#_description)
+Bは分岐をたどった先で共通になる**マージベース**です。Uは、変更を適用し直す土台に選んだ**載せ替え先**です。`rebased` にいる状態で `git rebase --merge main` とすると、`main` の先端Uの上へ `rebased` 側の変更を載せ替えます。[Git 2.39のrebaseマニュアル](https://git-scm.com/docs/git-rebase/2.39.0#_description)
 
 mergeではUとT2の変更を統合し、二つを親とするMを作ります。rebaseではT1の変更をUの状態に再適用してT1′を作り、続いてT2の変更をT1′の状態に再適用してT2′を作ります。検証では、Uから作った `merged` をmergeで、T2から作った `rebased` をrebaseで更新しました。[Gitの3-way merge](/tools/git-three-way-merge.html) · [Git 2.39のrebaseマニュアル](https://git-scm.com/docs/git-rebase/2.39.0#_description)
 
 ## 新しい親によってコミットIDが変わる
 
-コミットオブジェクトには、スナップショットを指すルートtreeと親コミットのIDの両方があります。元のT1の親はBですが、T1′の親はUです。変更の意図やメッセージが同じでも、親のIDが変わるとコミットオブジェクトの内容が変わります。その内容に基づいてIDを計算するため、この例ではT1′に別のIDが付き、T2′も新しい親T1′を参照します。[Gitの保存モデル](/tools/git-objects.html) · [Pro Gitのコミットオブジェクト](https://git-scm.com/book/en/v2/Git-Internals-Git-Objects#_git_commit_objects)
+コミットオブジェクトには、保存時点のファイル構成を表すルートtreeと親コミットのIDが入ります。元のT1の親はB、T1′の親はUです。変更の意図やメッセージが同じでも、親のIDが変わるとコミットの内容が変わります。その内容に基づいてIDを計算するため、この例ではT1′に別のIDが付きます。T2′も新しい親T1′を参照します。[Gitの保存モデル](/tools/git-objects.html) · [Pro Gitのコミットオブジェクト](https://git-scm.com/book/en/v2/Git-Internals-Git-Objects#_git_commit_objects)
 
 次は元のT1（`topic~1`）、再適用したT1′（`rebased~1`）、再適用後の先端T2′（`rebased`）、マージ結果M（`merged`）の順に並べた実測結果です。各行はコミットID、親のID、ルートtreeのIDの順です。Mの行には親が二つあるので、IDが一つ多く並びます。
 
@@ -52,7 +58,7 @@ $ git show --no-patch '--format=%h %p %t' 'topic~1' 'rebased~1' rebased merged
 
 独立した検証リポジトリでは、MとT2′のファイルはどちらも `stage.txt` が `stage=2`、`enemy.txt` が `hp=20`、`spawn.txt` が `count=3` でした。ルートtreeのIDも一致し、二つのコミットを比較する `git diff` には差分がありませんでした。Mの親はUとT2、T2′の親はT1′です。tree IDがそろっても、コミットの親と履歴は別々に確認できます。[Gitの `git diff` マニュアル](https://git-scm.com/docs/git-diff#_description) · [Pro Gitのrebaseの解説](https://git-scm.com/book/en/v2/Git-Branching-Rebasing#_rebasing)
 
-ここでは、互いに別のファイルへの単純な変更を使っています。変更が重なると、rebaseは途中のコミットを再適用する時点で止まることがあります。上流との重複や再適用後に空になる変更の扱いも、rebaseのオプションなどによって変わります。[Git 2.39のrebaseマニュアル](https://git-scm.com/docs/git-rebase/2.39.0#_options)
+この例は、互いに別のファイルへの単純な変更を使っています。
 
 ## 共有済みの履歴に積んだ作業はどこに残るか
 
@@ -67,6 +73,22 @@ flowchart TD
 ```
 
 検証では共有をローカルの別ブランチで再現しました。T2はCの祖先ですが、T2′の祖先には含まれず、CとT2′のマージベースはBでした。古い系列をそのまま新しい系列へマージすると、再適用前と再適用後の両方のコミットが履歴に入る場合があります。共有済みの先端を置き換えるときは、その上に積まれた作業の扱いを共同作業者とそろえる必要があります。[Pro Gitの共有済み履歴のrebase](https://git-scm.com/book/en/v2/Git-Branching-Rebasing#_rebase_peril) · [Gitの上流rebase後の復旧に関する解説](https://git-scm.com/docs/git-rebase/2.39.0#_recovering_from_upstream_rebase)
+
+## 補足
+
+### 範囲と載せ替え先の指定
+
+`--onto` を使う形式では、再適用する範囲を選ぶ上流の参照と、載せ替え先を別々に指定できます。
+
+### 再適用が止まる場合
+
+変更が重なると、rebaseは途中のコミットを再適用する時点で止まることがあります。上流との重複や再適用後に空になる変更の扱いも、rebaseのオプションなどによって変わります。[Git 2.39のrebaseマニュアル](https://git-scm.com/docs/git-rebase/2.39.0#_options)
+
+## 要点
+
+- rebaseは、選んだ範囲の変更を載せ替え先の上に順に適用し直します。
+- 新しい親を持つコミットには、この例のように別のIDが付きます。mergeと最終ファイルが同じでも、親をたどる履歴は違います。
+- 共有先を更新しても、同僚が旧先端に積んだコミットの親は変わりません。先端を置き換える前に、その作業の扱いをそろえます。
 
 ## 理解度チェック
 

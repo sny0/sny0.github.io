@@ -15,9 +15,15 @@ study:
 
 同僚が共有先にステージの変更をpushしたとします。手元で `git status` を見ると、ステージの変更をまだ取り込んでいないのに、`behind` は表示されません。この例で `git status` が比較するのは、手元の `main` と、共有先の先端を最後に記録した手元の `origin/main` です。その記録が更新されると、作業ファイルの内容が同じでも進み・遅れの表示が変わります。[Pro GitのRemote Branches](https://git-scm.com/book/en/v2/Git-Branching-Remote-Branches)
 
+## この記事で分かること
+
+手元の `main`、手元に保存した `origin/main`、共有先の `main` の違いを説明できます。`fetch` 前後で何が変わり、進み・遅れの表示がいつ変わるかを判断できます。
+
+**どんなときに使うか**　同僚がpushしたあと、手元の作業を動かさずに共有先の変更を確認したいときに役立ちます。
+
 ## 二つのリポジトリに三つの参照がある
 
-`origin` は手元のGitに登録した接続先の名前です。通常のcloneが付ける名前で、別の名前にもできます。次の三つの参照は別々の操作で更新されます。[Gitの保存モデル](/tools/git-objects.html) · [Git公式の用語集](https://git-scm.com/docs/gitglossary#def_remote_tracking_branch)
+`origin` は手元のGitに登録した接続先の名前です。通常のcloneが付ける名前で、別の名前にもできます。ここで扱う参照は、どのコミットを指すかを記録する名前です。次の三つの参照は別々の操作で更新されます。[Gitの保存モデル](/tools/git-objects.html) · [Git公式の用語集](https://git-scm.com/docs/gitglossary#def_remote_tracking_branch)
 
 - **手元の `main`** (`refs/heads/main`) は、自分の作業ブランチの先端です。`main` 上でコミットすると、この参照が進みます。
 - **手元の `origin/main`** (`refs/remotes/origin/main`) は、接続先 `origin` の `main` がどこを指していたかを手元に記録するリモート追跡ブランチです。
@@ -46,9 +52,7 @@ flowchart TD
     b -->|親| a
 ```
 
-この例の `git fetch origin` は、共有先のBを読むために必要なオブジェクトを取得し、手元の `origin/main` をBへ更新します。手元の `main` はCのままです。GitはBの設定を `origin/main:stage.txt` として読めますが、作業ツリーの `stage.txt` は `stage=1` のままです。indexにもBの変更は入りません。[Git公式のfetchマニュアル](https://git-scm.com/docs/git-fetch#_description) · [Gitのステージング](/tools/git-staging-index.html)
-
-全ブランチを対象とする通常のcloneでは `remote.origin.fetch` に `+refs/heads/*:refs/remotes/origin/*` が設定されます。コロンの左が共有先から取得する参照の範囲で、右が手元で更新する参照の場所です。この対応なら共有先の `refs/heads/main` の値が、手元の `refs/remotes/origin/main` に記録されます。実際に取得・更新される参照は設定やfetchの引数で変わります。[Git公式のfetchの参照対応](https://git-scm.com/docs/git-fetch#CRTB)
+この例の `git fetch origin` は、共有先のBを読むために必要なオブジェクトを取得し、手元の `origin/main` をBへ更新します。手元の `main` はCのままです。Bの設定は `origin/main:stage.txt` で読めます。作業ツリー（手元の編集用ファイル）にある `stage.txt` は `stage=1` のままです。index（次のコミットに入れる内容を用意する場所）にもBの変更は入りません。[Git公式のfetchマニュアル](https://git-scm.com/docs/git-fetch#_description) · [Gitのステージング](/tools/git-staging-index.html)
 
 ## ahead/behindは二つの手元の履歴を数える
 
@@ -84,7 +88,21 @@ stage=2
 
 ## 取得と統合は別の操作
 
-Bを作業ブランチに取り込むには、取得したコミットを統合する操作が続きます。fast-forwardで先端をCからBへ移すには、BがCの子孫であることが条件です。この例のBとCはAから分岐しています。mergeなら二つの先端を親とする結果を作る方法があり、rebaseならCの変更をBの上に再適用する方法があります。`git pull` はfetchの後に統合を試みます。統合方法や、分岐したときに停止するかは設定やオプションで決まります。[Git公式のpullマニュアル](https://git-scm.com/docs/git-pull#_description) · [Gitのマージ](/tools/git-three-way-merge.html) · [Gitのrebase](/tools/git-rebase.html)
+Bを作業ブランチに取り込むには、取得後に統合します。**fast-forward** は、新しいマージコミットを作らずにブランチの先端を進めることです。CからBへ進めるには、BがCの子孫である必要があります。この例のBとCはAから分岐しています。mergeなら二つの先端を親とする結果を作る方法があり、rebaseならCの変更をBの上に再適用する方法があります。[Gitのマージ](/tools/git-three-way-merge.html) · [Gitのrebase](/tools/git-rebase.html)
+
+`git pull` はfetchの後に統合を試みます。統合方法や、分岐したときに停止するかは設定やオプションで決まります。[Git公式のpullマニュアル](https://git-scm.com/docs/git-pull#_description)
+
+## 補足
+
+### fetchで更新する参照の設定
+
+全ブランチを対象とする通常のcloneでは `remote.origin.fetch` に `+refs/heads/*:refs/remotes/origin/*` が設定されます。コロンの左が共有先から取得する参照の範囲で、右が手元で更新する参照の場所です。この対応なら共有先の `refs/heads/main` の値が、手元の `refs/remotes/origin/main` に記録されます。実際に取得・更新される参照は設定やfetchの引数で変わります。[Git公式のfetchの参照対応](https://git-scm.com/docs/git-fetch#CRTB)
+
+## 要点
+
+- 手元の `main` と `origin/main`、共有先の `main` は、それぞれが先端を指します。
+- この例のfetchは `origin/main` を更新します。取得した変更を手元の作業ブランチへ取り込むには統合が必要です。
+- ahead/behindは手元にある二つの参照を使います。共有先の最新の状態を示すには、その状態を手元へ取得する必要があります。
 
 ## 理解度チェック
 

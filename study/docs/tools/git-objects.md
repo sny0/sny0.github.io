@@ -15,6 +15,12 @@ study:
 
 `note.txt` の1行だけを変えてコミットし、`git diff 'HEAD^' HEAD` で前後を比べると、`note.txt` の変更が表示されます。そのコミットを指定すれば、変更していない `keep.txt` も取り出せます。Gitが各コミットに結び付けるのは、追跡対象のファイルがその時点でどう並び、どんな内容だったかというスナップショットです。変更が少ないときは、複数のスナップショットで同じオブジェクトを参照できます。[Pro GitのGitオブジェクト解説](https://git-scm.com/book/en/v2/Git-Internals-Git-Objects)
 
+## この記事で分かること
+
+ファイルの内容・名前・履歴をGitが何に記録し、HEADからどうたどるか説明できます。コミットのスナップショットと、差分表示やpack（保存・転送の形式）を区別できます。
+
+**どんなときに使うか**　コミットから変更していないファイルも取り出せる理由や、コミットIDが何を指すかを知りたいときです。
+
 ## 内容・名前・履歴はどこにあるか
 
 | オブジェクト | 何を持つか |
@@ -77,9 +83,9 @@ new
 
 ## HEADとブランチは履歴のどこを指すか
 
-通常の状態では `HEAD` が現在のブランチ参照を指し、ブランチ参照がコミットを指します。例では `git symbolic-ref HEAD` の結果が `refs/heads/main` で、`git rev-parse refs/heads/main` の結果が図のコミット2を表す `e5b25d89…` です。`main` 上で新しいコミットを作ると `main` の参照先が進みます。コミット1は引き続きコミット2の親からたどれます。detached HEADでは、`HEAD` がブランチ名を介さずにコミットを直接指します。[Pro GitのGitの参照](https://git-scm.com/book/en/v2/Git-Internals-Git-References) · [git-symbolic-ref](https://git-scm.com/docs/git-symbolic-ref)
+通常の状態では `HEAD` が現在のブランチ参照を指し、ブランチ参照がコミットを指します。例では `git symbolic-ref HEAD` が `refs/heads/main` を返します。`git rev-parse refs/heads/main` の結果は、図のコミット2を表す `e5b25d89…` です。
 
-図は参照の論理的な関係です。Gitの対応版では、`files` 形式は個別の参照ファイルや `packed-refs` を使い、`reftable` 形式は別の保存方式を使います。オブジェクトIDもリポジトリの形式に依存し、今回の例はSHA-1です。対応するGitではSHA-256形式も選べます。IDを読むときは桁数を決め打ちせず、`git rev-parse --show-object-format` で形式を確認できます。[git-init](https://git-scm.com/docs/git-init) · [git-rev-parse](https://git-scm.com/docs/git-rev-parse)
+`main` 上で新しいコミットを作ると `main` の参照先が進みます。コミット1は引き続きコミット2の親からたどれます。[Pro GitのGitの参照](https://git-scm.com/book/en/v2/Git-Internals-Git-References) · [git-symbolic-ref](https://git-scm.com/docs/git-symbolic-ref)
 
 ## スナップショット、差分表示、packは何が違うか
 
@@ -87,7 +93,24 @@ new
 
 一方、packはオブジェクトをまとめて保存・転送する形式です。オブジェクトを圧縮して収めるほか、似たオブジェクトを基底にして、そこから本体を復元するための**デルタ**を収める場合があります。基底の選び方は履歴の親子関係とは別で、画面に出る `git diff` のテキストとも別です。packから取り出した型と本体は、元の論理オブジェクトに戻ります。[Gitのpack形式仕様](https://git-scm.com/docs/gitformat-pack) · [Pro GitのPackfiles](https://git-scm.com/book/en/v2/Git-Internals-Packfiles)
 
+## 補足
+
+### 参照やIDの保存形式
+
+図は参照の論理的な関係です。**detached HEAD** は、`HEAD` がブランチ名を介さずにコミットを直接指す状態です。Gitの対応版では、`files` 形式は個別の参照ファイルや `packed-refs` を使い、`reftable` 形式は別の保存方式を使います。
+
+オブジェクトIDはリポジトリの形式に依存します。今回の例はSHA-1です。対応するGitではSHA-256形式も選べます。IDを読むときは桁数を決め打ちせず、`git rev-parse --show-object-format` で形式を確認できます。[git-init](https://git-scm.com/docs/git-init) · [git-rev-parse](https://git-scm.com/docs/git-rev-parse)
+
+### 7オブジェクトをpack化した結果
+
 検証用リポジトリをpack化すると、個別に保存されていた7オブジェクトが1つのpackに入りました。この小さな例では7個ともデルタを使わず、pack化する前後で、上のIDや `ls-tree`、blobの内容、`git diff` の出力は同じでした。packに入っていることと、デルタ表現で入っていることは区別できます。
+
+## 要点
+
+- blobは内容、treeは名前と参照先、commitはルートtreeと親を持ちます。
+- ブランチ上ではHEADからブランチ参照と現在のコミットをたどれます。
+- 内容が同じファイルは、別のtreeから同じblobを参照できます。
+- `git diff` はスナップショットを比較し、packはオブジェクトを保存・転送するためにまとめます。
 
 ## 理解度チェック
 

@@ -13,13 +13,17 @@ study:
 
 # TransformerとAttention — 埋め込み・位置情報・Q/K/Vで文脈を計算する
 
-LLMの生成では、すでにあるトークン列を条件にして次のトークンの確率を求めます。Transformerのself-attention（自己注意）は、その途中で各位置の表現に、列内のほかの位置の情報を取り込む計算です。ここでは、生成用のdecoderで使う因果的なself-attentionを、小さな数値例で追います。[LLMの文章生成](/algorithms/llm-text-generation.html) · [Transformer原論文 §3](https://arxiv.org/html/1706.03762v7#S3)
+LLMの生成では、すでにあるトークン列を条件にして次のトークンの確率を求めます。Transformerのself-attention（自己注意）は、その途中で各位置の表現に、列内のほかの位置の情報を取り込む計算です。ここでは、生成用のdecoder（続きを作る部分）で使う因果的なself-attention（後の位置を参照しない自己注意）を、小さな数値例で追います。[LLMの文章生成](/algorithms/llm-text-generation.html) · [Transformer原論文 §3](https://arxiv.org/html/1706.03762v7#S3)
+
+## この記事で分かること
+
+位置情報がトークンの表現に加わる理由と、自己注意がQ・K・Vを使って参照先の情報を混ぜる流れを説明できます。因果マスクをかけたとき、各位置がどこを見られるか判断できます。
 
 ## トークンIDから、位置ごとの数値ベクトルへ
 
 トークンIDは語彙中の識別子です。埋め込み（embedding）では、IDに対応する学習済みの数値ベクトルを表から読み出します。同じIDには同じ表の行が対応しますが、その後の層で計算される表現は、位置や周囲の入力によって変わります。[Transformer原論文 §3.4](https://arxiv.org/html/1706.03762v7#S3.SS4)
 
-原論文のTransformerは、埋め込みを $\sqrt{d_{\mathrm{model}}}$ 倍してから位置ベクトルを加えます。位置表現にはsinとcosを使い、学習する位置埋め込みとも比較しています。位置情報は、列のどこにある入力かを計算へ渡すためのものです。位置の渡し方はモデルによって変わります。[Transformer原論文 §3.5](https://arxiv.org/html/1706.03762v7#S3.SS5)
+位置情報は、列のどこにある入力かを計算へ渡すためのものです。
 
 この教材では、加算直前の埋め込み $E$ と位置ベクトル $P$ を手で決めます。3トークンの列をA、B、Aとし、位置は0始まりで数えます。1行が1位置を表す行列として $X=E+P$ を計算します。実際のモデルの語彙や重みを測った数値ではありません。
 
@@ -37,13 +41,11 @@ $$
 
 ## Q・Kで参照の重みを求め、Vを混ぜる
 
-自己注意では、出力を求める位置の **Query（Q）** を参照先の **Key（K）** と比較し、参照先から受け取る **Value（V）** の混ぜ方を決めます。固定重みで推論するときは、学習済みの射影行列 $W_Q,W_K,W_V$ を入力の行列 $X$ に掛け、各位置のQ・K・Vを作ります。[Transformer原論文 §3.2.2](https://arxiv.org/html/1706.03762v7#S3.SS2.SSS2)
+自己注意では、出力を求める位置の **Query（Q）** を参照先の **Key（K）** と比較し、参照先から受け取る **Value（V）** の混ぜ方を決めます。固定重みで推論するときは、学習済みの射影行列 $W_Q,W_K,W_V$ を入力の行列 $X$ に掛け、その行列積で各位置のQ・K・Vへ変換します。[Transformer原論文 §3.2.2](https://arxiv.org/html/1706.03762v7#S3.SS2.SSS2)
 
 $$
 Q=XW_Q,\qquad K=XW_K,\qquad V=XW_V
 $$
-
-たとえばRoPEは、QとKに位置に応じた回転を適用して位置情報を計算に取り込みます。[RoFormer原論文](https://arxiv.org/abs/2104.09864)
 
 ```mermaid
 ---
@@ -69,7 +71,7 @@ flowchart TD
     mix --> out["位置ごとの新しい表現 O"]
 ```
 
-QとKの1行の次元を $d_k$ とすると、scaled dot-product attentionは次の式です。$M$ は見せない位置を除くためのマスクです。softmaxは**参照位置に沿って各行を正規化**します。[Transformer原論文 §3.2.1・§3.2.3](https://arxiv.org/html/1706.03762v7#S3.SS2.SSS1)
+QとKの1行の次元を $d_k$ とすると、scaled dot-product attentionは次の式です。$M$ は見せない位置を除くためのマスクです。**softmax** は、スコアの指数を求めて合計で割る計算です。この式では参照位置の方向に適用します。[Transformer原論文 §3.2.1・§3.2.3](https://arxiv.org/html/1706.03762v7#S3.SS2.SSS1)
 
 $$
 A=\operatorname{softmax}_{\mathrm{row}}\left(\frac{QK^T}{\sqrt{d_k}}+M\right)
@@ -130,7 +132,7 @@ Attention係数の0.669762は、位置1のValueを混ぜる重みです。ここ
 
 ## 掲載例をローカルで計算する
 
-次は1ヘッドの位置1だけを出力する例です。Python 3.12.4の標準ライブラリで検証しました。`position` は0始まりです。重みと入力はすべて教材用の固定値です。PyTorch 2.15の公式資料では、ドロップアウトを無効にした場合の行列積・マスク・softmax・Vの重み付き和の順序を確認できます。[PyTorch 2.15のscaled dot-product attention](https://docs.pytorch.org/docs/2.15/generated/torch.nn.functional.scaled_dot_product_attention.html)
+次は1ヘッドの位置1だけを出力する例です。Python 3.12.4の標準ライブラリで検証しました。`position` は0始まりです。重みと入力はすべて教材用の固定値です。
 
 ```python
 import math
@@ -184,9 +186,24 @@ output 2.339523 0.660477
 
 ## Attentionの出力から、次の層と語彙の確率へ
 
-multi-head attentionは、異なる射影行列で複数のヘッドを計算し、出力を連結してさらに射影します。原論文のブロックには、残差接続、Layer Normalization、各位置に同じ関数を使うFFN（Feed-Forward Network）もあります。FFNは、attentionで混ぜたあとの各位置の特徴を変換します。これらを層として重ね、最終的な位置の表現を語彙へのスコアとsoftmaxにつなげます。[Transformer原論文 §3.1〜§3.4](https://arxiv.org/html/1706.03762v7#S3)
+**multi-head attention** では、異なる射影行列を使う複数の計算経路（ヘッド）の出力をつなぎ、さらに射影します。原論文のブロックには、入力を計算結果に足す残差接続、値を正規化するLayer Normalization、各位置に同じ関数を使うFFN（Feed-Forward Network）もあります。FFNは、attentionで混ぜたあとの各位置の特徴を変換します。これらを層として重ね、最終的な位置の表現を語彙へのスコアとsoftmaxにつなげます。[Transformer原論文 §3.1〜§3.4](https://arxiv.org/html/1706.03762v7#S3)
+
+## 補足
+
+原論文のTransformerは、埋め込みを $\sqrt{d_{\mathrm{model}}}$ 倍してから位置ベクトルを加えます。位置表現にはsinとcosを使い、学習する位置埋め込みとも比較しています。位置の渡し方はモデルによって変わります。[Transformer原論文 §3.5](https://arxiv.org/html/1706.03762v7#S3.SS5)
+
+たとえばRoPEは、QとKに位置に応じた回転を適用して位置情報を計算に取り込みます。[RoFormer原論文](https://arxiv.org/abs/2104.09864)
+
+PyTorch 2.15の公式資料では、ドロップアウトを無効にした場合の行列積・マスク・softmax・Vの重み付き和の順序を確認できます。[PyTorch 2.15のscaled dot-product attention](https://docs.pytorch.org/docs/2.15/generated/torch.nn.functional.scaled_dot_product_attention.html)
 
 原論文の全体構成はencoderとdecoderを持つ翻訳モデルです。今回の教材はそのうち生成側の因果的self-attentionを抜き出しており、語彙の出力層まで含めたLLM全体の実装ではありません。位置表現や正規化の場所など、後続のモデルで変わる部分もあります。[Transformer原論文 §3.1](https://arxiv.org/html/1706.03762v7#S3.SS1)
+
+## 要点
+
+- この例では同じトークンに同じ埋め込みが対応します。位置情報を加えた表現は、位置によって変わります。
+- Qと各Kの内積をもとに参照位置ごとの重みを求め、その重みでVを混ぜます。
+- 因果マスクはsoftmaxの前に未来の位置のスコアを除くため、未来のVは出力に混ざりません。
+- Attentionの係数は参照位置ごとの重みです。次のトークンの確率は後段の出力層で求めます。
 
 ## 理解度チェック
 

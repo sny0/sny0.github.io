@@ -13,11 +13,19 @@ study:
 
 # LLMの量子化 — 精度とメモリ、重みとKVキャッシュの違い
 
-モデルのファイルに「4ビット」と書かれていたら、何が4ビットでしょうか。学習済みの重みを4ビットに詰めて転送し、行列積を計算するときに展開する構成があります。生成が進むにつれて増えるKVキャッシュにも量子化は使えますが、そちらは重みとは別に選ぶ保存形式です。どのデータを、いつ、どんな精度で表すかを分けて見ると、容量と速度への効果を判断できます。[TensorRT 10系の重み量子化](https://docs.nvidia.com/deeplearning/tensorrt/10.x.x/inference-library/work-quantized-types.html#weight-only-quantization) · [KIVI原論文](https://proceedings.mlr.press/v235/liu24bz.html)
+モデルのファイルに「4ビット」と書かれていたら、何が4ビットでしょうか。学習済みの重みを4ビットに詰めて転送し、行列積を計算するときに展開する構成があります。生成が進むにつれて増えるKVキャッシュ（過去の位置のK・Vを保持する領域）にも量子化を使えます。その保存形式は、重みの形式とは別に選びます。どのデータを、いつ、どんな精度で表すかを分けて見ると、容量と速度への効果を判断できます。[TensorRT 10系の重み量子化](https://docs.nvidia.com/deeplearning/tensorrt/10.x.x/inference-library/work-quantized-types.html#weight-only-quantization) · [KIVI原論文](https://proceedings.mlr.press/v235/liu24bz.html)
+
+## この記事で分かること
+
+量子化した値をどう復元し、丸めやクリッピングでどこに誤差が出るか説明できます。重み・活性値・KVキャッシュのどれを低ビットにするかと、容量・速度の見積もりを分けて考えられます。
 
 ## 少ないビットで、近い値を表す
 
-量子化では、多くの入力値を、限られた数の表現に対応づけます。ここでは、整数コードを等間隔の値に対応づける線形量子化を考えます。正のスケール $s$ は隣り合うコードに対応する復元値の間隔、ゼロ点 $z$ は元の値が0のときのコードです。次の式は、INT4を含む整数型を扱えるONNX opset 21の演算子仕様を参照します。整数への量子化では、$x/s$ を最近傍の整数に丸め、ちょうど中間なら偶数を選びます。ゼロ点を足してから、コードを使える範囲に収めます。この最後の操作がクリッピング（飽和）です。復元するときは、ゼロ点を引いてスケールを掛けます。[ONNX QuantizeLinear v21](https://onnx.ai/onnx/operators/onnx__QuantizeLinear.html#quantizelinear-21) · [ONNX DequantizeLinear v21](https://onnx.ai/onnx/operators/onnx__DequantizeLinear.html#dequantizelinear-21)
+量子化では、多くの入力値を、限られた数の表現に対応づけます。ここでは、整数コードを等間隔の値に対応づける線形量子化を考えます。正のスケール $s$ は隣り合うコードに対応する復元値の間隔、ゼロ点 $z$ は元の値が0のときのコードです。
+
+この式では、元の値 $x$ をスケール $s$ で割り、最も近い整数に丸めます。ちょうど中間なら偶数を選びます。ゼロ点を足してから、コードを使える範囲に収めます。この最後の操作がクリッピング（飽和）です。
+
+復元するときは、ゼロ点を引いてスケールを掛けます。[ONNX QuantizeLinear v21](https://onnx.ai/onnx/operators/onnx__QuantizeLinear.html#quantizelinear-21) · [ONNX DequantizeLinear v21](https://onnx.ai/onnx/operators/onnx__DequantizeLinear.html#dequantizelinear-21)
 
 $$
 q = \operatorname{clip}(\operatorname{round}(x/s)+z,\ q_{\min},\ q_{\max})
@@ -27,7 +35,7 @@ $$
 \hat{x}=s(q-z)
 $$
 
-図と掲載例は、ゼロ点が0の対称な方式です。スケールを0.25、使うコードを −7から7とすると、復元できる値は −1.75から1.75まで0.25刻みになります。4ビットの符号付き整数には −8も入りますが、この例では範囲を対称にするため使いません。FP8などの浮動小数点形式には、値が等間隔に並ばない方式もあります。[ONNXの4ビット整数仕様](https://onnx.ai/onnx/technical/int4.html) · [TensorRT 10系の量子化形式](https://docs.nvidia.com/deeplearning/tensorrt/10.x.x/inference-library/work-quantized-types.html)
+図と掲載例は、ゼロ点が0の対称な方式です。スケールを0.25、使うコードを −7から7とすると、復元できる値は −1.75から1.75まで0.25刻みになります。4ビットの符号付き整数に入る −8は、この例では範囲を対称にするため使いません。[ONNXの4ビット整数仕様](https://onnx.ai/onnx/technical/int4.html)
 
 ```mermaid
 ---
@@ -59,11 +67,11 @@ flowchart TD
 | 活性値 | 推論中に各層で生まれる中間値。たとえば行列積へ渡す値を量子化し、対応するカーネルで計算する。 |
 | KVキャッシュ | 過去のトークン位置のK・V。後のdecodeで読み直すために保持する容量に効く。 |
 
-K・Vも中間値ですが、次の生成ステップまで残すため、KVキャッシュに書き込むときの精度は独立した設計箇所です。重みを4ビットにしても、それだけで過去のK・Vの保存形式は変わりません。Kの近似はQとの内積で求めるAttentionスコアに、Vの近似は重み付き和に影響します。KとVに別のグループ化を選んだ研究例もあります。[TensorRT LLMのFP8 KVキャッシュ](https://nvidia.github.io/TensorRT-LLM/latest/features/quantization.html#fp8-kv-cache) · [KIVI原論文](https://proceedings.mlr.press/v235/liu24bz.html) · [KVキャッシュ](/algorithms/kv-cache.html)
+K・Vも中間値ですが、次の生成ステップまで残すため、KVキャッシュに書き込むときの精度は独立した設計箇所です。重みを4ビットにしても、それだけで過去のK・Vの保存形式は変わりません。K（Key）の近似は、Q（Query）との内積で求めるAttentionスコアに影響します。V（Value）の近似は、スコアから求めた係数で値を混ぜる計算に影響します。 [KVキャッシュ](/algorithms/kv-cache.html)
 
 ## 保存形式と演算精度を分けて見る
 
-TensorRT 10系の重みのみの量子化では、行列積カーネルが4ビットの重みを読み、カーネル内で復元してから高精度で内積を計算します。次の図は、この方式でK・Vの射影を行う場合に、重みと活性値がどこで合流し、どこからがキャッシュの保存になるかを示します。[TensorRT 10系のWeight-Only Quantization](https://docs.nvidia.com/deeplearning/tensorrt/10.x.x/inference-library/work-quantized-types.html#weight-only-quantization)
+重みを低ビットで保持し、演算するときに高精度の値に復元する方式があります。たとえばTensorRT 10系の重みのみの量子化では、行列積カーネル（行列積を行う処理）が4ビットの重みを読み、その中で復元してから高精度で内積を計算します。次の図は、この方式でK・Vの射影を行う場合に、重みと活性値がどこで合流し、どこからがキャッシュの保存になるかを示します。[TensorRT 10系のWeight-Only Quantization](https://docs.nvidia.com/deeplearning/tensorrt/10.x.x/inference-library/work-quantized-types.html#weight-only-quantization)
 
 ```mermaid
 ---
@@ -83,7 +91,7 @@ flowchart TD
     states -->|"保存形式は別に選ぶ"| cache["KVキャッシュに保存"]
 ```
 
-別のカーネルでは、低ビットの重みと活性値を使って積を求め、和はより広い型で累積します。たとえば、8ビット整数の積を32ビット整数に累積する設計があります。W4A16のような表記は、対象の重みと活性値のビット数を表します。積算器や出力、softmaxの型まで知るには個々の実装を確認します。[Jacobらの整数演算による推論 §2](https://openaccess.thecvf.com/content_cvpr_2018/html/Jacob_Quantization_and_Training_CVPR_2018_paper.html) · [TensorRT LLMの量子化方式](https://nvidia.github.io/TensorRT-LLM/latest/features/quantization.html)
+別のカーネルでは、低ビットの重みと活性値を使って積を求め、和はより広い型で累積します。
 
 ## 丸め誤差と容量をローカルで確かめる
 
@@ -155,7 +163,22 @@ FP16 / 4-bit+scales: 3.76
 
 読み出すバイト数が減ると、メモリ帯域が律速の処理では役立ちます。一方、展開・復元の処理や、使える低ビット命令とカーネルの有無も時間に効きます。同じビット幅でも、短い入力を1件だけ処理するときと、長い入力を同時に何件も処理するときでは結果が変わり得ます。速度を比べるなら、同じモデルと実行環境で入力・出力長や同時件数をそろえ、最初のトークンが出るまでの時間と、その後の生成速度を分けて見ます。品質も、数値誤差だけでなく、実際に使う入力と評価項目で確かめます。[ONNX Runtimeの性能解説](https://onnxruntime.ai/docs/performance/model-optimizations/quantization.html#why-am-i-not-seeing-performance-improvements) · [Hugging Face Transformersの量子化KVキャッシュ](https://huggingface.co/docs/transformers/main/en/kv_cache#quantized-cache) · [KIVI原論文](https://proceedings.mlr.press/v235/liu24bz.html)
 
+## 補足
+
+冒頭の量子化・復元の式は、INT4を含む整数型を扱えるONNX opset 21の演算子仕様を参照します。FP8などの浮動小数点形式には、値が等間隔に並ばない方式もあります。 [TensorRT 10系の量子化形式](https://docs.nvidia.com/deeplearning/tensorrt/10.x.x/inference-library/work-quantized-types.html)
+
+KとVに別のグループ化を選んだ研究例もあります。 [TensorRT LLMのFP8 KVキャッシュ](https://nvidia.github.io/TensorRT-LLM/latest/features/quantization.html#fp8-kv-cache) · [KIVI原論文](https://proceedings.mlr.press/v235/liu24bz.html)
+
+たとえば、8ビット整数の積を32ビット整数に累積する設計があります。W4A16のような表記は、対象の重みと活性値のビット数を表します。積算器や出力、softmaxの型まで知るには個々の実装を確認します。[Jacobらの整数演算による推論 §2](https://openaccess.thecvf.com/content_cvpr_2018/html/Jacob_Quantization_and_Training_CVPR_2018_paper.html) · [TensorRT LLMの量子化方式](https://nvidia.github.io/TensorRT-LLM/latest/features/quantization.html)
+
 量子化をいつ考慮するかにも違いがあります。PTQ（Post-Training Quantization）は、学習済みモデルを量子化に適応させる再学習をせずに変換します。スケールの調整などに代表的な入力で校正する方式もあります。QAT（Quantization-Aware Training）は、丸めや飽和による近似を学習や微調整の中で模擬し、モデルがその近似に適応できるようにします。どちらでも、配備する方式と評価結果を合わせて確認します。[TensorRT 10系の量子化ワークフロー](https://docs.nvidia.com/deeplearning/tensorrt/10.x.x/inference-library/work-quantized-types.html#quantization-workflows) · [TorchAO 0.17のQAT](https://docs.pytorch.org/ao/stable/workflows/qat.html)
+
+## 要点
+
+- 量子化では値を限られたコードに対応づけます。丸めやクリッピングによって、復元した値に誤差が生じます。
+- 重み、活性値、KVキャッシュは別々に量子化できます。保存形式から積や和の計算に使う型は決まりません。
+- コードだけでなく、スケールなどの付加情報も容量に入ります。最大VRAMを測るときは、実行時に使う中間値や作業領域も含めます。
+- 速度は読み出し、復元、カーネル、入力条件で変わります。品質は使う入力と評価項目を決めて確かめます。
 
 ## 理解度チェック
 
