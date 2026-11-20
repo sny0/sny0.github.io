@@ -8,7 +8,7 @@ study:
   domain: algorithms
   summary: モデルが提案した処理を検査してツールに渡し、結果を履歴に戻す実行ループを、停止条件やサンドボックスとの境界まで追う。
   aliases: [AIエージェント, エージェントハーネス, agent harness, agent loop, エージェントの実行ループ, サンドボックス]
-  verification: OpenAI Agents APIとAgents SDKの公式資料に照合。WindowsのPython 3.12.4で、教材用の実行ループの履歴、入力の拒否、回数上限を検証（2026-11-18）
+  verification: OpenAI Agents APIとAgents SDKの公式資料に照合。WindowsのPython 3.12.4で、教材用の実行ループの履歴、入力の拒否、回数上限を検証（2026-11-20）
 ---
 
 # AIエージェントのハーネス — モデル・ツール・実行ループをつなぐ仕組み
@@ -59,7 +59,7 @@ flowchart TD
 
 ## ローカルでループだけを模擬する
 
-以下の `fake_model` は、履歴の最後にツール結果があれば回答し、なければ60 FPSの換算を提案する関数です。`run` が履歴を持ち、登録済みのツールだけに処理を振り分けます。標準ライブラリだけで動く教材で、モデルへの入力と出力はPythonの値に置き換えています。
+以下の `fake_model` は、履歴の最後にツール結果があれば回答し、なければ60 FPSの換算を提案する関数です。`run` が履歴を持ち、登録済みのツールだけに処理を振り分けます。WindowsのPython 3.12.4で確認した教材で、標準ライブラリを使い、モデルへの入力と出力はPythonの値に置き換えています。
 
 ```python
 from dataclasses import dataclass
@@ -117,7 +117,16 @@ if __name__ == "__main__":
         print(state, [role for role, _ in history], history[-1][1])
 ```
 
+```text
+final ['user', 'tool_call', 'tool', 'assistant'] 予算は 16.67 ms です。
+unknown_tool ['user', 'tool_call'] ToolCall(name='unlisted', fps=60)
+invalid_args ['user', 'tool_call', 'error'] FPS must be a positive integer
+step_limit ['user', 'tool_call', 'tool', 'tool_call', 'tool'] 16.67 ms
+```
+
 `final` の履歴は `user → tool_call → tool → assistant` です。換算結果を受け取った2回目のモデル呼び出しで「予算は 16.67 ms です。」が返ります。`unknown_tool` は登録外の名前で止まり、換算処理に入りません。`invalid_args` は登録済みの換算関数に入り、FPSを検査した時点で止まります。毎回換算を提案する最後の例では `step_limit` で停止し、履歴の最後に残る `16.67 ms` はツール結果です。上限の2回は**モデルを呼ぶ回数**で、この教材では1回の呼び出しで最大1個のツールを処理します。
+
+この教材は、不正な引数でエラーを履歴に記録しても、その場で停止する設計です。実際のアプリには、修正可能な失敗を元の呼び出しに対応するツール結果としてモデルへ返し、引数の修正や別の方法を選べるようにする設計もあります。Responses APIの場合、対応する `call_id` の `function_call_output` にエラーを示す値を含められます。[OpenAI公式資料のFormatting results](https://developers.openai.com/api/docs/guides/function-calling#formatting-results) · [Agents SDKの停止と保留](https://developers.openai.com/api/docs/guides/agents/running-agents#handle-pauses-and-failures-deliberately)
 
 ## 実行を許可する判断と、実行中の制限
 
@@ -141,7 +150,7 @@ Agent Skillsの手順は、たとえば「換算した時間を実測値とし�
 
 ## 検証範囲
 
-公式資料は2026年11月18日に確認しました。同日にWindowsのPython 3.12.4で掲載コードを実行し、通常完了、登録外の名前による停止、不正なFPSの拒否、回数上限の4経路を確かめました。2回目の模擬モデル呼び出しが `16.67 ms` を受け取ることと、上限に達した場合に最終回答が履歴に加わらないことも確認しました。
+公式資料は2026年11月18日と20日に確認しました。WindowsのPython 3.12.4で掲載コードを実行し、通常完了、登録外の名前による停止、不正なFPSの拒否、回数上限の4経路を確かめました。2回目の模擬モデル呼び出しが `16.67 ms` を受け取ることと、上限に達した場合に最終回答が履歴に加わらないことも確認しました。
 
 検証対象は、同一プロセス内の模擬ループです。実モデルの判断、MCP通信、外部サービスの認可、サンドボックスによる隔離は公式資料に基づく説明です。
 

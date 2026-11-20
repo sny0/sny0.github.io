@@ -36,6 +36,8 @@ study:
 
 実際に1回を抽選するなら、各枠が同じ確率になるよう、`0` から `19` までの整数を一つ選びます。重みを順に足した境界は `10`、`18`、`20` です。たとえば `18` なら、最初に `18` より大きい境界は `20` なので剣の区間に入ります。区間は左端を含み、右端を含みません。C++17の `std::uniform_int_distribution` に渡す両端はともに含まれるため、指定する端点は `0` と `19` です。[WG21 N4659の整数一様分布](https://www.open-std.org/jtc1/sc22/wg21/docs/papers/2017/n4659.pdf#page=1100)
 
+生成器の出力を単に `roll % 20` にすると、元の出力が等確率でも、その取り得る値の個数が20の倍数でなければ余りによって対応する個数が違います。重みどおりの確率を得るには、20枠を一様に選ぶ手続きが必要です。[Fisher–Yates法で見る剰余による偏り](/algorithms/fisher-yates-shuffle.html#アルゴリズムの保証と乱数源の前提)
+
 Minecraft: Bedrock Editionの安定版向け公式仕様にも、プールを引く回数 `rolls`、候補の相対重み `weight`、何も落とさない `empty` があります。この記事の宝箱は「有効な候補から1回引く」モデルです。プールを複数回引く設定では、1回の抽選でその候補が選ばれる確率と、宝箱全体で一度以上出る確率を区別します。[Minecraft: Bedrock Editionの `minecraft:loot_table` 仕様](https://learn.microsoft.com/en-us/minecraft/creator/reference/content/loottablereference/examples/loottablecomponents/loot_table?view=minecraft-bedrock-stable)
 
 ### 20枠をすべて数えるC++例

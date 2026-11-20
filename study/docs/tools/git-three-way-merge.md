@@ -66,6 +66,26 @@ jump=K
 
 通常のindexでは、次にコミットする版はステージ0にあります。この競合中はステージ1が基準、2が現在側、3が相手側です。どの内容を残して結合するかは解消する人が決めます。ファイルが片側に存在しない競合などでは、全ステージがそろわない場合があります。[Gitのステージング](/tools/git-staging-index.html) · [git mergeの競合時の動作](https://git-scm.com/docs/git-merge/2.38.0#_true_merge)
 
+このテキスト競合では、Git 2.39.2の `merge.conflictStyle=merge` で作業ツリーに次のマーカーが出ました。区切りより上が現在側、下が取り込み側です。
+
+  ```text
+  <<<<<<< HEAD
+  jump=J
+  =======
+  jump=K
+  >>>>>>> feature
+  ```
+
+練習用リポジトリではJを残すと決め、マーカーを含む全体を `jump=J` の1行に編集しました。結果を `git add` で確定し、ステージ済みの差分を確認してマージを記録します。[Git公式の競合表示と解消](https://git-scm.com/docs/git-merge#_how_conflicts_are_presented)
+
+```shell
+git add -- key.txt
+git diff --cached --check
+git commit --no-edit
+```
+
+`git diff --cached --check` が問題を報告した場合は、コミット前に内容を見直します。検証では `git ls-files -u -- key.txt` が空になり、マージコミットにはHとFが第1親・第2親として残りました。
+
 ## fast-forwardでは先端を進める
 
 現在の先端が相手の先端の祖先にあたり、履歴がすでにつながっている場合は、現在のブランチ参照を相手のコミットまで進められます。これが **fast-forward** です。新しいマージコミットは作りません。検証用のブランチをBに置き、その子であるFを `git merge --ff-only feature` で取り込むと、更新後の先端は既存のFと同じIDになりました。HとFが分岐している図のケースでは、`--ff-only` はマージを拒否します。[git mergeのfast-forwardの説明](https://git-scm.com/docs/git-merge/2.38.0#_fast_forward_merge) · [git mergeのオプション](https://git-scm.com/docs/git-merge/2.38.0#_options)
@@ -89,7 +109,7 @@ flowchart TD
 
 ## 検証範囲
 
-2026年11月17日にWindowsのGit 2.39.2.windows.1で、独立したリポジトリを使いました。共通の基準が一つで、二つの先端を `-s ort` で統合した場合と、`--ff-only` で参照を進めた場合を確認しました。マージベースが複数ある履歴では、`ort` は共通の基準となるtreeを組み立てる場合があります。改名・削除を含む競合、複数のマージベース、他の戦略やカスタムのマージドライバーは未検証です。[git merge-base](https://git-scm.com/docs/git-merge-base#_discussion) · [Git公式の `ort` の説明](https://git-scm.com/docs/git-merge/2.38.0#_merge_strategies)
+2026年11月17日にWindowsのGit 2.39.2.windows.1で、独立したリポジトリを使いました。共通の基準が一つで、二つの先端を `-s ort` で統合した場合と、`--ff-only` で参照を進めた場合を確認しました。2026年11月20日に同じ版の別の検証リポジトリで、1行のテキスト競合を上の手順で解消し、出力と親の順序を照合しました。マージベースが複数ある履歴では、`ort` は共通の基準となるtreeを組み立てる場合があります。改名・削除を含む競合、複数のマージベース、他の戦略やカスタムのマージドライバーは未検証です。[git merge-base](https://git-scm.com/docs/git-merge-base#_discussion) · [Git公式の `ort` の説明](https://git-scm.com/docs/git-merge/2.38.0#_merge_strategies)
 
 ## 関連項目
 

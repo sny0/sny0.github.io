@@ -67,7 +67,7 @@ $q$ と $d$ をそれぞれ長さで割って単位ベクトルにすれば、�
 
 ## 手で置いたベクトルで、順位の違いを確かめる
 
-RAGの記事に出てきた架空の計測ログと同じ資料IDを使います。質問は「r18・PC-Aでの影の計測」です。質問を $(3,4)$、候補を次の2次元ベクトルと仮定します。座標は手で決めた値で、計測ログの文から学習済みモデルで求めた値とは区別します。`bench-04` はゼロベクトルの処理を見るために加えた候補です。
+質問は「r18・PC-Aでの影の計測」です。候補の `bench-01`〜`bench-03` は、RAGの記事の公開向け索引と同じ資料ID・計測条件です。チーム内資料の `bench-00` は対象外とし、この例ではゼロベクトルの処理を見るために `bench-04` を加えます。質問を $(3,4)$、候補を次の2次元ベクトルと仮定します。座標は説明用の手作りです。[RAGの仕組み](/algorithms/retrieval-augmented-generation.html)
 
 | 候補と計測条件 | 手作りベクトル | 内積 / コサイン |
 | --- | --- | --- |
@@ -78,7 +78,7 @@ RAGの記事に出てきた架空の計測ログと同じ資料IDを使います
 
 `bench-03` との内積は $3\cdot4+4\cdot3=24$ で、どちらも長さは5です。コサイン類似度は $24/(5\cdot5)=0.96$ になります。`bench-02` は内積が90ですが、候補の長さも30なので $90/(5\cdot30)=0.60$ です。コサインが最大の `bench-01` はビルドが古く、r18・PC-Aという条件に合う有効な候補は `bench-03` です。
 
-次は標準ライブラリだけで動くコードです。比較する候補をそろえるため、この例ではゼロの資料を両方の順位から除外します。質問がゼロなら、正規化の時点でエラーにします。
+次は標準ライブラリだけで動くコードです。`zip(..., strict=True)` で次元を確認するため、Python 3.10以降で実行します。比較する候補をそろえるため、この例ではゼロの資料を両方の順位から除外します。質問がゼロなら、正規化の時点でエラーにします。[Python組み込み関数のzip](https://docs.python.org/3.10/library/functions.html#zip)
 
 ```python
 from math import hypot
@@ -148,6 +148,8 @@ r18/PC-A: bench-03
 
 コサイン値が大きい資料でも、ビルドの一致や数値の正しさは元の記録で確かめます。版や機材のような必須条件は検索のフィルターにも使えます。教材のコードはすべての有効な候補を採点してから条件で絞っています。実運用で先に上位件数を切ると、必要な条件を満たす候補を切り落とすことがあります。必要な条件を検索に含め、結果が足りないときは分かった範囲を示します。[Microsoft Learnのベクトル検索フィルター](https://learn.microsoft.com/en-us/azure/search/vector-search-filters) · [RAGの仕組み](/algorithms/retrieval-augmented-generation.html)
 
+教材のコードは、候補のベクトルを一つずつ採点する全件走査です。近似近傍索引では、比較する候補を絞ることで大きいデータ集合での待ち時間を抑えられる場合があります。その代わり、全件走査なら上位に入る候補を取りこぼすことがあります。同じデータ・指標・検索条件のもとで、検索時間と、全件走査で得た上位候補のうち拾えた割合（再現率）を比べます。この再現率は、質問に必要な根拠を見つけたかという評価とは別です。[Elasticsearch公式のkNN検索](https://www.elastic.co/docs/solutions/search/vector/knn#knn-methods) · [BEIR原論文](https://arxiv.org/abs/2104.08663)
+
 ## 理解度チェック
 
 ::: details 次元数が同じなら、別々のモデルの出力をそのまま比較できる？
@@ -166,7 +168,7 @@ r18/PC-A: bench-03
 
 原論文と公式資料は2026年11月18日に確認しました。同日にWindowsのPython 3.12.4で掲載例を実行し、内積とコサイン類似度、2種類の順位、条件一致、ゼロの資料の除外とゼロの質問の拒否を確認しました。片方の非ゼロベクトルを正の定数倍したときのコサインも照合しました。
 
-実測の範囲は手作りベクトルの計算と順位です。学習済みの埋め込みモデル、実際の意味検索の品質、ベクトル索引の速度、検索結果を使った回答の品質は公式資料に基づく説明です。
+実測の範囲は手作りベクトルの全件走査による計算と順位です。近似索引は実装しておらず、速度と再現率は未計測です。学習済みの埋め込みモデルや、実際の検索と回答の品質も検証対象外です。
 
 ## 関連項目
 
@@ -178,6 +180,7 @@ r18/PC-A: bench-03
 
 - [Reimers・Gurevych — Sentence-BERT（EMNLP 2019）](https://aclanthology.org/D19-1410/)
 - [Karpukhinら — Dense Passage Retrieval（EMNLP 2020）](https://aclanthology.org/2020.emnlp-main.550/)
+- [Thakurら — BEIR（NeurIPS 2021 Datasets and Benchmarks）](https://arxiv.org/abs/2104.08663)
 - [Vaswaniら — Attention Is All You Need（2017）](https://arxiv.org/html/1706.03762v7#S3.SS4)
 - [Sentence Transformers公式 — Semantic Search](https://sbert.net/examples/sentence_transformer/applications/semantic-search/README.html)
 - [Elasticsearch公式 — Dense vector](https://www.elastic.co/docs/reference/elasticsearch/mapping-reference/dense-vector) · [検索方式](https://www.elastic.co/docs/solutions/search/search-approaches)

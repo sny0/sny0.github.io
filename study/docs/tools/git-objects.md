@@ -48,6 +48,8 @@ flowchart TD
 以下は独立した検証リポジトリの出力です。オブジェクトIDは先頭8桁に縮め、`cat-file -p` の作者情報などは省略しました。`HEAD^` はこの例では `HEAD` の第1親、`HEAD^{tree}` は今のコミットのルートtreeです。[gitrevisions](https://git-scm.com/docs/gitrevisions) · [git-rev-parse](https://git-scm.com/docs/git-rev-parse) · [git-cat-file](https://git-scm.com/docs/git-cat-file)
 
 ```text
+$ git rev-parse --show-object-format
+sha1
 $ git rev-parse HEAD 'HEAD^' 'HEAD^{tree}'
 e5b25d89
 07367563
@@ -99,7 +101,7 @@ new
 
 ## 検証範囲
 
-2026年11月17日にWindowsのGit 2.39.2.windows.1で、SHA-1形式の独立したリポジトリに2コミットを作成して観察しました。`git cat-file`、`git ls-tree`、`git rev-parse`、`git symbolic-ref`、`git diff` とpack化の前後を照合しました。SHA-256・reftableでの実行、デルタを使うpackの実測は対象外です。
+2026年11月17日にWindowsのGit 2.39.2.windows.1で、SHA-1形式の独立したリポジトリに2コミットを作成して観察しました。`git cat-file`、`git ls-tree`、`git rev-parse`、`git symbolic-ref`、`git diff` とpack化の前後を照合しました。2026年11月20日には同じ版で別々のSHA-1とSHA-256の練習用リポジトリを作り、`--show-object-format` がそれぞれ `sha1`、`sha256` を返すことを確認しました。SHA-256でのpack化、reftable、デルタを使うpackの実測は対象外です。
 
 ## 関連項目
 

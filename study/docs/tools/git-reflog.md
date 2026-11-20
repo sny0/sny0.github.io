@@ -17,7 +17,7 @@ study:
 
 ## コミットの親と、参照が以前指していた先
 
-共通のコミットBから、`main` ではUでステージ設定を変更し、`topic` ではTで `enemy.txt` の `hp=1` を `hp=2` にしました。`topic` を `main` の上にrebaseすると、HPの変更がUの上に再適用され、T′ができます。図では実線が「現在の参照が指す先」または「コミットが持つ親」、破線が「reflogに記録されている以前の先端」です。
+共通のコミットBから、`main` ではUでゲーム内のステージ設定を変更し、`topic` ではTで `enemy.txt` の `hp=1` を `hp=2` にしました。`topic` を `main` の上にrebaseすると、HPの変更がUの上に再適用され、T′ができます。図では実線が「現在の参照が指す先」または「コミットが持つ親」、破線が「reflogに記録されている以前の先端」です。
 
 ```mermaid
 flowchart TD
@@ -53,6 +53,25 @@ hp=2
 ```
 
 この例にはTを指す別のブランチやタグがありません。それらがあれば、Tは `--all` でも見つかります。検証直後は `ORIG_HEAD` もTを指していましたが、これは別の操作で上書きされ得る値で、`--all` の起点には含まれません。reflogはコミットの写しを保存する場所ではなく、リポジトリ内にまだ存在するオブジェクトを探す手掛かりです。[Gitの保存モデル](/tools/git-objects.html) · [Git公式のrebaseマニュアル](https://git-scm.com/docs/git-rebase#_description)
+
+### 旧コミットに新しいブランチを付ける
+
+旧先端Tが見つかったら、検証用リポジトリのPowerShellでコミットIDを確定し、内容を確認してから、未使用の名前 `recover-topic` を付けます。以下の2ブロックは同じPowerShellセッションで実行する例です。[Git公式のrev-parseマニュアル](https://git-scm.com/docs/git-rev-parse#_options_for_output) · [Git公式のbranchマニュアル](https://git-scm.com/docs/git-branch#_description)
+
+```powershell
+$oldCommit = git rev-parse --verify 'topic@{1}^{commit}'
+if ($LASTEXITCODE -ne 0) { throw '旧コミットを確認できませんでした。' }
+git --no-pager show --no-patch --oneline $oldCommit
+```
+
+表示されたIDとメッセージが目的のコミットだと確認できたら、次を実行します。新しい参照を作るだけなので、現在のブランチや編集中のファイルには手を加えません。
+
+```powershell
+git branch recover-topic $oldCommit
+git rev-parse --short recover-topic
+```
+
+この方法は対象のコミットがまだ見つかる場合に使えます。名前がすでに存在する場合は、使われていない別の名前を選びます。
 
 ## reflogはリポジトリごとの記録
 
@@ -92,7 +111,7 @@ Gitでは、ブランチやタグなどから親をたどって見つかるコ�
 
 ## 検証範囲
 
-2026年11月17日に、WindowsのGit 2.39.2.windows.1と独立したSHA-1リポジトリを使い、reflogを有効にして、競合のない1コミットを `git rebase --merge` で再適用しました。新旧コミットの親、reflogを探索に含めるかどうかによる違い、旧コミットのファイル内容、ローカル転送で複製したリポジトリの記録を確認しました。複製先では `hp=3` をステージしてから `hp=4` に再編集し、indexには `hp=3` のblobが残り、`HEAD` と `topic` のreflogは変わらないことも確認しました。
+2026年11月17日に、WindowsのGit 2.39.2.windows.1と独立したSHA-1リポジトリを使い、reflogを有効にして、競合のない1コミットを `git rebase --merge` で再適用しました。新旧コミットの親、reflogを探索に含めるかどうかによる違い、旧コミットのファイル内容、ローカル転送で複製したリポジトリの記録を確認しました。複製先では `hp=3` をステージしてから `hp=4` に再編集し、indexには `hp=3` のblobが残り、`HEAD` と `topic` のreflogは変わらないことも確認しました。 2026年11月20日には同じ版の新しい検証リポジトリで、旧先端から復旧用ブランチを作れることと、現在の参照・作業ツリーを変えないことを確認しました。
 
 reflogの期限切れ処理やGCは実行していません。実際の回収時期、異なる参照保存形式やGitの版、ホスティングサービス上での動作は実測していません。
 

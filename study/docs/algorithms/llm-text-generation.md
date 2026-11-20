@@ -17,7 +17,7 @@ study:
 
 ## 文章をトークンにし、続きの候補を求める
 
-トークナイザーは文字列を、語彙に登録された単位とそのIDの列に変換します。モデルはそのIDを数値ベクトルに変え、学習済みの重みを使って文脈を計算します。出力段階では次トークン候補のスコアから確率分布を求め、選択規則に従って一つを選びます。選んだIDを列に追加すると、次回の計算の文脈も変わります。[Transformer原論文 §3](https://arxiv.org/html/1706.03762v7#S3)
+トークナイザーは文字列を、語彙に登録された単位とそのIDの列に変換します。モデルはそのIDを数値ベクトルに変え、学習済みの**重み**（計算に使う調整済みのパラメーター）を使って文脈を計算します。出力段階では次トークン候補のスコアから確率分布を求め、選択規則に従って一つを選びます。選んだIDを列に追加すると、次回の計算の文脈も変わります。[Transformer原論文 §3](https://arxiv.org/html/1706.03762v7#S3)
 
 ```mermaid
 ---
@@ -61,7 +61,7 @@ BPE（Byte Pair Encoding）は、隣り合う記号の組を結合してより�
 
 ## 次トークンの確率と、選び方
 
-文脈を $c$、学習済みの重みを $\theta$ とすると、モデルが求めるのは候補 $v$ の条件付き確率 $p_\theta(v\mid c)$ です。代表的な出力層では、語彙中の各候補に対するスコア（logit）$z_v$ をsoftmaxで正規化します。候補の確率の合計は1になります。[Transformer原論文 §3.4](https://arxiv.org/html/1706.03762v7#S3.SS4)
+文脈を $c$、学習済みの重みを $\theta$ とすると、モデルが求めるのは候補 $v$ の条件付き確率 $p_\theta(v\mid c)$ です。代表的な出力層では、語彙中の各候補にスコア（logit）$z_v$ を付けます。**softmax** は、各スコアの指数を取り、その合計で割って全候補の確率の合計を1にする計算です。[Transformer原論文 §3.4](https://arxiv.org/html/1706.03762v7#S3.SS4)
 
 $$
 p_\theta(v\mid c)=\frac{\exp(z_v)}{\sum_{u\in V}\exp(z_u)}
@@ -77,7 +77,7 @@ $$
 
 最大の確率を選ぶgreedy方式なら「回復」です。分布からサンプリングする方式なら、別の候補も選ばれます。一様乱数として $r=0.8$ を得たと仮定する例では、回復の区間は $[0,0.665241\ldots)$、攻撃の区間はその続きなので「攻撃」が選ばれます。これは候補を選ぶ処理の違いで、生成後の文脈も変えることになります。[重み付き抽選](/game/loot-tables.html) · [GPT-2原論文 §3.5・§3.6](https://cdn.openai.com/better-language-models/language_models_are_unsupervised_multitask_learners.pdf)
 
-次のPythonコードで表と選択を計算できます。最大値をスコアから引くと、softmaxの比を保ちながら指数関数へ大きな正の値を渡すことを避けられます。
+次のコードはPython 3.12.4の標準ライブラリで検証しました。最大値をスコアから引くと、softmaxの比を保ちながら指数関数へ大きな正の値を渡すことを避けられます。
 
 ```python
 import math
@@ -116,16 +116,18 @@ sample: 攻撃
 
 ## 学習は重みを変え、推論は重みを使う
 
-次トークン予測の事前学習では、学習文に実際に現れた次のトークンを教師にします。そのトークンに高い確率を付けられるよう、損失を計算し、重み $\theta$ を更新します。たくさんの文と位置に対する学習を通じて、出力確率を計算する数値の集合が変わります。単語の並びだけでなく、文章中に表れる構造や関係もこの学習の対象になり得ます。[GPT-2原論文 §2](https://cdn.openai.com/better-language-models/language_models_are_unsupervised_multitask_learners.pdf)
+次トークン予測の事前学習では、学習文に実際に現れた次のトークンを正解とします。**損失** は、予測がその正解からどの程度外れたかを表す、学習で小さくしたい値です。たとえば正解トークンに付けた確率が低いほど損失が大きくなるように計算し、損失を小さくする方向へ重み $\theta$ を更新します。たくさんの文と位置に対する学習を通じて、出力確率を計算する数値の集合が変わります。単語の並びだけでなく、文章中に表れる構造や関係もこの学習の対象になり得ます。[GPT-2原論文 §2](https://cdn.openai.com/better-language-models/language_models_are_unsupervised_multitask_learners.pdf)
 
-通常の固定重みでの推論では、その重みを使い、与えられた文脈に応じて確率を計算します。「このゲームでは回復を禁止する」と文脈に加えることと、その文を使って重みを更新することは別の処理です。GPT-3の原論文では、入力に例を与えてタスクに適応させる設定で、勾配による重み更新を行わないことが明記されています。[GPT-3原論文](https://arxiv.org/abs/2005.14165v4)
+通常の固定重みでの推論では、その重みを使い、与えられた文脈に応じて確率を計算します。「このゲームでは回復を禁止する」と文脈に加えることと、その文を使って重みを更新することは別の処理です。GPT-3の原論文では、入力に例を与えてタスクに適応させる設定で、勾配による重み更新を行わないことが明記されています。[GPT-3原論文 §2](https://arxiv.org/html/2005.14165v4#S2)
 
 | 情報 | 主な役割 | この説明で変わる場面 |
 | --- | --- | --- |
 | 重み | 入力からスコアを計算する学習済みの数値 | 学習や追加学習で更新する |
 | コンテキスト | 今回の出力を条件付けるトークン列 | 入力や生成したトークンを加える |
 
-コンテキストに渡せる長さにはモデルや実行条件による上限があります。過去の会話や資料を使う場合も、どの情報が今回の入力に渡されたかが出力に影響します。会話サービスが何を保存し、後日何を学習に使うかは、そのサービスの仕組みで別に決まります。[GPT-3原論文 §1・§2.1・§7](https://arxiv.org/abs/2005.14165v4)
+コンテキストに渡せる長さにはモデルや実行条件による上限があります。過去の会話や資料を使う場合も、どの情報が今回の入力に渡されたかが出力に影響します。[AIエージェントのコンテキスト管理](/algorithms/agent-context-management.html) · [OpenAI APIの会話状態](https://developers.openai.com/api/docs/guides/conversation-state)
+
+会話の保存と学習への利用は、サービスや設定ごとに確認します。たとえばOpenAI APIには、エンドポイントや設定に応じて処理に必要な状態を保存する場合があります。同APIへ送ったデータは、利用者が明示的に共有を選んだ場合を除き、モデルの訓練・改善には使われません。これはOpenAI APIのデータの扱いです。[OpenAI APIのデータ管理](https://developers.openai.com/api/docs/guides/your-data)
 
 Transformerでは、こうした数値計算にベクトル、行列、attentionなどを使います。詳しい構造を追う前に、文脈として渡す列と、計算に使う重みを区別すると、入力を変えることと学習することの関係を読めます。[Transformer原論文](https://arxiv.org/abs/1706.03762) · [行列](/math/rendering/matrix.html)
 
@@ -159,7 +161,7 @@ Transformerでは、こうした数値計算にベクトル、行列、attention
 
 - トークンの列から文脈を計算する内部を、Q/K/Vと重み付き和で追う。[TransformerとAttention — 埋め込み・位置情報・Q/K/Vで文脈を計算する](/algorithms/transformer-attention.html)
 - 続きを1トークンずつ書くとき、推論で何を保存し、どの計算を省けるかを読む。[KVキャッシュ](/algorithms/kv-cache.html)
-- 学習済みのモデルを用途に合わせるとき、どのパラメータを学習するかを読む。[LLMのファインチューニングとLoRAの仕組み](/algorithms/lora-fine-tuning.html)
+- 学習済みのモデルを用途に合わせるとき、どのパラメーターを学習するかを読む。[LLMのファインチューニングとLoRAの仕組み](/algorithms/lora-fine-tuning.html)
 - 最初のトークンまでの待ち時間と、それ以降の出力間隔を分けて読む。[LLM推論のprefillとdecode](/algorithms/llm-prefill-and-decode.html)
 - 推論で使う重みや中間値を、少ないビットでどう近似するかを読む。[LLMの量子化](/algorithms/llm-quantization.html)
 - モデルの提案を受けたAIアプリが、外部のツールを呼んで結果を受け取る流れを読む。[MCPの仕組み — AIモデルと外部ツールをどうつなぐか](/algorithms/model-context-protocol.html)
@@ -180,4 +182,5 @@ Transformerでは、こうした数値計算にベクトル、行列、attention
 - [OpenAI — tiktokenのBPE解説](https://github.com/openai/tiktoken#what-is-bpe-anyway)
 - [Vaswaniら — Attention Is All You Need（2017）](https://arxiv.org/abs/1706.03762)
 - [Brownら — Language Models are Few-Shot Learners（2020）](https://arxiv.org/abs/2005.14165v4)
+- [OpenAI API — Conversation state](https://developers.openai.com/api/docs/guides/conversation-state) · [Data controls](https://developers.openai.com/api/docs/guides/your-data)
 - [Lin・Hilton・Evans — TruthfulQA: Measuring How Models Mimic Human Falsehoods（ACL 2022）](https://aclanthology.org/2022.acl-long.229/)

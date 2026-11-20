@@ -54,6 +54,8 @@ flowchart TD
 | `--mixed` | Aの10 | 10 / 40 |
 | `--hard` | Aの10 | 10 / 10 |
 
+`--hard` の行では、indexからステージ済みの版（HP30）が外れ、作業ファイルのHP40も上書きされます。残したい編集がある場合は、`git diff` と `git diff --staged` で対象を確認し、別のコミットや[stash](/tools/git-stash.html)などで保存してから実行します。
+
 `--soft` を実行したリポジトリで三つの値を読んだ出力です。`a57b882` がAで、実行前のBは `70e721f` でした。`git show ':enemy.txt'` はindexの版を読みます。[Git公式のリビジョン指定](https://git-scm.com/docs/gitrevisions)
 
 ```text

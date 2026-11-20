@@ -17,7 +17,7 @@ study:
 
 ## rebaseは新しい基準の上で変更を再適用する
 
-共通のコミットBから、`main` ではUでステージ番号を `2` に変えました。`topic` ではT1で敵のHPを `20` に変え、T2で出現数 `3` の `spawn.txt` を追加しました。図の矢印は親から子へ向いています。mergeとrebaseは元の分岐から別々に実行した結果です。
+共通のコミットBから、`main` ではUでゲーム内のステージ番号を `2` に変えました。`topic` ではT1で敵のHPを `20` に変え、T2で出現数 `3` の `spawn.txt` を追加しました。図の矢印は親から子へ向いています。mergeとrebaseは元の分岐から別々に実行した結果です。
 
 ```mermaid
 flowchart TD
@@ -30,13 +30,15 @@ flowchart TD
     upstream --> r1["T1′ HP変更"] --> r2["T2′ 出現数追加"]
 ```
 
+Bは分岐をたどった先で共通になる**マージベース**で、Uは今回のrebaseで選んだ**載せ替え先**です。`rebased` にいる状態で `git rebase --merge main` とすると、`main` の先端Uの上へ `rebased` 側の変更を載せ替えます。`--onto` を使う形式では、再適用する範囲を選ぶ上流の参照と、載せ替え先を別々に指定できます。[Git 2.39のrebaseマニュアル](https://git-scm.com/docs/git-rebase/2.39.0#_description)
+
 mergeではUとT2の変更を統合し、二つを親とするMを作ります。rebaseではT1の変更をUの状態に再適用してT1′を作り、続いてT2の変更をT1′の状態に再適用してT2′を作ります。検証では、Uから作った `merged` をmergeで、T2から作った `rebased` をrebaseで更新しました。[Gitの3-way merge](/tools/git-three-way-merge.html) · [Git 2.39のrebaseマニュアル](https://git-scm.com/docs/git-rebase/2.39.0#_description)
 
 ## 新しい親によってコミットIDが変わる
 
 コミットオブジェクトには、スナップショットを指すルートtreeと親コミットのIDの両方があります。元のT1の親はBですが、T1′の親はUです。変更の意図やメッセージが同じでも、親のIDが変わるとコミットオブジェクトの内容が変わります。その内容に基づいてIDを計算するため、この例ではT1′に別のIDが付き、T2′も新しい親T1′を参照します。[Gitの保存モデル](/tools/git-objects.html) · [Pro Gitのコミットオブジェクト](https://git-scm.com/book/en/v2/Git-Internals-Git-Objects#_git_commit_objects)
 
-次はT1、T1′、T2′、Mの順に並べた実測結果です。各行はコミットID、親のID、ルートtreeのIDの順です。Mの行には親が二つあるので、IDが一つ多く並びます。
+次は元のT1（`topic~1`）、再適用したT1′（`rebased~1`）、再適用後の先端T2′（`rebased`）、マージ結果M（`merged`）の順に並べた実測結果です。各行はコミットID、親のID、ルートtreeのIDの順です。Mの行には親が二つあるので、IDが一つ多く並びます。
 
 ```text
 $ git show --no-patch '--format=%h %p %t' 'topic~1' 'rebased~1' rebased merged
@@ -54,7 +56,7 @@ $ git show --no-patch '--format=%h %p %t' 'topic~1' 'rebased~1' rebased merged
 
 ## 共有済みの履歴に積んだ作業はどこに残るか
 
-同僚が元のT2を取得して、その上にCを作ったとします。その後、共有ブランチがT2′を指すように更新されても、Cの親はT2です。新しい先端と同僚の作業は別々の系列に分かれます。
+同僚が元のT2を取得して、その上にCを作ったとします。図の矢印は親から子を示します。その後、共有ブランチがT2′を指すように更新されても、Cの親はT2です。新しい先端と同僚の作業は別々の系列に分かれます。
 
 ```mermaid
 flowchart TD

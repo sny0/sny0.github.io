@@ -71,7 +71,7 @@ Hの状態に退避を再適用すると、HP40を作業ファイルに戻せま
 | `apply --index` | 30 | 40 |
 | `pop` | 20 | 40 |
 
-Git 2.52以降には、applyやpopを `--index` 付きとして動かす `stash.index` 設定もあります。既定値は `false` です。表の結果を比べるときは、使っている版とこの設定も確認します。[Git 2.52のstash設定](https://github.com/git/git/blob/v2.52.0/Documentation/config/stash.adoc#L9-L11)
+表の `apply` と `pop` は、`stash.index` が導入される前のGit 2.39.2で、`--index` を付けずに実行した結果です。Git 2.52以降で `stash.index=true` を設定すると、`--index` を省略したapplyやpopでもindexの復元を試みます。この設定の既定値は `false` です。[Git 2.52のstash設定](https://git-scm.com/docs/git-stash/2.52.0#_configuration)
 
 `apply` は適用後もstashの一覧に記録を残します。`pop` は適用に成功するとその記録を一覧から外します。検証でも、applyした2例ではWが残り、成功したpopの例では一覧が空になりました。これらはそれぞれ初期状態から作った別の検証例です。[Git公式のstashコマンド](https://git-scm.com/docs/git-stash#_commands)
 
@@ -117,4 +117,4 @@ stashは、そのリポジトリ内のコミット、参照、reflogを使って
 - [Git公式 — git-stash](https://git-scm.com/docs/git-stash)
 - [Git公式 — gitrevisions](https://git-scm.com/docs/gitrevisions)
 - [Git公式 — git-gc](https://git-scm.com/docs/git-gc#_notes)
-- [Git 2.52 — stash.index設定](https://github.com/git/git/blob/v2.52.0/Documentation/config/stash.adoc#L9-L11)
+- [Git 2.52 — stash.index設定](https://git-scm.com/docs/git-stash/2.52.0#_configuration)

@@ -8,7 +8,7 @@ study:
   domain: algorithms
   summary: AIアプリ内のMCPクライアントが外部のMCPサーバーとやり取りする流れを、能力の確認、ツール呼び出し、実行の許可に分けて追う。
   aliases: [MCP, Model Context Protocol, MCPホスト, MCPクライアント, MCPサーバー, JSON-RPC, ツール呼び出し]
-  verification: MCP公式仕様2026-07-28版に照合し、Python 3.12.4で架空の要求と応答、引数の条件と計算結果をローカル検証（2026-11-18）
+  verification: MCP公式仕様2026-07-28版と2025-11-25版に照合し、Python 3.12.4で架空の要求と応答、引数の条件と計算結果をローカル検証（2026-11-18・2026-11-20）
 ---
 
 # MCPの仕組み — AIモデルと外部ツールをどうつなぐか
@@ -120,7 +120,9 @@ flowchart TD
 }
 ```
 
-このJSON-RPCメッセージを運ぶ方法を**トランスポート**と呼びます。仕様には、子プロセスの標準入出力を使う `stdio` と、HTTPを使う Streamable HTTP があります。上のコードはどちらでも使うメッセージ本体です。HTTPの場合はプロトコル版などをHTTPヘッダーにも入れます。[Transports](https://modelcontextprotocol.io/specification/2026-07-28/basic/transports)
+`resultType` が `input_required` なら、サーバーは処理を終える前に追加情報を求めています。クライアントは `inputRequests` に対応する回答などを `inputResponses` にまとめ、返された `requestState` があればそれも添え、別のJSON-RPC `id` で元の要求を送り直します。2025-11-25版のツール完了結果には `resultType` がなく、2026-07-28版の互換規則では、その旧版結果を `complete` として扱います。[追加情報が必要なツール結果](https://modelcontextprotocol.io/specification/2026-07-28/server/tools#input-required-tool-results) · [2025-11-25版のTools](https://modelcontextprotocol.io/specification/2025-11-25/server/tools#calling-tools) · [2026-07-28版の変更点](https://modelcontextprotocol.io/specification/2026-07-28/changelog)
+
+このJSON-RPCメッセージを運ぶ方法を**トランスポート**と呼びます。2026-07-28版の標準トランスポートは、子プロセスの標準入出力で1メッセージを1行にする `stdio` と、HTTP POSTで送り、JSONまたは要求ごとのSSEストリームで返す Streamable HTTP です。上のコードはどちらでも使うメッセージ本体です。Streamable HTTPでは要求のプロトコル版やメソッド名、`tools/call` ならツール名をヘッダーにも入れます。2025-11-25版にあったGETによるストリームとプロトコルのセッションは、2026-07-28版で廃止されました。[Transports](https://modelcontextprotocol.io/specification/2026-07-28/basic/transports) · [Streamable HTTP](https://modelcontextprotocol.io/specification/2026-07-28/basic/transports/streamable-http) · [2025-11-25版のTransports](https://modelcontextprotocol.io/specification/2025-11-25/basic/transports)
 
 ## 対応能力と実行の許可は別に決まる
 
@@ -147,6 +149,8 @@ flowchart TD
 2026年11月18日に、WindowsのPython 3.12.4で架空の `server/discover`、`tools/list`、`tools/call` の要求と応答を3組検証しました。2026-07-28版の公式JSON Schemaの該当定義に照らし、要求IDの対応、能力の宣言、引数の形式、$90 / 60 = 1.5$ の結果を確認しました。引数を1つ欠く場合や `fps` が0の場合など、無効な入力も検査しました。[公式JSON Schema](https://github.com/modelcontextprotocol/modelcontextprotocol/blob/main/schema/2026-07-28/schema.json)
 
 検証対象は教材用のJSONと換算式です。実際のMCPクライアントとサーバー間の通信、認可、モデルによるツール選択は仕様と公式文書に基づく説明です。
+
+2026年11月20日に両版の仕様を再確認し、掲載の `tools/call` の要求と完了応答のJSON、版、対応する `id`、換算値を再検査しました。旧版との差と追加入力の流れは仕様で確認した範囲です。
 
 ## 関連項目
 

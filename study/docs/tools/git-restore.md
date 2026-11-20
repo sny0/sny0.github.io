@@ -46,13 +46,15 @@ flowchart TD
 
 `enemy.txt` が `hp=10` のコミットAの次に、`hp=20` のコミットBを作り、`main` の先端をBにしました。同じファイルを `hp=30` にしてステージしてから、作業ツリーだけ `hp=40` に編集しました。次の表は、この初期状態を用意した別々の使い捨てリポジトリで、各オプションを実行したあとのHPです。対象は `enemy.txt` で、すべての行で `HEAD` はHP20のBを指します。Aを復元元にする例では `--source=a57b882` を使いました。
 
-| オプション | index | 作業ツリー |
+| やりたいことと指定 | index | 作業ツリー |
 | --- | --- | --- |
-| 省略、または<br>`--worktree` | 30 | 30 |
-| `--staged` | 20 | 40 |
-| `--staged`<br>`--worktree` | 20 | 20 |
-| Aを `--source` に指定<br>`--worktree` | 30 | 10 |
-| Aを `--source` に指定<br>`--staged`<br>`--worktree` | 10 | 10 |
+| 未ステージの編集を戻す<br>オプション省略、または `--worktree` | 30 | 30 |
+| 編集を残してステージを外す<br>`--staged` | 20 | 40 |
+| 両方を最後のコミットに揃える<br>`--staged --worktree` | 20 | 20 |
+| 作業ファイルだけAの版にする<br>Aを `--source` に指定し、`--worktree` | 30 | 10 |
+| 両方をAの版にする<br>Aを `--source` に指定し、`--staged --worktree` | 10 | 10 |
+
+作業ツリーへ復元する行では、未ステージのHP40が上書きされます。残したい編集がある場合は、作業ツリーとindexの差分を確認してから復元先を選びます。[Git公式のrestoreマニュアル](https://git-scm.com/docs/git-restore#_options)
 
 オプションなしで `git restore -- enemy.txt` を実行した直後の出力です。`70e721f` が元の先端Bです。`git show ':enemy.txt'` はindexから読み、PowerShellの `Get-Content` は作業ファイルを読みます。[Git公式のリビジョン指定](https://git-scm.com/docs/gitrevisions)
 

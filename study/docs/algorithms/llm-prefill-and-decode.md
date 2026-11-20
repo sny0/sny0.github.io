@@ -15,7 +15,7 @@ study:
 
 ストリーミングで文章が返ってくるとき、すぐ書き始めて途中で間が空く応答も、少し待ってから続けて出てくる応答もあります。書き始めの待ち時間は、入力を読む計算や、サーバーで実行を待つ時間にも左右されます。書き始めてからの間隔には、続きのトークンを求める計算や配信の間隔が効きます。どちらを改善したいかによって、見るべき時刻も変わります。[vLLMのBenchmark CLI](https://docs.vllm.ai/en/latest/benchmarking/cli/#understanding-the-latency-metrics) · [DistServe原論文 §2–3](https://arxiv.org/html/2401.09670#S2)
 
-ここでは、因果マスク付きのTransformerで、各リクエストで1トークンずつ続きを生成し、出力をストリーミングする場合を考えます。前提となる生成の流れや、何をキャッシュするかは関連記事で確認できます。[LLMの文章生成](/algorithms/llm-text-generation.html) · [KVキャッシュ](/algorithms/kv-cache.html)
+**prefill** は、既知の入力列をまとめて処理し、最初の出力を選ぶ段階です。**decode** は、直前に選んだトークンを入力にして続きを求める段階です。ここでは、因果マスク付きのTransformerで、各リクエストで1トークンずつ続きを生成し、出力をストリーミングする場合を考えます。[PagedAttention原論文 §2.2](https://arxiv.org/html/2309.06180#S2.SS2) · [LLMの文章生成](/algorithms/llm-text-generation.html) · [KVキャッシュ](/algorithms/kv-cache.html)
 
 ## TTFTと出力間隔は、違う時刻を引く
 
@@ -53,7 +53,7 @@ flowchart TD
 
 ## 入力はまとめられ、続きは前の結果を待つ
 
-入力のトークンは、生成を始める前に分かっています。prefillでは各層に入る全位置の表現から、位置ごとのQ・K・Vを作ります。因果マスクでは、同じ層の位置1は位置1まで、位置2は位置2までというように参照範囲を限ります。位置2が参照する位置1のK・Vは前の層の表現から作るため、同じ層の位置1のAttention出力を待つ必要はありません。前の層から必要な表現がそろえば、マスクで参照先を制限したまま、各位置の計算をまとめられます。[Transformer原論文 §3.2](https://arxiv.org/html/1706.03762v7#S3.SS2) · [PagedAttention原論文 §2.2](https://arxiv.org/html/2309.06180#S2.SS2)
+入力のトークンは、生成を始める前に分かっています。prefillでは各層に入る全位置の表現から、位置ごとのQ・K・Vを作ります。ここでは位置を1始まりで数えます。因果マスクは、同じ層の位置1は位置1だけ、位置2は位置1と2というように参照範囲を限ります。位置2が参照する位置1のK・Vは前の層の表現から作るため、同じ層の位置1のAttention出力を待つ必要はありません。前の層から必要な表現がそろえば、マスクで参照先を制限したまま、各位置の計算をまとめられます。[Transformer原論文 §3.2](https://arxiv.org/html/1706.03762v7#S3.SS2) · [PagedAttention原論文 §2.2](https://arxiv.org/html/2309.06180#S2.SS2)
 
 ```mermaid
 ---
@@ -88,7 +88,7 @@ prefillで多くの位置をまとめると、一度読み出した重みを多�
 
 ## 時刻差と因果マスクのペア数を確かめる
 
-コードは図と表にある時刻をそのまま使います。各受信イベントは1トークン分で、時刻はすべて同じ説明用の基準にそろえています。もう一つの計算では、各クエリ位置が自分とそれ以前のKを参照するとして、許可されるペアを数えます。
+コードは図と表にある時刻をそのまま使います。各受信イベントは1トークン分で、時刻はすべて同じ説明用の基準にそろえています。もう一つの計算では、各クエリ位置が自分とそれ以前のKを参照するとして、許可されるペアを数えます。`itertools.pairwise` を使うため、Python 3.10以降で実行します。[Python標準ライブラリのpairwise](https://docs.python.org/3.10/library/itertools.html#itertools.pairwise)
 
 ```python
 from itertools import pairwise

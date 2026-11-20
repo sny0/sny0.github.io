@@ -19,9 +19,9 @@ LLMの生成では、すでにあるトークン列を条件にして次のト�
 
 トークンIDは語彙中の識別子です。埋め込み（embedding）では、IDに対応する学習済みの数値ベクトルを表から読み出します。同じIDには同じ表の行が対応しますが、その後の層で計算される表現は、位置や周囲の入力によって変わります。[Transformer原論文 §3.4](https://arxiv.org/html/1706.03762v7#S3.SS4)
 
-原論文のTransformerは、埋め込みを $\sqrt{d_{\mathrm{model}}}$ 倍してから位置ベクトルを加えます。位置表現にはsinとcosを使い、学習する位置埋め込みとも比較しています。位置情報は、列のどこにある入力かを計算へ渡すためのものです。たとえばRoPEではQとKのベクトルに位置依存の回転を適用する方法があり、モデルによって位置の渡し方は変わります。[Transformer原論文 §3.5](https://arxiv.org/html/1706.03762v7#S3.SS5) · [RoFormer原論文](https://arxiv.org/abs/2104.09864)
+原論文のTransformerは、埋め込みを $\sqrt{d_{\mathrm{model}}}$ 倍してから位置ベクトルを加えます。位置表現にはsinとcosを使い、学習する位置埋め込みとも比較しています。位置情報は、列のどこにある入力かを計算へ渡すためのものです。位置の渡し方はモデルによって変わります。[Transformer原論文 §3.5](https://arxiv.org/html/1706.03762v7#S3.SS5)
 
-この教材では、加算直前の埋め込み $E$ と位置ベクトル $P$ を手で決めます。3トークンの列をA、B、Aとし、1行が1位置を表す行列として $X=E+P$ を計算します。実際のモデルの語彙や重みを測った数値ではありません。
+この教材では、加算直前の埋め込み $E$ と位置ベクトル $P$ を手で決めます。3トークンの列をA、B、Aとし、位置は0始まりで数えます。1行が1位置を表す行列として $X=E+P$ を計算します。実際のモデルの語彙や重みを測った数値ではありません。
 
 | 位置とトークン | $E$ の行 | $P$ の行 |
 | --- | --- | --- |
@@ -37,15 +37,13 @@ $$
 
 ## Q・Kで参照の重みを求め、Vを混ぜる
 
-このself-attentionでは、入力の行列 $X$ から、学習する投影行列 $W_Q,W_K,W_V$ を使って三つの行列を作ります。固定重みでの推論中は投影行列を保持し、入力に応じてQ・K・Vを計算します。[Transformer原論文 §3.2.2](https://arxiv.org/html/1706.03762v7#S3.SS2.SSS2)
+自己注意では、出力を求める位置の **Query（Q）** を参照先の **Key（K）** と比較し、参照先から受け取る **Value（V）** の混ぜ方を決めます。固定重みで推論するときは、学習済みの射影行列 $W_Q,W_K,W_V$ を入力の行列 $X$ に掛け、各位置のQ・K・Vを作ります。[Transformer原論文 §3.2.2](https://arxiv.org/html/1706.03762v7#S3.SS2.SSS2)
 
 $$
 Q=XW_Q,\qquad K=XW_K,\qquad V=XW_V
 $$
 
-- **Query（Q）** は、出力を求める各位置のベクトルです。
-- **Key（K）** は、各参照位置に対応するベクトルです。Qとの内積が、その位置を参照するスコアになります。
-- **Value（V）** は、そのスコアから求めた係数で混ぜる情報です。
+たとえばRoPEは、QとKに位置に応じた回転を適用して位置情報を計算に取り込みます。[RoFormer原論文](https://arxiv.org/abs/2104.09864)
 
 ```mermaid
 ---
@@ -57,7 +55,7 @@ config:
 ---
 flowchart TD
     accTitle: 埋め込みと位置情報からself-attentionの出力を作る流れ
-    accDescr: トークンIDから埋め込みと位置情報を持つXを作り、別々の投影でQ・K・Vを得る。QとKの内積をスケールし、未来の位置をマスクしてsoftmaxを計算する。その係数でVを混ぜて、位置ごとの表現を得る。
+    accDescr: トークンIDから埋め込みと位置情報を持つXを作り、別々の射影でQ・K・Vを得る。QとKの内積をスケールし、未来の位置をマスクしてsoftmaxを計算する。その係数でVを混ぜて、位置ごとの表現を得る。
     id["トークンIDの列"] --> x["埋め込み＋位置情報 X"]
     x --> q["Q"]
     x --> k["K"]
@@ -85,7 +83,7 @@ $$
 
 ## 3トークン・2次元で、位置1の出力を計算する
 
-この例では投影行列も説明用に決めます。$W_K$ は単位行列で、$W_Q$ と $W_V$ は異なる変換です。
+この例では射影行列も説明用に決めます。$W_K$ は単位行列で、$W_Q$ と $W_V$ は異なる変換です。
 
 $$
 \begin{aligned}
@@ -132,7 +130,7 @@ Attention係数の0.669762は、位置1のValueを混ぜる重みです。ここ
 
 ## 掲載例をローカルで計算する
 
-次は1ヘッドの位置1だけを出力する、単体で動くPythonの例です。`position` は0始まりです。重みと入力はすべて教材用の固定値です。行列積・マスク・softmax・Vの重み付き和という計算順は、PyTorch公式資料の相当コードでも確認できます。[PyTorch 2.9のscaled dot-product attention](https://docs.pytorch.org/docs/2.9/generated/torch.nn.functional.scaled_dot_product_attention.html)
+次は1ヘッドの位置1だけを出力する例です。Python 3.12.4の標準ライブラリで検証しました。`position` は0始まりです。重みと入力はすべて教材用の固定値です。PyTorch 2.15の公式資料では、ドロップアウトを無効にした場合の行列積・マスク・softmax・Vの重み付き和の順序を確認できます。[PyTorch 2.15のscaled dot-product attention](https://docs.pytorch.org/docs/2.15/generated/torch.nn.functional.scaled_dot_product_attention.html)
 
 ```python
 import math
@@ -186,7 +184,7 @@ output 2.339523 0.660477
 
 ## Attentionの出力から、次の層と語彙の確率へ
 
-multi-head attentionは、異なる投影行列で複数のヘッドを計算し、出力を連結してさらに投影します。原論文のブロックには、残差接続、Layer Normalization、各位置に同じ関数を使うFFN（Feed-Forward Network）もあります。FFNは、attentionで混ぜたあとの各位置の特徴を変換します。これらを層として重ね、最終的な位置の表現を語彙へのスコアとsoftmaxにつなげます。[Transformer原論文 §3.1〜§3.4](https://arxiv.org/html/1706.03762v7#S3)
+multi-head attentionは、異なる射影行列で複数のヘッドを計算し、出力を連結してさらに射影します。原論文のブロックには、残差接続、Layer Normalization、各位置に同じ関数を使うFFN（Feed-Forward Network）もあります。FFNは、attentionで混ぜたあとの各位置の特徴を変換します。これらを層として重ね、最終的な位置の表現を語彙へのスコアとsoftmaxにつなげます。[Transformer原論文 §3.1〜§3.4](https://arxiv.org/html/1706.03762v7#S3)
 
 原論文の全体構成はencoderとdecoderを持つ翻訳モデルです。今回の教材はそのうち生成側の因果的self-attentionを抜き出しており、語彙の出力層まで含めたLLM全体の実装ではありません。位置表現や正規化の場所など、後続のモデルで変わる部分もあります。[Transformer原論文 §3.1](https://arxiv.org/html/1706.03762v7#S3.SS1)
 
@@ -206,7 +204,7 @@ softmaxの前のスコアをマスクします。この例では位置2を負の
 
 ## 検証範囲
 
-2026年11月18日に、WindowsのPython 3.12.4の標準ライブラリで、3トークン・2次元・1ヘッドの教材用行列を検算しました。埋め込みと位置の加算、Q/K/Vの投影、スコア、マスク、softmax、Vの重み付き和と掲載コードの出力を確認しました。全3位置のマスク付き・なしの結果を比べ、未来の入力変更に対する先行位置の不変性も確認しています。
+2026年11月18日に、WindowsのPython 3.12.4の標準ライブラリで、3トークン・2次元・1ヘッドの教材用行列を検算しました。埋め込みと位置の加算、Q/K/Vの射影、スコア、マスク、softmax、Vの重み付き和と掲載コードの出力を確認しました。全3位置のマスク付き・なしの結果を比べ、未来の入力変更に対する先行位置の不変性も確認しています。
 
 入力と重みは説明用に手で決めた値です。実際の語彙埋め込み、学習済みモデル、学習による更新、multi-head、残差接続、正規化、FFN、語彙出力層、RoPEは実測していません。これらは原論文に基づく説明です。
 
@@ -229,4 +227,4 @@ softmaxの前のスコアをマスクします。この例では位置2を負の
 - [Vaswaniら — Attention Is All You Need（2017）](https://arxiv.org/abs/1706.03762)
 - [Transformer原論文 — HTML版のモデル構成](https://arxiv.org/html/1706.03762v7#S3)
 - [Suら — RoFormer: Enhanced Transformer with Rotary Position Embedding](https://arxiv.org/abs/2104.09864)
-- [PyTorch 2.9 — scaled_dot_product_attention](https://docs.pytorch.org/docs/2.9/generated/torch.nn.functional.scaled_dot_product_attention.html)
+- [PyTorch 2.15 — scaled_dot_product_attention](https://docs.pytorch.org/docs/2.15/generated/torch.nn.functional.scaled_dot_product_attention.html)

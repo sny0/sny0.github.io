@@ -31,7 +31,7 @@ flowchart TD
 
 同じ座標とHPでも、攻撃のクールダウンが残り1 tickか、すでに終わっているかで、次の攻撃入力の結果は変わります。途中から再生したり巻き戻したりするなら、クールダウン、保留中のイベント、乱数生成器の現在の状態など、**復元後の更新に影響する値**を保存します。保存した値から同じ結果を再構築できるデータは、復元時に作り直せます。ビルドやルール、ゲームデータの版も変わり得るなら、照合対象の条件として記録します。[GGPO の状態保存・復元コールバック](https://github.com/pond3r/ggpo/blob/master/src/include/ggponet.h#L183-L225)
 
-シード（seed）は乱数列を始めるための値です。途中の状態を復元したい場合は、その時点の生成器の状態が要ります。Unity 6.3では `Random.state` がこの用途のAPIです。分布オブジェクトにも内部状態を持つものがあるので、使っている場合はその状態も復元の対象になります。[Unity 6.3 の `Random.state`](https://docs.unity3d.com/6000.3/Documentation/ScriptReference/Random-state.html) · [C++規格草案の乱数分布の要件](https://eel.is/c++draft/rand.req.dist)
+シード（seed）は乱数列を始めるための値です。途中から直ちに再開する場合は、次の抽選に使う生成器の状態を復元します。シードだけを設定し直すと列の先頭に戻ります。開始からの再生で復元する場合は、生成器の使い方と、どのtickで誰に値を渡したかもそろえます。Unity 6.3では `Random.state` がこの用途のAPIです。分布オブジェクトにも内部状態を持つものがあるので、使っている場合はその状態も復元の対象になります。[Unity 6.3 の `Random.state`](https://docs.unity3d.com/6000.3/Documentation/ScriptReference/Random-state.html) · [C++規格草案の乱数分布の要件](https://eel.is/c++draft/rand.req.dist)
 
 ## 同じ乱数列でも、使う相手で結果が変わる
 

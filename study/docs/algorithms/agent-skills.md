@@ -8,7 +8,7 @@ study:
   domain: algorithms
   summary: SKILL.mdの名前と説明から手順を選び、本文・資料・スクリプトを段階的に使う流れを、ゲームのフレーム時間の例で追う。
   aliases: [Agent Skills, エージェントスキル, SKILL.md, progressive disclosure, 段階的な読み込み]
-  verification: Agent Skills共通仕様とClaude公式文書に照合。教材のYAML・相対パスとPython 3.12.4の換算結果をローカル検証（2026-11-18）
+  verification: Agent Skills共通仕様とClaude公式文書に照合。教材のYAML・相対パスとPython 3.12.4の換算結果をローカル検証（2026-11-20）
 ---
 
 # Agent Skillsの仕組み — 手順と資料を必要なときに読み込む
@@ -17,7 +17,9 @@ study:
 
 ## 名前と説明で見つけ、本文と資料を順に使う
 
-Skillの入口は `SKILL.md` です。先頭にYAMLのメタデータ（frontmatter）があり、そのあとにMarkdownの手順が続きます。共通仕様で必須の項目は `name` と `description` です。`name` は1〜64文字で親ディレクトリ名と一致させます。`description` は1〜1024文字で、何をするSkillか、どの場面で使うかを書きます。`references/`、`scripts/`、`assets/` は用途に応じて資料、コード、テンプレートなどをまとめるための任意の構成です。[Agent Skills公式仕様](https://agentskills.io/specification)
+Skillの入口は `SKILL.md` です。先頭にYAMLのメタデータ（frontmatter）があり、そのあとにMarkdownの手順が続きます。共通仕様で必須の項目は `name` と `description` です。`description` は1〜1024文字で、何をするSkillか、どの場面で使うかを書きます。`references/`、`scripts/`、`assets/` は用途に応じて資料、コード、テンプレートなどをまとめるための任意の構成です。[Agent Skills公式仕様](https://agentskills.io/specification)
+
+`name` は1〜64文字で親ディレクトリ名と一致させます。共通仕様はUnicodeの小文字の英数字とハイフンを指定し、`a-z` と `0-9` を例示しています。先頭・末尾のハイフンと連続する `--` は使えません。参照バリデーターはUnicodeの英数字を判定します。対応する文字や予約名は製品でも確認します。たとえばClaude Platformでは `anthropic` と `claude` が予約語です。[Agent Skills公式仕様のname](https://agentskills.io/specification#name-field) · [参照バリデーター](https://github.com/agentskills/agentskills/blob/main/skills-ref/src/skills_ref/validator.py) · [Claude PlatformのSkill構成](https://platform.claude.com/docs/en/agents-and-tools/agent-skills/overview#skill-structure)
 
 ```mermaid
 ---
@@ -36,7 +38,7 @@ flowchart TD
     runner --> resultText["計算結果"]
 ```
 
-この段階的な読み込みを **progressive disclosure** と呼びます。アプリはファイルから名前と説明を取り出して一覧を作り、モデルが対象を判断できるようにします。選ばれたSkillの本文が会話の文脈に入り、本文が参照する資料は必要に応じて追加されます。発見のためにアプリがファイルを開くことと、その内容をモデルへの入力に含めることは別の処理です。一覧の作り方や、利用者が明示して選ぶ方法には製品差があります。[Agent Skills公式仕様のProgressive disclosure](https://agentskills.io/specification#progressive-disclosure) · [クライアント実装ガイド](https://agentskills.io/client-implementation/adding-skills-support)
+この**段階的開示（progressive disclosure）**では、候補を探す段階では名前と説明を提示し、採用した時点で `SKILL.md` の本文を読み込み、作業で必要になった時点で参照資料やコードを使います。詳しい資料を別ファイルに置くと、候補を並べる段階でその全文をモデルへ渡さずに済みます。発見のためにアプリがファイルを開くことと、その内容をモデルへの入力に含めることは別の処理です。一覧の作り方や、利用者が明示して選ぶ方法には製品差があります。[Agent Skills公式仕様のProgressive disclosure](https://agentskills.io/specification#progressive-disclosure) · [クライアント実装ガイド](https://agentskills.io/client-implementation/adding-skills-support)
 
 ## ゲームのフレーム時間を扱う小さな例
 
@@ -129,7 +131,7 @@ Skillの読み込みで変わるのは推論に使う文脈です。学習で重
 
 ## 検証範囲
 
-公式仕様と製品の公式文書は2026年11月18日に確認しました。教材は通常のファイルとして置き、入口を `SKILL.md.example` として検証しました。YAMLを解析して必須項目とディレクトリ名の一致を確かめ、本文の相対パスが同梱ファイルを指すことを確認しました。
+公式仕様と製品の公式文書は2026年11月18日と20日に確認しました。教材は通常のファイルとして置き、入口を `SKILL.md.example` として検証しました。YAMLを解析して必須項目とディレクトリ名の一致を確かめ、本文の相対パスが同梱ファイルを指すことを確認しました。
 
 WindowsのPython 3.12.4で掲載スクリプトを通常のプログラムとして実行し、60 FPSと120 FPSの出力を資料の数値と照合しました。0、負数、整数に変換できない文字列など5通りの不正入力も確認しました。モデルによるSkillの選択、本文の読み込み、製品内での動作や権限の適用は、公式文書に基づく説明です。
 

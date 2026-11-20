@@ -17,7 +17,7 @@ study:
 
 ## 少ないビットで、近い値を表す
 
-量子化では、多くの入力値を、限られた数の表現に対応づけます。ここでは、整数コードを等間隔の値に対応づける線形量子化を考えます。正のスケール $s$ は隣り合うコードに対応する復元値の間隔、ゼロ点 $z$ は元の値が0のときのコードです。ONNXの整数向け演算子は、$x/s$ を最近傍の整数に丸め、ちょうど中間なら偶数を選びます。ゼロ点を足してから、コードを使える範囲に収めます。この最後の操作がクリッピング（飽和）です。復元するときは、ゼロ点を引いてスケールを掛けます。[ONNX QuantizeLinear v21](https://onnx.ai/onnx/operators/onnx__QuantizeLinear.html#quantizelinear-21) · [ONNX DequantizeLinear v21](https://onnx.ai/onnx/operators/onnx__DequantizeLinear.html#dequantizelinear-21)
+量子化では、多くの入力値を、限られた数の表現に対応づけます。ここでは、整数コードを等間隔の値に対応づける線形量子化を考えます。正のスケール $s$ は隣り合うコードに対応する復元値の間隔、ゼロ点 $z$ は元の値が0のときのコードです。次の式は、INT4を含む整数型を扱えるONNX opset 21の演算子仕様を参照します。整数への量子化では、$x/s$ を最近傍の整数に丸め、ちょうど中間なら偶数を選びます。ゼロ点を足してから、コードを使える範囲に収めます。この最後の操作がクリッピング（飽和）です。復元するときは、ゼロ点を引いてスケールを掛けます。[ONNX QuantizeLinear v21](https://onnx.ai/onnx/operators/onnx__QuantizeLinear.html#quantizelinear-21) · [ONNX DequantizeLinear v21](https://onnx.ai/onnx/operators/onnx__DequantizeLinear.html#dequantizelinear-21)
 
 $$
 q = \operatorname{clip}(\operatorname{round}(x/s)+z,\ q_{\min},\ q_{\max})
@@ -88,6 +88,8 @@ flowchart TD
 ## 丸め誤差と容量をローカルで確かめる
 
 下のコードでは、入力とスケールを分数で表し、丸めの境目を正確に扱います。`round` の列は丸めた直後、`q` はクリッピング後のコードです。`x_hat` は復元値、`error` は復元値から入力を引いた値です。0.125はスケールで割ると0.5なので、偶数の0に丸められます。
+
+出力で `Fraction` を小数書式にするため、Python 3.12以降で実行します。[Python標準ライブラリのFraction](https://docs.python.org/3.12/library/fractions.html#fractions.Fraction)
 
 容量は、1,024個の重みを2値ずつ1バイトに詰める前提で512 Bです。64個ごとに2バイトのスケールを持つなら、16個で32 Bを追加します。ゼロ点は固定の0とし、ヘッダーやアラインメントの空きは数えません。同じ1,024個をFP16で保持する場合は2,048 Bです。[ONNXのINT4パック規約](https://onnx.ai/onnx/technical/int4.html#packing-and-unpacking)
 

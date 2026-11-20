@@ -17,7 +17,7 @@ study:
 
 ## 同じパスに3つの版がある
 
-作業ツリーには、エディターで最後に保存した `score=20` があります。**index**（ステージング領域）には `git add` した時点でGitが記録する `score=10` を指す項目が残ります。**HEAD** が示す現在のコミットのtreeには、最後にコミットした `score=0` があります。`git add` はindexを更新します。再編集後の内容も入れたいときは、もう一度ステージします。[git-add](https://git-scm.com/docs/git-add#_description) · [Git公式のデータモデル](https://git-scm.com/docs/gitdatamodel#_the_index)
+作業ツリーには、エディターで最後に保存した `score=20` があります。**index**（ステージング領域）には `git add` した時点でGitが記録する `score=10` を指す項目が残ります。**HEAD** が示す現在のコミットのtreeには、最後にコミットした `score=0` があります。`git add` はindexを更新します。再編集後の内容も入れたいときは、もう一度ステージします。[git-add](https://git-scm.com/docs/git-add#_description) · [Git公式のデータモデル](https://git-scm.com/docs/gitdatamodel#index)
 
 ```mermaid
 flowchart TD
@@ -33,7 +33,7 @@ flowchart TD
 
 ## indexは次のスナップショットの項目を持つ
 
-indexを読むと、変更箇所だけではなく、次のコミットで使うパスと保存内容の対応が見えます。通常のファイルの項目にはパス、モード、blob IDなどがあります。`git ls-files --stage` の表示はモード、オブジェクトID、ステージ番号、パスの順です。この例の `0` は競合していない項目です。`git show ':score.txt'` はそのindex項目が指すblobを、`git show 'HEAD:score.txt'` はHEADのコミット側のblobを読みます。[Git公式のデータモデル](https://git-scm.com/docs/gitdatamodel#_the_index) · [git-ls-files](https://git-scm.com/docs/git-ls-files#_output) · [gitrevisions](https://git-scm.com/docs/gitrevisions#_specifying_revisions)
+indexを読むと、変更箇所だけではなく、次のコミットで使うパスと保存内容の対応が見えます。通常のファイルの項目にはパス、モード、blob IDなどがあります。`git ls-files --stage` の表示はモード、オブジェクトID、ステージ番号、パスの順です。この例の `0` は競合していない項目です。マージ競合中の1〜3は、基準・現在側・相手側の版を区別する番号です。[Gitのマージ](/tools/git-three-way-merge.html)に具体例があります。`git show ':score.txt'` はそのindex項目が指すblobを、`git show 'HEAD:score.txt'` はHEADのコミット側のblobを読みます。[Git公式のデータモデル](https://git-scm.com/docs/gitdatamodel#index) · [git-ls-files](https://git-scm.com/docs/git-ls-files#_output) · [gitrevisions](https://git-scm.com/docs/gitrevisions#_specifying_revisions)
 
 ```text
 $ git ls-files --stage
@@ -84,7 +84,7 @@ indexの項目は次のtreeを組み立てるために使います。変更し�
 
 ## 参考資料
 
-- [Git公式 — データモデルのindex](https://git-scm.com/docs/gitdatamodel#_the_index)
+- [Git公式 — データモデルのindex](https://git-scm.com/docs/gitdatamodel#index)
 - [Git公式 — git-add](https://git-scm.com/docs/git-add#_description) · [git-ls-files](https://git-scm.com/docs/git-ls-files#_output)
 - [Git公式 — git-diff](https://git-scm.com/docs/git-diff#_description) · [git-status](https://git-scm.com/docs/git-status#_short_format)
 - [Git公式 — git-write-tree](https://git-scm.com/docs/git-write-tree) · [git-commit](https://git-scm.com/docs/git-commit#_description)

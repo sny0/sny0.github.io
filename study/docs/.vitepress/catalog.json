@@ -1068,7 +1068,7 @@
         "progressive disclosure",
         "段階的な読み込み"
       ],
-      "verification": "Agent Skills共通仕様とClaude公式文書に照合。教材のYAML・相対パスとPython 3.12.4の換算結果をローカル検証（2026-11-18）",
+      "verification": "Agent Skills共通仕様とClaude公式文書に照合。教材のYAML・相対パスとPython 3.12.4の換算結果をローカル検証（2026-11-20）",
       "links": [
         "/tools/profiling/cpu-profiling.html",
         "/algorithms/llm-text-generation.html",
@@ -1127,7 +1127,7 @@
         "エージェントの実行ループ",
         "サンドボックス"
       ],
-      "verification": "OpenAI Agents APIとAgents SDKの公式資料に照合。WindowsのPython 3.12.4で、教材用の実行ループの履歴、入力の拒否、回数上限を検証（2026-11-18）",
+      "verification": "OpenAI Agents APIとAgents SDKの公式資料に照合。WindowsのPython 3.12.4で、教材用の実行ループの履歴、入力の拒否、回数上限を検証（2026-11-20）",
       "links": [
         "/algorithms/agent-skills.html",
         "/algorithms/model-context-protocol.html",
@@ -4185,7 +4185,7 @@
         "一様シャッフル",
         "一様ランダム順列"
       ],
-      "verification": "Durstenfeldの原論文、Java SE 24の公式API、乱数の範囲変換の原論文に照合し、Windows x64のPython 3.12.4で2方式の全経路を列挙（2026-11-16）",
+      "verification": "Durstenfeldの原論文、Java SE 25の公式API、乱数の範囲変換の原論文に照合し、Windows x64のPython 3.12.4で2方式の全経路を列挙（2026-11-20）",
       "links": [
         "/game/shuffle-bag.html",
         "/game/random-streams.html",
@@ -4354,7 +4354,7 @@
         "ツール呼び出し",
         "call_id"
       ],
-      "verification": "OpenAI公式のFunction calling・Structured Outputs、JSONとJSON Schemaの仕様に照合し、模擬応答の検査・結果返却をPython 3.12.4でローカル検証（2026-11-18）",
+      "verification": "OpenAI公式のFunction calling・Structured Outputs、JSONとJSON Schemaの仕様に照合し、模擬応答の検査・結果返却をPython 3.12.4でローカル検証（2026-11-20）",
       "links": [
         "/algorithms/agent-harness.html",
         "/algorithms/model-context-protocol.html",
@@ -4602,6 +4602,7 @@
       "links": [
         "/tools/git-objects.html",
         "/tools/git-staging-index.html",
+        "/tools/git-stash.html",
         "/tools/git-revert.html",
         "/tools/git-reflog.html",
         "/tools/git-restore.html"
@@ -4661,11 +4662,11 @@
       "verification": "Git公式データモデルとコマンド資料に照合し、Windowsの独立したGitリポジトリでindex・差分・次のtreeを確認（2026-11-17）",
       "links": [
         "/tools/git-basics.html",
+        "/tools/git-three-way-merge.html",
         "/tools/git-objects.html",
         "/tools/git-stash.html",
         "/tools/git-restore.html",
-        "/tools/git-reset.html",
-        "/tools/git-three-way-merge.html"
+        "/tools/git-reset.html"
       ],
       "difficulty": "intermediate",
       "importance": "useful"
@@ -4760,8 +4761,15 @@
       "links": [
         "/tools/git-staging-index.html",
         "/tools/git-objects.html",
+        "/tools/git-restore.html",
+        "/tools/git-reset.html",
         "/tools/git-revert.html",
         "/tools/git-remote-tracking.html",
+        "/tools/git-three-way-merge.html",
+        "/tools/git-rebase.html",
+        "/tools/git-cherry-pick.html",
+        "/tools/git-reflog.html",
+        "/tools/git-stash.html",
         "/tools/terminal-shell-and-commands.html",
         "/os/files-and-paths.html",
         "/tools/reading-official-documentation.html",
@@ -5679,6 +5687,7 @@
       "links": [
         "/data/unicode-and-encoding.html",
         "/game/loot-tables.html",
+        "/algorithms/agent-context-management.html",
         "/math/rendering/matrix.html",
         "/tools/reviewing-ai-generated-code.html",
         "/algorithms/transformer-attention.html",
@@ -5690,7 +5699,6 @@
         "/algorithms/agent-skills.html",
         "/algorithms/agent-harness.html",
         "/algorithms/function-calling-and-structured-outputs.html",
-        "/algorithms/agent-context-management.html",
         "/algorithms/retrieval-augmented-generation.html"
       ],
       "difficulty": "intro",
@@ -5919,7 +5927,7 @@
         "JSON-RPC",
         "ツール呼び出し"
       ],
-      "verification": "MCP公式仕様2026-07-28版に照合し、Python 3.12.4で架空の要求と応答、引数の条件と計算結果をローカル検証（2026-11-18）",
+      "verification": "MCP公式仕様2026-07-28版と2025-11-25版に照合し、Python 3.12.4で架空の要求と応答、引数の条件と計算結果をローカル検証（2026-11-18・2026-11-20）",
       "links": [
         "/algorithms/llm-text-generation.html",
         "/algorithms/transformer-attention.html",
@@ -11681,7 +11689,8 @@
       "links": [
         "/game/loot-tables.html",
         "/algorithms/fisher-yates-shuffle.html",
-        "/game/random-streams.html"
+        "/game/random-streams.html",
+        "/practice/game/input-replay.html"
       ],
       "difficulty": "intermediate",
       "importance": "useful"
@@ -12621,6 +12630,7 @@
       ],
       "verification": "Minecraft Bedrock、WG21 N4659、MIT、Bungieの資料に照合し、Windows x64のMSVC 19.35とGCC 16.2で全20枠のC++例を実行（2026-11-16）",
       "links": [
+        "/algorithms/fisher-yates-shuffle.html",
         "/game/random-streams.html",
         "/algorithms/llm-text-generation.html",
         "/game/patterns/type-object-and-sandbox.html",

@@ -13,7 +13,7 @@ study:
 
 # Gitのrevert — 履歴を消さずに変更を打ち消す仕組み
 
-敵のHPを上げたあと、別のコミットでステージ番号を変えたとします。HPだけを前の値に戻したいなら、Gitの `revert` でHPを下げる変更を新しいコミットとして積めます。後から履歴を読むと、HPを上げた経緯と取り消した経緯の両方が分かります。[Git公式のrevertマニュアル](https://git-scm.com/docs/git-revert#_description)
+敵のHPを上げたあと、別のコミットでゲーム内のステージ番号を変えたとします。HPだけを前の値に戻したいなら、Gitの `revert` でHPを下げる変更を新しいコミットとして積めます。後から履歴を読むと、HPを上げた経緯と取り消した経緯の両方が分かります。[Git公式のrevertマニュアル](https://git-scm.com/docs/git-revert#_description)
 
 ## 親との差を逆向きにし、現在の先端へ適用する
 

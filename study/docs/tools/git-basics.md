@@ -20,7 +20,7 @@ study:
 | 場所 | 入っている内容 |
 | --- | --- |
 | 作業ツリー | エディターやコマンドでいま編集しているファイル。 |
-| ステージング領域（インデックス） | 次のコミットを作るときに使う内容。`git add` を実行した時点のファイル内容で更新する。 |
+| ステージング領域（index、インデックス） | 次のコミットを作るときに使う内容。`git add` を実行した時点のファイル内容で更新する。 |
 | コミット | 履歴に記録された時点の内容。今回の例の `HEAD` は、いま作業しているブランチの最新のコミットを指す。 |
 
 ```mermaid
@@ -128,12 +128,23 @@ score=20
 3. `git add -- score.txt` で20をステージへ入れ、`git diff --staged -- score.txt` で10から20への変更を確認します。
 :::
 
-## 関連項目
+## 次に読むGitの記事
 
-- `git add` した内容をindexがどう保持し、次のコミットへつなぐかを確かめる。[Gitのステージング — 作業ツリー・index・HEAD](/tools/git-staging-index.html)
-- コミットの中身や `HEAD` が指す先を確かめる。[Gitの保存モデル — blob・tree・commitとrefs／HEAD](/tools/git-objects.html)
-- すでにコミットした変更を、打ち消す差分として記録する仕組みを読む。[Gitのrevert — 履歴を消さずに変更を打ち消す仕組み](/tools/git-revert.html)
-- `git status` がブランチの進み・遅れを、どの履歴と比べて表示するかを読む。[Gitのリモート追跡ブランチ — origin/mainはサーバーそのものではない](/tools/git-remote-tracking.html)
+1. [ステージング](/tools/git-staging-index.html) — 作業ツリー・index・HEADを比べる。
+2. [保存モデル](/tools/git-objects.html) — blob、tree、commitと参照のつながりを読む。
+3. [restore](/tools/git-restore.html) — ファイルの復元元と復元先を選ぶ。
+4. [reset](/tools/git-reset.html) — コミットの指定とパスの指定で、どこが変わるかを読む。
+5. [revert](/tools/git-revert.html) — コミットで変更を打ち消す。
+6. [リモート追跡ブランチ](/tools/git-remote-tracking.html) — fetchと手元の履歴の関係を確認する。
+7. [3-way merge](/tools/git-three-way-merge.html) — 共通の基準と両側の先端から統合する。
+8. [rebase](/tools/git-rebase.html) — 変更を新しい基点へ載せ替える。
+9. [cherry-pick](/tools/git-cherry-pick.html) — 選んだコミットの変更を取り込む。
+10. [reflog](/tools/git-reflog.html) — ローカルの参照が以前指していたコミットを探す。
+11. [stash](/tools/git-stash.html) — 作業ツリーとindexを退避する。
+
+このページとrestore・resetで `Get-Content` を使う例はPowerShell用です。Gitの実行記録では、行頭の `$` や `PS>` を除いて入力します。検証に使ったGitの版は各記事の検証範囲に記載しています。
+
+## 関連項目
 - [ターミナル・シェル・コマンドの基本](/tools/terminal-shell-and-commands.html)
 - [ファイルとパス](/os/files-and-paths.html)
 - [公式ドキュメントの読み方](/tools/reading-official-documentation.html)
