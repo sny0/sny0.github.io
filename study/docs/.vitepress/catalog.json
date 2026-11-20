@@ -90,7 +90,7 @@
       "id": "algorithms",
       "title": "データ構造・アルゴリズム",
       "description": "操作手順、計算量、不変条件から道具を選ぶ。",
-      "count": 30,
+      "count": 31,
       "status": "辞典本文あり"
     },
     {
@@ -5669,6 +5669,32 @@
       "importance": "useful"
     },
     {
+      "title": "LLMの連続バッチング（Continuous Batching）— 生成途中でリクエストをどう入れ替えるか",
+      "url": "/algorithms/continuous-batching.html",
+      "file": "algorithms/continuous-batching.md",
+      "domain": "algorithms",
+      "section": "reference",
+      "format": "article",
+      "status": "published",
+      "summary": "到着時刻と出力長の異なる3リクエストで、固定バッチと反復ごとに入れ替える連続バッチングを比べる。",
+      "source": "新規執筆",
+      "aliases": [
+        "連続バッチング",
+        "Continuous Batching",
+        "Iteration-level Scheduling",
+        "反復単位のスケジューリング",
+        "Orca"
+      ],
+      "verification": "Orca、Sarathi-Serve、PagedAttentionの原論文に照合し、WindowsのPython 3.12.4でタイムラインと時刻・処理量の例を検算（2026-11-21）",
+      "links": [
+        "/algorithms/llm-prefill-and-decode.html",
+        "/algorithms/paged-attention.html",
+        "/algorithms/speculative-decoding.html"
+      ],
+      "difficulty": "intermediate",
+      "importance": "useful"
+    },
+    {
       "title": "LLMはどう文章を生成するのか — トークン・次トークン予測・学習と推論",
       "url": "/algorithms/llm-text-generation.html",
       "file": "algorithms/llm-text-generation.md",
@@ -5734,6 +5760,7 @@
         "/algorithms/kv-cache.html",
         "/algorithms/transformer-attention.html",
         "/algorithms/llm-quantization.html",
+        "/algorithms/continuous-batching.html",
         "/algorithms/speculative-decoding.html"
       ],
       "difficulty": "intermediate",
@@ -6422,7 +6449,8 @@
       "links": [
         "/algorithms/kv-cache.html",
         "/os/virtual-memory.html",
-        "/algorithms/llm-prefill-and-decode.html"
+        "/algorithms/llm-prefill-and-decode.html",
+        "/algorithms/continuous-batching.html"
       ],
       "difficulty": "intermediate",
       "importance": "useful"
@@ -17847,7 +17875,8 @@
       "links": [
         "/algorithms/kv-cache.html",
         "/algorithms/llm-prefill-and-decode.html",
-        "/algorithms/llm-text-generation.html"
+        "/algorithms/llm-text-generation.html",
+        "/algorithms/continuous-batching.html"
       ],
       "difficulty": "intermediate",
       "importance": "useful"

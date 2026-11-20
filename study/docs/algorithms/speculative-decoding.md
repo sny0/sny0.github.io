@@ -143,6 +143,7 @@ output: 1/2 3/10 1/5
 
 - [LLMの文章生成](/algorithms/llm-text-generation.html) — 本命だけで次のトークンを選ぶ流れと、greedy・サンプリングの違いを読む。
 - [LLM推論のprefillとdecode](/algorithms/llm-prefill-and-decode.html) — 既知の入力をまとめる理由と、最初の出力までの時間・出力間隔を分けて読む。
+- [連続バッチング](/algorithms/continuous-batching.html) — 複数のリクエストを同時に進めるとき、次の反復に誰を入れるかを図で追う。
 - [KVキャッシュ](/algorithms/kv-cache.html) — 過去の位置のK・Vが再利用できる理由と、保持に必要なメモリを見積もる。
 
 ## 参考資料

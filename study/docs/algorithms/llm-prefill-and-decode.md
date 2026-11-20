@@ -170,6 +170,7 @@ Sarathi-Serveでは、prefillを小分けにして進行中のdecodeと同じバ
 - [LLMの文章生成](/algorithms/llm-text-generation.html) — 次トークンを選び、選んだ結果を次に使う流れを確認する。
 - [TransformerとAttention](/algorithms/transformer-attention.html) — 因果マスクで参照する範囲を制限する計算を読む。
 - [KVキャッシュ](/algorithms/kv-cache.html) — decodeで再利用するテンソルと、その容量を見積もる。
+- [連続バッチング](/algorithms/continuous-batching.html) — 生成の途中で別のリクエストを入れると、最初の出力までの待ちと出力間隔がどう変わるかを比べる。
 - [投機的デコーディング](/algorithms/speculative-decoding.html) — 下書きで続きの候補を用意し、本命のdecodeを複数位置まとめて進める仕組みを読む。
 - [LLMの量子化](/algorithms/llm-quantization.html) — 重みやKVを低ビットで表すと読み出し量や演算にどう影響するかを読む。
 

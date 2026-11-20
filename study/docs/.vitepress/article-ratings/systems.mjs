@@ -24,6 +24,7 @@ export default {
   '/algorithms/kv-cache.html': ['intermediate', 'useful'],
   '/algorithms/paged-attention.html': ['intermediate', 'useful'],
   '/algorithms/llm-prefill-and-decode.html': ['intermediate', 'useful'],
+  '/algorithms/continuous-batching.html': ['intermediate', 'useful'],
   '/algorithms/speculative-decoding.html': ['intermediate', 'useful'],
   '/algorithms/llm-quantization.html': ['intermediate', 'useful'],
   '/algorithms/lora-fine-tuning.html': ['intermediate', 'useful'],

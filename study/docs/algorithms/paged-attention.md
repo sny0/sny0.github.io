@@ -120,6 +120,7 @@ KVのために取り置く枠を減らせると、同じGPUメモリの予算で
 - [KVキャッシュ](/algorithms/kv-cache.html) — 各層のKとVを何の計算に再利用するか、モデル構成から必要な容量をどう見積もるかを読む。
 - [仮想メモリとアドレス変換](/os/virtual-memory.html) — OSのページ表、ページフォルト、コピーオンライトとの共通点と違いを確認する。
 - [LLM推論のprefillとdecode](/algorithms/llm-prefill-and-decode.html) — 処理済みのトークンと生成した直後のトークンを分け、入力処理と生成を追う。
+- [連続バッチング](/algorithms/continuous-batching.html) — KVを置ける範囲で、各反復を実行するリクエストをどう入れ替えるかを読む。
 
 ## 参考資料
 

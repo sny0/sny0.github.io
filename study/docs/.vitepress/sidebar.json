@@ -763,6 +763,10 @@
           "link": "/algorithms/llm-quantization.html"
         },
         {
+          "text": "LLMの連続バッチング（Continuous Batching）— 生成途中でリクエストをどう入れ替えるか",
+          "link": "/algorithms/continuous-batching.html"
+        },
+        {
           "text": "LLMはどう文章を生成するのか — トークン・次トークン予測・学習と推論",
           "link": "/algorithms/llm-text-generation.html"
         },
