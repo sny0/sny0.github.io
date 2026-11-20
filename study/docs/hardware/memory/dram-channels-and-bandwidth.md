@@ -17,6 +17,10 @@ study:
 
 CPUが通常のメモリを読み、キャッシュ階層で要求を満たせずDRAMのデータが必要になると、メモリコントローラーが転送を進めます。例えばCPUが大きな配列を読むとき、複数のチャネルを使って同時に運べる量を増やせます。一方、次に読むアドレスが前の読み取り結果で決まる場合は、個々の要求を待つ時間が効きます。[Intelのメモリコントローラー資料](https://edc.intel.com/content/www/us/en/design/ipla/software-development-platforms/client/platforms/alder-lake-desktop/12th-generation-intel-core-processors-datasheet-volume-1-of-2/001/memory-controller-mc/) · [Intelの遅延測定の仕組み](https://www.intel.com/content/www/us/en/developer/articles/tool/intelr-memory-latency-checker.html) · [メモリとキャッシュの学習ガイド](/guide/low-level/memory-and-cache.html)
 
+## この記事で分かること
+
+転送率とデータ幅からチャネルの理論帯域を計算できます。大きな配列をまとめて読む場面と、次の読み取り先が直前の結果で決まる場面で、どの指標を見るか判断できます。
+
 ## チャネル、ランク、バンク、行
 
 メモリコントローラーは物理アドレスに対応する場所を選び、待っている読み書きとDRAMのリフレッシュを調整します。一般的なDIMMを使う構成では、場所を次の単位に分けて考えられます。アドレスを各単位へ振り分ける規則はコントローラーや構成で変わります。[Intelのメモリコントローラー資料](https://edc.intel.com/content/www/us/en/design/ipla/software-development-platforms/client/platforms/alder-lake-desktop/12th-generation-intel-core-processors-datasheet-volume-1-of-2/001/memory-controller-mc/) · [Micronのバンクとランクの説明](https://jp.micron.com/sales-support/sales/faqs)
@@ -59,3 +63,10 @@ DDR5の一般的なクライアント向けDIMMでは、データ幅32ビット�
 DDR4-3200では1クロックが0.625 nsです。CASレイテンシーが22クロックの設定なら、`READ`から最初のデータまでの目安は `22 × 0.625 ns = 13.75 ns` です。行を開く時間や切り替える時間は別の項目で、CPU側から見た読み取りには、キャッシュの確認、コントローラーまでの移動、先行する要求を待つ時間なども加わります。[IntelのDDR4-3200タイミング表](https://edc.intel.com/content/www/us/en/design/ipla/software-development-platforms/client/platforms/alder-lake-desktop/12th-generation-intel-core-processors-datasheet-volume-1-of-2/001/system-memory-timing-support_1/) · [Intelのメモリ計測資料](https://www.intel.com/content/www/us/en/developer/articles/tool/intelr-memory-latency-checker.html)
 
 大きな配列のコピーでは、複数の読み取りを先に発行できるため、単位時間あたりの転送量を測ります。ポインターをたどる処理では、次のアドレスを知るまで先へ進めないので、1回ずつの読み取りの遅延が表れやすくなります。テストのデータがキャッシュに収まるか、ほかの処理もDRAMを使うかを揃えて比べます。例えば統合GPUがシステムメモリを共有する構成では、描画中にもCPUが使える帯域や遅延が変わり得ます。[Intelの帯域・負荷時遅延の計測](https://www.intel.com/content/www/us/en/developer/articles/tool/intelr-memory-latency-checker.html) · [CPUとGPU](/hardware/gpu/cpu-vs-gpu.html) · [デバイスとメモリ間のDMA](/hardware/io/dma-and-iommu.html)
+
+## 要点
+
+- チャネルは転送経路です。同じバンクの開いている行を再び読むと、行を開く手順を省けます。
+- 理論帯域は1秒あたりの転送回数に1転送あたりのバイト数を掛けて求めます。独立したチャネルを並行して使える構成では、各チャネルの帯域を足せます。
+- 実測の帯域には、読み書きの切り替え、リフレッシュ、要求の待ちやアクセスの仕方が影響します。
+- 配列コピーでは単位時間の転送量、次のアドレスが直前の結果で決まる読み取りでは1件ごとのレイテンシーが効きます。

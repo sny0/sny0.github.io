@@ -15,6 +15,10 @@ study:
 
 キーボードのキーとゲームパッドのスティックは、形も出す値も違います。ゲーム側では、どちらの入力も「移動する」という同じ操作に対応付けられます。機器から受け取る値とゲーム内の操作の対応を、主に**Unity Input System 1.11**の用語で説明します。[Input Systemのアクション](https://docs.unity3d.com/Packages/com.unity.inputsystem@1.11/manual/Actions.html)
 
+## この記事で分かること
+
+キーやスティックをバインディングで移動などのアクションに結び付ける流れを説明できます。押し続けと押し始めを使い分け、どの更新で入力を使うか判断できます。
+
 ## 機器、操作箇所、ゲームの意味
 
 | 用語 | 表すもの | 例 |
@@ -59,6 +63,13 @@ Unity Input Systemでは、入力イベントを描画フレームに対応し�
 ## プレイ中とメニューで使う操作を切り替える
 
 同じ方向キーでも、プレイ中は移動、メニューでは選択先の変更へ使えます。Input Systemの**Action Map**は、関連するアクションをまとめて有効・無効にする単位です。プレイ用とUI用の入力をどの状態で使うか決めると、メニューを操作したときにキャラクターも動くといった干渉を扱えます。[Input Systemのアクションとマップ](https://docs.unity3d.com/Packages/com.unity.inputsystem@1.11/manual/Actions.html) · [UI用の入力](https://docs.unity3d.com/Packages/com.unity.inputsystem@1.11/manual/UISupport.html)
+
+## 要点
+
+- バインディングは、キーやスティックなどのコントロールを、移動や攻撃などのアクションに結び付けます。
+- 移動では押されている状態を、一回だけの攻撃では押し始めを使うなど、操作に合う情報を選びます。
+- 入力を受け取る時刻とゲームが使う時刻を分けて考えます。固定更新が一フレームに複数回あるなら、発射要求をどの更新で消費するか決めます。
+- バインディングを変えると操作の割り当てを変更できます。Action Mapは、プレイ用やメニュー用のアクションをまとめて切り替える単位です。
 
 画面側の選択や決定は[ゲームUI](/game/basics/ui-layout-and-interaction.html)、ポーズ時の切り替えは[ゲームの状態とポーズ](/game/basics/game-states-and-pause.html)、ゲーム内で決まった結果の通知は[ゲーム内イベント](/game/basics/game-events-and-notifications.html)へ進みます。
 
