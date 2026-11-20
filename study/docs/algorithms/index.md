@@ -34,6 +34,7 @@
 - [LLM推論のprefillとdecode — 最初のトークンを待つ時間と、続きが出る間隔が違う理由](/algorithms/llm-prefill-and-decode.html)
 - [MCPの仕組み — AIモデルと外部ツールをどうつなぐか](/algorithms/model-context-protocol.html)
 - [PagedAttention — LLMのKVキャッシュを、連続した領域に置かなくてよいのはなぜか](/algorithms/paged-attention.html)
+- [Prefillとdecodeの分離：生成を止めずにKVキャッシュをどう引き渡すか](/algorithms/disaggregated-prefill-decode.html)
 - [QLoRAの仕組み — 4ビットで保存した基底重みを凍結し、差分だけを学ぶ](/algorithms/qlora.html)
 - [RAGの仕組み — 検索した資料をどう回答に使うか](/algorithms/retrieval-augmented-generation.html)
 - [TransformerとAttention — 埋め込み・位置情報・Q/K/Vで文脈を計算する](/algorithms/transformer-attention.html)

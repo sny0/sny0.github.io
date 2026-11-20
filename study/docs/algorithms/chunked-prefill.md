@@ -105,6 +105,7 @@ Sarathi-Serveは、進行中のdecodeに先に枠を取り、反復で処理す�
 - [LLM推論のprefillとdecode](/algorithms/llm-prefill-and-decode.html) — 入力処理と生成の違い、最初の出力と続きの測定区間を確認する。
 - [連続バッチング](/algorithms/continuous-batching.html) — 反復の境界で実行するリクエストを入れ替える仕組みを読む。
 - [KVキャッシュ](/algorithms/kv-cache.html) — 処理済みの位置のどの値を保存し、続きの計算で使うかを追う。
+- [Prefillとdecodeの分離](/algorithms/disaggregated-prefill-decode.html) — 同じAとBを別のGPU群で処理し、KVの転送が加わる場合を比べる。
 
 ## 参考資料
 

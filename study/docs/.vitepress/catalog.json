@@ -90,7 +90,7 @@
       "id": "algorithms",
       "title": "データ構造・アルゴリズム",
       "description": "操作手順、計算量、不変条件から道具を選ぶ。",
-      "count": 34,
+      "count": 35,
       "status": "辞典本文あり"
     },
     {
@@ -5601,6 +5601,7 @@
         "/algorithms/llm-text-generation.html",
         "/algorithms/llm-prefill-and-decode.html",
         "/algorithms/chunked-prefill.html",
+        "/algorithms/disaggregated-prefill-decode.html",
         "/algorithms/paged-attention.html",
         "/algorithms/prompt-prefix-cache.html",
         "/algorithms/speculative-decoding.html",
@@ -5793,6 +5794,7 @@
         "/algorithms/prompt-prefix-cache.html",
         "/algorithms/continuous-batching.html",
         "/algorithms/chunked-prefill.html",
+        "/algorithms/disaggregated-prefill-decode.html",
         "/algorithms/speculative-decoding.html"
       ],
       "difficulty": "intermediate",
@@ -6649,6 +6651,32 @@
         "/runtime/memory/gc-and-csharp-comparison.html"
       ],
       "difficulty": "advanced",
+      "importance": "useful"
+    },
+    {
+      "title": "Prefillとdecodeの分離：生成を止めずにKVキャッシュをどう引き渡すか",
+      "url": "/algorithms/disaggregated-prefill-decode.html",
+      "file": "algorithms/disaggregated-prefill-decode.md",
+      "domain": "algorithms",
+      "section": "reference",
+      "format": "article",
+      "status": "published",
+      "summary": "長い入力Aと生成中のBを同じGPU群で処理する場合と、prefillとdecodeを別のGPU群に分ける場合を比べる。KVの転送費用と、初回応答・出力間隔・goodputへの影響を追う。",
+      "source": "新規執筆",
+      "aliases": [
+        "Prefillとdecodeの分離",
+        "Prefill-Decode Disaggregation",
+        "Disaggregated Prefill",
+        "P/D分離",
+        "DistServe"
+      ],
+      "verification": "DistServeとSarathi-Serveの原論文に照合し、WindowsのPython 3.12.4で概念図の出力時刻とKV転送時間を検算（2026-11-21）",
+      "links": [
+        "/algorithms/chunked-prefill.html",
+        "/algorithms/kv-cache.html",
+        "/algorithms/llm-prefill-and-decode.html"
+      ],
+      "difficulty": "intermediate",
       "importance": "useful"
     },
     {
@@ -12437,7 +12465,8 @@
       "links": [
         "/algorithms/llm-prefill-and-decode.html",
         "/algorithms/kv-cache.html",
-        "/algorithms/continuous-batching.html"
+        "/algorithms/continuous-batching.html",
+        "/algorithms/disaggregated-prefill-decode.html"
       ],
       "difficulty": "intermediate",
       "importance": "useful"

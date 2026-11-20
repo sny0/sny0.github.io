@@ -787,6 +787,10 @@
           "link": "/algorithms/paged-attention.html"
         },
         {
+          "text": "Prefillとdecodeの分離：生成を止めずにKVキャッシュをどう引き渡すか",
+          "link": "/algorithms/disaggregated-prefill-decode.html"
+        },
+        {
           "text": "QLoRAの仕組み — 4ビットで保存した基底重みを凍結し、差分だけを学ぶ",
           "link": "/algorithms/qlora.html"
         },
