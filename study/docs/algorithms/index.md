@@ -40,6 +40,7 @@
 - [スパースセットとECSのコンポーネント管理](/algorithms/sparse-sets.html)
 - [ソート — イントロソート・基数ソート・GPU の描画順](/algorithms/sorting.html)
 - [ハッシュテーブル — 同じ場所に来たキーをどう探すか](/algorithms/hash-tables.html)
+- [プロンプトのプレフィックスキャッシュ — 同じ長い前置きを毎回計算し直さなくてよい理由](/algorithms/prompt-prefix-cache.html)
 - [均等グリッドと空間ハッシュ — 近くの候補をセルで絞る](/algorithms/uniform-grid-and-spatial-hash.html)
 - [経路探索 — A* とナビメッシュ](/algorithms/pathfinding.html)
 - [四分木と八分木 — 必要な場所だけ細かく分ける](/algorithms/quadtrees-and-octrees.html)

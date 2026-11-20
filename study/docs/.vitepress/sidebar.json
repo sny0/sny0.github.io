@@ -811,6 +811,10 @@
           "link": "/algorithms/hash-tables.html"
         },
         {
+          "text": "プロンプトのプレフィックスキャッシュ — 同じ長い前置きを毎回計算し直さなくてよい理由",
+          "link": "/algorithms/prompt-prefix-cache.html"
+        },
+        {
           "text": "均等グリッドと空間ハッシュ — 近くの候補をセルで絞る",
           "link": "/algorithms/uniform-grid-and-spatial-hash.html"
         },

@@ -203,6 +203,7 @@ OpenAI APIのプロンプトキャッシュは、条件を満たす先頭部分�
 - [LLMの文章生成](/algorithms/llm-text-generation.html) — 次トークンを選び、入力の末尾に加える流れを読む。
 - [LLM推論のprefillとdecode](/algorithms/llm-prefill-and-decode.html) — キャッシュを作る段階と読み直す段階を、測定区間と計算の違いから比べる。
 - [PagedAttention](/algorithms/paged-attention.html) — 複数リクエストのKVを固定長のブロックに分けて置く方法を図で追う。
+- [プロンプトのプレフィックスキャッシュ](/algorithms/prompt-prefix-cache.html) — 別のリクエストにまたがって、どの位置のKVを再利用できるかを読む。
 - [投機的デコーディング](/algorithms/speculative-decoding.html) — 候補列を検証するとき、どの位置のK・Vを後の生成に残せるかを読む。
 - [LLMの量子化](/algorithms/llm-quantization.html) — K・Vを少ないビットで表す仕組みと、重みの量子化との違いを読む。
 - [AIエージェントのコンテキスト管理](/algorithms/agent-context-management.html) — 会話履歴から何を入力に残すかを考える。

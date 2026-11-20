@@ -22,6 +22,7 @@ export default {
   '/algorithms/llm-text-generation.html': ['intro', 'useful'],
   '/algorithms/transformer-attention.html': ['intermediate', 'useful'],
   '/algorithms/kv-cache.html': ['intermediate', 'useful'],
+  '/algorithms/prompt-prefix-cache.html': ['intermediate', 'useful'],
   '/algorithms/paged-attention.html': ['intermediate', 'useful'],
   '/algorithms/llm-prefill-and-decode.html': ['intermediate', 'useful'],
   '/algorithms/continuous-batching.html': ['intermediate', 'useful'],
