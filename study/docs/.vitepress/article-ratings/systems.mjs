@@ -25,6 +25,7 @@ export default {
   '/algorithms/prompt-prefix-cache.html': ['intermediate', 'useful'],
   '/algorithms/paged-attention.html': ['intermediate', 'useful'],
   '/algorithms/llm-prefill-and-decode.html': ['intermediate', 'useful'],
+  '/algorithms/chunked-prefill.html': ['intermediate', 'useful'],
   '/algorithms/continuous-batching.html': ['intermediate', 'useful'],
   '/algorithms/speculative-decoding.html': ['intermediate', 'useful'],
   '/algorithms/llm-quantization.html': ['intermediate', 'useful'],

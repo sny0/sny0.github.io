@@ -90,7 +90,7 @@
       "id": "algorithms",
       "title": "データ構造・アルゴリズム",
       "description": "操作手順、計算量、不変条件から道具を選ぶ。",
-      "count": 32,
+      "count": 33,
       "status": "辞典本文あり"
     },
     {
@@ -5573,6 +5573,7 @@
         "/algorithms/agent-context-management.html",
         "/algorithms/llm-text-generation.html",
         "/algorithms/llm-prefill-and-decode.html",
+        "/algorithms/chunked-prefill.html",
         "/algorithms/paged-attention.html",
         "/algorithms/prompt-prefix-cache.html",
         "/algorithms/speculative-decoding.html",
@@ -5690,7 +5691,8 @@
       "links": [
         "/algorithms/llm-prefill-and-decode.html",
         "/algorithms/paged-attention.html",
-        "/algorithms/speculative-decoding.html"
+        "/algorithms/speculative-decoding.html",
+        "/algorithms/chunked-prefill.html"
       ],
       "difficulty": "intermediate",
       "importance": "useful"
@@ -5763,6 +5765,7 @@
         "/algorithms/llm-quantization.html",
         "/algorithms/prompt-prefix-cache.html",
         "/algorithms/continuous-batching.html",
+        "/algorithms/chunked-prefill.html",
         "/algorithms/speculative-decoding.html"
       ],
       "difficulty": "intermediate",
@@ -12379,6 +12382,33 @@
         "/design/case-studies/save-data.html",
         "/design/case-studies/",
         "/design/case-studies/ui-notification.html"
+      ],
+      "difficulty": "intermediate",
+      "importance": "useful"
+    },
+    {
+      "title": "チャンク化prefill：長い入力を分割して、生成中の応答をどう守るか",
+      "url": "/algorithms/chunked-prefill.html",
+      "file": "algorithms/chunked-prefill.md",
+      "domain": "algorithms",
+      "section": "reference",
+      "format": "article",
+      "status": "published",
+      "summary": "長い入力Aのprefillを分割し、生成中のBと一緒に進める流れを、一括処理と比べる。初回応答と出力間隔、チャンクサイズの調整を説明する。",
+      "source": "新規執筆",
+      "aliases": [
+        "チャンク化prefill",
+        "Chunked Prefill",
+        "Chunked Prefills",
+        "分割prefill",
+        "Sarathi-Serve",
+        "Stall-free Batching"
+      ],
+      "verification": "Sarathi-Serveの原論文に照合し、WindowsのPython 3.12.4で概念図の反復とTTFT・出力間隔を検算（2026-11-21）",
+      "links": [
+        "/algorithms/llm-prefill-and-decode.html",
+        "/algorithms/kv-cache.html",
+        "/algorithms/continuous-batching.html"
       ],
       "difficulty": "intermediate",
       "importance": "useful"

@@ -807,6 +807,10 @@
           "link": "/algorithms/sorting.html"
         },
         {
+          "text": "チャンク化prefill：長い入力を分割して、生成中の応答をどう守るか",
+          "link": "/algorithms/chunked-prefill.html"
+        },
+        {
           "text": "ハッシュテーブル — 同じ場所に来たキーをどう探すか",
           "link": "/algorithms/hash-tables.html"
         },

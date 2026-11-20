@@ -172,6 +172,7 @@ Sarathi-Serveでは、prefillを小分けにして進行中のdecodeと同じバ
 - [KVキャッシュ](/algorithms/kv-cache.html) — decodeで再利用するテンソルと、その容量を見積もる。
 - [プロンプトのプレフィックスキャッシュ](/algorithms/prompt-prefix-cache.html) — 共通の入力部分を再利用して、最初の出力までの計算を減らす仕組みを読む。
 - [連続バッチング](/algorithms/continuous-batching.html) — 生成の途中で別のリクエストを入れると、最初の出力までの待ちと出力間隔がどう変わるかを比べる。
+- [チャンク化prefill](/algorithms/chunked-prefill.html) — 長い入力を分けたときの初回応答と、生成中の別の列の出力間隔を比べる。
 - [投機的デコーディング](/algorithms/speculative-decoding.html) — 下書きで続きの候補を用意し、本命のdecodeを複数位置まとめて進める仕組みを読む。
 - [LLMの量子化](/algorithms/llm-quantization.html) — 重みやKVを低ビットで表すと読み出し量や演算にどう影響するかを読む。
 

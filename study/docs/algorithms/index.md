@@ -39,6 +39,7 @@
 - [スタック・キュー・デック — どちらの端から入れ、どちらから取るか](/algorithms/queues-and-deques.html)
 - [スパースセットとECSのコンポーネント管理](/algorithms/sparse-sets.html)
 - [ソート — イントロソート・基数ソート・GPU の描画順](/algorithms/sorting.html)
+- [チャンク化prefill：長い入力を分割して、生成中の応答をどう守るか](/algorithms/chunked-prefill.html)
 - [ハッシュテーブル — 同じ場所に来たキーをどう探すか](/algorithms/hash-tables.html)
 - [プロンプトのプレフィックスキャッシュ — 同じ長い前置きを毎回計算し直さなくてよい理由](/algorithms/prompt-prefix-cache.html)
 - [均等グリッドと空間ハッシュ — 近くの候補をセルで絞る](/algorithms/uniform-grid-and-spatial-hash.html)

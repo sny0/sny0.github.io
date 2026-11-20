@@ -111,6 +111,7 @@ Cの初出力が早まる理由は、待機していたCを早い境界で実行
 ## 関連項目
 
 - [LLM推論のprefillとdecode](/algorithms/llm-prefill-and-decode.html) — 入力処理と逐次生成、待ち時間の測定区間を読む。
+- [チャンク化prefill](/algorithms/chunked-prefill.html) — 参加する列を決めた後、長い入力のどこまでをその反復で進めるかを追う。
 - [PagedAttention](/algorithms/paged-attention.html) — メモリ予算内で各リクエストのKVをどこに置くかを追う。
 - [投機的デコーディング](/algorithms/speculative-decoding.html) — 一つの列について、複数の候補トークンを一度に評価する仕組みを読む。
 
