@@ -140,6 +140,7 @@ Vの加重和にも、以前の基準で計算した指数が入っています�
 
 - [TransformerとAttention](/algorithms/transformer-attention.html) — QとKでスコアを作り、softmaxでVを混ぜる元の計算を読む。
 - [GPUアーキテクチャ](/hardware/gpu/architecture.html) — オンチップの作業領域と、GPUの主メモリの位置づけを確認する。
+- [Rooflineモデル](/hardware/gpu/roofline-model.html) — デバイスメモリとの転送量を減らすと、帯域から決まる演算性能の上限がどう変わるかを読む。
 - [PagedAttention](/algorithms/paged-attention.html) — 過去のKVを離れたブロックへ置き、ブロック表から参照する仕組みを読む。
 
 ## 参考資料

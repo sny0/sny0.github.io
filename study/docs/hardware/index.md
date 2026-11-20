@@ -28,6 +28,7 @@ CPU・GPU・メモリ・デバイスの間で、命令とデータがどう動�
 - [NICの受信キューとRSS — フレームがアプリへ届くまで](/hardware/io/nic-receive-queues.html)
 - [PCI Expressのリンクとレーン](/hardware/io/pcie-links.html)
 - [RAM・キャッシュ・ストレージの違い](/hardware/memory/ram-cache-and-storage.html)
+- [Rooflineモデル：GPUは計算とメモリ転送のどちらで詰まるか](/hardware/gpu/roofline-model.html)
 - [USBキーボードの入力がWindowsのアプリに届くまで — HIDレポートとWM_INPUT](/hardware/io/usb-keyboard-raw-input.html)
 - [コンピュータの部品と役割 — ゲームが動くまで](/hardware/computer-components.html)
 - [ハイブリッドCPUのスケジューリング — コアの特性とスレッドの待ち時間](/hardware/cpu/hybrid-cpu-scheduling.html)

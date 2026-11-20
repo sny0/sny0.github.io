@@ -91,6 +91,10 @@
           "link": "/hardware/memory/ram-cache-and-storage.html"
         },
         {
+          "text": "Rooflineモデル：GPUは計算とメモリ転送のどちらで詰まるか",
+          "link": "/hardware/gpu/roofline-model.html"
+        },
+        {
           "text": "USBキーボードの入力がWindowsのアプリに届くまで — HIDレポートとWM_INPUT",
           "link": "/hardware/io/usb-keyboard-raw-input.html"
         },

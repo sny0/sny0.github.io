@@ -242,6 +242,7 @@ void SplitCS(uint3 id : SV_DispatchThreadID) {
 
 ## 参考資料
 
+- [Rooflineモデル](/hardware/gpu/roofline-model.html) — GPUの演算性能とメモリ帯域から、カーネルの性能上限を比べる。
 - Fabian Giesen, *"A trip through the Graphics Pipeline 2011"* — 全パート必読
 - NVIDIA, 各世代 Architecture Whitepaper (Turing / Ampere / Ada)
 - AMD, *RDNA Architecture* Whitepaper / GPUOpen の ISA ドキュメント

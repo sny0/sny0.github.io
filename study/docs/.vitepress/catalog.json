@@ -34,7 +34,7 @@
       "id": "hardware",
       "title": "ハードウェア",
       "description": "CPU・GPU・メモリ・デバイスの間で、命令とデータがどう動くかを調べる。",
-      "count": 12,
+      "count": 13,
       "status": "辞典本文あり"
     },
     {
@@ -4215,7 +4215,8 @@
       "links": [
         "/algorithms/transformer-attention.html",
         "/hardware/gpu/architecture.html",
-        "/algorithms/paged-attention.html"
+        "/algorithms/paged-attention.html",
+        "/hardware/gpu/roofline-model.html"
       ],
       "difficulty": "intermediate",
       "importance": "useful"
@@ -5022,7 +5023,8 @@
         "/hardware/gpu/cpu-vs-gpu.html",
         "/graphics/pipeline/overview.html",
         "/graphics/compute/shared-memory.html",
-        "/algorithms/flash-attention.html"
+        "/algorithms/flash-attention.html",
+        "/hardware/gpu/roofline-model.html"
       ],
       "difficulty": "advanced",
       "importance": "useful"
@@ -5797,7 +5799,8 @@
         "/algorithms/chunked-prefill.html",
         "/algorithms/disaggregated-prefill-decode.html",
         "/algorithms/speculative-decoding.html",
-        "/algorithms/moe-routing.html"
+        "/algorithms/moe-routing.html",
+        "/hardware/gpu/roofline-model.html"
       ],
       "difficulty": "intermediate",
       "importance": "useful"
@@ -6966,6 +6969,35 @@
         "/graphics/engine/unreal-renderer.html"
       ],
       "difficulty": "advanced",
+      "importance": "useful"
+    },
+    {
+      "title": "Rooflineモデル：GPUは計算とメモリ転送のどちらで詰まるか",
+      "url": "/hardware/gpu/roofline-model.html",
+      "file": "hardware/gpu/roofline-model.md",
+      "domain": "hardware",
+      "section": "reference",
+      "format": "article",
+      "status": "published",
+      "summary": "演算性能とメモリ帯域からGPUカーネルの性能上限を描く。2と200 FLOP/byteを比較し、折れ点、メモリ階層、演算精度、実測の見方を整理する。",
+      "source": "新規執筆",
+      "aliases": [
+        "Rooflineモデル",
+        "Roofline Model",
+        "ルーフラインモデル",
+        "Operational Intensity",
+        "Arithmetic Intensity",
+        "演算強度",
+        "算術強度"
+      ],
+      "verification": "UC Berkeleyの技術報告とNVIDIAのプロファイリング資料に照合し、WindowsのPython 3.12.4で数値例と図の座標を検算（2026-11-21）",
+      "links": [
+        "/hardware/gpu/architecture.html",
+        "/algorithms/flash-attention.html",
+        "/algorithms/llm-prefill-and-decode.html",
+        "/hardware/gpu/what-is-gpu.html"
+      ],
+      "difficulty": "intermediate",
       "importance": "useful"
     },
     {

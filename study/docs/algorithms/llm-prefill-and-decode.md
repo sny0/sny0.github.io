@@ -177,6 +177,7 @@ Sarathi-Serveでは、prefillを小分けにして進行中のdecodeと同じバ
 - [投機的デコーディング](/algorithms/speculative-decoding.html) — 下書きで続きの候補を用意し、本命のdecodeを複数位置まとめて進める仕組みを読む。
 - [LLMの量子化](/algorithms/llm-quantization.html) — 重みやKVを低ビットで表すと読み出し量や演算にどう影響するかを読む。
 - [MoEの仕組み](/algorithms/moe-routing.html) — トークンを専門家に振り分ける計算と、GPU間通信の費用を読む。
+- [Rooflineモデル](/hardware/gpu/roofline-model.html) — カーネルごとに、演算量と転送量から性能上限を読む方法を確認する。
 
 ## 参考資料
 
