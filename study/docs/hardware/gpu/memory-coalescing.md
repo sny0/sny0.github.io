@@ -105,6 +105,7 @@ CUDAの32レーンが読むアドレスから、32バイト区間をいくつ必
 - [GPUアーキテクチャ詳解](/hardware/gpu/architecture.html) — ワープ、キャッシュ、GPUの主メモリの関係を確認する。
 - [GPU実行モデル](/graphics/compute/execution-model.html) — WarpやWaveの実行と、データの並びがメモリアクセスに与える影響を読む。
 - [Rooflineモデル](/hardware/gpu/roofline-model.html) — 計測した転送量から演算強度と性能上限を考える。
+- [GPUのタイル化](/hardware/gpu/matrix-multiplication-tiling.html) — 同じ区間への要求をまとめることと、取り込んだ要素を使い回すことを、行列積で比べる。
 
 ## 参考資料
 

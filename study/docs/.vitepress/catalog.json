@@ -34,7 +34,7 @@
       "id": "hardware",
       "title": "ハードウェア",
       "description": "CPU・GPU・メモリ・デバイスの間で、命令とデータがどう動くかを調べる。",
-      "count": 14,
+      "count": 15,
       "status": "辞典本文あり"
     },
     {
@@ -5115,6 +5115,35 @@
       "importance": "core"
     },
     {
+      "title": "GPUのタイル化：行列積で同じデータをどう使い回すか",
+      "url": "/hardware/gpu/matrix-multiplication-tiling.html",
+      "file": "hardware/gpu/matrix-multiplication-tiling.md",
+      "domain": "hardware",
+      "section": "reference",
+      "format": "article",
+      "status": "published",
+      "summary": "4×4行列の積を2×2の出力タイルに分け、Kを2要素ずつ進める。A・Bを同じブロックで再利用する相手、読み出し要求数、同期、共有メモリ容量を説明する。",
+      "source": "新規執筆",
+      "aliases": [
+        "GPUのタイル化",
+        "行列積のタイル化",
+        "Matrix Multiplication Tiling",
+        "Tiled Matrix Multiplication",
+        "タイル行列積"
+      ],
+      "verification": "NVIDIA CUDA C++ Best Practices GuideとCUDA Programming Guideに照合し、WindowsのPython 3.12.4で4×4の結果と全入力の論理読み出し数を検算（2026-11-21）",
+      "links": [
+        "/math/rendering/matrix.html",
+        "/graphics/compute/execution-model.html",
+        "/graphics/compute/shared-memory.html",
+        "/hardware/gpu/memory-coalescing.html",
+        "/hardware/gpu/roofline-model.html",
+        "/algorithms/flash-attention.html"
+      ],
+      "difficulty": "intermediate",
+      "importance": "useful"
+    },
+    {
       "title": "GPUのメモリアクセスの合体（coalescing）：同じ32要素でも読み込みが増える理由",
       "url": "/hardware/gpu/memory-coalescing.html",
       "file": "hardware/gpu/memory-coalescing.md",
@@ -5137,7 +5166,8 @@
         "/hardware/gpu/what-is-gpu.html",
         "/hardware/gpu/roofline-model.html",
         "/hardware/gpu/architecture.html",
-        "/graphics/compute/execution-model.html"
+        "/graphics/compute/execution-model.html",
+        "/hardware/gpu/matrix-multiplication-tiling.html"
       ],
       "difficulty": "intermediate",
       "importance": "useful"
@@ -7026,7 +7056,8 @@
         "/algorithms/flash-attention.html",
         "/algorithms/llm-prefill-and-decode.html",
         "/hardware/gpu/what-is-gpu.html",
-        "/hardware/gpu/memory-coalescing.html"
+        "/hardware/gpu/memory-coalescing.html",
+        "/hardware/gpu/matrix-multiplication-tiling.html"
       ],
       "difficulty": "intermediate",
       "importance": "useful"
@@ -7222,6 +7253,7 @@
         "/graphics/shader/wgsl.html",
         "/graphics/compute/execution-model.html",
         "/graphics/compute/compute-shader.html",
+        "/hardware/gpu/matrix-multiplication-tiling.html",
         "/graphics/compute/parallel-algorithms.html",
         "/graphics/optimization/basics.html"
       ],

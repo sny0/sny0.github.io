@@ -201,6 +201,7 @@ void HistCS(uint gi : SV_GroupIndex, uint3 dtid : SV_DispatchThreadID)
 
 ## 次に読むべきページ
 
+- [GPUのタイル化](/hardware/gpu/matrix-multiplication-tiling.html) — 行列積でAとBを協調ロードし、同じ共有領域を使い直す前にも同期する理由を読む。
 - [並列アルゴリズム (Reduction/Scan)](/graphics/compute/parallel-algorithms.html) — この道具で作るアルゴリズム
 - [GPU最適化の基礎](/graphics/optimization/basics.html)
 

@@ -79,6 +79,10 @@
           "link": "/hardware/gpu/what-is-gpu.html"
         },
         {
+          "text": "GPUのタイル化：行列積で同じデータをどう使い回すか",
+          "link": "/hardware/gpu/matrix-multiplication-tiling.html"
+        },
+        {
           "text": "GPUのメモリアクセスの合体（coalescing）：同じ32要素でも読み込みが増える理由",
           "link": "/hardware/gpu/memory-coalescing.html"
         },
