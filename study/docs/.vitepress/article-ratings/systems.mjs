@@ -51,6 +51,7 @@ export default {
   '/hardware/cpu/instruction-execution.html': ['intro', 'core'],
   '/hardware/gpu/architecture.html': ['advanced', 'useful'],
   '/hardware/gpu/cpu-vs-gpu.html': ['intermediate', 'core'],
+  '/hardware/gpu/memory-coalescing.html': ['intermediate', 'useful'],
   '/hardware/gpu/roofline-model.html': ['intermediate', 'useful'],
   '/hardware/gpu/what-is-gpu.html': ['intro', 'core'],
   '/hardware/io/dma-and-iommu.html': ['advanced', 'useful'],

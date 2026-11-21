@@ -109,6 +109,7 @@ $$
 
 - [GPUとは何か](/hardware/gpu/what-is-gpu.html) — GPUで多くの仕事を並列に処理する理由を確認する。
 - [GPUアーキテクチャ詳解](/hardware/gpu/architecture.html) — オンチップのキャッシュとGPUの主メモリの関係を読む。
+- [GPUのメモリアクセスの合体](/hardware/gpu/memory-coalescing.html) — アドレスの並びで読み込む区間数が変わる理由と、DRAMの転送量との違いを読む。
 - [FlashAttention](/algorithms/flash-attention.html) — タイル内で中間値を使い、デバイスメモリへの書き出しを減らす方法を追う。
 - [LLM推論のprefillとdecode](/algorithms/llm-prefill-and-decode.html) — 推論の段階ごとに、計算と転送の量が変わる理由を読む。
 

@@ -34,7 +34,7 @@
       "id": "hardware",
       "title": "ハードウェア",
       "description": "CPU・GPU・メモリ・デバイスの間で、命令とデータがどう動くかを調べる。",
-      "count": 13,
+      "count": 14,
       "status": "辞典本文あり"
     },
     {
@@ -5108,10 +5108,39 @@
         "/graphics/compute/execution-model.html",
         "/graphics/pipeline/rasterization.html",
         "/hardware/gpu/cpu-vs-gpu.html",
-        "/graphics/pipeline/overview.html"
+        "/graphics/pipeline/overview.html",
+        "/hardware/gpu/memory-coalescing.html"
       ],
       "difficulty": "intro",
       "importance": "core"
+    },
+    {
+      "title": "GPUのメモリアクセスの合体（coalescing）：同じ32要素でも読み込みが増える理由",
+      "url": "/hardware/gpu/memory-coalescing.html",
+      "file": "hardware/gpu/memory-coalescing.md",
+      "domain": "hardware",
+      "section": "reference",
+      "format": "article",
+      "status": "published",
+      "summary": "CUDAの1ワープで32レーンが4バイトずつ読み、連続なら4区間、2要素刻みなら8区間になる理由を追う。開始アドレスのずれ、キャッシュ、DRAM実測を区別する。",
+      "source": "新規執筆",
+      "aliases": [
+        "GPUメモリアクセスの合体",
+        "メモリコアレッシング",
+        "コアレッシング",
+        "Memory Coalescing",
+        "Coalesced Access",
+        "Strided Access"
+      ],
+      "verification": "NVIDIA CUDA C++ Best Practices GuideとNsight Computeの公式資料に照合し、WindowsのPython 3.12.4で32レーンのアドレスと区間を全列挙（2026-11-21）",
+      "links": [
+        "/hardware/gpu/what-is-gpu.html",
+        "/hardware/gpu/roofline-model.html",
+        "/hardware/gpu/architecture.html",
+        "/graphics/compute/execution-model.html"
+      ],
+      "difficulty": "intermediate",
+      "importance": "useful"
     },
     {
       "title": "GPUパーティクル — Computeで更新し、Indirectで描く",
@@ -5180,6 +5209,7 @@
       "source": "RenderingWiki",
       "aliases": [],
       "links": [
+        "/hardware/gpu/memory-coalescing.html",
         "/hardware/gpu/architecture.html",
         "/graphics/optimization/tools.html",
         "/graphics/compute/compute-shader.html",
@@ -6995,7 +7025,8 @@
         "/hardware/gpu/architecture.html",
         "/algorithms/flash-attention.html",
         "/algorithms/llm-prefill-and-decode.html",
-        "/hardware/gpu/what-is-gpu.html"
+        "/hardware/gpu/what-is-gpu.html",
+        "/hardware/gpu/memory-coalescing.html"
       ],
       "difficulty": "intermediate",
       "importance": "useful"

@@ -79,6 +79,10 @@
           "link": "/hardware/gpu/what-is-gpu.html"
         },
         {
+          "text": "GPUのメモリアクセスの合体（coalescing）：同じ32要素でも読み込みが増える理由",
+          "link": "/hardware/gpu/memory-coalescing.html"
+        },
+        {
           "text": "NICの受信キューとRSS — フレームがアプリへ届くまで",
           "link": "/hardware/io/nic-receive-queues.html"
         },

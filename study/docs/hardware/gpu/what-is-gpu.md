@@ -187,6 +187,7 @@ Debug.Log($"RayTracing対応: {SystemInfo.supportsRayTracing}");
 
 ## 参考資料
 
+- [GPUのメモリアクセスの合体](/hardware/gpu/memory-coalescing.html) — 並列に動くスレッドの読み込みが、アドレスの並びによってどうまとまるかを読む。
 - Fabian Giesen, *"A trip through the Graphics Pipeline 2011"*（The ryg blog）
 - NVIDIA, *GPU Gems* シリーズ (無料公開)
 - Hennessy & Patterson, *Computer Architecture: A Quantitative Approach* — GPU章
