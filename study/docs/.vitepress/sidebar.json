@@ -771,6 +771,10 @@
           "link": "/algorithms/kv-cache.html"
         },
         {
+          "text": "LLMのテンソル並列：1層を複数GPUで計算すると、なぜ通信が要るのか",
+          "link": "/algorithms/tensor-parallelism.html"
+        },
+        {
           "text": "LLMのファインチューニングとLoRAの仕組み — 基底重みを凍結し、差分だけを学ぶ",
           "link": "/algorithms/lora-fine-tuning.html"
         },

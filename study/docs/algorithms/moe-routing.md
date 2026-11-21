@@ -119,6 +119,7 @@ top-1でトークンごとの専門家FFNを1つに絞っても、処理時間�
 - [TransformerとAttention](/algorithms/transformer-attention.html) — トークン表現に文脈を取り込む計算を先に読む。
 - [LLM推論のprefillとdecode](/algorithms/llm-prefill-and-decode.html) — 推論の段階と、演算やメモリ帯域が待ち時間に与える影響を読む。
 - [LLMの量子化](/algorithms/llm-quantization.html) — 重みの個数と保存に必要なバイト数を分けて考える。
+- [LLMのテンソル並列](/algorithms/tensor-parallelism.html) — 専門家への配送と、同じ行列積を分けた部分和の集約を比べる。
 
 ## 参考資料
 

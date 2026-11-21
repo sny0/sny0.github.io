@@ -90,7 +90,7 @@
       "id": "algorithms",
       "title": "データ構造・アルゴリズム",
       "description": "操作手順、計算量、不変条件から道具を選ぶ。",
-      "count": 36,
+      "count": 37,
       "status": "辞典本文あり"
     },
     {
@@ -5698,6 +5698,34 @@
       "importance": "useful"
     },
     {
+      "title": "LLMのテンソル並列：1層を複数GPUで計算すると、なぜ通信が要るのか",
+      "url": "/algorithms/tensor-parallelism.html",
+      "file": "algorithms/tensor-parallelism.md",
+      "domain": "algorithms",
+      "section": "reference",
+      "format": "article",
+      "status": "published",
+      "summary": "行ベクトルの2層MLPで、1つめの重みを出力方向、2つめを入力方向に分ける。部分和のall-reduceと、データ並列・パイプライン並列との違いを追う。",
+      "source": "新規執筆",
+      "aliases": [
+        "テンソル並列",
+        "テンソルモデル並列",
+        "Tensor Parallelism",
+        "Tensor Model Parallelism",
+        "Megatron-LM",
+        "All-Reduce"
+      ],
+      "verification": "Megatron-LM原論文とNCCL公式資料に照合し、WindowsのPython 3.12.4で2層MLPの分割計算・部分和を検算（2026-11-21）",
+      "links": [
+        "/algorithms/transformer-attention.html",
+        "/algorithms/disaggregated-prefill-decode.html",
+        "/algorithms/moe-routing.html",
+        "/hardware/gpu/matrix-multiplication-tiling.html"
+      ],
+      "difficulty": "intermediate",
+      "importance": "useful"
+    },
+    {
       "title": "LLMのファインチューニングとLoRAの仕組み — 基底重みを凍結し、差分だけを学ぶ",
       "url": "/algorithms/lora-fine-tuning.html",
       "file": "algorithms/lora-fine-tuning.md",
@@ -6187,7 +6215,8 @@
       "links": [
         "/algorithms/transformer-attention.html",
         "/algorithms/llm-quantization.html",
-        "/algorithms/llm-prefill-and-decode.html"
+        "/algorithms/llm-prefill-and-decode.html",
+        "/algorithms/tensor-parallelism.html"
       ],
       "difficulty": "intermediate",
       "importance": "useful"
@@ -6766,7 +6795,8 @@
       "links": [
         "/algorithms/chunked-prefill.html",
         "/algorithms/kv-cache.html",
-        "/algorithms/llm-prefill-and-decode.html"
+        "/algorithms/llm-prefill-and-decode.html",
+        "/algorithms/tensor-parallelism.html"
       ],
       "difficulty": "intermediate",
       "importance": "useful"
@@ -7849,6 +7879,7 @@
         "/algorithms/flash-attention.html",
         "/algorithms/llm-prefill-and-decode.html",
         "/algorithms/llm-quantization.html",
+        "/algorithms/tensor-parallelism.html",
         "/algorithms/moe-routing.html",
         "/algorithms/model-context-protocol.html",
         "/algorithms/agent-skills.html",

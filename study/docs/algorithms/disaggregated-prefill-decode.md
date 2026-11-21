@@ -113,6 +113,7 @@ DistServeでの**GPUあたりのgoodput**は、所定のSLO達成率を保てる
 - [チャンク化prefill](/algorithms/chunked-prefill.html) — 同じGPU群で、長い入力Aを分けながらBの出力を返す方法を読む。
 - [LLM推論のprefillとdecode](/algorithms/llm-prefill-and-decode.html) — 入力処理と生成の計算、TTFTと出力間隔の測り方を読む。
 - [KVキャッシュ](/algorithms/kv-cache.html) — どの値を保存するかと、保存容量が増える条件を確認する。
+- [LLMのテンソル並列](/algorithms/tensor-parallelism.html) — GPU群の内側で同じ層を分割し、部分和を足す構成を読む。
 
 ## 参考資料
 
