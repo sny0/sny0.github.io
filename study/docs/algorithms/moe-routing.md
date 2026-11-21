@@ -120,6 +120,7 @@ top-1でトークンごとの専門家FFNを1つに絞っても、処理時間�
 - [LLM推論のprefillとdecode](/algorithms/llm-prefill-and-decode.html) — 推論の段階と、演算やメモリ帯域が待ち時間に与える影響を読む。
 - [LLMの量子化](/algorithms/llm-quantization.html) — 重みの個数と保存に必要なバイト数を分けて考える。
 - [LLMのテンソル並列](/algorithms/tensor-parallelism.html) — 専門家への配送と、同じ行列積を分けた部分和の集約を比べる。
+- [MoEのエキスパート並列](/algorithms/expert-parallelism.html) — 選んだ専門家へ中間ベクトルを送り、結果を元の位置に戻す流れを追う。
 
 ## 参考資料
 

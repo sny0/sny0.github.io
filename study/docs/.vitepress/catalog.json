@@ -90,7 +90,7 @@
       "id": "algorithms",
       "title": "データ構造・アルゴリズム",
       "description": "操作手順、計算量、不変条件から道具を選ぶ。",
-      "count": 37,
+      "count": 38,
       "status": "辞典本文あり"
     },
     {
@@ -5720,6 +5720,7 @@
         "/algorithms/transformer-attention.html",
         "/algorithms/disaggregated-prefill-decode.html",
         "/algorithms/moe-routing.html",
+        "/algorithms/expert-parallelism.html",
         "/hardware/gpu/matrix-multiplication-tiling.html"
       ],
       "difficulty": "intermediate",
@@ -6194,6 +6195,34 @@
       "importance": "specialized"
     },
     {
+      "title": "MoEのエキスパート並列：トークンがGPUを行き来する理由",
+      "url": "/algorithms/expert-parallelism.html",
+      "file": "algorithms/expert-parallelism.md",
+      "domain": "algorithms",
+      "section": "reference",
+      "format": "article",
+      "status": "published",
+      "summary": "2台のGPU・2専門家・4トークンで、ルーティング後の配送、専門家の計算、返送とcombineを追う。偏りとGPU間通信のコストを分けて考える。",
+      "source": "新規執筆",
+      "aliases": [
+        "エキスパート並列",
+        "専門家並列",
+        "Expert Parallelism",
+        "MoE Dispatch",
+        "MoE Combine",
+        "All-to-All",
+        "GShard"
+      ],
+      "verification": "GShard原論文とNCCL公式資料に照合し、WindowsのPython 3.12.4で4トークンの配送・結果・元の順序・GPU間の論理ペイロードを検算（2026-11-21）",
+      "links": [
+        "/algorithms/moe-routing.html",
+        "/algorithms/tensor-parallelism.html",
+        "/algorithms/disaggregated-prefill-decode.html"
+      ],
+      "difficulty": "intermediate",
+      "importance": "useful"
+    },
+    {
       "title": "MoEの仕組み：トークンごとに使う専門家をどう選ぶか",
       "url": "/algorithms/moe-routing.html",
       "file": "algorithms/moe-routing.md",
@@ -6216,7 +6245,8 @@
         "/algorithms/transformer-attention.html",
         "/algorithms/llm-quantization.html",
         "/algorithms/llm-prefill-and-decode.html",
-        "/algorithms/tensor-parallelism.html"
+        "/algorithms/tensor-parallelism.html",
+        "/algorithms/expert-parallelism.html"
       ],
       "difficulty": "intermediate",
       "importance": "useful"
@@ -6796,7 +6826,8 @@
         "/algorithms/chunked-prefill.html",
         "/algorithms/kv-cache.html",
         "/algorithms/llm-prefill-and-decode.html",
-        "/algorithms/tensor-parallelism.html"
+        "/algorithms/tensor-parallelism.html",
+        "/algorithms/expert-parallelism.html"
       ],
       "difficulty": "intermediate",
       "importance": "useful"

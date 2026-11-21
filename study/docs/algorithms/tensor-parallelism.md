@@ -124,6 +124,7 @@ $W_2$ の行0・1は、GPU 0が持つ中間成分 $(2,0)$ に対応します。�
 - [TransformerとAttention](/algorithms/transformer-attention.html) — Transformerの入力表現とAttentionの計算を読む。
 - [Prefillとdecodeの分離](/algorithms/disaggregated-prefill-decode.html) — 推論の段階を別GPU群に載せ、KVキャッシュを渡す構成を読む。
 - [MoEの仕組み](/algorithms/moe-routing.html) — 同じ層でトークンを専門家へ振り分ける場合のGPU間通信を読む。
+- [MoEのエキスパート並列](/algorithms/expert-parallelism.html) — 部分和の集約と、トークン別のベクトルの交換を比べる。
 - [GPUのタイル化](/hardware/gpu/matrix-multiplication-tiling.html) — 1台のGPUの中で、行列積の入力を共有して使い回す方法を読む。
 
 ## 参考資料

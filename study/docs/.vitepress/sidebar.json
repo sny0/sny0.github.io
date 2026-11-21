@@ -799,6 +799,10 @@
           "link": "/algorithms/model-context-protocol.html"
         },
         {
+          "text": "MoEのエキスパート並列：トークンがGPUを行き来する理由",
+          "link": "/algorithms/expert-parallelism.html"
+        },
+        {
           "text": "MoEの仕組み：トークンごとに使う専門家をどう選ぶか",
           "link": "/algorithms/moe-routing.html"
         },
