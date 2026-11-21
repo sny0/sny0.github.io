@@ -28,6 +28,7 @@
 - [Function callingと構造化出力 — AIの返答をプログラムにつなぐ仕組み](/algorithms/function-calling-and-structured-outputs.html)
 - [KVキャッシュ — 推論で何を保存し、何が速くなり、メモリをどれだけ使うか](/algorithms/kv-cache.html)
 - [LLMのテンソル並列：1層を複数GPUで計算すると、なぜ通信が要るのか](/algorithms/tensor-parallelism.html)
+- [LLMのパイプライン並列：層を分けると、なぜGPUに待ち時間が生まれるのか](/algorithms/pipeline-parallelism.html)
 - [LLMのファインチューニングとLoRAの仕組み — 基底重みを凍結し、差分だけを学ぶ](/algorithms/lora-fine-tuning.html)
 - [LLMの量子化 — 精度とメモリ、重みとKVキャッシュの違い](/algorithms/llm-quantization.html)
 - [LLMの連続バッチング（Continuous Batching）— 生成途中でリクエストをどう入れ替えるか](/algorithms/continuous-batching.html)

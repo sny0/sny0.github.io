@@ -121,6 +121,7 @@ GPU 0にある入力をMoEのルーターで振り分けたら、選ばれた専
 - [MoEの仕組み](/algorithms/moe-routing.html) — ルーターが専門家を選ぶ仕組みと、容量が足りない場合の扱いを読む。
 - [LLMのテンソル並列](/algorithms/tensor-parallelism.html) — 同じ出力成分を各GPUで部分計算し、最後に足し合わせる流れを追う。
 - [Prefillとdecodeの分離](/algorithms/disaggregated-prefill-decode.html) — 生成段階を分けるときにGPU群の間でKVを渡す仕組みを読む。
+- [LLMのパイプライン並列](/algorithms/pipeline-parallelism.html) — 専門家を選ぶ配置と、層を順に通す配置を比べる。
 
 ## 参考資料
 

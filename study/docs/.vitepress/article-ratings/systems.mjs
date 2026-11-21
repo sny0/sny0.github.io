@@ -30,6 +30,7 @@ export default {
   '/algorithms/disaggregated-prefill-decode.html': ['intermediate', 'useful'],
   '/algorithms/moe-routing.html': ['intermediate', 'useful'],
   '/algorithms/expert-parallelism.html': ['intermediate', 'useful'],
+  '/algorithms/pipeline-parallelism.html': ['intermediate', 'useful'],
   '/algorithms/tensor-parallelism.html': ['intermediate', 'useful'],
   '/algorithms/continuous-batching.html': ['intermediate', 'useful'],
   '/algorithms/speculative-decoding.html': ['intermediate', 'useful'],

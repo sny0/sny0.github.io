@@ -90,7 +90,7 @@
       "id": "algorithms",
       "title": "データ構造・アルゴリズム",
       "description": "操作手順、計算量、不変条件から道具を選ぶ。",
-      "count": 38,
+      "count": 39,
       "status": "辞典本文あり"
     },
     {
@@ -5721,7 +5721,35 @@
         "/algorithms/disaggregated-prefill-decode.html",
         "/algorithms/moe-routing.html",
         "/algorithms/expert-parallelism.html",
-        "/hardware/gpu/matrix-multiplication-tiling.html"
+        "/hardware/gpu/matrix-multiplication-tiling.html",
+        "/algorithms/pipeline-parallelism.html"
+      ],
+      "difficulty": "intermediate",
+      "importance": "useful"
+    },
+    {
+      "title": "LLMのパイプライン並列：層を分けると、なぜGPUに待ち時間が生まれるのか",
+      "url": "/algorithms/pipeline-parallelism.html",
+      "file": "algorithms/pipeline-parallelism.md",
+      "domain": "algorithms",
+      "section": "reference",
+      "format": "article",
+      "status": "published",
+      "summary": "2段に4つのマイクロバッチを流し、前向き計算で生まれる充填・定常・排出とバブルを図で追う。逆伝播、段間の通信と負荷不均衡を区別する。",
+      "source": "新規執筆",
+      "aliases": [
+        "パイプライン並列",
+        "パイプラインモデル並列",
+        "Pipeline Parallelism",
+        "GPipe",
+        "マイクロバッチ",
+        "パイプラインバブル"
+      ],
+      "verification": "GPipe原論文と分散Megatron-LM論文に照合し、WindowsのPython 3.12.4で2段×4マイクロバッチの時系列と空き枠を検算（2026-11-21）",
+      "links": [
+        "/algorithms/tensor-parallelism.html",
+        "/algorithms/expert-parallelism.html",
+        "/algorithms/disaggregated-prefill-decode.html"
       ],
       "difficulty": "intermediate",
       "importance": "useful"
@@ -6217,7 +6245,8 @@
       "links": [
         "/algorithms/moe-routing.html",
         "/algorithms/tensor-parallelism.html",
-        "/algorithms/disaggregated-prefill-decode.html"
+        "/algorithms/disaggregated-prefill-decode.html",
+        "/algorithms/pipeline-parallelism.html"
       ],
       "difficulty": "intermediate",
       "importance": "useful"
@@ -6827,7 +6856,8 @@
         "/algorithms/kv-cache.html",
         "/algorithms/llm-prefill-and-decode.html",
         "/algorithms/tensor-parallelism.html",
-        "/algorithms/expert-parallelism.html"
+        "/algorithms/expert-parallelism.html",
+        "/algorithms/pipeline-parallelism.html"
       ],
       "difficulty": "intermediate",
       "importance": "useful"

@@ -775,6 +775,10 @@
           "link": "/algorithms/tensor-parallelism.html"
         },
         {
+          "text": "LLMのパイプライン並列：層を分けると、なぜGPUに待ち時間が生まれるのか",
+          "link": "/algorithms/pipeline-parallelism.html"
+        },
+        {
           "text": "LLMのファインチューニングとLoRAの仕組み — 基底重みを凍結し、差分だけを学ぶ",
           "link": "/algorithms/lora-fine-tuning.html"
         },

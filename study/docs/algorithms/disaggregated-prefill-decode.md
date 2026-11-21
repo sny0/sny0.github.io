@@ -115,6 +115,7 @@ DistServeでの**GPUあたりのgoodput**は、所定のSLO達成率を保てる
 - [KVキャッシュ](/algorithms/kv-cache.html) — どの値を保存するかと、保存容量が増える条件を確認する。
 - [LLMのテンソル並列](/algorithms/tensor-parallelism.html) — GPU群の内側で同じ層を分割し、部分和を足す構成を読む。
 - [MoEのエキスパート並列](/algorithms/expert-parallelism.html) — 同じ層の中で、専門家との間を中間ベクトルが往復する構成を読む。
+- [LLMのパイプライン並列](/algorithms/pipeline-parallelism.html) — 処理段階の分離と、連続する層を別GPUに割り当てる方法を比べる。
 
 ## 参考資料
 
