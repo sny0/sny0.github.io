@@ -125,7 +125,7 @@
       "id": "tools",
       "title": "開発ツールと調査機能",
       "description": "どの機能で何を観察し、どう確かめるかを調べる。",
-      "count": 31,
+      "count": 32,
       "status": "辞典本文あり"
     }
   ],
@@ -4523,6 +4523,30 @@
       "importance": "useful"
     },
     {
+      "title": "Gitのchanged-path Bloom filter：あるファイルの履歴を探すとき、なぜ木の比較を省けるのか",
+      "url": "/tools/git-changed-path-bloom-filter.html",
+      "file": "tools/git-changed-path-bloom-filter.md",
+      "domain": "tools",
+      "section": "reference",
+      "format": "article",
+      "status": "published",
+      "summary": "第1親と対象パスを比べる前に、変更がないと分かる場合を図で追う。偽陽性、マージ、名前変更の追跡との関係も整理する。",
+      "source": "新規執筆",
+      "aliases": [
+        "changed-path Bloom filter",
+        "changed paths Bloom filter",
+        "変更パスのBloom filter",
+        "Gitのパス履歴"
+      ],
+      "verification": "Git公式資料とソースを参照し、Git for Windows 2.39.2で単一パスの履歴とTrace2の集計を検証（2026-11-21）",
+      "links": [
+        "/tools/git-objects.html",
+        "/tools/git-commit-graph.html"
+      ],
+      "difficulty": "intermediate",
+      "importance": "useful"
+    },
+    {
       "title": "Gitのcherry-pick — コミットではなく変更を別の履歴へ取り込む",
       "url": "/tools/git-cherry-pick.html",
       "file": "tools/git-cherry-pick.md",
@@ -4569,6 +4593,7 @@
       ],
       "verification": "Git公式資料と照合し、WindowsのGit 2.39.2で索引のある場合とない場合の祖先判定、世代番号v1・v2を検証（2026-11-21）",
       "links": [
+        "/tools/git-changed-path-bloom-filter.html",
         "/tools/git-objects.html",
         "/tools/git-three-way-merge.html",
         "/tools/git-reflog.html"
@@ -4860,6 +4885,7 @@
         "/tools/git-staging-index.html",
         "/tools/git-three-way-merge.html",
         "/tools/git-commit-graph.html",
+        "/tools/git-changed-path-bloom-filter.html",
         "/tools/git-rebase.html",
         "/tools/git-cherry-pick.html",
         "/tools/git-revert.html",

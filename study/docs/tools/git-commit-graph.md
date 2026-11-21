@@ -86,6 +86,7 @@ flowchart TB
 
 ## 関連項目
 
+- [Gitのchanged-path Bloom filter](/tools/git-changed-path-bloom-filter.html) — 特定のファイルの履歴を探すとき、第1親とのtree比較を省ける条件を読む。
 - [Gitの保存モデル](/tools/git-objects.html) — commitオブジェクトが親やtreeをどう参照するかを読む。
 - [Gitのマージ](/tools/git-three-way-merge.html) — 共通祖先を使ってマージの基準を探す場面を追う。
 - [Gitのreflog](/tools/git-reflog.html) — 参照の移動の記録と、コミットの親をたどる履歴を区別する。

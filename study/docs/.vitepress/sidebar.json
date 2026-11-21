@@ -1893,6 +1893,10 @@
           "link": "/tools/git-stash.html"
         },
         {
+          "text": "Gitのchanged-path Bloom filter：あるファイルの履歴を探すとき、なぜ木の比較を省けるのか",
+          "link": "/tools/git-changed-path-bloom-filter.html"
+        },
+        {
           "text": "Gitのcherry-pick — コミットではなく変更を別の履歴へ取り込む",
           "link": "/tools/git-cherry-pick.html"
         },

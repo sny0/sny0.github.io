@@ -24,6 +24,7 @@
 - [CPU プロファイリング — サンプリングと計装でフレームを測る](/tools/profiling/cpu-profiling.html)
 - [Git restoreの仕組み — 履歴を動かさず、復元元と復元先を選ぶ](/tools/git-restore.html)
 - [Git stashの内部構造 — 作業ツリーとindexの退避・再適用を追う](/tools/git-stash.html)
+- [Gitのchanged-path Bloom filter：あるファイルの履歴を探すとき、なぜ木の比較を省けるのか](/tools/git-changed-path-bloom-filter.html)
 - [Gitのcherry-pick — コミットではなく変更を別の履歴へ取り込む](/tools/git-cherry-pick.html)
 - [Gitのcommit-graph：なぜ履歴探索で、読まないコミットを増やせるのか](/tools/git-commit-graph.html)
 - [Gitのrebase — コミットの再適用と履歴の書き換え](/tools/git-rebase.html)
