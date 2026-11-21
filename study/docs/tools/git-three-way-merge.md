@@ -139,6 +139,7 @@ flowchart TD
 ## 関連項目
 
 - [Gitの保存モデル](/tools/git-objects.html) — commit、tree、親、ブランチ参照の役割を整理する。
+- [Gitのcommit-graph](/tools/git-commit-graph.html) — 祖先を調べる際に、世代番号からたどらなくてよい枝を見分ける。
 - 統合後のtreeが同じでも、親のつながりがどう変わるかを比べる。[Gitのrebase — コミットの再適用と履歴の書き換え](/tools/git-rebase.html)
 - 二つの先端を統合する場合と、片側から特定の変更を選ぶ場合の履歴を比べる。[Gitのcherry-pick — コミットではなく変更を別の履歴へ取り込む](/tools/git-cherry-pick.html)
 - [Gitのステージング](/tools/git-staging-index.html) — 競合のない場合にindexが次のtreeをどう作るかを読む。

@@ -25,6 +25,7 @@
 - [Git restoreの仕組み — 履歴を動かさず、復元元と復元先を選ぶ](/tools/git-restore.html)
 - [Git stashの内部構造 — 作業ツリーとindexの退避・再適用を追う](/tools/git-stash.html)
 - [Gitのcherry-pick — コミットではなく変更を別の履歴へ取り込む](/tools/git-cherry-pick.html)
+- [Gitのcommit-graph：なぜ履歴探索で、読まないコミットを増やせるのか](/tools/git-commit-graph.html)
 - [Gitのrebase — コミットの再適用と履歴の書き換え](/tools/git-rebase.html)
 - [Gitのreflog — 履歴から見えなくなったコミットはどこにあるのか](/tools/git-reflog.html)
 - [Gitのreset — HEAD・index・作業ツリーはどう変わるのか](/tools/git-reset.html)

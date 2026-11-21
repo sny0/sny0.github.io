@@ -1897,6 +1897,10 @@
           "link": "/tools/git-cherry-pick.html"
         },
         {
+          "text": "Gitのcommit-graph：なぜ履歴探索で、読まないコミットを増やせるのか",
+          "link": "/tools/git-commit-graph.html"
+        },
+        {
           "text": "Gitのrebase — コミットの再適用と履歴の書き換え",
           "link": "/tools/git-rebase.html"
         },

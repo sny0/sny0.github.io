@@ -130,6 +130,7 @@ new
 
 - 次のコミットのtreeを作るために、indexが名前やblobのIDをどう保持するかを確かめる。[Gitのステージング — 作業ツリー・index・HEAD](/tools/git-staging-index.html)
 - マージコミットが指す二つの親と、統合の基準になる共通祖先を図でたどる。[Gitのマージ — 共通祖先と3-way merge](/tools/git-three-way-merge.html)
+- [Gitのcommit-graph](/tools/git-commit-graph.html) — commitオブジェクトから作る索引が、親をたどる探索をどう省くかを読む。
 - 別の親の上に変更を適用し直すと、コミットIDがどう変わるかを確かめる。[Gitのrebase — コミットの再適用と履歴の書き換え](/tools/git-rebase.html)
 - 同じ修正を別の親の上に記録し、元のコミットと新しいコミットのIDを比べる。[Gitのcherry-pick — コミットではなく変更を別の履歴へ取り込む](/tools/git-cherry-pick.html)
 - 変更を打ち消したあとのtreeと、元のコミットを含む親のつながりを比べる。[Gitのrevert — 履歴を消さずに変更を打ち消す仕組み](/tools/git-revert.html)

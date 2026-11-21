@@ -125,7 +125,7 @@
       "id": "tools",
       "title": "開発ツールと調査機能",
       "description": "どの機能で何を観察し、どう確かめるかを調べる。",
-      "count": 30,
+      "count": 31,
       "status": "辞典本文あり"
     }
   ],
@@ -4550,6 +4550,33 @@
       "importance": "core"
     },
     {
+      "title": "Gitのcommit-graph：なぜ履歴探索で、読まないコミットを増やせるのか",
+      "url": "/tools/git-commit-graph.html",
+      "file": "tools/git-commit-graph.md",
+      "domain": "tools",
+      "section": "reference",
+      "format": "article",
+      "status": "published",
+      "summary": "親を読む索引と世代番号を使い、分岐とマージのある履歴でたどる必要のない親を見分ける。コミット時刻が逆転する例も追う。",
+      "source": "新規執筆",
+      "aliases": [
+        "commit-graph",
+        "Git commit graph",
+        "コミットグラフ索引",
+        "世代番号",
+        "generation number",
+        "corrected committer date"
+      ],
+      "verification": "Git公式資料と照合し、WindowsのGit 2.39.2で索引のある場合とない場合の祖先判定、世代番号v1・v2を検証（2026-11-21）",
+      "links": [
+        "/tools/git-objects.html",
+        "/tools/git-three-way-merge.html",
+        "/tools/git-reflog.html"
+      ],
+      "difficulty": "intermediate",
+      "importance": "useful"
+    },
+    {
       "title": "Gitのrebase — コミットの再適用と履歴の書き換え",
       "url": "/tools/git-rebase.html",
       "file": "tools/git-rebase.md",
@@ -4601,6 +4628,7 @@
         "/tools/git-objects.html",
         "/tools/git-staging-index.html",
         "/tools/git-reset.html",
+        "/tools/git-commit-graph.html",
         "/tools/git-stash.html",
         "/tools/git-three-way-merge.html"
       ],
@@ -4722,6 +4750,7 @@
       "links": [
         "/tools/git-staging-index.html",
         "/tools/git-objects.html",
+        "/tools/git-commit-graph.html",
         "/tools/git-rebase.html",
         "/tools/git-cherry-pick.html",
         "/tools/automated-testing.html"
@@ -4830,6 +4859,7 @@
       "links": [
         "/tools/git-staging-index.html",
         "/tools/git-three-way-merge.html",
+        "/tools/git-commit-graph.html",
         "/tools/git-rebase.html",
         "/tools/git-cherry-pick.html",
         "/tools/git-revert.html",

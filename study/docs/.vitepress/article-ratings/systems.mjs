@@ -172,6 +172,7 @@ export default {
   '/tools/build/what-is-build.html': ['intro', 'core'],
   '/tools/development-tools-basics.html': ['intro', 'core'],
   '/tools/git-basics.html': ['intro', 'core'],
+  '/tools/git-commit-graph.html': ['intermediate', 'useful'],
   '/tools/git-objects.html': ['intermediate', 'useful'],
   '/tools/git-staging-index.html': ['intermediate', 'useful'],
   '/tools/git-three-way-merge.html': ['intermediate', 'useful'],
